@@ -1,21 +1,27 @@
+const imageWidth = 2048;
+const imageHeight = 1536;
+
+const mapCRS = L.extend({}, L.CRS.Simple, {
+  transformation: new L.Transformation(1, -1024, -1, 768)
+});
+
 const map = L.map('map', {
-  crs: L.CRS.Simple,
+  crs: mapCRS,
   minZoom: -2
 });
 
-const imageWidth = 4096;
-const imageHeight = 3072;
 const imageBounds = [[0, 0], [imageHeight, imageWidth]];
 
 L.imageOverlay('adenai_map_01.jpg', imageBounds).addTo(map);
 map.fitBounds(imageBounds);
 
 map.on('mousemove', function (e) {
-  const point = map.latLngToLayerPoint(e.latlng);
-  const x = Math.round(point.x);
-  const y = Math.round(point.y);
+  const x = Math.round(e.latlng.lng); // X
+  const y = Math.round(e.latlng.lat); // Y
   document.getElementById('coords').textContent = `X: ${x}, Y: ${y}`;
 });
+
+L.marker([0, 0]).addTo(map).bindPopup("Center of the map (0, 0)").openPopup();
 
 // Load GeoJSON file and add to map
 fetch('data/places.geojson')
