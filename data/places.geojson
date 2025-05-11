@@ -5,7 +5,7 @@
       "type": "Feature",
       "properties": {
         "name": "Valaris",
-        "description": "A majestic northern city in the forests of Upeto."
+        "description": "Die grösste Stadt im Osten von Adenai. Regiert von Petrel Kormorant."
       },
       "geometry": {
         "type": "Point",
@@ -16,7 +16,7 @@
       "type": "Feature",
       "properties": {
         "name": "Rena",
-        "description": "Trade capital nestled against the northern ranges."
+        "description": "Die Hautpstadt von Valaris. Regiert von König Torrik von Rena."
       },
       "geometry": {
         "type": "Point",
@@ -27,7 +27,7 @@
       "type": "Feature",
       "properties": {
         "name": "Olecea",
-        "description": "Great desert city of Harak, carved from stone."
+        "description": "Das Juwel der Wüste - eine wundersame und blühende Stadt in Mitten der kargen Harak Region."
       },
       "geometry": {
         "type": "Point",
@@ -42,7 +42,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [790, 775]
+        "coordinates": [790, 760]
       }
     },
         {
@@ -53,7 +53,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [1090, 1265]
+        "coordinates": [1090, 1250]
       }
     }
   ]

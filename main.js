@@ -29,7 +29,7 @@ map.on('mousemove', function (e) {
 const DotOrange = L.icon({
   iconUrl: 'icons/dot_orange.svg',  // Path to your icon file
   iconSize: [32, 32],                 // Size in pixels
-  iconAnchor: [16, 32],               // Bottom center of the icon
+  iconAnchor: [16, 16],               // Bottom center of the icon
   popupAnchor: [0, -32]               // Popup appears above the icon
 });
 
