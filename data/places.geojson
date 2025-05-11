@@ -1,0 +1,38 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Valaris",
+        "description": "A majestic northern city in the forests of Upeto."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1090, 140]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rena",
+        "description": "Trade capital nestled against the northern ranges."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [330, 100]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Olecea",
+        "description": "Great desert city of Harak, carved from stone."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [460, 560]
+      }
+    }
+  ]
+}
