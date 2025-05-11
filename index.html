@@ -1,38 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <title>Adenai Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
+  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
   <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
     #map {
-      height: 100vh;
+      height: 100%;
       width: 100%;
+    }
+
+    #coords {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 5px 10px;
+      font-family: monospace;
+      border-radius: 4px;
+      z-index: 1000;
+      pointer-events: none; /* So it doesn't block clicks on the map */
     }
   </style>
 </head>
 
 <body>
   <div id="map"></div>
+  <div id="coords">X: –, Y: –</div>
 
-  <script src="main.js?v=0.250511.1822"></script>
-
-  <div id="coords" style="
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  padding: 5px 10px;
-  font-family: monospace;
-  border-radius: 4px;
-  z-index: 1000;">
-  X: –, Y: –
-  </div>
-  
+  <!-- Load Leaflet JS and your main logic last -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="main.js?v=0.250511.1829"></script>
 </body>
 </html>
