@@ -9,7 +9,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [1700, 1025]
+        "coordinates": [1700, 1008]
       }
     },
     {
@@ -20,7 +20,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [650, 1005]
+        "coordinates": [650, 1000]
       }
     },
     {
@@ -42,7 +42,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [790, 760]
+        "coordinates": [790, 769]
       }
     },
         {
@@ -53,7 +53,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [1090, 1250]
+        "coordinates": [1090, 1260]
       }
     }
   ]
