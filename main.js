@@ -53,7 +53,7 @@ const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
     'Q', [975, 1985], [996, 2015], // Reise Nach Atlantis
     'L', [1028, 2069], // Aufstieg von Atlantis
     'L', [927, 2069], // Rückkehr aufs Meer
-    'Q', [747, 2031], [708, 1983], // Küste von Upeto
+    'Q', [723, 2041], [708, 1983], // Küste von Upeto
     'Q', [564, 2014], [488, 1957], // Reise nach Basapo
     'Q', [489, 1867], [556, 1869] // Reise nach Akonechie
   ],
