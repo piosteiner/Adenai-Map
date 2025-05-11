@@ -33,6 +33,26 @@ const DotOrange = L.icon({
   popupAnchor: [0, -32]               // Popup appears above the icon
 });
 
+const heroCurve = L.curve(
+  [
+    'Silbergrat', [1240, 1041],         // Move to start point
+    'Toftgard - Erste Ankunft', [1340, 1042], [1396, 1085], // Quadratic curve: control point, then endpoint
+    'Torftgarder Wald', [1340, 1105], [1305, 1092], // Another curve segment
+    'Fitchers Turm', [1299, 1116], [1315, 1129],
+    'Zurak thar', [1267, 1142], [1287, 1174],
+    'Fitchers Turm', [1315, 1129]
+  ],
+  {
+    color: 'orange',
+    weight: 4,
+    dashArray: '10,6',
+    opacity: 0.9,
+  }
+).addTo(map);
+
+heroCurve.bindPopup("VsuzH Reise");
+
+
 //Load GeoJSON places
 fetch('data/places.geojson')
   .then(response => response.json())
