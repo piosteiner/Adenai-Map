@@ -11,10 +11,9 @@ L.imageOverlay('adenai_map_01.jpg', imageBounds).addTo(map);
 map.fitBounds(imageBounds);
 
 map.on('mousemove', function (e) {
-  // For CRS.Simple, use layerPoint to get pixel coordinates
-  const coords = map.latLngToLayerPoint(e.latlng);
-  const x = Math.round(coords.x);
-  const y = Math.round(coords.y);
+  const point = map.latLngToLayerPoint(e.latlng);
+  const x = Math.round(point.x);
+  const y = Math.round(point.y);
   document.getElementById('coords').textContent = `X: ${x}, Y: ${y}`;
 });
 
