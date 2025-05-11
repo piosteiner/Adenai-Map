@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Adenai Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <style>
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+  const map = L.map('map', {
+    crs: L.CRS.Simple,
+    minZoom: -2
+  });
+
+  const imageWidth = 2000; // Replace with your image's actual width in pixels
+  const imageHeight = 1500; // Replace with your image's actual height in pixels
+  const imageBounds = [[0,0], [imageHeight, imageWidth]];
+
+  L.imageOverlay('adenai_map_01.jpg', imageBounds).addTo(map);
+  map.fitBounds(imageBounds);
+
+  L.marker([300, 600])
+    .addTo(map)
+    .bindPopup("Castle Black")
+    .openPopup();
+</script>
+
+</body>
+</html>
