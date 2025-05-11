@@ -143,8 +143,7 @@
         "type": "Point",
         "coordinates": [2008, 1061]
       }
-    }
-    ,
+    },
         {
       "type": "Feature",
       "properties": {
@@ -155,8 +154,7 @@
         "type": "Point",
         "coordinates": [1957, 488]
       }
-    }
-    ,
+    },
         {
       "type": "Feature",
       "properties": {
@@ -166,6 +164,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [1869, 556]
+      }
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "Silbergrat",
+        "description": "Der Start der Reise der VsuzH."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1240, 1041]
       }
     }
   ]
