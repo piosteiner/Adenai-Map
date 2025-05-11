@@ -11,7 +11,7 @@ const mapCRS = L.extend({}, L.CRS.Simple, {
 const map = L.map('map', {
   crs: mapCRS,
   minZoom: -2,
-  maxZoom: 4
+  maxZoom: 3
 });
 
 //Overlay the image and fit bounds
@@ -25,9 +25,6 @@ map.on('mousemove', function (e) {
   const y = Math.round(e.latlng.lat); // Y = lat
   document.getElementById('coords').textContent = `X: ${x}, Y: ${y}`;
 });
-
-//FOR TESTING ONLY: Place a test marker at the center
-L.marker([0, 0]).addTo(map).bindPopup("World Center (0,0)").openPopup();
 
 //Load GeoJSON places
 fetch('data/places.geojson')
