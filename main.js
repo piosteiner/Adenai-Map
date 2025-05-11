@@ -16,16 +16,20 @@ fetch('data/places.geojson')
     }).addTo(map);
   });
 
-  var map = L.map('map', {
+const map = L.map('map', {
   crs: L.CRS.Simple,
-  minZoom: -2,
-  maxZoom: 2,
-  center: [384, 610], // [y, x] — center of the image
-  zoom: 0
+  minZoom: -2
 });
 
-// Use image dimensions for bounds
-var bounds = [[0,0], [768,1219]];
-L.imageOverlay('images/map.png', bounds).addTo(map);  // Use your actual map image path
+const imageWidth = 4096;
+const imageHeight = 3072;
+const imageBounds = [[0, 0], [imageHeight, imageWidth]];
+
+L.imageOverlay('adenai_map_01.jpg', imageBounds).addTo(map);
+map.fitBounds(imageBounds);
+});
+
+var bounds = [[0,0], [4096,3072]];
+L.imageOverlay('adenai_map_01', bounds).addTo(map);
 map.fitBounds(bounds);
 
