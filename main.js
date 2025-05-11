@@ -77,7 +77,7 @@ const journeyArrows = L.polylineDecorator(VsuzH_Journey, {
         polygon: true,
         pathOptions: {
           fillOpacity: 1,
-          weight: 0,
+          weight: 1,
           color: 'orange'
         }
       })
