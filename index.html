@@ -7,6 +7,7 @@
   
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="main.js"></script>
 
   <style>
     #map {
@@ -15,6 +16,7 @@
     }
   </style>
 </head>
+
 <body>
 
 <div id="map"></div>
@@ -25,13 +27,30 @@
     minZoom: -2
   });
 
-  const imageWidth = 2000; // Replace with your image's actual width in pixels
-  const imageHeight = 1500; // Replace with your image's actual height in pixels
+  const imageWidth = 4096;
+  const imageHeight = 3072;
   const imageBounds = [[0,0], [imageHeight, imageWidth]];
 
   L.imageOverlay('adenai_map_01.jpg', imageBounds).addTo(map);
   map.fitBounds(imageBounds);
-  
+
+  fetch('data/places.geojson')
+    .then(response => response.json())
+    .then(data => {
+      L.geoJSON(data, {
+        pointToLayer: function (feature, latlng) {
+          return L.marker(latlng);
+        },
+        onEachFeature: function (feature, layer) {
+          if (feature.properties && feature.properties.name) {
+            layer.bindPopup(
+              `<b>${feature.properties.name}</b><br>${feature.properties.description}`
+            );
+          }
+        }
+      }).addTo(map);
+    })
+    .catch(error => console.error('Error loading GeoJSON:', error));
 </script>
 
 </body>
