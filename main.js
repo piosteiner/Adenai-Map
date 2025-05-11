@@ -51,8 +51,8 @@ const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
     'Q', [1059, 1988], [1061, 2008], // Zur Sternenzirkel Insel
     'Q', [1039, 1974], [1005, 1977], // Reise nach Tuva Lu
     'Q', [966, 2012], [967, 2032], // Reise Nach Atlantis
-    'M', [1073, 2036], // Aufstieg von Atlantis
-    'M', [824, 2037], // Rückkehr aufs Meer
+    'L', [1073, 2036], // Aufstieg von Atlantis
+    'L', [824, 2037], // Rückkehr aufs Meer
     'Q', [747, 2031], [708, 1983], // Küste von Upeto
     'Q', [584, 2000], [488, 1957], // Reise nach Basapo
     'Q', [489, 1867], [556, 1869] // Reise nach Akonechie
