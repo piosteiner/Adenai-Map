@@ -33,14 +33,14 @@ const DotOrange = L.icon({
   popupAnchor: [0, -32]               // Popup appears above the icon
 });
 
-const VsuzH_Journey = L.curve(
+const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
   [
-    'M', [1240, 1041], // Silbergrat 
-    'Q', [1340, 1042], [1396, 1085], // Torftgard
-    'Q', [1340, 1105], [1305, 1092], // Torftgarder Wald
-    'Q', [1299, 1116], [1315, 1129], // Fitchers Turm
-    'Q', [1267, 1142], [1287, 1174], // Zurak'thar
-    'L', [1315, 1129] // Fitchers Turm
+    'M', [1041, 1240], // Silbergrat 
+    'Q', [1042, 1340], [1085, 1396], // Torftgard
+    'Q', [1105, 1340], [1092, 1305], // Torftgarder Wald
+    'Q', [1116, 1299], [1129, 1315], // Fitchers Turm
+    'Q', [1142, 1267], [1174, 1287], // Zurak'thar
+    'L', [1129, 1315] // Fitchers Turm
   ],
   {
     color: 'orange',
