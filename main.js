@@ -36,14 +36,14 @@ const DotOrange = L.icon({
 const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
   [
     'M', [1041, 1240], // Silbergrat 
-    'Q', [1062, 1287], [1044, 1338], // Weg nach Toftgard
+    'Q', [1062, 1287], [1044, 1338], // Weg nach Toftgard, Mephits
     'Q', [1054, 1371], [1083, 1392], // Toftgard
     'Q', [1106, 1340], [1094, 1310], // Toftgarder Wald
     'Q', [1109, 1276], [1129, 1285], // Weg zu Fitcher
     'Q', [1142, 1295], [1145, 1281], // Fitchers Turm
     'Q', [1156, 1221], [1171, 1219], // Nach Zurak'thar
     'Q', [1158, 1274], [1145, 1281], // Zurück zu Fitchers Turm
-    'Q', [1129, 1329], [1094, 1310], // Zurück nach Toftgard
+    'Q', [1129, 1329], [1083, 1392], // Zurück nach Toftgard
     'Q', [1080, 1456], [1084, 1488], // Flussfahrt 1
     'Q', [1000, 1581], [1008, 1700], // Flussfahrt 2 & Ankunft in Valaris
     'Q', [989, 1693], [985, 1724], // Abreise aus Valaris
