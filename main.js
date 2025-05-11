@@ -1,12 +1,10 @@
 //Defining image dimensions
 const imageWidth = 2048;
 const imageHeight = 1536;
-const centerX = imageWidth / 2; // 1024
-const centerY = imageHeight / 2; // 768
 
-//Define a custom CRS that centers (0,0) in the image
+//Flip Y axis: move origin to bottom-left (Originally 0,0 was on top left)
 const mapCRS = L.extend({}, L.CRS.Simple, {
-  transformation: new L.Transformation(1, -centerX, -1, centerY)
+  transformation: new L.Transformation(1, 0, -1, imageHeight)
 });
 
 //Initialize the map using that CRS

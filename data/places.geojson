@@ -44,6 +44,17 @@
         "type": "Point",
         "coordinates": [790, 775]
       }
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "Yosefka Akademie",
+        "description": "Die Autorithät der magischen Ausbildung und Forschung."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1090, 1265]
+      }
     }
   ]
 }
