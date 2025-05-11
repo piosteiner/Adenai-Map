@@ -119,7 +119,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [2036, 1073]
+        "coordinates": [917, 1981]
       }
     },
         {
@@ -131,6 +131,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [1392, 1083]
+      }
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "Sternenzirkel Insel",
+        "description": "Insel auf der sich der Sternenzirkel stationiert hatte."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2008, 1061]
       }
     }
   ]
