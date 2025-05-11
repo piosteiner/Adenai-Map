@@ -33,6 +33,51 @@ const DotOrange = L.icon({
   popupAnchor: [0, -32]               // Popup appears above the icon
 });
 
+const journeyPath = [
+  [1041, 1240],
+  [1044, 1338],
+  [1083, 1392],
+  [1094, 1310],
+  [1129, 1285],
+  [1145, 1281],
+  [1171, 1219],
+  [1145, 1281],
+  [1083, 1392],
+  [1084, 1488],
+  [1008, 1700],
+  [985, 1724],
+  [1039, 1974],
+  [1061, 2008],
+  [1005, 1977],
+  [996, 2015],
+  [1028, 2069],
+  [927, 2069],
+  [708, 1983],
+  [488, 1957],
+  [556, 1869]
+];
+
+const journeyLine = L.polyline(journeyPath, { opacity: 0 }).addTo(map);
+
+L.polylineDecorator(journeyLine, {
+  patterns: [
+    {
+      offset: '0%',
+      repeat: '10%',
+      symbol: L.Symbol.arrowHead({
+        pixelSize: 14,
+        pathOptions: {
+          fillOpacity: 1,
+          weight: 0,
+          color: 'orange'
+        }
+      })
+    }
+  ]
+}).addTo(map);
+
+
+
 const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
   [
     'M', [1041, 1240], // Silbergrat 
@@ -66,24 +111,6 @@ const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
 ).addTo(map);
 
 VsuzH_Journey.bindPopup("VsuzH Reise");
-
-const journeyArrows = L.polylineDecorator(VsuzH_Journey, {
-  patterns: [
-    {
-      offset: '5%',      // Start a little into the line
-      repeat: '20%',     // Repeat every 20%
-      symbol: L.Symbol.arrowHead({
-        pixelSize: 14,
-        polygon: true,
-        pathOptions: {
-          fillOpacity: 1,
-          weight: 1,
-          color: 'orange'
-        }
-      })
-    }
-  ]
-}).addTo(map);
 
 //Load GeoJSON places
 fetch('data/places.geojson')
