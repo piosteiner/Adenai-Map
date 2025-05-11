@@ -86,7 +86,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [1219, 1171]
+        "coordinates": [1977, 1005]
       }
     },
         {
@@ -97,7 +97,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [1219, 1171]
+        "coordinates": [1974, 1039]
       }
     },
         {
@@ -108,7 +108,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [1219, 1171]
+        "coordinates": [2032, 967]
       }
     },
         {
@@ -119,7 +119,18 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [1219, 1171]
+        "coordinates": [2036, 1073]
+      }
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "Toftgard",
+        "description": "Stadt der Familie Karthright."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1392, 1083]
       }
     }
   ]
