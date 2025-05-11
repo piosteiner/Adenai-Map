@@ -1,9 +1,11 @@
 const imageWidth = 2048;
 const imageHeight = 1536;
+const halfWidth = imageWidth / 2;   // 1024
+const halfHeight = imageHeight / 2; // 768
 
 // 🟢 Define the custom CRS first
 const mapCRS = L.extend({}, L.CRS.Simple, {
-  transformation: new L.Transformation(1, -imageWidth / 2, -1, imageHeight / 2)
+  transformation: new L.Transformation(1, -halfWidth, -1, halfHeight)
 });
 
 // 🟢 Then use the CRS to create the map
