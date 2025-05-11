@@ -1,18 +1,11 @@
 const map = L.map('map', {
-  crs: mapCRS,
+  crs: L.CRS.Simple,
   minZoom: -2
 });
 
 const imageWidth = 4096;
 const imageHeight = 3072;
 const imageBounds = [[0, 0], [imageHeight, imageWidth]];
-const centerX = 4096 / 2; // = 2048
-const centerY = 3072 / 2; // = 1536
-
-const mapCRS = L.extend({}, L.CRS.Simple, {
-  transformation: new L.Transformation(1, -2048, -1, 1536)
-});
-
 
 L.imageOverlay('adenai_map_01.jpg', imageBounds).addTo(map);
 map.fitBounds(imageBounds);
