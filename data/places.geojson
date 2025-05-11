@@ -144,5 +144,29 @@
         "coordinates": [2008, 1061]
       }
     }
+    ,
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "Basapo",
+        "description": "Insel auf der sich der Sternenzirkel stationiert hatte."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1957, 488]
+      }
+    }
+    ,
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "Akónetchie",
+        "description": "Alte heilige Städte im Dschungel von Upeto."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1869, 556]
+      }
+    }
   ]
 }
