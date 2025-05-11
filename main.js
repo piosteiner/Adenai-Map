@@ -73,7 +73,7 @@ const journeyArrows = L.polylineDecorator(VsuzH_Journey, {
       offset: '5%',      // Start a little into the line
       repeat: '20%',     // Repeat every 20%
       symbol: L.Symbol.arrowHead({
-        pixelSize: 10,
+        pixelSize: 14,
         polygon: true,
         pathOptions: {
           fillOpacity: 1,
