@@ -41,8 +41,8 @@ const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
     'Q', [1106, 1340], [1094, 1310], // Toftgarder Wald
     'Q', [1109, 1276], [1129, 1285], // Weg zu Fitcher
     'Q', [1142, 1295], [1145, 1281], // Fitchers Turm
-    'Q', [1156, 1221], [1171, 1219], // Zurak'thar
-    'Q', [1158, 1274], [1145, 1281] // Fitchers Turm
+    'Q', [1156, 1221], [1171, 1219], // Nach Zurak'thar
+    'Q', [1158, 1274], [1145, 1281], // Zurück zu Fitchers Turm
   ],
   {
     color: 'orange',
@@ -54,6 +54,23 @@ const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
 
 VsuzH_Journey.bindPopup("VsuzH Reise");
 
+const journeyArrows = L.polylineDecorator(VsuzH_Journey, {
+  patterns: [
+    {
+      offset: '5%',      // Start a little into the line
+      repeat: '20%',     // Repeat every 20%
+      symbol: L.Symbol.arrowHead({
+        pixelSize: 10,
+        polygon: true,
+        pathOptions: {
+          fillOpacity: 1,
+          weight: 0,
+          color: 'orange'
+        }
+      })
+    }
+  ]
+}).addTo(map);
 
 //Load GeoJSON places
 fetch('data/places.geojson')
