@@ -50,7 +50,7 @@ const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
     'Q', [993, 1909], [1039, 1974], // Reise nach Motu Motu
     'Q', [1059, 1988], [1061, 2008], // Zur Sternenzirkel Insel
     'Q', [1041, 1962], [1005, 1977], // Reise nach Luvatu
-    'Q', [966, 2012], [924, 1927], // Reise Nach Atlantis
+    'Q', [975, 1985], [973, 1999], // Reise Nach Atlantis
     'L', [967, 2032], // Aufstieg von Atlantis
     'L', [824, 2037], // Rückkehr aufs Meer
     'Q', [747, 2031], [708, 1983], // Küste von Upeto
