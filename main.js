@@ -45,11 +45,11 @@ const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
     'Q', [1158, 1274], [1145, 1281], // Zurück zu Fitchers Turm
     'Q', [1129, 1329], [1094, 1310], // Zurück nach Toftgard
     'Q', [1080, 1456], [1084, 1488], // Flussfahrt 1
-    'Q', [1006, 1607], [1008, 1700], // Flussfahrt 2 & Ankunft in Valaris
+    'Q', [1000, 1581], [1008, 1700], // Flussfahrt 2 & Ankunft in Valaris
     'Q', [989, 1693], [985, 1724], // Abreise aus Valaris
     'Q', [993, 1909], [1039, 1974], // Reise nach Motu Motu
     'Q', [1059, 1988], [1061, 2008], // Zur Sternenzirkel Insel
-    'Q', [1039, 1974], [1005, 1977], // Reise nach Luvatu
+    'Q', [1041, 1962], [1005, 1977], // Reise nach Luvatu
     'Q', [966, 2012], [924, 1927], // Reise Nach Atlantis
     'L', [967, 2032], // Aufstieg von Atlantis
     'L', [824, 2037], // Rückkehr aufs Meer
