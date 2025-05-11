@@ -33,6 +33,17 @@
         "type": "Point",
         "coordinates": [916, 271]
       }
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "Wesdalen",
+        "description": "Eine grosse Stadt an der Küste von Adenai und an dem Übergang zu Tua Danar."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [790, 775]
+      }
     }
   ]
 }
