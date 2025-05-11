@@ -10,7 +10,8 @@ const mapCRS = L.extend({}, L.CRS.Simple, {
 //Initialize the map using that CRS
 const map = L.map('map', {
   crs: mapCRS,
-  minZoom: -2
+  minZoom: -2,
+  maxZoom: 4
 });
 
 //Overlay the image and fit bounds
