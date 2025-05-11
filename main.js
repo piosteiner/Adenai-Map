@@ -1,3 +1,15 @@
+const map = L.map('map', {
+  crs: L.CRS.Simple,
+  minZoom: -2
+});
+
+const imageWidth = 4096;
+const imageHeight = 3072;
+const imageBounds = [[0, 0], [imageHeight, imageWidth]];
+
+L.imageOverlay('adenai_map_01.jpg', imageBounds).addTo(map);
+map.fitBounds(imageBounds);
+
 // Load GeoJSON file and add to map
 fetch('data/places.geojson')
   .then(response => response.json())
@@ -14,12 +26,5 @@ fetch('data/places.geojson')
         }
       }
     }).addTo(map);
-
-const imageWidth = 4096;
-const imageHeight = 3072;
-const imageBounds = [[0, 0], [imageHeight, imageWidth]];
-
-L.imageOverlay('adenai_map_01.jpg', imageBounds).addTo(map);
-map.fitBounds(imageBounds);
-});
-
+  })
+  .catch(error => console.error('Error loading GeoJSON:', error));
