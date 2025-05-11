@@ -55,6 +55,28 @@
         "type": "Point",
         "coordinates": [1090, 1260]
       }
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "Fitchers Turm",
+        "description": "Standort des Turms von Fitcher, als die VsuzH ihn besuchten."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1281, 1145]
+      }
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "Ruine von Zurak'thar",
+        "description": "Die verlassene Ruine von Zurak'thar."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1219, 1171]
+      }
     }
   ]
 }

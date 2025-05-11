@@ -36,12 +36,13 @@ const DotOrange = L.icon({
 const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
   [
     'M', [1041, 1240], // Silbergrat 
-    'Q', [1062, 1287], [1035, 1336], // Weg nach Toftgard
-    'Q', [1026, 1342], [1085, 1396], // Toftgard
-    'Q', [1105, 1340], [1092, 1305], // Toftgarder Wald
-    'Q', [1116, 1299], [1129, 1315], // Fitchers Turm
-    'Q', [1142, 1267], [1174, 1287], // Zurak'thar
-    'L', [1129, 1315] // Fitchers Turm
+    'Q', [1062, 1287], [1038, 1341], // Weg nach Toftgard
+    'Q', [1054, 1371], [1083, 1392], // Toftgard
+    'Q', [1106, 1340], [1094, 1310], // Toftgarder Wald
+    'Q', [1109, 1276], [1129, 1285], // Weg zu Fitcher
+    'Q', [1142, 1295], [1145, 1281], // Fitchers Turm
+    'Q', [1150, 1245], [1171, 1219], // Zurak'thar
+    'L', [1145, 1281] // Fitchers Turm
   ],
   {
     color: 'orange',
