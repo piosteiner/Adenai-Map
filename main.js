@@ -1,12 +1,12 @@
 //Defining image dimensions
 const imageWidth = 2048;
 const imageHeight = 1536;
-const halfWidth = imageWidth / 2;   // 1024
-const halfHeight = imageHeight / 2; // 768
+const centerX = imageWidth / 2; // 1024
+const centerY = imageHeight / 2; // 768
 
 //Define a custom CRS that centers (0,0) in the image
 const mapCRS = L.extend({}, L.CRS.Simple, {
-  transformation: new L.Transformation(1, -imageWidth / 2, -1, imageHeight / 2)
+  transformation: new L.Transformation(1, -centerX, -1, centerY)
 });
 
 //Initialize the map using that CRS
@@ -28,7 +28,7 @@ map.on('mousemove', function (e) {
 });
 
 //FOR TESTING ONLY: Place a test marker at the center
-L.marker([0, 0]).addTo(map).bindPopup("Center (0,0)").openPopup();
+L.marker([0, 0]).addTo(map).bindPopup("World Center (0,0)").openPopup();
 
 //Load GeoJSON places
 fetch('data/places.geojson')
