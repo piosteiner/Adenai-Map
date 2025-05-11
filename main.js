@@ -28,3 +28,11 @@ fetch('data/places.geojson')
     }).addTo(map);
   })
   .catch(error => console.error('Error loading GeoJSON:', error));
+
+  map.on('mousemove', function (e) {
+  // For CRS.Simple, use layerPoint to get pixel coordinates
+  const coords = map.project(e.latlng, map.getZoom());
+  const x = Math.round(coords.x);
+  const y = Math.round(coords.y);
+  document.getElementById('coords').textContent = `X: ${x}, Y: ${y}`;
+});
