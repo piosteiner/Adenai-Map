@@ -10,6 +10,14 @@ const imageBounds = [[0, 0], [imageHeight, imageWidth]];
 L.imageOverlay('adenai_map_01.jpg', imageBounds).addTo(map);
 map.fitBounds(imageBounds);
 
+map.on('mousemove', function (e) {
+  // For CRS.Simple, use layerPoint to get pixel coordinates
+  const coords = map.project(e.latlng, map.getZoom());
+  const x = Math.round(coords.x);
+  const y = Math.round(coords.y);
+  document.getElementById('coords').textContent = `X: ${x}, Y: ${y}`;
+});
+
 // Load GeoJSON file and add to map
 fetch('data/places.geojson')
   .then(response => response.json())
@@ -29,10 +37,3 @@ fetch('data/places.geojson')
   })
   .catch(error => console.error('Error loading GeoJSON:', error));
 
-  map.on('mousemove', function (e) {
-  // For CRS.Simple, use layerPoint to get pixel coordinates
-  const coords = map.project(e.latlng, map.getZoom());
-  const x = Math.round(coords.x);
-  const y = Math.round(coords.y);
-  document.getElementById('coords').textContent = `X: ${x}, Y: ${y}`;
-});
