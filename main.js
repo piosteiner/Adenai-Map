@@ -33,24 +33,13 @@ const DotOrange = L.icon({
   popupAnchor: [0, -32]               // Popup appears above the icon
 });
 
-L.geoJSON(data, {
-  pointToLayer: function (feature, latlng) {
-    return L.marker(latlng, { icon: DotOrange });
-  },
-  onEachFeature: function (feature, layer) {
-    if (feature.properties?.name) {
-      layer.bindPopup(`<b>${feature.properties.name}</b><br>${feature.properties.description}`);
-    }
-  }
-}).addTo(map);
-
 //Load GeoJSON places
 fetch('data/places.geojson')
   .then(response => response.json())
   .then(data => {
     L.geoJSON(data, {
       pointToLayer: function (feature, latlng) {
-        return L.marker(latlng);
+        return L.marker(latlng, { icon: DotOrange });
       },
       onEachFeature: function (feature, layer) {
         if (feature.properties && feature.properties.name) {
