@@ -77,6 +77,50 @@
         "type": "Point",
         "coordinates": [1219, 1171]
       }
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "Luvatu",
+        "description": "Stadt unter dem Wasser - primär von Triton*innen bewohnt."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1219, 1171]
+      }
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "Motu Motu",
+        "description": "Die schwimmende Stadt."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1219, 1171]
+      }
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "Atlantis (versunken)",
+        "description": "Atlantis versunken im Mirog Graben - auch bekannt als das Unterwasser Paradies."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1219, 1171]
+      }
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "Atlantis (aufgestiegen)",
+        "description": "Standort von Atlantis, nachdem es von den VsuzH wieder in den Himmel gehoben wurde."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1219, 1171]
+      }
     }
   ]
 }
