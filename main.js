@@ -1,35 +1,36 @@
+//Defining image dimensions
 const imageWidth = 2048;
 const imageHeight = 1536;
 const halfWidth = imageWidth / 2;   // 1024
 const halfHeight = imageHeight / 2; // 768
 
-// 🟢 Define the custom CRS first
+//Define a custom CRS that centers (0,0) in the image
 const mapCRS = L.extend({}, L.CRS.Simple, {
-  transformation: new L.Transformation(1, -halfWidth, -1, halfHeight)
+  transformation: new L.Transformation(1, -imageWidth / 2, -1, imageHeight / 2)
 });
 
-// 🟢 Then use the CRS to create the map
+//Initialize the map using that CRS
 const map = L.map('map', {
   crs: mapCRS,
   minZoom: -2
 });
 
-// Set bounds based on image size
+//Overlay the image and fit bounds
 const imageBounds = [[0, 0], [imageHeight, imageWidth]];
 L.imageOverlay('adenai_map_01.jpg', imageBounds).addTo(map);
 map.fitBounds(imageBounds);
 
-// Show mouse coordinates (centered, correctly flipped)
+//Show coordinates on mouse move (corrected for centered CRS)
 map.on('mousemove', function (e) {
-  const x = Math.round(e.latlng.lng); // X
-  const y = Math.round(e.latlng.lat); // Y
+  const x = Math.round(e.latlng.lng); // X = lng
+  const y = Math.round(e.latlng.lat); // Y = lat
   document.getElementById('coords').textContent = `X: ${x}, Y: ${y}`;
 });
 
-// Optional test marker at center
-L.marker([0, 0]).addTo(map).bindPopup("Center of the map (0, 0)").openPopup();
+//FOR TESTING ONLY: Place a test marker at the center
+L.marker([0, 0]).addTo(map).bindPopup("Center (0,0)").openPopup();
 
-// Load GeoJSON places
+//Load GeoJSON places
 fetch('data/places.geojson')
   .then(response => response.json())
   .then(data => {
