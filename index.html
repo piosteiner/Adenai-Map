@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <title>Adenai Map</title>
+  <meta name="description" content="Das ist die Karte von Adenai von der Gruppe VsuzH, die hier ihr Dungeon and Dragons Abenteuer bestreitet.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="icons/uwu_1.png">
+
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -38,6 +41,23 @@
 <body>
   <div id="map"></div>
   <div id="coords">X: –, Y: –</div>
+
+<noscript>
+  <div style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #222;
+    color: #f1e1bd;
+    padding: 20px;
+    font-family: sans-serif;
+    border-radius: 8px;
+    z-index: 2000;
+    text-align: center;">
+    Diese Karte benötigt JavaScript. Bitte aktiviere JavaScript in deinem Browser, um sie anzuzeigen.
+  </div>
+</noscript>
 
   <!-- Load Leaflet JS and your main logic last -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>

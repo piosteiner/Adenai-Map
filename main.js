@@ -39,8 +39,8 @@ const VsuzH_Journey = L.curve(
     'Q', [1340, 1042], [1396, 1085], // Torftgard
     'Q', [1340, 1105], [1305, 1092], // Torftgarder Wald
     'Q', [1299, 1116], [1315, 1129], // Fitchers Turm
-    'M', [1267, 1142], [1287, 1174], // Zurak'thar
-    'Q', [1315, 1129] // Fitchers Turm
+    'Q', [1267, 1142], [1287, 1174], // Zurak'thar
+    'L', [1315, 1129] // Fitchers Turm
   ],
   {
     color: 'orange',
