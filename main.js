@@ -62,7 +62,7 @@ const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
   {
     color: 'orange',
     weight: isMobile ? 6 : 4,
-    dashArray: '10,6',
+    dashArray: isMobile ? '16,10' : '10,6',
     opacity: 0.7,
   }
 ).addTo(map);
