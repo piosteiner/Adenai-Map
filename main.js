@@ -80,8 +80,8 @@ fetch('data/places.geojson')
       onEachFeature: function (feature, layer) {
         if (feature.properties && feature.properties.name) {
           layer.bindPopup(
-            `<b>${feature.properties.name}</b><br>${feature.properties.description}`
-          );
+          `<div class="popup-title">${feature.properties.name}</div><div class="popup-desc">${feature.properties.description}</div>`
+        );
         }
       }
     }).addTo(map);
