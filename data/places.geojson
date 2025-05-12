@@ -16,7 +16,7 @@
       "type": "Feature",
       "properties": {
         "name": "Rena",
-        "description": "Die Hautpstadt von Valaris. Regiert von König Torrack von Rena. <br><img src='images/torrack.png' alt='Portrait of Torrack' style='max-width:100%; max-height:150px; margin-top: 5px; border-radius: 4px;'> <br> König Torrack regiert als höchste Authorität die Stadt Rena. <br><img src='images/torren.png' alt='Portrait of Torren' style='max-width:100%; max-height:150px; margin-top: 5px; border-radius: 4px;'> <br> Prinz Torren ist der einzige Sohn von König Torrack."
+        "description": "Die Hautpstadt von Valaris. Regiert von König Torrack von Rena. <br><img src='images/torrack.png' alt='Portrait of Torrack' style='max-width:100%; max-height:150px; margin-top: 5px; border-radius: 4px;'>König Torrack regiert als höchste Authorität die Stadt Rena. <br><img src='images/torren.png' alt='Portrait of Torren' style='max-width:100%; max-height:150px; margin-top: 5px; border-radius: 4px;'> <br> Prinz Torren ist der einzige Sohn von König Torrack."
       },
       "geometry": {
         "type": "Point",
