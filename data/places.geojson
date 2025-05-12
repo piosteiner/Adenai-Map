@@ -12,28 +12,11 @@
         "coordinates": [1700, 1008]
       }
     },
-    {
+        {
       "type": "Feature",
       "properties": {
         "name": "Rena",
-        "description": "<div style='display: flex; flex-direction: column; gap: 12px;'>
-
-          <div style='display: flex; gap: 12px; align-items: flex-start;'>
-            <img src='images/torrack.png' alt='Portrait of Torrack' style='width: 100px; border-radius: 4px; flex-shrink: 0;'>
-            <div>
-              <b>König Torrack von Rena</b><br>
-              Regiert als höchste Autorität die Stadt Rena.
-            </div>
-          </div>
-
-          <div style='display: flex; gap: 12px; align-items: flex-start;'>
-            <img src='images/torren.png' alt='Portrait of Torren' style='width: 100px; border-radius: 4px; flex-shrink: 0;'>
-            <div>
-              <b>Prinz Torren</b><br>
-              Der einzige Sohn von König Torrack. Er gilt als Hoffnung der kommenden Generation.
-            </div>
-          </div>
-        </div>"
+        "description": "<div style='display: flex; flex-direction: column; gap: 12px;'>\n  <div style='display: flex; gap: 12px; align-items: flex-start;'>\n    <img src='images/torrack.png' alt='Portrait of Torrack' style='width: 100px; border-radius: 4px; flex-shrink: 0;'>\n    <div>\n      <b>König Torrack von Rena</b><br>\n      Regiert als höchste Autorität die Stadt Rena.\n    </div>\n  </div>\n  <div style='display: flex; gap: 12px; align-items: flex-start;'>\n    <img src='images/torren.png' alt='Portrait of Torren' style='width: 100px; border-radius: 4px; flex-shrink: 0;'>\n    <div>\n      <b>Prinz Torren</b><br>\n      Der einzige Sohn von König Torrack. Er gilt als Hoffnung der kommenden Generation.\n    </div>\n  </div>\n</div>"
       },
       "geometry": {
         "type": "Point",
