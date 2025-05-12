@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Adenai Map</title>
   <meta property="og:title" content="Adenai Map – DnD Kampagne VsuzH">
   <meta property="og:description" content="Karte der Welt Adenai, mit dem Abenteuerpfad der Gruppe VsuzH.">
   <meta property="og:image" content="icons/uwu_1.png">
-
+  
   <link rel="icon" type="image/png" href="icons/uwu_1.png">
-
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -37,6 +37,18 @@
       z-index: 1000;
       pointer-events: none; /* So it doesn't block clicks on the map */
     }
+
+    .leaflet-popup-content {
+    font-size: 1em;
+    line-height: 1.4;
+    }
+
+    @media (max-width: 768px) {
+    .leaflet-popup-content {
+    font-size: 1.2em;
+    }
+    }
+
   </style>
 </head>
 

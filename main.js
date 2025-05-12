@@ -26,10 +26,12 @@ map.on('mousemove', function (e) {
   document.getElementById('coords').textContent = `X: ${x}, Y: ${y}`;
 });
 
+const isMobile = window.innerWidth < 768;
+
 const DotOrange = L.icon({
   iconUrl: 'icons/dot_orange.svg',  // Path to your icon file
-  iconSize: [32, 32],                 // Size in pixels
-  iconAnchor: [16, 16],               // Bottom center of the icon
+  iconSize: isMobile ? [48, 48] : [32, 32],                 // Size in pixels
+  iconAnchor: isMobile ? [24, 24] : [16, 16],               // Bottom center of the icon
   popupAnchor: [0, -32]               // Popup appears above the icon
 });
 
@@ -59,9 +61,9 @@ const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
   ],
   {
     color: 'orange',
-    weight: 4,
+    weight: isMobile ? 6 : 4,
     dashArray: '10,6',
-    opacity: 0.9,
+    opacity: 0.7,
   }
 ).addTo(map);
 
