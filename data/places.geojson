@@ -16,7 +16,7 @@
       "type": "Feature",
       "properties": {
         "name": "Rena",
-        "description": "Die Hautpstadt von Valaris. Regiert von König Torrik von Rena.<br><img src='images/torrack.jpg' alt='Valaris' style='width:100%; margin-top: 5px; border-radius: 4px;'>"
+        "description": "Die Hautpstadt von Valaris. Regiert von König Torrik von Rena.<br><img src='images/torrack.png' alt='Portrait of Torrak' style='width:100%; margin-top: 5px; border-radius: 4px;'>"
       },
       "geometry": {
         "type": "Point",
