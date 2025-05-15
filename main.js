@@ -26,8 +26,10 @@ map.on('mousemove', function (e) {
   document.getElementById('coords').textContent = `X: ${x}, Y: ${y}`;
 });
 
+//Mobile settings
 const isMobile = window.innerWidth < 768;
 
+//Define places icon
 const DotOrange = L.icon({
   iconUrl: 'icons/dot_orange.svg',  // Path to your icon file
   iconSize: isMobile ? [48, 48] : [32, 32],                 // Size in pixels
@@ -35,6 +37,43 @@ const DotOrange = L.icon({
   popupAnchor: [0, -32]               // Popup appears above the icon
 });
 
+//Store markers for search
+let allFeatureLayers = [];
+
+//Load GeoJSON and bind markers + search
+fetch('data/places.geojson')
+  .then(response => response.json())
+  .then(data => {
+    const geoLayer = L.geoJSON(data, {
+      pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, { icon: DotOrange });
+      },
+      onEachFeature: function (feature, layer) {
+        if (feature.properties && feature.properties.name) {
+          layer.bindPopup(
+            `<div class="popup-title">${feature.properties.name}</div><div class="popup-desc">${feature.properties.description}</div>`
+          );
+        }
+        allFeatureLayers.push({ layer, feature });
+      }
+    }).addTo(map);
+  })
+  .catch(error => console.error('Error loading GeoJSON:', error));
+
+  // Search logic (must be after fetch)
+document.getElementById('searchBox').addEventListener('input', function () {
+  const query = this.value.toLowerCase();
+  allFeatureLayers.forEach(({ layer, feature }) => {
+    const name = feature.properties.name.toLowerCase();
+    const desc = feature.properties.description?.toLowerCase() || '';
+    if (name.includes(query) || desc.includes(query)) {
+      map.setView(layer.getLatLng(), map.getZoom());
+      layer.openPopup();
+    }
+  });
+});
+
+// Draw curved journey path
 const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
   [
     'M', [1041, 1240], // Silbergrat 
@@ -68,22 +107,3 @@ const VsuzH_Journey = L.curve( // CAREFUL: First Y followed by X coordinate
 ).addTo(map);
 
 VsuzH_Journey.bindPopup("VsuzH Reise");
-
-//Load GeoJSON places
-fetch('data/places.geojson')
-  .then(response => response.json())
-  .then(data => {
-    L.geoJSON(data, {
-      pointToLayer: function (feature, latlng) {
-        return L.marker(latlng, { icon: DotOrange });
-      },
-      onEachFeature: function (feature, layer) {
-        if (feature.properties && feature.properties.name) {
-          layer.bindPopup(
-          `<div class="popup-title">${feature.properties.name}</div><div class="popup-desc">${feature.properties.description}</div>`
-        );
-        }
-      }
-    }).addTo(map);
-  })
-  .catch(error => console.error('Error loading GeoJSON:', error));
