@@ -138,7 +138,7 @@ function initSearch() {
         item.className = "dropdown-item";
         item.innerHTML = `
           <img src="images/${result.name.toLowerCase().replace(/[^a-z0-9]/g, '')}.jpg" onerror="this.style.display='none'" />
-          <div class="dropdown-text"><strong>${result.name}</strong><br><span>${result.desc.replace(/(<([^>]+)>)/gi, '').substring(0, 75)}...</span></div>
+          <div class="dropdown-text"><strong>${result.name}</strong><br><span>${result.desc.replace(/(<([^>]+)>)/gi, '').substring(0, 100)}...</span></div>
         `;
         item.addEventListener("click", () => {
           map.setView(result.latlng, Math.max(map.getZoom(), 1));
