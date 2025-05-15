@@ -66,37 +66,41 @@ fetch('data/places.geojson')
 
         if (url) {
           fetch(url)
-            .then(response => response.text())
+            .then(response => {
+              if (!response.ok) throw new Error('Fetch failed'); // Ensure fallback on 404 etc.
+              return response.text();
+            })
             .then(html => {
+              // If HTML loaded successfully, show it in popup
               layer.bindPopup(
                 `<div class="popup-title">${name}</div><div class="popup-desc">${html}</div>`
               );
 
-              // Add to search index with external content
+              // Add to search index with stripped text
               searchIndex.push({
                 name,
-                desc: html.replace(/(<([^>]+)>)/gi, ''), // Strip HTML tags for search
+                desc: html.replace(/(<([^>]+)>)/gi, ''), // Remove HTML tags for search
                 latlng
               });
             })
             .catch(err => {
-              const fallback = "Fehler beim Laden der Beschreibung.";
+              // Fallback to local description if external content fails
               layer.bindPopup(
-                `<div class="popup-title">${name}</div><div class="popup-desc">${fallback}</div>`
+                `<div class="popup-title">${name}</div><div class="popup-desc">${desc}</div>`
               );
 
-              // Add fallback to search index
               searchIndex.push({
                 name,
-                desc: fallback,
+                desc,
                 latlng
               });
             });
         } else {
-          // Static description
+          // No contentUrl: use local description
           layer.bindPopup(
             `<div class="popup-title">${name}</div><div class="popup-desc">${desc}</div>`
           );
+
           searchIndex.push({
             name,
             desc,
@@ -108,7 +112,7 @@ fetch('data/places.geojson')
       }
     }).addTo(map);
 
-    initSearch();
+    initSearch(); // Init search once all markers are set up
   })
   .catch(error => console.error('Error loading GeoJSON:', error));
 
