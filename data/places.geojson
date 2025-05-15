@@ -16,6 +16,7 @@
       "type": "Feature",
       "properties": {
         "name": "Rena",
+        "description": "test",
         "contentUrl": "descriptions/rena.html"
       },
       "geometry": {
