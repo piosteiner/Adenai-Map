@@ -118,10 +118,9 @@ function initSearch() {
 
   let selectedIndex = -1;
 
-  searchInput.addEventListener("keyup", function (e) {
+  searchInput.addEventListener("input", function () {
     const query = this.value.toLowerCase();
     dropdown.innerHTML = '';
-    selectedIndex = -1;
 
     if (query === '') {
       dropdown.style.display = 'none';
