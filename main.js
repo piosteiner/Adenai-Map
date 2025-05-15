@@ -62,8 +62,8 @@ fetch('data/places.geojson')
         const name = feature.properties.name || '';
         const desc = feature.properties.description || '';
         const url = feature.properties.contentUrl;
+        const latlng = layer.getLatLng();
 
-        // Load from external HTML file if contentUrl is provided
         if (url) {
           fetch(url)
             .then(response => response.text())
@@ -71,26 +71,40 @@ fetch('data/places.geojson')
               layer.bindPopup(
                 `<div class="popup-title">${name}</div><div class="popup-desc">${html}</div>`
               );
+
+              // Add to search index with external content
+              searchIndex.push({
+                name,
+                desc: html.replace(/(<([^>]+)>)/gi, ''), // Strip HTML tags for search
+                latlng
+              });
             })
             .catch(err => {
+              const fallback = "Fehler beim Laden der Beschreibung.";
               layer.bindPopup(
-                `<div class="popup-title">${name}</div><div class="popup-desc">Fehler beim Laden der Beschreibung.</div>`
+                `<div class="popup-title">${name}</div><div class="popup-desc">${fallback}</div>`
               );
+
+              // Add fallback to search index
+              searchIndex.push({
+                name,
+                desc: fallback,
+                latlng
+              });
             });
         } else {
-          // Fallback to static `description` field
+          // Static description
           layer.bindPopup(
             `<div class="popup-title">${name}</div><div class="popup-desc">${desc}</div>`
           );
+          searchIndex.push({
+            name,
+            desc,
+            latlng
+          });
         }
 
-        // Push for search index
         geoFeatureLayers.push({ layer, feature });
-        searchIndex.push({
-          name,
-          desc, // You can still keep short description for search
-          latlng: layer.getLatLng()
-        });
       }
     }).addTo(map);
 
