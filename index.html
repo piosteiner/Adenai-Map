@@ -68,24 +68,37 @@
       padding: 8px;
       border-radius: 6px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-      width: 220px;
+      width: 250px;
     }
 
-    #searchBox {
-      width: 100%;
-      padding: 6px 10px;
+    #resultsDropdown {
+      margin-top: 6px;
+      max-height: 200px;
+      overflow-y: auto;
+      display: none;
       font-size: 14px;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
 
-    #resultsDropdown {
-      margin-top: 6px;
-      width: 100%;
-      max-height: 120px;
-      overflow-y: auto;
-      display: none;
-      font-size: 14px;
+    .dropdown-item {
+      padding: 6px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item.active {
+      background-color: #f0f0f0;
+    }
+
+    .dropdown-item img {
+      width: 32px;
+      height: 32px;
+      object-fit: cover;
+      border-radius: 4px;
     }
 
   </style>
@@ -95,10 +108,10 @@
   <div id="map"></div>
   <div id="coords">X: –, Y: –</div>
 
-  <div id="search-container">
-    <input type="text" id="searchBox" placeholder="Ort suchen...">
-    <select id="resultsDropdown" size="5"></select>
-  </div>
+<div id="search-container">
+  <input type="text" id="searchBox" placeholder="Ort suchen..." />
+  <div id="resultsDropdown"></div>
+</div>
 
 <noscript>
   <div style="
