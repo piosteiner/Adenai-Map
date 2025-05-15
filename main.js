@@ -12,6 +12,9 @@ const map = L.map('map', {
   crs: mapCRS,
   minZoom: -1,
   maxZoom: 3,
+  zoomSnap: 0.1,    // Allow smoother fractional zoom levels
+  zoomDelta: 0.25,  // Smaller steps when using +/- buttons or keyboard
+  wheelPxPerZoomLevel: 120, // Optional: slower scroll-based zoom
   zoomControl: false // Disable default top-left zoom control
 });
 
