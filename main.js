@@ -11,8 +11,14 @@ const mapCRS = L.extend({}, L.CRS.Simple, {
 const map = L.map('map', {
   crs: mapCRS,
   minZoom: -1,
-  maxZoom: 3
+  maxZoom: 3,
+  zoomControl: false // Disable default top-left zoom control
 });
+
+//Adds the zoom buttons in the bottom right.
+L.control.zoom({
+  position: 'bottomright' // Change to 'topright', 'bottomleft', etc. if you prefer
+}).addTo(map);
 
 //Overlay the image and fit bounds
 const imageBounds = [[0, 0], [imageHeight, imageWidth]];
