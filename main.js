@@ -121,6 +121,7 @@ function initSearch() {
   searchInput.addEventListener("input", function () {
     const query = this.value.toLowerCase();
     dropdown.innerHTML = '';
+    selectedIndex = -1;
 
     if (query === '') {
       dropdown.style.display = 'none';
@@ -160,17 +161,22 @@ function initSearch() {
   });
 
   searchInput.addEventListener("keydown", function (e) {
-    const items = dropdown.querySelectorAll(".dropdown-item");
+    const items = dropdown.querySelectorAll(".dropdown-item:not(.no-match)");
+    if (items.length === 0) return;
+
     if (e.key === "ArrowDown") {
       selectedIndex = (selectedIndex + 1) % items.length;
+      e.preventDefault();
     } else if (e.key === "ArrowUp") {
       selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+      e.preventDefault();
     } else if (e.key === "Enter" && items[selectedIndex]) {
       items[selectedIndex].click();
       return;
     } else if (e.key === "Escape") {
       dropdown.style.display = 'none';
       selectedIndex = -1;
+      return;
     }
 
     items.forEach((item, i) => {
