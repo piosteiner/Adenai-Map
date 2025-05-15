@@ -186,6 +186,21 @@ function initSearch() {
       }
     });
   });
+
+    // Hide dropdown when clicking outside the search container
+  document.addEventListener("click", function (e) {
+    const searchContainer = document.getElementById("search-container");
+    if (!searchContainer.contains(e.target)) {
+      dropdown.style.display = "none";
+    }
+  });
+
+  // Re-open dropdown on focus if there's still a query
+  searchInput.addEventListener("focus", function () {
+    if (this.value.trim() !== '' && dropdown.children.length > 0) {
+      dropdown.style.display = "block";
+    }
+  });
 }
 
 window.addEventListener('load', initSearch);
