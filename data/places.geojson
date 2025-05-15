@@ -17,7 +17,7 @@
       "properties": {
         "name": "Rena",
         "description": "test",
-        "contentUrl": "descriptions/renas.html"
+        "contentUrl": "descriptions/rena.html"
       },
       "geometry": {
         "type": "Point",
