@@ -16,7 +16,7 @@
       "type": "Feature",
       "properties": {
         "name": "Rena",
-        "description": "test",
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung, bitte kontaktiere den Websitenbetreiber.",
         "contentUrl": "descriptions/rena.html"
       },
       "geometry": {
