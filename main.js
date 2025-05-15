@@ -61,13 +61,34 @@ fetch('data/places.geojson')
       onEachFeature: function (feature, layer) {
         const name = feature.properties.name || '';
         const desc = feature.properties.description || '';
-        layer.bindPopup(
-          `<div class="popup-title">${name}</div><div class="popup-desc">${desc}</div>`
-        );
+        const url = feature.properties.contentUrl;
+
+        // Load from external HTML file if contentUrl is provided
+        if (url) {
+          fetch(url)
+            .then(response => response.text())
+            .then(html => {
+              layer.bindPopup(
+                `<div class="popup-title">${name}</div><div class="popup-desc">${html}</div>`
+              );
+            })
+            .catch(err => {
+              layer.bindPopup(
+                `<div class="popup-title">${name}</div><div class="popup-desc">Fehler beim Laden der Beschreibung.</div>`
+              );
+            });
+        } else {
+          // Fallback to static `description` field
+          layer.bindPopup(
+            `<div class="popup-title">${name}</div><div class="popup-desc">${desc}</div>`
+          );
+        }
+
+        // Push for search index
         geoFeatureLayers.push({ layer, feature });
         searchIndex.push({
           name,
-          desc,
+          desc, // You can still keep short description for search
           latlng: layer.getLatLng()
         });
       }
