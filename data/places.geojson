@@ -16,7 +16,7 @@
       "type": "Feature",
       "properties": {
         "name": "Rena",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Rena, bitte kontaktiere den Websitenbetreiber.",
         "contentUrl": "contentUrl/rena.html"
       },
       "geometry": {
@@ -28,7 +28,8 @@
       "type": "Feature",
       "properties": {
         "name": "Olecea",
-        "description": "Das Juwel der Wüste - eine wundersame und blühende Stadt in Mitten der kargen Harak Region."
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Olecea, bitte kontaktiere den Websitenbetreiber.",
+        "contentUrl": "contentUrl/olecea.html"
       },
       "geometry": {
         "type": "Point",
@@ -176,6 +177,30 @@
       "geometry": {
         "type": "Point",
         "coordinates": [1240, 1041]
+      }
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "Glesburg",
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Glesburg, bitte kontaktiere den Websitenbetreiber.",
+        "contentUrl": "contentUrl/glesburg.html"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1184, 648]
+      }
+    },
+            {
+      "type": "Feature",
+      "properties": {
+        "name": "Byrgenwerft",
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Byrgenwerft, bitte kontaktiere den Websitenbetreiber.",
+        "contentUrl": "contentUrl/byrgenwerft.html"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [959, 1212]
       }
     }
   ]
