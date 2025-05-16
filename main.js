@@ -46,21 +46,14 @@ const DotOrange = L.icon({
   popupAnchor: [0, -32]
 });
 
-// Add static ship icon manually using a DOM element that tracks map position
-const shipEl = document.createElement('img');
-shipEl.src = 'images/vsuzh_ship_draft.png';
-shipEl.alt = 'Ship';
-shipEl.className = 'fixed-map-icon';
-document.body.appendChild(shipEl);
+const ShipIcon = L.icon({
+  iconUrl: 'images/vsuzh_ship_draft.png',
+  iconSize: [30, 30],     // Adjust size in pixels
+  iconAnchor: [15, 15],   // Center the image
+  popupAnchor: [0, -15]
+});
 
-// Update its position based on map center
-function updateShipPosition() {
-  const point = map.latLngToContainerPoint([1013, 1919]); // map coords
-  shipEl.style.left = `${point.x}px`;
-  shipEl.style.top = `${point.y}px`;
-}
-map.on('move zoom', updateShipPosition);
-map.whenReady(updateShipPosition);
+L.marker([1013, 1919], { icon: ShipIcon }).addTo(map);
 
 //Store markers for search
 let geoFeatureLayers = [];
