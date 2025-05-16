@@ -288,6 +288,17 @@
         "type": "Point",
         "coordinates": [782, 443]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Goblin Loch",
+        "description": "Die VsuzH haben hier einen unschuligen Goblin in ein mysteriöses, dunkles Loch geworfen. Wenigstens haben sies verschlossen, damit niemand mehr reinfällt."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1040, 1472]
+      }
     }
   ]
 }
