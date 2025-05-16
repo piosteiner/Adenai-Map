@@ -46,16 +46,26 @@ const DotOrange = L.icon({
   popupAnchor: [0, -32]
 });
 
+//Stabilizing Images
+map.on('zoom', () => {
+  const currentZoom = map.getZoom();
+  const scaleFactor = Math.pow(2, map.getZoom() - map.getMinZoom());
+  const icons = document.querySelectorAll('.static-ship-icon img');
+  icons.forEach(img => {
+    img.style.transform = `scale(${1 / scaleFactor})`;
+  });
+});
+
 //Define Ship Image
-const ShipIcon = L.icon({
-  iconUrl: 'images/vsuzh_ship_draft.png', //Replace with your image path
-  iconSize: [30, 30], //Automatically scale width, fixed height
-  iconAnchor: [15, 15], //Adjust to center it properly
-  popupAnchor: [0, -15]
+const StaticShipIcon = L.divIcon({
+  className: 'static-ship-icon', // we’ll style this below
+  html: `<img src="images/vsuzh_ship_draft.png" alt="Ship" />`,
+  iconSize: [30, 30], // set a fixed pixel size
+  iconAnchor: [15, 15], // center it
 });
 
 //Show ship on map
-L.marker([1013, 1919], { icon: ShipIcon }).addTo(map);
+L.marker([1013, 1919], { icon: StaticShipIcon, interactive: false }).addTo(map);
 
 //Store markers for search
 let geoFeatureLayers = [];
