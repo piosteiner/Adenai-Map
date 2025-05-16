@@ -11,11 +11,11 @@
   flex-shrink: 0;
 }
 
-.static-ship-icon img {
-  height: 30px;
+.fixed-map-icon {
+  position: absolute;
   width: auto;
-  transform: scale(1);
-  transform-origin: center center;
-  will-change: transform;
+  height: 30px;
+  transform: translate(-50%, -50%);
+  z-index: 600; /* Above map tiles, below popups */
   pointer-events: none;
 }

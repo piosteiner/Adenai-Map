@@ -46,26 +46,21 @@ const DotOrange = L.icon({
   popupAnchor: [0, -32]
 });
 
-//Stabilizing Images
-map.on('zoom', () => {
-  const currentZoom = map.getZoom();
-  const scaleFactor = Math.pow(2, map.getZoom() - map.getMinZoom());
-  const icons = document.querySelectorAll('.static-ship-icon img');
-  icons.forEach(img => {
-    img.style.transform = `scale(${1 / scaleFactor})`;
-  });
-});
+// Add static ship icon manually using a DOM element that tracks map position
+const shipEl = document.createElement('img');
+shipEl.src = 'images/vsuzh_ship_draft.png';
+shipEl.alt = 'Ship';
+shipEl.className = 'fixed-map-icon';
+document.body.appendChild(shipEl);
 
-//Define Ship Image
-const StaticShipIcon = L.divIcon({
-  className: 'static-ship-icon', // we’ll style this below
-  html: `<img src="images/vsuzh_ship_draft.png" alt="Ship" />`,
-  iconSize: [30, 30], // set a fixed pixel size
-  iconAnchor: [15, 15], // center it
-});
-
-//Show ship on map
-L.marker([1013, 1919], { icon: StaticShipIcon, interactive: false }).addTo(map);
+// Update its position based on map center
+function updateShipPosition() {
+  const point = map.latLngToContainerPoint([1013, 1919]); // map coords
+  shipEl.style.left = `${point.x}px`;
+  shipEl.style.top = `${point.y}px`;
+}
+map.on('move zoom', updateShipPosition);
+map.whenReady(updateShipPosition);
 
 //Store markers for search
 let geoFeatureLayers = [];
