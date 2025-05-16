@@ -15,8 +15,8 @@ const VsuzH_Journey = L.curve(
     'L', [1040, 1472], //Zum Goblin Loch
     'L', [1053, 1481], //Zurück zur Landung
     'L', [1061, 1508], //Zurück auf den Fluss
-    'Q', [1044, 1535], [1034, 1569], //Flussreise Teil 3
-    'Q', [1019, 1581], [1008, 1608], //Flussreise Teil 4
+    'L', [1034, 1569], //Flussreise Teil 3
+    'L', [1008, 1608], //Flussreise Teil 4
     'Q', [1010, 1648], [1008, 1700], //Ankunft in Valaris
     'Q', [989, 1693], [985, 1724], // Ausfahrt von Valaris
     'L', [1036, 2074], //Fahrt nach Motu Motu
