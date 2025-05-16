@@ -25,7 +25,7 @@ const VsuzH_Journey = L.curve(
     'L', [992, 2126], //Fahrt nach Luvatu
     'L', [975, 2210], //Fahrt zum Unterwasserparadies
     'L', [1200, 2210], //Aufstieg von Atlantis
-    'Q', [1049, 2187], [888, 2275], //Rückkehr aufs Meer
+    'Q', [1140, 2340], [888, 2275], //Rückkehr aufs Meer
     'Q', [723, 2041], [708, 1983], //Fahrt an die Küste von Upeto
     'Q', [564, 2014], [488, 1957], //Fahrt nach Basapo
     'Q', [489, 1867], [556, 1869] //Reise nach Ako
