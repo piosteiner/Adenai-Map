@@ -10,12 +10,3 @@
   border-radius: 4px;
   flex-shrink: 0;
 }
-
-.fixed-map-icon {
-  position: absolute;
-  width: auto;
-  height: 30px;
-  transform: translate(-50%, -50%);
-  z-index: 600; /* Above map tiles, below popups */
-  pointer-events: none;
-}
