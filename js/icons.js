@@ -22,8 +22,8 @@ L.imageOverlay('images/vsuzh_ship_mirrored.PNG', ship1, {
 
 //Ship to Upeto
 const ship2 = [
-  [814 - 30, 2145 - 30],  // Southwest corner
-  [814 + 30, 2145 + 30]   // Northeast corner
+  [817 - 30, 2137 - 30],  // Southwest corner
+  [817 + 30, 2137 + 30]   // Northeast corner
 ];
 
 //Ship to Upeto
