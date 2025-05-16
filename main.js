@@ -53,13 +53,13 @@ const shipBounds = [
 ];
 
 //Ship Icon 2/2
-L.imageOverlay('images/vsuzh_ship_draft_mirrored.png', shipBounds, {
-  interactive: false
-}).addTo(map);
+//L.imageOverlay('images/vsuzh_ship_draft_mirrored.png', shipBounds, {
+//  interactive: false
+//}).addTo(map);
 
 //Store markers for search
-let geoFeatureLayers = [];
-let searchIndex = [];
+//let geoFeatureLayers = [];
+//let searchIndex = [];
 
 //Load GeoJSON and bind markers + search
 fetch('data/places.geojson')
