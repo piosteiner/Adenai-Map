@@ -5,7 +5,7 @@ const mapextension1 = [
 ];
 
 //Map Expansion
-L.imageOverlay('images/mapextension.PNG', mapextension1, {
+L.imageOverlay('images/mapextension_east.PNG', mapextension1, {
   interactive: false
 }).addTo(map);
 
@@ -22,8 +22,8 @@ L.imageOverlay('images/vsuzh_ship_mirrored.PNG', ship1, {
 
 //Ship to Upeto
 const ship2 = [
-  [809 - 30, 2153 - 30],  // Southwest corner
-  [809 + 30, 2153 + 30]   // Northeast corner
+  [814 - 30, 2145 - 30],  // Southwest corner
+  [814 + 30, 2145 + 30]   // Northeast corner
 ];
 
 //Ship to Upeto
