@@ -46,14 +46,14 @@ const DotOrange = L.icon({
   popupAnchor: [0, -32]
 });
 
-const ShipIcon = L.icon({
-  iconUrl: 'images/vsuzh_ship_draft.png',
-  iconSize: [30, 30],     // Adjust size in pixels
-  iconAnchor: [15, 15],   // Center the image
-  popupAnchor: [0, -15]
-});
+const shipBounds = [
+  [1013 - 30, 1919 - 30],  // Southwest corner
+  [1013 + 30, 1919 + 30]   // Northeast corner
+];
 
-L.marker([1013, 1919], { icon: ShipIcon }).addTo(map);
+L.imageOverlay('images/vsuzh_ship_draft.png', shipBounds, {
+  interactive: false
+}).addTo(map);
 
 //Store markers for search
 let geoFeatureLayers = [];
