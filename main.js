@@ -47,10 +47,10 @@ const DotOrange = L.icon({
 });
 
 //Ship Icon 1/2
-const shipBounds = [
-  [1032 - 30, 1916 - 30],  // Southwest corner
-  [1032 + 30, 1916 + 30]   // Northeast corner
-];
+//const shipBounds = [
+//  [1032 - 30, 1916 - 30],  // Southwest corner
+//  [1032 + 30, 1916 + 30]   // Northeast corner
+//];
 
 //Ship Icon 2/2
 //L.imageOverlay('images/vsuzh_ship_draft_mirrored.png', shipBounds, {
@@ -58,8 +58,8 @@ const shipBounds = [
 //}).addTo(map);
 
 //Store markers for search
-//let geoFeatureLayers = [];
-//let searchIndex = [];
+let geoFeatureLayers = [];
+let searchIndex = [];
 
 //Load GeoJSON and bind markers + search
 fetch('data/places.geojson')
