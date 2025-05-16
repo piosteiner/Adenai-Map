@@ -40,7 +40,8 @@
       "type": "Feature",
       "properties": {
         "name": "Wesdalen",
-        "description": "Eine grosse Stadt an der Küste von Adenai und an dem Übergang zu Tua Danar."
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Wesdalen, bitte kontaktiere den Websitenbetreiber.",
+        "contentUrl": "contentUrl/wesdalen.html"
       },
       "geometry": {
         "type": "Point",
@@ -51,7 +52,8 @@
       "type": "Feature",
       "properties": {
         "name": "Yosefka Akademie",
-        "description": "Die Autorithät der magischen Ausbildung und Forschung."
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Yosefka Akademie, bitte kontaktiere den Websitenbetreiber.",
+        "contentUrl": "yosefka_akademie.html."
       },
       "geometry": {
         "type": "Point",
@@ -201,6 +203,30 @@
       "geometry": {
         "type": "Point",
         "coordinates": [959, 1212]
+      }
+    },
+                {
+      "type": "Feature",
+      "properties": {
+        "name": "Neudalen",
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Neudalen, bitte kontaktiere den Websitenbetreiber.",
+        "contentUrl": "contentUrl/neudalen.html"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [596, 778]
+      }
+    },
+                    {
+      "type": "Feature",
+      "properties": {
+        "name": "Nordmund",
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Nordmund, bitte kontaktiere den Websitenbetreiber.",
+        "contentUrl": "contentUrl/nordmund.html"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1082, 967]
       }
     }
   ]
