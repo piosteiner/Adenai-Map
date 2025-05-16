@@ -1,0 +1,12 @@
+.character-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-top: 8px;
+}
+
+.character-card img {
+  width: 100px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
