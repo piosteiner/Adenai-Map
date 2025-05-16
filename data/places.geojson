@@ -321,6 +321,17 @@
         "type": "Point",
         "coordinates": [1310, 1094]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Überfallenes Küstendorf",
+        "description": "Die VsuzH wurden von einer Gruppe von Sahuagin angegriffen, welche zuvor ein Dorf geplündert hatten."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1985, 546]
+      }
     }
   ]
 }
