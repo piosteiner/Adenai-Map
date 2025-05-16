@@ -4,40 +4,51 @@ const mapextension1 = [
   [850 + 450, 2248 + 200]   // Northeast corner
 ];
 
-//2048p Expansion
+//Map Expansion
 L.imageOverlay('images/mapextension_east.PNG', mapextension1, {
   interactive: false
 }).addTo(map);
 
-//Ship Icon
+//Ship to Motu Motu
 const ship1 = [
   [1032 - 30, 1916 - 30],  // Southwest corner
   [1032 + 30, 1916 + 30]   // Northeast corner
 ];
 
-//Ship Icon
+//Ship to Motu Motu
 L.imageOverlay('images/vsuzh_ship_mirrored.PNG', ship1, {
   interactive: false
 }).addTo(map);
 
-//Ship Icon
+//Ship to Upeto
+const ship2 = [
+  [801 - 30, 2148 - 30],  // Southwest corner
+  [801 + 30, 2148 + 30]   // Northeast corner
+];
+
+//Ship to Upeto
+L.imageOverlay('images/vsuzh_ship.PNG', ship2, {
+  interactive: false
+}).addTo(map);
+
+//Atlantis Underwater
 const atlantisBubble = [
   [975 - 40, 2210 - 40],  // Southwest corner
   [975 + 40, 2210 + 40]   // Northeast corner
 ];
 
-//Ship Icon
+//Atlantis Underwater
 L.imageOverlay('images/atlantis_bubble.PNG', atlantisBubble, {
   interactive: false
 }).addTo(map);
 
-//Ship Icon
+//Atlantis Flying
 const atlantisClouds = [
   [1200 - 40, 2210 - 40],  // Southwest corner
   [1200 + 40, 2210 + 40]   // Northeast corner
 ];
 
-//Ship Icon
+//Atlantis Flying
 L.imageOverlay('images/atlantis_clouds.PNG', atlantisClouds, {
   interactive: false
 }).addTo(map);
