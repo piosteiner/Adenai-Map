@@ -23,9 +23,9 @@ const VsuzH_Journey = L.curve(
     'Q', [1059,2082], [1070, 2106], //Fahrt zur Sternenzirkel Insel
     'Q', [1049,2101], [1036, 2074], //Fahrt zurück nach Motu Motu
     'L', [992, 2126], //Fahrt nach Luvatu
-    'L', [991, 2152], //Fahrt zum Unterwasserparadies
-    'L', [1165, 2152], //Aufstieg von Atlantis
-    'Q', [1049, 2187], [917, 2173], //Rückkehr aufs Meer
+    'L', [975, 2210], //Fahrt zum Unterwasserparadies
+    'L', [1200, 2210], //Aufstieg von Atlantis
+    'Q', [1049, 2187], [888, 2275], //Rückkehr aufs Meer
     'Q', [723, 2041], [708, 1983], //Fahrt an die Küste von Upeto
     'Q', [564, 2014], [488, 1957], //Fahrt nach Basapo
     'Q', [489, 1867], [556, 1869] //Reise nach Ako
