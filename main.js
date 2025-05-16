@@ -180,8 +180,11 @@ function initSearch() {
           <div class="dropdown-text"><strong>${result.name}</strong><br><span>${result.desc.replace(/(<([^>]+)>)/gi, '').substring(0, 100)}...</span></div>
         `;
         item.addEventListener("click", () => {
-          map.setView(result.latlng, Math.max(map.getZoom(), 1));
-          L.popup().setLatLng(result.latlng).setContent(`<b>${result.name}</b><br>${result.desc}`).openOn(map);
+          const markerMatch = geoFeatureLayers.find(g => g.feature.properties.name === result.name);
+          if (markerMatch) {
+            map.setView(markerMatch.layer.getLatLng(), Math.max(map.getZoom(), 1));
+            markerMatch.layer.openPopup();
+          }
           dropdown.style.display = 'none';
           searchInput.blur();
         });
