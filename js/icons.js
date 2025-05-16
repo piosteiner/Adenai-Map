@@ -5,7 +5,7 @@ const ship1 = [
 ];
 
 //Ship Icon
-L.imageOverlay('images/vsuzh_ship_mirrored.png', ship1, {
+L.imageOverlay('images/vsuzh_ship_mirrored.PNG', ship1, {
   interactive: false
 }).addTo(map);
 
@@ -16,7 +16,7 @@ const atlantisBubble = [
 ];
 
 //Ship Icon
-L.imageOverlay('images/atlantis_bubble.png', atlantisBubble, {
+L.imageOverlay('images/atlantis_bubble.PNG', atlantisBubble, {
   interactive: false
 }).addTo(map);
 
@@ -27,7 +27,7 @@ const atlantisClouds = [
 ];
 
 //Ship Icon
-L.imageOverlay('images/atlantis_clouds.png', atlantisClouds, {
+L.imageOverlay('images/atlantis_clouds.PNG', atlantisClouds, {
   interactive: false
 }).addTo(map);
 
