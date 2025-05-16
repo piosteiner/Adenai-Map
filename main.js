@@ -53,7 +53,7 @@ const shipBounds = [
 ];
 
 //Ship Icon 2/2
-L.imageOverlay('images/vsuzh_ship_draft.png', shipBounds, {
+L.imageOverlay('images/vsuzh_ship_draft_mirrored.png', shipBounds, {
   interactive: false
 }).addTo(map);
 
