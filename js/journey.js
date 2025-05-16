@@ -20,8 +20,8 @@ const VsuzH_Journey = L.curve(
     'Q', [1010, 1648], [1008, 1700], //Ankunft in Valaris
     'Q', [989, 1693], [985, 1724], // Ausfahrt von Valaris
     'L', [1025, 2005], //Fahrt nach Motu Motu
-    'Q', [1059,2082], [1070, 2106], //Fahrt zur Sternenzirkel Insel
-    'Q', [1049,2101], [1036, 2074], //Fahrt zurück nach Motu Motu
+    'Q', [1046, 2010], [1070, 2106], //Fahrt zur Sternenzirkel Insel
+    'Q', [1046, 2103], [1025, 2005], //Fahrt zurück nach Motu Motu
     'L', [992, 2126], //Fahrt nach Luvatu
     'L', [975, 2210], //Fahrt zum Unterwasserparadies
     'L', [1200, 2210], //Aufstieg von Atlantis
