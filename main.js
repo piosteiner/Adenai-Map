@@ -46,6 +46,17 @@ const DotOrange = L.icon({
   popupAnchor: [0, -32]
 });
 
+//Define Ship Image
+const ShipIcon = L.icon({
+  iconUrl: 'images/vsuzh_ship_draft.png', // Replace with your image path
+  iconSize: [auto, 30],            // Automatically scale width, fixed height
+  iconAnchor: [15, 15],            // Adjust to center it properly
+  popupAnchor: [0, -15]
+});
+
+//Show ship on map
+L.marker([1013, 1919], { icon: ShipIcon }).addTo(map);
+
 //Store markers for search
 let geoFeatureLayers = [];
 let searchIndex = [];
