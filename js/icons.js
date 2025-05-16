@@ -1,11 +1,11 @@
 //Map Expansion
 const mapextension1 = [
-  [1050 - 250, 2298 - 250],  // Southwest corner
-  [1050 + 250, 2298 + 250]   // Northeast corner
+  [850 - 450, 2248 - 200],  // Southwest corner
+  [850 + 450, 2248 + 200]   // Northeast corner
 ];
 
 //2048p Expansion
-L.imageOverlay('images/mapextension_small.PNG', mapextension1, {
+L.imageOverlay('images/mapextension_east.PNG', mapextension1, {
   interactive: false
 }).addTo(map);
 
