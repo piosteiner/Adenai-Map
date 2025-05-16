@@ -310,6 +310,17 @@
         "type": "Point",
         "coordinates": [1481, 1053]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Torftgarder Forst",
+        "description": "Die VsuzH haben hier nach Spuren eines Eies und merkwürdigen Kreaturen gekämpft und gerastet."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1310, 1094]
+      }
     }
   ]
 }
