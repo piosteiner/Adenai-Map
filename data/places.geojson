@@ -53,7 +53,7 @@
       "properties": {
         "name": "Yosefka Akademie",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Yosefka Akademie, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "yosefka_akademie.html"
+        "contentUrl": "contentUrl/yosefka_akademie.html"
       },
       "geometry": {
         "type": "Point",
