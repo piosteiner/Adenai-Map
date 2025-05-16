@@ -49,7 +49,7 @@ const DotOrange = L.icon({
 //Define Ship Image
 const ShipIcon = L.icon({
   iconUrl: 'images/vsuzh_ship_draft.png', // Replace with your image path
-  iconSize: [30, 30],            // Automatically scale width, fixed height
+  iconSize: null,            // "["30, 30]"" wouldAutomatically scale width, fixed height
   iconAnchor: [15, 15],            // Adjust to center it properly
   popupAnchor: [0, -15]
 });
