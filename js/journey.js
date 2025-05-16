@@ -15,17 +15,20 @@ const VsuzH_Journey = L.curve(
     'L', [1040, 1472], //Zum Goblin Loch
     'L', [1053, 1481], //Zurück zur Landung
     'L', [1061, 1508], //Zurück auf den Fluss
-    'Q', [1000, 1581], [1008, 1700], //Flussreise Teil 2
-    'Q', [989, 1693], [985, 1724],
-    'Q', [993, 1909], [1039, 1974],
-    'Q', [1059, 1988], [1061, 2008],
-    'Q', [1041, 1962], [1005, 1977],
-    'Q', [975, 1985], [996, 2015],
-    'L', [1028, 2069],
-    'L', [927, 2069],
-    'Q', [723, 2041], [708, 1983],
-    'Q', [564, 2014], [488, 1957],
-    'Q', [489, 1867], [556, 1869]
+    'Q', [1044, 1535], [1034, 1569], //Flussreise Teil 3
+    'Q', [1019, 1581], [1008, 1608], //Flussreise Teil 4
+    'Q', [1010, 1648], [1008, 1700], //Ankunft in Valaris
+    'Q', [989, 1693], [985, 1724], // Ausfahrt von Valaris
+    'L', [1036, 2074], //Fahrt nach Motu Motu
+    'L', [1061, 2008], //Fahrt zur Sternenzirkel Insel
+    'L', [1041, 1962], //Fahrt zurück nach Motu Motu
+    'L', [975, 1985], //Fahrt nach Luvatu
+    'L', [1028, 2069], //Fahrt zum Unterwasserparadies
+    'L', [927, 2069], //Aufstieg von Atlantis
+    'L', [917, 2173], //Rückkehr aufs Meer
+    'Q', [723, 2041], [708, 1983], //Fahrt an die Küste von Upeto
+    'Q', [564, 2014], [488, 1957], //Fahrt nach Basapo
+    'Q', [489, 1867], [556, 1869] //Reise nach Ako
   ],
   {
     color: 'orange',
