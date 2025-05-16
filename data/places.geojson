@@ -12,7 +12,7 @@
         "coordinates": [1700, 1008]
       }
     },
-        {
+   {
       "type": "Feature",
       "properties": {
         "name": "Rena",
@@ -36,7 +36,7 @@
         "coordinates": [916, 261]
       }
     },
-        {
+    {
       "type": "Feature",
       "properties": {
         "name": "Wesdalen",
@@ -48,7 +48,7 @@
         "coordinates": [790, 769]
       }
     },
-        {
+    {
       "type": "Feature",
       "properties": {
         "name": "Yosefka Akademie",
@@ -60,7 +60,7 @@
         "coordinates": [1090, 1260]
       }
     },
-        {
+    {
       "type": "Feature",
       "properties": {
         "name": "Fitchers Turm",
@@ -71,7 +71,7 @@
         "coordinates": [1281, 1145]
       }
     },
-        {
+    {
       "type": "Feature",
       "properties": {
         "name": "Ruine von Zurak'thar",
@@ -82,7 +82,7 @@
         "coordinates": [1219, 1171]
       }
     },
-        {
+    {
       "type": "Feature",
       "properties": {
         "name": "Luvatu",
@@ -93,7 +93,7 @@
         "coordinates": [1977, 1005]
       }
     },
-        {
+    {
       "type": "Feature",
       "properties": {
         "name": "Motu Motu",
@@ -104,7 +104,7 @@
         "coordinates": [1974, 1039]
       }
     },
-        {
+    {
       "type": "Feature",
       "properties": {
         "name": "Atlantis (versunken)",
@@ -115,7 +115,7 @@
         "coordinates": [2015, 996]
       }
     },
-        {
+    {
       "type": "Feature",
       "properties": {
         "name": "Atlantis (aufgestiegen)",
@@ -126,7 +126,7 @@
         "coordinates": [2069, 1028]
       }
     },
-        {
+    {
       "type": "Feature",
       "properties": {
         "name": "Toftgard",
@@ -137,7 +137,7 @@
         "coordinates": [1392, 1083]
       }
     },
-        {
+    {
       "type": "Feature",
       "properties": {
         "name": "Sternenzirkel Insel",
@@ -148,7 +148,7 @@
         "coordinates": [2008, 1061]
       }
     },
-        {
+    {
       "type": "Feature",
       "properties": {
         "name": "Basapo",
@@ -159,7 +159,7 @@
         "coordinates": [1957, 488]
       }
     },
-        {
+    {
       "type": "Feature",
       "properties": {
         "name": "Akónetchie",
@@ -170,7 +170,7 @@
         "coordinates": [1869, 556]
       }
     },
-        {
+    {
       "type": "Feature",
       "properties": {
         "name": "Silbergrat",
@@ -181,7 +181,7 @@
         "coordinates": [1240, 1041]
       }
     },
-        {
+    {
       "type": "Feature",
       "properties": {
         "name": "Glesburg",
@@ -193,7 +193,7 @@
         "coordinates": [1184, 648]
       }
     },
-            {
+    {
       "type": "Feature",
       "properties": {
         "name": "Byrgenwerft",
@@ -205,7 +205,7 @@
         "coordinates": [959, 1212]
       }
     },
-                {
+    {
       "type": "Feature",
       "properties": {
         "name": "Neudalen",
@@ -217,7 +217,7 @@
         "coordinates": [596, 778]
       }
     },
-                    {
+    {
       "type": "Feature",
       "properties": {
         "name": "Nordmund",
@@ -227,6 +227,66 @@
       "geometry": {
         "type": "Point",
         "coordinates": [1082, 967]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Elissastadt",
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Elissastadt, bitte kontaktiere den Websitenbetreiber.",
+        "contentUrl": "contentUrl/elissastadt.html"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [372, 343]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Donnermund",
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Donnermund, bitte kontaktiere den Websitenbetreiber.",
+        "contentUrl": "contentUrl/donnermund.html"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [981, 656]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kalthar",
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Kalthar, bitte kontaktiere den Websitenbetreiber.",
+        "contentUrl": "contentUrl/kalthar.html"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [389, 941]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Barbenfall",
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Barbenfall, bitte kontaktiere den Websitenbetreiber.",
+        "contentUrl": "contentUrl/barbenfall.html"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [776, 962]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Makir",
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Makir, bitte kontaktiere den Websitenbetreiber.",
+        "contentUrl": "contentUrl/makir.html"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [782, 443]
       }
     }
   ]
