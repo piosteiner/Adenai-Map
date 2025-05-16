@@ -297,7 +297,18 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [1040, 1472]
+        "coordinates": [1472, 1040]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zur Prallen Traube",
+        "description": "Die VsuzH haben einen Überfall auf das Gasthaus und das umliegende Dorf gerächt."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1481, 1053]
       }
     }
   ]
