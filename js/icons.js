@@ -11,8 +11,8 @@ L.imageOverlay('images/mapextension_east.PNG', mapextension1, {
 
 //Goblin Hole
 const goblinhole = [
-  [1040 - 30, 1472 - 30],  // Southwest corner
-  [1040 + 30, 1472 + 30]   // Northeast corner
+  [1040 - 20, 1472 - 20],  // Southwest corner
+  [1040 + 20, 1472 + 20]   // Northeast corner
 ];
 
 //Goblin Hole
