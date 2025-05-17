@@ -336,12 +336,243 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Überfallenes Schiff",
-        "description": "Das ist ein Patzhalter für Tests."
+        "name": "Apit Sal",
+        "description": "Ein wenig bekanntes Dörfchen. Heimatort von Tasbor."
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [1983, 541]
+        "coordinates": [1677, 1229]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Estu Vin",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1846, 1203]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Dämmerwacht",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1974, 1054]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ort unweit von Apit Sal",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1603, 1184]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tangoa",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1618, 452]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Osdalen",
+        "description": "Osdalen fiel im Bürgerkrief. Seither ist die gesamte Region von Osdalen bis Esberg zerstört und unbewohnbar."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1397, 6662]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Esberg",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1322, 854]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cinnabar Felder",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1260, 762]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Altes Weingut",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1296, 694]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Alter Stützpunkt zwischen Glesburg und Osdalen",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1293, 648]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Siedlung an der nördlichen Grenze zur Harak Wüste",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1272, 479]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Issa",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1035, 407]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Südliches Kap der Harak Region",
+        "description": "Wichtigster südlicher Hafen. Weitere Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [743, 173]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Hafen nahe Makir",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [724, 415]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Theos Hof",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [960, 849]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Vorstadt von Wesdalen",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [810, 730]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Unbekannter Ort nördlich von Wesdalen",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [738, 810]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Unbekanntes Haus",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [855, 895]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Siedlung südlich von Rena",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [667, 933]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Siedlung nordwestlich von Rena",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [591, 1040]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kleiberhorst",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [779, 1111]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Föhrenhaus",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [863, 1122]
       }
     }
   ]
