@@ -9,6 +9,17 @@ L.imageOverlay('images/mapextension_east.PNG', mapextension1, {
   interactive: false
 }).addTo(map);
 
+//Goblin Hole
+const goblinhole = [
+  [1040 - 30, 1472 - 30],  // Southwest corner
+  [1040 + 30, 1472 + 30]   // Northeast corner
+];
+
+//Goblin Hole
+L.imageOverlay('images/goblin_hole.PNG', goblinhole, {
+  interactive: false
+}).addTo(map);
+
 //Ship to Motu Motu
 const ship1 = [
   [1032 - 30, 1916 - 30],  // Southwest corner
