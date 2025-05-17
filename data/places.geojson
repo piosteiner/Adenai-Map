@@ -332,6 +332,17 @@
         "type": "Point",
         "coordinates": [1985, 546]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Überfallenes Schiff",
+        "description": "Das ist ein Patzhalter für Tests."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1983, 541]
+      }
     }
   ]
 }

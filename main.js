@@ -46,16 +46,15 @@ const DotOrange = L.icon({
   popupAnchor: [0, -32]
 });
 
-//Ship Icon 1/2
-//const shipBounds = [
-//  [1032 - 30, 1916 - 30],  // Southwest corner
-//  [1032 + 30, 1916 + 30]   // Northeast corner
-//];
-
-//Ship Icon 2/2
-//L.imageOverlay('images/vsuzh_ship_draft_mirrored.png', shipBounds, {
-//  interactive: false
-//}).addTo(map);
+function sanitizeFilename(name) {
+  return name
+    .toLowerCase()
+    .replace(/ä/g, 'ae')
+    .replace(/ö/g, 'oe')
+    .replace(/ü/g, 'ue')
+    .replace(/ß/g, 'ss')
+    .replace(/[^a-z0-9]/g, '');
+}
 
 //Store markers for search
 let geoFeatureLayers = [];
@@ -149,12 +148,14 @@ function initSearch() {
 
     if (results.length > 0) {
       results.forEach((result, index) => {
+        const filename = sanitizeFilename(result.name);
         const item = document.createElement("div");
         item.className = "dropdown-item";
         item.innerHTML = `
-          <img src="images/${result.name.toLowerCase().replace(/[^a-z0-9]/g, '')}.jpg" onerror="this.style.display='none'" />
-          <div class="dropdown-text"><strong>${result.name}</strong><br><span>${result.desc.replace(/(<([^>]+)>)/gi, '').substring(0, 100)}...</span></div>
-        `;
+          <img src="images/${filename}.jpg" alt="${result.name}" onerror="this.style.display='none'" />
+          <div class="dropdown-text"><strong>${result.name}</strong><br>
+         <span>${result.desc.replace(/(<([^>]+)>)/gi, '').substring(0, 100)}...</span></div>
+          `;
         item.addEventListener("click", () => {
           const markerMatch = geoFeatureLayers.find(g => g.feature.properties.name === result.name);
           if (markerMatch) {
