@@ -396,7 +396,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [1397, 6662]
+        "coordinates": [1412, 657]
       }
     },
     {
@@ -573,6 +573,28 @@
       "geometry": {
         "type": "Point",
         "coordinates": [863, 1122]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Turm am östlichen Ufer gegenüber von Osdalen",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1459, 667]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Unbekannter Ort auf Tangoa",
+        "description": "Details sind noch zu entdecken."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1679, 719]
       }
     }
   ]
