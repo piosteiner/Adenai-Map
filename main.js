@@ -1,3 +1,36 @@
+window.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.createElement("button");
+  toggleBtn.id = "themeToggle";
+  toggleBtn.textContent = "🌓";
+  toggleBtn.title = "Toggle Dark Mode";
+  toggleBtn.style.position = "absolute";
+  toggleBtn.style.top = "10px";
+  toggleBtn.style.right = "10px";
+  toggleBtn.style.zIndex = "1001";
+  toggleBtn.style.padding = "6px 10px";
+  toggleBtn.style.border = "none";
+  toggleBtn.style.borderRadius = "4px";
+  toggleBtn.style.cursor = "pointer";
+
+  document.body.appendChild(toggleBtn);
+
+  const userPref = localStorage.getItem("theme");
+  const systemPref = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  if (userPref) {
+    document.documentElement.setAttribute("data-theme", userPref);
+  } else {
+    document.documentElement.setAttribute("data-theme", systemPref ? "dark" : "light");
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme");
+    const newTheme = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+  });
+});
+
 //Defining image dimensions
 const imageWidth = 2048;
 const imageHeight = 1536;

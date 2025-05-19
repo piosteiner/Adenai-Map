@@ -1,3 +1,40 @@
+:root {
+  --bg-color: #fff;
+  --text-color: #000;
+  --popup-bg: white;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #f0f0f0;
+  --popup-bg: #2a2a2a;
+}
+
+/* Apply theme variables */
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--popup-bg);
+  color: var(--text-color);
+}
+
+/* Update other themed areas as needed */
+#search-container {
+  background: var(--popup-bg);
+  color: var(--text-color);
+}
+
+#themeToggle {
+  background: var(--popup-bg);
+  color: var(--text-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/*--------------------------*/
+
 .character-card {
   display: flex;
   gap: 12px;
@@ -10,3 +47,4 @@
   border-radius: 4px;
   flex-shrink: 0;
 }
+
