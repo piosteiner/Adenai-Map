@@ -31,8 +31,19 @@ L.imageOverlay('images/vsuzh_ship_mirrored.PNG', ship1, {
   interactive: false
 }).addTo(map);
 
-//Ship to Upeto
+//Ship flying down
 const ship2 = [
+  [1040 - 40, 2297 - 40],  // Southwest corner
+  [1040 + 40, 2297 + 40]   // Northeast corner
+];
+
+//Ship flying down
+L.imageOverlay('images/vsuzh_ship_fly.PNG', shipfly, {
+  interactive: false
+}).addTo(map);
+
+//Ship to Upeto
+const shipfly = [
   [817 - 30, 2137 - 30],  // Southwest corner
   [817 + 30, 2137 + 30]   // Northeast corner
 ];
