@@ -26,6 +26,7 @@
   position: fixed;
   top: 5%;
   left: 5%;
+  max-width: 90vw;
   width: 90vw;
   height: 80%;
   background: #222;
