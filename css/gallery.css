@@ -23,12 +23,12 @@
 
 .gallery-modal {
   display: none;
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  max-width: 90vw;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centers the modal */
   width: 90vw;
-  height: 80%;
+  height: 80vh;
   background: #222;
   color: white;
   z-index: 10001;
