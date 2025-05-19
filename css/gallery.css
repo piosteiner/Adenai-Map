@@ -26,16 +26,15 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centers the modal */
-  max-width: 70vw;
-  width: 50vw;
-  max-height: 80vh;
-  height: auto;
+  transform: translate(-50%, -50%);
   background: #222;
   color: white;
   z-index: 10001;
   border-radius: 8px;
-  overflow: auto;
+  overflow: visible;
+  padding: 0;
+  max-width: 90vw;
+  max-height: 90vh;
 }
 
 .gallery-header {
@@ -54,7 +53,7 @@
 .gallery-body {
   display: flex;
   flex-direction: column;
-  max-height: calc(80vh - 40px); /* Account for header height */
+  align-items: center;
 }
 
 .close-button {
@@ -70,20 +69,21 @@
 }
 
 .main-image-container {
-  flex: 1;
+  position: relative;
+  width: auto;
+  max-width: 90vw;
+  max-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  max-height: 100%;
+  margin: 10px;
 }
 
 .main-image-container img {
   max-width: 100%;
   max-height: 100%;
-  height: auto;
-  width: auto;
   object-fit: contain;
+  display: block;
 }
 
 .arrow {
@@ -95,6 +95,7 @@
   user-select: none;
   padding: 0 12px;
   background: rgba(0, 0, 0, 0.3);
+  z-index: 10;
 }
 
 .arrow.left {
@@ -110,20 +111,17 @@
 }
 
 .thumbnail-strip {
-  height: 120px;
-  background: #111;
-  overflow-x: auto;
-  overflow-y: hidden;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  overflow-x: auto;
   gap: 8px;
-  padding: 8px;
-  justify-content: center;
+  padding: 10px;
+  background: #111;
+  max-width: 90vw;
 }
 
 .thumbnail-strip img {
-  height: 100px;
+  height: 60px;
   width: auto;
   opacity: 0.5;
   cursor: pointer;
