@@ -15,7 +15,7 @@
   --dropdown-bg: #2a2a2a;
   --dropdown-border: #444;
   --dropdown-hover: #3a3a3a;
-  --dropdown-highlight: #f0f0f0;
+  --dropdown-highlight: #333333;
 }
 
 html, body {
@@ -58,7 +58,7 @@ html, body {
   width: 100%;
   padding: 6px 10px;
   font-size: 14px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--dropdown-border);
   border-radius: 4px;
   background: var(--popup-bg);
   color: var(--text-color);
@@ -110,7 +110,7 @@ html, body {
 .dropdown-text span {
   font-size: 0.8em;
   color: var(--text-color);
-  opacity: 0.8;
+  opacity: 1;
 }
 
 /* Toggle Button */
