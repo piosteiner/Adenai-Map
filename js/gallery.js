@@ -143,11 +143,12 @@ function navigateGallery(direction) {
   if (activeIndex === -1) activeIndex = 0;
 
   let newIndex = (activeIndex + direction + thumbnails.length) % thumbnails.length;
-  setGalleryIndex(newIndex);
+  updateMainImage(newIndex);
 }
 
 
 
+// Scroll wheel for navigating images
 document.getElementById("galleryModal")?.addEventListener("wheel", function (e) {
   e.preventDefault();
   if (e.deltaY > 0) {
@@ -156,14 +157,3 @@ document.getElementById("galleryModal")?.addEventListener("wheel", function (e) 
     navigateGallery(-1); // Scroll up → previous image
   }
 }, { passive: false });
-
-function navigateGallery(direction) {
-  const thumbnails = document.querySelectorAll(".thumbnail-strip img");
-  if (thumbnails.length === 0) return;
-
-  let activeIndex = Array.from(thumbnails).findIndex(img => img.classList.contains("active"));
-  if (activeIndex === -1) activeIndex = 0;
-
-  let newIndex = (activeIndex + direction + thumbnails.length) % thumbnails.length;
-  setGalleryIndex(newIndex);
-}
