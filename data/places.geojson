@@ -152,7 +152,8 @@
       "type": "Feature",
       "properties": {
         "name": "Basapo",
-        "description": "Insel auf der sich der Sternenzirkel stationiert hatte."
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Basapo, bitte kontaktiere den Websitenbetreiber.",
+        "contentUrl": "contentUrl/basapo.html"
       },
       "geometry": {
         "type": "Point",
@@ -293,7 +294,7 @@
       "type": "Feature",
       "properties": {
         "name": "Goblin Loch",
-        "description": "Die VsuzH haben hier einen unschuligen Goblin in ein mysteriöses, dunkles Loch geworfen. Wenigstens haben sies verschlossen, damit niemand mehr reinfällt."
+        "description": "Die VsuzH haben hier einen unschuligen Goblin in ein mysteriöses, dunkles Loch geworfen. Wenigstens haben sies verschlossen damit niemand mehr reinfällt."
       },
       "geometry": {
         "type": "Point",
