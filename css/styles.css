@@ -74,14 +74,6 @@
   font-size: 18px;
 }
 
-.gallery-content {
-  padding: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-
 .gallery-content img {
   max-width: 100%;
   max-height: 150px;
@@ -103,7 +95,6 @@
   object-fit: contain;
 }
 
-
 .arrow {
   position: absolute;
   top: 50%;
@@ -121,6 +112,10 @@
 
 .arrow.right {
   right: 0;
+}
+
+.arrow:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .thumbnail-strip {
