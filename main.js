@@ -28,6 +28,16 @@ const imageBounds = [[0, 0], [imageHeight, imageWidth]];
 L.imageOverlay('adenai_map_01.jpg', imageBounds).addTo(map);
 map.fitBounds(imageBounds);
 
+// Prevent gallery modal from being closed when a Leaflet popup is closed
+map.on('popupclose', () => {
+  const modal = document.getElementById("galleryModal");
+  if (modal?.getAttribute("data-open") === "true") {
+    setTimeout(() => {
+      modal.style.display = "block";
+    }, 0);
+  }
+});
+
 //Show coordinates on mouse move (corrected for centered CRS)
 map.on('mousemove', function (e) {
   const x = Math.round(e.latlng.lng); // X = lng
