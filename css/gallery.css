@@ -35,7 +35,7 @@
   color: white;
   z-index: 10001;
   border-radius: 8px;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .gallery-header {
