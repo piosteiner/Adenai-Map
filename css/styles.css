@@ -11,6 +11,8 @@
   flex-shrink: 0;
 }
 
+/* ---------------------------- */
+
 .gallery-preview {
   display: inline-block;
   cursor: pointer;
@@ -36,26 +38,34 @@
 
 .gallery-modal {
   display: none;
-  position: absolute;
-  z-index: 5000; /* higher than Leaflet popups */
-  top: 20%;
-  left: 30%;
-  width: 400px;
-  max-width: 90%;
-  background: white;
-  border: 1px solid #aaa;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  z-index: 2000;
+  position: fixed;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 80%;
+  background: #222;
+  color: white;
+  z-index: 10001;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .gallery-header {
-  background: #444;
-  color: white;
-  padding: 8px;
+  background: #111;
+  padding: 8px 12px;
   cursor: move;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.gallery-title {
+  font-size: 1.2em;
+}
+
+.gallery-body {
+  display: flex;
+  height: calc(100% - 40px);
 }
 
 .close-button {
@@ -76,4 +86,62 @@
   max-width: 100%;
   max-height: 150px;
   border-radius: 4px;
+}
+
+.main-image-container {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.main-image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2em;
+  cursor: pointer;
+  user-select: none;
+  padding: 0 12px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.arrow.left {
+  left: 0;
+}
+
+.arrow.right {
+  right: 0;
+}
+
+.thumbnail-strip {
+  width: 120px;
+  background: #111;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+}
+
+.thumbnail-strip img {
+  width: 100px;
+  height: auto;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.thumbnail-strip img.active {
+  opacity: 1;
 }

@@ -2,9 +2,9 @@
   Insel auf der sich der Sternenzirkel stationiert hatte. 
 </div>
 
-<div class="gallery-preview" onclick="openGalleryModal()">
+<div class="gallery-preview">
   <img src="images/wantedposter_preview.png" alt="Galerie Vorschau">
-  <div class="gallery-label">Gallerie der Wanted Poster von Basapo</div>
+  <div class="gallery-label">Galerie der Wanted Poster von Basapo</div>
 </div>
 
 <div id="galleryModal" class="gallery-modal">
@@ -12,10 +12,19 @@
     <span class="close-button" onclick="closeGalleryModal()">✕</span>
     <span class="gallery-title">Basapo Wanted Poster</span>
   </div>
-  <div class="gallery-content">
-    <img src="images/wantedposter_ally.png" alt="Wanted Poster von Ally">
-    <img src="images/wantedposter_luna.png" alt="Wanted Poster von Luna">
-    <img src="images/wantedposter_tasbor.png" alt="Wanted Poster von Tasbor">
-    <img src="images/wantedposter_abu.png" alt="Wanted Poster von Abu">
+
+  <div class="gallery-body">
+    <div class="main-image-container">
+      <img id="mainImage" src="images/wantedposter_ally.png" alt="Main View">
+      <div class="arrow left" onclick="navigateGallery(-1)">←</div>
+      <div class="arrow right" onclick="navigateGallery(1)">→</div>
+    </div>
+    <div class="thumbnail-strip">
+      <img src="images/wantedposter_ally.png" onclick="setGalleryIndex(0)">
+      <img src="images/wantedposter_luna.png" onclick="setGalleryIndex(1)">
+      <img src="images/wantedposter_tasbor.png" onclick="setGalleryIndex(2)">
+      <img src="images/wantedposter_abu.png" onclick="setGalleryIndex(3)">
+    </div>
   </div>
 </div>
+
