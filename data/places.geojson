@@ -567,7 +567,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Föhrenhaus",
+        "name": "Föhrenhauch",
         "description": "Details sind noch zu entdecken."
       },
       "geometry": {
@@ -594,7 +594,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [1679, 719]
+        "coordinates": [1696, 719]
       }
     }
   ]
