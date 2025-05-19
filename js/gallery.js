@@ -1,11 +1,17 @@
 function openGalleryModal() {
   const modal = document.getElementById("galleryModal");
-  if (modal) modal.style.display = "block";
+  if (modal) {
+    modal.style.display = "block";
+    modal.setAttribute("data-open", "true");
+  }
 }
 
 function closeGalleryModal() {
   const modal = document.getElementById("galleryModal");
-  if (modal) modal.style.display = "none";
+  if (modal) {
+    modal.style.display = "none";
+    modal.removeAttribute("data-open");
+  }
 }
 
 // Draggable logic
@@ -34,9 +40,14 @@ function dragEnd() {
   document.removeEventListener("mouseup", dragEnd);
 }
 
-// ✅ Event delegation for dynamic HTML (fix for Leaflet popup content)
+// ✅ Prevent clicks inside the modal from bubbling up and triggering unwanted behavior
+document.getElementById("galleryModal")?.addEventListener("click", function (e) {
+  e.stopPropagation();
+});
+
+// ✅ Event delegation to handle dynamic or Leaflet-injected HTML
 document.addEventListener("click", function (e) {
-  // Open gallery when preview is clicked
+  // Open gallery when preview or label is clicked
   if (e.target.closest(".gallery-preview")) {
     openGalleryModal();
   }
@@ -46,3 +57,14 @@ document.addEventListener("click", function (e) {
     closeGalleryModal();
   }
 });
+
+// ✅ Optional safeguard: prevent accidental Leaflet map clicks from closing modal
+if (typeof map !== 'undefined') {
+  map.on('popupclose', () => {
+    const modal = document.getElementById("galleryModal");
+    if (modal?.getAttribute("data-open") === "true") {
+      // Prevent automatic closing if modal is open
+      setTimeout(() => modal.style.display = "block", 0);
+    }
+  });
+}
