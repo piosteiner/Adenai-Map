@@ -12,7 +12,7 @@
   --bg-color: #1c1c1c;
   --text-color: #f0f0f0;
   --popup-bg: #2a2a2a;
-  --dropdown-bg: #2c2c2c;
+  --dropdown-bg: #2a2a2a;
   --dropdown-border: #444;
   --dropdown-hover: #3a3a3a;
   --dropdown-highlight: #f0f0f0;
@@ -60,6 +60,8 @@ html, body {
   border: 1px solid var(--dropdown-border);
   border-radius: 4px;
   font-size: 14px;
+  outline: none;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 #resultsDropdown {
@@ -72,6 +74,7 @@ html, body {
   border: 1px solid var(--dropdown-border);
   border-radius: 4px;
   font-size: 14px;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .dropdown-item {
@@ -105,6 +108,7 @@ html, body {
 .dropdown-text span {
   font-size: 0.8em;
   color: var(--text-color);
+  opacity: 0.8;
 }
 
 /* Toggle Button */
