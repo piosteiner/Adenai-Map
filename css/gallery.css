@@ -29,7 +29,8 @@
   transform: translate(-50%, -50%); /* Centers the modal */
   max-width: 70vw;
   width: 50vw;
-  height: 80vh;
+  max-height: 80vh;
+  height: auto;
   background: #222;
   color: white;
   z-index: 10001;
