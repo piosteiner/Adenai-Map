@@ -23,7 +23,7 @@
 
 .gallery-modal {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 5%;
   left: 5%;
   max-width: 90vw;
