@@ -61,6 +61,8 @@ L.imageOverlay('images/vsuzh_ship.PNG', ship2, {
   interactive: false
 }).addTo(map);
 
+///---------------------
+
 //Atlantis Underwater
 const atlantisBubble = [
   [975 - 40, 2210 - 40],  // Southwest corner
@@ -71,6 +73,8 @@ const atlantisBubble = [
 L.imageOverlay('images/atlantis_bubble.PNG', atlantisBubble, {
   interactive: false
 }).addTo(map);
+
+///---------------------
 
 //Atlantis Flying
 const atlantisClouds = [
@@ -83,7 +87,7 @@ L.imageOverlay('images/atlantis_clouds.PNG', atlantisClouds, {
   interactive: false
 }).addTo(map);
 
-
+///---------------------
 
 //Atlantis Icon 1 and 2
 //const atlantisGeneral1 = [
