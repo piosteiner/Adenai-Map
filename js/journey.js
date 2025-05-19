@@ -4,11 +4,10 @@ const VsuzH_Journey = L.curve(
     'Q', [1062, 1287], [1044, 1338], //Weg nach Toftgard
     'Q', [1054, 1371], [1083, 1392], //Ankunft in Toftgard
     'Q', [1106, 1340], [1094, 1310], //In den Toftgarder Forst
-    'Q', [1109, 1276], [1129, 1285], //Weg zu Fitchers Turm
-    'Q', [1142, 1295], [1145, 1281], //Ankunft zu Fitchers Turm
-    'Q', [1156, 1221], [1171, 1219], //In die Ruine von Zurak'thar
-    'Q', [1158, 1274], [1145, 1281], //Zurück zu Fitcher
-    'Q', [1129, 1329], [1083, 1392], //Zurück nach Toftgard
+    'Q', [1112, 1316], [1128, 1344], //Ankunft zu Fitchers Turm
+    'Q', [1132, 1304], [1163, 1291], //In die Ruine von Zurak'thar
+    'Q', [1141, 1324], [1128, 1344], //Zurück zu Fitcher
+    'Q', [1105, 1338], [1083, 1392], //Zurück nach Toftgard
     'Q', [1080, 1456], [1084, 1488], //Flussreise Teil 1
     'L', [1061, 1508], //Flussreise Teil 2
     'L', [1053, 1481], //Landung
