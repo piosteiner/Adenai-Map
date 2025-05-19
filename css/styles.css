@@ -36,7 +36,8 @@
 
 .gallery-modal {
   display: none;
-  position: fixed;
+  position: absolute;
+  z-index: 5000; /* higher than Leaflet popups */
   top: 20%;
   left: 30%;
   width: 400px;
