@@ -1,9 +1,11 @@
 function openGalleryModal() {
-  document.getElementById("galleryModal").style.display = "block";
+  const modal = document.getElementById("galleryModal");
+  if (modal) modal.style.display = "block";
 }
 
 function closeGalleryModal() {
-  document.getElementById("galleryModal").style.display = "none";
+  const modal = document.getElementById("galleryModal");
+  if (modal) modal.style.display = "none";
 }
 
 // Draggable logic
@@ -31,3 +33,16 @@ function dragEnd() {
   document.removeEventListener("mousemove", dragMove);
   document.removeEventListener("mouseup", dragEnd);
 }
+
+// ✅ Event delegation for dynamic HTML (fix for Leaflet popup content)
+document.addEventListener("click", function (e) {
+  // Open gallery when preview is clicked
+  if (e.target.closest(".gallery-preview")) {
+    openGalleryModal();
+  }
+
+  // Close gallery when X button is clicked
+  if (e.target.classList.contains("close-button")) {
+    closeGalleryModal();
+  }
+});
