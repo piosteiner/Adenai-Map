@@ -1,20 +1,59 @@
+let currentImageIndex = 0;
+let galleryImages = [];
+
+// Called once on opening to populate state
 function openGalleryModal() {
   const modal = document.getElementById("galleryModal");
-  if (modal) {
-    modal.style.display = "block";
-    modal.setAttribute("data-open", "true");
-  }
+  if (!modal) return;
+
+  // Collect all images in thumbnail strip
+  galleryImages = Array.from(modal.querySelectorAll(".thumbnail-strip img"));
+  if (galleryImages.length === 0) return;
+
+  currentImageIndex = galleryImages.findIndex(img => img.classList.contains("active"));
+  if (currentImageIndex === -1) currentImageIndex = 0;
+
+  updateMainImage(currentImageIndex);
+  modal.style.display = "block";
+  modal.setAttribute("data-open", "true");
 }
 
 function closeGalleryModal() {
   const modal = document.getElementById("galleryModal");
-  if (modal) {
-    modal.style.display = "none";
-    modal.removeAttribute("data-open");
-  }
+  if (!modal) return;
+
+  modal.style.display = "none";
+  modal.removeAttribute("data-open");
 }
 
-// Draggable logic
+// Replace the main image and update active state
+function updateMainImage(index) {
+  const modal = document.getElementById("galleryModal");
+  if (!modal || !galleryImages.length) return;
+
+  const mainImg = modal.querySelector(".main-image-container img");
+  const selected = galleryImages[index];
+  if (mainImg && selected) {
+    mainImg.src = selected.src;
+    mainImg.alt = selected.alt;
+  }
+
+  galleryImages.forEach((img, i) => img.classList.toggle("active", i === index));
+  currentImageIndex = index;
+}
+
+// Event handlers for arrow buttons
+function prevImage() {
+  const newIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+  updateMainImage(newIndex);
+}
+
+function nextImage() {
+  const newIndex = (currentImageIndex + 1) % galleryImages.length;
+  updateMainImage(newIndex);
+}
+
+// Dragging logic
 let offsetX, offsetY, isDragging = false;
 
 function dragStart(e) {
@@ -40,31 +79,32 @@ function dragEnd() {
   document.removeEventListener("mouseup", dragEnd);
 }
 
-// ✅ Prevent clicks inside the modal from bubbling up and triggering unwanted behavior
-document.getElementById("galleryModal")?.addEventListener("click", function (e) {
-  e.stopPropagation();
-});
-
-// ✅ Event delegation to handle dynamic or Leaflet-injected HTML
+// Delegation for click events
 document.addEventListener("click", function (e) {
-  // Open gallery when preview or label is clicked
-  if (e.target.closest(".gallery-preview")) {
-    openGalleryModal();
+  if (e.target.closest(".gallery-preview")) openGalleryModal();
+  if (e.target.classList.contains("close-button")) closeGalleryModal();
+  if (e.target.classList.contains("arrow")) {
+    if (e.target.classList.contains("left")) prevImage();
+    if (e.target.classList.contains("right")) nextImage();
   }
-
-  // Close gallery when X button is clicked
-  if (e.target.classList.contains("close-button")) {
-    closeGalleryModal();
+  if (e.target.closest(".thumbnail-strip img")) {
+    const index = galleryImages.indexOf(e.target);
+    if (index !== -1) updateMainImage(index);
   }
 });
 
-// ✅ Optional safeguard: prevent accidental Leaflet map clicks from closing modal
-if (typeof map !== 'undefined') {
-  map.on('popupclose', () => {
-    const modal = document.getElementById("galleryModal");
-    if (modal?.getAttribute("data-open") === "true") {
-      // Prevent automatic closing if modal is open
-      setTimeout(() => modal.style.display = "block", 0);
-    }
-  });
-}
+// Keyboard support
+document.addEventListener("keydown", function (e) {
+  const modal = document.getElementById("galleryModal");
+  if (!modal || modal.style.display !== "block") return;
+
+  if (e.key === "ArrowLeft") prevImage();
+  else if (e.key === "ArrowRight") nextImage();
+});
+
+// Optional scroll support
+document.getElementById("galleryModal")?.addEventListener("wheel", function (e) {
+  e.preventDefault();
+  if (e.deltaY > 0) nextImage();
+  else prevImage();
+}, { passive: false });

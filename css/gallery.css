@@ -27,7 +27,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); /* Centers the modal */
-  width: 90vw;
+  max-width: 70vw;
+  width: 50vw;
   height: 80vh;
   background: #222;
   color: white;
