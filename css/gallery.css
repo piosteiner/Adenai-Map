@@ -53,7 +53,8 @@
 
 .gallery-body {
   display: flex;
-  height: calc(100% - 40px);
+  flex-direction: column;
+  height: calc(100% - 40px); /* leave space for header */
 }
 
 .close-button {
@@ -107,19 +108,21 @@
 }
 
 .thumbnail-strip {
-  width: 120px;
+  height: 120px;
   background: #111;
-  overflow-y: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: 8px;
   padding: 8px;
+  justify-content: center;
 }
 
 .thumbnail-strip img {
-  width: 100px;
-  height: auto;
+  height: 100px;
+  width: auto;
   opacity: 0.5;
   cursor: pointer;
   transition: opacity 0.2s;
