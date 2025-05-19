@@ -2,12 +2,20 @@
   --bg-color: #fffbe6;
   --text-color: #000;
   --popup-bg: white;
+  --dropdown-bg: #fff;
+  --dropdown-border: #ccc;
+  --dropdown-hover: #f0f0f0;
+  --dropdown-highlight: #000;
 }
 
 [data-theme="dark"] {
   --bg-color: #1c1c1c;
   --text-color: #f0f0f0;
   --popup-bg: #2a2a2a;
+  --dropdown-bg: #2c2c2c;
+  --dropdown-border: #444;
+  --dropdown-hover: #3a3a3a;
+  --dropdown-highlight: #f0f0f0;
 }
 
 html, body {
@@ -17,6 +25,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: sans-serif;
 }
 
 #map {
@@ -30,32 +39,89 @@ html, body {
   color: var(--text-color);
 }
 
-/* Update other themed areas as needed */
 #search-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
   background: var(--popup-bg);
   color: var(--text-color);
+  padding: 8px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  width: 250px;
 }
 
-#searchBox,
+#searchBox {
+  width: 100%;
+  padding: 6px;
+  background: var(--dropdown-bg);
+  color: var(--text-color);
+  border: 1px solid var(--dropdown-border);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
 #resultsDropdown {
-  background: var(--popup-bg);
+  margin-top: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  background: var(--dropdown-bg);
   color: var(--text-color);
-  border: 1px solid #aaa;
+  border: 1px solid var(--dropdown-border);
+  border-radius: 4px;
+  font-size: 14px;
 }
 
+.dropdown-item {
+  padding: 6px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  background: var(--dropdown-bg);
+  color: var(--text-color);
+}
+
+.dropdown-item:hover,
+.dropdown-item.active {
+  background-color: var(--dropdown-hover);
+  color: var(--dropdown-highlight);
+}
+
+.dropdown-item img {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.dropdown-text strong {
+  font-size: 0.9em;
+  color: var(--text-color);
+}
+
+.dropdown-text span {
+  font-size: 0.8em;
+  color: var(--text-color);
+}
+
+/* Toggle Button */
 #themeToggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 6px 10px;
   background: var(--popup-bg);
   color: var(--text-color);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
-[data-theme="dark"] #searchBox,
-[data-theme="dark"] #resultsDropdown {
-  border: 1px solid #444;
-}
-
-/*--------------------------*/
-
+/* Character cards if still used */
 .character-card {
   display: flex;
   gap: 12px;
@@ -68,4 +134,3 @@ html, body {
   border-radius: 4px;
   flex-shrink: 0;
 }
-
