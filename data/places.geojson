@@ -5,7 +5,8 @@
       "type": "Feature",
       "properties": {
         "name": "Valaris",
-        "description": "Die grösste Stadt im Osten von Adenai. Regiert von Petrel Kormorant."
+        "description": "Die grösste Stadt im Osten von Adenai. Regiert von Petrel Kormorant.",
+        "contentUrl": "contentUrl/valaris.html"
       },
       "geometry": {
         "type": "Point",
@@ -52,7 +53,7 @@
       "type": "Feature",
       "properties": {
         "name": "Yosefka Akademie",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Yosefka Akademie, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung der Yosefka Akademie, bitte kontaktiere den Websitenbetreiber.",
         "contentUrl": "contentUrl/yosefka_akademie.html"
       },
       "geometry": {
