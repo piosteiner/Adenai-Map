@@ -108,3 +108,27 @@ document.getElementById("galleryModal")?.addEventListener("wheel", function (e) 
   if (e.deltaY > 0) nextImage();
   else prevImage();
 }, { passive: false });
+
+let arrowTimeout;
+
+function showArrows() {
+  const arrows = document.querySelectorAll('.arrow');
+  arrows.forEach(arrow => arrow.classList.remove('hidden'));
+
+  clearTimeout(arrowTimeout);
+  arrowTimeout = setTimeout(() => {
+    arrows.forEach(arrow => arrow.classList.add('hidden'));
+  }, 3000);
+}
+
+// Show arrows on modal open
+document.addEventListener("click", function (e) {
+  if (e.target.closest(".gallery-preview")) {
+    openGalleryModal();
+    showArrows();
+  }
+});
+
+// Reset visibility on any interaction with the modal
+document.getElementById("galleryModal")?.addEventListener("mousemove", showArrows);
+document.getElementById("galleryModal")?.addEventListener("keydown", showArrows);

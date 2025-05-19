@@ -96,6 +96,8 @@
   padding: 0 12px;
   background: rgba(0, 0, 0, 0.3);
   z-index: 10;
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
 .arrow.left {
@@ -108,6 +110,11 @@
 
 .arrow:hover {
   background: rgba(61, 61, 61, 0.25);
+}
+
+.arrow.hidden {
+  opacity: 0;
+  pointer-events: none; /* ensures clicks don't trigger when invisible */
 }
 
 .thumbnail-strip {
