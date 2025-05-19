@@ -121,6 +121,8 @@ function showArrows() {
   }, 3000);
 }
 
+
+
 // Show arrows on modal open
 document.addEventListener("click", function (e) {
   if (e.target.closest(".gallery-preview")) {
@@ -132,3 +134,36 @@ document.addEventListener("click", function (e) {
 // Reset visibility on any interaction with the modal
 document.getElementById("galleryModal")?.addEventListener("mousemove", showArrows);
 document.getElementById("galleryModal")?.addEventListener("keydown", showArrows);
+
+function navigateGallery(direction) {
+  const thumbnails = document.querySelectorAll(".thumbnail-strip img");
+  if (thumbnails.length === 0) return;
+
+  let activeIndex = Array.from(thumbnails).findIndex(img => img.classList.contains("active"));
+  if (activeIndex === -1) activeIndex = 0;
+
+  let newIndex = (activeIndex + direction + thumbnails.length) % thumbnails.length;
+  setGalleryIndex(newIndex);
+}
+
+
+
+document.getElementById("galleryModal")?.addEventListener("wheel", function (e) {
+  e.preventDefault();
+  if (e.deltaY > 0) {
+    navigateGallery(1); // Scroll down → next image
+  } else {
+    navigateGallery(-1); // Scroll up → previous image
+  }
+}, { passive: false });
+
+function navigateGallery(direction) {
+  const thumbnails = document.querySelectorAll(".thumbnail-strip img");
+  if (thumbnails.length === 0) return;
+
+  let activeIndex = Array.from(thumbnails).findIndex(img => img.classList.contains("active"));
+  if (activeIndex === -1) activeIndex = 0;
+
+  let newIndex = (activeIndex + direction + thumbnails.length) % thumbnails.length;
+  setGalleryIndex(newIndex);
+}
