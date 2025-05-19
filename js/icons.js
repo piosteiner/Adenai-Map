@@ -9,6 +9,8 @@ L.imageOverlay('images/mapextension_east.PNG', mapextension1, {
   interactive: false
 }).addTo(map);
 
+///---------------------
+
 //Goblin Hole
 const goblinhole = [
   [1040 - 20, 1472 - 20],  // Southwest corner
@@ -19,6 +21,8 @@ const goblinhole = [
 L.imageOverlay('images/goblin_hole.PNG', goblinhole, {
   interactive: false
 }).addTo(map);
+
+///---------------------
 
 //Ship to Motu Motu
 const ship1 = [
@@ -31,8 +35,10 @@ L.imageOverlay('images/vsuzh_ship_mirrored.PNG', ship1, {
   interactive: false
 }).addTo(map);
 
+///---------------------
+
 //Ship flying down
-const ship2 = [
+const shipfly = [
   [1040 - 40, 2297 - 40],  // Southwest corner
   [1040 + 40, 2297 + 40]   // Northeast corner
 ];
@@ -42,8 +48,10 @@ L.imageOverlay('images/vsuzh_ship_fly.PNG', shipfly, {
   interactive: false
 }).addTo(map);
 
+///---------------------
+
 //Ship to Upeto
-const shipfly = [
+const ship2 = [
   [817 - 30, 2137 - 30],  // Southwest corner
   [817 + 30, 2137 + 30]   // Northeast corner
 ];
