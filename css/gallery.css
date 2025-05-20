@@ -86,32 +86,6 @@
   display: block;
 }
 
-/* Add this at the bottom of your CSS file */
-@media (max-width: 768px) {
-  .main-image-container {
-    max-height: 80vh;
-  }
-
-  .main-image-container img {
-    max-height: 80vh;
-  }
-
-  .gallery-modal {
-    max-width: 95vw;
-    max-height: 95vh;
-  }
-
-  .thumbnail-strip {
-    padding: 6px;
-    gap: 6px;
-    max-width: 95vw;
-  }
-
-  .thumbnail-strip img {
-    height: 48px;
-  }
-}
-
 .arrow {
   position: absolute;
   top: 50%;
@@ -163,4 +137,33 @@
 
 .thumbnail-strip img.active {
   opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .gallery-modal {
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+    transition: all 0.3s ease;
+  }
+
+  .main-image-container {
+    max-height: 70vh;
+    max-width: 100vw;
+  }
+
+  .thumbnail-strip {
+    max-width: 100vw;
+    padding: 6px;
+    gap: 6px;
+  }
+
+  .thumbnail-strip img {
+    height: 50px;
+  }
 }
