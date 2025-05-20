@@ -256,3 +256,5 @@ function initSearch() {
 }
 
 window.addEventListener('load', initSearch);
+
+map.dragging._draggable._container = map.getContainer();
