@@ -272,3 +272,20 @@ map.getContainer().addEventListener('mousedown', function (e) {
     map.dragging.enable();
   }
 });
+
+// Allow map dragging on popups and modals (mobile and desktop)
+const dragZones = ['.leaflet-popup-content', '.gallery-modal'];
+
+dragZones.forEach(selector => {
+  document.addEventListener('touchstart', e => {
+    if (e.target.closest(selector)) {
+      map.dragging.enable();  // Re-enable drag even if it started on popup
+    }
+  }, { passive: true });
+
+  document.addEventListener('mousedown', e => {
+    if (e.target.closest(selector)) {
+      map.dragging.enable();
+    }
+  });
+});

@@ -35,7 +35,8 @@
   padding: 0;
   max-width: 90vw;
   max-height: 90vh;
-  touch-action: none;
+  touch-action: pan-x pan-y;
+  -ms-touch-action: pan-x pan-y;
   pointer-events: auto;
 }
 
