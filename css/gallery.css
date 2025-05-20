@@ -149,6 +149,7 @@
     max-width: 100vw;
     max-height: 100vh;
     border-radius: 0;
+    z-index: 100000;
   }
 
   .main-image-container {
