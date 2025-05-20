@@ -150,7 +150,7 @@
     max-height: 100vh;
     border-radius: 0;
     overflow: visible;
-    z-index: 100000;
+    z-index: 1000000;
   }
 
   .main-image-container {
