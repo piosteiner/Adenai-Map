@@ -23,8 +23,8 @@ html, body {
 }
 
 .leaflet-popup-content {
-  pointer-events: auto !important;
-  touch-action: none; /* allows drag gestures */
+  pointer-events: auto;
+  touch-action: manipulation;
   font-size: 1em;
   line-height: 1.4;
 }

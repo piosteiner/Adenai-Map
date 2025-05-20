@@ -31,12 +31,22 @@ function updateMainImage(index) {
   const modal = document.getElementById("galleryModal");
   if (!modal || !galleryImages.length) return;
 
-  const mainImg = modal.querySelector(".main-image-container img");
+  const mainImgContainer = modal.querySelector(".main-image-container");
+  const mainImg = mainImgContainer.querySelector("img");
   const selected = galleryImages[index];
   if (mainImg && selected) {
     mainImg.src = selected.src;
     mainImg.alt = selected.alt;
   }
+
+  mainImgContainer.innerHTML = `<img src="${selected.src}" alt="${selected.alt}">`;
+  const newImg = mainImgContainer.querySelector("img");
+
+  Panzoom(newImg, {
+    maxScale: 5,
+    contain: 'outside',
+    canvas: true,
+  });
 
   galleryImages.forEach((img, i) => img.classList.toggle("active", i === index));
   currentImageIndex = index;

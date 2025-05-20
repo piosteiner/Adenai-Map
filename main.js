@@ -258,3 +258,17 @@ function initSearch() {
 window.addEventListener('load', initSearch);
 
 map.dragging._draggable._container = map.getContainer();
+
+// Allow dragging through popups and modals on mobile
+map.getContainer().addEventListener('touchstart', function (e) {
+  if (e.target.closest('.leaflet-popup-content') || e.target.closest('.gallery-modal')) {
+    map.dragging.enable(); // re-enable dragging
+  }
+}, { passive: true });
+
+// Optional: fix for desktop too
+map.getContainer().addEventListener('mousedown', function (e) {
+  if (e.target.closest('.leaflet-popup-content') || e.target.closest('.gallery-modal')) {
+    map.dragging.enable();
+  }
+});
