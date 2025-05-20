@@ -1,3 +1,11 @@
+#galleryOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
 .gallery-preview {
   display: inline-block;
   cursor: pointer;
@@ -22,19 +30,17 @@
 }
 
 .gallery-modal {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: block; /* controlled via parent overlay */
+  position: relative;
+  margin: auto;
   background: #222;
-  color: white;
-  z-index: 10001;
   border-radius: 8px;
-  overflow: visible;
-  padding: 0;
+  color: white;
   max-width: 90vw;
   max-height: 90vh;
+  overflow: visible;
+  z-index: 10000;
+  transform: translateY(10vh);
 }
 
 .gallery-header {
@@ -150,7 +156,6 @@
     max-height: 100vh;
     border-radius: 0;
     overflow: visible;
-    z-index: 1000000;
   }
 
   .main-image-container {

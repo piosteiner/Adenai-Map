@@ -3,28 +3,33 @@ let galleryImages = [];
 
 // Called once on opening to populate state
 function openGalleryModal() {
-  const modal = document.getElementById("galleryModal");
-  if (!modal) return;
+  const overlay = document.getElementById("galleryOverlay");
+  if (!overlay) return;
 
-  // Collect all images in thumbnail strip
+  // Gather images only once per gallery open
+  const modal = overlay.querySelector("#galleryModal");
   galleryImages = Array.from(modal.querySelectorAll(".thumbnail-strip img"));
-  if (galleryImages.length === 0) return;
-
   currentImageIndex = galleryImages.findIndex(img => img.classList.contains("active"));
   if (currentImageIndex === -1) currentImageIndex = 0;
 
   updateMainImage(currentImageIndex);
-  modal.style.display = "block";
-  modal.setAttribute("data-open", "true");
+  overlay.style.display = "flex"; // use flex to center modal if needed
+  overlay.setAttribute("data-open", "true");
 }
 
 function closeGalleryModal() {
-  const modal = document.getElementById("galleryModal");
-  if (!modal) return;
-
-  modal.style.display = "none";
-  modal.removeAttribute("data-open");
+  const overlay = document.getElementById("galleryOverlay");
+  if (!overlay) return;
+  overlay.style.display = "none";
+  overlay.removeAttribute("data-open");
 }
+
+document.getElementById("galleryOverlay")?.addEventListener("click", function (e) {
+  // Only close if click was on the overlay itself (not the modal inside it)
+  if (window.innerWidth <= 768 && !e.target.closest(".gallery-modal")) {
+    closeGalleryModal();
+  }
+});
 
 // Replace the main image and update active state
 function updateMainImage(index) {
