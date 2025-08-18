@@ -23,22 +23,7 @@
       "notes": "",
       "createdAt": "2025-08-18T11:37:31.663Z",
       "updatedAt": "2025-08-18T11:37:31.663Z"
-    },
-    {
-      "id": "twe",
-      "name": "twe",
-      "title": "",
-      "location": "",
-      "description": "asdf",
-      "image": "",
-      "status": "alive",
-      "faction": "",
-      "relationship": "ally",
-      "firstMet": "",
-      "notes": "",
-      "createdAt": "2025-08-18T12:21:23.958Z",
-      "updatedAt": "2025-08-18T12:21:23.958Z"
     }
   ],
-  "lastUpdated": "2025-08-18T16:14:44.510Z"
+  "lastUpdated": "2025-08-18T16:14:47.468Z"
 }
