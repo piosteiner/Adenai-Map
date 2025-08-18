@@ -5,6 +5,8 @@ class AdenaiAdmin {
         this.characters = [];
         this.currentFilter = '';
         this.currentCharacterFilter = '';
+        this.isAuthenticated = false; // NEW
+        this.username = null; // NEW
         this.init();
     }
 
@@ -12,11 +14,13 @@ class AdenaiAdmin {
         console.log('🚀 Initializing Adenai Admin Interface');
         this.setupEventListeners();
         await this.checkConnection();
+        await this.checkAuthStatus(); // NEW
         await this.loadLocations();
         await this.loadCharacters();
         this.renderLocations();
         this.renderCharacters();
         this.updateStats();
+        this.updateAuthUI(); // NEW
     }
 
     setupEventListeners() {
@@ -83,6 +87,25 @@ class AdenaiAdmin {
             }
         });
 
+        ///// AUTHENTICATION /////
+        // Login form submission
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.login();
+        });
+
+        // Login modal close
+        document.querySelector('.close-login-btn').addEventListener('click', () => {
+            this.closeLoginModal();
+        });
+
+        // Close login modal on backdrop click
+        document.getElementById('login-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'login-modal') {
+                this.closeLoginModal();
+            }
+        });
+
         ///// VARIOUS /////
         // View raw JSON button
         document.getElementById('view-raw-btn')?.addEventListener('click', () => {
@@ -116,6 +139,119 @@ class AdenaiAdmin {
             document.getElementById('status-indicator').textContent = '❌';
             document.getElementById('status-text').textContent = 'Connection error';
             this.showToast('Failed to connect to GitHub', 'error');
+        }
+    }
+
+    ///// AUTHENTICATION METHODS /////
+    async checkAuthStatus() {
+        try {
+            const response = await fetch('/api/auth-status');
+            const data = await response.json();
+            this.isAuthenticated = data.authenticated;
+            this.username = data.username;
+        } catch (error) {
+            console.error('Failed to check auth status:', error);
+            this.isAuthenticated = false;
+            this.username = null;
+        }
+    }
+
+    updateAuthUI() {
+        const authContainer = document.getElementById('auth-container');
+        
+        if (this.isAuthenticated) {
+            authContainer.innerHTML = `
+                <span class="welcome-text">Welcome, ${this.username}</span>
+                <button id="logout-btn" class="btn-secondary">Logout</button>
+            `;
+            
+            // Show all action buttons
+            document.querySelectorAll('.admin-action').forEach(btn => {
+                btn.style.display = 'inline-block';
+            });
+        } else {
+            authContainer.innerHTML = `
+                <button id="login-btn" class="btn-primary">Login</button>
+            `;
+            
+            // Hide action buttons
+            document.querySelectorAll('.admin-action').forEach(btn => {
+                btn.style.display = 'none';
+            });
+        }
+        
+        this.setupAuthEventListeners();
+    }
+
+    setupAuthEventListeners() {
+        const loginBtn = document.getElementById('login-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        
+        if (loginBtn) {
+            loginBtn.addEventListener('click', () => this.showLoginModal());
+        }
+        
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => this.logout());
+        }
+    }
+
+    showLoginModal() {
+        document.getElementById('login-modal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    closeLoginModal() {
+        document.getElementById('login-modal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+        document.getElementById('login-form').reset();
+    }
+
+    async login() {
+        const form = document.getElementById('login-form');
+        const formData = new FormData(form);
+        
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: formData.get('username'),
+                    password: formData.get('password')
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                this.isAuthenticated = true;
+                this.username = result.username;
+                this.updateAuthUI();
+                this.closeLoginModal();
+                this.showToast('✅ Login successful!', 'success');
+            } else {
+                this.showToast('❌ Invalid credentials', 'error');
+            }
+        } catch (error) {
+            console.error('Login failed:', error);
+            this.showToast('❌ Login failed', 'error');
+        }
+    }
+
+    async logout() {
+        try {
+            const response = await fetch('/api/logout', { method: 'POST' });
+            const result = await response.json();
+            
+            if (result.success) {
+                this.isAuthenticated = false;
+                this.username = null;
+                this.updateAuthUI();
+                this.showToast('✅ Logout successful!', 'success');
+            }
+        } catch (error) {
+            console.error('Logout failed:', error);
+            this.showToast('❌ Logout failed', 'error');
         }
     }
 
@@ -174,6 +310,14 @@ class AdenaiAdmin {
             const props = location.properties;
             const coords = location.geometry.coordinates;
             
+            // Only show edit/delete buttons if authenticated
+            const actionButtons = this.isAuthenticated ? `
+                <div class="location-actions">
+                    <button onclick="admin.editLocation('${props.name}')" class="btn-secondary">✏️ Edit</button>
+                    <button onclick="admin.deleteLocation('${props.name}')" class="btn-danger">🗑️ Delete</button>
+                </div>
+            ` : '';
+            
             return `
                 <div class="location-card" data-id="${props.name}">
                     <div class="location-header">
@@ -186,10 +330,7 @@ class AdenaiAdmin {
                         <p><strong>👥 Visited:</strong> ${props.visited ? '✅ Yes' : '❌ No'}</p>
                         ${props.description ? `<p><strong>📝 Description:</strong> ${props.description}</p>` : ''}
                     </div>
-                    <div class="location-actions">
-                        <button onclick="admin.editLocation('${props.name}')" class="btn-secondary">✏️ Edit</button>
-                        <button onclick="admin.deleteLocation('${props.name}')" class="btn-danger">🗑️ Delete</button>
-                    </div>
+                    ${actionButtons}
                 </div>
             `;
         }).join('');
@@ -253,6 +394,10 @@ class AdenaiAdmin {
     }
 
     openAddLocationModal() {
+        if (!this.isAuthenticated) {
+            this.showToast('❌ Please login to add locations', 'error');
+            return;
+        }
         document.getElementById('add-location-modal').style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
@@ -264,6 +409,11 @@ class AdenaiAdmin {
     }
 
     async saveLocation() {
+        if (!this.isAuthenticated) {
+            this.showToast('❌ Please login to add locations', 'error');
+            return;
+        }
+
         const form = document.getElementById('location-form');
         const formData = new FormData(form);
         
@@ -292,6 +442,13 @@ class AdenaiAdmin {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(locationData)
             });
+
+            if (response.status === 401) {
+                this.showToast('❌ Session expired. Please login again.', 'error');
+                this.isAuthenticated = false;
+                this.updateAuthUI();
+                return;
+            }
 
             const result = await response.json();
             
@@ -362,7 +519,7 @@ class AdenaiAdmin {
             toast.remove();
         }, 4000);
 
-        console.log(`�� Toast: ${message}`);
+        console.log(`📢 Toast: ${message}`);
     }
     
     ///// CHARACTER MANAGEMENT METHODS /////
@@ -386,6 +543,8 @@ class AdenaiAdmin {
 
     populateLocationDropdown() {
         const select = document.getElementById('character-location-select');
+        if (!select) return;
+        
         select.innerHTML = '<option value="">Select location...</option>';
         
         this.locations.forEach(location => {
@@ -434,6 +593,14 @@ class AdenaiAdmin {
         }
 
         container.innerHTML = filteredCharacters.map(character => {
+            // Only show edit/delete buttons if authenticated
+            const actionButtons = this.isAuthenticated ? `
+                <div class="character-actions">
+                    <button onclick="admin.editCharacter('${character.id}')" class="btn-secondary">✏️ Edit</button>
+                    <button onclick="admin.deleteCharacter('${character.id}')" class="btn-danger">🗑️ Delete</button>
+                </div>
+            ` : '';
+            
             return `
                 <div class="character-card" data-id="${character.id}">
                     <div class="character-header">
@@ -453,10 +620,7 @@ class AdenaiAdmin {
                         ${character.description ? `<p><strong>📝 Description:</strong> ${character.description}</p>` : ''}
                         ${character.notes ? `<p><strong>📋 Notes:</strong> ${character.notes}</p>` : ''}
                     </div>
-                    <div class="character-actions">
-                        <button onclick="admin.editCharacter('${character.id}')" class="btn-secondary">✏️ Edit</button>
-                        <button onclick="admin.deleteCharacter('${character.id}')" class="btn-danger">🗑️ Delete</button>
-                    </div>
+                    ${actionButtons}
                 </div>
             `;
         }).join('');
@@ -485,6 +649,10 @@ class AdenaiAdmin {
     }
 
     openAddCharacterModal() {
+        if (!this.isAuthenticated) {
+            this.showToast('❌ Please login to add characters', 'error');
+            return;
+        }
         this.populateLocationDropdown(); // Refresh location options
         document.getElementById('add-character-modal').style.display = 'block';
         document.body.style.overflow = 'hidden';
@@ -497,6 +665,11 @@ class AdenaiAdmin {
     }
 
     async saveCharacter() {
+        if (!this.isAuthenticated) {
+            this.showToast('❌ Please login to add characters', 'error');
+            return;
+        }
+
         const form = document.getElementById('character-form');
         const formData = new FormData(form);
         
@@ -522,6 +695,13 @@ class AdenaiAdmin {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(characterData)
             });
+
+            if (response.status === 401) {
+                this.showToast('❌ Session expired. Please login again.', 'error');
+                this.isAuthenticated = false;
+                this.updateAuthUI();
+                return;
+            }
 
             const result = await response.json();
             
@@ -549,6 +729,16 @@ class AdenaiAdmin {
         const character = this.characters.find(c => c.id === id);
         if (character && confirm(`Are you sure you want to delete "${character.name}"?`)) {
             this.showToast('🚧 Delete character functionality coming soon!', 'warning');
+        }
+    }
+
+    editLocation(name) {
+        this.showToast('🚧 Edit location functionality coming soon!', 'warning');
+    }
+
+    deleteLocation(name) {
+        if (confirm(`Are you sure you want to delete "${name}"?`)) {
+            this.showToast('🚧 Delete location functionality coming soon!', 'warning');
         }
     }
 }
