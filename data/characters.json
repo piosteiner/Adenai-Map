@@ -8,22 +8,7 @@
       "location": "Valaris",
       "status": "alive",
       "relationship": "friendly"
-    },
-    {
-      "id": "asdf",
-      "name": "asdf",
-      "title": "asd",
-      "location": "",
-      "description": "",
-      "image": "",
-      "status": "alive",
-      "faction": "",
-      "relationship": "ally",
-      "firstMet": "",
-      "notes": "",
-      "createdAt": "2025-08-18T11:37:31.663Z",
-      "updatedAt": "2025-08-18T11:37:31.663Z"
     }
   ],
-  "lastUpdated": "2025-08-18T16:14:47.468Z"
+  "lastUpdated": "2025-08-18T16:14:49.545Z"
 }
