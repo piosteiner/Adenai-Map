@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "characters": [
+    {
+      "id": "petrel_kormorant",
+      "name": "Petrel Kormorant", 
+      "title": "Ruler of Valaris",
+      "location": "Valaris",
+      "status": "alive",
+      "relationship": "friendly"
+    }
+  ]
+}
