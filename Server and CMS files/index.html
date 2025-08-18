@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🗺️ Adenai Campaign Admin</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>🗺️ Adenai Campaign Admin</h1>
+            <div class="connection-status" id="connection-status">
+                <span id="status-indicator">🔄</span>
+                <span id="status-text">Connecting...</span>
+            </div>
+        </header>
+
+        <nav class="admin-nav">
+            <button class="tab-btn active" data-tab="locations">📍 Locations</button>
+            <button class="tab-btn" data-tab="characters">👥 Characters</button>
+            <button class="tab-btn" data-tab="overview">📊 Overview</button>
+            <button class="tab-btn" data-tab="backup">💾 Backup</button>
+        </nav>
+
+        <main class="admin-main">
+            <!-- Locations Tab -->
+            <div id="locations-tab" class="tab-content active">
+                <div class="content-header">
+                    <h2>Campaign Locations</h2>
+                    <div class="actions">
+                        <button id="add-location-btn" class="btn-primary">+ Add Location</button>
+                        <input type="text" id="location-search" placeholder="Search locations..." class="search-input">
+                    </div>
+                </div>
+                
+                <div id="locations-list" class="content-list">
+                    <div class="loading">Loading locations... 🔄</div>
+                </div>
+            </div>
+
+            <!-- Characters Tab -->
+            <div id="characters-tab" class="tab-content">
+                <div class="content-header">
+                    <h2>Campaign Characters</h2>
+                    <div class="actions">
+                        <button id="add-character-btn" class="btn-primary">+ Add Character</button>
+                        <input type="text" id="character-search" placeholder="Search characters..." class="search-input">
+                    </div>
+                </div>
+                
+                <div id="characters-list" class="content-list">
+                    <div class="loading">Loading characters... 🔄</div>
+                </div>
+            </div>
+
+            <!-- Overview Tab -->
+            <div id="overview-tab" class="tab-content">
+                <div class="content-header">
+                    <h2>Campaign Overview</h2>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-locations">0</div>
+                        <div class="stat-label">Total Locations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="visited-locations">0</div>
+                        <div class="stat-label">Visited</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="regions-count">0</div>
+                        <div class="stat-label">Regions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-characters">0</div>
+                        <div class="stat-label">Characters</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="alive-characters">0</div>
+                        <div class="stat-label">Alive</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backup Tab -->
+            <div id="backup-tab" class="tab-content">
+                <div class="content-header">
+                    <h2>Data Management</h2>
+                </div>
+                <div class="backup-actions">
+                    <button id="export-btn" class="btn-secondary">📤 Export Data</button>
+                    <button id="view-raw-btn" class="btn-secondary">👁️ View Raw JSON</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Location Modal -->
+    <div id="add-location-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Location</h3>
+                <span class="close-btn">&times;</span>
+            </div>
+            
+            <form id="location-form" class="location-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>📍 Name *</label>
+                        <input type="text" name="name" required placeholder="e.g., Neue Stadt">
+                    </div>
+                    <div class="form-group">
+                        <label>🗺️ Region</label>
+                        <select name="region">
+                            <option value="eastern_adenai">Eastern Adenai</option>
+                            <option value="western_adenai">Western Adenai</option>
+                            <option value="upeto">Upeto</option>
+                            <option value="harak">Harak</option>
+                            <option value="sea">Sea/Ocean</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>📐 X Coordinate *</label>
+                        <input type="number" name="x" required placeholder="1000">
+                        <small>Left-right position on map</small>
+                    </div>
+                    <div class="form-group">
+                        <label>📐 Y Coordinate *</label>
+                        <input type="number" name="y" required placeholder="1000">
+                        <small>Up-down position on map</small>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>🏛️ Type</label>
+                    <select name="type">
+                        <option value="city">🏙️ City</option>
+                        <option value="town">🏘️ Town</option>
+                        <option value="village">🏡 Village</option>
+                        <option value="landmark">🗿 Landmark</option>
+                        <option value="dungeon">🏴‍☠️ Dungeon</option>
+                        <option value="ruin">🏛️ Ruin</option>
+                        <option value="camp">⛺ Camp</option>
+                        <option value="other">❓ Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>📝 Description</label>
+                    <textarea name="description" rows="3" placeholder="Describe this location..."></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="visited"> ✅ Visited by party
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">💾 Save Location</button>
+                    <button type="button" class="btn-secondary" onclick="closeModal()">❌ Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Character Modal -->
+    <div id="add-character-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Character</h3>
+                <span class="close-character-btn">&times;</span>
+            </div>
+            
+            <form id="character-form" class="character-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>👤 Name *</label>
+                        <input type="text" name="name" required placeholder="e.g., Petrel Kormorant">
+                    </div>
+                    <div class="form-group">
+                        <label>👑 Title/Role</label>
+                        <input type="text" name="title" placeholder="e.g., Ruler of Valaris">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>📍 Location</label>
+                        <select name="location" id="character-location-select">
+                            <option value="">Select location...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>💗 Status</label>
+                        <select name="status">
+                            <option value="alive">😊 Alive</option>
+                            <option value="dead">💀 Dead</option>
+                            <option value="missing">❓ Missing</option>
+                            <option value="unknown">🤷 Unknown</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>🏛️ Faction</label>
+                        <input type="text" name="faction" placeholder="e.g., Valaris Government">
+                    </div>
+                    <div class="form-group">
+                        <label>🤝 Relationship</label>
+                        <select name="relationship">
+                            <option value="ally">😊 Ally</option>
+                            <option value="friendly">🙂 Friendly</option>
+                            <option value="neutral">😐 Neutral</option>
+                            <option value="suspicious">🤨 Suspicious</option>
+                            <option value="hostile">😠 Hostile</option>
+                            <option value="enemy">⚔️ Enemy</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>📝 Description</label>
+                    <textarea name="description" rows="3" placeholder="Describe this character..."></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>📅 First Met</label>
+                        <input type="date" name="firstMet">
+                    </div>
+                    <div class="form-group">
+                        <label>🖼️ Image URL</label>
+                        <input type="text" name="image" placeholder="https://example.com/character.jpg">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>📋 Notes</label>
+                    <textarea name="notes" rows="2" placeholder="Additional notes about this character..."></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">💾 Save Character</button>
+                    <button type="button" class="btn-secondary" onclick="closeCharacterModal()">❌ Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toast-container"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
