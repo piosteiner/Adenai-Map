@@ -225,6 +225,114 @@ app.post('/api/locations', requireAuth, async (req, res) => {
   }
 });
 
+// Update location (protected)
+app.put('/api/locations/:name', requireAuth, async (req, res) => {
+  try {
+    const originalName = decodeURIComponent(req.params.name);
+    console.log('Updating location:', originalName);
+    
+    // Get current content
+    const { data: currentFile } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/places.geojson'
+    });
+    
+    const currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
+    
+    // Find and update the location
+    const locationIndex = currentContent.features.findIndex(
+      feature => feature.properties.name === originalName
+    );
+    
+    if (locationIndex === -1) {
+      return res.status(404).json({ 
+        success: false, 
+        error: 'Location not found' 
+      });
+    }
+    
+    // Update the location data
+    const updatedFeature = {
+      type: "Feature",
+      properties: {
+        name: req.body.properties.name,
+        description: req.body.properties.description || '',
+        contentUrl: req.body.properties.contentUrl || null,
+        ...req.body.properties
+      },
+      geometry: {
+        type: "Point",
+        coordinates: req.body.geometry.coordinates
+      }
+    };
+    
+    currentContent.features[locationIndex] = updatedFeature;
+    
+    // Commit to GitHub
+    await octokit.rest.repos.createOrUpdateFileContents({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/places.geojson',
+      message: `Update location: ${originalName} → ${updatedFeature.properties.name}`,
+      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64'),
+      sha: currentFile.sha
+    });
+    
+    res.json({ success: true, feature: updatedFeature });
+  } catch (error) {
+    console.error('Error updating location:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete location (protected)
+app.delete('/api/locations/:name', requireAuth, async (req, res) => {
+  try {
+    const locationName = decodeURIComponent(req.params.name);
+    console.log('Deleting location:', locationName);
+    
+    // Get current content
+    const { data: currentFile } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/places.geojson'
+    });
+    
+    const currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
+    
+    // Find and remove the location
+    const locationIndex = currentContent.features.findIndex(
+      feature => feature.properties.name === locationName
+    );
+    
+    if (locationIndex === -1) {
+      return res.status(404).json({ 
+        success: false, 
+        error: 'Location not found' 
+      });
+    }
+    
+    // Remove the location
+    currentContent.features.splice(locationIndex, 1);
+    
+    // Commit to GitHub
+    await octokit.rest.repos.createOrUpdateFileContents({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/places.geojson',
+      message: `Delete location: ${locationName}`,
+      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64'),
+      sha: currentFile.sha
+    });
+    
+    res.json({ success: true, message: `Location "${locationName}" deleted successfully` });
+  } catch (error) {
+    console.error('Error deleting location:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 ////// CHARACTER MANAGEMENT //////
 
 // Get all characters (public)
@@ -320,6 +428,120 @@ app.post('/api/characters', requireAuth, async (req, res) => {
     res.json({ success: true, character: newCharacter });
   } catch (error) {
     console.error('Error saving character:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Update character (protected)
+app.put('/api/characters/:id', requireAuth, async (req, res) => {
+  try {
+    const originalId = decodeURIComponent(req.params.id);
+    console.log('Updating character:', originalId);
+    
+    // Get current content
+    const { data: currentFile } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json'
+    });
+    
+    const currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
+    
+    // Find and update the character
+    const characterIndex = currentContent.characters.findIndex(
+      character => character.id === originalId
+    );
+    
+    if (characterIndex === -1) {
+      return res.status(404).json({ 
+        success: false, 
+        error: 'Character not found' 
+      });
+    }
+    
+    // Update the character data
+    const updatedCharacter = {
+      id: req.body.name.toLowerCase().replace(/[^a-z0-9]/g, '_'),
+      name: req.body.name,
+      title: req.body.title || '',
+      location: req.body.location || '',
+      description: req.body.description || '',
+      image: req.body.image || '',
+      status: req.body.status || 'alive',
+      faction: req.body.faction || '',
+      relationship: req.body.relationship || 'neutral',
+      firstMet: req.body.firstMet || '',
+      notes: req.body.notes || '',
+      createdAt: currentContent.characters[characterIndex].createdAt, // Keep original creation date
+      updatedAt: new Date().toISOString()
+    };
+    
+    currentContent.characters[characterIndex] = updatedCharacter;
+    currentContent.lastUpdated = new Date().toISOString();
+    
+    // Commit to GitHub
+    await octokit.rest.repos.createOrUpdateFileContents({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json',
+      message: `Update character: ${originalId} → ${updatedCharacter.name}`,
+      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64'),
+      sha: currentFile.sha
+    });
+    
+    res.json({ success: true, character: updatedCharacter });
+  } catch (error) {
+    console.error('Error updating character:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete character (protected)
+app.delete('/api/characters/:id', requireAuth, async (req, res) => {
+  try {
+    const characterId = decodeURIComponent(req.params.id);
+    console.log('Deleting character:', characterId);
+    
+    // Get current content
+    const { data: currentFile } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json'
+    });
+    
+    const currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
+    
+    // Find and remove the character
+    const characterIndex = currentContent.characters.findIndex(
+      character => character.id === characterId
+    );
+    
+    if (characterIndex === -1) {
+      return res.status(404).json({ 
+        success: false, 
+        error: 'Character not found' 
+      });
+    }
+    
+    const deletedCharacterName = currentContent.characters[characterIndex].name;
+    
+    // Remove the character
+    currentContent.characters.splice(characterIndex, 1);
+    currentContent.lastUpdated = new Date().toISOString();
+    
+    // Commit to GitHub
+    await octokit.rest.repos.createOrUpdateFileContents({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json',
+      message: `Delete character: ${deletedCharacterName}`,
+      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64'),
+      sha: currentFile.sha
+    });
+    
+    res.json({ success: true, message: `Character "${deletedCharacterName}" deleted successfully` });
+  } catch (error) {
+    console.error('Error deleting character:', error.message);
     res.status(500).json({ error: error.message });
   }
 });

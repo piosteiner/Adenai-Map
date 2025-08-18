@@ -5,8 +5,10 @@ class AdenaiAdmin {
         this.characters = [];
         this.currentFilter = '';
         this.currentCharacterFilter = '';
-        this.isAuthenticated = false; // NEW
-        this.username = null; // NEW
+        this.isAuthenticated = false;
+        this.username = null;
+        this.editingLocation = null; // Track if we're editing
+        this.editingCharacter = null; // Track if we're editing
         this.init();
     }
 
@@ -14,13 +16,13 @@ class AdenaiAdmin {
         console.log('🚀 Initializing Adenai Admin Interface');
         this.setupEventListeners();
         await this.checkConnection();
-        await this.checkAuthStatus(); // NEW
+        await this.checkAuthStatus();
         await this.loadLocations();
         await this.loadCharacters();
         this.renderLocations();
         this.renderCharacters();
         this.updateStats();
-        this.updateAuthUI(); // NEW
+        this.updateAuthUI();
     }
 
     setupEventListeners() {
@@ -229,6 +231,9 @@ class AdenaiAdmin {
                 this.updateAuthUI();
                 this.closeLoginModal();
                 this.showToast('✅ Login successful!', 'success');
+                // Re-render to show edit/delete buttons
+                this.renderLocations();
+                this.renderCharacters();
             } else {
                 this.showToast('❌ Invalid credentials', 'error');
             }
@@ -248,6 +253,9 @@ class AdenaiAdmin {
                 this.username = null;
                 this.updateAuthUI();
                 this.showToast('✅ Logout successful!', 'success');
+                // Re-render to hide edit/delete buttons
+                this.renderLocations();
+                this.renderCharacters();
             }
         } catch (error) {
             console.error('Logout failed:', error);
@@ -326,7 +334,7 @@ class AdenaiAdmin {
                     </div>
                     <div class="location-details">
                         <p><strong>📍 Region:</strong> ${this.formatRegion(props.region || 'Unknown')}</p>
-                        <p><strong>📐 Coordinates:</strong> ${coords[0]}, ${coords[1]}</p>
+                        <p><strong>📍 Coordinates:</strong> ${coords[0]}, ${coords[1]}</p>
                         <p><strong>👥 Visited:</strong> ${props.visited ? '✅ Yes' : '❌ No'}</p>
                         ${props.description ? `<p><strong>📝 Description:</strong> ${props.description}</p>` : ''}
                     </div>
@@ -390,7 +398,7 @@ class AdenaiAdmin {
             content.classList.toggle('active', content.id === `${tabName}-tab`);
         });
 
-        console.log(`📄 Switched to ${tabName} tab`);
+        console.log(`🔄 Switched to ${tabName} tab`);
     }
 
     openAddLocationModal() {
@@ -398,6 +406,50 @@ class AdenaiAdmin {
             this.showToast('❌ Please login to add locations', 'error');
             return;
         }
+        
+        // Reset editing state
+        this.editingLocation = null;
+        
+        // Update modal title and button text
+        document.querySelector('#add-location-modal .modal-header h3').textContent = 'Add New Location';
+        document.querySelector('#location-form button[type="submit"]').textContent = '💾 Save Location';
+        
+        document.getElementById('add-location-modal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    openEditLocationModal(locationName) {
+        if (!this.isAuthenticated) {
+            this.showToast('❌ Please login to edit locations', 'error');
+            return;
+        }
+        
+        const location = this.locations.find(loc => loc.properties.name === locationName);
+        if (!location) {
+            this.showToast('❌ Location not found', 'error');
+            return;
+        }
+        
+        // Set editing state
+        this.editingLocation = locationName;
+        
+        // Update modal title and button text
+        document.querySelector('#add-location-modal .modal-header h3').textContent = 'Edit Location';
+        document.querySelector('#location-form button[type="submit"]').textContent = '💾 Update Location';
+        
+        // Pre-fill form with current data
+        const form = document.getElementById('location-form');
+        const props = location.properties;
+        const coords = location.geometry.coordinates;
+        
+        form.querySelector('[name="name"]').value = props.name || '';
+        form.querySelector('[name="description"]').value = props.description || '';
+        form.querySelector('[name="region"]').value = props.region || '';
+        form.querySelector('[name="type"]').value = props.type || '';
+        form.querySelector('[name="x"]').value = coords[0] || '';
+        form.querySelector('[name="y"]').value = coords[1] || '';
+        form.querySelector('[name="visited"]').checked = !!props.visited;
+        
         document.getElementById('add-location-modal').style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
@@ -406,11 +458,12 @@ class AdenaiAdmin {
         document.getElementById('add-location-modal').style.display = 'none';
         document.body.style.overflow = 'auto';
         document.getElementById('location-form').reset();
+        this.editingLocation = null;
     }
 
     async saveLocation() {
         if (!this.isAuthenticated) {
-            this.showToast('❌ Please login to add locations', 'error');
+            this.showToast('❌ Please login to save locations', 'error');
             return;
         }
 
@@ -426,7 +479,7 @@ class AdenaiAdmin {
                 region: formData.get('region'),
                 type: formData.get('type'),
                 visited: formData.has('visited'),
-                contentUrl: null // We'll add this later
+                contentUrl: null
             },
             geometry: {
                 type: "Point",
@@ -435,10 +488,13 @@ class AdenaiAdmin {
         };
 
         try {
-            console.log('💾 Saving location:', locationData.properties.name);
+            const isEditing = !!this.editingLocation;
+            const originalName = this.editingLocation;
             
-            const response = await fetch('/api/locations', {
-                method: 'POST',
+            console.log(`💾 ${isEditing ? 'Updating' : 'Saving'} location:`, locationData.properties.name);
+            
+            const response = await fetch(`/api/locations${isEditing ? `/${encodeURIComponent(originalName)}` : ''}`, {
+                method: isEditing ? 'PUT' : 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(locationData)
             });
@@ -453,18 +509,62 @@ class AdenaiAdmin {
             const result = await response.json();
             
             if (result.success) {
-                this.showToast(`✅ Location "${locationData.properties.name}" saved successfully!`, 'success');
+                this.showToast(`✅ Location "${locationData.properties.name}" ${isEditing ? 'updated' : 'saved'} successfully!`, 'success');
                 await this.loadLocations();
                 this.renderLocations();
                 this.updateStats();
                 this.closeModal();
             } else {
-                this.showToast('❌ Failed to save location', 'error');
+                this.showToast(`❌ Failed to ${isEditing ? 'update' : 'save'} location`, 'error');
             }
         } catch (error) {
             console.error('Save failed:', error);
-            this.showToast('❌ Failed to save location', 'error');
+            this.showToast(`❌ Failed to ${this.editingLocation ? 'update' : 'save'} location`, 'error');
         }
+    }
+
+    async deleteLocation(name) {
+        if (!this.isAuthenticated) {
+            this.showToast('❌ Please login to delete locations', 'error');
+            return;
+        }
+        
+        if (!confirm(`Are you sure you want to delete "${name}"?\n\nThis action cannot be undone.`)) {
+            return;
+        }
+
+        try {
+            console.log('🗑️ Deleting location:', name);
+            
+            const response = await fetch(`/api/locations/${encodeURIComponent(name)}`, {
+                method: 'DELETE'
+            });
+
+            if (response.status === 401) {
+                this.showToast('❌ Session expired. Please login again.', 'error');
+                this.isAuthenticated = false;
+                this.updateAuthUI();
+                return;
+            }
+
+            const result = await response.json();
+            
+            if (result.success) {
+                this.showToast(`✅ Location "${name}" deleted successfully!`, 'success');
+                await this.loadLocations();
+                this.renderLocations();
+                this.updateStats();
+            } else {
+                this.showToast('❌ Failed to delete location', 'error');
+            }
+        } catch (error) {
+            console.error('Delete failed:', error);
+            this.showToast('❌ Failed to delete location', 'error');
+        }
+    }
+
+    editLocation(name) {
+        this.openEditLocationModal(name);
     }
 
     exportData() {
@@ -653,7 +753,55 @@ class AdenaiAdmin {
             this.showToast('❌ Please login to add characters', 'error');
             return;
         }
+        
+        // Reset editing state
+        this.editingCharacter = null;
+        
+        // Update modal title and button text
+        document.querySelector('#add-character-modal .modal-header h3').textContent = 'Add New Character';
+        document.querySelector('#character-form button[type="submit"]').textContent = '💾 Save Character';
+        
         this.populateLocationDropdown(); // Refresh location options
+        document.getElementById('add-character-modal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    openEditCharacterModal(characterId) {
+        if (!this.isAuthenticated) {
+            this.showToast('❌ Please login to edit characters', 'error');
+            return;
+        }
+        
+        const character = this.characters.find(char => char.id === characterId);
+        if (!character) {
+            this.showToast('❌ Character not found', 'error');
+            return;
+        }
+        
+        // Set editing state
+        this.editingCharacter = characterId;
+        
+        // Update modal title and button text
+        document.querySelector('#add-character-modal .modal-header h3').textContent = 'Edit Character';
+        document.querySelector('#character-form button[type="submit"]').textContent = '💾 Update Character';
+        
+        // Pre-fill form with current data
+        const form = document.getElementById('character-form');
+        
+        form.querySelector('[name="name"]').value = character.name || '';
+        form.querySelector('[name="title"]').value = character.title || '';
+        form.querySelector('[name="description"]').value = character.description || '';
+        form.querySelector('[name="image"]').value = character.image || '';
+        form.querySelector('[name="status"]').value = character.status || 'alive';
+        form.querySelector('[name="faction"]').value = character.faction || '';
+        form.querySelector('[name="relationship"]').value = character.relationship || 'neutral';
+        form.querySelector('[name="firstMet"]').value = character.firstMet || '';
+        form.querySelector('[name="notes"]').value = character.notes || '';
+        
+        // Populate and set location dropdown
+        this.populateLocationDropdown();
+        form.querySelector('[name="location"]').value = character.location || '';
+        
         document.getElementById('add-character-modal').style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
@@ -662,11 +810,12 @@ class AdenaiAdmin {
         document.getElementById('add-character-modal').style.display = 'none';
         document.body.style.overflow = 'auto';
         document.getElementById('character-form').reset();
+        this.editingCharacter = null;
     }
 
     async saveCharacter() {
         if (!this.isAuthenticated) {
-            this.showToast('❌ Please login to add characters', 'error');
+            this.showToast('❌ Please login to save characters', 'error');
             return;
         }
 
@@ -688,10 +837,13 @@ class AdenaiAdmin {
         };
 
         try {
-            console.log('💾 Saving character:', characterData.name);
+            const isEditing = !!this.editingCharacter;
+            const originalId = this.editingCharacter;
             
-            const response = await fetch('/api/characters', {
-                method: 'POST',
+            console.log(`💾 ${isEditing ? 'Updating' : 'Saving'} character:`, characterData.name);
+            
+            const response = await fetch(`/api/characters${isEditing ? `/${encodeURIComponent(originalId)}` : ''}`, {
+                method: isEditing ? 'PUT' : 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(characterData)
             });
@@ -706,40 +858,68 @@ class AdenaiAdmin {
             const result = await response.json();
             
             if (result.success) {
-                this.showToast(`✅ Character "${characterData.name}" saved successfully!`, 'success');
+                this.showToast(`✅ Character "${characterData.name}" ${isEditing ? 'updated' : 'saved'} successfully!`, 'success');
                 await this.loadCharacters();
                 this.renderCharacters();
                 this.updateStats();
                 this.closeCharacterModal();
             } else {
-                this.showToast('❌ Failed to save character', 'error');
+                this.showToast(`❌ Failed to ${isEditing ? 'update' : 'save'} character`, 'error');
             }
         } catch (error) {
             console.error('Save failed:', error);
-            this.showToast('❌ Failed to save character', 'error');
+            this.showToast(`❌ Failed to ${this.editingCharacter ? 'update' : 'save'} character`, 'error');
         }
     }
 
-    // Placeholder methods for future features
-    editCharacter(id) {
-        this.showToast('🚧 Edit character functionality coming soon!', 'warning');
-    }
-
-    deleteCharacter(id) {
+    async deleteCharacter(id) {
+        if (!this.isAuthenticated) {
+            this.showToast('❌ Please login to delete characters', 'error');
+            return;
+        }
+        
         const character = this.characters.find(c => c.id === id);
-        if (character && confirm(`Are you sure you want to delete "${character.name}"?`)) {
-            this.showToast('🚧 Delete character functionality coming soon!', 'warning');
+        if (!character) {
+            this.showToast('❌ Character not found', 'error');
+            return;
+        }
+        
+        if (!confirm(`Are you sure you want to delete "${character.name}"?\n\nThis action cannot be undone.`)) {
+            return;
+        }
+
+        try {
+            console.log('🗑️ Deleting character:', character.name);
+            
+            const response = await fetch(`/api/characters/${encodeURIComponent(id)}`, {
+                method: 'DELETE'
+            });
+
+            if (response.status === 401) {
+                this.showToast('❌ Session expired. Please login again.', 'error');
+                this.isAuthenticated = false;
+                this.updateAuthUI();
+                return;
+            }
+
+            const result = await response.json();
+            
+            if (result.success) {
+                this.showToast(`✅ Character "${character.name}" deleted successfully!`, 'success');
+                await this.loadCharacters();
+                this.renderCharacters();
+                this.updateStats();
+            } else {
+                this.showToast('❌ Failed to delete character', 'error');
+            }
+        } catch (error) {
+            console.error('Delete failed:', error);
+            this.showToast('❌ Failed to delete character', 'error');
         }
     }
 
-    editLocation(name) {
-        this.showToast('🚧 Edit location functionality coming soon!', 'warning');
-    }
-
-    deleteLocation(name) {
-        if (confirm(`Are you sure you want to delete "${name}"?`)) {
-            this.showToast('🚧 Delete location functionality coming soon!', 'warning');
-        }
+    editCharacter(id) {
+        this.openEditCharacterModal(id);
     }
 }
 
