@@ -14,6 +14,8 @@
                 <span id="status-indicator">🔄</span>
                 <span id="status-text">Connecting...</span>
             </div>
+            <div id="auth-container" class="auth-container">
+            </div>
         </header>
 
         <nav class="admin-nav">
@@ -29,7 +31,7 @@
                 <div class="content-header">
                     <h2>Campaign Locations</h2>
                     <div class="actions">
-                        <button id="add-location-btn" class="btn-primary">+ Add Location</button>
+                        <button id="add-location-btn" class="btn-primary admin-action">+ Add Location</button>
                         <input type="text" id="location-search" placeholder="Search locations..." class="search-input">
                     </div>
                 </div>
@@ -44,7 +46,7 @@
                 <div class="content-header">
                     <h2>Campaign Characters</h2>
                     <div class="actions">
-                        <button id="add-character-btn" class="btn-primary">+ Add Character</button>
+                        <button id="add-character-btn" class="btn-primary admin-action">+ Add Character</button>
                         <input type="text" id="character-search" placeholder="Search characters..." class="search-input">
                     </div>
                 </div>
@@ -251,6 +253,33 @@
                 <div class="form-actions">
                     <button type="submit" class="btn-primary">💾 Save Character</button>
                     <button type="button" class="btn-secondary" onclick="closeCharacterModal()">❌ Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔑 Admin Login</h3>
+                <span class="close-login-btn">&times;</span>
+            </div>
+            
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label>👤 Username</label>
+                    <input type="text" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>🔒 Password</label>
+                    <input type="password" name="password" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">🔑 Login</button>
+                    <button type="button" class="btn-secondary" onclick="admin.closeLoginModal()">Cancel</button>
                 </div>
             </form>
         </div>

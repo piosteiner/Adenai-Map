@@ -4,6 +4,7 @@ const { Octokit } = require('@octokit/rest');
 const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
+const session = require('express-session');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -21,8 +22,32 @@ console.log(`Setting up admin for: ${REPO_OWNER}/${REPO_NAME}`);
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Session management
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'adenai-campaign-secret-key-change-this',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { 
+    secure: false, // Set to true if using HTTPS
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
+}));
+
 app.use(express.static('admin-public'));
 app.use('/uploads', express.static('uploads'));
+
+// Authentication middleware for write operations only
+const requireAuth = (req, res, next) => {
+  if (req.session && req.session.authenticated) {
+    next();
+  } else {
+    res.status(401).json({ 
+      error: 'Authentication required',
+      message: 'You must be logged in to perform this action'
+    });
+  }
+};
 
 // File upload configuration
 const storage = multer.diskStorage({
@@ -45,7 +70,44 @@ const upload = multer({
   }
 });
 
-// Test GitHub connection
+// Authentication routes
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+  
+  if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
+    req.session.authenticated = true;
+    req.session.username = username;
+    res.json({ 
+      success: true, 
+      message: 'Login successful',
+      username: username
+    });
+  } else {
+    res.status(401).json({ 
+      success: false, 
+      message: 'Invalid credentials' 
+    });
+  }
+});
+
+app.post('/api/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      res.status(500).json({ success: false, message: 'Logout failed' });
+    } else {
+      res.json({ success: true, message: 'Logout successful' });
+    }
+  });
+});
+
+app.get('/api/auth-status', (req, res) => {
+  res.json({
+    authenticated: !!(req.session && req.session.authenticated),
+    username: req.session?.username || null
+  });
+});
+
+// Test GitHub connection (public)
 app.get('/api/test', async (req, res) => {
   try {
     const { data } = await octokit.rest.repos.get({
@@ -69,7 +131,7 @@ app.get('/api/test', async (req, res) => {
 
 //////LOCATION MANAGEMENT//////
 
-// Get current locations
+// Get current locations (public)
 app.get('/api/locations', async (req, res) => {
   try {
     const { data } = await octokit.rest.repos.getContent({
@@ -94,8 +156,8 @@ app.get('/api/locations', async (req, res) => {
   }
 });
 
-// Add new location
-app.post('/api/locations', async (req, res) => {
+// Add new location (protected)
+app.post('/api/locations', requireAuth, async (req, res) => {
   try {
     console.log('Adding new location:', req.body.properties?.name);
     
@@ -164,9 +226,8 @@ app.post('/api/locations', async (req, res) => {
 });
 
 ////// CHARACTER MANAGEMENT //////
-// Character Management Endpoints
 
-// Get all characters
+// Get all characters (public)
 app.get('/api/characters', async (req, res) => {
   try {
     const { data } = await octokit.rest.repos.getContent({
@@ -191,8 +252,8 @@ app.get('/api/characters', async (req, res) => {
   }
 });
 
-// Add new character
-app.post('/api/characters', async (req, res) => {
+// Add new character (protected)
+app.post('/api/characters', requireAuth, async (req, res) => {
   try {
     console.log('Adding new character:', req.body.name);
     
@@ -263,7 +324,7 @@ app.post('/api/characters', async (req, res) => {
   }
 });
 
-// Health check
+// Health check (public)
 app.get('/health', (req, res) => {
   res.json({ 
     status: 'healthy', 
