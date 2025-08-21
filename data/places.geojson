@@ -122,7 +122,9 @@
       "type": "Feature",
       "properties": {
         "name": "Motu Motu",
-        "description": "Die schwimmende Stadt."
+        "description": "Die schwimmende Stadt.",
+        "contentUrl": null,
+        "visited": true
       },
       "geometry": {
         "type": "Point",
