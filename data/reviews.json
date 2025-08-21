@@ -8,9 +8,9 @@
       "itemName": "tetw",
       "user": "Test User",
       "timestamp": "2025-08-21T21:03:23.772Z",
-      "status": "pending",
-      "reviewedBy": null,
-      "reviewedAt": null,
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-21T21:09:24.839Z",
       "reviewNotes": "",
       "commitMessage": "Create character: tetw (by Test User) - Initial character creation"
     },
@@ -28,5 +28,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-21T21:03:23.772Z"
+  "lastUpdated": "2025-08-21T21:09:25.041Z"
 }
