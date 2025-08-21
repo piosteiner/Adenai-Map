@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "2832b7770fb5f9878125405902f45105cadc9afc",
+      "action": "update",
+      "type": "location",
+      "itemName": "Motu Motu",
+      "user": "Pio`s Test User",
+      "timestamp": "2025-08-21T22:59:07.230Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Motu Motu (by Pio`s Test User) - marked as visited"
+    },
+    {
       "commitSha": "b5431bea0c9f1ccac3ed132eef2d8e570dc8e7fb",
       "action": "create",
       "type": "character",
@@ -28,5 +41,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-21T21:09:32.250Z"
+  "lastUpdated": "2025-08-21T22:59:07.230Z"
 }
