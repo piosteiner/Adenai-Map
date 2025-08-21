@@ -793,6 +793,24 @@
           123
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "test",
+        "description": "",
+        "contentUrl": null,
+        "region": "eastern_adenai",
+        "type": "city",
+        "visited": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1234,
+          2134
+        ]
+      }
     }
   ]
 }
