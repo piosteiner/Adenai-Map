@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "b5431bea0c9f1ccac3ed132eef2d8e570dc8e7fb",
+      "action": "create",
+      "type": "character",
+      "itemName": "tetw",
+      "user": "Test User",
+      "timestamp": "2025-08-21T21:03:23.772Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Create character: tetw (by Test User) - Initial character creation"
+    },
+    {
       "commitSha": "970184d6963e9ec05ded5fd673885a9460ffd9a3",
       "action": "create",
       "type": "location",
@@ -15,5 +28,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-21T20:41:06.553Z"
+  "lastUpdated": "2025-08-21T21:03:23.772Z"
 }
