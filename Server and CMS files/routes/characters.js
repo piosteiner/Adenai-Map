@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../middleware/auth');
-const githubHelper = require('../utils/githubHelper');
 
 // Initialize GitHub API (passed from main server)
 let octokit, REPO_OWNER, REPO_NAME;
@@ -15,41 +14,61 @@ const initGitHub = (octokitInstance, repoOwner, repoName) => {
 // Get all characters (public)
 router.get('/', async (req, res) => {
   try {
-    const content = await githubHelper.loadFromGitHub('data', 'characters.json');
+    const { data } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json'
+    });
     
-    if (!content) {
+    const content = JSON.parse(Buffer.from(data.content, 'base64').toString());
+    res.json(content);
+  } catch (error) {
+    if (error.status === 404) {
       // File doesn't exist yet, return empty structure
       res.json({
         version: "1.0",
         characters: []
       });
     } else {
-      res.json(content);
+      console.error('Error fetching characters:', error.message);
+      res.status(500).json({ error: error.message });
     }
-  } catch (error) {
-    console.error('Error fetching characters:', error.message);
-    res.status(500).json({ error: error.message });
   }
 });
 
 // Add new character (protected)
 router.post('/', requireAuth, async (req, res) => {
   try {
-    const user = req.session.user?.username || 'Unknown';
+    // Get user from session (fixed to match your session structure)
+    const user = req.session.displayName || req.session.username || 'Unknown';
     console.log('Adding new character:', req.body.name, 'by', user);
     
     // Get current content
-    let currentContent = await githubHelper.loadFromGitHub('data', 'characters.json');
+    let currentContent;
+    let currentSha;
     
-    if (!currentContent) {
-      // File doesn't exist, create new structure
-      currentContent = {
-        version: "1.0",
-        characters: []
-      };
+    try {
+      const { data: currentFile } = await octokit.rest.repos.getContent({
+        owner: REPO_OWNER,
+        repo: REPO_NAME,
+        path: 'data/characters.json'
+      });
+      currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
+      currentSha = currentFile.sha;
+    } catch (error) {
+      if (error.status === 404) {
+        // File doesn't exist, create new structure
+        currentContent = {
+          version: "1.0",
+          characters: []
+        };
+        currentSha = null;
+      } else {
+        throw error;
+      }
     }
     
-    // Create new character
+    // Add new character
     const newCharacter = {
       id: req.body.name.toLowerCase().replace(/[^a-z0-9]/g, '_'),
       name: req.body.name,
@@ -66,20 +85,26 @@ router.post('/', requireAuth, async (req, res) => {
       updatedAt: new Date().toISOString()
     };
     
-    // Add new character
     currentContent.characters.push(newCharacter);
     currentContent.lastUpdated = new Date().toISOString();
     
-    // Save with enhanced commit message
-    const changes = ['Initial character creation with all details'];
-    await githubHelper.saveToGitHub(
-      'data', 
-      'characters.json', 
-      currentContent, 
-      'create',
-      user,
-      changes
-    );
+    // Enhanced commit message with user attribution
+    const commitMessage = `Create character: ${newCharacter.name} (by ${user}) - Initial character creation`;
+    
+    // Commit to GitHub
+    const commitData = {
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json',
+      message: commitMessage,
+      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64')
+    };
+    
+    if (currentSha) {
+      commitData.sha = currentSha;
+    }
+    
+    await octokit.rest.repos.createOrUpdateFileContents(commitData);
     
     res.json({ success: true, character: newCharacter });
   } catch (error) {
@@ -92,20 +117,20 @@ router.post('/', requireAuth, async (req, res) => {
 router.put('/:id', requireAuth, async (req, res) => {
   try {
     const originalId = decodeURIComponent(req.params.id);
-    const user = req.session.user?.username || 'Unknown';
+    // Get user from session (fixed to match your session structure)
+    const user = req.session.displayName || req.session.username || 'Unknown';
     console.log('Updating character:', originalId, 'by', user);
     
     // Get current content
-    const currentContent = await githubHelper.loadFromGitHub('data', 'characters.json');
+    const { data: currentFile } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json'
+    });
     
-    if (!currentContent) {
-      return res.status(404).json({ 
-        success: false, 
-        error: 'Characters file not found' 
-      });
-    }
+    const currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
     
-    // Find the character to update
+    // Find and update the character
     const characterIndex = currentContent.characters.findIndex(
       character => character.id === originalId
     );
@@ -117,10 +142,10 @@ router.put('/:id', requireAuth, async (req, res) => {
       });
     }
     
-    // Get old data for change detection
+    // Get old character for change detection
     const oldCharacter = currentContent.characters[characterIndex];
     
-    // Create updated character
+    // Update the character data
     const updatedCharacter = {
       id: req.body.name.toLowerCase().replace(/[^a-z0-9]/g, '_'),
       name: req.body.name,
@@ -137,22 +162,25 @@ router.put('/:id', requireAuth, async (req, res) => {
       updatedAt: new Date().toISOString()
     };
     
-    // Detect changes for better commit message
+    // Detect what changed
     const changes = detectCharacterChanges(oldCharacter, updatedCharacter);
+    const changeDescription = changes.length > 0 ? changes.join(', ') : 'Updated character details';
     
-    // Update the character
     currentContent.characters[characterIndex] = updatedCharacter;
     currentContent.lastUpdated = new Date().toISOString();
     
-    // Save with enhanced commit message
-    await githubHelper.saveToGitHub(
-      'data', 
-      'characters.json', 
-      currentContent, 
-      'update',
-      user,
-      changes
-    );
+    // Enhanced commit message with user attribution and changes
+    const commitMessage = `Update character: ${originalId} (by ${user}) - ${changeDescription}`;
+    
+    // Commit to GitHub
+    await octokit.rest.repos.createOrUpdateFileContents({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json',
+      message: commitMessage,
+      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64'),
+      sha: currentFile.sha
+    });
     
     res.json({ success: true, character: updatedCharacter });
   } catch (error) {
@@ -165,19 +193,18 @@ router.put('/:id', requireAuth, async (req, res) => {
 router.delete('/:id', requireAuth, async (req, res) => {
   try {
     const characterId = decodeURIComponent(req.params.id);
-    const user = req.session.user?.username || 'Unknown';
-    const reason = req.body?.reason || 'Removed from campaign';
+    // Get user from session (fixed to match your session structure)
+    const user = req.session.displayName || req.session.username || 'Unknown';
     console.log('Deleting character:', characterId, 'by', user);
     
     // Get current content
-    const currentContent = await githubHelper.loadFromGitHub('data', 'characters.json');
+    const { data: currentFile } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json'
+    });
     
-    if (!currentContent) {
-      return res.status(404).json({ 
-        success: false, 
-        error: 'Characters file not found' 
-      });
-    }
+    const currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
     
     // Find and remove the character
     const characterIndex = currentContent.characters.findIndex(
@@ -197,15 +224,18 @@ router.delete('/:id', requireAuth, async (req, res) => {
     currentContent.characters.splice(characterIndex, 1);
     currentContent.lastUpdated = new Date().toISOString();
     
-    // Save with enhanced commit message
-    await githubHelper.saveToGitHub(
-      'data', 
-      'characters.json', 
-      currentContent, 
-      'delete',
-      user,
-      [reason]
-    );
+    // Enhanced commit message with user attribution
+    const commitMessage = `Delete character: ${deletedCharacterName} (by ${user}) - Removed from campaign`;
+    
+    // Commit to GitHub
+    await octokit.rest.repos.createOrUpdateFileContents({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json',
+      message: commitMessage,
+      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64'),
+      sha: currentFile.sha
+    });
     
     res.json({ success: true, message: `Character "${deletedCharacterName}" deleted successfully` });
   } catch (error) {
@@ -310,7 +340,7 @@ function detectCharacterChanges(oldCharacter, newCharacter) {
     }
   }
   
-  return changes.length > 0 ? changes : ['updated character details'];
+  return changes;
 }
 
 module.exports = { router, initGitHub };

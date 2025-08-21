@@ -14,8 +14,8 @@ const { router: charactersRouter, initGitHub: initCharactersGitHub } = require('
 // Import middleware
 const { requireAuth } = require('./middleware/auth');
 
-// Import activity routes
-const activityRoutes = require('./routes/activity');
+// Import activity routes (optional - only if you have the activity routes file)
+// const activityRoutes = require('./routes/activity');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -79,8 +79,8 @@ app.use('/api', authRoutes);
 app.use('/api/locations', locationsRouter);
 app.use('/api/characters', charactersRouter);
 
-// Activity routes 
-app.use('/api/activity', requireAuth, activityRoutes);
+// Activity routes (uncomment when you have the activity routes file)
+// app.use('/api/activity', requireAuth, activityRoutes);
 
 // Test GitHub connection (public)
 app.get('/api/test', async (req, res) => {

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../middleware/auth');
-const githubHelper = require('../utils/githubHelper');
 
 // Initialize GitHub API (passed from main server)
 let octokit, REPO_OWNER, REPO_NAME;
@@ -15,41 +14,61 @@ const initGitHub = (octokitInstance, repoOwner, repoName) => {
 // Get current locations (public)
 router.get('/', async (req, res) => {
   try {
-    const content = await githubHelper.loadFromGitHub('data', 'places.geojson');
+    const { data } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/places.geojson'
+    });
     
-    if (!content) {
+    const content = JSON.parse(Buffer.from(data.content, 'base64').toString());
+    res.json(content);
+  } catch (error) {
+    if (error.status === 404) {
       // File doesn't exist yet, return empty structure
       res.json({
         type: "FeatureCollection",
         features: []
       });
     } else {
-      res.json(content);
+      console.error('Error fetching locations:', error.message);
+      res.status(500).json({ error: error.message });
     }
-  } catch (error) {
-    console.error('Error fetching locations:', error.message);
-    res.status(500).json({ error: error.message });
   }
 });
 
 // Add new location (protected)
 router.post('/', requireAuth, async (req, res) => {
   try {
-    const user = req.session.user?.username || 'Unknown';
+    // Get user from session (fixed to match your session structure)
+    const user = req.session.displayName || req.session.username || 'Unknown';
     console.log('Adding new location:', req.body.properties?.name, 'by', user);
     
     // Get current content
-    let currentContent = await githubHelper.loadFromGitHub('data', 'places.geojson');
+    let currentContent;
+    let currentSha;
     
-    if (!currentContent) {
-      // File doesn't exist, create new structure
-      currentContent = {
-        type: "FeatureCollection",
-        features: []
-      };
+    try {
+      const { data: currentFile } = await octokit.rest.repos.getContent({
+        owner: REPO_OWNER,
+        repo: REPO_NAME,
+        path: 'data/places.geojson'
+      });
+      currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
+      currentSha = currentFile.sha;
+    } catch (error) {
+      if (error.status === 404) {
+        // File doesn't exist, create new structure
+        currentContent = {
+          type: "FeatureCollection",
+          features: []
+        };
+        currentSha = null;
+      } else {
+        throw error;
+      }
     }
     
-    // Create new location feature
+    // Add new location
     const newFeature = {
       type: "Feature",
       properties: {
@@ -64,19 +83,25 @@ router.post('/', requireAuth, async (req, res) => {
       }
     };
     
-    // Add new location
     currentContent.features.push(newFeature);
     
-    // Save with enhanced commit message
-    const changes = ['Initial location creation with all details'];
-    await githubHelper.saveToGitHub(
-      'data', 
-      'places.geojson', 
-      currentContent, 
-      'create',
-      user,
-      changes
-    );
+    // Enhanced commit message with user attribution
+    const commitMessage = `Create location: ${newFeature.properties.name} (by ${user}) - Initial location creation`;
+    
+    // Commit to GitHub
+    const commitData = {
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/places.geojson',
+      message: commitMessage,
+      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64')
+    };
+    
+    if (currentSha) {
+      commitData.sha = currentSha;
+    }
+    
+    await octokit.rest.repos.createOrUpdateFileContents(commitData);
     
     res.json({ success: true, feature: newFeature });
   } catch (error) {
@@ -89,20 +114,20 @@ router.post('/', requireAuth, async (req, res) => {
 router.put('/:name', requireAuth, async (req, res) => {
   try {
     const originalName = decodeURIComponent(req.params.name);
-    const user = req.session.user?.username || 'Unknown';
+    // Get user from session (fixed to match your session structure)
+    const user = req.session.displayName || req.session.username || 'Unknown';
     console.log('Updating location:', originalName, 'by', user);
     
     // Get current content
-    const currentContent = await githubHelper.loadFromGitHub('data', 'places.geojson');
+    const { data: currentFile } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/places.geojson'
+    });
     
-    if (!currentContent) {
-      return res.status(404).json({ 
-        success: false, 
-        error: 'Locations file not found' 
-      });
-    }
+    const currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
     
-    // Find the location to update
+    // Find and update the location
     const locationIndex = currentContent.features.findIndex(
       feature => feature.properties.name === originalName
     );
@@ -114,10 +139,10 @@ router.put('/:name', requireAuth, async (req, res) => {
       });
     }
     
-    // Get old data for change detection
+    // Get old location for change detection
     const oldLocation = currentContent.features[locationIndex];
     
-    // Create updated feature
+    // Update the location data
     const updatedFeature = {
       type: "Feature",
       properties: {
@@ -132,21 +157,24 @@ router.put('/:name', requireAuth, async (req, res) => {
       }
     };
     
-    // Detect changes for better commit message
+    // Detect what changed
     const changes = detectLocationChanges(oldLocation, updatedFeature);
+    const changeDescription = changes.length > 0 ? changes.join(', ') : 'Updated location details';
     
-    // Update the location
     currentContent.features[locationIndex] = updatedFeature;
     
-    // Save with enhanced commit message
-    await githubHelper.saveToGitHub(
-      'data', 
-      'places.geojson', 
-      currentContent, 
-      'update',
-      user,
-      changes
-    );
+    // Enhanced commit message with user attribution and changes
+    const commitMessage = `Update location: ${originalName} (by ${user}) - ${changeDescription}`;
+    
+    // Commit to GitHub
+    await octokit.rest.repos.createOrUpdateFileContents({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/places.geojson',
+      message: commitMessage,
+      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64'),
+      sha: currentFile.sha
+    });
     
     res.json({ success: true, feature: updatedFeature });
   } catch (error) {
@@ -159,19 +187,18 @@ router.put('/:name', requireAuth, async (req, res) => {
 router.delete('/:name', requireAuth, async (req, res) => {
   try {
     const locationName = decodeURIComponent(req.params.name);
-    const user = req.session.user?.username || 'Unknown';
-    const reason = req.body?.reason || 'Removed from campaign';
+    // Get user from session (fixed to match your session structure)
+    const user = req.session.displayName || req.session.username || 'Unknown';
     console.log('Deleting location:', locationName, 'by', user);
     
     // Get current content
-    const currentContent = await githubHelper.loadFromGitHub('data', 'places.geojson');
+    const { data: currentFile } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/places.geojson'
+    });
     
-    if (!currentContent) {
-      return res.status(404).json({ 
-        success: false, 
-        error: 'Locations file not found' 
-      });
-    }
+    const currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
     
     // Find and remove the location
     const locationIndex = currentContent.features.findIndex(
@@ -188,15 +215,18 @@ router.delete('/:name', requireAuth, async (req, res) => {
     // Remove the location
     currentContent.features.splice(locationIndex, 1);
     
-    // Save with enhanced commit message
-    await githubHelper.saveToGitHub(
-      'data', 
-      'places.geojson', 
-      currentContent, 
-      'delete',
-      user,
-      [reason]
-    );
+    // Enhanced commit message with user attribution
+    const commitMessage = `Delete location: ${locationName} (by ${user}) - Removed from campaign`;
+    
+    // Commit to GitHub
+    await octokit.rest.repos.createOrUpdateFileContents({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/places.geojson',
+      message: commitMessage,
+      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64'),
+      sha: currentFile.sha
+    });
     
     res.json({ success: true, message: `Location "${locationName}" deleted successfully` });
   } catch (error) {
@@ -247,7 +277,7 @@ function detectLocationChanges(oldLocation, newLocation) {
     changes.push('updated coordinates');
   }
   
-  return changes.length > 0 ? changes : ['updated location details'];
+  return changes;
 }
 
 module.exports = { router, initGitHub };

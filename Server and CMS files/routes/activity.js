@@ -1,4 +1,4 @@
-// routes/activity.js - New route file for activity tracking
+// routes/activity.js - Fixed for your environment variables
 const express = require('express');
 const { Octokit } = require('@octokit/rest');
 const router = express.Router();
@@ -7,7 +7,8 @@ const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN
 });
 
-const GITHUB_OWNER = process.env.GITHUB_OWNER;
+// Use the CORRECT environment variables that match your server.js
+const GITHUB_OWNER = process.env.GITHUB_USERNAME; // Fixed: was GITHUB_OWNER
 const GITHUB_REPO = process.env.GITHUB_REPO;
 
 // Get recent activity across all content
@@ -46,15 +47,32 @@ router.get('/:type/:name/history', async (req, res) => {
     const { type, name } = req.params;
     const limit = req.query.limit || 10;
 
-    // Fetch commits that mention this specific item
+    // Map type to actual file path
+    let filePath;
+    if (type === 'locations') {
+      filePath = 'data/places.geojson';
+    } else if (type === 'characters') {
+      filePath = 'data/characters.json';
+    } else {
+      return res.status(400).json({ success: false, error: 'Invalid type' });
+    }
+
+    // Fetch commits that touch this file and mention the specific item
     const { data: commits } = await octokit.rest.repos.listCommits({
       owner: GITHUB_OWNER,
       repo: GITHUB_REPO,
-      path: `${type}/${name}.json`,
+      path: filePath,
       per_page: limit
     });
 
-    const history = commits.map(commit => {
+    // Filter commits that mention this specific item in the message
+    const relevantCommits = commits.filter(commit => {
+      const message = commit.commit.message.toLowerCase();
+      const itemName = name.toLowerCase();
+      return message.includes(itemName);
+    });
+
+    const history = relevantCommits.map(commit => {
       const message = commit.commit.message;
       const author = commit.commit.author.name;
       const date = commit.commit.author.date;
@@ -103,10 +121,10 @@ router.get('/stats', async (req, res) => {
       // Count by user
       stats.userActivity[author] = (stats.userActivity[author] || 0) + 1;
 
-      // Count by type
-      if (message.includes('location:') || message.includes('Location:')) {
+      // Count by type based on commit message content
+      if (message.includes('location') || message.includes('Location') || message.includes('places.geojson')) {
         stats.typeActivity.locations++;
-      } else if (message.includes('character:') || message.includes('Character:')) {
+      } else if (message.includes('character') || message.includes('Character') || message.includes('characters.json')) {
         stats.typeActivity.characters++;
       } else {
         stats.typeActivity.other++;
@@ -127,13 +145,13 @@ router.get('/stats', async (req, res) => {
 function parseCommitMessage(message, author, date, sha) {
   try {
     // Enhanced commit message format:
-    // "Update location: Rivendell (by Nici) - Changed description and added new NPCs"
-    // "Create character: Gandalf (by Luisa) - Initial character creation"
-    // "Delete location: Old Tavern (by GM) - No longer needed"
+    // "Create location: Rivendell (by Nici) - Initial location creation"
+    // "Update character: Gandalf (by Luisa) - Updated character details"
+    // "Delete location: Old Tavern (by GM) - Removed from campaign"
 
     const patterns = {
-      update: /^Update (location|character): (.+) \(by (.+)\) - (.+)$/,
       create: /^Create (location|character): (.+) \(by (.+)\) - (.+)$/,
+      update: /^Update (location|character): (.+) \(by (.+)\) - (.+)$/,
       delete: /^Delete (location|character): (.+) \(by (.+)\) - (.+)$/
     };
 
