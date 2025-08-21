@@ -10,6 +10,11 @@ const session = require('express-session');
 const authRoutes = require('./routes/auth');
 const { router: locationsRouter, initGitHub: initLocationsGitHub } = require('./routes/locations');
 const { router: charactersRouter, initGitHub: initCharactersGitHub } = require('./routes/characters');
+
+// Import middleware
+const { requireAuth } = require('./middleware/auth');
+
+// Import activity routes
 const activityRoutes = require('./routes/activity');
 
 const app = express();
@@ -38,7 +43,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'adenai-campaign-secret-key-change-this',
   resave: false,
   saveUninitialized: false,
-  cookie: { 
+  cookie: {
     secure: false, // Set to true if using HTTPS
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
@@ -57,7 +62,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ 
+const upload = multer({
   storage,
   limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
   fileFilter: (req, file, cb) => {
@@ -73,6 +78,8 @@ const upload = multer({
 app.use('/api', authRoutes);
 app.use('/api/locations', locationsRouter);
 app.use('/api/characters', charactersRouter);
+
+// Activity routes 
 app.use('/api/activity', requireAuth, activityRoutes);
 
 // Test GitHub connection (public)
@@ -82,27 +89,27 @@ app.get('/api/test', async (req, res) => {
       owner: REPO_OWNER,
       repo: REPO_NAME
     });
-    res.json({ 
-      success: true, 
+    res.json({
+      success: true,
       message: 'GitHub connection successful!',
-      repo: data.full_name 
+      repo: data.full_name
     });
   } catch (error) {
     console.error('GitHub test failed:', error.message);
-    res.status(500).json({ 
-      success: false, 
+    res.status(500).json({
+      success: false,
       error: 'GitHub connection failed',
-      details: error.message 
+      details: error.message
     });
   }
 });
 
 // Health check (public)
 app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'healthy', 
+  res.json({
+    status: 'healthy',
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV 
+    environment: process.env.NODE_ENV
   });
 });
 
