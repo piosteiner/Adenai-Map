@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "reviews": [
+    {
+      "commitSha": "970184d6963e9ec05ded5fd673885a9460ffd9a3",
+      "action": "create",
+      "type": "location",
+      "itemName": "test",
+      "user": "Nici",
+      "timestamp": "2025-08-21T20:41:06.553Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Create location: test (by Nici) - Initial location creation"
+    }
+  ],
+  "lastUpdated": "2025-08-21T20:41:06.553Z"
+}
