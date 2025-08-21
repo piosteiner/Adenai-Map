@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../middleware/auth');
+const githubHelper = require('../utils/githubHelper');
 
 // Initialize GitHub API (passed from main server)
 let octokit, REPO_OWNER, REPO_NAME;
@@ -14,59 +15,41 @@ const initGitHub = (octokitInstance, repoOwner, repoName) => {
 // Get all characters (public)
 router.get('/', async (req, res) => {
   try {
-    const { data } = await octokit.rest.repos.getContent({
-      owner: REPO_OWNER,
-      repo: REPO_NAME,
-      path: 'data/characters.json'
-    });
+    const content = await githubHelper.loadFromGitHub('data', 'characters.json');
     
-    const content = JSON.parse(Buffer.from(data.content, 'base64').toString());
-    res.json(content);
-  } catch (error) {
-    if (error.status === 404) {
+    if (!content) {
       // File doesn't exist yet, return empty structure
       res.json({
         version: "1.0",
         characters: []
       });
     } else {
-      console.error('Error fetching characters:', error.message);
-      res.status(500).json({ error: error.message });
+      res.json(content);
     }
+  } catch (error) {
+    console.error('Error fetching characters:', error.message);
+    res.status(500).json({ error: error.message });
   }
 });
 
 // Add new character (protected)
 router.post('/', requireAuth, async (req, res) => {
   try {
-    console.log('Adding new character:', req.body.name);
+    const user = req.session.user?.username || 'Unknown';
+    console.log('Adding new character:', req.body.name, 'by', user);
     
     // Get current content
-    let currentContent;
-    let currentSha;
+    let currentContent = await githubHelper.loadFromGitHub('data', 'characters.json');
     
-    try {
-      const { data: currentFile } = await octokit.rest.repos.getContent({
-        owner: REPO_OWNER,
-        repo: REPO_NAME,
-        path: 'data/characters.json'
-      });
-      currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
-      currentSha = currentFile.sha;
-    } catch (error) {
-      if (error.status === 404) {
-        // File doesn't exist, create new structure
-        currentContent = {
-          version: "1.0",
-          characters: []
-        };
-        currentSha = null;
-      } else {
-        throw error;
-      }
+    if (!currentContent) {
+      // File doesn't exist, create new structure
+      currentContent = {
+        version: "1.0",
+        characters: []
+      };
     }
     
-    // Add new character
+    // Create new character
     const newCharacter = {
       id: req.body.name.toLowerCase().replace(/[^a-z0-9]/g, '_'),
       name: req.body.name,
@@ -83,23 +66,20 @@ router.post('/', requireAuth, async (req, res) => {
       updatedAt: new Date().toISOString()
     };
     
+    // Add new character
     currentContent.characters.push(newCharacter);
     currentContent.lastUpdated = new Date().toISOString();
     
-    // Commit to GitHub
-    const commitData = {
-      owner: REPO_OWNER,
-      repo: REPO_NAME,
-      path: 'data/characters.json',
-      message: `Add character: ${newCharacter.name}`,
-      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64')
-    };
-    
-    if (currentSha) {
-      commitData.sha = currentSha;
-    }
-    
-    await octokit.rest.repos.createOrUpdateFileContents(commitData);
+    // Save with enhanced commit message
+    const changes = ['Initial character creation with all details'];
+    await githubHelper.saveToGitHub(
+      'data', 
+      'characters.json', 
+      currentContent, 
+      'create',
+      user,
+      changes
+    );
     
     res.json({ success: true, character: newCharacter });
   } catch (error) {
@@ -112,18 +92,20 @@ router.post('/', requireAuth, async (req, res) => {
 router.put('/:id', requireAuth, async (req, res) => {
   try {
     const originalId = decodeURIComponent(req.params.id);
-    console.log('Updating character:', originalId);
+    const user = req.session.user?.username || 'Unknown';
+    console.log('Updating character:', originalId, 'by', user);
     
     // Get current content
-    const { data: currentFile } = await octokit.rest.repos.getContent({
-      owner: REPO_OWNER,
-      repo: REPO_NAME,
-      path: 'data/characters.json'
-    });
+    const currentContent = await githubHelper.loadFromGitHub('data', 'characters.json');
     
-    const currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
+    if (!currentContent) {
+      return res.status(404).json({ 
+        success: false, 
+        error: 'Characters file not found' 
+      });
+    }
     
-    // Find and update the character
+    // Find the character to update
     const characterIndex = currentContent.characters.findIndex(
       character => character.id === originalId
     );
@@ -135,7 +117,10 @@ router.put('/:id', requireAuth, async (req, res) => {
       });
     }
     
-    // Update the character data
+    // Get old data for change detection
+    const oldCharacter = currentContent.characters[characterIndex];
+    
+    // Create updated character
     const updatedCharacter = {
       id: req.body.name.toLowerCase().replace(/[^a-z0-9]/g, '_'),
       name: req.body.name,
@@ -148,22 +133,26 @@ router.put('/:id', requireAuth, async (req, res) => {
       relationship: req.body.relationship || 'neutral',
       firstMet: req.body.firstMet || '',
       notes: req.body.notes || '',
-      createdAt: currentContent.characters[characterIndex].createdAt, // Keep original creation date
+      createdAt: oldCharacter.createdAt, // Keep original creation date
       updatedAt: new Date().toISOString()
     };
     
+    // Detect changes for better commit message
+    const changes = detectCharacterChanges(oldCharacter, updatedCharacter);
+    
+    // Update the character
     currentContent.characters[characterIndex] = updatedCharacter;
     currentContent.lastUpdated = new Date().toISOString();
     
-    // Commit to GitHub
-    await octokit.rest.repos.createOrUpdateFileContents({
-      owner: REPO_OWNER,
-      repo: REPO_NAME,
-      path: 'data/characters.json',
-      message: `Update character: ${originalId} → ${updatedCharacter.name}`,
-      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64'),
-      sha: currentFile.sha
-    });
+    // Save with enhanced commit message
+    await githubHelper.saveToGitHub(
+      'data', 
+      'characters.json', 
+      currentContent, 
+      'update',
+      user,
+      changes
+    );
     
     res.json({ success: true, character: updatedCharacter });
   } catch (error) {
@@ -176,16 +165,19 @@ router.put('/:id', requireAuth, async (req, res) => {
 router.delete('/:id', requireAuth, async (req, res) => {
   try {
     const characterId = decodeURIComponent(req.params.id);
-    console.log('Deleting character:', characterId);
+    const user = req.session.user?.username || 'Unknown';
+    const reason = req.body?.reason || 'Removed from campaign';
+    console.log('Deleting character:', characterId, 'by', user);
     
     // Get current content
-    const { data: currentFile } = await octokit.rest.repos.getContent({
-      owner: REPO_OWNER,
-      repo: REPO_NAME,
-      path: 'data/characters.json'
-    });
+    const currentContent = await githubHelper.loadFromGitHub('data', 'characters.json');
     
-    const currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
+    if (!currentContent) {
+      return res.status(404).json({ 
+        success: false, 
+        error: 'Characters file not found' 
+      });
+    }
     
     // Find and remove the character
     const characterIndex = currentContent.characters.findIndex(
@@ -205,15 +197,15 @@ router.delete('/:id', requireAuth, async (req, res) => {
     currentContent.characters.splice(characterIndex, 1);
     currentContent.lastUpdated = new Date().toISOString();
     
-    // Commit to GitHub
-    await octokit.rest.repos.createOrUpdateFileContents({
-      owner: REPO_OWNER,
-      repo: REPO_NAME,
-      path: 'data/characters.json',
-      message: `Delete character: ${deletedCharacterName}`,
-      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64'),
-      sha: currentFile.sha
-    });
+    // Save with enhanced commit message
+    await githubHelper.saveToGitHub(
+      'data', 
+      'characters.json', 
+      currentContent, 
+      'delete',
+      user,
+      [reason]
+    );
     
     res.json({ success: true, message: `Character "${deletedCharacterName}" deleted successfully` });
   } catch (error) {
@@ -221,5 +213,104 @@ router.delete('/:id', requireAuth, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// Helper function to detect character changes
+function detectCharacterChanges(oldCharacter, newCharacter) {
+  const changes = [];
+  
+  // Check name change
+  if (oldCharacter.name !== newCharacter.name) {
+    changes.push('updated name');
+  }
+  
+  // Check title change
+  if (oldCharacter.title !== newCharacter.title) {
+    if (!oldCharacter.title && newCharacter.title) {
+      changes.push('added title');
+    } else if (oldCharacter.title && !newCharacter.title) {
+      changes.push('removed title');
+    } else {
+      changes.push('updated title');
+    }
+  }
+  
+  // Check location change
+  if (oldCharacter.location !== newCharacter.location) {
+    if (!oldCharacter.location && newCharacter.location) {
+      changes.push('added location');
+    } else if (oldCharacter.location && !newCharacter.location) {
+      changes.push('removed location');
+    } else {
+      changes.push('updated location');
+    }
+  }
+  
+  // Check description change
+  if (oldCharacter.description !== newCharacter.description) {
+    if (!oldCharacter.description && newCharacter.description) {
+      changes.push('added description');
+    } else if (oldCharacter.description && !newCharacter.description) {
+      changes.push('removed description');
+    } else {
+      changes.push('updated description');
+    }
+  }
+  
+  // Check status change
+  if (oldCharacter.status !== newCharacter.status) {
+    changes.push(`changed status to ${newCharacter.status}`);
+  }
+  
+  // Check faction change
+  if (oldCharacter.faction !== newCharacter.faction) {
+    if (!oldCharacter.faction && newCharacter.faction) {
+      changes.push('added faction');
+    } else if (oldCharacter.faction && !newCharacter.faction) {
+      changes.push('removed faction');
+    } else {
+      changes.push('updated faction');
+    }
+  }
+  
+  // Check relationship change
+  if (oldCharacter.relationship !== newCharacter.relationship) {
+    changes.push(`changed relationship to ${newCharacter.relationship}`);
+  }
+  
+  // Check first met change
+  if (oldCharacter.firstMet !== newCharacter.firstMet) {
+    if (!oldCharacter.firstMet && newCharacter.firstMet) {
+      changes.push('added first met date');
+    } else if (oldCharacter.firstMet && !newCharacter.firstMet) {
+      changes.push('removed first met date');
+    } else {
+      changes.push('updated first met date');
+    }
+  }
+  
+  // Check notes change
+  if (oldCharacter.notes !== newCharacter.notes) {
+    if (!oldCharacter.notes && newCharacter.notes) {
+      changes.push('added notes');
+    } else if (oldCharacter.notes && !newCharacter.notes) {
+      changes.push('removed notes');
+    } else {
+      changes.push('updated notes');
+    }
+  }
+  
+  // Check image change
+  if (oldCharacter.image !== newCharacter.image) {
+    if (!oldCharacter.image && newCharacter.image) {
+      changes.push('added image');
+    } else if (oldCharacter.image && !newCharacter.image) {
+      changes.push('removed image');
+    } else {
+      changes.push('updated image');
+    }
+  }
+  
+  return changes.length > 0 ? changes : ['updated character details'];
+}
 
 module.exports = { router, initGitHub };

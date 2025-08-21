@@ -78,7 +78,7 @@ class AdminLocations {
 
     async loadLocations() {
         try {
-            console.log('📡 Loading locations from GitHub...');
+            console.log('🗺️ Loading locations from GitHub...');
             this.ui.showLoading('locations-list', 'Loading locations...');
             
             const response = await fetch('/api/locations');
@@ -128,9 +128,21 @@ class AdminLocations {
             return;
         }
 
-        container.innerHTML = filteredLocations.map(location => {
-            return this.renderLocationCard(location);
-        }).join('');
+        container.innerHTML = '';
+        
+        filteredLocations.forEach(location => {
+            const cardElement = document.createElement('div');
+            cardElement.innerHTML = this.renderLocationCard(location);
+            
+            // Add history button to the card if ActivityModule is available
+            if (window.ActivityModule && typeof window.ActivityModule.addHistoryButton === 'function') {
+                setTimeout(() => {
+                    window.ActivityModule.addHistoryButton(cardElement, 'locations', location.properties.name);
+                }, 0);
+            }
+            
+            container.appendChild(cardElement);
+        });
     }
 
     renderLocationCard(location) {
@@ -152,7 +164,7 @@ class AdminLocations {
                     <span class="location-type">${this.formatType(props.type || 'unknown')}</span>
                 </div>
                 <div class="location-details">
-                    <p><strong>📍 Region:</strong> ${this.formatRegion(props.region || 'Unknown')}</p>
+                    <p><strong>🌍 Region:</strong> ${this.formatRegion(props.region || 'Unknown')}</p>
                     <p><strong>📍 Coordinates:</strong> ${coords[0]}, ${coords[1]}</p>
                     <p><strong>👥 Visited:</strong> ${props.visited ? '✅ Yes' : '❌ No'}</p>
                     ${props.description ? `<p><strong>📝 Description:</strong> ${props.description}</p>` : ''}

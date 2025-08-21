@@ -148,9 +148,21 @@ class AdminCharacters {
             return;
         }
 
-        container.innerHTML = filteredCharacters.map(character => {
-            return this.renderCharacterCard(character);
-        }).join('');
+        container.innerHTML = '';
+        
+        filteredCharacters.forEach(character => {
+            const cardElement = document.createElement('div');
+            cardElement.innerHTML = this.renderCharacterCard(character);
+            
+            // Add history button to the card if ActivityModule is available
+            if (window.ActivityModule && typeof window.ActivityModule.addHistoryButton === 'function') {
+                setTimeout(() => {
+                    window.ActivityModule.addHistoryButton(cardElement, 'characters', character.name);
+                }, 0);
+            }
+            
+            container.appendChild(cardElement);
+        });
     }
 
     renderCharacterCard(character) {
