@@ -1,0 +1,383 @@
+/* Responsive Design */
+
+/* Mobile-First Approach */
+
+/* Small screens (tablets) */
+@media (max-width: 768px) {
+    /* Header adjustments */
+    .admin-header {
+        padding: var(--spacing-md);
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+    
+    .admin-header h1 {
+        font-size: var(--font-size-xl);
+    }
+    
+    .header-right {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+    }
+    
+    .connection-status {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Navigation adjustments */
+    .admin-nav {
+        padding: 0 var(--spacing-md);
+        overflow-x: auto;
+        gap: var(--spacing-sm);
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .admin-nav::-webkit-scrollbar {
+        height: 3px;
+    }
+    
+    .admin-nav::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+    }
+    
+    .admin-nav::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+        border-radius: var(--radius-sm);
+    }
+    
+    .tab-btn {
+        white-space: nowrap;
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: var(--font-size-sm);
+    }
+    
+    /* Main content adjustments */
+    .admin-main {
+        padding: var(--spacing-md);
+    }
+    
+    /* Content header adjustments */
+    .content-header {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        align-items: stretch;
+    }
+    
+    .content-header h2 {
+        text-align: center;
+        font-size: var(--font-size-lg);
+    }
+    
+    /* Actions adjustments */
+    .actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .actions .btn-primary,
+    .actions .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .search-input {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    /* Card adjustments */
+    .location-card,
+    .character-card {
+        padding: var(--spacing-md);
+    }
+    
+    .location-header,
+    .character-header {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        align-items: stretch;
+    }
+    
+    .character-status {
+        align-items: stretch;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--spacing-xs);
+    }
+    
+    .status-badge,
+    .relationship-badge {
+        flex: 1;
+        min-width: max-content;
+    }
+    
+    /* Form adjustments */
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .form-actions {
+        flex-direction: column-reverse;
+        gap: var(--spacing-sm);
+    }
+    
+    .form-actions .btn-primary,
+    .form-actions .btn-secondary,
+    .form-actions .btn-danger {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Stats grid adjustments */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    /* Toast adjustments */
+    #toast-container {
+        left: var(--spacing-md);
+        right: var(--spacing-md);
+        top: var(--spacing-md);
+    }
+    
+    .toast {
+        max-width: none;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    /* Backup actions */
+    .backup-actions {
+        max-width: none;
+    }
+}
+
+/* Extra small screens (phones in portrait) */
+@media (max-width: 480px) {
+    /* Typography adjustments */
+    .admin-header h1 {
+        font-size: var(--font-size-lg);
+    }
+    
+    .content-header h2 {
+        font-size: var(--font-size-base);
+    }
+    
+    /* Spacing adjustments */
+    .admin-main {
+        padding: var(--spacing-sm);
+    }
+    
+    .location-card,
+    .character-card {
+        padding: var(--spacing-sm);
+    }
+    
+    .stat-card {
+        padding: var(--spacing-md);
+    }
+    
+    .stat-number {
+        font-size: var(--spacing-xl);
+    }
+    
+    /* Action buttons */
+    .location-actions,
+    .character-actions {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    
+    .location-actions .btn-secondary,
+    .location-actions .btn-danger,
+    .character-actions .btn-secondary,
+    .character-actions .btn-danger {
+        width: 100%;
+        justify-content: center;
+        font-size: var(--font-size-sm);
+    }
+    
+    /* Theme toggle */
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+        font-size: var(--font-size-base);
+    }
+}
+
+/* Large screens (desktops) */
+@media (min-width: 1200px) {
+    .admin-container {
+        max-width: 1400px;
+    }
+    
+    .admin-header {
+        padding: var(--spacing-lg) var(--spacing-xxl);
+    }
+    
+    .admin-nav {
+        padding: 0 var(--spacing-xxl);
+    }
+    
+    .admin-main {
+        padding: var(--spacing-xxl);
+    }
+    
+    /* Enhanced stats grid for larger screens */
+    .stats-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    /* Better use of space for forms */
+    .modal-content {
+        max-width: 700px;
+    }
+    
+    .modal-lg .modal-content {
+        max-width: 900px;
+    }
+}
+
+/* Extra large screens */
+@media (min-width: 1600px) {
+    .admin-container {
+        max-width: 1600px;
+    }
+    
+    /* Three column layout for cards on very large screens */
+    .content-list {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+}
+
+/* Print styles */
+@media print {
+    .admin-header,
+    .admin-nav,
+    .actions,
+    .location-actions,
+    .character-actions,
+    .form-actions,
+    .theme-toggle,
+    #toast-container,
+    .modal {
+        display: none !important;
+    }
+    
+    .admin-container {
+        box-shadow: none;
+        max-width: none;
+    }
+    
+    .admin-main {
+        padding: 0;
+    }
+    
+    .location-card,
+    .character-card,
+    .stat-card {
+        box-shadow: none;
+        border: 1px solid #000;
+        break-inside: avoid;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    /* Force light theme for printing */
+    :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8f9fa;
+        --text-primary: #000000;
+        --text-secondary: #666666;
+        --border-color: #cccccc;
+        --card-bg: #ffffff;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000000;
+        --text-secondary: #000000;
+    }
+    
+    [data-theme="dark"] {
+        --border-color: #ffffff;
+        --text-secondary: #ffffff;
+    }
+    
+    .btn-primary,
+    .btn-secondary,
+    .btn-danger {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .location-card:hover,
+    .character-card:hover,
+    .stat-card:hover {
+        transform: none;
+    }
+    
+    .btn-primary:hover {
+        transform: none;
+    }
+    
+    .theme-toggle:hover,
+    .close-btn:hover,
+    .close-character-btn:hover,
+    .close-login-btn:hover {
+        transform: none;
+    }
+}
+
+/* Focus-visible support for better keyboard navigation */
+@supports selector(:focus-visible) {
+    .tab-btn:focus {
+        outline: none;
+    }
+    
+    .tab-btn:focus-visible {
+        outline: 2px solid #667eea;
+        outline-offset: 2px;
+    }
+    
+    .btn-primary:focus,
+    .btn-secondary:focus,
+    .btn-danger:focus {
+        outline: none;
+    }
+    
+    .btn-primary:focus-visible,
+    .btn-secondary:focus-visible,
+    .btn-danger:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+    }
+    
+    .theme-toggle:focus {
+        outline: none;
+    }
+    
+    .theme-toggle:focus-visible {
+        outline: 2px solid var(--text-on-gradient);
+        outline-offset: 2px;
+    }
+}

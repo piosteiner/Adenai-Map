@@ -4,17 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🗺️ Adenai Campaign Admin</title>
-    <link rel="stylesheet" href="admin.css">
+    
+    <!-- Modular CSS - Load in correct order -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/activity.css">
 </head>
 <body>
     <div class="admin-container">
         <header class="admin-header">
             <h1>🗺️ Adenai Campaign Admin</h1>
-            <div class="connection-status" id="connection-status">
-                <span id="status-indicator">🔄</span>
-                <span id="status-text">Connecting...</span>
-            </div>
-            <div id="auth-container" class="auth-container">
+            <div class="header-right">
+                <div class="connection-status" id="connection-status">
+                    <span id="status-indicator">🔄</span>
+                    <span id="status-text">Connecting...</span>
+                </div>
+                <!-- Theme toggle will be inserted here by theme-toggle.js -->
+                <div id="auth-container" class="auth-container">
+                </div>
             </div>
         </header>
 
@@ -127,12 +139,12 @@
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>📐 X Coordinate *</label>
+                        <label>📍 X Coordinate *</label>
                         <input type="number" name="x" required placeholder="1000">
                         <small>Left-right position on map</small>
                     </div>
                     <div class="form-group">
-                        <label>📐 Y Coordinate *</label>
+                        <label>📍 Y Coordinate *</label>
                         <input type="number" name="y" required placeholder="1000">
                         <small>Up-down position on map</small>
                     </div>
@@ -262,7 +274,7 @@
     <div id="login-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>🔑 Admin Login</h3>
+                <h3>🔒 Admin Login</h3>
                 <span class="close-login-btn">&times;</span>
             </div>
             
@@ -278,7 +290,7 @@
                 </div>
                 
                 <div class="form-actions">
-                    <button type="submit" class="btn-primary">🔑 Login</button>
+                    <button type="submit" class="btn-primary">🔓 Login</button>
                     <button type="button" class="btn-secondary" onclick="admin.closeLoginModal()">Cancel</button>
                 </div>
             </form>
@@ -288,6 +300,13 @@
     <!-- Toast notifications -->
     <div id="toast-container"></div>
 
-    <script src="admin.js"></script>
+    <!-- Modular JavaScript - Load in dependency order -->
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/admin-ui.js"></script>
+    <script src="js/admin-auth.js"></script>
+    <script src="js/admin-locations.js"></script>
+    <script src="js/admin-characters.js"></script>
+    <script src="js/admin-core.js"></script>
+    <script src="js/admin-activity.js"></script>
 </body>
 </html>

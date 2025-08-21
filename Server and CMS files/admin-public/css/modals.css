@@ -1,0 +1,312 @@
+/* Modal Styles */
+
+/* Modal Overlay */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--modal-overlay);
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    animation: modalFadeIn 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+}
+
+/* Modal Content */
+.modal-content {
+    background: var(--modal-bg);
+    margin: 5% auto;
+    max-width: 600px;
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease;
+    position: relative;
+}
+
+/* Modal Header */
+.modal-header {
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.modal-header h3 {
+    color: var(--text-primary);
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Close Buttons */
+.close-btn,
+.close-character-btn,
+.close-login-btn {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color var(--transition-fast), transform var(--transition-fast);
+    background: none;
+    border: none;
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover,
+.close-character-btn:hover,
+.close-login-btn:hover {
+    color: var(--text-primary);
+    background: var(--tab-hover-bg);
+    transform: scale(1.1);
+}
+
+.close-btn:active,
+.close-character-btn:active,
+.close-login-btn:active {
+    transform: scale(0.95);
+}
+
+/* Modal Body/Content */
+.modal-body {
+    padding: var(--spacing-xl);
+}
+
+/* Modal Footer */
+.modal-footer {
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+}
+
+/* Modal Animations */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes modalFadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes modalSlideOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+}
+
+/* Modal Closing Animation */
+.modal.closing {
+    animation: modalFadeOut 0.3s ease;
+}
+
+.modal.closing .modal-content {
+    animation: modalSlideOut 0.3s ease;
+}
+
+/* Modal Sizes */
+.modal-sm .modal-content {
+    max-width: 400px;
+}
+
+.modal-lg .modal-content {
+    max-width: 800px;
+}
+
+.modal-xl .modal-content {
+    max-width: 1200px;
+}
+
+.modal-fullscreen .modal-content {
+    max-width: 95vw;
+    max-height: 95vh;
+    margin: 2.5vh auto;
+}
+
+/* Modal Backdrop Click Prevention */
+.modal-content {
+    pointer-events: auto;
+}
+
+.modal {
+    pointer-events: auto;
+}
+
+/* Prevent Body Scroll When Modal is Open */
+body.modal-open {
+    overflow: hidden;
+    padding-right: 17px; /* Compensate for scrollbar */
+}
+
+/* Loading State for Modals */
+.modal-loading {
+    position: relative;
+}
+
+.modal-loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--modal-overlay);
+    border-radius: var(--radius-lg);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-loading::before {
+    content: "⏳ Loading...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium);
+    background: var(--card-bg);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--card-shadow);
+}
+
+/* Confirmation Modal Styles */
+.modal-confirm .modal-content {
+    max-width: 400px;
+}
+
+.modal-confirm .modal-header {
+    background: #fff3cd;
+    color: #856404;
+    border-bottom-color: #ffeaa7;
+}
+
+[data-theme="dark"] .modal-confirm .modal-header {
+    background: #5d4e2a;
+    color: #ffb74d;
+    border-bottom-color: #6d5a32;
+}
+
+.modal-confirm .modal-body {
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+.modal-confirm .modal-footer {
+    justify-content: center;
+    gap: var(--spacing-lg);
+}
+
+/* Error Modal Styles */
+.modal-error .modal-header {
+    background: #f8d7da;
+    color: #721c24;
+    border-bottom-color: #f1aeb5;
+}
+
+[data-theme="dark"] .modal-error .modal-header {
+    background: #5d2a2a;
+    color: #ef5350;
+    border-bottom-color: #6d3232;
+}
+
+/* Success Modal Styles */
+.modal-success .modal-header {
+    background: #d4edda;
+    color: #155724;
+    border-bottom-color: #a3d9a5;
+}
+
+[data-theme="dark"] .modal-success .modal-header {
+    background: #2d5a3d;
+    color: #81c784;
+    border-bottom-color: #3d6a4d;
+}
+
+/* Modal Responsive Behavior */
+@media (max-width: 640px) {
+    .modal-content {
+        margin: 2vh auto;
+        max-height: 96vh;
+        max-width: 95vw;
+        border-radius: var(--radius-md);
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding-left: var(--spacing-md);
+        padding-right: var(--spacing-md);
+    }
+    
+    .modal-header {
+        padding-top: var(--spacing-md);
+        padding-bottom: var(--spacing-md);
+    }
+    
+    .modal-footer {
+        flex-direction: column-reverse;
+    }
+    
+    .modal-footer .btn-primary,
+    .modal-footer .btn-secondary,
+    .modal-footer .btn-danger {
+        width: 100%;
+        justify-content: center;
+    }
+}
