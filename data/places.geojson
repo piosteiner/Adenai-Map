@@ -122,7 +122,9 @@
       "type": "Feature",
       "properties": {
         "name": "Motu Motu",
-        "description": "Die schwimmende Stadt."
+        "description": "Die schwimmende Stadt.",
+        "contentUrl": null,
+        "visited": true
       },
       "geometry": {
         "type": "Point",
@@ -791,6 +793,24 @@
         "coordinates": [
           123,
           123
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "test",
+        "description": "",
+        "contentUrl": null,
+        "region": "eastern_adenai",
+        "type": "city",
+        "visited": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1234,
+          2134
         ]
       }
     }

@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "reviews": [
+    {
+      "commitSha": "2832b7770fb5f9878125405902f45105cadc9afc",
+      "action": "update",
+      "type": "location",
+      "itemName": "Motu Motu",
+      "user": "Pio`s Test User",
+      "timestamp": "2025-08-21T22:59:07.230Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Motu Motu (by Pio`s Test User) - marked as visited"
+    },
+    {
+      "commitSha": "b5431bea0c9f1ccac3ed132eef2d8e570dc8e7fb",
+      "action": "create",
+      "type": "character",
+      "itemName": "tetw",
+      "user": "Test User",
+      "timestamp": "2025-08-21T21:03:23.772Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-21T21:09:24.839Z",
+      "reviewNotes": "",
+      "commitMessage": "Create character: tetw (by Test User) - Initial character creation"
+    },
+    {
+      "commitSha": "970184d6963e9ec05ded5fd673885a9460ffd9a3",
+      "action": "create",
+      "type": "location",
+      "itemName": "test",
+      "user": "Nici",
+      "timestamp": "2025-08-21T20:41:06.553Z",
+      "status": "rejected",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-21T21:09:32.054Z",
+      "reviewNotes": "test",
+      "commitMessage": "Create location: test (by Nici) - Initial location creation"
+    }
+  ],
+  "lastUpdated": "2025-08-21T22:59:07.230Z"
+}
