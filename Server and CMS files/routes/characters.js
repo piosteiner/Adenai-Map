@@ -39,8 +39,9 @@ router.get('/', async (req, res) => {
 // Add new character (protected)
 router.post('/', requireAuth, async (req, res) => {
   try {
-    // Get user from session (fixed to match your session structure)
+    // Get user from session
     const user = req.session.displayName || req.session.username || 'Unknown';
+    const userRole = req.session.role || 'user';
     console.log('Adding new character:', req.body.name, 'by', user);
     
     // Get current content
@@ -104,9 +105,17 @@ router.post('/', requireAuth, async (req, res) => {
       commitData.sha = currentSha;
     }
     
-    await octokit.rest.repos.createOrUpdateFileContents(commitData);
+    const commitResponse = await octokit.rest.repos.createOrUpdateFileContents(commitData);
     
-    res.json({ success: true, character: newCharacter });
+    // Submit for review using the commit SHA
+    const commitSha = commitResponse.data.commit.sha;
+    await submitChangeForReview(commitSha, 'create', 'character', newCharacter.name, commitMessage, user, userRole);
+    
+    res.json({ 
+      success: true, 
+      character: newCharacter,
+      commitSha: commitSha
+    });
   } catch (error) {
     console.error('Error saving character:', error.message);
     res.status(500).json({ error: error.message });
@@ -117,8 +126,9 @@ router.post('/', requireAuth, async (req, res) => {
 router.put('/:id', requireAuth, async (req, res) => {
   try {
     const originalId = decodeURIComponent(req.params.id);
-    // Get user from session (fixed to match your session structure)
+    // Get user from session
     const user = req.session.displayName || req.session.username || 'Unknown';
+    const userRole = req.session.role || 'user';
     console.log('Updating character:', originalId, 'by', user);
     
     // Get current content
@@ -173,7 +183,7 @@ router.put('/:id', requireAuth, async (req, res) => {
     const commitMessage = `Update character: ${originalId} (by ${user}) - ${changeDescription}`;
     
     // Commit to GitHub
-    await octokit.rest.repos.createOrUpdateFileContents({
+    const commitResponse = await octokit.rest.repos.createOrUpdateFileContents({
       owner: REPO_OWNER,
       repo: REPO_NAME,
       path: 'data/characters.json',
@@ -182,7 +192,15 @@ router.put('/:id', requireAuth, async (req, res) => {
       sha: currentFile.sha
     });
     
-    res.json({ success: true, character: updatedCharacter });
+    // Submit for review using the commit SHA
+    const commitSha = commitResponse.data.commit.sha;
+    await submitChangeForReview(commitSha, 'update', 'character', updatedCharacter.name, commitMessage, user, userRole);
+    
+    res.json({ 
+      success: true, 
+      character: updatedCharacter,
+      commitSha: commitSha
+    });
   } catch (error) {
     console.error('Error updating character:', error.message);
     res.status(500).json({ error: error.message });
@@ -193,8 +211,9 @@ router.put('/:id', requireAuth, async (req, res) => {
 router.delete('/:id', requireAuth, async (req, res) => {
   try {
     const characterId = decodeURIComponent(req.params.id);
-    // Get user from session (fixed to match your session structure)
+    // Get user from session
     const user = req.session.displayName || req.session.username || 'Unknown';
+    const userRole = req.session.role || 'user';
     console.log('Deleting character:', characterId, 'by', user);
     
     // Get current content
@@ -228,7 +247,7 @@ router.delete('/:id', requireAuth, async (req, res) => {
     const commitMessage = `Delete character: ${deletedCharacterName} (by ${user}) - Removed from campaign`;
     
     // Commit to GitHub
-    await octokit.rest.repos.createOrUpdateFileContents({
+    const commitResponse = await octokit.rest.repos.createOrUpdateFileContents({
       owner: REPO_OWNER,
       repo: REPO_NAME,
       path: 'data/characters.json',
@@ -237,12 +256,106 @@ router.delete('/:id', requireAuth, async (req, res) => {
       sha: currentFile.sha
     });
     
-    res.json({ success: true, message: `Character "${deletedCharacterName}" deleted successfully` });
+    // Submit for review using the commit SHA
+    const commitSha = commitResponse.data.commit.sha;
+    await submitChangeForReview(commitSha, 'delete', 'character', deletedCharacterName, commitMessage, user, userRole);
+    
+    res.json({ 
+      success: true, 
+      message: `Character "${deletedCharacterName}" deleted successfully`,
+      commitSha: commitSha
+    });
   } catch (error) {
     console.error('Error deleting character:', error.message);
     res.status(500).json({ error: error.message });
   }
 });
+
+// Helper function to submit change for review
+async function submitChangeForReview(commitSha, action, type, itemName, commitMessage, user, userRole) {
+  try {
+    // Auto-approve for GM/Admin users
+    const autoApprove = userRole === 'gm' || userRole === 'admin';
+    
+    // Load reviews data
+    let reviewsData;
+    try {
+      const { data } = await octokit.rest.repos.getContent({
+        owner: REPO_OWNER,
+        repo: REPO_NAME,
+        path: 'data/reviews.json'
+      });
+      const content = Buffer.from(data.content, 'base64').toString('utf8');
+      reviewsData = JSON.parse(content);
+    } catch (error) {
+      if (error.status === 404) {
+        // File doesn't exist, create new structure
+        reviewsData = {
+          version: "1.0",
+          reviews: [],
+          lastUpdated: new Date().toISOString()
+        };
+      } else {
+        throw error;
+      }
+    }
+
+    // Check if review already exists
+    const existingReview = reviewsData.reviews.find(r => r.commitSha === commitSha);
+    if (existingReview) {
+      return; // Review already exists
+    }
+
+    // Create new review entry
+    const newReview = {
+      commitSha,
+      action,
+      type,
+      itemName,
+      user,
+      timestamp: new Date().toISOString(),
+      status: autoApprove ? 'approved' : 'pending',
+      reviewedBy: autoApprove ? user : null,
+      reviewedAt: autoApprove ? new Date().toISOString() : null,
+      reviewNotes: autoApprove ? 'Auto-approved (GM/Admin)' : '',
+      commitMessage
+    };
+
+    reviewsData.reviews.unshift(newReview); // Add to beginning for chronological order
+    reviewsData.lastUpdated = new Date().toISOString();
+
+    // Save updated reviews
+    let currentSha = null;
+    try {
+      const { data: currentFile } = await octokit.rest.repos.getContent({
+        owner: REPO_OWNER,
+        repo: REPO_NAME,
+        path: 'data/reviews.json'
+      });
+      currentSha = currentFile.sha;
+    } catch (error) {
+      if (error.status !== 404) throw error;
+    }
+
+    const content = JSON.stringify(reviewsData, null, 2);
+    const commitData = {
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/reviews.json',
+      message: 'Update review status',
+      content: Buffer.from(content).toString('base64')
+    };
+
+    if (currentSha) {
+      commitData.sha = currentSha;
+    }
+
+    await octokit.rest.repos.createOrUpdateFileContents(commitData);
+  } catch (error) {
+    console.error('Error submitting change for review:', error);
+    // Don't fail the main operation if review submission fails
+  }
+}
 
 // Helper function to detect character changes
 function detectCharacterChanges(oldCharacter, newCharacter) {

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/activity.css">
+    <link rel="stylesheet" href="css/changelog.css">
 </head>
 <body>
     <div class="admin-container">
@@ -35,6 +36,7 @@
             <button class="tab-btn" data-tab="characters">👥 Characters</button>
             <button class="tab-btn" data-tab="overview">📊 Overview</button>
             <button class="tab-btn" data-tab="backup">💾 Backup</button>
+            <button class="tab-btn" data-tab="changelog">📜 Changelog</button>
         </nav>
 
         <main class="admin-main">
@@ -105,6 +107,13 @@
                 <div class="backup-actions">
                     <button id="export-btn" class="btn-secondary">📤 Export Data</button>
                     <button id="view-raw-btn" class="btn-secondary">👁️ View Raw JSON</button>
+                </div>
+            </div>
+            
+            <!-- Changelog Tab -->
+            <div id="changelog-tab" class="tab-content">
+                <div id="main-content">
+                    <div class="loading">Loading changelog... 🔄</div>
                 </div>
             </div>
         </main>
@@ -308,5 +317,6 @@
     <script src="js/admin-characters.js"></script>
     <script src="js/admin-core.js"></script>
     <script src="js/admin-activity.js"></script>
+    <script src="js/admin-changelog.js"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@ const session = require('express-session');
 const authRoutes = require('./routes/auth');
 const { router: locationsRouter, initGitHub: initLocationsGitHub } = require('./routes/locations');
 const { router: charactersRouter, initGitHub: initCharactersGitHub } = require('./routes/characters');
+const changelogRoutes = require('./routes/changelog');
 
 // Import middleware
 const { requireAuth } = require('./middleware/auth');
@@ -78,6 +79,7 @@ const upload = multer({
 app.use('/api', authRoutes);
 app.use('/api/locations', locationsRouter);
 app.use('/api/characters', charactersRouter);
+app.use('/api/changelog', changelogRoutes);
 
 // Activity routes (uncomment when you have the activity routes file)
 // app.use('/api/activity', requireAuth, activityRoutes);

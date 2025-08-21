@@ -51,26 +51,50 @@
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
+
+  /* Light mode scrollbar and focus states */
+  --scrollbar-track: #f1f3f4;
+  --scrollbar-thumb: #c1c8cd;
+  --scrollbar-thumb-hover: #667eea;
+  --focus-ring: rgba(102, 126, 234, 0.2);
+  --focus-border: #667eea;
 }
 
 [data-theme="dark"] {
-  /* Dark mode colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #2d2d2d;
-  --bg-gradient: linear-gradient(135deg, #4a5568 0%, #553c9a 100%);
-  --text-primary: #e2e8f0;
-  --text-secondary: #a0aec0;
+  /* Improved dark mode colors - warmer and more comfortable */
+  --bg-primary: #0f172a;          /* Softer dark blue-gray instead of harsh black */
+  --bg-secondary: #1e293b;        /* Better contrast with primary */
+  --bg-gradient: linear-gradient(135deg, #475569 0%, #6366f1 100%); /* More vibrant gradient */
+  --text-primary: #f1f5f9;        /* Softer white, easier on eyes */
+  --text-secondary: #94a3b8;      /* Better contrast, warmer gray */
   --text-on-gradient: #ffffff;
-  --border-color: #4a5568;
-  --card-bg: #2d3748;
-  --card-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  --card-hover-shadow: 0 4px 16px rgba(0,0,0,0.4);
-  --input-bg: #2d3748;
-  --modal-bg: #2d3748;
-  --modal-overlay: rgba(0,0,0,0.7);
-  --toast-success: #48bb78;
-  --toast-error: #f56565;
-  --toast-warning: #ed8936;
-  --tab-hover-bg: rgba(255,255,255,0.1);
-  --loading-bg: #2d3748;
+  --border-color: #334155;        /* More subtle borders */
+  --card-bg: #1e293b;             /* Consistent with secondary bg */
+  --card-shadow: 0 2px 12px rgba(0,0,0,0.4);        /* Deeper shadows for better depth */
+  --card-hover-shadow: 0 6px 20px rgba(0,0,0,0.5);  /* More pronounced hover */
+  --input-bg: #334155;            /* Lighter input background for better UX */
+  --modal-bg: #1e293b;            /* Consistent with cards */
+  --modal-overlay: rgba(0,0,0,0.8); /* Slightly darker overlay */
+  --toast-success: #10b981;       /* Slightly adjusted greens */
+  --toast-error: #ef4444;         /* Slightly adjusted reds */
+  --toast-warning: #f59e0b;       /* Slightly adjusted oranges */
+  --tab-hover-bg: rgba(255,255,255,0.08); /* Subtler hover */
+  --loading-bg: #1e293b;
+
+  /* Enhanced dark mode specific variables */
+  --scrollbar-track: #1e293b;
+  --scrollbar-thumb: #475569;
+  --scrollbar-thumb-hover: #64748b;
+  --focus-ring: rgba(99, 102, 241, 0.3);
+  --focus-border: #6366f1;
+  
+  /* Improved status colors for dark mode */
+  --status-pending-bg: #451a03;   /* Warmer brown */
+  --status-pending-text: #fbbf24;
+  --status-approved-bg: #052e16;  /* Deeper green */
+  --status-approved-text: #34d399;
+  --status-rejected-bg: #450a0a;  /* Deeper red */
+  --status-rejected-text: #f87171;
+  --status-untracked-bg: #1f2937; /* Consistent gray */
+  --status-untracked-text: #9ca3af;
 }

@@ -11,6 +11,30 @@ const initGitHub = (octokitInstance, repoOwner, repoName) => {
   REPO_NAME = repoName;
 };
 
+// Helper function to submit change for review
+async function submitForReview(commitSha, action, type, itemName, commitMessage, user) {
+  try {
+    // Load review system
+    const reviewSystem = require('./changelog');
+    
+    // Create review data
+    const reviewData = {
+      commitSha,
+      action,
+      type,
+      itemName,
+      commitMessage,
+      user
+    };
+
+    // Submit for review (this will auto-approve for GM/Admin)
+    await reviewSystem.submitReview(reviewData);
+  } catch (error) {
+    console.error('Error submitting for review:', error);
+    // Don't fail the main operation if review submission fails
+  }
+}
+
 // Get current locations (public)
 router.get('/', async (req, res) => {
   try {
@@ -39,8 +63,9 @@ router.get('/', async (req, res) => {
 // Add new location (protected)
 router.post('/', requireAuth, async (req, res) => {
   try {
-    // Get user from session (fixed to match your session structure)
+    // Get user from session
     const user = req.session.displayName || req.session.username || 'Unknown';
+    const userRole = req.session.role || 'user';
     console.log('Adding new location:', req.body.properties?.name, 'by', user);
     
     // Get current content
@@ -101,9 +126,17 @@ router.post('/', requireAuth, async (req, res) => {
       commitData.sha = currentSha;
     }
     
-    await octokit.rest.repos.createOrUpdateFileContents(commitData);
+    const commitResponse = await octokit.rest.repos.createOrUpdateFileContents(commitData);
     
-    res.json({ success: true, feature: newFeature });
+    // Submit for review using the commit SHA
+    const commitSha = commitResponse.data.commit.sha;
+    await submitChangeForReview(commitSha, 'create', 'location', newFeature.properties.name, commitMessage, user, userRole);
+    
+    res.json({ 
+      success: true, 
+      feature: newFeature,
+      commitSha: commitSha
+    });
   } catch (error) {
     console.error('Error saving location:', error.message);
     res.status(500).json({ error: error.message });
@@ -114,8 +147,9 @@ router.post('/', requireAuth, async (req, res) => {
 router.put('/:name', requireAuth, async (req, res) => {
   try {
     const originalName = decodeURIComponent(req.params.name);
-    // Get user from session (fixed to match your session structure)
+    // Get user from session
     const user = req.session.displayName || req.session.username || 'Unknown';
+    const userRole = req.session.role || 'user';
     console.log('Updating location:', originalName, 'by', user);
     
     // Get current content
@@ -167,7 +201,7 @@ router.put('/:name', requireAuth, async (req, res) => {
     const commitMessage = `Update location: ${originalName} (by ${user}) - ${changeDescription}`;
     
     // Commit to GitHub
-    await octokit.rest.repos.createOrUpdateFileContents({
+    const commitResponse = await octokit.rest.repos.createOrUpdateFileContents({
       owner: REPO_OWNER,
       repo: REPO_NAME,
       path: 'data/places.geojson',
@@ -176,7 +210,15 @@ router.put('/:name', requireAuth, async (req, res) => {
       sha: currentFile.sha
     });
     
-    res.json({ success: true, feature: updatedFeature });
+    // Submit for review using the commit SHA
+    const commitSha = commitResponse.data.commit.sha;
+    await submitChangeForReview(commitSha, 'update', 'location', updatedFeature.properties.name, commitMessage, user, userRole);
+    
+    res.json({ 
+      success: true, 
+      feature: updatedFeature,
+      commitSha: commitSha
+    });
   } catch (error) {
     console.error('Error updating location:', error.message);
     res.status(500).json({ error: error.message });
@@ -187,8 +229,9 @@ router.put('/:name', requireAuth, async (req, res) => {
 router.delete('/:name', requireAuth, async (req, res) => {
   try {
     const locationName = decodeURIComponent(req.params.name);
-    // Get user from session (fixed to match your session structure)
+    // Get user from session
     const user = req.session.displayName || req.session.username || 'Unknown';
+    const userRole = req.session.role || 'user';
     console.log('Deleting location:', locationName, 'by', user);
     
     // Get current content
@@ -219,7 +262,7 @@ router.delete('/:name', requireAuth, async (req, res) => {
     const commitMessage = `Delete location: ${locationName} (by ${user}) - Removed from campaign`;
     
     // Commit to GitHub
-    await octokit.rest.repos.createOrUpdateFileContents({
+    const commitResponse = await octokit.rest.repos.createOrUpdateFileContents({
       owner: REPO_OWNER,
       repo: REPO_NAME,
       path: 'data/places.geojson',
@@ -228,12 +271,106 @@ router.delete('/:name', requireAuth, async (req, res) => {
       sha: currentFile.sha
     });
     
-    res.json({ success: true, message: `Location "${locationName}" deleted successfully` });
+    // Submit for review using the commit SHA
+    const commitSha = commitResponse.data.commit.sha;
+    await submitChangeForReview(commitSha, 'delete', 'location', locationName, commitMessage, user, userRole);
+    
+    res.json({ 
+      success: true, 
+      message: `Location "${locationName}" deleted successfully`,
+      commitSha: commitSha
+    });
   } catch (error) {
     console.error('Error deleting location:', error.message);
     res.status(500).json({ error: error.message });
   }
 });
+
+// Helper function to submit change for review
+async function submitChangeForReview(commitSha, action, type, itemName, commitMessage, user, userRole) {
+  try {
+    // Auto-approve for GM/Admin users
+    const autoApprove = userRole === 'gm' || userRole === 'admin';
+    
+    // Load reviews data
+    let reviewsData;
+    try {
+      const { data } = await octokit.rest.repos.getContent({
+        owner: REPO_OWNER,
+        repo: REPO_NAME,
+        path: 'data/reviews.json'
+      });
+      const content = Buffer.from(data.content, 'base64').toString('utf8');
+      reviewsData = JSON.parse(content);
+    } catch (error) {
+      if (error.status === 404) {
+        // File doesn't exist, create new structure
+        reviewsData = {
+          version: "1.0",
+          reviews: [],
+          lastUpdated: new Date().toISOString()
+        };
+      } else {
+        throw error;
+      }
+    }
+
+    // Check if review already exists
+    const existingReview = reviewsData.reviews.find(r => r.commitSha === commitSha);
+    if (existingReview) {
+      return; // Review already exists
+    }
+
+    // Create new review entry
+    const newReview = {
+      commitSha,
+      action,
+      type,
+      itemName,
+      user,
+      timestamp: new Date().toISOString(),
+      status: autoApprove ? 'approved' : 'pending',
+      reviewedBy: autoApprove ? user : null,
+      reviewedAt: autoApprove ? new Date().toISOString() : null,
+      reviewNotes: autoApprove ? 'Auto-approved (GM/Admin)' : '',
+      commitMessage
+    };
+
+    reviewsData.reviews.unshift(newReview); // Add to beginning for chronological order
+    reviewsData.lastUpdated = new Date().toISOString();
+
+    // Save updated reviews
+    let currentSha = null;
+    try {
+      const { data: currentFile } = await octokit.rest.repos.getContent({
+        owner: REPO_OWNER,
+        repo: REPO_NAME,
+        path: 'data/reviews.json'
+      });
+      currentSha = currentFile.sha;
+    } catch (error) {
+      if (error.status !== 404) throw error;
+    }
+
+    const content = JSON.stringify(reviewsData, null, 2);
+    const commitData = {
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/reviews.json',
+      message: 'Update review status',
+      content: Buffer.from(content).toString('base64')
+    };
+
+    if (currentSha) {
+      commitData.sha = currentSha;
+    }
+
+    await octokit.rest.repos.createOrUpdateFileContents(commitData);
+  } catch (error) {
+    console.error('Error submitting change for review:', error);
+    // Don't fail the main operation if review submission fails
+  }
+}
 
 // Helper function to detect location changes
 function detectLocationChanges(oldLocation, newLocation) {
