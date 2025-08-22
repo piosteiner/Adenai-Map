@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "8444ed2fd2fdad7441018df005578eb6a6bafbf1",
+      "action": "update",
+      "type": "character",
+      "itemName": "Avery",
+      "user": "gm",
+      "timestamp": "2025-08-22T15:27:49.892Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T15:27:49.892Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Avery (by gm) - Wesdalen on 2025-08-29"
+    },
+    {
       "commitSha": "b9ec92000ed6bd89b30ebe698573067c3b9d63c3",
       "action": "update",
       "type": "character",
@@ -535,5 +548,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T15:27:28.521Z"
+  "lastUpdated": "2025-08-22T15:27:49.892Z"
 }
