@@ -255,9 +255,9 @@
       "itemName": "Valaris",
       "user": "Nici",
       "timestamp": "2025-08-22T06:03:02.023Z",
-      "status": "pending",
-      "reviewedBy": null,
-      "reviewedAt": null,
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T07:31:50.878Z",
       "reviewNotes": "",
       "commitMessage": "Update location: Valaris (by Nici) - marked as visited"
     },
@@ -431,5 +431,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:09:33.361Z"
+  "lastUpdated": "2025-08-22T07:31:51.109Z"
 }
