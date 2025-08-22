@@ -83,96 +83,49 @@ const DotOrange = L.icon({
 let characterData = [];
 let characterLayers = [];
 
-// Function to completely reset character marker styles
-function resetCharacterMarkerStyles() {
-  console.log('🔄 RESETTING CHARACTER MARKER STYLES');
-  console.log('====================================');
-  
-  // Remove any existing character icon fixes
-  const existingFix = document.getElementById('character-icon-fix');
-  if (existingFix) {
-    existingFix.remove();
-    console.log('🗑️ Removed existing CSS fix');
-  }
-  
-  // Remove any other potential conflicting styles
-  const conflictingStyles = document.querySelectorAll('style');
-  conflictingStyles.forEach(style => {
-    if (style.textContent.includes('character-marker') || style.textContent.includes('.character-')) {
-      console.log('🗑️ Found potentially conflicting style, removing...');
-      style.remove();
-    }
-  });
-  
-  // Apply minimal, non-conflicting CSS
-  const style = document.createElement('style');
-  style.id = 'character-icon-minimal-fix';
-  style.textContent = `
-    /* Minimal fix - just ensure visibility and proper layering */
-    .character-marker {
-      background: transparent !important;
-      border: none !important;
-      z-index: 1000 !important;
-    }
-    
-    /* Let Leaflet handle all positioning - don't interfere */
-    .leaflet-marker-icon.character-marker {
-      /* Only set what's absolutely necessary */
-      pointer-events: auto !important;
-    }
-  `;
-  document.head.appendChild(style);
-  console.log('✅ Applied minimal CSS fix');
-  
-  // Force all markers to update their positions
-  characterLayers.forEach(cl => {
-    if (cl.marker._icon) {
-      // Clear any inline styles that might conflict
-      cl.marker._icon.style.left = '';
-      cl.marker._icon.style.top = '';
-      cl.marker._icon.style.transform = '';
-      cl.marker._icon.style.position = '';
-      
-      // Let Leaflet recalculate the position
-      cl.marker.update();
-    }
-  });
-  
-  console.log('🔄 Reset complete - markers should reposition automatically');
-}
-
-// Better CSS FIX - don't override positioning, just fix conflicts
+// CRITICAL CSS FIX for character icon positioning
 function fixCharacterIconCSS() {
   const style = document.createElement('style');
   style.id = 'character-icon-fix';
   style.textContent = `
-    /* Remove any CSS that might be interfering with Leaflet positioning */
-    .character-marker {
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-    }
-    
-    /* Ensure Leaflet can position the icons normally */
+    /* CRITICAL: Fix Leaflet marker positioning for character icons */
     .leaflet-marker-icon.character-marker {
       position: absolute !important;
-      /* DON'T override left/top - let Leaflet handle positioning */
-      z-index: 1000 !important;
+      transform: none !important;
+      margin: 0 !important;
+      left: -14px !important;  /* Half of icon width */
+      top: -14px !important;   /* Half of icon height */
     }
     
-    /* Make sure transforms work properly */
-    .leaflet-marker-pane .character-marker {
-      pointer-events: auto !important;
-      will-change: transform !important;
-    }
-    
-    /* Debug: add a small red border to see where icons actually are */
+    /* Alternative fix - reset all transforms */
     .character-marker {
-      outline: 1px solid red;
+      position: relative !important;
+      transform: translate3d(0, 0, 0) !important;
+      -webkit-transform: translate3d(0, 0, 0) !important;
+      -moz-transform: translate3d(0, 0, 0) !important;
+      -ms-transform: translate3d(0, 0, 0) !important;
+    }
+    
+    /* Ensure character markers are visible and positioned correctly */
+    .leaflet-marker-pane .character-marker {
+      z-index: 1000 !important;
+      transform: translate3d(0px, 0px, 0px) !important;
+    }
+    
+    /* Force proper positioning */
+    .leaflet-zoom-anim .character-marker {
+      transition: none !important;
+      transform: none !important;
+    }
+    
+    /* Debug: make character markers visible with border */
+    .character-marker {
+      border: 2px solid red !important;
+      background: yellow !important;
     }
   `;
   document.head.appendChild(style);
-  console.log('🔧 Applied BETTER CSS fix for character icon positioning');
+  console.log('🔧 Applied CRITICAL CSS fix for character icon positioning');
 }
 
 // Enhanced icons for different types - BACK TO YOUR ORIGINAL PREFERRED STYLE
@@ -344,67 +297,27 @@ function debugCharacterMarkerPositions() {
   });
 }
 
-// Function to manually force marker positions (IMPROVED)
+// Function to manually force marker positions
 function forceFixMarkerPositions() {
-  console.log('🔧 IMPROVED FORCE FIXING MARKER POSITIONS');
-  console.log('=========================================');
+  console.log('🔧 FORCE FIXING MARKER POSITIONS');
+  console.log('=================================');
   
   characterLayers.forEach(cl => {
     const marker = cl.marker;
     const character = cl.character;
     
+    // Force update marker position
+    marker.update();
+    
+    // Force redraw
     if (marker._icon) {
-      // Get the correct position from Leaflet
       const pos = map.latLngToLayerPoint(marker.getLatLng());
-      console.log(`📍 ${character.name} should be at pixel position: ${pos.x}, ${pos.y}`);
-      
-      // Clear any conflicting styles
-      marker._icon.style.left = '';
-      marker._icon.style.top = '';
       marker._icon.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0px)`;
-      marker._icon.style.position = 'absolute';
-      
-      console.log(`🔧 Force-repositioned ${character.name} to ${pos.x}, ${pos.y}`);
-      
-      // Verify the position after setting
-      setTimeout(() => {
-        const rect = marker._icon.getBoundingClientRect();
-        const mapRect = map.getContainer().getBoundingClientRect();
-        console.log(`✅ ${character.name} now at visual position: left=${rect.left - mapRect.left}, top=${rect.top - mapRect.top}`);
-      }, 100);
+      marker._icon.style.left = '0px';
+      marker._icon.style.top = '0px';
+      console.log(`🔧 Force-positioned ${character.name} icon`);
     }
   });
-}
-
-// Function to check for CSS conflicts
-function checkCSSConflicts() {
-  console.log('🔍 CHECKING FOR CSS CONFLICTS');
-  console.log('==============================');
-  
-  if (characterLayers.length > 0) {
-    const marker = characterLayers[0].marker;
-    if (marker._icon) {
-      const element = marker._icon;
-      const computedStyle = window.getComputedStyle(element);
-      
-      console.log('📊 Computed styles for character marker:');
-      console.log(`  position: ${computedStyle.position}`);
-      console.log(`  left: ${computedStyle.left}`);
-      console.log(`  top: ${computedStyle.top}`);
-      console.log(`  transform: ${computedStyle.transform}`);
-      console.log(`  z-index: ${computedStyle.zIndex}`);
-      console.log(`  display: ${computedStyle.display}`);
-      console.log(`  visibility: ${computedStyle.visibility}`);
-      
-      // Check if any problematic styles are applied
-      if (computedStyle.position === 'static') {
-        console.log('⚠️ WARNING: Character marker has position: static (should be absolute)');
-      }
-      if (computedStyle.transform === 'none') {
-        console.log('⚠️ WARNING: Character marker has no transform (Leaflet needs this for positioning)');
-      }
-    }
-  }
 }
 
 // Debug code for character location mismatch
@@ -633,8 +546,6 @@ function addCharacterControls() {
       <label><input type="checkbox" id="show-enemies" checked> Enemies</label><br>
       <label><input type="checkbox" id="show-neutral" checked> Neutral</label><br>
       <button onclick="debugCharacterMarkerPositions()" style="margin-top: 8px; font-size: 10px;">🔍 Debug Positions</button><br>
-      <button onclick="checkCSSConflicts()" style="margin-top: 4px; font-size: 10px;">🔍 Check CSS</button><br>
-      <button onclick="resetCharacterMarkerStyles()" style="margin-top: 4px; font-size: 10px;">🔄 Reset Styles</button><br>
       <button onclick="forceFixMarkerPositions()" style="margin-top: 4px; font-size: 10px;">🔧 Force Fix</button>
     </div>
   `;
