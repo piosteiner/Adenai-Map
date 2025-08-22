@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "214cb5357a71f843b778eb7edfdd9ba70a5b8749",
+      "action": "update",
+      "type": "character",
+      "itemName": "Petrel Kormorant",
+      "user": "gm",
+      "timestamp": "2025-08-22T15:11:02.812Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T15:11:02.812Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: petrel_kormorant (by gm) - updated description, updated faction, updated first met date, updated notes, updated image"
+    },
+    {
       "commitSha": "1129ba3d16b0f1740c52a5c434761f45d073898d",
       "action": "update",
       "type": "character",
@@ -470,5 +483,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T15:10:49.627Z"
+  "lastUpdated": "2025-08-22T15:11:02.812Z"
 }
