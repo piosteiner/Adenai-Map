@@ -45,18 +45,31 @@
       "relationship": "friendly",
       "firstMet": "",
       "notes": "",
-      "movementHistory": [],
+      "movementHistory": [
+        {
+          "id": "movement_1755876447794",
+          "date": "2025-08-20",
+          "location": "Rena",
+          "coordinates": [
+            650,
+            1000
+          ],
+          "notes": "",
+          "type": "travel",
+          "createdAt": "2025-08-22T15:27:27.794Z"
+        }
+      ],
       "currentLocation": {
-        "date": "2025-08-22",
+        "date": "2025-08-20",
         "location": "Rena",
         "coordinates": [
           650,
           1000
         ],
-        "notes": "Updated location"
+        "notes": ""
       },
       "createdAt": "2025-08-22T00:21:35.645Z",
-      "updatedAt": "2025-08-22T15:10:48.922Z"
+      "updatedAt": "2025-08-22T15:27:27.794Z"
     },
     {
       "id": "lia_karthright",
@@ -161,5 +174,5 @@
       "updatedAt": "2025-08-22T15:11:59.193Z"
     }
   ],
-  "lastUpdated": "2025-08-22T15:21:14.145Z"
+  "lastUpdated": "2025-08-22T15:27:27.794Z"
 }
