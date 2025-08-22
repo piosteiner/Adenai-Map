@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6e7de10ab3c269e0adc229190318b01c53af71ae",
+      "action": "delete",
+      "type": "character",
+      "itemName": "Tasbor",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:09:33.361Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Delete character: Tasbor (by Nici) - Removed from campaign"
+    },
+    {
       "commitSha": "5d2b23be82a24d8fdf047cf4baf639363a565123",
       "action": "create",
       "type": "character",
@@ -418,5 +431,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:09:11.905Z"
+  "lastUpdated": "2025-08-22T06:09:33.361Z"
 }
