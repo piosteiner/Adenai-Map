@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "15ce419e331cd17981b87c8afa0ab34ad10e6d25",
+      "action": "create",
+      "type": "character",
+      "itemName": "Tasbor",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:09:09.843Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Create character: Tasbor (by Nici) - Initial character creation"
+    },
+    {
       "commitSha": "9a1a2ddc2d1ed119f302c9b79e8d99e184d079fc",
       "action": "update",
       "type": "location",
@@ -392,5 +405,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:06:54.582Z"
+  "lastUpdated": "2025-08-22T06:09:09.843Z"
 }
