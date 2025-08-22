@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "36620ccaa03755d9d389266236e9c54a967734c6",
+      "action": "delete",
+      "type": "character",
+      "itemName": "tetw",
+      "user": "Pio`s Test User",
+      "timestamp": "2025-08-22T00:07:09.179Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Delete character: tetw (by Pio`s Test User) - Removed from campaign"
+    },
+    {
       "commitSha": "c320a90fbb19bb9e235ddbcb9d8aca3899570c2d",
       "action": "delete",
       "type": "character",
@@ -67,5 +80,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T00:07:03.516Z"
+  "lastUpdated": "2025-08-22T00:07:09.179Z"
 }
