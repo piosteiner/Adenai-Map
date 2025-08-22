@@ -83,104 +83,101 @@ const DotOrange = L.icon({
 let characterData = [];
 let characterLayers = [];
 
-// CRITICAL CSS FIX for character icon positioning
-function fixCharacterIconCSS() {
+// FIXED: Character icons with proper positioning
+const RelationshipIcons = {
+  ally: L.divIcon({
+    className: 'character-marker-fixed',
+    html: '<div style="background: #4CAF50; width: 28px; height: 28px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">👑</div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
+  }),
+  friendly: L.divIcon({
+    className: 'character-marker-fixed',
+    html: '<div style="background: #8BC34A; width: 28px; height: 28px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">😊</div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
+  }),
+  enemy: L.divIcon({
+    className: 'character-marker-fixed',
+    html: '<div style="background: #F44336; width: 28px; height: 28px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">⚔️</div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
+  }),
+  hostile: L.divIcon({
+    className: 'character-marker-fixed',
+    html: '<div style="background: #FF5722; width: 28px; height: 28px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">💀</div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
+  }),
+  neutral: L.divIcon({
+    className: 'character-marker-fixed',
+    html: '<div style="background: #FFC107; width: 28px; height: 28px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; color: #333; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">👤</div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
+  }),
+  suspicious: L.divIcon({
+    className: 'character-marker-fixed',
+    html: '<div style="background: #FF9800; width: 28px; height: 28px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">🤔</div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
+  })
+};
+
+// Add CSS fix for character icon positioning
+function addCharacterIconCSS() {
   const style = document.createElement('style');
-  style.id = 'character-icon-fix';
   style.textContent = `
-    /* CRITICAL: Fix Leaflet marker positioning for character icons */
-    .leaflet-marker-icon.character-marker {
-      position: absolute !important;
-      transform: none !important;
-      margin: 0 !important;
-      left: -14px !important;  /* Half of icon width */
-      top: -14px !important;   /* Half of icon height */
+    /* Fix character icon positioning */
+    .character-marker-fixed {
+      background: transparent !important;
+      border: none !important;
     }
     
-    /* Alternative fix - reset all transforms */
-    .character-marker {
-      position: relative !important;
-      transform: translate3d(0, 0, 0) !important;
-      -webkit-transform: translate3d(0, 0, 0) !important;
-      -moz-transform: translate3d(0, 0, 0) !important;
-      -ms-transform: translate3d(0, 0, 0) !important;
+    /* Ensure icons are positioned correctly */
+    .leaflet-marker-icon.character-marker-fixed {
+      transform-origin: center center !important;
     }
     
-    /* Ensure character markers are visible and positioned correctly */
-    .leaflet-marker-pane .character-marker {
-      z-index: 1000 !important;
-      transform: translate3d(0px, 0px, 0px) !important;
+    /* Fix for divIcon positioning issues */
+    .leaflet-div-icon {
+      background: transparent !important;
+      border: none !important;
     }
     
-    /* Force proper positioning */
-    .leaflet-zoom-anim .character-marker {
-      transition: none !important;
-      transform: none !important;
+    /* Character marker animation */
+    .character-marker-fixed {
+      animation: characterPulse 2s infinite;
     }
     
-    /* Debug: make character markers visible with border */
-    .character-marker {
-      border: 2px solid red !important;
-      background: yellow !important;
+    @keyframes characterPulse {
+      0% { 
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% { 
+        transform: scale(1.05);
+        opacity: 0.8;
+      }
+      100% { 
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    /* Disable animation on hover */
+    .character-marker-fixed:hover {
+      animation: none;
     }
   `;
   document.head.appendChild(style);
-  console.log('🔧 Applied CRITICAL CSS fix for character icon positioning');
+  console.log('✅ Added character icon CSS fixes');
 }
-
-// Enhanced icons for different types - BACK TO YOUR ORIGINAL PREFERRED STYLE
-const CharacterIcon = L.icon({
-  iconUrl: 'icons/character.svg',
-  iconSize: isMobile ? [40, 40] : [28, 28],
-  iconAnchor: isMobile ? [20, 20] : [14, 14],
-  popupAnchor: [0, -20]
-});
-
-// Relationship-based character icons - YOUR ORIGINAL PREFERRED ICONS
-const RelationshipIcons = {
-  ally: L.icon({
-    iconUrl: 'icons/character_ally.svg',
-    iconSize: isMobile ? [40, 40] : [28, 28],
-    iconAnchor: isMobile ? [20, 20] : [14, 14],
-    popupAnchor: [0, -20],
-    className: 'character-marker'
-  }),
-  friendly: L.icon({
-    iconUrl: 'icons/character_ally.svg',
-    iconSize: isMobile ? [40, 40] : [28, 28],
-    iconAnchor: isMobile ? [20, 20] : [14, 14],
-    popupAnchor: [0, -20],
-    className: 'character-marker'
-  }),
-  enemy: L.icon({
-    iconUrl: 'icons/character_enemy.svg',
-    iconSize: isMobile ? [40, 40] : [28, 28],
-    iconAnchor: isMobile ? [20, 20] : [14, 14],
-    popupAnchor: [0, -20],
-    className: 'character-marker'
-  }),
-  hostile: L.icon({
-    iconUrl: 'icons/character_enemy.svg',
-    iconSize: isMobile ? [40, 40] : [28, 28],
-    iconAnchor: isMobile ? [20, 20] : [14, 14],
-    popupAnchor: [0, -20],
-    className: 'character-marker'
-  }),
-  neutral: L.icon({
-    iconUrl: 'icons/character_neutral.svg',
-    iconSize: isMobile ? [40, 40] : [28, 28],
-    iconAnchor: isMobile ? [20, 20] : [14, 14],
-    popupAnchor: [0, -20],
-    className: 'character-marker'
-  }),
-  suspicious: L.icon({
-    iconUrl: 'icons/character_neutral.svg',
-    iconSize: isMobile ? [40, 40] : [28, 28],
-    iconAnchor: isMobile ? [20, 20] : [14, 14],
-    popupAnchor: [0, -20],
-    className: 'character-marker'
-  })
-};
 
 function sanitizeFilename(name) {
   return name
@@ -216,15 +213,12 @@ async function loadCharacters() {
   }
 }
 
-// Add characters to map with debugging
+// Add characters to map with fixed positioning
 function addCharactersToMap() {
-  console.log('🎭 Adding characters to map...');
+  console.log('🎭 Adding characters to map with fixed icons...');
   
   characterData.forEach(character => {
-    if (!character.location) {
-      console.log(`⚠️ Skipping ${character.name} - no location`);
-      return;
-    }
+    if (!character.location) return; // Skip characters without location
     
     // Find matching location from GeoJSON
     const locationMatch = geoFeatureLayers.find(g => 
@@ -234,15 +228,13 @@ function addCharactersToMap() {
     if (locationMatch) {
       // Get coordinates from the location
       const latlng = locationMatch.layer.getLatLng();
-      console.log(`📍 Base location for ${character.name}: [${latlng.lat}, ${latlng.lng}]`);
       
       // Offset character marker slightly from location marker
       const offsetLat = latlng.lat + (Math.random() - 0.5) * 30;
       const offsetLng = latlng.lng + (Math.random() - 0.5) * 30;
-      console.log(`📍 Character marker position for ${character.name}: [${offsetLat}, ${offsetLng}]`);
       
-      // Choose icon based on relationship
-      const icon = RelationshipIcons[character.relationship] || CharacterIcon;
+      // Choose icon based on relationship - now using fixed icons
+      const icon = RelationshipIcons[character.relationship] || RelationshipIcons.neutral;
       
       // Create character marker
       const marker = L.marker([offsetLat, offsetLng], { icon })
@@ -251,76 +243,16 @@ function addCharactersToMap() {
       
       characterLayers.push({ marker, character });
       
-      // Debug: Check marker position after creation
-      const actualPos = marker.getLatLng();
-      console.log(`✅ Created marker for ${character.name} at [${actualPos.lat}, ${actualPos.lng}]`);
-      
-      // Debug: Check if marker is visible on map
-      setTimeout(() => {
-        const markerElement = marker._icon;
-        if (markerElement) {
-          const rect = markerElement.getBoundingClientRect();
-          console.log(`🔍 ${character.name} icon visual position: left=${rect.left}, top=${rect.top}, visible=${rect.width > 0 && rect.height > 0}`);
-        }
-      }, 100);
-      
-    } else {
-      console.log(`❌ No location found for ${character.name} at "${character.location}"`);
+      console.log(`✅ Added ${character.name} with fixed icon at [${offsetLat.toFixed(1)}, ${offsetLng.toFixed(1)}]`);
     }
   });
   
-  console.log(`🎯 Total character markers created: ${characterLayers.length}`);
-}
-
-// Debug function to check marker positions
-function debugCharacterMarkerPositions() {
-  console.log('🔍 DEBUGGING CHARACTER MARKER POSITIONS');
-  console.log('======================================');
-  
-  characterLayers.forEach((cl, index) => {
-    const marker = cl.marker;
-    const character = cl.character;
-    const pos = marker.getLatLng();
-    
-    console.log(`${index + 1}. ${character.name}:`);
-    console.log(`   Logical position: [${pos.lat}, ${pos.lng}]`);
-    
-    if (marker._icon) {
-      const rect = marker._icon.getBoundingClientRect();
-      const mapRect = map.getContainer().getBoundingClientRect();
-      console.log(`   Visual position: left=${rect.left - mapRect.left}, top=${rect.top - mapRect.top}`);
-      console.log(`   Icon size: width=${rect.width}, height=${rect.height}`);
-      console.log(`   Icon visible: ${rect.width > 0 && rect.height > 0}`);
-    } else {
-      console.log(`   ❌ No icon element found`);
-    }
-  });
-}
-
-// Function to manually force marker positions
-function forceFixMarkerPositions() {
-  console.log('🔧 FORCE FIXING MARKER POSITIONS');
-  console.log('=================================');
-  
-  characterLayers.forEach(cl => {
-    const marker = cl.marker;
-    const character = cl.character;
-    
-    // Force update marker position
-    marker.update();
-    
-    // Force redraw
-    if (marker._icon) {
-      const pos = map.latLngToLayerPoint(marker.getLatLng());
-      marker._icon.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0px)`;
-      marker._icon.style.left = '0px';
-      marker._icon.style.top = '0px';
-      console.log(`🔧 Force-positioned ${character.name} icon`);
-    }
-  });
+  console.log(`🎯 Total character markers added: ${characterLayers.length}`);
 }
 
 // Debug code for character location mismatch
+// Add this to your addCharactersToMap function or run in console
+
 function debugCharacterLocationMatching() {
   console.log('🔍 DEBUGGING CHARACTER LOCATION MATCHING');
   console.log('==========================================');
@@ -397,6 +329,66 @@ function debugCharacterLocationMatching() {
       });
     }
   }
+}
+
+// Enhanced addCharactersToMap function with detailed logging
+function addCharactersToMapDebug() {
+  console.log('🎭 ADDING CHARACTERS TO MAP WITH DEBUG INFO');
+  console.log('============================================');
+  
+  characterData.forEach((character, index) => {
+    console.log(`\n👤 Processing character ${index + 1}: ${character.name}`);
+    
+    if (!character.location) {
+      console.log(`⚠️ Skipping ${character.name} - no location assigned`);
+      return;
+    }
+    
+    console.log(`📍 Looking for location: "${character.location}"`);
+    
+    // Find matching location from GeoJSON
+    const locationMatch = geoFeatureLayers.find(g => {
+      const matches = g.feature.properties.name === character.location;
+      console.log(`  Comparing "${g.feature.properties.name}" === "${character.location}" -> ${matches}`);
+      return matches;
+    });
+    
+    if (locationMatch) {
+      console.log(`✅ Location match found!`);
+      
+      // Get coordinates from the location
+      const latlng = locationMatch.layer.getLatLng();
+      console.log(`📍 Base coordinates: [${latlng.lat}, ${latlng.lng}]`);
+      
+      // Generate offset (but make it smaller for testing)
+      const offsetLat = latlng.lat + (Math.random() - 0.5) * 30;
+      const offsetLng = latlng.lng + (Math.random() - 0.5) * 30;
+      console.log(`📍 Offset coordinates: [${offsetLat}, ${offsetLng}]`);
+      
+      // Choose icon based on relationship
+      const icon = RelationshipIcons[character.relationship] || RelationshipIcons.neutral;
+      console.log(`🎨 Using icon for relationship: ${character.relationship}`);
+      
+      // Create character marker
+      const marker = L.marker([offsetLat, offsetLng], { icon })
+        .bindPopup(createCharacterPopup(character))
+        .addTo(map);
+      
+      characterLayers.push({ marker, character });
+      
+      console.log(`✅ Successfully added ${character.name} to map`);
+      console.log(`🗺️ Final marker position: [${marker.getLatLng().lat}, ${marker.getLatLng().lng}]`);
+      
+    } else {
+      console.log(`❌ No location found for ${character.name} at "${character.location}"`);
+      console.log('Available location names:');
+      geoFeatureLayers.forEach(g => {
+        console.log(`  - "${g.feature.properties.name}"`);
+      });
+    }
+  });
+  
+  console.log(`\n🎯 Summary: ${characterLayers.length} character markers added to map`);
 }
 
 // Quick test function to check coordinate system
@@ -544,9 +536,7 @@ function addCharacterControls() {
       <label><input type="checkbox" id="show-characters" checked> Show Characters</label><br>
       <label><input type="checkbox" id="show-allies" checked> Allies</label><br>
       <label><input type="checkbox" id="show-enemies" checked> Enemies</label><br>
-      <label><input type="checkbox" id="show-neutral" checked> Neutral</label><br>
-      <button onclick="debugCharacterMarkerPositions()" style="margin-top: 8px; font-size: 10px;">🔍 Debug Positions</button><br>
-      <button onclick="forceFixMarkerPositions()" style="margin-top: 4px; font-size: 10px;">🔧 Force Fix</button>
+      <label><input type="checkbox" id="show-neutral" checked> Neutral</label>
     </div>
   `;
   
@@ -652,8 +642,8 @@ fetch('data/places.geojson')
 
     initSearch(); // Init search once all markers are set up
     
-    // CRITICAL: Apply CSS fix before loading characters
-    fixCharacterIconCSS();
+    // Add character icon CSS fix
+    addCharacterIconCSS();
     
     // Load characters after locations are loaded
     setTimeout(() => {
