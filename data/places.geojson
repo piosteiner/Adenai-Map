@@ -210,7 +210,8 @@
       "properties": {
         "name": "Basapo",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Basapo, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/basapo.html"
+        "contentUrl": null,
+        "visited": true
       },
       "geometry": {
         "type": "Point",
