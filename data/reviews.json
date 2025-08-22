@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "a4668b6bb7b14724ee4dd38e42e3631a51c3b43d",
+      "action": "update",
+      "type": "character",
+      "itemName": "Test",
+      "user": "gm",
+      "timestamp": "2025-08-22T16:05:52.701Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T16:05:52.701Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Test (by gm) - Elissastadt on 2025-08-07"
+    },
+    {
       "commitSha": "ec6b7b4a9b16a52590268a629de806517c01c466",
       "action": "update",
       "type": "character",
@@ -561,5 +574,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T16:05:43.390Z"
+  "lastUpdated": "2025-08-22T16:05:52.701Z"
 }
