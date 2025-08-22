@@ -112,9 +112,9 @@
       "itemName": "Akónetchie",
       "user": "Nici",
       "timestamp": "2025-08-22T06:05:42.900Z",
-      "status": "pending",
-      "reviewedBy": null,
-      "reviewedAt": null,
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T07:34:13.306Z",
       "reviewNotes": "",
       "commitMessage": "Update location: Akónetchie (by Nici) - marked as visited"
     },
@@ -431,5 +431,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T07:34:10.117Z"
+  "lastUpdated": "2025-08-22T07:34:13.506Z"
 }
