@@ -34,9 +34,9 @@
       "itemName": "Tasbor",
       "user": "Nici",
       "timestamp": "2025-08-22T06:09:09.843Z",
-      "status": "pending",
-      "reviewedBy": null,
-      "reviewedAt": null,
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T07:35:43.447Z",
       "reviewNotes": "",
       "commitMessage": "Create character: Tasbor (by Nici) - Initial character creation"
     },
@@ -431,5 +431,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T07:35:38.087Z"
+  "lastUpdated": "2025-08-22T07:35:43.635Z"
 }
