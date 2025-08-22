@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "cbc9542c950f250a53ae5317e9299345a922a69f",
+      "action": "update",
+      "type": "character",
+      "itemName": "Avery",
+      "user": "gm",
+      "timestamp": "2025-08-22T13:56:40.800Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T13:56:40.800Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: avery (by gm) - updated location"
+    },
+    {
       "commitSha": "f36a456d4db89c96b3c0ebb85fea757f5e302f62",
       "action": "update",
       "type": "character",
@@ -444,5 +457,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T13:56:27.076Z"
+  "lastUpdated": "2025-08-22T13:56:40.800Z"
 }
