@@ -155,7 +155,9 @@
       "type": "Feature",
       "properties": {
         "name": "Atlantis (aufgestiegen)",
-        "description": "Standort von Atlantis, nachdem es von den VsuzH wieder in den Himmel gehoben wurde."
+        "description": "Standort von Atlantis, nachdem es von den VsuzH wieder in den Himmel gehoben wurde.",
+        "contentUrl": null,
+        "visited": true
       },
       "geometry": {
         "type": "Point",
