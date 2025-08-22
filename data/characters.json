@@ -8,7 +8,22 @@
       "location": "Valaris",
       "status": "alive",
       "relationship": "friendly"
+    },
+    {
+      "id": "avery",
+      "name": "avery",
+      "title": "",
+      "location": "",
+      "description": "",
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "createdAt": "2025-08-22T00:21:35.645Z",
+      "updatedAt": "2025-08-22T00:21:35.645Z"
     }
   ],
-  "lastUpdated": "2025-08-22T00:07:08.394Z"
+  "lastUpdated": "2025-08-22T00:21:35.645Z"
 }
