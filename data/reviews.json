@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "8e5d79e54fc3aad45b6962802ea217beeeab1bba",
+      "action": "create",
+      "type": "character",
+      "itemName": "Test",
+      "user": "gm",
+      "timestamp": "2025-08-22T15:11:49.352Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T15:11:49.352Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Test (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "056f65fb34e508c0083ed59841198443acd4e463",
       "action": "update",
       "type": "character",
@@ -496,5 +509,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T15:11:17.952Z"
+  "lastUpdated": "2025-08-22T15:11:49.352Z"
 }
