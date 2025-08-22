@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.createElement("button");
   toggleBtn.id = "themeToggle";
-  toggleBtn.textContent = "🌓";
+  toggleBtn.textContent = "🌙";
   toggleBtn.title = "Toggle Dark Mode";
   toggleBtn.style.position = "absolute";
   toggleBtn.style.top = "10px";
@@ -79,6 +79,64 @@ const DotOrange = L.icon({
   popupAnchor: [0, -32]
 });
 
+// Character data storage
+let characterData = [];
+let characterLayers = [];
+
+// Enhanced icons for different types
+const CharacterIcon = L.icon({
+  iconUrl: 'icons/character.svg',
+  iconSize: isMobile ? [40, 40] : [28, 28],
+  iconAnchor: isMobile ? [20, 20] : [14, 14],
+  popupAnchor: [0, -20]
+});
+
+// Relationship-based character icons
+const RelationshipIcons = {
+  ally: L.icon({
+    iconUrl: 'icons/character_ally.svg',
+    iconSize: isMobile ? [40, 40] : [28, 28],
+    iconAnchor: isMobile ? [20, 20] : [14, 14],
+    popupAnchor: [0, -20],
+    className: 'character-marker'
+  }),
+  friendly: L.icon({
+    iconUrl: 'icons/character_ally.svg',
+    iconSize: isMobile ? [40, 40] : [28, 28],
+    iconAnchor: isMobile ? [20, 20] : [14, 14],
+    popupAnchor: [0, -20],
+    className: 'character-marker'
+  }),
+  enemy: L.icon({
+    iconUrl: 'icons/character_enemy.svg',
+    iconSize: isMobile ? [40, 40] : [28, 28],
+    iconAnchor: isMobile ? [20, 20] : [14, 14],
+    popupAnchor: [0, -20],
+    className: 'character-marker'
+  }),
+  hostile: L.icon({
+    iconUrl: 'icons/character_enemy.svg',
+    iconSize: isMobile ? [40, 40] : [28, 28],
+    iconAnchor: isMobile ? [20, 20] : [14, 14],
+    popupAnchor: [0, -20],
+    className: 'character-marker'
+  }),
+  neutral: L.icon({
+    iconUrl: 'icons/character_neutral.svg',
+    iconSize: isMobile ? [40, 40] : [28, 28],
+    iconAnchor: isMobile ? [20, 20] : [14, 14],
+    popupAnchor: [0, -20],
+    className: 'character-marker'
+  }),
+  suspicious: L.icon({
+    iconUrl: 'icons/character_neutral.svg',
+    iconSize: isMobile ? [40, 40] : [28, 28],
+    iconAnchor: isMobile ? [20, 20] : [14, 14],
+    popupAnchor: [0, -20],
+    className: 'character-marker'
+  })
+};
+
 function sanitizeFilename(name) {
   return name
     .toLowerCase()
@@ -92,6 +150,205 @@ function sanitizeFilename(name) {
 //Store markers for search
 let geoFeatureLayers = [];
 let searchIndex = [];
+
+// Load character data
+async function loadCharacters() {
+  try {
+    const response = await fetch('data/characters.json');
+    const data = await response.json();
+    characterData = data.characters || [];
+    
+    console.log(`✅ Loaded ${characterData.length} characters`);
+    addCharactersToMap();
+    updateSearchIndexWithCharacters();
+    
+    // Initialize character panel after data is loaded
+    if (typeof initCharacterPanel === 'function') {
+      initCharacterPanel();
+    }
+  } catch (error) {
+    console.error('❌ Error loading characters:', error);
+  }
+}
+
+// Add characters to map
+function addCharactersToMap() {
+  characterData.forEach(character => {
+    if (!character.location) return; // Skip characters without location
+    
+    // Find matching location from GeoJSON
+    const locationMatch = geoFeatureLayers.find(g => 
+      g.feature.properties.name === character.location
+    );
+    
+    if (locationMatch) {
+      // Get coordinates from the location
+      const latlng = locationMatch.layer.getLatLng();
+      
+      // Offset character marker slightly from location marker
+      const offsetLat = latlng.lat + (Math.random() - 0.5) * 30;
+      const offsetLng = latlng.lng + (Math.random() - 0.5) * 30;
+      
+      // Choose icon based on relationship
+      const icon = RelationshipIcons[character.relationship] || CharacterIcon;
+      
+      // Create character marker
+      const marker = L.marker([offsetLat, offsetLng], { icon })
+        .bindPopup(createCharacterPopup(character))
+        .addTo(map);
+      
+      characterLayers.push({ marker, character });
+    }
+  });
+}
+
+// Create character popup content
+function createCharacterPopup(character) {
+  const statusEmoji = {
+    alive: '😊',
+    dead: '💀',
+    missing: '❓',
+    unknown: '🤷'
+  };
+  
+  const relationshipColor = {
+    ally: '#4CAF50',
+    friendly: '#8BC34A',
+    neutral: '#FFC107',
+    suspicious: '#FF9800',
+    hostile: '#FF5722',
+    enemy: '#F44336'
+  };
+  
+  const imageHtml = character.image ? 
+    `<img src="${character.image}" alt="${character.name}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px; float: right; margin-left: 10px;">` : '';
+  
+  return `
+    <div class="character-popup">
+      ${imageHtml}
+      <div class="popup-title" style="color: ${relationshipColor[character.relationship] || '#333'}">
+        ${character.name}
+      </div>
+      ${character.title ? `<div style="font-style: italic; margin-bottom: 8px;">${character.title}</div>` : ''}
+      <div style="margin-bottom: 8px;">
+        <span style="background: ${relationshipColor[character.relationship] || '#ccc'}; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.8em;">
+          ${character.relationship || 'unknown'}
+        </span>
+        <span style="margin-left: 8px;">
+          ${statusEmoji[character.status] || '❓'} ${character.status || 'unknown'}
+        </span>
+      </div>
+      ${character.faction ? `<div><strong>🏛️ Faction:</strong> ${character.faction}</div>` : ''}
+      ${character.firstMet ? `<div><strong>📅 First Met:</strong> ${character.firstMet}</div>` : ''}
+      ${character.description ? `<div style="margin-top: 8px;"><strong>📝 Description:</strong><br>${character.description}</div>` : ''}
+      ${character.notes ? `<div style="margin-top: 8px;"><strong>📋 Notes:</strong><br>${character.notes}</div>` : ''}
+    </div>
+  `;
+}
+
+// Enhanced search that includes characters
+function updateSearchIndexWithCharacters() {
+  // Add characters to existing search index
+  characterData.forEach(character => {
+    if (character.location) {
+      // Find location coordinates
+      const locationMatch = geoFeatureLayers.find(g => 
+        g.feature.properties.name === character.location
+      );
+      
+      if (locationMatch) {
+        searchIndex.push({
+          name: character.name,
+          desc: `${character.title || ''} ${character.description || ''} ${character.notes || ''}`.trim(),
+          latlng: locationMatch.layer.getLatLng(),
+          type: 'character',
+          character: character
+        });
+      }
+    }
+  });
+}
+
+// Enhanced search results rendering
+function renderSearchResult(result) {
+  if (result.type === 'character') {
+    const character = result.character;
+    const statusEmoji = {
+      alive: '😊', dead: '💀', missing: '❓', unknown: '🤷'
+    };
+    
+    return `
+      <div class="dropdown-item character-result">
+        ${character.image ? `<img src="${character.image}" alt="${character.name}" />` : '<div class="character-placeholder">👤</div>'}
+        <div class="dropdown-text">
+          <strong>${character.name}</strong>
+          ${character.title ? `<em> - ${character.title}</em>` : ''}
+          <br>
+          <span>${statusEmoji[character.status] || '❓'} ${character.relationship || 'Unknown'} • ${character.location || 'Unknown location'}</span>
+        </div>
+      </div>
+    `;
+  } else {
+    // Original location result
+    const filename = sanitizeFilename(result.name);
+    return `
+      <div class="dropdown-item location-result">
+        <img src="images/${filename}.jpg" alt="${result.name}" onerror="this.style.display='none'" />
+        <div class="dropdown-text">
+          <strong>📍 ${result.name}</strong><br>
+          <span>${result.desc.replace(/(<([^>]+)>)/gi, '').substring(0, 100)}...</span>
+        </div>
+      </div>
+    `;
+  }
+}
+
+// Character filter controls
+function addCharacterControls() {
+  const controlsHtml = `
+    <div id="character-controls" style="position: absolute; top: 80px; left: 10px; z-index: 1000; background: var(--popup-bg); padding: 10px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">
+      <div style="margin-bottom: 8px; font-weight: bold;">👥 Characters</div>
+      <label><input type="checkbox" id="show-characters" checked> Show Characters</label><br>
+      <label><input type="checkbox" id="show-allies" checked> Allies</label><br>
+      <label><input type="checkbox" id="show-enemies" checked> Enemies</label><br>
+      <label><input type="checkbox" id="show-neutral" checked> Neutral</label>
+    </div>
+  `;
+  
+  document.body.insertAdjacentHTML('beforeend', controlsHtml);
+  
+  // Add event listeners for filters
+  document.getElementById('show-characters').addEventListener('change', toggleCharacters);
+  document.getElementById('show-allies').addEventListener('change', () => filterCharacters(['ally', 'friendly']));
+  document.getElementById('show-enemies').addEventListener('change', () => filterCharacters(['enemy', 'hostile']));
+  document.getElementById('show-neutral').addEventListener('change', () => filterCharacters(['neutral', 'suspicious']));
+}
+
+function toggleCharacters() {
+  const show = document.getElementById('show-characters').checked;
+  characterLayers.forEach(({ marker }) => {
+    if (show) {
+      map.addLayer(marker);
+    } else {
+      map.removeLayer(marker);
+    }
+  });
+}
+
+function filterCharacters(relationships) {
+  const checkbox = event.target;
+  const show = checkbox.checked;
+  
+  characterLayers.forEach(({ marker, character }) => {
+    if (relationships.includes(character.relationship)) {
+      if (show) {
+        map.addLayer(marker);
+      } else {
+        map.removeLayer(marker);
+      }
+    }
+  });
+}
 
 //Load GeoJSON and bind markers + search
 fetch('data/places.geojson')
@@ -123,7 +380,8 @@ fetch('data/places.geojson')
               searchIndex.push({
                 name,
                 desc: html.replace(/(<([^>]+)>)/gi, ''), // Remove HTML tags for search
-                latlng
+                latlng,
+                type: 'location'
               });
             })
             .catch(err => {
@@ -135,7 +393,8 @@ fetch('data/places.geojson')
               searchIndex.push({
                 name,
                 desc,
-                latlng
+                latlng,
+                type: 'location'
               });
             });
         } else {
@@ -147,7 +406,8 @@ fetch('data/places.geojson')
           searchIndex.push({
             name,
             desc,
-            latlng
+            latlng,
+            type: 'location'
           });
         }
 
@@ -156,6 +416,12 @@ fetch('data/places.geojson')
     }).addTo(map);
 
     initSearch(); // Init search once all markers are set up
+    
+    // Load characters after locations are loaded
+    setTimeout(() => {
+      loadCharacters();
+      addCharacterControls();
+    }, 500);
   })
   .catch(error => console.error('Error loading GeoJSON:', error));
 
@@ -181,23 +447,33 @@ function initSearch() {
 
     if (results.length > 0) {
       results.forEach((result, index) => {
-        const filename = sanitizeFilename(result.name);
         const item = document.createElement("div");
-        item.className = "dropdown-item";
-        item.innerHTML = `
-          <img src="images/${filename}.jpg" alt="${result.name}" onerror="this.style.display='none'" />
-          <div class="dropdown-text"><strong>${result.name}</strong><br>
-         <span>${result.desc.replace(/(<([^>]+)>)/gi, '').substring(0, 100)}...</span></div>
-          `;
+        item.innerHTML = renderSearchResult(result);
+        
         item.addEventListener("click", () => {
-          const markerMatch = geoFeatureLayers.find(g => g.feature.properties.name === result.name);
-          if (markerMatch) {
-            map.setView(markerMatch.layer.getLatLng(), Math.max(map.getZoom(), 1));
-            markerMatch.layer.openPopup();
+          if (result.type === 'character') {
+            // For characters, find their marker and open popup
+            const characterLayer = characterLayers.find(cl => 
+              cl.character.name === result.character.name
+            );
+            if (characterLayer) {
+              map.setView(characterLayer.marker.getLatLng(), Math.max(map.getZoom(), 1));
+              characterLayer.marker.openPopup();
+            }
+          } else {
+            // Original location behavior
+            const markerMatch = geoFeatureLayers.find(g => 
+              g.feature.properties.name === result.name
+            );
+            if (markerMatch) {
+              map.setView(markerMatch.layer.getLatLng(), Math.max(map.getZoom(), 1));
+              markerMatch.layer.openPopup();
+            }
           }
           dropdown.style.display = 'none';
           searchInput.blur();
         });
+        
         dropdown.appendChild(item);
       });
       dropdown.style.display = 'block';
@@ -253,6 +529,88 @@ function initSearch() {
       dropdown.style.display = "block";
     }
   });
+}
+
+// Character panel functionality
+function initCharacterPanel() {
+  const panel = document.getElementById('character-panel');
+  const toggleBtn = document.getElementById('toggle-panel');
+  const grid = document.getElementById('character-grid');
+  
+  if (!panel || !toggleBtn || !grid) {
+    console.warn('Character panel elements not found');
+    return;
+  }
+  
+  let isPanelOpen = false;
+  
+  toggleBtn.addEventListener('click', () => {
+    isPanelOpen = !isPanelOpen;
+    panel.classList.toggle('open', isPanelOpen);
+    toggleBtn.textContent = isPanelOpen ? '✖️' : '📖';
+  });
+  
+  // Populate character grid
+  function populateCharacterGrid(characters = characterData) {
+    grid.innerHTML = '';
+    
+    characters.forEach(character => {
+      const card = document.createElement('div');
+      card.className = 'character-card';
+      card.innerHTML = `
+        ${character.image ? `<img src="${character.image}" alt="${character.name}">` : ''}
+        <div class="character-info">
+          <h4>${character.name}</h4>
+          ${character.title ? `<div class="title">${character.title}</div>` : ''}
+          <div class="location">📍 ${character.location || 'Unknown'}</div>
+          <div class="status-badge status-${character.status}">${character.status || 'unknown'}</div>
+        </div>
+      `;
+      
+      card.addEventListener('click', () => {
+        // Find and focus character on map
+        const characterLayer = characterLayers.find(cl => 
+          cl.character.name === character.name
+        );
+        if (characterLayer) {
+          map.setView(characterLayer.marker.getLatLng(), Math.max(map.getZoom(), 1));
+          characterLayer.marker.openPopup();
+          // Close panel on mobile
+          if (window.innerWidth <= 768) {
+            panel.classList.remove('open');
+            toggleBtn.textContent = '📖';
+            isPanelOpen = false;
+          }
+        }
+      });
+      
+      grid.appendChild(card);
+    });
+  }
+  
+  // Filter functionality
+  document.getElementById('relationship-filter')?.addEventListener('change', filterCharactersInPanel);
+  document.getElementById('status-filter')?.addEventListener('change', filterCharactersInPanel);
+  
+  function filterCharactersInPanel() {
+    const relationshipFilter = document.getElementById('relationship-filter')?.value || '';
+    const statusFilter = document.getElementById('status-filter')?.value || '';
+    
+    let filtered = characterData;
+    
+    if (relationshipFilter) {
+      filtered = filtered.filter(char => char.relationship === relationshipFilter);
+    }
+    
+    if (statusFilter) {
+      filtered = filtered.filter(char => char.status === statusFilter);
+    }
+    
+    populateCharacterGrid(filtered);
+  }
+  
+  // Initial population
+  populateCharacterGrid();
 }
 
 window.addEventListener('load', initSearch);

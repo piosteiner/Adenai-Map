@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Adenai Map</title>
-  <meta property="og:title" content="Adenai Map – DnD Kampagne VsuzH">
+  <meta property="og:title" content="Adenai Map — DnD Kampagne VsuzH">
   <meta property="og:description" content="Karte der Welt Adenai, mit dem Abenteuerpfad der Gruppe VsuzH.">
   <meta property="og:image" content="icons/uwu_1.png">
   
@@ -22,29 +22,65 @@
 
 <body>
   <div id="map"></div>
-  <div id="coords">X: –, Y: –</div>
+  <div id="coords">X: —, Y: —</div>
 
-<div id="search-container">
-  <input type="text" id="searchBox" placeholder="Begriff suchen..." />
-  <div id="resultsDropdown"></div>
-</div>
-
-<noscript>
-  <div style="
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #222;
-    color: #f1e1bd;
-    padding: 20px;
-    font-family: sans-serif;
-    border-radius: 8px;
-    z-index: 2000;
-    text-align: center;">
-    Diese Karte benötigt JavaScript. Bitte aktiviere JavaScript in deinem Browser, um sie anzuzeigen.
+  <div id="search-container">
+    <input type="text" id="searchBox" placeholder="Begriff suchen..." />
+    <div id="resultsDropdown"></div>
   </div>
-</noscript>
+
+  <!-- Character Browser Panel -->
+  <div id="character-panel" class="character-panel">
+    <div class="panel-header">
+      <h3>👥 Characters</h3>
+    </div>
+    
+    <div class="panel-content">
+      <div class="character-filters">
+        <select id="relationship-filter">
+          <option value="">All Relationships</option>
+          <option value="ally">Allies</option>
+          <option value="friendly">Friendly</option>
+          <option value="neutral">Neutral</option>
+          <option value="suspicious">Suspicious</option>
+          <option value="hostile">Hostile</option>
+          <option value="enemy">Enemies</option>
+        </select>
+        
+        <select id="status-filter">
+          <option value="">All Status</option>
+          <option value="alive">Alive</option>
+          <option value="dead">Dead</option>
+          <option value="missing">Missing</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+      
+      <div class="character-grid" id="character-grid">
+        <!-- Characters will be populated here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Character Panel Toggle Button -->
+  <button id="toggle-panel" title="Toggle Character Panel">📖</button>
+
+  <noscript>
+    <div style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #222;
+      color: #f1e1bd;
+      padding: 20px;
+      font-family: sans-serif;
+      border-radius: 8px;
+      z-index: 2000;
+      text-align: center;">
+      Diese Karte benötigt JavaScript. Bitte aktiviere JavaScript in deinem Browser, um sie anzuzeigen.
+    </div>
+  </noscript>
 
   <!-- Load Leaflet JS and your main logic last -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
