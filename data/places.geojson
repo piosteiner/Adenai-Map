@@ -169,7 +169,9 @@
       "type": "Feature",
       "properties": {
         "name": "Toftgard",
-        "description": "Stadt der Familie Karthright."
+        "description": "Stadt der Familie Karthright.",
+        "contentUrl": null,
+        "visited": true
       },
       "geometry": {
         "type": "Point",
