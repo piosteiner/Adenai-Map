@@ -71,7 +71,21 @@
       "firstMet": "",
       "notes": "",
       "createdAt": "2025-08-22T04:26:43.834Z",
-      "updatedAt": "2025-08-22T04:26:43.834Z"
+      "updatedAt": "2025-08-22T15:21:14.144Z",
+      "coordinates": [
+        1392,
+        1083
+      ],
+      "movementHistory": [],
+      "currentLocation": {
+        "date": "2025-08-22",
+        "location": "Toftgard",
+        "coordinates": [
+          1392,
+          1083
+        ],
+        "notes": "Migrated from original location"
+      }
     },
     {
       "id": "remus",
@@ -147,5 +161,5 @@
       "updatedAt": "2025-08-22T15:11:59.193Z"
     }
   ],
-  "lastUpdated": "2025-08-22T15:11:59.193Z"
+  "lastUpdated": "2025-08-22T15:21:14.145Z"
 }
