@@ -86,9 +86,9 @@
       "itemName": "Zur Prallen Traube",
       "user": "Nici",
       "timestamp": "2025-08-22T06:06:20.366Z",
-      "status": "pending",
-      "reviewedBy": null,
-      "reviewedAt": null,
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T07:34:24.808Z",
       "reviewNotes": "",
       "commitMessage": "Update location: Zur Prallen Traube (by Nici) - Updated location details"
     },
@@ -431,5 +431,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T07:34:15.513Z"
+  "lastUpdated": "2025-08-22T07:34:25.021Z"
 }
