@@ -97,7 +97,9 @@
       "type": "Feature",
       "properties": {
         "name": "Ruine von Zurak'thar",
-        "description": "Die verlassene Ruine von Zurak'thar."
+        "description": "Die verlassene Ruine von Zurak'thar.",
+        "contentUrl": null,
+        "visited": true
       },
       "geometry": {
         "type": "Point",
