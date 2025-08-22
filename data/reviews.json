@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "056f65fb34e508c0083ed59841198443acd4e463",
+      "action": "update",
+      "type": "character",
+      "itemName": "Remus",
+      "user": "gm",
+      "timestamp": "2025-08-22T15:11:17.952Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T15:11:17.952Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: remus (by gm) - Updated character details"
+    },
+    {
       "commitSha": "214cb5357a71f843b778eb7edfdd9ba70a5b8749",
       "action": "update",
       "type": "character",
@@ -483,5 +496,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T15:11:02.812Z"
+  "lastUpdated": "2025-08-22T15:11:17.952Z"
 }
