@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "0a3fae94552d15e5f83e6f86be7dcd421838ec37",
+      "action": "update",
+      "type": "location",
+      "itemName": "Fitchers Turm",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:03:15.079Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Fitchers Turm (by Nici) - marked as visited"
+    },
+    {
       "commitSha": "2f6fdbb16e5d48f5c322d1e457e639348645b182",
       "action": "update",
       "type": "location",
@@ -197,5 +210,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:03:03.926Z"
+  "lastUpdated": "2025-08-22T06:03:15.079Z"
 }
