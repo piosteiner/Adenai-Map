@@ -23,7 +23,22 @@
       "notes": "",
       "createdAt": "2025-08-22T00:21:35.645Z",
       "updatedAt": "2025-08-22T03:34:20.333Z"
+    },
+    {
+      "id": "lia_karthright",
+      "name": "Lia Karthright",
+      "title": "",
+      "location": "Toftgard",
+      "description": "",
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "createdAt": "2025-08-22T04:26:43.834Z",
+      "updatedAt": "2025-08-22T04:26:43.834Z"
     }
   ],
-  "lastUpdated": "2025-08-22T03:34:20.333Z"
+  "lastUpdated": "2025-08-22T04:26:43.834Z"
 }
