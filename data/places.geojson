@@ -680,7 +680,10 @@
       "type": "Feature",
       "properties": {
         "name": "Siedlung südlich von Rena",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "rena_region",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
