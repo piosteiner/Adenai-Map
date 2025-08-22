@@ -78,6 +78,10 @@
       "name": "Remus",
       "title": "Lord",
       "location": "Sternenzirkel Base?",
+      "coordinates": [
+        1155,
+        540
+      ],
       "description": "",
       "image": "",
       "status": "alive",
@@ -85,8 +89,18 @@
       "relationship": "enemy",
       "firstMet": "",
       "notes": "",
+      "movementHistory": [],
+      "currentLocation": {
+        "date": "2025-08-22",
+        "location": "Sternenzirkel Base?",
+        "coordinates": [
+          1155,
+          540
+        ],
+        "notes": "Updated location"
+      },
       "createdAt": "2025-08-22T04:28:11.542Z",
-      "updatedAt": "2025-08-22T04:28:11.542Z"
+      "updatedAt": "2025-08-22T15:11:17.200Z"
     },
     {
       "id": "tasbor",
@@ -104,5 +118,5 @@
       "updatedAt": "2025-08-22T06:09:11.125Z"
     }
   ],
-  "lastUpdated": "2025-08-22T15:11:02.077Z"
+  "lastUpdated": "2025-08-22T15:11:17.200Z"
 }
