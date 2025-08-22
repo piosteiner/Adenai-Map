@@ -160,10 +160,10 @@
       "id": "test",
       "name": "Test",
       "title": "",
-      "location": "Motu Motu",
+      "location": "Donnermund",
       "coordinates": [
-        2005,
-        1025
+        981,
+        656
       ],
       "description": "",
       "image": "",
@@ -172,19 +172,32 @@
       "relationship": "ally",
       "firstMet": "",
       "notes": "",
-      "movementHistory": [],
+      "movementHistory": [
+        {
+          "id": "movement_1755878742652",
+          "date": "2025-08-04",
+          "location": "Donnermund",
+          "coordinates": [
+            981,
+            656
+          ],
+          "notes": "",
+          "type": "travel",
+          "createdAt": "2025-08-22T16:05:42.652Z"
+        }
+      ],
       "currentLocation": {
-        "date": "2025-08-22",
-        "location": "Motu Motu",
+        "date": "2025-08-04",
+        "location": "Donnermund",
         "coordinates": [
-          2005,
-          1025
+          981,
+          656
         ],
-        "notes": "Initial location"
+        "notes": ""
       },
       "createdAt": "2025-08-22T15:11:48.559Z",
-      "updatedAt": "2025-08-22T15:11:59.193Z"
+      "updatedAt": "2025-08-22T16:05:42.652Z"
     }
   ],
-  "lastUpdated": "2025-08-22T15:27:49.219Z"
+  "lastUpdated": "2025-08-22T16:05:42.652Z"
 }
