@@ -160,10 +160,10 @@
       "id": "test",
       "name": "Test",
       "title": "",
-      "location": "Föhrenhauch",
+      "location": "Yosefka Akademie",
       "coordinates": [
-        863,
-        1122
+        1090,
+        1260
       ],
       "description": "",
       "image": "",
@@ -208,20 +208,32 @@
           "notes": "",
           "type": "mission",
           "createdAt": "2025-08-22T16:06:03.565Z"
+        },
+        {
+          "id": "movement_1755878791013",
+          "date": "2025-08-25",
+          "location": "Yosefka Akademie",
+          "coordinates": [
+            1090,
+            1260
+          ],
+          "notes": "Fled from a molerat",
+          "type": "escape",
+          "createdAt": "2025-08-22T16:06:31.013Z"
         }
       ],
       "currentLocation": {
-        "date": "2025-08-16",
-        "location": "Föhrenhauch",
+        "date": "2025-08-25",
+        "location": "Yosefka Akademie",
         "coordinates": [
-          863,
-          1122
+          1090,
+          1260
         ],
-        "notes": ""
+        "notes": "Fled from a molerat"
       },
       "createdAt": "2025-08-22T15:11:48.559Z",
-      "updatedAt": "2025-08-22T16:06:03.565Z"
+      "updatedAt": "2025-08-22T16:06:31.013Z"
     }
   ],
-  "lastUpdated": "2025-08-22T16:06:03.565Z"
+  "lastUpdated": "2025-08-22T16:06:31.013Z"
 }
