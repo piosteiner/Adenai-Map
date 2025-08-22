@@ -141,7 +141,9 @@
       "type": "Feature",
       "properties": {
         "name": "Atlantis (versunken)",
-        "description": "Atlantis versunken im Mirog Graben - auch bekannt als das Unterwasser Paradies."
+        "description": "Atlantis versunken im Mirog Graben - auch bekannt als das Unterwasser Paradies.",
+        "contentUrl": null,
+        "visited": true
       },
       "geometry": {
         "type": "Point",
