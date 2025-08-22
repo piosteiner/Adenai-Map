@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "b9ec92000ed6bd89b30ebe698573067c3b9d63c3",
+      "action": "update",
+      "type": "character",
+      "itemName": "Avery",
+      "user": "gm",
+      "timestamp": "2025-08-22T15:27:28.521Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T15:27:28.521Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Avery (by gm) - Rena on 2025-08-20"
+    },
+    {
       "commitSha": "f3bfd0902b8f54b5dfd9fac5961ac6158fd30e0e",
       "action": "update",
       "type": "character",
@@ -522,5 +535,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T15:11:59.879Z"
+  "lastUpdated": "2025-08-22T15:27:28.521Z"
 }
