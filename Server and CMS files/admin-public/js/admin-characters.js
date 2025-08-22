@@ -4,6 +4,7 @@ class AdminCharacters {
         this.characters = [];
         this.currentCharacterFilter = '';
         this.editingCharacter = null;
+        this.savedScrollPosition = null; // Add scroll position tracking
         this.ui = window.adminUI;
         this.auth = window.adminAuth;
         this.init();
@@ -223,8 +224,9 @@ class AdminCharacters {
     openAddCharacterModal() {
         if (!this.auth.requireAuth()) return;
         
-        // Reset editing state
+        // Reset editing state and scroll position for new characters
         this.editingCharacter = null;
+        this.savedScrollPosition = null;
         
         // Update modal title and button text
         document.querySelector('#add-character-modal .modal-header h3').textContent = 'Add New Character';
@@ -236,6 +238,10 @@ class AdminCharacters {
 
     openEditCharacterModal(characterId) {
         if (!this.auth.requireAuth()) return;
+        
+        // Save current scroll position before opening modal
+        this.savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        console.log('📍 Saved scroll position:', this.savedScrollPosition);
         
         const character = this.characters.find(char => char.id === characterId);
         if (!character) {
@@ -273,6 +279,7 @@ class AdminCharacters {
     closeCharacterModal() {
         this.ui.closeModal('add-character-modal');
         this.editingCharacter = null;
+        // Note: We don't clear savedScrollPosition here in case we need it for restoration
     }
 
     async saveCharacter() {
@@ -323,6 +330,18 @@ class AdminCharacters {
                 this.ui.showToast(`✅ Character "${characterData.name}" ${isEditing ? 'updated' : 'saved'} successfully!`, 'success');
                 await this.loadCharacters();
                 this.closeCharacterModal();
+                
+                // Restore scroll position for edits (not for new characters)
+                if (isEditing && this.savedScrollPosition !== null) {
+                    setTimeout(() => {
+                        console.log('📍 Restoring scroll position to:', this.savedScrollPosition);
+                        window.scrollTo({
+                            top: this.savedScrollPosition,
+                            behavior: 'smooth'
+                        });
+                        this.savedScrollPosition = null; // Clear after use
+                    }, 100); // Small delay to ensure content is rendered
+                }
                 
                 // Notify stats update
                 document.dispatchEvent(new CustomEvent('dataChanged', { detail: { type: 'characters' } }));

@@ -4,6 +4,7 @@ class AdminLocations {
         this.locations = [];
         this.currentFilter = '';
         this.editingLocation = null;
+        this.savedScrollPosition = null; // Add scroll position tracking
         this.ui = window.adminUI;
         this.auth = window.adminAuth;
         this.init();
@@ -203,8 +204,9 @@ class AdminLocations {
     openAddLocationModal() {
         if (!this.auth.requireAuth()) return;
         
-        // Reset editing state
+        // Reset editing state and scroll position for new locations
         this.editingLocation = null;
+        this.savedScrollPosition = null;
         
         // Update modal title and button text
         document.querySelector('#add-location-modal .modal-header h3').textContent = 'Add New Location';
@@ -215,6 +217,10 @@ class AdminLocations {
 
     openEditLocationModal(locationName) {
         if (!this.auth.requireAuth()) return;
+        
+        // Save current scroll position before opening modal
+        this.savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        console.log('📍 Saved scroll position:', this.savedScrollPosition);
         
         const location = this.locations.find(loc => loc.properties.name === locationName);
         if (!location) {
@@ -249,6 +255,7 @@ class AdminLocations {
     closeModal() {
         this.ui.closeModal('add-location-modal');
         this.editingLocation = null;
+        // Note: We don't clear savedScrollPosition here in case we need it for restoration
     }
 
     async saveLocation() {
@@ -304,6 +311,18 @@ class AdminLocations {
                 this.ui.showToast(`✅ Location "${locationData.properties.name}" ${isEditing ? 'updated' : 'saved'} successfully!`, 'success');
                 await this.loadLocations();
                 this.closeModal();
+                
+                // Restore scroll position for edits (not for new locations)
+                if (isEditing && this.savedScrollPosition !== null) {
+                    setTimeout(() => {
+                        console.log('📍 Restoring scroll position to:', this.savedScrollPosition);
+                        window.scrollTo({
+                            top: this.savedScrollPosition,
+                            behavior: 'smooth'
+                        });
+                        this.savedScrollPosition = null; // Clear after use
+                    }, 100); // Small delay to ensure content is rendered
+                }
                 
                 // Notify stats update
                 document.dispatchEvent(new CustomEvent('dataChanged', { detail: { type: 'locations' } }));
@@ -379,7 +398,7 @@ class AdminLocations {
             type: "FeatureCollection", 
             features: this.locations
         };
-        this.ui.viewRawJson(data, 'Adenai Locations - Raw JSON');
+        this.ui.viewRawJson(data, 'adenai-locations');
     }
 }
 

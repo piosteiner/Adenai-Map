@@ -180,7 +180,6 @@ class AdminChangelog {
             </div>
             
             <div id="changelog-content" class="content-list">
-                <!-- Content will be loaded here -->
             </div>
         `;
 
@@ -206,7 +205,9 @@ class AdminChangelog {
         }
 
         // Check if already loaded (avoid reloading unnecessarily)
-        if (changelogContent.innerHTML.includes('changelog-item')) {
+        if (changelogContent.innerHTML.trim() !== '' && 
+            (changelogContent.innerHTML.includes('changelog-item') || 
+             changelogContent.innerHTML.includes('empty-state'))) {
             console.log('📜 Changelog already loaded');
             return;
         }
@@ -217,12 +218,6 @@ class AdminChangelog {
     async loadChangelog() {
         try {
             console.log('📜 Loading changelog from API...');
-            
-            // Show loading state manually instead of using UI method
-            const changelogContent = document.getElementById('changelog-content');
-            if (changelogContent) {
-                changelogContent.innerHTML = '<div class="loading">Loading changelog... 🔄</div>';
-            }
             
             const response = await fetch('/api/changelog?limit=100');
             
@@ -267,28 +262,32 @@ class AdminChangelog {
         try {
             console.log('📜 Starting renderChangelog() with', this.changelog.length, 'items');
             
+            // AGGRESSIVE CLEANUP: Remove ALL loading messages from the entire changelog area
+            const changelogTab = document.getElementById('changelog-tab');
+            if (changelogTab) {
+                // Remove ALL loading elements anywhere in the tab
+                changelogTab.querySelectorAll('.loading').forEach(loading => {
+                    loading.remove();
+                    console.log('📜 Removed loading element:', loading);
+                });
+                
+                // Remove any elements containing "Loading changelog"
+                changelogTab.querySelectorAll('*').forEach(element => {
+                    if (element.textContent && element.textContent.includes('Loading changelog')) {
+                        element.remove();
+                        console.log('📜 Removed element with loading text:', element);
+                    }
+                });
+            }
+            
             const container = document.getElementById('changelog-content');
             if (!container) {
                 console.error('❌ changelog-content container not found!');
                 return;
             }
 
-            console.log('📜 Found container, clearing loading state...');
-            
             // Clear the container content
             container.innerHTML = '';
-            
-            // Also remove any loading messages that might be in parent containers
-            const changelogTab = document.getElementById('changelog-tab');
-            if (changelogTab) {
-                const loadingElements = changelogTab.querySelectorAll('.loading');
-                loadingElements.forEach(loading => {
-                    if (loading.textContent.includes('Loading changelog')) {
-                        loading.remove();
-                        console.log('📜 Removed loading message');
-                    }
-                });
-            }
 
             if (this.changelog.length === 0) {
                 console.log('📜 No changelog entries, showing empty state');
