@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "9a1a2ddc2d1ed119f302c9b79e8d99e184d079fc",
+      "action": "update",
+      "type": "location",
+      "itemName": "Verlassenes Fischereidorf",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:06:54.582Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Verlassenes Fischereidorf (by Nici) - marked as visited"
+    },
+    {
       "commitSha": "2cd4ebc353bcc3a5915ddea4566707c1f97a5a04",
       "action": "update",
       "type": "location",
@@ -379,5 +392,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:06:39.100Z"
+  "lastUpdated": "2025-08-22T06:06:54.582Z"
 }
