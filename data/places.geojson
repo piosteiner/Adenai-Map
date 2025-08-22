@@ -81,7 +81,9 @@
       "type": "Feature",
       "properties": {
         "name": "Fitchers Turm",
-        "description": "Standort des Turms von Fitcher, als die VsuzH ihn besuchten."
+        "description": "Standort des Turms von Fitcher, als die VsuzH ihn besuchten.",
+        "contentUrl": null,
+        "visited": true
       },
       "geometry": {
         "type": "Point",
