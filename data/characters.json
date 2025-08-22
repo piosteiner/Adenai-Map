@@ -33,10 +33,10 @@
       "id": "avery",
       "name": "Avery",
       "title": "von Rena",
-      "location": "Wesdalen",
+      "location": "Olecea",
       "coordinates": [
-        790,
-        769
+        916,
+        261
       ],
       "description": "",
       "image": "https://adenai.piogino.ch/images/avery.png",
@@ -72,16 +72,16 @@
         }
       ],
       "currentLocation": {
-        "date": "2025-08-29",
-        "location": "Wesdalen",
+        "date": "2025-08-22",
+        "location": "Olecea",
         "coordinates": [
-          790,
-          769
+          916,
+          261
         ],
-        "notes": ""
+        "notes": "Updated location"
       },
       "createdAt": "2025-08-22T00:21:35.645Z",
-      "updatedAt": "2025-08-22T15:27:49.219Z"
+      "updatedAt": "2025-08-22T16:13:29.928Z"
     },
     {
       "id": "lia_karthright",
@@ -235,5 +235,5 @@
       "updatedAt": "2025-08-22T16:12:51.364Z"
     }
   ],
-  "lastUpdated": "2025-08-22T16:12:51.364Z"
+  "lastUpdated": "2025-08-22T16:13:29.928Z"
 }
