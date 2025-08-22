@@ -392,7 +392,9 @@
       "type": "Feature",
       "properties": {
         "name": "Goblin Loch",
-        "description": "Die VsuzH haben hier einen unschuligen Goblin in ein mysteriöses, dunkles Loch geworfen. Wenigstens haben sies verschlossen damit niemand mehr reinfällt."
+        "description": "Die VsuzH haben hier einen unschuligen Goblin in ein mysteriöses, dunkles Loch geworfen. Wenigstens haben sies verschlossen damit niemand mehr reinfällt.",
+        "contentUrl": null,
+        "visited": true
       },
       "geometry": {
         "type": "Point",
