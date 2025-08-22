@@ -1,0 +1,243 @@
+/* Streamlined Admin CSS - Integration & Override Styles Only */
+/* This file now only contains styles not covered by the modular CSS system */
+
+/* ===== MOVEMENT MODAL STYLES (Character-specific) ===== */
+.movement-modal-content {
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.movement-history-section {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.movement-history-list {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-sm);
+    background: var(--card-bg);
+}
+
+.movement-entry {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    transition: box-shadow var(--transition-fast);
+}
+
+.movement-entry:hover {
+    box-shadow: var(--card-shadow);
+}
+
+.movement-entry:last-child {
+    margin-bottom: 0;
+}
+
+.movement-entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-xs);
+}
+
+.movement-info h4 {
+    margin: 0 0 var(--spacing-xs) 0;
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+}
+
+.movement-date {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.movement-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.movement-actions button {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: filter var(--transition-fast);
+}
+
+.movement-actions button:hover {
+    filter: brightness(0.9);
+}
+
+.movement-details {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.movement-details p {
+    margin: var(--spacing-xs) 0;
+}
+
+.add-movement-section {
+    background: var(--bg-secondary);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+}
+
+.movement-form .form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.movement-form label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+}
+
+.movement-form input, 
+.movement-form select, 
+.movement-form textarea {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    background: var(--input-bg);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.movement-form input:focus,
+.movement-form select:focus,
+.movement-form textarea:focus {
+    outline: none;
+    border-color: var(--focus-border);
+    box-shadow: 0 0 0 2px var(--focus-ring);
+}
+
+.movement-form textarea {
+    resize: vertical;
+    min-height: 60px;
+    line-height: 1.4;
+}
+
+/* Empty state for movement history */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xxl);
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.empty-state p {
+    margin: var(--spacing-xs) 0;
+}
+
+/* ===== ADMIN ACTION VISIBILITY ===== */
+/* These are shown/hidden based on authentication state by JavaScript */
+.admin-action {
+    display: none; /* Hidden by default, shown when authenticated */
+}
+
+.admin-action.visible {
+    display: inline-flex;
+}
+
+/* ===== INTEGRATION OVERRIDES ===== */
+/* Small overrides to ensure modular CSS works together properly */
+
+/* Ensure tab content transitions work */
+.tab-content {
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.tab-content.active {
+    opacity: 1;
+}
+
+/* Ensure toast container is properly positioned above everything */
+#toast-container {
+    z-index: 10000;
+}
+
+/* Ensure modals are above everything else */
+.modal {
+    z-index: 9999;
+}
+
+/* Map container z-index to ensure it doesn't interfere with modals */
+#journeys-map {
+    z-index: 1;
+}
+
+.map-instructions {
+    z-index: 1000;
+}
+
+/* ===== PRINT OPTIMIZATION ===== */
+@media print {
+    .admin-header,
+    .admin-nav,
+    .actions,
+    .location-actions,
+    .character-actions,
+    .form-actions,
+    .movement-actions,
+    .theme-toggle,
+    #toast-container,
+    .modal,
+    #map-instructions {
+        display: none !important;
+    }
+    
+    .journeys-map-container {
+        height: 400px !important;
+        page-break-inside: avoid;
+    }
+    
+    .movement-modal-content {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .movement-entry {
+        border-width: 2px;
+    }
+    
+    .journey-item {
+        border-width: 2px;
+    }
+    
+    .segment-item {
+        border-width: 2px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .movement-entry:hover,
+    .journey-item:hover,
+    .segment-item:hover {
+        transform: none;
+    }
+    
+    .tab-content {
+        transition: none;
+    }
+}

@@ -2,6 +2,29 @@
 class AdminUI {
     constructor() {
         this.toastContainer = this.ensureToastContainer();
+        this.initializeTabSystem();
+    }
+
+    // Initialize tab system with event listeners
+    initializeTabSystem() {
+        document.addEventListener('DOMContentLoaded', () => {
+            // Setup tab button listeners
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabName = btn.dataset.tab;
+                    this.switchTab(tabName);
+                });
+            });
+
+            // Check for active tab on page load
+            const activeTab = document.querySelector('.tab-btn.active');
+            if (activeTab) {
+                const tabName = activeTab.dataset.tab;
+                if (tabName === 'journeys') {
+                    setTimeout(() => this.initializeJourneyTab(), 500);
+                }
+            }
+        });
     }
 
     // Toast Notification System
@@ -86,7 +109,7 @@ class AdminUI {
         }
     }
 
-    // Tab Management
+    // Enhanced Tab Management with Journey Integration
     switchTab(tabName) {
         // Update tab buttons
         document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -99,6 +122,66 @@ class AdminUI {
         });
 
         console.log(`🔄 Switched to ${tabName} tab`);
+
+        // Special handling for journeys tab
+        if (tabName === 'journeys') {
+            setTimeout(() => this.initializeJourneyTab(), 200);
+        }
+
+        // Notify admin core of tab change (for stats updates, etc.)
+        if (window.admin && typeof window.admin.onTabChanged === 'function') {
+            window.admin.onTabChanged(tabName);
+        }
+    }
+
+    // Journey Tab Integration
+    initializeJourneyTab() {
+        console.log('🗺️ Initializing journey tab from AdminUI');
+        
+        try {
+            // Check if Journey Manager exists
+            if (window.journeyManager) {
+                console.log('✅ Found existing Journey Manager, initializing...');
+                window.journeyManager.initializeJourneyTab();
+            } else if (typeof JourneyManager !== 'undefined') {
+                console.log('🔧 Creating new Journey Manager...');
+                window.journeyManager = new JourneyManager();
+                window.journeyManager.initializeJourneyTab();
+            } else {
+                console.error('❌ JourneyManager class not found - check if admin-journey.js is loaded');
+                this.showJourneyError('Journey Manager not loaded. Please refresh the page.');
+            }
+        } catch (error) {
+            console.error('❌ Error initializing journey tab:', error);
+            this.showJourneyError(`Failed to initialize journeys: ${error.message}`);
+        }
+    }
+
+    // Show journey-specific error
+    showJourneyError(message) {
+        const journeysList = document.getElementById('journeys-list');
+        if (journeysList) {
+            journeysList.innerHTML = `
+                <div class="error-state" style="text-align: center; padding: 40px 20px;">
+                    <p style="color: #dc3545; font-weight: bold;">❌ Journey Loading Error</p>
+                    <p style="color: #666; margin: 10px 0;">${message}</p>
+                    <button onclick="adminUI.initializeJourneyTab()" class="btn-primary" style="margin-top: 15px;">
+                        🔄 Retry
+                    </button>
+                </div>
+            `;
+        }
+        this.showToast(message, 'error');
+    }
+
+    // Force map resize (utility for journey management)
+    forceMapResize() {
+        if (window.journeyManager && window.journeyManager.map) {
+            setTimeout(() => {
+                window.journeyManager.map.invalidateSize(true);
+                console.log('🗺️ Forced map resize from AdminUI');
+            }, 100);
+        }
     }
 
     // Form Utilities
@@ -294,6 +377,25 @@ class AdminUI {
                 </body>
             </html>
         `);
+    }
+
+    // Debug utility for Journey Management
+    debugJourneySystem() {
+        console.group('🔧 Journey System Debug Info');
+        console.log('Journey Manager exists:', !!window.journeyManager);
+        console.log('JourneyManager class defined:', typeof JourneyManager !== 'undefined');
+        console.log('Journey tab element:', document.querySelector('[data-tab="journeys"]'));
+        console.log('Journey map container:', document.getElementById('journeys-map'));
+        console.log('Journey list container:', document.getElementById('journeys-list'));
+        
+        if (window.journeyManager) {
+            console.log('Journey Manager state:', {
+                journeys: window.journeyManager.journeys?.length || 0,
+                map: !!window.journeyManager.map,
+                currentJourney: !!window.journeyManager.currentJourney
+            });
+        }
+        console.groupEnd();
     }
 }
 

@@ -12,13 +12,9 @@ const requireAuth = (req, res, next) => {
 
 // Journey-specific middleware for API protection
 const authenticateJourneyAPI = (req, res, next) => {
-    // For GET requests to journey (read-only), allow public access if needed
-    if (req.method === 'GET' && req.path.startsWith('/api/journey')) {
-        // Option 1: Public read access (uncomment if you want client website to fetch directly)
-        // return next();
-        
-        // Option 2: Protected access (recommended for admin-only management)
-        return requireAuth(req, res, next);
+    // For GET requests to journey (read-only), allow public access for the admin interface
+    if (req.method === 'GET') {
+        return next(); // Allow public read access to load journeys in admin
     }
     
     // All other operations (POST, PUT, DELETE) require admin authentication

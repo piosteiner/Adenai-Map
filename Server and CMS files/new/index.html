@@ -33,13 +33,10 @@
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/activity.css">
     <link rel="stylesheet" href="css/changelog.css">
-    <link rel="stylesheet" href="css/journey.css">
-    <link rel="stylesheet" href="css/admin.css">
     
     <!-- Leaflet CSS for Journey Management -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
-
 <body>
     <div class="admin-container">
         <header class="admin-header">
@@ -182,7 +179,7 @@
                     </div>
                     
                     <div class="journeys-map-container">
-                        <div id="journeys-map"></div>
+                        <div id="journeys-map" style="height: 100%; width: 100%;"></div>
                         
                         <!-- Map Instructions Overlay -->
                         <div id="map-instructions" class="map-instructions" style="display: none;">
@@ -249,6 +246,7 @@
         </main>
     </div>
 
+    <!-- All your existing modals stay the same... -->
     <!-- Add Location Modal -->
     <div id="add-location-modal" class="modal">
         <div class="modal-content">
@@ -461,12 +459,12 @@
                         
                         <!-- Custom Coordinates Input -->
                         <div id="custom-coordinates-input" class="form-group" style="display: none;">
-                            <div class="form-row">
-                                <div class="form-group">
+                            <div style="display: flex; gap: 10px;">
+                                <div style="flex: 1;">
                                     <label for="movement-x">🗺️ X Coordinate:</label>
                                     <input type="number" id="movement-x" name="movementX" placeholder="e.g., 1700">
                                 </div>
-                                <div class="form-group">
+                                <div style="flex: 1;">
                                     <label for="movement-y">🗺️ Y Coordinate:</label>
                                     <input type="number" id="movement-y" name="movementY" placeholder="e.g., 1008">
                                 </div>
@@ -539,6 +537,7 @@
 
     <!-- Modular JavaScript - Load in dependency order -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!--<script src="js/leaflet.curve.min.js"></script>-->
     <script src="js/theme-toggle.js"></script>
     <script src="js/admin-ui.js"></script>
     <script src="js/admin-auth.js"></script>
@@ -548,5 +547,475 @@
     <script src="js/admin-core.js"></script>
     <script src="js/admin-activity.js"></script>
     <script src="js/admin-changelog.js"></script>
+
+    <!-- Journey Management CSS -->
+    <style>
+    /* Journey Tab Styles */
+    .journeys-layout {
+        display: grid;
+        grid-template-columns: 400px 1fr;
+        gap: 20px;
+        height: calc(100vh - 250px);
+        min-height: 600px;
+    }
+
+    .journeys-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        overflow-y: auto;
+        border-right: 1px solid var(--border-color, #ddd);
+        padding-right: 20px;
+    }
+
+    .journey-item {
+        background: var(--background-primary, #fff);
+        border: 1px solid var(--border-color, #ddd);
+        border-radius: 8px;
+        padding: 15px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-bottom: 10px;
+    }
+
+    .journey-item:hover {
+        background: var(--hover-color, #f5f5f5);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .journey-item.active {
+        border-color: var(--primary-color, #007bff);
+        background: var(--primary-light, #e7f3ff);
+    }
+
+    .journey-item.inactive {
+        opacity: 0.6;
+    }
+
+    .journey-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+
+    .journey-item-header h4 {
+        margin: 0;
+        font-size: 1.1em;
+        color: var(--text-primary, #333);
+    }
+
+    .journey-status {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .journey-description {
+        color: var(--text-secondary, #666);
+        font-size: 0.9em;
+        margin: 5px 0;
+        font-style: italic;
+    }
+
+    .journey-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8em;
+        color: var(--text-muted, #999);
+        margin-top: 8px;
+    }
+
+    .journey-editor {
+        background: var(--background-secondary, #f8f9fa);
+        border-radius: 8px;
+        padding: 20px;
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+
+    .journey-editor .editor-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border-color, #ddd);
+    }
+
+    .journey-form .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .journey-form .form-group {
+        margin-bottom: 15px;
+    }
+
+    .journey-form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: var(--text-primary, #333);
+    }
+
+    .journey-form input,
+    .journey-form textarea,
+    .journey-form select {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid var(--border-color, #ddd);
+        border-radius: 4px;
+        font-size: 14px;
+        transition: border-color 0.2s;
+    }
+
+    .journey-form input:focus,
+    .journey-form textarea:focus,
+    .journey-form select:focus {
+        outline: none;
+        border-color: var(--primary-color, #007bff);
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    }
+
+    .opacity-value {
+        color: var(--text-muted, #666);
+        font-size: 0.8em;
+        margin-left: 5px;
+    }
+
+    .segments-section {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color, #ddd);
+    }
+
+    .segment-controls {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .segments-list {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .segment-item {
+        background: var(--background-primary, #fff);
+        border: 1px solid var(--border-color, #ddd);
+        border-radius: 4px;
+        padding: 12px;
+        margin-bottom: 8px;
+    }
+
+    .segment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+
+    .segment-type {
+        background: var(--primary-color, #007bff);
+        color: white;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+
+    .segment-coords {
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
+        color: var(--text-secondary, #666);
+    }
+
+    .segment-description {
+        font-style: italic;
+        color: var(--text-secondary, #666);
+        font-size: 0.9em;
+        margin-top: 5px;
+    }
+
+    .segment-control {
+        font-family: 'Courier New', monospace;
+        font-size: 0.8em;
+        color: var(--text-muted, #999);
+        margin-top: 3px;
+    }
+
+    .journeys-map-container {
+        position: relative;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        /* Add aspect ratio constraint */
+        aspect-ratio: 5/3; /* Matches your 2500x1500 bounds */
+        min-height: 400px;
+    }
+
+    .map-instructions {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 1000;
+        text-align: center;
+        border: 1px solid var(--border-color, #ddd);
+    }
+
+    .map-instructions p {
+        margin: 0 0 10px 0;
+        font-weight: 600;
+        color: var(--text-primary, #333);
+    }
+
+    .instruction-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .no-journeys {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--text-muted, #666);
+    }
+
+    .no-segments {
+        text-align: center;
+        padding: 20px;
+        color: var(--text-muted, #666);
+        font-style: italic;
+    }
+
+    /* Responsive design */
+    @media (max-width: 1200px) {
+        .journeys-layout {
+            grid-template-columns: 350px 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .journeys-layout {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr;
+            height: auto;
+        }
+        
+        .journeys-sidebar {
+            border-right: none;
+            border-bottom: 1px solid var(--border-color, #ddd);
+            padding-right: 0;
+            padding-bottom: 20px;
+            max-height: 300px;
+        }
+        
+        .journeys-map-container {
+            min-height: 400px;
+        }
+        
+        .journey-form .form-row {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Dark theme support */
+    [data-theme="dark"] .journey-item {
+        background: var(--background-primary);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+    }
+
+    [data-theme="dark"] .journey-item:hover {
+        background: var(--hover-color);
+    }
+
+    [data-theme="dark"] .journey-editor {
+        background: var(--background-secondary);
+    }
+
+    [data-theme="dark"] .map-instructions {
+        background: var(--background-primary);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+    }
+
+    [data-theme="dark"] .segment-item {
+        background: var(--background-primary);
+        border-color: var(--border-color);
+    }
+    </style>
+
+    <!-- Movement Modal CSS (keeping your existing styles) -->
+    <style>
+    .movement-modal-content {
+        max-width: 800px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .movement-history-section {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #eee;
+    }
+
+    .movement-history-list {
+        max-height: 400px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 10px;
+    }
+
+    .movement-entry {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+
+    .movement-entry:last-child {
+        margin-bottom: 0;
+    }
+
+    .movement-entry-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 8px;
+    }
+
+    .movement-info h4 {
+        margin: 0 0 4px 0;
+        color: #333;
+    }
+
+    .movement-date {
+        font-size: 0.9em;
+        color: #666;
+    }
+
+    .movement-actions {
+        display: flex;
+        gap: 5px;
+    }
+
+    .movement-actions button {
+        padding: 4px 8px;
+        font-size: 0.8em;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .movement-details {
+        font-size: 0.9em;
+        color: #555;
+    }
+
+    .movement-details p {
+        margin: 3px 0;
+    }
+
+    .add-movement-section {
+        background: #f5f5f5;
+        padding: 20px;
+        border-radius: 6px;
+    }
+
+    .movement-form .form-group {
+        margin-bottom: 15px;
+    }
+
+    .movement-form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .movement-form input, 
+    .movement-form select, 
+    .movement-form textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+    .movement-form textarea {
+        resize: vertical;
+        min-height: 60px;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #666;
+    }
+
+    .empty-state p {
+        margin: 5px 0;
+    }
+
+    /* Dark theme support */
+    [data-theme="dark"] .movement-entry {
+        background: #2a2a2a;
+        border-color: #555;
+        color: #f0f0f0;
+    }
+
+    [data-theme="dark"] .movement-info h4 {
+        color: #f0f0f0;
+    }
+
+    [data-theme="dark"] .movement-date {
+        color: #aaa;
+    }
+
+    [data-theme="dark"] .movement-details {
+        color: #ccc;
+    }
+
+    [data-theme="dark"] .add-movement-section {
+        background: #1e1e1e;
+    }
+
+    [data-theme="dark"] .movement-form label {
+        color: #f0f0f0;
+    }
+
+    [data-theme="dark"] .movement-form input,
+    [data-theme="dark"] .movement-form select,
+    [data-theme="dark"] .movement-form textarea {
+        background: #333;
+        border-color: #555;
+        color: #f0f0f0;
+    }
+
+    [data-theme="dark"] .movement-history-list {
+        background: #1a1a1a;
+        border-color: #555;
+    }
+
+    [data-theme="dark"] .movement-history-section {
+        border-bottom-color: #444;
+    }
+    </style>
 </body>
 </html>

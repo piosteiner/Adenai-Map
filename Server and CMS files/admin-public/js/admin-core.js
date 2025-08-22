@@ -5,6 +5,7 @@ class AdenaiAdmin {
         this.auth = window.adminAuth;
         this.locations = window.adminLocations;
         this.characters = window.adminCharacters;
+        this.journeys = window.journeyManager; // Add journey manager reference
         this.init();
     }
 
@@ -33,13 +34,9 @@ class AdenaiAdmin {
     }
 
     setupEventListeners() {
-        // Tab switching
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                this.ui.switchTab(e.target.dataset.tab);
-            });
-        });
-
+        // REMOVED: Tab switching (now handled by AdminUI)
+        // Tab switching is handled by adminUI.switchTab()
+        
         // Export button
         const exportBtn = document.getElementById('export-btn');
         if (exportBtn) {
@@ -54,6 +51,25 @@ class AdenaiAdmin {
             viewRawBtn.addEventListener('click', () => {
                 this.viewRawJson();
             });
+        }
+    }
+
+    // Called by AdminUI when tabs change
+    onTabChanged(tabName) {
+        console.log(`📋 Admin Core handling tab change: ${tabName}`);
+        
+        // Handle tab-specific logic here
+        if (tabName === 'overview') {
+            // Force update stats when overview tab is opened
+            setTimeout(() => this.updateStats(), 100);
+        }
+        
+        if (tabName === 'journeys') {
+            // Update journey reference if it exists now
+            if (window.journeyManager && !this.journeys) {
+                this.journeys = window.journeyManager;
+                console.log('🗺️ Journey manager reference updated');
+            }
         }
     }
 
@@ -90,30 +106,45 @@ class AdenaiAdmin {
         try {
             const locations = this.locations?.getLocations() || [];
             const characters = this.characters?.getCharacters() || [];
+            const journeys = this.journeys?.journeys || [];
             
             // Update location stats
-            document.getElementById('total-locations').textContent = locations.length;
+            const totalLocationsEl = document.getElementById('total-locations');
+            if (totalLocationsEl) {
+                totalLocationsEl.textContent = locations.length;
+            }
             
-            const visited = locations.filter(loc => loc.properties.visited).length;
-            document.getElementById('visited-locations').textContent = visited;
+            const visitedLocationsEl = document.getElementById('visited-locations');
+            if (visitedLocationsEl) {
+                const visited = locations.filter(loc => loc.properties.visited).length;
+                visitedLocationsEl.textContent = visited;
+            }
             
-            const regions = new Set(locations.map(loc => loc.properties.region).filter(Boolean));
-            document.getElementById('regions-count').textContent = regions.size;
+            const regionsCountEl = document.getElementById('regions-count');
+            if (regionsCountEl) {
+                const regions = new Set(locations.map(loc => loc.properties.region).filter(Boolean));
+                regionsCountEl.textContent = regions.size;
+            }
             
             // Update character stats
             const totalCharactersEl = document.getElementById('total-characters');
-            const aliveCharactersEl = document.getElementById('alive-characters');
-            
             if (totalCharactersEl) {
                 totalCharactersEl.textContent = characters.length;
             }
             
+            const aliveCharactersEl = document.getElementById('alive-characters');
             if (aliveCharactersEl) {
                 const alive = characters.filter(char => char.status === 'alive').length;
                 aliveCharactersEl.textContent = alive;
             }
             
-            console.log(`📊 Stats updated: ${locations.length} locations, ${characters.length} characters`);
+            // Update journey stats
+            const totalJourneysEl = document.getElementById('total-journeys');
+            if (totalJourneysEl) {
+                totalJourneysEl.textContent = journeys.length;
+            }
+            
+            console.log(`📊 Stats updated: ${locations.length} locations, ${characters.length} characters, ${journeys.length} journeys`);
         } catch (error) {
             console.error('Failed to update stats:', error);
         }
@@ -123,6 +154,7 @@ class AdenaiAdmin {
         try {
             const locations = this.locations?.getLocations() || [];
             const characters = this.characters?.getCharacters() || [];
+            const journeys = this.journeys?.journeys || [];
             
             const exportData = {
                 metadata: {
@@ -130,7 +162,8 @@ class AdenaiAdmin {
                     version: "1.0",
                     campaign: "Adenai",
                     totalLocations: locations.length,
-                    totalCharacters: characters.length
+                    totalCharacters: characters.length,
+                    totalJourneys: journeys.length
                 },
                 locations: {
                     type: "FeatureCollection",
@@ -139,6 +172,11 @@ class AdenaiAdmin {
                 characters: {
                     version: "1.0",
                     characters: characters,
+                    lastUpdated: new Date().toISOString()
+                },
+                journeys: {
+                    version: "1.0",
+                    journeys: journeys,
                     lastUpdated: new Date().toISOString()
                 }
             };
@@ -154,6 +192,7 @@ class AdenaiAdmin {
         try {
             const locations = this.locations?.getLocations() || [];
             const characters = this.characters?.getCharacters() || [];
+            const journeys = this.journeys?.journeys || [];
             
             const data = {
                 metadata: {
@@ -163,8 +202,10 @@ class AdenaiAdmin {
                     stats: {
                         totalLocations: locations.length,
                         totalCharacters: characters.length,
+                        totalJourneys: journeys.length,
                         visitedLocations: locations.filter(loc => loc.properties.visited).length,
-                        aliveCharacters: characters.filter(char => char.status === 'alive').length
+                        aliveCharacters: characters.filter(char => char.status === 'alive').length,
+                        activeJourneys: journeys.filter(journey => journey.active).length
                     }
                 },
                 locations: {
@@ -174,6 +215,10 @@ class AdenaiAdmin {
                 characters: {
                     version: "1.0",
                     characters: characters
+                },
+                journeys: {
+                    version: "1.0",
+                    journeys: journeys
                 }
             };
             
@@ -188,7 +233,8 @@ class AdenaiAdmin {
     getCampaignData() {
         return {
             locations: this.locations?.getLocations() || [],
-            characters: this.characters?.getCharacters() || []
+            characters: this.characters?.getCharacters() || [],
+            journeys: this.journeys?.journeys || []
         };
     }
 
@@ -203,6 +249,10 @@ class AdenaiAdmin {
             
             if (this.characters) {
                 await this.characters.loadCharacters();
+            }
+            
+            if (this.journeys && typeof this.journeys.loadJourneys === 'function') {
+                await this.journeys.loadJourneys();
             }
             
             this.updateStats();
@@ -243,6 +293,7 @@ class AdenaiAdmin {
             auth: !!this.auth && this.auth.isAuthenticated,
             locations: !!this.locations,
             characters: !!this.characters,
+            journeys: !!this.journeys,
             theme: !!window.themeManager
         };
     }

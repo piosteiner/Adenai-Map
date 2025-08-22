@@ -1,0 +1,308 @@
+{
+  "journeys": [
+    {
+      "id": "vsuzh_journey",
+      "name": "VsuzH Reise",
+      "description": "Die Hauptreise der Abenteurer",
+      "color": "orange",
+      "weight": 4,
+      "weightMobile": 6,
+      "dashArray": "10,6",
+      "dashArrayMobile": "16,10",
+      "opacity": 0.7,
+      "active": true,
+      "segments": [
+        {
+          "type": "M",
+          "coords": [
+            1041,
+            1240
+          ],
+          "description": "Start in Silbergrat"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            1062,
+            1287
+          ],
+          "control": [
+            1044,
+            1338
+          ],
+          "description": "Weg nach Toftgard"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            1054,
+            1371
+          ],
+          "control": [
+            1083,
+            1392
+          ],
+          "description": "Ankunft in Toftgard"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            1106,
+            1340
+          ],
+          "control": [
+            1094,
+            1310
+          ],
+          "description": "In den Toftgarder Forst"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            1112,
+            1316
+          ],
+          "control": [
+            1128,
+            1344
+          ],
+          "description": "Ankunft zu Fitchers Turm"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            1125,
+            1333
+          ],
+          "control": [
+            1163,
+            1291
+          ],
+          "description": "In die Ruine von Zurak'thar"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            1166,
+            1301
+          ],
+          "control": [
+            1128,
+            1344
+          ],
+          "description": "Zurück zu Fitcher"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            1105,
+            1338
+          ],
+          "control": [
+            1083,
+            1392
+          ],
+          "description": "Zurück nach Toftgard"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            1080,
+            1456
+          ],
+          "control": [
+            1084,
+            1488
+          ],
+          "description": "Flussreise Teil 1"
+        },
+        {
+          "type": "L",
+          "coords": [
+            1061,
+            1508
+          ],
+          "description": "Flussreise Teil 2"
+        },
+        {
+          "type": "L",
+          "coords": [
+            1053,
+            1481
+          ],
+          "description": "Landung"
+        },
+        {
+          "type": "L",
+          "coords": [
+            1040,
+            1472
+          ],
+          "description": "Zum Goblin Loch"
+        },
+        {
+          "type": "L",
+          "coords": [
+            1053,
+            1481
+          ],
+          "description": "Zurück zur Landung"
+        },
+        {
+          "type": "L",
+          "coords": [
+            1061,
+            1508
+          ],
+          "description": "Zurück auf den Fluss"
+        },
+        {
+          "type": "L",
+          "coords": [
+            1034,
+            1569
+          ],
+          "description": "Flussreise Teil 3"
+        },
+        {
+          "type": "L",
+          "coords": [
+            1008,
+            1608
+          ],
+          "description": "Flussreise Teil 4"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            1010,
+            1648
+          ],
+          "control": [
+            1008,
+            1700
+          ],
+          "description": "Ankunft in Valaris"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            989,
+            1693
+          ],
+          "control": [
+            985,
+            1724
+          ],
+          "description": "Ausfahrt von Valaris"
+        },
+        {
+          "type": "L",
+          "coords": [
+            1025,
+            2005
+          ],
+          "description": "Fahrt nach Motu Motu"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            1046,
+            2010
+          ],
+          "control": [
+            1070,
+            2106
+          ],
+          "description": "Fahrt zur Sternenzirkel Insel"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            1046,
+            2103
+          ],
+          "control": [
+            1025,
+            2005
+          ],
+          "description": "Fahrt zurück nach Motu Motu"
+        },
+        {
+          "type": "L",
+          "coords": [
+            992,
+            2126
+          ],
+          "description": "Fahrt nach Luvatu"
+        },
+        {
+          "type": "L",
+          "coords": [
+            975,
+            2210
+          ],
+          "description": "Fahrt zum Unterwasserparadies"
+        },
+        {
+          "type": "L",
+          "coords": [
+            1200,
+            2210
+          ],
+          "description": "Aufstieg von Atlantis"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            1140,
+            2340
+          ],
+          "control": [
+            888,
+            2275
+          ],
+          "description": "Rückkehr aufs Meer"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            723,
+            2041
+          ],
+          "control": [
+            708,
+            1983
+          ],
+          "description": "Fahrt an die Küste von Upeto"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            564,
+            2014
+          ],
+          "control": [
+            488,
+            1957
+          ],
+          "description": "Fahrt nach Basapo"
+        },
+        {
+          "type": "Q",
+          "coords": [
+            489,
+            1867
+          ],
+          "control": [
+            556,
+            1869
+          ],
+          "description": "Reise nach Ako"
+        }
+      ],
+      "createdAt": "2025-08-22T20:52:42.382Z",
+      "updatedAt": "2025-08-22T20:52:42.382Z"
+    }
+  ]
+}
