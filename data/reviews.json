@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "5b13449387f9d733f702f40040ebbce088d1710b",
+      "action": "create",
+      "type": "character",
+      "itemName": "test awet",
+      "user": "gm",
+      "timestamp": "2025-08-22T00:03:53.425Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T00:03:53.425Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: test awet (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "2832b7770fb5f9878125405902f45105cadc9afc",
       "action": "update",
       "type": "location",
@@ -41,5 +54,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T00:03:18.953Z"
+  "lastUpdated": "2025-08-22T00:03:53.425Z"
 }
