@@ -216,9 +216,9 @@
       "itemName": "Fitchers Turm",
       "user": "Nici",
       "timestamp": "2025-08-22T06:03:16.826Z",
-      "status": "pending",
-      "reviewedBy": null,
-      "reviewedAt": null,
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T07:33:47.843Z",
       "reviewNotes": "",
       "commitMessage": "Update location: Fitchers Turm (by Nici) - Updated location details"
     },
@@ -431,5 +431,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T07:33:44.987Z"
+  "lastUpdated": "2025-08-22T07:33:48.048Z"
 }
