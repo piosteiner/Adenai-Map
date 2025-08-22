@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "64b7ef64b004d2ea17fe8ffb941a0206e4d29b32",
+      "action": "create",
+      "type": "character",
+      "itemName": "Remus",
+      "user": "gm",
+      "timestamp": "2025-08-22T04:28:12.357Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T04:28:12.357Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Remus (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "bc780037a73add5e7f109ad993a2e2b859381932",
       "action": "create",
       "type": "character",
@@ -158,5 +171,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T04:26:44.535Z"
+  "lastUpdated": "2025-08-22T04:28:12.357Z"
 }
