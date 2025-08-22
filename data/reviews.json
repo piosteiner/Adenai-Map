@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "f28bbf74e0b863b8cda8724a699b15fcda88cb04",
+      "action": "update",
+      "type": "location",
+      "itemName": "Goblin Loch",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:06:28.830Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Goblin Loch (by Nici) - marked as visited"
+    },
+    {
       "commitSha": "a2afd8a5db7e173b5370683d979318831306dd8a",
       "action": "update",
       "type": "location",
@@ -353,5 +366,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:06:20.366Z"
+  "lastUpdated": "2025-08-22T06:06:28.830Z"
 }
