@@ -524,66 +524,135 @@ function filterPathsByDateRange(startDate, endDate) {
   });
 }
 
-// Add movement controls to the map
-function addMovementControls() {
-  const controlsHtml = `
-    <div id="movement-controls" style="position: absolute; top: 140px; left: 10px; z-index: 1000; background: var(--popup-bg); padding: 10px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); max-width: 250px;">
-      <div style="margin-bottom: 8px; font-weight: bold;">🛤️ Character Movement</div>
-      
-      <button id="toggle-character-paths" class="btn-secondary" style="width: 100%; margin-bottom: 10px;">
-        🛤️ Show Paths
-      </button>
-      
-      <div id="timeline-controls" style="display: none;">
-        <label style="display: block; margin-bottom: 5px; font-size: 0.9em;">📅 Date Range Filter:</label>
-        <input type="date" id="start-date" style="width: 48%; margin-bottom: 5px;" />
-        <input type="date" id="end-date" style="width: 48%; margin-left: 2%;" />
-        <button id="apply-date-filter" class="btn-secondary" style="width: 100%; font-size: 0.8em;">Apply Filter</button>
-        <button id="clear-date-filter" class="btn-secondary" style="width: 100%; font-size: 0.8em; margin-top: 5px;">Clear Filter</button>
+function addIntegratedMovementControls() {
+  // Find the character panel content area
+  const characterPanel = document.getElementById('character-panel');
+  if (!characterPanel) {
+    console.warn('Character panel not found');
+    return;
+  }
+
+  // Create movement controls section
+  const movementControlsHtml = `
+    <div class="movement-controls-section">
+      <div class="movement-header" onclick="toggleMovementControls()">
+        <h4>🛤️ Character Movement</h4>
+        <span class="movement-toggle">▼</span>
       </div>
       
-      <div style="margin-top: 10px; font-size: 0.8em; color: var(--text-color); opacity: 0.7;">
-        <div>Legend:</div>
-        <div>🏁 = Start • 📍 = Current • Numbers = Path order</div>
+      <div id="movement-controls-content" class="movement-controls-content">
+        <button id="toggle-character-paths" class="btn-secondary movement-btn">
+          🛤️ Show Paths
+        </button>
+        
+        <div id="timeline-controls" style="display: none;">
+          <label class="movement-label">📅 Date Range Filter:</label>
+          <div class="date-inputs">
+            <input type="date" id="start-date" class="date-input" />
+            <input type="date" id="end-date" class="date-input" />
+          </div>
+          <button id="apply-date-filter" class="btn-secondary movement-btn">Apply Filter</button>
+          <button id="clear-date-filter" class="btn-secondary movement-btn">Clear Filter</button>
+        </div>
+        
+        <div class="movement-legend">
+          <div class="legend-title">Legend:</div>
+          <div class="legend-text">🏁 = Start • 📍 = Current • Numbers = Path order</div>
+        </div>
       </div>
     </div>
   `;
-  
-  document.body.insertAdjacentHTML('beforeend', controlsHtml);
-  
+
+  // Insert movement controls at the top of panel content, after the header
+  const panelContent = characterPanel.querySelector('.panel-content');
+  if (panelContent) {
+    panelContent.insertAdjacentHTML('afterbegin', movementControlsHtml);
+  }
+
   // Add event listeners
-  document.getElementById('toggle-character-paths').addEventListener('click', () => {
-    toggleCharacterPaths();
-    
-    const timelineControls = document.getElementById('timeline-controls');
-    timelineControls.style.display = showCharacterPaths ? 'block' : 'none';
-  });
-  
-  document.getElementById('apply-date-filter').addEventListener('click', () => {
-    const startDate = document.getElementById('start-date').value;
-    const endDate = document.getElementById('end-date').value;
-    
-    if (startDate && endDate) {
-      filterPathsByDateRange(startDate, endDate);
-    }
-  });
-  
-  document.getElementById('clear-date-filter').addEventListener('click', () => {
-    document.getElementById('start-date').value = '';
-    document.getElementById('end-date').value = '';
-    
-    // Reset to show all paths
-    if (showCharacterPaths) {
-      clearCharacterPaths();
-      addCharacterMovementPaths();
-    }
-  });
+  setupMovementControlListeners();
 }
+
+// Add this new function for the collapsible header
+function toggleMovementControls() {
+  const content = document.getElementById('movement-controls-content');
+  const toggle = document.querySelector('.movement-toggle');
+  
+  if (content && toggle) {
+    const isVisible = content.style.display !== 'none';
+    content.style.display = isVisible ? 'none' : 'block';
+    toggle.textContent = isVisible ? '▶' : '▼';
+  }
+}
+
+// Separate function for event listeners
+function setupMovementControlListeners() {
+  // Toggle paths button
+  const toggleBtn = document.getElementById('toggle-character-paths');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      toggleCharacterPaths();
+      
+      const timelineControls = document.getElementById('timeline-controls');
+      if (timelineControls) {
+        timelineControls.style.display = showCharacterPaths ? 'block' : 'none';
+      }
+    });
+  }
+  
+  // Date filter buttons
+  const applyBtn = document.getElementById('apply-date-filter');
+  if (applyBtn) {
+    applyBtn.addEventListener('click', () => {
+      const startDate = document.getElementById('start-date').value;
+      const endDate = document.getElementById('end-date').value;
+      
+      if (startDate && endDate) {
+        filterPathsByDateRange(startDate, endDate);
+      }
+    });
+  }
+  
+  const clearBtn = document.getElementById('clear-date-filter');
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      document.getElementById('start-date').value = '';
+      document.getElementById('end-date').value = '';
+      
+      // Reset to show all paths
+      if (showCharacterPaths) {
+        clearCharacterPaths();
+        addCharacterMovementPaths();
+      }
+    });
+  }
+}
+
+// STEP 2: Update the loadCharacters function call
+// FIND this section in your main.js and UPDATE it:
+
+fetch('data/places.geojson')
+  .then(response => response.json())
+  .then(data => {
+    // ... existing GeoJSON loading code ...
+
+    initSearch(); // Init search once all markers are set up
+    
+    // Load characters after locations are loaded
+    setTimeout(() => {
+      loadCharacters();
+      addCharacterControls();
+      // CHANGE THIS LINE:
+      // addMovementControls(); // Remove this old call
+      addIntegratedMovementControls(); // Add this new call
+    }, 500);
+  })
+  .catch(error => console.error('Error loading GeoJSON:', error));
 
 // Character filter controls
 function addCharacterControls() {
   const controlsHtml = `
-    <div id="character-controls" style="position: absolute; top: 80px; left: 10px; z-index: 1000; background: var(--popup-bg); padding: 10px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); transition: background-color 0.3s ease, color 0.3s ease; width: 150px; font-size: 12px;">
+    <div id="character-controls" style="position: absolute; top: 60px; left: 10px; z-index: 1000; background: var(--popup-bg); padding: 10px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); transition: background-color 0.3s ease, color 0.3s ease; width: 150px; font-size: 12px;">
       <div style="margin-bottom: 8px; font-weight: bold;">👥 Characters</div>
       <label><input type="checkbox" id="show-characters" checked> Show Characters</label><br>
       <label><input type="checkbox" id="show-allies" checked> Allies</label><br>
@@ -989,81 +1058,143 @@ dragZones.forEach(selector => {
 });
 
 // Add CSS for movement markers
-const movementCSS = `
-  .movement-start-marker, .movement-end-marker, .movement-number-marker {
-    background: white;
-    border: 2px solid #333;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 16px;
-    font-size: 12px;
-    font-weight: bold;
+const integratedMovementCSS = `
+  /* Movement Controls Section in Character Panel */
+  .movement-controls-section {
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--dropdown-border);
+    padding-bottom: 15px;
   }
-  
-  .movement-number-marker {
-    background: #2196F3;
-    color: white;
+
+  .movement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--dropdown-border);
+    margin-bottom: 10px;
   }
-  
-  .character-path-popup {
-    max-width: 300px;
+
+  .movement-header:hover {
+    background: var(--dropdown-hover);
+    padding: 8px;
+    margin: 0 -8px 10px -8px;
+    border-radius: 4px;
   }
-  
-  .timeline-entry {
-    padding: 3px 0;
-    border-bottom: 1px solid #eee;
+
+  .movement-header h4 {
+    margin: 0;
+    font-size: 1em;
+    color: var(--text-color);
   }
-  
-  .timeline-entry:last-child {
-    border-bottom: none;
+
+  .movement-toggle {
+    font-size: 0.8em;
+    color: var(--text-color);
+    opacity: 0.7;
   }
-  
-  .movement-point-popup {
-    max-width: 250px;
+
+  .movement-controls-content {
+    display: block;
   }
-  
-  #movement-controls button.active {
-    background: #4CAF50;
-    color: white;
-  }
-  
-  #movement-controls button {
+
+  .movement-btn {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 6px 10px;
+    font-size: 0.85em;
     background: var(--popup-bg);
     color: var(--text-color);
     border: 1px solid var(--dropdown-border);
     border-radius: 4px;
-    padding: 5px 10px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
-  
-  #movement-controls button:hover {
+
+  .movement-btn:hover {
     background: var(--dropdown-hover);
   }
-  
-  #movement-controls input[type="date"] {
-    background: var(--popup-bg);
-    color: var(--text-color);
-    border: 1px solid var(--dropdown-border);
-    border-radius: 4px;
-    padding: 4px;
+
+  .movement-btn.active {
+    background: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
   }
-  
-  .btn-secondary {
+
+  .movement-label {
+    display: block;
+    margin: 10px 0 5px 0;
+    font-size: 0.85em;
+    font-weight: bold;
+    color: var(--text-color);
+  }
+
+  .date-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .date-input {
+    padding: 4px 6px;
+    font-size: 0.8em;
     background: var(--popup-bg);
     color: var(--text-color);
     border: 1px solid var(--dropdown-border);
     border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .movement-legend {
+    margin-top: 12px;
+    padding: 8px;
+    background: var(--dropdown-bg);
+    border-radius: 4px;
+    border: 1px solid var(--dropdown-border);
+  }
+
+  .legend-title {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 4px;
+  }
+
+  .legend-text {
+    font-size: 0.75em;
+    color: var(--text-color);
+    opacity: 0.8;
+    line-height: 1.3;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .movement-controls-section {
+      margin-bottom: 15px;
+    }
+    
+    .movement-btn {
+      font-size: 0.9em;
+      padding: 8px 10px;
+    }
+    
+    .date-inputs {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+  }
+
+  /* Remove old standalone movement controls */
+  #movement-controls {
+    display: none !important;
   }
 `;
 
-// Add CSS to document
-const style = document.createElement('style');
-style.textContent = movementCSS;
-document.head.appendChild(style);
+// Add the CSS to the document
+const movementStyle = document.createElement('style');
+movementStyle.textContent = integratedMovementCSS;
+document.head.appendChild(movementStyle);
 
 // Make functions available globally for admin interface
 window.addCharacterMovementPaths = addCharacterMovementPaths;
