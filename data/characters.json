@@ -116,7 +116,36 @@
       "notes": "",
       "createdAt": "2025-08-22T06:09:11.125Z",
       "updatedAt": "2025-08-22T06:09:11.125Z"
+    },
+    {
+      "id": "test",
+      "name": "Test",
+      "title": "",
+      "location": "Olecea",
+      "coordinates": [
+        916,
+        261
+      ],
+      "description": "",
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "currentLocation": {
+        "date": "2025-08-22",
+        "location": "Olecea",
+        "coordinates": [
+          916,
+          261
+        ],
+        "notes": "Initial location"
+      },
+      "createdAt": "2025-08-22T15:11:48.559Z",
+      "updatedAt": "2025-08-22T15:11:48.559Z"
     }
   ],
-  "lastUpdated": "2025-08-22T15:11:17.200Z"
+  "lastUpdated": "2025-08-22T15:11:48.559Z"
 }
