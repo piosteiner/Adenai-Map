@@ -40,22 +40,32 @@ class AdminChangelog {
             }
         });
 
-        // Delegate event listeners for changelog actions
-        this.ui.addDelegatedListener('changelog-content', '.review-approve-btn', 'click', (e) => {
-            e.preventDefault();
-            const commitSha = e.target.dataset.commit;
-            this.reviewChange(commitSha, 'approved');
-        });
-
-        this.ui.addDelegatedListener('changelog-content', '.review-reject-btn', 'click', (e) => {
-            e.preventDefault();
-            const commitSha = e.target.dataset.commit;
-            this.showRejectModal(commitSha);
-        });
-
-        this.ui.addDelegatedListener('changelog-content', '.user-stats-btn', 'click', (e) => {
-            e.preventDefault();
-            this.showUserStats();
+        // 🔧 FIX: Use direct event delegation instead of UI method
+        document.addEventListener('click', (e) => {
+            // Review approve button
+            if (e.target.matches('.review-approve-btn')) {
+                e.preventDefault();
+                console.log('🎯 Approve button clicked!', e.target);
+                const commitSha = e.target.dataset.commit;
+                console.log('📝 Commit SHA:', commitSha);
+                this.reviewChange(commitSha, 'approved');
+            }
+            
+            // Review reject button  
+            if (e.target.matches('.review-reject-btn')) {
+                e.preventDefault();
+                console.log('🎯 Reject button clicked!', e.target);
+                const commitSha = e.target.dataset.commit;
+                console.log('📝 Commit SHA:', commitSha);
+                this.showRejectModal(commitSha);
+            }
+            
+            // User stats button
+            if (e.target.matches('.user-stats-btn')) {
+                e.preventDefault();
+                console.log('🎯 Stats button clicked!', e.target);
+                this.showUserStats();
+            }
         });
 
         // Filter change listener
@@ -348,10 +358,10 @@ class AdminChangelog {
         const isOwnChange = change.isOwnChange;
         const cardClass = isOwnChange ? 'changelog-item own-change' : 'changelog-item';
         
-        // Review buttons for admins (using your existing button classes)
+        // Review buttons for admins
         const reviewButtons = (change.canReview && change.review.status === 'pending') ? `
-            <div class="review-actions">
-                <button class="btn-primary review-approve-btn" data-commit="${change.review.commitSha || change.id}">
+            <div class="review-actions" style="margin-top: 10px;">
+                <button class="btn-primary review-approve-btn" style="margin-right: 5px;" data-commit="${change.review.commitSha || change.id}">
                     ✅ Approve
                 </button>
                 <button class="btn-danger review-reject-btn" data-commit="${change.review.commitSha || change.id}">
@@ -360,41 +370,45 @@ class AdminChangelog {
             </div>
         ` : '';
 
-        // Review details (using your existing styling pattern)
+        // Review details
         const reviewDetails = change.review.reviewedBy ? `
-            <div class="review-details">
-                Reviewed by <strong>${change.review.reviewedBy}</strong> 
-                ${this.formatTimeAgo(new Date(change.review.reviewedAt))}
-                ${change.review.reviewNotes ? `<br><em>"${change.review.reviewNotes}"</em>` : ''}
+            <div class="review-details" style="margin-top: 10px; padding: 10px; background: rgba(0,0,0,0.05); border-radius: 5px;">
+                <small style="color: #666;">
+                    Reviewed by <strong>${change.review.reviewedBy}</strong> 
+                    ${this.formatTimeAgo(new Date(change.review.reviewedAt))}
+                    ${change.review.reviewNotes ? `<br><em>"${change.review.reviewNotes}"</em>` : ''}
+                </small>
             </div>
         ` : '';
 
         return `
-            <div class="${cardClass}" data-status="${change.review.status}">
-                <div class="changelog-header">
-                    <div class="changelog-main-info">
-                        ${actionIcon} <strong>${change.user}</strong>
-                        <span style="color: ${this.getActionColorHex(change.action)};">${change.action}d</span>
-                        <span class="action-badge">${change.type}</span>
-                        <strong style="color: #667eea;">${change.itemName}</strong>
-                        ${isOwnChange ? '<span class="user-badge">You</span>' : ''}
+            <div class="location-card ${cardClass}" data-status="${change.review.status}" style="margin-bottom: 15px;">
+                <div class="location-header">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div>
+                            <h3 style="margin: 0; font-size: 1.1em;">
+                                ${actionIcon} <strong>${change.user}</strong>
+                                <span style="color: ${this.getActionColorHex(change.action)};">${change.action}d</span>
+                                <span style="background: #6c757d; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.8em;">${change.type}</span>
+                                <strong style="color: #667eea;">${change.itemName}</strong>
+                                ${isOwnChange ? '<span style="background: #667eea; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.8em; margin-left: 5px;">You</span>' : ''}
+                            </h3>
+                            
+                            <!-- Status below main info as requested -->
+                            <div style="margin-top: 5px;">
+                                ${this.getCleanReviewStatus(change.review.status)}
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="changelog-status">
-                        ${this.getCleanReviewStatus(change.review.status)}
-                    </div>
                 </div>
-                
-                <div class="changelog-description">
-                    ${change.description}
+                <div class="location-details">
+                    <p style="color: #666; margin: 5px 0;">${change.description}</p>
+                    <small style="color: #999;">
+                        🕒 ${timeAgo} • #${change.id}
+                    </small>
+                    ${reviewDetails}
+                    ${reviewButtons}
                 </div>
-                
-                <div class="changelog-meta">
-                    🕒 ${timeAgo} • #${change.id}
-                </div>
-                
-                ${reviewDetails}
-                ${reviewButtons}
             </div>
         `;
     }
