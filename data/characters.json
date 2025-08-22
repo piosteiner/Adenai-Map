@@ -38,7 +38,22 @@
       "notes": "",
       "createdAt": "2025-08-22T04:26:43.834Z",
       "updatedAt": "2025-08-22T04:26:43.834Z"
+    },
+    {
+      "id": "remus",
+      "name": "Remus",
+      "title": "Lord",
+      "location": "Sternenzirkel Base?",
+      "description": "",
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "enemy",
+      "firstMet": "",
+      "notes": "",
+      "createdAt": "2025-08-22T04:28:11.542Z",
+      "updatedAt": "2025-08-22T04:28:11.542Z"
     }
   ],
-  "lastUpdated": "2025-08-22T04:26:43.834Z"
+  "lastUpdated": "2025-08-22T04:28:11.542Z"
 }
