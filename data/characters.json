@@ -11,19 +11,19 @@
     },
     {
       "id": "avery",
-      "name": "avery",
-      "title": "",
-      "location": "",
+      "name": "Avery",
+      "title": "von Rena",
+      "location": "Rena",
       "description": "",
-      "image": "",
+      "image": "https://adenai.piogino.ch/images/avery.png",
       "status": "alive",
-      "faction": "",
-      "relationship": "ally",
+      "faction": "Regierung von Rena",
+      "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "createdAt": "2025-08-22T00:21:35.645Z",
-      "updatedAt": "2025-08-22T00:21:35.645Z"
+      "updatedAt": "2025-08-22T03:34:20.333Z"
     }
   ],
-  "lastUpdated": "2025-08-22T00:21:35.645Z"
+  "lastUpdated": "2025-08-22T03:34:20.333Z"
 }
