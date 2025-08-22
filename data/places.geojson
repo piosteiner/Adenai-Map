@@ -424,7 +424,9 @@
       "type": "Feature",
       "properties": {
         "name": "Torftgarder Forst",
-        "description": "Die VsuzH haben hier nach Spuren eines Eies und merkwürdigen Kreaturen gekämpft und gerastet."
+        "description": "Die VsuzH haben hier nach Spuren eines Eies und merkwürdigen Kreaturen gekämpft und gerastet.",
+        "contentUrl": null,
+        "visited": true
       },
       "geometry": {
         "type": "Point",
