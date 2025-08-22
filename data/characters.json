@@ -33,10 +33,10 @@
       "id": "avery",
       "name": "Avery",
       "title": "von Rena",
-      "location": "Rena",
+      "location": "Wesdalen",
       "coordinates": [
-        650,
-        1000
+        790,
+        769
       ],
       "description": "",
       "image": "https://adenai.piogino.ch/images/avery.png",
@@ -57,19 +57,31 @@
           "notes": "",
           "type": "travel",
           "createdAt": "2025-08-22T15:27:27.794Z"
+        },
+        {
+          "id": "movement_1755876469219",
+          "date": "2025-08-29",
+          "location": "Wesdalen",
+          "coordinates": [
+            790,
+            769
+          ],
+          "notes": "",
+          "type": "travel",
+          "createdAt": "2025-08-22T15:27:49.219Z"
         }
       ],
       "currentLocation": {
-        "date": "2025-08-20",
-        "location": "Rena",
+        "date": "2025-08-29",
+        "location": "Wesdalen",
         "coordinates": [
-          650,
-          1000
+          790,
+          769
         ],
         "notes": ""
       },
       "createdAt": "2025-08-22T00:21:35.645Z",
-      "updatedAt": "2025-08-22T15:27:27.794Z"
+      "updatedAt": "2025-08-22T15:27:49.219Z"
     },
     {
       "id": "lia_karthright",
@@ -174,5 +186,5 @@
       "updatedAt": "2025-08-22T15:11:59.193Z"
     }
   ],
-  "lastUpdated": "2025-08-22T15:27:27.794Z"
+  "lastUpdated": "2025-08-22T15:27:49.219Z"
 }
