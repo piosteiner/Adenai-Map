@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "48cf61b66a3c02bcc74f800626819ce3c41b4795",
+      "action": "update",
+      "type": "location",
+      "itemName": "Ruine von Zurak'thar",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:05:13.588Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Ruine von Zurak'thar (by Nici) - marked as visited"
+    },
+    {
       "commitSha": "ab39b450b8c30704c5219b34d54985e241e9de29",
       "action": "update",
       "type": "location",
@@ -275,5 +288,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:05:05.737Z"
+  "lastUpdated": "2025-08-22T06:05:13.588Z"
 }
