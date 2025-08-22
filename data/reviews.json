@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "1f194b93d6ee5324561a14ecb66284fe7b6bc17a",
+      "action": "update",
+      "type": "location",
+      "itemName": "Akónetchie",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:05:42.900Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Akónetchie (by Nici) - marked as visited"
+    },
+    {
       "commitSha": "08c29dc7fdde663c24a5d484388f8858cbd15ff7",
       "action": "update",
       "type": "location",
@@ -314,5 +327,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:05:34.009Z"
+  "lastUpdated": "2025-08-22T06:05:42.900Z"
 }
