@@ -137,6 +137,22 @@ const RelationshipIcons = {
   })
 };
 
+// Global variables for movement tracking
+let characterPaths = [];
+let movementLayers = [];
+let showCharacterPaths = false;
+let currentTimelineDate = null;
+
+// Colors for different character relationships
+const pathColors = {
+  ally: '#4CAF50',
+  friendly: '#8BC34A', 
+  neutral: '#FFC107',
+  suspicious: '#FF9800',
+  hostile: '#FF5722',
+  enemy: '#F44336'
+};
+
 function sanitizeFilename(name) {
   return name
     .toLowerCase()
@@ -151,39 +167,19 @@ function sanitizeFilename(name) {
 let geoFeatureLayers = [];
 let searchIndex = [];
 
-// Load character data
-async function loadCharacters() {
-  try {
-    const response = await fetch('data/characters.json');
-    const data = await response.json();
-    characterData = data.characters || [];
-    
-    console.log(`✅ Loaded ${characterData.length} characters`);
-    addCharactersToMap();
-    updateSearchIndexWithCharacters();
-    
-    // Initialize character panel after data is loaded
-    if (typeof initCharacterPanel === 'function') {
-      initCharacterPanel();
-    }
-  } catch (error) {
-    console.error('❌ Error loading characters:', error);
-  }
-}
-
-// Simplified character mapping - no more location matching needed!
+// Add characters to map using stored coordinates
 function addCharactersToMap() {
   characterData.forEach(character => {
     // Skip characters without coordinates
-    if (!character.coordinates) {
-      console.warn(`Character ${character.name} has no coordinates`);
+    if (!character.coordinates || !Array.isArray(character.coordinates)) {
+      console.warn(`⚠️ Character "${character.name}" has no valid coordinates`, character);
       return;
     }
     
-    // Use stored coordinates directly
+    // Use stored coordinates directly - no more location matching needed!
     const [lng, lat] = character.coordinates;
     
-    // Add small random offset so multiple characters at same location don't overlap
+    // Add small random offset so multiple characters at same location don't overlap exactly
     const offsetLat = lat + (Math.random() - 0.5) * 20;
     const offsetLng = lng + (Math.random() - 0.5) * 20;
     
@@ -196,7 +192,11 @@ function addCharactersToMap() {
       .addTo(map);
     
     characterLayers.push({ marker, character });
+    
+    console.log(`✅ Added character "${character.name}" at coordinates [${lng}, ${lat}]`);
   });
+  
+  console.log(`📍 Successfully placed ${characterLayers.length} characters on map`);
 }
 
 // Create character popup content
@@ -220,6 +220,10 @@ function createCharacterPopup(character) {
   const imageHtml = character.image ? 
     `<img src="${character.image}" alt="${character.name}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px; float: right; margin-left: 10px;">` : '';
   
+  // Show movement count if available
+  const movementCount = character.movementHistory ? character.movementHistory.length : 0;
+  const movementInfo = movementCount > 0 ? `<div><strong>🛤️ Movement History:</strong> ${movementCount} locations</div>` : '';
+  
   return `
     <div class="character-popup">
       ${imageHtml}
@@ -235,27 +239,31 @@ function createCharacterPopup(character) {
           ${statusEmoji[character.status] || '❓'} ${character.status || 'unknown'}
         </span>
       </div>
-      ${character.faction ? `<div><strong>🏛️ Faction:</strong> ${character.faction}</div>` : ''}
+      ${character.faction ? `<div><strong>🛡️ Faction:</strong> ${character.faction}</div>` : ''}
       ${character.firstMet ? `<div><strong>📅 First Met:</strong> ${character.firstMet}</div>` : ''}
+      ${movementInfo}
       ${character.description ? `<div style="margin-top: 8px;"><strong>📝 Description:</strong><br>${character.description}</div>` : ''}
       ${character.notes ? `<div style="margin-top: 8px;"><strong>📋 Notes:</strong><br>${character.notes}</div>` : ''}
     </div>
   `;
 }
 
-// Enhanced search that includes characters
+// Enhanced search that includes characters using stored coordinates
 function updateSearchIndexWithCharacters() {
+  // Add characters to existing search index
   characterData.forEach(character => {
-    if (character.coordinates) {
+    if (character.coordinates && Array.isArray(character.coordinates)) {
       const [lng, lat] = character.coordinates;
       
       searchIndex.push({
         name: character.name,
         desc: `${character.title || ''} ${character.description || ''} ${character.notes || ''}`.trim(),
-        latlng: { lat, lng },
+        latlng: { lat, lng }, // Use stored coordinates directly
         type: 'character',
         character: character
       });
+    } else {
+      console.warn(`⚠️ Character "${character.name}" excluded from search - no coordinates`);
     }
   });
 }
@@ -294,10 +302,288 @@ function renderSearchResult(result) {
   }
 }
 
+// Add character movement paths to map
+function addCharacterMovementPaths() {
+  // Clear existing paths
+  clearCharacterPaths();
+  
+  characterData.forEach(character => {
+    if (!character.movementHistory || character.movementHistory.length < 1) {
+      return; // Need at least 1 movement point
+    }
+    
+    const pathColor = pathColors[character.relationship] || '#666666';
+    const movementPoints = [];
+    
+    // Add all movement history points
+    character.movementHistory.forEach(movement => {
+      if (movement.coordinates) {
+        movementPoints.push({
+          coordinates: movement.coordinates,
+          date: movement.date,
+          location: movement.location || 'Custom Location',
+          notes: movement.notes || '',
+          type: movement.type || 'travel'
+        });
+      }
+    });
+    
+    // Add current location as last point if it has coordinates and is different from last movement
+    if (character.coordinates) {
+      const lastMovement = movementPoints[movementPoints.length - 1];
+      const isSameAsLastMovement = lastMovement && 
+        lastMovement.coordinates[0] === character.coordinates[0] && 
+        lastMovement.coordinates[1] === character.coordinates[1];
+        
+      if (!isSameAsLastMovement) {
+        movementPoints.push({
+          coordinates: character.coordinates,
+          date: character.currentLocation?.date || 'Current',
+          location: character.location || 'Current Location',
+          notes: character.currentLocation?.notes || 'Current position'
+        });
+      }
+    }
+    
+    // Sort points by date
+    movementPoints.sort((a, b) => new Date(a.date) - new Date(b.date));
+    
+    if (movementPoints.length >= 2) {
+      // Create path coordinates for Leaflet
+      const pathCoords = movementPoints.map(point => [
+        point.coordinates[1], // lat
+        point.coordinates[0]  // lng
+      ]);
+      
+      // Create the path polyline
+      const pathLine = L.polyline(pathCoords, {
+        color: pathColor,
+        weight: 4,
+        opacity: 0.7,
+        dashArray: '10,5',
+        className: `character-path character-path-${character.id}`
+      });
+      
+      // Add click handler for path info
+      pathLine.bindPopup(`
+        <div class="character-path-popup">
+          <h4>📍 ${character.name}'s Journey</h4>
+          <p><strong>Total Locations:</strong> ${movementPoints.length}</p>
+          <p><strong>Relationship:</strong> ${character.relationship}</p>
+          <div class="movement-timeline">
+            ${movementPoints.map((point, index) => `
+              <div class="timeline-entry">
+                <strong>${index + 1}.</strong> ${point.location} 
+                <small>(${point.date})</small>
+                ${point.notes ? `<br><em>${point.notes}</em>` : ''}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `);
+      
+      // Create movement markers for each point
+      const pathMarkers = movementPoints.map((point, index) => {
+        const isFirst = index === 0;
+        const isLast = index === movementPoints.length - 1;
+        
+        let markerIcon;
+        if (isFirst) {
+          markerIcon = L.divIcon({
+            html: '🏁',
+            iconSize: [20, 20],
+            className: 'movement-start-marker'
+          });
+        } else if (isLast) {
+          markerIcon = L.divIcon({
+            html: '📍',
+            iconSize: [20, 20],
+            className: 'movement-end-marker'
+          });
+        } else {
+          markerIcon = L.divIcon({
+            html: `${index + 1}`,
+            iconSize: [20, 20],
+            className: 'movement-number-marker',
+            iconAnchor: [10, 10]
+          });
+        }
+        
+        const marker = L.marker([point.coordinates[1], point.coordinates[0]], {
+          icon: markerIcon
+        });
+        
+        marker.bindPopup(`
+          <div class="movement-point-popup">
+            <h4>${point.location}</h4>
+            <p><strong>📅 Date:</strong> ${point.date}</p>
+            <p><strong>👤 Character:</strong> ${character.name}</p>
+            ${point.notes ? `<p><strong>📝 Notes:</strong> ${point.notes}</p>` : ''}
+            <p><strong>🗺️ Coordinates:</strong> [${point.coordinates[0]}, ${point.coordinates[1]}]</p>
+          </div>
+        `);
+        
+        return marker;
+      });
+      
+      // Store path data
+      const pathData = {
+        character: character,
+        pathLine: pathLine,
+        markers: pathMarkers,
+        points: movementPoints
+      };
+      
+      characterPaths.push(pathData);
+      
+      // Add to map if paths are currently shown
+      if (showCharacterPaths) {
+        pathLine.addTo(map);
+        pathMarkers.forEach(marker => marker.addTo(map));
+        movementLayers.push(pathLine, ...pathMarkers);
+      }
+    }
+  });
+  
+  console.log(`🛤️ Created ${characterPaths.length} character movement paths`);
+}
+
+// Clear all character movement paths from map
+function clearCharacterPaths() {
+  movementLayers.forEach(layer => {
+    if (map.hasLayer(layer)) {
+      map.removeLayer(layer);
+    }
+  });
+  movementLayers = [];
+  characterPaths = [];
+}
+
+// Toggle character movement paths visibility
+function toggleCharacterPaths() {
+  showCharacterPaths = !showCharacterPaths;
+  
+  if (showCharacterPaths) {
+    characterPaths.forEach(pathData => {
+      pathData.pathLine.addTo(map);
+      pathData.markers.forEach(marker => marker.addTo(map));
+      movementLayers.push(pathData.pathLine, ...pathData.markers);
+    });
+    console.log('📍 Character movement paths shown');
+  } else {
+    clearCharacterPaths();
+    addCharacterMovementPaths(); // Recreate but don't add to map
+    console.log('📍 Character movement paths hidden');
+  }
+  
+  // Update UI button
+  const pathToggleBtn = document.getElementById('toggle-character-paths');
+  if (pathToggleBtn) {
+    pathToggleBtn.textContent = showCharacterPaths ? '🛤️ Hide Paths' : '🛤️ Show Paths';
+    pathToggleBtn.classList.toggle('active', showCharacterPaths);
+  }
+}
+
+// Filter paths by date range
+function filterPathsByDateRange(startDate, endDate) {
+  characterPaths.forEach(pathData => {
+    const filteredPoints = pathData.points.filter(point => {
+      const pointDate = new Date(point.date);
+      return pointDate >= new Date(startDate) && pointDate <= new Date(endDate);
+    });
+    
+    if (filteredPoints.length >= 2) {
+      // Update path with filtered points
+      const filteredCoords = filteredPoints.map(point => [
+        point.coordinates[1], // lat
+        point.coordinates[0]  // lng
+      ]);
+      pathData.pathLine.setLatLngs(filteredCoords);
+      
+      // Show/hide markers based on date range
+      pathData.markers.forEach((marker, index) => {
+        const point = pathData.points[index];
+        const pointDate = new Date(point.date);
+        const inRange = pointDate >= new Date(startDate) && pointDate <= new Date(endDate);
+        
+        if (inRange && showCharacterPaths) {
+          if (!map.hasLayer(marker)) marker.addTo(map);
+        } else {
+          if (map.hasLayer(marker)) map.removeLayer(marker);
+        }
+      });
+    } else {
+      // Hide path if not enough points in date range
+      if (map.hasLayer(pathData.pathLine)) {
+        map.removeLayer(pathData.pathLine);
+      }
+      pathData.markers.forEach(marker => {
+        if (map.hasLayer(marker)) map.removeLayer(marker);
+      });
+    }
+  });
+}
+
+// Add movement controls to the map
+function addMovementControls() {
+  const controlsHtml = `
+    <div id="movement-controls" style="position: absolute; top: 140px; left: 10px; z-index: 1000; background: var(--popup-bg); padding: 10px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); max-width: 250px;">
+      <div style="margin-bottom: 8px; font-weight: bold;">🛤️ Character Movement</div>
+      
+      <button id="toggle-character-paths" class="btn-secondary" style="width: 100%; margin-bottom: 10px;">
+        🛤️ Show Paths
+      </button>
+      
+      <div id="timeline-controls" style="display: none;">
+        <label style="display: block; margin-bottom: 5px; font-size: 0.9em;">📅 Date Range Filter:</label>
+        <input type="date" id="start-date" style="width: 48%; margin-bottom: 5px;" />
+        <input type="date" id="end-date" style="width: 48%; margin-left: 2%;" />
+        <button id="apply-date-filter" class="btn-secondary" style="width: 100%; font-size: 0.8em;">Apply Filter</button>
+        <button id="clear-date-filter" class="btn-secondary" style="width: 100%; font-size: 0.8em; margin-top: 5px;">Clear Filter</button>
+      </div>
+      
+      <div style="margin-top: 10px; font-size: 0.8em; color: var(--text-color); opacity: 0.7;">
+        <div>Legend:</div>
+        <div>🏁 = Start • 📍 = Current • Numbers = Path order</div>
+      </div>
+    </div>
+  `;
+  
+  document.body.insertAdjacentHTML('beforeend', controlsHtml);
+  
+  // Add event listeners
+  document.getElementById('toggle-character-paths').addEventListener('click', () => {
+    toggleCharacterPaths();
+    
+    const timelineControls = document.getElementById('timeline-controls');
+    timelineControls.style.display = showCharacterPaths ? 'block' : 'none';
+  });
+  
+  document.getElementById('apply-date-filter').addEventListener('click', () => {
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+    
+    if (startDate && endDate) {
+      filterPathsByDateRange(startDate, endDate);
+    }
+  });
+  
+  document.getElementById('clear-date-filter').addEventListener('click', () => {
+    document.getElementById('start-date').value = '';
+    document.getElementById('end-date').value = '';
+    
+    // Reset to show all paths
+    if (showCharacterPaths) {
+      clearCharacterPaths();
+      addCharacterMovementPaths();
+    }
+  });
+}
+
 // Character filter controls
 function addCharacterControls() {
   const controlsHtml = `
-    <div id="character-controls" style="position: absolute; top: 80px; left: 10px; z-index: 1000; background: var(--popup-bg); padding: 10px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">
+    <div id="character-controls" style="position: absolute; top: 80px; left: 10px; z-index: 1000; background: var(--popup-bg); padding: 10px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); transition: background-color 0.3s ease, color 0.3s ease; width: 150px; font-size: 12px;">
       <div style="margin-bottom: 8px; font-weight: bold;">👥 Characters</div>
       <label><input type="checkbox" id="show-characters" checked> Show Characters</label><br>
       <label><input type="checkbox" id="show-allies" checked> Allies</label><br>
@@ -339,6 +625,40 @@ function filterCharacters(relationships) {
       }
     }
   });
+}
+
+// Load character data with movement support
+async function loadCharacters() {
+  try {
+    console.log('👥 Loading characters from server...');
+    const response = await fetch('data/characters.json');
+    const data = await response.json();
+    characterData = data.characters || [];
+    
+    console.log(`✅ Loaded ${characterData.length} characters`);
+    
+    // Log coordinate status for debugging
+    const withCoords = characterData.filter(c => c.coordinates).length;
+    const withoutCoords = characterData.length - withCoords;
+    const withMovements = characterData.filter(c => c.movementHistory && c.movementHistory.length > 0).length;
+    
+    console.log(`📍 Characters with coordinates: ${withCoords}`);
+    console.log(`🛤️ Characters with movement history: ${withMovements}`);
+    if (withoutCoords > 0) {
+      console.warn(`⚠️ Characters without coordinates: ${withoutCoords}`);
+    }
+    
+    addCharactersToMap();
+    addCharacterMovementPaths();
+    updateSearchIndexWithCharacters();
+    
+    // Initialize character panel after data is loaded
+    if (typeof initCharacterPanel === 'function') {
+      initCharacterPanel();
+    }
+  } catch (error) {
+    console.error('❌ Error loading characters:', error);
+  }
 }
 
 //Load GeoJSON and bind markers + search
@@ -412,6 +732,7 @@ fetch('data/places.geojson')
     setTimeout(() => {
       loadCharacters();
       addCharacterControls();
+      addMovementControls();
     }, 500);
   })
   .catch(error => console.error('Error loading GeoJSON:', error));
@@ -638,3 +959,84 @@ dragZones.forEach(selector => {
     }
   });
 });
+
+// Add CSS for movement markers
+const movementCSS = `
+  .movement-start-marker, .movement-end-marker, .movement-number-marker {
+    background: white;
+    border: 2px solid #333;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 16px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .movement-number-marker {
+    background: #2196F3;
+    color: white;
+  }
+  
+  .character-path-popup {
+    max-width: 300px;
+  }
+  
+  .timeline-entry {
+    padding: 3px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .timeline-entry:last-child {
+    border-bottom: none;
+  }
+  
+  .movement-point-popup {
+    max-width: 250px;
+  }
+  
+  #movement-controls button.active {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  #movement-controls button {
+    background: var(--popup-bg);
+    color: var(--text-color);
+    border: 1px solid var(--dropdown-border);
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  #movement-controls button:hover {
+    background: var(--dropdown-hover);
+  }
+  
+  #movement-controls input[type="date"] {
+    background: var(--popup-bg);
+    color: var(--text-color);
+    border: 1px solid var(--dropdown-border);
+    border-radius: 4px;
+    padding: 4px;
+  }
+  
+  .btn-secondary {
+    background: var(--popup-bg);
+    color: var(--text-color);
+    border: 1px solid var(--dropdown-border);
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+`;
+
+// Add CSS to document
+const style = document.createElement('style');
+style.textContent = movementCSS;
+document.head.appendChild(style);
+
+// Make functions available globally for admin interface
+window.addCharacterMovementPaths = addCharacterMovementPaths;
+window.clearCharacterPaths = clearCharacterPaths;
