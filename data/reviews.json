@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "846cba940b53f3ae9042401e5d176003deaedcef",
+      "action": "update",
+      "type": "location",
+      "itemName": "Sternenzirkel Insel",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:05:23.888Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Sternenzirkel Insel (by Nici) - marked as visited"
+    },
+    {
       "commitSha": "48cf61b66a3c02bcc74f800626819ce3c41b4795",
       "action": "update",
       "type": "location",
@@ -288,5 +301,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:05:13.588Z"
+  "lastUpdated": "2025-08-22T06:05:23.888Z"
 }
