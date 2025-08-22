@@ -73,9 +73,9 @@
       "itemName": "Goblin Loch",
       "user": "Nici",
       "timestamp": "2025-08-22T06:06:28.830Z",
-      "status": "pending",
-      "reviewedBy": null,
-      "reviewedAt": null,
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T07:35:32.837Z",
       "reviewNotes": "",
       "commitMessage": "Update location: Goblin Loch (by Nici) - marked as visited"
     },
@@ -431,5 +431,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T07:34:25.021Z"
+  "lastUpdated": "2025-08-22T07:35:33.046Z"
 }
