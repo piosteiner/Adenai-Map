@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "2cd4ebc353bcc3a5915ddea4566707c1f97a5a04",
+      "action": "update",
+      "type": "location",
+      "itemName": "Torftgarder Forst",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:06:39.100Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Torftgarder Forst (by Nici) - marked as visited"
+    },
+    {
       "commitSha": "f28bbf74e0b863b8cda8724a699b15fcda88cb04",
       "action": "update",
       "type": "location",
@@ -366,5 +379,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:06:28.830Z"
+  "lastUpdated": "2025-08-22T06:06:39.100Z"
 }
