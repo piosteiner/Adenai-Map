@@ -1,40 +1,139 @@
-const VsuzH_Journey = L.curve(
-  [
-    'M', [1041, 1240], //Start in Silbergrat
-    'Q', [1062, 1287], [1044, 1338], //Weg nach Toftgard
-    'Q', [1054, 1371], [1083, 1392], //Ankunft in Toftgard
-    'Q', [1106, 1340], [1094, 1310], //In den Toftgarder Forst
-    'Q', [1112, 1316], [1128, 1344], //Ankunft zu Fitchers Turm
-    'Q', [1125, 1333], [1163, 1291], //In die Ruine von Zurak'thar
-    'Q', [1166, 1301], [1128, 1344], //Zurück zu Fitcher
-    'Q', [1105, 1338], [1083, 1392], //Zurück nach Toftgard
-    'Q', [1080, 1456], [1084, 1488], //Flussreise Teil 1
-    'L', [1061, 1508], //Flussreise Teil 2
-    'L', [1053, 1481], //Landung
-    'L', [1040, 1472], //Zum Goblin Loch
-    'L', [1053, 1481], //Zurück zur Landung
-    'L', [1061, 1508], //Zurück auf den Fluss
-    'L', [1034, 1569], //Flussreise Teil 3
-    'L', [1008, 1608], //Flussreise Teil 4
-    'Q', [1010, 1648], [1008, 1700], //Ankunft in Valaris
-    'Q', [989, 1693], [985, 1724], // Ausfahrt von Valaris
-    'L', [1025, 2005], //Fahrt nach Motu Motu
-    'Q', [1046, 2010], [1070, 2106], //Fahrt zur Sternenzirkel Insel
-    'Q', [1046, 2103], [1025, 2005], //Fahrt zurück nach Motu Motu
-    'L', [992, 2126], //Fahrt nach Luvatu
-    'L', [975, 2210], //Fahrt zum Unterwasserparadies
-    'L', [1200, 2210], //Aufstieg von Atlantis
-    'Q', [1140, 2340], [888, 2275], //Rückkehr aufs Meer
-    'Q', [723, 2041], [708, 1983], //Fahrt an die Küste von Upeto
-    'Q', [564, 2014], [488, 1957], //Fahrt nach Basapo
-    'Q', [489, 1867], [556, 1869] //Reise nach Ako
-  ],
-  {
-    color: 'orange',
-    weight: isMobile ? 6 : 4,
-    dashArray: isMobile ? '16,10' : '10,6',
-    opacity: 0.7,
-  }
-).addTo(map);
+// Dynamic Journey Loader - Clean Version
+// Loads journey data directly from CMS without fallback
 
-VsuzH_Journey.bindPopup("VsuzH Reise");
+let journeyLayers = [];
+
+// Dynamic journey loader
+async function loadJourneys() {
+    try {
+        // Load from CMS using singular endpoint
+        const response = await fetch('https://adenai-admin.piogino.ch/api/journey');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const journeys = await response.json();
+        console.log(`✅ Loaded ${journeys.length} journey(s) from CMS`);
+        
+        // Clear existing journeys
+        clearJourneys();
+        
+        // Render each active journey
+        journeys.forEach(journey => {
+            if (!journey.active) {
+                console.log(`⏭️  Skipping inactive journey: ${journey.name}`);
+                return;
+            }
+            
+            const pathData = buildPathFromSegments(journey.segments);
+            const journeyLayer = L.curve(pathData, {
+                color: journey.color,
+                weight: isMobile() ? journey.weightMobile : journey.weight,
+                dashArray: isMobile() ? journey.dashArrayMobile : journey.dashArray,
+                opacity: journey.opacity,
+            }).addTo(map);
+            
+            // Enhanced popup with journey info
+            const lastUpdate = new Date(journey.updatedAt).toLocaleDateString('de-DE');
+            journeyLayer.bindPopup(`
+                <div class="journey-popup">
+                    <h4>${journey.name}</h4>
+                    ${journey.description ? `<p>${journey.description}</p>` : ''}
+                    <small>${journey.segments.length} Segmente • ${lastUpdate}</small>
+                </div>
+            `);
+            
+            // Store reference for cleanup
+            journeyLayers.push(journeyLayer);
+            
+            console.log(`✨ Rendered: ${journey.name} (${journey.segments.length} segments)`);
+        });
+        
+    } catch (error) {
+        console.error('❌ Could not load journeys from CMS:', error);
+        // Optionally show user-friendly error
+        showJourneyError(error.message);
+    }
+}
+
+function buildPathFromSegments(segments) {
+    const pathData = [];
+    for (const segment of segments) {
+        pathData.push(segment.type);
+        pathData.push([segment.coords[0], segment.coords[1]]);
+        if (segment.type === 'Q' && segment.control) {
+            pathData.push([segment.control[0], segment.control[1]]);
+        }
+    }
+    return pathData;
+}
+
+function clearJourneys() {
+    journeyLayers.forEach(layer => {
+        if (map.hasLayer(layer)) {
+            map.removeLayer(layer);
+        }
+    });
+    journeyLayers = [];
+}
+
+function isMobile() {
+    return window.innerWidth <= 768 || 
+           /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+function showJourneyError(message) {
+    // Optional: Show error to user
+    console.warn('🚫 Journey loading failed:', message);
+    
+    // You could add a visual error indicator here if desired
+    // For example, a small notification in the corner
+}
+
+// Refresh function for manual updates
+async function refreshJourneys() {
+    console.log('🔄 Refreshing journeys...');
+    await loadJourneys();
+}
+
+// Initialize when map is ready
+function initJourneys() {
+    if (typeof map !== 'undefined' && map) {
+        loadJourneys();
+        console.log('🚀 Journey system initialized');
+    } else {
+        // Wait for map to be ready
+        setTimeout(initJourneys, 500);
+    }
+}
+
+// Auto-initialize
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initJourneys);
+} else {
+    initJourneys();
+}
+
+// Add basic CSS for popups
+const style = document.createElement('style');
+style.textContent = `
+.journey-popup h4 {
+    margin: 0 0 8px 0;
+    color: #333;
+}
+.journey-popup p {
+    margin: 0 0 8px 0;
+    font-style: italic;
+    color: #666;
+}
+.journey-popup small {
+    color: #888;
+    font-size: 0.8em;
+}
+`;
+document.head.appendChild(style);
+
+// Export functions for external use
+window.refreshJourneys = refreshJourneys;
+window.loadJourneys = loadJourneys;
