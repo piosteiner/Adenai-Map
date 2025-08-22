@@ -406,7 +406,9 @@
       "type": "Feature",
       "properties": {
         "name": "Zur Prallen Traube",
-        "description": "Die VsuzH haben einen Überfall auf das Gasthaus und das umliegende Dorf gerächt."
+        "description": "Die VsuzH haben einen Überfall auf das Gasthaus und das umliegende Dorf gerächt.",
+        "contentUrl": null,
+        "visited": true
       },
       "geometry": {
         "type": "Point",
