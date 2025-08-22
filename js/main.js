@@ -171,34 +171,31 @@ async function loadCharacters() {
   }
 }
 
-// Add characters to map
+// Simplified character mapping - no more location matching needed!
 function addCharactersToMap() {
   characterData.forEach(character => {
-    if (!character.location) return; // Skip characters without location
-    
-    // Find matching location from GeoJSON
-    const locationMatch = geoFeatureLayers.find(g => 
-      g.feature.properties.name === character.location
-    );
-    
-    if (locationMatch) {
-      // Get coordinates from the location
-      const latlng = locationMatch.layer.getLatLng();
-      
-      // Offset character marker slightly from location marker
-      const offsetLat = latlng.lat + (Math.random() - 0.5) * 30;
-      const offsetLng = latlng.lng + (Math.random() - 0.5) * 30;
-      
-      // Choose icon based on relationship
-      const icon = RelationshipIcons[character.relationship] || CharacterIcon;
-      
-      // Create character marker
-      const marker = L.marker([offsetLat, offsetLng], { icon })
-        .bindPopup(createCharacterPopup(character))
-        .addTo(map);
-      
-      characterLayers.push({ marker, character });
+    // Skip characters without coordinates
+    if (!character.coordinates) {
+      console.warn(`Character ${character.name} has no coordinates`);
+      return;
     }
+    
+    // Use stored coordinates directly
+    const [lng, lat] = character.coordinates;
+    
+    // Add small random offset so multiple characters at same location don't overlap
+    const offsetLat = lat + (Math.random() - 0.5) * 20;
+    const offsetLng = lng + (Math.random() - 0.5) * 20;
+    
+    // Choose icon based on relationship
+    const icon = RelationshipIcons[character.relationship] || CharacterIcon;
+    
+    // Create character marker
+    const marker = L.marker([offsetLat, offsetLng], { icon })
+      .bindPopup(createCharacterPopup(character))
+      .addTo(map);
+    
+    characterLayers.push({ marker, character });
   });
 }
 
@@ -248,23 +245,17 @@ function createCharacterPopup(character) {
 
 // Enhanced search that includes characters
 function updateSearchIndexWithCharacters() {
-  // Add characters to existing search index
   characterData.forEach(character => {
-    if (character.location) {
-      // Find location coordinates
-      const locationMatch = geoFeatureLayers.find(g => 
-        g.feature.properties.name === character.location
-      );
+    if (character.coordinates) {
+      const [lng, lat] = character.coordinates;
       
-      if (locationMatch) {
-        searchIndex.push({
-          name: character.name,
-          desc: `${character.title || ''} ${character.description || ''} ${character.notes || ''}`.trim(),
-          latlng: locationMatch.layer.getLatLng(),
-          type: 'character',
-          character: character
-        });
-      }
+      searchIndex.push({
+        name: character.name,
+        desc: `${character.title || ''} ${character.description || ''} ${character.notes || ''}`.trim(),
+        latlng: { lat, lng },
+        type: 'character',
+        character: character
+      });
     }
   });
 }
