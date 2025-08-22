@@ -8,9 +8,9 @@
       "itemName": "Tasbor",
       "user": "Nici",
       "timestamp": "2025-08-22T06:09:33.361Z",
-      "status": "pending",
-      "reviewedBy": null,
-      "reviewedAt": null,
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T07:35:50.471Z",
       "reviewNotes": "",
       "commitMessage": "Delete character: Tasbor (by Nici) - Removed from campaign"
     },
@@ -431,5 +431,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T07:35:48.505Z"
+  "lastUpdated": "2025-08-22T07:35:50.664Z"
 }
