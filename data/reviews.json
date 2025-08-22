@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ab39b450b8c30704c5219b34d54985e241e9de29",
+      "action": "update",
+      "type": "location",
+      "itemName": "Luvatu",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:05:05.737Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Luvatu (by Nici) - marked as visited"
+    },
+    {
       "commitSha": "7a53fa6ae2c2a44b0abe6007f6705d190163ca32",
       "action": "update",
       "type": "location",
@@ -262,5 +275,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:04:56.509Z"
+  "lastUpdated": "2025-08-22T06:05:05.737Z"
 }
