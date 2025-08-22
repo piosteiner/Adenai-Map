@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "2f6fdbb16e5d48f5c322d1e457e639348645b182",
+      "action": "update",
+      "type": "location",
+      "itemName": "Valaris",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:03:03.926Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Valaris (by Nici) - Updated location details"
+    },
+    {
       "commitSha": "64f77c46562d1891bdc03ea4b095d9031f7689dc",
       "action": "update",
       "type": "location",
@@ -184,5 +197,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:03:02.023Z"
+  "lastUpdated": "2025-08-22T06:03:03.926Z"
 }
