@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "bc0c58b8eee87a0661a216a41ffc58742aacebec",
+      "action": "update",
+      "type": "location",
+      "itemName": "Toftgard",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:04:16.240Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Toftgard (by Nici) - marked as visited"
+    },
+    {
       "commitSha": "11745e4f4cfd7188825b47d01ce607d6d26a24a7",
       "action": "update",
       "type": "location",
@@ -223,5 +236,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:03:16.826Z"
+  "lastUpdated": "2025-08-22T06:04:16.240Z"
 }
