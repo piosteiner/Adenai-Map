@@ -203,9 +203,9 @@
       "itemName": "Toftgard",
       "user": "Nici",
       "timestamp": "2025-08-22T06:04:16.240Z",
-      "status": "pending",
-      "reviewedBy": null,
-      "reviewedAt": null,
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T07:33:52.040Z",
       "reviewNotes": "",
       "commitMessage": "Update location: Toftgard (by Nici) - marked as visited"
     },
@@ -431,5 +431,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T07:33:50.137Z"
+  "lastUpdated": "2025-08-22T07:33:52.225Z"
 }
