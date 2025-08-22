@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "08c29dc7fdde663c24a5d484388f8858cbd15ff7",
+      "action": "update",
+      "type": "location",
+      "itemName": "Basapo",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:05:34.009Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Basapo (by Nici) - marked as visited"
+    },
+    {
       "commitSha": "846cba940b53f3ae9042401e5d176003deaedcef",
       "action": "update",
       "type": "location",
@@ -301,5 +314,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:05:23.888Z"
+  "lastUpdated": "2025-08-22T06:05:34.009Z"
 }
