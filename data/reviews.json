@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "7a53fa6ae2c2a44b0abe6007f6705d190163ca32",
+      "action": "update",
+      "type": "location",
+      "itemName": "Atlantis (versunken)",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:04:56.509Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Atlantis (versunken) (by Nici) - marked as visited"
+    },
+    {
       "commitSha": "6453a948e52ff943d4a1eba417aa1482132f20eb",
       "action": "update",
       "type": "location",
@@ -249,5 +262,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:04:24.135Z"
+  "lastUpdated": "2025-08-22T06:04:56.509Z"
 }
