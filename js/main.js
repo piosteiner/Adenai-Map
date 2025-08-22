@@ -752,10 +752,38 @@ function initSearch() {
       dropdown.style.display = 'none';
       return;
     }
-
-    const results = searchIndex.filter(m =>
+    
+  const results = searchIndex
+    .filter(m =>
       m.name.toLowerCase().includes(query) || m.desc.toLowerCase().includes(query)
-    );
+    )
+    .sort((a, b) => {
+      const queryLower = query.toLowerCase();
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      
+      // 🥇 PRIORITY 1: Exact matches first
+      const exactMatchA = nameA === queryLower;
+      const exactMatchB = nameB === queryLower;
+      if (exactMatchA && !exactMatchB) return -1;
+      if (!exactMatchA && exactMatchB) return 1;
+      
+      // 🥈 PRIORITY 2: Names starting with the query
+      const startsWithA = nameA.startsWith(queryLower);
+      const startsWithB = nameB.startsWith(queryLower);
+      if (startsWithA && !startsWithB) return -1;
+      if (!startsWithA && startsWithB) return 1;
+      
+      // 🥉 PRIORITY 3: Characters before locations (if same match quality)
+      if (startsWithA === startsWithB) {
+        if (a.type === 'character' && b.type === 'location') return -1;
+        if (a.type === 'location' && b.type === 'character') return 1;
+      }
+      
+      // 🔤 FINAL: Alphabetical order
+      return nameA.localeCompare(nameB);
+    }
+  );
 
     if (results.length > 0) {
       results.forEach((result, index) => {
