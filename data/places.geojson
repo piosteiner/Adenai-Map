@@ -111,7 +111,9 @@
       "type": "Feature",
       "properties": {
         "name": "Luvatu",
-        "description": "Stadt unter dem Wasser - primär von Triton*innen bewohnt."
+        "description": "Stadt unter dem Wasser - primär von Triton*innen bewohnt.",
+        "contentUrl": null,
+        "visited": true
       },
       "geometry": {
         "type": "Point",
