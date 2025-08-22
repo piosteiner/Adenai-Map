@@ -160,10 +160,10 @@
       "id": "test",
       "name": "Test",
       "title": "",
-      "location": "Donnermund",
+      "location": "Elissastadt",
       "coordinates": [
-        981,
-        656
+        372,
+        343
       ],
       "description": "",
       "image": "",
@@ -184,20 +184,32 @@
           "notes": "",
           "type": "travel",
           "createdAt": "2025-08-22T16:05:42.652Z"
+        },
+        {
+          "id": "movement_1755878751956",
+          "date": "2025-08-07",
+          "location": "Elissastadt",
+          "coordinates": [
+            372,
+            343
+          ],
+          "notes": "",
+          "type": "travel",
+          "createdAt": "2025-08-22T16:05:51.956Z"
         }
       ],
       "currentLocation": {
-        "date": "2025-08-04",
-        "location": "Donnermund",
+        "date": "2025-08-07",
+        "location": "Elissastadt",
         "coordinates": [
-          981,
-          656
+          372,
+          343
         ],
         "notes": ""
       },
       "createdAt": "2025-08-22T15:11:48.559Z",
-      "updatedAt": "2025-08-22T16:05:42.652Z"
+      "updatedAt": "2025-08-22T16:05:51.956Z"
     }
   ],
-  "lastUpdated": "2025-08-22T16:05:42.652Z"
+  "lastUpdated": "2025-08-22T16:05:51.956Z"
 }
