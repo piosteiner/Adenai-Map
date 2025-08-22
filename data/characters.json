@@ -160,10 +160,10 @@
       "id": "test",
       "name": "Test",
       "title": "",
-      "location": "Elissastadt",
+      "location": "Föhrenhauch",
       "coordinates": [
-        372,
-        343
+        863,
+        1122
       ],
       "description": "",
       "image": "",
@@ -196,20 +196,32 @@
           "notes": "",
           "type": "travel",
           "createdAt": "2025-08-22T16:05:51.956Z"
+        },
+        {
+          "id": "movement_1755878763565",
+          "date": "2025-08-16",
+          "location": "Föhrenhauch",
+          "coordinates": [
+            863,
+            1122
+          ],
+          "notes": "",
+          "type": "mission",
+          "createdAt": "2025-08-22T16:06:03.565Z"
         }
       ],
       "currentLocation": {
-        "date": "2025-08-07",
-        "location": "Elissastadt",
+        "date": "2025-08-16",
+        "location": "Föhrenhauch",
         "coordinates": [
-          372,
-          343
+          863,
+          1122
         ],
         "notes": ""
       },
       "createdAt": "2025-08-22T15:11:48.559Z",
-      "updatedAt": "2025-08-22T16:05:51.956Z"
+      "updatedAt": "2025-08-22T16:06:03.565Z"
     }
   ],
-  "lastUpdated": "2025-08-22T16:05:51.956Z"
+  "lastUpdated": "2025-08-22T16:06:03.565Z"
 }
