@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "a2afd8a5db7e173b5370683d979318831306dd8a",
+      "action": "update",
+      "type": "location",
+      "itemName": "Zur Prallen Traube",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:06:20.366Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Zur Prallen Traube (by Nici) - Updated location details"
+    },
+    {
       "commitSha": "c82314e0caace69a2ebc3dd693e3f40b0a0d18d6",
       "action": "update",
       "type": "location",
@@ -340,5 +353,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:05:58.239Z"
+  "lastUpdated": "2025-08-22T06:06:20.366Z"
 }
