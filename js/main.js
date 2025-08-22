@@ -83,59 +83,101 @@ const DotOrange = L.icon({
 let characterData = [];
 let characterLayers = [];
 
-// Enhanced icons for different types
-const CharacterIcon = L.icon({
-  iconUrl: 'icons/character.svg',
-  iconSize: isMobile ? [40, 40] : [28, 28],
-  iconAnchor: isMobile ? [20, 20] : [14, 14],
-  popupAnchor: [0, -20]
-});
-
-// Relationship-based character icons
+// FIXED: Character icons with proper positioning
 const RelationshipIcons = {
-  ally: L.icon({
-    iconUrl: 'icons/character_ally.svg',
-    iconSize: isMobile ? [40, 40] : [28, 28],
-    iconAnchor: isMobile ? [20, 20] : [14, 14],
-    popupAnchor: [0, -20],
-    className: 'character-marker'
+  ally: L.divIcon({
+    className: 'character-marker-fixed',
+    html: '<div style="background: #4CAF50; width: 28px; height: 28px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">👑</div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
   }),
-  friendly: L.icon({
-    iconUrl: 'icons/character_ally.svg',
-    iconSize: isMobile ? [40, 40] : [28, 28],
-    iconAnchor: isMobile ? [20, 20] : [14, 14],
-    popupAnchor: [0, -20],
-    className: 'character-marker'
+  friendly: L.divIcon({
+    className: 'character-marker-fixed',
+    html: '<div style="background: #8BC34A; width: 28px; height: 28px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">😊</div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
   }),
-  enemy: L.icon({
-    iconUrl: 'icons/character_enemy.svg',
-    iconSize: isMobile ? [40, 40] : [28, 28],
-    iconAnchor: isMobile ? [20, 20] : [14, 14],
-    popupAnchor: [0, -20],
-    className: 'character-marker'
+  enemy: L.divIcon({
+    className: 'character-marker-fixed',
+    html: '<div style="background: #F44336; width: 28px; height: 28px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">⚔️</div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
   }),
-  hostile: L.icon({
-    iconUrl: 'icons/character_enemy.svg',
-    iconSize: isMobile ? [40, 40] : [28, 28],
-    iconAnchor: isMobile ? [20, 20] : [14, 14],
-    popupAnchor: [0, -20],
-    className: 'character-marker'
+  hostile: L.divIcon({
+    className: 'character-marker-fixed',
+    html: '<div style="background: #FF5722; width: 28px; height: 28px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">💀</div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
   }),
-  neutral: L.icon({
-    iconUrl: 'icons/character_neutral.svg',
-    iconSize: isMobile ? [40, 40] : [28, 28],
-    iconAnchor: isMobile ? [20, 20] : [14, 14],
-    popupAnchor: [0, -20],
-    className: 'character-marker'
+  neutral: L.divIcon({
+    className: 'character-marker-fixed',
+    html: '<div style="background: #FFC107; width: 28px; height: 28px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; color: #333; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">👤</div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
   }),
-  suspicious: L.icon({
-    iconUrl: 'icons/character_neutral.svg',
-    iconSize: isMobile ? [40, 40] : [28, 28],
-    iconAnchor: isMobile ? [20, 20] : [14, 14],
-    popupAnchor: [0, -20],
-    className: 'character-marker'
+  suspicious: L.divIcon({
+    className: 'character-marker-fixed',
+    html: '<div style="background: #FF9800; width: 28px; height: 28px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">🤔</div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
   })
 };
+
+// Add CSS fix for character icon positioning
+function addCharacterIconCSS() {
+  const style = document.createElement('style');
+  style.textContent = `
+    /* Fix character icon positioning */
+    .character-marker-fixed {
+      background: transparent !important;
+      border: none !important;
+    }
+    
+    /* Ensure icons are positioned correctly */
+    .leaflet-marker-icon.character-marker-fixed {
+      transform-origin: center center !important;
+    }
+    
+    /* Fix for divIcon positioning issues */
+    .leaflet-div-icon {
+      background: transparent !important;
+      border: none !important;
+    }
+    
+    /* Character marker animation */
+    .character-marker-fixed {
+      animation: characterPulse 2s infinite;
+    }
+    
+    @keyframes characterPulse {
+      0% { 
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% { 
+        transform: scale(1.05);
+        opacity: 0.8;
+      }
+      100% { 
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    /* Disable animation on hover */
+    .character-marker-fixed:hover {
+      animation: none;
+    }
+  `;
+  document.head.appendChild(style);
+  console.log('✅ Added character icon CSS fixes');
+}
 
 function sanitizeFilename(name) {
   return name
@@ -171,8 +213,10 @@ async function loadCharacters() {
   }
 }
 
-// Add characters to map
+// Add characters to map with fixed positioning
 function addCharactersToMap() {
+  console.log('🎭 Adding characters to map with fixed icons...');
+  
   characterData.forEach(character => {
     if (!character.location) return; // Skip characters without location
     
@@ -189,8 +233,8 @@ function addCharactersToMap() {
       const offsetLat = latlng.lat + (Math.random() - 0.5) * 30;
       const offsetLng = latlng.lng + (Math.random() - 0.5) * 30;
       
-      // Choose icon based on relationship
-      const icon = RelationshipIcons[character.relationship] || CharacterIcon;
+      // Choose icon based on relationship - now using fixed icons
+      const icon = RelationshipIcons[character.relationship] || RelationshipIcons.neutral;
       
       // Create character marker
       const marker = L.marker([offsetLat, offsetLng], { icon })
@@ -198,8 +242,12 @@ function addCharactersToMap() {
         .addTo(map);
       
       characterLayers.push({ marker, character });
+      
+      console.log(`✅ Added ${character.name} with fixed icon at [${offsetLat.toFixed(1)}, ${offsetLng.toFixed(1)}]`);
     }
   });
+  
+  console.log(`🎯 Total character markers added: ${characterLayers.length}`);
 }
 
 // Debug code for character location mismatch
@@ -378,11 +426,6 @@ function testCoordinateSystem() {
     }, 5000);
   }
 }
-
-// Run all debug functions
-console.log('🚀 Running character location debugging...');
-debugCharacterLocationMatching();
-testCoordinateSystem();
 
 // Create character popup content
 function createCharacterPopup(character) {
@@ -598,6 +641,9 @@ fetch('data/places.geojson')
     }).addTo(map);
 
     initSearch(); // Init search once all markers are set up
+    
+    // Add character icon CSS fix
+    addCharacterIconCSS();
     
     // Load characters after locations are loaded
     setTimeout(() => {
