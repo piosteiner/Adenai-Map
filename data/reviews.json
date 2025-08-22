@@ -2,15 +2,54 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "36620ccaa03755d9d389266236e9c54a967734c6",
+      "action": "delete",
+      "type": "character",
+      "itemName": "tetw",
+      "user": "Pio`s Test User",
+      "timestamp": "2025-08-22T00:07:09.179Z",
+      "status": "rejected",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T00:07:22.821Z",
+      "reviewNotes": "test",
+      "commitMessage": "Delete character: tetw (by Pio`s Test User) - Removed from campaign"
+    },
+    {
+      "commitSha": "c320a90fbb19bb9e235ddbcb9d8aca3899570c2d",
+      "action": "delete",
+      "type": "character",
+      "itemName": "test awet",
+      "user": "Pio`s Test User",
+      "timestamp": "2025-08-22T00:06:43.845Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T00:07:03.322Z",
+      "reviewNotes": "",
+      "commitMessage": "Delete character: test awet (by Pio`s Test User) - Removed from campaign"
+    },
+    {
+      "commitSha": "5b13449387f9d733f702f40040ebbce088d1710b",
+      "action": "create",
+      "type": "character",
+      "itemName": "test awet",
+      "user": "gm",
+      "timestamp": "2025-08-22T00:03:53.425Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T00:03:53.425Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: test awet (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "2832b7770fb5f9878125405902f45105cadc9afc",
       "action": "update",
       "type": "location",
       "itemName": "Motu Motu",
       "user": "Pio`s Test User",
       "timestamp": "2025-08-21T22:59:07.230Z",
-      "status": "pending",
-      "reviewedBy": null,
-      "reviewedAt": null,
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-22T00:03:18.783Z",
       "reviewNotes": "",
       "commitMessage": "Update location: Motu Motu (by Pio`s Test User) - marked as visited"
     },
@@ -41,5 +80,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-21T22:59:07.230Z"
+  "lastUpdated": "2025-08-22T00:07:23.020Z"
 }
