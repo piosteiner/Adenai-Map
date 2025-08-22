@@ -132,6 +132,27 @@ class AdminUI {
         });
     }
 
+    resetForm(formId) {
+        const form = document.getElementById(formId);
+        if (form) {
+            form.reset();
+            
+            // Also clear any custom validation states
+            const inputs = form.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.classList.remove('error', 'valid');
+            });
+            
+            // Clear any error messages
+            const errorMessages = form.querySelectorAll('.error-message');
+            errorMessages.forEach(msg => msg.remove());
+            
+            console.log(`🔄 Form "${formId}" reset`);
+        } else {
+            console.warn(`⚠️ Form "${formId}" not found for reset`);
+        }
+    }
+
     // Validation
     validateForm(formId, rules = {}) {
         const form = document.getElementById(formId);

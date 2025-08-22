@@ -11,6 +11,51 @@ const initGitHub = (octokitInstance, repoOwner, repoName) => {
   REPO_NAME = repoName;
 };
 
+// Helper function to resolve coordinates from location name
+async function resolveLocationCoordinates(locationName) {
+  if (!locationName) return null;
+  
+  try {
+    const { data } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/places.geojson'
+    });
+    
+    const placesData = JSON.parse(Buffer.from(data.content, 'base64').toString());
+    
+    // Find the location by name
+    const location = placesData.features.find(
+      feature => feature.properties.name === locationName
+    );
+    
+    if (location && location.geometry && location.geometry.coordinates) {
+      return location.geometry.coordinates;
+    }
+    
+    console.warn(`⚠️ Location "${locationName}" not found in places.geojson`);
+    return null;
+  } catch (error) {
+    console.error('Error resolving location coordinates:', error);
+    return null;
+  }
+}
+
+// Helper function to resolve coordinates for movement entries
+async function resolveMovementCoordinates(locationName, directCoordinates) {
+  // If direct coordinates provided, use those
+  if (directCoordinates && Array.isArray(directCoordinates) && directCoordinates.length === 2) {
+    return directCoordinates;
+  }
+  
+  // Otherwise, resolve from location name
+  if (locationName) {
+    return await resolveLocationCoordinates(locationName);
+  }
+  
+  return null;
+}
+
 // Get all characters (public)
 router.get('/', async (req, res) => {
   try {
@@ -44,6 +89,9 @@ router.post('/', requireAuth, async (req, res) => {
     const userRole = req.session.role || 'user';
     console.log('Adding new character:', req.body.name, 'by', user);
     
+    // Resolve coordinates from location name
+    const coordinates = await resolveLocationCoordinates(req.body.location);
+    
     // Get current content
     let currentContent;
     let currentSha;
@@ -69,12 +117,13 @@ router.post('/', requireAuth, async (req, res) => {
       }
     }
     
-    // Add new character
+    // Add new character with coordinates
     const newCharacter = {
       id: req.body.name.toLowerCase().replace(/[^a-z0-9]/g, '_'),
       name: req.body.name,
       title: req.body.title || '',
       location: req.body.location || '',
+      coordinates: coordinates,
       description: req.body.description || '',
       image: req.body.image || '',
       status: req.body.status || 'alive',
@@ -82,6 +131,13 @@ router.post('/', requireAuth, async (req, res) => {
       relationship: req.body.relationship || 'neutral',
       firstMet: req.body.firstMet || '',
       notes: req.body.notes || '',
+      movementHistory: [],
+      currentLocation: coordinates ? {
+        date: new Date().toISOString().split('T')[0],
+        location: req.body.location || null,
+        coordinates: coordinates,
+        notes: 'Initial location'
+      } : null,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
@@ -131,6 +187,9 @@ router.put('/:id', requireAuth, async (req, res) => {
     const userRole = req.session.role || 'user';
     console.log('Updating character:', originalId, 'by', user);
     
+    // Resolve coordinates from location name
+    const coordinates = await resolveLocationCoordinates(req.body.location);
+    
     // Get current content
     const { data: currentFile } = await octokit.rest.repos.getContent({
       owner: REPO_OWNER,
@@ -155,12 +214,13 @@ router.put('/:id', requireAuth, async (req, res) => {
     // Get old character for change detection
     const oldCharacter = currentContent.characters[characterIndex];
     
-    // Update the character data
+    // Update the character data with coordinates
     const updatedCharacter = {
       id: req.body.name.toLowerCase().replace(/[^a-z0-9]/g, '_'),
       name: req.body.name,
       title: req.body.title || '',
       location: req.body.location || '',
+      coordinates: coordinates,
       description: req.body.description || '',
       image: req.body.image || '',
       status: req.body.status || 'alive',
@@ -168,6 +228,13 @@ router.put('/:id', requireAuth, async (req, res) => {
       relationship: req.body.relationship || 'neutral',
       firstMet: req.body.firstMet || '',
       notes: req.body.notes || '',
+      movementHistory: oldCharacter.movementHistory || [],
+      currentLocation: coordinates ? {
+        date: new Date().toISOString().split('T')[0],
+        location: req.body.location || null,
+        coordinates: coordinates,
+        notes: oldCharacter.currentLocation?.notes || 'Updated location'
+      } : oldCharacter.currentLocation,
       createdAt: oldCharacter.createdAt, // Keep original creation date
       updatedAt: new Date().toISOString()
     };
@@ -267,6 +334,298 @@ router.delete('/:id', requireAuth, async (req, res) => {
     });
   } catch (error) {
     console.error('Error deleting character:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Add movement entry to character
+router.post('/:id/movements', requireAuth, async (req, res) => {
+  try {
+    const characterId = decodeURIComponent(req.params.id);
+    const user = req.session.displayName || req.session.username || 'Unknown';
+    const userRole = req.session.role || 'user';
+    
+    console.log('Adding movement to character:', characterId, 'by', user);
+    
+    // Resolve coordinates
+    const coordinates = await resolveMovementCoordinates(
+      req.body.location, 
+      req.body.coordinates
+    );
+    
+    if (!coordinates) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Could not resolve coordinates for movement' 
+      });
+    }
+    
+    // Get current characters data
+    const { data: currentFile } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json'
+    });
+    
+    const currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
+    
+    // Find character
+    const characterIndex = currentContent.characters.findIndex(
+      character => character.id === characterId
+    );
+    
+    if (characterIndex === -1) {
+      return res.status(404).json({ 
+        success: false, 
+        error: 'Character not found' 
+      });
+    }
+    
+    const character = currentContent.characters[characterIndex];
+    
+    // Initialize movement history if it doesn't exist
+    if (!character.movementHistory) {
+      character.movementHistory = [];
+    }
+    
+    // Create new movement entry
+    const newMovement = {
+      id: `movement_${Date.now()}`,
+      date: req.body.date || new Date().toISOString().split('T')[0],
+      location: req.body.location || null,
+      coordinates: coordinates,
+      notes: req.body.notes || '',
+      type: req.body.type || 'travel',
+      createdAt: new Date().toISOString()
+    };
+    
+    // Add to movement history (sorted by date)
+    character.movementHistory.push(newMovement);
+    character.movementHistory.sort((a, b) => new Date(a.date) - new Date(b.date));
+    
+    // Update current location if this is the most recent movement
+    const latestMovement = character.movementHistory[character.movementHistory.length - 1];
+    if (latestMovement.id === newMovement.id) {
+      character.location = newMovement.location || 'Custom Location';
+      character.coordinates = newMovement.coordinates;
+      character.currentLocation = {
+        date: newMovement.date,
+        location: newMovement.location,
+        coordinates: newMovement.coordinates,
+        notes: newMovement.notes
+      };
+    }
+    
+    character.updatedAt = new Date().toISOString();
+    currentContent.lastUpdated = new Date().toISOString();
+    
+    // Commit to GitHub
+    const commitMessage = `Add movement to character: ${character.name} (by ${user}) - ${newMovement.location || 'Custom coordinates'} on ${newMovement.date}`;
+    
+    const commitResponse = await octokit.rest.repos.createOrUpdateFileContents({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json',
+      message: commitMessage,
+      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64'),
+      sha: currentFile.sha
+    });
+    
+    // Submit for review
+    const commitSha = commitResponse.data.commit.sha;
+    await submitChangeForReview(commitSha, 'update', 'character', character.name, commitMessage, user, userRole);
+    
+    res.json({ 
+      success: true, 
+      movement: newMovement,
+      character: character,
+      commitSha: commitSha
+    });
+  } catch (error) {
+    console.error('Error adding movement:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Update movement entry
+router.put('/:id/movements/:movementId', requireAuth, async (req, res) => {
+  try {
+    const characterId = decodeURIComponent(req.params.id);
+    const movementId = decodeURIComponent(req.params.movementId);
+    const user = req.session.displayName || req.session.username || 'Unknown';
+    const userRole = req.session.role || 'user';
+    
+    // Resolve coordinates
+    const coordinates = await resolveMovementCoordinates(
+      req.body.location, 
+      req.body.coordinates
+    );
+    
+    if (!coordinates) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Could not resolve coordinates for movement' 
+      });
+    }
+    
+    // Get current characters data
+    const { data: currentFile } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json'
+    });
+    
+    const currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
+    
+    // Find character and movement
+    const character = currentContent.characters.find(c => c.id === characterId);
+    if (!character || !character.movementHistory) {
+      return res.status(404).json({ success: false, error: 'Character or movement not found' });
+    }
+    
+    const movementIndex = character.movementHistory.findIndex(m => m.id === movementId);
+    if (movementIndex === -1) {
+      return res.status(404).json({ success: false, error: 'Movement not found' });
+    }
+    
+    // Update movement
+    const updatedMovement = {
+      ...character.movementHistory[movementIndex],
+      date: req.body.date || character.movementHistory[movementIndex].date,
+      location: req.body.location || null,
+      coordinates: coordinates,
+      notes: req.body.notes || '',
+      type: req.body.type || character.movementHistory[movementIndex].type,
+      updatedAt: new Date().toISOString()
+    };
+    
+    character.movementHistory[movementIndex] = updatedMovement;
+    
+    // Re-sort by date
+    character.movementHistory.sort((a, b) => new Date(a.date) - new Date(b.date));
+    
+    // Update current location if this was the most recent movement
+    const latestMovement = character.movementHistory[character.movementHistory.length - 1];
+    if (latestMovement.id === movementId) {
+      character.location = latestMovement.location || 'Custom Location';
+      character.coordinates = latestMovement.coordinates;
+      character.currentLocation = {
+        date: latestMovement.date,
+        location: latestMovement.location,
+        coordinates: latestMovement.coordinates,
+        notes: latestMovement.notes
+      };
+    }
+    
+    character.updatedAt = new Date().toISOString();
+    currentContent.lastUpdated = new Date().toISOString();
+    
+    // Commit to GitHub
+    const commitMessage = `Update character movement: ${character.name} (by ${user}) - Modified ${updatedMovement.location || 'coordinates'} entry`;
+    
+    const commitResponse = await octokit.rest.repos.createOrUpdateFileContents({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json',
+      message: commitMessage,
+      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64'),
+      sha: currentFile.sha
+    });
+    
+    const commitSha = commitResponse.data.commit.sha;
+    await submitChangeForReview(commitSha, 'update', 'character', character.name, commitMessage, user, userRole);
+    
+    res.json({ 
+      success: true, 
+      movement: updatedMovement,
+      character: character,
+      commitSha: commitSha
+    });
+  } catch (error) {
+    console.error('Error updating movement:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete movement entry
+router.delete('/:id/movements/:movementId', requireAuth, async (req, res) => {
+  try {
+    const characterId = decodeURIComponent(req.params.id);
+    const movementId = decodeURIComponent(req.params.movementId);
+    const user = req.session.displayName || req.session.username || 'Unknown';
+    const userRole = req.session.role || 'user';
+    
+    // Get current characters data
+    const { data: currentFile } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json'
+    });
+    
+    const currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
+    
+    // Find character and movement
+    const character = currentContent.characters.find(c => c.id === characterId);
+    if (!character || !character.movementHistory) {
+      return res.status(404).json({ success: false, error: 'Character or movement not found' });
+    }
+    
+    const movementIndex = character.movementHistory.findIndex(m => m.id === movementId);
+    if (movementIndex === -1) {
+      return res.status(404).json({ success: false, error: 'Movement not found' });
+    }
+    
+    // Remove movement
+    const deletedMovement = character.movementHistory[movementIndex];
+    character.movementHistory.splice(movementIndex, 1);
+    
+    // Update current location to the most recent remaining movement
+    if (character.movementHistory.length > 0) {
+      const latestMovement = character.movementHistory[character.movementHistory.length - 1];
+      character.location = latestMovement.location || 'Custom Location';
+      character.coordinates = latestMovement.coordinates;
+      character.currentLocation = {
+        date: latestMovement.date,
+        location: latestMovement.location,
+        coordinates: latestMovement.coordinates,
+        notes: latestMovement.notes
+      };
+    } else {
+      // No movements left, keep current location as is
+      character.currentLocation = {
+        date: new Date().toISOString().split('T')[0],
+        location: character.location,
+        coordinates: character.coordinates,
+        notes: 'Original location'
+      };
+    }
+    
+    character.updatedAt = new Date().toISOString();
+    currentContent.lastUpdated = new Date().toISOString();
+    
+    // Commit to GitHub
+    const commitMessage = `Delete character movement: ${character.name} (by ${user}) - Removed ${deletedMovement.location || 'coordinates'} entry`;
+    
+    const commitResponse = await octokit.rest.repos.createOrUpdateFileContents({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'data/characters.json',
+      message: commitMessage,
+      content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64'),
+      sha: currentFile.sha
+    });
+    
+    const commitSha = commitResponse.data.commit.sha;
+    await submitChangeForReview(commitSha, 'update', 'character', character.name, commitMessage, user, userRole);
+    
+    res.json({ 
+      success: true, 
+      message: 'Movement deleted successfully',
+      character: character,
+      commitSha: commitSha
+    });
+  } catch (error) {
+    console.error('Error deleting movement:', error.message);
     res.status(500).json({ error: error.message });
   }
 });

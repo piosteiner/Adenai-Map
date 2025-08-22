@@ -308,6 +308,93 @@
         </div>
     </div>
 
+    <!-- Character Movement Modal -->
+    <div id="character-movement-modal" class="modal" style="display: none;">
+        <div class="modal-content movement-modal-content">
+            <div class="modal-header">
+                <h3>🛤️ Character Movement History</h3>
+                <button class="close-movement-btn">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Movement History Display -->
+                <div class="movement-history-section">
+                    <h4>📍 Movement History</h4>
+                    <div id="movement-history-list" class="movement-history-list">
+                        <!-- Movement entries will be populated here -->
+                    </div>
+                </div>
+                
+                <!-- Add/Edit Movement Form -->
+                <div class="add-movement-section">
+                    <h4 id="movement-form-title">➕ Add New Movement</h4>
+                    <form id="movement-form" class="movement-form">
+                        
+                        <!-- Location Type Selection -->
+                        <div class="form-group">
+                            <label for="movement-location-type">📍 Location Type:</label>
+                            <select id="movement-location-type" name="movementLocationType" required>
+                                <option value="existing">Existing Location</option>
+                                <option value="custom">Custom Coordinates</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Existing Location Input -->
+                        <div id="existing-location-input" class="form-group">
+                            <label for="movement-location-select">🏛️ Location:</label>
+                            <select id="movement-location-select" name="movementLocation">
+                                <option value="">Select location...</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Custom Coordinates Input -->
+                        <div id="custom-coordinates-input" class="form-group" style="display: none;">
+                            <div style="display: flex; gap: 10px;">
+                                <div style="flex: 1;">
+                                    <label for="movement-x">🗺️ X Coordinate:</label>
+                                    <input type="number" id="movement-x" name="movementX" placeholder="e.g., 1700">
+                                </div>
+                                <div style="flex: 1;">
+                                    <label for="movement-y">🗺️ Y Coordinate:</label>
+                                    <input type="number" id="movement-y" name="movementY" placeholder="e.g., 1008">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Date -->
+                        <div class="form-group">
+                            <label for="movement-date">📅 Date:</label>
+                            <input type="date" id="movement-date" name="movementDate" required>
+                        </div>
+                        
+                        <!-- Movement Type -->
+                        <div class="form-group">
+                            <label for="movement-type">🎯 Movement Type:</label>
+                            <select id="movement-type" name="movementType">
+                                <option value="travel">🚶 Travel</option>
+                                <option value="return">🔄 Return</option>
+                                <option value="meeting">🤝 Meeting</option>
+                                <option value="mission">⚔️ Mission</option>
+                                <option value="exile">🚪 Exile</option>
+                                <option value="capture">⛓️ Capture</option>
+                                <option value="escape">🏃 Escape</option>
+                                <option value="other">❓ Other</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Notes -->
+                        <div class="form-group">
+                            <label for="movement-notes">📝 Notes:</label>
+                            <textarea id="movement-notes" name="movementNotes" rows="3" placeholder="Optional notes about this movement..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">💾 Add Movement</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Login Modal -->
     <div id="login-modal" class="modal">
         <div class="modal-content">
@@ -347,5 +434,166 @@
     <script src="js/admin-core.js"></script>
     <script src="js/admin-activity.js"></script>
     <script src="js/admin-changelog.js"></script>
+
+    <!-- Movement Modal CSS -->
+    <style>
+    .movement-modal-content {
+        max-width: 800px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .movement-history-section {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #eee;
+    }
+
+    .movement-history-list {
+        max-height: 400px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 10px;
+    }
+
+    .movement-entry {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+
+    .movement-entry:last-child {
+        margin-bottom: 0;
+    }
+
+    .movement-entry-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 8px;
+    }
+
+    .movement-info h4 {
+        margin: 0 0 4px 0;
+        color: #333;
+    }
+
+    .movement-date {
+        font-size: 0.9em;
+        color: #666;
+    }
+
+    .movement-actions {
+        display: flex;
+        gap: 5px;
+    }
+
+    .movement-actions button {
+        padding: 4px 8px;
+        font-size: 0.8em;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .movement-details {
+        font-size: 0.9em;
+        color: #555;
+    }
+
+    .movement-details p {
+        margin: 3px 0;
+    }
+
+    .add-movement-section {
+        background: #f5f5f5;
+        padding: 20px;
+        border-radius: 6px;
+    }
+
+    .movement-form .form-group {
+        margin-bottom: 15px;
+    }
+
+    .movement-form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .movement-form input, 
+    .movement-form select, 
+    .movement-form textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+    .movement-form textarea {
+        resize: vertical;
+        min-height: 60px;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #666;
+    }
+
+    .empty-state p {
+        margin: 5px 0;
+    }
+
+    /* Dark theme support */
+    [data-theme="dark"] .movement-entry {
+        background: #2a2a2a;
+        border-color: #555;
+        color: #f0f0f0;
+    }
+
+    [data-theme="dark"] .movement-info h4 {
+        color: #f0f0f0;
+    }
+
+    [data-theme="dark"] .movement-date {
+        color: #aaa;
+    }
+
+    [data-theme="dark"] .movement-details {
+        color: #ccc;
+    }
+
+    [data-theme="dark"] .add-movement-section {
+        background: #1e1e1e;
+    }
+
+    [data-theme="dark"] .movement-form label {
+        color: #f0f0f0;
+    }
+
+    [data-theme="dark"] .movement-form input,
+    [data-theme="dark"] .movement-form select,
+    [data-theme="dark"] .movement-form textarea {
+        background: #333;
+        border-color: #555;
+        color: #f0f0f0;
+    }
+
+    [data-theme="dark"] .movement-history-list {
+        background: #1a1a1a;
+        border-color: #555;
+    }
+
+    [data-theme="dark"] .movement-history-section {
+        border-bottom-color: #444;
+    }
+    </style>
 </body>
 </html>

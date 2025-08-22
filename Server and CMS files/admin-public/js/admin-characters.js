@@ -4,6 +4,7 @@ class AdminCharacters {
         this.characters = [];
         this.currentCharacterFilter = '';
         this.editingCharacter = null;
+        this.editingMovement = null;
         this.savedScrollPosition = null; // Add scroll position tracking
         this.ui = window.adminUI;
         this.auth = window.adminAuth;
@@ -75,6 +76,47 @@ class AdminCharacters {
             const characterId = e.target.dataset.character;
             this.deleteCharacter(characterId);
         });
+
+        // Character movements button
+        this.ui.addDelegatedListener('characters-list', '.character-movements-btn', 'click', (e) => {
+            const characterId = e.target.dataset.character;
+            this.openMovementModal(characterId);
+        });
+
+        // Movement form submission
+        const movementForm = document.getElementById('movement-form');
+        if (movementForm) {
+            movementForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.saveMovement();
+            });
+        }
+
+        // Close movement modal
+        const closeMovementBtn = document.querySelector('.close-movement-btn');
+        if (closeMovementBtn) {
+            closeMovementBtn.addEventListener('click', () => {
+                this.closeMovementModal();
+            });
+        }
+
+        // Movement modal backdrop click
+        const movementModal = document.getElementById('character-movement-modal');
+        if (movementModal) {
+            movementModal.addEventListener('click', (e) => {
+                if (e.target.id === 'character-movement-modal') {
+                    this.closeMovementModal();
+                }
+            });
+        }
+
+        // Location type selection change
+        const locationTypeSelect = document.getElementById('movement-location-type');
+        if (locationTypeSelect) {
+            locationTypeSelect.addEventListener('change', (e) => {
+                this.toggleMovementLocationInputs(e.target.value);
+            });
+        }
     }
 
     async loadCharacters() {
@@ -99,20 +141,31 @@ class AdminCharacters {
         }
     }
 
-    populateLocationDropdown() {
-        const select = document.getElementById('character-location-select');
+    populateLocationDropdown(selectId = 'character-location-select') {
+        const select = document.getElementById(selectId);
         if (!select) return;
         
         select.innerHTML = '<option value="">Select location...</option>';
         
         // Get locations from the locations module
         const locations = window.adminLocations?.getLocations() || [];
-        locations.forEach(location => {
+        
+        // 🔤 SORT LOCATIONS ALPHABETICALLY by name (case-insensitive)
+        const sortedLocations = locations.sort((a, b) => {
+            const nameA = a.properties.name.toLowerCase();
+            const nameB = b.properties.name.toLowerCase();
+            return nameA.localeCompare(nameB);
+        });
+        
+        // Add sorted locations to dropdown
+        sortedLocations.forEach(location => {
             const option = document.createElement('option');
             option.value = location.properties.name;
             option.textContent = location.properties.name;
             select.appendChild(option);
         });
+        
+        console.log(`📍 Populated dropdown "${selectId}" with ${sortedLocations.length} sorted locations`);
     }
 
     renderCharacters() {
@@ -167,13 +220,22 @@ class AdminCharacters {
     }
 
     renderCharacterCard(character) {
+        // Count movements
+        const movementCount = character.movementHistory ? character.movementHistory.length : 0;
+        const hasMovements = movementCount > 0;
+        
         // Only show edit/delete buttons if authenticated
         const actionButtons = this.auth.isAuthenticated ? `
             <div class="character-actions">
                 <button class="btn-secondary character-edit-btn" data-character="${character.id}">✏️ Edit</button>
+                <button class="btn-secondary character-movements-btn" data-character="${character.id}">🛤️ Movements (${movementCount})</button>
                 <button class="btn-danger character-delete-btn" data-character="${character.id}">🗑️ Delete</button>
             </div>
         ` : '';
+        
+        // Show latest movement info
+        const latestMovement = hasMovements ? 
+            character.movementHistory[character.movementHistory.length - 1] : null;
         
         return `
             <div class="character-card" data-id="${character.id}">
@@ -188,9 +250,12 @@ class AdminCharacters {
                     </div>
                 </div>
                 <div class="character-details">
-                    ${character.location ? `<p><strong>📍 Location:</strong> ${character.location}</p>` : ''}
-                    ${character.faction ? `<p><strong>🏛️ Faction:</strong> ${character.faction}</p>` : ''}
+                    ${character.location ? `<p><strong>📍 Current Location:</strong> ${character.location}</p>` : ''}
+                    ${character.coordinates ? `<p><strong>🗺️ Coordinates:</strong> [${character.coordinates[0]}, ${character.coordinates[1]}]</p>` : '<p><strong>⚠️ Coordinates:</strong> <em style="color: orange;">Not set</em></p>'}
+                    ${character.faction ? `<p><strong>🛡️ Faction:</strong> ${character.faction}</p>` : ''}
                     ${character.firstMet ? `<p><strong>📅 First Met:</strong> ${character.firstMet}</p>` : ''}
+                    ${hasMovements ? `<p><strong>🛤️ Movement History:</strong> ${movementCount} locations</p>` : ''}
+                    ${latestMovement ? `<p><strong>📍 Last Seen:</strong> ${latestMovement.location || 'Custom Location'} (${latestMovement.date})</p>` : ''}
                     ${character.description ? `<p><strong>📝 Description:</strong> ${character.description}</p>` : ''}
                     ${character.notes ? `<p><strong>📋 Notes:</strong> ${character.notes}</p>` : ''}
                 </div>
@@ -396,6 +461,295 @@ class AdminCharacters {
 
     editCharacter(id) {
         this.openEditCharacterModal(id);
+    }
+
+    // Open movement management modal
+    openMovementModal(characterId) {
+        if (!this.auth.requireAuth()) return;
+        
+        const character = this.characters.find(char => char.id === characterId);
+        if (!character) {
+            this.ui.showToast('❌ Character not found', 'error');
+            return;
+        }
+        
+        this.editingCharacter = characterId;
+        this.editingMovement = null;
+        
+        // Update modal title
+        document.querySelector('#character-movement-modal .modal-header h3').textContent = `🛤️ ${character.name} - Movement History`;
+        
+        // Populate location dropdown for movements
+        this.populateLocationDropdown('movement-location-select');
+        
+        // Render movement history
+        this.renderMovementHistory(character);
+        
+        // Reset form
+        const form = document.getElementById('movement-form');
+        if (form) form.reset();
+        document.getElementById('movement-location-type').value = 'existing';
+        this.toggleMovementLocationInputs('existing');
+        
+        this.ui.openModal('character-movement-modal');
+    }
+
+    // Render movement history in modal
+    renderMovementHistory(character) {
+        const container = document.getElementById('movement-history-list');
+        if (!container) return;
+        
+        const movements = character.movementHistory || [];
+        
+        if (movements.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <p>🛤️ No movement history yet</p>
+                    <p style="font-size: 0.9em; opacity: 0.7;">Add the first movement entry below</p>
+                </div>
+            `;
+            return;
+        }
+        
+        // Sort movements by date (newest first for display)
+        const sortedMovements = [...movements].sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        container.innerHTML = sortedMovements.map(movement => `
+            <div class="movement-entry" data-movement-id="${movement.id}">
+                <div class="movement-entry-header">
+                    <div class="movement-info">
+                        <h4>${movement.location || 'Custom Location'}</h4>
+                        <span class="movement-date">📅 ${movement.date}</span>
+                    </div>
+                    <div class="movement-actions">
+                        <button class="btn-secondary movement-edit-btn" data-movement="${movement.id}">✏️</button>
+                        <button class="btn-danger movement-delete-btn" data-movement="${movement.id}">🗑️</button>
+                    </div>
+                </div>
+                <div class="movement-details">
+                    <p><strong>🗺️ Coordinates:</strong> [${movement.coordinates[0]}, ${movement.coordinates[1]}]</p>
+                    <p><strong>📝 Type:</strong> ${movement.type || 'travel'}</p>
+                    ${movement.notes ? `<p><strong>📋 Notes:</strong> ${movement.notes}</p>` : ''}
+                    <p><strong>📝 Added:</strong> ${new Date(movement.createdAt).toLocaleDateString()}</p>
+                </div>
+            </div>
+        `).join('');
+        
+        // Add event listeners for movement actions
+        container.querySelectorAll('.movement-edit-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const movementId = e.target.dataset.movement;
+                this.editMovement(movementId);
+            });
+        });
+        
+        container.querySelectorAll('.movement-delete-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const movementId = e.target.dataset.movement;
+                this.deleteMovement(movementId);
+            });
+        });
+    }
+
+    // Toggle between existing location and custom coordinates
+    toggleMovementLocationInputs(type) {
+        const existingLocationDiv = document.getElementById('existing-location-input');
+        const customCoordsDiv = document.getElementById('custom-coordinates-input');
+        
+        if (type === 'existing') {
+            existingLocationDiv.style.display = 'block';
+            customCoordsDiv.style.display = 'none';
+        } else {
+            existingLocationDiv.style.display = 'none';
+            customCoordsDiv.style.display = 'block';
+        }
+    }
+
+    // Save movement entry
+    async saveMovement() {
+        if (!this.auth.requireAuth()) return;
+
+        const formData = this.ui.getFormData('movement-form');
+        if (!formData) return;
+
+        // Validate form based on location type
+        const locationType = formData.movementLocationType;
+        let isValid;
+        
+        if (locationType === 'existing') {
+            isValid = this.ui.validateForm('movement-form', {
+                movementLocation: { required: true, label: 'Location' },
+                movementDate: { required: true, label: 'Date' }
+            });
+        } else {
+            isValid = this.ui.validateForm('movement-form', {
+                movementX: { required: true, label: 'X Coordinate' },
+                movementY: { required: true, label: 'Y Coordinate' },
+                movementDate: { required: true, label: 'Date' }
+            });
+        }
+
+        if (!isValid) return;
+        
+        // Create movement data
+        const movementData = {
+            date: formData.movementDate,
+            type: formData.movementType || 'travel',
+            notes: formData.movementNotes || ''
+        };
+        
+        if (locationType === 'existing') {
+            movementData.location = formData.movementLocation;
+        } else {
+            movementData.coordinates = [parseInt(formData.movementX), parseInt(formData.movementY)];
+        }
+
+        try {
+            const isEditing = !!this.editingMovement;
+            const characterId = this.editingCharacter;
+            
+            console.log(`🛤️ ${isEditing ? 'Updating' : 'Adding'} movement for character:`, characterId);
+            
+            const url = isEditing ? 
+                `/api/characters/${encodeURIComponent(characterId)}/movements/${encodeURIComponent(this.editingMovement)}` :
+                `/api/characters/${encodeURIComponent(characterId)}/movements`;
+            
+            const response = await this.auth.authenticatedFetch(url, {
+                method: isEditing ? 'PUT' : 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(movementData)
+            });
+
+            const result = await response.json();
+            
+            if (result.success) {
+                this.ui.showToast(`✅ Movement ${isEditing ? 'updated' : 'added'} successfully!`, 'success');
+                
+                // Refresh character data
+                await this.loadCharacters();
+                
+                // Update movement history display
+                const character = this.characters.find(c => c.id === characterId);
+                if (character) {
+                    this.renderMovementHistory(character);
+                }
+                
+                // Reset form
+                this.ui.resetForm('movement-form');
+                this.editingMovement = null;
+                
+                // Update main map if it's loaded
+                if (window.addCharacterMovementPaths) {
+                    window.addCharacterMovementPaths();
+                }
+                
+                // Notify stats update
+                document.dispatchEvent(new CustomEvent('dataChanged', { detail: { type: 'characters' } }));
+            } else {
+                this.ui.showToast(`❌ Failed to ${isEditing ? 'update' : 'add'} movement`, 'error');
+            }
+        } catch (error) {
+            console.error('Movement save failed:', error);
+            this.ui.showToast(`❌ Failed to ${this.editingMovement ? 'update' : 'add'} movement`, 'error');
+        }
+    }
+
+    // Edit movement entry
+    editMovement(movementId) {
+        const character = this.characters.find(c => c.id === this.editingCharacter);
+        if (!character || !character.movementHistory) return;
+        
+        const movement = character.movementHistory.find(m => m.id === movementId);
+        if (!movement) {
+            this.ui.showToast('❌ Movement not found', 'error');
+            return;
+        }
+        
+        this.editingMovement = movementId;
+        
+        // Determine if this is an existing location or custom coordinates
+        const isExistingLocation = !!movement.location;
+        
+        // Populate form
+        this.ui.populateForm('movement-form', {
+            movementLocationType: isExistingLocation ? 'existing' : 'custom',
+            movementLocation: movement.location || '',
+            movementX: isExistingLocation ? '' : movement.coordinates[0],
+            movementY: isExistingLocation ? '' : movement.coordinates[1],
+            movementDate: movement.date,
+            movementType: movement.type || 'travel',
+            movementNotes: movement.notes || ''
+        });
+        
+        // Toggle inputs based on location type
+        this.toggleMovementLocationInputs(isExistingLocation ? 'existing' : 'custom');
+        
+        // Update form title
+        document.querySelector('#movement-form button[type="submit"]').textContent = '💾 Update Movement';
+    }
+
+    // Delete movement entry
+    async deleteMovement(movementId) {
+        if (!this.auth.requireAuth()) return;
+        
+        const character = this.characters.find(c => c.id === this.editingCharacter);
+        if (!character || !character.movementHistory) return;
+        
+        const movement = character.movementHistory.find(m => m.id === movementId);
+        if (!movement) {
+            this.ui.showToast('❌ Movement not found', 'error');
+            return;
+        }
+        
+        const confirmed = this.ui.confirm(
+            `Are you sure you want to delete this movement?\n\n📍 ${movement.location || 'Custom Location'} (${movement.date})\n\nThis action cannot be undone.`
+        );
+        
+        if (!confirmed) return;
+
+        try {
+            console.log('🗑️ Deleting movement:', movementId);
+            
+            const response = await this.auth.authenticatedFetch(
+                `/api/characters/${encodeURIComponent(this.editingCharacter)}/movements/${encodeURIComponent(movementId)}`,
+                { method: 'DELETE' }
+            );
+
+            const result = await response.json();
+            
+            if (result.success) {
+                this.ui.showToast('✅ Movement deleted successfully!', 'success');
+                
+                // Refresh character data
+                await this.loadCharacters();
+                
+                // Update movement history display
+                const updatedCharacter = this.characters.find(c => c.id === this.editingCharacter);
+                if (updatedCharacter) {
+                    this.renderMovementHistory(updatedCharacter);
+                }
+                
+                // Update main map if it's loaded
+                if (window.addCharacterMovementPaths) {
+                    window.addCharacterMovementPaths();
+                }
+                
+                // Notify stats update
+                document.dispatchEvent(new CustomEvent('dataChanged', { detail: { type: 'characters' } }));
+            } else {
+                this.ui.showToast('❌ Failed to delete movement', 'error');
+            }
+        } catch (error) {
+            console.error('Delete failed:', error);
+            this.ui.showToast('❌ Failed to delete movement', 'error');
+        }
+    }
+
+    // Close movement modal
+    closeMovementModal() {
+        this.ui.closeModal('character-movement-modal');
+        this.editingCharacter = null;
+        this.editingMovement = null;
     }
 
     onAuthStateChanged(isAuthenticated) {
