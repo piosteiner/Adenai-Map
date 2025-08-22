@@ -68,7 +68,22 @@
       "notes": "",
       "createdAt": "2025-08-22T06:09:09.103Z",
       "updatedAt": "2025-08-22T06:09:09.103Z"
+    },
+    {
+      "id": "tasbor",
+      "name": "Tasbor",
+      "title": "Käpt'n, de Coolst, Detektiv",
+      "location": "",
+      "description": "",
+      "image": "",
+      "status": "alive",
+      "faction": "VsuzH",
+      "relationship": "suspicious",
+      "firstMet": "",
+      "notes": "",
+      "createdAt": "2025-08-22T06:09:11.125Z",
+      "updatedAt": "2025-08-22T06:09:11.125Z"
     }
   ],
-  "lastUpdated": "2025-08-22T06:09:09.103Z"
+  "lastUpdated": "2025-08-22T06:09:11.125Z"
 }
