@@ -6,7 +6,8 @@
       "properties": {
         "name": "Valaris",
         "description": "Die grösste Stadt im Osten von Adenai. Regiert von Petrel Kormorant.",
-        "contentUrl": "contentUrl/valaris.html"
+        "contentUrl": null,
+        "visited": true
       },
       "geometry": {
         "type": "Point",
