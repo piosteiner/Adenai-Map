@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "c320a90fbb19bb9e235ddbcb9d8aca3899570c2d",
+      "action": "delete",
+      "type": "character",
+      "itemName": "test awet",
+      "user": "Pio`s Test User",
+      "timestamp": "2025-08-22T00:06:43.845Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Delete character: test awet (by Pio`s Test User) - Removed from campaign"
+    },
+    {
       "commitSha": "5b13449387f9d733f702f40040ebbce088d1710b",
       "action": "create",
       "type": "character",
@@ -54,5 +67,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T00:03:53.425Z"
+  "lastUpdated": "2025-08-22T00:06:43.845Z"
 }
