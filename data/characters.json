@@ -121,10 +121,10 @@
       "id": "test",
       "name": "Test",
       "title": "",
-      "location": "Olecea",
+      "location": "Motu Motu",
       "coordinates": [
-        916,
-        261
+        2005,
+        1025
       ],
       "description": "",
       "image": "",
@@ -136,16 +136,16 @@
       "movementHistory": [],
       "currentLocation": {
         "date": "2025-08-22",
-        "location": "Olecea",
+        "location": "Motu Motu",
         "coordinates": [
-          916,
-          261
+          2005,
+          1025
         ],
         "notes": "Initial location"
       },
       "createdAt": "2025-08-22T15:11:48.559Z",
-      "updatedAt": "2025-08-22T15:11:48.559Z"
+      "updatedAt": "2025-08-22T15:11:59.193Z"
     }
   ],
-  "lastUpdated": "2025-08-22T15:11:48.559Z"
+  "lastUpdated": "2025-08-22T15:11:59.193Z"
 }
