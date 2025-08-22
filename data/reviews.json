@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "c82314e0caace69a2ebc3dd693e3f40b0a0d18d6",
+      "action": "update",
+      "type": "location",
+      "itemName": "Silbergrat",
+      "user": "Nici",
+      "timestamp": "2025-08-22T06:05:58.239Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update location: Silbergrat (by Nici) - marked as visited"
+    },
+    {
       "commitSha": "1f194b93d6ee5324561a14ecb66284fe7b6bc17a",
       "action": "update",
       "type": "location",
@@ -327,5 +340,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T06:05:42.900Z"
+  "lastUpdated": "2025-08-22T06:05:58.239Z"
 }
