@@ -193,7 +193,9 @@
       "type": "Feature",
       "properties": {
         "name": "Sternenzirkel Insel",
-        "description": "Insel auf der sich der Sternenzirkel stationiert hatte."
+        "description": "Insel auf der sich der Sternenzirkel stationiert hatte.",
+        "contentUrl": null,
+        "visited": true
       },
       "geometry": {
         "type": "Point",
