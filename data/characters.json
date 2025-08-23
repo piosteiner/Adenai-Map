@@ -87,7 +87,7 @@
       "id": "lia_karthright",
       "name": "Lia Karthright",
       "title": "",
-      "location": "Toftgard",
+      "location": "Barbenfall",
       "description": "",
       "image": "",
       "status": "alive",
@@ -96,20 +96,33 @@
       "firstMet": "",
       "notes": "",
       "createdAt": "2025-08-22T04:26:43.834Z",
-      "updatedAt": "2025-08-22T15:21:14.144Z",
+      "updatedAt": "2025-08-23T05:16:45.613Z",
       "coordinates": [
-        1392,
-        1083
+        776,
+        962
       ],
-      "movementHistory": [],
+      "movementHistory": [
+        {
+          "id": "movement_1755926205613",
+          "date": "2025-08-20",
+          "location": "Barbenfall",
+          "coordinates": [
+            776,
+            962
+          ],
+          "notes": "",
+          "type": "travel",
+          "createdAt": "2025-08-23T05:16:45.613Z"
+        }
+      ],
       "currentLocation": {
-        "date": "2025-08-22",
-        "location": "Toftgard",
+        "date": "2025-08-20",
+        "location": "Barbenfall",
         "coordinates": [
-          1392,
-          1083
+          776,
+          962
         ],
-        "notes": "Migrated from original location"
+        "notes": ""
       }
     },
     {
@@ -235,5 +248,5 @@
       "updatedAt": "2025-08-22T16:12:51.364Z"
     }
   ],
-  "lastUpdated": "2025-08-22T16:13:44.549Z"
+  "lastUpdated": "2025-08-23T05:16:45.613Z"
 }
