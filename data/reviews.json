@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "a73f67900db523bc2c825d8bffed39245ce1e4c4",
+      "action": "update",
+      "type": "character",
+      "itemName": "Test",
+      "user": "gm",
+      "timestamp": "2025-08-23T05:54:44.041Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-23T05:54:44.041Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Test (by gm) - Estu Vin on 2025-08-30"
+    },
+    {
       "commitSha": "29889f1680ddd3026d1c095d7afe1328e3b75847",
       "action": "update",
       "type": "character",
@@ -691,5 +704,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-23T05:27:14.125Z"
+  "lastUpdated": "2025-08-23T05:54:44.041Z"
 }
