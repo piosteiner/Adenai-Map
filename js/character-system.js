@@ -98,21 +98,14 @@ class CharacterSystem {
             return false;
         }
 
-        // Get character coordinates [x, y] from data
-        const xy = character.currentLocation?.coordinates?.length === 2
-            ? character.currentLocation.coordinates
-            : character.coordinates?.length === 2
-                ? character.coordinates
-                : null;
-
-        if (!xy) {
-            console.warn(`⚠️ Character "${characterName}" has invalid coordinates`);
-            return false;
-        }
-
-        // Convert pixel coordinates to latlng
-        const zoomForUnproject = map.getMaxZoom?.() ?? map.getZoom();
-        const latlng = map.unproject([xy[0], xy[1]], zoomForUnproject);
+        // Use the EXACT same coordinate logic as the original addCharactersToMap method
+        const [lng, lat] = character.coordinates;
+        
+        // Add small random offset so multiple characters at same location don't overlap exactly
+        const offsetLat = lat + (Math.random() - 0.5) * 20;
+        const offsetLng = lng + (Math.random() - 0.5) * 20;
+        
+        const latlng = L.latLng(offsetLat, offsetLng);
 
         // Compute paddings to keep target in inner 50% of visible area
         const size = map.getSize();
@@ -149,7 +142,7 @@ class CharacterSystem {
         // Create and show a temporary popup for the character
         this.showCharacterPopup(character, latlng);
 
-        console.log(`🎯 Focused on character "${characterName}" at [${xy[0]}, ${xy[1]}]`);
+        console.log(`🎯 Focused on character "${characterName}" at [${lng}, ${lat}]`);
         return true;
     }
 
