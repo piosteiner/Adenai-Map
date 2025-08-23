@@ -96,37 +96,12 @@
       "firstMet": "",
       "notes": "",
       "createdAt": "2025-08-22T04:26:43.834Z",
-      "updatedAt": "2025-08-23T05:17:01.696Z",
+      "updatedAt": "2025-08-23T05:27:13.383Z",
       "coordinates": [
         981,
         656
       ],
-      "movementHistory": [
-        {
-          "id": "movement_1755926205613",
-          "date": "2025-08-20",
-          "location": "Barbenfall",
-          "coordinates": [
-            776,
-            962
-          ],
-          "notes": "",
-          "type": "travel",
-          "createdAt": "2025-08-23T05:16:45.613Z"
-        },
-        {
-          "id": "movement_1755926221696",
-          "date": "2025-08-23",
-          "location": "Donnermund",
-          "coordinates": [
-            981,
-            656
-          ],
-          "notes": "",
-          "type": "travel",
-          "createdAt": "2025-08-23T05:17:01.696Z"
-        }
-      ],
+      "movementHistory": [],
       "currentLocation": {
         "date": "2025-08-23",
         "location": "Donnermund",
@@ -134,7 +109,7 @@
           981,
           656
         ],
-        "notes": ""
+        "notes": "Original location"
       }
     },
     {
@@ -185,10 +160,10 @@
       "id": "test",
       "name": "Test",
       "title": "",
-      "location": "Yosefka Akademie",
+      "location": "Estu Vin",
       "coordinates": [
-        1090,
-        1260
+        1846,
+        1203
       ],
       "description": "",
       "image": "",
@@ -245,20 +220,32 @@
           "notes": "Fled from a molerat",
           "type": "escape",
           "createdAt": "2025-08-22T16:06:31.013Z"
+        },
+        {
+          "id": "movement_1755928483342",
+          "date": "2025-08-30",
+          "location": "Estu Vin",
+          "coordinates": [
+            1846,
+            1203
+          ],
+          "notes": "",
+          "type": "capture",
+          "createdAt": "2025-08-23T05:54:43.342Z"
         }
       ],
       "currentLocation": {
-        "date": "2025-08-22",
-        "location": "Yosefka Akademie",
+        "date": "2025-08-30",
+        "location": "Estu Vin",
         "coordinates": [
-          1090,
-          1260
+          1846,
+          1203
         ],
-        "notes": "Fled from a molerat"
+        "notes": ""
       },
       "createdAt": "2025-08-22T15:11:48.559Z",
-      "updatedAt": "2025-08-22T16:12:51.364Z"
+      "updatedAt": "2025-08-23T05:54:43.342Z"
     }
   ],
-  "lastUpdated": "2025-08-23T05:17:01.696Z"
+  "lastUpdated": "2025-08-23T05:54:43.342Z"
 }
