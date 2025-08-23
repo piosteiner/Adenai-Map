@@ -96,25 +96,12 @@
       "firstMet": "",
       "notes": "",
       "createdAt": "2025-08-22T04:26:43.834Z",
-      "updatedAt": "2025-08-23T05:27:10.331Z",
+      "updatedAt": "2025-08-23T05:27:13.383Z",
       "coordinates": [
         981,
         656
       ],
-      "movementHistory": [
-        {
-          "id": "movement_1755926221696",
-          "date": "2025-08-23",
-          "location": "Donnermund",
-          "coordinates": [
-            981,
-            656
-          ],
-          "notes": "",
-          "type": "travel",
-          "createdAt": "2025-08-23T05:17:01.696Z"
-        }
-      ],
+      "movementHistory": [],
       "currentLocation": {
         "date": "2025-08-23",
         "location": "Donnermund",
@@ -122,7 +109,7 @@
           981,
           656
         ],
-        "notes": ""
+        "notes": "Original location"
       }
     },
     {
@@ -248,5 +235,5 @@
       "updatedAt": "2025-08-22T16:12:51.364Z"
     }
   ],
-  "lastUpdated": "2025-08-23T05:27:10.331Z"
+  "lastUpdated": "2025-08-23T05:27:13.383Z"
 }
