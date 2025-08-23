@@ -112,7 +112,7 @@ class CharacterSystem {
         
         const latlng = L.latLng(offsetLat, offsetLng);
 
-        // Compute paddings to keep target in inner 30% of visible area
+        // Calculate the actual center of the visible area (accounting for panel)
         const size = map.getSize();
         
         // Check if character panel is open and adjust for it
@@ -128,33 +128,33 @@ class CharacterSystem {
         const visibleWidth = Math.max(0, size.x - leftOverlay - rightOverlay);
         const visibleHeight = size.y;
 
-        // Inner 30% means 35% margin on each visible side (100% - 30% = 70%, 70%/2 = 35%)
-        const padLeft = leftOverlay + visibleWidth * 0.35;
-        const padRight = rightOverlay + visibleWidth * 0.35;
-        const padTop = visibleHeight * 0.35;
-        const padBottom = visibleHeight * 0.35;
+        // Calculate the center point of the visible area
+        const centerX = leftOverlay + (visibleWidth / 2);
+        const centerY = visibleHeight / 2;
 
-        const options = {
-            paddingTopLeft: L.point(padLeft, padTop),
-            paddingBottomRight: L.point(padRight, padBottom),
-            animate: true,
-            duration: 0.8 // Smooth animation
-        };
+        // Get current map bounds and center
+        const mapCenter = map.getCenter();
+        const mapCenterPixel = map.latLngToContainerPoint(mapCenter);
+        
+        // Calculate offset needed to center the character
+        const targetPixel = map.latLngToContainerPoint(latlng);
+        const offsetX = centerX - targetPixel.x;
+        const offsetY = centerY - targetPixel.y;
+        
+        // Apply the offset to move the character to center
+        const newCenterPixel = L.point(mapCenterPixel.x + offsetX, mapCenterPixel.y + offsetY);
+        const newCenter = map.containerPointToLatLng(newCenterPixel);
 
         // Ensure a minimum zoom level for better character visibility
         const currentZoom = map.getZoom();
         const minZoomForCharacters = 0.5; // Adjust this value as needed
         
         if (currentZoom < minZoomForCharacters) {
-            // First zoom to minimum level, then pan to position
-            map.setView(latlng, minZoomForCharacters, { animate: true, duration: 0.8 });
-            // Small delay to let the zoom complete, then pan into the inner 30%
-            setTimeout(() => {
-                map.panInside(latlng, options);
-            }, 200);
+            // Zoom and center in one smooth motion
+            map.setView(newCenter, minZoomForCharacters, { animate: true, duration: 0.8 });
         } else {
-            // Use panInside to ensure the point lies within the inner 30%
-            map.panInside(latlng, options);
+            // Just center the character
+            map.panTo(newCenter, { animate: true, duration: 0.8 });
         }
 
         // Create and show a temporary popup for the character
