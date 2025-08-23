@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "29889f1680ddd3026d1c095d7afe1328e3b75847",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lia Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-23T05:27:14.125Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-23T05:27:14.125Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Delete character movement: Lia Karthright (by gm) - Removed Donnermund entry"
+    },
+    {
       "commitSha": "e890ee8712582b839f5e7118591c85357831f92e",
       "action": "update",
       "type": "character",
@@ -678,5 +691,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-23T05:27:10.984Z"
+  "lastUpdated": "2025-08-23T05:27:14.125Z"
 }
