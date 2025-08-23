@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "946e5a93b465f880d0f5cd28aa200c8cab44aa51",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lia Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-23T05:17:02.405Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-23T05:17:02.405Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Lia Karthright (by gm) - Donnermund on 2025-08-23"
+    },
+    {
       "commitSha": "2276afad827677600ec5b945643d885c3eb804ee",
       "action": "update",
       "type": "character",
@@ -652,5 +665,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-23T05:16:46.334Z"
+  "lastUpdated": "2025-08-23T05:17:02.405Z"
 }
