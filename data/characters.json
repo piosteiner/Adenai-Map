@@ -87,7 +87,7 @@
       "id": "lia_karthright",
       "name": "Lia Karthright",
       "title": "",
-      "location": "Barbenfall",
+      "location": "Donnermund",
       "description": "",
       "image": "",
       "status": "alive",
@@ -96,10 +96,10 @@
       "firstMet": "",
       "notes": "",
       "createdAt": "2025-08-22T04:26:43.834Z",
-      "updatedAt": "2025-08-23T05:16:45.613Z",
+      "updatedAt": "2025-08-23T05:17:01.696Z",
       "coordinates": [
-        776,
-        962
+        981,
+        656
       ],
       "movementHistory": [
         {
@@ -113,14 +113,26 @@
           "notes": "",
           "type": "travel",
           "createdAt": "2025-08-23T05:16:45.613Z"
+        },
+        {
+          "id": "movement_1755926221696",
+          "date": "2025-08-23",
+          "location": "Donnermund",
+          "coordinates": [
+            981,
+            656
+          ],
+          "notes": "",
+          "type": "travel",
+          "createdAt": "2025-08-23T05:17:01.696Z"
         }
       ],
       "currentLocation": {
-        "date": "2025-08-20",
-        "location": "Barbenfall",
+        "date": "2025-08-23",
+        "location": "Donnermund",
         "coordinates": [
-          776,
-          962
+          981,
+          656
         ],
         "notes": ""
       }
@@ -248,5 +260,5 @@
       "updatedAt": "2025-08-22T16:12:51.364Z"
     }
   ],
-  "lastUpdated": "2025-08-23T05:16:45.613Z"
+  "lastUpdated": "2025-08-23T05:17:01.696Z"
 }
