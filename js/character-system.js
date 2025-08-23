@@ -2,7 +2,7 @@
 class CharacterSystem {
     constructor() {
         this.characterData = [];
-        this.characterLayers = [];
+        // Remove characterLayers array since we won't create markers anymore
         this.relationshipIcons = {};
         this.statusEmojis = {
             alive: '😊',
@@ -22,67 +22,8 @@ class CharacterSystem {
     }
 
     init() {
-        this.createIcons();
-    }
-
-    createIcons() {
-        const isMobile = window.mapCore.getIsMobile();
-        const iconSize = isMobile ? [40, 40] : [28, 28];
-        const iconAnchor = isMobile ? [20, 20] : [14, 14];
-
-        // Enhanced icons for different character relationships
-        this.relationshipIcons = {
-            ally: L.icon({
-                iconUrl: 'icons/character_ally.svg',
-                iconSize: iconSize,
-                iconAnchor: iconAnchor,
-                popupAnchor: [0, -20],
-                className: 'character-marker'
-            }),
-            friendly: L.icon({
-                iconUrl: 'icons/character_ally.svg',
-                iconSize: iconSize,
-                iconAnchor: iconAnchor,
-                popupAnchor: [0, -20],
-                className: 'character-marker'
-            }),
-            enemy: L.icon({
-                iconUrl: 'icons/character_enemy.svg',
-                iconSize: iconSize,
-                iconAnchor: iconAnchor,
-                popupAnchor: [0, -20],
-                className: 'character-marker'
-            }),
-            hostile: L.icon({
-                iconUrl: 'icons/character_enemy.svg',
-                iconSize: iconSize,
-                iconAnchor: iconAnchor,
-                popupAnchor: [0, -20],
-                className: 'character-marker'
-            }),
-            neutral: L.icon({
-                iconUrl: 'icons/character_neutral.svg',
-                iconSize: iconSize,
-                iconAnchor: iconAnchor,
-                popupAnchor: [0, -20],
-                className: 'character-marker'
-            }),
-            suspicious: L.icon({
-                iconUrl: 'icons/character_neutral.svg',
-                iconSize: iconSize,
-                iconAnchor: iconAnchor,
-                popupAnchor: [0, -20],
-                className: 'character-marker'
-            })
-        };
-
-        // Default character icon
-        this.defaultIcon = L.icon({
-            iconUrl: 'icons/character.svg',
-            iconSize: iconSize,
-            iconAnchor: iconAnchor,
-            popupAnchor: [0, -20]
-        });
+        // Remove createIcons() call since we won't need icons anymore
+        console.log('🎯 Character system initialized without visual markers');
     }
 
     async loadCharacters() {
@@ -110,7 +51,8 @@ class CharacterSystem {
                 console.warn(`⚠️ Characters without coordinates: ${withoutCoords}`);
             }
             
-            this.addCharactersToMap();
+            // Don't add any visual markers to the map
+            console.log('🎯 Character data loaded - no visual markers created');
             
             // Notify other systems that characters are loaded
             document.dispatchEvent(new CustomEvent('charactersLoaded', { 
@@ -132,45 +74,115 @@ class CharacterSystem {
         }
     }
 
-    addCharactersToMap() {
+    // Get character by name
+    getCharacterByName(name) {
+        return this.characterData.find(char => char.name === name);
+    }
+
+    // Get all characters
+    getCharacters() {
+        return this.characterData;
+    }
+
+    // Enhanced focus character method with proper centering
+    focusCharacter(characterName) {
+        const character = this.getCharacterByName(characterName);
+        if (!character || !character.coordinates) {
+            console.warn(`⚠️ Character "${characterName}" not found or has no coordinates`);
+            return false;
+        }
+
+        const map = window.mapCore.getMap();
+        if (!map) {
+            console.warn('⚠️ Map not available');
+            return false;
+        }
+
+        // Get character coordinates [x, y] from data
+        const xy = character.currentLocation?.coordinates?.length === 2
+            ? character.currentLocation.coordinates
+            : character.coordinates?.length === 2
+                ? character.coordinates
+                : null;
+
+        if (!xy) {
+            console.warn(`⚠️ Character "${characterName}" has invalid coordinates`);
+            return false;
+        }
+
+        // Convert pixel coordinates to latlng
+        const zoomForUnproject = map.getMaxZoom?.() ?? map.getZoom();
+        const latlng = map.unproject([xy[0], xy[1]], zoomForUnproject);
+
+        // Compute paddings to keep target in inner 50% of visible area
+        const size = map.getSize();
+        
+        // Check if character panel is open and adjust for it
+        const characterPanel = document.getElementById('character-panel');
+        const panelIsOpen = characterPanel?.classList?.contains('open');
+        
+        let leftOverlay = 0, rightOverlay = 0;
+        if (panelIsOpen && characterPanel) {
+            const panelWidth = characterPanel.getBoundingClientRect?.().width || 0;
+            rightOverlay = panelWidth; // Character panel is on the right
+        }
+
+        const visibleWidth = Math.max(0, size.x - leftOverlay - rightOverlay);
+        const visibleHeight = size.y;
+
+        // Inner 50% means 25% margin on each visible side
+        const padLeft = leftOverlay + visibleWidth * 0.25;
+        const padRight = rightOverlay + visibleWidth * 0.25;
+        const padTop = visibleHeight * 0.25;
+        const padBottom = visibleHeight * 0.25;
+
+        const options = {
+            paddingTopLeft: L.point(padLeft, padTop),
+            paddingBottomRight: L.point(padRight, padBottom),
+            animate: true,
+            duration: 0.8 // Smooth animation
+        };
+
+        // Use panInside to ensure the point lies within the inner box
+        map.panInside(latlng, options);
+
+        // Create and show a temporary popup for the character
+        this.showCharacterPopup(character, latlng);
+
+        console.log(`🎯 Focused on character "${characterName}" at [${xy[0]}, ${xy[1]}]`);
+        return true;
+    }
+
+    // Create and show a temporary popup for the focused character
+    showCharacterPopup(character, latlng) {
         const map = window.mapCore.getMap();
         
-        // Clear existing character layers first
-        this.characterLayers.forEach(({ marker }) => {
-            if (map.hasLayer(marker)) {
-                map.removeLayer(marker);
+        // Remove any existing character focus popup
+        if (this.currentCharacterPopup) {
+            map.removeLayer(this.currentCharacterPopup);
+        }
+
+        // Create popup content
+        const popupContent = this.createCharacterPopup(character);
+
+        // Create a temporary marker just for the popup
+        this.currentCharacterPopup = L.popup({
+            closeButton: true,
+            autoClose: true,
+            closeOnClick: true,
+            className: 'character-focus-popup'
+        })
+        .setLatLng(latlng)
+        .setContent(popupContent)
+        .openOn(map);
+
+        // Auto-close the popup after 10 seconds
+        setTimeout(() => {
+            if (this.currentCharacterPopup && map.hasLayer(this.currentCharacterPopup)) {
+                map.removeLayer(this.currentCharacterPopup);
+                this.currentCharacterPopup = null;
             }
-        });
-        this.characterLayers = [];
-        
-        this.characterData.forEach(character => {
-            // Skip characters without coordinates
-            if (!character.coordinates || !Array.isArray(character.coordinates)) {
-                console.warn(`⚠️ Character "${character.name}" has no valid coordinates`, character);
-                return;
-            }
-            
-            // Use stored coordinates directly
-            const [lng, lat] = character.coordinates;
-            
-            // Add small random offset so multiple characters at same location don't overlap exactly
-            const offsetLat = lat + (Math.random() - 0.5) * 20;
-            const offsetLng = lng + (Math.random() - 0.5) * 20;
-            
-            // Choose icon based on relationship
-            const icon = this.relationshipIcons[character.relationship] || this.defaultIcon;
-            
-            // Create character marker
-            const marker = L.marker([offsetLat, offsetLng], { icon })
-                .bindPopup(this.createCharacterPopup(character))
-                .addTo(map);
-            
-            this.characterLayers.push({ marker, character });
-            
-            console.log(`✅ Added character "${character.name}" at coordinates [${lng}, ${lat}]`);
-        });
-        
-        console.log(`🗺️ Successfully placed ${this.characterLayers.length} characters on map`);
+        }, 10000);
     }
 
     createCharacterPopup(character) {
@@ -185,7 +197,7 @@ class CharacterSystem {
             <div class="character-popup">
                 ${imageHtml}
                 <div class="popup-title" style="color: ${this.relationshipColors[character.relationship] || '#333'}">
-                    ${character.name}
+                    🎯 ${character.name}
                 </div>
                 ${character.title ? `<div style="font-style: italic; margin-bottom: 8px;">${character.title}</div>` : ''}
                 <div style="margin-bottom: 8px;">
@@ -198,43 +210,12 @@ class CharacterSystem {
                 </div>
                 ${character.faction ? `<div><strong>🛡️ Faction:</strong> ${character.faction}</div>` : ''}
                 ${character.firstMet ? `<div><strong>📅 First Met:</strong> ${character.firstMet}</div>` : ''}
+                <div><strong>📍 Location:</strong> ${character.location || 'Unknown'}</div>
                 ${movementInfo}
                 ${character.description ? `<div style="margin-top: 8px;"><strong>📝 Description:</strong><br>${character.description}</div>` : ''}
                 ${character.notes ? `<div style="margin-top: 8px;"><strong>📋 Notes:</strong><br>${character.notes}</div>` : ''}
             </div>
         `;
-    }
-
-    // Get character by name
-    getCharacterByName(name) {
-        return this.characterData.find(char => char.name === name);
-    }
-
-    // Get character layer by name
-    getCharacterLayerByName(name) {
-        return this.characterLayers.find(cl => cl.character.name === name);
-    }
-
-    // Get all characters
-    getCharacters() {
-        return this.characterData;
-    }
-
-    // Get all character layers
-    getCharacterLayers() {
-        return this.characterLayers;
-    }
-
-    // Focus on character
-    focusCharacter(characterName) {
-        const characterLayer = this.getCharacterLayerByName(characterName);
-        if (characterLayer) {
-            const map = window.mapCore.getMap();
-            map.setView(characterLayer.marker.getLatLng(), Math.max(map.getZoom(), 1));
-            characterLayer.marker.openPopup();
-            return true;
-        }
-        return false;
     }
 
     // Reload characters (for admin updates)
@@ -275,6 +256,15 @@ class CharacterSystem {
                 </div>
             </div>
         `;
+    }
+
+    // Legacy compatibility - these methods now do nothing
+    getCharacterLayers() {
+        return []; // No layers anymore
+    }
+
+    getCharacterLayerByName(name) {
+        return null; // No layers anymore
     }
 }
 
