@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "2276afad827677600ec5b945643d885c3eb804ee",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lia Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-23T05:16:46.334Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-23T05:16:46.334Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Lia Karthright (by gm) - Barbenfall on 2025-08-20"
+    },
+    {
       "commitSha": "8f7cb6a7c77c1cf697af940eefc24f4faa6a2ae2",
       "action": "update",
       "type": "character",
@@ -639,5 +652,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-22T16:13:45.320Z"
+  "lastUpdated": "2025-08-23T05:16:46.334Z"
 }
