@@ -2,8 +2,8 @@
 class CharacterSystem {
     constructor() {
         this.characterData = [];
-        // Remove characterLayers array since we won't create markers anymore
-        this.relationshipIcons = {};
+        this.currentCharacterPopup = null; // Track current popup
+        this.locationClickListener = null; // Track location click listener
         this.statusEmojis = {
             alive: '😊',
             dead: '💀',
@@ -24,6 +24,11 @@ class CharacterSystem {
     init() {
         // Remove createIcons() call since we won't need icons anymore
         console.log('🎯 Character system initialized without visual markers');
+        
+        // Listen for locations loaded to set up location marker click handlers
+        document.addEventListener('locationsLoaded', (e) => {
+            this.setupLocationMarkerListeners(e.detail.geoFeatureLayers);
+        });
     }
 
     async loadCharacters() {
@@ -158,24 +163,65 @@ class CharacterSystem {
         // Create popup content
         const popupContent = this.createCharacterPopup(character);
 
-        // Create a temporary marker just for the popup
+        // Create a persistent popup that stays open
         this.currentCharacterPopup = L.popup({
-            closeButton: true,
-            autoClose: true,
-            closeOnClick: true,
+            closeButton: true,      // Keep the X button for manual closing
+            autoClose: false,       // Don't auto-close when other popups open
+            closeOnClick: false,    // Don't close when clicking on map
+            closeOnEscapeKey: true, // Allow ESC key to close
             className: 'character-focus-popup'
         })
         .setLatLng(latlng)
         .setContent(popupContent)
         .openOn(map);
 
-        // Auto-close the popup after 10 seconds
-        setTimeout(() => {
-            if (this.currentCharacterPopup && map.hasLayer(this.currentCharacterPopup)) {
-                map.removeLayer(this.currentCharacterPopup);
+        // Set up event listeners for controlled closing
+        this.setupPopupCloseListeners();
+
+        console.log(`🎯 Character popup opened for "${character.name}" - stays open until closed manually, another character selected, or location clicked`);
+    }
+
+    // Set up listeners to close character popup when needed
+    setupPopupCloseListeners() {
+        // Listen for popup close events to clean up references
+        if (this.currentCharacterPopup) {
+            this.currentCharacterPopup.on('remove', () => {
                 this.currentCharacterPopup = null;
+                console.log('🎯 Character popup reference cleaned up');
+            });
+        }
+    }
+
+    // Set up listeners on location markers to close character popups when clicked
+    setupLocationMarkerListeners(geoFeatureLayers) {
+        if (!geoFeatureLayers) return;
+        
+        geoFeatureLayers.forEach(locationData => {
+            if (locationData.layer) {
+                // Add click listener to each location marker
+                locationData.layer.on('click', () => {
+                    this.closeCurrentCharacterPopup();
+                    console.log('🎯 Character popup closed due to location marker click');
+                });
             }
-        }, 10000);
+        });
+        
+        console.log(`🎯 Set up close listeners on ${geoFeatureLayers.length} location markers`);
+    }
+
+    // Public method to close current character popup (can be called by other systems)
+    closeCharacterPopup() {
+        this.closeCurrentCharacterPopup();
+    }
+
+    // Close the current character popup
+    closeCurrentCharacterPopup() {
+        const map = window.mapCore.getMap();
+        if (this.currentCharacterPopup && map.hasLayer(this.currentCharacterPopup)) {
+            map.removeLayer(this.currentCharacterPopup);
+            this.currentCharacterPopup = null;
+            console.log('🎯 Character popup closed');
+        }
     }
 
     createCharacterPopup(character) {
