@@ -121,56 +121,58 @@ class CharacterPanel {
     }
 
     focusCharacterOnMap(character) {
-        // Let your existing focus run first (zoom/visibility etc.)
         const success = window.characterSystem?.focusCharacter?.(character.name);
 
-        // resolve [x, y] from your character object
-        const getPixelXY = () => {
-            if (character?.currentLocation?.coordinates?.length === 2) {
-                return character.currentLocation.coordinates; // [x, y]
-            }
-            if (character?.coordinates?.length === 2) {
-                return character.coordinates; // [x, y]
-            }
-            return null;
+        // 1) Resolve pixel [x, y] from your data
+        const xy = character?.currentLocation?.coordinates?.length === 2
+            ? character.currentLocation.coordinates
+            : character?.coordinates?.length === 2
+                ? character.coordinates
+                : null;
+        if (!xy || !this.map) return;
+
+        // 2) Convert pixels -> latlng (use maxZoom if you set one for your image map)
+        const zoomForUnproject = this.map.getMaxZoom?.() ?? this.map.getZoom();
+        const latlng = this.map.unproject([xy[0], xy[1]], zoomForUnproject);
+
+        // 3) Compute paddings so the "allowed box" is the inner 50% of the visible area
+        const size = this.map.getSize();           // full map container size
+        const panelIsOpen = this.panel?.classList?.contains('open');
+        const panelSide = 'left';                  // change to 'right' if your panel is on the right
+
+        let leftOverlay = 0, rightOverlay = 0;
+        if (panelIsOpen) {
+            const w = this.panel.getBoundingClientRect?.().width || 0;
+            if (panelSide === 'left') leftOverlay = w; else rightOverlay = w;
+        }
+
+        const visibleW = Math.max(0, size.x - leftOverlay - rightOverlay);
+        const visibleH = size.y;
+
+        // Inner 50% means 25% margin on each visible side
+        const padLeft   = leftOverlay  + visibleW * 0.25;
+        const padRight  = rightOverlay + visibleW * 0.25;
+        const padTop    =               visibleH * 0.25;
+        const padBottom =               visibleH * 0.25;
+
+        const options = {
+            paddingTopLeft:    L.point(padLeft,  padTop),
+            paddingBottomRight:L.point(padRight, padBottom),
+            animate: true
         };
 
-        const hardCenter = () => {
-            const xy = getPixelXY();
-            if (!xy || !this.map) return;
+        // 4) Ensure the point lies within that inner box (no over-centering if already close)
+        const doPan = () => this.map.panInside(latlng, options);
+        // let characterSystem finish any own pan/zoom first
+        requestAnimationFrame(() => requestAnimationFrame(doPan));
 
-            const zoom = this.map.getZoom();
-            // Convert pixel [x,y] to LatLng for CRS.Simple at current zoom
-            const latlng = this.map.unproject([xy[0], xy[1]], zoom);
-
-            // 1) Hard center exactly on the character
-            this.map.setView(latlng, zoom, { animate: true });
-
-            // 2) If a side panel overlays the map, nudge so the point is centered in the *visible* area
-            const panelIsOpen = this.panel?.classList?.contains('open');
-            if (panelIsOpen) {
-                const rect = this.panel.getBoundingClientRect?.();
-                const panelWidth = rect?.width || 0;
-
-                // set this to 'left' or 'right' depending on where your panel sits
-                const panelSide = 'left';
-                const offsetX = (panelWidth / 2) * (panelSide === 'left' ? 1 : -1);
-
-                this.map.panBy([offsetX, 0], { animate: true });
-            }
-        };
-
-        // Run after characterSystem’s own movement starts, so our hard-center wins
-        requestAnimationFrame(() => requestAnimationFrame(hardCenter));
-
-        // Mobile: close panel after focusing (keep your behavior)
+        // 5) Mobile: close panel after focusing (keep your behavior)
         if (success && window.innerWidth <= 768) {
             this.isPanelOpen = false;
             this.panel.classList.remove('open');
             this.toggleBtn.textContent = '📖';
         }
     }
-
 
     filterCharacters() {
         const relationshipFilter = document.getElementById('relationship-filter')?.value || '';
