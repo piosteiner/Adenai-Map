@@ -1,9 +1,10 @@
-// movement-system.js - Character Movement Tracking and Visualization
+// movement-system.js - Enhanced Character Movement Tracking with Individual Path Toggles
 class MovementSystem {
     constructor() {
         this.characterPaths = [];
         this.movementLayers = [];
-        this.showCharacterPaths = false;
+        this.showPathsPanel = false;
+        this.visibleCharacterPaths = new Set(); // Track which character paths are visible
         this.currentTimelineDate = null;
         this.pathColors = {
             ally: '#4CAF50',
@@ -78,6 +79,11 @@ class MovementSystem {
         });
         
         console.log(`🛤️ Created ${this.characterPaths.length} character movement paths`);
+        
+        // Refresh character list if paths panel is visible
+        if (this.showPathsPanel) {
+            this.updateCharacterPathsList();
+        }
     }
 
     createCharacterPath(character, movementPoints, pathColor) {
@@ -111,17 +117,11 @@ class MovementSystem {
             character: character,
             pathLine: pathLine,
             markers: pathMarkers,
-            points: movementPoints
+            points: movementPoints,
+            isVisible: false
         };
         
         this.characterPaths.push(pathData);
-        
-        // Add to map if paths are currently shown
-        if (this.showCharacterPaths) {
-            pathLine.addTo(map);
-            pathMarkers.forEach(marker => marker.addTo(map));
-            this.movementLayers.push(pathLine, ...pathMarkers);
-        }
     }
 
     createPathPopup(character, movementPoints) {
@@ -150,14 +150,16 @@ class MovementSystem {
         
         let markerIcon;
         if (isFirst) {
+            // FIXED: Start marker now uses 📍
             markerIcon = L.divIcon({
-                html: '🚩',
+                html: '📍',
                 iconSize: [20, 20],
                 className: 'movement-start-marker'
             });
         } else if (isLast) {
+            // FIXED: Current marker now uses 🚩
             markerIcon = L.divIcon({
-                html: '📍',
+                html: '🚩',
                 iconSize: [20, 20],
                 className: 'movement-end-marker'
             });
@@ -208,37 +210,183 @@ class MovementSystem {
         });
         this.movementLayers = [];
         this.characterPaths = [];
+        this.visibleCharacterPaths.clear();
     }
 
-    toggleCharacterPaths() {
-        this.showCharacterPaths = !this.showCharacterPaths;
+    // NEW: Toggle the character paths selection panel
+    togglePathsPanel() {
+        this.showPathsPanel = !this.showPathsPanel;
+        
+        const charactersList = document.getElementById('character-paths-list');
+        const pathToggleBtn = document.getElementById('toggle-character-paths');
+        
+        if (this.showPathsPanel) {
+            // Show character selection panel
+            charactersList.style.display = 'block';
+            pathToggleBtn.textContent = '🛤️ Hide Paths Panel';
+            pathToggleBtn.classList.add('active');
+            this.updateCharacterPathsList();
+            console.log('🗺️ Character paths panel shown');
+        } else {
+            // Hide panel and all paths
+            charactersList.style.display = 'none';
+            pathToggleBtn.textContent = '🛤️ Show Paths';
+            pathToggleBtn.classList.remove('active');
+            this.hideAllPaths();
+            console.log('🗺️ Character paths panel hidden');
+        }
+    }
+
+    // NEW: Update character paths list with checkboxes
+    updateCharacterPathsList() {
+        const charactersList = document.getElementById('character-paths-list');
+        if (!charactersList) return;
+
+        // Get all characters from character system (not just those with movement)
+        const allCharacters = window.characterSystem.getCharacters();
+        
+        let listHTML = `
+            <div class="paths-controls">
+                <button id="show-all-paths" class="btn-secondary movement-btn-small">✅ Show All</button>
+                <button id="hide-all-paths" class="btn-secondary movement-btn-small">❌ Hide All</button>
+            </div>
+            <div class="characters-paths-list">
+        `;
+        
+        allCharacters.forEach(character => {
+            const hasMovementData = this.getCharacterPath(character.id) !== null;
+            const isVisible = this.visibleCharacterPaths.has(character.id);
+            const movementCount = character.movementHistory ? character.movementHistory.length : 0;
+            
+            listHTML += `
+                <div class="character-path-item ${!hasMovementData ? 'no-movement' : ''}">
+                    <label class="character-path-checkbox">
+                        <input type="checkbox" 
+                               id="path-${character.id}" 
+                               ${isVisible ? 'checked' : ''} 
+                               ${!hasMovementData ? 'disabled' : ''}
+                               onchange="window.movementSystem.toggleCharacterPath('${character.id}')">
+                        <span class="checkmark" style="border-color: ${this.pathColors[character.relationship] || '#666'}"></span>
+                        <div class="character-path-info">
+                            <strong>${character.name}</strong>
+                            <div class="character-path-details">
+                                ${character.relationship} ${hasMovementData ? `• ${movementCount + 1} locations` : '• No movement data'}
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            `;
+        });
+        
+        listHTML += '</div>';
+        charactersList.innerHTML = listHTML;
+        
+        // Add event listeners for show/hide all buttons
+        document.getElementById('show-all-paths')?.addEventListener('click', () => this.showAllPaths());
+        document.getElementById('hide-all-paths')?.addEventListener('click', () => this.hideAllPaths());
+    }
+
+    // NEW: Toggle individual character path
+    toggleCharacterPath(characterId) {
+        const checkbox = document.getElementById(`path-${characterId}`);
+        const isVisible = checkbox?.checked || false;
+        
+        if (isVisible) {
+            this.showCharacterPath(characterId);
+        } else {
+            this.hideCharacterPath(characterId);
+        }
+    }
+
+    // NEW: Show individual character path
+    showCharacterPath(characterId) {
+        const pathData = this.getCharacterPath(characterId);
+        if (!pathData || pathData.isVisible) return;
+        
         const map = window.mapCore.getMap();
         
-        if (this.showCharacterPaths) {
-            this.characterPaths.forEach(pathData => {
-                pathData.pathLine.addTo(map);
-                pathData.markers.forEach(marker => marker.addTo(map));
-                this.movementLayers.push(pathData.pathLine, ...pathData.markers);
-            });
-            console.log('🗺️ Character movement paths shown');
-        } else {
-            this.clearCharacterPaths();
-            this.addCharacterMovementPaths(); // Recreate but don't add to map
-            console.log('🗺️ Character movement paths hidden');
+        // Add path and markers to map
+        pathData.pathLine.addTo(map);
+        pathData.markers.forEach(marker => marker.addTo(map));
+        this.movementLayers.push(pathData.pathLine, ...pathData.markers);
+        
+        pathData.isVisible = true;
+        this.visibleCharacterPaths.add(characterId);
+        
+        console.log(`🗺️ Showing path for ${pathData.character.name}`);
+    }
+
+    // NEW: Hide individual character path
+    hideCharacterPath(characterId) {
+        const pathData = this.getCharacterPath(characterId);
+        if (!pathData || !pathData.isVisible) return;
+        
+        const map = window.mapCore.getMap();
+        
+        // Remove path and markers from map
+        if (map.hasLayer(pathData.pathLine)) {
+            map.removeLayer(pathData.pathLine);
+            this.movementLayers = this.movementLayers.filter(layer => layer !== pathData.pathLine);
         }
         
-        // Update UI button
-        const pathToggleBtn = document.getElementById('toggle-character-paths');
-        if (pathToggleBtn) {
-            pathToggleBtn.textContent = this.showCharacterPaths ? '🛤️ Hide Paths' : '🛤️ Show Paths';
-            pathToggleBtn.classList.toggle('active', this.showCharacterPaths);
-        }
+        pathData.markers.forEach(marker => {
+            if (map.hasLayer(marker)) {
+                map.removeLayer(marker);
+                this.movementLayers = this.movementLayers.filter(layer => layer !== marker);
+            }
+        });
+        
+        pathData.isVisible = false;
+        this.visibleCharacterPaths.delete(characterId);
+        
+        console.log(`🗺️ Hiding path for ${pathData.character.name}`);
+    }
+
+    // NEW: Show all character paths
+    showAllPaths() {
+        this.characterPaths.forEach(pathData => {
+            this.showCharacterPath(pathData.character.id);
+        });
+        
+        // Update all checkboxes
+        this.characterPaths.forEach(pathData => {
+            const checkbox = document.getElementById(`path-${pathData.character.id}`);
+            if (checkbox && !checkbox.disabled) {
+                checkbox.checked = true;
+            }
+        });
+        
+        console.log('🗺️ All character paths shown');
+    }
+
+    // NEW: Hide all character paths
+    hideAllPaths() {
+        this.characterPaths.forEach(pathData => {
+            this.hideCharacterPath(pathData.character.id);
+        });
+        
+        // Update all checkboxes
+        this.characterPaths.forEach(pathData => {
+            const checkbox = document.getElementById(`path-${pathData.character.id}`);
+            if (checkbox) {
+                checkbox.checked = false;
+            }
+        });
+        
+        console.log('🗺️ All character paths hidden');
+    }
+
+    // Helper method to get character path data
+    getCharacterPath(characterId) {
+        return this.characterPaths.find(pathData => pathData.character.id === characterId) || null;
     }
 
     filterPathsByDateRange(startDate, endDate) {
         const map = window.mapCore.getMap();
         
         this.characterPaths.forEach(pathData => {
+            if (!pathData.isVisible) return; // Skip invisible paths
+            
             const filteredPoints = pathData.points.filter(point => {
                 const pointDate = new Date(point.date);
                 return pointDate >= new Date(startDate) && pointDate <= new Date(endDate);
@@ -258,7 +406,7 @@ class MovementSystem {
                     const pointDate = new Date(point.date);
                     const inRange = pointDate >= new Date(startDate) && pointDate <= new Date(endDate);
                     
-                    if (inRange && this.showCharacterPaths) {
+                    if (inRange) {
                         if (!map.hasLayer(marker)) marker.addTo(map);
                     } else {
                         if (map.hasLayer(marker)) map.removeLayer(marker);
@@ -297,6 +445,10 @@ class MovementSystem {
                         🛤️ Show Paths
                     </button>
                     
+                    <div id="character-paths-list" class="character-paths-list" style="display: none;">
+                        <!-- Character checkboxes will be populated here -->
+                    </div>
+                    
                     <div id="timeline-controls" style="display: none;">
                         <label class="movement-label">📅 Date Range Filter:</label>
                         <div class="date-inputs">
@@ -309,7 +461,7 @@ class MovementSystem {
                     
                     <div class="movement-legend">
                         <div class="legend-title">Legend:</div>
-                        <div class="legend-text">🚩 = Start • 📍 = Current • Numbers = Path order</div>
+                        <div class="legend-text">📍 = Start • 🚩 = Current • Numbers = Path order</div>
                     </div>
                 </div>
             </div>
@@ -337,15 +489,15 @@ class MovementSystem {
     }
 
     setupMovementControlListeners() {
-        // Toggle paths button
+        // Toggle paths panel button (UPDATED)
         const toggleBtn = document.getElementById('toggle-character-paths');
         if (toggleBtn) {
             toggleBtn.addEventListener('click', () => {
-                this.toggleCharacterPaths();
+                this.togglePathsPanel();
                 
                 const timelineControls = document.getElementById('timeline-controls');
                 if (timelineControls) {
-                    timelineControls.style.display = this.showCharacterPaths ? 'block' : 'none';
+                    timelineControls.style.display = this.showPathsPanel ? 'block' : 'none';
                 }
             });
         }
@@ -369,11 +521,13 @@ class MovementSystem {
                 document.getElementById('start-date').value = '';
                 document.getElementById('end-date').value = '';
                 
-                // Reset to show all paths
-                if (this.showCharacterPaths) {
-                    this.clearCharacterPaths();
-                    this.addCharacterMovementPaths();
-                }
+                // Reset to show original paths
+                this.characterPaths.forEach(pathData => {
+                    if (pathData.isVisible) {
+                        this.hideCharacterPath(pathData.character.id);
+                        this.showCharacterPath(pathData.character.id);
+                    }
+                });
             });
         }
     }
@@ -441,6 +595,125 @@ class MovementSystem {
                 background: #4CAF50;
                 color: white;
                 border-color: #4CAF50;
+            }
+
+            /* NEW: Character paths list styles */
+            .character-paths-list {
+                margin-top: 10px;
+                border: 1px solid var(--dropdown-border);
+                border-radius: 4px;
+                background: var(--dropdown-bg);
+                max-height: 300px;
+                overflow-y: auto;
+            }
+
+            .paths-controls {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                padding: 8px;
+                border-bottom: 1px solid var(--dropdown-border);
+                background: var(--card-bg);
+            }
+
+            .movement-btn-small {
+                padding: 4px 8px;
+                font-size: 0.8em;
+                background: var(--popup-bg);
+                color: var(--text-color);
+                border: 1px solid var(--dropdown-border);
+                border-radius: 3px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .movement-btn-small:hover {
+                background: var(--dropdown-hover);
+            }
+
+            .characters-paths-list {
+                padding: 4px;
+            }
+
+            .character-path-item {
+                margin: 2px 0;
+                border-radius: 4px;
+                transition: background-color 0.3s ease;
+            }
+
+            .character-path-item:hover {
+                background: var(--dropdown-hover);
+            }
+
+            .character-path-item.no-movement {
+                opacity: 0.6;
+            }
+
+            .character-path-checkbox {
+                display: flex;
+                align-items: center;
+                padding: 6px 8px;
+                cursor: pointer;
+                width: 100%;
+                position: relative;
+            }
+
+            .character-path-checkbox input[type="checkbox"] {
+                margin-right: 10px;
+                cursor: pointer;
+                position: absolute;
+                opacity: 0;
+                width: 16px;
+                height: 16px;
+            }
+
+            .checkmark {
+                width: 16px;
+                height: 16px;
+                border: 2px solid var(--dropdown-border);
+                border-radius: 3px;
+                margin-right: 10px;
+                flex-shrink: 0;
+                position: relative;
+                background: var(--popup-bg);
+                transition: all 0.3s ease;
+            }
+
+            .character-path-checkbox input[type="checkbox"]:checked + .checkmark {
+                background: var(--dropdown-border);
+            }
+
+            .character-path-checkbox input[type="checkbox"]:checked + .checkmark::after {
+                content: '✓';
+                position: absolute;
+                color: white;
+                font-size: 12px;
+                font-weight: bold;
+                top: -2px;
+                left: 2px;
+            }
+
+            .character-path-checkbox input[type="checkbox"]:disabled + .checkmark {
+                background: var(--dropdown-bg);
+                border-color: var(--text-muted);
+                opacity: 0.5;
+            }
+
+            .character-path-info {
+                flex: 1;
+            }
+
+            .character-path-info strong {
+                display: block;
+                font-size: 0.9em;
+                color: var(--text-color);
+                margin-bottom: 2px;
+            }
+
+            .character-path-details {
+                font-size: 0.75em;
+                color: var(--text-muted);
+                text-transform: capitalize;
             }
 
             .movement-label {
@@ -551,6 +824,15 @@ class MovementSystem {
                     grid-template-columns: 1fr;
                     gap: 6px;
                 }
+
+                .character-paths-list {
+                    max-height: 200px;
+                }
+
+                .paths-controls {
+                    grid-template-columns: 1fr;
+                    gap: 4px;
+                }
             }
 
             /* Dark mode adjustments */
@@ -564,6 +846,16 @@ class MovementSystem {
             [data-theme="dark"] .timeline-entry {
                 border-bottom-color: #444;
             }
+
+            [data-theme="dark"] .checkmark {
+                border-color: var(--dropdown-border);
+                background: var(--card-bg);
+            }
+
+            [data-theme="dark"] .character-path-checkbox input[type="checkbox"]:checked + .checkmark {
+                background: #4CAF50;
+                border-color: #4CAF50;
+            }
         `;
 
         const style = document.createElement('style');
@@ -576,8 +868,8 @@ class MovementSystem {
         return this.characterPaths;
     }
 
-    getShowCharacterPaths() {
-        return this.showCharacterPaths;
+    getVisibleCharacterPaths() {
+        return Array.from(this.visibleCharacterPaths);
     }
 }
 
