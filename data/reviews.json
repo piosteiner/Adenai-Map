@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "49e68bf381f12b59a393b9e1e34916fb489aedaa",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-24T23:28:40.449Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-24T23:28:40.449Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vsuzh (by gm) - changed relationship to party"
+    },
+    {
       "commitSha": "d732f3cbfbd24fbe5f6c33356d00817707382002",
       "action": "update",
       "type": "character",
@@ -756,5 +769,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-24T23:21:20.785Z"
+  "lastUpdated": "2025-08-24T23:28:40.449Z"
 }
