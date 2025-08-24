@@ -249,14 +249,17 @@
     {
       "id": "vsuzh",
       "name": "VsuzH",
-      "title": "",
-      "location": "",
-      "coordinates": null,
+      "title": "Vollkommen seriöse und zivilisierte Held:innen",
+      "location": "Silbergrat",
+      "coordinates": [
+        1240,
+        1041
+      ],
       "description": "",
       "image": "",
       "status": "alive",
       "faction": "Selbständige Abenteurer",
-      "relationship": "suspicious",
+      "relationship": "party",
       "firstMet": "",
       "notes": "",
       "movementHistory": [
@@ -283,20 +286,32 @@
           "notes": "",
           "type": "mission",
           "createdAt": "2025-08-24T23:08:02.170Z"
+        },
+        {
+          "id": "movement_1756078306547",
+          "date": "5663-06-04",
+          "location": "Silbergrat",
+          "coordinates": [
+            1240,
+            1041
+          ],
+          "notes": "",
+          "type": "stay",
+          "createdAt": "2025-08-24T23:31:46.547Z"
         }
       ],
       "currentLocation": {
         "date": "5663-06-04",
-        "location": null,
+        "location": "Silbergrat",
         "coordinates": [
-          1265,
-          1018
+          1240,
+          1041
         ],
         "notes": ""
       },
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-24T23:21:20.104Z"
+      "updatedAt": "2025-08-24T23:31:46.547Z"
     }
   ],
-  "lastUpdated": "2025-08-24T23:21:20.104Z"
+  "lastUpdated": "2025-08-24T23:31:46.547Z"
 }
