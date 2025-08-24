@@ -98,6 +98,14 @@ class MovementSystem {
             className: `character-path character-path-${character.id}`
         });
         
+        // Add cursor-following tooltip with character name
+        pathLine.bindTooltip(`🛤️ ${character.name}`, {
+            permanent: false,
+            direction: 'top',
+            offset: [0, -10],
+            className: 'character-path-tooltip'
+        });
+
         // Add click handler for path info
         pathLine.bindPopup(this.createPathPopup(character, movementPoints));
         
@@ -366,6 +374,24 @@ class MovementSystem {
                 opacity: 1;
             }
 
+            /* Character Path Tooltips */
+            .character-path-tooltip {
+                background: rgba(0, 0, 0, 0.8) !important;
+                color: white !important;
+                border: none !important;
+                border-radius: 6px !important;
+                font-size: 12px !important;
+                font-weight: 500 !important;
+                padding: 4px 8px !important;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+                pointer-events: none !important;
+                z-index: 1001 !important;
+            }
+
+            .character-path-tooltip::before {
+                display: none !important; /* Hide the default arrow */
+            }
+
             /* Dark mode adjustments */
             [data-theme="dark"] .movement-start-marker,
             [data-theme="dark"] .movement-end-marker {
@@ -376,6 +402,11 @@ class MovementSystem {
             
             [data-theme="dark"] .timeline-entry {
                 border-bottom-color: #444;
+            }
+
+            [data-theme="dark"] .character-path-tooltip {
+                background: rgba(255, 255, 255, 0.9) !important;
+                color: #333 !important;
             }
         `;
 
