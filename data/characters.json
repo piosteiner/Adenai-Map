@@ -245,7 +245,25 @@
       },
       "createdAt": "2025-08-22T15:11:48.559Z",
       "updatedAt": "2025-08-23T05:54:43.342Z"
+    },
+    {
+      "id": "vsuzh",
+      "name": "VsuzH",
+      "title": "",
+      "location": "",
+      "coordinates": null,
+      "description": "",
+      "image": "",
+      "status": "alive",
+      "faction": "Selbständige Abenteurer",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "currentLocation": null,
+      "createdAt": "2025-08-24T23:05:39.208Z",
+      "updatedAt": "2025-08-24T23:05:39.208Z"
     }
   ],
-  "lastUpdated": "2025-08-23T05:54:43.342Z"
+  "lastUpdated": "2025-08-24T23:05:39.208Z"
 }
