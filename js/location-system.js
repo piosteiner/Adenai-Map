@@ -9,7 +9,6 @@ class LocationSystem {
 
     init() {
         this.createLocationIcon();
-        this.loadLocations();
     }
 
     createLocationIcon() {
