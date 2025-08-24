@@ -46,32 +46,23 @@ class CharacterPanel {
             this.togglePanel();
         });
 
-        // Filter functionality
-        const relationshipFilter = document.getElementById('relationship-filter');
-        const statusFilter = document.getElementById('status-filter');
-        
-        if (relationshipFilter) {
-            relationshipFilter.addEventListener('change', () => this.filterCharacters());
-        }
-        
-        if (statusFilter) {
-            statusFilter.addEventListener('change', () => this.filterCharacters());
-        }
+        // Removed dropdown filter listeners since we're removing the dropdowns
     }
 
     addMovementControlsSection() {
         const panelContent = this.panel.querySelector('.panel-content');
         if (!panelContent) return;
 
-        // Add always-visible movement controls at the top
+        // Add collapsible movement controls at the top
         const controlsHtml = `
-            <!-- Always Visible Movement Controls -->
+            <!-- Collapsible Movement Controls -->
             <div class="integrated-movement-section">
-                <div class="movement-section-header-static">
-                    <h4>🛤️ Movement Paths</h4>
+                <div class="movement-section-header" onclick="window.characterPanel.toggleMovementControls()">
+                    <h4>🛤️ Movement Paths Options</h4>
+                    <span class="movement-section-toggle">▼</span>
                 </div>
                 
-                <div class="integrated-movement-content">
+                <div id="integrated-movement-content" class="integrated-movement-content">
                     <div class="movement-quick-actions">
                         <button id="integrated-show-all-paths" class="btn-secondary movement-action-btn">✅ Show All</button>
                         <button id="integrated-hide-all-paths" class="btn-secondary movement-action-btn">❌ Hide All</button>
@@ -89,18 +80,30 @@ class CharacterPanel {
                 </div>
             </div>
 
-            <!-- Search Bar Section - MOVED HERE -->
+            <!-- Search Bar Section -->
             <div class="character-search-section">
                 <input type="text" 
                        id="character-search-input" 
                        class="character-search-input" 
                        placeholder="🔍 Search characters (name, location, title...)"
-                       onkeyup="window.characterPanel.filterCharactersBySearch()">
+                       onkeyup="window.characterPanel.filterCharactersBySearch()"
+                       oninput="window.characterPanel.filterCharactersBySearch()">
             </div>
         `;
 
         panelContent.insertAdjacentHTML('afterbegin', controlsHtml);
         this.setupIntegratedMovementListeners();
+    }
+
+    toggleMovementControls() {
+        this.showMovementControls = !this.showMovementControls;
+        const content = document.getElementById('integrated-movement-content');
+        const toggle = document.querySelector('.movement-section-toggle');
+        
+        if (content && toggle) {
+            content.style.display = this.showMovementControls ? 'block' : 'none';
+            toggle.textContent = this.showMovementControls ? '▼' : '▶';
+        }
     }
 
     setupIntegratedMovementListeners() {
@@ -343,58 +346,53 @@ class CharacterPanel {
 
     addIntegratedPanelCSS() {
         const integratedCSS = `
-            /* Character Search Section - Now positioned after date controls */
-            .character-search-section {
-                margin-bottom: 15px;
-                padding-bottom: 15px;
-                border-bottom: 1px solid var(--dropdown-border);
-            }
-
-            .character-search-input {
-                width: 100%;
-                padding: 10px 12px;
-                font-size: 0.9em;
-                background: var(--popup-bg);
-                color: var(--text-color);
-                border: 2px solid var(--dropdown-border);
-                border-radius: 6px;
-                transition: all 0.3s ease;
-                box-sizing: border-box;
-            }
-
-            .character-search-input:focus {
-                outline: none;
-                border-color: #4CAF50;
-                box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
-            }
-
-            .character-search-input::placeholder {
-                color: var(--text-muted);
-                opacity: 0.7;
-            }
-
-            /* Static Movement Controls Section - Now at the top */
+            /* Collapsible Movement Controls Section */
             .integrated-movement-section {
                 margin-bottom: 20px;
                 border-bottom: 1px solid var(--dropdown-border);
                 padding-bottom: 15px;
             }
 
-            .movement-section-header-static {
+            .movement-section-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
                 padding: 8px 0;
                 border-bottom: 1px solid var(--dropdown-border);
                 margin-bottom: 15px;
+                transition: background-color 0.3s ease;
             }
 
-            .movement-section-header-static h4 {
+            .movement-section-header:hover {
+                background: var(--dropdown-hover);
+                padding: 8px 12px;
+                margin: 0 -12px 15px -12px;
+                border-radius: 6px;
+            }
+
+            .movement-section-header h4 {
                 margin: 0;
                 font-size: 1em;
                 color: var(--text-color);
-                text-align: center;
+                font-weight: bold;
+            }
+
+            .movement-section-toggle {
+                font-size: 0.9em;
+                color: var(--text-color);
+                opacity: 0.7;
+                transition: transform 0.3s ease;
             }
 
             .integrated-movement-content {
-                display: block; /* Always visible */
+                display: block; /* Initially visible */
+                animation: fadeIn 0.3s ease-in-out;
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; height: 0; }
+                to { opacity: 1; height: auto; }
             }
 
             .movement-quick-actions {
@@ -424,6 +422,37 @@ class CharacterPanel {
 
             .movement-action-btn:active {
                 transform: translateY(0);
+            }
+
+            /* Character Search Section - Now positioned after movement controls */
+            .character-search-section {
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid var(--dropdown-border);
+            }
+
+            .character-search-input {
+                width: 100%;
+                padding: 12px 15px;
+                font-size: 0.9em;
+                background: var(--popup-bg);
+                color: var(--text-color);
+                border: 2px solid var(--dropdown-border);
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                box-sizing: border-box;
+            }
+
+            .character-search-input:focus {
+                outline: none;
+                border-color: #4CAF50;
+                box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+                background: var(--card-bg);
+            }
+
+            .character-search-input::placeholder {
+                color: var(--text-muted);
+                opacity: 0.7;
             }
 
             /* Integrated Character Cards */
@@ -575,13 +604,12 @@ class CharacterPanel {
             .relationship-badge.relationship-hostile { background: #FFEBEE; color: #C62828; }
             .relationship-badge.relationship-enemy { background: #FFEBEE; color: #B71C1C; }
 
-            /* Date Range Controls - Now positioned above search bar */
+            /* Date Range Controls */
             .integrated-timeline-controls {
                 padding: 12px;
                 background: var(--dropdown-bg);
                 border-radius: 6px;
                 border: 1px solid var(--dropdown-border);
-                margin-bottom: 15px; /* Added margin since search bar comes after */
             }
 
             .movement-label {
@@ -637,6 +665,7 @@ class CharacterPanel {
 
                 .character-search-input {
                     font-size: 16px; /* Prevent zoom on iOS */
+                    padding: 10px 12px;
                 }
             }
 
@@ -650,6 +679,7 @@ class CharacterPanel {
             [data-theme="dark"] .character-search-input:focus {
                 border-color: #4CAF50;
                 box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+                background: var(--popup-bg);
             }
 
             [data-theme="dark"] .status-badge.status-alive { background: rgba(46, 125, 50, 0.3); color: #81C784; }
