@@ -313,7 +313,8 @@ class CharacterPanel {
             neutral: '#FFC107',
             suspicious: '#FF9800',
             hostile: '#FF5722',
-            enemy: '#F44336'
+            enemy: '#F44336',
+            party: '#3F51B5'
         };
         return colors[relationship] || '#666666';
     }
@@ -325,7 +326,8 @@ class CharacterPanel {
             neutral: '😐 Neutral',
             suspicious: '🤨 Suspicious',
             hostile: '😠 Hostile',
-            enemy: '⚔️ Enemy'
+            enemy: '⚔️ Enemy',
+            party: '👩‍👩‍👧‍👦 Party'
         };
         return relationships[relationship] || relationship || 'Unknown';
     }

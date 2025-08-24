@@ -11,7 +11,8 @@ class MovementSystem {
             neutral: '#FFC107',
             suspicious: '#FF9800',
             hostile: '#FF5722',
-            enemy: '#F44336'
+            enemy: '#F44336',
+            party: '#3F51B5'
         };
         this.init();
     }

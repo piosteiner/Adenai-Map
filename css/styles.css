@@ -713,6 +713,7 @@ html, body {
 .badge.relationship-suspicious { background: #FFF3E0; color: #EF6C00; }
 .badge.relationship-hostile { background: #FFEBEE; color: #C62828; }
 .badge.relationship-enemy { background: #FFEBEE; color: #B71C1C; }
+.badge.relationship-party { background: #E3F2FD; color: #303F9F; }
 
 /* Empty State */
 .empty-state {
@@ -1027,6 +1028,7 @@ html, body {
 [data-theme="dark"] .badge.relationship-suspicious { background: rgba(239, 108, 0, 0.3); color: #FFB74D; }
 [data-theme="dark"] .badge.relationship-hostile { background: rgba(198, 40, 40, 0.3); color: #E57373; }
 [data-theme="dark"] .badge.relationship-enemy { background: rgba(183, 28, 28, 0.3); color: #EF5350; }
+[data-theme="dark"] .badge.relationship-party { background: rgba(48, 63, 159, 0.3); color: #7986CB; }
 
 [data-theme="dark"] .checkmark {
   border-color: var(--dropdown-border);
