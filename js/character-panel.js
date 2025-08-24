@@ -45,8 +45,6 @@ class CharacterPanel {
         this.toggleBtn.addEventListener('click', () => {
             this.togglePanel();
         });
-
-        // Removed dropdown filter listeners since we're removing the dropdowns
     }
 
     addMovementControlsSection() {
@@ -160,48 +158,35 @@ class CharacterPanel {
         });
     }
 
-    // NEW: Live search functionality
+    // FIXED: Simplified search functionality without circular recursion
     filterCharactersBySearch() {
         const searchInput = document.getElementById('character-search-input');
         if (!searchInput) return;
         
         const query = searchInput.value.toLowerCase().trim();
         
+        let filteredCharacters;
+        
         if (query === '') {
-            // No search query, show all characters with current filters
-            this.filterCharacters();
-            return;
+            // No search query, show all characters
+            filteredCharacters = this.characters;
+        } else {
+            // Filter characters based on search query
+            filteredCharacters = this.characters.filter(character => {
+                return (
+                    character.name.toLowerCase().includes(query) ||
+                    (character.title && character.title.toLowerCase().includes(query)) ||
+                    (character.location && character.location.toLowerCase().includes(query)) ||
+                    (character.relationship && character.relationship.toLowerCase().includes(query)) ||
+                    (character.status && character.status.toLowerCase().includes(query)) ||
+                    (character.faction && character.faction.toLowerCase().includes(query)) ||
+                    (character.description && character.description.toLowerCase().includes(query)) ||
+                    (character.notes && character.notes.toLowerCase().includes(query))
+                );
+            });
         }
         
-        // Filter characters based on search query
-        const filteredCharacters = this.characters.filter(character => {
-            return (
-                character.name.toLowerCase().includes(query) ||
-                (character.title && character.title.toLowerCase().includes(query)) ||
-                (character.location && character.location.toLowerCase().includes(query)) ||
-                (character.relationship && character.relationship.toLowerCase().includes(query)) ||
-                (character.status && character.status.toLowerCase().includes(query)) ||
-                (character.faction && character.faction.toLowerCase().includes(query)) ||
-                (character.description && character.description.toLowerCase().includes(query)) ||
-                (character.notes && character.notes.toLowerCase().includes(query))
-            );
-        });
-        
-        // Apply additional filters if they are set
-        const relationshipFilter = document.getElementById('relationship-filter')?.value || '';
-        const statusFilter = document.getElementById('status-filter')?.value || '';
-        
-        let finalFilteredCharacters = filteredCharacters;
-        
-        if (relationshipFilter) {
-            finalFilteredCharacters = finalFilteredCharacters.filter(char => char.relationship === relationshipFilter);
-        }
-        
-        if (statusFilter) {
-            finalFilteredCharacters = finalFilteredCharacters.filter(char => char.status === statusFilter);
-        }
-        
-        this.populateCharacterGrid(finalFilteredCharacters);
+        this.populateCharacterGrid(filteredCharacters);
     }
 
     togglePanel() {
@@ -329,17 +314,12 @@ class CharacterPanel {
         return relationships[relationship] || relationship || 'Unknown';
     }
 
-    filterCharacters() {
-        // Trigger the search-based filtering which handles both search and dropdown filters
-        this.filterCharactersBySearch();
-    }
-
     showEmptyState() {
         this.grid.innerHTML = `
             <div class="empty-state">
                 <div class="empty-icon">👥</div>
                 <h3>No Characters Found</h3>
-                <p>No characters match your current filters or none have been added yet.</p>
+                <p>No characters match your current search or none have been added yet.</p>
             </div>
         `;
     }
