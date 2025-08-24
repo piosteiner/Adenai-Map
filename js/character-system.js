@@ -104,19 +104,20 @@ class CharacterSystem {
         return this.characterData;
     }
 
-    // FIXED: Convert image coordinates to map coordinates
-    convertImageCoordinatesToMapCoordinates(imageCoords) {
+    // FIXED: Use same coordinate system as locations - no transformation needed
+    convertImageCoordinatesToMapCoordinates(imageCoords, characterName) {
         const [x, y] = imageCoords;
-        const mapCore = window.mapCore;
-        const imageHeight = mapCore.getDimensions().height; // 1536
         
-        // Transform from image coordinates (0,0 at top-left) to map coordinates (0,0 at bottom-left)
-        // The transformation is: lng = x, lat = imageHeight - y
-        const lng = x;
-        const lat = imageHeight - y;
+        // Characters should use the SAME coordinate system as locations
+        // Locations work correctly, so characters should too
+        // No transformation needed - use coordinates as-is
         
-        console.log(`📍 Coordinate conversion: Image [${x}, ${y}] → Map [${lng}, ${lat}]`);
-        return [lng, lat];
+        const mapLng = x;  // lng = x coordinate
+        const mapLat = y;  // lat = y coordinate
+        
+        console.log(`📍 Coordinate conversion for "${characterName}": Using coordinates as-is [lng=${mapLng}, lat=${mapLat}]`);
+        
+        return [mapLng, mapLat];  // Return as [lng, lat] for L.latLng(lat, lng)
     }
 
     // Enhanced focus character method with coordinate fix
@@ -134,7 +135,7 @@ class CharacterSystem {
         }
 
         // FIXED: Properly convert coordinates
-        const [mapLng, mapLat] = this.convertImageCoordinatesToMapCoordinates(character.coordinates);
+        const [mapLng, mapLat] = this.convertImageCoordinatesToMapCoordinates(character.coordinates, characterName);
         const targetLatLng = L.latLng(mapLat, mapLng);
         
         console.log(`🎯 Focusing on "${characterName}" at image coords ${character.coordinates} → map coords [${mapLng}, ${mapLat}]`);
@@ -351,7 +352,7 @@ class CharacterSystem {
         this.characterData.forEach(character => {
             if (character.coordinates && Array.isArray(character.coordinates)) {
                 // Convert image coordinates to map coordinates for search
-                const [mapLng, mapLat] = this.convertImageCoordinatesToMapCoordinates(character.coordinates);
+                const [mapLng, mapLat] = this.convertImageCoordinatesToMapCoordinates(character.coordinates, character.name);
                 
                 searchIndex.push({
                     name: character.name,
