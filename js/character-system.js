@@ -189,10 +189,10 @@ class CharacterSystem {
                 easeLinearity: 0.1
             });
             
-            // Verify centering after animation
-            setTimeout(() => {
+            // Wait for animation to completely finish before verification
+            this.waitForAnimationComplete(map, () => {
                 this.verifyCentering(map, targetLatLng, characterName, character, 'standard');
-            }, 1000);
+            });
             
         } catch (error) {
             console.warn(`⚠️ Standard setView failed: ${error.message}`);
@@ -209,23 +209,22 @@ class CharacterSystem {
             // First, pan without changing zoom
             map.panTo(targetLatLng, { 
                 animate: true, 
-                duration: 0.4,
+                duration: 0.6,
                 easeLinearity: 0.1
             });
             
-            // Then adjust zoom after panning
-            setTimeout(() => {
+            // Wait for pan to complete, then adjust zoom
+            this.waitForAnimationComplete(map, () => {
                 map.setZoom(targetZoom, {
                     animate: true,
                     duration: 0.4
                 });
                 
-                // Final verification
-                setTimeout(() => {
+                // Wait for zoom to complete before verification
+                this.waitForAnimationComplete(map, () => {
                     this.verifyCentering(map, targetLatLng, characterName, character, 'two-step');
-                }, 600);
-                
-            }, 500);
+                });
+            });
             
         } catch (error) {
             console.warn(`⚠️ Two-step centering failed: ${error.message}`);
@@ -256,10 +255,10 @@ class CharacterSystem {
                     maxZoom: targetZoom
                 });
                 
-                // Final verification
-                setTimeout(() => {
+                // Wait for bounds animation to complete
+                this.waitForAnimationComplete(map, () => {
                     this.verifyCentering(map, targetLatLng, characterName, character, 'emergency');
-                }, 1000);
+                });
                 
             }, 100);
             
@@ -270,7 +269,36 @@ class CharacterSystem {
         }
     }
 
-    // Verify centering worked and show popup
+    // Smart animation completion detection
+    waitForAnimationComplete(map, callback) {
+        let animationEndTimeout;
+        let moveEndFired = false;
+        
+        // Method 1: Listen for moveend event (most reliable)
+        const onMoveEnd = () => {
+            if (!moveEndFired) {
+                moveEndFired = true;
+                map.off('moveend', onMoveEnd);
+                clearTimeout(animationEndTimeout);
+                
+                // Small additional delay to ensure everything is settled
+                setTimeout(callback, 100);
+            }
+        };
+        
+        map.on('moveend', onMoveEnd);
+        
+        // Method 2: Fallback timeout in case moveend doesn't fire
+        animationEndTimeout = setTimeout(() => {
+            if (!moveEndFired) {
+                console.log('📍 Using timeout fallback for animation completion');
+                map.off('moveend', onMoveEnd);
+                onMoveEnd();
+            }
+        }, 1200); // Slightly longer than expected animation duration
+    }
+
+    // Improved verification with less aggressive corrections
     verifyCentering(map, targetLatLng, characterName, character, strategy) {
         const currentCenter = map.getCenter();
         const distance = currentCenter.distanceTo(targetLatLng);
@@ -280,28 +308,44 @@ class CharacterSystem {
         const boundsWidth = bounds.getEast() - bounds.getWest();
         const boundsHeight = bounds.getNorth() - bounds.getSouth();
         
-        // Check if character is within reasonable center area (30% of viewport)
-        const centerTolerance = Math.min(boundsWidth, boundsHeight) * 0.15; // 15% tolerance
+        // More lenient tolerance - only correct if significantly off-center
+        const centerTolerance = Math.min(boundsWidth, boundsHeight) * 0.25; // 25% tolerance (was 15%)
         
         if (distance <= centerTolerance) {
             console.log(`✅ Centering SUCCESS (${strategy}): "${characterName}" distance ${distance.toFixed(2)} <= tolerance ${centerTolerance.toFixed(2)}`);
+            
+            // Show popup immediately on success
+            this.showCharacterPopup(character, targetLatLng);
+            
         } else {
             console.warn(`⚠️ Centering IMPERFECT (${strategy}): "${characterName}" distance ${distance.toFixed(2)} > tolerance ${centerTolerance.toFixed(2)}`);
             
-            // If still not centered properly, try one final adjustment
-            if (strategy !== 'final-adjustment') {
+            // Only try correction if significantly off-center AND not already a final adjustment
+            const significantlyOff = distance > centerTolerance * 2; // Must be really far off
+            
+            if (significantlyOff && strategy !== 'final-adjustment') {
+                console.log(`🔧 Distance ${distance.toFixed(2)} is significantly off, attempting gentle correction...`);
+                
+                // Gentle correction with shorter, smoother animation
                 setTimeout(() => {
-                    map.panTo(targetLatLng, { animate: true, duration: 0.5 });
-                    setTimeout(() => {
+                    map.panTo(targetLatLng, { 
+                        animate: true, 
+                        duration: 0.3, // Shorter duration
+                        easeLinearity: 0.25 // Smoother easing
+                    });
+                    
+                    // Wait for correction to complete
+                    this.waitForAnimationComplete(map, () => {
                         this.verifyCentering(map, targetLatLng, characterName, character, 'final-adjustment');
-                    }, 600);
-                }, 200);
-                return;
+                    });
+                }, 100); // Shorter delay
+                
+            } else {
+                // Accept "good enough" centering and show popup
+                console.log(`✓ Centering acceptable for "${characterName}" - showing popup`);
+                this.showCharacterPopup(character, targetLatLng);
             }
         }
-        
-        // Show character popup
-        this.showCharacterPopup(character, targetLatLng);
         
         // Log final viewport state
         console.log(`📊 Final viewport - Center: [${currentCenter.lat.toFixed(2)}, ${currentCenter.lng.toFixed(2)}], Zoom: ${map.getZoom().toFixed(2)}`);
