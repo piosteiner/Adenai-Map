@@ -256,7 +256,7 @@
       "image": "",
       "status": "alive",
       "faction": "Selbständige Abenteurer",
-      "relationship": "suspicious",
+      "relationship": "party",
       "firstMet": "",
       "notes": "",
       "movementHistory": [
@@ -295,8 +295,8 @@
         "notes": ""
       },
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-24T23:21:20.104Z"
+      "updatedAt": "2025-08-24T23:28:39.759Z"
     }
   ],
-  "lastUpdated": "2025-08-24T23:21:20.104Z"
+  "lastUpdated": "2025-08-24T23:28:39.759Z"
 }
