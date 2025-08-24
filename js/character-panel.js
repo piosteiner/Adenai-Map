@@ -1,4 +1,4 @@
-// character-panel.js - Character Panel Functionality
+// character-panel.js - Enhanced Character Panel with Integrated Movement Controls
 class CharacterPanel {
     constructor() {
         this.panel = null;
@@ -6,6 +6,7 @@ class CharacterPanel {
         this.grid = null;
         this.isPanelOpen = false;
         this.characters = [];
+        this.showMovementControls = false;
         this.init();
     }
 
@@ -35,7 +36,8 @@ class CharacterPanel {
         }
         
         this.setupEventListeners();
-        this.addPanelCSS();
+        this.addIntegratedPanelCSS();
+        this.addMovementControlsSection();
     }
 
     setupEventListeners() {
@@ -57,6 +59,120 @@ class CharacterPanel {
         }
     }
 
+    addMovementControlsSection() {
+        const panelContent = this.panel.querySelector('.panel-content');
+        if (!panelContent) return;
+
+        // Add movement controls at the top
+        const movementControlsHtml = `
+            <div class="integrated-movement-section">
+                <div class="movement-section-header" onclick="window.characterPanel.toggleMovementControls()">
+                    <h4>🛤️ Movement Paths</h4>
+                    <span class="movement-section-toggle">▶</span>
+                </div>
+                
+                <div id="integrated-movement-content" class="integrated-movement-content" style="display: none;">
+                    <div class="movement-quick-actions">
+                        <button id="integrated-show-all-paths" class="btn-secondary movement-action-btn">✅ Show All</button>
+                        <button id="integrated-hide-all-paths" class="btn-secondary movement-action-btn">❌ Hide All</button>
+                    </div>
+                    
+                    <div id="integrated-timeline-controls" class="integrated-timeline-controls" style="display: none;">
+                        <label class="movement-label">📅 Date Range Filter:</label>
+                        <div class="date-inputs">
+                            <input type="date" id="integrated-start-date" class="date-input" />
+                            <input type="date" id="integrated-end-date" class="date-input" />
+                        </div>
+                        <button id="integrated-apply-date-filter" class="btn-secondary movement-action-btn">Apply Filter</button>
+                        <button id="integrated-clear-date-filter" class="btn-secondary movement-action-btn">Clear Filter</button>
+                    </div>
+                    
+                    <div class="movement-legend">
+                        <div class="legend-title">Legend:</div>
+                        <div class="legend-text">📍 = Start • 🚩 = Current • Numbers = Path order</div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        panelContent.insertAdjacentHTML('afterbegin', movementControlsHtml);
+        this.setupIntegratedMovementListeners();
+    }
+
+    toggleMovementControls() {
+        this.showMovementControls = !this.showMovementControls;
+        const content = document.getElementById('integrated-movement-content');
+        const toggle = document.querySelector('.movement-section-toggle');
+        const timelineControls = document.getElementById('integrated-timeline-controls');
+        
+        if (content && toggle) {
+            content.style.display = this.showMovementControls ? 'block' : 'none';
+            toggle.textContent = this.showMovementControls ? '▼' : '▶';
+            
+            // Show timeline controls if movement controls are visible
+            if (timelineControls) {
+                timelineControls.style.display = this.showMovementControls ? 'block' : 'none';
+            }
+            
+            // Refresh character grid to show/hide checkboxes
+            this.populateCharacterGrid();
+        }
+    }
+
+    setupIntegratedMovementListeners() {
+        // Show/Hide all buttons
+        document.getElementById('integrated-show-all-paths')?.addEventListener('click', () => {
+            if (window.movementSystem) {
+                window.movementSystem.showAllPaths();
+                // Update all checkboxes in the character grid
+                this.characters.forEach(character => {
+                    const checkbox = document.getElementById(`integrated-path-${character.id}`);
+                    if (checkbox && !checkbox.disabled) {
+                        checkbox.checked = true;
+                    }
+                });
+            }
+        });
+        
+        document.getElementById('integrated-hide-all-paths')?.addEventListener('click', () => {
+            if (window.movementSystem) {
+                window.movementSystem.hideAllPaths();
+                // Update all checkboxes in the character grid
+                this.characters.forEach(character => {
+                    const checkbox = document.getElementById(`integrated-path-${character.id}`);
+                    if (checkbox) {
+                        checkbox.checked = false;
+                    }
+                });
+            }
+        });
+
+        // Date filter buttons
+        document.getElementById('integrated-apply-date-filter')?.addEventListener('click', () => {
+            const startDate = document.getElementById('integrated-start-date').value;
+            const endDate = document.getElementById('integrated-end-date').value;
+            
+            if (startDate && endDate && window.movementSystem) {
+                window.movementSystem.filterPathsByDateRange(startDate, endDate);
+            }
+        });
+        
+        document.getElementById('integrated-clear-date-filter')?.addEventListener('click', () => {
+            document.getElementById('integrated-start-date').value = '';
+            document.getElementById('integrated-end-date').value = '';
+            
+            // Reset to show original paths
+            if (window.movementSystem) {
+                window.movementSystem.characterPaths.forEach(pathData => {
+                    if (pathData.isVisible) {
+                        window.movementSystem.hideCharacterPath(pathData.character.id);
+                        window.movementSystem.showCharacterPath(pathData.character.id);
+                    }
+                });
+            }
+        });
+    }
+
     togglePanel() {
         this.isPanelOpen = !this.isPanelOpen;
         this.panel.classList.toggle('open', this.isPanelOpen);
@@ -74,38 +190,100 @@ class CharacterPanel {
         }
         
         characters.forEach(character => {
-            const card = this.createCharacterCard(character);
+            const card = this.createIntegratedCharacterCard(character);
             this.grid.appendChild(card);
         });
     }
 
-    createCharacterCard(character) {
+    createIntegratedCharacterCard(character) {
         const card = document.createElement('div');
-        card.className = 'character-card';
+        card.className = 'integrated-character-card';
         
-        // Enhanced card with movement indicator
-        const movementCount = character.movementHistory ? character.movementHistory.length : 0;
-        const movementIndicator = movementCount > 0 ? `🛤️ ${movementCount}` : '';
+        // Check if character has movement data
+        const hasMovementData = character.movementHistory && character.movementHistory.length > 0;
+        const movementCount = hasMovementData ? character.movementHistory.length : 0;
+        const isPathVisible = window.movementSystem?.visibleCharacterPaths?.has(character.id) || false;
         
-        card.innerHTML = `
-            ${character.image ? `<img src="${character.image}" alt="${character.name}">` : ''}
-            <div class="character-info">
-                <h4>${character.name} ${movementIndicator}</h4>
-                ${character.title ? `<div class="title">${character.title}</div>` : ''}
-                <div class="location">📍 ${character.location || 'Unknown'}</div>
-                <div class="status-badge status-${character.status}">${character.status || 'unknown'}</div>
-                <div class="relationship-badge relationship-${character.relationship}">
-                    ${this.formatRelationship(character.relationship)}
+        // Movement checkbox (only show if movement controls are visible)
+        const movementCheckbox = this.showMovementControls ? `
+            <div class="movement-checkbox-container">
+                <label class="movement-checkbox-label">
+                    <input type="checkbox" 
+                           id="integrated-path-${character.id}" 
+                           ${isPathVisible ? 'checked' : ''} 
+                           ${!hasMovementData ? 'disabled' : ''}
+                           onchange="window.characterPanel.toggleCharacterPath('${character.id}')">
+                    <span class="movement-checkmark" style="border-color: ${this.getRelationshipColor(character.relationship)}"></span>
+                </label>
+            </div>
+        ` : '';
+        
+        // Character info section (clickable to focus character)
+        const characterInfo = `
+            <div class="character-info-section" onclick="window.characterPanel.focusCharacterOnMap('${character.name}')" style="cursor: pointer;">
+                ${character.image ? `<img src="${character.image}" alt="${character.name}" class="character-avatar">` : ''}
+                <div class="character-details">
+                    <h4 class="character-name">${character.name}${hasMovementData ? ` 🛤️ ${movementCount + 1}` : ''}</h4>
+                    ${character.title ? `<div class="character-title">${character.title}</div>` : ''}
+                    <div class="character-location">📍 ${character.location || 'Unknown'}</div>
+                    <div class="character-badges">
+                        <span class="status-badge status-${character.status}">${character.status || 'unknown'}</span>
+                        <span class="relationship-badge relationship-${character.relationship}">
+                            ${this.formatRelationship(character.relationship)}
+                        </span>
+                    </div>
                 </div>
             </div>
         `;
         
-        // Add click handler to focus character on map using the centralized method
-        card.addEventListener('click', () => {
-            this.focusCharacterOnMap(character);
-        });
+        card.innerHTML = `
+            <div class="integrated-card-layout">
+                ${movementCheckbox}
+                ${characterInfo}
+            </div>
+        `;
         
         return card;
+    }
+
+    toggleCharacterPath(characterId) {
+        if (!window.movementSystem) return;
+        
+        const checkbox = document.getElementById(`integrated-path-${characterId}`);
+        const isVisible = checkbox?.checked || false;
+        
+        if (isVisible) {
+            window.movementSystem.showCharacterPath(characterId);
+        } else {
+            window.movementSystem.hideCharacterPath(characterId);
+        }
+    }
+
+    focusCharacterOnMap(characterName) {
+        // Use the centralized character system focus method
+        const success = window.characterSystem?.focusCharacter?.(characterName);
+        
+        if (!success) {
+            console.warn(`⚠️ Could not focus on character "${characterName}"`);
+            return;
+        }
+
+        // Mobile: close panel after focusing
+        if (window.innerWidth <= 768) {
+            this.closePanel();
+        }
+    }
+
+    getRelationshipColor(relationship) {
+        const colors = {
+            ally: '#4CAF50',
+            friendly: '#8BC34A',
+            neutral: '#FFC107',
+            suspicious: '#FF9800',
+            hostile: '#FF5722',
+            enemy: '#F44336'
+        };
+        return colors[relationship] || '#666666';
     }
 
     formatRelationship(relationship) {
@@ -118,21 +296,6 @@ class CharacterPanel {
             enemy: '⚔️ Enemy'
         };
         return relationships[relationship] || relationship || 'Unknown';
-    }
-
-    focusCharacterOnMap(character) {
-        // Use the centralized character system focus method
-        const success = window.characterSystem?.focusCharacter?.(character.name);
-        
-        if (!success) {
-            console.warn(`⚠️ Could not focus on character "${character.name}"`);
-            return;
-        }
-
-        // Mobile: close panel after focusing
-        if (window.innerWidth <= 768) {
-            this.closePanel();
-        }
     }
 
     filterCharacters() {
@@ -162,348 +325,312 @@ class CharacterPanel {
         `;
     }
 
-    // Get panel statistics
-    getPanelStats() {
-        return {
-            totalCharacters: this.characters.length,
-            withMovements: this.characters.filter(c => c.movementHistory && c.movementHistory.length > 0).length,
-            withCoordinates: this.characters.filter(c => c.coordinates).length,
-            byStatus: this.groupBy(this.characters, 'status'),
-            byRelationship: this.groupBy(this.characters, 'relationship')
-        };
-    }
-
-    groupBy(array, property) {
-        return array.reduce((acc, item) => {
-            const key = item[property] || 'unknown';
-            acc[key] = (acc[key] || 0) + 1;
-            return acc;
-        }, {});
-    }
-
-    addPanelCSS() {
-        const panelCSS = `
-            /* Enhanced Character Panel Styles */
-            .character-panel {
-                position: fixed;
-                top: 0;
-                right: -400px;
-                width: 350px;
-                height: 100vh;
-                background: var(--popup-bg);
-                border-left: 1px solid var(--dropdown-border);
-                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-                transition: right 0.3s ease;
-                z-index: 1000;
-                overflow-y: auto;
-            }
-
-            .character-panel.open {
-                right: 0;
-            }
-
-            .character-panel .panel-header {
-                padding: 20px;
+    addIntegratedPanelCSS() {
+        const integratedCSS = `
+            /* Integrated Movement Controls in Character Panel */
+            .integrated-movement-section {
+                margin-bottom: 20px;
                 border-bottom: 1px solid var(--dropdown-border);
-                background: var(--card-bg);
+                padding-bottom: 15px;
             }
 
-            .character-panel .panel-header h3 {
+            .movement-section-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
+                padding: 8px 0;
+                border-bottom: 1px solid var(--dropdown-border);
+                margin-bottom: 10px;
+            }
+
+            .movement-section-header:hover {
+                background: var(--dropdown-hover);
+                padding: 8px;
+                margin: 0 -8px 10px -8px;
+                border-radius: 4px;
+            }
+
+            .movement-section-header h4 {
                 margin: 0;
+                font-size: 1em;
                 color: var(--text-color);
             }
 
-            .character-panel .panel-content {
-                padding: 20px;
+            .movement-section-toggle {
+                font-size: 0.8em;
+                color: var(--text-color);
+                opacity: 0.7;
             }
 
-            .character-filters {
-                margin-bottom: 20px;
-            }
-
-            .character-filters select {
-                width: 100%;
+            .movement-quick-actions {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
                 margin-bottom: 10px;
-                padding: 8px;
+            }
+
+            .movement-action-btn {
+                padding: 6px 10px;
+                font-size: 0.8em;
+                background: var(--popup-bg);
+                color: var(--text-color);
                 border: 1px solid var(--dropdown-border);
                 border-radius: 4px;
-                background: var(--popup-bg);
-                color: var(--text-color);
+                cursor: pointer;
+                transition: background-color 0.3s ease;
             }
 
-            .character-grid {
-                display: flex;
-                flex-direction: column;
-                gap: 15px;
+            .movement-action-btn:hover {
+                background: var(--dropdown-hover);
             }
 
-            .character-card {
+            /* Integrated Character Cards */
+            .integrated-character-card {
                 background: var(--card-bg);
                 border: 1px solid var(--dropdown-border);
                 border-radius: 8px;
-                padding: 15px;
-                cursor: pointer;
+                margin-bottom: 12px;
+                overflow: hidden;
                 transition: all 0.3s ease;
-                position: relative;
             }
 
-            .character-card:hover {
+            .integrated-character-card:hover {
                 background: var(--dropdown-hover);
-                transform: translateY(-2px);
+                transform: translateY(-1px);
                 box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             }
 
-            .character-card img {
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                object-fit: cover;
-                float: right;
-                margin-left: 15px;
+            .integrated-card-layout {
+                display: flex;
+                align-items: center;
+                padding: 12px;
             }
 
-            .character-info h4 {
-                margin: 0 0 8px 0;
-                color: var(--text-color);
-                font-size: 1.1em;
+            .movement-checkbox-container {
+                margin-right: 12px;
+                flex-shrink: 0;
             }
 
-            .character-info .title {
-                font-style: italic;
-                color: var(--text-muted);
-                margin-bottom: 8px;
-                font-size: 0.9em;
-            }
-
-            .character-info .location {
-                color: var(--text-muted);
-                margin-bottom: 8px;
-                font-size: 0.9em;
-            }
-
-            .status-badge {
-                display: inline-block;
-                padding: 3px 8px;
-                border-radius: 12px;
-                font-size: 0.8em;
-                font-weight: bold;
-                margin-bottom: 5px;
-            }
-
-            .status-badge.status-alive {
-                background: #E8F5E8;
-                color: #2E7D32;
-            }
-
-            .status-badge.status-dead {
-                background: #FFEBEE;
-                color: #C62828;
-            }
-
-            .status-badge.status-missing {
-                background: #FFF3E0;
-                color: #EF6C00;
-            }
-
-            .status-badge.status-unknown {
-                background: #F3E5F5;
-                color: #7B1FA2;
-            }
-
-            .relationship-badge {
-                display: inline-block;
-                padding: 3px 8px;
-                border-radius: 12px;
-                font-size: 0.8em;
-                font-weight: bold;
-                margin-left: 5px;
-            }
-
-            .relationship-badge.relationship-ally {
-                background: #E8F5E8;
-                color: #2E7D32;
-            }
-
-            .relationship-badge.relationship-friendly {
-                background: #E8F8F5;
-                color: #00695C;
-            }
-
-            .relationship-badge.relationship-neutral {
-                background: #FFFDE7;
-                color: #F57F17;
-            }
-
-            .relationship-badge.relationship-suspicious {
-                background: #FFF3E0;
-                color: #EF6C00;
-            }
-
-            .relationship-badge.relationship-hostile {
-                background: #FFEBEE;
-                color: #C62828;
-            }
-
-            .relationship-badge.relationship-enemy {
-                background: #FFEBEE;
-                color: #B71C1C;
-            }
-
-            .empty-state {
-                text-align: center;
-                padding: 40px 20px;
-                color: var(--text-muted);
-            }
-
-            .empty-state .empty-icon {
-                font-size: 3em;
-                margin-bottom: 15px;
-                opacity: 0.5;
-            }
-
-            .empty-state h3 {
-                margin: 0 0 10px 0;
-                color: var(--text-color);
-            }
-
-            .empty-state p {
-                margin: 0;
-                line-height: 1.4;
-            }
-
-            #toggle-panel {
-                position: fixed;
-                top: 50%;
-                right: 10px;
-                transform: translateY(-50%);
-                background: var(--popup-bg);
-                border: 1px solid var(--dropdown-border);
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
+            .movement-checkbox-label {
+                display: flex;
+                align-items: center;
                 cursor: pointer;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-                z-index: 1001;
+                position: relative;
+            }
+
+            .movement-checkbox-label input[type="checkbox"] {
+                position: absolute;
+                opacity: 0;
+                width: 18px;
+                height: 18px;
+                cursor: pointer;
+            }
+
+            .movement-checkmark {
+                width: 18px;
+                height: 18px;
+                border: 2px solid var(--dropdown-border);
+                border-radius: 4px;
+                background: var(--popup-bg);
                 transition: all 0.3s ease;
+                position: relative;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 1.2em;
             }
 
-            #toggle-panel:hover {
-                background: var(--dropdown-hover);
-                transform: translateY(-50%) scale(1.1);
+            .movement-checkbox-label input[type="checkbox"]:checked + .movement-checkmark {
+                background: var(--dropdown-border);
             }
 
-            /* Styling for character focus popups */
-            .character-focus-popup .leaflet-popup-content-wrapper {
-                background: var(--popup-bg);
+            .movement-checkbox-label input[type="checkbox"]:checked + .movement-checkmark::after {
+                content: '✓';
+                color: white;
+                font-size: 12px;
+                font-weight: bold;
+            }
+
+            .movement-checkbox-label input[type="checkbox"]:disabled + .movement-checkmark {
+                background: var(--dropdown-bg);
+                border-color: var(--text-muted);
+                opacity: 0.5;
+            }
+
+            .character-info-section {
+                display: flex;
+                align-items: center;
+                flex: 1;
+                transition: all 0.2s ease;
+            }
+
+            .character-info-section:hover {
+                transform: translateX(2px);
+            }
+
+            .character-avatar {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-right: 12px;
                 border: 2px solid var(--dropdown-border);
+                flex-shrink: 0;
+            }
+
+            .character-details {
+                flex: 1;
+            }
+
+            .character-name {
+                margin: 0 0 4px 0;
+                font-size: 1em;
+                color: var(--text-color);
+                font-weight: bold;
+            }
+
+            .character-title {
+                font-style: italic;
+                font-size: 0.85em;
+                color: var(--text-muted);
+                margin-bottom: 4px;
+            }
+
+            .character-location {
+                font-size: 0.85em;
+                color: var(--text-muted);
+                margin-bottom: 8px;
+            }
+
+            .character-badges {
+                display: flex;
+                gap: 6px;
+                flex-wrap: wrap;
+            }
+
+            .status-badge, .relationship-badge {
+                display: inline-block;
+                padding: 2px 6px;
                 border-radius: 12px;
-                box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+                font-size: 0.75em;
+                font-weight: bold;
             }
 
-            .character-focus-popup .leaflet-popup-content {
-                margin: 16px;
-                line-height: 1.4;
+            .status-badge.status-alive { background: #E8F5E8; color: #2E7D32; }
+            .status-badge.status-dead { background: #FFEBEE; color: #C62828; }
+            .status-badge.status-missing { background: #FFF3E0; color: #EF6C00; }
+            .status-badge.status-unknown { background: #F3E5F5; color: #7B1FA2; }
+
+            .relationship-badge.relationship-ally { background: #E8F5E8; color: #2E7D32; }
+            .relationship-badge.relationship-friendly { background: #E8F8F5; color: #00695C; }
+            .relationship-badge.relationship-neutral { background: #FFFDE7; color: #F57F17; }
+            .relationship-badge.relationship-suspicious { background: #FFF3E0; color: #EF6C00; }
+            .relationship-badge.relationship-hostile { background: #FFEBEE; color: #C62828; }
+            .relationship-badge.relationship-enemy { background: #FFEBEE; color: #B71C1C; }
+
+            /* Date Range Controls */
+            .integrated-timeline-controls {
+                margin-top: 10px;
+                padding: 10px;
+                background: var(--dropdown-bg);
+                border-radius: 4px;
+                border: 1px solid var(--dropdown-border);
             }
 
-            .character-focus-popup .leaflet-popup-tip {
-                background: var(--popup-bg);
-                border: 2px solid var(--dropdown-border);
-            }
-
-            /* Mobile responsiveness */
-            @media (max-width: 768px) {
-                .character-panel {
-                    width: 100%;
-                    right: -100%;
-                }
-
-                .character-panel .panel-content {
-                    padding: 15px;
-                }
-
-                .character-card {
-                    padding: 12px;
-                }
-
-                .character-card img {
-                    width: 50px;
-                    height: 50px;
-                }
-
-                #toggle-panel {
-                    right: 15px;
-                    width: 45px;
-                    height: 45px;
-                }
-            }
-
-            /* Dark mode adjustments */
-            [data-theme="dark"] .character-panel {
-                box-shadow: -2px 0 10px rgba(0,0,0,0.3);
-            }
-
-            [data-theme="dark"] .character-focus-popup .leaflet-popup-content-wrapper {
-                background: var(--popup-bg);
+            .movement-label {
+                display: block;
+                margin-bottom: 6px;
+                font-size: 0.85em;
+                font-weight: bold;
                 color: var(--text-color);
             }
 
-            [data-theme="dark"] .status-badge.status-alive {
-                background: rgba(46, 125, 50, 0.3);
-                color: #81C784;
+            .date-inputs {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                margin-bottom: 8px;
             }
 
-            [data-theme="dark"] .status-badge.status-dead {
-                background: rgba(198, 40, 40, 0.3);
-                color: #E57373;
+            .date-input {
+                padding: 6px;
+                font-size: 0.8em;
+                background: var(--popup-bg);
+                color: var(--text-color);
+                border: 1px solid var(--dropdown-border);
+                border-radius: 4px;
             }
 
-            [data-theme="dark"] .status-badge.status-missing {
-                background: rgba(239, 108, 0, 0.3);
-                color: #FFB74D;
+            .movement-legend {
+                margin-top: 12px;
+                padding: 8px;
+                background: var(--dropdown-bg);
+                border-radius: 4px;
+                border: 1px solid var(--dropdown-border);
             }
 
-            [data-theme="dark"] .status-badge.status-unknown {
-                background: rgba(123, 31, 162, 0.3);
-                color: #CE93D8;
+            .legend-title {
+                font-size: 0.8em;
+                font-weight: bold;
+                color: var(--text-color);
+                margin-bottom: 4px;
             }
 
-            [data-theme="dark"] .relationship-badge.relationship-ally {
-                background: rgba(46, 125, 50, 0.3);
-                color: #81C784;
+            .legend-text {
+                font-size: 0.75em;
+                color: var(--text-color);
+                opacity: 0.8;
+                line-height: 1.3;
             }
 
-            [data-theme="dark"] .relationship-badge.relationship-friendly {
-                background: rgba(0, 105, 92, 0.3);
-                color: #4DB6AC;
+            /* Mobile Responsiveness */
+            @media (max-width: 768px) {
+                .integrated-card-layout {
+                    padding: 10px;
+                }
+
+                .character-avatar {
+                    width: 40px;
+                    height: 40px;
+                }
+
+                .movement-quick-actions {
+                    grid-template-columns: 1fr;
+                    gap: 6px;
+                }
+
+                .date-inputs {
+                    grid-template-columns: 1fr;
+                    gap: 6px;
+                }
             }
 
-            [data-theme="dark"] .relationship-badge.relationship-neutral {
-                background: rgba(245, 127, 23, 0.3);
-                color: #FFD54F;
+            /* Dark Mode Support */
+            [data-theme="dark"] .status-badge.status-alive { background: rgba(46, 125, 50, 0.3); color: #81C784; }
+            [data-theme="dark"] .status-badge.status-dead { background: rgba(198, 40, 40, 0.3); color: #E57373; }
+            [data-theme="dark"] .status-badge.status-missing { background: rgba(239, 108, 0, 0.3); color: #FFB74D; }
+            [data-theme="dark"] .status-badge.status-unknown { background: rgba(123, 31, 162, 0.3); color: #CE93D8; }
+
+            [data-theme="dark"] .relationship-badge.relationship-ally { background: rgba(46, 125, 50, 0.3); color: #81C784; }
+            [data-theme="dark"] .relationship-badge.relationship-friendly { background: rgba(0, 105, 92, 0.3); color: #4DB6AC; }
+            [data-theme="dark"] .relationship-badge.relationship-neutral { background: rgba(245, 127, 23, 0.3); color: #FFD54F; }
+            [data-theme="dark"] .relationship-badge.relationship-suspicious { background: rgba(239, 108, 0, 0.3); color: #FFB74D; }
+            [data-theme="dark"] .relationship-badge.relationship-hostile { background: rgba(198, 40, 40, 0.3); color: #E57373; }
+            [data-theme="dark"] .relationship-badge.relationship-enemy { background: rgba(183, 28, 28, 0.3); color: #EF5350; }
+
+            [data-theme="dark"] .movement-checkmark {
+                border-color: var(--dropdown-border);
+                background: var(--card-bg);
             }
 
-            [data-theme="dark"] .relationship-badge.relationship-suspicious {
-                background: rgba(239, 108, 0, 0.3);
-                color: #FFB74D;
-            }
-
-            [data-theme="dark"] .relationship-badge.relationship-hostile {
-                background: rgba(198, 40, 40, 0.3);
-                color: #E57373;
-            }
-
-            [data-theme="dark"] .relationship-badge.relationship-enemy {
-                background: rgba(183, 28, 28, 0.3);
-                color: #EF5350;
+            [data-theme="dark"] .movement-checkbox-label input[type="checkbox"]:checked + .movement-checkmark {
+                background: #4CAF50;
+                border-color: #4CAF50;
             }
         `;
 
         const style = document.createElement('style');
-        style.textContent = panelCSS;
+        style.textContent = integratedCSS;
         document.head.appendChild(style);
     }
 
@@ -526,6 +653,24 @@ class CharacterPanel {
 
     isOpen() {
         return this.isPanelOpen;
+    }
+
+    getPanelStats() {
+        return {
+            totalCharacters: this.characters.length,
+            withMovements: this.characters.filter(c => c.movementHistory && c.movementHistory.length > 0).length,
+            withCoordinates: this.characters.filter(c => c.coordinates).length,
+            byStatus: this.groupBy(this.characters, 'status'),
+            byRelationship: this.groupBy(this.characters, 'relationship')
+        };
+    }
+
+    groupBy(array, property) {
+        return array.reduce((acc, item) => {
+            const key = item[property] || 'unknown';
+            acc[key] = (acc[key] || 0) + 1;
+            return acc;
+        }, {});
     }
 }
 
