@@ -250,10 +250,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "",
-      "location": "Silbergrat",
+      "location": "Custom Location",
       "coordinates": [
-        1240,
-        1041
+        1265,
+        1018
       ],
       "description": "",
       "image": "",
@@ -274,20 +274,32 @@
           "notes": "",
           "type": "mission",
           "createdAt": "2025-08-24T23:06:55.342Z"
+        },
+        {
+          "id": "movement_1756076882170",
+          "date": "5663-06-04",
+          "location": null,
+          "coordinates": [
+            1265,
+            1018
+          ],
+          "notes": "",
+          "type": "mission",
+          "createdAt": "2025-08-24T23:08:02.170Z"
         }
       ],
       "currentLocation": {
-        "date": "5663-06-03",
-        "location": "Silbergrat",
+        "date": "5663-06-04",
+        "location": null,
         "coordinates": [
-          1240,
-          1041
+          1265,
+          1018
         ],
         "notes": ""
       },
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-24T23:06:55.343Z"
+      "updatedAt": "2025-08-24T23:08:02.170Z"
     }
   ],
-  "lastUpdated": "2025-08-24T23:06:55.343Z"
+  "lastUpdated": "2025-08-24T23:08:02.170Z"
 }
