@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "31bde3c716528982371cac2bf80c6de5f478213f",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-24T23:08:02.860Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-24T23:08:02.860Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Custom coordinates on 5663-06-04"
+    },
+    {
       "commitSha": "1b51c9eb788be3b74e51cd91108e2539f2c6e0e9",
       "action": "update",
       "type": "character",
@@ -730,5 +743,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-24T23:06:56.069Z"
+  "lastUpdated": "2025-08-24T23:08:02.860Z"
 }
