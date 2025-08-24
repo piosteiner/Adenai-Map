@@ -17,8 +17,6 @@ class MovementSystem {
     }
 
     init() {
-        this.addMovementCSS();
-        
         // Listen for characters loaded event
         document.addEventListener('charactersLoaded', (e) => {
             this.addCharacterMovementPaths();
@@ -324,96 +322,6 @@ class MovementSystem {
                 });
             }
         });
-    }
-
-    addMovementCSS() {
-        const movementCSS = `
-            /* Movement marker styles */
-            .movement-start-marker, .movement-end-marker, .movement-number-marker {
-                background: white;
-                border: 2px solid #333;
-                border-radius: 50%;
-                text-align: center;
-                line-height: 16px;
-                font-size: 12px;
-                font-weight: bold;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            }
-            
-            .movement-number-marker {
-                background: #2196F3;
-                color: white;
-                border-color: #1976D2;
-            }
-            
-            .character-path-popup {
-                max-width: 300px;
-            }
-            
-            .timeline-entry {
-                padding: 5px 0;
-                border-bottom: 1px solid #eee;
-                font-size: 0.9em;
-            }
-            
-            .timeline-entry:last-child {
-                border-bottom: none;
-            }
-            
-            .movement-point-popup {
-                max-width: 250px;
-            }
-
-            /* Path styling */
-            .character-path {
-                stroke-linecap: round;
-                stroke-linejoin: round;
-            }
-            
-            .character-path:hover {
-                stroke-width: 6px;
-                opacity: 1;
-            }
-
-            /* Character Path Tooltips */
-            .character-path-tooltip {
-                background: rgba(0, 0, 0, 0.8) !important;
-                color: white !important;
-                border: none !important;
-                border-radius: 6px !important;
-                font-size: 12px !important;
-                font-weight: 500 !important;
-                padding: 4px 8px !important;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
-                pointer-events: none !important;
-                z-index: 1001 !important;
-            }
-
-            .character-path-tooltip::before {
-                display: none !important; /* Hide the default arrow */
-            }
-
-            /* Dark mode adjustments */
-            [data-theme="dark"] .movement-start-marker,
-            [data-theme="dark"] .movement-end-marker {
-                background: #2a2a2a;
-                border-color: #fff;
-                color: #fff;
-            }
-            
-            [data-theme="dark"] .timeline-entry {
-                border-bottom-color: #444;
-            }
-
-            [data-theme="dark"] .character-path-tooltip {
-                background: rgba(255, 255, 255, 0.9) !important;
-                color: #333 !important;
-            }
-        `;
-
-        const style = document.createElement('style');
-        style.textContent = movementCSS;
-        document.head.appendChild(style);
     }
 
     // Public methods for global access
