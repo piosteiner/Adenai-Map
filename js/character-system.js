@@ -250,7 +250,7 @@ class CharacterSystem {
         );
     }
 
-    // Simplified popup showing (no verification needed)
+    // Simplified popup showing with offset positioning
     showCharacterPopup(character, latlng) {
         const map = window.mapCore.getMap();
         
@@ -262,7 +262,7 @@ class CharacterSystem {
         // Create popup content
         const popupContent = this.createCharacterPopup(character);
 
-        // Create popup with enhanced options
+        // Create popup with enhanced options and offset
         this.currentCharacterPopup = L.popup({
             closeButton: true,
             autoClose: false,
@@ -270,7 +270,8 @@ class CharacterSystem {
             closeOnEscapeKey: true,
             className: 'character-focus-popup',
             autoPan: false,           // Disable auto-pan since we already centered properly
-            keepInView: true         // Keep popup in view when map is panned
+            keepInView: true,         // Keep popup in view when map is panned
+            offset: [0, -25]          // Position popup directly above the coordinate point, like location popups
         })
         .setLatLng(latlng)
         .setContent(popupContent)
@@ -279,7 +280,7 @@ class CharacterSystem {
         // Set up event listeners for controlled closing
         this.setupPopupCloseListeners();
 
-        console.log(`🎯 Character popup opened for "${character.name}"`);
+        console.log(`🎯 Character popup opened for "${character.name}" with offset positioning`);
     }
 
     // Set up listeners to close character popup when needed
