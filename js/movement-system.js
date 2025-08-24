@@ -101,6 +101,7 @@ class MovementSystem {
         // Add cursor-following tooltip with character name
         pathLine.bindTooltip(`🛤️ ${character.name}`, {
             permanent: false,
+            sticky: true,
             direction: 'top',
             offset: [0, -10],
             className: 'character-path-tooltip'
