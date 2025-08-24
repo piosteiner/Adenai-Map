@@ -17,6 +17,9 @@ class AdenaiMap {
                 });
             }
 
+            // Wait for map core to be ready
+            await this.waitForMapCore();
+            
             // Initialize systems in order
             await this.initializeSystems();
             await this.loadData();
@@ -27,12 +30,35 @@ class AdenaiMap {
             
             // Dispatch initialization complete event
             document.dispatchEvent(new CustomEvent('adenaiMapReady', {
-                detail: { systems: this.systems }
+                detail: { 
+                    systems: this.systems,
+                    map: this.getLeafletMap() // 🔥 Include map reference
+                }
             }));
             
         } catch (error) {
             console.error('❌ Failed to initialize Adenai Map:', error);
         }
+    }
+
+    // 🔥 NEW: Wait for map core to be ready
+    async waitForMapCore() {
+        console.log('⏳ Waiting for map core...');
+        
+        let attempts = 0;
+        const maxAttempts = 50; // 5 seconds max
+        
+        while (attempts < maxAttempts) {
+            if (window.mapCore && window.mapCore.map && window.map === window.mapCore.map) {
+                console.log('✅ Map core ready!');
+                return;
+            }
+            
+            await new Promise(resolve => setTimeout(resolve, 100));
+            attempts++;
+        }
+        
+        throw new Error('Map core failed to initialize within timeout');
     }
 
     async initializeSystems() {
@@ -55,10 +81,22 @@ class AdenaiMap {
             .map(([name]) => name);
 
         if (missingSystems.length > 0) {
-            throw new Error(`Missing systems: ${missingSystems.join(', ')}`);
+            console.warn('⚠️ Missing systems:', missingSystems);
+            // Don't throw error, just warn - some systems might be optional
+        }
+
+        // 🔥 Validate map reference is working
+        const map = this.getLeafletMap();
+        if (!map || typeof map.addLayer !== 'function') {
+            throw new Error('Leaflet map not properly initialized for systems');
         }
 
         console.log('✅ All systems initialized');
+        console.log('📍 Map reference validated:', {
+            hasMap: !!map,
+            hasAddLayer: typeof map.addLayer === 'function',
+            mapType: map.constructor.name
+        });
     }
 
     async loadData() {
@@ -66,15 +104,26 @@ class AdenaiMap {
         
         try {
             // Load locations first (they provide coordinates for characters)
-            await this.systems.locationsSystem.loadLocations();
+            if (this.systems.locationsSystem) {
+                await this.systems.locationsSystem.loadLocations();
+            }
             
             // Then load characters (which depend on location coordinates)
-            await this.systems.characterSystem.loadCharacters();
+            if (this.systems.characterSystem) {
+                await this.systems.characterSystem.loadCharacters();
+            }
             
             // Initialize movement controls after characters are loaded
             setTimeout(() => {
-                this.systems.movementSystem.addIntegratedMovementControls();
+                if (this.systems.movementSystem) {
+                    this.systems.movementSystem.addIntegratedMovementControls();
+                }
             }, 100);
+            
+            // 🔥 Initialize journeys after map and systems are ready
+            setTimeout(() => {
+                this.initializeJourneys();
+            }, 200);
             
             console.log('✅ All data loaded successfully');
             
@@ -84,17 +133,54 @@ class AdenaiMap {
         }
     }
 
+    // 🔥 NEW: Initialize journey system
+    initializeJourneys() {
+        console.log('🛤️ Initializing journey system...');
+        
+        // Check if journey functions are available
+        if (typeof window.loadJourneys === 'function') {
+            // Validate map is available for journeys
+            if (window.map && typeof window.map.addLayer === 'function') {
+                console.log('📍 Map validated for journeys, loading...');
+                window.loadJourneys().catch(error => {
+                    console.error('❌ Failed to load journeys:', error);
+                });
+            } else {
+                console.error('❌ Map not available for journey system');
+                console.log('Debug info:', {
+                    windowMap: !!window.map,
+                    mapType: window.map?.constructor?.name,
+                    hasAddLayer: typeof window.map?.addLayer
+                });
+            }
+        } else {
+            console.log('ℹ️ Journey system not loaded (loadJourneys function not found)');
+        }
+    }
+
     setupGlobalEventListeners() {
         // Listen for data updates (useful for admin interface integration)
         document.addEventListener('charactersUpdated', () => {
             console.log('🔄 Characters updated, reloading...');
-            this.systems.characterSystem.reloadCharacters();
+            if (this.systems.characterSystem) {
+                this.systems.characterSystem.reloadCharacters();
+            }
         });
 
         // Listen for location updates
         document.addEventListener('locationsUpdated', () => {
             console.log('🔄 Locations updated, reloading...');
-            this.systems.locationsSystem.loadLocations();
+            if (this.systems.locationsSystem) {
+                this.systems.locationsSystem.loadLocations();
+            }
+        });
+
+        // 🔥 NEW: Listen for journey updates
+        document.addEventListener('journeysUpdated', () => {
+            console.log('🔄 Journeys updated, reloading...');
+            if (typeof window.refreshJourneys === 'function') {
+                window.refreshJourneys();
+            }
         });
 
         // Error handling
@@ -106,6 +192,15 @@ class AdenaiMap {
         window.addEventListener('unhandledrejection', (event) => {
             console.error('🚨 Unhandled promise rejection:', event.reason);
         });
+    }
+
+    // 🔥 NEW: Get the actual Leaflet map instance
+    getLeafletMap() {
+        // Try multiple ways to access the map
+        return window.map || 
+               this.systems?.mapCore?.getMap() || 
+               window.mapCore?.map || 
+               null;
     }
 
     // Public API methods
@@ -121,51 +216,136 @@ class AdenaiMap {
         return this.initialized;
     }
 
+    // 🔥 NEW: Get map with validation
+    getMap() {
+        const map = this.getLeafletMap();
+        if (!map) {
+            console.error('❌ No Leaflet map available');
+            return null;
+        }
+        if (typeof map.addLayer !== 'function') {
+            console.error('❌ Invalid map object (missing addLayer method)');
+            return null;
+        }
+        return map;
+    }
+
     // Character management shortcuts
     focusCharacter(name) {
-        return this.systems.characterSystem.focusCharacter(name);
+        return this.systems.characterSystem?.focusCharacter(name);
     }
 
     focusLocation(name) {
-        return this.systems.locationsSystem.focusLocation(name);
+        return this.systems.locationsSystem?.focusLocation(name);
     }
 
     searchMap(query) {
-        return this.systems.searchSystem.search(query);
+        return this.systems.searchSystem?.search(query);
     }
 
     toggleCharacterPaths() {
-        return this.systems.movementSystem.toggleCharacterPaths();
+        return this.systems.movementSystem?.toggleCharacterPaths();
     }
 
     toggleCharacterPanel() {
-        return this.systems.characterPanel.togglePanel();
+        return this.systems.characterPanel?.togglePanel();
+    }
+
+    // 🔥 NEW: Journey management shortcuts
+    loadJourneys() {
+        if (typeof window.loadJourneys === 'function') {
+            return window.loadJourneys();
+        }
+        console.warn('⚠️ Journey system not available');
+    }
+
+    refreshJourneys() {
+        if (typeof window.refreshJourneys === 'function') {
+            return window.refreshJourneys();
+        }
+        console.warn('⚠️ Journey system not available');
+    }
+
+    clearJourneys() {
+        if (typeof window.clearJourneys === 'function') {
+            return window.clearJourneys();
+        }
+        console.warn('⚠️ Journey system not available');
     }
 
     // Debug and utility methods
     getMapStats() {
-        return {
-            characters: {
-                total: this.systems.characterSystem.getCharacters().length,
-                withCoordinates: this.systems.characterSystem.getCharacters().filter(c => c.coordinates).length,
-                withMovements: this.systems.characterSystem.getCharacters().filter(c => c.movementHistory?.length > 0).length
+        const baseStats = {
+            map: {
+                available: !!this.getLeafletMap(),
+                type: this.getLeafletMap()?.constructor?.name || 'N/A',
+                hasAddLayer: typeof this.getLeafletMap()?.addLayer === 'function'
             },
-            locations: {
-                total: this.systems.locationsSystem.getLocations().length,
-                ...this.systems.locationsSystem.getLocationStats()
-            },
-            movement: {
-                pathsCreated: this.systems.movementSystem.getCharacterPaths().length,
-                pathsVisible: this.systems.movementSystem.getShowCharacterPaths()
-            },
-            search: {
-                indexSize: this.systems.searchSystem.getSearchIndex().length
-            },
-            panel: {
-                isOpen: this.systems.characterPanel.isOpen(),
-                ...this.systems.characterPanel.getPanelStats()
+            systems: {
+                loaded: Object.keys(this.systems).length,
+                available: Object.values(this.systems).filter(Boolean).length
             }
         };
+
+        // Add system-specific stats if available
+        if (this.systems.characterSystem) {
+            baseStats.characters = {
+                total: this.systems.characterSystem.getCharacters?.()?.length || 0,
+                withCoordinates: this.systems.characterSystem.getCharacters?.()?.filter(c => c.coordinates)?.length || 0,
+                withMovements: this.systems.characterSystem.getCharacters?.()?.filter(c => c.movementHistory?.length > 0)?.length || 0
+            };
+        }
+
+        if (this.systems.locationsSystem) {
+            baseStats.locations = {
+                total: this.systems.locationsSystem.getLocations?.()?.length || 0,
+                ...this.systems.locationsSystem.getLocationStats?.() || {}
+            };
+        }
+
+        if (this.systems.movementSystem) {
+            baseStats.movement = {
+                pathsCreated: this.systems.movementSystem.getCharacterPaths?.()?.length || 0,
+                pathsVisible: this.systems.movementSystem.getShowCharacterPaths?.() || false
+            };
+        }
+
+        if (this.systems.searchSystem) {
+            baseStats.search = {
+                indexSize: this.systems.searchSystem.getSearchIndex?.()?.length || 0
+            };
+        }
+
+        if (this.systems.characterPanel) {
+            baseStats.panel = {
+                isOpen: this.systems.characterPanel.isOpen?.() || false,
+                ...this.systems.characterPanel.getPanelStats?.() || {}
+            };
+        }
+
+        // Add journey stats if available
+        if (typeof window.debugJourneys === 'function') {
+            try {
+                // This will log journey debug info to console
+                window.debugJourneys();
+                baseStats.journeys = {
+                    systemAvailable: true,
+                    checkConsoleForDetails: true
+                };
+            } catch (e) {
+                baseStats.journeys = {
+                    systemAvailable: false,
+                    error: e.message
+                };
+            }
+        } else {
+            baseStats.journeys = {
+                systemAvailable: false,
+                reason: 'debugJourneys function not found'
+            };
+        }
+
+        return baseStats;
     }
 
     printStats() {
@@ -176,15 +356,43 @@ class AdenaiMap {
 
     // Admin interface integration helpers
     refreshCharacters() {
-        return this.systems.characterSystem.reloadCharacters();
+        return this.systems.characterSystem?.reloadCharacters();
     }
 
     refreshLocations() {
-        return this.systems.locationsSystem.loadLocations();
+        return this.systems.locationsSystem?.loadLocations();
     }
 
     refreshPanel() {
-        return this.systems.characterPanel.refreshPanel();
+        return this.systems.characterPanel?.refreshPanel();
+    }
+
+    // 🔥 NEW: Map debugging helper
+    debugMap() {
+        const map = this.getLeafletMap();
+        console.log('🔍 Map Debug Info:');
+        console.log('  window.map:', window.map);
+        console.log('  window.mapCore:', window.mapCore);
+        console.log('  this.getLeafletMap():', map);
+        console.log('  Map methods available:', {
+            addLayer: typeof map?.addLayer,
+            removeLayer: typeof map?.removeLayer,
+            fitBounds: typeof map?.fitBounds,
+            on: typeof map?.on
+        });
+        
+        if (map && map.getContainer) {
+            console.log('  Map container:', map.getContainer());
+        }
+        
+        return {
+            map,
+            isValid: !!(map && typeof map.addLayer === 'function'),
+            globalRefs: {
+                windowMap: window.map,
+                mapCore: window.mapCore
+            }
+        };
     }
 }
 
@@ -198,6 +406,9 @@ window.adenaiMap = adenaiMap;
 window.addCharacterMovementPaths = () => window.movementSystem?.addCharacterMovementPaths();
 window.clearCharacterPaths = () => window.movementSystem?.clearCharacterPaths();
 window.reloadCharacters = () => window.characterSystem?.reloadCharacters();
+
+// 🔥 NEW: Expose map debugging function globally
+window.debugMap = () => window.adenaiMap?.debugMap();
 
 // Cleanup - hide any remnants of old controls
 const cleanupCSS = `

@@ -1,12 +1,63 @@
-// Dynamic Journey Loader - Clean Version
-// Loads journey data directly from CMS without fallback
+// Dynamic Journey Loader - Improved Version
+// Enhanced with better map detection and error handling
 
 let journeyLayers = [];
+
+// 🔥 IMPROVED: Get map with fallback options
+function getMap() {
+    // Try multiple ways to access the map
+    let map = window.map || 
+              window.mapCore?.map || 
+              window.mapCore?.getMap?.() ||
+              window.adenaiMap?.getLeafletMap?.() ||
+              null;
+    
+    // Validate the map object
+    if (map && typeof map.addLayer === 'function') {
+        return map;
+    }
+    
+    // If we have a map but it's not valid, log debug info
+    if (map) {
+        console.error('❌ Invalid map object found:', {
+            type: map.constructor.name,
+            hasAddLayer: typeof map.addLayer,
+            methods: Object.getOwnPropertyNames(map).filter(name => typeof map[name] === 'function')
+        });
+    }
+    
+    return null;
+}
+
+// 🔥 IMPROVED: Wait for map to be available
+async function waitForMap(maxAttempts = 50) {
+    let attempts = 0;
+    
+    while (attempts < maxAttempts) {
+        const map = getMap();
+        if (map) {
+            console.log('✅ Map found for journeys:', map.constructor.name);
+            return map;
+        }
+        
+        console.log(`⏳ Waiting for map... (${attempts + 1}/${maxAttempts})`);
+        await new Promise(resolve => setTimeout(resolve, 100));
+        attempts++;
+    }
+    
+    throw new Error('Map not available after timeout');
+}
 
 // Dynamic journey loader
 async function loadJourneys() {
     try {
         console.log('🔄 Loading journeys from CMS...');
+        
+        // 🔥 Wait for map to be available
+        const map = await waitForMap();
+        if (!map) {
+            throw new Error('No valid Leaflet map available for journey rendering');
+        }
         
         // Load from CMS using singular endpoint
         const response = await fetch('https://adenai-admin.piogino.ch/api/journey', {
@@ -52,8 +103,8 @@ async function loadJourneys() {
                     opacity: journey.opacity || 0.7,
                 });
 
-                // Check if map exists before adding
-                if (typeof map !== 'undefined' && map) {
+                // Add to map with validation
+                if (map && typeof map.addLayer === 'function') {
                     journeyLayer.addTo(map);
                     
                     // Enhanced popup with journey info
@@ -120,8 +171,10 @@ function buildPathFromSegments(segments) {
 
 function clearJourneys() {
     console.log('🧹 Clearing existing journeys...');
+    const map = getMap();
+    
     journeyLayers.forEach(layer => {
-        if (typeof map !== 'undefined' && map && map.hasLayer(layer)) {
+        if (map && map.hasLayer && map.hasLayer(layer)) {
             map.removeLayer(layer);
         }
     });
@@ -162,16 +215,25 @@ async function refreshJourneys() {
     await loadJourneys();
 }
 
-// Initialize when map is ready
-function initJourneys() {
-    if (typeof map !== 'undefined' && map) {
-        console.log('🚀 Map ready, initializing journey system...');
-        loadJourneys();
-        console.log('🚀 Journey system initialized');
-    } else {
-        console.log('⏳ Map not ready, waiting...');
-        // Wait for map to be ready
-        setTimeout(initJourneys, 500);
+// 🔥 IMPROVED: Initialize with better error handling
+async function initJourneys() {
+    try {
+        console.log('🚀 Initializing journey system...');
+        
+        // Wait for map with timeout
+        const map = await waitForMap();
+        
+        if (map) {
+            console.log('🚀 Map ready, loading journeys...');
+            await loadJourneys();
+            console.log('✅ Journey system initialized successfully');
+        } else {
+            throw new Error('Map not available for journey initialization');
+        }
+        
+    } catch (error) {
+        console.error('❌ Failed to initialize journey system:', error);
+        showJourneyError(`Initialization failed: ${error.message}`);
     }
 }
 
@@ -238,13 +300,64 @@ window.refreshJourneys = refreshJourneys;
 window.loadJourneys = loadJourneys;
 window.clearJourneys = clearJourneys;
 
-// Debug function
+// 🔥 IMPROVED: Debug function with more detailed info
 window.debugJourneys = function() {
+    const map = getMap();
+    
     console.log('🔍 Journey Debug Info:');
     console.log('- Layers loaded:', journeyLayers.length);
-    console.log('- Map available:', typeof map !== 'undefined' && !!map);
+    console.log('- Map available:', !!map);
+    console.log('- Map type:', map?.constructor?.name || 'N/A');
+    console.log('- Map methods:', {
+        addLayer: typeof map?.addLayer,
+        removeLayer: typeof map?.removeLayer,
+        hasLayer: typeof map?.hasLayer
+    });
     console.log('- Mobile mode:', isMobile());
     console.log('- Layers:', journeyLayers);
+    console.log('- Global references:', {
+        windowMap: !!window.map,
+        mapCore: !!window.mapCore,
+        adenaiMap: !!window.adenaiMap
+    });
+    
+    // Try to validate each layer
+    if (journeyLayers.length > 0) {
+        console.log('- Layer validation:');
+        journeyLayers.forEach((layer, i) => {
+            console.log(`  Layer ${i}:`, {
+                type: layer.constructor.name,
+                onMap: map ? map.hasLayer(layer) : 'unknown'
+            });
+        });
+    }
+    
+    return {
+        layersCount: journeyLayers.length,
+        mapAvailable: !!map,
+        mapValid: !!(map && typeof map.addLayer === 'function')
+    };
 };
 
-console.log('📚 Journey system script loaded successfully');
+// 🔥 NEW: Manual map detection for debugging
+window.detectMaps = function() {
+    console.log('🔍 Detecting all available maps:');
+    console.log('- window.map:', window.map, window.map?.constructor?.name);
+    console.log('- window.mapCore:', window.mapCore);
+    console.log('- window.mapCore.map:', window.mapCore?.map, window.mapCore?.map?.constructor?.name);
+    console.log('- window.adenaiMap:', window.adenaiMap);
+    console.log('- getMap() result:', getMap());
+    
+    // Look for any Leaflet map instances
+    const allMaps = [];
+    for (let key in window) {
+        if (window[key] && typeof window[key] === 'object' && window[key].constructor?.name === 'Map') {
+            allMaps.push({ key, map: window[key] });
+        }
+    }
+    console.log('- All Leaflet Map instances found:', allMaps);
+    
+    return { allMaps, currentMap: getMap() };
+};
+
+console.log('📚 Enhanced journey system script loaded successfully');

@@ -14,6 +14,9 @@ class MapCore {
         this.initializeMap();
         this.setupCoordinateDisplay();
         this.setupDragHandling();
+        
+        // 🔥 FIX: Expose map globally for journey system and other modules
+        this.exposeMapGlobally();
     }
 
     setupTheme() {
@@ -81,6 +84,31 @@ class MapCore {
 
         // Set dragging container
         this.map.dragging._draggable._container = this.map.getContainer();
+        
+        // 🔥 ADD THIS LINE - Fix for journey system
+        window.map = this.map;
+        
+        console.log('🗺️ Leaflet map initialized:', this.map);
+    }
+
+    // 🔥 NEW METHOD: Expose map globally for compatibility with existing journey system
+    exposeMapGlobally() {
+        // Set global map reference for journey.js and other modules that expect it
+        window.map = this.map;
+        
+        // Also expose mapCore globally (already done in constructor, but being explicit)
+        window.mapCore = this;
+        
+        // Add debug info
+        console.log('🌍 Global map references set:');
+        console.log('  window.map:', window.map);
+        console.log('  window.mapCore:', window.mapCore);
+        console.log('  Map has addLayer method:', typeof window.map?.addLayer === 'function');
+        
+        // Dispatch event for modules waiting for map to be ready
+        document.dispatchEvent(new CustomEvent('leafletMapReady', {
+            detail: { map: this.map, mapCore: this }
+        }));
     }
 
     setupCoordinateDisplay() {
@@ -169,10 +197,49 @@ class MapCore {
             height: this.imageHeight
         };
     }
+
+    // 🔥 NEW: Validation method to check if map is properly set up
+    validateMapSetup() {
+        const issues = [];
+        
+        if (!this.map) {
+            issues.push('Leaflet map not initialized');
+        }
+        
+        if (!window.map) {
+            issues.push('Global map reference not set');
+        }
+        
+        if (window.map && typeof window.map.addLayer !== 'function') {
+            issues.push('Global map is not a valid Leaflet map object');
+        }
+        
+        if (window.map !== this.map) {
+            issues.push('Global map reference does not match internal map');
+        }
+        
+        if (issues.length > 0) {
+            console.error('🚨 Map setup issues:', issues);
+            return false;
+        }
+        
+        console.log('✅ Map setup validation passed');
+        return true;
+    }
 }
 
 // Create global map core instance
 window.mapCore = new MapCore();
+
+// 🔥 ADDITIONAL: Validate setup after a short delay to ensure everything is ready
+setTimeout(() => {
+    if (window.mapCore) {
+        const isValid = window.mapCore.validateMapSetup();
+        if (isValid) {
+            console.log('🎉 Map core ready for journey system!');
+        }
+    }
+}, 100);
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {
