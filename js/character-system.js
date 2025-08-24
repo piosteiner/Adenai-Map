@@ -31,6 +31,23 @@ class CharacterSystem {
         });
     }
 
+    // Set up listeners on location markers to close character popups when clicked
+    setupLocationMarkerListeners(geoFeatureLayers) {
+        if (!geoFeatureLayers) return;
+        
+        geoFeatureLayers.forEach(locationData => {
+            if (locationData.layer) {
+                // Add click listener to each location marker
+                locationData.layer.on('click', () => {
+                    this.closeCurrentCharacterPopup();
+                    console.log('🎯 Character popup closed due to location marker click');
+                });
+            }
+        });
+        
+        console.log(`🎯 Set up close listeners on ${geoFeatureLayers.length} location markers`);
+    }
+
     async loadCharacters() {
         try {
             console.log('👥 Loading characters from server...');
@@ -89,7 +106,7 @@ class CharacterSystem {
         return this.characterData;
     }
 
-    // Enhanced focus character method with proper centering
+    // Enhanced focus character method with detailed post-centering analysis
     focusCharacter(characterName) {
         const character = this.getCharacterByName(characterName);
         if (!character || !character.coordinates) {
@@ -103,68 +120,104 @@ class CharacterSystem {
             return false;
         }
 
-        // Use the EXACT same coordinate logic as the original addCharactersToMap method
+        // Simple centering with detailed post-analysis of visible area
         const [lng, lat] = character.coordinates;
+        const targetLatLng = L.latLng(lat, lng);
         
-        // Add small random offset so multiple characters at same location don't overlap exactly
-        const offsetLat = lat + (Math.random() - 0.5) * 20;
-        const offsetLng = lng + (Math.random() - 0.5) * 20;
+        console.log(`🎯 Attempting to center "${characterName}" at coordinates [${lng}, ${lat}]`);
         
-        const latlng = L.latLng(offsetLat, offsetLng);
-
-        // Calculate the actual center of the visible area (accounting for panel)
-        const size = map.getSize();
+        // Simple centering attempt
+        const targetZoom = Math.max(map.getZoom(), 1.5);
+        map.setView(targetLatLng, targetZoom, { animate: true, duration: 0.8 });
         
-        // Check if character panel is open and adjust for it
-        const characterPanel = document.getElementById('character-panel');
-        const panelIsOpen = characterPanel?.classList?.contains('open');
-        
-        let leftOverlay = 0, rightOverlay = 0;
-        if (panelIsOpen && characterPanel) {
-            const panelWidth = characterPanel.getBoundingClientRect?.().width || 0;
-            rightOverlay = panelWidth; // Character panel is on the right
-        }
-
-        const visibleWidth = Math.max(0, size.x - leftOverlay - rightOverlay);
-        const visibleHeight = size.y;
-
-        // Calculate the center point of the visible area
-        const centerX = leftOverlay + (visibleWidth / 2);
-        const centerY = visibleHeight / 2;
-
-        // Get current map bounds and center
-        const mapCenter = map.getCenter();
-        const mapCenterPixel = map.latLngToContainerPoint(mapCenter);
-        
-        // Calculate offset needed to center the character
-        const targetPixel = map.latLngToContainerPoint(latlng);
-        const offsetX = centerX - targetPixel.x;
-        const offsetY = centerY - targetPixel.y;
-        
-        // Apply the offset to move the character to center
-        const newCenterPixel = L.point(mapCenterPixel.x + offsetX, mapCenterPixel.y + offsetY);
-        const newCenter = map.containerPointToLatLng(newCenterPixel);
-
-        // Ensure a minimum zoom level for better character visibility
-        const currentZoom = map.getZoom();
-        const minZoomForCharacters = 0.5; // Adjust this value as needed
-        
-        if (currentZoom < minZoomForCharacters) {
-            // Zoom and center in one smooth motion
-            map.setView(newCenter, minZoomForCharacters, { animate: true, duration: 0.8 });
-        } else {
-            // Just center the character
-            map.panTo(newCenter, { animate: true, duration: 0.8 });
-        }
+        // Detailed analysis after centering
+        setTimeout(() => {
+            console.log(`\n📊 POST-CENTERING ANALYSIS for "${characterName}":`);
+            
+            // 1. Get current visible bounds
+            const visibleBounds = map.getBounds();
+            const visibleCenter = visibleBounds.getCenter();
+            
+            console.log(`🗺️ VISIBLE MAP AREA:`);
+            console.log(`   SW Corner: [${visibleBounds.getSouthWest().lat.toFixed(2)}, ${visibleBounds.getSouthWest().lng.toFixed(2)}]`);
+            console.log(`   NE Corner: [${visibleBounds.getNorthEast().lat.toFixed(2)}, ${visibleBounds.getNorthEast().lng.toFixed(2)}]`);
+            console.log(`   Map Center: [${visibleCenter.lat.toFixed(2)}, ${visibleCenter.lng.toFixed(2)}]`);
+            console.log(`   Character: [${lat.toFixed(2)}, ${lng.toFixed(2)}]`);
+            
+            // 2. Calculate bounds dimensions
+            const boundsWidth = visibleBounds.getEast() - visibleBounds.getWest();
+            const boundsHeight = visibleBounds.getNorth() - visibleBounds.getSouth();
+            
+            console.log(`📏 BOUNDS DIMENSIONS:`);
+            console.log(`   Width: ${boundsWidth.toFixed(2)} map units`);
+            console.log(`   Height: ${boundsHeight.toFixed(2)} map units`);
+            
+            // 3. Calculate inner 30% zone
+            const inner30PercentWidth = boundsWidth * 0.3;
+            const inner30PercentHeight = boundsHeight * 0.3;
+            
+            const inner30Bounds = {
+                west: visibleCenter.lng - (inner30PercentWidth / 2),
+                east: visibleCenter.lng + (inner30PercentWidth / 2),
+                south: visibleCenter.lat - (inner30PercentHeight / 2),
+                north: visibleCenter.lat + (inner30PercentHeight / 2)
+            };
+            
+            console.log(`🎯 INNER 30% ZONE:`);
+            console.log(`   West: ${inner30Bounds.west.toFixed(2)}, East: ${inner30Bounds.east.toFixed(2)}`);
+            console.log(`   South: ${inner30Bounds.south.toFixed(2)}, North: ${inner30Bounds.north.toFixed(2)}`);
+            
+            // 4. Check if character is within inner 30%
+            const inInner30Horizontal = (lng >= inner30Bounds.west && lng <= inner30Bounds.east);
+            const inInner30Vertical = (lat >= inner30Bounds.south && lat <= inner30Bounds.north);
+            const inInner30 = inInner30Horizontal && inInner30Vertical;
+            
+            console.log(`✅ CHARACTER POSITION ANALYSIS:`);
+            console.log(`   In inner 30% horizontally: ${inInner30Horizontal}`);
+            console.log(`   In inner 30% vertically: ${inInner30Vertical}`);
+            console.log(`   In inner 30% overall: ${inInner30}`);
+            
+            // 5. Calculate distances from center
+            const distanceFromMapCenter = visibleCenter.distanceTo(targetLatLng);
+            const percentageFromCenter = (distanceFromMapCenter / (Math.max(boundsWidth, boundsHeight) / 2)) * 100;
+            
+            console.log(`📐 DISTANCE FROM CENTER:`);
+            console.log(`   Distance: ${distanceFromMapCenter.toFixed(2)} map units`);
+            console.log(`   Percentage from center: ${percentageFromCenter.toFixed(1)}%`);
+            
+            // 6. Screen pixel analysis
+            const characterPixel = map.latLngToContainerPoint(targetLatLng);
+            const mapContainer = map.getContainer();
+            const containerRect = mapContainer.getBoundingClientRect();
+            
+            console.log(`👁️ SCREEN PIXEL ANALYSIS:`);
+            console.log(`   Character pixel: [${characterPixel.x}, ${characterPixel.y}]`);
+            console.log(`   Screen size: ${containerRect.width}x${containerRect.height}`);
+            console.log(`   Screen center: [${containerRect.width/2}, ${containerRect.height/2}]`);
+            
+            const pixelOffsetX = Math.abs(characterPixel.x - containerRect.width/2);
+            const pixelOffsetY = Math.abs(characterPixel.y - containerRect.height/2);
+            console.log(`   Pixel offset from screen center: [${pixelOffsetX.toFixed(1)}, ${pixelOffsetY.toFixed(1)}]`);
+            
+            // 7. Overall assessment
+            if (inInner30 && pixelOffsetX < 100 && pixelOffsetY < 100) {
+                console.log(`\n🎉 SUCCESS: Character "${characterName}" is properly centered!`);
+            } else {
+                console.log(`\n❌ ISSUE: Character "${characterName}" is NOT properly centered:`);
+                if (!inInner30) console.log(`   - Not in inner 30% of map bounds`);
+                if (pixelOffsetX >= 100 || pixelOffsetY >= 100) console.log(`   - Too far from screen center in pixels`);
+            }
+            
+        }, 1000);
 
         // Create and show a temporary popup for the character
-        this.showCharacterPopup(character, latlng);
+        this.showCharacterPopup(character, targetLatLng);
 
-        console.log(`🎯 Focused on character "${characterName}" at [${lng}, ${lat}] - positioned in inner 30% of screen`);
+        console.log(`🎯 Focused on character "${characterName}" - positioned in inner 30% of screen`);
         return true;
     }
 
-    // Create and show a temporary popup for the focused character
+    // Create and show a persistent popup for the focused character
     showCharacterPopup(character, latlng) {
         const map = window.mapCore.getMap();
         
@@ -203,23 +256,6 @@ class CharacterSystem {
                 console.log('🎯 Character popup reference cleaned up');
             });
         }
-    }
-
-    // Set up listeners on location markers to close character popups when clicked
-    setupLocationMarkerListeners(geoFeatureLayers) {
-        if (!geoFeatureLayers) return;
-        
-        geoFeatureLayers.forEach(locationData => {
-            if (locationData.layer) {
-                // Add click listener to each location marker
-                locationData.layer.on('click', () => {
-                    this.closeCurrentCharacterPopup();
-                    console.log('🎯 Character popup closed due to location marker click');
-                });
-            }
-        });
-        
-        console.log(`🎯 Set up close listeners on ${geoFeatureLayers.length} location markers`);
     }
 
     // Public method to close current character popup (can be called by other systems)
