@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "8bbc501211ef7a70405deaa86c825003ba0ffe06",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-24T23:29:35.642Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-24T23:29:35.642Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vsuzh (by gm) - updated title"
+    },
+    {
       "commitSha": "c53b84a54a08fbf88ff15c05cac6863558c964b9",
       "action": "update",
       "type": "character",
@@ -782,5 +795,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-24T23:29:02.311Z"
+  "lastUpdated": "2025-08-24T23:29:35.642Z"
 }
