@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Adenai Map</title>
-  <meta property="og:title" content="Adenai Map — DnD Kampagne VsuzH">
+  <meta property="og:title" content="Adenai Map – DnD Kampagne VsuzH">
   <meta property="og:description" content="Karte der Welt Adenai, mit dem Abenteuerpfad der Gruppe VsuzH.">
   <meta property="og:image" content="icons/uwu_1.png">
   
@@ -21,7 +21,7 @@
 
 <body>
   <div id="map"></div>
-  <div id="coords">X: —, Y: —</div>
+  <div id="coords">X: –, Y: –</div>
 
   <!-- Search Container -->
   <div id="search-container">
@@ -65,26 +65,32 @@
     </div>
   </noscript>
 
-  <!-- External Dependencies -->
+  <!-- STEP 1: External Dependencies (Core Libraries) -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="js/leaflet.curve.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/bbecquet/Leaflet.PolylineDecorator@master/dist/leaflet.polylineDecorator.min.js"></script>
 
-  <!-- Gallery System -->
+  <!-- STEP 2: Gallery System -->
   <script src="https://unpkg.com/@panzoom/panzoom/dist/panzoom.min.js"></script>
   <script src="js/gallery.js"></script>
 
-  <!-- Legacy Systems (consider removing if not needed) -->
-  <script src="js/journey.js?v=0.25.05.16.1306"></script>
+  <!-- STEP 3: Core Map System (MUST load first) -->
+  <script src="js/map-core.js?v=1.1.0"></script>
+
+  <!-- STEP 4: Legacy Icons System (before other systems) -->
   <script src="js/icons.js?v=0.25.05.16.1306"></script>
 
-  <!-- Modern Adenai System (dependency order) -->
-  <script src="js/map-core.js?v=1.1.0"></script>
+  <!-- STEP 5: Modern Adenai Systems (after map core) -->
   <script src="js/character-system.js?v=1.1.0"></script>
   <script src="js/movement-system.js?v=1.1.0"></script>
   <script src="js/location-system.js?v=1.1.0"></script>
   <script src="js/search-system.js?v=1.1.0"></script>
   <script src="js/character-panel.js?v=1.1.0"></script>
+
+  <!-- STEP 6: Journey System (AFTER map and systems are initialized) -->
+  <script src="js/journey.js?v=0.25.05.16.1306"></script>
+
+  <!-- STEP 7: Main Application (Last) -->
   <script src="js/main.js?v=1.1.0"></script>
 </body>
 
