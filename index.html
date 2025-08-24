@@ -13,7 +13,7 @@
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <!-- My styles CSS -->
+  <!-- My styles CSS (now includes character panel styles) -->
   <link rel="stylesheet" href="css/styles.css">
   <!-- My gallery CSS -->
   <link rel="stylesheet" href="css/gallery.css">
@@ -23,20 +23,23 @@
   <div id="map"></div>
   <div id="coords">X: —, Y: —</div>
 
+  <!-- Search Container -->
   <div id="search-container">
     <input type="text" id="searchBox" placeholder="Begriff suchen..." />
     <div id="resultsDropdown"></div>
   </div>
 
-  <!-- Character Browser Panel -->
+  <!-- Character Panel -->
   <div id="character-panel" class="character-panel">
     <div class="panel-header">
       <h3>👥 Characters</h3>
     </div>
     
     <div class="panel-content">
+      <!-- Movement controls and search bar will be injected here by JavaScript -->
+      
       <div class="character-grid" id="character-grid">
-        <!-- Characters will be populated here -->
+        <!-- Character cards will be populated here by JavaScript -->
       </div>
     </div>
   </div>
@@ -44,6 +47,7 @@
   <!-- Character Panel Toggle Button -->
   <button id="toggle-panel" title="Toggle Character Panel">📖</button>
 
+  <!-- No JavaScript fallback -->
   <noscript>
     <div style="
       position: absolute;
@@ -61,27 +65,27 @@
     </div>
   </noscript>
 
-  <!-- Leaflet and Dependencies -->
+  <!-- External Dependencies -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="js/leaflet.curve.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/bbecquet/Leaflet.PolylineDecorator@master/dist/leaflet.polylineDecorator.min.js"></script>
 
-  <!-- Gallery Dependencies -->
+  <!-- Gallery System -->
   <script src="https://unpkg.com/@panzoom/panzoom/dist/panzoom.min.js"></script>
   <script src="js/gallery.js"></script>
 
-  <!-- Legacy Features (Optional - can be removed if not needed) -->
+  <!-- Legacy Systems (consider removing if not needed) -->
   <script src="js/journey.js?v=0.25.05.16.1306"></script>
   <script src="js/icons.js?v=0.25.05.16.1306"></script>
 
-  <!-- Modular Adenai System (Load in dependency order) -->
-  <script src="js/map-core.js?v=1.0.0"></script>
-  <script src="js/character-system.js?v=1.0.0"></script>
-  <script src="js/movement-system.js?v=1.0.0"></script>
-  <script src="js/location-system.js?v=1.0.0"></script>
-  <script src="js/search-system.js?v=1.0.0"></script>
-  <script src="js/character-panel.js?v=1.0.0"></script>
-  <script src="js/main.js?v=1.0.0"></script>
+  <!-- Modern Adenai System (dependency order) -->
+  <script src="js/map-core.js?v=1.1.0"></script>
+  <script src="js/character-system.js?v=1.1.0"></script>
+  <script src="js/movement-system.js?v=1.1.0"></script>
+  <script src="js/location-system.js?v=1.1.0"></script>
+  <script src="js/search-system.js?v=1.1.0"></script>
+  <script src="js/character-panel.js?v=1.1.0"></script>
+  <script src="js/main.js?v=1.1.0"></script>
 </body>
 
 </html>
