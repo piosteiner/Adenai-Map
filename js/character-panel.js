@@ -63,17 +63,8 @@ class CharacterPanel {
         const panelContent = this.panel.querySelector('.panel-content');
         if (!panelContent) return;
 
-        // Add search bar and always-visible movement controls at the top
+        // Add always-visible movement controls at the top
         const controlsHtml = `
-            <!-- Search Bar Section -->
-            <div class="character-search-section">
-                <input type="text" 
-                       id="character-search-input" 
-                       class="character-search-input" 
-                       placeholder="🔍 Search characters (name, location, title...)"
-                       onkeyup="window.characterPanel.filterCharactersBySearch()">
-            </div>
-            
             <!-- Always Visible Movement Controls -->
             <div class="integrated-movement-section">
                 <div class="movement-section-header-static">
@@ -96,6 +87,15 @@ class CharacterPanel {
                         <button id="integrated-clear-date-filter" class="btn-secondary movement-action-btn">Clear Filter</button>
                     </div>
                 </div>
+            </div>
+
+            <!-- Search Bar Section - MOVED HERE -->
+            <div class="character-search-section">
+                <input type="text" 
+                       id="character-search-input" 
+                       class="character-search-input" 
+                       placeholder="🔍 Search characters (name, location, title...)"
+                       onkeyup="window.characterPanel.filterCharactersBySearch()">
             </div>
         `;
 
@@ -343,7 +343,7 @@ class CharacterPanel {
 
     addIntegratedPanelCSS() {
         const integratedCSS = `
-            /* Character Search Section */
+            /* Character Search Section - Now positioned after date controls */
             .character-search-section {
                 margin-bottom: 15px;
                 padding-bottom: 15px;
@@ -373,7 +373,7 @@ class CharacterPanel {
                 opacity: 0.7;
             }
 
-            /* Static Movement Controls Section */
+            /* Static Movement Controls Section - Now at the top */
             .integrated-movement-section {
                 margin-bottom: 20px;
                 border-bottom: 1px solid var(--dropdown-border);
@@ -575,12 +575,13 @@ class CharacterPanel {
             .relationship-badge.relationship-hostile { background: #FFEBEE; color: #C62828; }
             .relationship-badge.relationship-enemy { background: #FFEBEE; color: #B71C1C; }
 
-            /* Date Range Controls */
+            /* Date Range Controls - Now positioned above search bar */
             .integrated-timeline-controls {
                 padding: 12px;
                 background: var(--dropdown-bg);
                 border-radius: 6px;
                 border: 1px solid var(--dropdown-border);
+                margin-bottom: 15px; /* Added margin since search bar comes after */
             }
 
             .movement-label {
