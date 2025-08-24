@@ -182,7 +182,7 @@ class JourneyManager {
         }
     }
 
-    // Enhanced Map Initialization with Robust Error Handling
+    // 🔥 ENHANCED MAP INITIALIZATION WITH CORRECT DIMENSIONS & IMAGE PATHS
     initializeMap() {
         const mapContainer = document.getElementById('journeys-map');
         if (!mapContainer) {
@@ -196,7 +196,7 @@ class JourneyManager {
         }
 
         try {
-            this.log('🗺️ Initializing map...');
+            this.log('🗺️ Initializing map with correct 4:3 aspect ratio...');
             
             // Force container to be visible and properly sized
             const container = mapContainer.parentElement;
@@ -210,6 +210,7 @@ class JourneyManager {
                 throw new Error('Leaflet library not loaded - check script includes');
             }
             
+            // 🔥 CORRECTED: Use Simple CRS like main map with correct transformation
             this.map = L.map('journeys-map', {
                 crs: L.CRS.Simple,
                 minZoom: -2,
@@ -218,22 +219,12 @@ class JourneyManager {
                 attributionControl: false
             });
 
-            const bounds = [[0, 0], [2500, 1500]];
-            const imagePath = 'images/adenai_map_01.jpg';
+            // 🔥 CORRECTED: Use exact same dimensions as main map (2048x1536)
+            // Note: Leaflet uses [lat, lng] which translates to [height, width] for Simple CRS
+            const bounds = [[0, 0], [1536, 2048]]; // [height, width] - matches your main map
             
-            const imageOverlay = L.imageOverlay(imagePath, bounds).addTo(this.map);
-            
-            // Handle image load events using Leaflet's event system
-            imageOverlay.on('load', () => {
-                this.log(`✅ Map image loaded successfully: ${imagePath}`);
-                // Force map resize after image loads
-                setTimeout(() => this.forceMapResize(), 100);
-            });
-            
-            imageOverlay.on('error', () => {
-                console.warn(`⚠️ Failed to load map image: ${imagePath}`);
-                this.showNotification(`Map image not found: ${imagePath}`, 'warning');
-            });
+            // 🔥 CORRECTED: Try multiple image paths to find the correct one
+            this.loadMapImage(bounds);
 
             this.map.fitBounds(bounds);
             
@@ -250,7 +241,7 @@ class JourneyManager {
             // Setup resize observer for dynamic resizing
             this.setupMapResizeObserver();
 
-            this.log('✅ Journey map initialized successfully');
+            this.log('✅ Journey map initialized successfully with 4:3 aspect ratio');
         } catch (error) {
             console.error('❌ Error initializing map:', error);
             this.showError(`Failed to initialize map: ${error.message}`);
@@ -258,11 +249,124 @@ class JourneyManager {
         }
     }
 
-    // Enhanced Map Resize Function with Multiple Strategies
+    // 🔥 NEW: Intelligent image loading with multiple path attempts
+    loadMapImage(bounds) {
+        const imagePaths = [
+            'images/adenai_map_01.jpg',           // Same directory as main map
+            '../images/adenai_map_01.jpg',       // Up one level
+            '/images/adenai_map_01.jpg',         // Root path
+            'adenai_map_01.jpg',                 // Current directory
+            '../adenai_map_01.jpg',              // Up one level, root
+        ];
+        
+        let pathIndex = 0;
+        
+        const tryLoadImage = () => {
+            if (pathIndex >= imagePaths.length) {
+                this.log('⚠️ All image paths failed, using placeholder');
+                this.createPlaceholderMap(bounds);
+                return;
+            }
+            
+            const imagePath = imagePaths[pathIndex];
+            this.log(`🔍 Trying image path ${pathIndex + 1}/${imagePaths.length}: ${imagePath}`);
+            
+            const imageOverlay = L.imageOverlay(imagePath, bounds);
+            
+            // Handle successful load
+            imageOverlay.on('load', () => {
+                this.log(`✅ Map image loaded successfully: ${imagePath}`);
+                imageOverlay.addTo(this.map);
+                
+                // Force map resize after image loads
+                setTimeout(() => this.forceMapResize(), 100);
+            });
+            
+            // Handle failed load
+            imageOverlay.on('error', () => {
+                this.log(`❌ Failed to load: ${imagePath}`);
+                pathIndex++;
+                tryLoadImage();
+            });
+            
+            // Start the load attempt
+            imageOverlay.addTo(this.map);
+            
+            // Timeout fallback - if no load/error event fires within 3 seconds
+            setTimeout(() => {
+                if (this.map.hasLayer(imageOverlay)) {
+                    this.map.removeLayer(imageOverlay);
+                    pathIndex++;
+                    tryLoadImage();
+                }
+            }, 3000);
+        };
+        
+        tryLoadImage();
+    }
+
+    // 🔥 NEW: Create placeholder when image loading fails
+    createPlaceholderMap(bounds) {
+        this.log('📝 Creating placeholder map background');
+        
+        // Create a simple colored background with grid
+        const placeholderOverlay = L.imageOverlay(
+            'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+                <svg width="2048" height="1536" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#ccc" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="#f0f8ff"/>
+                    <rect width="100%" height="100%" fill="url(#grid)"/>
+                    <text x="1024" y="768" text-anchor="middle" font-family="Arial" font-size="48" fill="#666">
+                        Adenai Map Placeholder
+                    </text>
+                    <text x="1024" y="820" text-anchor="middle" font-family="Arial" font-size="24" fill="#999">
+                        Click to add journey segments
+                    </text>
+                </svg>
+            `),
+            bounds
+        ).addTo(this.map);
+        
+        this.showNotification('Map image not found - using placeholder', 'warning');
+        
+        // Still force resize
+        setTimeout(() => this.forceMapResize(), 100);
+    }
+
+    // 🔥 ENHANCED MAP RESIZE WITH ASPECT RATIO VALIDATION
     forceMapResize() {
         if (!this.map) {
             this.log('⚠️ Cannot resize map - map not initialized');
             return;
+        }
+        
+        // Ensure container is properly sized and has correct aspect ratio
+        const container = document.getElementById('journeys-map');
+        if (container) {
+            // Force recalculation of container dimensions
+            const parent = container.parentElement;
+            if (parent) {
+                const computedStyle = window.getComputedStyle(parent);
+                const width = parseFloat(computedStyle.width);
+                const height = parseFloat(computedStyle.height);
+                const ratio = width / height;
+                const expectedRatio = 4/3; // 1.333...
+                
+                this.log(`📏 Container dimensions: ${width.toFixed(0)}px × ${height.toFixed(0)}px`);
+                this.log(`📐 Aspect ratio: ${ratio.toFixed(3)} (expected: ${expectedRatio.toFixed(3)})`);
+                
+                // Validate aspect ratio
+                if (Math.abs(ratio - expectedRatio) > 0.1) {
+                    console.warn(`⚠️ Container aspect ratio ${ratio.toFixed(2)} doesn't match expected 4:3 ratio (${expectedRatio.toFixed(2)})`);
+                    console.warn('💡 Check journey.css - map container should have aspect-ratio: 4/3 or padding-bottom: 75%');
+                } else {
+                    this.log('✅ Container aspect ratio is correct');
+                }
+            }
         }
         
         // Multiple resize attempts with different timings for maximum compatibility
@@ -271,11 +375,50 @@ class JourneyManager {
         resizeTimes.forEach((delay, index) => {
             setTimeout(() => {
                 if (this.map) {
-                    this.map.invalidateSize(true);
+                    this.map.invalidateSize({
+                        animate: false,
+                        pan: false,
+                        reset: true
+                    });
                     this.log(`🔄 Map resize attempt ${index + 1} at ${delay}ms`);
+                    
+                    // On final attempt, log success and validate
+                    if (index === resizeTimes.length - 1) {
+                        this.log('✅ Map resize sequence completed');
+                        this.validateMapState();
+                    }
                 }
             }, delay);
         });
+    }
+
+    // 🔥 NEW: Validate map state after resize
+    validateMapState() {
+        if (!this.map) return;
+        
+        try {
+            const mapSize = this.map.getSize();
+            const mapBounds = this.map.getBounds();
+            
+            this.log('🔍 Map validation:');
+            this.log(`  - Size: ${mapSize.x}×${mapSize.y}px`);
+            this.log(`  - Bounds: ${JSON.stringify(mapBounds)}`);
+            this.log(`  - Zoom: ${this.map.getZoom()}`);
+            this.log(`  - Center: ${JSON.stringify(this.map.getCenter())}`);
+            
+            // Check if dimensions make sense
+            const aspectRatio = mapSize.x / mapSize.y;
+            const expectedRatio = 4/3;
+            
+            if (Math.abs(aspectRatio - expectedRatio) < 0.1) {
+                this.log('✅ Map aspect ratio is correct');
+            } else {
+                console.warn(`⚠️ Map aspect ratio ${aspectRatio.toFixed(2)} differs from expected ${expectedRatio.toFixed(2)}`);
+            }
+            
+        } catch (error) {
+            console.warn('⚠️ Could not validate map state:', error.message);
+        }
     }
 
     // Setup ResizeObserver for Dynamic Map Sizing
@@ -468,7 +611,7 @@ class JourneyManager {
             }
         }
         
-        this.log(`📍 Built path data with ${latlngs.length} points`);
+        this.log(`🔧 Built path data with ${latlngs.length} points`);
         return latlngs;
     }
 
@@ -893,7 +1036,9 @@ class JourneyManager {
             resizeObservers: this.resizeObservers.size,
             apiBaseUrl: this.apiBaseUrl,
             leafletLoaded: typeof L !== 'undefined',
-            mapContainer: !!document.getElementById('journeys-map')
+            mapContainer: !!document.getElementById('journeys-map'),
+            mapSize: this.map ? this.map.getSize() : null,
+            mapBounds: this.map ? this.map.getBounds() : null
         };
     }
 }
