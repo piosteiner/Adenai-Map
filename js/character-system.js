@@ -106,7 +106,7 @@ class CharacterSystem {
         return this.characterData;
     }
 
-    // Enhanced focus character method with detailed post-centering analysis
+    // Enhanced focus character method with robust centering for custom CRS
     focusCharacter(characterName) {
         const character = this.getCharacterByName(characterName);
         if (!character || !character.coordinates) {
@@ -120,104 +120,194 @@ class CharacterSystem {
             return false;
         }
 
-        // Simple centering with detailed post-analysis of visible area
         const [lng, lat] = character.coordinates;
         const targetLatLng = L.latLng(lat, lng);
         
-        console.log(`🎯 Attempting to center "${characterName}" at coordinates [${lng}, ${lat}]`);
-        
-        // Simple centering attempt
-        const targetZoom = Math.max(map.getZoom(), 1.5);
-        map.setView(targetLatLng, targetZoom, { animate: true, duration: 0.8 });
-        
-        // Detailed analysis after centering
-        setTimeout(() => {
-            console.log(`\n📊 POST-CENTERING ANALYSIS for "${characterName}":`);
-            
-            // 1. Get current visible bounds
-            const visibleBounds = map.getBounds();
-            const visibleCenter = visibleBounds.getCenter();
-            
-            console.log(`🗺️ VISIBLE MAP AREA:`);
-            console.log(`   SW Corner: [${visibleBounds.getSouthWest().lat.toFixed(2)}, ${visibleBounds.getSouthWest().lng.toFixed(2)}]`);
-            console.log(`   NE Corner: [${visibleBounds.getNorthEast().lat.toFixed(2)}, ${visibleBounds.getNorthEast().lng.toFixed(2)}]`);
-            console.log(`   Map Center: [${visibleCenter.lat.toFixed(2)}, ${visibleCenter.lng.toFixed(2)}]`);
-            console.log(`   Character: [${lat.toFixed(2)}, ${lng.toFixed(2)}]`);
-            
-            // 2. Calculate bounds dimensions
-            const boundsWidth = visibleBounds.getEast() - visibleBounds.getWest();
-            const boundsHeight = visibleBounds.getNorth() - visibleBounds.getSouth();
-            
-            console.log(`📏 BOUNDS DIMENSIONS:`);
-            console.log(`   Width: ${boundsWidth.toFixed(2)} map units`);
-            console.log(`   Height: ${boundsHeight.toFixed(2)} map units`);
-            
-            // 3. Calculate inner 30% zone
-            const inner30PercentWidth = boundsWidth * 0.3;
-            const inner30PercentHeight = boundsHeight * 0.3;
-            
-            const inner30Bounds = {
-                west: visibleCenter.lng - (inner30PercentWidth / 2),
-                east: visibleCenter.lng + (inner30PercentWidth / 2),
-                south: visibleCenter.lat - (inner30PercentHeight / 2),
-                north: visibleCenter.lat + (inner30PercentHeight / 2)
-            };
-            
-            console.log(`🎯 INNER 30% ZONE:`);
-            console.log(`   West: ${inner30Bounds.west.toFixed(2)}, East: ${inner30Bounds.east.toFixed(2)}`);
-            console.log(`   South: ${inner30Bounds.south.toFixed(2)}, North: ${inner30Bounds.north.toFixed(2)}`);
-            
-            // 4. Check if character is within inner 30%
-            const inInner30Horizontal = (lng >= inner30Bounds.west && lng <= inner30Bounds.east);
-            const inInner30Vertical = (lat >= inner30Bounds.south && lat <= inner30Bounds.north);
-            const inInner30 = inInner30Horizontal && inInner30Vertical;
-            
-            console.log(`✅ CHARACTER POSITION ANALYSIS:`);
-            console.log(`   In inner 30% horizontally: ${inInner30Horizontal}`);
-            console.log(`   In inner 30% vertically: ${inInner30Vertical}`);
-            console.log(`   In inner 30% overall: ${inInner30}`);
-            
-            // 5. Calculate distances from center
-            const distanceFromMapCenter = visibleCenter.distanceTo(targetLatLng);
-            const percentageFromCenter = (distanceFromMapCenter / (Math.max(boundsWidth, boundsHeight) / 2)) * 100;
-            
-            console.log(`📐 DISTANCE FROM CENTER:`);
-            console.log(`   Distance: ${distanceFromMapCenter.toFixed(2)} map units`);
-            console.log(`   Percentage from center: ${percentageFromCenter.toFixed(1)}%`);
-            
-            // 6. Screen pixel analysis
-            const characterPixel = map.latLngToContainerPoint(targetLatLng);
-            const mapContainer = map.getContainer();
-            const containerRect = mapContainer.getBoundingClientRect();
-            
-            console.log(`👁️ SCREEN PIXEL ANALYSIS:`);
-            console.log(`   Character pixel: [${characterPixel.x}, ${characterPixel.y}]`);
-            console.log(`   Screen size: ${containerRect.width}x${containerRect.height}`);
-            console.log(`   Screen center: [${containerRect.width/2}, ${containerRect.height/2}]`);
-            
-            const pixelOffsetX = Math.abs(characterPixel.x - containerRect.width/2);
-            const pixelOffsetY = Math.abs(characterPixel.y - containerRect.height/2);
-            console.log(`   Pixel offset from screen center: [${pixelOffsetX.toFixed(1)}, ${pixelOffsetY.toFixed(1)}]`);
-            
-            // 7. Overall assessment
-            if (inInner30 && pixelOffsetX < 100 && pixelOffsetY < 100) {
-                console.log(`\n🎉 SUCCESS: Character "${characterName}" is properly centered!`);
-            } else {
-                console.log(`\n❌ ISSUE: Character "${characterName}" is NOT properly centered:`);
-                if (!inInner30) console.log(`   - Not in inner 30% of map bounds`);
-                if (pixelOffsetX >= 100 || pixelOffsetY >= 100) console.log(`   - Too far from screen center in pixels`);
-            }
-            
-        }, 1000);
+        console.log(`🎯 Focusing on "${characterName}" at coordinates [${lng}, ${lat}]`);
 
-        // Create and show a temporary popup for the character
-        this.showCharacterPopup(character, targetLatLng);
-
-        console.log(`🎯 Focused on character "${characterName}" - positioned in inner 30% of screen`);
+        // SOLUTION: Multi-step centering approach that works with custom CRS
+        this.performRobustCentering(map, targetLatLng, characterName, character);
+        
         return true;
     }
 
-    // Create and show a persistent popup for the focused character
+    // New robust centering method
+    performRobustCentering(map, targetLatLng, characterName, character) {
+        // Step 1: Calculate appropriate zoom level for character panel
+        const isCharacterPanelOpen = window.characterPanel?.isOpen() || false;
+        const isMobile = window.innerWidth <= 768;
+        
+        // Dynamic zoom based on current zoom, but with bounds
+        let targetZoom = map.getZoom();
+        
+        // Ensure minimum useful zoom level
+        if (targetZoom < 0.5) {
+            targetZoom = 1.2;
+        } else if (targetZoom > 2.5) {
+            targetZoom = 2.0; // Prevent being too zoomed in
+        } else {
+            targetZoom = Math.max(targetZoom, 1.0);
+        }
+
+        console.log(`📍 Current zoom: ${map.getZoom().toFixed(2)}, Target zoom: ${targetZoom.toFixed(2)}`);
+
+        // Step 2: Account for character panel offset (pan slightly left when panel open)
+        let adjustedTarget = targetLatLng;
+        if (isCharacterPanelOpen && !isMobile) {
+            // Calculate offset to center character in visible area (left of panel)
+            const containerSize = map.getSize();
+            const panelWidth = 350; // Character panel width
+            const visibleWidth = containerSize.x - panelWidth;
+            
+            // Calculate how much to shift left (in pixels)
+            const offsetPixels = panelWidth / 2; // Half panel width
+            
+            // Convert pixel offset to map coordinates
+            const currentCenter = map.getCenter();
+            const pixelCenter = map.latLngToContainerPoint(currentCenter);
+            const offsetPoint = L.point(pixelCenter.x - offsetPixels, pixelCenter.y);
+            const offsetLatLng = map.containerPointToLatLng(offsetPoint);
+            
+            // Calculate the difference and apply it to target
+            const lngOffset = offsetLatLng.lng - currentCenter.lng;
+            adjustedTarget = L.latLng(targetLatLng.lat, targetLatLng.lng + lngOffset);
+            
+            console.log(`📱 Panel open: adjusting target by ${lngOffset.toFixed(2)} lng units`);
+        }
+
+        // Step 3: Robust centering approach
+        this.executeCenteringStrategy(map, adjustedTarget, targetZoom, characterName, character);
+    }
+
+    // Execute centering with multiple fallback strategies
+    executeCenteringStrategy(map, targetLatLng, targetZoom, characterName, character) {
+        // Strategy 1: Standard setView (works most of the time)
+        try {
+            map.setView(targetLatLng, targetZoom, { 
+                animate: true, 
+                duration: 0.8,
+                easeLinearity: 0.1
+            });
+            
+            // Verify centering after animation
+            setTimeout(() => {
+                this.verifyCentering(map, targetLatLng, characterName, character, 'standard');
+            }, 1000);
+            
+        } catch (error) {
+            console.warn(`⚠️ Standard setView failed: ${error.message}`);
+            this.fallbackCenteringStrategy(map, targetLatLng, targetZoom, characterName, character);
+        }
+    }
+
+    // Fallback centering strategies
+    fallbackCenteringStrategy(map, targetLatLng, targetZoom, characterName, character) {
+        console.log(`🔄 Using fallback centering for "${characterName}"`);
+        
+        // Strategy 2: Two-step approach (pan then zoom)
+        try {
+            // First, pan without changing zoom
+            map.panTo(targetLatLng, { 
+                animate: true, 
+                duration: 0.4,
+                easeLinearity: 0.1
+            });
+            
+            // Then adjust zoom after panning
+            setTimeout(() => {
+                map.setZoom(targetZoom, {
+                    animate: true,
+                    duration: 0.4
+                });
+                
+                // Final verification
+                setTimeout(() => {
+                    this.verifyCentering(map, targetLatLng, characterName, character, 'two-step');
+                }, 600);
+                
+            }, 500);
+            
+        } catch (error) {
+            console.warn(`⚠️ Two-step centering failed: ${error.message}`);
+            this.emergencyCenteringStrategy(map, targetLatLng, targetZoom, characterName, character);
+        }
+    }
+
+    // Emergency centering strategy
+    emergencyCenteringStrategy(map, targetLatLng, targetZoom, characterName, character) {
+        console.log(`🚨 Using emergency centering for "${characterName}"`);
+        
+        // Strategy 3: Force refresh map state then center
+        try {
+            // Force map to recalculate its state
+            map.invalidateSize();
+            
+            // Wait a bit, then try bounds-based approach
+            setTimeout(() => {
+                // Create tight bounds around character location
+                const bounds = L.latLngBounds(
+                    [targetLatLng.lat - 50, targetLatLng.lng - 50],
+                    [targetLatLng.lat + 50, targetLatLng.lng + 50]
+                );
+                
+                map.fitBounds(bounds, {
+                    animate: true,
+                    duration: 0.8,
+                    maxZoom: targetZoom
+                });
+                
+                // Final verification
+                setTimeout(() => {
+                    this.verifyCentering(map, targetLatLng, characterName, character, 'emergency');
+                }, 1000);
+                
+            }, 100);
+            
+        } catch (error) {
+            console.error(`❌ All centering strategies failed for "${characterName}": ${error.message}`);
+            // Still show popup even if centering fails
+            this.showCharacterPopup(character, targetLatLng);
+        }
+    }
+
+    // Verify centering worked and show popup
+    verifyCentering(map, targetLatLng, characterName, character, strategy) {
+        const currentCenter = map.getCenter();
+        const distance = currentCenter.distanceTo(targetLatLng);
+        
+        // Get current viewport dimensions for validation
+        const bounds = map.getBounds();
+        const boundsWidth = bounds.getEast() - bounds.getWest();
+        const boundsHeight = bounds.getNorth() - bounds.getSouth();
+        
+        // Check if character is within reasonable center area (30% of viewport)
+        const centerTolerance = Math.min(boundsWidth, boundsHeight) * 0.15; // 15% tolerance
+        
+        if (distance <= centerTolerance) {
+            console.log(`✅ Centering SUCCESS (${strategy}): "${characterName}" distance ${distance.toFixed(2)} <= tolerance ${centerTolerance.toFixed(2)}`);
+        } else {
+            console.warn(`⚠️ Centering IMPERFECT (${strategy}): "${characterName}" distance ${distance.toFixed(2)} > tolerance ${centerTolerance.toFixed(2)}`);
+            
+            // If still not centered properly, try one final adjustment
+            if (strategy !== 'final-adjustment') {
+                setTimeout(() => {
+                    map.panTo(targetLatLng, { animate: true, duration: 0.5 });
+                    setTimeout(() => {
+                        this.verifyCentering(map, targetLatLng, characterName, character, 'final-adjustment');
+                    }, 600);
+                }, 200);
+                return;
+            }
+        }
+        
+        // Show character popup
+        this.showCharacterPopup(character, targetLatLng);
+        
+        // Log final viewport state
+        console.log(`📊 Final viewport - Center: [${currentCenter.lat.toFixed(2)}, ${currentCenter.lng.toFixed(2)}], Zoom: ${map.getZoom().toFixed(2)}`);
+    }
+
+    // Enhanced popup positioning that accounts for viewport
     showCharacterPopup(character, latlng) {
         const map = window.mapCore.getMap();
         
@@ -229,13 +319,16 @@ class CharacterSystem {
         // Create popup content
         const popupContent = this.createCharacterPopup(character);
 
-        // Create a persistent popup that stays open
+        // Create popup with enhanced options
         this.currentCharacterPopup = L.popup({
-            closeButton: true,      // Keep the X button for manual closing
-            autoClose: false,       // Don't auto-close when other popups open
-            closeOnClick: false,    // Don't close when clicking on map
-            closeOnEscapeKey: true, // Allow ESC key to close
-            className: 'character-focus-popup'
+            closeButton: true,
+            autoClose: false,
+            closeOnClick: false,
+            closeOnEscapeKey: true,
+            className: 'character-focus-popup',
+            autoPan: true,           // Automatically pan to keep popup in view
+            autoPanPadding: [50, 50], // Padding from edges
+            keepInView: true         // Keep popup in view when map is panned
         })
         .setLatLng(latlng)
         .setContent(popupContent)
@@ -244,7 +337,7 @@ class CharacterSystem {
         // Set up event listeners for controlled closing
         this.setupPopupCloseListeners();
 
-        console.log(`🎯 Character popup opened for "${character.name}" - stays open until closed manually, another character selected, or location clicked`);
+        console.log(`🎯 Character popup opened for "${character.name}" with enhanced positioning`);
     }
 
     // Set up listeners to close character popup when needed
