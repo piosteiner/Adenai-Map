@@ -63,21 +63,30 @@ class CharacterPanel {
         const panelContent = this.panel.querySelector('.panel-content');
         if (!panelContent) return;
 
-        // Add movement controls at the top
-        const movementControlsHtml = `
+        // Add search bar and always-visible movement controls at the top
+        const controlsHtml = `
+            <!-- Search Bar Section -->
+            <div class="character-search-section">
+                <input type="text" 
+                       id="character-search-input" 
+                       class="character-search-input" 
+                       placeholder="🔍 Search characters (name, location, title...)"
+                       onkeyup="window.characterPanel.filterCharactersBySearch()">
+            </div>
+            
+            <!-- Always Visible Movement Controls -->
             <div class="integrated-movement-section">
-                <div class="movement-section-header" onclick="window.characterPanel.toggleMovementControls()">
+                <div class="movement-section-header-static">
                     <h4>🛤️ Movement Paths</h4>
-                    <span class="movement-section-toggle">▶</span>
                 </div>
                 
-                <div id="integrated-movement-content" class="integrated-movement-content" style="display: none;">
+                <div class="integrated-movement-content">
                     <div class="movement-quick-actions">
                         <button id="integrated-show-all-paths" class="btn-secondary movement-action-btn">✅ Show All</button>
                         <button id="integrated-hide-all-paths" class="btn-secondary movement-action-btn">❌ Hide All</button>
                     </div>
                     
-                    <div id="integrated-timeline-controls" class="integrated-timeline-controls" style="display: none;">
+                    <div id="integrated-timeline-controls" class="integrated-timeline-controls">
                         <label class="movement-label">📅 Date Range Filter:</label>
                         <div class="date-inputs">
                             <input type="date" id="integrated-start-date" class="date-input" />
@@ -86,37 +95,12 @@ class CharacterPanel {
                         <button id="integrated-apply-date-filter" class="btn-secondary movement-action-btn">Apply Filter</button>
                         <button id="integrated-clear-date-filter" class="btn-secondary movement-action-btn">Clear Filter</button>
                     </div>
-                    
-                    <div class="movement-legend">
-                        <div class="legend-title">Legend:</div>
-                        <div class="legend-text">📍 = Start • 🚩 = Current • Numbers = Path order</div>
-                    </div>
                 </div>
             </div>
         `;
 
-        panelContent.insertAdjacentHTML('afterbegin', movementControlsHtml);
+        panelContent.insertAdjacentHTML('afterbegin', controlsHtml);
         this.setupIntegratedMovementListeners();
-    }
-
-    toggleMovementControls() {
-        this.showMovementControls = !this.showMovementControls;
-        const content = document.getElementById('integrated-movement-content');
-        const toggle = document.querySelector('.movement-section-toggle');
-        const timelineControls = document.getElementById('integrated-timeline-controls');
-        
-        if (content && toggle) {
-            content.style.display = this.showMovementControls ? 'block' : 'none';
-            toggle.textContent = this.showMovementControls ? '▼' : '▶';
-            
-            // Show timeline controls if movement controls are visible
-            if (timelineControls) {
-                timelineControls.style.display = this.showMovementControls ? 'block' : 'none';
-            }
-            
-            // Refresh character grid to show/hide checkboxes
-            this.populateCharacterGrid();
-        }
     }
 
     setupIntegratedMovementListeners() {
@@ -173,6 +157,50 @@ class CharacterPanel {
         });
     }
 
+    // NEW: Live search functionality
+    filterCharactersBySearch() {
+        const searchInput = document.getElementById('character-search-input');
+        if (!searchInput) return;
+        
+        const query = searchInput.value.toLowerCase().trim();
+        
+        if (query === '') {
+            // No search query, show all characters with current filters
+            this.filterCharacters();
+            return;
+        }
+        
+        // Filter characters based on search query
+        const filteredCharacters = this.characters.filter(character => {
+            return (
+                character.name.toLowerCase().includes(query) ||
+                (character.title && character.title.toLowerCase().includes(query)) ||
+                (character.location && character.location.toLowerCase().includes(query)) ||
+                (character.relationship && character.relationship.toLowerCase().includes(query)) ||
+                (character.status && character.status.toLowerCase().includes(query)) ||
+                (character.faction && character.faction.toLowerCase().includes(query)) ||
+                (character.description && character.description.toLowerCase().includes(query)) ||
+                (character.notes && character.notes.toLowerCase().includes(query))
+            );
+        });
+        
+        // Apply additional filters if they are set
+        const relationshipFilter = document.getElementById('relationship-filter')?.value || '';
+        const statusFilter = document.getElementById('status-filter')?.value || '';
+        
+        let finalFilteredCharacters = filteredCharacters;
+        
+        if (relationshipFilter) {
+            finalFilteredCharacters = finalFilteredCharacters.filter(char => char.relationship === relationshipFilter);
+        }
+        
+        if (statusFilter) {
+            finalFilteredCharacters = finalFilteredCharacters.filter(char => char.status === statusFilter);
+        }
+        
+        this.populateCharacterGrid(finalFilteredCharacters);
+    }
+
     togglePanel() {
         this.isPanelOpen = !this.isPanelOpen;
         this.panel.classList.toggle('open', this.isPanelOpen);
@@ -204,8 +232,8 @@ class CharacterPanel {
         const movementCount = hasMovementData ? character.movementHistory.length : 0;
         const isPathVisible = window.movementSystem?.visibleCharacterPaths?.has(character.id) || false;
         
-        // Movement checkbox (only show if movement controls are visible)
-        const movementCheckbox = this.showMovementControls ? `
+        // Movement checkbox (ALWAYS SHOW)
+        const movementCheckbox = `
             <div class="movement-checkbox-container">
                 <label class="movement-checkbox-label">
                     <input type="checkbox" 
@@ -216,7 +244,7 @@ class CharacterPanel {
                     <span class="movement-checkmark" style="border-color: ${this.getRelationshipColor(character.relationship)}"></span>
                 </label>
             </div>
-        ` : '';
+        `;
         
         // Character info section (clickable to focus character)
         const characterInfo = `
@@ -299,20 +327,8 @@ class CharacterPanel {
     }
 
     filterCharacters() {
-        const relationshipFilter = document.getElementById('relationship-filter')?.value || '';
-        const statusFilter = document.getElementById('status-filter')?.value || '';
-        
-        let filtered = this.characters;
-        
-        if (relationshipFilter) {
-            filtered = filtered.filter(char => char.relationship === relationshipFilter);
-        }
-        
-        if (statusFilter) {
-            filtered = filtered.filter(char => char.status === statusFilter);
-        }
-        
-        this.populateCharacterGrid(filtered);
+        // Trigger the search-based filtering which handles both search and dropdown filters
+        this.filterCharactersBySearch();
     }
 
     showEmptyState() {
@@ -327,62 +343,87 @@ class CharacterPanel {
 
     addIntegratedPanelCSS() {
         const integratedCSS = `
-            /* Integrated Movement Controls in Character Panel */
+            /* Character Search Section */
+            .character-search-section {
+                margin-bottom: 15px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid var(--dropdown-border);
+            }
+
+            .character-search-input {
+                width: 100%;
+                padding: 10px 12px;
+                font-size: 0.9em;
+                background: var(--popup-bg);
+                color: var(--text-color);
+                border: 2px solid var(--dropdown-border);
+                border-radius: 6px;
+                transition: all 0.3s ease;
+                box-sizing: border-box;
+            }
+
+            .character-search-input:focus {
+                outline: none;
+                border-color: #4CAF50;
+                box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+            }
+
+            .character-search-input::placeholder {
+                color: var(--text-muted);
+                opacity: 0.7;
+            }
+
+            /* Static Movement Controls Section */
             .integrated-movement-section {
                 margin-bottom: 20px;
                 border-bottom: 1px solid var(--dropdown-border);
                 padding-bottom: 15px;
             }
 
-            .movement-section-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                cursor: pointer;
+            .movement-section-header-static {
                 padding: 8px 0;
                 border-bottom: 1px solid var(--dropdown-border);
-                margin-bottom: 10px;
+                margin-bottom: 15px;
             }
 
-            .movement-section-header:hover {
-                background: var(--dropdown-hover);
-                padding: 8px;
-                margin: 0 -8px 10px -8px;
-                border-radius: 4px;
-            }
-
-            .movement-section-header h4 {
+            .movement-section-header-static h4 {
                 margin: 0;
                 font-size: 1em;
                 color: var(--text-color);
+                text-align: center;
             }
 
-            .movement-section-toggle {
-                font-size: 0.8em;
-                color: var(--text-color);
-                opacity: 0.7;
+            .integrated-movement-content {
+                display: block; /* Always visible */
             }
 
             .movement-quick-actions {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 8px;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
             }
 
             .movement-action-btn {
-                padding: 6px 10px;
+                padding: 8px 12px;
                 font-size: 0.8em;
                 background: var(--popup-bg);
                 color: var(--text-color);
                 border: 1px solid var(--dropdown-border);
                 border-radius: 4px;
                 cursor: pointer;
-                transition: background-color 0.3s ease;
+                transition: all 0.3s ease;
+                font-weight: 500;
             }
 
             .movement-action-btn:hover {
                 background: var(--dropdown-hover);
+                transform: translateY(-1px);
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .movement-action-btn:active {
+                transform: translateY(0);
             }
 
             /* Integrated Character Cards */
@@ -422,14 +463,14 @@ class CharacterPanel {
             .movement-checkbox-label input[type="checkbox"] {
                 position: absolute;
                 opacity: 0;
-                width: 18px;
-                height: 18px;
+                width: 20px;
+                height: 20px;
                 cursor: pointer;
             }
 
             .movement-checkmark {
-                width: 18px;
-                height: 18px;
+                width: 20px;
+                height: 20px;
                 border: 2px solid var(--dropdown-border);
                 border-radius: 4px;
                 background: var(--popup-bg);
@@ -447,7 +488,7 @@ class CharacterPanel {
             .movement-checkbox-label input[type="checkbox"]:checked + .movement-checkmark::after {
                 content: '✓';
                 color: white;
-                font-size: 12px;
+                font-size: 14px;
                 font-weight: bold;
             }
 
@@ -455,6 +496,11 @@ class CharacterPanel {
                 background: var(--dropdown-bg);
                 border-color: var(--text-muted);
                 opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            .movement-checkbox-label input[type="checkbox"]:disabled {
+                cursor: not-allowed;
             }
 
             .character-info-section {
@@ -462,6 +508,7 @@ class CharacterPanel {
                 align-items: center;
                 flex: 1;
                 transition: all 0.2s ease;
+                padding: 2px 0;
             }
 
             .character-info-section:hover {
@@ -530,16 +577,15 @@ class CharacterPanel {
 
             /* Date Range Controls */
             .integrated-timeline-controls {
-                margin-top: 10px;
-                padding: 10px;
+                padding: 12px;
                 background: var(--dropdown-bg);
-                border-radius: 4px;
+                border-radius: 6px;
                 border: 1px solid var(--dropdown-border);
             }
 
             .movement-label {
                 display: block;
-                margin-bottom: 6px;
+                margin-bottom: 8px;
                 font-size: 0.85em;
                 font-weight: bold;
                 color: var(--text-color);
@@ -549,38 +595,22 @@ class CharacterPanel {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 8px;
-                margin-bottom: 8px;
+                margin-bottom: 10px;
             }
 
             .date-input {
-                padding: 6px;
+                padding: 8px;
                 font-size: 0.8em;
                 background: var(--popup-bg);
                 color: var(--text-color);
                 border: 1px solid var(--dropdown-border);
                 border-radius: 4px;
+                transition: border-color 0.3s ease;
             }
 
-            .movement-legend {
-                margin-top: 12px;
-                padding: 8px;
-                background: var(--dropdown-bg);
-                border-radius: 4px;
-                border: 1px solid var(--dropdown-border);
-            }
-
-            .legend-title {
-                font-size: 0.8em;
-                font-weight: bold;
-                color: var(--text-color);
-                margin-bottom: 4px;
-            }
-
-            .legend-text {
-                font-size: 0.75em;
-                color: var(--text-color);
-                opacity: 0.8;
-                line-height: 1.3;
+            .date-input:focus {
+                outline: none;
+                border-color: #4CAF50;
             }
 
             /* Mobile Responsiveness */
@@ -603,9 +633,24 @@ class CharacterPanel {
                     grid-template-columns: 1fr;
                     gap: 6px;
                 }
+
+                .character-search-input {
+                    font-size: 16px; /* Prevent zoom on iOS */
+                }
             }
 
             /* Dark Mode Support */
+            [data-theme="dark"] .character-search-input {
+                background: var(--card-bg);
+                border-color: var(--dropdown-border);
+                color: var(--text-color);
+            }
+
+            [data-theme="dark"] .character-search-input:focus {
+                border-color: #4CAF50;
+                box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+            }
+
             [data-theme="dark"] .status-badge.status-alive { background: rgba(46, 125, 50, 0.3); color: #81C784; }
             [data-theme="dark"] .status-badge.status-dead { background: rgba(198, 40, 40, 0.3); color: #E57373; }
             [data-theme="dark"] .status-badge.status-missing { background: rgba(239, 108, 0, 0.3); color: #FFB74D; }
