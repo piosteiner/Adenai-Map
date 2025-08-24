@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "d732f3cbfbd24fbe5f6c33356d00817707382002",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-24T23:21:20.785Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-24T23:21:20.785Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vsuzh (by gm) - removed location, changed relationship to suspicious"
+    },
+    {
       "commitSha": "31bde3c716528982371cac2bf80c6de5f478213f",
       "action": "update",
       "type": "character",
@@ -743,5 +756,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-24T23:08:02.860Z"
+  "lastUpdated": "2025-08-24T23:21:20.785Z"
 }
