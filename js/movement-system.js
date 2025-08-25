@@ -126,7 +126,7 @@ class MovementSystem {
                 selectedButton.classList.add('selected');
             }
         }
-};
+    };
     }
 
     addCharacterMovementPaths() {
