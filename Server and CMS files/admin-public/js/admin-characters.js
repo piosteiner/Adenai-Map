@@ -281,7 +281,8 @@ class AdminCharacters {
             neutral: '😐 Neutral',
             suspicious: '🤨 Suspicious',
             hostile: '😠 Hostile',
-            enemy: '⚔️ Enemy'
+            enemy: '⚔️ Enemy',
+            party: '👩‍👩‍👧‍👦 Party'
         };
         return relationships[relationship] || relationship;
     }
