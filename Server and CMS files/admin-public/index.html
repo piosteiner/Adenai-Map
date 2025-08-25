@@ -387,6 +387,7 @@
                             <option value="hostile">😠 Hostile</option>
                             <option value="enemy">⚔️ Enemy</option>
                             <option value="unknown">🤷 Unknown</option>
+                            <option value="party">👩‍👩‍👧‍👦 Party</option>
                         </select>
                     </div>
                 </div>
@@ -459,8 +460,16 @@
                             </select>
                         </div>
                         
-                        <!-- Custom Coordinates Input -->
+                        <!-- Custom Coordinates Input - ENHANCED VERSION -->
                         <div id="custom-coordinates-input" class="form-group" style="display: none;">
+                            <!-- Custom Location Name Field -->
+                            <div class="form-group">
+                                <label for="movement-custom-name">🏷️ Custom Location Name:</label>
+                                <input type="text" id="movement-custom-name" name="movementCustomName" placeholder="e.g., Hidden Cave, Secret Camp">
+                                <small style="color: #666; font-size: 0.8em;">Give this custom location a memorable name</small>
+                            </div>
+                    
+                            <!-- Coordinates Row -->
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="movement-x">🗺️ X Coordinate:</label>
@@ -473,16 +482,36 @@
                             </div>
                         </div>
                         
-                        <!-- Date -->
-                        <div class="form-group">
-                            <label for="movement-date">📅 Date:</label>
-                            <input type="date" id="movement-date" name="movementDate" required>
+                        <!-- 🔥 ENHANCED: Date Range Section -->
+                        <div class="form-group date-range-section">
+                            <label>📅 Date Range:</label>
+                            <div class="date-range-container">
+                                <!-- Start Date (Required) -->
+                                <div class="date-input-group">
+                                    <label for="movement-date-start" class="date-sublabel">Start Date *</label>
+                                    <input type="date" id="movement-date-start" name="movementDateStart" required>
+                                </div>
+                                
+                                <!-- End Date (Optional) -->
+                                <div class="date-input-group">
+                                    <label for="movement-date-end" class="date-sublabel">End Date (Optional)</label>
+                                    <input type="date" id="movement-date-end" name="movementDateEnd">
+                                    <small class="date-help">Leave empty for single-day movements</small>
+                                </div>
+                            </div>
+                            
+                            <!-- Duration Display -->
+                            <div id="duration-display" class="duration-display" style="display: none;">
+                                <span class="duration-icon">⏱️</span>
+                                <span id="duration-text">Duration will appear here</span>
+                            </div>
                         </div>
                         
                         <!-- Movement Type -->
                         <div class="form-group">
                             <label for="movement-type">🎯 Movement Type:</label>
                             <select id="movement-type" name="movementType">
+                                <option value="stay">🏡 Stay</option>
                                 <option value="travel">🚶 Travel</option>
                                 <option value="return">🔄 Return</option>
                                 <option value="meeting">🤝 Meeting</option>

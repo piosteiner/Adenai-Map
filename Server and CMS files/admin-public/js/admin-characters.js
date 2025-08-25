@@ -38,6 +38,14 @@ class AdminCharacters {
                 this.saveCharacter();
             });
         }
+        
+        const startDateInput = document.getElementById('movement-date-start');
+        const endDateInput = document.getElementById('movement-date-end');
+        
+        if (startDateInput && endDateInput) {
+            startDateInput.addEventListener('change', () => this.handleDateRangeChange());
+            endDateInput.addEventListener('change', () => this.handleDateRangeChange());
+        }
 
         // Character search functionality
         const characterSearch = document.getElementById('character-search');
@@ -219,6 +227,82 @@ class AdminCharacters {
         });
     }
 
+    // 🔥 NEW: Handle date range changes and validation
+handleDateRangeChange() {
+    const startDate = document.getElementById('movement-date-start').value;
+    const endDate = document.getElementById('movement-date-end').value;
+    const durationDisplay = document.getElementById('duration-display');
+    const durationText = document.getElementById('duration-text');
+    
+    // Clear any previous validation messages
+    this.clearDateValidationMessages();
+    
+    if (startDate && endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        
+        // Validate end date is not before start date
+        if (end < start) {
+            this.showDateValidationError('End date cannot be before start date');
+            durationDisplay.style.display = 'none';
+            return;
+        }
+        
+        // Calculate and display duration
+        const duration = this.calculateDuration(start, end);
+        durationText.textContent = duration;
+        durationDisplay.style.display = 'flex';
+        
+    } else if (startDate && !endDate) {
+        // Single day movement
+        durationDisplay.style.display = 'none';
+    } else {
+        durationDisplay.style.display = 'none';
+    }
+}
+
+// 🔥 NEW: Calculate duration between two dates
+calculateDuration(startDate, endDate) {
+    const timeDiff = endDate.getTime() - startDate.getTime();
+    const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    
+    if (daysDiff === 0) {
+        return 'Same day';
+    } else if (daysDiff === 1) {
+        return '1 day stay';
+    } else if (daysDiff <= 7) {
+        return `${daysDiff} days stay`;
+    } else if (daysDiff <= 30) {
+        const weeks = Math.ceil(daysDiff / 7);
+        return weeks === 1 ? '1 week stay' : `${weeks} weeks stay`;
+    } else {
+        const months = Math.ceil(daysDiff / 30);
+        return months === 1 ? '1 month stay' : `${months} months stay`;
+    }
+}
+
+// 🔥 NEW: Show date validation error
+showDateValidationError(message) {
+    this.clearDateValidationMessages();
+    
+    const endDateGroup = document.getElementById('movement-date-end').parentElement;
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'date-validation-message';
+    errorDiv.innerHTML = `⚠️ ${message}`;
+    
+    endDateGroup.appendChild(errorDiv);
+    document.getElementById('movement-date-end').classList.add('error');
+}
+
+// 🔥 NEW: Clear date validation messages
+clearDateValidationMessages() {
+    const errorMessages = document.querySelectorAll('.date-validation-message');
+    errorMessages.forEach(msg => msg.remove());
+    
+    const errorInputs = document.querySelectorAll('input[type="date"].error');
+    errorInputs.forEach(input => input.classList.remove('error'));
+}
+
     renderCharacterCard(character) {
         // Count movements
         const movementCount = character.movementHistory ? character.movementHistory.length : 0;
@@ -281,7 +365,8 @@ class AdminCharacters {
             neutral: '😐 Neutral',
             suspicious: '🤨 Suspicious',
             hostile: '😠 Hostile',
-            enemy: '⚔️ Enemy'
+            enemy: '⚔️ Enemy',
+            party: '👩‍👩‍👧‍👦 Party'
         };
         return relationships[relationship] || relationship;
     }
@@ -494,7 +579,7 @@ class AdminCharacters {
         this.ui.openModal('character-movement-modal');
     }
 
-    // Render movement history in modal
+    // 🔥 ENHANCED: Update your renderMovementHistory method to show custom location names better
     renderMovementHistory(character) {
         const container = document.getElementById('movement-history-list');
         if (!container) return;
@@ -511,31 +596,148 @@ class AdminCharacters {
             return;
         }
         
-        // Sort movements by date (newest first for display)
+        // Sort movements chronologically (oldest first) to get proper journey sequence
+        const chronologicalMovements = [...movements].sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+        // Create a map of movement ID to journey sequence number
+        const sequenceMap = new Map();
+        chronologicalMovements.forEach((movement, index) => {
+            sequenceMap.set(movement.id, index + 1);
+        });
+        
+        // Sort movements by date (newest first for display) but keep sequence numbers
         const sortedMovements = [...movements].sort((a, b) => new Date(b.date) - new Date(a.date));
         
-        container.innerHTML = sortedMovements.map(movement => `
-            <div class="movement-entry" data-movement-id="${movement.id}">
-                <div class="movement-entry-header">
-                    <div class="movement-info">
-                        <h4>${movement.location || 'Custom Location'}</h4>
-                        <span class="movement-date">📅 ${movement.date}</span>
+        container.innerHTML = sortedMovements.map(movement => {
+            // Get the chronological journey sequence number
+            const journeyNumber = sequenceMap.get(movement.id);
+            
+            // Better handling of location names for custom locations
+            const locationDisplay = movement.location || 'Custom Location';
+            const isCustom = movement.isCustomLocation || (movement.coordinates && movement.location !== movement.coordinates);
+            const locationIcon = isCustom ? '🗺️' : '📍';
+            
+            return `
+                <div class="movement-entry" data-movement-id="${movement.id}">
+                    <div class="movement-entry-header">
+                        <div class="movement-info">
+                            <div class="movement-title">
+                                <span class="journey-number">${journeyNumber}</span>
+                                <h4>${locationIcon} ${locationDisplay}</h4>
+                                ${isCustom ? '<span class="custom-location-badge">Custom</span>' : ''}
+                            </div>
+                            <span class="movement-date">📅 ${movement.date}</span>
+                        </div>
+                        <div class="movement-actions">
+                            <button class="btn-secondary movement-edit-btn" data-movement="${movement.id}" title="Edit movement">✏️</button>
+                            <button class="btn-danger movement-delete-btn" data-movement="${movement.id}" title="Delete movement">🗑️</button>
+                        </div>
                     </div>
-                    <div class="movement-actions">
-                        <button class="btn-secondary movement-edit-btn" data-movement="${movement.id}">✏️</button>
-                        <button class="btn-danger movement-delete-btn" data-movement="${movement.id}">🗑️</button>
+                    <div class="movement-details">
+                        <div class="movement-detail-row">
+                            <span><strong>🗺️ Coordinates:</strong> [${movement.coordinates[0]}, ${movement.coordinates[1]}]</span>
+                            <span><strong>🎯 Type:</strong> ${movement.type || 'travel'}</span>
+                        </div>
+                        ${movement.notes ? `<p><strong>📋 Notes:</strong> ${movement.notes}</p>` : ''}
+                        <p class="movement-metadata"><strong>📅 Added:</strong> ${new Date(movement.createdAt).toLocaleDateString()}</p>
                     </div>
                 </div>
-                <div class="movement-details">
-                    <p><strong>🗺️ Coordinates:</strong> [${movement.coordinates[0]}, ${movement.coordinates[1]}]</p>
-                    <p><strong>📝 Type:</strong> ${movement.type || 'travel'}</p>
-                    ${movement.notes ? `<p><strong>📋 Notes:</strong> ${movement.notes}</p>` : ''}
-                    <p><strong>📝 Added:</strong> ${new Date(movement.createdAt).toLocaleDateString()}</p>
+            `;
+        }).join('');
+        
+        // Add journey summary at the top
+        const summaryHTML = `
+            <div class="journey-summary">
+                <div class="journey-stats">
+                    <span class="stat-item">
+                        <span class="stat-number">${movements.length}</span>
+                        <span class="stat-label">Total Movements</span>
+                    </span>
+                    <span class="stat-item">
+                        <span class="stat-number">${this.getUniqueLocations(movements)}</span>
+                        <span class="stat-label">Unique Locations</span>
+                    </span>
+                    <span class="stat-item">
+                        <span class="stat-number">${this.getDateRange(movements)}</span>
+                        <span class="stat-label">Journey Span</span>
+                    </span>
+                </div>
+                <div class="journey-path-preview">
+                    <strong>🛤️ Journey Path:</strong> ${this.generatePathPreview(chronologicalMovements)}
                 </div>
             </div>
-        `).join('');
+        `;
+        
+        container.insertAdjacentHTML('afterbegin', summaryHTML);
         
         // Add event listeners for movement actions
+        container.querySelectorAll('.movement-edit-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const movementId = e.target.dataset.movement;
+                this.editMovement(movementId);
+            });
+        });
+        
+        container.querySelectorAll('.movement-delete-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const movementId = e.target.dataset.movement;
+                this.deleteMovement(movementId);
+            });
+        });
+    }
+
+    // 🔥 NEW: Format movement date range for display
+    formatMovementDateRange(movement) {
+        const startDate = movement.dateStart || movement.date;
+        const endDate = movement.dateEnd;
+        
+        if (!startDate) return 'No date';
+        
+        const formatDate = (dateStr) => {
+            return new Date(dateStr).toLocaleDateString('de-DE');
+        };
+        
+        if (endDate && endDate !== startDate) {
+            return `📅 ${formatDate(startDate)} <span class="date-range-arrow">→</span> ${formatDate(endDate)}`;
+        } else {
+            return `📅 ${formatDate(startDate)}`;
+        }
+    }
+
+    // 🔥 NEW: Generate enhanced journey summary with date range info
+    generateJourneySummaryWithDateRanges(chronologicalMovements) {
+        const totalMovements = chronologicalMovements.length;
+        const multiDayMovements = chronologicalMovements.filter(m => m.dateEnd && m.dateEnd !== (m.dateStart || m.date)).length;
+        
+        return `
+            <div class="journey-summary">
+                <div class="journey-stats">
+                    <span class="stat-item">
+                        <span class="stat-number">${totalMovements}</span>
+                        <span class="stat-label">Total Movements</span>
+                    </span>
+                    <span class="stat-item">
+                        <span class="stat-number">${this.getUniqueLocations(chronologicalMovements)}</span>
+                        <span class="stat-label">Unique Locations</span>
+                    </span>
+                    <span class="stat-item">
+                        <span class="stat-number">${multiDayMovements}</span>
+                        <span class="stat-label">Multi-day Stays</span>
+                    </span>
+                    <span class="stat-item">
+                        <span class="stat-number">${this.getDateRange(chronologicalMovements)}</span>
+                        <span class="stat-label">Journey Span</span>
+                    </span>
+                </div>
+                <div class="journey-path-preview">
+                    <strong>🛤️ Journey Path:</strong> ${this.generatePathPreview(chronologicalMovements)}
+                </div>
+            </div>
+        `;
+    }
+
+    // 🔥 NEW: Add movement action listeners (extracted for clarity)
+    addMovementActionListeners(container) {
         container.querySelectorAll('.movement-edit-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const movementId = e.target.dataset.movement;
@@ -565,7 +767,7 @@ class AdminCharacters {
         }
     }
 
-    // Save movement entry
+    // 🔥 ENHANCED: Updated saveMovement method with date range support
     async saveMovement() {
         if (!this.auth.requireAuth()) return;
 
@@ -579,36 +781,59 @@ class AdminCharacters {
         if (locationType === 'existing') {
             isValid = this.ui.validateForm('movement-form', {
                 movementLocation: { required: true, label: 'Location' },
-                movementDate: { required: true, label: 'Date' }
+                movementDateStart: { required: true, label: 'Start Date' }
             });
         } else {
             isValid = this.ui.validateForm('movement-form', {
+                movementCustomName: { required: true, label: 'Custom Location Name' },
                 movementX: { required: true, label: 'X Coordinate' },
                 movementY: { required: true, label: 'Y Coordinate' },
-                movementDate: { required: true, label: 'Date' }
+                movementDateStart: { required: true, label: 'Start Date' }
             });
+        }
+
+        // 🔥 NEW: Additional date range validation
+        if (isValid) {
+            const startDate = formData.movementDateStart;
+            const endDate = formData.movementDateEnd;
+            
+            if (startDate && endDate) {
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                
+                if (end < start) {
+                    this.showDateValidationError('End date cannot be before start date');
+                    return;
+                }
+            }
         }
 
         if (!isValid) return;
         
-        // Create movement data
+        // Create movement data with date range support
         const movementData = {
-            date: formData.movementDate,
+            dateStart: formData.movementDateStart,
+            dateEnd: formData.movementDateEnd || null,
             type: formData.movementType || 'travel',
             notes: formData.movementNotes || ''
         };
         
+        // 🔥 ENHANCED: Include legacy date field for compatibility
+        movementData.date = formData.movementDateStart;
+        
         if (locationType === 'existing') {
             movementData.location = formData.movementLocation;
         } else {
+            movementData.location = formData.movementCustomName;
             movementData.coordinates = [parseInt(formData.movementX), parseInt(formData.movementY)];
+            movementData.isCustomLocation = true;
         }
 
         try {
             const isEditing = !!this.editingMovement;
             const characterId = this.editingCharacter;
             
-            console.log(`🛤️ ${isEditing ? 'Updating' : 'Adding'} movement for character:`, characterId);
+            console.log(`🛤️ ${isEditing ? 'Updating' : 'Adding'} movement with date range for character:`, characterId);
             
             const url = isEditing ? 
                 `/api/characters/${encodeURIComponent(characterId)}/movements/${encodeURIComponent(this.editingMovement)}` :
@@ -634,8 +859,10 @@ class AdminCharacters {
                     this.renderMovementHistory(character);
                 }
                 
-                // Reset form
+                // Reset form and clear validation
                 this.ui.resetForm('movement-form');
+                this.clearDateValidationMessages();
+                document.getElementById('duration-display').style.display = 'none';
                 this.editingMovement = null;
                 
                 // Update main map if it's loaded
@@ -654,7 +881,54 @@ class AdminCharacters {
         }
     }
 
-    // Edit movement entry
+    // 🔥 NEW: Helper method to count unique locations
+    getUniqueLocations(movements) {
+        const locations = new Set();
+        movements.forEach(movement => {
+            const locationKey = `${movement.coordinates[0]},${movement.coordinates[1]}`;
+            locations.add(locationKey);
+        });
+        return locations.size;
+    }
+
+    // 🔥 NEW: Helper method to get date range
+    getDateRange(movements) {
+        if (movements.length === 0) return 'N/A';
+        
+        const dates = movements.map(m => new Date(m.date)).sort((a, b) => a - b);
+        const start = dates[0];
+        const end = dates[dates.length - 1];
+        
+        const daysDiff = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+        
+        if (daysDiff === 0) return 'Same day';
+        if (daysDiff === 1) return '1 day';
+        if (daysDiff < 30) return `${daysDiff} days`;
+        if (daysDiff < 365) return `${Math.ceil(daysDiff / 30)} months`;
+        return `${Math.ceil(daysDiff / 365)} years`;
+    }
+
+    // 🔥 NEW: Helper method to generate path preview
+    generatePathPreview(chronologicalMovements) {
+        if (chronologicalMovements.length === 0) return 'No movements';
+        
+        // Show first few locations in the journey
+        const preview = chronologicalMovements
+            .slice(0, 4)
+            .map((movement, index) => {
+                const name = movement.location || 'Custom';
+                const shortName = name.length > 15 ? name.substring(0, 12) + '...' : name;
+                return `<span class="path-step">${index + 1}. ${shortName}</span>`;
+            })
+            .join(' → ');
+        
+        const remaining = chronologicalMovements.length - 4;
+        const suffix = remaining > 0 ? ` → ... +${remaining} more` : '';
+        
+        return `<div class="path-preview">${preview}${suffix}</div>`;
+    }
+
+    // 🔥 ENHANCED: Updated editMovement method with date range support
     editMovement(movementId) {
         const character = this.characters.find(c => c.id === this.editingCharacter);
         if (!character || !character.movementHistory) return;
@@ -668,21 +942,32 @@ class AdminCharacters {
         this.editingMovement = movementId;
         
         // Determine if this is an existing location or custom coordinates
-        const isExistingLocation = !!movement.location;
+        const isCustomLocation = movement.isCustomLocation || (movement.coordinates && !movement.location);
         
-        // Populate form
-        this.ui.populateForm('movement-form', {
-            movementLocationType: isExistingLocation ? 'existing' : 'custom',
-            movementLocation: movement.location || '',
-            movementX: isExistingLocation ? '' : movement.coordinates[0],
-            movementY: isExistingLocation ? '' : movement.coordinates[1],
-            movementDate: movement.date,
+        // Populate form with date range support
+        const formValues = {
+            movementLocationType: isCustomLocation ? 'custom' : 'existing',
+            movementDateStart: movement.dateStart || movement.date, // Fallback to legacy date
+            movementDateEnd: movement.dateEnd || '', // Optional end date
             movementType: movement.type || 'travel',
             movementNotes: movement.notes || ''
-        });
+        };
+        
+        if (isCustomLocation) {
+            formValues.movementCustomName = movement.location || 'Custom Location';
+            formValues.movementX = movement.coordinates ? movement.coordinates[0] : '';
+            formValues.movementY = movement.coordinates ? movement.coordinates[1] : '';
+        } else {
+            formValues.movementLocation = movement.location || '';
+        }
+        
+        this.ui.populateForm('movement-form', formValues);
         
         // Toggle inputs based on location type
-        this.toggleMovementLocationInputs(isExistingLocation ? 'existing' : 'custom');
+        this.toggleMovementLocationInputs(isCustomLocation ? 'custom' : 'existing');
+        
+        // Update duration display if end date exists
+        setTimeout(() => this.handleDateRangeChange(), 100);
         
         // Update form title
         document.querySelector('#movement-form button[type="submit"]').textContent = '💾 Update Movement';

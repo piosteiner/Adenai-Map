@@ -310,6 +310,101 @@ html, body {
     display: none !important; /* Hide the default arrow */
 }
 
+/* ========== MULTI-VISIT MARKER STYLES ========== */
+
+/* Multi-visit marker container */
+.multi-visit-marker {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Visit count badge */
+.visit-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    font-size: 8px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Multiple visits styling */
+.movement-start-marker.multiple-visits,
+.movement-end-marker.multiple-visits,
+.movement-number-marker.multiple-visits {
+    filter: drop-shadow(0 0 4px rgba(255, 68, 68, 0.6));
+}
+
+/* Visit badge in popups */
+.visit-badge {
+    background: #ff4444;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 0.7em;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+/* Visits timeline in popup */
+.visits-timeline {
+    margin-top: 12px;
+    border-top: 1px solid #eee;
+    padding-top: 8px;
+}
+
+.visits-timeline h5 {
+    margin: 0 0 8px 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.visit-entry {
+    padding: 4px 0;
+    font-size: 0.85em;
+    border-left: 2px solid #ddd;
+    padding-left: 8px;
+    margin-bottom: 4px;
+}
+
+.visit-entry.current-visit {
+    border-left-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.1);
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+
+.visit-type {
+    display: inline-block;
+    background: #f0f0f0;
+    padding: 1px 4px;
+    border-radius: 2px;
+    margin-left: 8px;
+    font-size: 0.7em;
+    color: #666;
+}
+
+/* Multi-visit popup styling */
+.multi-visit-popup {
+    max-width: 280px;
+}
+
+.multi-visit-popup .visits-timeline {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
 /* Dark mode adjustments */
 [data-theme="dark"] .movement-start-marker,
 [data-theme="dark"] .movement-end-marker {
@@ -325,6 +420,38 @@ html, body {
 [data-theme="dark"] .character-path-tooltip {
     background: rgba(255, 255, 255, 0.9) !important;
     color: #333 !important;
+}
+
+/* Dark theme support for multi-visit markers */
+[data-theme="dark"] .visit-count {
+    background: #ff6666;
+    border-color: #333;
+}
+
+[data-theme="dark"] .visit-badge {
+    background: #ff6666;
+}
+
+[data-theme="dark"] .visits-timeline {
+    border-top-color: #444;
+}
+
+[data-theme="dark"] .visits-timeline h5 {
+    color: #ccc;
+}
+
+[data-theme="dark"] .visit-entry {
+    border-left-color: #555;
+}
+
+[data-theme="dark"] .visit-entry.current-visit {
+    border-left-color: #66BB6A;
+    background: rgba(102, 187, 106, 0.2);
+}
+
+[data-theme="dark"] .visit-type {
+    background: #444;
+    color: #ccc;
 }
 
 /* ============================================

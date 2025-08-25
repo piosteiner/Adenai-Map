@@ -212,6 +212,11 @@
     color: #721c24; 
 }
 
+.relationship-party { 
+    background: rgb(196, 212, 255); 
+    color: #584cffff; 
+}
+
 /* Enhanced dark mode badge adjustments */
 [data-theme="dark"] .status-alive { 
     background: var(--status-approved-bg); 
@@ -260,7 +265,12 @@
 
 [data-theme="dark"] .relationship-enemy { 
     background: #5d1a2a; 
-    color: #fca5a5; 
+    color: #fca5a5;
+}
+
+[data-theme="dark"] .relationship-party { 
+    background: #3730a3; 
+    color: #a5b4fc;
 }
 
 /* Stat Cards */

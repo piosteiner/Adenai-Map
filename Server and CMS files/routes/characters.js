@@ -338,7 +338,7 @@ router.delete('/:id', requireAuth, async (req, res) => {
   }
 });
 
-// Add movement entry to character
+// 🔥 ENHANCED: Add movement entry to character with date range support
 router.post('/:id/movements', requireAuth, async (req, res) => {
   try {
     const characterId = decodeURIComponent(req.params.id);
@@ -388,20 +388,23 @@ router.post('/:id/movements', requireAuth, async (req, res) => {
       character.movementHistory = [];
     }
     
-    // Create new movement entry
+    // 🔥 ENHANCED: Create new movement entry with date ranges and custom location support
     const newMovement = {
       id: `movement_${Date.now()}`,
-      date: req.body.date || new Date().toISOString().split('T')[0],
+      date: req.body.dateStart || req.body.date || new Date().toISOString().split('T')[0], // Legacy support
+      dateStart: req.body.dateStart || req.body.date || new Date().toISOString().split('T')[0],
+      dateEnd: req.body.dateEnd || null,
       location: req.body.location || null,
       coordinates: coordinates,
       notes: req.body.notes || '',
       type: req.body.type || 'travel',
+      isCustomLocation: req.body.isCustomLocation || false,
       createdAt: new Date().toISOString()
     };
     
-    // Add to movement history (sorted by date)
+    // Add to movement history (sorted by date using dateStart)
     character.movementHistory.push(newMovement);
-    character.movementHistory.sort((a, b) => new Date(a.date) - new Date(b.date));
+    character.movementHistory.sort((a, b) => new Date(a.dateStart || a.date) - new Date(b.dateStart || b.date));
     
     // Update current location if this is the most recent movement
     const latestMovement = character.movementHistory[character.movementHistory.length - 1];
@@ -409,7 +412,9 @@ router.post('/:id/movements', requireAuth, async (req, res) => {
       character.location = newMovement.location || 'Custom Location';
       character.coordinates = newMovement.coordinates;
       character.currentLocation = {
-        date: newMovement.date,
+        date: newMovement.dateStart || newMovement.date,
+        dateStart: newMovement.dateStart,
+        dateEnd: newMovement.dateEnd,
         location: newMovement.location,
         coordinates: newMovement.coordinates,
         notes: newMovement.notes
@@ -419,8 +424,12 @@ router.post('/:id/movements', requireAuth, async (req, res) => {
     character.updatedAt = new Date().toISOString();
     currentContent.lastUpdated = new Date().toISOString();
     
-    // Commit to GitHub
-    const commitMessage = `Add movement to character: ${character.name} (by ${user}) - ${newMovement.location || 'Custom coordinates'} on ${newMovement.date}`;
+    // 🔥 ENHANCED: Better commit message with date range info
+    const dateInfo = newMovement.dateEnd ? 
+      `${newMovement.dateStart} to ${newMovement.dateEnd}` : 
+      newMovement.dateStart;
+    
+    const commitMessage = `Add movement to character: ${character.name} (by ${user}) - ${newMovement.location || 'Custom coordinates'} (${dateInfo})`;
     
     const commitResponse = await octokit.rest.repos.createOrUpdateFileContents({
       owner: REPO_OWNER,
@@ -447,7 +456,7 @@ router.post('/:id/movements', requireAuth, async (req, res) => {
   }
 });
 
-// Update movement entry
+// 🔥 ENHANCED: Update movement entry with date range support
 router.put('/:id/movements/:movementId', requireAuth, async (req, res) => {
   try {
     const characterId = decodeURIComponent(req.params.id);
@@ -488,21 +497,24 @@ router.put('/:id/movements/:movementId', requireAuth, async (req, res) => {
       return res.status(404).json({ success: false, error: 'Movement not found' });
     }
     
-    // Update movement
+    // 🔥 ENHANCED: Update movement with date range support
     const updatedMovement = {
       ...character.movementHistory[movementIndex],
-      date: req.body.date || character.movementHistory[movementIndex].date,
+      date: req.body.dateStart || req.body.date || character.movementHistory[movementIndex].date, // Legacy support
+      dateStart: req.body.dateStart || req.body.date || character.movementHistory[movementIndex].dateStart,
+      dateEnd: req.body.dateEnd || null,
       location: req.body.location || null,
       coordinates: coordinates,
       notes: req.body.notes || '',
       type: req.body.type || character.movementHistory[movementIndex].type,
+      isCustomLocation: req.body.isCustomLocation || character.movementHistory[movementIndex].isCustomLocation,
       updatedAt: new Date().toISOString()
     };
     
     character.movementHistory[movementIndex] = updatedMovement;
     
-    // Re-sort by date
-    character.movementHistory.sort((a, b) => new Date(a.date) - new Date(b.date));
+    // Re-sort by date (using dateStart for sorting)
+    character.movementHistory.sort((a, b) => new Date(a.dateStart || a.date) - new Date(b.dateStart || b.date));
     
     // Update current location if this was the most recent movement
     const latestMovement = character.movementHistory[character.movementHistory.length - 1];
@@ -510,7 +522,9 @@ router.put('/:id/movements/:movementId', requireAuth, async (req, res) => {
       character.location = latestMovement.location || 'Custom Location';
       character.coordinates = latestMovement.coordinates;
       character.currentLocation = {
-        date: latestMovement.date,
+        date: latestMovement.dateStart || latestMovement.date,
+        dateStart: latestMovement.dateStart,
+        dateEnd: latestMovement.dateEnd,
         location: latestMovement.location,
         coordinates: latestMovement.coordinates,
         notes: latestMovement.notes
@@ -520,8 +534,12 @@ router.put('/:id/movements/:movementId', requireAuth, async (req, res) => {
     character.updatedAt = new Date().toISOString();
     currentContent.lastUpdated = new Date().toISOString();
     
-    // Commit to GitHub
-    const commitMessage = `Update character movement: ${character.name} (by ${user}) - Modified ${updatedMovement.location || 'coordinates'} entry`;
+    // 🔥 ENHANCED: Better commit message with date range info
+    const dateInfo = updatedMovement.dateEnd ? 
+      `${updatedMovement.dateStart} to ${updatedMovement.dateEnd}` : 
+      updatedMovement.dateStart;
+    
+    const commitMessage = `Update character movement: ${character.name} (by ${user}) - Modified ${updatedMovement.location || 'coordinates'} entry (${dateInfo})`;
     
     const commitResponse = await octokit.rest.repos.createOrUpdateFileContents({
       owner: REPO_OWNER,
@@ -585,7 +603,9 @@ router.delete('/:id/movements/:movementId', requireAuth, async (req, res) => {
       character.location = latestMovement.location || 'Custom Location';
       character.coordinates = latestMovement.coordinates;
       character.currentLocation = {
-        date: latestMovement.date,
+        date: latestMovement.dateStart || latestMovement.date,
+        dateStart: latestMovement.dateStart,
+        dateEnd: latestMovement.dateEnd,
         location: latestMovement.location,
         coordinates: latestMovement.coordinates,
         notes: latestMovement.notes

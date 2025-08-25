@@ -159,6 +159,7 @@ class MovementSystem {
     createMovementMarker(point, index, totalPoints, character) {
         const isFirst = index === 0;
         const isLast = index === totalPoints - 1;
+        const isVsuzHParty = character.relationship === 'party'; // FIX: Define this variable
         
         // Check for overlapping markers at this location
         const sameLocationVisits = this.findSameLocationVisits(point, character, index);
@@ -166,18 +167,22 @@ class MovementSystem {
 
         let markerIcon;
         if (isFirst) {
-            // Start marker uses 📍
+            const startEmoji = isVsuzHParty ? '🏠' : '📍';
             markerIcon = L.divIcon({
-                html: '📍',
-                iconSize: [20, 20],
-                className: 'movement-start-marker'
+                html: hasMultipleVisits ? 
+                    `<div class="multi-visit-marker start-marker">${startEmoji}<span class="visit-count">${sameLocationVisits.length}</span></div>` :
+                    startEmoji,
+                iconSize: isVsuzHParty ? [24, 24] : [20, 20],
+                className: `movement-start-marker${isVsuzHParty ? ' party-marker' : ''}${hasMultipleVisits ? ' multiple-visits' : ''}`
             });
         } else if (isLast) {
-            // Current marker uses 🚩
+            const endEmoji = isVsuzHParty ? '⭐' : '🚩';
             markerIcon = L.divIcon({
-                html: '🚩',
-                iconSize: [20, 20],
-                className: 'movement-end-marker'
+                html: hasMultipleVisits ?
+                    `<div class="multi-visit-marker end-marker">${endEmoji}<span class="visit-count">${sameLocationVisits.length}</span></div>` :
+                    endEmoji,
+                iconSize: isVsuzHParty ? [24, 24] : [20, 20],
+                className: `movement-end-marker${isVsuzHParty ? ' party-marker' : ''}${hasMultipleVisits ? ' multiple-visits' : ''}`
             });
         } else {
             // For middle points, show visit number or multiple visit indicator
@@ -186,9 +191,9 @@ class MovementSystem {
                 html: hasMultipleVisits ?
                 `<div class="multi-visit-marker number-marker">${visitNumber}<span class="visit-count">${sameLocationVisits.length}</span></div>` :
                 visitNumber,
-                iconSize: [20, 20],
-                className: `movement-number-marker${hasMultipleVisits ? ' multiple-visits' : ''}`,
-                iconAnchor: [10, 10]
+                iconSize: isVsuzHParty ? [22, 22] : [20, 20],
+                className: `movement-number-marker${isVsuzHParty ? ' party-marker' : ''}${hasMultipleVisits ? ' multiple-visits' : ''}`,
+                iconAnchor: isVsuzHParty ? [11, 11] : [10, 10]
             });
         }
         
