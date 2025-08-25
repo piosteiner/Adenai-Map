@@ -441,6 +441,19 @@ class MovementSystem {
     getVisibleCharacterPaths() {
         return Array.from(this.visibleCharacterPaths);
     }
+
+    addIntegratedMovementControls() {
+        // This method is called by main.js but wasn't included in the updated file
+        // It's likely for character panel integration
+        console.log('🎮 Movement controls integration called');
+        
+        // If you have a character panel system, integrate here
+        if (window.characterPanel) {
+            window.characterPanel.addMovementControls(this);
+        }
+        
+        return true;
+    }
 }
 
 // Create global movement system instance
