@@ -22,6 +22,16 @@ class MovementSystem {
         document.addEventListener('charactersLoaded', (e) => {
             this.addCharacterMovementPaths();
         });
+
+        // Add global function for consolidated popups
+        window.showVisitDetails = (visitIndex, coordKey) => {
+            const containerSelector = `#visit-details-${coordKey.replace(',', '-')}`;
+            const container = document.querySelector(containerSelector);
+            if (!container) return;
+            
+            // Find the visit data (simplified for now)
+            container.innerHTML = `<p>Loading visit ${visitIndex + 1} details...</p>`;
+        };
     }
 
     addCharacterMovementPaths() {
@@ -43,7 +53,8 @@ class MovementSystem {
                 if (movement.coordinates) {
                     movementPoints.push({
                         coordinates: movement.coordinates,
-                        date: movement.date,
+                        date: movement.dateStart || movement.date,
+                        dateEnd: movement.dateEnd,
                         location: movement.location || 'Custom Location',
                         notes: movement.notes || '',
                         type: movement.type || 'travel'
@@ -62,6 +73,7 @@ class MovementSystem {
                     movementPoints.push({
                         coordinates: character.coordinates,
                         date: character.currentLocation?.date || 'Current',
+                        dateEnd: null,
                         location: character.location || 'Current Location',
                         notes: character.currentLocation?.notes || 'Current position'
                     });
@@ -84,10 +96,10 @@ class MovementSystem {
 
         if (vsuzHPath) {
             this.showCharacterPath(vsuzHPath.character.id);
-            console.log(`🎮 Auto-showing VsuzH path for: ${vsuzHPath.character.name}`);
+            console.log(`Auto-showing VsuzH path for: ${vsuzHPath.character.name}`);
         }
 
-        console.log(`🛤️ Created ${this.characterPaths.length} character movement paths`);
+        console.log(`Created ${this.characterPaths.length} character movement paths`);
     }
 
     createCharacterPath(character, movementPoints, pathColor) {
@@ -109,7 +121,7 @@ class MovementSystem {
         });
         
         // Add cursor-following tooltip with character name
-        pathLine.bindTooltip(`🛤️ ${character.name}`, {
+        pathLine.bindTooltip(`${character.name}`, {
             permanent: false,
             sticky: true,
             direction: 'top',
@@ -140,7 +152,7 @@ class MovementSystem {
     createPathPopup(character, movementPoints) {
         return `
             <div class="character-path-popup">
-                <h4>🗺️ ${character.name}'s Journey</h4>
+                <h4>${character.name}'s Journey</h4>
                 <p><strong>Total Locations:</strong> ${movementPoints.length}</p>
                 <p><strong>Relationship:</strong> ${character.relationship}</p>
                 <div class="movement-timeline">
@@ -156,147 +168,195 @@ class MovementSystem {
         `;
     }
 
+    // Enhanced method to group all visits by location
+    findAllVisitsAtLocation(coordinates, allCharacters) {
+        const visits = [];
+        
+        allCharacters.forEach(character => {
+            if (!character.movementHistory) return;
+            
+            character.movementHistory.forEach((movement, index) => {
+                if (movement.coordinates && 
+                    movement.coordinates[0] === coordinates[0] && 
+                    movement.coordinates[1] === coordinates[1]) {
+                    visits.push({
+                        ...movement,
+                        character: character,
+                        visitIndex: index + 1, // Journey sequence number
+                        characterName: character.name
+                    });
+                }
+            });
+        });
+        
+        return visits.sort((a, b) => new Date(a.dateStart || a.date) - new Date(b.dateStart || b.date));
+    }
+
     createMovementMarker(point, index, totalPoints, character) {
         const isFirst = index === 0;
         const isLast = index === totalPoints - 1;
-        const isVsuzHParty = character.relationship === 'party'; // FIX: Define this variable
         
-        // Check for overlapping markers at this location
-        const sameLocationVisits = this.findSameLocationVisits(point, character, index);
-        const hasMultipleVisits = sameLocationVisits.length > 1;
+        // Find the movement data for duration info
+        const movement = character.movementHistory.find(m => 
+            m.coordinates && 
+            m.coordinates[0] === point.coordinates[0] && 
+            m.coordinates[1] === point.coordinates[1] &&
+            m.location === point.location
+        );
+        
+        const hasDateRange = movement && movement.dateEnd && movement.dateEnd !== (movement.dateStart || movement.date);
+        const allCharacters = window.characterSystem.getCharacters();
+        const allVisitsHere = this.findAllVisitsAtLocation(point.coordinates, allCharacters);
+        const hasMultipleVisits = allVisitsHere.length > 1;
 
         let markerIcon;
         if (isFirst) {
-            const startEmoji = isVsuzHParty ? '🏠' : '📍';
             markerIcon = L.divIcon({
-                html: hasMultipleVisits ? 
-                    `<div class="multi-visit-marker start-marker">${startEmoji}<span class="visit-count">${sameLocationVisits.length}</span></div>` :
-                    startEmoji,
-                iconSize: isVsuzHParty ? [24, 24] : [20, 20],
-                className: `movement-start-marker${isVsuzHParty ? ' party-marker' : ''}${hasMultipleVisits ? ' multiple-visits' : ''}`
+                html: this.createMarkerHTML('📍', hasMultipleVisits, allVisitsHere.length, hasDateRange),
+                iconSize: [24, 24],
+                className: `movement-start-marker${hasMultipleVisits ? ' has-multiple' : ''}${hasDateRange ? ' multi-day' : ''}`,
+                iconAnchor: [12, 12]
             });
         } else if (isLast) {
-            const endEmoji = isVsuzHParty ? '⭐' : '🚩';
             markerIcon = L.divIcon({
-                html: hasMultipleVisits ?
-                    `<div class="multi-visit-marker end-marker">${endEmoji}<span class="visit-count">${sameLocationVisits.length}</span></div>` :
-                    endEmoji,
-                iconSize: isVsuzHParty ? [24, 24] : [20, 20],
-                className: `movement-end-marker${isVsuzHParty ? ' party-marker' : ''}${hasMultipleVisits ? ' multiple-visits' : ''}`
+                html: this.createMarkerHTML('🚩', hasMultipleVisits, allVisitsHere.length, hasDateRange),
+                iconSize: [24, 24],
+                className: `movement-end-marker${hasMultipleVisits ? ' has-multiple' : ''}${hasDateRange ? ' multi-day' : ''}`,
+                iconAnchor: [12, 12]
             });
         } else {
-            // For middle points, show visit number or multiple visit indicator
-            const visitNumber = hasMultipleVisits ? `${index + 1}` : `${index + 1}`;
+            const visitNumber = `${index + 1}`;
             markerIcon = L.divIcon({
-                html: hasMultipleVisits ?
-                `<div class="multi-visit-marker number-marker">${visitNumber}<span class="visit-count">${sameLocationVisits.length}</span></div>` :
-                visitNumber,
-                iconSize: isVsuzHParty ? [22, 22] : [20, 20],
-                className: `movement-number-marker${isVsuzHParty ? ' party-marker' : ''}${hasMultipleVisits ? ' multiple-visits' : ''}`,
-                iconAnchor: isVsuzHParty ? [11, 11] : [10, 10]
+                html: this.createMarkerHTML(visitNumber, hasMultipleVisits, allVisitsHere.length, hasDateRange, true),
+                iconSize: [24, 24],
+                className: `movement-number-marker${hasMultipleVisits ? ' has-multiple' : ''}${hasDateRange ? ' multi-day' : ''}`,
+                iconAnchor: [12, 12]
             });
         }
         
-        // Calculate offset for overlapping markers
-        const offset = hasMultipleVisits ? this.calculateMarkerOffset(sameLocationVisits, index) : [0, 0];
-        const adjustedCoords = [
-            point.coordinates[1] + offset[0], 
-            point.coordinates[0] + offset[1]
-        ];
-
-        // Use calculated offset for positioning
-        const marker = L.marker(adjustedCoords, {
+        const marker = L.marker([point.coordinates[1], point.coordinates[0]], {
             icon: markerIcon,
-            zIndexOffset: isVsuzHParty ? 1000 : 0
+            zIndexOffset: hasMultipleVisits ? 100 : 0
         });
         
-        // Enhanced popup for multiple visits or single visits
         const popupContent = hasMultipleVisits ?
-            this.createMultiVisitPopup(point, sameLocationVisits, character, isVsuzHParty) :
-            this.createSingleVisitPopup(point, character, isVsuzHParty);
+            this.createConsolidatedPopup(point, allVisitsHere) :
+            this.createSingleVisitPopup(point, character);
         
         marker.bindPopup(popupContent);
         
         return marker;
     }
 
-    // 🔥 NEW: Find all visits to the same location
-    findSameLocationVisits(currentPoint, character, currentIndex) {
-        const visits = [];
-        const currentCoords = currentPoint.coordinates;
+    // Helper method to create marker HTML with duration indicators
+    createMarkerHTML(content, hasMultiple, visitCount, hasDateRange, isNumber = false) {
+        const durationIndicator = hasDateRange ? '<span class="duration-dot"></span>' : '';
+        const visitBadge = hasMultiple ? `<span class="total-visits">${visitCount}</span>` : '';
         
-        character.movementHistory?.forEach((movement, index) => {
-            if (movement.coordinates && 
-                movement.coordinates[0] === currentCoords[0] && 
-                movement.coordinates[1] === currentCoords[1]) {
-                visits.push({
-                    ...movement,
-                    visitIndex: index,
-                    isCurrent: index === currentIndex
-                });
-            }
-        });
-        
-        return visits.sort((a, b) => new Date(a.date) - new Date(b.date));
+        if (isNumber) {
+            return `
+                <div class="consolidated-marker number-marker">
+                    <div class="single-number-marker">${content}</div>
+                    ${visitBadge}
+                    ${durationIndicator}
+                </div>
+            `;
+        } else {
+            return `
+                <div class="consolidated-marker">
+                    ${content}
+                    ${visitBadge}
+                    ${durationIndicator}
+                </div>
+            `;
+        }
     }
 
-    // 🔥 NEW: Calculate offset for overlapping markers
-    calculateMarkerOffset(visits, currentIndex) {
-        const visitPosition = visits.findIndex(v => v.visitIndex === currentIndex);
-        const totalVisits = visits.length;
-        
-        if (totalVisits === 1) return [0, 0];
-        
-        // Create a circular offset pattern
-        const angle = (visitPosition * 2 * Math.PI) / totalVisits;
-        const radius = Math.min(15 + (totalVisits * 2), 30); // Scale with number of visits
-        
-        return [
-            Math.cos(angle) * radius,
-            Math.sin(angle) * radius
-        ];
-    }
-
-    // 🔥 NEW: Create popup for multiple visits to same location
-    createMultiVisitPopup(point, visits, character, isVsuzHParty = false) {
-        const partyNote = isVsuzHParty ? '<p style="color: #ff6600;"><strong>🎮 Party Journey</strong></p>' : '';
-        
+    // New method for consolidated popup with visit selection
+    createConsolidatedPopup(point, allVisits) {
         return `
-            <div class="movement-point-popup multi-visit-popup${isVsuzHParty ? ' party-point-popup' : ''}">
-                <h4>${point.location} <span class="visit-badge">${visits.length} visits</span></h4>
-                ${partyNote}
-                <p><strong>👤 Character:</strong> ${character.name}</p>
-                <p><strong>🗺️ Coordinates:</strong> [${point.coordinates[0]}, ${point.coordinates[1]}]</p>
+            <div class="consolidated-popup">
+                <h4>${point.location} <span class="total-badge">${allVisits.length} visits</span></h4>
+                <p><strong>Coordinates:</strong> [${point.coordinates[0]}, ${point.coordinates[1]}]</p>
                 
-                <div class="visits-timeline">
-                    <h5>📅 Visit History:</h5>
-                    ${visits.map((visit, index) => `
-                        <div class="visit-entry ${visit.isCurrent ? 'current-visit' : ''}">
-                            <strong>${index + 1}.</strong> ${this.formatDate(visit.date)}
-                            ${visit.isCurrent ? ' <em>(Current)</em>' : ''}
-                            ${visit.notes ? `<br><small>${visit.notes}</small>` : ''}
-                            <small class="visit-type">${visit.type || 'travel'}</small>
-                        </div>
-                    `).join('')}
+                <div class="visit-selection">
+                    <h5>Select Visit to View Details:</h5>
+                    <div class="visit-buttons">
+                        ${allVisits.map((visit, index) => `
+                            <button class="visit-btn" onclick="showVisitDetails(${index}, '${point.coordinates[0]},${point.coordinates[1]}')">
+                                <span class="visit-number">${visit.visitIndex}</span>
+                                <small>${visit.characterName}</small>
+                                <small>${this.formatDate(visit.dateStart || visit.date)}</small>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div id="visit-details-${point.coordinates[0]}-${point.coordinates[1]}" class="visit-details-container">
+                    <p style="text-align: center; color: #666; font-style: italic;">Click a visit number above to see details</p>
                 </div>
             </div>
         `;
     }
 
-    // 🔥 NEW: Create popup for single visit
-    createSingleVisitPopup(point, character, isVsuzHParty = false) {
-        const partyNote = isVsuzHParty ? '<p style="color: #ff6600;"><strong>🎮 Party Journey</strong></p>' : '';
+    createSingleVisitPopup(point, character) {
+        const movement = character.movementHistory.find(m => 
+            m.coordinates && 
+            m.coordinates[0] === point.coordinates[0] && 
+            m.coordinates[1] === point.coordinates[1] &&
+            m.location === point.location
+        );
+        
+        const hasDateRange = movement && movement.dateEnd && movement.dateEnd !== (movement.dateStart || movement.date);
+        const duration = hasDateRange ? this.calculateDuration(new Date(movement.dateStart || movement.date), new Date(movement.dateEnd)) : null;
         
         return `
-            <div class="movement-point-popup${isVsuzHParty ? ' party-point-popup' : ''}">
-                <h4>${point.location}</h4>
-                ${partyNote}
-                <p><strong>📅 Date:</strong> ${this.formatDate(point.date)}</p>
-                <p><strong>👤 Character:</strong> ${character.name}</p>
-                ${point.notes ? `<p><strong>📝 Notes:</strong> ${point.notes}</p>` : ''}
-                <p><strong>🗺️ Coordinates:</strong> [${point.coordinates[0]}, ${point.coordinates[1]}]</p>
+            <div class="movement-point-popup${hasDateRange ? ' multi-day-stay' : ''}">
+                <h4>${point.location}${hasDateRange ? ' 🏠' : ''}</h4>
+                <p><strong>Date:</strong> ${this.formatMovementDateRange(movement)}</p>
+                ${duration ? `<p class="duration-info"><strong>Duration:</strong> ${duration}</p>` : ''}
+                <p><strong>Character:</strong> ${character.name}</p>
+                ${point.notes ? `<p><strong>Notes:</strong> ${point.notes}</p>` : ''}
+                <p><strong>Coordinates:</strong> [${point.coordinates[0]}, ${point.coordinates[1]}]</p>
             </div>
         `;
+    }
+
+    // Helper method to format date ranges
+    formatMovementDateRange(movement) {
+        if (!movement) return 'Unknown date';
+        
+        const startDate = movement.dateStart || movement.date;
+        const endDate = movement.dateEnd;
+        
+        if (!startDate) return 'No date';
+        
+        const formatDate = (dateStr) => {
+            return new Date(dateStr).toLocaleDateString('de-DE');
+        };
+        
+        if (endDate && endDate !== startDate) {
+            return `${formatDate(startDate)} - ${formatDate(endDate)}`;
+        } else {
+            return formatDate(startDate);
+        }
+    }
+
+    // Helper method to calculate duration
+    calculateDuration(startDate, endDate) {
+        const timeDiff = endDate.getTime() - startDate.getTime();
+        const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+        
+        if (daysDiff === 0) return 'Same day';
+        if (daysDiff === 1) return '1 day';
+        if (daysDiff <= 7) return `${daysDiff} days`;
+        if (daysDiff <= 30) {
+            const weeks = Math.ceil(daysDiff / 7);
+            return weeks === 1 ? '1 week' : `${weeks} weeks`;
+        } else {
+            const months = Math.ceil(daysDiff / 30);
+            return months === 1 ? '1 month' : `${months} months`;
+        }
     }
 
     formatDate(dateString) {
@@ -338,7 +398,7 @@ class MovementSystem {
         pathData.isVisible = true;
         this.visibleCharacterPaths.add(characterId);
         
-        console.log(`🗺️ Showing path for ${pathData.character.name}`);
+        console.log(`Showing path for ${pathData.character.name}`);
     }
 
     // Hide individual character path
@@ -364,7 +424,7 @@ class MovementSystem {
         pathData.isVisible = false;
         this.visibleCharacterPaths.delete(characterId);
         
-        console.log(`🗺️ Hiding path for ${pathData.character.name}`);
+        console.log(`Hiding path for ${pathData.character.name}`);
     }
 
     // Show all character paths
@@ -373,7 +433,7 @@ class MovementSystem {
             this.showCharacterPath(pathData.character.id);
         });
         
-        console.log('🗺️ All character paths shown');
+        console.log('All character paths shown');
     }
 
     // Hide all character paths
@@ -382,7 +442,7 @@ class MovementSystem {
             this.hideCharacterPath(pathData.character.id);
         });
         
-        console.log('🗺️ All character paths hidden');
+        console.log('All character paths hidden');
     }
 
     // Helper method to get character path data
@@ -442,12 +502,10 @@ class MovementSystem {
         return Array.from(this.visibleCharacterPaths);
     }
 
+    // Required by main.js
     addIntegratedMovementControls() {
-        // This method is called by main.js but wasn't included in the updated file
-        // It's likely for character panel integration
-        console.log('🎮 Movement controls integration called');
+        console.log('Movement controls integration called');
         
-        // If you have a character panel system, integrate here
         if (window.characterPanel) {
             window.characterPanel.addMovementControls(this);
         }
