@@ -17,7 +17,7 @@ class CharacterSystem {
             suspicious: '#FF9800',
             hostile: '#FF5722',
             enemy: '#F44336',
-            party: '#3F51B5'
+            party: '#584cffff'
         };
         this.init();
     }
