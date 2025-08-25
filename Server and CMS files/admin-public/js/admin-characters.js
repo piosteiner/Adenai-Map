@@ -158,7 +158,7 @@ class AdminCharacters {
         // Get locations from the locations module
         const locations = window.adminLocations?.getLocations() || [];
         
-        // 🔤 SORT LOCATIONS ALPHABETICALLY by name (case-insensitive)
+        // SORT LOCATIONS ALPHABETICALLY by name (case-insensitive)
         const sortedLocations = locations.sort((a, b) => {
             const nameA = a.properties.name.toLowerCase();
             const nameB = b.properties.name.toLowerCase();
@@ -227,81 +227,81 @@ class AdminCharacters {
         });
     }
 
-    // 🔥 NEW: Handle date range changes and validation
-handleDateRangeChange() {
-    const startDate = document.getElementById('movement-date-start').value;
-    const endDate = document.getElementById('movement-date-end').value;
-    const durationDisplay = document.getElementById('duration-display');
-    const durationText = document.getElementById('duration-text');
-    
-    // Clear any previous validation messages
-    this.clearDateValidationMessages();
-    
-    if (startDate && endDate) {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
+    // Handle date range changes and validation
+    handleDateRangeChange() {
+        const startDate = document.getElementById('movement-date-start').value;
+        const endDate = document.getElementById('movement-date-end').value;
+        const durationDisplay = document.getElementById('duration-display');
+        const durationText = document.getElementById('duration-text');
         
-        // Validate end date is not before start date
-        if (end < start) {
-            this.showDateValidationError('End date cannot be before start date');
+        // Clear any previous validation messages
+        this.clearDateValidationMessages();
+        
+        if (startDate && endDate) {
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            
+            // Validate end date is not before start date
+            if (end < start) {
+                this.showDateValidationError('End date cannot be before start date');
+                durationDisplay.style.display = 'none';
+                return;
+            }
+            
+            // Calculate and display duration
+            const duration = this.calculateDuration(start, end);
+            durationText.textContent = duration;
+            durationDisplay.style.display = 'flex';
+            
+        } else if (startDate && !endDate) {
+            // Single day movement
             durationDisplay.style.display = 'none';
-            return;
+        } else {
+            durationDisplay.style.display = 'none';
         }
-        
-        // Calculate and display duration
-        const duration = this.calculateDuration(start, end);
-        durationText.textContent = duration;
-        durationDisplay.style.display = 'flex';
-        
-    } else if (startDate && !endDate) {
-        // Single day movement
-        durationDisplay.style.display = 'none';
-    } else {
-        durationDisplay.style.display = 'none';
     }
-}
 
-// 🔥 NEW: Calculate duration between two dates
-calculateDuration(startDate, endDate) {
-    const timeDiff = endDate.getTime() - startDate.getTime();
-    const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    
-    if (daysDiff === 0) {
-        return 'Same day';
-    } else if (daysDiff === 1) {
-        return '1 day stay';
-    } else if (daysDiff <= 7) {
-        return `${daysDiff} days stay`;
-    } else if (daysDiff <= 30) {
-        const weeks = Math.ceil(daysDiff / 7);
-        return weeks === 1 ? '1 week stay' : `${weeks} weeks stay`;
-    } else {
-        const months = Math.ceil(daysDiff / 30);
-        return months === 1 ? '1 month stay' : `${months} months stay`;
+    // Calculate duration between two dates
+    calculateDuration(startDate, endDate) {
+        const timeDiff = endDate.getTime() - startDate.getTime();
+        const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+        
+        if (daysDiff === 0) {
+            return 'Same day';
+        } else if (daysDiff === 1) {
+            return '1 day stay';
+        } else if (daysDiff <= 7) {
+            return `${daysDiff} days stay`;
+        } else if (daysDiff <= 30) {
+            const weeks = Math.ceil(daysDiff / 7);
+            return weeks === 1 ? '1 week stay' : `${weeks} weeks stay`;
+        } else {
+            const months = Math.ceil(daysDiff / 30);
+            return months === 1 ? '1 month stay' : `${months} months stay`;
+        }
     }
-}
 
-// 🔥 NEW: Show date validation error
-showDateValidationError(message) {
-    this.clearDateValidationMessages();
-    
-    const endDateGroup = document.getElementById('movement-date-end').parentElement;
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'date-validation-message';
-    errorDiv.innerHTML = `⚠️ ${message}`;
-    
-    endDateGroup.appendChild(errorDiv);
-    document.getElementById('movement-date-end').classList.add('error');
-}
+    // Show date validation error
+    showDateValidationError(message) {
+        this.clearDateValidationMessages();
+        
+        const endDateGroup = document.getElementById('movement-date-end').parentElement;
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'date-validation-message';
+        errorDiv.innerHTML = `⚠️ ${message}`;
+        
+        endDateGroup.appendChild(errorDiv);
+        document.getElementById('movement-date-end').classList.add('error');
+    }
 
-// 🔥 NEW: Clear date validation messages
-clearDateValidationMessages() {
-    const errorMessages = document.querySelectorAll('.date-validation-message');
-    errorMessages.forEach(msg => msg.remove());
-    
-    const errorInputs = document.querySelectorAll('input[type="date"].error');
-    errorInputs.forEach(input => input.classList.remove('error'));
-}
+    // Clear date validation messages
+    clearDateValidationMessages() {
+        const errorMessages = document.querySelectorAll('.date-validation-message');
+        errorMessages.forEach(msg => msg.remove());
+        
+        const errorInputs = document.querySelectorAll('input[type="date"].error');
+        errorInputs.forEach(input => input.classList.remove('error'));
+    }
 
     renderCharacterCard(character) {
         // Count movements
@@ -579,7 +579,7 @@ clearDateValidationMessages() {
         this.ui.openModal('character-movement-modal');
     }
 
-    // 🔥 ENHANCED: Update your renderMovementHistory method to show custom location names better
+    // FIXED: Sort by journey sequence numbers instead of dates
     renderMovementHistory(character) {
         const container = document.getElementById('movement-history-list');
         if (!container) return;
@@ -597,7 +597,11 @@ clearDateValidationMessages() {
         }
         
         // Sort movements chronologically (oldest first) to get proper journey sequence
-        const chronologicalMovements = [...movements].sort((a, b) => new Date(a.date) - new Date(b.date));
+        const chronologicalMovements = [...movements].sort((a, b) => {
+            const dateA = new Date(a.dateStart || a.date);
+            const dateB = new Date(b.dateStart || b.date);
+            return dateA - dateB;
+        });
         
         // Create a map of movement ID to journey sequence number
         const sequenceMap = new Map();
@@ -605,17 +609,23 @@ clearDateValidationMessages() {
             sequenceMap.set(movement.id, index + 1);
         });
         
-        // Sort movements by date (newest first for display) but keep sequence numbers
-        const sortedMovements = [...movements].sort((a, b) => new Date(b.date) - new Date(a.date));
+        // FIXED: Sort movements by journey sequence number (newest sequence first for display)
+        const sortedMovements = [...movements].sort((a, b) => {
+            const sequenceA = sequenceMap.get(a.id);
+            const sequenceB = sequenceMap.get(b.id);
+            return sequenceB - sequenceA; // Newest journey numbers first
+        });
         
         container.innerHTML = sortedMovements.map(movement => {
-            // Get the chronological journey sequence number
             const journeyNumber = sequenceMap.get(movement.id);
-            
-            // Better handling of location names for custom locations
             const locationDisplay = movement.location || 'Custom Location';
             const isCustom = movement.isCustomLocation || (movement.coordinates && movement.location !== movement.coordinates);
-            const locationIcon = isCustom ? '🗺️' : '📍';
+            const locationIcon = isCustom ? 'Custom' : 'Location';
+            
+            // Enhanced date range display
+            const hasDateRange = movement.dateEnd && movement.dateEnd !== (movement.dateStart || movement.date);
+            const dateDisplay = this.formatMovementDateRange(movement);
+            const durationInfo = hasDateRange ? this.calculateDuration(new Date(movement.dateStart || movement.date), new Date(movement.dateEnd)) : '';
             
             return `
                 <div class="movement-entry" data-movement-id="${movement.id}">
@@ -623,10 +633,14 @@ clearDateValidationMessages() {
                         <div class="movement-info">
                             <div class="movement-title">
                                 <span class="journey-number">${journeyNumber}</span>
-                                <h4>${locationIcon} ${locationDisplay}</h4>
+                                <h4>${locationDisplay}</h4>
                                 ${isCustom ? '<span class="custom-location-badge">Custom</span>' : ''}
+                                ${hasDateRange ? '<span class="date-range-badge">Multi-day</span>' : ''}
                             </div>
-                            <span class="movement-date">📅 ${movement.date}</span>
+                            <div class="movement-date-container">
+                                <span class="movement-date ${hasDateRange ? 'has-range' : ''}">${dateDisplay}</span>
+                                ${durationInfo ? `<span class="movement-duration">${durationInfo}</span>` : ''}
+                            </div>
                         </div>
                         <div class="movement-actions">
                             <button class="btn-secondary movement-edit-btn" data-movement="${movement.id}" title="Edit movement">✏️</button>
@@ -645,48 +659,15 @@ clearDateValidationMessages() {
             `;
         }).join('');
         
-        // Add journey summary at the top
-        const summaryHTML = `
-            <div class="journey-summary">
-                <div class="journey-stats">
-                    <span class="stat-item">
-                        <span class="stat-number">${movements.length}</span>
-                        <span class="stat-label">Total Movements</span>
-                    </span>
-                    <span class="stat-item">
-                        <span class="stat-number">${this.getUniqueLocations(movements)}</span>
-                        <span class="stat-label">Unique Locations</span>
-                    </span>
-                    <span class="stat-item">
-                        <span class="stat-number">${this.getDateRange(movements)}</span>
-                        <span class="stat-label">Journey Span</span>
-                    </span>
-                </div>
-                <div class="journey-path-preview">
-                    <strong>🛤️ Journey Path:</strong> ${this.generatePathPreview(chronologicalMovements)}
-                </div>
-            </div>
-        `;
-        
+        // Add journey summary at the top (enhanced for date ranges)
+        const summaryHTML = this.generateJourneySummaryWithDateRanges(chronologicalMovements);
         container.insertAdjacentHTML('afterbegin', summaryHTML);
         
         // Add event listeners for movement actions
-        container.querySelectorAll('.movement-edit-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const movementId = e.target.dataset.movement;
-                this.editMovement(movementId);
-            });
-        });
-        
-        container.querySelectorAll('.movement-delete-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const movementId = e.target.dataset.movement;
-                this.deleteMovement(movementId);
-            });
-        });
+        this.addMovementActionListeners(container);
     }
 
-    // 🔥 NEW: Format movement date range for display
+    // Updated helper method to format movement date range for CMS display  
     formatMovementDateRange(movement) {
         const startDate = movement.dateStart || movement.date;
         const endDate = movement.dateEnd;
@@ -704,7 +685,7 @@ clearDateValidationMessages() {
         }
     }
 
-    // 🔥 NEW: Generate enhanced journey summary with date range info
+    // Generate enhanced journey summary with date range info
     generateJourneySummaryWithDateRanges(chronologicalMovements) {
         const totalMovements = chronologicalMovements.length;
         const multiDayMovements = chronologicalMovements.filter(m => m.dateEnd && m.dateEnd !== (m.dateStart || m.date)).length;
@@ -736,7 +717,7 @@ clearDateValidationMessages() {
         `;
     }
 
-    // 🔥 NEW: Add movement action listeners (extracted for clarity)
+    // Add movement action listeners (extracted for clarity)
     addMovementActionListeners(container) {
         container.querySelectorAll('.movement-edit-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -767,7 +748,7 @@ clearDateValidationMessages() {
         }
     }
 
-    // 🔥 ENHANCED: Updated saveMovement method with date range support
+    // ENHANCED: Updated saveMovement method with date range support
     async saveMovement() {
         if (!this.auth.requireAuth()) return;
 
@@ -792,7 +773,7 @@ clearDateValidationMessages() {
             });
         }
 
-        // 🔥 NEW: Additional date range validation
+        // NEW: Additional date range validation
         if (isValid) {
             const startDate = formData.movementDateStart;
             const endDate = formData.movementDateEnd;
@@ -818,7 +799,7 @@ clearDateValidationMessages() {
             notes: formData.movementNotes || ''
         };
         
-        // 🔥 ENHANCED: Include legacy date field for compatibility
+        // ENHANCED: Include legacy date field for compatibility
         movementData.date = formData.movementDateStart;
         
         if (locationType === 'existing') {
@@ -881,7 +862,7 @@ clearDateValidationMessages() {
         }
     }
 
-    // 🔥 NEW: Helper method to count unique locations
+    // Helper method to count unique locations
     getUniqueLocations(movements) {
         const locations = new Set();
         movements.forEach(movement => {
@@ -891,7 +872,7 @@ clearDateValidationMessages() {
         return locations.size;
     }
 
-    // 🔥 NEW: Helper method to get date range
+    // Helper method to get date range
     getDateRange(movements) {
         if (movements.length === 0) return 'N/A';
         
@@ -908,7 +889,7 @@ clearDateValidationMessages() {
         return `${Math.ceil(daysDiff / 365)} years`;
     }
 
-    // 🔥 NEW: Helper method to generate path preview
+    // Helper method to generate path preview
     generatePathPreview(chronologicalMovements) {
         if (chronologicalMovements.length === 0) return 'No movements';
         
@@ -928,7 +909,7 @@ clearDateValidationMessages() {
         return `<div class="path-preview">${preview}${suffix}</div>`;
     }
 
-    // 🔥 ENHANCED: Updated editMovement method with date range support
+    // ENHANCED: Updated editMovement method with date range support
     editMovement(movementId) {
         const character = this.characters.find(c => c.id === this.editingCharacter);
         if (!character || !character.movementHistory) return;
