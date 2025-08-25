@@ -250,10 +250,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Custom Location",
+      "location": "Test Coordinate",
       "coordinates": [
-        1219,
-        1041
+        1262,
+        1049
       ],
       "description": "",
       "image": "",
@@ -310,20 +310,32 @@
           "notes": "Kampf gegen die Sternen-Heinis, nachdem sie Abu böse beäugt haben.",
           "type": "mission",
           "createdAt": "2025-08-25T10:24:43.681Z"
+        },
+        {
+          "id": "movement_1756137677339",
+          "date": "5663-06-05",
+          "location": "Test Coordinate",
+          "coordinates": [
+            1262,
+            1049
+          ],
+          "notes": "",
+          "type": "escape",
+          "createdAt": "2025-08-25T16:01:17.339Z"
         }
       ],
       "currentLocation": {
         "date": "5663-06-05",
-        "location": null,
+        "location": "Test Coordinate",
         "coordinates": [
-          1219,
-          1041
+          1262,
+          1049
         ],
-        "notes": "Kampf gegen die Sternen-Heinis, nachdem sie Abu böse beäugt haben."
+        "notes": ""
       },
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-25T10:24:43.681Z"
+      "updatedAt": "2025-08-25T16:01:17.342Z"
     }
   ],
-  "lastUpdated": "2025-08-25T10:24:43.681Z"
+  "lastUpdated": "2025-08-25T16:01:17.342Z"
 }
