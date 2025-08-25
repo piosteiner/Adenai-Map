@@ -250,10 +250,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Test Coordinate",
+      "location": "Test Location",
       "coordinates": [
-        1262,
-        1049
+        1264,
+        1057
       ],
       "description": "",
       "image": "",
@@ -314,28 +314,34 @@
         {
           "id": "movement_1756137677339",
           "date": "5663-06-05",
-          "location": "Test Coordinate",
+          "location": "Test Location",
           "coordinates": [
-            1262,
-            1049
+            1264,
+            1057
           ],
           "notes": "",
           "type": "escape",
-          "createdAt": "2025-08-25T16:01:17.339Z"
+          "createdAt": "2025-08-25T16:01:17.339Z",
+          "dateStart": "5663-06-05",
+          "dateEnd": "5663-06-14",
+          "isCustomLocation": true,
+          "updatedAt": "2025-08-25T16:49:20.817Z"
         }
       ],
       "currentLocation": {
         "date": "5663-06-05",
-        "location": "Test Coordinate",
+        "dateStart": "5663-06-05",
+        "dateEnd": "5663-06-14",
+        "location": "Test Location",
         "coordinates": [
-          1262,
-          1049
+          1264,
+          1057
         ],
         "notes": ""
       },
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-25T16:01:17.342Z"
+      "updatedAt": "2025-08-25T16:49:20.818Z"
     }
   ],
-  "lastUpdated": "2025-08-25T16:01:17.342Z"
+  "lastUpdated": "2025-08-25T16:49:20.818Z"
 }
