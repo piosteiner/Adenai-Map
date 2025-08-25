@@ -25,13 +25,108 @@ class MovementSystem {
 
         // Add global function for consolidated popups
         window.showVisitDetails = (visitIndex, coordKey) => {
-            const containerSelector = `#visit-details-${coordKey.replace(',', '-')}`;
-            const container = document.querySelector(containerSelector);
-            if (!container) return;
+        const containerSelector = `#visit-details-${coordKey.replace(',', '-')}`;
+        const container = document.querySelector(containerSelector);
+        if (!container) return;
+        
+        // Parse coordinates from the coordKey
+        const [x, y] = coordKey.split(',').map(Number);
+        const coordinates = [x, y];
+        
+        // Find all visits at this location
+        const allCharacters = window.characterSystem.getCharacters();
+        const allVisits = window.movementSystem.findAllVisitsAtLocation(coordinates, allCharacters);
+        
+        if (visitIndex >= allVisits.length) {
+            container.innerHTML = `<p style="color: red;">Visit not found.</p>`;
+            return;
+        }
+        
+        const visit = allVisits[visitIndex];
+        const movement = visit; // The visit object IS the movement data
+        const character = visit.character;
+        
+        // Check if this is a multi-day stay
+        const hasDateRange = movement.dateEnd && movement.dateEnd !== (movement.dateStart || movement.date);
+        const duration = hasDateRange ? 
+            window.movementSystem.calculateDuration(
+                new Date(movement.dateStart || movement.date), 
+                new Date(movement.dateEnd)
+            ) : null;
+        
+        // Generate the visit details HTML
+        const visitDetailsHTML = `
+            <div class="selected-visit-details${hasDateRange ? ' multi-day-stay' : ''}">
+                <div class="visit-header">
+                    <h4>${movement.location || 'Unknown Location'}${hasDateRange ? ' 🏠' : ''}</h4>
+                    <span class="visit-badge">Visit ${visit.visitIndex}</span>
+                </div>
+                
+                <div class="visit-info-grid">
+                    <div class="info-row">
+                        <strong>Character:</strong> 
+                        <span class="character-name">${character.name}</span>
+                    </div>
+                    
+                    <div class="info-row">
+                        <strong>Date:</strong> 
+                        <span class="visit-date">${window.movementSystem.formatMovementDateRange(movement)}</span>
+                    </div>
+                    
+                    ${duration ? `
+                    <div class="info-row duration-row">
+                        <strong>Duration:</strong> 
+                        <span class="duration-info">${duration}</span>
+                    </div>
+                    ` : ''}
+                    
+                    <div class="info-row">
+                        <strong>Coordinates:</strong> 
+                        <span class="coordinates">[${coordinates[0]}, ${coordinates[1]}]</span>
+                    </div>
+                    
+                    ${movement.type ? `
+                    <div class="info-row">
+                        <strong>Type:</strong> 
+                        <span class="movement-type">${movement.type}</span>
+                    </div>
+                    ` : ''}
+                    
+                    ${movement.notes ? `
+                    <div class="info-row notes-row">
+                        <strong>Notes:</strong> 
+                        <div class="movement-notes">${movement.notes}</div>
+                    </div>
+                    ` : ''}
+                </div>
+                
+                <div class="visit-navigation">
+                    ${allVisits.length > 1 ? `
+                    <small class="visit-counter">
+                        Visit ${visitIndex + 1} of ${allVisits.length} at this location
+                    </small>
+                    ` : ''}
+                </div>
+            </div>
+        `;
+        
+        container.innerHTML = visitDetailsHTML;
+        
+        // Add some visual feedback
+        container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        // Highlight the selected visit button
+        const popupElement = container.closest('.consolidated-popup');
+        if (popupElement) {
+            const allButtons = popupElement.querySelectorAll('.visit-btn');
+            allButtons.forEach(btn => btn.classList.remove('selected'));
             
-            // Find the visit data (simplified for now)
-            container.innerHTML = `<p>Loading visit ${visitIndex + 1} details...</p>`;
-        };
+            const selectedButton = popupElement.querySelector(`[onclick*="${visitIndex},"]`);
+            if (selectedButton) {
+                selectedButton.classList.add('selected');
+            }
+        }
+};
     }
 
     addCharacterMovementPaths() {
