@@ -250,10 +250,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Test Location",
+      "location": "Toftgard",
       "coordinates": [
-        1264,
-        1057
+        1392,
+        1083
       ],
       "description": "",
       "image": "",
@@ -326,22 +326,37 @@
           "dateEnd": "5663-06-14",
           "isCustomLocation": true,
           "updatedAt": "2025-08-25T16:49:20.817Z"
+        },
+        {
+          "id": "movement_1756140699063",
+          "date": "5663-06-20",
+          "dateStart": "5663-06-20",
+          "dateEnd": "5663-06-25",
+          "location": "Toftgard",
+          "coordinates": [
+            1392,
+            1083
+          ],
+          "notes": "Test übernachtung in toftgard",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-25T16:51:39.063Z"
         }
       ],
       "currentLocation": {
-        "date": "5663-06-05",
-        "dateStart": "5663-06-05",
-        "dateEnd": "5663-06-14",
-        "location": "Test Location",
+        "date": "5663-06-20",
+        "dateStart": "5663-06-20",
+        "dateEnd": "5663-06-25",
+        "location": "Toftgard",
         "coordinates": [
-          1264,
-          1057
+          1392,
+          1083
         ],
-        "notes": ""
+        "notes": "Test übernachtung in toftgard"
       },
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-25T16:49:20.818Z"
+      "updatedAt": "2025-08-25T16:51:39.063Z"
     }
   ],
-  "lastUpdated": "2025-08-25T16:49:20.818Z"
+  "lastUpdated": "2025-08-25T16:51:39.063Z"
 }
