@@ -170,7 +170,7 @@ class CoordinateCopySystem {
         this.holdIndicator.className = 'coordinate-hold-indicator';
         this.holdIndicator.innerHTML = `
             <div class="hold-content">
-                📍 [${this.currentCoordinates[0]}, ${this.currentCoordinates[1]}]
+                ${this.currentCoordinates[0]} ${this.currentCoordinates[1]}
                 <div class="hold-instruction">Press <kbd>C</kbd> to copy</div>
             </div>
         `;
