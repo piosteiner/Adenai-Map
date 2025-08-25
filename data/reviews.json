@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "c58ba19773162a829c58d151d9a209dc3137aa91",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-25T16:01:18.150Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-25T16:01:18.150Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Test Coordinate on 5663-06-05"
+    },
+    {
       "commitSha": "9ad31bace429879d94983ef742cf02d4583639e8",
       "action": "update",
       "type": "character",
@@ -821,5 +834,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-25T10:24:44.469Z"
+  "lastUpdated": "2025-08-25T16:01:18.150Z"
 }
