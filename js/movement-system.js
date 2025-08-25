@@ -76,6 +76,17 @@ class MovementSystem {
             }
         });
         
+        // Auto-show VsuzH path by default
+        const vsuzHPath = this.characterPaths.find(pathData => {
+            const name = pathData.character.name.toLowerCase();
+            return name.includes('vsuzh') || name.includes('vsuz') || pathData.character.relationship === 'party';
+        });
+
+        if (vsuzHPath) {
+            this.showCharacterPath(vsuzHPath.character.id);
+            console.log(`🎮 Auto-showing VsuzH path for: ${vsuzHPath.character.name}`);
+        }
+
         console.log(`🛤️ Created ${this.characterPaths.length} character movement paths`);
     }
 
