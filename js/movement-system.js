@@ -29,8 +29,103 @@ class MovementSystem {
             const container = document.querySelector(containerSelector);
             if (!container) return;
             
-            // Find the visit data (simplified for now)
-            container.innerHTML = `<p>Loading visit ${visitIndex + 1} details...</p>`;
+            // Parse coordinates from the coordKey
+            const [x, y] = coordKey.split(',').map(Number);
+            const coordinates = [x, y];
+            
+            // Find all visits at this location
+            const allCharacters = window.characterSystem.getCharacters();
+            const allVisits = this.findAllVisitsAtLocation(coordinates, allCharacters);
+            
+            if (visitIndex >= allVisits.length) {
+                container.innerHTML = `<p style="color: red;">Visit not found.</p>`;
+                return;
+            }
+            
+            const visit = allVisits[visitIndex];
+            const movement = visit; // The visit object IS the movement data
+            const character = visit.character;
+            
+            // Check if this is a multi-day stay
+            const hasDateRange = movement.dateEnd && movement.dateEnd !== (movement.dateStart || movement.date);
+            const duration = hasDateRange ? 
+                this.calculateDuration(
+                    new Date(movement.dateStart || movement.date), 
+                    new Date(movement.dateEnd)
+                ) : null;
+            
+            // Generate the visit details HTML
+            const visitDetailsHTML = `
+                <div class="selected-visit-details${hasDateRange ? ' multi-day-stay' : ''}">
+                    <div class="visit-header">
+                        <h4>${movement.location || 'Unknown Location'}${hasDateRange ? ' 🏠' : ''}</h4>
+                        <span class="visit-badge">Visit ${visit.visitIndex}</span>
+                    </div>
+                    
+                    <div class="visit-info-grid">
+                        <div class="info-row">
+                            <strong>Character:</strong> 
+                            <span class="character-name">${character.name}</span>
+                        </div>
+                        
+                        <div class="info-row">
+                            <strong>Date:</strong> 
+                            <span class="visit-date">${this.formatMovementDateRange(movement)}</span>
+                        </div>
+                        
+                        ${duration ? `
+                        <div class="info-row duration-row">
+                            <strong>Duration:</strong> 
+                            <span class="duration-info">${duration}</span>
+                        </div>
+                        ` : ''}
+                        
+                        <div class="info-row">
+                            <strong>Coordinates:</strong> 
+                            <span class="coordinates">[${coordinates[0]}, ${coordinates[1]}]</span>
+                        </div>
+                        
+                        ${movement.type ? `
+                        <div class="info-row">
+                            <strong>Type:</strong> 
+                            <span class="movement-type">${movement.type}</span>
+                        </div>
+                        ` : ''}
+                        
+                        ${movement.notes ? `
+                        <div class="info-row notes-row">
+                            <strong>Notes:</strong> 
+                            <div class="movement-notes">${movement.notes}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="visit-navigation">
+                        ${allVisits.length > 1 ? `
+                        <small class="visit-counter">
+                            Visit ${visitIndex + 1} of ${allVisits.length} at this location
+                        </small>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = visitDetailsHTML;
+            
+            // Add some visual feedback
+            container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Highlight the selected visit button
+            const popupElement = container.closest('.consolidated-popup');
+            if (popupElement) {
+                const allButtons = popupElement.querySelectorAll('.visit-btn');
+                allButtons.forEach(btn => btn.classList.remove('selected'));
+                
+                const selectedButton = popupElement.querySelector(`[onclick*="${visitIndex},"]`);
+                if (selectedButton) {
+                    selectedButton.classList.add('selected');
+                }
+            }
         };
     }
 
@@ -290,7 +385,7 @@ class MovementSystem {
         }
     }
 
-    // New method for consolidated popup with visit selection
+    // Updated method for consolidated popup with visit selection
     createConsolidatedPopup(point, allVisits) {
         return `
             <div class="consolidated-popup">
@@ -302,16 +397,22 @@ class MovementSystem {
                     <div class="visit-buttons">
                         ${allVisits.map((visit, index) => `
                             <button class="visit-btn" onclick="showVisitDetails(${index}, '${point.coordinates[0]},${point.coordinates[1]}')">
-                                <span class="visit-number">${visit.visitIndex}</span>
-                                <small>${visit.characterName}</small>
-                                <small>${this.formatDate(visit.dateStart || visit.date)}</small>
+                                <div class="visit-btn-content">
+                                    <span class="visit-number">${visit.visitIndex}</span>
+                                    <div class="visit-meta">
+                                        <small class="character-name">${visit.characterName}</small>
+                                        <small class="visit-date">${this.formatDate(visit.dateStart || visit.date)}</small>
+                                    </div>
+                                </div>
                             </button>
                         `).join('')}
                     </div>
                 </div>
                 
                 <div id="visit-details-${point.coordinates[0]}-${point.coordinates[1]}" class="visit-details-container">
-                    <p style="text-align: center; color: #666; font-style: italic;">Click a visit number above to see details</p>
+                    <div class="initial-message">
+                        <p>👆 Click a visit number above to see details</p>
+                    </div>
                 </div>
             </div>
         `;

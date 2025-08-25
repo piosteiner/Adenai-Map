@@ -8,6 +8,7 @@ class AdminCharacters {
         this.savedScrollPosition = null; // Add scroll position tracking
         this.ui = window.adminUI;
         this.auth = window.adminAuth;
+        this.locationDropdown = null; // Store reference to searchable dropdown
         this.init();
     }
 
@@ -129,20 +130,20 @@ class AdminCharacters {
 
     async loadCharacters() {
         try {
-            console.log('👥 Loading characters from GitHub...');
+            console.log('Loading characters from GitHub...');
             this.ui.showLoading('characters-list', 'Loading characters...');
             
             const response = await fetch('/api/characters');
             const data = await response.json();
             
             this.characters = data.characters || [];
-            console.log(`✅ Loaded ${this.characters.length} characters`);
+            console.log(`Loaded ${this.characters.length} characters`);
             
             // Populate location dropdown
             this.populateLocationDropdown();
             this.renderCharacters();
         } catch (error) {
-            console.error('❌ Failed to load characters:', error);
+            console.error('Failed to load characters:', error);
             this.ui.showToast('Failed to load characters', 'error');
             this.characters = [];
             this.renderCharacters();
@@ -153,8 +154,6 @@ class AdminCharacters {
         const select = document.getElementById(selectId);
         if (!select) return;
         
-        select.innerHTML = '<option value="">Select location...</option>';
-        
         // Get locations from the locations module
         const locations = window.adminLocations?.getLocations() || [];
         
@@ -164,16 +163,40 @@ class AdminCharacters {
             const nameB = b.properties.name.toLowerCase();
             return nameA.localeCompare(nameB);
         });
+
+        // Convert to format expected by SearchableLocationDropdown
+        const locationOptions = sortedLocations.map(location => ({
+            id: location.properties.name,
+            name: location.properties.name,
+            description: location.properties.description || '',
+            tags: location.properties.tags || []
+        }));
+
+        // Replace the select element with searchable dropdown container
+        const container = document.createElement('div');
+        container.id = `${selectId}-container`;
+        select.parentNode.replaceChild(container, select);
+
+        // Initialize searchable dropdown
+        if (selectId === 'movement-location-select') {
+            this.movementLocationDropdown = new SearchableLocationDropdown(
+                `${selectId}-container`,
+                locationOptions,
+                (selectedLocation) => {
+                    console.log('Movement location selected:', selectedLocation);
+                }
+            );
+        } else {
+            this.locationDropdown = new SearchableLocationDropdown(
+                `${selectId}-container`,
+                locationOptions,
+                (selectedLocation) => {
+                    console.log('Character location selected:', selectedLocation);
+                }
+            );
+        }
         
-        // Add sorted locations to dropdown
-        sortedLocations.forEach(location => {
-            const option = document.createElement('option');
-            option.value = location.properties.name;
-            option.textContent = location.properties.name;
-            select.appendChild(option);
-        });
-        
-        console.log(`📍 Populated dropdown "${selectId}" with ${sortedLocations.length} sorted locations`);
+        console.log(`Populated searchable dropdown "${selectId}" with ${sortedLocations.length} sorted locations`);
     }
 
     renderCharacters() {
@@ -182,7 +205,7 @@ class AdminCharacters {
         
         if (this.characters.length === 0) {
             this.ui.showEmptyState('characters-list',
-                '👥 No characters yet',
+                'No characters yet',
                 'Add your first campaign character to get started!'
             );
             return;
@@ -204,7 +227,7 @@ class AdminCharacters {
 
         if (filteredCharacters.length === 0) {
             this.ui.showEmptyState('characters-list',
-                '🔍 No matches found',
+                'No matches found',
                 'Try adjusting your search terms'
             );
             return;
@@ -288,7 +311,7 @@ class AdminCharacters {
         const endDateGroup = document.getElementById('movement-date-end').parentElement;
         const errorDiv = document.createElement('div');
         errorDiv.className = 'date-validation-message';
-        errorDiv.innerHTML = `⚠️ ${message}`;
+        errorDiv.innerHTML = `${message}`;
         
         endDateGroup.appendChild(errorDiv);
         document.getElementById('movement-date-end').classList.add('error');
@@ -311,9 +334,9 @@ class AdminCharacters {
         // Only show edit/delete buttons if authenticated
         const actionButtons = this.auth.isAuthenticated ? `
             <div class="character-actions">
-                <button class="btn-secondary character-edit-btn" data-character="${character.id}">✏️ Edit</button>
-                <button class="btn-secondary character-movements-btn" data-character="${character.id}">🛤️ Movements (${movementCount})</button>
-                <button class="btn-danger character-delete-btn" data-character="${character.id}">🗑️ Delete</button>
+                <button class="btn-secondary character-edit-btn" data-character="${character.id}">Edit</button>
+                <button class="btn-secondary character-movements-btn" data-character="${character.id}">Movements (${movementCount})</button>
+                <button class="btn-danger character-delete-btn" data-character="${character.id}">Delete</button>
             </div>
         ` : '';
         
@@ -334,14 +357,14 @@ class AdminCharacters {
                     </div>
                 </div>
                 <div class="character-details">
-                    ${character.location ? `<p><strong>📍 Current Location:</strong> ${character.location}</p>` : ''}
-                    ${character.coordinates ? `<p><strong>🗺️ Coordinates:</strong> [${character.coordinates[0]}, ${character.coordinates[1]}]</p>` : '<p><strong>⚠️ Coordinates:</strong> <em style="color: orange;">Not set</em></p>'}
-                    ${character.faction ? `<p><strong>🛡️ Faction:</strong> ${character.faction}</p>` : ''}
-                    ${character.firstMet ? `<p><strong>📅 First Met:</strong> ${character.firstMet}</p>` : ''}
-                    ${hasMovements ? `<p><strong>🛤️ Movement History:</strong> ${movementCount} locations</p>` : ''}
-                    ${latestMovement ? `<p><strong>📍 Last Seen:</strong> ${latestMovement.location || 'Custom Location'} (${latestMovement.date})</p>` : ''}
-                    ${character.description ? `<p><strong>📝 Description:</strong> ${character.description}</p>` : ''}
-                    ${character.notes ? `<p><strong>📋 Notes:</strong> ${character.notes}</p>` : ''}
+                    ${character.location ? `<p><strong>Current Location:</strong> ${character.location}</p>` : ''}
+                    ${character.coordinates ? `<p><strong>Coordinates:</strong> [${character.coordinates[0]}, ${character.coordinates[1]}]</p>` : '<p><strong>Coordinates:</strong> <em style="color: orange;">Not set</em></p>'}
+                    ${character.faction ? `<p><strong>Faction:</strong> ${character.faction}</p>` : ''}
+                    ${character.firstMet ? `<p><strong>First Met:</strong> ${character.firstMet}</p>` : ''}
+                    ${hasMovements ? `<p><strong>Movement History:</strong> ${movementCount} locations</p>` : ''}
+                    ${latestMovement ? `<p><strong>Last Seen:</strong> ${latestMovement.location || 'Custom Location'} (${latestMovement.date})</p>` : ''}
+                    ${character.description ? `<p><strong>Description:</strong> ${character.description}</p>` : ''}
+                    ${character.notes ? `<p><strong>Notes:</strong> ${character.notes}</p>` : ''}
                 </div>
                 ${actionButtons}
             </div>
@@ -350,23 +373,23 @@ class AdminCharacters {
 
     formatStatus(status) {
         const statuses = {
-            alive: '😊 Alive',
-            dead: '💀 Dead',
-            missing: '❓ Missing',
-            unknown: '🤷 Unknown'
+            alive: 'Alive',
+            dead: 'Dead',
+            missing: 'Missing',
+            unknown: 'Unknown'
         };
         return statuses[status] || status;
     }
 
     formatRelationship(relationship) {
         const relationships = {
-            ally: '😊 Ally',
-            friendly: '🙂 Friendly',
-            neutral: '😐 Neutral',
-            suspicious: '🤨 Suspicious',
-            hostile: '😠 Hostile',
-            enemy: '⚔️ Enemy',
-            party: '👩‍👩‍👧‍👦 Party'
+            ally: 'Ally',
+            friendly: 'Friendly',
+            neutral: 'Neutral',
+            suspicious: 'Suspicious',
+            hostile: 'Hostile',
+            enemy: 'Enemy',
+            party: 'Party'
         };
         return relationships[relationship] || relationship;
     }
@@ -380,7 +403,7 @@ class AdminCharacters {
         
         // Update modal title and button text
         document.querySelector('#add-character-modal .modal-header h3').textContent = 'Add New Character';
-        document.querySelector('#character-form button[type="submit"]').textContent = '💾 Save Character';
+        document.querySelector('#character-form button[type="submit"]').textContent = 'Save Character';
         
         this.populateLocationDropdown(); // Refresh location options
         this.ui.openModal('add-character-modal');
@@ -391,11 +414,11 @@ class AdminCharacters {
         
         // Save current scroll position before opening modal
         this.savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-        console.log('📍 Saved scroll position:', this.savedScrollPosition);
+        console.log('Saved scroll position:', this.savedScrollPosition);
         
         const character = this.characters.find(char => char.id === characterId);
         if (!character) {
-            this.ui.showToast('❌ Character not found', 'error');
+            this.ui.showToast('Character not found', 'error');
             return;
         }
         
@@ -404,7 +427,7 @@ class AdminCharacters {
         
         // Update modal title and button text
         document.querySelector('#add-character-modal .modal-header h3').textContent = 'Edit Character';
-        document.querySelector('#character-form button[type="submit"]').textContent = '💾 Update Character';
+        document.querySelector('#character-form button[type="submit"]').textContent = 'Update Character';
         
         // Populate and set location dropdown
         this.populateLocationDropdown();
@@ -422,6 +445,11 @@ class AdminCharacters {
             firstMet: character.firstMet || '',
             notes: character.notes || ''
         });
+
+        // Set the location in the searchable dropdown
+        if (this.locationDropdown && character.location) {
+            this.locationDropdown.setSelectedLocation(character.location);
+        }
         
         this.ui.openModal('add-character-modal');
     }
@@ -438,6 +466,9 @@ class AdminCharacters {
         const formData = this.ui.getFormData('character-form');
         if (!formData) return;
 
+        // Get location from searchable dropdown
+        const selectedLocation = this.locationDropdown?.getSelectedLocation();
+
         // Validate form
         const isValid = this.ui.validateForm('character-form', {
             name: { required: true, label: 'Character Name' }
@@ -449,7 +480,7 @@ class AdminCharacters {
         const characterData = {
             name: formData.name,
             title: formData.title || '',
-            location: formData.location || '',
+            location: selectedLocation?.name || '',
             description: formData.description || '',
             image: formData.image || '',
             status: formData.status || 'alive',
@@ -463,7 +494,7 @@ class AdminCharacters {
             const isEditing = !!this.editingCharacter;
             const originalId = this.editingCharacter;
             
-            console.log(`💾 ${isEditing ? 'Updating' : 'Saving'} character:`, characterData.name);
+            console.log(`${isEditing ? 'Updating' : 'Saving'} character:`, characterData.name);
             
             const response = await this.auth.authenticatedFetch(
                 `/api/characters${isEditing ? `/${encodeURIComponent(originalId)}` : ''}`,
@@ -477,14 +508,14 @@ class AdminCharacters {
             const result = await response.json();
             
             if (result.success) {
-                this.ui.showToast(`✅ Character "${characterData.name}" ${isEditing ? 'updated' : 'saved'} successfully!`, 'success');
+                this.ui.showToast(`Character "${characterData.name}" ${isEditing ? 'updated' : 'saved'} successfully!`, 'success');
                 await this.loadCharacters();
                 this.closeCharacterModal();
                 
                 // Restore scroll position for edits (not for new characters)
                 if (isEditing && this.savedScrollPosition !== null) {
                     setTimeout(() => {
-                        console.log('📍 Restoring scroll position to:', this.savedScrollPosition);
+                        console.log('Restoring scroll position to:', this.savedScrollPosition);
                         window.scrollTo({
                             top: this.savedScrollPosition,
                             behavior: 'smooth'
@@ -496,11 +527,11 @@ class AdminCharacters {
                 // Notify stats update
                 document.dispatchEvent(new CustomEvent('dataChanged', { detail: { type: 'characters' } }));
             } else {
-                this.ui.showToast(`❌ Failed to ${isEditing ? 'update' : 'save'} character`, 'error');
+                this.ui.showToast(`Failed to ${isEditing ? 'update' : 'save'} character`, 'error');
             }
         } catch (error) {
             console.error('Save failed:', error);
-            this.ui.showToast(`❌ Failed to ${this.editingCharacter ? 'update' : 'save'} character`, 'error');
+            this.ui.showToast(`Failed to ${this.editingCharacter ? 'update' : 'save'} character`, 'error');
         }
     }
 
@@ -509,7 +540,7 @@ class AdminCharacters {
         
         const character = this.characters.find(c => c.id === id);
         if (!character) {
-            this.ui.showToast('❌ Character not found', 'error');
+            this.ui.showToast('Character not found', 'error');
             return;
         }
         
@@ -520,7 +551,7 @@ class AdminCharacters {
         if (!confirmed) return;
 
         try {
-            console.log('🗑️ Deleting character:', character.name);
+            console.log('Deleting character:', character.name);
             
             const response = await this.auth.authenticatedFetch(
                 `/api/characters/${encodeURIComponent(id)}`,
@@ -530,17 +561,17 @@ class AdminCharacters {
             const result = await response.json();
             
             if (result.success) {
-                this.ui.showToast(`✅ Character "${character.name}" deleted successfully!`, 'success');
+                this.ui.showToast(`Character "${character.name}" deleted successfully!`, 'success');
                 await this.loadCharacters();
                 
                 // Notify stats update
                 document.dispatchEvent(new CustomEvent('dataChanged', { detail: { type: 'characters' } }));
             } else {
-                this.ui.showToast('❌ Failed to delete character', 'error');
+                this.ui.showToast('Failed to delete character', 'error');
             }
         } catch (error) {
             console.error('Delete failed:', error);
-            this.ui.showToast('❌ Failed to delete character', 'error');
+            this.ui.showToast('Failed to delete character', 'error');
         }
     }
 
@@ -554,7 +585,7 @@ class AdminCharacters {
         
         const character = this.characters.find(char => char.id === characterId);
         if (!character) {
-            this.ui.showToast('❌ Character not found', 'error');
+            this.ui.showToast('Character not found', 'error');
             return;
         }
         
@@ -562,7 +593,7 @@ class AdminCharacters {
         this.editingMovement = null;
         
         // Update modal title
-        document.querySelector('#character-movement-modal .modal-header h3').textContent = `🛤️ ${character.name} - Movement History`;
+        document.querySelector('#character-movement-modal .modal-header h3').textContent = `${character.name} - Movement History`;
         
         // Populate location dropdown for movements
         this.populateLocationDropdown('movement-location-select');
@@ -589,7 +620,7 @@ class AdminCharacters {
         if (movements.length === 0) {
             container.innerHTML = `
                 <div class="empty-state">
-                    <p>🛤️ No movement history yet</p>
+                    <p>No movement history yet</p>
                     <p style="font-size: 0.9em; opacity: 0.7;">Add the first movement entry below</p>
                 </div>
             `;
@@ -643,17 +674,17 @@ class AdminCharacters {
                             </div>
                         </div>
                         <div class="movement-actions">
-                            <button class="btn-secondary movement-edit-btn" data-movement="${movement.id}" title="Edit movement">✏️</button>
-                            <button class="btn-danger movement-delete-btn" data-movement="${movement.id}" title="Delete movement">🗑️</button>
+                            <button class="btn-secondary movement-edit-btn" data-movement="${movement.id}" title="Edit movement">Edit</button>
+                            <button class="btn-danger movement-delete-btn" data-movement="${movement.id}" title="Delete movement">Delete</button>
                         </div>
                     </div>
                     <div class="movement-details">
                         <div class="movement-detail-row">
-                            <span><strong>🗺️ Coordinates:</strong> [${movement.coordinates[0]}, ${movement.coordinates[1]}]</span>
-                            <span><strong>🎯 Type:</strong> ${movement.type || 'travel'}</span>
+                            <span><strong>Coordinates:</strong> [${movement.coordinates[0]}, ${movement.coordinates[1]}]</span>
+                            <span><strong>Type:</strong> ${movement.type || 'travel'}</span>
                         </div>
-                        ${movement.notes ? `<p><strong>📋 Notes:</strong> ${movement.notes}</p>` : ''}
-                        <p class="movement-metadata"><strong>📅 Added:</strong> ${new Date(movement.createdAt).toLocaleDateString()}</p>
+                        ${movement.notes ? `<p><strong>Notes:</strong> ${movement.notes}</p>` : ''}
+                        <p class="movement-metadata"><strong>Added:</strong> ${new Date(movement.createdAt).toLocaleDateString()}</p>
                     </div>
                 </div>
             `;
@@ -679,9 +710,9 @@ class AdminCharacters {
         };
         
         if (endDate && endDate !== startDate) {
-            return `📅 ${formatDate(startDate)} <span class="date-range-arrow">→</span> ${formatDate(endDate)}`;
+            return `${formatDate(startDate)} <span class="date-range-arrow">→</span> ${formatDate(endDate)}`;
         } else {
-            return `📅 ${formatDate(startDate)}`;
+            return `${formatDate(startDate)}`;
         }
     }
 
@@ -711,7 +742,7 @@ class AdminCharacters {
                     </span>
                 </div>
                 <div class="journey-path-preview">
-                    <strong>🛤️ Journey Path:</strong> ${this.generatePathPreview(chronologicalMovements)}
+                    <strong>Journey Path:</strong> ${this.generatePathPreview(chronologicalMovements)}
                 </div>
             </div>
         `;
@@ -755,15 +786,22 @@ class AdminCharacters {
         const formData = this.ui.getFormData('movement-form');
         if (!formData) return;
 
+        // Get location from searchable dropdown
+        const selectedLocation = this.movementLocationDropdown?.getSelectedLocation();
+
         // Validate form based on location type
         const locationType = formData.movementLocationType;
         let isValid;
         
         if (locationType === 'existing') {
-            isValid = this.ui.validateForm('movement-form', {
-                movementLocation: { required: true, label: 'Location' },
+            isValid = selectedLocation && this.ui.validateForm('movement-form', {
                 movementDateStart: { required: true, label: 'Start Date' }
             });
+            
+            if (!selectedLocation) {
+                this.ui.showToast('Please select a location', 'error');
+                return;
+            }
         } else {
             isValid = this.ui.validateForm('movement-form', {
                 movementCustomName: { required: true, label: 'Custom Location Name' },
@@ -803,7 +841,7 @@ class AdminCharacters {
         movementData.date = formData.movementDateStart;
         
         if (locationType === 'existing') {
-            movementData.location = formData.movementLocation;
+            movementData.location = selectedLocation.name;
         } else {
             movementData.location = formData.movementCustomName;
             movementData.coordinates = [parseInt(formData.movementX), parseInt(formData.movementY)];
@@ -814,7 +852,7 @@ class AdminCharacters {
             const isEditing = !!this.editingMovement;
             const characterId = this.editingCharacter;
             
-            console.log(`🛤️ ${isEditing ? 'Updating' : 'Adding'} movement with date range for character:`, characterId);
+            console.log(`${isEditing ? 'Updating' : 'Adding'} movement with date range for character:`, characterId);
             
             const url = isEditing ? 
                 `/api/characters/${encodeURIComponent(characterId)}/movements/${encodeURIComponent(this.editingMovement)}` :
@@ -829,7 +867,7 @@ class AdminCharacters {
             const result = await response.json();
             
             if (result.success) {
-                this.ui.showToast(`✅ Movement ${isEditing ? 'updated' : 'added'} successfully!`, 'success');
+                this.ui.showToast(`Movement ${isEditing ? 'updated' : 'added'} successfully!`, 'success');
                 
                 // Refresh character data
                 await this.loadCharacters();
@@ -854,11 +892,11 @@ class AdminCharacters {
                 // Notify stats update
                 document.dispatchEvent(new CustomEvent('dataChanged', { detail: { type: 'characters' } }));
             } else {
-                this.ui.showToast(`❌ Failed to ${isEditing ? 'update' : 'add'} movement`, 'error');
+                this.ui.showToast(`Failed to ${isEditing ? 'update' : 'add'} movement`, 'error');
             }
         } catch (error) {
             console.error('Movement save failed:', error);
-            this.ui.showToast(`❌ Failed to ${this.editingMovement ? 'update' : 'add'} movement`, 'error');
+            this.ui.showToast(`Failed to ${this.editingMovement ? 'update' : 'add'} movement`, 'error');
         }
     }
 
@@ -916,7 +954,7 @@ class AdminCharacters {
         
         const movement = character.movementHistory.find(m => m.id === movementId);
         if (!movement) {
-            this.ui.showToast('❌ Movement not found', 'error');
+            this.ui.showToast('Movement not found', 'error');
             return;
         }
         
@@ -939,7 +977,10 @@ class AdminCharacters {
             formValues.movementX = movement.coordinates ? movement.coordinates[0] : '';
             formValues.movementY = movement.coordinates ? movement.coordinates[1] : '';
         } else {
-            formValues.movementLocation = movement.location || '';
+            // Set the location in the searchable dropdown
+            if (this.movementLocationDropdown && movement.location) {
+                this.movementLocationDropdown.setSelectedLocation(movement.location);
+            }
         }
         
         this.ui.populateForm('movement-form', formValues);
@@ -951,7 +992,7 @@ class AdminCharacters {
         setTimeout(() => this.handleDateRangeChange(), 100);
         
         // Update form title
-        document.querySelector('#movement-form button[type="submit"]').textContent = '💾 Update Movement';
+        document.querySelector('#movement-form button[type="submit"]').textContent = 'Update Movement';
     }
 
     // Delete movement entry
@@ -963,18 +1004,18 @@ class AdminCharacters {
         
         const movement = character.movementHistory.find(m => m.id === movementId);
         if (!movement) {
-            this.ui.showToast('❌ Movement not found', 'error');
+            this.ui.showToast('Movement not found', 'error');
             return;
         }
         
         const confirmed = this.ui.confirm(
-            `Are you sure you want to delete this movement?\n\n📍 ${movement.location || 'Custom Location'} (${movement.date})\n\nThis action cannot be undone.`
+            `Are you sure you want to delete this movement?\n\n${movement.location || 'Custom Location'} (${movement.date})\n\nThis action cannot be undone.`
         );
         
         if (!confirmed) return;
 
         try {
-            console.log('🗑️ Deleting movement:', movementId);
+            console.log('Deleting movement:', movementId);
             
             const response = await this.auth.authenticatedFetch(
                 `/api/characters/${encodeURIComponent(this.editingCharacter)}/movements/${encodeURIComponent(movementId)}`,
@@ -984,7 +1025,7 @@ class AdminCharacters {
             const result = await response.json();
             
             if (result.success) {
-                this.ui.showToast('✅ Movement deleted successfully!', 'success');
+                this.ui.showToast('Movement deleted successfully!', 'success');
                 
                 // Refresh character data
                 await this.loadCharacters();
@@ -1003,11 +1044,11 @@ class AdminCharacters {
                 // Notify stats update
                 document.dispatchEvent(new CustomEvent('dataChanged', { detail: { type: 'characters' } }));
             } else {
-                this.ui.showToast('❌ Failed to delete movement', 'error');
+                this.ui.showToast('Failed to delete movement', 'error');
             }
         } catch (error) {
             console.error('Delete failed:', error);
-            this.ui.showToast('❌ Failed to delete movement', 'error');
+            this.ui.showToast('Failed to delete movement', 'error');
         }
     }
 
@@ -1046,6 +1087,219 @@ class AdminCharacters {
             lastUpdated: new Date().toISOString()
         };
         this.ui.viewRawJson(data, 'Adenai Characters - Raw JSON');
+    }
+}
+
+// Searchable Location Dropdown Class
+class SearchableLocationDropdown {
+    constructor(containerId, locations, onSelectionCallback) {
+        this.container = document.getElementById(containerId);
+        this.locations = locations || [];
+        this.filteredLocations = [...this.locations];
+        this.onSelectionCallback = onSelectionCallback;
+        this.selectedLocation = null;
+        this.isOpen = false;
+        
+        this.init();
+    }
+    
+    init() {
+        this.createDropdownHTML();
+        this.attachEventListeners();
+    }
+    
+    createDropdownHTML() {
+        this.container.innerHTML = `
+            <div class="searchable-dropdown">
+                <div class="dropdown-input-container">
+                    <input 
+                        type="text" 
+                        class="location-search-input" 
+                        placeholder="Type to search locations..."
+                        autocomplete="off"
+                    >
+                    <button type="button" class="dropdown-toggle-btn">▼</button>
+                </div>
+                <ul class="dropdown-options" style="display: none;">
+                    ${this.renderOptions()}
+                </ul>
+            </div>
+        `;
+        
+        this.input = this.container.querySelector('.location-search-input');
+        this.optionsList = this.container.querySelector('.dropdown-options');
+        this.toggleBtn = this.container.querySelector('.dropdown-toggle-btn');
+    }
+    
+    renderOptions() {
+        if (this.filteredLocations.length === 0) {
+            return '<li class="no-results">No locations found</li>';
+        }
+        
+        return this.filteredLocations.map(location => `
+            <li class="dropdown-option" data-location-id="${location.id}">
+                <span class="location-icon">📍</span>
+                <div class="location-info">
+                    <div class="location-name">${location.name}</div>
+                    ${location.description ? `<div class="location-description">${location.description}</div>` : ''}
+                </div>
+            </li>
+        `).join('');
+    }
+    
+    attachEventListeners() {
+        // Search input
+        this.input.addEventListener('input', (e) => {
+            this.handleSearch(e.target.value);
+        });
+        
+        this.input.addEventListener('focus', () => {
+            this.openDropdown();
+        });
+        
+        // Toggle button
+        this.toggleBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.isOpen ? this.closeDropdown() : this.openDropdown();
+        });
+        
+        // Option selection
+        this.optionsList.addEventListener('click', (e) => {
+            const option = e.target.closest('.dropdown-option');
+            if (option && !option.classList.contains('no-results')) {
+                this.selectLocation(option);
+            }
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!this.container.contains(e.target)) {
+                this.closeDropdown();
+            }
+        });
+        
+        // Keyboard navigation
+        this.input.addEventListener('keydown', (e) => {
+            this.handleKeyNavigation(e);
+        });
+    }
+    
+    handleSearch(searchTerm) {
+        const term = searchTerm.toLowerCase().trim();
+        
+        if (term === '') {
+            this.filteredLocations = [...this.locations];
+        } else {
+            this.filteredLocations = this.locations.filter(location => {
+                return location.name.toLowerCase().includes(term) ||
+                       (location.description && location.description.toLowerCase().includes(term)) ||
+                       (location.tags && location.tags.some(tag => tag.toLowerCase().includes(term)));
+            });
+        }
+        
+        this.updateOptionsList();
+        this.openDropdown();
+    }
+    
+    updateOptionsList() {
+        this.optionsList.innerHTML = this.renderOptions();
+    }
+    
+    selectLocation(optionElement) {
+        const locationId = optionElement.dataset.locationId;
+        const location = this.locations.find(loc => loc.id === locationId);
+        
+        if (location) {
+            this.selectedLocation = location;
+            this.input.value = location.name;
+            this.closeDropdown();
+            
+            if (this.onSelectionCallback) {
+                this.onSelectionCallback(location);
+            }
+        }
+    }
+    
+    openDropdown() {
+        this.isOpen = true;
+        this.optionsList.style.display = 'block';
+        this.toggleBtn.textContent = '▲';
+        this.container.classList.add('dropdown-open');
+    }
+    
+    closeDropdown() {
+        this.isOpen = false;
+        this.optionsList.style.display = 'none';
+        this.toggleBtn.textContent = '▼';
+        this.container.classList.remove('dropdown-open');
+    }
+    
+    handleKeyNavigation(e) {
+        const options = this.optionsList.querySelectorAll('.dropdown-option:not(.no-results)');
+        let currentIndex = Array.from(options).findIndex(opt => opt.classList.contains('highlighted'));
+        
+        switch(e.key) {
+            case 'ArrowDown':
+                e.preventDefault();
+                currentIndex = currentIndex < options.length - 1 ? currentIndex + 1 : 0;
+                this.highlightOption(options, currentIndex);
+                break;
+                
+            case 'ArrowUp':
+                e.preventDefault();
+                currentIndex = currentIndex > 0 ? currentIndex - 1 : options.length - 1;
+                this.highlightOption(options, currentIndex);
+                break;
+                
+            case 'Enter':
+                e.preventDefault();
+                if (currentIndex >= 0 && options[currentIndex]) {
+                    this.selectLocation(options[currentIndex]);
+                }
+                break;
+                
+            case 'Escape':
+                this.closeDropdown();
+                break;
+        }
+    }
+    
+    highlightOption(options, index) {
+        options.forEach(opt => opt.classList.remove('highlighted'));
+        if (options[index]) {
+            options[index].classList.add('highlighted');
+            options[index].scrollIntoView({ block: 'nearest' });
+        }
+    }
+    
+    // Public method to update locations
+    updateLocations(newLocations) {
+        this.locations = newLocations;
+        this.filteredLocations = [...newLocations];
+        this.updateOptionsList();
+    }
+    
+    // Public method to get selected location
+    getSelectedLocation() {
+        return this.selectedLocation;
+    }
+    
+    // Public method to set selected location by name
+    setSelectedLocation(locationName) {
+        const location = this.locations.find(loc => loc.name === locationName);
+        if (location) {
+            this.selectedLocation = location;
+            this.input.value = location.name;
+        }
+    }
+    
+    // Public method to clear selection
+    clear() {
+        this.selectedLocation = null;
+        this.input.value = '';
+        this.filteredLocations = [...this.locations];
+        this.updateOptionsList();
+        this.closeDropdown();
     }
 }
 

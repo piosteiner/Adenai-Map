@@ -274,6 +274,19 @@ html, body {
     border-bottom: none;
 }
 
+.timeline-entry.multi-day-stay {
+    background-color: rgba(76, 175, 80, 0.1);
+    border-left: 3px solid #4CAF50;
+    padding-left: 8px;
+    margin: 4px 0;
+}
+
+.timeline-entry .duration-info {
+    color: #4CAF50;
+    font-size: 0.9em;
+    font-weight: normal;
+}
+
 .movement-point-popup {
     max-width: 250px;
 }
@@ -408,6 +421,19 @@ html, body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.visit-btn.selected {
+    background: #007cba;
+    border-color: #007cba;
+    color: white;
+}
+
+.visit-btn-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
 .visit-btn .visit-number {
     background: #2196F3;
     color: white;
@@ -422,10 +448,19 @@ html, body {
     margin-bottom: 4px;
 }
 
+.visit-btn.selected .visit-number {
+    background: rgba(255, 255, 255, 0.9);
+    color: #007cba;
+}
+
 .visit-btn small {
     font-size: 0.7em;
     color: #666;
     line-height: 1.2;
+}
+
+.visit-btn.selected small {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .visit-details-container {
@@ -433,6 +468,144 @@ html, body {
     padding-top: 8px;
     margin-top: 8px;
     min-height: 60px;
+}
+
+.initial-message {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 10px;
+}
+
+.selected-visit-details {
+    animation: fadeIn 0.3s ease-in;
+}
+
+.selected-visit-details.multi-day-stay {
+    background-color: rgba(76, 175, 80, 0.05);
+    border-left: 3px solid #4CAF50;
+    padding-left: 12px;
+    margin-left: -12px;
+}
+
+.visit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.visit-header h4 {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.visit-badge {
+    background: #007cba;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.visit-info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.info-row strong {
+    min-width: 80px;
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-row span,
+.info-row div {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+}
+
+.character-name {
+    font-weight: 500;
+    color: #007cba;
+}
+
+.visit-date {
+    font-family: monospace;
+    background: #f8f9fa;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.duration-info {
+    color: #4CAF50;
+    font-weight: 500;
+}
+
+.coordinates {
+    font-family: monospace;
+    background: #f8f9fa;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.movement-type {
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
+.notes-row {
+    align-items: flex-start;
+}
+
+.movement-notes {
+    background: #fff9c4;
+    border-left: 3px solid #ffc107;
+    padding: 8px;
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+.visit-navigation {
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid #f0f0f0;
+    text-align: center;
+}
+
+.visit-counter {
+    color: #666;
+    font-size: 11px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ========== DURATION INDICATORS ========== */
@@ -486,6 +659,15 @@ html, body {
     border-bottom-color: #444;
 }
 
+[data-theme="dark"] .timeline-entry.multi-day-stay {
+    background-color: rgba(102, 187, 106, 0.1);
+    border-left-color: #66BB6A;
+}
+
+[data-theme="dark"] .timeline-entry .duration-info {
+    color: #81C784;
+}
+
 [data-theme="dark"] .character-path-tooltip {
     background: rgba(255, 255, 255, 0.9) !important;
     color: #333 !important;
@@ -519,12 +701,81 @@ html, body {
     background: #333;
 }
 
+[data-theme="dark"] .visit-btn.selected {
+    background: #007cba;
+    color: white;
+}
+
 [data-theme="dark"] .visit-btn small {
     color: #999;
 }
 
+[data-theme="dark"] .visit-btn.selected small {
+    color: rgba(255, 255, 255, 0.9);
+}
+
 [data-theme="dark"] .visit-details-container {
     border-top-color: #444;
+}
+
+[data-theme="dark"] .initial-message {
+    color: #999;
+}
+
+[data-theme="dark"] .selected-visit-details.multi-day-stay {
+    background-color: rgba(102, 187, 106, 0.1);
+    border-left-color: #66BB6A;
+}
+
+[data-theme="dark"] .visit-header {
+    border-bottom-color: #444;
+}
+
+[data-theme="dark"] .visit-header h4 {
+    color: #f0f0f0;
+}
+
+[data-theme="dark"] .info-row strong {
+    color: #999;
+}
+
+[data-theme="dark"] .info-row span,
+[data-theme="dark"] .info-row div {
+    color: #f0f0f0;
+}
+
+[data-theme="dark"] .character-name {
+    color: #93C5FD;
+}
+
+[data-theme="dark"] .visit-date,
+[data-theme="dark"] .coordinates {
+    background: #4a5568;
+    color: white;
+}
+
+[data-theme="dark"] .duration-info {
+    color: #81C784;
+    background: rgba(102, 187, 106, 0.2);
+}
+
+[data-theme="dark"] .movement-type {
+    background: #1E3A8A;
+    color: #93C5FD;
+}
+
+[data-theme="dark"] .movement-notes {
+    background: #744210;
+    border-left-color: #fbd38d;
+    color: #fbd38d;
+}
+
+[data-theme="dark"] .visit-navigation {
+    border-top-color: #444;
+}
+
+[data-theme="dark"] .visit-counter {
+    color: #999;
 }
 
 /* Dark theme support for duration indicators */
@@ -542,11 +793,6 @@ html, body {
 [data-theme="dark"] .movement-point-popup.multi-day-stay {
     border-left-color: #66BB6A;
     background: linear-gradient(to right, rgba(102, 187, 106, 0.1), transparent);
-}
-
-[data-theme="dark"] .duration-info {
-    color: #81C784;
-    background: rgba(102, 187, 106, 0.2);
 }
 
 /* ============================================
