@@ -156,13 +156,31 @@ class MovementSystem {
                 <p><strong>Total Locations:</strong> ${movementPoints.length}</p>
                 <p><strong>Relationship:</strong> ${character.relationship}</p>
                 <div class="movement-timeline">
-                    ${movementPoints.map((point, index) => `
-                        <div class="timeline-entry">
-                            <strong>${index + 1}.</strong> ${point.location} 
-                            <small>(${this.formatDate(point.date)})</small>
-                            ${point.notes ? `<br><em>${point.notes}</em>` : ''}
-                        </div>
-                    `).join('')}
+                    ${movementPoints.map((point, index) => {
+                        // Find the corresponding movement data to get full date range info
+                        const movement = character.movementHistory.find(m => 
+                            m.coordinates && 
+                            m.coordinates[0] === point.coordinates[0] && 
+                            m.coordinates[1] === point.coordinates[1] &&
+                            (m.location === point.location || (!m.location && point.location === 'Custom Location'))
+                        );
+                        
+                        // Calculate duration if there's a date range
+                        const hasDateRange = movement && movement.dateEnd && movement.dateEnd !== (movement.dateStart || movement.date);
+                        const duration = hasDateRange ? this.calculateDuration(new Date(movement.dateStart || movement.date), new Date(movement.dateEnd)) : null;
+                        
+                        // Format the date range
+                        const dateDisplay = movement ? this.formatMovementDateRange(movement) : this.formatDate(point.date);
+                        
+                        return `
+                            <div class="timeline-entry${hasDateRange ? ' multi-day-stay' : ''}">
+                                <strong>${index + 1}.</strong> ${point.location}${hasDateRange ? ' 🏠' : ''}
+                                <small>(${dateDisplay})</small>
+                                ${duration ? `<br><span class="duration-info"><strong>Duration:</strong> ${duration}</span>` : ''}
+                                ${point.notes ? `<br><em>${point.notes}</em>` : ''}
+                            </div>
+                        `;
+                    }).join('')}
                 </div>
             </div>
         `;
