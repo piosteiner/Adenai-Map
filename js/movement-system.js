@@ -160,6 +160,10 @@ class MovementSystem {
         const isFirst = index === 0;
         const isLast = index === totalPoints - 1;
         
+        // Check for overlapping markers at this location
+        const sameLocationVisits = this.findSameLocationVisits(point, character, index);
+        const hasMultipleVisits = sameLocationVisits.length > 1;
+
         let markerIcon;
         if (isFirst) {
             // Start marker uses 📍
@@ -176,30 +180,118 @@ class MovementSystem {
                 className: 'movement-end-marker'
             });
         } else {
+            // For middle points, show visit number or multiple visit indicator
+            const visitNumber = hasMultipleVisits ? `${index + 1}` : `${index + 1}`;
             markerIcon = L.divIcon({
-                html: `${index + 1}`,
+                html: hasMultipleVisits ?
+                `<div class="multi-visit-marker number-marker">${visitNumber}<span class="visit-count">${sameLocationVisits.length}</span></div>` :
+                visitNumber,
                 iconSize: [20, 20],
-                className: 'movement-number-marker',
+                className: `movement-number-marker${hasMultipleVisits ? ' multiple-visits' : ''}`,
                 iconAnchor: [10, 10]
             });
         }
         
-        // Use same coordinate system as characters
-        const marker = L.marker([point.coordinates[1], point.coordinates[0]], {
-            icon: markerIcon
+        // Calculate offset for overlapping markers
+        const offset = hasMultipleVisits ? this.calculateMarkerOffset(sameLocationVisits, index) : [0, 0];
+        const adjustedCoords = [
+            point.coordinates[1] + offset[0], 
+            point.coordinates[0] + offset[1]
+        ];
+
+        // Use calculated offset for positioning
+        const marker = L.marker(adjustedCoords, {
+            icon: markerIcon,
+            zIndexOffset: isVsuzHParty ? 1000 : 0
         });
         
-        marker.bindPopup(`
-            <div class="movement-point-popup">
+        // Enhanced popup for multiple visits or single visits
+        const popupContent = hasMultipleVisits ?
+            this.createMultiVisitPopup(point, sameLocationVisits, character, isVsuzHParty) :
+            this.createSingleVisitPopup(point, character, isVsuzHParty);
+        
+        marker.bindPopup(popupContent);
+        
+        return marker;
+    }
+
+    // 🔥 NEW: Find all visits to the same location
+    findSameLocationVisits(currentPoint, character, currentIndex) {
+        const visits = [];
+        const currentCoords = currentPoint.coordinates;
+        
+        character.movementHistory?.forEach((movement, index) => {
+            if (movement.coordinates && 
+                movement.coordinates[0] === currentCoords[0] && 
+                movement.coordinates[1] === currentCoords[1]) {
+                visits.push({
+                    ...movement,
+                    visitIndex: index,
+                    isCurrent: index === currentIndex
+                });
+            }
+        });
+        
+        return visits.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    // 🔥 NEW: Calculate offset for overlapping markers
+    calculateMarkerOffset(visits, currentIndex) {
+        const visitPosition = visits.findIndex(v => v.visitIndex === currentIndex);
+        const totalVisits = visits.length;
+        
+        if (totalVisits === 1) return [0, 0];
+        
+        // Create a circular offset pattern
+        const angle = (visitPosition * 2 * Math.PI) / totalVisits;
+        const radius = Math.min(15 + (totalVisits * 2), 30); // Scale with number of visits
+        
+        return [
+            Math.cos(angle) * radius,
+            Math.sin(angle) * radius
+        ];
+    }
+
+    // 🔥 NEW: Create popup for multiple visits to same location
+    createMultiVisitPopup(point, visits, character, isVsuzHParty = false) {
+        const partyNote = isVsuzHParty ? '<p style="color: #ff6600;"><strong>🎮 Party Journey</strong></p>' : '';
+        
+        return `
+            <div class="movement-point-popup multi-visit-popup${isVsuzHParty ? ' party-point-popup' : ''}">
+                <h4>${point.location} <span class="visit-badge">${visits.length} visits</span></h4>
+                ${partyNote}
+                <p><strong>👤 Character:</strong> ${character.name}</p>
+                <p><strong>🗺️ Coordinates:</strong> [${point.coordinates[0]}, ${point.coordinates[1]}]</p>
+                
+                <div class="visits-timeline">
+                    <h5>📅 Visit History:</h5>
+                    ${visits.map((visit, index) => `
+                        <div class="visit-entry ${visit.isCurrent ? 'current-visit' : ''}">
+                            <strong>${index + 1}.</strong> ${this.formatDate(visit.date)}
+                            ${visit.isCurrent ? ' <em>(Current)</em>' : ''}
+                            ${visit.notes ? `<br><small>${visit.notes}</small>` : ''}
+                            <small class="visit-type">${visit.type || 'travel'}</small>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    // 🔥 NEW: Create popup for single visit
+    createSingleVisitPopup(point, character, isVsuzHParty = false) {
+        const partyNote = isVsuzHParty ? '<p style="color: #ff6600;"><strong>🎮 Party Journey</strong></p>' : '';
+        
+        return `
+            <div class="movement-point-popup${isVsuzHParty ? ' party-point-popup' : ''}">
                 <h4>${point.location}</h4>
+                ${partyNote}
                 <p><strong>📅 Date:</strong> ${this.formatDate(point.date)}</p>
                 <p><strong>👤 Character:</strong> ${character.name}</p>
                 ${point.notes ? `<p><strong>📝 Notes:</strong> ${point.notes}</p>` : ''}
                 <p><strong>🗺️ Coordinates:</strong> [${point.coordinates[0]}, ${point.coordinates[1]}]</p>
             </div>
-        `);
-        
-        return marker;
+        `;
     }
 
     formatDate(dateString) {
