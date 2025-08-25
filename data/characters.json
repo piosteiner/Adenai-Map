@@ -250,9 +250,9 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Silbergrat",
+      "location": "Custom Location",
       "coordinates": [
-        1240,
+        1219,
         1041
       ],
       "description": "",
@@ -298,20 +298,32 @@
           "notes": "",
           "type": "stay",
           "createdAt": "2025-08-24T23:31:46.547Z"
+        },
+        {
+          "id": "movement_1756117483681",
+          "date": "5663-06-05",
+          "location": null,
+          "coordinates": [
+            1219,
+            1041
+          ],
+          "notes": "Kampf gegen die Sternen-Heinis, nachdem sie Abu böse beäugt haben.",
+          "type": "mission",
+          "createdAt": "2025-08-25T10:24:43.681Z"
         }
       ],
       "currentLocation": {
-        "date": "5663-06-04",
-        "location": "Silbergrat",
+        "date": "5663-06-05",
+        "location": null,
         "coordinates": [
-          1240,
+          1219,
           1041
         ],
-        "notes": ""
+        "notes": "Kampf gegen die Sternen-Heinis, nachdem sie Abu böse beäugt haben."
       },
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-24T23:31:46.547Z"
+      "updatedAt": "2025-08-25T10:24:43.681Z"
     }
   ],
-  "lastUpdated": "2025-08-24T23:31:46.547Z"
+  "lastUpdated": "2025-08-25T10:24:43.681Z"
 }
