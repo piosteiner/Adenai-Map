@@ -98,7 +98,7 @@ class CoordinateCopySystem {
             const content = this.holdIndicator.querySelector('.hold-content');
             if (content) {
                 content.innerHTML = `
-                    [${this.currentCoordinates[0]}, ${this.currentCoordinates[1]}]
+                    ${this.currentCoordinates[0]} ${this.currentCoordinates[1]}
                     <div class="hold-instruction">Press <kbd>C</kbd> to copy</div>
                 `;
             }
