@@ -33,12 +33,12 @@ class CoordinateCopySystem {
         // Mouse events
         map.on('mousedown', (e) => this.startHold(e));
         map.on('mouseup', () => this.endHold());
-        map.on('mousemove', (e) => this.updateCoordinates(e));
+        map.on('mousemove', (e) => this.handleMouseMove(e));
 
         // Touch events for mobile
         map.on('touchstart', (e) => this.startHold(e));
         map.on('touchend', () => this.endHold());
-        map.on('touchmove', (e) => this.updateCoordinates(e));
+        map.on('touchmove', (e) => this.handleMouseMove(e));
 
         // Keyboard listener
         document.addEventListener('keydown', (e) => this.handleKeyPress(e));
@@ -74,6 +74,15 @@ class CoordinateCopySystem {
         this.hideHoldIndicator();
     }
 
+    handleMouseMove(e) {
+        this.updateCoordinates(e);
+        
+        // Update indicator position if it's showing
+        if (this.isHolding && this.holdIndicator) {
+            this.updateIndicatorPosition(e);
+        }
+    }
+
     updateCoordinates(e) {
         // Convert Leaflet latlng to map coordinates
         const latlng = e.latlng;
@@ -83,6 +92,17 @@ class CoordinateCopySystem {
         const y = Math.round(latlng.lat);
         
         this.currentCoordinates = [x, y];
+        
+        // Update indicator content if showing
+        if (this.isHolding && this.holdIndicator) {
+            const content = this.holdIndicator.querySelector('.hold-content');
+            if (content) {
+                content.innerHTML = `
+                    [${this.currentCoordinates[0]}, ${this.currentCoordinates[1]}]
+                    <div class="hold-instruction">Press <kbd>C</kbd> to copy</div>
+                `;
+            }
+        }
     }
 
     handleKeyPress(e) {
@@ -157,14 +177,22 @@ class CoordinateCopySystem {
 
         document.body.appendChild(this.holdIndicator);
 
-        // Position near cursor (with offset to not interfere)
+        // Initial positioning
+        this.updateIndicatorPosition(e);
+    }
+
+    updateIndicatorPosition(e) {
+        if (!this.holdIndicator) return;
+
+        // Position near cursor with offset
         if (e.originalEvent) {
             const clientX = e.originalEvent.clientX || (e.originalEvent.touches && e.originalEvent.touches[0].clientX);
             const clientY = e.originalEvent.clientY || (e.originalEvent.touches && e.originalEvent.touches[0].clientY);
             
             if (clientX && clientY) {
-                this.holdIndicator.style.left = `${clientX + 20}px`;
-                this.holdIndicator.style.top = `${clientY - 60}px`;
+                // Position with offset to not block cursor
+                this.holdIndicator.style.left = `${clientX + 15}px`;
+                this.holdIndicator.style.top = `${clientY - 50}px`;
             }
         }
     }
@@ -226,7 +254,7 @@ class CoordinateCopySystem {
         styles.textContent = `
             .coordinate-hold-indicator {
                 position: fixed;
-                background: rgba(0, 0, 0, 0.9);
+                background: rgba(128, 128, 128, 0.6);
                 color: white;
                 padding: 8px 12px;
                 border-radius: 8px;
@@ -234,10 +262,11 @@ class CoordinateCopySystem {
                 font-size: 13px;
                 z-index: 10000;
                 pointer-events: none;
-                border: 2px solid #4CAF50;
-                animation: pulseGreen 1s ease-in-out infinite alternate;
+                border: 2px solid rgba(64, 64, 64, 0.8);
                 box-shadow: 0 4px 12px rgba(0,0,0,0.3);
                 user-select: none;
+                backdrop-filter: blur(2px);
+                transition: all 0.1s ease;
             }
 
             .hold-content {
@@ -247,22 +276,17 @@ class CoordinateCopySystem {
             .hold-instruction {
                 font-size: 11px;
                 margin-top: 4px;
-                color: #ccc;
+                color: #ddd;
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             }
 
             .hold-instruction kbd {
-                background: #333;
-                border: 1px solid #555;
+                background: rgba(51, 51, 51, 0.8);
+                border: 1px solid rgba(85, 85, 85, 0.8);
                 border-radius: 3px;
                 padding: 1px 4px;
                 font-size: 10px;
                 color: #fff;
-            }
-
-            @keyframes pulseGreen {
-                from { border-color: #4CAF50; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
-                to { border-color: #66BB6A; box-shadow: 0 4px 16px rgba(76, 175, 80, 0.4); }
             }
 
             @keyframes slideInFromRight {
