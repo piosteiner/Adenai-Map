@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "a46ccb0ed186d9b95ba7b368cd2d22d61b7140ce",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lia Karthright",
+      "user": "Pio`s Test User",
+      "timestamp": "2025-08-26T21:42:12.086Z",
+      "status": "pending",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewNotes": "",
+      "commitMessage": "Update character: lia_karthright (by Pio`s Test User) - added title"
+    },
+    {
       "commitSha": "fcb5c58e45fce2b9106cc8ec0ad89f6092cd340e",
       "action": "update",
       "type": "location",
@@ -1874,5 +1887,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T13:47:47.211Z"
+  "lastUpdated": "2025-08-26T21:42:12.086Z"
 }
