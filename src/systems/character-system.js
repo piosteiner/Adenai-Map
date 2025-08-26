@@ -51,7 +51,7 @@ class CharacterSystem {
     async loadCharacters() {
         try {
             console.log('👥 Loading characters from server...');
-            const response = await fetch('data/characters.json');
+            const response = await fetch('public/data/characters.json');
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);

@@ -15,7 +15,7 @@ class LocationSystem {
         const isMobile = window.mapCore.getIsMobile();
         
         this.dotOrangeIcon = L.icon({
-            iconUrl: 'icons/dot_orange.svg',
+            iconUrl: 'public/icons/dot_orange.svg',
             iconSize: isMobile ? [48, 48] : [32, 32],
             iconAnchor: isMobile ? [24, 24] : [16, 16],
             popupAnchor: [0, -32]
@@ -26,7 +26,7 @@ class LocationSystem {
         try {
             console.log('📍 Loading locations from GeoJSON...');
             
-            const response = await fetch('data/places.geojson');
+            const response = await fetch('public/data/places.geojson');
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }

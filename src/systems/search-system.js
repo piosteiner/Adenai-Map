@@ -139,7 +139,7 @@ class SearchSystem {
             const filename = window.mapCore.sanitizeFilename(result.name);
             return `
                 <div class="dropdown-item location-result">
-                    <img src="images/${filename}.jpg" alt="${result.name}" onerror="this.style.display='none'" />
+                    <img src="public/images/${filename}.jpg" alt="${result.name}" onerror="this.style.display='none'" />
                     <div class="dropdown-text">
                         <strong>📍 ${result.name}</strong><br>
                         <span>${result.desc.replace(/(<([^>]+)>)/gi, '').substring(0, 100)}...</span>

@@ -5,7 +5,7 @@ const mapextension1 = [
 ];
 
 //Map Expansion
-L.imageOverlay('images/mapextension_east.png', mapextension1, {
+L.imageOverlay('public/images/mapextension_east.png', mapextension1, {
   interactive: false
 }).addTo(map);
 
@@ -18,7 +18,7 @@ const goblinhole = [
 ];
 
 //Goblin Hole
-L.imageOverlay('images/goblin_hole.png', goblinhole, {
+L.imageOverlay('public/images/goblin_hole.png', goblinhole, {
   interactive: false
 }).addTo(map);
 
@@ -31,7 +31,7 @@ const ship1 = [
 ];
 
 //Ship to Motu Motu
-L.imageOverlay('images/vsuzh_ship_mirrored.png', ship1, {
+L.imageOverlay('public/images/vsuzh_ship_mirrored.png', ship1, {
   interactive: false
 }).addTo(map);
 
@@ -44,7 +44,7 @@ const shipfly = [
 ];
 
 //Ship flying down
-L.imageOverlay('images/vsuzh_ship_fly.png', shipfly, {
+L.imageOverlay('public/images/vsuzh_ship_fly.png', shipfly, {
   interactive: false
 }).addTo(map);
 
@@ -57,7 +57,7 @@ const ship2 = [
 ];
 
 //Ship to Upeto
-L.imageOverlay('images/vsuzh_ship.png', ship2, {
+L.imageOverlay('public/images/vsuzh_ship.png', ship2, {
   interactive: false
 }).addTo(map);
 
@@ -70,7 +70,7 @@ const atlantisBubble = [
 ];
 
 //Atlantis Underwater
-L.imageOverlay('images/atlantis_bubble.png', atlantisBubble, {
+L.imageOverlay('public/images/atlantis_bubble.png', atlantisBubble, {
   interactive: false
 }).addTo(map);
 
@@ -83,7 +83,7 @@ const atlantisClouds = [
 ];
 
 //Atlantis Flying
-L.imageOverlay('images/atlantis_clouds.png', atlantisClouds, {
+L.imageOverlay('public/images/atlantis_clouds.png', atlantisClouds, {
   interactive: false
 }).addTo(map);
 
@@ -100,7 +100,7 @@ L.imageOverlay('images/atlantis_clouds.png', atlantisClouds, {
 //  [1200 + 40, 2210 + 40]   // Northeast corner
 //];
 
-//const atlantisImage = 'images/atlantis_general.png';
+//const atlantisImage = 'public/images/atlantis_general.png';
 //const atlantisOptions = { interactive: false };
 
 //L.imageOverlay(atlantisImage, atlantisGeneral1, atlantisOptions).addTo(map);
