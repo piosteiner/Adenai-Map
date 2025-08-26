@@ -25,7 +25,7 @@
         "name": "Rena",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Rena, bitte kontaktiere den Websitenbetreiber.",
         "contentUrl": null,
-        "region": "rena_region",
+        "region": "Rena Region",
         "type": "city",
         "visited": false
       },
