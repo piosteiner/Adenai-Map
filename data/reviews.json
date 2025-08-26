@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "d6d3cb84621be9dace6386ef49a5fad69f051293",
+      "action": "update",
+      "type": "location",
+      "itemName": "Siedlung nordwestlich von Rena",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:56:05.622Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:56:05.622Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Siedlung nordwestlich von Rena (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "fe54cc26aecb980fc5cac1676f1cdd743627884e",
       "action": "update",
       "type": "location",
@@ -1601,5 +1614,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:55:46.052Z"
+  "lastUpdated": "2025-08-26T06:56:05.622Z"
 }
