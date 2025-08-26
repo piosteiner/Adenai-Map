@@ -884,7 +884,11 @@
       "type": "Feature",
       "properties": {
         "name": "Föhrenhauch",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Rena Region",
+        "type": "town",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
