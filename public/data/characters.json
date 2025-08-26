@@ -172,19 +172,16 @@
     {
       "id": "test",
       "name": "Test",
-      "title": "",
-      "location": "Estu Vin",
-      "coordinates": [
-        1846,
-        1203
-      ],
-      "description": "",
+      "title": "Herrscher des Tests",
+      "location": "",
+      "coordinates": null,
+      "description": "Beschreibung-Test",
       "image": "",
       "status": "alive",
-      "faction": "",
+      "faction": "Testfraktion",
       "relationship": "ally",
-      "firstMet": "",
-      "notes": "",
+      "firstMet": "2022-01-01",
+      "notes": "Notizen-Test",
       "movementHistory": [
         {
           "id": "movement_1755878742652",
@@ -257,7 +254,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-22T15:11:48.559Z",
-      "updatedAt": "2025-08-23T05:54:43.342Z"
+      "updatedAt": "2025-08-26T23:21:09.987Z"
     },
     {
       "id": "vsuzh",
@@ -371,5 +368,5 @@
       "updatedAt": "2025-08-25T16:51:39.063Z"
     }
   ],
-  "lastUpdated": "2025-08-26T23:19:16.595Z"
+  "lastUpdated": "2025-08-26T23:21:09.987Z"
 }
