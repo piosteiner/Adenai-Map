@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "c1a7d447e71123666c91e03285512423fd53110d",
+      "action": "update",
+      "type": "location",
+      "itemName": "Unbekanntes Haus",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:55:24.873Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:55:24.873Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Unbekanntes Haus (by gm) - updated region, marked as unvisited"
+    },
+    {
       "commitSha": "872938a19717c8baa20dec3432b4a0e05d6c21d3",
       "action": "update",
       "type": "location",
@@ -1575,5 +1588,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:55:07.690Z"
+  "lastUpdated": "2025-08-26T06:55:24.873Z"
 }
