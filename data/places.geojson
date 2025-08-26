@@ -385,6 +385,7 @@
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Kalthar, bitte kontaktiere den Websitenbetreiber.",
         "contentUrl": null,
         "region": "Rena Region",
+        "type": "town",
         "visited": false
       },
       "geometry": {
