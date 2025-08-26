@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "e0708107fd683ab52f64ea5396a99e9df0581497",
+      "action": "update",
+      "type": "location",
+      "itemName": "Goblin Loch",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:48:08.147Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:48:08.147Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Goblin Loch (by gm) - updated region, updated type"
+    },
+    {
       "commitSha": "c1f1efde5ca3d60817d60a5b95de41e3af92192f",
       "action": "update",
       "type": "location",
@@ -1302,5 +1315,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:47:48.743Z"
+  "lastUpdated": "2025-08-26T06:48:08.147Z"
 }
