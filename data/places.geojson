@@ -832,7 +832,8 @@
         "name": "Siedlung südlich von Rena",
         "description": "Details sind noch zu entdecken.",
         "contentUrl": null,
-        "region": "rena_region",
+        "region": "Rena Region",
+        "type": "village",
         "visited": false
       },
       "geometry": {
