@@ -366,7 +366,9 @@
       "properties": {
         "name": "Donnermund",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Donnermund, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/donnermund.html"
+        "contentUrl": null,
+        "region": "Ewige Donnerklüfte",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
