@@ -349,7 +349,9 @@
       "properties": {
         "name": "Elissastadt",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Elissastadt, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/elissastadt.html"
+        "contentUrl": null,
+        "region": "Tua Danar",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
