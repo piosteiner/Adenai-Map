@@ -813,7 +813,10 @@
       "type": "Feature",
       "properties": {
         "name": "Unbekanntes Haus",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Rena Region",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
