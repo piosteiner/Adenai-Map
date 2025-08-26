@@ -580,7 +580,11 @@
       "type": "Feature",
       "properties": {
         "name": "Tangoa",
-        "description": "Die grösste Stadt in der Region Upeto. Eine hochrangige Person, namens Vazeer (teilweise auch Vezier geschrieben) wurde von den Carthrights eingeladen, als die VsuzH in der Arena von Torftgard gekämpft hatten. Details sind noch zu entdecken."
+        "description": "Die grösste Stadt in der Region Upeto. Eine hochrangige Person, namens Vazeer (teilweise auch Vezier geschrieben) wurde von den Carthrights eingeladen, als die VsuzH in der Arena von Torftgard gekämpft hatten. Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Upeto",
+        "type": "city",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
