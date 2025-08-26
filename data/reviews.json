@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "7ac74481b65ae4ab1ad9285bb040890b0c9cd8d3",
+      "action": "update",
+      "type": "location",
+      "itemName": "Olecea",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:31:06.573Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:31:06.573Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Olecea (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "30a802a6b273cd0432f1d873ba0f8746193c5e25",
       "action": "update",
       "type": "location",
@@ -886,5 +899,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:30:42.660Z"
+  "lastUpdated": "2025-08-26T06:31:06.573Z"
 }
