@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "e016ad41a236246795b2d89b6612db0c94061988",
+      "action": "update",
+      "type": "location",
+      "itemName": "Cinnabar Felder",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:52:06.527Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:52:06.527Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Cinnabar Felder (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "70188e12a2a7419765ac7ab0f0c04a105f2c5c6a",
       "action": "update",
       "type": "location",
@@ -1445,5 +1458,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:51:43.127Z"
+  "lastUpdated": "2025-08-26T06:52:06.527Z"
 }
