@@ -177,14 +177,19 @@ class AdminLocations {
     
     formatType(type) {
         const types = {
-            city: '🏙️ City',
-            town: '🏘️ Town', 
-            village: '🏡 Village',
-            landmark: '🗿 Landmark',
-            dungeon: '🏴‍☠️ Dungeon',
-            ruin: '🏛️ Ruin',
-            camp: '⛺ Camp',
-            unknown: '❓ Unknown'
+            city: '🏙️ Stadt',
+            town: '🏘️ Dorf',
+            village: '🏡 Weiler',
+            camp: '⛺ Lager',
+            landmark: '🗿 Orientierungspunkt',
+            ruin: '🏛️ Ruine',
+            dungeon: '☠️ Dungeon',
+            monster: '🐉 Monster',
+            environment: '🌳 Umgebung',
+            mountain: '⛰️ Berg/Gebirge',
+            lake: '💧 Gewässer',
+            island: '🏝️ Insel',
+            unknown: '❓ Unbekannt'
         };
         return types[type] || `❓ ${type}`;
     }
@@ -207,6 +212,8 @@ class AdminLocations {
             east_sea: 'Östliche See',
             west_sea: 'Westliche See',
             heaven: 'Himmel',
+            underdark: 'Underdark',
+            feywild: 'Feywild',
             unknown: 'Unbekannt',
             other: 'Andere'
         };

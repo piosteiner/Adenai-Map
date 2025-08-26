@@ -283,6 +283,7 @@
                             <option value="west_sea">Westliche See</option>
                             <option value="heaven">Himmel</option>
                             <option value="underdark">Underdark</option>
+                            <option value="feywild">Feywild</option>
                             <option value="unknown">Unbekannt</option>
                             <option value="other">Andere</option>
                         </select>
@@ -305,14 +306,19 @@
                 <div class="form-group">
                     <label>🏛️ Type</label>
                     <select name="type">
-                        <option value="city">🏙️ City</option>
-                        <option value="town">🏘️ Town</option>
-                        <option value="village">🏡 Village</option>
-                        <option value="landmark">🗿 Landmark</option>
-                        <option value="dungeon">🏴‍☠️ Dungeon</option>
-                        <option value="ruin">🏛️ Ruin</option>
-                        <option value="camp">⛺ Camp</option>
-                        <option value="other">❓ Other</option>
+                        <option value="city">🏙️ Stadt</option>
+                        <option value="town">🏘️ Dorf</option>
+                        <option value="village">🏡 Weiler</option>
+                        <option value="camp">⛺ Lager</option>
+                        <option value="landmark">🗿 Orientierungspunkt</option>
+                        <option value="ruin">🏛️ Ruine</option>
+                        <option value="dungeon">☠️ Dungeon</option>
+                        <option value="monster">🐉 Monster</option>
+                        <option value="environment">🌳 Umgebung</option>
+                        <option value="mountain">⛰️ Berg/Gebirge</option>
+                        <option value="lake">💧 Gewässer</option>
+                        <option value="island">🏝️ Insel</option>
+                        <option value="unknown">❓ Unbekannt</option>
                     </select>
                 </div>
                 
@@ -367,10 +373,11 @@
                     <div class="form-group">
                         <label>💗 Status</label>
                         <select name="status">
-                            <option value="alive">😊 Alive</option>
-                            <option value="dead">💀 Dead</option>
-                            <option value="missing">❓ Missing</option>
-                            <option value="unknown">🤷 Unknown</option>
+                            <option value="alive">😊 Lebend</option>
+                            <option value="dead">💀 Verstorben</option>
+                            <option value="undead">🧟 Untot</option>
+                            <option value="missing">❓ Vermisst</option>
+                            <option value="unknown">🤷 Unbekannt</option>
                         </select>
                     </div>
                 </div>
@@ -383,26 +390,26 @@
                     <div class="form-group">
                         <label>🤝 Relationship</label>
                         <select name="relationship">
-                            <option value="ally">😊 Ally</option>
-                            <option value="friendly">🙂 Friendly</option>
+                            <option value="ally">😊 Verbündet</option>
+                            <option value="friendly">🙂 Freundlich</option>
                             <option value="neutral">😐 Neutral</option>
-                            <option value="suspicious">🤨 Suspicious</option>
-                            <option value="hostile">😠 Hostile</option>
-                            <option value="enemy">⚔️ Enemy</option>
-                            <option value="unknown">🤷 Unknown</option>
-                            <option value="party">👩‍👩‍👧‍👦 Party</option>
+                            <option value="suspicious">🤨 Suspekt</option>
+                            <option value="hostile">😠 Ablehenend</option>
+                            <option value="enemy">⚔️ Feindlich</option>
+                            <option value="unknown">🤷 Unbekannt</option>
+                            <option value="party">👩‍👩‍👧‍👦 Gruppe</option>
                         </select>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label>📝 Description</label>
-                    <textarea name="description" rows="3" placeholder="Describe this character..."></textarea>
+                    <label>📝 Beschreibung</label>
+                    <textarea name="description" rows="3" placeholder="Beschreibe diesen Charakter..."></textarea>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>📅 First Met</label>
+                        <label>📅 Erstes Treffen</label>
                         <input type="date" name="firstMet">
                     </div>
                     <div class="form-group">
@@ -412,8 +419,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>📋 Notes</label>
-                    <textarea name="notes" rows="2" placeholder="Additional notes about this character..."></textarea>
+                    <label>📋 Notizen</label>
+                    <textarea name="notes" rows="2" placeholder="Zusätzliche Notizen zu diesem Charakter..."></textarea>
                 </div>
                 
                 <div class="form-actions">
@@ -514,15 +521,15 @@
                         <div class="form-group">
                             <label for="movement-type">🎯 Movement Type:</label>
                             <select id="movement-type" name="movementType">
-                                <option value="stay">🏡 Stay</option>
-                                <option value="travel">🚶 Travel</option>
-                                <option value="return">🔄 Return</option>
-                                <option value="meeting">🤝 Meeting</option>
+                                <option value="stay">🏡 Aufenthalt</option>
+                                <option value="travel">🚶 Reise</option>
+                                <option value="return">🔄 Rückkehr</option>
+                                <option value="meeting">🤝 Treffen</option>
                                 <option value="mission">⚔️ Mission</option>
-                                <option value="exile">🚪 Exile</option>
-                                <option value="capture">⛓️ Capture</option>
-                                <option value="escape">🏃 Escape</option>
-                                <option value="other">❓ Other</option>
+                                <option value="exile">🚪 Exil</option>
+                                <option value="capture">⛓️ Gefangenschaft</option>
+                                <option value="escape">🏃 Flucht</option>
+                                <option value="other">❓ Andere</option>
                             </select>
                         </div>
                         

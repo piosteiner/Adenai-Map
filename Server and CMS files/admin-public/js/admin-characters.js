@@ -350,23 +350,25 @@ class AdminCharacters {
 
     formatStatus(status) {
         const statuses = {
-            alive: '😊 Alive',
-            dead: '💀 Dead',
-            missing: '❓ Missing',
-            unknown: '🤷 Unknown'
+            alive: '😊 Lebend',
+            dead: '💀 Verstorben',
+            undead: '🧟 Untot',
+            missing: '❓ Vermisst',
+            unknown: '🤷 Unbekannt'
         };
         return statuses[status] || status;
     }
 
     formatRelationship(relationship) {
         const relationships = {
-            ally: '😊 Ally',
-            friendly: '🙂 Friendly',
+            ally: '😊 Verbündet',
+            friendly: '🙂 Freundlich',
             neutral: '😐 Neutral',
-            suspicious: '🤨 Suspicious',
-            hostile: '😠 Hostile',
-            enemy: '⚔️ Enemy',
-            party: '👩‍👩‍👧‍👦 Party'
+            suspicious: '🤨 Suspekt',
+            hostile: '😠 Ablehnend',
+            enemy: '⚔️ Feindlich',
+            unknown: '🤷 Unbekannt',
+            party: '👩‍👩‍👧‍👦 Gruppe'
         };
         return relationships[relationship] || relationship;
     }
