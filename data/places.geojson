@@ -760,7 +760,11 @@
       "type": "Feature",
       "properties": {
         "name": "Theos Hof",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Ost-Adenai",
+        "type": "village",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
