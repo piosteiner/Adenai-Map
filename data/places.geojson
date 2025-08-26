@@ -147,7 +147,7 @@
         "name": "Motu Motu",
         "description": "Die schwimmende Stadt.",
         "contentUrl": null,
-        "region": "Östliche See",
+        "region": "east_sea",
         "visited": true
       },
       "geometry": {
