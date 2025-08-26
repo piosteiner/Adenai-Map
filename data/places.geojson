@@ -742,7 +742,11 @@
       "type": "Feature",
       "properties": {
         "name": "Hafen nahe Makir",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Harak",
+        "type": "town",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
