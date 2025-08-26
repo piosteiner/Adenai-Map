@@ -23,7 +23,10 @@
       "properties": {
         "name": "Rena",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Rena, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/rena.html"
+        "contentUrl": null,
+        "region": "rena_region",
+        "type": "city",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
