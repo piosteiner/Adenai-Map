@@ -902,7 +902,11 @@
       "type": "Feature",
       "properties": {
         "name": "Turm am östlichen Ufer gegenüber von Osdalen",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Upeto",
+        "type": "camp",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
