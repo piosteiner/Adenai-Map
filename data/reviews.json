@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "2d5603d97ee16c917c1cee6e592c37f162eeef73",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lia Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-26T07:12:03.149Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T07:12:03.149Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Lia Karthright (by gm) - Toftgard (5663-06-03 to 5663-07-17)"
+    },
+    {
       "commitSha": "510a2bbefae9bcdb5f95576b3e681096f20ce481",
       "action": "update",
       "type": "character",
@@ -1692,5 +1705,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T07:07:42.326Z"
+  "lastUpdated": "2025-08-26T07:12:03.149Z"
 }
