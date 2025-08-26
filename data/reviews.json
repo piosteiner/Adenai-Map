@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "c1f1efde5ca3d60817d60a5b95de41e3af92192f",
+      "action": "update",
+      "type": "location",
+      "itemName": "Makir",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:47:48.743Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:47:48.743Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Makir (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "fbf8bf2dd009bda5e3782b80c1db6b83e46f55da",
       "action": "update",
       "type": "location",
@@ -1289,5 +1302,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:47:25.939Z"
+  "lastUpdated": "2025-08-26T06:47:48.743Z"
 }
