@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "f7c25af8b6ae26feb5d677211f84d7a3a64ecafb",
+      "action": "update",
+      "type": "location",
+      "itemName": "Elissastadt",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:45:17.530Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:45:17.530Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Elissastadt (by gm) - updated region, marked as unvisited"
+    },
+    {
       "commitSha": "29e0cfd0eef659d0cdf81023b547061fb99ed2bd",
       "action": "update",
       "type": "location",
@@ -1211,5 +1224,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:45:07.576Z"
+  "lastUpdated": "2025-08-26T06:45:17.530Z"
 }
