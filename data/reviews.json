@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ca25024e020972e73ff7d93c18f7443475b9cd9b",
+      "action": "update",
+      "type": "location",
+      "itemName": "Yosefka Akademie",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:41:10.775Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:41:10.775Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Yosefka Akademie (by gm) - updated region"
+    },
+    {
       "commitSha": "370b670247326177c98f97b04c5319a0a9655b82",
       "action": "update",
       "type": "location",
@@ -1003,5 +1016,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:41:02.120Z"
+  "lastUpdated": "2025-08-26T06:41:10.775Z"
 }
