@@ -652,7 +652,11 @@
       "type": "Feature",
       "properties": {
         "name": "Altes Weingut",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Süd-Adenai",
+        "type": "ruin",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
