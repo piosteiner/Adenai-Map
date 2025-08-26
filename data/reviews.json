@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "afdec73388057a3e25434918492435ed907ee994",
+      "action": "update",
+      "type": "location",
+      "itemName": "Siedlung an der nördlichen Grenze zur Harak Wüste",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:52:55.998Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:52:55.998Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Siedlung an der nördlichen Grenze zur Harak Wüste (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "d600cf1a8609bbe04a8b3df9452b1a94cbd3bc84",
       "action": "update",
       "type": "location",
@@ -1484,5 +1497,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:52:40.962Z"
+  "lastUpdated": "2025-08-26T06:52:55.998Z"
 }
