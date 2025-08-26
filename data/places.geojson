@@ -292,7 +292,9 @@
       "properties": {
         "name": "Byrgenwerft",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Byrgenwerft, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/byrgenwerft.html"
+        "contentUrl": null,
+        "region": "Valaris Region",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
