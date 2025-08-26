@@ -4,11 +4,25 @@ class LocationSystem {
         this.geoFeatureLayers = [];
         this.locations = [];
         this.dotOrangeIcon = null;
+        this.mediaLibrary = null;
         this.init();
     }
 
     init() {
         this.createLocationIcon();
+        this.loadMediaLibrary();
+    }
+
+    async loadMediaLibrary() {
+        try {
+            const response = await fetch('public/data/media-library.json');
+            if (response.ok) {
+                this.mediaLibrary = await response.json();
+                console.log('📚 Media library loaded');
+            }
+        } catch (error) {
+            console.warn('⚠️ Could not load media library:', error);
+        }
     }
 
     createLocationIcon() {
@@ -20,6 +34,138 @@ class LocationSystem {
             iconAnchor: isMobile ? [24, 24] : [16, 16],
             popupAnchor: [0, -32]
         });
+    }
+
+    // Parse link syntax [text:type:id] and convert to clickable elements
+    parseLinks(text) {
+        if (!text || !this.mediaLibrary) return text;
+        
+        const linkRegex = /\[([^\]]+):([^:]+):([^\]]+)\]/g;
+        
+        return text.replace(linkRegex, (match, displayText, type, id) => {
+            const onClick = `window.locationSystem.showMediaModal('${type}', '${id}')`;
+            return `<span class="media-link" onclick="${onClick}" title="Click to view ${type}">${displayText}</span>`;
+        });
+    }
+
+    // Show media modal based on type and id
+    showMediaModal(type, id) {
+        if (!this.mediaLibrary) return;
+        
+        let content = '';
+        let title = '';
+        
+        switch (type) {
+            case 'character':
+                const character = this.mediaLibrary.characters[id];
+                if (character) {
+                    title = character.name;
+                    content = `
+                        <div class="character-modal">
+                            <img src="${character.image}" alt="${character.name}" class="character-image">
+                            <p><strong>Status:</strong> ${character.status}</p>
+                            <p><strong>Beziehung:</strong> ${character.relationship}</p>
+                            <p>${character.description}</p>
+                        </div>
+                    `;
+                }
+                break;
+                
+            case 'gallery':
+                const gallery = this.mediaLibrary.galleries[id];
+                if (gallery) {
+                    title = gallery.title;
+                    content = `
+                        <div class="gallery-modal">
+                            <p>${gallery.description}</p>
+                            <div class="gallery-grid">
+                                ${gallery.images.map(img => 
+                                    `<img src="${img.src}" alt="${img.alt}" class="gallery-image" onclick="window.locationSystem.showFullImage('${img.src}', '${img.alt}')">`
+                                ).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+                break;
+                
+            case 'event':
+                const event = this.mediaLibrary.events[id];
+                if (event) {
+                    title = event.title;
+                    content = `
+                        <div class="event-modal">
+                            <p><strong>Datum:</strong> ${event.date}</p>
+                            <p>${event.description}</p>
+                            ${event.image ? `<img src="${event.image}" alt="${event.title}" class="event-image">` : ''}
+                        </div>
+                    `;
+                }
+                break;
+                
+            case 'image':
+                const image = this.mediaLibrary.images[id];
+                if (image) {
+                    title = image.title;
+                    content = `
+                        <div class="image-modal">
+                            <img src="${image.src}" alt="${image.alt}" class="modal-image">
+                            <p>${image.description}</p>
+                        </div>
+                    `;
+                }
+                break;
+        }
+        
+        if (content) {
+            this.showModal(title, content);
+        }
+    }
+
+    // Show modal popup
+    showModal(title, content) {
+        // Remove existing modal
+        const existingModal = document.querySelector('.media-modal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+        
+        // Create modal
+        const modal = document.createElement('div');
+        modal.className = 'media-modal';
+        modal.innerHTML = `
+            <div class="media-modal-content">
+                <div class="media-modal-header">
+                    <h3>${title}</h3>
+                    <span class="media-modal-close">&times;</span>
+                </div>
+                <div class="media-modal-body">
+                    ${content}
+                </div>
+            </div>
+        `;
+        
+        // Add to page
+        document.body.appendChild(modal);
+        
+        // Add event listeners
+        modal.querySelector('.media-modal-close').onclick = () => modal.remove();
+        modal.onclick = (e) => {
+            if (e.target === modal) modal.remove();
+        };
+        
+        // Add escape key listener
+        const escapeHandler = (e) => {
+            if (e.key === 'Escape') {
+                modal.remove();
+                document.removeEventListener('keydown', escapeHandler);
+            }
+        };
+        document.addEventListener('keydown', escapeHandler);
+    }
+
+    // Show full image in modal
+    showFullImage(src, alt) {
+        this.showModal(alt, `<img src="${src}" alt="${alt}" class="full-image">`);
     }
 
     async loadLocations() {
@@ -67,6 +213,7 @@ class LocationSystem {
     async processLocationFeature(feature, layer) {
         const name = feature.properties.name || '';
         const desc = feature.properties.description || '';
+        const details = feature.properties.details || [];
         const url = feature.properties.contentUrl;
         const latlng = layer.getLatLng();
 
@@ -79,22 +226,22 @@ class LocationSystem {
                 if (response.ok) {
                     const html = await response.text();
                     finalDesc = html.replace(/(<([^>]+)>)/gi, ''); // Remove HTML tags for search
-                    popupContent = `<div class="popup-title">${name}</div><div class="popup-desc">${html}</div>`;
+                    popupContent = `<div class="popup-title">${name}</div><div class="popup-desc">${this.parseLinks(html)}</div>`;
                 } else {
                     throw new Error('Fetch failed');
                 }
             } catch (error) {
                 // Fallback to local description if external content fails
-                popupContent = `<div class="popup-title">${name}</div><div class="popup-desc">${desc}</div>`;
+                popupContent = this.createPopupFromProperties(name, desc, details);
                 console.warn(`⚠️ Failed to load content for ${name}: ${error.message}`);
             }
         } else {
-            // No contentUrl: use local description
-            popupContent = `<div class="popup-title">${name}</div><div class="popup-desc">${desc}</div>`;
+            // No contentUrl: use local description and details
+            popupContent = this.createPopupFromProperties(name, desc, details);
         }
 
         // Bind popup to the layer
-        layer.bindPopup(popupContent);
+        layer.bindPopup(popupContent, { maxWidth: 400, className: 'custom-popup' });
 
         // Store location data
         const locationData = {
@@ -107,6 +254,25 @@ class LocationSystem {
 
         this.geoFeatureLayers.push(locationData);
         this.locations.push(locationData);
+    }
+
+    // Create popup content from properties
+    createPopupFromProperties(name, description, details) {
+        let content = `<div class="popup-title">${name}</div>`;
+        
+        if (description) {
+            content += `<div class="popup-desc">${this.parseLinks(description)}</div>`;
+        }
+        
+        if (details && details.length > 0) {
+            content += '<div class="popup-details">';
+            details.forEach(detail => {
+                content += `<div class="popup-detail">• ${this.parseLinks(detail)}</div>`;
+            });
+            content += '</div>';
+        }
+        
+        return content;
     }
 
     // Find location by name

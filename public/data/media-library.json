@@ -1,0 +1,120 @@
+{
+  "galleries": {
+    "valaris-map": {
+      "title": "Valaris Stadtplan",
+      "description": "Detaillierte Karte der Stadt Valaris",
+      "images": [
+        {
+          "src": "map_valaris.png",
+          "alt": "Valaris Karte", 
+          "caption": "Übersicht der Stadt Valaris mit allen wichtigen Gebäuden"
+        }
+      ]
+    },
+    "basapo-wanted": {
+      "title": "Wanted Poster von Basapo",
+      "description": "Sammlung der Wanted Poster die in Basapo hängen",
+      "images": [
+        {
+          "src": "wantedposter_ally.png",
+          "alt": "Ally Wanted Poster",
+          "caption": "Ally - Wanted für verschiedene Verbrechen"
+        },
+        {
+          "src": "wantedposter_luna.png", 
+          "alt": "Luna Wanted Poster",
+          "caption": "Luna - Wanted für magische Störungen"
+        },
+        {
+          "src": "wantedposter_tasbor.png",
+          "alt": "Tasbor Wanted Poster", 
+          "caption": "Tasbor - Wanted für Detektivarbeiten"
+        },
+        {
+          "src": "wantedposter_abu.png",
+          "alt": "Abu Wanted Poster",
+          "caption": "Abu - Wanted als Komplize"
+        }
+      ]
+    }
+  },
+  "characters": {
+    "petrel-kormorant": {
+      "name": "Petrel Kormorant",
+      "title": "Regent von Valaris",
+      "description": "Dankbarer Regent der Stadt Valaris, der der Gruppe VsuzH sehr verbunden ist.",
+      "image": "petrel.png",
+      "relationship": "ally",
+      "status": "alive",
+      "location": "Valaris"
+    },
+    "maeba-ii": {
+      "name": "Königin Maeba II",
+      "title": "Herrscherin von Basapo",
+      "description": "Königin der Küstenstadt Basapo in der Region Upeto.",
+      "image": "maeba.png",
+      "relationship": "neutral",
+      "status": "alive", 
+      "location": "Basapo"
+    },
+    "tasbor": {
+      "name": "Tasbor",
+      "title": "Detektiv",
+      "description": "Detektiv in Valaris, Partner von Abu Sasion.",
+      "image": "tasbor.png",
+      "relationship": "friendly",
+      "status": "alive",
+      "location": "Valaris"
+    },
+    "abu-sasion": {
+      "name": "Abu Sasion", 
+      "title": "Detektiv",
+      "description": "Detektiv in Valaris, Partner von Tasbor.",
+      "image": "abu.png",
+      "relationship": "friendly",
+      "status": "alive",
+      "location": "Valaris"
+    },
+    "shiho": {
+      "name": "Shiho",
+      "title": "Verstorbene Bewohnerin",
+      "description": "Ehemalige Bewohnerin von Valaris, wurde von Sandschreitern ermordet.",
+      "image": "shiho.png",
+      "relationship": "neutral",
+      "status": "dead",
+      "location": "Valaris"
+    }
+  },
+  "events": {
+    "kunos-defeat": {
+      "title": "Kampf gegen Kunos den Hageren",
+      "date": "Session 8",
+      "location": "Valaris",
+      "description": "Die Gruppe VsuzH deckte Kunos' Machenschaften auf und besiegte ihn, wodurch Valaris befreit wurde.",
+      "participants": ["vsuzh-gruppe"],
+      "outcome": "victory"
+    },
+    "basapo-visit": {
+      "title": "Erster Besuch in Basapo", 
+      "date": "Session 15",
+      "location": "Basapo",
+      "description": "Die Gruppe besuchte zum ersten Mal die Küstenstadt Basapo.",
+      "participants": ["vsuzh-gruppe"],
+      "outcome": "peaceful"
+    }
+  },
+  "images": {
+    "atlantis-general": {
+      "src": "atlantis_general.png",
+      "alt": "Atlantis Übersicht",
+      "caption": "Allgemeine Ansicht von Atlantis",
+      "category": "location"
+    },
+    "goblin-hole": {
+      "src": "goblin_hole.png", 
+      "alt": "Goblin Höhle",
+      "caption": "Eingang zur mysteriösen Goblin Höhle",
+      "category": "location"
+    }
+  }
+}

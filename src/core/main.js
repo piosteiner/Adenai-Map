@@ -71,9 +71,13 @@ class AdenaiMap {
             characterSystem: window.characterSystem,
             movementSystem: window.movementSystem,
             locationsSystem: window.locationsSystem,
+            locationSystem: window.locationSystem, // Add this line for new naming
             searchSystem: window.searchSystem,
             characterPanel: window.characterPanel
         };
+
+        // Make location system available globally for media modal access
+        window.locationSystem = window.locationsSystem || window.locationSystem;
 
         // Verify all systems are available
         const missingSystems = Object.entries(this.systems)
