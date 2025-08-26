@@ -509,7 +509,11 @@
       "type": "Feature",
       "properties": {
         "name": "Apit Sal",
-        "description": "Ein wenig bekanntes Dörfchen. Heimatort von Tasbor."
+        "description": "Ein wenig bekanntes Dörfchen. Heimatort von Tasbor.",
+        "contentUrl": null,
+        "region": "Ost-Adenai",
+        "type": "town",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
