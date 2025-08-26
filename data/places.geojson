@@ -475,6 +475,8 @@
         "name": "Torftgarder Forst",
         "description": "Die VsuzH haben hier nach Spuren eines Eies und merkwürdigen Kreaturen gekämpft und gerastet.",
         "contentUrl": null,
+        "region": "Ost-Adenai",
+        "type": "landmark",
         "visited": true
       },
       "geometry": {
