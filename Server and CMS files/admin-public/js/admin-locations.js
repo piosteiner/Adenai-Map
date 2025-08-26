@@ -191,12 +191,22 @@ class AdminLocations {
 
     formatRegion(region) {
         const regions = {
-            eastern_adenai: 'Eastern Adenai',
-            western_adenai: 'Western Adenai',
+            north_adenai: 'Nord-Adenai',
+            eastern_adenai: 'Ost-Adenai',
+            south_adenai: 'Süd-Adenai',
+            western_adenai: 'West-Adenai',
+            valaris_region: 'Valaris Region',
             upeto: 'Upeto',
             harak: 'Harak',
-            sea: 'Sea/Ocean',
-            other: 'Other'
+            tua_danar: 'Tua Danar',
+            rena_region: 'Rena Region',
+            arcane_heights: 'Arkane Höhen',
+            sun_peaks: 'Sonnenspitzen',
+            cinnabar_fields: 'Zinnober-Felder',
+            ewige_donnerkluefte: 'Ewige Donnerklüfte',
+            east_sea: 'Östliche See',
+            west_sea: 'Westliche See',
+            other: 'Andere',
         };
         return regions[region] || region;
     }

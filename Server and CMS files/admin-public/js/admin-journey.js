@@ -249,59 +249,82 @@ class JourneyManager {
         }
     }
 
-    // 🔥 NEW: Intelligent image loading with multiple path attempts
+    // Map Image Loader with Multiple Path Attempts
     loadMapImage(bounds) {
-        const imagePaths = [
-            'images/adenai_map_01.jpg',           // Same directory as main map
-            '../images/adenai_map_01.jpg',       // Up one level
-            '/images/adenai_map_01.jpg',         // Root path
-            'adenai_map_01.jpg',                 // Current directory
-            '../adenai_map_01.jpg',              // Up one level, root
-        ];
-        
-        let pathIndex = 0;
-        
-        const tryLoadImage = () => {
-            if (pathIndex >= imagePaths.length) {
+    const imagePaths = [
+        'images/adenai_map_01.jpg',
+        '../images/adenai_map_01.jpg',
+        '/images/adenai_map_01.jpg',
+        'adenai_map_01.jpg',
+        '../adenai_map_01.jpg',
+    ];
+
+    let pathIndex = 0;
+    let succeeded = false;
+    let currentOverlay = null;
+
+    const tryLoadImage = () => {
+        if (pathIndex >= imagePaths.length) {
+            if (!succeeded) {
                 this.log('⚠️ All image paths failed, using placeholder');
                 this.createPlaceholderMap(bounds);
-                return;
             }
-            
-            const imagePath = imagePaths[pathIndex];
-            this.log(`🔍 Trying image path ${pathIndex + 1}/${imagePaths.length}: ${imagePath}`);
-            
-            const imageOverlay = L.imageOverlay(imagePath, bounds);
-            
-            // Handle successful load
-            imageOverlay.on('load', () => {
-                this.log(`✅ Map image loaded successfully: ${imagePath}`);
-                imageOverlay.addTo(this.map);
-                
-                // Force map resize after image loads
-                setTimeout(() => this.forceMapResize(), 100);
-            });
-            
-            // Handle failed load
-            imageOverlay.on('error', () => {
-                this.log(`❌ Failed to load: ${imagePath}`);
+            return;
+        }
+
+        const imagePath = imagePaths[pathIndex];
+        this.log(`🔍 Trying image path ${pathIndex + 1}/${imagePaths.length}: ${imagePath}`);
+
+        // Clean up previous attempt's overlay if any (and if it didn’t succeed)
+        if (currentOverlay && this.map && this.map.hasLayer(currentOverlay) && !succeeded) {
+            this.map.removeLayer(currentOverlay);
+        }
+
+        let loadedOrErrored = false;
+        const overlay = L.imageOverlay(imagePath, bounds);
+
+        const clearAndMark = () => {
+            loadedOrErrored = true;
+            if (timeoutId) clearTimeout(timeoutId);
+        };
+
+        overlay.once('load', () => {
+            clearAndMark();
+            if (succeeded) return; // already have a good one (paranoia)
+            this.log(`✅ Map image loaded successfully: ${imagePath}`);
+            succeeded = true;
+            // Add once (we didn't add before)
+            overlay.addTo(this.map);
+            currentOverlay = overlay;
+
+            // Resize after load
+            setTimeout(() => this.forceMapResize(), 100);
+        });
+
+        overlay.once('error', () => {
+            clearAndMark();
+            this.log(`❌ Failed to load: ${imagePath}`);
+            pathIndex++;
+            tryLoadImage();
+        });
+
+        // Start loading by adding to map AFTER handlers are wired
+        overlay.addTo(this.map);
+        currentOverlay = overlay;
+
+        // Timeout fallback: only retry if we got NEITHER load nor error
+        const timeoutId = setTimeout(() => {
+            if (!loadedOrErrored) {
+                this.log(`⏳ Timeout while loading: ${imagePath} — retrying next path`);
+                if (this.map && this.map.hasLayer(overlay)) {
+                    this.map.removeLayer(overlay);
+                }
                 pathIndex++;
                 tryLoadImage();
-            });
-            
-            // Start the load attempt
-            imageOverlay.addTo(this.map);
-            
-            // Timeout fallback - if no load/error event fires within 3 seconds
-            setTimeout(() => {
-                if (this.map.hasLayer(imageOverlay)) {
-                    this.map.removeLayer(imageOverlay);
-                    pathIndex++;
-                    tryLoadImage();
-                }
-            }, 3000);
-        };
-        
+            }
+        }, 3000);
+    };
+
         tryLoadImage();
     }
 

@@ -338,7 +338,7 @@ router.delete('/:id', requireAuth, async (req, res) => {
   }
 });
 
-// 🔥 ENHANCED: Add movement entry to character with date range support
+// ENHANCED: Add movement entry to character with date range support
 router.post('/:id/movements', requireAuth, async (req, res) => {
   try {
     const characterId = decodeURIComponent(req.params.id);
@@ -388,7 +388,7 @@ router.post('/:id/movements', requireAuth, async (req, res) => {
       character.movementHistory = [];
     }
     
-    // 🔥 ENHANCED: Create new movement entry with date ranges and custom location support
+    // ENHANCED: Create new movement entry with date ranges and custom location support
     const newMovement = {
       id: `movement_${Date.now()}`,
       date: req.body.dateStart || req.body.date || new Date().toISOString().split('T')[0], // Legacy support
@@ -424,7 +424,7 @@ router.post('/:id/movements', requireAuth, async (req, res) => {
     character.updatedAt = new Date().toISOString();
     currentContent.lastUpdated = new Date().toISOString();
     
-    // 🔥 ENHANCED: Better commit message with date range info
+    // ENHANCED: Better commit message with date range info
     const dateInfo = newMovement.dateEnd ? 
       `${newMovement.dateStart} to ${newMovement.dateEnd}` : 
       newMovement.dateStart;
@@ -456,7 +456,7 @@ router.post('/:id/movements', requireAuth, async (req, res) => {
   }
 });
 
-// 🔥 ENHANCED: Update movement entry with date range support
+// ENHANCED: Update movement entry with date range support
 router.put('/:id/movements/:movementId', requireAuth, async (req, res) => {
   try {
     const characterId = decodeURIComponent(req.params.id);
@@ -497,7 +497,7 @@ router.put('/:id/movements/:movementId', requireAuth, async (req, res) => {
       return res.status(404).json({ success: false, error: 'Movement not found' });
     }
     
-    // 🔥 ENHANCED: Update movement with date range support
+    // ENHANCED: Update movement with date range support
     const updatedMovement = {
       ...character.movementHistory[movementIndex],
       date: req.body.dateStart || req.body.date || character.movementHistory[movementIndex].date, // Legacy support
@@ -534,7 +534,7 @@ router.put('/:id/movements/:movementId', requireAuth, async (req, res) => {
     character.updatedAt = new Date().toISOString();
     currentContent.lastUpdated = new Date().toISOString();
     
-    // 🔥 ENHANCED: Better commit message with date range info
+    // ENHANCED: Better commit message with date range info
     const dateInfo = updatedMovement.dateEnd ? 
       `${updatedMovement.dateStart} to ${updatedMovement.dateEnd}` : 
       updatedMovement.dateStart;
