@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "093fb46b9ad68f9c9b483408dc683bf44c462493",
+      "action": "update",
+      "type": "location",
+      "itemName": "Atlantis (aufgestiegen)",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:42:13.167Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:42:13.167Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Atlantis (aufgestiegen) (by gm) - updated region"
+    },
+    {
       "commitSha": "e113502e616e8346753605c86e501103b3b4bb9e",
       "action": "update",
       "type": "location",
@@ -1068,5 +1081,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:42:02.106Z"
+  "lastUpdated": "2025-08-26T06:42:13.167Z"
 }
