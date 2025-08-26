@@ -493,6 +493,8 @@
         "name": "Verlassenes Fischereidorf",
         "description": "Die VsuzH wurden von einer Gruppe von Sahuagin angegriffen, welche zuvor ein Dorf geplündert hatten.",
         "contentUrl": null,
+        "region": "Upeto",
+        "type": "village",
         "visited": true
       },
       "geometry": {
