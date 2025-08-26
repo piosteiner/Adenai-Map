@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "d7bf7e49f23690e7105dd6d7eea2a250995cfa96",
+      "action": "update",
+      "type": "location",
+      "itemName": "Neudalen",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:44:42.224Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:44:42.225Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Neudalen (by gm) - updated region, marked as unvisited"
+    },
+    {
       "commitSha": "eba27a2ba185b55882295ecf04431b8b2130b7c5",
       "action": "update",
       "type": "location",
@@ -1185,5 +1198,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:44:17.877Z"
+  "lastUpdated": "2025-08-26T06:44:42.225Z"
 }
