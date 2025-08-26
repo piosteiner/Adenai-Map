@@ -616,7 +616,11 @@
       "type": "Feature",
       "properties": {
         "name": "Esberg",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Süd-Adenai",
+        "type": "ruin",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
