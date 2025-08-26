@@ -214,6 +214,7 @@
         "name": "Sternenzirkel Insel",
         "description": "Insel auf der sich der Sternenzirkel stationiert hatte.",
         "contentUrl": null,
+        "region": "Östliche See",
         "visited": true
       },
       "geometry": {
