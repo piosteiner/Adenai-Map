@@ -7,7 +7,7 @@
         "name": "Valaris",
         "description": "Die grösste Stadt im Osten von Adenai. Regiert von Petrel Kormorant.",
         "contentUrl": null,
-        "region": "Valaris Region",
+        "region": "valaris_region",
         "type": "city",
         "visited": true
       },
@@ -25,7 +25,7 @@
         "name": "Rena",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Rena, bitte kontaktiere den Websitenbetreiber.",
         "contentUrl": null,
-        "region": "Rena Region",
+        "region": "rena_region",
         "type": "city",
         "visited": false
       },
@@ -61,7 +61,7 @@
         "name": "Wesdalen",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Wesdalen, bitte kontaktiere den Websitenbetreiber.",
         "contentUrl": null,
-        "region": "Rena Region",
+        "region": "rena_region",
         "type": "city",
         "visited": false
       },
@@ -79,7 +79,7 @@
         "name": "Yosefka Akademie",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung der Yosefka Akademie, bitte kontaktiere den Websitenbetreiber.",
         "contentUrl": null,
-        "region": "Arkane Höhen",
+        "region": "arcane_heights",
         "type": "village",
         "visited": false
       },
@@ -113,7 +113,7 @@
         "name": "Ruine von Zurak'thar",
         "description": "Die verlassene Ruine von Zurak'thar.",
         "contentUrl": null,
-        "region": "Ost-Adenai",
+        "region": "eastern_adenai",
         "visited": true
       },
       "geometry": {
@@ -130,7 +130,7 @@
         "name": "Luvatu",
         "description": "Stadt unter dem Wasser - primär von Triton*innen bewohnt.",
         "contentUrl": null,
-        "region": "Östliche See",
+        "region": "east_sea",
         "visited": true
       },
       "geometry": {
@@ -147,7 +147,7 @@
         "name": "Motu Motu",
         "description": "Die schwimmende Stadt.",
         "contentUrl": null,
-        "region": "Östliche See",
+        "region": "east_sea",
         "visited": true
       },
       "geometry": {
@@ -164,7 +164,7 @@
         "name": "Atlantis (versunken)",
         "description": "Atlantis versunken im Mirog Graben - auch bekannt als das Unterwasser Paradies.",
         "contentUrl": null,
-        "region": "Östliche See",
+        "region": "east_sea",
         "visited": true
       },
       "geometry": {
@@ -181,7 +181,7 @@
         "name": "Atlantis (aufgestiegen)",
         "description": "Standort von Atlantis, nachdem es von den VsuzH wieder in den Himmel gehoben wurde.",
         "contentUrl": null,
-        "region": "Östliche See",
+        "region": "other",
         "visited": true
       },
       "geometry": {
@@ -198,6 +198,7 @@
         "name": "Toftgard",
         "description": "Stadt der Familie Karthright.",
         "contentUrl": null,
+        "region": "eastern_adenai",
         "visited": true
       },
       "geometry": {
