@@ -634,7 +634,11 @@
       "type": "Feature",
       "properties": {
         "name": "Cinnabar Felder",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Süd-Adenai",
+        "type": "landmark",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
