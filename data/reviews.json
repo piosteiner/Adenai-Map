@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "873737ece1429da1031861bac77411993a6e6b9b",
+      "action": "update",
+      "type": "location",
+      "itemName": "Luvatu",
+      "user": "gm",
+      "timestamp": "2025-08-26T09:13:52.883Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T09:13:52.883Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Luvatu (by gm) - updated region"
+    },
+    {
       "commitSha": "d213aaba94bf4d5ad0d5cc153c6e9fee5549e55a",
       "action": "update",
       "type": "location",
@@ -1796,5 +1809,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T09:13:51.468Z"
+  "lastUpdated": "2025-08-26T09:13:52.883Z"
 }
