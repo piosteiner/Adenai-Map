@@ -159,6 +159,7 @@
       "name": "Tasbor",
       "title": "Käpt'n, de Coolst, Detektiv",
       "location": "",
+      "coordinates": null,
       "description": "",
       "image": "",
       "status": "alive",
@@ -166,8 +167,9 @@
       "relationship": "suspicious",
       "firstMet": "",
       "notes": "",
+      "movementHistory": [],
       "createdAt": "2025-08-22T06:09:11.125Z",
-      "updatedAt": "2025-08-22T06:09:11.125Z"
+      "updatedAt": "2025-08-26T23:56:27.950Z"
     },
     {
       "id": "test",
@@ -368,5 +370,5 @@
       "updatedAt": "2025-08-25T16:51:39.063Z"
     }
   ],
-  "lastUpdated": "2025-08-26T23:56:12.958Z"
+  "lastUpdated": "2025-08-26T23:56:27.950Z"
 }
