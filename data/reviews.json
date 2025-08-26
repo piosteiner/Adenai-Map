@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "25059f15e773ecdd301b23b4757616ee74449d3a",
+      "action": "update",
+      "type": "location",
+      "itemName": "Donnermund",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:45:27.611Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:45:27.611Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Donnermund (by gm) - updated region, marked as unvisited"
+    },
+    {
       "commitSha": "f7c25af8b6ae26feb5d677211f84d7a3a64ecafb",
       "action": "update",
       "type": "location",
@@ -1224,5 +1237,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:45:17.530Z"
+  "lastUpdated": "2025-08-26T06:45:27.611Z"
 }
