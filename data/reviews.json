@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "98feac36c8e70938aa47ce6d0613c77c5d2e14e9",
+      "action": "update",
+      "type": "location",
+      "itemName": "Hafen nahe Makir",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:53:47.372Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:53:47.372Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Hafen nahe Makir (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "9bdf06856f0a510ce5ab1db8593f1dda1ea8dfd0",
       "action": "update",
       "type": "location",
@@ -1523,5 +1536,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:53:26.436Z"
+  "lastUpdated": "2025-08-26T06:53:47.372Z"
 }
