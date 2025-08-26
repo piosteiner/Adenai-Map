@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "a972bba212ab8c47e2e4b7607dd138fd78c0a354",
+      "action": "update",
+      "type": "location",
+      "itemName": "Tangoa",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:50:27.510Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:50:27.510Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Tangoa (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "e0f130888772f72cb57980e415cd0d1802fd7998",
       "action": "update",
       "type": "location",
@@ -1406,5 +1419,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:50:08.289Z"
+  "lastUpdated": "2025-08-26T06:50:27.510Z"
 }
