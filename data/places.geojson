@@ -688,7 +688,11 @@
       "type": "Feature",
       "properties": {
         "name": "Siedlung an der nördlichen Grenze zur Harak Wüste",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Harak",
+        "type": "town",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
