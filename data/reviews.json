@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "15b751256edbd774cd0fedfaf3625032a0c354c0",
+      "action": "update",
+      "type": "location",
+      "itemName": "Kleiberhorst",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:56:17.464Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:56:17.464Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Kleiberhorst (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "d6d3cb84621be9dace6386ef49a5fad69f051293",
       "action": "update",
       "type": "location",
@@ -1614,5 +1627,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:56:05.622Z"
+  "lastUpdated": "2025-08-26T06:56:17.464Z"
 }
