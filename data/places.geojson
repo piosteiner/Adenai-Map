@@ -41,7 +41,10 @@
       "properties": {
         "name": "Olecea",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Olecea, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/olecea.html"
+        "contentUrl": null,
+        "region": "harak",
+        "type": "city",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
