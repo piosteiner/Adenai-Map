@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "7f009fdf7d97bb7bfedb37a2b20f474902fad91f",
+      "action": "update",
+      "type": "location",
+      "itemName": "Issa",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:53:09.989Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:53:09.989Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Issa (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "afdec73388057a3e25434918492435ed907ee994",
       "action": "update",
       "type": "location",
@@ -1497,5 +1510,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:52:55.998Z"
+  "lastUpdated": "2025-08-26T06:53:09.989Z"
 }
