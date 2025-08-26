@@ -281,7 +281,9 @@
       "properties": {
         "name": "Glesburg",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Glesburg, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/glesburg.html"
+        "contentUrl": null,
+        "region": "Ewige Donnerklüfte",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
