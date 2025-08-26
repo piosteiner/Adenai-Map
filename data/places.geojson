@@ -113,6 +113,7 @@
         "name": "Ruine von Zurak'thar",
         "description": "Die verlassene Ruine von Zurak'thar.",
         "contentUrl": null,
+        "region": "Ost-Adenai",
         "visited": true
       },
       "geometry": {
