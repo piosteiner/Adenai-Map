@@ -332,7 +332,9 @@
       "properties": {
         "name": "Nordmund",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Nordmund, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/nordmund.html"
+        "contentUrl": null,
+        "region": "Sonnenspitzen",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
