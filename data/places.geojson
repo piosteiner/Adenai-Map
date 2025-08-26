@@ -527,7 +527,11 @@
       "type": "Feature",
       "properties": {
         "name": "Estu Vin",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Ost-Adenai",
+        "type": "city",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
