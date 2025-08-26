@@ -796,7 +796,10 @@
       "type": "Feature",
       "properties": {
         "name": "Unbekannter Ort nördlich von Wesdalen",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Rena Region",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
