@@ -598,7 +598,11 @@
       "type": "Feature",
       "properties": {
         "name": "Osdalen",
-        "description": "Osdalen fiel im Bürgerkrief. Seither ist die gesamte Region von Osdalen bis Esberg zerstört und unbewohnbar."
+        "description": "Osdalen fiel im Bürgerkrief. Seither ist die gesamte Region von Osdalen bis Esberg zerstört und unbewohnbar.",
+        "contentUrl": null,
+        "region": "Süd-Adenai",
+        "type": "ruin",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
