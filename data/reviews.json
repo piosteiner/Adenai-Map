@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6519786589ed09c97f7dc0d3da5e40fb0dd312be",
+      "action": "update",
+      "type": "location",
+      "itemName": "Vorstadt von Wesdalen",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:54:42.676Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:54:42.676Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Vorstadt von Wesdalen (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "00e57735055235bf3965d72fd637f4d1fd449245",
       "action": "update",
       "type": "location",
@@ -1549,5 +1562,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:54:07.219Z"
+  "lastUpdated": "2025-08-26T06:54:42.676Z"
 }
