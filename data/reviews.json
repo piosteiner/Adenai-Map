@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "a373c670d4d77b6282aaa521fa4d7681f20d372d",
+      "action": "update",
+      "type": "location",
+      "itemName": "Basapo",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:43:44.290Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:43:44.290Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Basapo (by gm) - updated region"
+    },
+    {
       "commitSha": "9eb054ef289eda018aa3a49363cd9a89f2d6203a",
       "action": "update",
       "type": "location",
@@ -1159,5 +1172,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:43:32.829Z"
+  "lastUpdated": "2025-08-26T06:43:44.290Z"
 }
