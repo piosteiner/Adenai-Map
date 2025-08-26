@@ -670,7 +670,11 @@
       "type": "Feature",
       "properties": {
         "name": "Alter Stützpunkt zwischen Glesburg und Osdalen",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Süd-Adenai",
+        "type": "camp",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
