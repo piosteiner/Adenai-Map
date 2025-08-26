@@ -2,6 +2,84 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "bacc2bb66d269d6bfa86fec911a136285bfbf0a9",
+      "action": "update",
+      "type": "location",
+      "itemName": "Valaris",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:32:09.691Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:32:09.691Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Valaris (by gm) - updated region"
+    },
+    {
+      "commitSha": "e098954a95bc6ee3cca83c8ff9f444b91d932c43",
+      "action": "update",
+      "type": "location",
+      "itemName": "Wesdalen",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:31:55.336Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:31:55.336Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Wesdalen (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
+      "commitSha": "c8f2c7ba7b06b249bdbc6745abd51c62d98c211c",
+      "action": "update",
+      "type": "location",
+      "itemName": "Yosefka Akademie",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:31:34.825Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:31:34.825Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Yosefka Akademie (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
+      "commitSha": "7ac74481b65ae4ab1ad9285bb040890b0c9cd8d3",
+      "action": "update",
+      "type": "location",
+      "itemName": "Olecea",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:31:06.573Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:31:06.573Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Olecea (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
+      "commitSha": "30a802a6b273cd0432f1d873ba0f8746193c5e25",
+      "action": "update",
+      "type": "location",
+      "itemName": "Rena",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:30:42.660Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:30:42.660Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Rena (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
+      "commitSha": "666c7c89a10430f3c629192e33281b35f0c476f7",
+      "action": "update",
+      "type": "location",
+      "itemName": "Valaris",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:30:22.302Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:30:22.302Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Valaris (by gm) - updated type"
+    },
+    {
       "commitSha": "d28741cd4d9dc6ff2744e298e44efca3e0cc2107",
       "action": "update",
       "type": "character",
@@ -860,5 +938,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-25T16:51:39.836Z"
+  "lastUpdated": "2025-08-26T06:32:09.691Z"
 }

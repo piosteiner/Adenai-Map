@@ -7,6 +7,8 @@
         "name": "Valaris",
         "description": "Die grösste Stadt im Osten von Adenai. Regiert von Petrel Kormorant.",
         "contentUrl": null,
+        "region": "valaris_region",
+        "type": "city",
         "visited": true
       },
       "geometry": {
@@ -22,7 +24,10 @@
       "properties": {
         "name": "Rena",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Rena, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/rena.html"
+        "contentUrl": null,
+        "region": "rena_region",
+        "type": "city",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
@@ -37,7 +42,10 @@
       "properties": {
         "name": "Olecea",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Olecea, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/olecea.html"
+        "contentUrl": null,
+        "region": "harak",
+        "type": "city",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
@@ -52,7 +60,10 @@
       "properties": {
         "name": "Wesdalen",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Wesdalen, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/wesdalen.html"
+        "contentUrl": null,
+        "region": "rena_region",
+        "type": "city",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
@@ -67,7 +78,10 @@
       "properties": {
         "name": "Yosefka Akademie",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung der Yosefka Akademie, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/yosefka_akademie.html"
+        "contentUrl": null,
+        "region": "arcane_hights",
+        "type": "village",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
