@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6f19f0956cf150e497e78015502607e506db828d",
+      "action": "update",
+      "type": "location",
+      "itemName": "Altes Weingut",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:52:18.907Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:52:18.907Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Altes Weingut (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "e016ad41a236246795b2d89b6612db0c94061988",
       "action": "update",
       "type": "location",
@@ -1458,5 +1471,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:52:06.527Z"
+  "lastUpdated": "2025-08-26T06:52:18.907Z"
 }
