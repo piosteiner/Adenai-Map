@@ -24,16 +24,16 @@
   <title>Adenai Map</title>
   <meta property="og:title" content="Adenai Map – DnD Kampagne VsuzH">
   <meta property="og:description" content="Karte der Welt Adenai, mit dem Abenteuerpfad der Gruppe VsuzH.">
-  <meta property="og:image" content="icons/uwu_1.png">
+  <meta property="og:image" content="public/icons/uwu_1.png">
   
-  <link rel="icon" type="image/png" href="icons/uwu_1.png">
+  <link rel="icon" type="image/png" href="public/icons/uwu_1.png">
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <!-- My styles CSS (now includes character panel styles) -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="public/css/styles.css">
   <!-- My gallery CSS -->
-  <link rel="stylesheet" href="css/gallery.css">
+  <link rel="stylesheet" href="public/css/gallery.css">
 </head>
 
 <body>
@@ -83,38 +83,38 @@
   </noscript>
   
   <!-- STEP 0: External Dependencies (CMS API) -->
-  <script src="../src/core/config.js"></script>
+  <script src="src/core/config.js"></script>
   
   <!-- STEP 1: External Dependencies (Core Libraries) -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="../src/vendor/leaflet.curve.js"></script>
+  <script src="src/vendor/leaflet.curve.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/bbecquet/Leaflet.PolylineDecorator@master/dist/leaflet.polylineDecorator.min.js"></script>
 
   <!-- STEP 2: Gallery System -->
   <script src="https://unpkg.com/@panzoom/panzoom/dist/panzoom.min.js"></script>
-  <script src="../src/ui/gallery.js"></script>
+  <script src="src/ui/gallery.js"></script>
 
   <!-- STEP 3: Core Map System (MUST load first) -->
-  <script src="../src/core/map-core.js?v=1.1.0"></script>
+  <script src="src/core/map-core.js?v=1.1.0"></script>
 
   <!-- STEP 4: Legacy Icons System (before other systems) -->
-  <script src="../src/utils/icons.js?v=0.25.05.16.1306"></script>
+  <script src="src/utils/icons.js?v=0.25.05.16.1306"></script>
 
   <!-- STEP 5: Modern Adenai Systems (after map core) -->
-  <script src="../src/systems/character-system.js?v=1.1.0"></script>
-  <script src="../src/systems/movement-system.js?v=1.1.0"></script>
-  <script src="../src/systems/location-system.js?v=1.1.0"></script>
-  <script src="../src/systems/search-system.js?v=1.1.0"></script>
-  <script src="../src/ui/character-panel.js?v=1.1.0"></script>
+  <script src="src/systems/character-system.js?v=1.1.0"></script>
+  <script src="src/systems/movement-system.js?v=1.1.0"></script>
+  <script src="src/systems/location-system.js?v=1.1.0"></script>
+  <script src="src/systems/search-system.js?v=1.1.0"></script>
+  <script src="src/ui/character-panel.js?v=1.1.0"></script>
 
   <!-- STEP 5.5: Coordinate Copy System -->
-  <script src="../src/ui/coordinate-copy.js?v=1.0.0"></script>
+  <script src="src/ui/coordinate-copy.js?v=1.0.0"></script>
 
   <!-- STEP 6: Journey System (AFTER map and systems are initialized) -->
-  <script src="../src/utils/journey.js?v=0.25.05.16.1306"></script>
+  <script src="src/utils/journey.js?v=0.25.05.16.1306"></script>
 
   <!-- STEP 7: Main Application (Last) -->
-  <script src="../src/core/main.js?v=1.1.0"></script>
+  <script src="src/core/main.js?v=1.1.0"></script>
 </body>
 
 </html>
