@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6985a632a2d8a7bfaed772791ab5d609a8aaa190",
+      "action": "update",
+      "type": "location",
+      "itemName": "Sternenzirkel Base?",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:58:00.286Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:58:00.286Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Sternenzirkel Base? (by gm) - updated region, updated type"
+    },
+    {
       "commitSha": "fb1fc8d561791bb359fcffca0fb41a3ab8a8e483",
       "action": "update",
       "type": "location",
@@ -1666,5 +1679,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:57:45.214Z"
+  "lastUpdated": "2025-08-26T06:58:00.286Z"
 }
