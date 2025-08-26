@@ -919,8 +919,11 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Unbekannter Ort auf Tangoa",
-        "description": "Details sind noch zu entdecken."
+        "name": "Unbekannter Ort auf Upeto",
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Upeto",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
