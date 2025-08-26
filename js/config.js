@@ -2,6 +2,20 @@
 // Auto-synced from admin CMS - DO NOT EDIT MANUALLY  
 // Last updated: 2025-08-26T16:28:03.574Z
 // This file provides consistent labels and values across the entire campaign
+//
+// INTEGRATION STATUS:
+// ✅ character-panel.js - formatRelationship() & character badges
+// ✅ character-system.js - character popups & search results  
+// ✅ admin-locations.js - formatType() 
+// ✅ admin HTML - location/character/relationship selects (auto-populated)
+// ✅ admin-core.js - select population on page load
+// ✅ main.js - testAdenaiConfig() function for validation
+//
+// USAGE:
+// AdenaiConfig.getCharacterStatusLabel('alive') → '😊 Lebend'
+// AdenaiConfig.getCharacterRelationshipLabel('friendly') → '🙂 Freundlich'  
+// AdenaiConfig.getLocationTypeLabel('city') → '🏙️ Stadt'
+// AdenaiConfig.generateSelectOptions('characterStatus') → '<option>...</option>'
 
 const AdenaiConfig = {
     // Location Types - both value and display format

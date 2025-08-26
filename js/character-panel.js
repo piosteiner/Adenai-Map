@@ -265,7 +265,7 @@ class CharacterPanel {
                         ${character.title ? `<div class="character-title">${character.title}</div>` : ''}
                         <div class="character-location">📍 ${character.location || 'Unknown'}</div>
                         <div class="character-badges">
-                            <span class="badge status-${character.status}">${character.status || 'unknown'}</span>
+                            <span class="badge status-${character.status}">${AdenaiConfig.getCharacterStatusLabel(character.status) || 'unknown'}</span>
                             <span class="badge relationship-${character.relationship}">
                                 ${this.formatRelationship(character.relationship)}
                             </span>
@@ -320,16 +320,7 @@ class CharacterPanel {
     }
 
     formatRelationship(relationship) {
-        const relationships = {
-            ally: '😊 Ally',
-            friendly: '🙂 Friendly',
-            neutral: '😐 Neutral',
-            suspicious: '🤨 Suspicious',
-            hostile: '😠 Hostile',
-            enemy: '⚔️ Enemy',
-            party: '👩‍👩‍👧‍👦 Party'
-        };
-        return relationships[relationship] || relationship || 'Unknown';
+        return AdenaiConfig.getCharacterRelationshipLabel(relationship) || relationship || 'Unknown';
     }
 
     showEmptyState() {

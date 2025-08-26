@@ -306,6 +306,28 @@ document.addEventListener('DOMContentLoaded', () => {
         window.admin = new AdenaiAdmin();
         console.log('🎯 Global admin instance created');
         
+        // Populate select options using AdenaiConfig
+        if (window.AdenaiConfig) {
+            const locationTypeSelect = document.getElementById('location-type-select');
+            if (locationTypeSelect) {
+                locationTypeSelect.innerHTML = AdenaiConfig.generateSelectOptions('locationTypes');
+            }
+            
+            const characterStatusSelect = document.getElementById('character-status-select');
+            if (characterStatusSelect) {
+                characterStatusSelect.innerHTML = AdenaiConfig.generateSelectOptions('characterStatus');
+            }
+            
+            const characterRelationshipSelect = document.getElementById('character-relationship-select');
+            if (characterRelationshipSelect) {
+                characterRelationshipSelect.innerHTML = AdenaiConfig.generateSelectOptions('characterRelationships');
+            }
+            
+            console.log('✅ Select options populated from AdenaiConfig');
+        } else {
+            console.warn('⚠️ AdenaiConfig not found - select options not populated');
+        }
+        
         // Debug info
         console.log('📋 Module status:', window.admin.getModuleStatus());
     }, 200);

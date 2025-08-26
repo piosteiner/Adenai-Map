@@ -305,20 +305,8 @@
                 
                 <div class="form-group">
                     <label>🏛️ Type</label>
-                    <select name="type">
-                        <option value="city">🏙️ Stadt</option>
-                        <option value="town">🏘️ Dorf</option>
-                        <option value="village">🏡 Weiler</option>
-                        <option value="camp">⛺ Lager</option>
-                        <option value="landmark">🗿 Orientierungspunkt</option>
-                        <option value="ruin">🏛️ Ruine</option>
-                        <option value="dungeon">☠️ Dungeon</option>
-                        <option value="monster">🐉 Monster</option>
-                        <option value="environment">🌳 Umgebung</option>
-                        <option value="mountain">⛰️ Berg/Gebirge</option>
-                        <option value="lake">💧 Gewässer</option>
-                        <option value="island">🏝️ Insel</option>
-                        <option value="unknown">❓ Unbekannt</option>
+                    <select name="type" id="location-type-select">
+                        <!-- Options populated by AdenaiConfig.generateSelectOptions('locationTypes') -->
                     </select>
                 </div>
                 
@@ -372,12 +360,8 @@
                     </div>
                     <div class="form-group">
                         <label>💗 Status</label>
-                        <select name="status">
-                            <option value="alive">😊 Lebend</option>
-                            <option value="dead">💀 Verstorben</option>
-                            <option value="undead">🧟 Untot</option>
-                            <option value="missing">❓ Vermisst</option>
-                            <option value="unknown">🤷 Unbekannt</option>
+                        <select name="status" id="character-status-select">
+                            <!-- Options populated by AdenaiConfig.generateSelectOptions('characterStatus') -->
                         </select>
                     </div>
                 </div>
@@ -389,15 +373,8 @@
                     </div>
                     <div class="form-group">
                         <label>🤝 Relationship</label>
-                        <select name="relationship">
-                            <option value="ally">😊 Verbündet</option>
-                            <option value="friendly">🙂 Freundlich</option>
-                            <option value="neutral">😐 Neutral</option>
-                            <option value="suspicious">🤨 Suspekt</option>
-                            <option value="hostile">😠 Ablehenend</option>
-                            <option value="enemy">⚔️ Feindlich</option>
-                            <option value="unknown">🤷 Unbekannt</option>
-                            <option value="party">👩‍👩‍👧‍👦 Gruppe</option>
+                        <select name="relationship" id="character-relationship-select">
+                            <!-- Options populated by AdenaiConfig.generateSelectOptions('characterRelationships') -->
                         </select>
                     </div>
                 </div>
@@ -578,6 +555,7 @@
 
     <!-- Modular JavaScript - Load in dependency order -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="../../js/config.js"></script>
     <script src="js/theme-toggle.js"></script>
     <script src="js/admin-ui.js"></script>
     <script src="js/admin-auth.js"></script>

@@ -327,10 +327,10 @@ class CharacterSystem {
                 ${character.title ? `<div style="font-style: italic; margin-bottom: 8px;">${character.title}</div>` : ''}
                 <div style="margin-bottom: 8px;">
                     <span style="background: ${this.relationshipColors[character.relationship] || '#ccc'}; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.8em;">
-                        ${character.relationship || 'unknown'}
+                        ${AdenaiConfig.getCharacterRelationshipLabel(character.relationship) || 'unknown'}
                     </span>
                     <span style="margin-left: 8px;">
-                        ${this.statusEmojis[character.status] || '❓'} ${character.status || 'unknown'}
+                        ${AdenaiConfig.getCharacterStatusLabel(character.status) || '❓ Unbekannt'}
                     </span>
                 </div>
                 ${character.faction ? `<div><strong>🛡️ Faction:</strong> ${character.faction}</div>` : ''}
@@ -378,7 +378,7 @@ class CharacterSystem {
                     <strong>${character.name}</strong>
                     ${character.title ? `<em> - ${character.title}</em>` : ''}
                     <br>
-                    <span>${this.statusEmojis[character.status] || '❓'} ${character.relationship || 'Unknown'} • ${character.location || 'Unknown location'}</span>
+                    <span>${AdenaiConfig.getCharacterStatusLabel(character.status)} ${AdenaiConfig.getCharacterRelationshipLabel(character.relationship)} • ${character.location || 'Unknown location'}</span>
                 </div>
             </div>
         `;

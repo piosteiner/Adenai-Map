@@ -428,4 +428,69 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = AdenaiMap;
 }
 
+// Test function to verify AdenaiConfig integration
+window.testAdenaiConfig = function() {
+    console.log('🧪 Testing AdenaiConfig integration...');
+    
+    if (!window.AdenaiConfig) {
+        console.error('❌ AdenaiConfig not found!');
+        return false;
+    }
+    
+    console.log('✅ AdenaiConfig is available globally');
+    
+    // Test character status labels
+    console.log('👤 Character Status Tests:');
+    console.log('  alive →', AdenaiConfig.getCharacterStatusLabel('alive'));
+    console.log('  dead →', AdenaiConfig.getCharacterStatusLabel('dead'));
+    console.log('  undead →', AdenaiConfig.getCharacterStatusLabel('undead'));
+    console.log('  missing →', AdenaiConfig.getCharacterStatusLabel('missing'));
+    
+    // Test character relationship labels
+    console.log('🤝 Character Relationship Tests:');
+    console.log('  ally →', AdenaiConfig.getCharacterRelationshipLabel('ally'));
+    console.log('  friendly →', AdenaiConfig.getCharacterRelationshipLabel('friendly'));
+    console.log('  neutral →', AdenaiConfig.getCharacterRelationshipLabel('neutral'));
+    console.log('  hostile →', AdenaiConfig.getCharacterRelationshipLabel('hostile'));
+    console.log('  enemy →', AdenaiConfig.getCharacterRelationshipLabel('enemy'));
+    
+    // Test location type labels
+    console.log('🏛️ Location Type Tests:');
+    console.log('  city →', AdenaiConfig.getLocationTypeLabel('city'));
+    console.log('  town →', AdenaiConfig.getLocationTypeLabel('town'));
+    console.log('  village →', AdenaiConfig.getLocationTypeLabel('village'));
+    console.log('  dungeon →', AdenaiConfig.getLocationTypeLabel('dungeon'));
+    
+    // Test location region labels
+    console.log('🗺️ Location Region Tests:');
+    console.log('  north_adenai →', AdenaiConfig.getLocationRegionLabel('north_adenai'));
+    console.log('  valaris_region →', AdenaiConfig.getLocationRegionLabel('valaris_region'));
+    console.log('  underdark →', AdenaiConfig.getLocationRegionLabel('underdark'));
+    
+    // Test movement type labels
+    console.log('🚶 Movement Type Tests:');
+    console.log('  stay →', AdenaiConfig.getMovementTypeLabel('stay'));
+    console.log('  travel →', AdenaiConfig.getMovementTypeLabel('travel'));
+    console.log('  mission →', AdenaiConfig.getMovementTypeLabel('mission'));
+    
+    // Test select generation
+    console.log('📋 Select Options Test:');
+    const statusOptions = AdenaiConfig.generateSelectOptions('characterStatus');
+    console.log('  Character status options (HTML):', statusOptions.substring(0, 100) + '...');
+    
+    const relationshipArray = AdenaiConfig.getSelectOptionsArray('characterRelationships');
+    console.log('  Relationship options (Array):', relationshipArray.slice(0, 3));
+    
+    console.log('🎉 AdenaiConfig integration test complete!');
+    return true;
+};
+
+// Auto-run test after map initialization
+document.addEventListener('adenaiMapInitialized', () => {
+    setTimeout(() => {
+        console.log('🔄 Running AdenaiConfig integration test...');
+        window.testAdenaiConfig();
+    }, 1000);
+});
+
 console.log('🗺️ Adenai Map modules loaded and ready for initialization');

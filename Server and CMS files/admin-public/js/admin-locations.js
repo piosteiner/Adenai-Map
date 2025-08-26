@@ -176,22 +176,7 @@ class AdminLocations {
     }
     
     formatType(type) {
-        const types = {
-            city: '🏙️ Stadt',
-            town: '🏘️ Dorf',
-            village: '🏡 Weiler',
-            camp: '⛺ Lager',
-            landmark: '🗿 Orientierungspunkt',
-            ruin: '🏛️ Ruine',
-            dungeon: '☠️ Dungeon',
-            monster: '🐉 Monster',
-            environment: '🌳 Umgebung',
-            mountain: '⛰️ Berg/Gebirge',
-            lake: '💧 Gewässer',
-            island: '🏝️ Insel',
-            unknown: '❓ Unbekannt'
-        };
-        return types[type] || `❓ ${type}`;
+        return AdenaiConfig.getLocationTypeLabel(type) || `❓ ${type}`;
     }
 
     formatRegion(region) {
