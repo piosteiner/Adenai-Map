@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "83cc7e74460fd87e9d805ae720b003bc51a413b6",
+      "action": "update",
+      "type": "location",
+      "itemName": "Atlantis (versunken)",
+      "user": "gm",
+      "timestamp": "2025-08-26T09:14:12.308Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T09:14:12.308Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Atlantis (versunken) (by gm) - updated region"
+    },
+    {
       "commitSha": "de6639b5821080a49f65651a8fb3a9e20e929400",
       "action": "update",
       "type": "location",
@@ -1822,5 +1835,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T09:13:59.951Z"
+  "lastUpdated": "2025-08-26T09:14:12.308Z"
 }
