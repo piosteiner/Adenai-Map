@@ -87,7 +87,11 @@
       "id": "lia_karthright",
       "name": "Lia Karthright",
       "title": "",
-      "location": "Donnermund",
+      "location": "Toftgard",
+      "coordinates": [
+        1392,
+        1083
+      ],
       "description": "",
       "image": "",
       "status": "alive",
@@ -95,22 +99,36 @@
       "relationship": "ally",
       "firstMet": "",
       "notes": "",
-      "createdAt": "2025-08-22T04:26:43.834Z",
-      "updatedAt": "2025-08-23T05:27:13.383Z",
-      "coordinates": [
-        981,
-        656
+      "movementHistory": [
+        {
+          "id": "movement_1756192322410",
+          "date": "5663-06-03",
+          "dateStart": "5663-06-03",
+          "dateEnd": "5663-07-17",
+          "location": "Toftgard",
+          "coordinates": [
+            1392,
+            1083
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-26T07:12:02.410Z"
+        }
       ],
-      "movementHistory": [],
       "currentLocation": {
-        "date": "2025-08-23",
-        "location": "Donnermund",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": "5663-07-17",
+        "location": "Toftgard",
         "coordinates": [
-          981,
-          656
+          1392,
+          1083
         ],
-        "notes": "Original location"
-      }
+        "notes": ""
+      },
+      "createdAt": "2025-08-22T04:26:43.834Z",
+      "updatedAt": "2025-08-26T07:12:02.413Z"
     },
     {
       "id": "remus",
@@ -358,5 +376,5 @@
       "updatedAt": "2025-08-25T16:51:39.063Z"
     }
   ],
-  "lastUpdated": "2025-08-25T16:51:39.063Z"
+  "lastUpdated": "2025-08-26T07:12:02.413Z"
 }
