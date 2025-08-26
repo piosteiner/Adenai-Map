@@ -724,7 +724,11 @@
       "type": "Feature",
       "properties": {
         "name": "Südliches Kap der Harak Region",
-        "description": "Wichtigster südlicher Hafen. Weitere Details sind noch zu entdecken."
+        "description": "Wichtigster südlicher Hafen. Weitere Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Harak",
+        "type": "town",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
