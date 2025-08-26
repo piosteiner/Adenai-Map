@@ -563,7 +563,10 @@
       "type": "Feature",
       "properties": {
         "name": "Ort unweit von Apit Sal",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Ost-Adenai",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
