@@ -848,7 +848,11 @@
       "type": "Feature",
       "properties": {
         "name": "Siedlung nordwestlich von Rena",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Rena Region",
+        "type": "village",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
