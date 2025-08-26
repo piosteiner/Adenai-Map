@@ -383,7 +383,9 @@
       "properties": {
         "name": "Kalthar",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Kalthar, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/kalthar.html"
+        "contentUrl": null,
+        "region": "Rena Region",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
