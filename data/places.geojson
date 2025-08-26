@@ -130,7 +130,7 @@
         "name": "Luvatu",
         "description": "Stadt unter dem Wasser - primär von Triton*innen bewohnt.",
         "contentUrl": null,
-        "region": "Östliche See",
+        "region": "east_sea",
         "visited": true
       },
       "geometry": {
