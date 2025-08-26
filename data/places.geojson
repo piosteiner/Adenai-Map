@@ -420,7 +420,10 @@
       "properties": {
         "name": "Makir",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Makir, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/makir.html"
+        "contentUrl": null,
+        "region": "Harak",
+        "type": "town",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
