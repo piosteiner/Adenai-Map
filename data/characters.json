@@ -1,35 +1,5 @@
 {
   "version": "1.0",
-  "characters": [
-    {
-      "id": "test_character",
-      "name": "Test Character",
-      "title": "Test Title",
-      "location": "Test Location",
-      "coordinates": [
-        1000,
-        1000
-      ],
-      "description": "A test character",
-      "image": "",
-      "status": "alive",
-      "faction": "",
-      "relationship": "friendly",
-      "firstMet": "",
-      "notes": "",
-      "movementHistory": [],
-      "currentLocation": {
-        "date": "2025-08-26",
-        "location": "Test Location",
-        "coordinates": [
-          1000,
-          1000
-        ],
-        "notes": "Initial location"
-      },
-      "createdAt": "2025-08-26T21:05:02.618Z",
-      "updatedAt": "2025-08-26T21:05:02.618Z"
-    }
-  ],
-  "lastUpdated": "2025-08-26T21:05:02.618Z"
+  "characters": [],
+  "lastUpdated": "2025-08-26T21:05:23.047Z"
 }
