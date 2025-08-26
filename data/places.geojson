@@ -368,6 +368,7 @@
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Donnermund, bitte kontaktiere den Websitenbetreiber.",
         "contentUrl": null,
         "region": "Ewige Donnerklüfte",
+        "type": "town",
         "visited": false
       },
       "geometry": {
