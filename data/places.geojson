@@ -939,8 +939,8 @@
         "name": "Sternenzirkel Base?",
         "description": "Es wird vermutet, dass sich Lord Remus, Anführer des Sternenzirkels in dieser Region befindet.",
         "contentUrl": null,
-        "region": "harak",
-        "type": "city",
+        "region": "Süd-Adenai",
+        "type": "camp",
         "visited": false
       },
       "geometry": {
