@@ -198,6 +198,7 @@
         "name": "Toftgard",
         "description": "Stadt der Familie Karthright.",
         "contentUrl": null,
+        "region": "eastern_adenai",
         "visited": true
       },
       "geometry": {
