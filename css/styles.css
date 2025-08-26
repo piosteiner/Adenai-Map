@@ -455,14 +455,8 @@ html, body {
 .movement-start-marker.multi-day,
 .movement-end-marker.multi-day,
 .movement-number-marker.multi-day {
-    border: 2px solid #4CAF50 !important;
+    inset: 2px solid #4CAF50 !important;
     background: rgba(76, 175, 80, 0.1) !important;
-}
-
-/* Enhanced popup for multi-day stays */
-.movement-point-popup.multi-day-stay {
-    border-left: 4px solid #4CAF50;
-    background: linear-gradient(to right, rgba(76, 175, 80, 0.05), transparent);
 }
 
 .duration-info {

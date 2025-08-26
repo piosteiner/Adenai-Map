@@ -206,7 +206,9 @@ class AdminLocations {
             ewige_donnerkluefte: 'Ewige Donnerklüfte',
             east_sea: 'Östliche See',
             west_sea: 'Westliche See',
-            other: 'Andere',
+            heaven: 'Himmel',
+            unknown: 'Unbekannt',
+            other: 'Andere'
         };
         return regions[region] || region;
     }
