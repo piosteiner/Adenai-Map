@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "70188e12a2a7419765ac7ab0f0c04a105f2c5c6a",
+      "action": "update",
+      "type": "location",
+      "itemName": "Esberg",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:51:43.127Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:51:43.127Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Esberg (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "7d211957ac940fbee13e17c54add711fdefac021",
       "action": "update",
       "type": "location",
@@ -1432,5 +1445,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:51:06.235Z"
+  "lastUpdated": "2025-08-26T06:51:43.127Z"
 }
