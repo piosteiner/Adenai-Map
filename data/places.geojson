@@ -315,7 +315,9 @@
       "properties": {
         "name": "Neudalen",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Neudalen, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/neudalen.html"
+        "contentUrl": null,
+        "region": "Tua Danar",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
