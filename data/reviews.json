@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "9bdf06856f0a510ce5ab1db8593f1dda1ea8dfd0",
+      "action": "update",
+      "type": "location",
+      "itemName": "Südliches Kap der Harak Region",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:53:26.436Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:53:26.436Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Südliches Kap der Harak Region (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "7f009fdf7d97bb7bfedb37a2b20f474902fad91f",
       "action": "update",
       "type": "location",
@@ -1510,5 +1523,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:53:09.989Z"
+  "lastUpdated": "2025-08-26T06:53:26.436Z"
 }
