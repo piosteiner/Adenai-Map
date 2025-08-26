@@ -74,7 +74,10 @@
       "properties": {
         "name": "Yosefka Akademie",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung der Yosefka Akademie, bitte kontaktiere den Websitenbetreiber.",
-        "contentUrl": "contentUrl/yosefka_akademie.html"
+        "contentUrl": null,
+        "region": "arcane_hights",
+        "type": "village",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
