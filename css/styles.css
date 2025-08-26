@@ -451,17 +451,7 @@ html, body {
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
-/* Multi-day marker styling */
-.movement-start-marker.multi-day,
-.movement-end-marker.multi-day,
-.movement-number-marker.multi-day {
-    inset: 2px solid #4CAF50 !important;
-    background: rgba(76, 175, 80, 0.1) !important;
-}
-
 .duration-info {
-    color: #4CAF50;
-    font-weight: bold;
     background: rgba(76, 175, 80, 0.1);
     padding: 4px 8px;
     border-radius: 4px;
