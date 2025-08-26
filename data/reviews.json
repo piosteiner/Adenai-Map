@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "de6639b5821080a49f65651a8fb3a9e20e929400",
+      "action": "update",
+      "type": "location",
+      "itemName": "Motu Motu",
+      "user": "gm",
+      "timestamp": "2025-08-26T09:13:59.951Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T09:13:59.951Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Motu Motu (by gm) - updated region"
+    },
+    {
       "commitSha": "873737ece1429da1031861bac77411993a6e6b9b",
       "action": "update",
       "type": "location",
@@ -1809,5 +1822,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T09:13:52.883Z"
+  "lastUpdated": "2025-08-26T09:13:59.951Z"
 }
