@@ -545,7 +545,11 @@
       "type": "Feature",
       "properties": {
         "name": "Dämmerwacht",
-        "description": "Details sind noch zu entdecken."
+        "description": "Details sind noch zu entdecken.",
+        "contentUrl": null,
+        "region": "Valaris Region",
+        "type": "landmark",
+        "visited": false
       },
       "geometry": {
         "type": "Point",
