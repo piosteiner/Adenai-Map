@@ -33,13 +33,10 @@
       "id": "avery",
       "name": "Avery",
       "title": "von Rena",
-      "location": "Wesdalen",
-      "coordinates": [
-        790,
-        769
-      ],
+      "location": "",
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/images/avery.png",
+      "image": "https://adenai.piogino.ch/public/images/avery.png",
       "status": "alive",
       "faction": "Regierung von Rena",
       "relationship": "friendly",
@@ -81,7 +78,7 @@
         "notes": "Updated location"
       },
       "createdAt": "2025-08-22T00:21:35.645Z",
-      "updatedAt": "2025-08-22T16:13:44.549Z"
+      "updatedAt": "2025-08-26T23:19:16.594Z"
     },
     {
       "id": "lia_karthright",
@@ -374,5 +371,5 @@
       "updatedAt": "2025-08-25T16:51:39.063Z"
     }
   ],
-  "lastUpdated": "2025-08-26T21:42:11.281Z"
+  "lastUpdated": "2025-08-26T23:19:16.595Z"
 }
