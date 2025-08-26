@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "f4d2ead8b718e9f4b6f1e78af89b9bf9c605a2a8",
+      "action": "update",
+      "type": "location",
+      "itemName": "Estu Vin",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:49:35.208Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:49:35.208Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Estu Vin (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "0cf1467de4cb41d70b8b54504424c1b1adc46bc8",
       "action": "update",
       "type": "location",
@@ -1367,5 +1380,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:49:19.362Z"
+  "lastUpdated": "2025-08-26T06:49:35.208Z"
 }
