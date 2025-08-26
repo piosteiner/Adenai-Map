@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "492071f6b3f29ec44748ba8c0affbb4d4c2db7b1",
+      "action": "update",
+      "type": "location",
+      "itemName": "Dämmerwacht",
+      "user": "gm",
+      "timestamp": "2025-08-26T06:49:49.800Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T06:49:49.800Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Dämmerwacht (by gm) - updated region, updated type, marked as unvisited"
+    },
+    {
       "commitSha": "f4d2ead8b718e9f4b6f1e78af89b9bf9c605a2a8",
       "action": "update",
       "type": "location",
@@ -1380,5 +1393,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T06:49:35.208Z"
+  "lastUpdated": "2025-08-26T06:49:49.800Z"
 }
