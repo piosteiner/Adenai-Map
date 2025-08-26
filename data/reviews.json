@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "c4a704edda40f0e6c94d159e2e291a028c467235",
+      "action": "update",
+      "type": "location",
+      "itemName": "Ruine von Zurak'thar",
+      "user": "gm",
+      "timestamp": "2025-08-26T09:13:34.457Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T09:13:34.457Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Ruine von Zurak'thar (by gm) - updated region"
+    },
+    {
       "commitSha": "0fd7a8a2661184db8a831b5496a63b27831c883e",
       "action": "update",
       "type": "location",
@@ -1770,5 +1783,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T09:13:06.848Z"
+  "lastUpdated": "2025-08-26T09:13:34.457Z"
 }
