@@ -8,9 +8,9 @@
       "itemName": "Lia Karthright",
       "user": "Pio`s Test User",
       "timestamp": "2025-08-26T21:42:12.086Z",
-      "status": "pending",
-      "reviewedBy": null,
-      "reviewedAt": null,
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-26T21:48:22.378Z",
       "reviewNotes": "",
       "commitMessage": "Update character: lia_karthright (by Pio`s Test User) - added title"
     },
@@ -1887,5 +1887,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-26T21:42:12.086Z"
+  "lastUpdated": "2025-08-26T21:48:22.608Z"
 }
