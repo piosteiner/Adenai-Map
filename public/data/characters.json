@@ -86,7 +86,7 @@
     {
       "id": "lia_karthright",
       "name": "Lia Karthright",
-      "title": "",
+      "title": "Der starke Arm der Karthrights",
       "location": "Toftgard",
       "coordinates": [
         1392,
@@ -117,18 +117,16 @@
         }
       ],
       "currentLocation": {
-        "date": "5663-06-03",
-        "dateStart": "5663-06-03",
-        "dateEnd": "5663-07-17",
+        "date": "2025-08-26",
         "location": "Toftgard",
         "coordinates": [
           1392,
           1083
         ],
-        "notes": ""
+        "notes": "Updated location"
       },
       "createdAt": "2025-08-22T04:26:43.834Z",
-      "updatedAt": "2025-08-26T07:12:02.413Z"
+      "updatedAt": "2025-08-26T21:42:11.281Z"
     },
     {
       "id": "remus",
@@ -376,5 +374,5 @@
       "updatedAt": "2025-08-25T16:51:39.063Z"
     }
   ],
-  "lastUpdated": "2025-08-26T07:12:02.413Z"
+  "lastUpdated": "2025-08-26T21:42:11.281Z"
 }
