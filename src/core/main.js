@@ -505,6 +505,12 @@ class DragonShadowController {
     constructor() {
         this.shadows = [];
         this.isActive = true;
+        this.mapBounds = {
+            topLeft: [3, -3],
+            topRight: [2497, -24], 
+            bottomRight: [2468, 1546],
+            bottomLeft: [1, 1537]
+        };
         this.init();
     }
 
@@ -514,13 +520,46 @@ class DragonShadowController {
             setTimeout(() => {
                 this.setupShadows();
                 this.startRandomShadows();
-                console.log('🐉 Dragon shadows activated');
+                console.log('🐉 Dragon shadows activated within map bounds');
             }, 2000);
         });
     }
 
     setupShadows() {
         this.shadows = document.querySelectorAll('.dragon-shadow');
+    }
+
+    // Convert map coordinates to screen percentage
+    mapCoordsToScreenPercent(x, y) {
+        const map = window.mapCore.getMap();
+        if (!map) return { x: 50, y: 50 }; // Fallback to center
+        
+        // Convert map coordinates to LatLng
+        const point = map.project([y, x], map.getZoom());
+        const bounds = map.getPixelBounds();
+        
+        // Calculate percentage position within map view
+        const percentX = ((point.x - bounds.min.x) / (bounds.max.x - bounds.min.x)) * 100;
+        const percentY = ((point.y - bounds.min.y) / (bounds.max.y - bounds.min.y)) * 100;
+        
+        return { 
+            x: Math.max(0, Math.min(100, percentX)), 
+            y: Math.max(0, Math.min(100, percentY)) 
+        };
+    }
+
+    // Get random position within map bounds
+    getRandomMapPosition() {
+        // Random position within the defined bounds
+        const minX = Math.min(this.mapBounds.topLeft[0], this.mapBounds.bottomLeft[0]);
+        const maxX = Math.max(this.mapBounds.topRight[0], this.mapBounds.bottomRight[0]);
+        const minY = Math.min(this.mapBounds.topLeft[1], this.mapBounds.topRight[1]);
+        const maxY = Math.max(this.mapBounds.bottomLeft[1], this.mapBounds.bottomRight[1]);
+        
+        const randomX = minX + Math.random() * (maxX - minX);
+        const randomY = minY + Math.random() * (maxY - minY);
+        
+        return this.mapCoordsToScreenPercent(randomX, randomY);
     }
 
     startRandomShadows() {
@@ -541,34 +580,51 @@ class DragonShadowController {
         // Pick a random shadow variant
         const randomShadow = this.shadows[Math.floor(Math.random() * this.shadows.length)];
         
+        // Get random positions within map bounds
+        const startPos = this.getRandomMapPosition();
+        const endPos = this.getRandomMapPosition();
+        
         // Create a unique animation with random properties
         const animationName = `dragonFly-${Date.now()}`;
         const duration = Math.random() * 4 + 6; // 6-10 seconds
-        const startY = Math.random() * 40 + 10; // 10-50% from top
-        const direction = Math.random() > 0.5 ? 1 : -1; // Left to right or right to left
+        const direction = Math.random() > 0.5 ? 1 : -1; // Flight direction
         
-        // Create dynamic keyframes
+        // Calculate flight path within map bounds
+        const deltaX = (endPos.x - startPos.x) * direction;
+        const deltaY = (endPos.y - startPos.y) * 0.5; // Less vertical movement
+        
+        // Create dynamic keyframes that stay within map bounds
         const keyframes = `
             @keyframes ${animationName} {
                 0% { 
                     opacity: 0; 
-                    transform: translateX(${direction * -200}px) translateY(${startY - 10}%) scale(0.8) rotate(${direction * -10}deg);
+                    left: ${startPos.x - 20}%;
+                    top: ${startPos.y}%;
+                    transform: scale(0.8) rotate(${direction * -10}deg);
                 }
                 15% { 
                     opacity: 0.6; 
-                    transform: translateX(${direction * -50}px) translateY(${startY - 5}%) scale(1) rotate(${direction * -5}deg);
+                    left: ${startPos.x}%;
+                    top: ${startPos.y + deltaY * 0.2}%;
+                    transform: scale(1) rotate(${direction * -5}deg);
                 }
                 50% { 
                     opacity: 0.8; 
-                    transform: translateX(${direction * 50}px) translateY(${startY}%) scale(1.1) rotate(0deg);
+                    left: ${startPos.x + deltaX * 0.5}%;
+                    top: ${startPos.y + deltaY * 0.5}%;
+                    transform: scale(1.1) rotate(0deg);
                 }
                 85% { 
                     opacity: 0.6; 
-                    transform: translateX(${direction * 150}px) translateY(${startY + 5}%) scale(1) rotate(${direction * 5}deg);
+                    left: ${endPos.x}%;
+                    top: ${endPos.y}%;
+                    transform: scale(1) rotate(${direction * 5}deg);
                 }
                 100% { 
                     opacity: 0; 
-                    transform: translateX(${direction * 300}px) translateY(${startY + 10}%) scale(0.8) rotate(${direction * 10}deg);
+                    left: ${endPos.x + 20}%;
+                    top: ${endPos.y}%;
+                    transform: scale(0.8) rotate(${direction * 10}deg);
                 }
             }
         `;
@@ -580,7 +636,6 @@ class DragonShadowController {
 
         // Apply animation
         randomShadow.style.animation = `${animationName} ${duration}s ease-in-out`;
-        randomShadow.style.top = `${startY}%`;
 
         // Clean up after animation
         setTimeout(() => {
