@@ -295,7 +295,7 @@ html, body {
 
 .movement-point-popup {
     max-width: 250px;
-    background: rgba(231, 230, 182, 0.9); /* Beige background */
+    background: rgba(241, 241, 201, 0.9); /* Beige background */
     padding: 12px;
     border-radius: 8px;
     border: 1px solid rgba(85, 107, 47, 0.2);
@@ -675,11 +675,11 @@ html, body {
 
 /* Dark theme support for styled number markers */
 [data-theme="dark"] .number-marker .single-number-marker {
-    background: rgba(139, 123, 101, 0.55); /* Darker beige for dark theme */
-    color: #90EE90; /* Light green for better contrast in dark theme */
+    background: #2a2a2a; /* Darker beige for dark theme */
+    color: #efe4c8; /* Light green for better contrast in dark theme */
     font-family: "Arial Black", "Helvetica Black", "DejaVu Sans Bold", "Arial", sans-serif; /* Bold sans-serif font */
     font-weight: 900; /* Extra bold */
-    border: 1px solid rgba(144, 238, 144, 0.3); /* Light green border */
+    border: 1px solid rgba(0, 39, 0, 0.3); /* Light green border */
     box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1); /* Light shadow for dark theme */
 }
 
