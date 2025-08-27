@@ -9,7 +9,15 @@ class LocationSystem {
     }
 
     init() {
-        this.createLocationIcon();
+        // Wait for map to be ready before creating icon
+        if (window.mapCore && window.mapCore.map) {
+            this.createLocationIcon();
+        } else {
+            // Wait for map initialization
+            document.addEventListener('adenaiMapInitialized', () => {
+                this.createLocationIcon();
+            });
+        }
         this.loadMediaLibrary();
     }
 
@@ -26,7 +34,7 @@ class LocationSystem {
     }
 
     createLocationIcon() {
-        const isMobile = window.mapCore.getIsMobile();
+        const isMobile = window.mapCore && window.mapCore.getIsMobile ? window.mapCore.getIsMobile() : false;
         
         this.dotOrangeIcon = L.icon({
             iconUrl: 'public/icons/dot_orange.svg',
@@ -34,6 +42,8 @@ class LocationSystem {
             iconAnchor: isMobile ? [24, 24] : [16, 16],
             popupAnchor: [0, -32]
         });
+        
+        console.log('📍 Location icon created');
     }
 
     // Parse link syntax [text:type:id] and convert to clickable elements
@@ -477,8 +487,9 @@ class LocationSystem {
     }
 }
 
-// Create global location system instance
-window.locationsSystem = new LocationSystem();
+// Create global location system instance  
+window.locationSystem = new LocationSystem();
+window.locationsSystem = window.locationSystem; // Backward compatibility
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {
