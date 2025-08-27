@@ -398,7 +398,7 @@ class MovementSystem {
         let markerIcon;
         if (isFirst) {
             markerIcon = L.divIcon({
-                html: this.createMarkerHTML('📍', hasMultipleVisits, visitsToShow.length, hasDateRange),
+                html: this.createMarkerHTML('1', hasMultipleVisits, visitsToShow.length, hasDateRange, true),
                 iconSize: [24, 24],
                 className: `movement-start-marker${hasMultipleVisits ? ' has-multiple' : ''}${hasDateRange ? ' multi-day' : ''}${hasMultipleCharacters ? ' cross-character' : ''}`,
                 iconAnchor: [12, 12]
@@ -675,10 +675,10 @@ class MovementSystem {
         
         let markerHtml, markerClass;
         if (hasStart && hasEnd) {
-            markerHtml = this.createMarkerHTML('📍🚩', true, group.visits.length, hasDateRange);
+            markerHtml = this.createMarkerHTML('1', true, group.visits.length, hasDateRange);
             markerClass = 'movement-start-end-marker';
         } else if (hasStart) {
-            markerHtml = this.createMarkerHTML('📍', true, group.visits.length, hasDateRange);
+            markerHtml = this.createMarkerHTML('1', true, group.visits.length, hasDateRange, true);
             markerClass = 'movement-start-marker';
         } else if (hasEnd) {
             markerHtml = this.createMarkerHTML('🚩', true, group.visits.length, hasDateRange);
