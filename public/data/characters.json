@@ -84,10 +84,10 @@
       "id": "lia_karthright",
       "name": "Lia Karthright",
       "title": "Der starke Arm der Karthrights",
-      "location": "Toftgard",
+      "location": "Goblin Loch",
       "coordinates": [
-        1392,
-        1083
+        1472,
+        1040
       ],
       "description": "",
       "image": "",
@@ -111,19 +111,36 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-26T07:12:02.410Z"
+        },
+        {
+          "id": "movement_1756257904810",
+          "date": "6553-07-31",
+          "dateStart": "6553-07-31",
+          "dateEnd": "6553-08-03",
+          "location": "Goblin Loch",
+          "coordinates": [
+            1472,
+            1040
+          ],
+          "notes": "",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-27T01:25:04.810Z"
         }
       ],
       "currentLocation": {
-        "date": "2025-08-26",
-        "location": "Toftgard",
+        "date": "6553-07-31",
+        "dateStart": "6553-07-31",
+        "dateEnd": "6553-08-03",
+        "location": "Goblin Loch",
         "coordinates": [
-          1392,
-          1083
+          1472,
+          1040
         ],
-        "notes": "Updated location"
+        "notes": ""
       },
       "createdAt": "2025-08-22T04:26:43.834Z",
-      "updatedAt": "2025-08-26T21:42:11.281Z"
+      "updatedAt": "2025-08-27T01:25:04.810Z"
     },
     {
       "id": "remus",
@@ -381,5 +398,5 @@
       "updatedAt": "2025-08-27T00:35:18.828Z"
     }
   ],
-  "lastUpdated": "2025-08-27T00:35:18.828Z"
+  "lastUpdated": "2025-08-27T01:25:04.810Z"
 }
