@@ -257,8 +257,17 @@ class LocationSystem {
         // Disable default popup behavior
         marker.off('click');
         
-        // Click event - opens popup and makes it sticky
+        // Click event - toggles popup (opens/closes) and makes it sticky
         marker.on('click', () => {
+            // If this marker's popup is already open, close it (toggle behavior)
+            if (this.currentOpenPopup === marker && marker._isPopupSticky) {
+                marker._isPopupSticky = false;
+                marker.closePopup();
+                this.currentOpenPopup = null;
+                console.log('📍 Location popup toggled closed');
+                return;
+            }
+            
             // Close any previously open popup and reset its sticky state
             if (this.currentOpenPopup && this.currentOpenPopup !== marker) {
                 this.currentOpenPopup._isPopupSticky = false;
