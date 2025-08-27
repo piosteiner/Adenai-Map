@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "c5a3ab6283109d4380dfb9911d4ba176745ce0da",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lia Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-27T01:25:05.650Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-27T01:25:05.650Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Lia Karthright (by gm) - Goblin Loch (6553-07-31 to 6553-08-03)"
+    },
+    {
       "commitSha": "c680cb35ec152aebe9b698bb0f1c43a9fe277b3b",
       "action": "create",
       "type": "character",
@@ -2056,5 +2069,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-27T00:35:19.625Z"
+  "lastUpdated": "2025-08-27T01:25:05.650Z"
 }
