@@ -80,7 +80,7 @@ class MovementSystem {
                 <div class="visit-info-grid">
                     <div class="info-row">
                         <strong>Person:</strong> 
-                        <span class="character-name">${character.name}</span>
+                        <span class="character-name">${visit.characterName || (character ? character.name : 'Unknown')}</span>
                     </div>
                     
                     ${movement.type ? `
