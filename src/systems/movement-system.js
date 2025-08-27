@@ -620,26 +620,30 @@ class MovementSystem {
             // Sort visits by date
             group.visits.sort((a, b) => new Date(a.dateStart || a.date) - new Date(b.dateStart || b.date));
             
-            const hasMultipleCharacters = new Set(group.visits.map(v => v.characterId)).size > 1;
-            const hasMultipleVisits = group.visits.length > 1;
+            const uniqueCharacters = new Set(group.visits.map(v => v.characterId));
+            const hasMultipleCharacters = uniqueCharacters.size > 1;
+            const hasMultipleVisitsFromSameCharacter = group.visits.length > uniqueCharacters.size;
             
-            if (hasMultipleCharacters || hasMultipleVisits) {
-                // Create consolidated marker
+            // Only consolidate if there's actual overlap
+            const needsConsolidation = hasMultipleCharacters || hasMultipleVisitsFromSameCharacter;
+            
+            if (needsConsolidation) {
+                // Create consolidated marker for overlapping locations
                 const marker = this.createConsolidatedMarkerForLocation(group);
                 marker.addTo(map);
                 this.consolidatedMarkers.push(marker);
             } else {
-                // Create individual marker
-                const visit = group.visits[0];
-                const marker = this.createMovementMarker(
-                    { coordinates: group.coordinates, location: group.location },
-                    visit.character,
-                    visit.pathIndex,
-                    visit.isFirst,
-                    visit.isLast
-                );
-                marker.addTo(map);
-                this.consolidatedMarkers.push(marker);
+                // Create individual markers for single visits
+                group.visits.forEach(visit => {
+                    const marker = this.createMovementMarker(
+                        { coordinates: group.coordinates, location: group.location },
+                        visit.pathIndex,
+                        visit.character.movementHistory.length,
+                        visit.character
+                    );
+                    marker.addTo(map);
+                    this.consolidatedMarkers.push(marker);
+                });
             }
         });
     }
@@ -713,15 +717,16 @@ class MovementSystem {
         
         const map = window.mapCore.getMap();
         
-        // Add only the path line to map (not individual markers)
+        // Add path line and individual markers to map
         pathData.pathLine.addTo(map);
-        this.movementLayers.push(pathData.pathLine);
+        pathData.markers.forEach(marker => marker.addTo(map));
+        this.movementLayers.push(pathData.pathLine, ...pathData.markers);
         
         pathData.isVisible = true;
         this.visibleCharacterPaths.add(characterId);
         
-        // Recreate consolidated markers for all visible paths
-        this.createConsolidatedMarkers();
+        // Update marker visibility based on overlaps
+        this.updateMarkerVisibility();
         
         console.log(`Showing path for ${pathData.character.name}`);
     }
@@ -733,19 +738,103 @@ class MovementSystem {
         
         const map = window.mapCore.getMap();
         
-        // Remove path line from map
+        // Remove path line and markers from map
         if (map.hasLayer(pathData.pathLine)) {
             map.removeLayer(pathData.pathLine);
             this.movementLayers = this.movementLayers.filter(layer => layer !== pathData.pathLine);
         }
 
+        pathData.markers.forEach(marker => {
+            if (map.hasLayer(marker)) {
+                map.removeLayer(marker);
+                this.movementLayers = this.movementLayers.filter(layer => layer !== marker);
+            }
+        });
+
         pathData.isVisible = false;
         this.visibleCharacterPaths.delete(characterId);
         
-        // Recreate consolidated markers for remaining visible paths
-        this.createConsolidatedMarkers();
+        // Clear any existing consolidated markers and update visibility
+        this.clearConsolidatedMarkers();
+        this.updateMarkerVisibility();
         
         console.log(`Hiding path for ${pathData.character.name}`);
+    }
+
+    // Update marker visibility to handle overlaps
+    updateMarkerVisibility() {
+        const map = window.mapCore.getMap();
+        const visibleCharacterIds = Array.from(this.visibleCharacterPaths);
+        const allCharacters = window.characterSystem.getCharacters();
+        
+        // Clear existing consolidated markers
+        this.clearConsolidatedMarkers();
+        
+        if (visibleCharacterIds.length === 0) return;
+        
+        // Group all movement points by coordinates from visible characters
+        const coordinateGroups = new Map();
+        const markerLookup = new Map(); // Track original markers by coordinate
+        
+        visibleCharacterIds.forEach(characterId => {
+            const character = allCharacters.find(c => c.id === characterId);
+            const pathData = this.getCharacterPath(characterId);
+            if (!character?.movementHistory || !pathData) return;
+            
+            character.movementHistory.forEach((movement, index) => {
+                if (!movement.coordinates) return;
+                
+                const coordKey = `${movement.coordinates[0]},${movement.coordinates[1]}`;
+                if (!coordinateGroups.has(coordKey)) {
+                    coordinateGroups.set(coordKey, {
+                        coordinates: movement.coordinates,
+                        location: movement.location,
+                        visits: [],
+                        originalMarkers: []
+                    });
+                }
+                
+                const group = coordinateGroups.get(coordKey);
+                group.visits.push({
+                    ...movement,
+                    character: character,
+                    characterId: character.id,
+                    characterName: character.name,
+                    visitIndex: index + 1,
+                    isFirst: index === 0,
+                    isLast: index === character.movementHistory.length - 1,
+                    pathIndex: index
+                });
+                
+                // Find the corresponding original marker
+                if (pathData.markers[index]) {
+                    group.originalMarkers.push(pathData.markers[index]);
+                }
+            });
+        });
+        
+        // Handle overlaps
+        coordinateGroups.forEach((group, coordKey) => {
+            const uniqueCharacters = new Set(group.visits.map(v => v.characterId));
+            const hasMultipleCharacters = uniqueCharacters.size > 1;
+            const hasMultipleVisitsFromSameCharacter = group.visits.length > uniqueCharacters.size;
+            
+            if (hasMultipleCharacters || hasMultipleVisitsFromSameCharacter) {
+                // Hide original markers at this location
+                group.originalMarkers.forEach(marker => {
+                    if (map.hasLayer(marker)) {
+                        map.removeLayer(marker);
+                    }
+                });
+                
+                // Create and show consolidated marker
+                group.visits.sort((a, b) => new Date(a.dateStart || a.date) - new Date(b.dateStart || b.date));
+                const consolidatedMarker = this.createConsolidatedMarkerForLocation(group);
+                consolidatedMarker.addTo(map);
+                this.consolidatedMarkers.push(consolidatedMarker);
+            }
+            // If no overlap, original markers remain visible
+        });
     }    // Show all character paths
     showAllPaths() {
         this.characterPaths.forEach(pathData => {
@@ -758,10 +847,27 @@ class MovementSystem {
     // Hide all character paths
     hideAllPaths() {
         this.characterPaths.forEach(pathData => {
-            this.hideCharacterPath(pathData.character.id);
+            if (pathData.isVisible) {
+                const map = window.mapCore.getMap();
+                
+                // Remove path line and markers
+                if (map.hasLayer(pathData.pathLine)) {
+                    map.removeLayer(pathData.pathLine);
+                    this.movementLayers = this.movementLayers.filter(layer => layer !== pathData.pathLine);
+                }
+                
+                pathData.markers.forEach(marker => {
+                    if (map.hasLayer(marker)) {
+                        map.removeLayer(marker);
+                        this.movementLayers = this.movementLayers.filter(layer => layer !== marker);
+                    }
+                });
+                
+                pathData.isVisible = false;
+            }
         });
         
-        // Clear any remaining consolidated markers
+        this.visibleCharacterPaths.clear();
         this.clearConsolidatedMarkers();
         
         console.log('All character paths hidden');
