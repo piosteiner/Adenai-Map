@@ -57,15 +57,6 @@
           "createdAt": "2025-08-22T15:27:49.219Z"
         }
       ],
-      "currentLocation": {
-        "date": "2025-08-22",
-        "location": "Wesdalen",
-        "coordinates": [
-          790,
-          769
-        ],
-        "notes": "Updated location"
-      },
       "createdAt": "2025-08-22T00:21:35.645Z",
       "updatedAt": "2025-08-26T23:19:16.594Z"
     },
@@ -118,18 +109,7 @@
         }
       ],
       "createdAt": "2025-08-22T04:26:43.834Z",
-      "updatedAt": "2025-08-27T10:30:20.282Z",
-      "currentLocation": {
-        "location": "Issa",
-        "date": "2025-08-22",
-        "dateStart": "2025-08-22",
-        "dateEnd": null,
-        "coordinates": [
-          1035,
-          407
-        ],
-        "notes": "Migrated from place of origin"
-      }
+      "updatedAt": "2025-08-27T10:30:20.282Z"
     },
     {
       "id": "remus",
@@ -148,15 +128,6 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "currentLocation": {
-        "date": "2025-08-22",
-        "location": "Sternenzirkel Base?",
-        "coordinates": [
-          1155,
-          540
-        ],
-        "notes": "Updated location"
-      },
       "createdAt": "2025-08-22T04:28:11.542Z",
       "updatedAt": "2025-08-22T15:11:17.200Z"
     },
@@ -256,18 +227,7 @@
         }
       ],
       "createdAt": "2025-08-22T15:11:48.559Z",
-      "updatedAt": "2025-08-27T00:19:20.086Z",
-      "currentLocation": {
-        "location": "Atlantis (aufgestiegen)",
-        "date": "2025-08-22",
-        "dateStart": "2025-08-22",
-        "dateEnd": null,
-        "coordinates": [
-          2210,
-          1200
-        ],
-        "notes": "Migrated from place of origin"
-      }
+      "updatedAt": "2025-08-27T00:19:20.086Z"
     },
     {
       "id": "vsuzh",
@@ -366,17 +326,6 @@
           "createdAt": "2025-08-25T16:51:39.063Z"
         }
       ],
-      "currentLocation": {
-        "date": "5663-06-20",
-        "dateStart": "5663-06-20",
-        "dateEnd": "5663-06-25",
-        "location": "Toftgard",
-        "coordinates": [
-          1392,
-          1083
-        ],
-        "notes": "Test übernachtung in toftgard"
-      },
       "createdAt": "2025-08-24T23:05:39.208Z",
       "updatedAt": "2025-08-25T16:51:39.063Z"
     },
@@ -446,19 +395,8 @@
         }
       ],
       "createdAt": "2025-08-27T10:32:15.038Z",
-      "updatedAt": "2025-08-27T10:59:16.555Z",
-      "currentLocation": {
-        "location": "Goblin Loch",
-        "date": "2025-08-27",
-        "dateStart": "2025-08-27",
-        "dateEnd": null,
-        "coordinates": [
-          1472,
-          1040
-        ],
-        "notes": "Migrated from place of origin"
-      }
+      "updatedAt": "2025-08-27T10:59:16.555Z"
     }
   ],
-  "lastUpdated": "2025-08-27T17:53:54.234Z"
+  "lastUpdated": "2025-08-27T18:07:32.568Z"
 }
