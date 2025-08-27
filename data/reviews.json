@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "08f03bb5e7689d06c56632bea41255088615dc15",
+      "action": "create",
+      "type": "location",
+      "itemName": "test",
+      "user": "gm",
+      "timestamp": "2025-08-27T01:08:05.790Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-27T01:08:05.790Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create location: test (by gm) - Initial location creation"
+    },
+    {
       "commitSha": "5435f3151e988a7b38890c68ae64b3fb3bd612d3",
       "action": "delete",
       "type": "location",
@@ -249,5 +262,5 @@
       "commitMessage": "Create location: Test Location (by gm) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-27T01:07:49.540Z"
+  "lastUpdated": "2025-08-27T01:08:05.790Z"
 }
