@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "c470b132579dd749675cac3c3f9a4f650e1c9bc6",
+      "action": "update",
+      "type": "character",
+      "itemName": "Viktoria Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-27T10:40:55.532Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-27T10:40:55.532Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: viktoria_karthright (by gm) - changed relationship to friendly"
+    },
+    {
       "commitSha": "448e60cbd928c923ff34409ed75ac5b3301609b2",
       "action": "update",
       "type": "character",
@@ -2121,5 +2134,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-27T10:39:40.202Z"
+  "lastUpdated": "2025-08-27T10:40:55.532Z"
 }
