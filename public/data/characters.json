@@ -390,8 +390,11 @@
       "id": "viktoria_karthright",
       "name": "Viktoria Karthright",
       "title": "Familienoberhaupt",
-      "placeOfOrigin": "",
-      "coordinates": null,
+      "placeOfOrigin": "Toftgard",
+      "coordinates": [
+        1392,
+        1083
+      ],
       "description": "",
       "image": "https://adenai.piogino.ch/public/images/viktoria_karthright_close.png",
       "status": "alive",
@@ -401,8 +404,8 @@
       "notes": "",
       "movementHistory": [],
       "createdAt": "2025-08-27T10:32:15.038Z",
-      "updatedAt": "2025-08-27T10:32:15.038Z"
+      "updatedAt": "2025-08-27T10:39:39.405Z"
     }
   ],
-  "lastUpdated": "2025-08-27T10:32:15.038Z"
+  "lastUpdated": "2025-08-27T10:39:39.405Z"
 }
