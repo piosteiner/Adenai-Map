@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "b79edcf4bbd8573ef42eb7f0fee0706dfda1ece4",
+      "action": "create",
+      "type": "location",
+      "itemName": "Teststa",
+      "user": "gm",
+      "timestamp": "2025-08-27T00:54:14.950Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-27T00:54:14.950Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create location: Teststa (by gm) - Initial location creation"
+    },
+    {
       "commitSha": "483cc2fdbe416a665c28d29d0099e66f4bcb7b3f",
       "action": "create",
       "type": "location",
@@ -145,5 +158,5 @@
       "commitMessage": "Create location: Test Location (by gm) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-27T00:51:43.773Z"
+  "lastUpdated": "2025-08-27T00:54:14.950Z"
 }
