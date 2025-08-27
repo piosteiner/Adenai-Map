@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "c680cb35ec152aebe9b698bb0f1c43a9fe277b3b",
+      "action": "create",
+      "type": "character",
+      "itemName": "Pio",
+      "user": "gm",
+      "timestamp": "2025-08-27T00:35:19.625Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-27T00:35:19.625Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Pio (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "57f2955135eae946c1cd3e3a6098a9dfc909ba71",
       "action": "update",
       "type": "character",
@@ -2043,5 +2056,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-27T00:19:20.830Z"
+  "lastUpdated": "2025-08-27T00:35:19.625Z"
 }
