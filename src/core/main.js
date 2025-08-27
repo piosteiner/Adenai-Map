@@ -658,7 +658,7 @@ class DragonShadowController {
     }
 }
 
-// Initialize dragon shadows
-window.dragonShadows = new DragonShadowController();
+// Initialize dragon shadows - DISABLED
+// window.dragonShadows = new DragonShadowController();
 
 console.log('🗺️ Adenai Map modules loaded and ready for initialization');

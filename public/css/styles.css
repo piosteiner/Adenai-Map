@@ -1981,3 +1981,35 @@ html, body {
     height: 16px;
   }
 }
+
+/* ============================================
+   ENHANCED LOCATION POPUP STYLES
+   ============================================ */
+
+/* Make popup close button more prominent */
+.leaflet-popup-close-button {
+  color: #666 !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  padding: 4px 6px !important;
+  line-height: 1 !important;
+}
+
+.leaflet-popup-close-button:hover {
+  color: #000 !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 2px !important;
+}
+
+/* Improve popup content styling */
+.custom-popup .popup-title {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.custom-popup .popup-desc {
+  line-height: 1.4;
+  color: #555;
+}

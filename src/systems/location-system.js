@@ -241,10 +241,64 @@ class LocationSystem {
             },
             onEachFeature: async (feature, layer) => {
                 await this.processLocationFeature(feature, layer);
+                // Setup enhanced interactions after popup is bound
+                this.setupMarkerInteractions(layer);
             }
         }).addTo(map);
 
         return geoLayer;
+    }
+
+    setupMarkerInteractions(marker) {
+        let hoverTimeout;
+        let isPopupSticky = false; // Track if popup was opened by click
+        
+        // Disable default popup behavior
+        marker.off('click');
+        
+        // Click event - opens popup and makes it sticky
+        marker.on('click', () => {
+            isPopupSticky = true;
+            marker.openPopup();
+            console.log('📍 Location popup opened by click (sticky)');
+        });
+        
+        // Hover events
+        marker.on('mouseover', () => {
+            // Clear any existing timeout
+            if (hoverTimeout) {
+                clearTimeout(hoverTimeout);
+                hoverTimeout = null;
+            }
+            
+            // Only open popup on hover if it's not already sticky
+            if (!isPopupSticky) {
+                hoverTimeout = setTimeout(() => {
+                    marker.openPopup();
+                    console.log('📍 Location popup opened by hover');
+                }, 100); // 100ms delay
+            }
+        });
+        
+        marker.on('mouseout', () => {
+            // Clear hover timeout if mouse leaves before 100ms
+            if (hoverTimeout) {
+                clearTimeout(hoverTimeout);
+                hoverTimeout = null;
+            }
+            
+            // Only close popup if it's not sticky
+            if (!isPopupSticky) {
+                marker.closePopup();
+                console.log('📍 Location popup closed by mouseout');
+            }
+        });
+        
+        // Reset sticky state when popup is manually closed
+        marker.on('popupclose', () => {
+            isPopupSticky = false;
+            console.log('📍 Location popup closed, sticky state reset');
+        });
     }
 
     async processLocationFeature(feature, layer) {
@@ -277,8 +331,13 @@ class LocationSystem {
             popupContent = this.createPopupFromProperties(name, desc, details);
         }
 
-        // Bind popup to the layer
-        layer.bindPopup(popupContent, { maxWidth: 400, className: 'custom-popup' });
+        // Bind popup to the layer (with enhanced interaction behavior)
+        layer.bindPopup(popupContent, { 
+            maxWidth: 400, 
+            className: 'custom-popup',
+            autoClose: false, // Don't auto-close when clicking elsewhere
+            closeOnClick: false // Don't close when clicking the map
+        });
 
         // Store location data
         const locationData = {
