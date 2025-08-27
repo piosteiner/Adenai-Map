@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "448e60cbd928c923ff34409ed75ac5b3301609b2",
+      "action": "update",
+      "type": "character",
+      "itemName": "Viktoria Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-27T10:39:40.202Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-27T10:39:40.202Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: viktoria_karthright (by gm) - added place of origin"
+    },
+    {
       "commitSha": "c6aee3b6d0d52dd6022a27c9ce63c0c672b9e912",
       "action": "create",
       "type": "character",
@@ -2108,5 +2121,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-27T10:32:15.787Z"
+  "lastUpdated": "2025-08-27T10:39:40.202Z"
 }
