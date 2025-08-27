@@ -540,7 +540,7 @@ class CharacterSystem {
             <div class="character-popup">
                 ${imageHtml}
                 <div class="popup-title" style="color: ${this.relationshipColors[character.relationship] || '#333'}">
-                    🎯 ${character.name}
+                    ${character.name}
                 </div>
                 ${character.title ? `<div style="font-style: italic; margin-bottom: 8px;">${character.title}</div>` : ''}
                 <div style="margin-bottom: 8px;">
