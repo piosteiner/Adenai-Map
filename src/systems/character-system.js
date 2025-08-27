@@ -1,6 +1,7 @@
 // character-system.js - Character Loading, Rendering, and Management
 class CharacterSystem {
     constructor() {
+        console.log('🎯 CHARACTER SYSTEM LOADED - VERSION 1.2.0 - UPDATED WITH ENHANCED POPUPS');
         this.characterData = [];
         this.currentCharacterPopup = null; // Track current popup
         this.currentPanelPopup = null; // Track panel-anchored popup
@@ -52,10 +53,29 @@ class CharacterSystem {
     async loadCharacters() {
         try {
             console.log('👥 Loading characters from server...');
-            const response = await fetch(`public/data/characters.json?t=${Date.now()}`);
+            // Try different potential URLs in case of server routing issues
+            let response;
+            const urls = [
+                `/data/characters.json?t=${Date.now()}`,
+                `public/data/characters.json?t=${Date.now()}`,
+                `./public/data/characters.json?t=${Date.now()}`
+            ];
             
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            for (const url of urls) {
+                try {
+                    console.log(`🔄 Trying URL: ${url}`);
+                    response = await fetch(url);
+                    if (response.ok) {
+                        console.log(`✅ Successfully loaded from: ${url}`);
+                        break;
+                    }
+                } catch (e) {
+                    console.log(`❌ Failed URL: ${url} - ${e.message}`);
+                }
+            }
+            
+            if (!response || !response.ok) {
+                throw new Error(`HTTP ${response?.status || 'No response'}: ${response?.statusText || 'Failed all URLs'}`);
             }
             
             const data = await response.json();
