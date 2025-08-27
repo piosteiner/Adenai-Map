@@ -84,15 +84,15 @@
       "id": "lia_karthright",
       "name": "Lia Karthright",
       "title": "Der starke Arm der Karthrights",
-      "location": "Goblin Loch",
+      "placeOfOrigin": "Issa",
       "coordinates": [
-        1472,
-        1040
+        1035,
+        407
       ],
       "description": "",
-      "image": "",
+      "image": "https://adenai.piogino.ch/public/images/lia_karthright_close.png",
       "status": "alive",
-      "faction": "",
+      "faction": "Familie Karthright",
       "relationship": "ally",
       "firstMet": "",
       "notes": "",
@@ -128,19 +128,8 @@
           "createdAt": "2025-08-27T01:25:04.810Z"
         }
       ],
-      "currentLocation": {
-        "date": "6553-07-31",
-        "dateStart": "6553-07-31",
-        "dateEnd": "6553-08-03",
-        "location": "Goblin Loch",
-        "coordinates": [
-          1472,
-          1040
-        ],
-        "notes": ""
-      },
       "createdAt": "2025-08-22T04:26:43.834Z",
-      "updatedAt": "2025-08-27T01:25:04.810Z"
+      "updatedAt": "2025-08-27T10:30:20.282Z"
     },
     {
       "id": "remus",
@@ -398,5 +387,5 @@
       "updatedAt": "2025-08-27T00:35:18.828Z"
     }
   ],
-  "lastUpdated": "2025-08-27T01:25:04.810Z"
+  "lastUpdated": "2025-08-27T10:30:20.282Z"
 }
