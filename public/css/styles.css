@@ -260,6 +260,25 @@ html, body {
     margin: auto;
 }
 
+/* Styled number markers with serif font and elegant design */
+.number-marker .single-number-marker {
+    background: rgba(245, 245, 220, 0.55); /* Beige background with 55% opacity */
+    color: #556B2F; /* Dark olive green */
+    font-family: "Times New Roman", "Georgia", serif; /* Serif font */
+    font-weight: bold;
+    font-size: 13px;
+    min-width: 20px;
+    min-height: 20px;
+    padding: 2px;
+    border-radius: 50%; /* Perfect circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(85, 107, 47, 0.3); /* Subtle olive border */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    line-height: 1;
+}
+
 .character-path-popup {
     max-width: 300px;
 }
@@ -584,6 +603,14 @@ html, body {
 [data-theme="dark"] .movement-start-end-marker.cross-character .marker-content {
     background: linear-gradient(135deg, #FF8A80, #80CBC4);
     color: #121212;
+}
+
+/* Dark theme support for styled number markers */
+[data-theme="dark"] .number-marker .single-number-marker {
+    background: rgba(139, 123, 101, 0.55); /* Darker beige for dark theme */
+    color: #90EE90; /* Light green for better contrast in dark theme */
+    border: 1px solid rgba(144, 238, 144, 0.3); /* Light green border */
+    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1); /* Light shadow for dark theme */
 }
 
 /* ============================================
