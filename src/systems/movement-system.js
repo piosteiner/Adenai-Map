@@ -24,7 +24,7 @@ class MovementSystem {
         });
 
         // Add global function for consolidated popups
-        window.showVisitDetails = (visitIndex, coordKey) => {
+        window.showVisitDetails = (visitIndex, coordKey, characterId = null) => {
         const containerSelector = `#visit-details-${coordKey.replace(',', '-')}`;
         const container = document.querySelector(containerSelector);
         if (!container) return;
@@ -33,18 +33,32 @@ class MovementSystem {
         const [x, y] = coordKey.split(',').map(Number);
         const coordinates = [x, y];
         
-        // Find all visits at this location
-        const allCharacters = window.characterSystem.getCharacters();
-        const allVisits = window.movementSystem.findAllVisitsAtLocation(coordinates, allCharacters);
+        let visits;
+        let visit;
         
-        if (visitIndex >= allVisits.length) {
+        if (characterId) {
+            // Single character mode - find visits for specific character
+            const allCharacters = window.characterSystem.getCharacters();
+            const character = allCharacters.find(c => c.id === characterId);
+            
+            if (!character) {
+                container.innerHTML = `<p style="color: red;">Character not found.</p>`;
+                return;
+            }
+            
+            visits = window.movementSystem.findVisitsAtLocationForCharacter(coordinates, character);
+        } else {
+            // Cross-character mode - find visits from all selected characters
+            visits = window.movementSystem.findVisitsAtLocationFromSelectedCharacters(coordinates);
+        }
+        
+        if (visitIndex >= visits.length) {
             container.innerHTML = `<p style="color: red;">Visit not found.</p>`;
             return;
         }
         
-        const visit = allVisits[visitIndex];
+        visit = visits[visitIndex];
         const movement = visit; // The visit object IS the movement data
-        const character = visit.character;
         
         // Check if this is a multi-day stay
         const hasDateRange = movement.dateEnd && movement.dateEnd !== (movement.dateStart || movement.date);
@@ -305,6 +319,58 @@ class MovementSystem {
         return visits.sort((a, b) => new Date(a.dateStart || a.date) - new Date(b.dateStart || b.date));
     }
 
+    // 🔥 NEW: Method to find visits at location for a SINGLE character only
+    // Find visits at a location from all selected characters
+    // This enables cross-character consolidation when multiple selected characters
+    // have visited the same location, showing a combined view of all visits
+    findVisitsAtLocationFromSelectedCharacters(coordinates) {
+        const visits = [];
+        const selectedCharacterIds = this.getVisibleCharacterPaths();
+        const allCharacters = window.characterSystem.getCharacters();
+        
+        selectedCharacterIds.forEach(characterId => {
+            const character = allCharacters.find(c => c.id === characterId);
+            if (!character || !character.movementHistory) return;
+            
+            character.movementHistory.forEach((movement, index) => {
+                if (movement.coordinates && 
+                    movement.coordinates[0] === coordinates[0] && 
+                    movement.coordinates[1] === coordinates[1]) {
+                    visits.push({
+                        ...movement,
+                        character: character,
+                        visitIndex: index + 1,
+                        characterName: character.name,
+                        characterId: character.id
+                    });
+                }
+            });
+        });
+        
+        return visits.sort((a, b) => new Date(a.dateStart || a.date) - new Date(b.dateStart || b.date));
+    }
+
+    findVisitsAtLocationForCharacter(coordinates, character) {
+        const visits = [];
+        
+        if (!character.movementHistory) return visits;
+        
+        character.movementHistory.forEach((movement, index) => {
+            if (movement.coordinates && 
+                movement.coordinates[0] === coordinates[0] && 
+                movement.coordinates[1] === coordinates[1]) {
+                visits.push({
+                    ...movement,
+                    character: character,
+                    visitIndex: index + 1, // Journey sequence number
+                    characterName: character.name
+                });
+            }
+        });
+        
+        return visits.sort((a, b) => new Date(a.dateStart || a.date) - new Date(b.dateStart || b.date));
+    }
+
     createMovementMarker(point, index, totalPoints, character) {
         const isFirst = index === 0;
         const isLast = index === totalPoints - 1;
@@ -318,31 +384,37 @@ class MovementSystem {
         );
         
         const hasDateRange = movement && movement.dateEnd && movement.dateEnd !== (movement.dateStart || movement.date);
-        const allCharacters = window.characterSystem.getCharacters();
-        const allVisitsHere = this.findAllVisitsAtLocation(point.coordinates, allCharacters);
-        const hasMultipleVisits = allVisitsHere.length > 1;
+        
+        // Check for visits from ALL selected characters at this location
+        const allSelectedVisits = this.findVisitsAtLocationFromSelectedCharacters(point.coordinates);
+        const sameCharacterVisits = this.findVisitsAtLocationForCharacter(point.coordinates, character);
+        
+        // Determine if we should show cross-character consolidation
+        const hasMultipleCharacters = new Set(allSelectedVisits.map(v => v.characterId)).size > 1;
+        const hasMultipleVisits = hasMultipleCharacters ? allSelectedVisits.length > 1 : sameCharacterVisits.length > 1;
+        const visitsToShow = hasMultipleCharacters ? allSelectedVisits : sameCharacterVisits;
 
         let markerIcon;
         if (isFirst) {
             markerIcon = L.divIcon({
-                html: this.createMarkerHTML('📍', hasMultipleVisits, allVisitsHere.length, hasDateRange),
+                html: this.createMarkerHTML('📍', hasMultipleVisits, visitsToShow.length, hasDateRange),
                 iconSize: [24, 24],
-                className: `movement-start-marker${hasMultipleVisits ? ' has-multiple' : ''}${hasDateRange ? ' multi-day' : ''}`,
+                className: `movement-start-marker${hasMultipleVisits ? ' has-multiple' : ''}${hasDateRange ? ' multi-day' : ''}${hasMultipleCharacters ? ' cross-character' : ''}`,
                 iconAnchor: [12, 12]
             });
         } else if (isLast) {
             markerIcon = L.divIcon({
-                html: this.createMarkerHTML('🚩', hasMultipleVisits, allVisitsHere.length, hasDateRange),
+                html: this.createMarkerHTML('🚩', hasMultipleVisits, visitsToShow.length, hasDateRange),
                 iconSize: [24, 24],
-                className: `movement-end-marker${hasMultipleVisits ? ' has-multiple' : ''}${hasDateRange ? ' multi-day' : ''}`,
+                className: `movement-end-marker${hasMultipleVisits ? ' has-multiple' : ''}${hasDateRange ? ' multi-day' : ''}${hasMultipleCharacters ? ' cross-character' : ''}`,
                 iconAnchor: [12, 12]
             });
         } else {
             const visitNumber = `${index + 1}`;
             markerIcon = L.divIcon({
-                html: this.createMarkerHTML(visitNumber, hasMultipleVisits, allVisitsHere.length, hasDateRange, true),
+                html: this.createMarkerHTML(visitNumber, hasMultipleVisits, visitsToShow.length, hasDateRange, true),
                 iconSize: [24, 24],
-                className: `movement-number-marker${hasMultipleVisits ? ' has-multiple' : ''}${hasDateRange ? ' multi-day' : ''}`,
+                className: `movement-number-marker${hasMultipleVisits ? ' has-multiple' : ''}${hasDateRange ? ' multi-day' : ''}${hasMultipleCharacters ? ' cross-character' : ''}`,
                 iconAnchor: [12, 12]
             });
         }
@@ -353,7 +425,7 @@ class MovementSystem {
         });
         
         const popupContent = hasMultipleVisits ?
-            this.createConsolidatedPopup(point, allVisitsHere) :
+            this.createConsolidatedPopup(point, visitsToShow) :
             this.createSingleVisitPopup(point, character);
         
         marker.bindPopup(popupContent);
@@ -387,16 +459,21 @@ class MovementSystem {
 
     // New method for consolidated popup with visit selection
     createConsolidatedPopup(point, allVisits) {
+        // Check if this is cross-character consolidation
+        const uniqueCharacters = new Set(allVisits.map(v => v.characterId || v.character?.id));
+        const isCrossCharacter = uniqueCharacters.size > 1;
+        
         return `
             <div class="consolidated-popup">
                 <h4>${point.location} <span class="total-badge">${allVisits.length} visits</span></h4>
                 <p><strong>Coordinates:</strong> [${point.coordinates[0]}, ${point.coordinates[1]}]</p>
+                ${isCrossCharacter ? '<p class="cross-character-indicator">🤝 Multiple characters visited this location</p>' : ''}
                 
                 <div class="visit-selection">
                     <h5>Select Visit to View Details:</h5>
                     <div class="visit-buttons">
                         ${allVisits.map((visit, index) => `
-                            <button class="visit-btn" onclick="showVisitDetails(${index}, '${point.coordinates[0]},${point.coordinates[1]}')">
+                            <button class="visit-btn" onclick="showVisitDetails(${index}, '${point.coordinates[0]},${point.coordinates[1]}', ${isCrossCharacter ? 'null' : `'${visit.character.id}'`})">
                                 <span class="visit-number">${visit.visitIndex}</span>
                                 <small>${visit.characterName}</small>
                                 <small>${this.formatDate(visit.dateStart || visit.date)}</small>

@@ -435,6 +435,32 @@ html, body {
     min-height: 60px;
 }
 
+/* Cross-character consolidation styles */
+.cross-character-indicator {
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin: 4px 0;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.movement-start-marker.cross-character,
+.movement-end-marker.cross-character,
+.movement-number-marker.cross-character {
+    border: 2px solid #FF6B6B;
+    box-shadow: 0 0 8px rgba(255, 107, 107, 0.6);
+}
+
+.movement-start-marker.cross-character .marker-content,
+.movement-end-marker.cross-character .marker-content,
+.movement-number-marker.cross-character .marker-content {
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+}
+
 /* ========== DURATION INDICATORS ========== */
 
 /* Duration dot indicator for multi-day stays */
@@ -531,6 +557,27 @@ html, body {
 [data-theme="dark"] .duration-info {
     color: #81C784;
     background: rgba(102, 187, 106, 0.2);
+}
+
+/* Dark theme support for cross-character consolidation */
+[data-theme="dark"] .cross-character-indicator {
+    background: linear-gradient(135deg, #FF8A80, #80CBC4);
+    color: #121212;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+[data-theme="dark"] .movement-start-marker.cross-character,
+[data-theme="dark"] .movement-end-marker.cross-character,
+[data-theme="dark"] .movement-number-marker.cross-character {
+    border: 2px solid #FF8A80;
+    box-shadow: 0 0 12px rgba(255, 138, 128, 0.8);
+}
+
+[data-theme="dark"] .movement-start-marker.cross-character .marker-content,
+[data-theme="dark"] .movement-end-marker.cross-character .marker-content,
+[data-theme="dark"] .movement-number-marker.cross-character .marker-content {
+    background: linear-gradient(135deg, #FF8A80, #80CBC4);
+    color: #121212;
 }
 
 /* ============================================
