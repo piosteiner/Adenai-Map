@@ -5,29 +5,17 @@
       "id": "petrel_kormorant",
       "name": "Petrel Kormorant",
       "title": "Ruler of Valaris",
-      "location": "Valaris",
-      "coordinates": [
-        1700,
-        1008
-      ],
+      "placeOfOrigin": "",
+      "coordinates": null,
       "description": "",
       "image": "",
       "status": "alive",
       "faction": "",
-      "relationship": "friendly",
+      "relationship": "ally",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "currentLocation": {
-        "date": "2025-08-22",
-        "location": "Valaris",
-        "coordinates": [
-          1700,
-          1008
-        ],
-        "notes": "Updated location"
-      },
-      "updatedAt": "2025-08-22T15:11:02.077Z"
+      "updatedAt": "2025-08-27T10:41:04.735Z"
     },
     {
       "id": "avery",
@@ -407,5 +395,5 @@
       "updatedAt": "2025-08-27T10:40:54.728Z"
     }
   ],
-  "lastUpdated": "2025-08-27T10:40:54.728Z"
+  "lastUpdated": "2025-08-27T10:41:04.735Z"
 }
