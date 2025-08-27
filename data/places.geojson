@@ -18,6 +18,24 @@
           1
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "2",
+        "description": "",
+        "contentUrl": null,
+        "region": "north_adenai",
+        "type": "town",
+        "visited": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1,
+          1
+        ]
+      }
     }
   ]
 }
