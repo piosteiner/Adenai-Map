@@ -712,7 +712,7 @@ html, body {
 .visit-info-grid {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 2px;
 }
 
 .info-row {
