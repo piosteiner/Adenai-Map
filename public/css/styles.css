@@ -262,8 +262,8 @@ html, body {
 
 /* Styled number markers with serif font and elegant design */
 .number-marker .single-number-marker {
-    background: rgba(255, 255, 255, 0.637); /* Beige background with 55% opacity */
-    color: #2d4600; /* Dark olive green */
+    background: #f6f6de; /* Beige background with 55% opacity */
+    color: #8b7355; /* Dark olive green */
     font-family: "Arial Black", "Helvetica Black", "DejaVu Sans Bold", "Arial", sans-serif; /* Bold sans-serif font */
     font-weight: 900; /* Extra bold */
     font-size: 13px;
