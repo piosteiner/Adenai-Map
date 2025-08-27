@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "57f2955135eae946c1cd3e3a6098a9dfc909ba71",
+      "action": "update",
+      "type": "character",
+      "itemName": "Test",
+      "user": "gm",
+      "timestamp": "2025-08-27T00:19:20.830Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-27T00:19:20.830Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: test (by gm) - added place of origin"
+    },
+    {
       "commitSha": "d4a4d1cb0b9e944aad076024fb04b5e73fb4dda3",
       "action": "update",
       "type": "character",
@@ -2030,5 +2043,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-27T00:09:55.997Z"
+  "lastUpdated": "2025-08-27T00:19:20.830Z"
 }
