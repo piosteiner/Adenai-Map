@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "84fd8d8cdfafd6461027a471c9151ce71888d439",
+      "action": "update",
+      "type": "character",
+      "itemName": "Viktoria Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-27T10:45:32.184Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-27T10:45:32.184Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Viktoria Karthright (by gm) - Toftgard (5663-06-01 to 5663-09-01)"
+    },
+    {
       "commitSha": "e978127b8f033607a1216c522de766a1414bb4fe",
       "action": "update",
       "type": "character",
@@ -2147,5 +2160,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-27T10:41:05.505Z"
+  "lastUpdated": "2025-08-27T10:45:32.184Z"
 }
