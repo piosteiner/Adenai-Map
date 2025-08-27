@@ -385,7 +385,24 @@
       "movementHistory": [],
       "createdAt": "2025-08-27T00:35:18.828Z",
       "updatedAt": "2025-08-27T00:35:18.828Z"
+    },
+    {
+      "id": "viktoria_karthright",
+      "name": "Viktoria Karthright",
+      "title": "Familienoberhaupt",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai.piogino.ch/public/images/viktoria_karthright_close.png",
+      "status": "alive",
+      "faction": "Familie Karthright",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-27T10:32:15.038Z",
+      "updatedAt": "2025-08-27T10:32:15.038Z"
     }
   ],
-  "lastUpdated": "2025-08-27T10:30:20.282Z"
+  "lastUpdated": "2025-08-27T10:32:15.038Z"
 }
