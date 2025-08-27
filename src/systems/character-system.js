@@ -3,6 +3,7 @@ class CharacterSystem {
     constructor() {
         this.characterData = [];
         this.currentCharacterPopup = null; // Track current popup
+        this.currentPanelPopup = null; // Track panel-anchored popup
         this.locationClickListener = null; // Track location click listener
         this.statusEmojis = {
             alive: '😊',
@@ -124,9 +125,16 @@ class CharacterSystem {
     // Enhanced focus character method with coordinate fix
     focusCharacter(characterName) {
         const character = this.getCharacterByName(characterName);
-        if (!character || !character.coordinates) {
-            console.warn(`⚠️ Character "${characterName}" not found or has no coordinates`);
+        if (!character) {
+            console.warn(`⚠️ Character "${characterName}" not found`);
             return false;
+        }
+
+        // If character has no coordinates/location, show panel-anchored popup
+        if (!character.coordinates) {
+            console.log(`📋 Showing panel popup for "${characterName}" (no location)`);
+            this.showPanelAnchoredPopup(character);
+            return true;
         }
 
         const map = window.mapCore.getMap();
@@ -145,6 +153,148 @@ class CharacterSystem {
         this.performSmoothCentering(map, targetLatLng, characterName, character);
         
         return true;
+    }
+
+    // Show popup anchored to character panel for characters without locations
+    showPanelAnchoredPopup(character) {
+        // Close any existing panel popup
+        this.closePanelAnchoredPopup();
+
+        const panel = document.getElementById('character-panel');
+        if (!panel) {
+            console.warn('⚠️ Character panel not found');
+            return;
+        }
+
+        // Create popup content
+        const popupContent = this.createCharacterPopupContent(character);
+
+        // Create popup element
+        const popup = document.createElement('div');
+        popup.id = 'panel-anchored-popup';
+        popup.className = 'panel-anchored-popup';
+        popup.innerHTML = `
+            <div class="panel-popup-header">
+                <h3>${character.name}</h3>
+                <button class="panel-popup-close" onclick="window.characterSystem.closePanelAnchoredPopup()">×</button>
+            </div>
+            <div class="panel-popup-content">
+                ${popupContent}
+            </div>
+        `;
+
+        // Position popup relative to panel
+        popup.style.position = 'absolute';
+        popup.style.left = panel.offsetWidth + 'px';
+        popup.style.top = '0px';
+        popup.style.zIndex = '10001';
+
+        // Append to panel container
+        panel.appendChild(popup);
+
+        // Track current popup
+        this.currentPanelPopup = popup;
+
+        console.log(`📋 Panel popup opened for "${character.name}"`);
+    }
+
+    // Close panel-anchored popup
+    closePanelAnchoredPopup() {
+        if (this.currentPanelPopup) {
+            this.currentPanelPopup.remove();
+            this.currentPanelPopup = null;
+            console.log('📋 Panel popup closed');
+        }
+    }
+
+    // Create character popup content
+    createCharacterPopupContent(character) {
+        const statusEmoji = this.statusEmojis[character.status] || '🤷';
+        const statusLabel = character.status || 'unknown';
+        const relationship = character.relationship || 'neutral';
+        
+        // Image
+        const image = character.image ? `<img src="${character.image}" alt="${character.name}" class="character-popup-avatar">` : '';
+        
+        // Title
+        const title = character.title ? `<div class="character-popup-title">${character.title}</div>` : '';
+        
+        // Last seen location (from currentLocation or coordinates)
+        let lastSeenContent = '';
+        if (character.currentLocation && character.currentLocation.location) {
+            const date = character.currentLocation.date || character.currentLocation.dateStart || '';
+            lastSeenContent = `📍 Last Seen: ${character.currentLocation.location}${date ? ` (${date})` : ''}`;
+        } else if (character.location) {
+            lastSeenContent = `📍 Last Seen: ${character.location}`;
+        } else {
+            lastSeenContent = `📍 Last Seen: <span class="location-unknown">Unknown</span>`;
+        }
+        
+        // Build content sections
+        const contentSections = [];
+        
+        // Faction
+        if (character.faction) {
+            contentSections.push(`<div class="character-popup-faction">🏛️ <strong>Faction:</strong> ${character.faction}</div>`);
+        }
+        
+        // Place of Origin
+        if (character.placeOfOrigin) {
+            contentSections.push(`<div class="character-popup-origin">🏠 <strong>Place of Origin:</strong> ${character.placeOfOrigin}</div>`);
+        }
+        
+        // Movement History count
+        if (character.movementHistory && character.movementHistory.length > 0) {
+            const historyCount = character.movementHistory.length;
+            const historyText = historyCount === 1 ? '1 location' : `${historyCount} locations`;
+            contentSections.push(`<div class="character-popup-movement">🗺️ <strong>Movement History:</strong> ${historyText}</div>`);
+        }
+        
+        // First Met
+        if (character.firstMet) {
+            contentSections.push(`<div class="character-popup-met">🗓️ <strong>First Met:</strong> ${character.firstMet}</div>`);
+        }
+        
+        // Description
+        if (character.description) {
+            contentSections.push(`<div class="character-popup-description">📖 <strong>Description:</strong> ${character.description}</div>`);
+        }
+        
+        // Notes
+        if (character.notes) {
+            contentSections.push(`<div class="character-popup-notes">📝 <strong>Notes:</strong> ${character.notes}</div>`);
+        }
+        
+        // Created/Updated dates (for reference, like in CMS)
+        if (character.createdAt || character.updatedAt) {
+            const createdDate = character.createdAt ? new Date(character.createdAt).toLocaleDateString() : '';
+            const updatedDate = character.updatedAt ? new Date(character.updatedAt).toLocaleDateString() : '';
+            
+            if (updatedDate && updatedDate !== createdDate) {
+                contentSections.push(`<div class="character-popup-dates">📅 <strong>Last Updated:</strong> ${updatedDate}</div>`);
+            } else if (createdDate) {
+                contentSections.push(`<div class="character-popup-dates">📅 <strong>Created:</strong> ${createdDate}</div>`);
+            }
+        }
+
+        return `
+            <div class="character-popup-header-info">
+                ${image}
+                <div class="character-popup-details">
+                    ${title}
+                    <div class="character-popup-status">
+                        ${statusEmoji} <strong>Status:</strong> ${statusLabel}
+                    </div>
+                    <div class="character-popup-relationship relationship-${relationship}">
+                        <strong>Relationship:</strong> ${relationship}
+                    </div>
+                    <div class="character-popup-location">
+                        ${lastSeenContent}
+                    </div>
+                </div>
+            </div>
+            ${contentSections.join('')}
+        `;
     }
 
     // Simple, reliable centering with panel awareness

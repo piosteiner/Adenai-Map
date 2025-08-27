@@ -2252,3 +2252,222 @@ html, body {
   background: #5a6268;
   border-color: #adb5bd;
 }
+
+/* ============================================
+   PANEL-ANCHORED CHARACTER POPUP
+   ============================================ */
+
+.panel-anchored-popup {
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 300px;
+  max-width: 400px;
+  font-family: sans-serif;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.panel-popup-header {
+  padding: 15px 20px 10px 20px;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+  border-radius: 8px 8px 0 0;
+}
+
+.panel-popup-header h3 {
+  margin: 0;
+  color: #495057;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.panel-popup-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6c757d;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.panel-popup-close:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.panel-popup-content {
+  padding: 20px;
+  line-height: 1.5;
+}
+
+.character-popup-header-info {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.character-popup-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #dee2e6;
+  flex-shrink: 0;
+}
+
+.character-popup-details {
+  flex: 1;
+}
+
+.character-popup-title {
+  font-style: italic;
+  color: #6c757d;
+  margin-bottom: 5px;
+}
+
+.character-popup-status,
+.character-popup-relationship,
+.character-popup-location {
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+
+.character-popup-relationship {
+  padding: 2px 6px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.character-popup-relationship.relationship-friendly {
+  background: #d4edda;
+  color: #155724;
+}
+
+.character-popup-relationship.relationship-ally {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.character-popup-relationship.relationship-neutral {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.character-popup-relationship.relationship-suspicious {
+  background: #ffeaa7;
+  color: #856404;
+}
+
+.character-popup-relationship.relationship-hostile {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.character-popup-relationship.relationship-enemy {
+  background: #f5c6cb;
+  color: #721c24;
+}
+
+.location-unknown {
+  color: #dc3545;
+  font-style: italic;
+}
+
+.character-popup-faction,
+.character-popup-met,
+.character-popup-notes,
+.character-popup-description,
+.character-popup-origin,
+.character-popup-movement,
+.character-popup-dates {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #007bff;
+}
+
+.character-popup-description {
+  border-left-color: #28a745;
+}
+
+.character-popup-notes {
+  border-left-color: #ffc107;
+}
+
+.character-popup-origin {
+  border-left-color: #6f42c1;
+}
+
+.character-popup-movement {
+  border-left-color: #fd7e14;
+}
+
+.character-popup-dates {
+  border-left-color: #6c757d;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .panel-anchored-popup {
+  background: #343a40;
+  border-color: #6c757d;
+  color: #f8f9fa;
+}
+
+[data-theme="dark"] .panel-popup-header {
+  background: #495057;
+  border-color: #6c757d;
+}
+
+[data-theme="dark"] .panel-popup-header h3 {
+  color: #f8f9fa;
+}
+
+[data-theme="dark"] .panel-popup-close {
+  color: #adb5bd;
+}
+
+[data-theme="dark"] .panel-popup-close:hover {
+  background: #5a6268;
+  color: #f8f9fa;
+}
+
+[data-theme="dark"] .character-popup-faction,
+[data-theme="dark"] .character-popup-met,
+[data-theme="dark"] .character-popup-notes,
+[data-theme="dark"] .character-popup-description,
+[data-theme="dark"] .character-popup-origin,
+[data-theme="dark"] .character-popup-movement,
+[data-theme="dark"] .character-popup-dates {
+  background: #495057;
+  color: #f8f9fa;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .panel-anchored-popup {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 10002 !important;
+  }
+}
