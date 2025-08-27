@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "5435f3151e988a7b38890c68ae64b3fb3bd612d3",
+      "action": "delete",
+      "type": "location",
+      "itemName": "Teststa",
+      "user": "gm",
+      "timestamp": "2025-08-27T01:07:49.540Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-27T01:07:49.540Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Delete location: Teststa (by gm) - Removed from campaign"
+    },
+    {
       "commitSha": "5e070125487b282318dc757d79575c5ae729630e",
       "action": "delete",
       "type": "location",
@@ -236,5 +249,5 @@
       "commitMessage": "Create location: Test Location (by gm) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-27T01:05:57.854Z"
+  "lastUpdated": "2025-08-27T01:07:49.540Z"
 }
