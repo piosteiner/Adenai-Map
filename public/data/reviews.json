@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "e978127b8f033607a1216c522de766a1414bb4fe",
+      "action": "update",
+      "type": "character",
+      "itemName": "Petrel Kormorant",
+      "user": "gm",
+      "timestamp": "2025-08-27T10:41:05.505Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-27T10:41:05.505Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: petrel_kormorant (by gm) - updated place of origin, changed relationship to ally"
+    },
+    {
       "commitSha": "c470b132579dd749675cac3c3f9a4f650e1c9bc6",
       "action": "update",
       "type": "character",
@@ -2134,5 +2147,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-27T10:40:55.532Z"
+  "lastUpdated": "2025-08-27T10:41:05.505Z"
 }
