@@ -21,41 +21,37 @@ class MapCore {
 
     setupTheme() {
         // Theme toggle functionality
-        window.addEventListener("DOMContentLoaded", () => {
-            const toggleBtn = document.createElement("button");
-            toggleBtn.id = "themeToggle";
-            toggleBtn.textContent = "🌙";
-            toggleBtn.title = "Toggle Dark Mode";
-            toggleBtn.style.position = "absolute";
-            toggleBtn.style.top = "10px";
-            toggleBtn.style.right = "10px";
-            toggleBtn.style.zIndex = "1001";
-            toggleBtn.style.padding = "6px 10px";
-            toggleBtn.style.border = "none";
-            toggleBtn.style.borderRadius = "4px";
-            toggleBtn.style.cursor = "pointer";
+        const toggleBtn = document.createElement("button");
+        toggleBtn.id = "themeToggle";
+        toggleBtn.textContent = "🌙";
+        toggleBtn.title = "Toggle Dark Mode";
+        toggleBtn.style.position = "absolute";
+        toggleBtn.style.top = "10px";
+        toggleBtn.style.right = "10px";
+        toggleBtn.style.zIndex = "1001";
+        toggleBtn.style.padding = "6px 10px";
+        toggleBtn.style.border = "none";
+        toggleBtn.style.borderRadius = "4px";
+        toggleBtn.style.cursor = "pointer";
 
-            document.body.appendChild(toggleBtn);
+        document.body.appendChild(toggleBtn);
 
-            const userPref = localStorage.getItem("theme");
-            const systemPref = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const userPref = localStorage.getItem("theme");
+        const systemPref = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-            if (userPref) {
-                document.documentElement.setAttribute("data-theme", userPref);
-            } else {
-                document.documentElement.setAttribute("data-theme", systemPref ? "dark" : "light");
-            }
+        if (userPref) {
+            document.documentElement.setAttribute("data-theme", userPref);
+        } else {
+            document.documentElement.setAttribute("data-theme", systemPref ? "dark" : "light");
+        }
 
-            toggleBtn.addEventListener("click", () => {
-                const current = document.documentElement.getAttribute("data-theme");
-                const newTheme = current === "dark" ? "light" : "dark";
-                document.documentElement.setAttribute("data-theme", newTheme);
-                localStorage.setItem("theme", newTheme);
-            });
+        toggleBtn.addEventListener("click", () => {
+            const current = document.documentElement.getAttribute("data-theme");
+            const newTheme = current === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", newTheme);
+            localStorage.setItem("theme", newTheme);
         });
-    }
-
-    initializeMap() {
+    }    initializeMap() {
         // Flip Y axis: move origin to bottom-left (Originally 0,0 was on top left)
         this.mapCRS = L.extend({}, L.CRS.Simple, {
             transformation: new L.Transformation(1, 0, -1, this.imageHeight)
@@ -79,10 +75,10 @@ class MapCore {
         L.imageOverlay('adenai_map_01.jpg', imageBounds).addTo(this.map);
         this.map.fitBounds(imageBounds);
 
-        // Set movement bounds - restrict to half map height distance from edges
+        // Set movement bounds - restrict to 80% map height distance from edges
         const mapHeight = this.imageHeight;
         const mapWidth = this.imageWidth;
-        const restrictionDistance = mapHeight / 2; // Half the map height
+        const restrictionDistance = mapHeight * 0.8; // 80% of the map height
         
         const maxBounds = [
             [-restrictionDistance, -restrictionDistance], // Southwest (bottom-left)
@@ -95,7 +91,12 @@ class MapCore {
         console.log(`🗺️ Map bounds restricted to: ${restrictionDistance}px beyond map edges`);
 
         // Add custom zoom control
-        this.setupCustomZoomControl();
+        try {
+            this.setupCustomZoomControl();
+            console.log('✅ Custom zoom control setup successfully');
+        } catch (error) {
+            console.error('❌ Failed to setup custom zoom control:', error);
+        }
 
         // Set dragging container
         this.map.dragging._draggable._container = this.map.getContainer();
@@ -243,6 +244,14 @@ class MapCore {
     }
 
     setupCustomZoomControl() {
+        console.log('🔧 Setting up custom zoom control...');
+        console.log('Map object:', this.map);
+        console.log('Map type:', typeof this.map);
+        
+        if (!this.map) {
+            console.error('❌ Map object is not available');
+            return;
+        }
         // Create zoom control container
         const zoomContainer = document.createElement('div');
         zoomContainer.className = 'custom-zoom-control';
@@ -315,18 +324,21 @@ class MapCore {
     }
 }
 
-// Create global map core instance
-window.mapCore = new MapCore();
-
-// 🔥 ADDITIONAL: Validate setup after a short delay to ensure everything is ready
-setTimeout(() => {
-    if (window.mapCore) {
-        const isValid = window.mapCore.validateMapSetup();
-        if (isValid) {
-            console.log('🎉 Map core ready for journey system!');
+// Create global map core instance after DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 DOM loaded, initializing MapCore...');
+    window.mapCore = new MapCore();
+    
+    // Validate setup after a short delay to ensure everything is ready
+    setTimeout(() => {
+        if (window.mapCore) {
+            const isValid = window.mapCore.validateMapSetup();
+            if (isValid) {
+                console.log('🎉 Map core ready for journey system!');
+            }
         }
-    }
-}, 100);
+    }, 100);
+});
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {

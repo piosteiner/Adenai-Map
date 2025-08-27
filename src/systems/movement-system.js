@@ -24,6 +24,13 @@ class MovementSystem {
             this.addCharacterMovementPaths();
         });
 
+        // Set up zoom-based number visibility when map is ready
+        setTimeout(() => {
+            if (window.mapCore && window.mapCore.map) {
+                this.setupZoomBasedNumberVisibility();
+            }
+        }, 500);
+
         // Add global function for consolidated popups
         window.showVisitDetails = (visitIndex, coordKey, characterId = null) => {
         const containerSelector = `#visit-details-${coordKey.replace(',', '-')}`;
@@ -1038,6 +1045,47 @@ class MovementSystem {
         }
         
         return true;
+    }
+
+    setupZoomBasedNumberVisibility() {
+        const map = window.mapCore.map;
+        if (!map) return;
+
+        // Initial visibility check
+        this.updateNumberVisibility();
+
+        // Listen for zoom changes
+        map.on('zoomend', () => {
+            this.updateNumberVisibility();
+        });
+
+        console.log('🔍 Zoom-based number visibility setup complete');
+    }
+
+    updateNumberVisibility() {
+        const map = window.mapCore.map;
+        if (!map) return;
+
+        // Calculate current zoom percentage
+        const currentZoom = map.getZoom();
+        const minZoom = map.getMinZoom();
+        const maxZoom = map.getMaxZoom();
+        const zoomPercentage = ((currentZoom - minZoom) / (maxZoom - minZoom)) * 100;
+
+        // Show numbers only if zoom is 30% or more
+        const shouldShowNumbers = zoomPercentage >= 30;
+
+        // Find all numbered movement markers and toggle visibility
+        const numberMarkers = document.querySelectorAll('.movement-number-marker');
+        numberMarkers.forEach(marker => {
+            if (shouldShowNumbers) {
+                marker.style.display = '';
+            } else {
+                marker.style.display = 'none';
+            }
+        });
+
+        console.log(`📊 Zoom: ${zoomPercentage.toFixed(1)}% - Numbers ${shouldShowNumbers ? 'visible' : 'hidden'}`);
     }
 }
 
