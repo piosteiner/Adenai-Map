@@ -498,4 +498,104 @@ document.addEventListener('adenaiMapInitialized', () => {
     }, 1000);
 });
 
+// ============================================
+// DRAGON SHADOW CONTROLLER
+// ============================================
+class DragonShadowController {
+    constructor() {
+        this.shadows = [];
+        this.isActive = true;
+        this.init();
+    }
+
+    init() {
+        // Wait for the map to be fully loaded
+        document.addEventListener('adenaiMapInitialized', () => {
+            setTimeout(() => {
+                this.setupShadows();
+                this.startRandomShadows();
+                console.log('🐉 Dragon shadows activated');
+            }, 2000);
+        });
+    }
+
+    setupShadows() {
+        this.shadows = document.querySelectorAll('.dragon-shadow');
+    }
+
+    startRandomShadows() {
+        if (!this.isActive) return;
+
+        // Schedule the next random dragon shadow
+        const randomDelay = Math.random() * 45000 + 30000; // Between 30-75 seconds
+        
+        setTimeout(() => {
+            this.triggerRandomShadow();
+            this.startRandomShadows(); // Schedule the next one
+        }, randomDelay);
+    }
+
+    triggerRandomShadow() {
+        if (!this.isActive || this.shadows.length === 0) return;
+
+        // Pick a random shadow variant
+        const randomShadow = this.shadows[Math.floor(Math.random() * this.shadows.length)];
+        
+        // Create a unique animation with random properties
+        const animationName = `dragonFly-${Date.now()}`;
+        const duration = Math.random() * 4 + 6; // 6-10 seconds
+        const startY = Math.random() * 40 + 10; // 10-50% from top
+        const direction = Math.random() > 0.5 ? 1 : -1; // Left to right or right to left
+        
+        // Create dynamic keyframes
+        const keyframes = `
+            @keyframes ${animationName} {
+                0% { 
+                    opacity: 0; 
+                    transform: translateX(${direction * -200}px) translateY(${startY - 10}%) scale(0.8) rotate(${direction * -10}deg);
+                }
+                15% { 
+                    opacity: 0.6; 
+                    transform: translateX(${direction * -50}px) translateY(${startY - 5}%) scale(1) rotate(${direction * -5}deg);
+                }
+                50% { 
+                    opacity: 0.8; 
+                    transform: translateX(${direction * 50}px) translateY(${startY}%) scale(1.1) rotate(0deg);
+                }
+                85% { 
+                    opacity: 0.6; 
+                    transform: translateX(${direction * 150}px) translateY(${startY + 5}%) scale(1) rotate(${direction * 5}deg);
+                }
+                100% { 
+                    opacity: 0; 
+                    transform: translateX(${direction * 300}px) translateY(${startY + 10}%) scale(0.8) rotate(${direction * 10}deg);
+                }
+            }
+        `;
+
+        // Add keyframes to document
+        const style = document.createElement('style');
+        style.textContent = keyframes;
+        document.head.appendChild(style);
+
+        // Apply animation
+        randomShadow.style.animation = `${animationName} ${duration}s ease-in-out`;
+        randomShadow.style.top = `${startY}%`;
+
+        // Clean up after animation
+        setTimeout(() => {
+            randomShadow.style.animation = '';
+            document.head.removeChild(style);
+        }, duration * 1000 + 1000);
+    }
+
+    toggle() {
+        this.isActive = !this.isActive;
+        console.log(`🐉 Dragon shadows ${this.isActive ? 'enabled' : 'disabled'}`);
+    }
+}
+
+// Initialize dragon shadows
+window.dragonShadows = new DragonShadowController();
+
 console.log('🗺️ Adenai Map modules loaded and ready for initialization');

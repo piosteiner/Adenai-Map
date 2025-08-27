@@ -37,6 +37,21 @@ Adenai-Map/
 - **Search**: Find characters and locations quickly
 - **Character Panel**: Side panel with character management
 - **Campaign Content**: Rich location descriptions and lore
+- **🐉 Dragon Shadows**: Atmospheric dragon shadows periodically pass over the map for immersive D&D ambiance
+
+### Dragon Shadow System
+
+The map features an atmospheric dragon shadow overlay that creates immersive D&D campaign ambiance:
+
+- **Automatic**: Dragon shadows appear randomly every 30-75 seconds
+- **Dynamic**: Each shadow has unique flight paths, timing, and direction
+- **Three Variants**: Different shadow sizes and intensities for variety
+- **Theme Compatible**: Works in both light and dark themes
+- **Non-intrusive**: Shadows don't interfere with map interactions
+
+**Controls:**
+- Toggle on/off: `window.dragonShadows.toggle()` in browser console
+- Status check: `window.dragonShadows.isActive`
 
 ## 🧪 **Testing Configuration**
 
