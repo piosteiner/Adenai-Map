@@ -362,7 +362,24 @@
       },
       "createdAt": "2025-08-24T23:05:39.208Z",
       "updatedAt": "2025-08-25T16:51:39.063Z"
+    },
+    {
+      "id": "pio",
+      "name": "Pio",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-27T00:35:18.828Z",
+      "updatedAt": "2025-08-27T00:35:18.828Z"
     }
   ],
-  "lastUpdated": "2025-08-27T00:19:20.086Z"
+  "lastUpdated": "2025-08-27T00:35:18.828Z"
 }
