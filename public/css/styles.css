@@ -264,8 +264,8 @@ html, body {
 .number-marker .single-number-marker {
     background: rgba(255, 255, 255, 0.637); /* Beige background with 55% opacity */
     color: #2d4600; /* Dark olive green */
-    font-family: "Times New Roman", "Georgia", serif; /* Serif font */
-    font-weight: bold;
+    font-family: "Arial Black", "Helvetica Black", "DejaVu Sans Bold", "Arial", sans-serif; /* Bold sans-serif font */
+    font-weight: 900; /* Extra bold */
     font-size: 13px;
     min-width: 20px;
     min-height: 20px;
@@ -295,7 +295,7 @@ html, body {
 
 .movement-point-popup {
     max-width: 250px;
-    background: rgba(245, 245, 220, 0.9); /* Beige background */
+    background: rgba(231, 230, 182, 0.9); /* Beige background */
     padding: 12px;
     border-radius: 8px;
     border: 1px solid rgba(85, 107, 47, 0.2);
@@ -431,13 +431,13 @@ html, body {
 }
 
 .visit-selection {
-    margin-top: 12px;
+    margin-top: 8px;
     border-top: 1px solid #eee;
-    padding-top: 8px;
+    padding-top: 6px;
 }
 
 .visit-selection h5 {
-    margin: 0 0 8px 0;
+    margin: 0 0 6px 0;
     font-size: 0.9em;
     color: #666;
 }
@@ -473,7 +473,8 @@ html, body {
 .visit-btn .visit-number {
     background: rgba(245, 245, 220, 0.55); /* Beige background like map markers */
     color: #556B2F; /* Dark olive green like map markers */
-    font-family: "Times New Roman", "Georgia", serif; /* Serif font like map markers */
+    font-family: "Arial Black", "Helvetica Black", "DejaVu Sans Bold", "Arial", sans-serif; /* Bold sans-serif font */
+    font-weight: 900; /* Extra bold */
     border: 1px solid rgba(85, 107, 47, 0.3); /* Subtle olive border */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow */
     border-radius: 50%;
@@ -482,7 +483,6 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
     font-size: 12px;
     margin-bottom: 4px;
     line-height: 1;
@@ -639,6 +639,8 @@ html, body {
 [data-theme="dark"] .visit-btn .visit-number {
     background: rgba(139, 123, 101, 0.55); /* Darker beige for dark theme */
     color: #90EE90; /* Light green for better contrast */
+    font-family: "Arial Black", "Helvetica Black", "DejaVu Sans Bold", "Arial", sans-serif; /* Bold sans-serif font */
+    font-weight: 900; /* Extra bold */
     border: 1px solid rgba(144, 238, 144, 0.3);
     box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
 }
@@ -675,6 +677,8 @@ html, body {
 [data-theme="dark"] .number-marker .single-number-marker {
     background: rgba(139, 123, 101, 0.55); /* Darker beige for dark theme */
     color: #90EE90; /* Light green for better contrast in dark theme */
+    font-family: "Arial Black", "Helvetica Black", "DejaVu Sans Bold", "Arial", sans-serif; /* Bold sans-serif font */
+    font-weight: 900; /* Extra bold */
     border: 1px solid rgba(144, 238, 144, 0.3); /* Light green border */
     box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1); /* Light shadow for dark theme */
 }

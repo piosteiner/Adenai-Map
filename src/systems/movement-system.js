@@ -462,14 +462,13 @@ class MovementSystem {
         return `
             <div class="consolidated-popup">
                 <h4>${point.location} <span class="total-badge">${allVisits.length} visits</span></h4>
-                <p><strong>Coordinates:</strong> [${point.coordinates[0]}, ${point.coordinates[1]}]</p>
                 ${isCrossCharacter ? '<p class="cross-character-indicator">🤝 Multiple characters visited this location</p>' : ''}
                 
                 <div class="visit-selection">
                     <h5>Select Visit to View Details:</h5>
                     <div class="visit-buttons">
                         ${allVisits.map((visit, index) => `
-                            <button class="visit-btn" onclick="showVisitDetails(${index}, '${point.coordinates[0]},${point.coordinates[1]}', ${isCrossCharacter ? 'null' : `'${visit.character.id}'`})">
+                                                                                    <button class="visit-btn" onclick="showVisitDetails(${index}, '${point.coordinates[0]},${point.coordinates[1]}', ${isCrossCharacter ? 'null' : `'${visit.character.id}'`})">>
                                 <span class="visit-number">${visit.visitIndex}</span>
                                 <small>${visit.characterName}</small>
                                 <small>${this.formatDate(visit.dateStart || visit.date)}</small>
@@ -479,7 +478,6 @@ class MovementSystem {
                 </div>
                 
                 <div id="visit-details-${point.coordinates[0]}-${point.coordinates[1]}" class="visit-details-container">
-                    <p style="text-align: center; color: #666; font-style: italic;">Click a visit number above to see details</p>
                 </div>
             </div>
         `;
