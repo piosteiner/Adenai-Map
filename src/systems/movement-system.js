@@ -83,27 +83,22 @@ class MovementSystem {
                         <span class="character-name">${character.name}</span>
                     </div>
                     
+                    ${movement.type ? `
+                    <div class="info-row">
+                        <strong>Movement Type:</strong> 
+                        <span class="movement-type">${window.movementSystem.formatMovementType(movement.type)}</span>
+                    </div>
+                    ` : ''}
+                    
                     <div class="info-row">
                         <strong>Date:</strong> 
                         <span class="visit-date">${window.movementSystem.formatMovementDateRange(movement)}</span>
                     </div>
                     
                     ${duration ? `
-                    <div class="info-row duration-row">
+                    <div class="info-row">
                         <strong>Duration:</strong> 
                         <span class="duration-info">${duration}</span>
-                    </div>
-                    ` : ''}
-                    
-                    <div class="info-row">
-                        <strong>Coordinates:</strong> 
-                        <span class="coordinates">[${coordinates[0]}, ${coordinates[1]}]</span>
-                    </div>
-                    
-                    ${movement.type ? `
-                    <div class="info-row">
-                        <strong>Type:</strong> 
-                        <span class="movement-type">${movement.type}</span>
                     </div>
                     ` : ''}
                     
@@ -116,9 +111,9 @@ class MovementSystem {
                 </div>
                 
                 <div class="visit-navigation">
-                    ${allVisits.length > 1 ? `
+                    ${visits.length > 1 ? `
                     <small class="visit-counter">
-                        Visit ${visitIndex + 1} of ${allVisits.length} at this location
+                        Visit ${visitIndex + 1} of ${visits.length} at this location
                     </small>
                     ` : ''}
                 </div>
@@ -504,11 +499,11 @@ class MovementSystem {
         return `
             <div class="movement-point-popup${hasDateRange ? ' multi-day-stay' : ''}">
                 <h4>${point.location}${hasDateRange ? ' 🏠' : ''}</h4>
-                <p><strong>Date:</strong> ${this.formatMovementDateRange(movement)}</p>
-                ${duration ? `<p class="duration-info"><strong>Duration:</strong> ${duration}</p>` : ''}
                 <p><strong>Character:</strong> ${character.name}</p>
-                ${point.notes ? `<p><strong>Notes:</strong> ${point.notes}</p>` : ''}
-                <p><strong>Coordinates:</strong> [${point.coordinates[0]}, ${point.coordinates[1]}]</p>
+                ${movement?.type ? `<p><strong>Movement Type:</strong> ${this.formatMovementType(movement.type)}</p>` : ''}
+                <p><strong>Date:</strong> ${this.formatMovementDateRange(movement)}</p>
+                ${duration ? `<p><strong>Duration:</strong> ${duration}</p>` : ''}
+                ${movement?.notes ? `<p><strong>Notes:</strong> ${movement.notes}</p>` : ''}
             </div>
         `;
     }
@@ -531,6 +526,28 @@ class MovementSystem {
         } else {
             return formatDate(startDate);
         }
+    }
+
+    // Helper method to format movement type
+    formatMovementType(type) {
+        if (!type) return 'Unknown';
+        
+        const typeLabels = {
+            'travel': 'Travel',
+            'teleport': 'Teleportation',
+            'flight': 'Flight',
+            'ship': 'Ship Travel',
+            'walk': 'Walking',
+            'ride': 'Riding',
+            'portal': 'Portal',
+            'magic': 'Magical Transport',
+            'forced': 'Forced Movement',
+            'retreat': 'Retreat',
+            'chase': 'Chase',
+            'exploration': 'Exploration'
+        };
+        
+        return typeLabels[type.toLowerCase()] || type.charAt(0).toUpperCase() + type.slice(1);
     }
 
     // Helper method to calculate duration

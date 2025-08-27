@@ -297,6 +297,39 @@ html, body {
     max-width: 250px;
 }
 
+.movement-point-popup h4 {
+    font-size: 1.2em;
+    margin: 0 0 12px 0;
+    font-weight: bold;
+}
+
+.movement-point-popup p {
+    margin: 4px 0;
+    font-size: 0.9em;
+    line-height: 1.3;
+}
+
+.movement-point-popup .duration-info {
+    margin: 4px 0;
+}
+
+/* Consolidated popup visit details styling */
+.selected-visit-details h4 {
+    font-size: 1.2em;
+    margin: 0 0 12px 0;
+    font-weight: bold;
+}
+
+.selected-visit-details .info-row {
+    margin: 4px 0;
+    font-size: 0.9em;
+    line-height: 1.3;
+}
+
+.selected-visit-details .visit-header {
+    margin-bottom: 12px;
+}
+
 /* Path styling */
 .character-path {
     stroke-linecap: round;
