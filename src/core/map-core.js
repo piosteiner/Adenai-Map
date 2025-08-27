@@ -17,6 +17,12 @@ class MapCore {
         
         // 🔥 FIX: Expose map globally for journey system and other modules
         this.exposeMapGlobally();
+        
+        // Dispatch map initialization event for other systems
+        setTimeout(() => {
+            document.dispatchEvent(new CustomEvent('adenaiMapInitialized'));
+            console.log('🗺️ Map initialization event dispatched');
+        }, 100);
     }
 
     setupTheme() {
