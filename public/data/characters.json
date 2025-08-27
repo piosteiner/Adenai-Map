@@ -378,10 +378,10 @@
       "id": "viktoria_karthright",
       "name": "Viktoria Karthright",
       "title": "Familienoberhaupt",
-      "placeOfOrigin": "Toftgard",
+      "placeOfOrigin": "Goblin Loch",
       "coordinates": [
-        1392,
-        1083
+        1472,
+        1040
       ],
       "description": "",
       "image": "https://adenai.piogino.ch/public/images/viktoria_karthright_close.png",
@@ -405,23 +405,26 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-27T10:45:31.229Z"
+        },
+        {
+          "id": "movement_1756292224735",
+          "date": "5663-09-09",
+          "dateStart": "5663-09-09",
+          "dateEnd": "5663-10-01",
+          "location": "Valaris",
+          "coordinates": [
+            1700,
+            1008
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-27T10:57:04.735Z"
         }
       ],
       "createdAt": "2025-08-27T10:32:15.038Z",
-      "updatedAt": "2025-08-27T10:45:31.229Z",
-      "location": "Toftgard",
-      "currentLocation": {
-        "date": "5663-06-01",
-        "dateStart": "5663-06-01",
-        "dateEnd": "5663-09-01",
-        "location": "Toftgard",
-        "coordinates": [
-          1392,
-          1083
-        ],
-        "notes": ""
-      }
+      "updatedAt": "2025-08-27T10:59:16.555Z"
     }
   ],
-  "lastUpdated": "2025-08-27T10:45:31.229Z"
+  "lastUpdated": "2025-08-27T10:59:16.555Z"
 }
