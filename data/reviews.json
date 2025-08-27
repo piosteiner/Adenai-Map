@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "5e070125487b282318dc757d79575c5ae729630e",
+      "action": "delete",
+      "type": "location",
+      "itemName": "1234",
+      "user": "gm",
+      "timestamp": "2025-08-27T01:05:57.854Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-27T01:05:57.854Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Delete location: 1234 (by gm) - Removed from campaign"
+    },
+    {
       "commitSha": "aede518aeeef00e1db113cdf71d76908010817c7",
       "action": "delete",
       "type": "location",
@@ -223,5 +236,5 @@
       "commitMessage": "Create location: Test Location (by gm) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-27T01:05:51.396Z"
+  "lastUpdated": "2025-08-27T01:05:57.854Z"
 }
