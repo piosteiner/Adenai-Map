@@ -72,15 +72,30 @@ class MapCore {
             zoomControl: false // Disable default top-left zoom control
         });
 
-        // Add zoom buttons in the bottom right
-        L.control.zoom({
-            position: 'bottomright'
-        }).addTo(this.map);
+        // Custom zoom control will be added after map initialization
 
         // Overlay the image and fit bounds
         const imageBounds = [[0, 0], [this.imageHeight, this.imageWidth]];
         L.imageOverlay('adenai_map_01.jpg', imageBounds).addTo(this.map);
         this.map.fitBounds(imageBounds);
+
+        // Set movement bounds - restrict to half map height distance from edges
+        const mapHeight = this.imageHeight;
+        const mapWidth = this.imageWidth;
+        const restrictionDistance = mapHeight / 2; // Half the map height
+        
+        const maxBounds = [
+            [-restrictionDistance, -restrictionDistance], // Southwest (bottom-left)
+            [mapHeight + restrictionDistance, mapWidth + restrictionDistance] // Northeast (top-right)
+        ];
+        
+        this.map.setMaxBounds(maxBounds);
+        this.map.options.maxBoundsViscosity = 1.0; // Prevent any movement outside bounds
+
+        console.log(`🗺️ Map bounds restricted to: ${restrictionDistance}px beyond map edges`);
+
+        // Add custom zoom control
+        this.setupCustomZoomControl();
 
         // Set dragging container
         this.map.dragging._draggable._container = this.map.getContainer();

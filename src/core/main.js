@@ -565,13 +565,19 @@ class DragonShadowController {
     startRandomShadows() {
         if (!this.isActive) return;
 
-        // Schedule the next random dragon shadow
-        const randomDelay = Math.random() * 45000 + 30000; // Between 30-75 seconds
+        // Schedule the next random dragon shadow - shorter delay for testing
+        const randomDelay = Math.random() * 15000 + 5000; // Between 5-20 seconds for testing
         
         setTimeout(() => {
             this.triggerRandomShadow();
             this.startRandomShadows(); // Schedule the next one
         }, randomDelay);
+    }
+
+    // Manual trigger for testing
+    triggerNow() {
+        console.log('🐉 Manually triggering dragon shadow...');
+        this.triggerRandomShadow();
     }
 
     triggerRandomShadow() {
@@ -580,50 +586,48 @@ class DragonShadowController {
         // Pick a random shadow variant
         const randomShadow = this.shadows[Math.floor(Math.random() * this.shadows.length)];
         
-        // Get random positions within map bounds
-        const startPos = this.getRandomMapPosition();
-        const endPos = this.getRandomMapPosition();
+        // Simplified positioning - use viewport percentages directly for now
+        const startX = Math.random() * 20; // Start from left edge area
+        const endX = 80 + Math.random() * 20; // End at right edge area
+        const startY = 10 + Math.random() * 60; // Random Y position within map area
+        const endY = 10 + Math.random() * 60;
         
         // Create a unique animation with random properties
         const animationName = `dragonFly-${Date.now()}`;
         const duration = Math.random() * 4 + 6; // 6-10 seconds
-        const direction = Math.random() > 0.5 ? 1 : -1; // Flight direction
+        const direction = Math.random() > 0.5 ? 1 : -1;
         
-        // Calculate flight path within map bounds
-        const deltaX = (endPos.x - startPos.x) * direction;
-        const deltaY = (endPos.y - startPos.y) * 0.5; // Less vertical movement
-        
-        // Create dynamic keyframes that stay within map bounds
+        // Create simplified keyframes for testing
         const keyframes = `
             @keyframes ${animationName} {
                 0% { 
                     opacity: 0; 
-                    left: ${startPos.x - 20}%;
-                    top: ${startPos.y}%;
+                    left: ${startX}%;
+                    top: ${startY}%;
                     transform: scale(0.8) rotate(${direction * -10}deg);
                 }
-                15% { 
+                25% { 
                     opacity: 0.6; 
-                    left: ${startPos.x}%;
-                    top: ${startPos.y + deltaY * 0.2}%;
+                    left: ${startX + (endX - startX) * 0.25}%;
+                    top: ${startY + (endY - startY) * 0.25}%;
                     transform: scale(1) rotate(${direction * -5}deg);
                 }
                 50% { 
                     opacity: 0.8; 
-                    left: ${startPos.x + deltaX * 0.5}%;
-                    top: ${startPos.y + deltaY * 0.5}%;
+                    left: ${startX + (endX - startX) * 0.5}%;
+                    top: ${startY + (endY - startY) * 0.5}%;
                     transform: scale(1.1) rotate(0deg);
                 }
-                85% { 
+                75% { 
                     opacity: 0.6; 
-                    left: ${endPos.x}%;
-                    top: ${endPos.y}%;
+                    left: ${startX + (endX - startX) * 0.75}%;
+                    top: ${startY + (endY - startY) * 0.75}%;
                     transform: scale(1) rotate(${direction * 5}deg);
                 }
                 100% { 
                     opacity: 0; 
-                    left: ${endPos.x + 20}%;
-                    top: ${endPos.y}%;
+                    left: ${endX}%;
+                    top: ${endY}%;
                     transform: scale(0.8) rotate(${direction * 10}deg);
                 }
             }
@@ -637,11 +641,15 @@ class DragonShadowController {
         // Apply animation
         randomShadow.style.animation = `${animationName} ${duration}s ease-in-out`;
 
+        console.log(`🐉 Dragon shadow triggered: ${animationName} for ${duration}s`);
+
         // Clean up after animation
         setTimeout(() => {
             randomShadow.style.animation = '';
-            document.head.removeChild(style);
-        }, duration * 1000 + 1000);
+            if (document.head.contains(style)) {
+                document.head.removeChild(style);
+            }
+        }, (duration + 1) * 1000);
     }
 
     toggle() {
