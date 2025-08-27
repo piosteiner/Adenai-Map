@@ -172,7 +172,10 @@ class LocationSystem {
         try {
             console.log('📍 Loading locations from GeoJSON...');
             
-            const response = await fetch('public/data/places.geojson');
+            // 🔥 CLEAR EXISTING DATA FIRST
+            this.clearExistingLocations();
+            
+            const response = await fetch(`public/data/places.geojson?t=${Date.now()}`);
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
@@ -193,6 +196,30 @@ class LocationSystem {
         } catch (error) {
             console.error('❌ Error loading locations:', error);
         }
+    }
+
+    // Clear existing location data before loading new data
+    clearExistingLocations() {
+        console.log('🧹 Clearing existing location data...');
+        
+        // Remove existing markers from map
+        this.geoFeatureLayers.forEach(locationData => {
+            if (locationData.layer && window.mapCore?.getMap()) {
+                window.mapCore.getMap().removeLayer(locationData.layer);
+            }
+        });
+        
+        // Clear arrays
+        this.geoFeatureLayers = [];
+        this.locations = [];
+        
+        console.log(`🗑️ Removed ${this.geoFeatureLayers.length} existing location markers`);
+    }
+
+    // Add proper reload method for admin interface integration
+    async reloadLocations() {
+        console.log('🔄 Reloading locations from admin update...');
+        await this.loadLocations();
     }
 
     async processGeoJSONData(data) {

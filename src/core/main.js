@@ -175,7 +175,7 @@ class AdenaiMap {
         document.addEventListener('locationsUpdated', () => {
             console.log('🔄 Locations updated, reloading...');
             if (this.systems.locationsSystem) {
-                this.systems.locationsSystem.loadLocations();
+                this.systems.locationsSystem.reloadLocations();
             }
         });
 
@@ -364,7 +364,7 @@ class AdenaiMap {
     }
 
     refreshLocations() {
-        return this.systems.locationsSystem?.loadLocations();
+        return this.systems.locationsSystem?.reloadLocations();
     }
 
     refreshPanel() {
@@ -410,6 +410,7 @@ window.adenaiMap = adenaiMap;
 window.addCharacterMovementPaths = () => window.movementSystem?.addCharacterMovementPaths();
 window.clearCharacterPaths = () => window.movementSystem?.clearCharacterPaths();
 window.reloadCharacters = () => window.characterSystem?.reloadCharacters();
+window.reloadLocations = () => window.adenaiMap?.refreshLocations();
 
 // 🔥 NEW: Expose map debugging function globally
 window.debugMap = () => window.adenaiMap?.debugMap();
