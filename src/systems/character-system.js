@@ -52,7 +52,7 @@ class CharacterSystem {
     async loadCharacters() {
         try {
             console.log('👥 Loading characters from server...');
-            const response = await fetch('public/data/characters.json');
+            const response = await fetch(`public/data/characters.json?t=${Date.now()}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -62,6 +62,25 @@ class CharacterSystem {
             this.characterData = data.characters || [];
             
             console.log(`✅ Loaded ${this.characterData.length} characters`);
+            
+            // Debug: Log a sample character to verify all fields are present
+            if (this.characterData.length > 0) {
+                const sampleChar = this.characterData.find(c => c.id === 'test') || this.characterData[0];
+                console.log('🔍 Sample character data:', {
+                    id: sampleChar.id,
+                    name: sampleChar.name,
+                    title: sampleChar.title,
+                    placeOfOrigin: sampleChar.placeOfOrigin,
+                    status: sampleChar.status,
+                    faction: sampleChar.faction,
+                    relationship: sampleChar.relationship,
+                    firstMet: sampleChar.firstMet,
+                    description: sampleChar.description,
+                    notes: sampleChar.notes,
+                    currentLocation: sampleChar.currentLocation,
+                    movementHistory: sampleChar.movementHistory?.length || 0
+                });
+            }
             
             // Log coordinate status for debugging
             const withCoords = this.characterData.filter(c => c.coordinates).length;
@@ -209,6 +228,17 @@ class CharacterSystem {
 
     // Create character popup content
     createCharacterPopupContent(character) {
+        console.log('🔍 Creating popup for character:', character.name, 'with data:', {
+            placeOfOrigin: character.placeOfOrigin,
+            currentLocation: character.currentLocation,
+            location: character.location,
+            movementHistory: character.movementHistory?.length || 0,
+            faction: character.faction,
+            firstMet: character.firstMet,
+            description: character.description,
+            notes: character.notes
+        });
+        
         const statusEmoji = this.statusEmojis[character.status] || '🤷';
         const statusLabel = character.status || 'unknown';
         const relationship = character.relationship || 'neutral';
@@ -219,15 +249,24 @@ class CharacterSystem {
         // Title
         const title = character.title ? `<div class="character-popup-title">${character.title}</div>` : '';
         
-        // Last seen location (from currentLocation or coordinates)
+        // Last seen location (from currentLocation, location, or latest movement)
         let lastSeenContent = '';
         if (character.currentLocation && character.currentLocation.location) {
             const date = character.currentLocation.date || character.currentLocation.dateStart || '';
-            lastSeenContent = `📍 Last Seen: ${character.currentLocation.location}${date ? ` (${date})` : ''}`;
+            lastSeenContent = `📍 <strong>Last Seen:</strong> ${character.currentLocation.location}${date ? ` (${date})` : ''}`;
         } else if (character.location) {
-            lastSeenContent = `📍 Last Seen: ${character.location}`;
+            lastSeenContent = `📍 <strong>Last Seen:</strong> ${character.location}`;
+        } else if (character.movementHistory && character.movementHistory.length > 0) {
+            // Get the most recent movement entry
+            const latestMovement = character.movementHistory[character.movementHistory.length - 1];
+            if (latestMovement && latestMovement.location) {
+                const date = latestMovement.date || latestMovement.dateStart || '';
+                lastSeenContent = `📍 <strong>Last Seen:</strong> ${latestMovement.location}${date ? ` (${date})` : ''}`;
+            } else {
+                lastSeenContent = `📍 <strong>Last Seen:</strong> <span class="location-unknown">Unknown</span>`;
+            }
         } else {
-            lastSeenContent = `📍 Last Seen: <span class="location-unknown">Unknown</span>`;
+            lastSeenContent = `📍 <strong>Last Seen:</strong> <span class="location-unknown">Unknown</span>`;
         }
         
         // Build content sections
