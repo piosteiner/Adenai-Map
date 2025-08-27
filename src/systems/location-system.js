@@ -35,16 +35,27 @@ class LocationSystem {
     }
 
     createLocationIcon() {
-        const isMobile = window.mapCore && window.mapCore.getIsMobile ? window.mapCore.getIsMobile() : false;
-        
-        this.dotOrangeIcon = L.icon({
-            iconUrl: 'public/icons/dot_orange.svg',
-            iconSize: isMobile ? [48, 48] : [32, 32],
-            iconAnchor: isMobile ? [24, 24] : [16, 16],
-            popupAnchor: [0, -32]
-        });
-        
-        console.log('📍 Location icon created');
+        try {
+            const isMobile = window.mapCore && window.mapCore.getIsMobile ? window.mapCore.getIsMobile() : false;
+            
+            // Try different icon paths in case of path issues
+            const iconUrl = window.location.pathname.includes('public') 
+                ? 'icons/dot_orange.svg' 
+                : 'public/icons/dot_orange.svg';
+            
+            this.dotOrangeIcon = L.icon({
+                iconUrl: iconUrl,
+                iconSize: isMobile ? [48, 48] : [32, 32],
+                iconAnchor: isMobile ? [24, 24] : [16, 16],
+                popupAnchor: [0, -32]
+            });
+            
+            console.log('📍 Location icon created successfully with path:', iconUrl);
+        } catch (error) {
+            console.error('❌ Error creating location icon:', error);
+            // Fallback to default marker if icon creation fails
+            this.dotOrangeIcon = null;
+        }
     }
 
     // Parse link syntax [text:type:id] and convert to clickable elements
@@ -183,6 +194,12 @@ class LocationSystem {
         try {
             console.log('📍 Loading locations from GeoJSON...');
             
+            // Ensure icon is ready before loading locations
+            if (!this.dotOrangeIcon) {
+                console.log('📍 Creating location icon before loading...');
+                this.createLocationIcon();
+            }
+            
             // 🔥 CLEAR EXISTING DATA FIRST
             this.clearExistingLocations();
             
@@ -235,6 +252,25 @@ class LocationSystem {
 
     async processGeoJSONData(data) {
         const map = window.mapCore.getMap();
+        
+        // Ensure icon is created before using it
+        if (!this.dotOrangeIcon) {
+            console.warn('⚠️ Location icon not ready, creating it now...');
+            this.createLocationIcon();
+        }
+        
+        // Double-check that icon was created successfully
+        if (!this.dotOrangeIcon) {
+            console.error('❌ Failed to create location icon, using default marker');
+            const geoLayer = L.geoJSON(data, {
+                onEachFeature: async (feature, layer) => {
+                    await this.processLocationFeature(feature, layer);
+                    // Setup enhanced interactions after popup is bound
+                    this.setupMarkerInteractions(layer);
+                }
+            }).addTo(map);
+            return geoLayer;
+        }
         
         const geoLayer = L.geoJSON(data, {
             pointToLayer: (feature, latlng) => {
