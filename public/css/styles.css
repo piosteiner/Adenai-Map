@@ -245,7 +245,7 @@ html, body {
    ============================================ */
 
 /* Movement marker styles */
-.movement-start-marker, .movement-end-marker, .movement-number-marker {
+.movement-start-marker, .movement-end-marker, .movement-number-marker, .movement-start-end-marker {
     background: transparent;
     border: none;
     text-align: center;
@@ -450,14 +450,16 @@ html, body {
 
 .movement-start-marker.cross-character,
 .movement-end-marker.cross-character,
-.movement-number-marker.cross-character {
+.movement-number-marker.cross-character,
+.movement-start-end-marker.cross-character {
     border: 2px solid #FF6B6B;
     box-shadow: 0 0 8px rgba(255, 107, 107, 0.6);
 }
 
 .movement-start-marker.cross-character .marker-content,
 .movement-end-marker.cross-character .marker-content,
-.movement-number-marker.cross-character .marker-content {
+.movement-number-marker.cross-character .marker-content,
+.movement-start-end-marker.cross-character .marker-content {
     background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
 }
 
@@ -486,7 +488,8 @@ html, body {
 
 /* Dark mode adjustments */
 [data-theme="dark"] .movement-start-marker,
-[data-theme="dark"] .movement-end-marker {
+[data-theme="dark"] .movement-end-marker,
+[data-theme="dark"] .movement-start-end-marker {
     background: #2a2a2a;
     border-color: #fff;
     color: #fff;
@@ -544,7 +547,8 @@ html, body {
 
 [data-theme="dark"] .movement-start-marker.multi-day,
 [data-theme="dark"] .movement-end-marker.multi-day,
-[data-theme="dark"] .movement-number-marker.multi-day {
+[data-theme="dark"] .movement-number-marker.multi-day,
+[data-theme="dark"] .movement-start-end-marker.multi-day {
     border-color: #66BB6A !important;
     background: rgba(102, 187, 106, 0.2) !important;
 }
@@ -568,14 +572,16 @@ html, body {
 
 [data-theme="dark"] .movement-start-marker.cross-character,
 [data-theme="dark"] .movement-end-marker.cross-character,
-[data-theme="dark"] .movement-number-marker.cross-character {
+[data-theme="dark"] .movement-number-marker.cross-character,
+[data-theme="dark"] .movement-start-end-marker.cross-character {
     border: 2px solid #FF8A80;
     box-shadow: 0 0 12px rgba(255, 138, 128, 0.8);
 }
 
 [data-theme="dark"] .movement-start-marker.cross-character .marker-content,
 [data-theme="dark"] .movement-end-marker.cross-character .marker-content,
-[data-theme="dark"] .movement-number-marker.cross-character .marker-content {
+[data-theme="dark"] .movement-number-marker.cross-character .marker-content,
+[data-theme="dark"] .movement-start-end-marker.cross-character .marker-content {
     background: linear-gradient(135deg, #FF8A80, #80CBC4);
     color: #121212;
 }
