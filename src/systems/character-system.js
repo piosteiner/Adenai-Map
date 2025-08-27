@@ -254,19 +254,24 @@ class CharacterSystem {
         if (character.currentLocation && character.currentLocation.location) {
             const date = character.currentLocation.date || character.currentLocation.dateStart || '';
             lastSeenContent = `📍 <strong>Last Seen:</strong> ${character.currentLocation.location}${date ? ` (${date})` : ''}`;
+            console.log('✅ Using currentLocation for last seen:', character.currentLocation.location);
         } else if (character.location) {
             lastSeenContent = `📍 <strong>Last Seen:</strong> ${character.location}`;
+            console.log('✅ Using location field for last seen:', character.location);
         } else if (character.movementHistory && character.movementHistory.length > 0) {
             // Get the most recent movement entry
             const latestMovement = character.movementHistory[character.movementHistory.length - 1];
             if (latestMovement && latestMovement.location) {
                 const date = latestMovement.date || latestMovement.dateStart || '';
                 lastSeenContent = `📍 <strong>Last Seen:</strong> ${latestMovement.location}${date ? ` (${date})` : ''}`;
+                console.log('✅ Using movement history for last seen:', latestMovement.location, 'from', latestMovement.date);
             } else {
                 lastSeenContent = `📍 <strong>Last Seen:</strong> <span class="location-unknown">Unknown</span>`;
+                console.log('❌ No location found in movement history');
             }
         } else {
             lastSeenContent = `📍 <strong>Last Seen:</strong> <span class="location-unknown">Unknown</span>`;
+            console.log('❌ No location data found anywhere');
         }
         
         // Build content sections
@@ -275,11 +280,15 @@ class CharacterSystem {
         // Faction
         if (character.faction) {
             contentSections.push(`<div class="character-popup-faction">🏛️ <strong>Faction:</strong> ${character.faction}</div>`);
+            console.log('✅ Adding faction:', character.faction);
         }
         
         // Place of Origin
         if (character.placeOfOrigin) {
             contentSections.push(`<div class="character-popup-origin">🏠 <strong>Place of Origin:</strong> ${character.placeOfOrigin}</div>`);
+            console.log('✅ Adding place of origin:', character.placeOfOrigin);
+        } else {
+            console.log('❌ No placeOfOrigin found');
         }
         
         // Movement History count
