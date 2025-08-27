@@ -295,6 +295,10 @@ html, body {
 
 .movement-point-popup {
     max-width: 250px;
+    background: rgba(245, 245, 220, 0.9); /* Beige background */
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(85, 107, 47, 0.2);
 }
 
 .movement-point-popup h4 {
@@ -410,6 +414,10 @@ html, body {
 /* Consolidated popup styles */
 .consolidated-popup {
     max-width: 320px;
+    background: rgba(245, 245, 220, 0.9); /* Beige background */
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(85, 107, 47, 0.2);
 }
 
 .total-badge {
@@ -452,6 +460,8 @@ html, body {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    position: relative;
+    z-index: 10; /* Ensure buttons are clickable */
 }
 
 .visit-btn:hover {
@@ -461,8 +471,11 @@ html, body {
 }
 
 .visit-btn .visit-number {
-    background: #2196F3;
-    color: white;
+    background: rgba(245, 245, 220, 0.55); /* Beige background like map markers */
+    color: #556B2F; /* Dark olive green like map markers */
+    font-family: "Times New Roman", "Georgia", serif; /* Serif font like map markers */
+    border: 1px solid rgba(85, 107, 47, 0.3); /* Subtle olive border */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow */
     border-radius: 50%;
     width: 24px;
     height: 24px;
@@ -472,6 +485,7 @@ html, body {
     font-weight: bold;
     font-size: 12px;
     margin-bottom: 4px;
+    line-height: 1;
 }
 
 .visit-btn small {
@@ -608,6 +622,25 @@ html, body {
 [data-theme="dark"] .movement-point-popup.multi-day-stay {
     border-left-color: #66BB6A;
     background: linear-gradient(to right, rgba(102, 187, 106, 0.1), transparent);
+}
+
+/* Dark theme support for movement popups */
+[data-theme="dark"] .movement-point-popup {
+    background: rgba(139, 123, 101, 0.9); /* Darker beige for dark theme */
+    border: 1px solid rgba(144, 238, 144, 0.2);
+}
+
+[data-theme="dark"] .consolidated-popup {
+    background: rgba(139, 123, 101, 0.9); /* Darker beige for dark theme */
+    border: 1px solid rgba(144, 238, 144, 0.2);
+}
+
+/* Dark theme support for visit button numbers */
+[data-theme="dark"] .visit-btn .visit-number {
+    background: rgba(139, 123, 101, 0.55); /* Darker beige for dark theme */
+    color: #90EE90; /* Light green for better contrast */
+    border: 1px solid rgba(144, 238, 144, 0.3);
+    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
 }
 
 [data-theme="dark"] .duration-info {
