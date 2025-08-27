@@ -474,9 +474,10 @@ html, body {
 
 .visit-buttons {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     gap: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    justify-items: center;
+    align-items: start;
 }
 
 .visit-btn {
@@ -510,8 +511,8 @@ html, body {
 }
 
 .visit-btn .visit-number {
-    background: #2196F3;
-    color: white;
+    background: #f5f5dc;
+    color: #8b7355;
     border-radius: 50%;
     width: 24px;
     height: 24px;
@@ -522,13 +523,13 @@ html, body {
     font-weight: 900;
     font-family: "Arial Black", "Helvetica Black", sans-serif;
     margin: 0 auto 4px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(139, 115, 85, 0.3);
 }
 
 [data-theme="dark"] .visit-btn .visit-number {
-    background: #64B5F6;
-    color: #121212;
-    border-color: rgba(255, 255, 255, 0.2);
+    background: #f5f5dc;
+    color: #8b7355;
+    border-color: rgba(139, 115, 85, 0.4);
 }
 
 .visit-btn small {
@@ -538,8 +539,8 @@ html, body {
 }
 
 .visit-details-container {
-    margin-top: 12px;
-    padding-top: 12px;
+    margin-top: 8px;
+    padding-top: 8px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 

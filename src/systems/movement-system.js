@@ -459,6 +459,25 @@ class MovementSystem {
         const uniqueCharacters = new Set(allVisits.map(v => v.characterId || v.character?.id));
         const isCrossCharacter = uniqueCharacters.size > 1;
         
+        // Determine grid layout based on number of visits
+        let gridLayout = '';
+        const visitCount = allVisits.length;
+        
+        if (visitCount === 1) {
+            gridLayout = 'grid-template-columns: 1fr;';
+        } else if (visitCount === 2) {
+            gridLayout = 'grid-template-columns: 1fr 1fr;';
+        } else if (visitCount === 3) {
+            gridLayout = 'grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;';
+        } else if (visitCount === 4) {
+            gridLayout = 'grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;';
+        } else if (visitCount === 5) {
+            gridLayout = 'grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr;';
+        } else {
+            // For 6+ visits, use responsive auto-fit
+            gridLayout = 'grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));';
+        }
+        
         return `
             <div class="consolidated-popup">
                 <h4>${point.location} <span class="total-badge">${allVisits.length} visits</span></h4>
@@ -466,14 +485,28 @@ class MovementSystem {
                 
                 <div class="visit-selection">
                     <h5>Select Visit to View Details:</h5>
-                    <div class="visit-buttons">
-                        ${allVisits.map((visit, index) => `
-                                                                                    <button class="visit-btn" onclick="showVisitDetails(${index}, '${point.coordinates[0]},${point.coordinates[1]}', ${isCrossCharacter ? 'null' : `'${visit.character.id}'`})">>
-                                <span class="visit-number">${visit.visitIndex}</span>
-                                <small>${visit.characterName}</small>
-                                <small>${this.formatDate(visit.dateStart || visit.date)}</small>
-                            </button>
-                        `).join('')}
+                    <div class="visit-buttons" style="${gridLayout}">
+                        ${allVisits.map((visit, index) => {
+                            let additionalStyle = '';
+                            
+                            // Special positioning for 3 visits (third one spans both columns)
+                            if (visitCount === 3 && index === 2) {
+                                additionalStyle = 'grid-column: 1 / 3; justify-self: center;';
+                            }
+                            // Special positioning for 5 visits (4th and 5th on bottom row)
+                            else if (visitCount === 5 && index >= 3) {
+                                if (index === 3) additionalStyle = 'grid-row: 2; grid-column: 1;';
+                                if (index === 4) additionalStyle = 'grid-row: 2; grid-column: 2;';
+                            }
+                            
+                            return `
+                                <button class="visit-btn" style="${additionalStyle}" onclick="showVisitDetails(${index}, '${point.coordinates[0]},${point.coordinates[1]}', ${isCrossCharacter ? 'null' : `'${visit.character.id}'`})">
+                                    <span class="visit-number">${visit.visitIndex}</span>
+                                    <small>${visit.characterName}</small>
+                                    <small>${this.formatDate(visit.dateStart || visit.date)}</small>
+                                </button>
+                            `;
+                        }).join('')}
                     </div>
                 </div>
                 
