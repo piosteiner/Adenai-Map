@@ -15,13 +15,22 @@ class MovementSystem {
             enemy: '#F44336',
             party: '#584cffff'
         };
+        
+        // 🔥 NEW: Initialize Character Path Manager for API integration
+        this.pathManager = new CharacterPathManager();
+        this.isUsingAPI = false; // Track data source for debugging
+        
         this.init();
     }
 
     init() {
-        // Listen for characters loaded event
-        document.addEventListener('charactersLoaded', (e) => {
-            this.addCharacterMovementPaths();
+        // Listen for characters loaded event - now handles async loading
+        document.addEventListener('charactersLoaded', async (e) => {
+            try {
+                await this.addCharacterMovementPaths();
+            } catch (error) {
+                console.error('❌ Failed to add character movement paths:', error);
+            }
         });
 
         // Set up zoom-based number visibility when map is ready
@@ -146,10 +155,162 @@ class MovementSystem {
     };
     }
 
-    addCharacterMovementPaths() {
+    // 🔥 NEW: Hybrid API implementation with fallback to existing system
+    async addCharacterMovementPaths() {
+        console.log('🗺️ Starting character path loading...');
+        
+        // Show loading state
+        this.showLoadingState();
+        
         // Clear existing paths
         this.clearCharacterPaths();
         
+        try {
+            // Try the new API first
+            const pathData = await this.pathManager.loadCharacterPaths();
+            this.isUsingAPI = pathData.metadata.source !== 'legacy-json';
+            
+            console.log(`📊 Using ${this.isUsingAPI ? 'API' : 'fallback'} data source`);
+            console.log(`📈 Loaded ${Object.keys(pathData.paths).length} character paths`);
+            
+            // Render paths from API data
+            await this.renderPathsFromAPIData(pathData);
+            
+        } catch (error) {
+            console.error('❌ Failed to load character paths:', error);
+            
+            // Final fallback to existing character system
+            console.log('🔄 Attempting legacy character system fallback...');
+            await this.loadLegacyCharacterPaths();
+        }
+        
+        // Auto-show VsuzH path by default
+        this.autoShowPartyPath();
+        
+        // Hide loading state
+        this.hideLoadingState();
+        
+        console.log(`✅ Created ${this.characterPaths.length} character movement paths`);
+        
+        // Log performance info
+        if (this.isUsingAPI) {
+            this.pathManager.printStatistics();
+        }
+    }
+
+    // Render paths from new API format
+    async renderPathsFromAPIData(apiData) {
+        const paths = apiData.paths;
+        
+        Object.values(paths).forEach(pathInfo => {
+            if (pathInfo.type === 'movement' && pathInfo.coordinates.length >= 2) {
+                // Multi-point movement path
+                this.createCharacterPathFromAPI(pathInfo);
+            } else if (pathInfo.type === 'static' && pathInfo.coordinates.length === 1) {
+                // Static location marker
+                this.createStaticCharacterMarker(pathInfo);
+            }
+        });
+    }
+
+    // Create character path from API data format
+    createCharacterPathFromAPI(pathInfo) {
+        const map = window.mapCore.getMap();
+        
+        // Create the path polyline using pre-computed coordinates
+        const pathLine = L.polyline(pathInfo.coordinates, {
+            color: pathInfo.style.color,
+            weight: pathInfo.style.weight,
+            opacity: pathInfo.style.opacity,
+            dashArray: pathInfo.style.dashArray,
+            className: `character-path character-path-${pathInfo.id}`
+        });
+        
+        // Add tooltip with character name
+        pathLine.bindTooltip(pathInfo.name, {
+            permanent: false,
+            sticky: true,
+            direction: 'top',
+            offset: [0, -10],
+            className: 'character-path-tooltip'
+        });
+
+        // Create popup with journey info
+        pathLine.bindPopup(this.createAPIPathPopup(pathInfo));
+        
+        // Create movement markers for path points
+        const pathMarkers = pathInfo.coordinates.map((coord, index) => {
+            return this.createAPIMovementMarker(coord, index, pathInfo.coordinates.length, pathInfo);
+        });
+        
+        // Store path data in the same format as legacy system
+        const pathData = {
+            character: {
+                id: pathInfo.id,
+                name: pathInfo.name,
+                relationship: pathInfo.metadata.relationship
+            },
+            pathLine: pathLine,
+            markers: pathMarkers,
+            points: pathInfo.coordinates.map((coord, index) => ({
+                coordinates: [coord[1], coord[0]], // Convert back to [x,y] for compatibility
+                location: `Location ${index + 1}`,
+                date: 'API Data'
+            })),
+            isVisible: false,
+            apiSource: true // Mark as API-sourced
+        };
+        
+        this.characterPaths.push(pathData);
+    }
+
+    // Create static character marker for characters without movement
+    createStaticCharacterMarker(pathInfo) {
+        const map = window.mapCore.getMap();
+        const coord = pathInfo.coordinates[0];
+        
+        const marker = L.circleMarker(coord, {
+            radius: 8,
+            fillColor: pathInfo.style.color,
+            color: pathInfo.style.color,
+            weight: 2,
+            opacity: pathInfo.style.opacity,
+            fillOpacity: pathInfo.style.opacity * 0.8,
+            className: `static-character-marker character-${pathInfo.id}`
+        });
+
+        marker.bindTooltip(pathInfo.name, {
+            permanent: false,
+            direction: 'top',
+            offset: [0, -10]
+        });
+
+        marker.bindPopup(this.createAPIStaticPopup(pathInfo));
+
+        // Store as a simplified path data for consistency
+        const pathData = {
+            character: {
+                id: pathInfo.id,
+                name: pathInfo.name,
+                relationship: pathInfo.metadata.relationship
+            },
+            pathLine: marker, // Using marker as the main element
+            markers: [marker],
+            points: [{
+                coordinates: [coord[1], coord[0]], // Convert to [x,y]
+                location: pathInfo.name,
+                date: 'Static'
+            }],
+            isVisible: false,
+            isStatic: true,
+            apiSource: true
+        };
+
+        this.characterPaths.push(pathData);
+    }
+
+    // Legacy fallback method (existing logic)
+    async loadLegacyCharacterPaths() {
         const characters = window.characterSystem.getCharacters();
         
         characters.forEach(character => {
@@ -199,8 +360,10 @@ class MovementSystem {
                 this.createCharacterPath(character, movementPoints, pathColor);
             }
         });
-        
-        // Auto-show VsuzH path by default
+    }
+
+    // Auto-show party/VsuzH path
+    autoShowPartyPath() {
         const vsuzHPath = this.characterPaths.find(pathData => {
             const name = pathData.character.name.toLowerCase();
             return name.includes('vsuzh') || name.includes('vsuz') || pathData.character.relationship === 'party';
@@ -210,8 +373,99 @@ class MovementSystem {
             this.showCharacterPath(vsuzHPath.character.id);
             console.log(`Auto-showing VsuzH path for: ${vsuzHPath.character.name}`);
         }
+    }
 
-        console.log(`Created ${this.characterPaths.length} character movement paths`);
+    // UI feedback methods
+    showLoadingState() {
+        // Create or update loading indicator
+        let loadingDiv = document.getElementById('character-paths-loading');
+        if (!loadingDiv) {
+            loadingDiv = document.createElement('div');
+            loadingDiv.id = 'character-paths-loading';
+            loadingDiv.innerHTML = `
+                <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+                           background: rgba(0,0,0,0.8); color: white; padding: 20px; border-radius: 8px; 
+                           z-index: 10000; text-align: center;">
+                    <div>🗺️ Loading character paths...</div>
+                    <div style="margin-top: 10px; font-size: 0.8em; opacity: 0.8;">
+                        Trying optimized API...
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(loadingDiv);
+        }
+    }
+
+    hideLoadingState() {
+        const loadingDiv = document.getElementById('character-paths-loading');
+        if (loadingDiv) {
+            loadingDiv.remove();
+        }
+    }
+
+    // Create popup content for API paths
+    createAPIPathPopup(pathInfo) {
+        const metadata = pathInfo.metadata;
+        return `
+            <div class="character-path-popup">
+                <h4>${pathInfo.name}'s Journey</h4>
+                <p><strong>Total Locations:</strong> ${pathInfo.coordinates.length}</p>
+                <p><strong>Relationship:</strong> ${metadata.relationship}</p>
+                <p><strong>Status:</strong> ${metadata.status}</p>
+                <div class="api-info">
+                    <small>📊 Optimized path data • ${metadata.movementCount} movements</small>
+                </div>
+            </div>
+        `;
+    }
+
+    // Create popup content for static API markers
+    createAPIStaticPopup(pathInfo) {
+        const metadata = pathInfo.metadata;
+        return `
+            <div class="character-static-popup">
+                <h4>${pathInfo.name}</h4>
+                <p><strong>Status:</strong> ${metadata.status}</p>
+                <p><strong>Relationship:</strong> ${metadata.relationship}</p>
+                <div class="api-info">
+                    <small>📍 Static location</small>
+                </div>
+            </div>
+        `;
+    }
+
+    // Create movement marker for API data
+    createAPIMovementMarker(coord, index, totalPoints, pathInfo) {
+        const isFirst = index === 0;
+        const isLast = index === totalPoints - 1;
+        
+        let markerContent;
+        if (isFirst) {
+            markerContent = '1';
+        } else if (isLast) {
+            markerContent = '🚩';
+        } else {
+            markerContent = `${index + 1}`;
+        }
+
+        const markerIcon = L.divIcon({
+            html: `<div class="movement-marker-content">${markerContent}</div>`,
+            iconSize: [24, 24],
+            className: `movement-${isFirst ? 'start' : isLast ? 'end' : 'number'}-marker api-marker`,
+            iconAnchor: [12, 12]
+        });
+        
+        const marker = L.marker(coord, {
+            icon: markerIcon,
+            zIndexOffset: 10
+        });
+
+        marker.bindTooltip(`${pathInfo.name} - Stop ${index + 1}`, {
+            direction: 'top',
+            offset: [0, -12]
+        });
+
+        return marker;
     }
 
     createCharacterPath(character, movementPoints, pathColor) {
@@ -1111,10 +1365,260 @@ class MovementSystem {
 
         console.log(`📊 Zoom: ${zoomPercentage.toFixed(1)}% - Numbers ${shouldShowNumbers ? 'visible' : 'hidden'}`);
     }
+
+    // 🔥 NEW: Debug and testing methods for Character Path Manager integration
+    
+    // Test API connection
+    async testAPIConnection() {
+        console.log('🧪 Testing Character Paths API connection...');
+        const result = await this.pathManager.testAPIConnection();
+        console.log(`API Test Result: ${result ? '✅ Success' : '❌ Failed'}`);
+        return result;
+    }
+
+    // Test fallback system
+    async testFallback() {
+        console.log('🧪 Testing fallback character data loading...');
+        const result = await this.pathManager.testFallback();
+        console.log(`Fallback Test Result: ${result ? '✅ Success' : '❌ Failed'}`);
+        return result;
+    }
+
+    // Force reload with API
+    async forceAPIReload() {
+        console.log('🔄 Forcing reload with API data...');
+        this.pathManager.clearCache();
+        await this.addCharacterMovementPaths();
+    }
+
+    // Force reload with fallback
+    async forceFallbackReload() {
+        console.log('🔄 Forcing reload with fallback data...');
+        this.clearCharacterPaths();
+        await this.loadLegacyCharacterPaths();
+        this.autoShowPartyPath();
+    }
+
+    // Get performance statistics
+    getPerformanceStats() {
+        return {
+            ...this.pathManager.getStatistics(),
+            currentDataSource: this.isUsingAPI ? 'API' : 'fallback',
+            pathsLoaded: this.characterPaths.length,
+            visiblePaths: this.visibleCharacterPaths.size
+        };
+    }
+
+    // Show debug panel
+    showDebugPanel() {
+        const stats = this.getPerformanceStats();
+        
+        let debugPanel = document.getElementById('character-path-debug-panel');
+        if (!debugPanel) {
+            debugPanel = document.createElement('div');
+            debugPanel.id = 'character-path-debug-panel';
+            debugPanel.className = 'character-path-debug';
+            document.body.appendChild(debugPanel);
+        }
+
+        debugPanel.innerHTML = `
+            <h4>📊 Character Path Debug</h4>
+            <div class="stat-row">
+                <span class="stat-label">Data Source:</span>
+                <span class="stat-value">${stats.currentDataSource}</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Paths Loaded:</span>
+                <span class="stat-value">${stats.pathsLoaded}</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Visible Paths:</span>
+                <span class="stat-value">${stats.visiblePaths}</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">API Calls:</span>
+                <span class="stat-value">${stats.apiCalls}</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Cache Hits:</span>
+                <span class="stat-value">${stats.cacheHits}</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Fallback Usage:</span>
+                <span class="stat-value">${stats.fallbackUsage}</span>
+            </div>
+            <div style="margin-top: 10px; text-align: center;">
+                <button onclick="window.movementSystem.hideDebugPanel()" style="background: #dc3545; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">Close</button>
+            </div>
+        `;
+
+        debugPanel.classList.add('show');
+        
+        // Auto-hide after 30 seconds
+        setTimeout(() => this.hideDebugPanel(), 30000);
+    }
+
+    // Hide debug panel
+    hideDebugPanel() {
+        const debugPanel = document.getElementById('character-path-debug-panel');
+        if (debugPanel) {
+            debugPanel.classList.remove('show');
+        }
+    }
+
+    // Show performance indicator
+    showPerformanceIndicator(type, message, duration = 3000) {
+        let indicator = document.getElementById('performance-indicator');
+        if (!indicator) {
+            indicator = document.createElement('div');
+            indicator.id = 'performance-indicator';
+            indicator.className = 'performance-indicator';
+            document.body.appendChild(indicator);
+        }
+
+        indicator.className = `performance-indicator ${type}`;
+        indicator.textContent = message;
+        indicator.classList.add('show');
+
+        setTimeout(() => {
+            indicator.classList.remove('show');
+        }, duration);
+    }
+
+    // Enhanced logging for development
+    logDataComparison() {
+        const stats = this.pathManager.getStatistics();
+        if (stats.dataSizeComparisons.length > 1) {
+            const apiData = stats.dataSizeComparisons.filter(d => d.source === 'api');
+            const fallbackData = stats.dataSizeComparisons.filter(d => d.source === 'fallback');
+            
+            if (apiData.length > 0 && fallbackData.length > 0) {
+                const apiAvgSize = apiData.reduce((sum, d) => sum + d.size, 0) / apiData.length;
+                const fallbackAvgSize = fallbackData.reduce((sum, d) => sum + d.size, 0) / fallbackData.length;
+                const improvement = ((fallbackAvgSize - apiAvgSize) / fallbackAvgSize * 100).toFixed(1);
+                
+                console.log('📊 Data Size Comparison:');
+                console.log(`  API average: ${(apiAvgSize / 1024).toFixed(2)}KB`);
+                console.log(`  Fallback average: ${(fallbackAvgSize / 1024).toFixed(2)}KB`);
+                console.log(`  Improvement: ${improvement}% reduction`);
+                
+                this.showPerformanceIndicator('api-success', `${improvement}% bandwidth saved`, 5000);
+            }
+        }
+    }
 }
 
 // Create global movement system instance
 window.movementSystem = new MovementSystem();
+
+// 🔥 NEW: Global testing and debugging functions for Character Path Manager
+
+// Test the entire character path system
+window.testCharacterPaths = async function() {
+    console.log('🧪 Testing Character Path System...');
+    
+    try {
+        console.log('1. Testing API connection...');
+        const apiTest = await window.movementSystem.testAPIConnection();
+        
+        console.log('2. Testing fallback system...');
+        const fallbackTest = await window.movementSystem.testFallback();
+        
+        console.log('3. Showing current statistics...');
+        const stats = window.movementSystem.getPerformanceStats();
+        console.log('Stats:', stats);
+        
+        console.log('4. Data comparison...');
+        window.movementSystem.logDataComparison();
+        
+        console.log('✅ Character Path System test complete!');
+        window.movementSystem.showDebugPanel();
+        
+        return {
+            apiTest,
+            fallbackTest,
+            stats
+        };
+        
+    } catch (error) {
+        console.error('❌ Test failed:', error);
+        return false;
+    }
+};
+
+// Force API reload for testing
+window.testAPIReload = function() {
+    console.log('🔄 Testing API reload...');
+    return window.movementSystem.forceAPIReload();
+};
+
+// Force fallback reload for testing
+window.testFallbackReload = function() {
+    console.log('🔄 Testing fallback reload...');
+    return window.movementSystem.forceFallbackReload();
+};
+
+// Show character path debug panel
+window.showCharacterPathDebug = function() {
+    window.movementSystem.showDebugPanel();
+};
+
+// Clear character path cache
+window.clearCharacterPathCache = function() {
+    window.movementSystem.pathManager.clearCache();
+    console.log('🧹 Character path cache cleared');
+};
+
+// Toggle debug mode
+window.toggleCharacterPathDebug = function(enabled) {
+    window.movementSystem.pathManager.setDebugMode(enabled);
+    console.log(`🔧 Debug mode ${enabled ? 'enabled' : 'disabled'}`);
+};
+
+// Performance comparison tool
+window.compareCharacterPathPerformance = async function() {
+    console.log('📊 Running performance comparison...');
+    
+    // Clear cache to ensure fresh data
+    window.movementSystem.pathManager.clearCache();
+    
+    // Test API performance
+    console.log('Testing API performance...');
+    const apiStart = performance.now();
+    await window.movementSystem.forceAPIReload();
+    const apiTime = performance.now() - apiStart;
+    
+    // Test fallback performance
+    console.log('Testing fallback performance...');
+    const fallbackStart = performance.now();
+    await window.movementSystem.forceFallbackReload();
+    const fallbackTime = performance.now() - fallbackStart;
+    
+    const improvement = ((fallbackTime - apiTime) / fallbackTime * 100).toFixed(1);
+    
+    console.log('📈 Performance Comparison Results:');
+    console.log(`  API load time: ${apiTime.toFixed(2)}ms`);
+    console.log(`  Fallback load time: ${fallbackTime.toFixed(2)}ms`);
+    console.log(`  Performance improvement: ${improvement}%`);
+    
+    // Show data size comparison
+    window.movementSystem.logDataComparison();
+    
+    return {
+        apiTime,
+        fallbackTime,
+        improvement: parseFloat(improvement)
+    };
+};
+
+console.log('🔧 Character Path testing functions loaded:');
+console.log('  - testCharacterPaths() - Full system test');
+console.log('  - testAPIReload() - Test API data loading');
+console.log('  - testFallbackReload() - Test fallback data loading');
+console.log('  - showCharacterPathDebug() - Show debug panel');
+console.log('  - clearCharacterPathCache() - Clear cache');
+console.log('  - toggleCharacterPathDebug(true/false) - Toggle debug mode');
+console.log('  - compareCharacterPathPerformance() - Performance comparison');
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {
