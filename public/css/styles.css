@@ -293,45 +293,77 @@ html, body {
     border-bottom: none;
 }
 
-.movement-point-popup {
-    max-width: 250px;
-    background: rgba(241, 241, 201, 0.9); /* Beige background */
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(85, 107, 47, 0.2);
+/* ============================================
+   MOVEMENT POPUP STYLES (UNIFIED & OPTIMIZED)
+   ============================================ */
+
+/* Base popup styles - applies to all movement popups */
+.movement-point-popup,
+.consolidated-popup {
+    max-width: 320px;
+    padding: 16px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.4;
+    /* Light theme fallback */
+    background: rgba(245, 245, 220, 0.95);
+    color: #2c1810;
 }
 
-.movement-point-popup h4 {
-    font-size: 1.2em;
-    margin: 0 0 12px 0;
-    font-weight: bold;
+/* Dark theme - sleek dark design */
+[data-theme="dark"] .movement-point-popup,
+[data-theme="dark"] .consolidated-popup {
+    background: rgba(40, 44, 52, 0.95);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 
-.movement-point-popup p {
-    margin: 4px 0;
-    font-size: 1em;
-    line-height: 1.3;
-}
-
-.movement-point-popup .duration-info {
-    margin: 4px 0;
-}
-
-/* Consolidated popup visit details styling */
+/* Popup headers */
+.movement-point-popup h4,
+.consolidated-popup h4,
 .selected-visit-details h4 {
-    font-size: 1.2em;
+    font-size: 1.1em;
     margin: 0 0 12px 0;
-    font-weight: bold;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
+[data-theme="dark"] .movement-point-popup h4,
+[data-theme="dark"] .consolidated-popup h4,
+[data-theme="dark"] .selected-visit-details h4 {
+    color: #ffffff;
+}
+
+/* Content text */
+.movement-point-popup p,
 .selected-visit-details .info-row {
-    margin: 4px 0;
-    font-size: 1em;
-    line-height: 1.3;
+    margin: 6px 0;
+    font-size: 0.9em;
+    line-height: 1.4;
 }
 
-.selected-visit-details .visit-header {
-    margin-bottom: 12px;
+[data-theme="dark"] .movement-point-popup p,
+[data-theme="dark"] .selected-visit-details .info-row {
+    color: #e0e0e0;
+}
+
+/* Multi-day stay indicator */
+.movement-point-popup.multi-day-stay,
+.selected-visit-details.multi-day-stay {
+    border-left: 4px solid #4CAF50;
+    padding-left: 20px;
+}
+
+[data-theme="dark"] .movement-point-popup.multi-day-stay,
+[data-theme="dark"] .selected-visit-details.multi-day-stay {
+    border-left-color: #66BB6A;
+    background: linear-gradient(90deg, rgba(102, 187, 106, 0.1), transparent);
 }
 
 /* Path styling */
@@ -411,109 +443,132 @@ html, body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Consolidated popup styles */
-.consolidated-popup {
-    max-width: 320px;
-    background: rgba(245, 245, 220, 0.9); /* Beige background */
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(85, 107, 47, 0.2);
-}
-
+/* Consolidated popup specific elements */
 .total-badge {
     background: #4CAF50;
     color: white;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 0.7em;
-    font-weight: bold;
+    padding: 3px 10px;
+    border-radius: 16px;
+    font-size: 0.75em;
+    font-weight: 600;
     margin-left: 8px;
 }
 
+[data-theme="dark"] .total-badge {
+    background: #66BB6A;
+    color: #121212;
+}
+
 .visit-selection {
-    margin-top: 8px;
-    border-top: 1px solid #eee;
-    padding-top: 6px;
+    margin-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 12px;
 }
 
 .visit-selection h5 {
-    margin: 0 0 6px 0;
-    font-size: 0.9em;
-    color: #666;
+    margin: 0 0 8px 0;
+    font-size: 0.85em;
+    font-weight: 500;
+    opacity: 0.8;
 }
 
 .visit-buttons {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 6px;
+    gap: 8px;
     margin-bottom: 12px;
 }
 
 .visit-btn {
-    background: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 8px 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 6px;
     cursor: pointer;
     transition: all 0.2s ease;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    z-index: 10; /* Ensure buttons are clickable */
+    gap: 2px;
 }
 
 .visit-btn:hover {
-    background: #e9ecef;
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
     transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] .visit-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+[data-theme="dark"] .visit-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .visit-btn .visit-number {
-    background: rgba(245, 245, 220, 0.55); /* Beige background like map markers */
-    color: #556B2F; /* Dark olive green like map markers */
-    font-family: "Arial Black", "Helvetica Black", "DejaVu Sans Bold", "Arial", sans-serif; /* Bold sans-serif font */
-    font-weight: 900; /* Extra bold */
-    border: 1px solid rgba(85, 107, 47, 0.3); /* Subtle olive border */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    background: #2196F3;
+    color: white;
     border-radius: 50%;
     width: 24px;
     height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
-    margin-bottom: 4px;
-    line-height: 1;
+    font-size: 11px;
+    font-weight: 900;
+    font-family: "Arial Black", "Helvetica Black", sans-serif;
+    margin: 0 auto 4px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .visit-btn .visit-number {
+    background: #64B5F6;
+    color: #121212;
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .visit-btn small {
     font-size: 0.7em;
-    color: #666;
+    opacity: 0.8;
     line-height: 1.2;
 }
 
 .visit-details-container {
-    border-top: 1px solid #eee;
-    padding-top: 8px;
-    margin-top: 8px;
-    min-height: 60px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Cross-character consolidation styles */
 .cross-character-indicator {
-    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
-    color: white;
+    background: linear-gradient(135deg, #FF8A80, #80CBC4);
+    color: #121212;
     padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 0.8em;
-    font-weight: bold;
-    margin: 4px 0;
+    border-radius: 16px;
+    font-size: 0.75em;
+    font-weight: 600;
+    margin: 8px 0;
     text-align: center;
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+[data-theme="dark"] .cross-character-indicator {
+    background: linear-gradient(135deg, #FF8A80, #80CBC4);
+/* Path styling */
+.character-path {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.character-path:hover {
+    stroke-width: 6px;
+    opacity: 1;
+}
+
+/* Movement markers cross-character styling */
 .movement-start-marker.cross-character,
 .movement-end-marker.cross-character,
 .movement-number-marker.cross-character,
@@ -527,6 +582,8 @@ html, body {
 .movement-number-marker.cross-character .marker-content,
 .movement-start-end-marker.cross-character .marker-content {
     background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+    color: white;
+}
 }
 
 /* ========== DURATION INDICATORS ========== */
@@ -619,42 +676,57 @@ html, body {
     background: rgba(102, 187, 106, 0.2) !important;
 }
 
-[data-theme="dark"] .movement-point-popup.multi-day-stay {
-    border-left-color: #66BB6A;
-    background: linear-gradient(to right, rgba(102, 187, 106, 0.1), transparent);
-}
-
-/* Dark theme support for movement popups */
-[data-theme="dark"] .movement-point-popup {
-    background: rgba(139, 123, 101, 0.9); /* Darker beige for dark theme */
-    border: 1px solid rgba(144, 238, 144, 0.2);
-}
-
-[data-theme="dark"] .consolidated-popup {
-    background: rgba(139, 123, 101, 0.9); /* Darker beige for dark theme */
-    border: 1px solid rgba(144, 238, 144, 0.2);
-}
-
-/* Dark theme support for visit button numbers */
-[data-theme="dark"] .visit-btn .visit-number {
-    background: rgba(139, 123, 101, 0.55); /* Darker beige for dark theme */
-    color: #90EE90; /* Light green for better contrast */
-    font-family: "Arial Black", "Helvetica Black", "DejaVu Sans Bold", "Arial", sans-serif; /* Bold sans-serif font */
-    font-weight: 900; /* Extra bold */
-    border: 1px solid rgba(144, 238, 144, 0.3);
-    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .duration-info {
-    color: #81C784;
-    background: rgba(102, 187, 106, 0.2);
-}
-
 /* Dark theme support for cross-character consolidation */
 [data-theme="dark"] .cross-character-indicator {
     background: linear-gradient(135deg, #FF8A80, #80CBC4);
     color: #121212;
     border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Visit badge styling */
+.visit-badge {
+    background: #2196F3;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.7em;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+[data-theme="dark"] .visit-badge {
+    background: #64B5F6;
+    color: #121212;
+}
+
+/* Visit header styling */
+.visit-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+/* Info grid styling */
+.visit-info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-row strong {
+    font-weight: 600;
+    min-width: 80px;
+}
+
+[data-theme="dark"] .info-row strong {
+    color: #ffffff;
 }
 
 [data-theme="dark"] .movement-start-marker.cross-character,
