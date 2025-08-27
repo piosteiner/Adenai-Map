@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "b3eae2b9a17e6b58c2f0a5614113e5a3266494f3",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lia Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-27T10:29:08.169Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-27T10:29:08.169Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: lia_karthright (by gm) - added place of origin, added faction, added image"
+    },
+    {
       "commitSha": "c5a3ab6283109d4380dfb9911d4ba176745ce0da",
       "action": "update",
       "type": "character",
@@ -2069,5 +2082,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-27T01:25:05.650Z"
+  "lastUpdated": "2025-08-27T10:29:08.169Z"
 }
