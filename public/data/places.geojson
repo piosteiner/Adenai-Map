@@ -966,6 +966,24 @@
           540
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Teststa",
+        "description": "wer",
+        "contentUrl": null,
+        "region": "north_adenai",
+        "type": "city",
+        "visited": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          234,
+          234
+        ]
+      }
     }
   ]
 }
