@@ -5,6 +5,7 @@ class LocationSystem {
         this.locations = [];
         this.dotOrangeIcon = null;
         this.mediaLibrary = null;
+        this.currentOpenPopup = null; // Track currently open popup
         this.init();
     }
 
@@ -251,15 +252,23 @@ class LocationSystem {
 
     setupMarkerInteractions(marker) {
         let hoverTimeout;
-        let isPopupSticky = false; // Track if popup was opened by click
+        marker._isPopupSticky = false; // Store sticky state on the marker itself
         
         // Disable default popup behavior
         marker.off('click');
         
         // Click event - opens popup and makes it sticky
         marker.on('click', () => {
-            isPopupSticky = true;
+            // Close any previously open popup and reset its sticky state
+            if (this.currentOpenPopup && this.currentOpenPopup !== marker) {
+                this.currentOpenPopup._isPopupSticky = false;
+                this.currentOpenPopup.closePopup();
+                console.log('📍 Previous location popup closed automatically');
+            }
+            
+            marker._isPopupSticky = true;
             marker.openPopup();
+            this.currentOpenPopup = marker; // Track this as the current open popup
             console.log('📍 Location popup opened by click (sticky)');
         });
         
@@ -272,7 +281,7 @@ class LocationSystem {
             }
             
             // Only open popup on hover if it's not already sticky
-            if (!isPopupSticky) {
+            if (!marker._isPopupSticky) {
                 hoverTimeout = setTimeout(() => {
                     marker.openPopup();
                     console.log('📍 Location popup opened by hover');
@@ -288,7 +297,7 @@ class LocationSystem {
             }
             
             // Only close popup if it's not sticky
-            if (!isPopupSticky) {
+            if (!marker._isPopupSticky) {
                 marker.closePopup();
                 console.log('📍 Location popup closed by mouseout');
             }
@@ -296,9 +305,23 @@ class LocationSystem {
         
         // Reset sticky state when popup is manually closed
         marker.on('popupclose', () => {
-            isPopupSticky = false;
+            marker._isPopupSticky = false;
+            // Clear current open popup tracking if this marker's popup is closing
+            if (this.currentOpenPopup === marker) {
+                this.currentOpenPopup = null;
+            }
             console.log('📍 Location popup closed, sticky state reset');
         });
+    }
+
+    // Close all open location popups
+    closeAllPopups() {
+        if (this.currentOpenPopup) {
+            this.currentOpenPopup._isPopupSticky = false;
+            this.currentOpenPopup.closePopup();
+            this.currentOpenPopup = null;
+            console.log('📍 All location popups closed');
+        }
     }
 
     async processLocationFeature(feature, layer) {
@@ -330,6 +353,9 @@ class LocationSystem {
             // No contentUrl: use local description and details
             popupContent = this.createPopupFromProperties(name, desc, details);
         }
+
+        // Add character lists to popup content
+        popupContent = this.addCharacterListsToPopup(popupContent, name);
 
         // Bind popup to the layer (with enhanced interaction behavior)
         layer.bindPopup(popupContent, { 
@@ -369,6 +395,170 @@ class LocationSystem {
         }
         
         return content;
+    }
+
+    // Add character lists to popup content
+    addCharacterListsToPopup(popupContent, locationName) {
+        const characterStats = this.getCharactersByLocation(locationName);
+        
+        if (characterStats.originCharacters.length === 0 && characterStats.lastSeenCharacters.length === 0) {
+            return popupContent; // No characters to show
+        }
+
+        let characterSection = '<div class="popup-characters">';
+        characterSection += '<hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">';
+        
+        // Characters from this location
+        if (characterStats.originCharacters.length > 0) {
+            characterSection += `
+                <div class="character-list-section">
+                    <button class="character-list-button" onclick="window.locationSystem.showCharacterModal('${locationName}', 'origin')">
+                        <span class="character-list-icon">🏠</span>
+                        <span class="character-list-text">Characters from here (${characterStats.originCharacters.length})</span>
+                        <span class="character-list-arrow">→</span>
+                    </button>
+                </div>
+            `;
+        }
+
+        // Characters last seen here
+        if (characterStats.lastSeenCharacters.length > 0) {
+            characterSection += `
+                <div class="character-list-section">
+                    <button class="character-list-button" onclick="window.locationSystem.showCharacterModal('${locationName}', 'lastSeen')">
+                        <span class="character-list-icon">👁️</span>
+                        <span class="character-list-text">Last seen here (${characterStats.lastSeenCharacters.length})</span>
+                        <span class="character-list-arrow">→</span>
+                    </button>
+                </div>
+            `;
+        }
+
+        characterSection += '</div>';
+        return popupContent + characterSection;
+    }
+
+    // Get characters associated with a location
+    getCharactersByLocation(locationName) {
+        const originCharacters = [];
+        const lastSeenCharacters = [];
+
+        if (!window.characterSystem) {
+            return { originCharacters, lastSeenCharacters };
+        }
+
+        const characters = window.characterSystem.getCharacters();
+        
+        characters.forEach(character => {
+            // Check if this is their place of origin (first movement entry or if they have no movement, their current location)
+            let originLocation = null;
+            if (character.movementHistory && character.movementHistory.length > 0) {
+                // Sort movement history by date to find the earliest
+                const sortedHistory = [...character.movementHistory].sort((a, b) => new Date(a.date) - new Date(b.date));
+                originLocation = sortedHistory[0].location;
+            } else if (character.currentLocation) {
+                // If no movement history, consider current location as origin
+                originLocation = character.currentLocation.location;
+            }
+
+            if (originLocation === locationName) {
+                originCharacters.push(character);
+            }
+
+            // Check if this is their last seen location
+            if (character.currentLocation && character.currentLocation.location === locationName) {
+                // Only add if not already in origin list (avoid duplicates)
+                if (!originCharacters.find(c => c.id === character.id)) {
+                    lastSeenCharacters.push(character);
+                }
+            }
+        });
+
+        return { originCharacters, lastSeenCharacters };
+    }
+
+    // Show character modal
+    showCharacterModal(locationName, type) {
+        const characterStats = this.getCharactersByLocation(locationName);
+        const characters = type === 'origin' ? characterStats.originCharacters : characterStats.lastSeenCharacters;
+        
+        const modalTitle = type === 'origin' 
+            ? `Characters from ${locationName}` 
+            : `Characters last seen in ${locationName}`;
+
+        const modalContent = this.createCharacterModalContent(characters, modalTitle);
+        this.openModal(modalContent);
+    }
+
+    // Create character modal content
+    createCharacterModalContent(characters, title) {
+        let content = `
+            <div class="character-modal">
+                <div class="character-modal-header">
+                    <h3>${title}</h3>
+                    <button class="character-modal-close" onclick="window.locationSystem.closeModal()">×</button>
+                </div>
+                <div class="character-modal-body">
+        `;
+
+        if (characters.length === 0) {
+            content += '<p>No characters found.</p>';
+        } else {
+            characters.forEach(character => {
+                const image = character.image ? `<img src="${character.image}" alt="${character.name}" class="character-avatar">` : '';
+                const title = character.title ? ` <span class="character-title">${character.title}</span>` : '';
+                const faction = character.faction ? `<div class="character-faction">${character.faction}</div>` : '';
+                const relationship = character.relationship ? `<span class="character-relationship ${character.relationship}">${character.relationship}</span>` : '';
+                
+                content += `
+                    <div class="character-card" onclick="window.characterSystem.focusCharacter('${character.name}'); window.locationSystem.closeModal();">
+                        <div class="character-card-content">
+                            ${image}
+                            <div class="character-info">
+                                <div class="character-name">${character.name}${title}</div>
+                                ${faction}
+                                ${relationship ? `<div class="character-meta">${relationship}</div>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        content += `
+                </div>
+            </div>
+        `;
+
+        return content;
+    }
+
+    // Open modal
+    openModal(content) {
+        // Remove existing modal if any
+        this.closeModal();
+
+        const modal = document.createElement('div');
+        modal.id = 'character-location-modal';
+        modal.className = 'modal-overlay';
+        modal.innerHTML = content;
+        
+        document.body.appendChild(modal);
+        
+        // Close on overlay click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                this.closeModal();
+            }
+        });
+    }
+
+    // Close modal
+    closeModal() {
+        const modal = document.getElementById('character-location-modal');
+        if (modal) {
+            modal.remove();
+        }
     }
 
     // Find location by name

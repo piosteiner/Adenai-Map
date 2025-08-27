@@ -2013,3 +2013,242 @@ html, body {
   line-height: 1.4;
   color: #555;
 }
+
+/* Character lists in popups */
+.popup-characters {
+  margin-top: 10px;
+}
+
+.character-list-section {
+  margin-bottom: 8px;
+}
+
+.character-list-button {
+  width: 100%;
+  padding: 10px 12px;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #495057;
+  transition: all 0.2s ease;
+}
+
+.character-list-button:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+  transform: translateY(-1px);
+}
+
+.character-list-icon {
+  font-size: 16px;
+}
+
+.character-list-text {
+  flex: 1;
+  text-align: left;
+}
+
+.character-list-arrow {
+  font-weight: bold;
+  color: #6c757d;
+}
+
+/* Character modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.character-modal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.character-modal-header {
+  padding: 20px 20px 15px 20px;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+}
+
+.character-modal-header h3 {
+  margin: 0;
+  color: #495057;
+  font-size: 18px;
+}
+
+.character-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6c757d;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.character-modal-close:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.character-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.character-card {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.character-card:hover {
+  border-color: #adb5bd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.character-card-content {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.character-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #dee2e6;
+}
+
+.character-info {
+  flex: 1;
+}
+
+.character-name {
+  font-weight: bold;
+  font-size: 16px;
+  color: #495057;
+  margin-bottom: 4px;
+}
+
+.character-title {
+  font-weight: normal;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.character-faction {
+  font-size: 13px;
+  color: #6c757d;
+  margin-bottom: 4px;
+}
+
+.character-meta {
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.character-relationship.friendly {
+  background: #d4edda;
+  color: #155724;
+}
+
+.character-relationship.ally {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.character-relationship.neutral {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.character-relationship.suspicious {
+  background: #ffeaa7;
+  color: #856404;
+}
+
+.character-relationship.hostile {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.character-relationship.enemy {
+  background: #f5c6cb;
+  color: #721c24;
+}
+
+/* Dark theme support for character modal */
+[data-theme="dark"] .character-modal {
+  background: #343a40;
+  color: #f8f9fa;
+}
+
+[data-theme="dark"] .character-modal-header {
+  background: #495057;
+  border-color: #6c757d;
+}
+
+[data-theme="dark"] .character-modal-header h3 {
+  color: #f8f9fa;
+}
+
+[data-theme="dark"] .character-card {
+  background: #495057;
+  border-color: #6c757d;
+  color: #f8f9fa;
+}
+
+[data-theme="dark"] .character-card:hover {
+  border-color: #adb5bd;
+  background: #5a6268;
+}
+
+[data-theme="dark"] .character-list-button {
+  background: #495057;
+  border-color: #6c757d;
+  color: #f8f9fa;
+}
+
+[data-theme="dark"] .character-list-button:hover {
+  background: #5a6268;
+  border-color: #adb5bd;
+}
