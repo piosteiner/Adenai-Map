@@ -79,32 +79,32 @@ class MovementSystem {
                 
                 <div class="visit-info-grid">
                     <div class="info-row">
-                        <strong>Character:</strong> 
+                        <strong>Person:</strong> 
                         <span class="character-name">${character.name}</span>
                     </div>
                     
                     ${movement.type ? `
                     <div class="info-row">
-                        <strong>Movement Type:</strong> 
+                        <strong>Art der Reise:</strong> 
                         <span class="movement-type">${window.movementSystem.formatMovementType(movement.type)}</span>
                     </div>
                     ` : ''}
                     
                     <div class="info-row">
-                        <strong>Date:</strong> 
+                        <strong>Datum:</strong> 
                         <span class="visit-date">${window.movementSystem.formatMovementDateRange(movement)}</span>
                     </div>
                     
                     ${duration ? `
                     <div class="info-row">
-                        <strong>Duration:</strong> 
+                        <strong>Dauer:</strong> 
                         <span class="duration-info">${duration}</span>
                     </div>
                     ` : ''}
                     
                     ${movement.notes ? `
                     <div class="info-row notes-row">
-                        <strong>Notes:</strong> 
+                        <strong>Notizen:</strong> 
                         <div class="movement-notes">${movement.notes}</div>
                     </div>
                     ` : ''}
@@ -499,11 +499,11 @@ class MovementSystem {
         return `
             <div class="movement-point-popup${hasDateRange ? ' multi-day-stay' : ''}">
                 <h4>${point.location}${hasDateRange ? ' 🏠' : ''}</h4>
-                <p><strong>Character:</strong> ${character.name}</p>
-                ${movement?.type ? `<p><strong>Movement Type:</strong> ${this.formatMovementType(movement.type)}</p>` : ''}
-                <p><strong>Date:</strong> ${this.formatMovementDateRange(movement)}</p>
-                ${duration ? `<p><strong>Duration:</strong> ${duration}</p>` : ''}
-                ${movement?.notes ? `<p><strong>Notes:</strong> ${movement.notes}</p>` : ''}
+                <p><strong>Person:</strong> ${character.name}</p>
+                ${movement?.type ? `<p><strong>Art der Reise:</strong> ${this.formatMovementType(movement.type)}</p>` : ''}
+                <p><strong>Datum:</strong> ${this.formatMovementDateRange(movement)}</p>
+                ${duration ? `<p><strong>Dauer:</strong> ${duration}</p>` : ''}
+                ${movement?.notes ? `<p><strong>Notizen:</strong> ${movement.notes}</p>` : ''}
             </div>
         `;
     }

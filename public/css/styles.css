@@ -305,7 +305,7 @@ html, body {
 
 .movement-point-popup p {
     margin: 4px 0;
-    font-size: 0.9em;
+    font-size: 1em;
     line-height: 1.3;
 }
 
@@ -322,7 +322,7 @@ html, body {
 
 .selected-visit-details .info-row {
     margin: 4px 0;
-    font-size: 0.9em;
+    font-size: 1em;
     line-height: 1.3;
 }
 
