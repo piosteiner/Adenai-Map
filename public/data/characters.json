@@ -390,10 +390,38 @@
       "relationship": "friendly",
       "firstMet": "",
       "notes": "",
-      "movementHistory": [],
+      "movementHistory": [
+        {
+          "id": "movement_1756291531229",
+          "date": "5663-06-01",
+          "dateStart": "5663-06-01",
+          "dateEnd": "5663-09-01",
+          "location": "Toftgard",
+          "coordinates": [
+            1392,
+            1083
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-27T10:45:31.229Z"
+        }
+      ],
       "createdAt": "2025-08-27T10:32:15.038Z",
-      "updatedAt": "2025-08-27T10:40:54.728Z"
+      "updatedAt": "2025-08-27T10:45:31.229Z",
+      "location": "Toftgard",
+      "currentLocation": {
+        "date": "5663-06-01",
+        "dateStart": "5663-06-01",
+        "dateEnd": "5663-09-01",
+        "location": "Toftgard",
+        "coordinates": [
+          1392,
+          1083
+        ],
+        "notes": ""
+      }
     }
   ],
-  "lastUpdated": "2025-08-27T10:41:04.735Z"
+  "lastUpdated": "2025-08-27T10:45:31.229Z"
 }
