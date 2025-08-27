@@ -167,6 +167,11 @@ class MovementSystem {
         
         try {
             // Try the new API first
+            // API provides server-controlled path styling:
+            // - color: by character relationship (ally=#4CAF50, neutral=#FFC107, etc.)
+            // - weight: always 2px
+            // - opacity: 0.7 for living, 0.4 for dead characters  
+            // - dashArray: '5,2' for all paths (5px dash, 2px gap)
             const pathData = await this.pathManager.loadCharacterPaths();
             this.isUsingAPI = pathData.metadata.source !== 'legacy-json';
             
@@ -217,14 +222,18 @@ class MovementSystem {
     createCharacterPathFromAPI(pathInfo) {
         const map = window.mapCore.getMap();
         
-        // Create the path polyline using pre-computed coordinates
-        const pathLine = L.polyline(pathInfo.coordinates, {
-            color: pathInfo.style.color,
-            weight: pathInfo.style.weight,
-            opacity: pathInfo.style.opacity,
-            dashArray: pathInfo.style.dashArray,
+        // Use server-controlled styling for paths
+        // Server controls: color (by relationship), weight (always 2), opacity (0.7 or 0.4), dashArray (always '5,2')
+        const pathStyle = {
+            color: pathInfo.style.color,           // Server-controlled by relationship
+            weight: pathInfo.style.weight,         // Server-controlled (always 2)
+            opacity: pathInfo.style.opacity,       // Server-controlled (0.7 for alive, 0.4 for dead)
+            dashArray: pathInfo.style.dashArray || '5,2', // Server-controlled (standard dash pattern)
             className: `character-path character-path-${pathInfo.id}`
-        });
+        };
+        
+        // Create the path polyline using server-controlled styling
+        const pathLine = L.polyline(pathInfo.coordinates, pathStyle);
         
         // Add tooltip with character name
         pathLine.bindTooltip(pathInfo.name, {
@@ -238,23 +247,49 @@ class MovementSystem {
         // Create popup with journey info
         pathLine.bindPopup(this.createAPIPathPopup(pathInfo));
         
-        // Create movement markers for path points
+        // Create movement markers for path points using the enhanced consolidation system
         const pathMarkers = pathInfo.coordinates.map((coord, index) => {
-            return this.createAPIMovementMarker(coord, index, pathInfo.coordinates.length, pathInfo);
+            // Convert API format to legacy format for consistency with consolidation system
+            const point = {
+                coordinates: [coord[1], coord[0]], // Convert [lat,lng] to [x,y] for legacy compatibility
+                location: `${pathInfo.name} Stop ${index + 1}`,
+                date: 'API Data'
+            };
+            
+            // Create a mock character object for compatibility (markers use CSS styling, not API colors)
+            const mockCharacter = {
+                id: pathInfo.id,
+                name: pathInfo.name,
+                relationship: pathInfo.metadata.relationship,
+                movementHistory: pathInfo.coordinates.map((c, i) => ({
+                    coordinates: [c[1], c[0]], // Convert to [x,y]
+                    location: `${pathInfo.name} Stop ${i + 1}`,
+                    date: 'API Data'
+                }))
+            };
+            
+            return this.createMovementMarker(point, index, pathInfo.coordinates.length, mockCharacter);
         });
         
-        // Store path data in the same format as legacy system
+        // Store path data in the same format as legacy system for full consolidation compatibility
         const pathData = {
             character: {
                 id: pathInfo.id,
                 name: pathInfo.name,
-                relationship: pathInfo.metadata.relationship
+                relationship: pathInfo.metadata.relationship,
+                // Add movementHistory for consolidation compatibility
+                movementHistory: pathInfo.coordinates.map((coord, i) => ({
+                    coordinates: [coord[1], coord[0]], // Convert to [x,y]
+                    location: `${pathInfo.name} Stop ${i + 1}`,
+                    date: 'API Data',
+                    dateStart: 'API Data'
+                }))
             },
             pathLine: pathLine,
             markers: pathMarkers,
             points: pathInfo.coordinates.map((coord, index) => ({
                 coordinates: [coord[1], coord[0]], // Convert back to [x,y] for compatibility
-                location: `Location ${index + 1}`,
+                location: `${pathInfo.name} Stop ${index + 1}`,
                 date: 'API Data'
             })),
             isVisible: false,
@@ -287,12 +322,19 @@ class MovementSystem {
 
         marker.bindPopup(this.createAPIStaticPopup(pathInfo));
 
-        // Store as a simplified path data for consistency
+        // Store as a simplified path data for consistency with consolidation system
         const pathData = {
             character: {
                 id: pathInfo.id,
                 name: pathInfo.name,
-                relationship: pathInfo.metadata.relationship
+                relationship: pathInfo.metadata.relationship,
+                // Add movementHistory even for static characters for consolidation compatibility
+                movementHistory: [{
+                    coordinates: [coord[1], coord[0]], // Convert to [x,y]
+                    location: pathInfo.name,
+                    date: 'Static',
+                    dateStart: 'Static'
+                }]
             },
             pathLine: marker, // Using marker as the main element
             markers: [marker],
@@ -661,7 +703,7 @@ class MovementSystem {
             });
         } else if (isLast) {
             markerIcon = L.divIcon({
-                html: this.createMarkerHTML('🚩', hasMultipleVisits, visitsToShow.length, hasDateRange),
+                html: this.createMarkerHTML('🚩', hasMultipleVisits, visitsToShow.length, hasDateRange, false),
                 iconSize: [24, 24],
                 className: `movement-end-marker${hasMultipleVisits ? ' has-multiple' : ''}${hasDateRange ? ' multi-day' : ''}${hasMultipleCharacters ? ' cross-character' : ''}`,
                 iconAnchor: [12, 12]
@@ -984,13 +1026,13 @@ class MovementSystem {
         
         let markerHtml, markerClass;
         if (hasStart && hasEnd) {
-            markerHtml = this.createMarkerHTML('1', true, group.visits.length, hasDateRange);
+            markerHtml = this.createMarkerHTML('1', true, group.visits.length, hasDateRange, true);
             markerClass = 'movement-start-end-marker';
         } else if (hasStart) {
             markerHtml = this.createMarkerHTML('1', true, group.visits.length, hasDateRange, true);
             markerClass = 'movement-start-marker';
         } else if (hasEnd) {
-            markerHtml = this.createMarkerHTML('🚩', true, group.visits.length, hasDateRange);
+            markerHtml = this.createMarkerHTML('🚩', true, group.visits.length, hasDateRange, false);
             markerClass = 'movement-end-marker';
         } else {
             // Show visit count for intermediate stops
@@ -1611,6 +1653,34 @@ window.compareCharacterPathPerformance = async function() {
     };
 };
 
+// Test server-side path styling
+window.testServerSideStyling = async function() {
+    console.log('🎨 Testing server-side path styling...');
+    
+    try {
+        const response = await fetch('https://adenai-admin.piogino.ch/api/character-paths');
+        const data = await response.json();
+        
+        console.log('📊 Server-Side Path Design Analysis:');
+        Object.values(data.paths).forEach(pathInfo => {
+            const style = pathInfo.style;
+            console.log(`${pathInfo.name}:`);
+            console.log(`  Color: ${style.color} (${pathInfo.metadata.relationship})`);
+            console.log(`  Weight: ${style.weight}px`);
+            console.log(`  Opacity: ${style.opacity} (${pathInfo.metadata.status})`);
+            console.log(`  DashArray: ${style.dashArray || 'null (will use 5,2)'}`);
+            console.log('---');
+        });
+        
+        console.log('✅ Server-side styling test complete!');
+        return true;
+        
+    } catch (error) {
+        console.error('❌ Server-side styling test failed:', error);
+        return false;
+    }
+};
+
 console.log('🔧 Character Path testing functions loaded:');
 console.log('  - testCharacterPaths() - Full system test');
 console.log('  - testAPIReload() - Test API data loading');
@@ -1619,6 +1689,7 @@ console.log('  - showCharacterPathDebug() - Show debug panel');
 console.log('  - clearCharacterPathCache() - Clear cache');
 console.log('  - toggleCharacterPathDebug(true/false) - Toggle debug mode');
 console.log('  - compareCharacterPathPerformance() - Performance comparison');
+console.log('  - testServerSideStyling() - Test server-side path design');
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {

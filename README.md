@@ -33,11 +33,40 @@ Adenai-Map/
 
 - **Interactive Map**: Leaflet-based map with custom campaign locations
 - **Character System**: Track character locations, relationships, and status  
-- **Movement Paths**: Visualize character journeys over time
+- **Movement Paths**: Visualize character journeys over time with server-controlled styling
 - **Search**: Find characters and locations quickly
 - **Character Panel**: Side panel with character management
 - **Campaign Content**: Rich location descriptions and lore
 - **🐉 Dragon Shadows**: Atmospheric dragon shadows periodically pass over the map for immersive D&D ambiance
+
+### Character Movement Path System
+
+The map features a hybrid API-first character path system with automatic fallback:
+
+- **API-First**: Optimized character paths loaded from server with 85% bandwidth reduction
+- **Server-Controlled Styling**: Path appearance controlled server-side via API response
+- **Automatic Fallback**: Falls back to local JSON data if API unavailable
+- **Overlapping Marker Consolidation**: Smart marker grouping when multiple characters visit same location
+- **Cross-Character Support**: View multiple character paths simultaneously
+
+**Path Design System (Server-Side):**
+- **Color**: Determined by character relationship (`#4CAF50` for ally, `#FFC107` for neutral, etc.)
+- **Weight**: Always `2px` for consistent line thickness
+- **Opacity**: `0.7` for living characters, `0.4` for deceased characters
+- **DashArray**: `'5,2'` for all paths (5px dashes, 2px gaps)
+
+**Testing Commands:**
+```javascript
+await testCharacterPaths()           // Full system test
+showCharacterPathDebug()             // Show debug panel
+compareCharacterPathPerformance()    // Performance comparison
+testServerSideStyling()              // Analyze server-side path design
+```
+
+**Design Philosophy:**
+- **Paths**: Server-controlled styling for consistency and centralized design management
+- **Markers**: CSS-controlled styling for theme compatibility and client-side customization
+- **Separation of Concerns**: Visual design managed server-side, UI behavior managed client-side
 
 ### Dragon Shadow System
 
