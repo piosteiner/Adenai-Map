@@ -1085,6 +1085,26 @@ class MovementSystem {
             }
         });
 
+        // Also hide total-visits indicators when zoom is below 30%
+        const totalVisitsElements = document.querySelectorAll('.total-visits');
+        totalVisitsElements.forEach(element => {
+            if (shouldShowNumbers) {
+                element.style.display = '';
+            } else {
+                element.style.display = 'none';
+            }
+        });
+
+        // Hide single-number-marker elements (the actual number content)
+        const singleNumberMarkers = document.querySelectorAll('.single-number-marker');
+        singleNumberMarkers.forEach(element => {
+            if (shouldShowNumbers) {
+                element.style.display = '';
+            } else {
+                element.style.display = 'none';
+            }
+        });
+
         console.log(`📊 Zoom: ${zoomPercentage.toFixed(1)}% - Numbers ${shouldShowNumbers ? 'visible' : 'hidden'}`);
     }
 }
