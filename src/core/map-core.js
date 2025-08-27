@@ -241,6 +241,78 @@ class MapCore {
         console.log('✅ Map setup validation passed');
         return true;
     }
+
+    setupCustomZoomControl() {
+        // Create zoom control container
+        const zoomContainer = document.createElement('div');
+        zoomContainer.className = 'custom-zoom-control';
+        
+        // Create zoom percentage display
+        const zoomDisplay = document.createElement('div');
+        zoomDisplay.className = 'zoom-display';
+        zoomDisplay.textContent = this.getZoomPercentage();
+        
+        // Create zoom slider container
+        const sliderContainer = document.createElement('div');
+        sliderContainer.className = 'zoom-slider-container';
+        
+        // Create zoom slider
+        const zoomSlider = document.createElement('input');
+        zoomSlider.type = 'range';
+        zoomSlider.className = 'zoom-slider';
+        zoomSlider.min = this.map.getMinZoom();
+        zoomSlider.max = this.map.getMaxZoom();
+        zoomSlider.step = 0.1;
+        zoomSlider.value = this.map.getZoom();
+        
+        // Create zoom labels
+        const minLabel = document.createElement('span');
+        minLabel.className = 'zoom-label zoom-min';
+        minLabel.textContent = '-';
+        
+        const maxLabel = document.createElement('span');
+        maxLabel.className = 'zoom-label zoom-max';
+        maxLabel.textContent = '+';
+        
+        // Assemble slider container
+        sliderContainer.appendChild(minLabel);
+        sliderContainer.appendChild(zoomSlider);
+        sliderContainer.appendChild(maxLabel);
+        
+        // Assemble main container
+        zoomContainer.appendChild(zoomDisplay);
+        zoomContainer.appendChild(sliderContainer);
+        
+        // Add to map
+        document.body.appendChild(zoomContainer);
+        
+        // Event listeners
+        zoomSlider.addEventListener('input', (e) => {
+            const zoomLevel = parseFloat(e.target.value);
+            this.map.setZoom(zoomLevel);
+        });
+        
+        // Update slider when map zoom changes
+        this.map.on('zoomend', () => {
+            zoomSlider.value = this.map.getZoom();
+            zoomDisplay.textContent = this.getZoomPercentage();
+        });
+        
+        // Initial display update
+        zoomDisplay.textContent = this.getZoomPercentage();
+        
+        console.log('🎚️ Custom zoom control initialized');
+    }
+    
+    getZoomPercentage() {
+        const currentZoom = this.map.getZoom();
+        const minZoom = this.map.getMinZoom();
+        const maxZoom = this.map.getMaxZoom();
+        
+        // Calculate percentage (0% at minZoom, 100% at maxZoom)
+        const percentage = ((currentZoom - minZoom) / (maxZoom - minZoom)) * 100;
+        return `${Math.round(percentage)}%`;
+    }
 }
 
 // Create global map core instance
