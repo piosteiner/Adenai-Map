@@ -33,13 +33,10 @@
       "id": "avery",
       "name": "Avery",
       "title": "von Rena",
-      "location": "Wesdalen",
-      "coordinates": [
-        790,
-        769
-      ],
+      "location": "",
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/images/avery.png",
+      "image": "https://adenai.piogino.ch/public/images/avery.png",
       "status": "alive",
       "faction": "Regierung von Rena",
       "relationship": "friendly",
@@ -81,12 +78,12 @@
         "notes": "Updated location"
       },
       "createdAt": "2025-08-22T00:21:35.645Z",
-      "updatedAt": "2025-08-22T16:13:44.549Z"
+      "updatedAt": "2025-08-26T23:19:16.594Z"
     },
     {
       "id": "lia_karthright",
       "name": "Lia Karthright",
-      "title": "",
+      "title": "Der starke Arm der Karthrights",
       "location": "Toftgard",
       "coordinates": [
         1392,
@@ -117,18 +114,16 @@
         }
       ],
       "currentLocation": {
-        "date": "5663-06-03",
-        "dateStart": "5663-06-03",
-        "dateEnd": "5663-07-17",
+        "date": "2025-08-26",
         "location": "Toftgard",
         "coordinates": [
           1392,
           1083
         ],
-        "notes": ""
+        "notes": "Updated location"
       },
       "createdAt": "2025-08-22T04:26:43.834Z",
-      "updatedAt": "2025-08-26T07:12:02.413Z"
+      "updatedAt": "2025-08-26T21:42:11.281Z"
     },
     {
       "id": "remus",
@@ -164,6 +159,7 @@
       "name": "Tasbor",
       "title": "Käpt'n, de Coolst, Detektiv",
       "location": "",
+      "coordinates": null,
       "description": "",
       "image": "",
       "status": "alive",
@@ -171,25 +167,26 @@
       "relationship": "suspicious",
       "firstMet": "",
       "notes": "",
+      "movementHistory": [],
       "createdAt": "2025-08-22T06:09:11.125Z",
-      "updatedAt": "2025-08-22T06:09:11.125Z"
+      "updatedAt": "2025-08-26T23:56:27.950Z"
     },
     {
       "id": "test",
       "name": "Test",
-      "title": "",
-      "location": "Estu Vin",
+      "title": "Herrscher des Tests",
+      "placeOfOrigin": "Atlantis (aufgestiegen)",
       "coordinates": [
-        1846,
-        1203
+        2210,
+        1200
       ],
-      "description": "",
+      "description": "Beschreibung-Test",
       "image": "",
-      "status": "alive",
-      "faction": "",
+      "status": "dead",
+      "faction": "Testfraktion",
       "relationship": "ally",
-      "firstMet": "",
-      "notes": "",
+      "firstMet": "2022-01-01",
+      "notes": "Notizen-Test",
       "movementHistory": [
         {
           "id": "movement_1755878742652",
@@ -252,17 +249,8 @@
           "createdAt": "2025-08-23T05:54:43.342Z"
         }
       ],
-      "currentLocation": {
-        "date": "2025-08-30",
-        "location": "Estu Vin",
-        "coordinates": [
-          1846,
-          1203
-        ],
-        "notes": ""
-      },
       "createdAt": "2025-08-22T15:11:48.559Z",
-      "updatedAt": "2025-08-23T05:54:43.342Z"
+      "updatedAt": "2025-08-27T00:19:20.086Z"
     },
     {
       "id": "vsuzh",
@@ -374,7 +362,24 @@
       },
       "createdAt": "2025-08-24T23:05:39.208Z",
       "updatedAt": "2025-08-25T16:51:39.063Z"
+    },
+    {
+      "id": "pio",
+      "name": "Pio",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-27T00:35:18.828Z",
+      "updatedAt": "2025-08-27T00:35:18.828Z"
     }
   ],
-  "lastUpdated": "2025-08-26T07:12:02.413Z"
+  "lastUpdated": "2025-08-27T00:35:18.828Z"
 }
