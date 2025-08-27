@@ -175,8 +175,11 @@
       "id": "test",
       "name": "Test",
       "title": "Herrscher des Tests",
-      "location": "",
-      "coordinates": null,
+      "placeOfOrigin": "Atlantis (aufgestiegen)",
+      "coordinates": [
+        2210,
+        1200
+      ],
       "description": "Beschreibung-Test",
       "image": "",
       "status": "dead",
@@ -246,17 +249,8 @@
           "createdAt": "2025-08-23T05:54:43.342Z"
         }
       ],
-      "currentLocation": {
-        "date": "2025-08-30",
-        "location": "Estu Vin",
-        "coordinates": [
-          1846,
-          1203
-        ],
-        "notes": ""
-      },
       "createdAt": "2025-08-22T15:11:48.559Z",
-      "updatedAt": "2025-08-27T00:09:55.340Z"
+      "updatedAt": "2025-08-27T00:19:20.086Z"
     },
     {
       "id": "vsuzh",
@@ -370,5 +364,5 @@
       "updatedAt": "2025-08-25T16:51:39.063Z"
     }
   ],
-  "lastUpdated": "2025-08-27T00:09:55.340Z"
+  "lastUpdated": "2025-08-27T00:19:20.086Z"
 }
