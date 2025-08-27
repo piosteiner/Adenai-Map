@@ -15,7 +15,8 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "updatedAt": "2025-08-27T10:41:04.735Z"
+      "updatedAt": "2025-08-27T10:41:04.735Z",
+      "createdAt": "2025-08-27T17:53:53.624Z"
     },
     {
       "id": "avery",
@@ -117,7 +118,18 @@
         }
       ],
       "createdAt": "2025-08-22T04:26:43.834Z",
-      "updatedAt": "2025-08-27T10:30:20.282Z"
+      "updatedAt": "2025-08-27T10:30:20.282Z",
+      "currentLocation": {
+        "location": "Issa",
+        "date": "2025-08-22",
+        "dateStart": "2025-08-22",
+        "dateEnd": null,
+        "coordinates": [
+          1035,
+          407
+        ],
+        "notes": "Migrated from place of origin"
+      }
     },
     {
       "id": "remus",
@@ -244,7 +256,18 @@
         }
       ],
       "createdAt": "2025-08-22T15:11:48.559Z",
-      "updatedAt": "2025-08-27T00:19:20.086Z"
+      "updatedAt": "2025-08-27T00:19:20.086Z",
+      "currentLocation": {
+        "location": "Atlantis (aufgestiegen)",
+        "date": "2025-08-22",
+        "dateStart": "2025-08-22",
+        "dateEnd": null,
+        "coordinates": [
+          2210,
+          1200
+        ],
+        "notes": "Migrated from place of origin"
+      }
     },
     {
       "id": "vsuzh",
@@ -423,8 +446,19 @@
         }
       ],
       "createdAt": "2025-08-27T10:32:15.038Z",
-      "updatedAt": "2025-08-27T10:59:16.555Z"
+      "updatedAt": "2025-08-27T10:59:16.555Z",
+      "currentLocation": {
+        "location": "Goblin Loch",
+        "date": "2025-08-27",
+        "dateStart": "2025-08-27",
+        "dateEnd": null,
+        "coordinates": [
+          1472,
+          1040
+        ],
+        "notes": "Migrated from place of origin"
+      }
     }
   ],
-  "lastUpdated": "2025-08-27T10:59:16.555Z"
+  "lastUpdated": "2025-08-27T17:53:54.234Z"
 }
