@@ -967,6 +967,24 @@
           540
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Erhabene See",
+        "description": "",
+        "contentUrl": null,
+        "region": "tua_danar",
+        "type": "environment",
+        "visited": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1488,
+          777
+        ]
+      }
     }
   ]
 }
