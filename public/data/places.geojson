@@ -966,24 +966,6 @@
           540
         ]
       }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "test",
-        "description": "",
-        "contentUrl": null,
-        "region": "north_adenai",
-        "type": "mountain",
-        "visited": false
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          1235,
-          1235
-        ]
-      }
     }
   ]
 }
