@@ -263,7 +263,7 @@ html, body {
 /* Styled number markers with serif font and elegant design */
 .number-marker .single-number-marker {
     background: rgba(254, 255, 215, 0.8); /* Beige background with 55% opacity */
-    color: #2e3f11; /* Dark olive green */
+    color: #3d5f01; /* Dark olive green */
     font-family: "Times New Roman", "Georgia", serif; /* Serif font */
     font-weight: bold;
     font-size: 13px;
