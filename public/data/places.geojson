@@ -967,24 +967,6 @@
           540
         ]
       }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "123",
-        "description": "",
-        "contentUrl": null,
-        "region": "north_adenai",
-        "type": "city",
-        "visited": false
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          123,
-          123
-        ]
-      }
     }
   ]
 }
