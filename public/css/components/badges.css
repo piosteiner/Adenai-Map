@@ -1,0 +1,134 @@
+/* Status and Relationship Badges */
+
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+/* Status badges */
+.badge.status-alive { background: #E8F5E8; color: #2E7D32; }
+.badge.status-dead { background: #FFEBEE; color: #C62828; }
+.badge.status-missing { background: #FFF3E0; color: #EF6C00; }
+.badge.status-unknown { background: #F3E5F5; color: #7B1FA2; }
+
+/* Legacy status badge support */
+.status-badge { /* Keep for backwards compatibility */
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  margin-top: 4px;
+}
+
+.status-alive { background: #4CAF50; }
+.status-dead { background: #F44336; }
+.status-missing { background: #FF9800; }
+.status-unknown { background: #757575; }
+
+/* Relationship badges */
+.badge.relationship-ally { background: #E8F5E8; color: #2E7D32; }
+.badge.relationship-friendly { background: #E8F8F5; color: #00695C; }
+.badge.relationship-neutral { background: #FFFDE7; color: #F57F17; }
+.badge.relationship-suspicious { background: #FFF3E0; color: #EF6C00; }
+.badge.relationship-hostile { background: #FFEBEE; color: #C62828; }
+.badge.relationship-enemy { background: #FFEBEE; color: #B71C1C; }
+.badge.relationship-party { background: #E3F2FD; color: #303F9F; }
+
+/* Character popup relationship badges */
+.character-popup-relationship {
+  padding: 2px 6px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.character-popup-relationship.relationship-friendly {
+  background: #d4edda;
+  color: #155724;
+}
+
+.character-popup-relationship.relationship-ally {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.character-popup-relationship.relationship-neutral {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.character-popup-relationship.relationship-suspicious {
+  background: #ffeaa7;
+  color: #856404;
+}
+
+.character-popup-relationship.relationship-hostile {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.character-popup-relationship.relationship-enemy {
+  background: #f5c6cb;
+  color: #721c24;
+}
+
+/* Character relationship badges in modal */
+.character-relationship.friendly {
+  background: #d4edda;
+  color: #155724;
+}
+
+.character-relationship.ally {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.character-relationship.neutral {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.character-relationship.suspicious {
+  background: #ffeaa7;
+  color: #856404;
+}
+
+.character-relationship.hostile {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.character-relationship.enemy {
+  background: #f5c6cb;
+  color: #721c24;
+}
+
+/* Enhanced tooltip for character status/relationship badges */
+.character-popup span[style*="background"] {
+  position: relative;
+  cursor: help;
+  transition: all 0.2s ease;
+}
+
+.character-popup span[style*="background"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Dark theme badge support */
+[data-theme="dark"] .badge.status-alive { background: rgba(46, 125, 50, 0.3); color: #81C784; }
+[data-theme="dark"] .badge.status-dead { background: rgba(198, 40, 40, 0.3); color: #E57373; }
+[data-theme="dark"] .badge.status-missing { background: rgba(239, 108, 0, 0.3); color: #FFB74D; }
+[data-theme="dark"] .badge.status-unknown { background: rgba(123, 31, 162, 0.3); color: #CE93D8; }
+
+[data-theme="dark"] .badge.relationship-ally { background: rgba(46, 125, 50, 0.3); color: #81C784; }
+[data-theme="dark"] .badge.relationship-friendly { background: rgba(0, 105, 92, 0.3); color: #4DB6AC; }
+[data-theme="dark"] .badge.relationship-neutral { background: rgba(245, 127, 23, 0.3); color: #FFD54F; }
+[data-theme="dark"] .badge.relationship-suspicious { background: rgba(239, 108, 0, 0.3); color: #FFB74D; }
+[data-theme="dark"] .badge.relationship-hostile { background: rgba(198, 40, 40, 0.3); color: #E57373; }
+[data-theme="dark"] .badge.relationship-enemy { background: rgba(183, 28, 28, 0.3); color: #EF5350; }
+[data-theme="dark"] .badge.relationship-party { background: rgba(48, 63, 159, 0.3); color: #7986CB; }

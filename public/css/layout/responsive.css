@@ -1,0 +1,142 @@
+/* Responsive Design and Mobile Styles */
+
+@media (max-width: 768px) {
+  .leaflet-popup-content {
+    font-size: 1.2em;
+  }
+
+  #resultsDropdown {
+    max-height: 60vh;
+  }
+
+  #character-controls {
+    font-size: 14px;
+    width: 160px;
+  }
+  
+  .character-popup {
+    max-width: 250px;
+  }
+  
+  .character-popup img {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .character-panel {
+    width: 100vw;
+    right: -100vw;
+  }
+  
+  #toggle-panel {
+    right: 15px;
+    top: 70px;
+  }
+
+  /* Enhanced mobile responsiveness for character popups */
+  .character-focus-popup .leaflet-popup-content-wrapper {
+    min-width: 250px;
+    max-width: calc(100vw - 40px);
+  }
+  
+  .character-focus-popup .leaflet-popup-content {
+    margin: 12px;
+    font-size: 13px;
+  }
+  
+  .character-popup .popup-title {
+    font-size: 16px;
+  }
+
+  /* Mobile character panel improvements */
+  .card-layout {
+    padding: 10px;
+  }
+
+  .character-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .movement-actions,
+  .date-actions {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .date-inputs {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .character-search {
+    font-size: 16px; /* Prevent zoom on iOS */
+    padding: 10px 12px;
+  }
+
+  /* Mobile zoom control */
+  .custom-zoom-control {
+    bottom: 80px;
+    right: 10px;
+    min-width: 160px;
+    padding: 10px 12px;
+  }
+  
+  .zoom-display {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+  
+  .zoom-label {
+    font-size: 14px;
+    width: 16px;
+  }
+  
+  .zoom-slider::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .zoom-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Mobile media modal */
+  .media-modal-content {
+    max-width: 95%;
+    max-height: 95%;
+  }
+  
+  .media-modal-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .media-modal-body {
+    padding: 1rem;
+  }
+  
+  .character-modal .character-image {
+    width: 100%;
+    height: 200px;
+    float: none;
+    margin-right: 0;
+  }
+  
+  .gallery-modal .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  /* Mobile panel anchored popup */
+  .panel-anchored-popup {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 10002 !important;
+  }
+}

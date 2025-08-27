@@ -1,0 +1,25 @@
+/* CSS Custom Properties and Theme Variables */
+
+:root {
+  --bg-color: #bbc3ac;
+  --text-color: #000;
+  --text-muted: #666;
+  --popup-bg: white;
+  --card-bg: #f9f9f9;
+  --dropdown-bg: #fff;
+  --dropdown-border: #ccc;
+  --dropdown-hover: #f0f0f0;
+  --dropdown-highlight: #000;
+}
+
+[data-theme="dark"] {
+  --bg-color: #1c1c1c;
+  --text-color: #f0f0f0;
+  --text-muted: #aaa;
+  --popup-bg: #2a2a2a;
+  --card-bg: #333;
+  --dropdown-bg: #2a2a2a;
+  --dropdown-border: #444;
+  --dropdown-hover: #3a3a3a;
+  --dropdown-highlight: #f0f0f0;
+}

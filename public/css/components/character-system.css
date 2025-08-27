@@ -1,0 +1,499 @@
+/* Character Markers and Movement System Styles */
+
+/* Character controls styling */
+#character-controls {
+  font-size: 12px;
+  width: 150px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#character-controls label {
+  display: block;
+  margin-bottom: 4px;
+  cursor: pointer;
+  padding: 2px 0;
+}
+
+#character-controls input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+/* Movement marker styles */
+.movement-start-marker, .movement-end-marker, .movement-number-marker, .movement-start-end-marker {
+    background: transparent;
+    border: none;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.movement-number-marker .single-number-marker {
+    margin: auto;
+}
+
+/* Styled number markers with serif font and elegant design */
+.number-marker .single-number-marker {
+    background: #f6f6dec9; /* Beige background with 55% opacity */
+    color: #8b7355; /* Dark olive green */
+    font-family: "Arial Black", "Helvetica Black", "DejaVu Sans Bold", "Arial", sans-serif; /* Bold sans-serif font */
+    font-weight: 900; /* Extra bold */
+    font-size: 13px;
+    min-width: 20px;
+    min-height: 20px;
+    padding: 2px;
+    border-radius: 50%; /* Perfect circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(85, 107, 47, 0.3); /* Subtle olive border */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    line-height: 1;
+}
+
+.character-path-popup {
+    max-width: 300px;
+}
+
+.timeline-entry {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9em;
+}
+
+.timeline-entry:last-child {
+    border-bottom: none;
+}
+
+/* Movement Popup Styles (Unified & Optimized) */
+.movement-point-popup,
+.consolidated-popup {
+    max-width: 320px;
+    padding: 16px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.4;
+    /* Light theme fallback */
+    background: rgba(245, 245, 220, 0.95);
+    color: #2c1810;
+}
+
+/* Dark theme - sleek dark design */
+[data-theme="dark"] .movement-point-popup,
+[data-theme="dark"] .consolidated-popup {
+    background: rgba(40, 44, 52, 0.95);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* Popup headers */
+.movement-point-popup h4,
+.consolidated-popup h4,
+.selected-visit-details h4 {
+    font-size: 1.1em;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+[data-theme="dark"] .movement-point-popup h4,
+[data-theme="dark"] .consolidated-popup h4,
+[data-theme="dark"] .selected-visit-details h4 {
+    color: #ffffff;
+}
+
+/* Content text */
+.movement-point-popup p,
+.selected-visit-details .info-row {
+    margin: 3px 0;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+[data-theme="dark"] .movement-point-popup p,
+[data-theme="dark"] .selected-visit-details .info-row {
+    color: #e0e0e0;
+}
+
+/* Multi-day stay indicator */
+.movement-point-popup.multi-day-stay,
+.selected-visit-details.multi-day-stay {
+    border-left: 4px solid #4CAF50;
+    padding-left: 20px;
+}
+
+[data-theme="dark"] .movement-point-popup.multi-day-stay,
+[data-theme="dark"] .selected-visit-details.multi-day-stay {
+    border-left-color: #66BB6A;
+    background: linear-gradient(90deg, rgba(102, 187, 106, 0.1), transparent);
+}
+
+/* Path styling */
+.character-path {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.character-path:hover {
+    stroke-width: 6px;
+    opacity: 1;
+}
+
+/* Character Path Tooltips */
+.character-path-tooltip {
+    background: rgba(0, 0, 0, 0.8) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    padding: 4px 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    pointer-events: none !important;
+    z-index: 1001 !important;
+}
+
+.character-path-tooltip::before {
+    display: none !important; /* Hide the default arrow */
+}
+
+/* Consolidated Markers Styles */
+.consolidated-marker {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.total-visits {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #ff4444;
+    color: white;
+    border-radius: 3px;
+    min-width: 12px;
+    height: 12px;
+    font-size: 8px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    padding: 0 2px;
+}
+
+/* Square number markers with perfect centering */
+.single-number-marker,
+.consolidated-marker .visit-number {
+    background: #2196F3;
+    color: white;
+    border-radius: 4px; /* Square with rounded corners */
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Consolidated popup specific elements */
+.total-badge {
+    background: #4CAF50;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 16px;
+    font-size: 0.75em;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+[data-theme="dark"] .total-badge {
+    background: #66BB6A;
+    color: #121212;
+}
+
+.visit-selection {
+    margin-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 12px;
+}
+
+.visit-selection h5 {
+    margin: 0 0 8px 0;
+    font-size: 0.85em;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.visit-buttons {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 8px;
+    justify-items: center;
+    align-items: start;
+}
+
+.visit-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.visit-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .visit-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+[data-theme="dark"] .visit-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.visit-btn .visit-number {
+    background: #f5f5dc;
+    color: #8b7355;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 900;
+    font-family: "Arial Black", "Helvetica Black", sans-serif;
+    margin: 0 auto 4px;
+    border: 2px solid rgba(139, 115, 85, 0.3);
+}
+
+[data-theme="dark"] .visit-btn .visit-number {
+    background: #f5f5dc;
+    color: #8b7355;
+    border-color: rgba(139, 115, 85, 0.4);
+}
+
+.visit-btn small {
+    font-size: 0.7em;
+    opacity: 0.8;
+    line-height: 1.2;
+}
+
+.visit-details-container {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cross-character-indicator {
+    background: linear-gradient(135deg, #FF8A80, #80CBC4);
+    color: #121212;
+    padding: 4px 8px;
+    border-radius: 16px;
+    font-size: 0.75em;
+    font-weight: 600;
+    margin: 8px 0;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Movement markers cross-character styling */
+.movement-start-marker.cross-character,
+.movement-end-marker.cross-character,
+.movement-number-marker.cross-character,
+.movement-start-end-marker.cross-character {
+    border: 2px solid #FF6B6B;
+    box-shadow: 0 0 8px rgba(255, 107, 107, 0.6);
+}
+
+.movement-start-marker.cross-character .marker-content,
+.movement-end-marker.cross-character .marker-content,
+.movement-number-marker.cross-character .marker-content,
+.movement-start-end-marker.cross-character .marker-content {
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+    color: white;
+}
+
+/* Duration Indicators */
+.duration-dot {
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: #4CAF50;
+    border-radius: 50%;
+    border: 1px solid white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.duration-info {
+    background: rgba(76, 175, 80, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin: 4px 0;
+}
+
+/* Visit badge styling */
+.visit-badge {
+    background: #2196F3;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.7em;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+[data-theme="dark"] .visit-badge {
+    background: #64B5F6;
+    color: #121212;
+}
+
+/* Visit header styling */
+.visit-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+/* Info grid styling */
+.visit-info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-row strong {
+    font-weight: 600;
+    min-width: 80px;
+}
+
+[data-theme="dark"] .info-row strong {
+    color: #ffffff;
+}
+
+/* Animation for character markers */
+.character-marker {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .movement-start-marker,
+[data-theme="dark"] .movement-end-marker,
+[data-theme="dark"] .movement-start-end-marker {
+    background: #2a2a2a;
+    border-color: #fff;
+    color: #fff;
+}
+
+[data-theme="dark"] .timeline-entry {
+    border-bottom-color: #444;
+}
+
+[data-theme="dark"] .character-path-tooltip {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #333 !important;
+}
+
+[data-theme="dark"] .total-visits {
+    background: #ff6666;
+    border-color: #333;
+}
+
+[data-theme="dark"] .visit-selection {
+    border-top-color: #444;
+}
+
+[data-theme="dark"] .visit-selection h5 {
+    color: #ccc;
+}
+
+[data-theme="dark"] .visit-details-container {
+    border-top-color: #444;
+}
+
+[data-theme="dark"] .duration-dot {
+    background: #66BB6A;
+}
+
+[data-theme="dark"] .movement-start-marker.multi-day,
+[data-theme="dark"] .movement-end-marker.multi-day,
+[data-theme="dark"] .movement-number-marker.multi-day,
+[data-theme="dark"] .movement-start-end-marker.multi-day {
+    border-color: #66BB6A !important;
+    background: rgba(102, 187, 106, 0.2) !important;
+}
+
+[data-theme="dark"] .cross-character-indicator {
+    background: linear-gradient(135deg, #FF8A80, #80CBC4);
+    color: #121212;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+[data-theme="dark"] .movement-start-marker.cross-character,
+[data-theme="dark"] .movement-end-marker.cross-character,
+[data-theme="dark"] .movement-number-marker.cross-character,
+[data-theme="dark"] .movement-start-end-marker.cross-character {
+    border: 2px solid #FF8A80;
+    box-shadow: 0 0 12px rgba(255, 138, 128, 0.8);
+}
+
+[data-theme="dark"] .movement-start-marker.cross-character .marker-content,
+[data-theme="dark"] .movement-end-marker.cross-character .marker-content,
+[data-theme="dark"] .movement-number-marker.cross-character .marker-content,
+[data-theme="dark"] .movement-start-end-marker.cross-character .marker-content {
+    background: linear-gradient(135deg, #FF8A80, #80CBC4);
+    color: #121212;
+}
+
+/* Dark theme support for styled number markers */
+[data-theme="dark"] .number-marker .single-number-marker {
+    background: #2a2a2a; /* Darker beige for dark theme */
+    color: #efe4c8; /* Light green for better contrast in dark theme */
+    font-family: "Arial Black", "Helvetica Black", "DejaVu Sans Bold", "Arial", sans-serif; /* Bold sans-serif font */
+    font-weight: 900; /* Extra bold */
+    border: 1px solid rgba(0, 39, 0, 0.3); /* Light green border */
+    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1); /* Light shadow for dark theme */
+}

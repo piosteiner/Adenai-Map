@@ -1,0 +1,358 @@
+/* Modal Dialogs and Overlays */
+
+/* Media Link and Modal Styles */
+.media-link {
+  color: #2563eb;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.media-link:hover {
+  color: #1d4ed8;
+  text-decoration: none;
+}
+
+.media-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease;
+}
+
+.media-modal-content {
+  background: white;
+  border-radius: 8px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+  position: relative;
+  animation: slideIn 0.3s ease;
+}
+
+.media-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+  border-radius: 8px 8px 0 0;
+}
+
+.media-modal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.media-modal-close {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.media-modal-close:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.media-modal-body {
+  padding: 1.5rem;
+}
+
+.character-modal .character-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  float: left;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.gallery-modal .gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.gallery-modal .gallery-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.gallery-modal .gallery-image:hover {
+  transform: scale(1.05);
+}
+
+.event-modal .event-image {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.image-modal .modal-image,
+.full-image {
+  max-width: 100%;
+  max-height: 70vh;
+  border-radius: 8px;
+}
+
+/* Character modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.character-modal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.character-modal-header {
+  padding: 20px 20px 15px 20px;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+}
+
+.character-modal-header h3 {
+  margin: 0;
+  color: #495057;
+  font-size: 18px;
+}
+
+.character-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6c757d;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.character-modal-close:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.character-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.character-card-content {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.character-name {
+  font-weight: bold;
+  font-size: 16px;
+  color: #495057;
+  margin-bottom: 4px;
+}
+
+.character-title {
+  font-weight: normal;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.character-faction {
+  font-size: 13px;
+  color: #6c757d;
+  margin-bottom: 4px;
+}
+
+.character-meta {
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+/* Loading state for character focusing */
+.character-focusing-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  z-index: 1003;
+  font-size: 14px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.character-focusing-overlay.active {
+  opacity: 1;
+}
+
+/* Improved visual feedback for centering success/failure */
+.character-centering-indicator {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 1004;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.character-centering-indicator.success {
+  background: #4CAF50;
+  color: white;
+  opacity: 1;
+}
+
+.character-centering-indicator.warning {
+  background: #FF9800;
+  color: white;
+  opacity: 1;
+}
+
+.character-centering-indicator.error {
+  background: #F44336;
+  color: white;
+  opacity: 1;
+}
+
+/* Dark theme for modals */
+[data-theme="dark"] .media-modal-content {
+  background: #374151;
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .media-modal-header {
+  background: #4b5563;
+  border-bottom-color: #6b7280;
+}
+
+[data-theme="dark"] .media-modal-header h3 {
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .media-modal-close {
+  color: #d1d5db;
+}
+
+[data-theme="dark"] .media-modal-close:hover {
+  background: #6b7280;
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .media-link {
+  color: #60a5fa;
+}
+
+[data-theme="dark"] .media-link:hover {
+  color: #93c5fd;
+}
+
+/* Dark theme support for character modal */
+[data-theme="dark"] .character-modal {
+  background: #343a40;
+  color: #f8f9fa;
+}
+
+[data-theme="dark"] .character-modal-header {
+  background: #495057;
+  border-color: #6c757d;
+}
+
+[data-theme="dark"] .character-modal-header h3 {
+  color: #f8f9fa;
+}
+
+[data-theme="dark"] .character-card {
+  background: #495057;
+  border-color: #6c757d;
+  color: #f8f9fa;
+}
+
+[data-theme="dark"] .character-card:hover {
+  border-color: #adb5bd;
+  background: #5a6268;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Animation for popup appearance */
+.character-focus-popup .leaflet-popup-content-wrapper {
+  animation: characterPopupFadeIn 0.3s ease-out;
+}
+
+@keyframes characterPopupFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

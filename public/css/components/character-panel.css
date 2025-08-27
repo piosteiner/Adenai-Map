@@ -1,0 +1,357 @@
+/* Character Panel Sidebar Styles */
+
+/* Main Panel Structure */
+.character-panel {
+  position: fixed;
+  right: -320px;
+  top: 0;
+  width: 320px;
+  height: 100vh;
+  background: var(--popup-bg);
+  color: var(--text-color);
+  z-index: 1001;
+  transition: right 0.3s ease;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+  overflow-y: auto;
+}
+
+.character-panel.open {
+  right: 0;
+}
+
+.panel-header {
+  background: #333;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-header h3 {
+  margin: 0;
+}
+
+.panel-content {
+  padding: 15px;
+}
+
+/* Movement Controls Section */
+.movement-section {
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--dropdown-border);
+  padding-bottom: 15px;
+}
+
+.movement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--dropdown-border);
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.movement-header:hover {
+  background: var(--dropdown-hover);
+  padding: 8px 12px;
+  margin: 0 -12px 15px -12px;
+  border-radius: 6px;
+}
+
+.movement-header h4 {
+  margin: 0;
+  font-size: 1em;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.movement-toggle {
+  font-size: 0.9em;
+  color: var(--text-color);
+  opacity: 0.7;
+  transition: transform 0.3s ease;
+}
+
+.movement-content {
+  display: block;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; height: 0; }
+  to { opacity: 1; height: auto; }
+}
+
+.movement-btn {
+  padding: 8px 12px;
+  font-size: 0.8em;
+  background: var(--popup-bg);
+  color: var(--text-color);
+  border: 1px solid var(--dropdown-border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.movement-btn:hover {
+  background: var(--dropdown-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.movement-btn:active {
+  transform: translateY(0);
+}
+
+/* Date Controls */
+.date-controls {
+  padding: 12px;
+  background: var(--dropdown-bg);
+  border-radius: 6px;
+  border: 1px solid var(--dropdown-border);
+}
+
+.date-controls label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.85em;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.date-inputs input {
+  padding: 8px;
+  font-size: 0.8em;
+  background: var(--popup-bg);
+  color: var(--text-color);
+  border: 1px solid var(--dropdown-border);
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.date-inputs input:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+/* Search Section */
+.search-section {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--dropdown-border);
+}
+
+.character-search {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 0.9em;
+  background: var(--popup-bg);
+  color: var(--text-color);
+  border: 2px solid var(--dropdown-border);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.character-search:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+  background: var(--card-bg);
+}
+
+.character-search::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+/* Character Cards */
+.character-card {
+  background: var(--card-bg);
+  border: 1px solid var(--dropdown-border);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.character-card:hover {
+  background: var(--dropdown-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.card-layout {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+}
+
+.movement-checkbox {
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.movement-checkbox label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.movement-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--dropdown-border);
+  border-radius: 4px;
+  background: var(--popup-bg);
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movement-checkbox input[type="checkbox"]:checked + .checkmark {
+  background: var(--dropdown-border);
+}
+
+.movement-checkbox input[type="checkbox"]:checked + .checkmark::after {
+  content: '✓';
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.movement-checkbox input[type="checkbox"]:disabled + .checkmark {
+  background: var(--dropdown-bg);
+  border-color: var(--text-muted);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.movement-checkbox input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+}
+
+.character-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 2px 0;
+}
+
+.character-info:hover {
+  transform: translateX(2px);
+}
+
+.character-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  border: 2px solid var(--dropdown-border);
+  flex-shrink: 0;
+}
+
+.character-details {
+  flex: 1;
+}
+
+.character-details h4 {
+  margin: 0 0 4px 0;
+  font-size: 1em;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.character-title {
+  font-style: italic;
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.character-location {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.character-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.empty-state h3 {
+  margin: 0 0 10px 0;
+  color: var(--text-color);
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .character-search {
+  background: var(--card-bg);
+  border-color: var(--dropdown-border);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .character-search:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+  background: var(--popup-bg);
+}
+
+[data-theme="dark"] .checkmark {
+  border-color: var(--dropdown-border);
+  background: var(--card-bg);
+}
+
+[data-theme="dark"] .movement-checkbox input[type="checkbox"]:checked + .checkmark {
+  background: #4CAF50;
+  border-color: #4CAF50;
+}
+
+[data-theme="dark"] .character-panel .character-card {
+  border-color: #555;
+}
+
+[data-theme="dark"] .character-info .title {
+  color: #aaa;
+}
+
+[data-theme="dark"] .character-info .location {
+  color: #bbb;
+}

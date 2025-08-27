@@ -1,0 +1,92 @@
+/* Animations and Visual Effects */
+
+/* Dragon Shadow Overlay Animation */
+@keyframes dragonFly {
+  0% { 
+    opacity: 0; 
+    transform: translateX(-200px) translateY(-100px) scale(0.8) rotate(-10deg);
+  }
+  15% { 
+    opacity: 0.7; 
+    transform: translateX(-50px) translateY(-50px) scale(1) rotate(-5deg);
+  }
+  50% { 
+    opacity: 0.9; 
+    transform: translateX(50px) translateY(0px) scale(1.1) rotate(0deg);
+  }
+  85% { 
+    opacity: 0.7; 
+    transform: translateX(150px) translateY(50px) scale(1) rotate(5deg);
+  }
+  100% { 
+    opacity: 0; 
+    transform: translateX(300px) translateY(100px) scale(0.8) rotate(10deg);
+  }
+}
+
+.dragon-shadow-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+  /* Clip to map bounds */
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.dragon-shadow {
+  position: absolute;
+  width: 400px;
+  height: 300px;
+  background: radial-gradient(ellipse 60% 40% at center, 
+    rgba(0, 0, 0, 0.4) 0%, 
+    rgba(0, 0, 0, 0.2) 30%, 
+    rgba(0, 0, 0, 0.1) 60%, 
+    transparent 100%);
+  opacity: 0;
+  filter: blur(2px);
+}
+
+.dragon-shadow.variant-2 {
+  width: 350px;
+  height: 250px;
+  background: radial-gradient(ellipse 50% 35% at center, 
+    rgba(0, 0, 0, 0.35) 0%, 
+    rgba(0, 0, 0, 0.15) 40%, 
+    transparent 80%);
+}
+
+.dragon-shadow.variant-3 {
+  width: 500px;
+  height: 350px;
+  background: radial-gradient(ellipse 70% 45% at center, 
+    rgba(0, 0, 0, 0.3) 0%, 
+    rgba(0, 0, 0, 0.1) 50%, 
+    transparent 90%);
+}
+
+/* Dark theme adjustments - same as light theme */
+[data-theme="dark"] .dragon-shadow {
+  background: radial-gradient(ellipse 60% 40% at center, 
+    rgba(0, 0, 0, 0.4) 0%, 
+    rgba(0, 0, 0, 0.2) 30%, 
+    rgba(0, 0, 0, 0.1) 60%, 
+    transparent 100%);
+}
+
+[data-theme="dark"] .dragon-shadow.variant-2 {
+  background: radial-gradient(ellipse 50% 35% at center, 
+    rgba(0, 0, 0, 0.35) 0%, 
+    rgba(0, 0, 0, 0.15) 40%, 
+    transparent 80%);
+}
+
+[data-theme="dark"] .dragon-shadow.variant-3 {
+  background: radial-gradient(ellipse 70% 45% at center, 
+    rgba(0, 0, 0, 0.3) 0%, 
+    rgba(0, 0, 0, 0.1) 50%, 
+    transparent 90%);
+}

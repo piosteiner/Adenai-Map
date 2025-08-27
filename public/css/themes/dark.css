@@ -1,0 +1,6 @@
+/* Dark Theme Specific Overrides */
+
+/* This file contains dark theme specific overrides that can't be handled by CSS variables */
+
+/* Most dark theme styles are handled by [data-theme="dark"] selectors in component files */
+/* Add any additional dark theme specific styles here if needed */

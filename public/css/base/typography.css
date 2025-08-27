@@ -1,0 +1,46 @@
+/* Typography and Font Styles */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.4;
+}
+
+.popup-title {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.popup-desc {
+  font-size: 1em;
+}
+
+/* Custom popup typography */
+.custom-popup .popup-title {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.custom-popup .popup-desc {
+  line-height: 1.4;
+  color: #555;
+}
+
+/* Character popup typography */
+.character-popup .popup-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--dropdown-border);
+}
+
+[data-theme="dark"] .custom-popup .popup-title {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .custom-popup .popup-desc {
+  color: #e0e0e0;
+}

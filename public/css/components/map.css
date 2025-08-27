@@ -1,0 +1,40 @@
+/* Map Specific Styles */
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+.leaflet-popup-content {
+  pointer-events: auto;
+  touch-action: pan-x pan-y;
+  -ms-touch-action: pan-x pan-y;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--popup-bg);
+  color: var(--text-color);
+}
+
+/* Make popup close button more prominent */
+.leaflet-popup-close-button {
+  color: #666 !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  padding: 4px 6px !important;
+  line-height: 1 !important;
+}
+
+.leaflet-popup-close-button:hover {
+  color: #000 !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 2px !important;
+}
+
+/* Custom popup */
+.custom-popup .leaflet-popup-content {
+  min-width: 250px;
+  max-width: 400px;
+}
