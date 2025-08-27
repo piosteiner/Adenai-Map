@@ -1040,8 +1040,12 @@ class MovementSystem {
     addIntegratedMovementControls() {
         console.log('Movement controls integration called');
         
+        // Movement controls are already integrated in the character panel
+        // Verify character panel is available
         if (window.characterPanel) {
-            window.characterPanel.addMovementControls(this);
+            console.log('✅ Character panel available for movement controls');
+        } else {
+            console.warn('⚠️ Character panel not available');
         }
         
         return true;
