@@ -292,13 +292,13 @@
           "location": "Nice Custom Lococo",
           "coordinates": [
             1264,
-            1057
+            null
           ],
           "notes": "",
           "type": "mission",
           "createdAt": "2025-08-24T23:08:02.170Z",
           "movement_nr": 2,
-          "updatedAt": "2025-08-28T09:34:41.159Z",
+          "updatedAt": "2025-08-28T10:01:45.384Z",
           "dateStart": "5663-06-04",
           "dateEnd": null,
           "isCustomLocation": true
@@ -370,7 +370,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-28T10:00:55.001Z"
+      "updatedAt": "2025-08-28T10:01:45.384Z"
     },
     {
       "id": "pio",
@@ -639,5 +639,5 @@
       "location": "Theos Hof"
     }
   ],
-  "lastUpdated": "2025-08-28T10:00:55.001Z"
+  "lastUpdated": "2025-08-28T10:01:45.384Z"
 }
