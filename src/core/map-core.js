@@ -45,17 +45,37 @@ class MapCore {
         const userPref = localStorage.getItem("theme");
         const systemPref = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
+        let currentTheme;
         if (userPref) {
+            currentTheme = userPref;
             document.documentElement.setAttribute("data-theme", userPref);
         } else {
-            document.documentElement.setAttribute("data-theme", systemPref ? "dark" : "light");
+            currentTheme = systemPref ? "dark" : "light";
+            document.documentElement.setAttribute("data-theme", currentTheme);
         }
+
+        // Function to update toggle button icon based on current theme
+        const updateToggleIcon = (theme) => {
+            if (theme === "dark") {
+                toggleBtn.textContent = "☀️"; // Sun icon for dark mode (click to go light)
+                toggleBtn.title = "Switch to Light Mode";
+            } else {
+                toggleBtn.textContent = "🌙"; // Moon icon for light mode (click to go dark)
+                toggleBtn.title = "Switch to Dark Mode";
+            }
+        };
+
+        // Set initial icon
+        updateToggleIcon(currentTheme);
 
         toggleBtn.addEventListener("click", () => {
             const current = document.documentElement.getAttribute("data-theme");
             const newTheme = current === "dark" ? "light" : "dark";
             document.documentElement.setAttribute("data-theme", newTheme);
             localStorage.setItem("theme", newTheme);
+            
+            // Update button icon
+            updateToggleIcon(newTheme);
         });
     }    initializeMap() {
         // Flip Y axis: move origin to bottom-left (Originally 0,0 was on top left)
