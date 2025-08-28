@@ -1,0 +1,174 @@
+/* Movement Markers Styling */
+
+/* Base marker styles */
+.movement-marker {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    user-select: none;
+}
+
+.movement-marker:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Single movement markers */
+.single-marker {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Cluster markers */
+.cluster-marker {
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.cluster-marker:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Fanned out markers */
+.fan-marker {
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.fan-marker:hover {
+    transform: scale(1.15) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Marker icons */
+.movement-marker-icon {
+    z-index: 600;
+}
+
+.cluster-icon {
+    z-index: 1001;
+}
+
+.fan-icon {
+    z-index: 1002;
+}
+
+/* Fan out animations */
+@keyframes fanOut {
+    0% {
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes fanIn {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(0) rotate(180deg);
+        opacity: 0;
+    }
+}
+
+/* Movement detail popup styles */
+.movement-detail-popup {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.movement-popup {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 300px;
+}
+
+.movement-popup-header {
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.movement-popup-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+.movement-popup-content {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.movement-info-row {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.movement-info-row:last-child {
+    margin-bottom: 0;
+}
+
+.movement-info-row strong {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    .movement-popup-header h3 {
+        color: #ffffff;
+    }
+    
+    .movement-info-row {
+        color: #cccccc;
+    }
+    
+    .movement-info-row strong {
+        color: #ffffff;
+    }
+    
+    .movement-popup-header {
+        border-bottom-color: rgba(255, 255, 255, 0.2);
+    }
+}
+
+.dark-mode .movement-popup-header h3 {
+    color: #ffffff;
+}
+
+.dark-mode .movement-info-row {
+    color: #cccccc;
+}
+
+.dark-mode .movement-info-row strong {
+    color: #ffffff;
+}
+
+.dark-mode .movement-popup-header {
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .movement-marker {
+        transform: scale(1.1);
+    }
+    
+    .movement-marker:hover {
+        transform: scale(1.2);
+    }
+    
+    .fan-marker:hover {
+        transform: scale(1.25) !important;
+    }
+}
