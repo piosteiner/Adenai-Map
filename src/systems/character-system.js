@@ -161,6 +161,28 @@ class CharacterSystem {
         return [mapLng, mapLat];  // Return as [lng, lat] for L.latLng(lat, lng)
     }
 
+    // Get character position based on priority: 1) Last travel point 2) Place of origin 3) No coordinates
+    getCharacterPosition(character) {
+        // Priority 1: Last travel point from movementHistory
+        if (character.movementHistory && character.movementHistory.length > 0) {
+            const lastMovement = character.movementHistory[character.movementHistory.length - 1];
+            if (lastMovement.coordinates && Array.isArray(lastMovement.coordinates) && lastMovement.coordinates.length === 2) {
+                console.log(`🛤️ Using last travel point for ${character.name}:`, lastMovement.coordinates);
+                return lastMovement.coordinates;
+            }
+        }
+        
+        // Priority 2: Place of origin (character.coordinates)
+        if (character.coordinates && Array.isArray(character.coordinates) && character.coordinates.length === 2) {
+            console.log(`🏠 Using place of origin for ${character.name}:`, character.coordinates);
+            return character.coordinates;
+        }
+        
+        // Priority 3: No coordinates available
+        console.log(`📋 No coordinates available for ${character.name}, will show panel popup`);
+        return null;
+    }
+
     // Enhanced focus character method with coordinate fix
     focusCharacter(characterName) {
         const character = this.getCharacterByName(characterName);
@@ -169,9 +191,12 @@ class CharacterSystem {
             return false;
         }
 
-        // If character has no coordinates/location, show panel-anchored popup
-        if (!character.coordinates) {
-            console.log(`📋 Showing panel popup for "${characterName}" (no location)`);
+        // Get position based on priority rules
+        const coordinates = this.getCharacterPosition(character);
+        
+        // If character has no coordinates, show panel-anchored popup
+        if (!coordinates) {
+            console.log(`📋 Showing panel popup for "${characterName}" (no coordinates)`);
             this.showPanelAnchoredPopup(character);
             return true;
         }
@@ -183,10 +208,10 @@ class CharacterSystem {
         }
 
         // FIXED: Properly convert coordinates
-        const [mapLng, mapLat] = this.convertImageCoordinatesToMapCoordinates(character.coordinates, characterName);
+        const [mapLng, mapLat] = this.convertImageCoordinatesToMapCoordinates(coordinates, characterName);
         const targetLatLng = L.latLng(mapLat, mapLng);
         
-        console.log(`🎯 Focusing on "${characterName}" at image coords ${character.coordinates} → map coords [${mapLng}, ${mapLat}]`);
+        console.log(`🎯 Focusing on "${characterName}" at image coords ${coordinates} → map coords [${mapLng}, ${mapLat}]`);
 
         // Single, smooth centering approach
         this.performSmoothCentering(map, targetLatLng, characterName, character);
