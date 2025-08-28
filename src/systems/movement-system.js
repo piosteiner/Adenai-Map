@@ -313,27 +313,33 @@ class MovementSystem {
         if (!map) return;
 
         // Calculate duration if we have both start and end dates
-        let durationText = 'Unknown';
-        if (movementData.date && movementData.endDate) {
-            const startDate = new Date(movementData.date);
-            const endDate = new Date(movementData.endDate);
-            const diffTime = Math.abs(endDate - startDate);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            durationText = `${diffDays} day${diffDays !== 1 ? 's' : ''}`;
-        } else if (movementData.date && movementData.dateEnd) {
-            const startDate = new Date(movementData.date);
-            const endDate = new Date(movementData.dateEnd);
-            const diffTime = Math.abs(endDate - startDate);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            durationText = `${diffDays} day${diffDays !== 1 ? 's' : ''}`;
+        let durationText = null;
+        let hasEndDate = false;
+        
+        const endDate = movementData.endDate || movementData.dateEnd;
+        if (endDate) {
+            hasEndDate = true;
+            
+            if (movementData.date) {
+                const startDate = new Date(movementData.date);
+                const endDateObj = new Date(endDate);
+                
+                if (!isNaN(startDate.getTime()) && !isNaN(endDateObj.getTime())) {
+                    const diffTime = Math.abs(endDateObj - startDate);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    durationText = `${diffDays} day${diffDays !== 1 ? 's' : ''}`;
+                }
+            }
         }
 
         // Format dates
         const formatDate = (dateStr) => {
-            if (!dateStr) return 'Not specified';
+            if (!dateStr) return null;
             const date = new Date(dateStr);
-            return isNaN(date.getTime()) ? 'Invalid date' : date.toLocaleDateString();
+            return isNaN(date.getTime()) ? null : date.toLocaleDateString();
         };
+
+        const formattedEndDate = formatDate(endDate);
 
         // Create popup content
         const popupContent = `
@@ -349,14 +355,18 @@ class MovementSystem {
                         <strong>🚶 Movement Type:</strong> ${movementData.type || 'travel'}
                     </div>
                     <div class="movement-info-row">
-                        <strong>📅 Start Date:</strong> ${formatDate(movementData.date)}
+                        <strong>📅 Start Date:</strong> ${formatDate(movementData.date) || 'Not specified'}
                     </div>
+                    ${hasEndDate && formattedEndDate ? `
                     <div class="movement-info-row">
-                        <strong>📅 End Date:</strong> ${formatDate(movementData.endDate || movementData.dateEnd)}
+                        <strong>📅 End Date:</strong> ${formattedEndDate}
                     </div>
+                    ` : ''}
+                    ${durationText ? `
                     <div class="movement-info-row">
                         <strong>⏱️ Duration:</strong> ${durationText}
                     </div>
+                    ` : ''}
                     ${movementData.notes ? `
                     <div class="movement-info-row">
                         <strong>📝 Notes:</strong> ${movementData.notes}
