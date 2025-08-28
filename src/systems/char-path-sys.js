@@ -56,33 +56,66 @@ class CharPathSystem {
         
         Object.values(paths).forEach((pathInfo, index) => {
             console.log(`📊 Processing path ${index + 1}:`, pathInfo.name, pathInfo.type);
+            console.log(`   Coordinates:`, pathInfo.coordinates?.length || 0, 'points');
+            console.log(`   Style:`, pathInfo.style);
             
-            if (pathInfo.type === 'movement' && pathInfo.coordinates.length >= 2) {
-                console.log(`📍 Creating path for ${pathInfo.name} with ${pathInfo.coordinates.length} coordinates`);
-                console.log('🎨 Style:', pathInfo.style);
+            // Handle both movement paths and static locations
+            if (pathInfo.coordinates && pathInfo.coordinates.length >= 1) {
                 
-                // Create path line using API styling
-                const pathLine = L.polyline(pathInfo.coordinates, {
-                    color: pathInfo.style.color,
-                    weight: pathInfo.style.weight,
-                    opacity: pathInfo.style.opacity,
-                    dashArray: pathInfo.style.dashArray || '5,2'
-                });
+                if (pathInfo.type === 'movement' && pathInfo.coordinates.length >= 2) {
+                    // Multi-point movement path
+                    console.log(`📍 Creating movement path for ${pathInfo.name} with ${pathInfo.coordinates.length} coordinates`);
+                    
+                    const pathLine = L.polyline(pathInfo.coordinates, {
+                        color: pathInfo.style.color,
+                        weight: pathInfo.style.weight,
+                        opacity: pathInfo.style.opacity,
+                        dashArray: pathInfo.style.dashArray
+                    });
+                    
+                    pathLine.addTo(map);
+                    this.movementLayers.push(pathLine);
+                    
+                    // Add tooltip for movement path
+                    pathLine.bindTooltip(`${pathInfo.name} - Movement Path`, {
+                        permanent: false,
+                        sticky: true,
+                        direction: 'top'
+                    });
+                    
+                    console.log(`✅ Displayed movement path for ${pathInfo.name}`);
+                    
+                } else if (pathInfo.type === 'static' && pathInfo.coordinates.length === 1) {
+                    // Single-point static location
+                    console.log(`📍 Creating static marker for ${pathInfo.name}`);
+                    
+                    const marker = L.circleMarker(pathInfo.coordinates[0], {
+                        radius: 6,
+                        fillColor: pathInfo.style.color,
+                        color: '#fff',
+                        weight: 2,
+                        fillOpacity: pathInfo.style.opacity,
+                        opacity: 1
+                    });
+                    
+                    marker.addTo(map);
+                    this.movementLayers.push(marker);
+                    
+                    // Add tooltip for static location
+                    marker.bindTooltip(`${pathInfo.name} - Current Location`, {
+                        permanent: false,
+                        sticky: true,
+                        direction: 'top'
+                    });
+                    
+                    console.log(`✅ Displayed static marker for ${pathInfo.name}`);
+                    
+                } else {
+                    console.log(`⚠️ Unusual path for ${pathInfo.name}: type=${pathInfo.type}, coords=${pathInfo.coordinates.length}`);
+                }
                 
-                // Add to map
-                pathLine.addTo(map);
-                this.movementLayers.push(pathLine);
-                
-                // Add tooltip
-                pathLine.bindTooltip(pathInfo.name, {
-                    permanent: false,
-                    sticky: true,
-                    direction: 'top'
-                });
-                
-                console.log(`✅ Displayed path for ${pathInfo.name}`);
             } else {
-                console.log(`⚠️ Skipping path ${pathInfo.name}: type=${pathInfo.type}, coords=${pathInfo.coordinates.length}`);
+                console.log(`⚠️ Skipping ${pathInfo.name}: no valid coordinates`);
             }
         });
         
