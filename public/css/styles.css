@@ -11,14 +11,18 @@
 @import 'layout/responsive.css';
 
 /* Components */
-@import 'components/map.css';
-@import 'components/search.css';
-@import 'components/popups.css';
-@import 'components/character-panel.css';
-@import 'components/character-system.css';
-@import 'components/modals.css';
-@import 'components/controls.css';
-@import 'components/badges.css';
+@import 'components/map/map-core.css';
+@import 'components/map/coordinates.css';
+@import 'components/features/search.css';
+@import 'components/features/gallery.css';
+@import 'components/ui/popups.css';
+@import 'components/ui/modals.css';
+@import 'components/ui/controls.css';
+@import 'components/ui/badges.css';
+@import 'components/characters/character-panel.css';
+@import 'components/characters/character-system.css';
+@import 'components/characters/character-paths.css';
+@import 'components/movement/movement-markers.css';
 
 /* Themes */
 @import 'themes/light.css';

@@ -1,0 +1,19 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Dark mode variant of dot_orange.svg - black border with orange dot -->
+<svg fill="#ff6b24" width="800px" height="800px" viewBox="-2 -2 24.00 24.00" xmlns="http://www.w3.org/2000/svg" stroke="#ff6b24">
+
+<g id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(6.9,6.9), scale(0.31)">
+
+<rect x="-2" y="-2" width="24.00" height="24.00" rx="12" fill="#000000" strokewidth="0"/>
+
+</g>
+
+<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.12"/>
+
+<g id="SVGRepo_iconCarrier">
+
+<path d="M7.8 10a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0-4.4 0z"/>
+
+</g>
+
+</svg>

@@ -77,6 +77,25 @@ class MovementMarkers {
         return markers;
     }
 
+    /**
+     * Generate inline styles for movement markers
+     * @param {string} pathColor - The color for the marker background
+     * @param {Object} additionalStyles - Additional inline styles specific to marker type
+     * @returns {string} Complete style string
+     */
+    getMarkerStyles(pathColor, additionalStyles = {}) {
+        const baseStyles = {
+            background: pathColor,
+            '--path-color': pathColor
+        };
+        
+        const allStyles = { ...baseStyles, ...additionalStyles };
+        
+        return Object.entries(allStyles)
+            .map(([key, value]) => `${key}: ${value}`)
+            .join('; ') + ';';
+    }
+
     // Create a single movement marker
     createSingleMovementMarker(coordinates, movementData, characterName, characterId) {
         const map = window.mapCore.getMap();
@@ -86,21 +105,7 @@ class MovementMarkers {
         const pathColor = this.getCharacterPathColor(characterId);
 
         const markerHtml = `
-            <div class="movement-marker single-marker" style="
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-                font-weight: bold;
-                position: relative;
-                cursor: pointer;
-                background: ${pathColor};
-                color: white;
-                border: 2px solid white;
-            ">${markerNumber}</div>
+            <div class="movement-marker single-marker" style="${this.getMarkerStyles(pathColor)}">${markerNumber}</div>
         `;
 
         const customIcon = L.divIcon({
@@ -128,21 +133,7 @@ class MovementMarkers {
         const pathColor = this.getCharacterPathColor(characterId);
 
         const markerHtml = `
-            <div class="movement-marker cluster-marker" style="
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-                font-weight: bold;
-                position: relative;
-                cursor: pointer;
-                background: ${pathColor};
-                color: white;
-                border: 3px solid white;
-            ">
+            <div class="movement-marker cluster-marker" style="${this.getMarkerStyles(pathColor)}">
                 ${count}x
             </div>
         `;
@@ -239,24 +230,7 @@ class MovementMarkers {
             const markerNumber = (movement.movement_nr || 0) + 1;
 
             const fanMarkerHtml = `
-                <div class="movement-marker fan-marker" style="
-                    width: 24px;
-                    height: 24px;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 12px;
-                    font-weight: bold;
-                    position: relative;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                    transform: scale(0);
-                    z-index: 1002;
-                    background: ${pathColor};
-                    color: white;
-                    border: 2px solid white;
-                ">${markerNumber}</div>
+                <div class="movement-marker fan-marker" style="${this.getMarkerStyles(pathColor)}">${markerNumber}</div>
             `;
 
             const fanIcon = L.divIcon({

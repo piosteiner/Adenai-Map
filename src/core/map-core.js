@@ -76,6 +76,11 @@ class MapCore {
             
             // Update button icon
             updateToggleIcon(newTheme);
+            
+            // Refresh location icons for new theme
+            if (window.locationSystem) {
+                window.locationSystem.refreshLocationIcons();
+            }
         });
     }    initializeMap() {
         // Flip Y axis: move origin to bottom-left (Originally 0,0 was on top left)

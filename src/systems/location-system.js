@@ -38,10 +38,17 @@ class LocationSystem {
         try {
             const isMobile = window.mapCore && window.mapCore.getIsMobile ? window.mapCore.getIsMobile() : false;
             
+            // Get current theme
+            const currentTheme = document.documentElement.getAttribute("data-theme");
+            const isDarkMode = currentTheme === 'dark';
+            
+            // Choose icon based on theme
+            const iconFilename = isDarkMode ? 'dot_orange_dark.svg' : 'dot_orange.svg';
+            
             // Try different icon paths in case of path issues
             const iconUrl = window.location.pathname.includes('public') 
-                ? 'icons/dot_orange.svg' 
-                : 'public/icons/dot_orange.svg';
+                ? `icons/${iconFilename}` 
+                : `public/icons/${iconFilename}`;
             
             this.dotOrangeIcon = L.icon({
                 iconUrl: iconUrl,
@@ -55,6 +62,29 @@ class LocationSystem {
             console.error('❌ Error creating location icon:', error);
             // Fallback to default marker if icon creation fails
             this.dotOrangeIcon = null;
+        }
+    }
+
+    /**
+     * Refresh location icons for theme changes
+     * Recreates the icon and updates all existing location markers
+     */
+    refreshLocationIcons() {
+        try {
+            // Recreate the icon with current theme
+            this.createLocationIcon();
+            
+            // Update all existing location markers with new icon
+            if (this.locationLayer && this.dotOrangeIcon) {
+                this.locationLayer.eachLayer((layer) => {
+                    if (layer.setIcon) {
+                        layer.setIcon(this.dotOrangeIcon);
+                    }
+                });
+                console.log('📍 Location icons refreshed for theme change');
+            }
+        } catch (error) {
+            console.error('❌ Error refreshing location icons:', error);
         }
     }
 
