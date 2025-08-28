@@ -42,7 +42,8 @@
           ],
           "notes": "",
           "type": "travel",
-          "createdAt": "2025-08-22T15:27:27.794Z"
+          "createdAt": "2025-08-22T15:27:27.794Z",
+          "movement_nr": 0
         },
         {
           "id": "movement_1755876469219",
@@ -54,11 +55,12 @@
           ],
           "notes": "",
           "type": "travel",
-          "createdAt": "2025-08-22T15:27:49.219Z"
+          "createdAt": "2025-08-22T15:27:49.219Z",
+          "movement_nr": 1
         }
       ],
       "createdAt": "2025-08-22T00:21:35.645Z",
-      "updatedAt": "2025-08-26T23:19:16.594Z"
+      "updatedAt": "2025-08-28T05:00:05.156Z"
     },
     {
       "id": "lia_karthright",
@@ -90,7 +92,8 @@
           "notes": "",
           "type": "stay",
           "isCustomLocation": false,
-          "createdAt": "2025-08-26T07:12:02.410Z"
+          "createdAt": "2025-08-26T07:12:02.410Z",
+          "movement_nr": 0
         },
         {
           "id": "movement_1756257904810",
@@ -105,11 +108,12 @@
           "notes": "",
           "type": "mission",
           "isCustomLocation": false,
-          "createdAt": "2025-08-27T01:25:04.810Z"
+          "createdAt": "2025-08-27T01:25:04.810Z",
+          "movement_nr": 1
         }
       ],
       "createdAt": "2025-08-22T04:26:43.834Z",
-      "updatedAt": "2025-08-27T10:30:20.282Z"
+      "updatedAt": "2025-08-28T05:00:05.156Z"
     },
     {
       "id": "remus",
@@ -175,7 +179,8 @@
           ],
           "notes": "",
           "type": "travel",
-          "createdAt": "2025-08-22T16:05:42.652Z"
+          "createdAt": "2025-08-22T16:05:42.652Z",
+          "movement_nr": 0
         },
         {
           "id": "movement_1755878751956",
@@ -187,7 +192,8 @@
           ],
           "notes": "",
           "type": "travel",
-          "createdAt": "2025-08-22T16:05:51.956Z"
+          "createdAt": "2025-08-22T16:05:51.956Z",
+          "movement_nr": 1
         },
         {
           "id": "movement_1755878763565",
@@ -199,7 +205,8 @@
           ],
           "notes": "",
           "type": "mission",
-          "createdAt": "2025-08-22T16:06:03.565Z"
+          "createdAt": "2025-08-22T16:06:03.565Z",
+          "movement_nr": 2
         },
         {
           "id": "movement_1755878791013",
@@ -211,7 +218,8 @@
           ],
           "notes": "Fled from a molerat",
           "type": "escape",
-          "createdAt": "2025-08-22T16:06:31.013Z"
+          "createdAt": "2025-08-22T16:06:31.013Z",
+          "movement_nr": 3
         },
         {
           "id": "movement_1755928483342",
@@ -223,11 +231,12 @@
           ],
           "notes": "",
           "type": "capture",
-          "createdAt": "2025-08-23T05:54:43.342Z"
+          "createdAt": "2025-08-23T05:54:43.342Z",
+          "movement_nr": 4
         }
       ],
       "createdAt": "2025-08-22T15:11:48.559Z",
-      "updatedAt": "2025-08-27T00:19:20.086Z"
+      "updatedAt": "2025-08-28T05:00:05.156Z"
     },
     {
       "id": "vsuzh",
@@ -256,7 +265,8 @@
           ],
           "notes": "",
           "type": "mission",
-          "createdAt": "2025-08-24T23:06:55.342Z"
+          "createdAt": "2025-08-24T23:06:55.342Z",
+          "movement_nr": 0
         },
         {
           "id": "movement_1756076882170",
@@ -268,7 +278,8 @@
           ],
           "notes": "",
           "type": "mission",
-          "createdAt": "2025-08-24T23:08:02.170Z"
+          "createdAt": "2025-08-24T23:08:02.170Z",
+          "movement_nr": 1
         },
         {
           "id": "movement_1756078306547",
@@ -280,7 +291,8 @@
           ],
           "notes": "",
           "type": "stay",
-          "createdAt": "2025-08-24T23:31:46.547Z"
+          "createdAt": "2025-08-24T23:31:46.547Z",
+          "movement_nr": 2
         },
         {
           "id": "movement_1756117483681",
@@ -292,7 +304,8 @@
           ],
           "notes": "Kampf gegen die Sternen-Heinis, nachdem sie Abu böse beäugt haben.",
           "type": "mission",
-          "createdAt": "2025-08-25T10:24:43.681Z"
+          "createdAt": "2025-08-25T10:24:43.681Z",
+          "movement_nr": 3
         },
         {
           "id": "movement_1756137677339",
@@ -308,7 +321,8 @@
           "dateStart": "5663-06-05",
           "dateEnd": "5663-06-14",
           "isCustomLocation": true,
-          "updatedAt": "2025-08-25T16:49:20.817Z"
+          "updatedAt": "2025-08-25T16:49:20.817Z",
+          "movement_nr": 4
         },
         {
           "id": "movement_1756140699063",
@@ -323,11 +337,12 @@
           "notes": "Test übernachtung in toftgard",
           "type": "stay",
           "isCustomLocation": false,
-          "createdAt": "2025-08-25T16:51:39.063Z"
+          "createdAt": "2025-08-25T16:51:39.063Z",
+          "movement_nr": 5
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-25T16:51:39.063Z"
+      "updatedAt": "2025-08-28T05:00:05.156Z"
     },
     {
       "id": "pio",
@@ -376,7 +391,8 @@
           "notes": "",
           "type": "stay",
           "isCustomLocation": false,
-          "createdAt": "2025-08-27T10:45:31.229Z"
+          "createdAt": "2025-08-27T10:45:31.229Z",
+          "movement_nr": 0
         },
         {
           "id": "movement_1756292224735",
@@ -391,11 +407,12 @@
           "notes": "",
           "type": "stay",
           "isCustomLocation": false,
-          "createdAt": "2025-08-27T10:57:04.735Z"
+          "createdAt": "2025-08-27T10:57:04.735Z",
+          "movement_nr": 1
         }
       ],
       "createdAt": "2025-08-27T10:32:15.038Z",
-      "updatedAt": "2025-08-27T10:59:16.555Z"
+      "updatedAt": "2025-08-28T05:00:05.156Z"
     },
     {
       "id": "test2",
@@ -427,7 +444,8 @@
           "notes": "",
           "type": "stay",
           "isCustomLocation": false,
-          "createdAt": "2025-08-28T04:32:08.007Z"
+          "createdAt": "2025-08-28T04:32:08.007Z",
+          "movement_nr": 0
         },
         {
           "id": "movement_1756355579692",
@@ -442,11 +460,12 @@
           "notes": "",
           "type": "stay",
           "isCustomLocation": false,
-          "createdAt": "2025-08-28T04:32:59.692Z"
+          "createdAt": "2025-08-28T04:32:59.692Z",
+          "movement_nr": 1
         }
       ],
       "createdAt": "2025-08-28T04:31:45.676Z",
-      "updatedAt": "2025-08-28T04:32:59.692Z",
+      "updatedAt": "2025-08-28T05:00:05.156Z",
       "currentLocation": {
         "date": "5663-05-26",
         "dateStart": "5663-05-26",
@@ -461,5 +480,5 @@
       "location": "Osdalen"
     }
   ],
-  "lastUpdated": "2025-08-28T04:32:59.692Z"
+  "lastUpdated": "2025-08-28T05:00:05.156Z"
 }
