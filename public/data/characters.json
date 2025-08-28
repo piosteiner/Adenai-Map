@@ -428,25 +428,10 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-28T04:32:08.007Z"
-        },
-        {
-          "id": "movement_1756355530064",
-          "date": "5663-05-20",
-          "dateStart": "5663-05-20",
-          "dateEnd": null,
-          "location": "Altes Weingut",
-          "coordinates": [
-            1296,
-            694
-          ],
-          "notes": "",
-          "type": "stay",
-          "isCustomLocation": false,
-          "createdAt": "2025-08-28T04:32:10.064Z"
         }
       ],
       "createdAt": "2025-08-28T04:31:45.676Z",
-      "updatedAt": "2025-08-28T04:32:10.065Z",
+      "updatedAt": "2025-08-28T04:32:24.888Z",
       "currentLocation": {
         "date": "5663-05-20",
         "dateStart": "5663-05-20",
@@ -461,5 +446,5 @@
       "location": "Altes Weingut"
     }
   ],
-  "lastUpdated": "2025-08-28T04:32:10.065Z"
+  "lastUpdated": "2025-08-28T04:32:24.888Z"
 }
