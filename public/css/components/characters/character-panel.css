@@ -32,11 +32,11 @@
   margin: 0;
 }
 
-/* Close button positioned on left border */
+/* Close button positioned on left border with panel indentation */
 .panel-close-btn {
   position: absolute;
-  left: -20px; /* Half outside the panel border */
-  top: 55vh; /* 55% viewport height */
+  left: -15px; /* Slightly less outside the panel */
+  top: 45vh; /* 45% viewport height */
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -52,6 +52,21 @@
   z-index: 1002;
   transition: all 0.2s ease;
   box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+}
+
+/* Create a bulge/indentation in the panel for the close button */
+.character-panel::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: calc(55vh - 25px); /* Center around the button */
+  width: 30px;
+  height: 50px;
+  background: var(--popup-bg);
+  border: 2px solid var(--dropdown-border);
+  border-right: none;
+  border-radius: 25px 0 0 25px;
+  z-index: 1001;
 }
 
 .panel-close-btn:hover {
@@ -393,4 +408,10 @@
 
 [data-theme="dark"] .panel-close-btn:hover {
   background: #374151;
+}
+
+/* Dark mode panel bulge */
+[data-theme="dark"] .character-panel::before {
+  background: #2a2a2a;
+  border-color: #4a5568;
 }

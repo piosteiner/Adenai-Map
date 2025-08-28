@@ -197,6 +197,12 @@ class CharacterSystem {
             return false;
         }
 
+        // Open character panel if it's closed
+        const isCharacterPanelOpen = window.characterPanel?.isOpen() || false;
+        if (!isCharacterPanelOpen && window.characterPanel) {
+            window.characterPanel.openPanel();
+        }
+
         // Get position based on priority rules
         const coordinates = this.getCharacterPosition(character);
         

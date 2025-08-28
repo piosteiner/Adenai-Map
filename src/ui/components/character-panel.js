@@ -25,11 +25,11 @@ class CharacterPanel {
 
     initPanel() {
         this.panel = document.getElementById('character-panel');
-        this.toggleBtn = document.getElementById('toggle-panel');
+        this.toggleBtn = document.getElementById('toggle-panel'); // May not exist anymore
         this.closeBtn = document.getElementById('panel-close-btn');
         this.grid = document.getElementById('character-grid');
         
-        if (!this.panel || !this.toggleBtn || !this.grid) {
+        if (!this.panel || !this.grid) {
             console.warn('Character panel elements not found');
             return;
         }
@@ -39,7 +39,10 @@ class CharacterPanel {
     }
 
     setupEventListeners() {
-        this.toggleBtn.addEventListener('click', () => this.togglePanel());
+        // Add toggle button event listener if it exists
+        if (this.toggleBtn) {
+            this.toggleBtn.addEventListener('click', () => this.togglePanel());
+        }
         
         // Add close button event listener
         if (this.closeBtn) {
