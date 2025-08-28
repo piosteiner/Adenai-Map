@@ -279,13 +279,20 @@ class CharacterPanel {
     }
 
     toggleCharacterPath(characterId) {
-        if (!window.movementSystem) return;
+        if (!window.movementSystem) {
+            console.warn('⚠️ Movement system not available');
+            return;
+        }
         
         const checkbox = document.getElementById(`path-${characterId}`);
         const isVisible = checkbox?.checked || false;
         
         if (isVisible) {
-            window.movementSystem.showCharacterPath(characterId);
+            const success = window.movementSystem.showCharacterPath(characterId);
+            // If showing path failed, uncheck the checkbox
+            if (success === false) {
+                checkbox.checked = false;
+            }
         } else {
             window.movementSystem.hideCharacterPath(characterId);
         }

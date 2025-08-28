@@ -173,9 +173,10 @@ class MovementSystem {
             await this.renderPathsFromAPIData(pathData);
             
         } catch (error) {
-            console.error('❌ Character Paths API unavailable - system will not function without server connection');
+            console.error('❌ Character Paths API unavailable - paths will not be available');
             this.showLoadingError('Character movement data unavailable. Please contact developer through GitHub.');
-            throw error; // Re-throw to stop execution
+            // Don't throw - allow the system to continue functioning without paths
+            this.isUsingAPI = false;
         }
         
         // Auto-show VsuzH path by default
@@ -1062,7 +1063,12 @@ class MovementSystem {
     // Show individual character path
     showCharacterPath(characterId) {
         const pathData = this.getCharacterPath(characterId);
-        if (!pathData || pathData.isVisible) return;
+        if (!pathData) {
+            console.warn(`⚠️ No path data found for character ${characterId}. API may be unavailable.`);
+            return false;
+        }
+        
+        if (pathData.isVisible) return true;
         
         const map = window.mapCore.getMap();
         
@@ -1078,12 +1084,18 @@ class MovementSystem {
         this.updateMarkerVisibility();
         
         console.log(`Showing path for ${pathData.character.name}`);
+        return true;
     }
 
     // Hide individual character path
     hideCharacterPath(characterId) {
         const pathData = this.getCharacterPath(characterId);
-        if (!pathData || !pathData.isVisible) return;
+        if (!pathData) {
+            console.warn(`⚠️ No path data found for character ${characterId}. API may be unavailable.`);
+            return;
+        }
+        
+        if (!pathData.isVisible) return;
         
         const map = window.mapCore.getMap();
         
