@@ -256,6 +256,22 @@
       "notes": "",
       "movementHistory": [
         {
+          "id": "movement_1756361407508",
+          "movement_nr": 0,
+          "date": "5055-05-05",
+          "dateStart": "5055-05-05",
+          "dateEnd": null,
+          "location": "Nordmund",
+          "coordinates": [
+            1082,
+            967
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T06:10:07.508Z"
+        },
+        {
           "id": "movement_1756076815342",
           "date": "5663-06-03",
           "location": "Silbergrat",
@@ -266,7 +282,7 @@
           "notes": "",
           "type": "mission",
           "createdAt": "2025-08-24T23:06:55.342Z",
-          "movement_nr": 0
+          "movement_nr": 1
         },
         {
           "id": "movement_1756076882170",
@@ -279,7 +295,7 @@
           "notes": "",
           "type": "mission",
           "createdAt": "2025-08-24T23:08:02.170Z",
-          "movement_nr": 1
+          "movement_nr": 2
         },
         {
           "id": "movement_1756078306547",
@@ -292,7 +308,7 @@
           "notes": "",
           "type": "stay",
           "createdAt": "2025-08-24T23:31:46.547Z",
-          "movement_nr": 2
+          "movement_nr": 3
         },
         {
           "id": "movement_1756117483681",
@@ -305,7 +321,7 @@
           "notes": "Kampf gegen die Sternen-Heinis, nachdem sie Abu böse beäugt haben.",
           "type": "mission",
           "createdAt": "2025-08-25T10:24:43.681Z",
-          "movement_nr": 3
+          "movement_nr": 4
         },
         {
           "id": "movement_1756137677339",
@@ -322,7 +338,7 @@
           "dateEnd": "5663-06-14",
           "isCustomLocation": true,
           "updatedAt": "2025-08-25T16:49:20.817Z",
-          "movement_nr": 4
+          "movement_nr": 5
         },
         {
           "id": "movement_1756140699063",
@@ -338,11 +354,11 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-25T16:51:39.063Z",
-          "movement_nr": 5
+          "movement_nr": 6
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-28T05:00:05.156Z"
+      "updatedAt": "2025-08-28T06:10:07.508Z"
     },
     {
       "id": "pio",
@@ -482,5 +498,5 @@
       "location": "Osdalen"
     }
   ],
-  "lastUpdated": "2025-08-28T05:29:17.258Z"
+  "lastUpdated": "2025-08-28T06:10:07.508Z"
 }
