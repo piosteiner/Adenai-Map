@@ -11,10 +11,10 @@ class CharacterPanel {
         
         // Resize properties
         this.isResizing = false;
-        this.currentWidth = 320;
+        this.currentWidth = 350;
         this.minWidth = 30;
         this.maxWidth = 600;
-        this.collapseThreshold = 320;
+        this.collapseThreshold = 350;
         this.expandThreshold = 50;
         
         this.init();
@@ -70,13 +70,19 @@ class CharacterPanel {
         let startX, startWidth;
 
         const startResize = (e) => {
-            if (!this.isPanelOpen) return;
-            
             this.isResizing = true;
             startX = e.clientX || e.touches[0].clientX;
-            startWidth = parseInt(document.defaultView.getComputedStyle(this.panel).width, 10);
+            
+            // If panel is closed, trigger open on any interaction
+            if (!this.isPanelOpen) {
+                this.openPanel();
+                startWidth = this.collapseThreshold;
+            } else {
+                startWidth = parseInt(document.defaultView.getComputedStyle(this.panel).width, 10);
+            }
             
             this.resizeHandle.classList.add('dragging');
+            this.resizeHandle.classList.remove('trigger-zone');
             document.body.style.cursor = 'ew-resize';
             document.body.style.userSelect = 'none';
             
@@ -84,7 +90,7 @@ class CharacterPanel {
         };
 
         const doResize = (e) => {
-            if (!this.isResizing || !this.isPanelOpen) return;
+            if (!this.isResizing) return;
             
             const clientX = e.clientX || e.touches[0].clientX;
             const diff = startX - clientX;
@@ -94,6 +100,7 @@ class CharacterPanel {
             newWidth = Math.max(this.minWidth, Math.min(this.maxWidth, newWidth));
             
             this.setWidth(newWidth);
+            this.updateHandlePosition();
             e.preventDefault();
         };
 
@@ -111,6 +118,8 @@ class CharacterPanel {
             } else if (this.panel.classList.contains('collapsed') && this.currentWidth > this.expandThreshold) {
                 this.expandPanel();
             }
+            
+            this.updateHandlePosition();
         };
 
         // Mouse events
@@ -122,6 +131,9 @@ class CharacterPanel {
         this.resizeHandle.addEventListener('touchstart', startResize);
         document.addEventListener('touchmove', doResize);
         document.addEventListener('touchend', stopResize);
+        
+        // Initialize handle position
+        this.updateHandlePosition();
     }
 
     setWidth(width) {
@@ -129,14 +141,30 @@ class CharacterPanel {
         this.panel.style.width = width + 'px';
     }
 
+    updateHandlePosition() {
+        if (!this.resizeHandle) return;
+        
+        if (!this.isPanelOpen) {
+            // Show trigger zone when panel is closed
+            this.resizeHandle.classList.add('trigger-zone');
+            this.resizeHandle.style.right = '0px';
+        } else {
+            // Position handle next to open panel
+            this.resizeHandle.classList.remove('trigger-zone');
+            this.resizeHandle.style.right = (this.currentWidth - 8) + 'px';
+        }
+    }
+
     collapsePanel() {
         this.panel.classList.add('collapsed');
         this.setWidth(this.minWidth);
+        this.updateHandlePosition();
     }
 
     expandPanel() {
         this.panel.classList.remove('collapsed');
         this.setWidth(this.collapseThreshold);
+        this.updateHandlePosition();
     }
 
     initializePanelContent() {
@@ -266,6 +294,7 @@ class CharacterPanel {
         if (this.isPanelOpen) {
             this.expandPanel();
         }
+        this.updateHandlePosition();
     }
 
     openPanel() {
@@ -273,6 +302,7 @@ class CharacterPanel {
         this.panel.classList.add('open');
         this.toggleBtn.textContent = '✖️';
         this.expandPanel();
+        this.updateHandlePosition();
     }
 
     closePanel() {
@@ -282,6 +312,7 @@ class CharacterPanel {
         // Reset width when closing
         this.setWidth(this.collapseThreshold);
         this.panel.classList.remove('collapsed');
+        this.updateHandlePosition();
     }
 
     // Character grid management
