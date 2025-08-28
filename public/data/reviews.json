@@ -2,6 +2,97 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6c640e7d2ae2ee86a62fa4458d1449600246060d",
+      "action": "update",
+      "type": "character",
+      "itemName": "test 3",
+      "user": "gm",
+      "timestamp": "2025-08-28T07:57:42.086Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-28T07:57:42.086Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: test 3 (by gm) - Theos Hof (5663-01-06)"
+    },
+    {
+      "commitSha": "70e3a3a03fd00a8514c2c13e483a3d3461da63e3",
+      "action": "update",
+      "type": "character",
+      "itemName": "test 3",
+      "user": "gm",
+      "timestamp": "2025-08-28T07:57:24.574Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-28T07:57:24.574Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: test 3 (by gm) - Nordmund (5663-01-04)"
+    },
+    {
+      "commitSha": "9c0a5f14ed3188d1496c1d51865819f1038041d3",
+      "action": "update",
+      "type": "character",
+      "itemName": "test 3",
+      "user": "gm",
+      "timestamp": "2025-08-28T07:57:22.718Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-28T07:57:22.718Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: test 3 (by gm) - Nordmund (5663-01-04)"
+    },
+    {
+      "commitSha": "a807b26f8f55d12590c765eb96b99cc2afb076c7",
+      "action": "update",
+      "type": "character",
+      "itemName": "test 3",
+      "user": "gm",
+      "timestamp": "2025-08-28T07:56:43.981Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-28T07:56:43.981Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: test 3 (by gm) - Silbergrat (5663-01-03)"
+    },
+    {
+      "commitSha": "7284643fbaff1c5031113ca137cff23b6cc2ffbf",
+      "action": "update",
+      "type": "character",
+      "itemName": "test 3",
+      "user": "gm",
+      "timestamp": "2025-08-28T07:56:29.953Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-28T07:56:29.953Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: test 3 (by gm) - Nordmund (5663-01-02)"
+    },
+    {
+      "commitSha": "1e0118ab890b48afedebde080ccdb3ec73ae5238",
+      "action": "update",
+      "type": "character",
+      "itemName": "test 3",
+      "user": "gm",
+      "timestamp": "2025-08-28T07:56:16.179Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-28T07:56:16.179Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: test 3 (by gm) - Esberg (5663-01-01)"
+    },
+    {
+      "commitSha": "19f359be55b7b688cb2004fdd8f3928dbcec18e0",
+      "action": "create",
+      "type": "character",
+      "itemName": "test 3",
+      "user": "gm",
+      "timestamp": "2025-08-28T07:55:49.179Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-28T07:55:49.179Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: test 3 (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "80658fd7f72f06d64388e478481c809fc0636bad",
       "action": "update",
       "type": "character",
@@ -2420,5 +2511,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-28T06:25:57.692Z"
+  "lastUpdated": "2025-08-28T07:57:42.086Z"
 }

@@ -505,7 +505,136 @@
         "notes": ""
       },
       "location": "Osdalen"
+    },
+    {
+      "id": "test_3",
+      "name": "test 3",
+      "title": "",
+      "placeOfOrigin": "Barbenfall",
+      "coordinates": [
+        960,
+        849
+      ],
+      "description": "",
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [
+        {
+          "id": "movement_1756367775410",
+          "movement_nr": 0,
+          "date": "5663-01-01",
+          "dateStart": "5663-01-01",
+          "dateEnd": null,
+          "location": "Esberg",
+          "coordinates": [
+            1322,
+            854
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T07:56:15.410Z"
+        },
+        {
+          "id": "movement_1756367789043",
+          "movement_nr": 1,
+          "date": "5663-01-02",
+          "dateStart": "5663-01-02",
+          "dateEnd": null,
+          "location": "Nordmund",
+          "coordinates": [
+            1082,
+            967
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T07:56:29.043Z"
+        },
+        {
+          "id": "movement_1756367803280",
+          "movement_nr": 2,
+          "date": "5663-01-03",
+          "dateStart": "5663-01-03",
+          "dateEnd": null,
+          "location": "Silbergrat",
+          "coordinates": [
+            1240,
+            1041
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T07:56:43.280Z"
+        },
+        {
+          "id": "movement_1756367841874",
+          "movement_nr": 3,
+          "date": "5663-01-04",
+          "dateStart": "5663-01-04",
+          "dateEnd": null,
+          "location": "Nordmund",
+          "coordinates": [
+            1082,
+            967
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T07:57:21.874Z"
+        },
+        {
+          "id": "movement_1756367843788",
+          "movement_nr": 4,
+          "date": "5663-01-04",
+          "dateStart": "5663-01-04",
+          "dateEnd": null,
+          "location": "Nordmund",
+          "coordinates": [
+            1082,
+            967
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T07:57:23.788Z"
+        },
+        {
+          "id": "movement_1756367861135",
+          "movement_nr": 5,
+          "date": "5663-01-06",
+          "dateStart": "5663-01-06",
+          "dateEnd": null,
+          "location": "Theos Hof",
+          "coordinates": [
+            960,
+            849
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T07:57:41.135Z"
+        }
+      ],
+      "createdAt": "2025-08-28T07:55:48.310Z",
+      "updatedAt": "2025-08-28T07:57:41.135Z",
+      "currentLocation": {
+        "date": "5663-01-06",
+        "dateStart": "5663-01-06",
+        "dateEnd": null,
+        "location": "Theos Hof",
+        "coordinates": [
+          960,
+          849
+        ],
+        "notes": ""
+      },
+      "location": "Theos Hof"
     }
   ],
-  "lastUpdated": "2025-08-28T06:25:56.906Z"
+  "lastUpdated": "2025-08-28T07:57:41.135Z"
 }
