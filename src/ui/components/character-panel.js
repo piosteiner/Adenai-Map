@@ -4,9 +4,19 @@ class CharacterPanel {
         this.panel = null;
         this.toggleBtn = null;
         this.grid = null;
+        this.resizeHandle = null;
         this.isPanelOpen = false;
         this.characters = [];
         this.showMovementControls = false;
+        
+        // Resize properties
+        this.isResizing = false;
+        this.currentWidth = 320;
+        this.minWidth = 30;
+        this.maxWidth = 600;
+        this.collapseThreshold = 320;
+        this.expandThreshold = 50;
+        
         this.init();
     }
 
@@ -27,6 +37,7 @@ class CharacterPanel {
         this.panel = document.getElementById('character-panel');
         this.toggleBtn = document.getElementById('toggle-panel');
         this.grid = document.getElementById('character-grid');
+        this.resizeHandle = document.getElementById('resize-handle');
         
         if (!this.panel || !this.toggleBtn || !this.grid) {
             console.warn('Character panel elements not found');
@@ -34,6 +45,7 @@ class CharacterPanel {
         }
         
         this.setupEventListeners();
+        this.setupResizeHandlers();
         this.initializePanelContent();
     }
 
@@ -50,6 +62,81 @@ class CharacterPanel {
                 }
             }
         });
+    }
+
+    setupResizeHandlers() {
+        if (!this.resizeHandle) return;
+
+        let startX, startWidth;
+
+        const startResize = (e) => {
+            if (!this.isPanelOpen) return;
+            
+            this.isResizing = true;
+            startX = e.clientX || e.touches[0].clientX;
+            startWidth = parseInt(document.defaultView.getComputedStyle(this.panel).width, 10);
+            
+            this.resizeHandle.classList.add('dragging');
+            document.body.style.cursor = 'ew-resize';
+            document.body.style.userSelect = 'none';
+            
+            e.preventDefault();
+        };
+
+        const doResize = (e) => {
+            if (!this.isResizing || !this.isPanelOpen) return;
+            
+            const clientX = e.clientX || e.touches[0].clientX;
+            const diff = startX - clientX;
+            let newWidth = startWidth + diff;
+            
+            // Clamp width between min and max
+            newWidth = Math.max(this.minWidth, Math.min(this.maxWidth, newWidth));
+            
+            this.setWidth(newWidth);
+            e.preventDefault();
+        };
+
+        const stopResize = () => {
+            if (!this.isResizing) return;
+            
+            this.isResizing = false;
+            this.resizeHandle.classList.remove('dragging');
+            document.body.style.cursor = '';
+            document.body.style.userSelect = '';
+            
+            // Auto-collapse or expand logic
+            if (this.currentWidth < this.collapseThreshold) {
+                this.collapsePanel();
+            } else if (this.panel.classList.contains('collapsed') && this.currentWidth > this.expandThreshold) {
+                this.expandPanel();
+            }
+        };
+
+        // Mouse events
+        this.resizeHandle.addEventListener('mousedown', startResize);
+        document.addEventListener('mousemove', doResize);
+        document.addEventListener('mouseup', stopResize);
+
+        // Touch events for mobile
+        this.resizeHandle.addEventListener('touchstart', startResize);
+        document.addEventListener('touchmove', doResize);
+        document.addEventListener('touchend', stopResize);
+    }
+
+    setWidth(width) {
+        this.currentWidth = width;
+        this.panel.style.width = width + 'px';
+    }
+
+    collapsePanel() {
+        this.panel.classList.add('collapsed');
+        this.setWidth(this.minWidth);
+    }
+
+    expandPanel() {
+        this.panel.classList.remove('collapsed');
+        this.setWidth(this.collapseThreshold);
     }
 
     initializePanelContent() {
@@ -174,18 +261,27 @@ class CharacterPanel {
         this.isPanelOpen = !this.isPanelOpen;
         this.panel.classList.toggle('open', this.isPanelOpen);
         this.toggleBtn.textContent = this.isPanelOpen ? '✖️' : '📖';
+        
+        // Reset to default width when opening
+        if (this.isPanelOpen) {
+            this.expandPanel();
+        }
     }
 
     openPanel() {
         this.isPanelOpen = true;
         this.panel.classList.add('open');
         this.toggleBtn.textContent = '✖️';
+        this.expandPanel();
     }
 
     closePanel() {
         this.isPanelOpen = false;
         this.panel.classList.remove('open');
         this.toggleBtn.textContent = '📖';
+        // Reset width when closing
+        this.setWidth(this.collapseThreshold);
+        this.panel.classList.remove('collapsed');
     }
 
     // Character grid management

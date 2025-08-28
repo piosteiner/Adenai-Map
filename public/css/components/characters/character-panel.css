@@ -6,17 +6,78 @@
   right: -320px;
   top: 0;
   width: 320px;
+  min-width: 30px; /* Minimum width for sliver mode */
+  max-width: 600px; /* Maximum width */
   height: 100vh;
   background: var(--popup-bg);
   color: var(--text-color);
   z-index: 1001;
-  transition: right 0.3s ease;
+  transition: right 0.3s ease, width 0.3s ease;
   box-shadow: -2px 0 10px rgba(0,0,0,0.3);
   overflow-y: auto;
 }
 
 .character-panel.open {
   right: 0;
+}
+
+/* Collapsed/Sliver mode */
+.character-panel.collapsed {
+  width: 30px !important;
+  overflow: hidden;
+}
+
+.character-panel.collapsed .panel-content,
+.character-panel.collapsed .panel-header h3 {
+  display: none;
+}
+
+/* Resize Handle */
+.resize-handle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 8px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  cursor: ew-resize;
+  z-index: 1002;
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.resize-handle:hover {
+  background: rgba(0, 0, 0, 0.2);
+  border-left-color: var(--dropdown-border);
+}
+
+.resize-handle.dragging {
+  background: rgba(0, 0, 0, 0.3);
+  border-left-color: #4CAF50;
+}
+
+/* Handle indicator */
+.resize-handle::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 40px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--text-muted) 0px,
+    var(--text-muted) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.resize-handle:hover::before {
+  opacity: 1;
 }
 
 .panel-header {
@@ -287,6 +348,7 @@
 .character-avatar {
   width: 50px;
   height: 50px;
+  min-height: 50px; /* Ensure minimum height is maintained */
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--dropdown-border);
