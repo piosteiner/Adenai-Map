@@ -41,6 +41,7 @@ class CharacterPanel {
         this.panel = document.getElementById('character-panel');
         this.grid = document.getElementById('character-grid');
         this.resizeHandle = document.getElementById('resize-handle');
+        this.retractBtn = document.getElementById('retract-panel');
         
         if (!this.panel || !this.grid) {
             console.warn('Character panel elements not found');
@@ -67,6 +68,13 @@ class CharacterPanel {
                 }
             }
         });
+
+        // Retract button event listener
+        if (this.retractBtn) {
+            this.retractBtn.addEventListener('click', () => {
+                this.collapsePanel();
+            });
+        }
 
         // Hover behavior for auto-expand
         this.setupHoverBehavior();
@@ -233,16 +241,9 @@ class CharacterPanel {
     getMovementControlsHTML() {
         return `
             <div class="movement-section">
-                <div class="movement-header" onclick="window.characterPanel.toggleMovementControls()">
-                    <h4>🛤️ Movement Paths Options</h4>
-                    <span class="movement-toggle">▼</span>
-                </div>
-                
-                <div id="movement-content" class="movement-content">
-                    <div class="movement-actions">
-                        <button id="show-all-paths" class="movement-btn">✅ Show All</button>
-                        <button id="hide-all-paths" class="movement-btn">❌ Hide All</button>
-                    </div>
+                <div class="movement-actions">
+                    <button id="show-all-paths" class="movement-btn">✅ Show All</button>
+                    <button id="hide-all-paths" class="movement-btn">❌ Hide All</button>
                 </div>
             </div>
         `;
@@ -292,17 +293,6 @@ class CharacterPanel {
                 checkbox.checked = checked;
             }
         });
-    }
-
-    toggleMovementControls() {
-        this.showMovementControls = !this.showMovementControls;
-        const content = document.getElementById('movement-content');
-        const toggle = document.querySelector('.movement-toggle');
-        
-        if (content && toggle) {
-            content.style.display = this.showMovementControls ? 'block' : 'none';
-            toggle.textContent = this.showMovementControls ? '▼' : '▶';
-        }
     }
 
     // Search functionality
