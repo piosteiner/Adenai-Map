@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "b523ef65b12fae2308e1cd211bf902c590f98b34",
+      "action": "create",
+      "type": "character",
+      "itemName": "Pio's Minimalist",
+      "user": "gm",
+      "timestamp": "2025-08-28T10:27:06.495Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-28T10:27:06.495Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Pio's Minimalist (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "5ad153dea747c28f41e58dfa85c4ed6e887a0dfe",
       "action": "create",
       "type": "character",
@@ -2602,5 +2615,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-28T10:21:32.442Z"
+  "lastUpdated": "2025-08-28T10:27:06.495Z"
 }
