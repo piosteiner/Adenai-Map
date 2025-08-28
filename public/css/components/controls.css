@@ -14,7 +14,7 @@
   box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
-/* Custom Zoom Control */
+/* Custom Zoom Control 
 .custom-zoom-control {
   position: fixed;
   bottom: 20px;
@@ -27,7 +27,7 @@
   backdrop-filter: blur(10px);
   z-index: 1000;
   min-width: 200px;
-}
+}*/
 
 [data-theme="dark"] .custom-zoom-control {
   background: rgba(40, 44, 52, 0.9);
