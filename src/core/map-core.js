@@ -118,8 +118,8 @@ class MapCore {
 
         // Add custom zoom control
         try {
-            this.setupCustomZoomControl();
-            console.log('✅ Custom zoom control setup successfully');
+            // this.setupCustomZoomControl(); // Commented out to remove zoom slider
+            console.log('✅ Custom zoom control disabled by user request');
         } catch (error) {
             console.error('❌ Failed to setup custom zoom control:', error);
         }
