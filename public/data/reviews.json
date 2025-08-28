@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "5ad153dea747c28f41e58dfa85c4ed6e887a0dfe",
+      "action": "create",
+      "type": "character",
+      "itemName": "Pio's fully loaded char",
+      "user": "gm",
+      "timestamp": "2025-08-28T10:21:32.442Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-28T10:21:32.442Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Pio's fully loaded char (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "34db8d9ef6ccee5a478da867a965f4a7f578b57c",
       "action": "create",
       "type": "character",
@@ -2589,5 +2602,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-28T10:18:11.629Z"
+  "lastUpdated": "2025-08-28T10:21:32.442Z"
 }
