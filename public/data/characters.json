@@ -512,8 +512,8 @@
       "title": "",
       "placeOfOrigin": "Barbenfall",
       "coordinates": [
-        776,
-        962
+        1322,
+        854
       ],
       "description": "",
       "image": "",
@@ -522,21 +522,39 @@
       "relationship": "ally",
       "firstMet": "",
       "notes": "",
-      "movementHistory": [],
+      "movementHistory": [
+        {
+          "id": "movement_1756367775410",
+          "movement_nr": 0,
+          "date": "5663-01-01",
+          "dateStart": "5663-01-01",
+          "dateEnd": null,
+          "location": "Esberg",
+          "coordinates": [
+            1322,
+            854
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T07:56:15.410Z"
+        }
+      ],
       "createdAt": "2025-08-28T07:55:48.310Z",
-      "updatedAt": "2025-08-28T07:55:48.310Z",
+      "updatedAt": "2025-08-28T07:56:15.410Z",
       "currentLocation": {
-        "location": "Barbenfall",
-        "date": "2025-08-28",
-        "dateStart": "2025-08-28",
+        "date": "5663-01-01",
+        "dateStart": "5663-01-01",
         "dateEnd": null,
+        "location": "Esberg",
         "coordinates": [
-          776,
-          962
+          1322,
+          854
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": ""
+      },
+      "location": "Esberg"
     }
   ],
-  "lastUpdated": "2025-08-28T07:55:48.310Z"
+  "lastUpdated": "2025-08-28T07:56:15.410Z"
 }
