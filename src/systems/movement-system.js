@@ -138,6 +138,12 @@ class MovementSystem {
     // Required by main.js
     addIntegratedMovementControls() {
         console.log('✅ Movement system initialized');
+        
+        // Update version info via GitHub checker if available
+        if (window.gitHubVersionChecker) {
+            window.gitHubVersionChecker.updateVersionDisplay();
+        }
+        
         return true;
     }
 
@@ -145,6 +151,11 @@ class MovementSystem {
     async testLoadPaths() {
         console.log('🧪 Manual test: Loading paths...');
         await this.loadAndDisplayPaths();
+        
+        // Update version after test if GitHub checker available
+        if (window.gitHubVersionChecker) {
+            window.gitHubVersionChecker.updateVersionDisplay();
+        }
     }
 }
 
