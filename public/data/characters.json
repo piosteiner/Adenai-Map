@@ -637,7 +637,38 @@
         "notes": ""
       },
       "location": "Theos Hof"
+    },
+    {
+      "id": "pio_s_origin_character",
+      "name": "Pio's Origin Character",
+      "title": "",
+      "placeOfOrigin": "Apit Sal",
+      "coordinates": [
+        1677,
+        1229
+      ],
+      "description": "",
+      "image": "",
+      "status": "undead",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-28T10:18:10.800Z",
+      "updatedAt": "2025-08-28T10:18:10.800Z",
+      "currentLocation": {
+        "location": "Apit Sal",
+        "date": "2025-08-28",
+        "dateStart": "2025-08-28",
+        "dateEnd": null,
+        "coordinates": [
+          1677,
+          1229
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2025-08-28T10:02:02.622Z"
+  "lastUpdated": "2025-08-28T10:18:10.800Z"
 }
