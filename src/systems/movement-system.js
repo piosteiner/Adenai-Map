@@ -6,15 +6,6 @@ class MovementSystem {
         this.visibleCharacterPaths = new Set(); // Track which character paths are visible
         this.consolidatedMarkers = []; // Track consolidated markers for overlapping locations
         this.currentTimelineDate = null;
-        this.pathColors = {
-            ally: '#4CAF50',
-            friendly: '#8BC34A', 
-            neutral: '#FFC107',
-            suspicious: '#FF9800',
-            hostile: '#FF5722',
-            enemy: '#F44336',
-            party: '#584cffff'
-        };
         
         // 🔥 NEW: Initialize Character Path Manager for API integration
         this.pathManager = new CharacterPathManager();
@@ -351,7 +342,7 @@ class MovementSystem {
         this.characterPaths.push(pathData);
     }
 
-    // Legacy fallback method (existing logic)
+    // Legacy fallback method (uses server-compatible styling)
     async loadLegacyCharacterPaths() {
         const characters = window.characterSystem.getCharacters();
         
@@ -360,7 +351,7 @@ class MovementSystem {
                 return; // Need at least 1 movement point
             }
             
-            const pathColor = this.pathColors[character.relationship] || '#666666';
+            // Use server-compatible styling for legacy paths to maintain consistency
             const movementPoints = [];
             
             // Add all movement history points
@@ -399,7 +390,7 @@ class MovementSystem {
             movementPoints.sort((a, b) => new Date(a.date) - new Date(b.date));
             
             if (movementPoints.length >= 2) {
-                this.createCharacterPath(character, movementPoints, pathColor);
+                this.createCharacterPath(character, movementPoints);
             }
         });
     }
@@ -510,7 +501,7 @@ class MovementSystem {
         return marker;
     }
 
-    createCharacterPath(character, movementPoints, pathColor) {
+    createCharacterPath(character, movementPoints) {
         const map = window.mapCore.getMap();
         
         // Create path coordinates for Leaflet (using the same coordinate system as characters)
@@ -519,12 +510,13 @@ class MovementSystem {
             point.coordinates[0]  // lng = x
         ]);
         
-        // Create the path polyline
+        // Use server-compatible styling for consistency
+        // Server-controlled design: color by relationship, weight=2, opacity by status, dashArray='5,2'
+        const pathStyle = this.getServerCompatiblePathStyle(character);
+        
+        // Create the path polyline with server-compatible styling
         const pathLine = L.polyline(pathCoords, {
-            color: pathColor,
-            weight: 4,
-            opacity: 0.7,
-            dashArray: '10,5',
+            ...pathStyle,
             className: `character-path character-path-${character.id}`
         });
         
@@ -555,6 +547,28 @@ class MovementSystem {
         };
         
         this.characterPaths.push(pathData);
+    }
+
+    // Get server-compatible path styling for legacy characters
+    getServerCompatiblePathStyle(character) {
+        // Match server-side design system:
+        // Color by relationship, weight=2, opacity by status, dashArray='5,2'
+        const relationshipColors = {
+            ally: '#4CAF50',
+            friendly: '#8BC34A', 
+            neutral: '#FFC107',
+            suspicious: '#FF9800',
+            hostile: '#FF5722',
+            enemy: '#F44336',
+            party: '#584cffff'
+        };
+        
+        return {
+            color: relationshipColors[character.relationship] || '#666666',
+            weight: 2,  // Server standard
+            opacity: (character.status === 'dead' || character.status === 'deceased') ? 0.4 : 0.7, // Server standard
+            dashArray: '5,2' // Server standard
+        };
     }
 
     createPathPopup(character, movementPoints) {
@@ -1681,6 +1695,33 @@ window.testServerSideStyling = async function() {
     }
 };
 
+// Test design consistency between API and legacy paths
+window.testDesignConsistency = function() {
+    console.log('🔍 Testing design consistency between API and legacy systems...');
+    
+    const movementSystem = window.movementSystem;
+    const apiPaths = movementSystem.characterPaths.filter(p => p.apiSource);
+    const legacyPaths = movementSystem.characterPaths.filter(p => !p.apiSource);
+    
+    console.log('📊 Design Analysis:');
+    console.log('API Paths:', apiPaths.length);
+    console.log('Legacy Paths:', legacyPaths.length);
+    
+    // Check if legacy paths use consistent server-style design
+    legacyPaths.forEach(pathData => {
+        if (pathData.pathLine && pathData.pathLine.options) {
+            const options = pathData.pathLine.options;
+            console.log(`${pathData.character.name} (Legacy):`);
+            console.log(`  Weight: ${options.weight} (should be 2)`);
+            console.log(`  DashArray: ${options.dashArray} (should be '5,2')`);
+            console.log(`  Color: ${options.color}`);
+            console.log(`  Opacity: ${options.opacity}`);
+        }
+    });
+    
+    console.log('✅ Design consistency test complete!');
+};
+
 console.log('🔧 Character Path testing functions loaded:');
 console.log('  - testCharacterPaths() - Full system test');
 console.log('  - testAPIReload() - Test API data loading');
@@ -1690,6 +1731,7 @@ console.log('  - clearCharacterPathCache() - Clear cache');
 console.log('  - toggleCharacterPathDebug(true/false) - Toggle debug mode');
 console.log('  - compareCharacterPathPerformance() - Performance comparison');
 console.log('  - testServerSideStyling() - Test server-side path design');
+console.log('  - testDesignConsistency() - Test API vs legacy design consistency');
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {
