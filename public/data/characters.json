@@ -292,13 +292,13 @@
           "location": "Nice Custom Lococo",
           "coordinates": [
             1264,
-            1057
+            1008
           ],
           "notes": "",
           "type": "mission",
           "createdAt": "2025-08-24T23:08:02.170Z",
           "movement_nr": 2,
-          "updatedAt": "2025-08-28T09:34:41.159Z",
+          "updatedAt": "2025-08-28T10:02:02.622Z",
           "dateStart": "5663-06-04",
           "dateEnd": null,
           "isCustomLocation": true
@@ -322,14 +322,14 @@
           "date": "5663-06-05",
           "location": "Another nice Custom Lococo",
           "coordinates": [
-            null,
-            null
+            1234,
+            1234
           ],
           "notes": "Kampf gegen die Sternen-Heinis, nachdem sie Abu böse beäugt haben.",
           "type": "mission",
           "createdAt": "2025-08-25T10:24:43.681Z",
           "movement_nr": 4,
-          "updatedAt": "2025-08-28T09:34:59.791Z",
+          "updatedAt": "2025-08-28T10:00:55.001Z",
           "dateStart": "5663-06-05",
           "dateEnd": null,
           "isCustomLocation": true
@@ -370,7 +370,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-28T09:34:59.791Z"
+      "updatedAt": "2025-08-28T10:02:02.622Z"
     },
     {
       "id": "pio",
@@ -639,5 +639,5 @@
       "location": "Theos Hof"
     }
   ],
-  "lastUpdated": "2025-08-28T09:34:59.791Z"
+  "lastUpdated": "2025-08-28T10:02:02.622Z"
 }
