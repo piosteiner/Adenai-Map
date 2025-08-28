@@ -190,20 +190,12 @@
   align-items: flex-start;
   padding: 12px;
   gap: 12px;
-  min-height: 80px; /* Ensure enough space for avatar + checkbox positioning */
+  min-height: 100px; /* Ensure enough space for avatar + checkbox + spacing */
   position: relative;
 }
 
 .movement-checkbox {
   flex-shrink: 0;
-}
-
-/* Position checkbox when avatar exists */
-.avatar-checkbox-section:not(.no-avatar) .movement-checkbox {
-  position: absolute;
-  left: 50%; /* Center horizontally with avatar */
-  transform: translateX(-50%); /* Perfect horizontal centering */
-  bottom: 12px; /* Distance from bottom of card (matching card padding) */
 }
 
 /* Avatar and checkbox container */
@@ -213,12 +205,13 @@
   align-items: center;
   flex-shrink: 0;
   position: relative;
+  width: 70px; /* Fixed width to contain avatar and checkbox */
 }
 
-/* When avatar exists, position it slightly above content line */
+/* When avatar exists, position it slightly below card border */
 .avatar-checkbox-section:not(.no-avatar) {
-  align-items: flex-start;
-  gap: 0; /* Remove gap, we'll position manually */
+  align-items: center;
+  padding-top: 8px; /* Space from card border */
 }
 
 /* When no avatar exists, center checkbox vertically */
@@ -226,7 +219,6 @@
   justify-content: center;
   align-items: center;
   min-height: 70px; /* Match typical character info height with padding */
-  gap: 8px;
 }
 
 .movement-checkbox label {
@@ -285,8 +277,7 @@
   flex: 1;
   cursor: pointer;
   transition: all 0.2s ease;
-  padding: 8px 0; /* Increased padding to account for avatar positioning */
-  gap: 12px;
+  padding: 8px 0;
 }
 
 .character-info:hover {
@@ -300,7 +291,7 @@
   object-fit: cover;
   border: 2px solid var(--dropdown-border);
   flex-shrink: 0;
-  margin-top: -8px; /* Pull avatar up slightly above character name line */
+  margin-bottom: 10px; /* 10px space below avatar for checkbox */
 }
 
 .character-details {
