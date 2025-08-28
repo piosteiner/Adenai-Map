@@ -198,8 +198,9 @@ class CharacterPanel {
         if (!this.resizeHandle) return;
         
         // Always position handle next to the panel (since panel is always visible)
+        // Handle is now 16px wide, so subtract 16 from panel width
         this.resizeHandle.classList.remove('trigger-zone');
-        this.resizeHandle.style.right = (this.currentWidth - 8) + 'px';
+        this.resizeHandle.style.right = (this.currentWidth - 16) + 'px';
     }
 
     collapsePanel() {

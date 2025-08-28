@@ -55,9 +55,9 @@
 /* Resize Handle */
 .resize-handle {
   position: fixed;
-  right: 22px; /* Positioned next to collapsed panel (30px - 8px) */
+  right: 14px; /* Positioned next to collapsed panel (30px - 16px) */
   top: 0;
-  width: 8px;
+  width: 16px; /* Doubled from 8px to 16px */
   height: 100vh; /* Full screen height */
   background: rgba(0, 0, 0, 0.1);
   cursor: ew-resize;
@@ -80,7 +80,7 @@
 .resize-handle::before {
   content: '';
   position: absolute;
-  left: 2px;
+  left: 6px; /* Centered in the wider handle (16px / 2 - 2px) */
   top: 50%;
   transform: translateY(-50%);
   width: 4px;
