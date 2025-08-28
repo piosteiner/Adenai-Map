@@ -26,6 +26,7 @@ class CharacterPanel {
     initPanel() {
         this.panel = document.getElementById('character-panel');
         this.toggleBtn = document.getElementById('toggle-panel'); // May not exist anymore
+        this.openBtn = document.getElementById('panel-open-btn');
         this.closeBtn = document.getElementById('panel-close-btn');
         this.grid = document.getElementById('character-grid');
         
@@ -42,6 +43,11 @@ class CharacterPanel {
         // Add toggle button event listener if it exists
         if (this.toggleBtn) {
             this.toggleBtn.addEventListener('click', () => this.togglePanel());
+        }
+        
+        // Add open button event listener
+        if (this.openBtn) {
+            this.openBtn.addEventListener('click', () => this.openPanel());
         }
         
         // Add close button event listener

@@ -59,7 +59,7 @@
   content: '';
   position: absolute;
   left: -2px;
-  top: calc(55vh - 25px); /* Center around the button */
+  top: calc(45vh - 25px); /* Center around the button at 45vh */
   width: 30px;
   height: 50px;
   background: var(--popup-bg);
@@ -77,6 +77,39 @@
 
 .panel-content {
   padding: 15px;
+}
+
+/* Character Panel Open Button */
+.panel-open-btn {
+  position: fixed;
+  right: 15px;
+  top: 70px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--popup-bg);
+  color: var(--text-color);
+  border: 2px solid var(--dropdown-border);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.panel-open-btn:hover {
+  background: var(--dropdown-hover);
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* Hide open button when panel is open */
+.character-panel.open ~ .panel-open-btn {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Movement Controls Section */
@@ -414,4 +447,15 @@
 [data-theme="dark"] .character-panel::before {
   background: #2a2a2a;
   border-color: #4a5568;
+}
+
+/* Dark mode open button */
+[data-theme="dark"] .panel-open-btn {
+  background: #2a2a2a;
+  color: #e2e8f0;
+  border-color: #4a5568;
+}
+
+[data-theme="dark"] .panel-open-btn:hover {
+  background: #374151;
 }
