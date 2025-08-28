@@ -60,10 +60,16 @@ class CharacterPanel {
     setupEventListeners() {
         // Add event delegation for character clicks
         this.panel.addEventListener('click', (e) => {
+            // Prevent retract button from interfering with character clicks
+            if (e.target.closest('#retract-panel')) {
+                return; // Let the retract button handle its own click
+            }
+            
             const characterInfo = e.target.closest('.character-info');
             if (characterInfo) {
                 const characterName = characterInfo.dataset.characterName;
                 if (characterName) {
+                    console.log(`🖱️ Character clicked: "${characterName}"`);
                     this.focusCharacter(characterName);
                 }
             }
@@ -408,13 +414,27 @@ class CharacterPanel {
 
     focusCharacter(characterName) {
         console.log(`🎯 Character panel requesting focus for: "${characterName}"`);
-        const success = window.characterSystem?.focusCharacter?.(characterName);
+        
+        // Check if character system is available
+        if (!window.characterSystem) {
+            console.error('❌ Character system not available!');
+            return;
+        }
+        
+        if (typeof window.characterSystem.focusCharacter !== 'function') {
+            console.error('❌ Character system focusCharacter method not available!');
+            return;
+        }
+        
+        const success = window.characterSystem.focusCharacter(characterName);
         
         if (!success) {
             console.warn(`⚠️ Could not focus on character "${characterName}"`);
             return;
         }
 
+        console.log(`✅ Successfully focused on character "${characterName}"`);
+        
         // Collapse panel on mobile for better map visibility
         if (window.innerWidth <= 768) {
             this.collapsePanel();
