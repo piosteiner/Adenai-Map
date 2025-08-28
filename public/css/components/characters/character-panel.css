@@ -187,46 +187,13 @@
 
 .card-layout {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding: 12px;
-  gap: 12px;
-  min-height: 80px; /* Ensure enough space for avatar + checkbox positioning */
-  position: relative;
 }
 
 .movement-checkbox {
+  margin-right: 12px;
   flex-shrink: 0;
-}
-
-/* Position checkbox when avatar exists */
-.avatar-checkbox-section:not(.no-avatar) .movement-checkbox {
-  position: absolute;
-  left: 50%; /* Center horizontally with avatar */
-  transform: translateX(-50%); /* Perfect horizontal centering */
-  bottom: 12px; /* Distance from bottom of card (matching card padding) */
-}
-
-/* Avatar and checkbox container */
-.avatar-checkbox-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-shrink: 0;
-  position: relative;
-}
-
-/* When avatar exists, position it slightly above content line */
-.avatar-checkbox-section:not(.no-avatar) {
-  align-items: flex-start;
-  gap: 0; /* Remove gap, we'll position manually */
-}
-
-/* When no avatar exists, center checkbox vertically */
-.avatar-checkbox-section.no-avatar {
-  justify-content: center;
-  align-items: center;
-  min-height: 70px; /* Match typical character info height with padding */
-  gap: 8px;
 }
 
 .movement-checkbox label {
@@ -281,12 +248,11 @@
 
 .character-info {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex: 1;
   cursor: pointer;
   transition: all 0.2s ease;
-  padding: 8px 0; /* Increased padding to account for avatar positioning */
-  gap: 12px;
+  padding: 2px 0;
 }
 
 .character-info:hover {
@@ -298,9 +264,9 @@
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
+  margin-right: 12px;
   border: 2px solid var(--dropdown-border);
   flex-shrink: 0;
-  margin-top: -8px; /* Pull avatar up slightly above character name line */
 }
 
 .character-details {
@@ -388,4 +354,32 @@
 
 [data-theme="dark"] .character-info .location {
   color: #bbb;
+}
+
+/* Dark mode close button */
+[data-theme="dark"] .panel-close-btn {
+  background: #2a2a2a;
+  color: #e2e8f0;
+  border-color: #4a5568;
+}
+
+[data-theme="dark"] .panel-close-btn:hover {
+  background: #374151;
+}
+
+/* Dark mode panel bulge */
+[data-theme="dark"] .character-panel::before {
+  background: #2a2a2a;
+  border-color: #4a5568;
+}
+
+/* Dark mode open button */
+[data-theme="dark"] .panel-open-btn {
+  background: #2a2a2a;
+  color: #e2e8f0;
+  border-color: #4a5568;
+}
+
+[data-theme="dark"] .panel-open-btn:hover {
+  background: #374151;
 }

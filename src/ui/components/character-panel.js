@@ -25,10 +25,12 @@ class CharacterPanel {
 
     initPanel() {
         this.panel = document.getElementById('character-panel');
-        this.toggleBtn = document.getElementById('toggle-panel');
+        this.toggleBtn = document.getElementById('toggle-panel'); // May not exist anymore
+        this.openBtn = document.getElementById('panel-open-btn');
+        this.closeBtn = document.getElementById('panel-close-btn');
         this.grid = document.getElementById('character-grid');
         
-        if (!this.panel || !this.toggleBtn || !this.grid) {
+        if (!this.panel || !this.grid) {
             console.warn('Character panel elements not found');
             return;
         }
@@ -38,7 +40,20 @@ class CharacterPanel {
     }
 
     setupEventListeners() {
-        this.toggleBtn.addEventListener('click', () => this.togglePanel());
+        // Add toggle button event listener if it exists
+        if (this.toggleBtn) {
+            this.toggleBtn.addEventListener('click', () => this.togglePanel());
+        }
+        
+        // Add open button event listener
+        if (this.openBtn) {
+            this.openBtn.addEventListener('click', () => this.openPanel());
+        }
+        
+        // Add close button event listener
+        if (this.closeBtn) {
+            this.closeBtn.addEventListener('click', () => this.closePanel());
+        }
         
         // Add event delegation for character clicks
         this.panel.addEventListener('click', (e) => {
@@ -215,21 +230,19 @@ class CharacterPanel {
         
         card.innerHTML = `
             <div class="card-layout">
-                <div class="avatar-checkbox-section ${!character.image ? 'no-avatar' : ''}">
-                    ${character.image ? `<img src="${character.image}" alt="${character.name}" class="character-avatar">` : ''}
-                    <div class="movement-checkbox">
-                        <label>
-                            <input type="checkbox" 
-                                   id="path-${character.id}" 
-                                   ${isPathVisible ? 'checked' : ''} 
-                                   ${!hasMovement ? 'disabled' : ''}
-                                   onchange="window.characterPanel.toggleCharacterPath('${character.id}')">
-                            <span class="checkmark" style="border-color: ${this.getRelationshipColor(character.relationship)}"></span>
-                        </label>
-                    </div>
+                <div class="movement-checkbox">
+                    <label>
+                        <input type="checkbox" 
+                               id="path-${character.id}" 
+                               ${isPathVisible ? 'checked' : ''} 
+                               ${!hasMovement ? 'disabled' : ''}
+                               onchange="window.characterPanel.toggleCharacterPath('${character.id}')">
+                        <span class="checkmark" style="border-color: ${this.getRelationshipColor(character.relationship)}"></span>
+                    </label>
                 </div>
                 
                 <div class="character-info" data-character-name="${character.name}">
+                    ${character.image ? `<img src="${character.image}" alt="${character.name}" class="character-avatar">` : ''}
                     <div class="character-details">
                         <h4>${character.name}${hasMovement ? ` 🛤️ ${movementCount + 1}` : ''}</h4>
                         ${character.title ? `<div class="character-title">${character.title}</div>` : ''}
