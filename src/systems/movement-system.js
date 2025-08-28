@@ -480,7 +480,7 @@ class MovementSystem {
                 position: relative;
                 cursor: pointer;
                 transition: all 0.3s ease;
-                background: #007acc;
+                background: #0b6099ff;
                 color: white;
                 border: 3px solid white;
             ">
@@ -555,7 +555,7 @@ class MovementSystem {
         const centerLatLng = clusterMarker.getLatLng();
         
         // Spiral configuration
-        const baseRadius = 30; // Starting radius in pixels
+        const baseRadius = 33; // Starting radius in pixels
         const radiusIncrement = 15; // How much radius increases per revolution
         const itemsPerRevolution = 6; // How many items before increasing radius
         

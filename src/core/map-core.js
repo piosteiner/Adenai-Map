@@ -68,8 +68,8 @@ class MapCore {
             crs: this.mapCRS,
             minZoom: -1,
             maxZoom: 3,
-            zoomSnap: 0.1,    // Allow smoother fractional zoom levels
-            zoomDelta: 1,  // Smaller steps when using +/- buttons or keyboard
+            zoomSnap: 0.02,    // Allow smoother fractional zoom levels
+            zoomDelta: 0.5,  // Smaller steps when using +/- buttons or keyboard
             wheelPxPerZoomLevel: 120, // Optional: slower scroll-based zoom
             zoomControl: false // Disable default top-left zoom control
         });
