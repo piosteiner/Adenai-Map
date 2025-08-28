@@ -256,20 +256,6 @@
       "notes": "",
       "movementHistory": [
         {
-          "id": "movement_1756076815342",
-          "date": "5663-06-03",
-          "location": "Silbergrat",
-          "coordinates": [
-            1240,
-            1041
-          ],
-          "notes": "",
-          "type": "mission",
-          "createdAt": "2025-08-24T23:06:55.342Z",
-          "movement_nr": 0,
-          "updatedAt": "2025-08-28T06:10:24.116Z"
-        },
-        {
           "id": "movement_1756076882170",
           "date": "5663-06-04",
           "location": null,
@@ -280,8 +266,22 @@
           "notes": "",
           "type": "mission",
           "createdAt": "2025-08-24T23:08:02.170Z",
+          "movement_nr": 0,
+          "updatedAt": "2025-08-28T06:10:24.822Z"
+        },
+        {
+          "id": "movement_1756076815342",
+          "date": "5663-06-03",
+          "location": "Silbergrat",
+          "coordinates": [
+            1240,
+            1041
+          ],
+          "notes": "",
+          "type": "mission",
+          "createdAt": "2025-08-24T23:06:55.342Z",
           "movement_nr": 1,
-          "updatedAt": "2025-08-28T06:10:24.116Z"
+          "updatedAt": "2025-08-28T06:10:24.822Z"
         },
         {
           "id": "movement_1756361407508",
@@ -298,7 +298,7 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-28T06:10:07.508Z",
-          "updatedAt": "2025-08-28T06:10:24.116Z"
+          "updatedAt": "2025-08-28T06:10:24.822Z"
         },
         {
           "id": "movement_1756078306547",
@@ -312,7 +312,7 @@
           "type": "stay",
           "createdAt": "2025-08-24T23:31:46.547Z",
           "movement_nr": 3,
-          "updatedAt": "2025-08-28T06:10:24.116Z"
+          "updatedAt": "2025-08-28T06:10:24.822Z"
         },
         {
           "id": "movement_1756117483681",
@@ -326,7 +326,7 @@
           "type": "mission",
           "createdAt": "2025-08-25T10:24:43.681Z",
           "movement_nr": 4,
-          "updatedAt": "2025-08-28T06:10:24.116Z"
+          "updatedAt": "2025-08-28T06:10:24.822Z"
         },
         {
           "id": "movement_1756137677339",
@@ -342,7 +342,7 @@
           "dateStart": "5663-06-05",
           "dateEnd": "5663-06-14",
           "isCustomLocation": true,
-          "updatedAt": "2025-08-28T06:10:24.116Z",
+          "updatedAt": "2025-08-28T06:10:24.822Z",
           "movement_nr": 5
         },
         {
@@ -360,11 +360,11 @@
           "isCustomLocation": false,
           "createdAt": "2025-08-25T16:51:39.063Z",
           "movement_nr": 6,
-          "updatedAt": "2025-08-28T06:10:24.116Z"
+          "updatedAt": "2025-08-28T06:10:24.822Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-28T06:10:24.116Z"
+      "updatedAt": "2025-08-28T06:10:24.822Z"
     },
     {
       "id": "pio",
@@ -504,5 +504,5 @@
       "location": "Osdalen"
     }
   ],
-  "lastUpdated": "2025-08-28T06:10:24.116Z"
+  "lastUpdated": "2025-08-28T06:10:24.822Z"
 }
