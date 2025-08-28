@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6ed08094119327c0688a64ad402a70d175bbc2f4",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-28T10:00:56.241Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-28T10:00:56.241Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Another nice Custom Lococo entry (5663-06-05)"
+    },
+    {
       "commitSha": "f72bd87625bf113d13bf3ae045433c73e7c804c6",
       "action": "update",
       "type": "character",
@@ -2537,5 +2550,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-28T09:35:00.647Z"
+  "lastUpdated": "2025-08-28T10:00:56.241Z"
 }
