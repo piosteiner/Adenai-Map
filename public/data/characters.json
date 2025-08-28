@@ -403,8 +403,8 @@
       "title": "",
       "placeOfOrigin": "Atlantis (versunken)",
       "coordinates": [
-        1296,
-        694
+        1412,
+        657
       ],
       "description": "",
       "image": "",
@@ -428,23 +428,38 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-28T04:32:08.007Z"
+        },
+        {
+          "id": "movement_1756355579692",
+          "date": "5663-05-26",
+          "dateStart": "5663-05-26",
+          "dateEnd": null,
+          "location": "Osdalen",
+          "coordinates": [
+            1412,
+            657
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T04:32:59.692Z"
         }
       ],
       "createdAt": "2025-08-28T04:31:45.676Z",
-      "updatedAt": "2025-08-28T04:32:24.888Z",
+      "updatedAt": "2025-08-28T04:32:59.692Z",
       "currentLocation": {
-        "date": "5663-05-20",
-        "dateStart": "5663-05-20",
+        "date": "5663-05-26",
+        "dateStart": "5663-05-26",
         "dateEnd": null,
-        "location": "Altes Weingut",
+        "location": "Osdalen",
         "coordinates": [
-          1296,
-          694
+          1412,
+          657
         ],
         "notes": ""
       },
-      "location": "Altes Weingut"
+      "location": "Osdalen"
     }
   ],
-  "lastUpdated": "2025-08-28T04:32:24.888Z"
+  "lastUpdated": "2025-08-28T04:32:59.692Z"
 }
