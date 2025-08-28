@@ -475,20 +475,16 @@ class MovementSystem {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 10px;
+                font-size: 12px;
                 font-weight: bold;
                 position: relative;
                 cursor: pointer;
                 transition: all 0.3s ease;
-                ${isDarkMode ? 
-                    'background: rgba(0, 0, 0, 0.8); color: white; border: 3px solid white;' :
-                    'background: rgba(255, 255, 255, 0.8); color: black; border: 3px solid black;'
-                }
+                background: #007acc;
+                color: white;
+                border: 3px solid white;
             ">
-                <div style="text-align: center; line-height: 1;">
-                    <div>${movements.map(m => (m.movement_nr || 0) + 1).join(',')}</div>
-                    <div style="font-size: 8px; opacity: 0.8;">(${count}x)</div>
-                </div>
+                ${count}x
             </div>
         `;
 
@@ -559,7 +555,7 @@ class MovementSystem {
         const centerLatLng = clusterMarker.getLatLng();
         
         // Spiral configuration
-        const baseRadius = 40; // Starting radius in pixels
+        const baseRadius = 30; // Starting radius in pixels
         const radiusIncrement = 15; // How much radius increases per revolution
         const itemsPerRevolution = 6; // How many items before increasing radius
         
@@ -604,7 +600,7 @@ class MovementSystem {
                     cursor: pointer;
                     transition: all 0.3s ease;
                     transform: scale(0);
-                    z-index: 1000;
+                    z-index: 1002;
                     ${isDarkMode ? 
                         'background: rgba(0, 0, 0, 0.9); color: white; border: 2px solid white;' :
                         'background: rgba(255, 255, 255, 0.9); color: black; border: 2px solid black;'
@@ -633,14 +629,6 @@ class MovementSystem {
             
             fanMarker.on('mouseout', () => {
                 clusterMarker._scheduleFanIn();
-            });
-            
-            // Add tooltip
-            fanMarker.bindTooltip(`${characterName} - Stop ${markerNumber}: ${movement.location || 'Unknown'}`, {
-                permanent: false,
-                sticky: true,
-                direction: 'top',
-                offset: [0, -12]
             });
             
             fanMarker.addTo(map);
