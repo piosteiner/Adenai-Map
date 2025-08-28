@@ -255,6 +255,11 @@
   position: relative;
 }
 
+/* Alternative approach for no-avatar cards - center the whole section */
+.no-avatar {
+  align-self: center; /* Center the checkbox section within the flex container */
+}
+
 .movement-checkbox {
   flex-shrink: 0;
 }
@@ -279,7 +284,8 @@
 .avatar-checkbox-section.no-avatar {
   justify-content: center;
   align-items: center;
-  min-height: 70px; /* Match typical character info height with padding */
+  height: 100%; /* Take full height of the card layout */
+  min-height: 76px; /* Match card min-height minus padding (100px - 24px) */
 }
 
 .movement-checkbox label {
