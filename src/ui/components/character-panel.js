@@ -5,17 +5,15 @@ class CharacterPanel {
         this.toggleBtn = null;
         this.grid = null;
         this.resizeHandle = null;
-        this.isPanelOpen = true; // Always "open", just retracted
-        this.isHovering = false;
+        this.isPanelOpen = false;
         this.characters = [];
         this.showMovementControls = false;
         
         // Resize properties
         this.isResizing = false;
         this.currentWidth = 350;
-        this.minWidth = 350; // Minimum visible width when pulled out
+        this.minWidth = 30;
         this.maxWidth = 600;
-        this.retractedWidth = 0; // Fully retracted (invisible)
         this.collapseThreshold = 350;
         this.expandThreshold = 50;
         
@@ -37,33 +35,28 @@ class CharacterPanel {
 
     initPanel() {
         this.panel = document.getElementById('character-panel');
+        this.toggleBtn = document.getElementById('toggle-panel');
         this.grid = document.getElementById('character-grid');
         this.resizeHandle = document.getElementById('resize-handle');
         
-        if (!this.panel || !this.grid) {
+        if (!this.panel || !this.toggleBtn || !this.grid) {
             console.warn('Character panel elements not found');
             return;
         }
         
-        // Start retracted
-        this.setWidth(this.retractedWidth);
-        this.panel.style.opacity = '0';
-        
         this.setupEventListeners();
         this.setupResizeHandlers();
-        this.setupHoverDetection();
         this.initializePanelContent();
     }
 
     setupEventListeners() {
-        // Remove toggle button dependency
+        this.toggleBtn.addEventListener('click', () => this.togglePanel());
         
         // Add event delegation for character clicks
         this.panel.addEventListener('click', (e) => {
-            // If panel is retracted and user clicks on it, pull it out
-            if (this.currentWidth < this.minWidth) {
-                console.log('🚀 CLICK TRIGGER! Pulling out panel via panel click');
-                this.pullOutPanel();
+            // If panel is closed and user clicks on it, snap it open
+            if (!this.isPanelOpen) {
+                this.openPanel();
                 e.stopPropagation();
                 return;
             }
@@ -78,54 +71,24 @@ class CharacterPanel {
         });
     }
 
-    setupHoverDetection() {
-        let hoverTimeout;
-        
-        document.addEventListener('mousemove', (e) => {
-            const rightEdgeDistance = window.innerWidth - e.clientX;
-            const shouldHover = rightEdgeDistance <= 100;
-            
-            if (shouldHover && !this.isHovering && this.currentWidth < this.minWidth) {
-                this.isHovering = true;
-                console.log('🖱️ Hover detected, showing preview');
-                this.showPreview();
-                
-                // Clear any existing timeout
-                if (hoverTimeout) clearTimeout(hoverTimeout);
-                
-            } else if (!shouldHover && this.isHovering) {
-                // Delay hiding to prevent flickering
-                hoverTimeout = setTimeout(() => {
-                    if (!this.isResizing && this.currentWidth < this.minWidth) {
-                        this.isHovering = false;
-                        console.log('🖱️ Hover ended, hiding preview');
-                        this.hidePreview();
-                    }
-                }, 200);
-            }
-        });
-    }
-
     setupResizeHandlers() {
         if (!this.resizeHandle) return;
 
         let startX, startWidth, triggerDistance = 0;
 
         const startResize = (e) => {
-            console.log('🎯 Start resize, current width:', this.currentWidth);
             this.isResizing = true;
             startX = e.clientX || e.touches[0].clientX;
             triggerDistance = 0;
             
-            if (this.currentWidth < this.minWidth) {
-                startWidth = 0; // Start from retracted position
-                console.log('📏 Starting from retracted position');
+            if (!this.isPanelOpen) {
+                startWidth = 0; // Start from closed position
             } else {
                 startWidth = parseInt(document.defaultView.getComputedStyle(this.panel).width, 10);
-                console.log('📏 Starting width:', startWidth);
             }
             
             this.resizeHandle.classList.add('dragging');
+            this.resizeHandle.classList.remove('trigger-zone');
             document.body.style.cursor = 'ew-resize';
             document.body.style.userSelect = 'none';
             
@@ -138,22 +101,20 @@ class CharacterPanel {
             const clientX = e.clientX || e.touches[0].clientX;
             const diff = startX - clientX;
             
-            if (this.currentWidth < this.minWidth) {
+            if (!this.isPanelOpen) {
                 // Track how far user has pulled from the right edge
                 triggerDistance = Math.max(0, diff);
-                console.log('🖱️ Trigger distance:', triggerDistance);
                 
-                // If pulled 30px or more, pull out panel
+                // If pulled 30px or more, snap panel open
                 if (triggerDistance >= 30) {
-                    console.log('🚀 TRIGGER! Pulling out panel');
-                    this.pullOutPanel();
-                    // Reset for continued resizing from pulled out state
+                    this.openPanel();
+                    // Reset for continued resizing from open state
                     startX = clientX;
-                    startWidth = this.minWidth;
+                    startWidth = this.collapseThreshold;
                     triggerDistance = 0;
                 }
             } else {
-                // Normal resize when panel is pulled out
+                // Normal resize when panel is open
                 let newWidth = startWidth + diff;
                 newWidth = Math.max(this.minWidth, Math.min(this.maxWidth, newWidth));
                 this.setWidth(newWidth);
@@ -171,8 +132,14 @@ class CharacterPanel {
             document.body.style.cursor = '';
             document.body.style.userSelect = '';
             
-            // Handle auto-retract/expand logic
-            this.handleResizeEnd();
+            // Auto-collapse or expand logic
+            if (this.currentWidth < this.collapseThreshold) {
+                this.collapsePanel();
+            } else if (this.panel.classList.contains('collapsed') && this.currentWidth > this.expandThreshold) {
+                this.expandPanel();
+            }
+            
+            this.updateHandlePosition();
         };
 
         // Mouse events
@@ -185,12 +152,10 @@ class CharacterPanel {
         document.addEventListener('touchmove', doResize);
         document.addEventListener('touchend', stopResize);
         
-        // Click handler for snap-open when panel is retracted
+        // Click handler for snap-open when panel is closed
         this.resizeHandle.addEventListener('click', (e) => {
-            console.log('🖱️ Handle clicked, current width:', this.currentWidth, 'is resizing:', this.isResizing);
-            if (this.currentWidth < this.minWidth && !this.isResizing) {
-                console.log('🚀 CLICK TRIGGER! Pulling out panel via handle click');
-                this.pullOutPanel();
+            if (!this.isPanelOpen && !this.isResizing) {
+                this.openPanel();
                 e.stopPropagation();
             }
         });
@@ -202,64 +167,31 @@ class CharacterPanel {
     setWidth(width) {
         this.currentWidth = width;
         this.panel.style.width = width + 'px';
-        
-        // Update right position for retracted state
-        if (width === this.retractedWidth) {
-            this.panel.style.right = '-350px';
-        } else {
-            this.panel.style.right = '0px';
-        }
-    }
-
-    showPreview() {
-        this.setWidth(this.minWidth);
-        this.panel.style.opacity = '0.5';
-        this.panel.style.transition = 'all 0.3s ease';
-        this.updateHandlePosition();
-    }
-
-    hidePreview() {
-        this.setWidth(this.retractedWidth);
-        this.panel.style.opacity = '0';
-        this.updateHandlePosition();
-    }
-
-    pullOutPanel() {
-        this.isHovering = false;
-        this.setWidth(this.minWidth);
-        this.panel.style.opacity = '1';
-        this.panel.style.transition = 'all 0.3s ease';
-        this.updateHandlePosition();
-    }
-
-    retractPanel() {
-        this.isHovering = false;
-        this.setWidth(this.retractedWidth);
-        this.panel.style.opacity = '0';
-        this.updateHandlePosition();
     }
 
     updateHandlePosition() {
         if (!this.resizeHandle) return;
         
-        console.log('🔧 Updating handle position, current width:', this.currentWidth);
-        
-        if (this.currentWidth < this.minWidth) {
-            // Handle stays at right edge when retracted
+        if (!this.isPanelOpen) {
+            // Show trigger zone when panel is closed
             this.resizeHandle.classList.add('trigger-zone');
+            this.resizeHandle.style.right = '0px';
         } else {
-            // Position handle next to visible panel
+            // Position handle next to open panel
             this.resizeHandle.classList.remove('trigger-zone');
+            this.resizeHandle.style.right = (this.currentWidth - 8) + 'px';
         }
     }
 
-    // Auto-collapse/expand logic for resize end
-    handleResizeEnd() {
-        if (this.currentWidth < this.collapseThreshold) {
-            this.retractPanel();
-        } else if (this.currentWidth < this.minWidth) {
-            this.pullOutPanel();
-        }
+    collapsePanel() {
+        this.panel.classList.add('collapsed');
+        this.setWidth(this.minWidth);
+        this.updateHandlePosition();
+    }
+
+    expandPanel() {
+        this.panel.classList.remove('collapsed');
+        this.setWidth(this.collapseThreshold);
         this.updateHandlePosition();
     }
 
@@ -380,6 +312,37 @@ class CharacterPanel {
         );
     }
 
+    // Panel management
+    togglePanel() {
+        this.isPanelOpen = !this.isPanelOpen;
+        this.panel.classList.toggle('open', this.isPanelOpen);
+        this.toggleBtn.textContent = this.isPanelOpen ? '✖️' : '📖';
+        
+        // Reset to default width when opening
+        if (this.isPanelOpen) {
+            this.expandPanel();
+        }
+        this.updateHandlePosition();
+    }
+
+    openPanel() {
+        this.isPanelOpen = true;
+        this.panel.classList.add('open');
+        this.toggleBtn.textContent = '✖️';
+        this.expandPanel();
+        this.updateHandlePosition();
+    }
+
+    closePanel() {
+        this.isPanelOpen = false;
+        this.panel.classList.remove('open');
+        this.toggleBtn.textContent = '📖';
+        // Reset width when closing
+        this.setWidth(this.collapseThreshold);
+        this.panel.classList.remove('collapsed');
+        this.updateHandlePosition();
+    }
+
     // Character grid management
     populateCharacterGrid(characters = this.characters) {
         if (!this.grid) return;
@@ -469,9 +432,9 @@ class CharacterPanel {
             return;
         }
 
-        // Retract panel on mobile
+        // Close panel on mobile
         if (window.innerWidth <= 768) {
-            this.retractPanel();
+            this.closePanel();
         }
     }
 

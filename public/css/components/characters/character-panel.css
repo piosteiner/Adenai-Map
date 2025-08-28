@@ -3,7 +3,7 @@
 /* Main Panel Structure */
 .character-panel {
   position: fixed;
-  right: 0;
+  right: -350px;
   top: 0;
   width: 350px;
   min-width: 30px; /* Minimum width for sliver mode */
@@ -12,40 +12,51 @@
   background: var(--popup-bg);
   color: var(--text-color);
   z-index: 1001;
-  transition: all 0.3s ease; /* Smooth transitions for width, opacity, and position */
+  transition: right 0.3s ease, width 0.3s ease;
   box-shadow: -2px 0 10px rgba(0,0,0,0.3);
   overflow-y: auto;
-  opacity: 0; /* Start invisible */
 }
 
-/* Remove old open/collapsed states - no longer needed */
+.character-panel.open {
+  right: 0;
+}
+
+/* Collapsed/Sliver mode */
+.character-panel.collapsed {
+  width: 30px !important;
+  overflow: hidden;
+}
+
+.character-panel.collapsed .panel-content,
+.character-panel.collapsed .panel-header h3 {
+  display: none;
+}
 
 /* Resize Handle */
 .resize-handle {
   position: fixed;
-  right: 0; /* Always at right edge */
+  right: -8px; /* Hidden when panel is closed */
   top: 0;
-  width: 3px; /* Thin trigger zone when retracted */
+  width: 8px;
   height: 100vh; /* Full screen height */
-  background: transparent;
+  background: rgba(0, 0, 0, 0.1);
   cursor: ew-resize;
   z-index: 1003; /* Above panel */
   border-left: 2px solid transparent;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
-/* Show full handle when panel is visible */
-.resize-handle:not(.trigger-zone) {
-  right: 350px; /* Panel width */
-  width: 8px;
-  background: rgba(0, 0, 0, 0.1);
+/* Show handle when panel is open */
+.character-panel.open .resize-handle {
+  right: 342px; /* Panel width (350px) - handle width (8px) */
 }
 
-/* Trigger zone stays at edge */
+/* Always show a thin trigger area when panel is closed */
 .resize-handle.trigger-zone {
   right: 0 !important;
-  width: 3px !important;
-  background: transparent !important;
+  width: 3px;
+  background: transparent;
+  opacity: 0.5;
 }
 
 .resize-handle:hover {
