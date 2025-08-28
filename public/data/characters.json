@@ -512,8 +512,8 @@
       "title": "",
       "placeOfOrigin": "Barbenfall",
       "coordinates": [
-        1082,
-        967
+        960,
+        849
       ],
       "description": "",
       "image": "",
@@ -602,23 +602,39 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-28T07:57:23.788Z"
+        },
+        {
+          "id": "movement_1756367861135",
+          "movement_nr": 5,
+          "date": "5663-01-06",
+          "dateStart": "5663-01-06",
+          "dateEnd": null,
+          "location": "Theos Hof",
+          "coordinates": [
+            960,
+            849
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T07:57:41.135Z"
         }
       ],
       "createdAt": "2025-08-28T07:55:48.310Z",
-      "updatedAt": "2025-08-28T07:57:23.788Z",
+      "updatedAt": "2025-08-28T07:57:41.135Z",
       "currentLocation": {
-        "date": "5663-01-04",
-        "dateStart": "5663-01-04",
+        "date": "5663-01-06",
+        "dateStart": "5663-01-06",
         "dateEnd": null,
-        "location": "Nordmund",
+        "location": "Theos Hof",
         "coordinates": [
-          1082,
-          967
+          960,
+          849
         ],
         "notes": ""
       },
-      "location": "Nordmund"
+      "location": "Theos Hof"
     }
   ],
-  "lastUpdated": "2025-08-28T07:57:23.788Z"
+  "lastUpdated": "2025-08-28T07:57:41.135Z"
 }
