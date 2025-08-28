@@ -159,6 +159,55 @@ window.testMovement = async function() {
     }
 };
 
+window.debugCharacters = function() {
+    console.log('🔍 Debugging character panel...');
+    
+    // Check if character system is available
+    if (window.characterSystem) {
+        const characters = window.characterSystem.getCharacters();
+        console.log('📋 Characters from character system:', characters.length);
+        characters.forEach(char => {
+            console.log(`  - ${char.name} (ID: ${char.id})`);
+            console.log(`    Has movement history: ${char.movementHistory ? char.movementHistory.length : 'NO'}`);
+            console.log(`    Checkbox should be: ${char.movementHistory && char.movementHistory.length > 0 ? 'ENABLED' : 'DISABLED'}`);
+        });
+    } else {
+        console.log('❌ Character system not available');
+    }
+    
+    // Check movement system paths
+    if (window.movementSystem) {
+        console.log('🛤️ Movement system paths:', window.movementSystem.characterPaths.length);
+        window.movementSystem.characterPaths.forEach(path => {
+            console.log(`  - ${path.character.name} (ID: ${path.character.id})`);
+            console.log(`    Points: ${path.points ? path.points.length : 'NO POINTS'}`);
+        });
+    }
+    
+    // Check if panel is open
+    const panel = document.getElementById('character-panel');
+    if (panel) {
+        console.log('📖 Panel exists, classes:', panel.className);
+        const checkboxes = panel.querySelectorAll('input[type="checkbox"]');
+        console.log(`🔲 Found ${checkboxes.length} checkboxes in panel`);
+        checkboxes.forEach(cb => {
+            console.log(`  - ${cb.id}: enabled=${!cb.disabled}, checked=${cb.checked}`);
+        });
+    } else {
+        console.log('❌ Character panel element not found');
+    }
+};
+
 window.createTestPaths = function() {
     window.createTestCharacterPaths();
+};
+
+window.refreshCharacterPanel = function() {
+    console.log('🔄 Refreshing character panel...');
+    if (window.characterPanel) {
+        window.characterPanel.populateCharacterGrid();
+        console.log('✅ Character panel refreshed');
+    } else {
+        console.log('❌ Character panel not available');
+    }
 };
