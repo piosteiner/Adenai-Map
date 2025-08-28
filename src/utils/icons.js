@@ -3,7 +3,7 @@
 
 function initializeMapOverlays() {
     // Check if map is available
-    if (typeof map === 'undefined' || !map) {
+    if (typeof window.map === 'undefined' || !window.map) {
         console.warn('🖼️ Map not ready yet, waiting for initialization...');
         return;
     }
@@ -20,7 +20,7 @@ function initializeMapOverlays() {
         //Map Expansion
         L.imageOverlay('public/images/mapextension_east.png', mapextension1, {
           interactive: false
-        }).addTo(map);
+        }).addTo(window.map);
 
         ///---------------------
 
@@ -33,7 +33,7 @@ function initializeMapOverlays() {
         //Goblin Hole
         L.imageOverlay('public/images/goblin_hole.png', goblinhole, {
           interactive: false
-        }).addTo(map);
+        }).addTo(window.map);
 
         ///---------------------
 
@@ -46,7 +46,7 @@ function initializeMapOverlays() {
         //Ship to Motu Motu
         L.imageOverlay('public/images/vsuzh_ship_mirrored.png', ship1, {
           interactive: false
-        }).addTo(map);
+        }).addTo(window.map);
 
         ///---------------------
 
@@ -59,7 +59,7 @@ function initializeMapOverlays() {
         //Ship flying down
         L.imageOverlay('public/images/vsuzh_ship_fly.png', shipfly, {
           interactive: false
-        }).addTo(map);
+        }).addTo(window.map);
 
         ///---------------------
 
@@ -72,7 +72,7 @@ function initializeMapOverlays() {
         //Ship to Upeto
         L.imageOverlay('public/images/vsuzh_ship.png', ship2, {
           interactive: false
-        }).addTo(map);
+        }).addTo(window.map);
 
         ///---------------------
 
@@ -85,7 +85,7 @@ function initializeMapOverlays() {
         //Atlantis Underwater
         L.imageOverlay('public/images/atlantis_bubble.png', atlantisBubble, {
           interactive: false
-        }).addTo(map);
+        }).addTo(window.map);
 
         ///---------------------
 
@@ -98,7 +98,7 @@ function initializeMapOverlays() {
         //Atlantis Flying
         L.imageOverlay('public/images/atlantis_clouds.png', atlantisClouds, {
           interactive: false
-        }).addTo(map);
+        }).addTo(window.map);
 
         ///---------------------
 
@@ -127,7 +127,7 @@ function initializeMapOverlays() {
 }
 
 // Initialize when map is ready
-if (typeof map !== 'undefined' && map) {
+if (typeof window.map !== 'undefined' && window.map) {
     // Map already available
     initializeMapOverlays();
 } else {
@@ -136,7 +136,7 @@ if (typeof map !== 'undefined' && map) {
     
     // Fallback: try again after a short delay
     setTimeout(() => {
-        if (typeof map !== 'undefined' && map && document.getElementById('map')) {
+        if (typeof window.map !== 'undefined' && window.map && document.getElementById('map')) {
             initializeMapOverlays();
         }
     }, 500);
