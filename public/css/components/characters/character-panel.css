@@ -12,9 +12,21 @@
   background: var(--popup-bg);
   color: var(--text-color);
   z-index: 1001;
-  transition: right 0.3s ease, width 0.3s ease;
+  transition: width 0.3s ease;
   box-shadow: -2px 0 10px rgba(0,0,0,0.3);
   overflow-y: auto;
+}
+
+/* Add hover effect for collapsed panel */
+.character-panel.collapsed {
+  width: 30px !important;
+  overflow: hidden;
+  cursor: pointer;
+  transition: width 0.3s ease, box-shadow 0.3s ease;
+}
+
+.character-panel.collapsed:hover {
+  box-shadow: -4px 0 15px rgba(0,0,0,0.4);
 }
 
 /* Panel is always visible, .open class not needed anymore but kept for compatibility */
@@ -23,9 +35,16 @@
 }
 
 /* Collapsed/Sliver mode */
+/* Add hover effect for collapsed panel */
 .character-panel.collapsed {
   width: 30px !important;
   overflow: hidden;
+  cursor: pointer;
+  transition: width 0.3s ease, box-shadow 0.3s ease;
+}
+
+.character-panel.collapsed:hover {
+  box-shadow: -4px 0 15px rgba(0,0,0,0.4);
 }
 
 .character-panel.collapsed .panel-content,

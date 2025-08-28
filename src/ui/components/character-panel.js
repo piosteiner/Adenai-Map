@@ -8,6 +8,11 @@ class CharacterPanel {
         this.characters = [];
         this.showMovementControls = false;
         
+        // Hover behavior properties
+        this.hoverTimer = null;
+        this.hoverDelay = 200; // 200ms delay
+        this.isHoverExpanded = false; // Track if panel was expanded by hover
+        
         // Resize properties
         this.isResizing = false;
         this.currentWidth = 30; // Start in collapsed state
@@ -62,6 +67,64 @@ class CharacterPanel {
                 }
             }
         });
+
+        // Hover behavior for auto-expand
+        this.setupHoverBehavior();
+    }
+
+    setupHoverBehavior() {
+        // Hover on panel to expand when collapsed
+        this.panel.addEventListener('mouseenter', () => {
+            if (this.panel.classList.contains('collapsed') && !this.isResizing) {
+                this.startHoverTimer();
+            }
+        });
+
+        this.panel.addEventListener('mouseleave', () => {
+            this.clearHoverTimer();
+            // Auto-collapse if it was expanded by hover and user leaves
+            if (this.isHoverExpanded && !this.isResizing) {
+                this.collapsePanel();
+                this.isHoverExpanded = false;
+            }
+        });
+
+        // Also trigger on resize handle hover when panel is collapsed
+        this.resizeHandle?.addEventListener('mouseenter', () => {
+            if (this.panel.classList.contains('collapsed') && !this.isResizing) {
+                this.startHoverTimer();
+            }
+        });
+
+        this.resizeHandle?.addEventListener('mouseleave', () => {
+            // Only clear timer if not over the panel itself
+            setTimeout(() => {
+                if (!this.panel.matches(':hover')) {
+                    this.clearHoverTimer();
+                    if (this.isHoverExpanded && !this.isResizing) {
+                        this.collapsePanel();
+                        this.isHoverExpanded = false;
+                    }
+                }
+            }, 50); // Small delay to allow moving from handle to panel
+        });
+    }
+
+    startHoverTimer() {
+        this.clearHoverTimer(); // Clear any existing timer
+        this.hoverTimer = setTimeout(() => {
+            if (this.panel.classList.contains('collapsed')) {
+                this.expandPanel();
+                this.isHoverExpanded = true;
+            }
+        }, this.hoverDelay);
+    }
+
+    clearHoverTimer() {
+        if (this.hoverTimer) {
+            clearTimeout(this.hoverTimer);
+            this.hoverTimer = null;
+        }
     }
 
     setupResizeHandlers() {
@@ -73,6 +136,10 @@ class CharacterPanel {
             this.isResizing = true;
             startX = e.clientX || e.touches[0].clientX;
             startWidth = parseInt(document.defaultView.getComputedStyle(this.panel).width, 10);
+            
+            // Clear hover state when user starts dragging
+            this.clearHoverTimer();
+            this.isHoverExpanded = false;
             
             this.resizeHandle.classList.add('dragging');
             this.resizeHandle.classList.remove('trigger-zone');
@@ -146,6 +213,9 @@ class CharacterPanel {
         this.panel.classList.add('collapsed');
         this.setWidth(this.minWidth);
         this.updateHandlePosition();
+        // Clear hover state when collapsing
+        this.clearHoverTimer();
+        this.isHoverExpanded = false;
     }
 
     expandPanel() {
