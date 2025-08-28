@@ -2,10 +2,9 @@
 class CharacterPanel {
     constructor() {
         this.panel = null;
-        this.toggleBtn = null;
         this.grid = null;
         this.resizeHandle = null;
-        this.isPanelOpen = false;
+        this.isPanelOpen = false; // Default to closed/retracted
         this.characters = [];
         this.showMovementControls = false;
         
@@ -35,11 +34,10 @@ class CharacterPanel {
 
     initPanel() {
         this.panel = document.getElementById('character-panel');
-        this.toggleBtn = document.getElementById('toggle-panel');
         this.grid = document.getElementById('character-grid');
         this.resizeHandle = document.getElementById('resize-handle');
         
-        if (!this.panel || !this.toggleBtn || !this.grid) {
+        if (!this.panel || !this.grid) {
             console.warn('Character panel elements not found');
             return;
         }
@@ -50,8 +48,6 @@ class CharacterPanel {
     }
 
     setupEventListeners() {
-        this.toggleBtn.addEventListener('click', () => this.togglePanel());
-        
         // Add event delegation for character clicks
         this.panel.addEventListener('click', (e) => {
             const characterInfo = e.target.closest('.character-info');
@@ -73,7 +69,7 @@ class CharacterPanel {
             this.isResizing = true;
             startX = e.clientX || e.touches[0].clientX;
             
-            // If panel is closed, trigger open on any interaction
+            // If panel is closed, open it when user starts interacting with resize handle
             if (!this.isPanelOpen) {
                 this.openPanel();
                 startWidth = this.collapseThreshold;
@@ -131,6 +127,14 @@ class CharacterPanel {
         this.resizeHandle.addEventListener('touchstart', startResize);
         document.addEventListener('touchmove', doResize);
         document.addEventListener('touchend', stopResize);
+        
+        // Click to open panel when closed
+        this.resizeHandle.addEventListener('click', (e) => {
+            if (!this.isPanelOpen && !this.isResizing) {
+                this.openPanel();
+                e.preventDefault();
+            }
+        });
         
         // Initialize handle position
         this.updateHandlePosition();
@@ -285,22 +289,9 @@ class CharacterPanel {
     }
 
     // Panel management
-    togglePanel() {
-        this.isPanelOpen = !this.isPanelOpen;
-        this.panel.classList.toggle('open', this.isPanelOpen);
-        this.toggleBtn.textContent = this.isPanelOpen ? '✖️' : '📖';
-        
-        // Reset to default width when opening
-        if (this.isPanelOpen) {
-            this.expandPanel();
-        }
-        this.updateHandlePosition();
-    }
-
     openPanel() {
         this.isPanelOpen = true;
         this.panel.classList.add('open');
-        this.toggleBtn.textContent = '✖️';
         this.expandPanel();
         this.updateHandlePosition();
     }
@@ -308,7 +299,6 @@ class CharacterPanel {
     closePanel() {
         this.isPanelOpen = false;
         this.panel.classList.remove('open');
-        this.toggleBtn.textContent = '📖';
         // Reset width when closing
         this.setWidth(this.collapseThreshold);
         this.panel.classList.remove('collapsed');

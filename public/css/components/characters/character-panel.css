@@ -54,9 +54,16 @@
 /* Always show a thin trigger area when panel is closed */
 .resize-handle.trigger-zone {
   right: 0 !important;
-  width: 3px;
-  background: transparent;
-  opacity: 0.5;
+  width: 8px; /* Make it a bit wider for easier interaction */
+  background: rgba(76, 175, 80, 0.3); /* Slightly visible background */
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.resize-handle.trigger-zone:hover {
+  background: rgba(76, 175, 80, 0.5);
+  opacity: 1;
+  width: 12px; /* Expand on hover for better feedback */
 }
 
 .resize-handle:hover {
@@ -89,8 +96,25 @@
   transition: opacity 0.2s ease;
 }
 
+/* When in trigger zone mode (panel closed), show a different indicator */
+.resize-handle.trigger-zone::before {
+  content: '◀';
+  font-size: 12px;
+  color: rgba(76, 175, 80, 0.8);
+  background: none;
+  width: auto;
+  height: auto;
+  left: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .resize-handle:hover::before {
   opacity: 1;
+}
+
+.resize-handle.trigger-zone:hover::before {
+  color: rgba(76, 175, 80, 1);
 }
 
 .panel-header {
