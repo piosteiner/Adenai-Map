@@ -558,11 +558,23 @@ class MovementSystem {
         const characterName = clusterMarker._characterName;
         const centerLatLng = clusterMarker.getLatLng();
         
-        const radius = 50; // Radius for fan out in pixels
-        const angleStep = (2 * Math.PI) / movements.length;
+        // Spiral configuration
+        const baseRadius = 40; // Starting radius in pixels
+        const radiusIncrement = 15; // How much radius increases per revolution
+        const itemsPerRevolution = 6; // How many items before increasing radius
         
         movements.forEach((movement, index) => {
-            const angle = index * angleStep;
+            // Calculate spiral position
+            const revolutionIndex = Math.floor(index / itemsPerRevolution);
+            const positionInRevolution = index % itemsPerRevolution;
+            
+            // Start from top (0 degrees = top) and go clockwise
+            const angleStep = (2 * Math.PI) / itemsPerRevolution;
+            const angle = (positionInRevolution * angleStep) - (Math.PI / 2); // -π/2 to start from top
+            
+            // Calculate radius for this position (spiral outward)
+            const radius = baseRadius + (revolutionIndex * radiusIncrement);
+            
             const offsetX = Math.cos(angle) * radius;
             const offsetY = Math.sin(angle) * radius;
             
@@ -572,7 +584,7 @@ class MovementSystem {
             const fanPoint = L.point(centerPoint.x + offsetX, centerPoint.y + offsetY);
             const fanLatLng = map.containerPointToLatLng(fanPoint);
             
-            // Create individual marker for fanning out
+            // Create individual marker for fanning out (same size as regular markers)
             const markerNumber = (movement.movement_nr || 0) + 1;
             const isDarkMode = document.body.classList.contains('dark-mode') || 
                               document.documentElement.classList.contains('dark-mode') ||
@@ -580,13 +592,13 @@ class MovementSystem {
 
             const fanMarkerHtml = `
                 <div class="movement-marker fan-marker" style="
-                    width: 20px;
-                    height: 20px;
+                    width: 24px;
+                    height: 24px;
                     border-radius: 50%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    font-size: 10px;
+                    font-size: 12px;
                     font-weight: bold;
                     position: relative;
                     cursor: pointer;
@@ -603,8 +615,8 @@ class MovementSystem {
             const fanIcon = L.divIcon({
                 html: fanMarkerHtml,
                 className: 'movement-marker-icon fan-icon',
-                iconSize: [20, 20],
-                iconAnchor: [10, 10]
+                iconSize: [24, 24],
+                iconAnchor: [12, 12]
             });
 
             const fanMarker = L.marker(fanLatLng, { icon: fanIcon });
@@ -628,22 +640,22 @@ class MovementSystem {
                 permanent: false,
                 sticky: true,
                 direction: 'top',
-                offset: [0, -10]
+                offset: [0, -12]
             });
             
             fanMarker.addTo(map);
             
-            // Animate the fan out
+            // Animate the fan out with spiral timing
             setTimeout(() => {
                 const element = fanMarker.getElement();
                 if (element) {
                     const markerDiv = element.querySelector('.fan-marker');
                     if (markerDiv) {
                         markerDiv.style.transform = 'scale(1)';
-                        markerDiv.style.animation = 'fanOut 0.3s ease-out';
+                        markerDiv.style.animation = 'fanOut 0.4s ease-out';
                     }
                 }
-            }, index * 50); // Stagger the animation
+            }, index * 60); // Slightly longer stagger for spiral effect
             
             clusterMarker._fanMarkers.push(fanMarker);
         });
