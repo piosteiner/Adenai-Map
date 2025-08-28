@@ -109,16 +109,22 @@ class CharPathAPI {
         const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
 
         try {
+            console.log(`🌐 Attempting fetch to: ${this.apiBaseUrl}`);
+            
             const response = await fetch(this.apiBaseUrl, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                signal: controller.signal
+                signal: controller.signal,
+                cache: 'no-cache' // Force fresh request
             });
 
             clearTimeout(timeoutId);
+            
+            console.log(`📊 API Response - Status: ${response.status}, StatusText: ${response.statusText}`);
+            console.log(`📊 API Response Headers:`, [...response.headers.entries()]);
 
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -143,8 +149,21 @@ class CharPathAPI {
         } catch (error) {
             clearTimeout(timeoutId);
             
+            console.error('🚨 Detailed fetch error:', {
+                name: error.name,
+                message: error.message,
+                stack: error.stack,
+                url: this.apiBaseUrl,
+                timestamp: new Date().toISOString()
+            });
+            
             if (error.name === 'AbortError') {
-                throw new Error('API request timeout');
+                throw new Error('API request timeout (10 seconds)');
+            }
+            
+            // Check for common network errors
+            if (error.message.includes('Failed to fetch') || error.message.includes('Network error')) {
+                throw new Error(`Network error: Unable to connect to ${this.apiBaseUrl}`);
             }
             
             throw error;

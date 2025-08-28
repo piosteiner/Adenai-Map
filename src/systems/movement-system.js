@@ -27,12 +27,21 @@ class MovementSystem {
     // API-only path loading and display
     async loadAndDisplayPaths() {
         try {
+            console.log('🚀 Starting path loading process...');
             const apiData = await this.pathManager.loadCharacterPaths();
+            console.log('✅ API data received, processing paths...');
+            
             this.displayPaths(apiData.paths);
+            console.log('✅ Paths displayed successfully');
             
             // Load character data for markers
+            console.log('🎯 Loading character movement markers...');
             await this.loadCharacterMovementMarkers();
+            console.log('✅ Movement markers loaded successfully');
+            
         } catch (error) {
+            console.error('❌ Error in loadAndDisplayPaths:', error);
+            console.error('❌ Error stack:', error.stack);
             console.error('❌ Character Paths API unavailable');
             this.showError('Character movement data unavailable. Please contact developer through GitHub.');
         }
@@ -65,6 +74,7 @@ class MovementSystem {
 
     // Display paths on the map
     displayPaths(paths) {
+        console.log('🗺️ Starting displayPaths with data:', paths);
         const map = window.mapCore.getMap();
         
         if (!map) {
@@ -72,11 +82,17 @@ class MovementSystem {
             return;
         }
         
+        console.log('✅ Map available for path display');
+        
         // Hide existing paths before loading new ones
         this.hideAllPaths();
+        console.log('🧹 Existing paths hidden');
         
-        Object.values(paths).forEach((pathInfo) => {
-            if (pathInfo.type === 'movement' && pathInfo.coordinates.length >= 2) {
+        try {
+            Object.values(paths).forEach((pathInfo, index) => {
+                console.log(`🛤️ Processing path ${index + 1}:`, pathInfo.name || pathInfo.id);
+                
+                if (pathInfo.type === 'movement' && pathInfo.coordinates.length >= 2) {
                 // Create path line using server-provided styling
                 const pathLine = L.polyline(pathInfo.coordinates, {
                     color: pathInfo.style.color,
@@ -116,6 +132,13 @@ class MovementSystem {
                 });
             }
         });
+        
+        console.log('✅ All paths processed successfully');
+        
+        } catch (pathError) {
+            console.error('❌ Error in displayPaths:', pathError);
+            throw pathError; // Re-throw to be caught by parent
+        }
         
         // Show VsuzH markers by default (after markers are loaded)
         setTimeout(() => {
