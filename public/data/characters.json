@@ -586,10 +586,26 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-28T07:57:21.874Z"
+        },
+        {
+          "id": "movement_1756367843788",
+          "movement_nr": 4,
+          "date": "5663-01-04",
+          "dateStart": "5663-01-04",
+          "dateEnd": null,
+          "location": "Nordmund",
+          "coordinates": [
+            1082,
+            967
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T07:57:23.788Z"
         }
       ],
       "createdAt": "2025-08-28T07:55:48.310Z",
-      "updatedAt": "2025-08-28T07:57:21.874Z",
+      "updatedAt": "2025-08-28T07:57:23.788Z",
       "currentLocation": {
         "date": "5663-01-04",
         "dateStart": "5663-01-04",
@@ -604,5 +620,5 @@
       "location": "Nordmund"
     }
   ],
-  "lastUpdated": "2025-08-28T07:57:21.874Z"
+  "lastUpdated": "2025-08-28T07:57:23.788Z"
 }
