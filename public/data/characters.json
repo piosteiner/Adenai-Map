@@ -396,7 +396,38 @@
       ],
       "createdAt": "2025-08-27T10:32:15.038Z",
       "updatedAt": "2025-08-27T10:59:16.555Z"
+    },
+    {
+      "id": "test2",
+      "name": "Test2",
+      "title": "",
+      "placeOfOrigin": "Atlantis (versunken)",
+      "coordinates": [
+        2210,
+        975
+      ],
+      "description": "",
+      "image": "",
+      "status": "missing",
+      "faction": "",
+      "relationship": "hostile",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-28T04:31:45.676Z",
+      "updatedAt": "2025-08-28T04:31:45.676Z",
+      "currentLocation": {
+        "location": "Atlantis (versunken)",
+        "date": "2025-08-28",
+        "dateStart": "2025-08-28",
+        "dateEnd": null,
+        "coordinates": [
+          2210,
+          975
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2025-08-27T18:07:32.568Z"
+  "lastUpdated": "2025-08-28T04:31:45.676Z"
 }
