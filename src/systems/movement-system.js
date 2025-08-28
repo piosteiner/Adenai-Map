@@ -340,6 +340,12 @@ class MovementSystem {
         }
     }
 
+    // Get character path color by character ID
+    getCharacterPathColor(characterId) {
+        const pathData = this.characterPaths.find(path => path.character?.id === characterId);
+        return pathData?.style?.color || '#333333'; // Default dark color if not found
+    }
+
     // Create markers for a character's movement history
     createCharacterMovementMarkers(characterData) {
         const markers = [];
@@ -371,7 +377,7 @@ class MovementSystem {
             if (movements.length === 1) {
                 // Single marker
                 const movement = movements[0];
-                const marker = this.createSingleMovementMarker(mapCoords, movement, characterData.name);
+                const marker = this.createSingleMovementMarker(mapCoords, movement, characterData.name, characterData.id);
                 
                 if (marker) {
                     markers.push({
@@ -385,7 +391,7 @@ class MovementSystem {
                 }
             } else {
                 // Clustered markers for same location
-                const clusterMarker = this.createClusteredMovementMarker(mapCoords, movements, characterData.name);
+                const clusterMarker = this.createClusteredMovementMarker(mapCoords, movements, characterData.name, characterData.id);
                 
                 if (clusterMarker) {
                     markers.push({
@@ -403,11 +409,12 @@ class MovementSystem {
     }
 
     // Create a single movement marker
-    createSingleMovementMarker(coordinates, movementData, characterName) {
+    createSingleMovementMarker(coordinates, movementData, characterName, characterId) {
         const map = window.mapCore.getMap();
         if (!map) return null;
 
         const markerNumber = (movementData.movement_nr || 0) + 1;
+        const pathColor = this.getCharacterPathColor(characterId);
         
         const isDarkMode = document.body.classList.contains('dark-mode') || 
                           document.documentElement.classList.contains('dark-mode') ||
@@ -426,10 +433,9 @@ class MovementSystem {
                 position: relative;
                 cursor: pointer;
                 transition: transform 0.2s ease;
-                ${isDarkMode ? 
-                    'background: rgba(0, 0, 0, 0.7); color: white; border: 2px solid white;' :
-                    'background: rgba(255, 255, 255, 0.7); color: black; border: 2px solid black;'
-                }
+                background: ${pathColor};
+                color: white;
+                border: 2px solid white;
             ">${markerNumber}</div>
         `;
 
@@ -450,11 +456,12 @@ class MovementSystem {
     }
 
     // Create a clustered movement marker for multiple visits to same location
-    createClusteredMovementMarker(coordinates, movements, characterName) {
+    createClusteredMovementMarker(coordinates, movements, characterName, characterId) {
         const map = window.mapCore.getMap();
         if (!map) return null;
 
         const count = movements.length;
+        const pathColor = this.getCharacterPathColor(characterId);
         
         const isDarkMode = document.body.classList.contains('dark-mode') || 
                           document.documentElement.classList.contains('dark-mode') ||
@@ -473,7 +480,7 @@ class MovementSystem {
                 position: relative;
                 cursor: pointer;
                 transition: all 0.3s ease;
-                background: #0b6099ff;
+                background: ${pathColor};
                 color: white;
                 border: 3px solid white;
             ">
@@ -493,6 +500,7 @@ class MovementSystem {
         // Store movements data for fanning out
         marker._movements = movements;
         marker._characterName = characterName;
+        marker._characterId = characterId;
         marker._isFannedOut = false;
         marker._fanMarkers = [];
         marker._hoverTimeout = null;
@@ -538,7 +546,9 @@ class MovementSystem {
         clusterMarker._isFannedOut = true;
         const movements = clusterMarker._movements;
         const characterName = clusterMarker._characterName;
+        const characterId = clusterMarker._characterId;
         const centerLatLng = clusterMarker.getLatLng();
+        const pathColor = this.getCharacterPathColor(characterId);
         
         // Spiral configuration
         const baseRadius = 33; // Starting radius in pixels
@@ -568,9 +578,6 @@ class MovementSystem {
             
             // Create individual marker for fanning out (same size as regular markers)
             const markerNumber = (movement.movement_nr || 0) + 1;
-            const isDarkMode = document.body.classList.contains('dark-mode') || 
-                              document.documentElement.classList.contains('dark-mode') ||
-                              window.matchMedia('(prefers-color-scheme: dark)').matches;
 
             const fanMarkerHtml = `
                 <div class="movement-marker fan-marker" style="
@@ -587,10 +594,9 @@ class MovementSystem {
                     transition: all 0.3s ease;
                     transform: scale(0);
                     z-index: 1002;
-                    ${isDarkMode ? 
-                        'background: rgba(0, 0, 0, 0.9); color: white; border: 2px solid white;' :
-                        'background: rgba(255, 255, 255, 0.9); color: black; border: 2px solid black;'
-                    }
+                    background: ${pathColor};
+                    color: white;
+                    border: 2px solid white;
                 ">${markerNumber}</div>
             `;
 
