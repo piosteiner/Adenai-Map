@@ -1,11 +1,24 @@
 // Map Image Overlays - Initialized after map is ready
 // Waits for map initialization before adding overlays
 
+// Map Image Overlays - Initialized after map is ready
+// Waits for map initialization before adding overlays
+
 function initializeMapOverlays() {
-    // Check if map is available
-    if (typeof window.map === 'undefined' || !window.map) {
+    // Get map reference using modern approach
+    let map = null;
+    
+    if (window.mapCore && typeof window.mapCore.getMap === 'function') {
+        map = window.mapCore.getMap();
+        console.log('🖼️ Got map from mapCore.getMap()');
+    } else if (window.map) {
+        map = window.map;
+        console.log('🖼️ Got map from window.map');
+    }
+    
+    if (!map) {
         console.warn('🖼️ Map not ready yet, waiting for initialization...');
-        return;
+        return false; // Return false to indicate failure
     }
 
     console.log('🖼️ Initializing map image overlays...');
@@ -20,7 +33,7 @@ function initializeMapOverlays() {
         //Map Expansion
         L.imageOverlay('public/images/mapextension_east.png', mapextension1, {
           interactive: false
-        }).addTo(window.map);
+        }).addTo(map);
 
         ///---------------------
 
@@ -33,7 +46,7 @@ function initializeMapOverlays() {
         //Goblin Hole
         L.imageOverlay('public/images/goblin_hole.png', goblinhole, {
           interactive: false
-        }).addTo(window.map);
+        }).addTo(map);
 
         ///---------------------
 
@@ -46,7 +59,7 @@ function initializeMapOverlays() {
         //Ship to Motu Motu
         L.imageOverlay('public/images/vsuzh_ship_mirrored.png', ship1, {
           interactive: false
-        }).addTo(window.map);
+        }).addTo(map);
 
         ///---------------------
 
@@ -59,7 +72,7 @@ function initializeMapOverlays() {
         //Ship flying down
         L.imageOverlay('public/images/vsuzh_ship_fly.png', shipfly, {
           interactive: false
-        }).addTo(window.map);
+        }).addTo(map);
 
         ///---------------------
 
@@ -72,7 +85,7 @@ function initializeMapOverlays() {
         //Ship to Upeto
         L.imageOverlay('public/images/vsuzh_ship.png', ship2, {
           interactive: false
-        }).addTo(window.map);
+        }).addTo(map);
 
         ///---------------------
 
@@ -85,7 +98,7 @@ function initializeMapOverlays() {
         //Atlantis Underwater
         L.imageOverlay('public/images/atlantis_bubble.png', atlantisBubble, {
           interactive: false
-        }).addTo(window.map);
+        }).addTo(map);
 
         ///---------------------
 
@@ -98,7 +111,7 @@ function initializeMapOverlays() {
         //Atlantis Flying
         L.imageOverlay('public/images/atlantis_clouds.png', atlantisClouds, {
           interactive: false
-        }).addTo(window.map);
+        }).addTo(map);
 
         ///---------------------
 
@@ -120,24 +133,47 @@ function initializeMapOverlays() {
         //L.imageOverlay(atlantisImage, atlantisGeneral2, atlantisOptions).addTo(map);
 
         console.log('✅ Map image overlays initialized successfully');
+        return true; // Return true to indicate success
         
     } catch (error) {
         console.error('❌ Error initializing map overlays:', error);
+        return false; // Return false to indicate failure
     }
 }
 
-// Initialize when map is ready
-if (typeof window.map !== 'undefined' && window.map) {
-    // Map already available
-    initializeMapOverlays();
-} else {
-    // Wait for map initialization event
-    document.addEventListener('adenaiMapInitialized', initializeMapOverlays);
+// Initialize when map is ready - multiple fallback strategies
+function tryInitializeOverlays() {
+    if (initializeMapOverlays()) {
+        return; // Success, stop trying
+    }
     
-    // Fallback: try again after a short delay
+    // If failed, try again after short delay
     setTimeout(() => {
-        if (typeof window.map !== 'undefined' && window.map && document.getElementById('map')) {
-            initializeMapOverlays();
+        if (initializeMapOverlays()) {
+            return; // Success on retry
         }
+        
+        // Final attempt after longer delay
+        setTimeout(() => {
+            initializeMapOverlays();
+        }, 2000);
     }, 500);
+}
+
+// Listen for map initialization event
+document.addEventListener('adenaiMapInitialized', () => {
+    console.log('🖼️ Received adenaiMapInitialized event, attempting overlay initialization');
+    tryInitializeOverlays();
+});
+
+// Listen for DOMContentLoaded as fallback
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🖼️ DOM loaded, attempting overlay initialization');
+    setTimeout(tryInitializeOverlays, 100);
+});
+
+// Immediate attempt if scripts load after map is ready
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    console.log('🖼️ Document already ready, attempting immediate overlay initialization');
+    setTimeout(tryInitializeOverlays, 100);
 }
