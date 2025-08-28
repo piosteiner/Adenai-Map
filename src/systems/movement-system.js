@@ -2,6 +2,7 @@ class MovementSystem {
     constructor() {
         this.characterPaths = [];
         this.movementLayers = [];
+        this.movementMarkers = []; // Track movement location markers
         
         // Initialize Character Path Manager for API integration
         this.pathManager = new CharacterPathManager();
@@ -25,9 +26,37 @@ class MovementSystem {
         try {
             const apiData = await this.pathManager.loadCharacterPaths();
             this.displayPaths(apiData.paths);
+            
+            // Load character data for markers
+            await this.loadCharacterMovementMarkers();
         } catch (error) {
             console.error('❌ Character Paths API unavailable');
             this.showError('Character movement data unavailable. Please contact developer through GitHub.');
+        }
+    }
+
+    // Load character data and create movement markers
+    async loadCharacterMovementMarkers() {
+        try {
+            // Load character data (adjust URL if needed)
+            const response = await fetch('public/data/characters.json');
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            
+            const data = await response.json();
+            const characters = data.characters || [];
+            
+            // Create markers for each character
+            characters.forEach(character => {
+                const characterMarkers = this.createCharacterMovementMarkers(character);
+                this.movementMarkers.push(...characterMarkers);
+            });
+            
+            console.log(`✅ Created ${this.movementMarkers.length} movement markers`);
+            
+        } catch (error) {
+            console.error('❌ Failed to load character movement markers:', error);
         }
     }
 
@@ -85,10 +114,33 @@ class MovementSystem {
             }
         });
         
+        // Show VsuzH markers by default (after markers are loaded)
+        setTimeout(() => {
+            this.showInitialVsuzHMarkers();
+        }, 100);
+        
         // Refresh character panel checkboxes after paths are loaded
         if (window.characterPanel) {
             window.characterPanel.refreshPanel();
         }
+    }
+
+    // Show VsuzH movement markers by default
+    showInitialVsuzHMarkers() {
+        const map = window.mapCore.getMap();
+        if (!map) return;
+
+        this.movementMarkers
+            .filter(markerData => {
+                const isVsuzH = markerData.characterId?.toLowerCase().includes('vsuzh');
+                return isVsuzH;
+            })
+            .forEach(markerData => {
+                if (!map.hasLayer(markerData.marker)) {
+                    markerData.marker.addTo(map);
+                    markerData.isVisible = true;
+                }
+            });
     }
 
     // Show all character paths
@@ -96,10 +148,24 @@ class MovementSystem {
         const map = window.mapCore.getMap();
         if (!map) return;
 
+        // Show all path layers
         this.movementLayers.forEach(layer => {
             if (!map.hasLayer(layer)) {
                 layer.addTo(map);
             }
+        });
+        
+        // Show all movement markers
+        this.movementMarkers.forEach(markerData => {
+            if (!map.hasLayer(markerData.marker)) {
+                markerData.marker.addTo(map);
+                markerData.isVisible = true;
+            }
+        });
+        
+        // Update visibility state for paths
+        this.characterPaths.forEach(pathData => {
+            pathData.isVisible = true;
         });
     }
 
@@ -108,10 +174,24 @@ class MovementSystem {
         const map = window.mapCore.getMap();
         if (!map) return;
 
+        // Hide all path layers
         this.movementLayers.forEach(layer => {
             if (map.hasLayer(layer)) {
                 map.removeLayer(layer);
             }
+        });
+        
+        // Hide all movement markers
+        this.movementMarkers.forEach(markerData => {
+            if (map.hasLayer(markerData.marker)) {
+                map.removeLayer(markerData.marker);
+                markerData.isVisible = false;
+            }
+        });
+        
+        // Update visibility state for paths
+        this.characterPaths.forEach(pathData => {
+            pathData.isVisible = false;
         });
     }
 
@@ -120,11 +200,22 @@ class MovementSystem {
         const map = window.mapCore.getMap();
         if (!map) return false;
 
-        // Find the path layer for this character
+        // Find and show the path layer for this character
         const pathData = this.characterPaths.find(path => path.character?.id === characterId);
         if (pathData && pathData.pathLine && !map.hasLayer(pathData.pathLine)) {
             pathData.pathLine.addTo(map);
             pathData.isVisible = true; // Update visibility state
+            
+            // Also show movement markers for this character
+            this.movementMarkers
+                .filter(markerData => markerData.characterId === characterId)
+                .forEach(markerData => {
+                    if (!map.hasLayer(markerData.marker)) {
+                        markerData.marker.addTo(map);
+                        markerData.isVisible = true;
+                    }
+                });
+            
             return true;
         }
         return false;
@@ -135,23 +226,120 @@ class MovementSystem {
         const map = window.mapCore.getMap();
         if (!map) return false;
 
-        // Find the path layer for this character
+        // Find and hide the path layer for this character
         const pathData = this.characterPaths.find(path => path.character?.id === characterId);
         if (pathData && pathData.pathLine && map.hasLayer(pathData.pathLine)) {
             map.removeLayer(pathData.pathLine);
             pathData.isVisible = false; // Update visibility state
+            
+            // Also hide movement markers for this character
+            this.movementMarkers
+                .filter(markerData => markerData.characterId === characterId)
+                .forEach(markerData => {
+                    if (map.hasLayer(markerData.marker)) {
+                        map.removeLayer(markerData.marker);
+                        markerData.isVisible = false;
+                    }
+                });
+            
             return true;
         }
         return false;
+    }
+
+    // Create numbered marker for movement locations
+    createMovementMarker(coordinates, movementNr, characterName, locationName) {
+        const map = window.mapCore.getMap();
+        if (!map) return null;
+
+        // Create marker number (movement_nr + 1)
+        const markerNumber = (movementNr || 0) + 1;
+        
+        // Detect dark mode (you can adjust this selector based on your theme system)
+        const isDarkMode = document.body.classList.contains('dark-mode') || 
+                          document.documentElement.classList.contains('dark-mode') ||
+                          window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Create custom marker HTML with responsive styling
+        const markerHtml = `
+            <div class="movement-marker" style="
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                font-weight: bold;
+                position: relative;
+                ${isDarkMode ? 
+                    'background: rgba(0, 0, 0, 0.7); color: white; border: 2px solid white;' :
+                    'background: rgba(255, 255, 255, 0.7); color: black; border: 2px solid black;'
+                }
+            ">${markerNumber}</div>
+        `;
+
+        // Create custom icon
+        const customIcon = L.divIcon({
+            html: markerHtml,
+            className: 'movement-marker-icon',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        });
+
+        // Create marker
+        const marker = L.marker(coordinates, { icon: customIcon });
+        
+        // Add tooltip with location info
+        marker.bindTooltip(`${characterName} - Stop ${markerNumber}: ${locationName}`, {
+            permanent: false,
+            sticky: true,
+            direction: 'top',
+            offset: [0, -12]
+        });
+
+        return marker;
+    }
+
+    // Create markers for a character's movement history
+    createCharacterMovementMarkers(characterData) {
+        const markers = [];
+        
+        if (!characterData.movementHistory || characterData.movementHistory.length === 0) {
+            return markers;
+        }
+
+        characterData.movementHistory.forEach(movement => {
+            if (movement.coordinates && Array.isArray(movement.coordinates) && movement.coordinates.length === 2) {
+                // Convert coordinates to map format (you may need to adjust this based on your coordinate system)
+                const [x, y] = movement.coordinates;
+                const mapCoords = [y, x]; // Leaflet expects [lat, lng]
+                
+                const marker = this.createMovementMarker(
+                    mapCoords,
+                    movement.movement_nr,
+                    characterData.name,
+                    movement.location || 'Unknown Location'
+                );
+                
+                if (marker) {
+                    markers.push({
+                        marker: marker,
+                        characterId: characterData.id,
+                        movementNr: movement.movement_nr,
+                        isVisible: false
+                    });
+                }
+            }
+        });
+
+        return markers;
     }
 
     // Check if a character path is currently visible
     isCharacterPathVisible(characterId) {
         const pathData = this.characterPaths.find(path => path.character?.id === characterId);
         if (!pathData) return false;
-        
-        // For debugging - let's log what we're checking
-        console.log(`Checking visibility for ${characterId}:`, pathData.isVisible);
         
         return pathData.isVisible || false;
     }

@@ -202,9 +202,6 @@ class CharacterPanel {
         const movementCount = hasMovement ? character.movementHistory.length : 0;
         const isPathVisible = window.movementSystem?.isCharacterPathVisible?.(character.id) || false;
         
-        // Debug logging
-        console.log(`Creating card for ${character.name} (${character.id}): visible=${isPathVisible}`);
-        
         card.innerHTML = `
             <div class="card-layout">
                 <div class="movement-checkbox">

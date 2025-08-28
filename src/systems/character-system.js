@@ -163,12 +163,18 @@ class CharacterSystem {
 
     // Get character position based on priority: 1) Last travel point 2) Place of origin 3) No coordinates
     getCharacterPosition(character) {
-        // Priority 1: Last travel point from movementHistory
+        // Priority 1: Last travel point from movementHistory (highest movement_nr)
         if (character.movementHistory && character.movementHistory.length > 0) {
-            const lastMovement = character.movementHistory[character.movementHistory.length - 1];
-            if (lastMovement.coordinates && Array.isArray(lastMovement.coordinates) && lastMovement.coordinates.length === 2) {
-                console.log(`🛤️ Using last travel point for ${character.name}:`, lastMovement.coordinates);
-                return lastMovement.coordinates;
+            // Find the movement with the highest movement_nr
+            const latestMovement = character.movementHistory.reduce((latest, current) => {
+                const currentNr = current.movement_nr || 0;
+                const latestNr = latest.movement_nr || 0;
+                return currentNr > latestNr ? current : latest;
+            });
+            
+            if (latestMovement.coordinates && Array.isArray(latestMovement.coordinates) && latestMovement.coordinates.length === 2) {
+                console.log(`🛤️ Using latest travel point (movement_nr: ${latestMovement.movement_nr}) for ${character.name}:`, latestMovement.coordinates);
+                return latestMovement.coordinates;
             }
         }
         
