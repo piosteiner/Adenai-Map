@@ -239,72 +239,17 @@ class MovementSystem {
                     if (map.hasLayer(markerData.marker)) {
                         map.removeLayer(markerData.marker);
                         markerData.isVisible = false;
+                        
+                        // Clean up any fanned out markers for clusters
+                        if (markerData.type === 'cluster' && markerData.marker._fanMarkers) {
+                            this.fanInClusteredMarkers(markerData.marker);
+                        }
                     }
                 });
             
             return true;
         }
         return false;
-    }
-
-    // Create numbered marker for movement locations
-    createMovementMarker(coordinates, movementData, characterName) {
-        const map = window.mapCore.getMap();
-        if (!map) return null;
-
-        // Create marker number (movement_nr + 1)
-        const markerNumber = (movementData.movement_nr || 0) + 1;
-        
-        // Detect dark mode (you can adjust this selector based on your theme system)
-        const isDarkMode = document.body.classList.contains('dark-mode') || 
-                          document.documentElement.classList.contains('dark-mode') ||
-                          window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // Create custom marker HTML with responsive styling
-        const markerHtml = `
-            <div class="movement-marker" style="
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-                font-weight: bold;
-                position: relative;
-                cursor: pointer;
-                ${isDarkMode ? 
-                    'background: rgba(0, 0, 0, 0.7); color: white; border: 2px solid white;' :
-                    'background: rgba(255, 255, 255, 0.7); color: black; border: 2px solid black;'
-                }
-            ">${markerNumber}</div>
-        `;
-
-        // Create custom icon
-        const customIcon = L.divIcon({
-            html: markerHtml,
-            className: 'movement-marker-icon',
-            iconSize: [24, 24],
-            iconAnchor: [12, 12]
-        });
-
-        // Create marker
-        const marker = L.marker(coordinates, { icon: customIcon });
-        
-        // Add click event for detailed popup
-        marker.on('click', () => {
-            this.showMovementPopup(movementData, characterName, markerNumber);
-        });
-        
-        // Add simple tooltip on hover
-        marker.bindTooltip(`${characterName} - Stop ${markerNumber}`, {
-            permanent: false,
-            sticky: true,
-            direction: 'top',
-            offset: [0, -12]
-        });
-
-        return marker;
     }
 
     // Show detailed movement popup
@@ -403,31 +348,240 @@ class MovementSystem {
             return markers;
         }
 
+        // Group movements by coordinates to handle overlapping locations
+        const movementsByLocation = {};
+        
         characterData.movementHistory.forEach(movement => {
             if (movement.coordinates && Array.isArray(movement.coordinates) && movement.coordinates.length === 2) {
-                // Convert coordinates to map format (you may need to adjust this based on your coordinate system)
-                const [x, y] = movement.coordinates;
-                const mapCoords = [y, x]; // Leaflet expects [lat, lng]
+                const coordKey = `${movement.coordinates[0]},${movement.coordinates[1]}`;
                 
-                const marker = this.createMovementMarker(
-                    mapCoords,
-                    movement, // Pass full movement data for popup
-                    characterData.name
-                );
+                if (!movementsByLocation[coordKey]) {
+                    movementsByLocation[coordKey] = [];
+                }
+                
+                movementsByLocation[coordKey].push(movement);
+            }
+        });
+
+        // Create markers for each location (single or clustered)
+        Object.entries(movementsByLocation).forEach(([coordKey, movements]) => {
+            const [x, y] = coordKey.split(',').map(Number);
+            const mapCoords = [y, x]; // Leaflet expects [lat, lng]
+            
+            if (movements.length === 1) {
+                // Single marker
+                const movement = movements[0];
+                const marker = this.createSingleMovementMarker(mapCoords, movement, characterData.name);
                 
                 if (marker) {
                     markers.push({
                         marker: marker,
                         characterId: characterData.id,
                         movementNr: movement.movement_nr,
-                        movementData: movement, // Store movement data for reference
-                        isVisible: false
+                        movementData: movement,
+                        isVisible: false,
+                        type: 'single'
+                    });
+                }
+            } else {
+                // Clustered markers for same location
+                const clusterMarker = this.createClusteredMovementMarker(mapCoords, movements, characterData.name);
+                
+                if (clusterMarker) {
+                    markers.push({
+                        marker: clusterMarker,
+                        characterId: characterData.id,
+                        movements: movements,
+                        isVisible: false,
+                        type: 'cluster'
                     });
                 }
             }
         });
 
         return markers;
+    }
+
+    // Create a single movement marker
+    createSingleMovementMarker(coordinates, movementData, characterName) {
+        const map = window.mapCore.getMap();
+        if (!map) return null;
+
+        const markerNumber = (movementData.movement_nr || 0) + 1;
+        
+        const isDarkMode = document.body.classList.contains('dark-mode') || 
+                          document.documentElement.classList.contains('dark-mode') ||
+                          window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        const markerHtml = `
+            <div class="movement-marker single-marker" style="
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                font-weight: bold;
+                position: relative;
+                cursor: pointer;
+                transition: transform 0.2s ease;
+                ${isDarkMode ? 
+                    'background: rgba(0, 0, 0, 0.7); color: white; border: 2px solid white;' :
+                    'background: rgba(255, 255, 255, 0.7); color: black; border: 2px solid black;'
+                }
+            ">${markerNumber}</div>
+        `;
+
+        const customIcon = L.divIcon({
+            html: markerHtml,
+            className: 'movement-marker-icon',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        });
+
+        const marker = L.marker(coordinates, { icon: customIcon });
+        
+        marker.on('click', () => {
+            this.showMovementPopup(movementData, characterName, markerNumber);
+        });
+        
+        marker.bindTooltip(`${characterName} - Stop ${markerNumber}`, {
+            permanent: false,
+            sticky: true,
+            direction: 'top',
+            offset: [0, -12]
+        });
+
+        return marker;
+    }
+
+    // Create a clustered movement marker for multiple visits to same location
+    createClusteredMovementMarker(coordinates, movements, characterName) {
+        const map = window.mapCore.getMap();
+        if (!map) return null;
+
+        const count = movements.length;
+        
+        const isDarkMode = document.body.classList.contains('dark-mode') || 
+                          document.documentElement.classList.contains('dark-mode') ||
+                          window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        const markerHtml = `
+            <div class="movement-marker cluster-marker" style="
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 10px;
+                font-weight: bold;
+                position: relative;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                ${isDarkMode ? 
+                    'background: rgba(0, 0, 0, 0.8); color: white; border: 3px solid white;' :
+                    'background: rgba(255, 255, 255, 0.8); color: black; border: 3px solid black;'
+                }
+            ">
+                <div style="text-align: center; line-height: 1;">
+                    <div>${movements.map(m => (m.movement_nr || 0) + 1).join(',')}</div>
+                    <div style="font-size: 8px; opacity: 0.8;">(${count}x)</div>
+                </div>
+            </div>
+        `;
+
+        const customIcon = L.divIcon({
+            html: markerHtml,
+            className: 'movement-marker-icon cluster-icon',
+            iconSize: [32, 32],
+            iconAnchor: [16, 16]
+        });
+
+        const marker = L.marker(coordinates, { icon: customIcon });
+        
+        // Store movements data for fanning out
+        marker._movements = movements;
+        marker._characterName = characterName;
+        marker._isFannedOut = false;
+        marker._fanMarkers = [];
+        
+        // Add hover events for fanning out
+        marker.on('mouseover', () => {
+            this.fanOutClusteredMarkers(marker);
+        });
+        
+        marker.on('mouseout', () => {
+            setTimeout(() => {
+                this.fanInClusteredMarkers(marker);
+            }, 2000); // Keep fanned out for 2 seconds
+        });
+        
+        marker.bindTooltip(`${characterName} - ${count} visits to ${movements[0].location || 'this location'}`, {
+            permanent: false,
+            sticky: true,
+            direction: 'top',
+            offset: [0, -16]
+        });
+
+        return marker;
+    }
+
+    // Fan out clustered markers on hover
+    fanOutClusteredMarkers(clusterMarker) {
+        if (clusterMarker._isFannedOut) return;
+        
+        const map = window.mapCore.getMap();
+        if (!map) return;
+        
+        clusterMarker._isFannedOut = true;
+        const movements = clusterMarker._movements;
+        const characterName = clusterMarker._characterName;
+        const centerLatLng = clusterMarker.getLatLng();
+        
+        const radius = 40; // Radius for fan out
+        const angleStep = (2 * Math.PI) / movements.length;
+        
+        movements.forEach((movement, index) => {
+            const angle = index * angleStep;
+            const offsetX = Math.cos(angle) * radius;
+            const offsetY = Math.sin(angle) * radius;
+            
+            // Convert pixel offset to lat/lng offset (approximate)
+            const latOffset = offsetY / 111000; // Rough conversion
+            const lngOffset = offsetX / (111000 * Math.cos(centerLatLng.lat * Math.PI / 180));
+            
+            const fanLatLng = L.latLng(
+                centerLatLng.lat + latOffset,
+                centerLatLng.lng + lngOffset
+            );
+            
+            const fanMarker = this.createSingleMovementMarker(fanLatLng, movement, characterName);
+            if (fanMarker) {
+                fanMarker.addTo(map);
+                fanMarker.getElement().style.zIndex = '1000';
+                fanMarker.getElement().style.animation = 'fanOut 0.3s ease-out';
+                clusterMarker._fanMarkers.push(fanMarker);
+            }
+        });
+    }
+
+    // Fan in clustered markers
+    fanInClusteredMarkers(clusterMarker) {
+        if (!clusterMarker._isFannedOut) return;
+        
+        const map = window.mapCore.getMap();
+        if (!map) return;
+        
+        clusterMarker._fanMarkers.forEach(fanMarker => {
+            if (map.hasLayer(fanMarker)) {
+                map.removeLayer(fanMarker);
+            }
+        });
+        
+        clusterMarker._fanMarkers = [];
+        clusterMarker._isFannedOut = false;
     }
 
     // Check if a character path is currently visible

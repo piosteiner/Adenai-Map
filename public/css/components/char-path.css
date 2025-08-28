@@ -1,6 +1,6 @@
 /* char-path.css - Styles for character path system */
 
-/* Movement marker cursor pointer */
+/* Movement marker styles */
 .movement-marker {
     cursor: pointer !important;
     transition: transform 0.2s ease;
@@ -8,6 +8,56 @@
 
 .movement-marker:hover {
     transform: scale(1.1);
+}
+
+/* Single marker styles */
+.single-marker {
+    z-index: 500;
+}
+
+/* Cluster marker styles */
+.cluster-marker {
+    z-index: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.cluster-marker:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Fan out animation */
+@keyframes fanOut {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+@keyframes fanIn {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+/* Cluster indicator styling */
+.cluster-marker .cluster-count {
+    font-size: 8px;
+    opacity: 0.8;
+    line-height: 1;
 }
 
 /* Movement detail popup styles */
