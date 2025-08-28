@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "a68bbcf4b34151496238c9c61da26d4ef26d003d",
+      "action": "update",
+      "type": "character",
+      "itemName": "Test2",
+      "user": "gm",
+      "timestamp": "2025-08-28T05:22:36.570Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-28T05:22:36.570Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Reorder movements for character: Test2 (by gm) - 2 movements reordered"
+    },
+    {
       "commitSha": "33000cf0d5325d96d0d3c2806ec8d485132339ce",
       "action": "update",
       "type": "character",
@@ -2303,5 +2316,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-28T05:22:27.149Z"
+  "lastUpdated": "2025-08-28T05:22:36.570Z"
 }
