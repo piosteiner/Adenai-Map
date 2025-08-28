@@ -445,13 +445,6 @@ class MovementSystem {
         marker.on('click', () => {
             this.showMovementPopup(movementData, characterName, markerNumber);
         });
-        
-        marker.bindTooltip(`${characterName} - Stop ${markerNumber}`, {
-            permanent: false,
-            sticky: true,
-            direction: 'top',
-            offset: [0, -12]
-        });
 
         return marker;
     }
@@ -531,13 +524,6 @@ class MovementSystem {
                 this.fanInClusteredMarkers(marker);
             }, 300);
         };
-        
-        marker.bindTooltip(`${characterName} - ${count} visits to ${movements[0].location || 'this location'}`, {
-            permanent: false,
-            sticky: true,
-            direction: 'top',
-            offset: [0, -16]
-        });
 
         return marker;
     }
