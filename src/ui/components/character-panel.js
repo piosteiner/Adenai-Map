@@ -82,11 +82,7 @@ class CharacterPanel {
 
         this.panel.addEventListener('mouseleave', () => {
             this.clearHoverTimer();
-            // Auto-collapse if it was expanded by hover and user leaves
-            if (this.isHoverExpanded && !this.isResizing) {
-                this.collapsePanel();
-                this.isHoverExpanded = false;
-            }
+            // Remove auto-collapse behavior - panel stays open once hover-triggered
         });
 
         // Also trigger on resize handle hover when panel is collapsed
@@ -101,10 +97,7 @@ class CharacterPanel {
             setTimeout(() => {
                 if (!this.panel.matches(':hover')) {
                     this.clearHoverTimer();
-                    if (this.isHoverExpanded && !this.isResizing) {
-                        this.collapsePanel();
-                        this.isHoverExpanded = false;
-                    }
+                    // Remove auto-collapse behavior - panel stays open once hover-triggered
                 }
             }, 50); // Small delay to allow moving from handle to panel
         });
@@ -213,7 +206,7 @@ class CharacterPanel {
         this.panel.classList.add('collapsed');
         this.setWidth(this.minWidth);
         this.updateHandlePosition();
-        // Clear hover state when collapsing
+        // Clear hover state when manually collapsing
         this.clearHoverTimer();
         this.isHoverExpanded = false;
     }
