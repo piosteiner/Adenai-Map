@@ -84,6 +84,11 @@ class MovementSystem {
                 });
             }
         });
+        
+        // Refresh character panel checkboxes after paths are loaded
+        if (window.characterPanel) {
+            window.characterPanel.refreshPanel();
+        }
     }
 
     // Show all character paths
@@ -143,7 +148,12 @@ class MovementSystem {
     // Check if a character path is currently visible
     isCharacterPathVisible(characterId) {
         const pathData = this.characterPaths.find(path => path.character?.id === characterId);
-        return pathData ? pathData.isVisible || false : false;
+        if (!pathData) return false;
+        
+        // For debugging - let's log what we're checking
+        console.log(`Checking visibility for ${characterId}:`, pathData.isVisible);
+        
+        return pathData.isVisible || false;
     }
 
     // Show error message
