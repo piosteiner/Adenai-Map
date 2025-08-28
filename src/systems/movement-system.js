@@ -146,9 +146,9 @@ class MovementSystem {
     };
     }
 
-    // 🔥 NEW: Hybrid API implementation with fallback to existing system
+    // 🔥 NEW: API-only character path implementation
     async addCharacterMovementPaths() {
-        console.log('🗺️ Starting character path loading...');
+        console.log('🗺️ Starting character path loading (API-only mode)...');
         
         // Show loading state
         this.showLoadingState();
@@ -157,27 +157,25 @@ class MovementSystem {
         this.clearCharacterPaths();
         
         try {
-            // Try the new API first
+            // Load from Character Paths API
             // API provides server-controlled path styling:
             // - color: by character relationship (ally=#4CAF50, neutral=#FFC107, etc.)
             // - weight: always 2px
             // - opacity: 0.7 for living, 0.4 for dead characters  
             // - dashArray: '5,2' for all paths (5px dash, 2px gap)
             const pathData = await this.pathManager.loadCharacterPaths();
-            this.isUsingAPI = pathData.metadata.source !== 'legacy-json';
+            this.isUsingAPI = true;
             
-            console.log(`📊 Using ${this.isUsingAPI ? 'API' : 'fallback'} data source`);
+            console.log(`📊 Using API data source`);
             console.log(`📈 Loaded ${Object.keys(pathData.paths).length} character paths`);
             
             // Render paths from API data
             await this.renderPathsFromAPIData(pathData);
             
         } catch (error) {
-            console.error('❌ Failed to load character paths:', error);
-            
-            // Final fallback to existing character system
-            console.log('🔄 Attempting legacy character system fallback...');
-            await this.loadLegacyCharacterPaths();
+            console.error('❌ Character Paths API unavailable - system will not function without server connection');
+            this.showLoadingError('Character movement data unavailable. Please contact developer through GitHub.');
+            throw error; // Re-throw to stop execution
         }
         
         // Auto-show VsuzH path by default
@@ -240,9 +238,9 @@ class MovementSystem {
         
         // Create movement markers for path points using the enhanced consolidation system
         const pathMarkers = pathInfo.coordinates.map((coord, index) => {
-            // Convert API format to legacy format for consistency with consolidation system
+            // Convert API format to internal format for consistency with consolidation system
             const point = {
-                coordinates: [coord[1], coord[0]], // Convert [lat,lng] to [x,y] for legacy compatibility
+                coordinates: [coord[1], coord[0]], // Convert [lat,lng] to [x,y] for map compatibility
                 location: `${pathInfo.name} Stop ${index + 1}`,
                 date: 'API Data'
             };
@@ -262,7 +260,7 @@ class MovementSystem {
             return this.createMovementMarker(point, index, pathInfo.coordinates.length, mockCharacter);
         });
         
-        // Store path data in the same format as legacy system for full consolidation compatibility
+        // Store path data in the same format as internal system for full consolidation compatibility
         const pathData = {
             character: {
                 id: pathInfo.id,
@@ -342,59 +340,6 @@ class MovementSystem {
         this.characterPaths.push(pathData);
     }
 
-    // Legacy fallback method (uses server-compatible styling)
-    async loadLegacyCharacterPaths() {
-        const characters = window.characterSystem.getCharacters();
-        
-        characters.forEach(character => {
-            if (!character.movementHistory || character.movementHistory.length < 1) {
-                return; // Need at least 1 movement point
-            }
-            
-            // Use server-compatible styling for legacy paths to maintain consistency
-            const movementPoints = [];
-            
-            // Add all movement history points
-            character.movementHistory.forEach(movement => {
-                if (movement.coordinates) {
-                    movementPoints.push({
-                        coordinates: movement.coordinates,
-                        date: movement.dateStart || movement.date,
-                        dateEnd: movement.dateEnd,
-                        location: movement.location || 'Custom Location',
-                        notes: movement.notes || '',
-                        type: movement.type || 'travel'
-                    });
-                }
-            });
-            
-            // Add current location as last point if it has coordinates and is different from last movement
-            if (character.coordinates) {
-                const lastMovement = movementPoints[movementPoints.length - 1];
-                const isSameAsLastMovement = lastMovement && 
-                    lastMovement.coordinates[0] === character.coordinates[0] && 
-                    lastMovement.coordinates[1] === character.coordinates[1];
-                    
-                if (!isSameAsLastMovement) {
-                    movementPoints.push({
-                        coordinates: character.coordinates,
-                        date: character.currentLocation?.date || 'Current',
-                        dateEnd: null,
-                        location: character.location || 'Current Location',
-                        notes: character.currentLocation?.notes || 'Current position'
-                    });
-                }
-            }
-            
-            // Sort points by date
-            movementPoints.sort((a, b) => new Date(a.date) - new Date(b.date));
-            
-            if (movementPoints.length >= 2) {
-                this.createCharacterPath(character, movementPoints);
-            }
-        });
-    }
-
     // Auto-show party/VsuzH path
     autoShowPartyPath() {
         const vsuzHPath = this.characterPaths.find(pathData => {
@@ -434,6 +379,45 @@ class MovementSystem {
         if (loadingDiv) {
             loadingDiv.remove();
         }
+    }
+
+    showLoadingError(message) {
+        this.hideLoadingState();
+        
+        const errorDiv = document.createElement('div');
+        errorDiv.id = 'character-paths-error';
+        errorDiv.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #dc3545;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10000;
+            max-width: 500px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        `;
+        
+        errorDiv.innerHTML = `
+            <h3 style="margin: 0 0 10px 0;">⚠️ System Unavailable</h3>
+            <p style="margin: 0 0 15px 0;">${message}</p>
+            <a href="https://github.com/piosteiner" target="_blank" style="color: #fff; text-decoration: underline;">
+                🐙 Contact Developer on GitHub
+            </a>
+        `;
+        
+        document.body.appendChild(errorDiv);
+        
+        // Auto-remove after 15 seconds
+        setTimeout(() => {
+            if (errorDiv.parentNode) {
+                errorDiv.parentNode.removeChild(errorDiv);
+            }
+        }, 15000);
     }
 
     // Create popup content for API paths
@@ -549,7 +533,7 @@ class MovementSystem {
         this.characterPaths.push(pathData);
     }
 
-    // Get server-compatible path styling for legacy characters
+    // Get server-compatible path styling for characters
     getServerCompatiblePathStyle(character) {
         // Match server-side design system:
         // Color by relationship, weight=2, opacity by status, dashArray='5,2'
@@ -1432,14 +1416,6 @@ class MovementSystem {
         return result;
     }
 
-    // Test fallback system
-    async testFallback() {
-        console.log('🧪 Testing fallback character data loading...');
-        const result = await this.pathManager.testFallback();
-        console.log(`Fallback Test Result: ${result ? '✅ Success' : '❌ Failed'}`);
-        return result;
-    }
-
     // Force reload with API
     async forceAPIReload() {
         console.log('🔄 Forcing reload with API data...');
@@ -1447,19 +1423,11 @@ class MovementSystem {
         await this.addCharacterMovementPaths();
     }
 
-    // Force reload with fallback
-    async forceFallbackReload() {
-        console.log('🔄 Forcing reload with fallback data...');
-        this.clearCharacterPaths();
-        await this.loadLegacyCharacterPaths();
-        this.autoShowPartyPath();
-    }
-
     // Get performance statistics
     getPerformanceStats() {
         return {
             ...this.pathManager.getStatistics(),
-            currentDataSource: this.isUsingAPI ? 'API' : 'fallback',
+            currentDataSource: this.isUsingAPI ? 'API' : 'Unknown',
             pathsLoaded: this.characterPaths.length,
             visiblePaths: this.visibleCharacterPaths.size
         };

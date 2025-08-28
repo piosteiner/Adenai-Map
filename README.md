@@ -41,13 +41,16 @@ Adenai-Map/
 
 ### Character Movement Path System
 
-The map features a hybrid API-first character path system with automatic fallback:
+The map features an API-only character path system requiring server connection:
 
-- **API-First**: Optimized character paths loaded from server with 85% bandwidth reduction
+- **API-Only Architecture**: Character paths loaded exclusively from dedicated server API
 - **Server-Controlled Styling**: Path appearance controlled server-side via API response
-- **Automatic Fallback**: Falls back to local JSON data if API unavailable
+- **Error Handling**: Clear user feedback with developer contact info when API unavailable
+- **Performance Optimized**: Caching system with 85% bandwidth reduction
 - **Overlapping Marker Consolidation**: Smart marker grouping when multiple characters visit same location
 - **Cross-Character Support**: View multiple character paths simultaneously
+
+**Note**: The character movement system requires server connectivity. If unavailable, users will see an error message with contact information.
 
 **Path Design System (Server-Side):**
 - **Color**: Determined by character relationship (`#4CAF50` for ally, `#FFC107` for neutral, etc.)

@@ -61,16 +61,15 @@
 
     <div class="test-section">
         <h2>Character Path Manager Test</h2>
-        <p>Test the hybrid Character Path Manager functionality.</p>
+        <p>Test the Character Path Manager API functionality.</p>
         <button onclick="testPathManager()">Test Path Manager</button>
-        <button onclick="testFallback()">Test Fallback</button>
         <button onclick="testCaching()">Test Caching</button>
     </div>
 
     <div class="test-section">
-        <h2>Performance Comparison</h2>
-        <p>Compare API vs fallback data sizes and load times.</p>
-        <button onclick="comparePerformance()">Run Performance Test</button>
+        <h2>Performance Analysis</h2>
+        <p>Analyze API performance metrics and data optimization.</p>
+        <button onclick="performanceAnalysis()">Run Performance Analysis</button>
         <button onclick="showStatistics()">Show Statistics</button>
     </div>
 
@@ -95,7 +94,6 @@
                 this.stats = {
                     apiCalls: 0,
                     cacheHits: 0,
-                    fallbackUsage: 0,
                     dataSizeComparisons: []
                 };
                 this.isDebugMode = false;
@@ -272,35 +270,6 @@
             }
         }
 
-        async function testFallback() {
-            log('🔄 Testing fallback system...', 'info');
-            log('⚠️ Note: This test simulates fallback behavior', 'warning');
-            
-            // Simulate fallback data
-            const fallbackData = {
-                paths: {
-                    'test_character': {
-                        id: 'test_character',
-                        name: 'Test Character',
-                        type: 'movement',
-                        coordinates: [[100, 200], [150, 250]],
-                        style: { color: '#28a745', weight: 2, opacity: 0.7 },
-                        metadata: { relationship: 'ally', status: 'alive' }
-                    }
-                },
-                metadata: {
-                    generated: new Date().toISOString(),
-                    version: '1.0-fallback',
-                    source: 'legacy-json'
-                }
-            };
-            
-            const dataSize = new Blob([JSON.stringify(fallbackData)]).size;
-            log('✅ Fallback test completed', 'success');
-            log(`Simulated fallback data size: ${(dataSize / 1024).toFixed(2)}KB`, 'info');
-            log(`Paths in fallback: ${Object.keys(fallbackData.paths).length}`, 'info');
-        }
-
         async function testCaching() {
             log('💾 Testing caching system...', 'info');
             
@@ -325,8 +294,8 @@
             }
         }
 
-        async function comparePerformance() {
-            log('🏃 Running performance comparison...', 'info');
+        async function performanceAnalysis() {
+            log('🏃 Running performance analysis...', 'info');
             
             // Clear cache for accurate test
             pathManager.clearCache();
