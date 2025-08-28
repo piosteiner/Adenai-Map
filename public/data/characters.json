@@ -432,22 +432,6 @@
       "notes": "",
       "movementHistory": [
         {
-          "id": "movement_1756355528007",
-          "date": "5663-05-20",
-          "dateStart": "5663-05-20",
-          "dateEnd": null,
-          "location": "Altes Weingut",
-          "coordinates": [
-            1296,
-            694
-          ],
-          "notes": "",
-          "type": "stay",
-          "isCustomLocation": false,
-          "createdAt": "2025-08-28T04:32:08.007Z",
-          "movement_nr": 0
-        },
-        {
           "id": "movement_1756355579692",
           "date": "5663-05-26",
           "dateStart": "5663-05-26",
@@ -461,11 +445,29 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-28T04:32:59.692Z",
-          "movement_nr": 1
+          "movement_nr": 0,
+          "updatedAt": "2025-08-28T05:21:50.924Z"
+        },
+        {
+          "id": "movement_1756355528007",
+          "date": "5663-05-20",
+          "dateStart": "5663-05-20",
+          "dateEnd": null,
+          "location": "Altes Weingut",
+          "coordinates": [
+            1296,
+            694
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T04:32:08.007Z",
+          "movement_nr": 1,
+          "updatedAt": "2025-08-28T05:21:50.924Z"
         }
       ],
       "createdAt": "2025-08-28T04:31:45.676Z",
-      "updatedAt": "2025-08-28T05:00:05.156Z",
+      "updatedAt": "2025-08-28T05:21:50.924Z",
       "currentLocation": {
         "date": "5663-05-26",
         "dateStart": "5663-05-26",
@@ -480,5 +482,5 @@
       "location": "Osdalen"
     }
   ],
-  "lastUpdated": "2025-08-28T05:00:05.156Z"
+  "lastUpdated": "2025-08-28T05:21:50.924Z"
 }
