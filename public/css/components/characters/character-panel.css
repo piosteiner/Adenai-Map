@@ -3,9 +3,9 @@
 /* Main Panel Structure */
 .character-panel {
   position: fixed;
-  right: -350px;
+  right: 0; /* Always visible, positioned at right edge */
   top: 0;
-  width: 350px;
+  width: 30px; /* Start collapsed */
   min-width: 30px; /* Minimum width for sliver mode */
   max-width: 600px; /* Maximum width */
   height: 100vh;
@@ -17,6 +17,7 @@
   overflow-y: auto;
 }
 
+/* Panel is always visible, .open class not needed anymore but kept for compatibility */
 .character-panel.open {
   right: 0;
 }
@@ -35,7 +36,7 @@
 /* Resize Handle */
 .resize-handle {
   position: fixed;
-  right: -8px; /* Hidden when panel is closed */
+  right: 22px; /* Positioned next to collapsed panel (30px - 8px) */
   top: 0;
   width: 8px;
   height: 100vh; /* Full screen height */
@@ -44,26 +45,6 @@
   z-index: 1003; /* Above panel */
   border-left: 2px solid transparent;
   transition: all 0.2s ease;
-}
-
-/* Show handle when panel is open */
-.character-panel.open .resize-handle {
-  right: 342px; /* Panel width (350px) - handle width (8px) */
-}
-
-/* Always show a thin trigger area when panel is closed */
-.resize-handle.trigger-zone {
-  right: 0 !important;
-  width: 8px; /* Make it a bit wider for easier interaction */
-  background: rgba(76, 175, 80, 0.3); /* Slightly visible background */
-  opacity: 0.7;
-  transition: all 0.2s ease;
-}
-
-.resize-handle.trigger-zone:hover {
-  background: rgba(76, 175, 80, 0.5);
-  opacity: 1;
-  width: 12px; /* Expand on hover for better feedback */
 }
 
 .resize-handle:hover {
@@ -96,25 +77,8 @@
   transition: opacity 0.2s ease;
 }
 
-/* When in trigger zone mode (panel closed), show a different indicator */
-.resize-handle.trigger-zone::before {
-  content: '◀';
-  font-size: 12px;
-  color: rgba(76, 175, 80, 0.8);
-  background: none;
-  width: auto;
-  height: auto;
-  left: 1px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 .resize-handle:hover::before {
   opacity: 1;
-}
-
-.resize-handle.trigger-zone:hover::before {
-  color: rgba(76, 175, 80, 1);
 }
 
 .panel-header {

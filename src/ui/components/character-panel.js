@@ -4,13 +4,13 @@ class CharacterPanel {
         this.panel = null;
         this.grid = null;
         this.resizeHandle = null;
-        this.isPanelOpen = false; // Default to closed/retracted
+        this.isPanelOpen = true; // Always visible, but collapsed by default
         this.characters = [];
         this.showMovementControls = false;
         
         // Resize properties
         this.isResizing = false;
-        this.currentWidth = 350;
+        this.currentWidth = 30; // Start in collapsed state
         this.minWidth = 30;
         this.maxWidth = 600;
         this.collapseThreshold = 350;
@@ -42,6 +42,10 @@ class CharacterPanel {
             return;
         }
         
+        // Set initial state to collapsed but visible
+        this.panel.classList.add('open', 'collapsed');
+        this.setWidth(this.minWidth);
+        
         this.setupEventListeners();
         this.setupResizeHandlers();
         this.initializePanelContent();
@@ -68,14 +72,7 @@ class CharacterPanel {
         const startResize = (e) => {
             this.isResizing = true;
             startX = e.clientX || e.touches[0].clientX;
-            
-            // If panel is closed, open it when user starts interacting with resize handle
-            if (!this.isPanelOpen) {
-                this.openPanel();
-                startWidth = this.collapseThreshold;
-            } else {
-                startWidth = parseInt(document.defaultView.getComputedStyle(this.panel).width, 10);
-            }
+            startWidth = parseInt(document.defaultView.getComputedStyle(this.panel).width, 10);
             
             this.resizeHandle.classList.add('dragging');
             this.resizeHandle.classList.remove('trigger-zone');
@@ -128,14 +125,6 @@ class CharacterPanel {
         document.addEventListener('touchmove', doResize);
         document.addEventListener('touchend', stopResize);
         
-        // Click to open panel when closed
-        this.resizeHandle.addEventListener('click', (e) => {
-            if (!this.isPanelOpen && !this.isResizing) {
-                this.openPanel();
-                e.preventDefault();
-            }
-        });
-        
         // Initialize handle position
         this.updateHandlePosition();
     }
@@ -148,15 +137,9 @@ class CharacterPanel {
     updateHandlePosition() {
         if (!this.resizeHandle) return;
         
-        if (!this.isPanelOpen) {
-            // Show trigger zone when panel is closed
-            this.resizeHandle.classList.add('trigger-zone');
-            this.resizeHandle.style.right = '0px';
-        } else {
-            // Position handle next to open panel
-            this.resizeHandle.classList.remove('trigger-zone');
-            this.resizeHandle.style.right = (this.currentWidth - 8) + 'px';
-        }
+        // Always position handle next to the panel (since panel is always visible)
+        this.resizeHandle.classList.remove('trigger-zone');
+        this.resizeHandle.style.right = (this.currentWidth - 8) + 'px';
     }
 
     collapsePanel() {
@@ -289,22 +272,6 @@ class CharacterPanel {
     }
 
     // Panel management
-    openPanel() {
-        this.isPanelOpen = true;
-        this.panel.classList.add('open');
-        this.expandPanel();
-        this.updateHandlePosition();
-    }
-
-    closePanel() {
-        this.isPanelOpen = false;
-        this.panel.classList.remove('open');
-        // Reset width when closing
-        this.setWidth(this.collapseThreshold);
-        this.panel.classList.remove('collapsed');
-        this.updateHandlePosition();
-    }
-
     // Character grid management
     populateCharacterGrid(characters = this.characters) {
         if (!this.grid) return;
@@ -394,9 +361,9 @@ class CharacterPanel {
             return;
         }
 
-        // Close panel on mobile
+        // Collapse panel on mobile for better map visibility
         if (window.innerWidth <= 768) {
-            this.closePanel();
+            this.collapsePanel();
         }
     }
 
@@ -433,8 +400,8 @@ class CharacterPanel {
         this.populateCharacterGrid();
     }
 
-    isOpen() {
-        return this.isPanelOpen;
+    isExpanded() {
+        return !this.panel.classList.contains('collapsed');
     }
 
     getPanelStats() {
