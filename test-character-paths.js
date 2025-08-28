@@ -5,7 +5,15 @@ window.createTestCharacterPaths = function() {
     console.log('🧪 Creating test character paths for development...');
     
     if (!window.movementSystem) {
-        console.error('❌ Movement system not available');
+        console.error('❌ Movement system not available - waiting for initialization...');
+        // Try again after a delay
+        setTimeout(() => {
+            if (window.movementSystem) {
+                window.createTestCharacterPaths();
+            } else {
+                console.error('❌ Movement system still not available after waiting');
+            }
+        }, 1000);
         return;
     }
     
@@ -92,7 +100,65 @@ document.addEventListener('adenaiMapReady', () => {
             console.log('🔧 No character paths loaded - creating test data...');
             window.createTestCharacterPaths();
         }
+    }, 3000); // Increased delay to ensure everything is loaded
+});
+
+// Also listen for characters loaded event as backup
+document.addEventListener('charactersLoaded', () => {
+    setTimeout(() => {
+        if (window.movementSystem && window.movementSystem.characterPaths.length === 0) {
+            console.log('🔧 Characters loaded but no paths - creating test data...');
+            window.createTestCharacterPaths();
+        }
     }, 2000);
 });
 
+// Helper function to wait for movement system to be available
+window.waitForMovementSystem = function() {
+    return new Promise((resolve, reject) => {
+        if (window.movementSystem) {
+            resolve(window.movementSystem);
+            return;
+        }
+        
+        let attempts = 0;
+        const maxAttempts = 50; // 5 seconds max
+        
+        const interval = setInterval(() => {
+            attempts++;
+            if (window.movementSystem) {
+                clearInterval(interval);
+                resolve(window.movementSystem);
+            } else if (attempts >= maxAttempts) {
+                clearInterval(interval);
+                reject(new Error('Movement system not available after 5 seconds'));
+            }
+        }, 100);
+    });
+};
+
 console.log('🧪 Test character paths module loaded');
+
+// Console helper functions available immediately
+window.testMovement = async function() {
+    try {
+        const movementSystem = await window.waitForMovementSystem();
+        console.log('✅ Movement system available:', movementSystem);
+        
+        console.log('📊 Current paths:', movementSystem.characterPaths.length);
+        console.log('👁️ Visible paths:', movementSystem.visibleCharacterPaths.size);
+        
+        // Test API connection
+        console.log('🌐 Testing API...');
+        const apiResult = await movementSystem.testAPIConnection();
+        console.log('API Result:', apiResult);
+        
+        return movementSystem;
+    } catch (error) {
+        console.error('❌ Error:', error.message);
+    }
+};
+
+window.createTestPaths = function() {
+    window.createTestCharacterPaths();
+};
