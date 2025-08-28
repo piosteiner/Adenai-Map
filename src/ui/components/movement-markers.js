@@ -200,6 +200,9 @@ class MovementMarkers {
         const centerLatLng = clusterMarker.getLatLng();
         const pathColor = this.getCharacterPathColor(characterId);
         
+        // Track fan positions for popup placement
+        this.currentFanPositions = [];
+        
         // Spiral configuration
         const baseRadius = 33; // Starting radius in pixels
         const radiusIncrement = 15; // How much radius increases per revolution
@@ -226,6 +229,9 @@ class MovementMarkers {
             const fanPoint = L.point(centerPoint.x + offsetX, centerPoint.y + offsetY);
             const fanLatLng = map.containerPointToLatLng(fanPoint);
             
+            // Track this fan position for popup placement
+            this.currentFanPositions.push(fanLatLng);
+            
             // Create individual marker for fanning out (same size as regular markers)
             const markerNumber = (movement.movement_nr || 0) + 1;
 
@@ -244,7 +250,12 @@ class MovementMarkers {
             
             // Add click event for detailed popup
             fanMarker.on('click', () => {
-                this.showMovementPopup(movement, characterName, markerNumber);
+                // Pass the cluster center and fan positions for optimal popup placement
+                this.showMovementPopup(movement, characterName, markerNumber, {
+                    clickedPosition: fanLatLng,
+                    clusterCenter: centerLatLng,
+                    allFanPositions: this.currentFanPositions || []
+                });
             });
             
             // Add hover events to keep cluster fanned out
@@ -287,6 +298,9 @@ class MovementMarkers {
         const map = window.mapCore.getMap();
         if (!map) return;
         
+        // Clear fan positions tracking
+        this.currentFanPositions = [];
+        
         // Animate fan in
         clusterMarker._fanMarkers.forEach((fanMarker, index) => {
             setTimeout(() => {
@@ -319,7 +333,7 @@ class MovementMarkers {
     }
 
     // Show detailed movement popup
-    showMovementPopup(movementData, characterName, markerNumber) {
+    showMovementPopup(movementData, characterName, markerNumber, customPosition = null) {
         const map = window.mapCore.getMap();
         if (!map) return;
 
@@ -393,12 +407,90 @@ class MovementMarkers {
 
         // Position popup near the marker if possible
         try {
-            const markerLatLng = L.latLng(movementData.coordinates[1], movementData.coordinates[0]);
+            let markerLatLng;
+            if (customPosition) {
+                // Use the fan marker position, but adjust to be above the topmost marker
+                if (typeof customPosition === 'object' && customPosition.allFanPositions) {
+                    // New enhanced positioning with all fan positions
+                    markerLatLng = this.calculateOptimalPopupPosition(customPosition);
+                } else {
+                    // Legacy single position support
+                    markerLatLng = this.calculateOptimalPopupPosition({ clickedPosition: customPosition });
+                }
+            } else {
+                // Use original coordinates for regular markers
+                markerLatLng = L.latLng(movementData.coordinates[1], movementData.coordinates[0]);
+            }
             popup.setLatLng(markerLatLng);
         } catch (e) {
             // Fallback to map center if positioning fails
             console.warn('Could not position popup at marker location');
         }
+    }
+
+    /**
+     * Calculate optimal popup position above fan markers
+     * @param {Object|L.LatLng} positionData - Position data (enhanced object or legacy LatLng)
+     * @returns {L.LatLng} Optimal position for popup
+     */
+    calculateOptimalPopupPosition(positionData) {
+        const map = window.mapCore.getMap();
+        if (!map) {
+            return positionData.clickedPosition || positionData;
+        }
+        
+        try {
+            let targetPosition;
+            
+            if (positionData.allFanPositions && positionData.allFanPositions.length > 0) {
+                // Find the topmost marker position for multiple fan markers
+                targetPosition = this.findTopmostPosition(positionData.allFanPositions);
+            } else if (positionData.clickedPosition) {
+                // Single marker position
+                targetPosition = positionData.clickedPosition;
+            } else {
+                // Legacy support - positionData is the LatLng directly
+                targetPosition = positionData;
+            }
+            
+            // Convert to container coordinates for pixel-based calculations
+            const targetPoint = map.latLngToContainerPoint(targetPosition);
+            
+            // Offset the popup to be above the marker (negative Y in screen coordinates)
+            // Add extra space to account for marker size and proper visual separation
+            const popupOffset = 50; // pixels above the topmost marker
+            const adjustedPoint = L.point(targetPoint.x, targetPoint.y - popupOffset);
+            
+            // Convert back to lat/lng
+            return map.containerPointToLatLng(adjustedPoint);
+        } catch (e) {
+            console.warn('Could not calculate optimal popup position, using fallback');
+            return positionData.clickedPosition || positionData;
+        }
+    }
+
+    /**
+     * Find the topmost position from an array of fan marker positions
+     * @param {L.LatLng[]} positions - Array of fan marker positions
+     * @returns {L.LatLng} Position of the topmost marker
+     */
+    findTopmostPosition(positions) {
+        const map = window.mapCore.getMap();
+        if (!map || positions.length === 0) return positions[0];
+        
+        // Convert all positions to screen coordinates and find the one with smallest Y (topmost)
+        let topmostPosition = positions[0];
+        let smallestY = map.latLngToContainerPoint(positions[0]).y;
+        
+        for (let i = 1; i < positions.length; i++) {
+            const screenPoint = map.latLngToContainerPoint(positions[i]);
+            if (screenPoint.y < smallestY) {
+                smallestY = screenPoint.y;
+                topmostPosition = positions[i];
+            }
+        }
+        
+        return topmostPosition;
     }
 }
 

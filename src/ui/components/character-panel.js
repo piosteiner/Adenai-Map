@@ -26,6 +26,7 @@ class CharacterPanel {
     initPanel() {
         this.panel = document.getElementById('character-panel');
         this.toggleBtn = document.getElementById('toggle-panel');
+        this.closeBtn = document.getElementById('panel-close-btn');
         this.grid = document.getElementById('character-grid');
         
         if (!this.panel || !this.toggleBtn || !this.grid) {
@@ -39,6 +40,11 @@ class CharacterPanel {
 
     setupEventListeners() {
         this.toggleBtn.addEventListener('click', () => this.togglePanel());
+        
+        // Add close button event listener
+        if (this.closeBtn) {
+            this.closeBtn.addEventListener('click', () => this.closePanel());
+        }
         
         // Add event delegation for character clicks
         this.panel.addEventListener('click', (e) => {
