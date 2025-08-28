@@ -403,8 +403,8 @@
       "title": "",
       "placeOfOrigin": "Atlantis (versunken)",
       "coordinates": [
-        2210,
-        975
+        1296,
+        694
       ],
       "description": "",
       "image": "",
@@ -413,21 +413,38 @@
       "relationship": "hostile",
       "firstMet": "",
       "notes": "",
-      "movementHistory": [],
+      "movementHistory": [
+        {
+          "id": "movement_1756355528007",
+          "date": "5663-05-20",
+          "dateStart": "5663-05-20",
+          "dateEnd": null,
+          "location": "Altes Weingut",
+          "coordinates": [
+            1296,
+            694
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T04:32:08.007Z"
+        }
+      ],
       "createdAt": "2025-08-28T04:31:45.676Z",
-      "updatedAt": "2025-08-28T04:31:45.676Z",
+      "updatedAt": "2025-08-28T04:32:08.007Z",
       "currentLocation": {
-        "location": "Atlantis (versunken)",
-        "date": "2025-08-28",
-        "dateStart": "2025-08-28",
+        "date": "5663-05-20",
+        "dateStart": "5663-05-20",
         "dateEnd": null,
+        "location": "Altes Weingut",
         "coordinates": [
-          2210,
-          975
+          1296,
+          694
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": ""
+      },
+      "location": "Altes Weingut"
     }
   ],
-  "lastUpdated": "2025-08-28T04:31:45.676Z"
+  "lastUpdated": "2025-08-28T04:32:08.007Z"
 }
