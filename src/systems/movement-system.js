@@ -20,19 +20,11 @@ class MovementSystem {
         });
     }
 
-    // Simple API-only path loading and display
+    // API-only path loading and display
     async loadAndDisplayPaths() {
-        console.log('🗺️ Loading character paths from API...');
-        
         try {
-            // Load paths from API
             const apiData = await this.pathManager.loadCharacterPaths();
-            
-            console.log(`📈 Loaded ${Object.keys(apiData.paths).length} character paths from API`);
-            
-            // Display paths on map
             this.displayPaths(apiData.paths);
-            
         } catch (error) {
             console.error('❌ Character Paths API unavailable');
             this.showError('Character movement data unavailable. Please contact developer through GitHub.');
@@ -43,30 +35,24 @@ class MovementSystem {
     displayPaths(paths) {
         const map = window.mapCore.getMap();
         
-        console.log('🎯 DisplayPaths called with:', Object.keys(paths).length, 'paths');
-        console.log('🗺️ Map available:', !!map);
-        
         if (!map) {
-            console.error('❌ Map not available in displayPaths');
+            console.error('❌ Map not available for path display');
             return;
         }
         
-        Object.values(paths).forEach((pathInfo, index) => {
-            console.log(`📊 Processing path ${index + 1}:`, pathInfo.name, pathInfo.type);
-            
+        // Hide existing paths before loading new ones
+        this.hideAllPaths();
+        
+        Object.values(paths).forEach((pathInfo) => {
             if (pathInfo.type === 'movement' && pathInfo.coordinates.length >= 2) {
-                console.log(`📍 Creating path for ${pathInfo.name} with ${pathInfo.coordinates.length} coordinates`);
-                console.log('🎨 Style:', pathInfo.style);
-                
-                // Create path line using API styling
+                // Create path line using server-provided styling
                 const pathLine = L.polyline(pathInfo.coordinates, {
                     color: pathInfo.style.color,
                     weight: pathInfo.style.weight,
                     opacity: pathInfo.style.opacity,
-                    dashArray: pathInfo.style.dashArray || '5,2'
+                    dashArray: pathInfo.style.dashArray
                 });
                 
-                // Add to map
                 pathLine.addTo(map);
                 this.movementLayers.push(pathLine);
                 
@@ -76,28 +62,72 @@ class MovementSystem {
                     sticky: true,
                     direction: 'top'
                 });
-                
-                console.log(`✅ Displayed path for ${pathInfo.name}`);
-            } else {
-                console.log(`⚠️ Skipping path ${pathInfo.name}: type=${pathInfo.type}, coords=${pathInfo.coordinates.length}`);
+
+                // Store path data for character panel compatibility
+                this.characterPaths.push({
+                    character: {
+                        id: pathInfo.id,
+                        name: pathInfo.name,
+                        relationship: pathInfo.metadata?.relationship || 'unknown'
+                    },
+                    pathLine: pathLine,
+                    coordinates: pathInfo.coordinates,
+                    style: pathInfo.style
+                });
             }
         });
-        
-        console.log(`✅ Total displayed: ${this.movementLayers.length} character paths`);
     }
 
-    // Clear all paths from map
-    clearPaths() {
+    // Show all character paths
+    showAllPaths() {
         const map = window.mapCore.getMap();
-        
+        if (!map) return;
+
+        this.movementLayers.forEach(layer => {
+            if (!map.hasLayer(layer)) {
+                layer.addTo(map);
+            }
+        });
+    }
+
+    // Hide all character paths
+    hideAllPaths() {
+        const map = window.mapCore.getMap();
+        if (!map) return;
+
         this.movementLayers.forEach(layer => {
             if (map.hasLayer(layer)) {
                 map.removeLayer(layer);
             }
         });
-        
-        this.movementLayers = [];
-        this.characterPaths = [];
+    }
+
+    // Show specific character path by ID
+    showCharacterPath(characterId) {
+        const map = window.mapCore.getMap();
+        if (!map) return false;
+
+        // Find the path layer for this character
+        const pathData = this.characterPaths.find(path => path.character?.id === characterId);
+        if (pathData && pathData.pathLine && !map.hasLayer(pathData.pathLine)) {
+            pathData.pathLine.addTo(map);
+            return true;
+        }
+        return false;
+    }
+
+    // Hide specific character path by ID
+    hideCharacterPath(characterId) {
+        const map = window.mapCore.getMap();
+        if (!map) return false;
+
+        // Find the path layer for this character
+        const pathData = this.characterPaths.find(path => path.character?.id === characterId);
+        if (pathData && pathData.pathLine && map.hasLayer(pathData.pathLine)) {
+            map.removeLayer(pathData.pathLine);
+            return true;
+        }
+        return false;
     }
 
     // Show error message
@@ -137,25 +167,12 @@ class MovementSystem {
 
     // Required by main.js
     addIntegratedMovementControls() {
-        console.log('✅ Movement system initialized');
-        
         // Update version info via GitHub checker if available
         if (window.gitHubVersionChecker) {
             window.gitHubVersionChecker.updateVersionDisplay();
         }
         
         return true;
-    }
-
-    // Manual test function
-    async testLoadPaths() {
-        console.log('🧪 Manual test: Loading paths...');
-        await this.loadAndDisplayPaths();
-        
-        // Update version after test if GitHub checker available
-        if (window.gitHubVersionChecker) {
-            window.gitHubVersionChecker.updateVersionDisplay();
-        }
     }
 }
 

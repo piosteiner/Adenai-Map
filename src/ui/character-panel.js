@@ -66,18 +66,6 @@ class CharacterPanel {
                         <button id="show-all-paths" class="movement-btn">✅ Show All</button>
                         <button id="hide-all-paths" class="movement-btn">❌ Hide All</button>
                     </div>
-                    
-                    <div class="date-controls">
-                        <label>📅 Date Range Filter:</label>
-                        <div class="date-inputs">
-                            <input type="date" id="start-date" />
-                            <input type="date" id="end-date" />
-                        </div>
-                        <div class="date-actions">
-                            <button id="apply-date-filter" class="movement-btn">Apply Filter</button>
-                            <button id="clear-date-filter" class="movement-btn">Clear Filter</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         `;
@@ -103,14 +91,6 @@ class CharacterPanel {
         document.getElementById('hide-all-paths')?.addEventListener('click', () => {
             this.hideAllCharacterPaths();
         });
-
-        document.getElementById('apply-date-filter')?.addEventListener('click', () => {
-            this.applyDateFilter();
-        });
-        
-        document.getElementById('clear-date-filter')?.addEventListener('click', () => {
-            this.clearDateFilter();
-        });
     }
 
     // Movement control methods
@@ -135,29 +115,6 @@ class CharacterPanel {
                 checkbox.checked = checked;
             }
         });
-    }
-
-    applyDateFilter() {
-        const startDate = document.getElementById('start-date').value;
-        const endDate = document.getElementById('end-date').value;
-        
-        if (startDate && endDate && window.movementSystem) {
-            window.movementSystem.filterPathsByDateRange(startDate, endDate);
-        }
-    }
-
-    clearDateFilter() {
-        document.getElementById('start-date').value = '';
-        document.getElementById('end-date').value = '';
-        
-        if (window.movementSystem) {
-            window.movementSystem.characterPaths.forEach(pathData => {
-                if (pathData.isVisible) {
-                    window.movementSystem.hideCharacterPath(pathData.character.id);
-                    window.movementSystem.showCharacterPath(pathData.character.id);
-                }
-            });
-        }
     }
 
     toggleMovementControls() {
