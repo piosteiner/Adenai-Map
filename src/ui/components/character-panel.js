@@ -54,13 +54,6 @@ class CharacterPanel {
         
         // Add event delegation for character clicks
         this.panel.addEventListener('click', (e) => {
-            // If panel is closed and user clicks on it, snap it open
-            if (!this.isPanelOpen) {
-                this.openPanel();
-                e.stopPropagation();
-                return;
-            }
-            
             const characterInfo = e.target.closest('.character-info');
             if (characterInfo) {
                 const characterName = characterInfo.dataset.characterName;
@@ -74,15 +67,16 @@ class CharacterPanel {
     setupResizeHandlers() {
         if (!this.resizeHandle) return;
 
-        let startX, startWidth, triggerDistance = 0;
+        let startX, startWidth;
 
         const startResize = (e) => {
             this.isResizing = true;
             startX = e.clientX || e.touches[0].clientX;
-            triggerDistance = 0;
             
+            // If panel is closed, trigger open on any interaction
             if (!this.isPanelOpen) {
-                startWidth = 0; // Start from closed position
+                this.openPanel();
+                startWidth = this.collapseThreshold;
             } else {
                 startWidth = parseInt(document.defaultView.getComputedStyle(this.panel).width, 10);
             }
@@ -100,27 +94,13 @@ class CharacterPanel {
             
             const clientX = e.clientX || e.touches[0].clientX;
             const diff = startX - clientX;
+            let newWidth = startWidth + diff;
             
-            if (!this.isPanelOpen) {
-                // Track how far user has pulled from the right edge
-                triggerDistance = Math.max(0, diff);
-                
-                // If pulled 30px or more, snap panel open
-                if (triggerDistance >= 30) {
-                    this.openPanel();
-                    // Reset for continued resizing from open state
-                    startX = clientX;
-                    startWidth = this.collapseThreshold;
-                    triggerDistance = 0;
-                }
-            } else {
-                // Normal resize when panel is open
-                let newWidth = startWidth + diff;
-                newWidth = Math.max(this.minWidth, Math.min(this.maxWidth, newWidth));
-                this.setWidth(newWidth);
-                this.updateHandlePosition();
-            }
+            // Clamp width between min and max
+            newWidth = Math.max(this.minWidth, Math.min(this.maxWidth, newWidth));
             
+            this.setWidth(newWidth);
+            this.updateHandlePosition();
             e.preventDefault();
         };
 
@@ -151,14 +131,6 @@ class CharacterPanel {
         this.resizeHandle.addEventListener('touchstart', startResize);
         document.addEventListener('touchmove', doResize);
         document.addEventListener('touchend', stopResize);
-        
-        // Click handler for snap-open when panel is closed
-        this.resizeHandle.addEventListener('click', (e) => {
-            if (!this.isPanelOpen && !this.isResizing) {
-                this.openPanel();
-                e.stopPropagation();
-            }
-        });
         
         // Initialize handle position
         this.updateHandlePosition();
