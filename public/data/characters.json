@@ -512,8 +512,8 @@
       "title": "",
       "placeOfOrigin": "Barbenfall",
       "coordinates": [
-        1082,
-        967
+        1240,
+        1041
       ],
       "description": "",
       "image": "",
@@ -554,23 +554,39 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-28T07:56:29.043Z"
+        },
+        {
+          "id": "movement_1756367803280",
+          "movement_nr": 2,
+          "date": "5663-01-03",
+          "dateStart": "5663-01-03",
+          "dateEnd": null,
+          "location": "Silbergrat",
+          "coordinates": [
+            1240,
+            1041
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T07:56:43.280Z"
         }
       ],
       "createdAt": "2025-08-28T07:55:48.310Z",
-      "updatedAt": "2025-08-28T07:56:29.043Z",
+      "updatedAt": "2025-08-28T07:56:43.280Z",
       "currentLocation": {
-        "date": "5663-01-02",
-        "dateStart": "5663-01-02",
+        "date": "5663-01-03",
+        "dateStart": "5663-01-03",
         "dateEnd": null,
-        "location": "Nordmund",
+        "location": "Silbergrat",
         "coordinates": [
-          1082,
-          967
+          1240,
+          1041
         ],
         "notes": ""
       },
-      "location": "Nordmund"
+      "location": "Silbergrat"
     }
   ],
-  "lastUpdated": "2025-08-28T07:56:29.043Z"
+  "lastUpdated": "2025-08-28T07:56:43.280Z"
 }
