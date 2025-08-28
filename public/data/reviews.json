@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "8f456c68fba392e4448b483dc4a82c2e7c1ce584",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-28T06:10:08.307Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-28T06:10:08.308Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Nordmund (5055-05-05)"
+    },
+    {
       "commitSha": "1e30aa6edd8b613256c90ef1d790ca68ce9f9b5b",
       "action": "update",
       "type": "character",
@@ -2355,5 +2368,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-28T05:29:17.914Z"
+  "lastUpdated": "2025-08-28T06:10:08.308Z"
 }
