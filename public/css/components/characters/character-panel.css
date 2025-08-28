@@ -32,84 +32,8 @@
   margin: 0;
 }
 
-/* Close button positioned on left border with panel indentation */
-.panel-close-btn {
-  position: absolute;
-  left: -15px; /* Slightly less outside the panel */
-  top: 45vh; /* 45% viewport height */
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--popup-bg);
-  color: var(--text-color);
-  border: 2px solid var(--dropdown-border);
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1002;
-  transition: all 0.2s ease;
-  box-shadow: -2px 0 8px rgba(0,0,0,0.2);
-}
-
-/* Create a bulge/indentation in the panel for the close button */
-.character-panel::before {
-  content: '';
-  position: absolute;
-  left: -2px;
-  top: calc(45vh - 25px); /* Center around the button at 45vh */
-  width: 30px;
-  height: 50px;
-  background: var(--popup-bg);
-  border: 2px solid var(--dropdown-border);
-  border-right: none;
-  border-radius: 25px 0 0 25px;
-  z-index: 1001;
-}
-
-.panel-close-btn:hover {
-  background: var(--dropdown-hover);
-  transform: scale(1.1);
-  box-shadow: -4px 0 12px rgba(0,0,0,0.3);
-}
-
 .panel-content {
   padding: 15px;
-}
-
-/* Character Panel Open Button */
-.panel-open-btn {
-  position: fixed;
-  right: 15px;
-  top: 70px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--popup-bg);
-  color: var(--text-color);
-  border: 2px solid var(--dropdown-border);
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-}
-
-.panel-open-btn:hover {
-  background: var(--dropdown-hover);
-  transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-/* Hide open button when panel is open */
-.character-panel.open ~ .panel-open-btn {
-  opacity: 0;
-  pointer-events: none;
 }
 
 /* Movement Controls Section */

@@ -27,6 +27,11 @@
     width: 100vw;
     right: -100vw;
   }
+  
+  #toggle-panel {
+    right: 15px;
+    top: 70px;
+  }
 
   /* Enhanced mobile responsiveness for character popups */
   .character-focus-popup .leaflet-popup-content-wrapper {
