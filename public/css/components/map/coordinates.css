@@ -1,0 +1,74 @@
+/* Coordinate display and copy system styles */
+
+#coords {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 1000;
+    user-select: none;
+}
+
+#coords:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#coords.copied {
+    background: rgba(34, 197, 94, 0.9);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+    #coords {
+        background: rgba(45, 55, 72, 0.9);
+        color: #e2e8f0;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    #coords:hover {
+        background: rgba(45, 55, 72, 0.95);
+    }
+}
+
+.dark-mode #coords {
+    background: rgba(45, 55, 72, 0.9);
+    color: #e2e8f0;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode #coords:hover {
+    background: rgba(45, 55, 72, 0.95);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #coords {
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 14px;
+        padding: 10px 14px;
+    }
+    
+    #coords:hover {
+        transform: translateX(-50%) scale(1.05);
+    }
+    
+    #coords.copied {
+        transform: translateX(-50%) scale(1.1);
+    }
+}

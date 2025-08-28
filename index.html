@@ -32,12 +32,24 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <!-- My styles CSS (now includes character panel styles) -->
   <link rel="stylesheet" href="public/css/styles.css">
-  <!-- My gallery CSS -->
-  <link rel="stylesheet" href="public/css/gallery.css">
-  <!-- Character Path System CSS -->
-  <link rel="stylesheet" href="public/css/components/char-path.css">
-  <!-- Movement Markers CSS -->
-  <link rel="stylesheet" href="public/css/components/movement-markers.css">
+  <!-- Feature-specific CSS -->
+  <link rel="stylesheet" href="public/css/components/features/gallery.css">
+  <!-- Map System CSS -->
+  <link rel="stylesheet" href="public/css/components/map/map-core.css">
+  <link rel="stylesheet" href="public/css/components/map/coordinates.css">
+  <!-- Character System CSS -->
+  <link rel="stylesheet" href="public/css/components/characters/character-paths.css">
+  <link rel="stylesheet" href="public/css/components/characters/character-panel.css">
+  <link rel="stylesheet" href="public/css/components/characters/character-system.css">
+  <!-- Movement System CSS -->
+  <link rel="stylesheet" href="public/css/components/movement/movement-markers.css">
+  <!-- UI Components CSS -->
+  <link rel="stylesheet" href="public/css/components/ui/controls.css">
+  <link rel="stylesheet" href="public/css/components/ui/modals.css">
+  <link rel="stylesheet" href="public/css/components/ui/popups.css">
+  <link rel="stylesheet" href="public/css/components/ui/badges.css">
+  <!-- Feature CSS -->
+  <link rel="stylesheet" href="public/css/components/features/search.css">
 </head>
 
 <body>
@@ -122,14 +134,14 @@
 
   <!-- STEP 6: Modern Adenai Systems (after map core and utilities) -->
   <script src="src/systems/character-system.js?t=dev"></script>
-  <script src="src/ui/movement-markers.js?t=dev"></script>
+  <script src="src/ui/components/movement-markers.js?t=dev"></script>
   <script src="src/systems/movement-system.js?t=dev"></script>
   <script src="src/systems/location-system.js?t=dev"></script>
   <script src="src/systems/search-system.js?t=dev"></script>
-  <script src="src/ui/character-panel.js?t=dev"></script>
+  <script src="src/ui/components/character-panel.js?t=dev"></script>
 
   <!-- STEP 5.5: Coordinate Copy System -->
-  <script src="src/ui/coordinate-copy.js?t=dev"></script>
+  <script src="src/ui/components/coordinate-copy.js?t=dev"></script>
 
   <!-- STEP 5.6: GitHub Version Checker -->
   <script src="src/utils/github-version.js?t=dev"></script>
