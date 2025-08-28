@@ -97,10 +97,7 @@ class CoordinateCopySystem {
         if (this.isHolding && this.holdIndicator) {
             const content = this.holdIndicator.querySelector('.hold-content');
             if (content) {
-                content.innerHTML = `
-                    ${this.currentCoordinates[0]} ${this.currentCoordinates[1]}
-                    <div class="hold-instruction">Press <kbd>C</kbd> to copy</div>
-                `;
+                content.innerHTML = `${this.currentCoordinates[0]} ${this.currentCoordinates[1]}`;
             }
         }
     }
@@ -121,7 +118,7 @@ class CoordinateCopySystem {
     async copyCoordinates() {
         if (!this.currentCoordinates) return;
 
-        const coordString = `[${this.currentCoordinates[0]}, ${this.currentCoordinates[1]}]`;
+        const coordString = `${this.currentCoordinates[0]} ${this.currentCoordinates[1]}`;
         
         try {
             // Try modern clipboard API first
