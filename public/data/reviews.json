@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "80658fd7f72f06d64388e478481c809fc0636bad",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-28T06:25:57.692Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-28T06:25:57.692Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Test Location entry (5663-06-04)"
+    },
+    {
       "commitSha": "c63936b8b17d81227fb32a6952e7145ab950fcf3",
       "action": "update",
       "type": "character",
@@ -2407,5 +2420,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-28T06:10:44.622Z"
+  "lastUpdated": "2025-08-28T06:25:57.692Z"
 }
