@@ -598,7 +598,7 @@ class CharacterSystem {
         await this.loadCharacters();
     }
 
-    // FIXED: Add characters to search index with proper coordinate conversion
+    // FIXED: Add all characters to search index, including those without coordinates
     addToSearchIndex(searchIndex) {
         this.characterData.forEach(character => {
             if (character.coordinates && Array.isArray(character.coordinates)) {
@@ -613,7 +613,15 @@ class CharacterSystem {
                     character: character
                 });
             } else {
-                console.warn(`⚠️ Character "${character.name}" excluded from search - no coordinates`);
+                // Include characters without coordinates for panel popup
+                searchIndex.push({
+                    name: character.name,
+                    desc: `${character.title || ''} ${character.description || ''} ${character.notes || ''}`.trim(),
+                    latlng: null, // No map coordinates
+                    type: 'character',
+                    character: character
+                });
+                console.log(`📋 Character "${character.name}" added to search (no coordinates - will show panel popup)`);
             }
         });
     }

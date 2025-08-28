@@ -39,6 +39,17 @@ class CharacterPanel {
 
     setupEventListeners() {
         this.toggleBtn.addEventListener('click', () => this.togglePanel());
+        
+        // Add event delegation for character clicks
+        this.panel.addEventListener('click', (e) => {
+            const characterInfo = e.target.closest('.character-info');
+            if (characterInfo) {
+                const characterName = characterInfo.dataset.characterName;
+                if (characterName) {
+                    this.focusCharacter(characterName);
+                }
+            }
+        });
     }
 
     initializePanelContent() {
@@ -215,7 +226,7 @@ class CharacterPanel {
                     </label>
                 </div>
                 
-                <div class="character-info" onclick="window.characterPanel.focusCharacter('${character.name}')">
+                <div class="character-info" data-character-name="${character.name}">
                     ${character.image ? `<img src="${character.image}" alt="${character.name}" class="character-avatar">` : ''}
                     <div class="character-details">
                         <h4>${character.name}${hasMovement ? ` 🛤️ ${movementCount + 1}` : ''}</h4>
