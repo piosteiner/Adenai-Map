@@ -668,7 +668,38 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "pio_s_fully_loaded_char",
+      "name": "Pio's fully loaded char",
+      "title": "Novice Typer",
+      "placeOfOrigin": "Dämmerwacht",
+      "coordinates": [
+        1837,
+        1062
+      ],
+      "description": "Es unterdurchschnittlich Begabter Novize",
+      "image": "https://d7hftxdivxxvm.cloudfront.net/?height=1200&quality=80&resize_to=fill&src=https%3A%2F%2Fartsy-media-uploads.s3.amazonaws.com%2FmPisDeUp-bFdqp5jSaafeg%252FClippy%2Bthumb.jpg&width=1200",
+      "status": "alive",
+      "faction": "Circle of Code",
+      "relationship": "ally",
+      "firstMet": "1993-10-09",
+      "notes": "Name, Title\nPlace of Origin, Status\nFaction, Relationship,\nbeschreibung\nErstes Treffen, img url",
+      "movementHistory": [],
+      "createdAt": "2025-08-28T10:21:31.607Z",
+      "updatedAt": "2025-08-28T10:21:31.607Z",
+      "currentLocation": {
+        "location": "Dämmerwacht",
+        "date": "2025-08-28",
+        "dateStart": "2025-08-28",
+        "dateEnd": null,
+        "coordinates": [
+          1837,
+          1062
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2025-08-28T10:18:10.800Z"
+  "lastUpdated": "2025-08-28T10:21:31.607Z"
 }
