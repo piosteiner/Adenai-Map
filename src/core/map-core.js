@@ -35,12 +35,40 @@ class MapCore {
         toggleBtn.style.top = "10px";
         toggleBtn.style.right = "10px";
         toggleBtn.style.zIndex = "1001";
-        toggleBtn.style.padding = "6px 10px";
+        toggleBtn.style.width = "50px";  // Make it square
+        toggleBtn.style.height = "50px"; // Make it square
+        toggleBtn.style.fontSize = "24px"; // Bigger icon
+        toggleBtn.style.padding = "0"; // Remove padding for perfect square
         toggleBtn.style.border = "none";
-        toggleBtn.style.borderRadius = "4px";
+        toggleBtn.style.borderRadius = "8px"; // Slightly larger border radius
         toggleBtn.style.cursor = "pointer";
+        toggleBtn.style.display = "flex"; // Center the icon
+        toggleBtn.style.alignItems = "center"; // Center vertically
+        toggleBtn.style.justifyContent = "center"; // Center horizontally
+        toggleBtn.style.backgroundColor = "rgba(255, 255, 255, 0.9)"; // Slight background
+        toggleBtn.style.boxShadow = "0 2px 6px rgba(0, 0, 0, 0.2)"; // Add shadow
+        toggleBtn.style.transition = "all 0.2s ease"; // Smooth transitions
 
         document.body.appendChild(toggleBtn);
+
+        // Add hover effects
+        toggleBtn.addEventListener('mouseenter', () => {
+            toggleBtn.style.transform = 'scale(1.05)';
+            toggleBtn.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+        });
+
+        toggleBtn.addEventListener('mouseleave', () => {
+            toggleBtn.style.transform = 'scale(1)';
+            toggleBtn.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.2)';
+        });
+
+        toggleBtn.addEventListener('mousedown', () => {
+            toggleBtn.style.transform = 'scale(0.95)';
+        });
+
+        toggleBtn.addEventListener('mouseup', () => {
+            toggleBtn.style.transform = 'scale(1.05)';
+        });
 
         const userPref = localStorage.getItem("theme");
         const systemPref = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -59,9 +87,13 @@ class MapCore {
             if (theme === "dark") {
                 toggleBtn.textContent = "☀️"; // Sun icon for dark mode (click to go light)
                 toggleBtn.title = "Switch to Light Mode";
+                toggleBtn.style.backgroundColor = "rgba(40, 40, 40, 0.9)"; // Dark background
+                toggleBtn.style.color = "#ffffff"; // White text/icon
             } else {
                 toggleBtn.textContent = "🌙"; // Moon icon for light mode (click to go dark)
                 toggleBtn.title = "Switch to Dark Mode";
+                toggleBtn.style.backgroundColor = "rgba(255, 255, 255, 0.9)"; // Light background
+                toggleBtn.style.color = "#000000"; // Dark text/icon
             }
         };
 
