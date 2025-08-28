@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "d5550ddad2925fcaad3a8c5e7f9d7a643a73c761",
+      "action": "update",
+      "type": "character",
+      "itemName": "Test2",
+      "user": "gm",
+      "timestamp": "2025-08-28T04:32:10.919Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-28T04:32:10.919Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Test2 (by gm) - Altes Weingut (5663-05-20)"
+    },
+    {
       "commitSha": "bbbef9dd64f2d8847f428bde4aeb71acd6db3416",
       "action": "update",
       "type": "character",
@@ -2212,5 +2225,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-28T04:32:08.744Z"
+  "lastUpdated": "2025-08-28T04:32:10.919Z"
 }
