@@ -197,12 +197,6 @@ class CharacterSystem {
             return false;
         }
 
-        // Open character panel if it's closed
-        const isCharacterPanelOpen = window.characterPanel?.isOpen() || false;
-        if (!isCharacterPanelOpen && window.characterPanel) {
-            window.characterPanel.openPanel();
-        }
-
         // Get position based on priority rules
         const coordinates = this.getCharacterPosition(character);
         
@@ -434,7 +428,7 @@ class CharacterSystem {
 
     // Calculate target position accounting for character panel
     calculatePanelAwareTarget(map, originalTarget) {
-        const isCharacterPanelOpen = window.characterPanel?.isOpen() || false;
+        const isCharacterPanelOpen = window.characterPanel?.isExpanded() || false;
         const isMobile = window.innerWidth <= 768;
         
         if (!isCharacterPanelOpen || isMobile) {
@@ -475,7 +469,7 @@ class CharacterSystem {
 
     // Calculate padding for fitBounds
     calculateViewportPadding() {
-        const isCharacterPanelOpen = window.characterPanel?.isOpen() || false;
+        const isCharacterPanelOpen = window.characterPanel?.isExpanded() || false;
         const isMobile = window.innerWidth <= 768;
         
         if (isCharacterPanelOpen && !isMobile) {
