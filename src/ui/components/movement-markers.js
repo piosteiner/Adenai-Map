@@ -378,45 +378,42 @@ class MovementMarkers {
 
         const formattedEndDate = formatDate(endDate);
 
-        // Create popup content
+        // Create popup content using character popup styling
         const popupContent = `
-            <div class="movement-popup">
-                <div class="movement-popup-header">
-                    <h3>🛤️ ${characterName} - Stop ${markerNumber}</h3>
+            <div class="character-popup">
+                <div class="popup-title" style="color: #6366f1; margin-bottom: 8px;">
+                    🛤️ ${characterName} - Stop ${markerNumber}
                 </div>
-                <div class="movement-popup-content">
-                    <div class="movement-info-row">
-                        <strong>📍 Location:</strong> ${movementData.location || 'Unknown'}
-                    </div>
-                    <div class="movement-info-row">
-                        <strong>🚶 Movement Type:</strong> ${movementData.type || 'travel'}
-                    </div>
-                    <div class="movement-info-row">
-                        <strong>📅 Start Date:</strong> ${formatDate(movementData.date) || 'Not specified'}
-                    </div>
-                    ${hasEndDate && formattedEndDate ? `
-                    <div class="movement-info-row">
-                        <strong>📅 End Date:</strong> ${formattedEndDate}
-                    </div>
-                    ` : ''}
-                    ${durationText ? `
-                    <div class="movement-info-row">
-                        <strong>⏱️ Duration:</strong> ${durationText}
-                    </div>
-                    ` : ''}
-                    ${movementData.notes ? `
-                    <div class="movement-info-row">
-                        <strong>📝 Notes:</strong> ${movementData.notes}
-                    </div>
-                    ` : ''}
+                <div style="margin-bottom: 8px;">
+                    <strong>📍 Location:</strong> ${movementData.location || 'Unknown'}
                 </div>
+                <div style="margin-bottom: 8px;">
+                    <strong>🚶 Movement Type:</strong> ${movementData.type || 'travel'}
+                </div>
+                <div style="margin-bottom: 8px;">
+                    <strong>📅 Start Date:</strong> ${formatDate(movementData.date) || 'Not specified'}
+                </div>
+                ${hasEndDate && formattedEndDate ? `
+                <div style="margin-bottom: 8px;">
+                    <strong>📅 End Date:</strong> ${formattedEndDate}
+                </div>
+                ` : ''}
+                ${durationText ? `
+                <div style="margin-bottom: 8px;">
+                    <strong>⏱️ Duration:</strong> ${durationText}
+                </div>
+                ` : ''}
+                ${movementData.notes ? `
+                <div style="margin-bottom: 0;">
+                    <strong>📝 Notes:</strong> ${movementData.notes}
+                </div>
+                ` : ''}
             </div>
         `;
 
         // Create and show popup
         const popup = L.popup({
-            maxWidth: 300,
-            className: 'movement-detail-popup'
+            maxWidth: 300
         })
         .setLatLng(map.getCenter())
         .setContent(popupContent)
