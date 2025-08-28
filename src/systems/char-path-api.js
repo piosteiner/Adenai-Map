@@ -1,7 +1,7 @@
-// character-path-manager.js - Character Paths API Integration
-// Provides optimized character path data from server API
+// char-path-api.js - Character Paths API Client
+// Provides character path data from server API
 
-class CharacterPathManager {
+class CharPathAPI {
     constructor() {
         this.cache = new Map();
         this.cacheTimeout = 5 * 60 * 1000; // 5 minutes
@@ -19,9 +19,9 @@ class CharacterPathManager {
     }
 
     init() {
-        console.log('🚀 Character Path Manager initialized (API-only mode)');
+        console.log('🚀 Character Path API Client initialized');
         if (this.isDebugMode) {
-            console.log('🔧 Debug mode enabled for Character Path Manager');
+            console.log('🔧 Debug mode enabled for Character Path API');
         }
     }
 
@@ -257,10 +257,12 @@ class CharacterPathManager {
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = CharacterPathManager;
+    module.exports = CharPathAPI;
 }
 
 // Make available globally
-window.CharacterPathManager = CharacterPathManager;
+window.CharPathAPI = CharPathAPI;
+// Legacy alias for backward compatibility
+window.CharacterPathManager = CharPathAPI;
 
-console.log('📚 Character Path Manager loaded successfully (API-only mode)');
+console.log('📚 Character Path API Client loaded successfully');

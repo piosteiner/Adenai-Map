@@ -1,10 +1,13 @@
-class MovementSystem {
+// char-path-sys.js - Character Path Display System
+// Handles display and interaction of character paths on the map
+
+class CharPathSystem {
     constructor() {
         this.characterPaths = [];
         this.movementLayers = [];
         
-        // Initialize Character Path Manager for API integration
-        this.pathManager = new CharacterPathManager();
+        // Initialize Character Path API client
+        this.pathAPI = new CharPathAPI();
         
         this.init();
     }
@@ -26,7 +29,7 @@ class MovementSystem {
         
         try {
             // Load paths from API
-            const apiData = await this.pathManager.loadCharacterPaths();
+            const apiData = await this.pathAPI.loadCharacterPaths();
             
             console.log(`📈 Loaded ${Object.keys(apiData.paths).length} character paths from API`);
             
@@ -137,7 +140,7 @@ class MovementSystem {
 
     // Required by main.js
     addIntegratedMovementControls() {
-        console.log('✅ Movement system initialized');
+        console.log('✅ Character Path System initialized');
         
         // Update version info via GitHub checker if available
         if (window.gitHubVersionChecker) {
@@ -161,8 +164,10 @@ class MovementSystem {
 
 // Export for use in other modules
 if (typeof window !== 'undefined') {
-    window.MovementSystem = MovementSystem;
+    window.CharPathSystem = CharPathSystem;
     
     // Create and expose instance for global access
-    window.movementSystem = new MovementSystem();
+    window.charPathSystem = new CharPathSystem();
+    // Legacy alias for backward compatibility
+    window.movementSystem = window.charPathSystem;
 }

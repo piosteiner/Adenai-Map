@@ -1,4 +1,4 @@
-// TEST CHARACTER PATHS - REMOVE WHEN API IS WORKING
+// char-path-test.js - TEMPORARY TEST DATA (REMOVE WHEN API IS WORKING)
 // This file provides dummy character paths for testing when the API is unavailable
 
 window.createTestCharacterPaths = function() {

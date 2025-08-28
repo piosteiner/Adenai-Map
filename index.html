@@ -34,8 +34,8 @@
   <link rel="stylesheet" href="public/css/styles.css">
   <!-- My gallery CSS -->
   <link rel="stylesheet" href="public/css/gallery.css">
-  <!-- Character Path Manager CSS -->
-  <link rel="stylesheet" href="public/css/components/character-path-manager.css">
+  <!-- Character Path System CSS -->
+  <link rel="stylesheet" href="public/css/components/char-path.css">
 </head>
 
 <body>
@@ -50,9 +50,9 @@
   
   <div id="coords">X: –, Y: –</div>
   
-  <!-- Version indicator -->
+  <!-- Version indicator (populated by github-version.js) -->
   <div id="version-info">
-    <div class="version-line">Last Update: 28.08.2025</div>
+    <!-- Auto-populated by GitHub Version Checker -->
   </div>
 
   <!-- Search Container -->
@@ -115,10 +115,12 @@
   <!-- STEP 4: Legacy Icons System (before other systems) -->
   <script src="src/utils/icons.js?v=0.25.05.16.1306"></script>
 
-  <!-- STEP 5: Modern Adenai Systems (after map core) -->
-  <script src="src/systems/character-path-manager.js?v=1.0.0"></script>
+  <!-- STEP 5: Character Path API Client (utility layer) -->
+  <script src="src/utils/char-path-api.js?v=1.0.0"></script>
+
+  <!-- STEP 6: Modern Adenai Systems (after map core and utilities) -->
   <script src="src/systems/character-system.js?v=1.2.0&t=20250827"></script>
-  <script src="src/systems/movement-system.js?v=1.1.0"></script>
+  <script src="src/systems/char-path-sys.js?v=1.1.0"></script>
   <script src="src/systems/location-system.js?v=1.3.0&t=20250827"></script>
   <script src="src/systems/search-system.js?v=1.1.0"></script>
   <script src="src/ui/character-panel.js?v=1.1.0"></script>
@@ -129,8 +131,8 @@
   <!-- STEP 5.6: GitHub Version Checker -->
   <script src="src/utils/github-version.js?v=1.0.0"></script>
 
-  <!-- STEP 5.7: Test Character Paths (TEMPORARY - remove when API works) -->
-  <script src="test-character-paths.js"></script>
+  <!-- STEP 5.7: Character Path Test Data (TEMPORARY - remove when API works) -->
+  <script src="char-path-test.js"></script>
 
   <!-- STEP 6: Journey System (AFTER map and systems are initialized) -->
   <script src="src/utils/journey.js?v=0.25.05.16.1306"></script>
