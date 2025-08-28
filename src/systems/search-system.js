@@ -163,6 +163,7 @@ class SearchSystem {
         
         if (result.type === 'character') {
             // For characters, use character system to focus
+            console.log(`🔍 Search requesting focus for character: "${result.character.name}"`);
             window.characterSystem.focusCharacter(result.character.name);
         } else {
             // For locations, use locations system if available

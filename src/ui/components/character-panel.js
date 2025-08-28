@@ -256,6 +256,7 @@ class CharacterPanel {
     }
 
     focusCharacter(characterName) {
+        console.log(`🎯 Character panel requesting focus for: "${characterName}"`);
         const success = window.characterSystem?.focusCharacter?.(characterName);
         
         if (!success) {
