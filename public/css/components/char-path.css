@@ -1,5 +1,95 @@
 /* char-path.css - Styles for character path system */
 
+/* Movement marker cursor pointer */
+.movement-marker {
+    cursor: pointer !important;
+    transition: transform 0.2s ease;
+}
+
+.movement-marker:hover {
+    transform: scale(1.1);
+}
+
+/* Movement detail popup styles */
+.movement-detail-popup .leaflet-popup-content-wrapper {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.movement-popup {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-width: 250px;
+}
+
+.movement-popup-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 15px;
+    margin: -12px -12px 12px -12px;
+    border-radius: 8px 8px 0 0;
+}
+
+.movement-popup-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.movement-popup-content {
+    padding: 0;
+}
+
+.movement-info-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    padding: 4px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.movement-info-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.movement-info-row strong {
+    min-width: 110px;
+    color: #555;
+    font-size: 13px;
+    margin-right: 8px;
+}
+
+.movement-info-row span,
+.movement-info-row:not(:has(strong)) {
+    color: #333;
+    font-size: 13px;
+    flex: 1;
+}
+
+/* Dark theme support for movement popup */
+[data-theme="dark"] .movement-detail-popup .leaflet-popup-content-wrapper {
+    background: #2d3748;
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .movement-popup-header {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+}
+
+[data-theme="dark"] .movement-info-row {
+    border-bottom-color: #4a5568;
+}
+
+[data-theme="dark"] .movement-info-row strong {
+    color: #a0aec0;
+}
+
+[data-theme="dark"] .movement-info-row span,
+[data-theme="dark"] .movement-info-row:not(:has(strong)) {
+    color: #e2e8f0;
+}
+
 /* Loading state styles */
 #character-paths-loading {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;

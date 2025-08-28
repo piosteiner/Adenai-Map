@@ -248,12 +248,12 @@ class MovementSystem {
     }
 
     // Create numbered marker for movement locations
-    createMovementMarker(coordinates, movementNr, characterName, locationName) {
+    createMovementMarker(coordinates, movementData, characterName) {
         const map = window.mapCore.getMap();
         if (!map) return null;
 
         // Create marker number (movement_nr + 1)
-        const markerNumber = (movementNr || 0) + 1;
+        const markerNumber = (movementData.movement_nr || 0) + 1;
         
         // Detect dark mode (you can adjust this selector based on your theme system)
         const isDarkMode = document.body.classList.contains('dark-mode') || 
@@ -272,6 +272,7 @@ class MovementSystem {
                 font-size: 12px;
                 font-weight: bold;
                 position: relative;
+                cursor: pointer;
                 ${isDarkMode ? 
                     'background: rgba(0, 0, 0, 0.7); color: white; border: 2px solid white;' :
                     'background: rgba(255, 255, 255, 0.7); color: black; border: 2px solid black;'
@@ -290,8 +291,13 @@ class MovementSystem {
         // Create marker
         const marker = L.marker(coordinates, { icon: customIcon });
         
-        // Add tooltip with location info
-        marker.bindTooltip(`${characterName} - Stop ${markerNumber}: ${locationName}`, {
+        // Add click event for detailed popup
+        marker.on('click', () => {
+            this.showMovementPopup(movementData, characterName, markerNumber);
+        });
+        
+        // Add simple tooltip on hover
+        marker.bindTooltip(`${characterName} - Stop ${markerNumber}`, {
             permanent: false,
             sticky: true,
             direction: 'top',
@@ -299,6 +305,84 @@ class MovementSystem {
         });
 
         return marker;
+    }
+
+    // Show detailed movement popup
+    showMovementPopup(movementData, characterName, markerNumber) {
+        const map = window.mapCore.getMap();
+        if (!map) return;
+
+        // Calculate duration if we have both start and end dates
+        let durationText = 'Unknown';
+        if (movementData.date && movementData.endDate) {
+            const startDate = new Date(movementData.date);
+            const endDate = new Date(movementData.endDate);
+            const diffTime = Math.abs(endDate - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            durationText = `${diffDays} day${diffDays !== 1 ? 's' : ''}`;
+        } else if (movementData.date && movementData.dateEnd) {
+            const startDate = new Date(movementData.date);
+            const endDate = new Date(movementData.dateEnd);
+            const diffTime = Math.abs(endDate - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            durationText = `${diffDays} day${diffDays !== 1 ? 's' : ''}`;
+        }
+
+        // Format dates
+        const formatDate = (dateStr) => {
+            if (!dateStr) return 'Not specified';
+            const date = new Date(dateStr);
+            return isNaN(date.getTime()) ? 'Invalid date' : date.toLocaleDateString();
+        };
+
+        // Create popup content
+        const popupContent = `
+            <div class="movement-popup">
+                <div class="movement-popup-header">
+                    <h3>🛤️ ${characterName} - Stop ${markerNumber}</h3>
+                </div>
+                <div class="movement-popup-content">
+                    <div class="movement-info-row">
+                        <strong>📍 Location:</strong> ${movementData.location || 'Unknown'}
+                    </div>
+                    <div class="movement-info-row">
+                        <strong>🚶 Movement Type:</strong> ${movementData.type || 'travel'}
+                    </div>
+                    <div class="movement-info-row">
+                        <strong>📅 Start Date:</strong> ${formatDate(movementData.date)}
+                    </div>
+                    <div class="movement-info-row">
+                        <strong>📅 End Date:</strong> ${formatDate(movementData.endDate || movementData.dateEnd)}
+                    </div>
+                    <div class="movement-info-row">
+                        <strong>⏱️ Duration:</strong> ${durationText}
+                    </div>
+                    ${movementData.notes ? `
+                    <div class="movement-info-row">
+                        <strong>📝 Notes:</strong> ${movementData.notes}
+                    </div>
+                    ` : ''}
+                </div>
+            </div>
+        `;
+
+        // Create and show popup
+        const popup = L.popup({
+            maxWidth: 300,
+            className: 'movement-detail-popup'
+        })
+        .setLatLng(map.getCenter())
+        .setContent(popupContent)
+        .openOn(map);
+
+        // Position popup near the marker if possible
+        try {
+            const markerLatLng = L.latLng(movementData.coordinates[1], movementData.coordinates[0]);
+            popup.setLatLng(markerLatLng);
+        } catch (e) {
+            // Fallback to map center if positioning fails
+            console.warn('Could not position popup at marker location');
+        }
     }
 
     // Create markers for a character's movement history
@@ -317,9 +401,8 @@ class MovementSystem {
                 
                 const marker = this.createMovementMarker(
                     mapCoords,
-                    movement.movement_nr,
-                    characterData.name,
-                    movement.location || 'Unknown Location'
+                    movement, // Pass full movement data for popup
+                    characterData.name
                 );
                 
                 if (marker) {
@@ -327,6 +410,7 @@ class MovementSystem {
                         marker: marker,
                         characterId: characterData.id,
                         movementNr: movement.movement_nr,
+                        movementData: movement, // Store movement data for reference
                         isVisible: false
                     });
                 }
