@@ -512,8 +512,8 @@
       "title": "",
       "placeOfOrigin": "Barbenfall",
       "coordinates": [
-        1322,
-        854
+        1082,
+        967
       ],
       "description": "",
       "image": "",
@@ -538,23 +538,39 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-28T07:56:15.410Z"
+        },
+        {
+          "id": "movement_1756367789043",
+          "movement_nr": 1,
+          "date": "5663-01-02",
+          "dateStart": "5663-01-02",
+          "dateEnd": null,
+          "location": "Nordmund",
+          "coordinates": [
+            1082,
+            967
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-28T07:56:29.043Z"
         }
       ],
       "createdAt": "2025-08-28T07:55:48.310Z",
-      "updatedAt": "2025-08-28T07:56:15.410Z",
+      "updatedAt": "2025-08-28T07:56:29.043Z",
       "currentLocation": {
-        "date": "5663-01-01",
-        "dateStart": "5663-01-01",
+        "date": "5663-01-02",
+        "dateStart": "5663-01-02",
         "dateEnd": null,
-        "location": "Esberg",
+        "location": "Nordmund",
         "coordinates": [
-          1322,
-          854
+          1082,
+          967
         ],
         "notes": ""
       },
-      "location": "Esberg"
+      "location": "Nordmund"
     }
   ],
-  "lastUpdated": "2025-08-28T07:56:15.410Z"
+  "lastUpdated": "2025-08-28T07:56:29.043Z"
 }
