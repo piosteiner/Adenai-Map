@@ -289,16 +289,19 @@
         {
           "id": "movement_1756076882170",
           "date": "5663-06-04",
-          "location": null,
+          "location": "Test Location",
           "coordinates": [
-            1265,
-            1018
+            1264,
+            1057
           ],
           "notes": "",
           "type": "mission",
           "createdAt": "2025-08-24T23:08:02.170Z",
           "movement_nr": 2,
-          "updatedAt": "2025-08-28T06:10:43.758Z"
+          "updatedAt": "2025-08-28T06:25:56.905Z",
+          "dateStart": "5663-06-04",
+          "dateEnd": null,
+          "isCustomLocation": true
         },
         {
           "id": "movement_1756078306547",
@@ -364,7 +367,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-28T06:10:43.758Z"
+      "updatedAt": "2025-08-28T06:25:56.906Z"
     },
     {
       "id": "pio",
@@ -504,5 +507,5 @@
       "location": "Osdalen"
     }
   ],
-  "lastUpdated": "2025-08-28T06:10:43.758Z"
+  "lastUpdated": "2025-08-28T06:25:56.906Z"
 }
