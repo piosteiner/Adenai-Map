@@ -3,9 +3,9 @@
 /* Main Panel Structure */
 .character-panel {
   position: fixed;
-  right: -320px;
+  right: -350px;
   top: 0;
-  width: 320px;
+  width: 350px;
   min-width: 30px; /* Minimum width for sliver mode */
   max-width: 600px; /* Maximum width */
   height: 100vh;
