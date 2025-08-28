@@ -4,6 +4,7 @@ class CharacterSystem {
         console.log('🎯 CHARACTER SYSTEM LOADED - VERSION 1.2.0 - UPDATED WITH ENHANCED POPUPS');
         this.characterData = [];
         this.currentCharacterPopup = null; // Track current popup
+        this.currentFocusedCharacter = null; // Track which character has focus
         this.currentPanelPopup = null; // Track panel-anchored popup
         this.locationClickListener = null; // Track location click listener
         this.statusEmojis = {
@@ -197,6 +198,14 @@ class CharacterSystem {
             return false;
         }
 
+        // Check if this character is already focused - if so, close the popup
+        if (this.currentFocusedCharacter === characterName && this.currentCharacterPopup) {
+            console.log(`🔄 Toggling off popup for "${characterName}"`);
+            this.closeCurrentCharacterPopup();
+            this.currentFocusedCharacter = null;
+            return true;
+        }
+
         // Get position based on priority rules
         const coordinates = this.getCharacterPosition(character);
         
@@ -204,6 +213,7 @@ class CharacterSystem {
         if (!coordinates) {
             console.log(`📋 Showing panel popup for "${characterName}" (no coordinates)`);
             this.showPanelAnchoredPopup(character);
+            this.currentFocusedCharacter = characterName;
             return true;
         }
 
@@ -527,6 +537,9 @@ class CharacterSystem {
         .setContent(popupContent)
         .openOn(map);
 
+        // Track which character is currently focused
+        this.currentFocusedCharacter = character.name;
+
         // Set up event listeners for controlled closing
         this.setupPopupCloseListeners();
 
@@ -539,6 +552,7 @@ class CharacterSystem {
         if (this.currentCharacterPopup) {
             this.currentCharacterPopup.on('remove', () => {
                 this.currentCharacterPopup = null;
+                this.currentFocusedCharacter = null; // Clear focused character when popup is removed
                 console.log('🎯 Character popup reference cleaned up');
             });
         }
@@ -555,6 +569,7 @@ class CharacterSystem {
         if (this.currentCharacterPopup && map.hasLayer(this.currentCharacterPopup)) {
             map.removeLayer(this.currentCharacterPopup);
             this.currentCharacterPopup = null;
+            this.currentFocusedCharacter = null; // Clear focused character
             console.log('🎯 Character popup closed');
         }
     }
