@@ -506,17 +506,35 @@ class MovementSystem {
         marker._characterName = characterName;
         marker._isFannedOut = false;
         marker._fanMarkers = [];
+        marker._hoverTimeout = null;
         
-        // Add hover events for fanning out
+        // Add hover events for fanning out with better control
         marker.on('mouseover', () => {
+            if (marker._hoverTimeout) {
+                clearTimeout(marker._hoverTimeout);
+            }
             this.fanOutClusteredMarkers(marker);
         });
         
         marker.on('mouseout', () => {
-            setTimeout(() => {
+            // Delay the fan-in to allow moving to fanned markers
+            marker._hoverTimeout = setTimeout(() => {
                 this.fanInClusteredMarkers(marker);
-            }, 2000); // Keep fanned out for 2 seconds
+            }, 500);
         });
+        
+        // Keep area active when hovering over fanned markers
+        marker._keepFannedOut = () => {
+            if (marker._hoverTimeout) {
+                clearTimeout(marker._hoverTimeout);
+            }
+        };
+        
+        marker._scheduleFanIn = () => {
+            marker._hoverTimeout = setTimeout(() => {
+                this.fanInClusteredMarkers(marker);
+            }, 300);
+        };
         
         marker.bindTooltip(`${characterName} - ${count} visits to ${movements[0].location || 'this location'}`, {
             permanent: false,
@@ -540,7 +558,7 @@ class MovementSystem {
         const characterName = clusterMarker._characterName;
         const centerLatLng = clusterMarker.getLatLng();
         
-        const radius = 40; // Radius for fan out
+        const radius = 50; // Radius for fan out in pixels
         const angleStep = (2 * Math.PI) / movements.length;
         
         movements.forEach((movement, index) => {
@@ -548,23 +566,93 @@ class MovementSystem {
             const offsetX = Math.cos(angle) * radius;
             const offsetY = Math.sin(angle) * radius;
             
-            // Convert pixel offset to lat/lng offset (approximate)
-            const latOffset = offsetY / 111000; // Rough conversion
-            const lngOffset = offsetX / (111000 * Math.cos(centerLatLng.lat * Math.PI / 180));
+            // Get the map container to calculate pixel offsets
+            const mapContainer = map.getContainer();
+            const centerPoint = map.latLngToContainerPoint(centerLatLng);
+            const fanPoint = L.point(centerPoint.x + offsetX, centerPoint.y + offsetY);
+            const fanLatLng = map.containerPointToLatLng(fanPoint);
             
-            const fanLatLng = L.latLng(
-                centerLatLng.lat + latOffset,
-                centerLatLng.lng + lngOffset
-            );
+            // Create individual marker for fanning out
+            const markerNumber = (movement.movement_nr || 0) + 1;
+            const isDarkMode = document.body.classList.contains('dark-mode') || 
+                              document.documentElement.classList.contains('dark-mode') ||
+                              window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            const fanMarkerHtml = `
+                <div class="movement-marker fan-marker" style="
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 10px;
+                    font-weight: bold;
+                    position: relative;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    transform: scale(0);
+                    z-index: 1000;
+                    ${isDarkMode ? 
+                        'background: rgba(0, 0, 0, 0.9); color: white; border: 2px solid white;' :
+                        'background: rgba(255, 255, 255, 0.9); color: black; border: 2px solid black;'
+                    }
+                ">${markerNumber}</div>
+            `;
+
+            const fanIcon = L.divIcon({
+                html: fanMarkerHtml,
+                className: 'movement-marker-icon fan-icon',
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            });
+
+            const fanMarker = L.marker(fanLatLng, { icon: fanIcon });
             
-            const fanMarker = this.createSingleMovementMarker(fanLatLng, movement, characterName);
-            if (fanMarker) {
-                fanMarker.addTo(map);
-                fanMarker.getElement().style.zIndex = '1000';
-                fanMarker.getElement().style.animation = 'fanOut 0.3s ease-out';
-                clusterMarker._fanMarkers.push(fanMarker);
-            }
+            // Add click event for detailed popup
+            fanMarker.on('click', () => {
+                this.showMovementPopup(movement, characterName, markerNumber);
+            });
+            
+            // Add hover events to keep cluster fanned out
+            fanMarker.on('mouseover', () => {
+                clusterMarker._keepFannedOut();
+            });
+            
+            fanMarker.on('mouseout', () => {
+                clusterMarker._scheduleFanIn();
+            });
+            
+            // Add tooltip
+            fanMarker.bindTooltip(`${characterName} - Stop ${markerNumber}: ${movement.location || 'Unknown'}`, {
+                permanent: false,
+                sticky: true,
+                direction: 'top',
+                offset: [0, -10]
+            });
+            
+            fanMarker.addTo(map);
+            
+            // Animate the fan out
+            setTimeout(() => {
+                const element = fanMarker.getElement();
+                if (element) {
+                    const markerDiv = element.querySelector('.fan-marker');
+                    if (markerDiv) {
+                        markerDiv.style.transform = 'scale(1)';
+                        markerDiv.style.animation = 'fanOut 0.3s ease-out';
+                    }
+                }
+            }, index * 50); // Stagger the animation
+            
+            clusterMarker._fanMarkers.push(fanMarker);
         });
+        
+        // Keep the cluster marker visible and on top
+        const clusterElement = clusterMarker.getElement();
+        if (clusterElement) {
+            clusterElement.style.zIndex = '1001';
+        }
     }
 
     // Fan in clustered markers
@@ -574,11 +662,32 @@ class MovementSystem {
         const map = window.mapCore.getMap();
         if (!map) return;
         
-        clusterMarker._fanMarkers.forEach(fanMarker => {
-            if (map.hasLayer(fanMarker)) {
-                map.removeLayer(fanMarker);
-            }
+        // Animate fan in
+        clusterMarker._fanMarkers.forEach((fanMarker, index) => {
+            setTimeout(() => {
+                const element = fanMarker.getElement();
+                if (element) {
+                    const markerDiv = element.querySelector('.fan-marker');
+                    if (markerDiv) {
+                        markerDiv.style.transform = 'scale(0)';
+                        markerDiv.style.animation = 'fanIn 0.2s ease-in';
+                    }
+                }
+                
+                // Remove marker after animation
+                setTimeout(() => {
+                    if (map.hasLayer(fanMarker)) {
+                        map.removeLayer(fanMarker);
+                    }
+                }, 200);
+            }, index * 30);
         });
+        
+        // Reset cluster marker z-index
+        const clusterElement = clusterMarker.getElement();
+        if (clusterElement) {
+            clusterElement.style.zIndex = '600';
+        }
         
         clusterMarker._fanMarkers = [];
         clusterMarker._isFannedOut = false;
