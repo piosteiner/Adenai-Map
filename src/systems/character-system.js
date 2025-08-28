@@ -253,14 +253,14 @@ class CharacterSystem {
             </div>
         `;
 
-        // Position popup relative to panel
-        popup.style.position = 'absolute';
-        popup.style.left = panel.offsetWidth + 'px';
-        popup.style.top = '0px';
+        // Position popup to the left of panel with 40px spacing, near top
+        popup.style.position = 'fixed'; // Use fixed positioning for better control
+        popup.style.right = (panel.offsetWidth + 40) + 'px'; // 40px to the left of panel
+        popup.style.top = '40px'; // 40px from top of screen
         popup.style.zIndex = '10001';
 
-        // Append to panel container
-        panel.appendChild(popup);
+        // Append to body instead of panel for fixed positioning
+        document.body.appendChild(popup);
 
         // Track current popup
         this.currentPanelPopup = popup;
