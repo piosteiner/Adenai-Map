@@ -200,7 +200,7 @@ class CharacterPanel {
         
         const hasMovement = character.movementHistory && character.movementHistory.length > 0;
         const movementCount = hasMovement ? character.movementHistory.length : 0;
-        const isPathVisible = window.movementSystem?.visibleCharacterPaths?.has(character.id) || false;
+        const isPathVisible = window.movementSystem?.isCharacterPathVisible?.(character.id) || false;
         
         card.innerHTML = `
             <div class="card-layout">

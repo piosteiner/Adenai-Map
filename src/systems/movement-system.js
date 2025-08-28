@@ -119,6 +119,7 @@ class MovementSystem {
         const pathData = this.characterPaths.find(path => path.character?.id === characterId);
         if (pathData && pathData.pathLine && !map.hasLayer(pathData.pathLine)) {
             pathData.pathLine.addTo(map);
+            pathData.isVisible = true; // Update visibility state
             return true;
         }
         return false;
@@ -133,9 +134,16 @@ class MovementSystem {
         const pathData = this.characterPaths.find(path => path.character?.id === characterId);
         if (pathData && pathData.pathLine && map.hasLayer(pathData.pathLine)) {
             map.removeLayer(pathData.pathLine);
+            pathData.isVisible = false; // Update visibility state
             return true;
         }
         return false;
+    }
+
+    // Check if a character path is currently visible
+    isCharacterPathVisible(characterId) {
+        const pathData = this.characterPaths.find(path => path.character?.id === characterId);
+        return pathData ? pathData.isVisible || false : false;
     }
 
     // Show error message
