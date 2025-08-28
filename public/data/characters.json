@@ -699,7 +699,24 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "pio_s_minimalist",
+      "name": "Pio's Minimalist",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "",
+      "status": "unknown",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-28T10:27:05.732Z",
+      "updatedAt": "2025-08-28T10:27:05.732Z"
     }
   ],
-  "lastUpdated": "2025-08-28T10:21:31.607Z"
+  "lastUpdated": "2025-08-28T10:27:05.732Z"
 }
