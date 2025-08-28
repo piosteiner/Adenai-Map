@@ -93,43 +93,60 @@ class MovementSystem {
                 console.log(`🛤️ Processing path ${index + 1}:`, pathInfo.name || pathInfo.id);
                 
                 if (pathInfo.type === 'movement' && pathInfo.coordinates.length >= 2) {
-                // Create path line using server-provided styling
-                const pathLine = L.polyline(pathInfo.coordinates, {
-                    color: pathInfo.style.color,
-                    weight: pathInfo.style.weight,
-                    opacity: pathInfo.style.opacity,
-                    dashArray: pathInfo.style.dashArray
-                });
-                
-                // Only add VsuzH path to map by default, keep others hidden
-                const isVsuzH = pathInfo.name?.toLowerCase().includes('vsuzh') || 
-                               pathInfo.id?.toLowerCase().includes('vsuzh');
-                
-                if (isVsuzH) {
-                    pathLine.addTo(map);
-                }
-                
-                this.movementLayers.push(pathLine);
-                
-                // Add tooltip
-                pathLine.bindTooltip(pathInfo.name, {
-                    permanent: false,
-                    sticky: true,
-                    direction: 'top'
-                });
+                    // Filter out null coordinates before creating polyline
+                    const validCoordinates = pathInfo.coordinates.filter(coord => {
+                        return coord && 
+                               coord.length === 2 && 
+                               coord[0] !== null && 
+                               coord[1] !== null &&
+                               typeof coord[0] === 'number' && 
+                               typeof coord[1] === 'number';
+                    });
+                    
+                    console.log(`🗺️ ${pathInfo.name}: ${pathInfo.coordinates.length} total coords, ${validCoordinates.length} valid coords`);
+                    
+                    // Only create polyline if we have at least 2 valid coordinates
+                    if (validCoordinates.length >= 2) {
+                        // Create path line using server-provided styling
+                        const pathLine = L.polyline(validCoordinates, {
+                            color: pathInfo.style.color,
+                            weight: pathInfo.style.weight,
+                            opacity: pathInfo.style.opacity,
+                            dashArray: pathInfo.style.dashArray
+                        });
+                        
+                        // Only add VsuzH path to map by default, keep others hidden
+                        const isVsuzH = pathInfo.name?.toLowerCase().includes('vsuzh') || 
+                                       pathInfo.id?.toLowerCase().includes('vsuzh');
+                        
+                        if (isVsuzH) {
+                            pathLine.addTo(map);
+                        }
+                        
+                        this.movementLayers.push(pathLine);
+                        
+                        // Add tooltip
+                        pathLine.bindTooltip(pathInfo.name, {
+                            permanent: false,
+                            sticky: true,
+                            direction: 'top'
+                        });
 
-                // Store path data for character panel compatibility
-                this.characterPaths.push({
-                    character: {
-                        id: pathInfo.id,
-                        name: pathInfo.name,
-                        relationship: pathInfo.metadata?.relationship || 'unknown'
-                    },
-                    pathLine: pathLine,
-                    coordinates: pathInfo.coordinates,
-                    style: pathInfo.style,
-                    isVisible: isVsuzH // Track initial visibility state
-                });
+                        // Store path data for character panel compatibility
+                        this.characterPaths.push({
+                            character: {
+                                id: pathInfo.id,
+                                name: pathInfo.name,
+                                relationship: pathInfo.metadata?.relationship || 'unknown'
+                            },
+                            pathLine: pathLine,
+                            coordinates: validCoordinates, // Use filtered coordinates
+                            style: pathInfo.style,
+                            isVisible: isVsuzH // Track initial visibility state
+                        });
+                    } else {
+                        console.warn(`⚠️ Skipping ${pathInfo.name}: insufficient valid coordinates (${validCoordinates.length})`);
+                    }
             }
         });
         
