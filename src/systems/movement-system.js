@@ -53,7 +53,14 @@ class MovementSystem {
                     dashArray: pathInfo.style.dashArray
                 });
                 
-                pathLine.addTo(map);
+                // Only add VsuzH path to map by default, keep others hidden
+                const isVsuzH = pathInfo.name?.toLowerCase().includes('vsuzh') || 
+                               pathInfo.id?.toLowerCase().includes('vsuzh');
+                
+                if (isVsuzH) {
+                    pathLine.addTo(map);
+                }
+                
                 this.movementLayers.push(pathLine);
                 
                 // Add tooltip
@@ -72,7 +79,8 @@ class MovementSystem {
                     },
                     pathLine: pathLine,
                     coordinates: pathInfo.coordinates,
-                    style: pathInfo.style
+                    style: pathInfo.style,
+                    isVisible: isVsuzH // Track initial visibility state
                 });
             }
         });
