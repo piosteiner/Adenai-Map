@@ -382,11 +382,9 @@ class MovementMarkers {
         const popupContent = `
             <div class="character-popup">
                 <div class="popup-title" style="color: #6366f1; margin-bottom: 8px;">
-                    🛤️ ${characterName} - Stop ${markerNumber}
+                    � ${movementData.location || 'Unknown Location'}
                 </div>
-                <div style="margin-bottom: 8px;">
-                    <strong>📍 Location:</strong> ${movementData.location || 'Unknown'}
-                </div>
+                <div style="font-style: italic; margin-bottom: 8px;">${characterName} - Stop ${markerNumber}</div>
                 <div style="margin-bottom: 8px;">
                     <strong>🚶 Movement Type:</strong> ${movementData.type || 'travel'}
                 </div>
