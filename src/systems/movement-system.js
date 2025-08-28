@@ -43,8 +43,21 @@ class MovementSystem {
     displayPaths(paths) {
         const map = window.mapCore.getMap();
         
-        Object.values(paths).forEach(pathInfo => {
+        console.log('🎯 DisplayPaths called with:', Object.keys(paths).length, 'paths');
+        console.log('🗺️ Map available:', !!map);
+        
+        if (!map) {
+            console.error('❌ Map not available in displayPaths');
+            return;
+        }
+        
+        Object.values(paths).forEach((pathInfo, index) => {
+            console.log(`📊 Processing path ${index + 1}:`, pathInfo.name, pathInfo.type);
+            
             if (pathInfo.type === 'movement' && pathInfo.coordinates.length >= 2) {
+                console.log(`📍 Creating path for ${pathInfo.name} with ${pathInfo.coordinates.length} coordinates`);
+                console.log('🎨 Style:', pathInfo.style);
+                
                 // Create path line using API styling
                 const pathLine = L.polyline(pathInfo.coordinates, {
                     color: pathInfo.style.color,
@@ -65,10 +78,12 @@ class MovementSystem {
                 });
                 
                 console.log(`✅ Displayed path for ${pathInfo.name}`);
+            } else {
+                console.log(`⚠️ Skipping path ${pathInfo.name}: type=${pathInfo.type}, coords=${pathInfo.coordinates.length}`);
             }
         });
         
-        console.log(`✅ Displayed ${this.movementLayers.length} character paths`);
+        console.log(`✅ Total displayed: ${this.movementLayers.length} character paths`);
     }
 
     // Clear all paths from map
@@ -124,6 +139,12 @@ class MovementSystem {
     addIntegratedMovementControls() {
         console.log('✅ Movement system initialized');
         return true;
+    }
+
+    // Manual test function
+    async testLoadPaths() {
+        console.log('🧪 Manual test: Loading paths...');
+        await this.loadAndDisplayPaths();
     }
 }
 
