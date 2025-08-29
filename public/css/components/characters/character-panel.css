@@ -101,9 +101,9 @@
   opacity: 1;
 }
 
-.panel-header {
-  background: white;
-  color: #6366f1;
+.character-panel .panel-header {
+  background: white !important;
+  color: #6366f1 !important;
   padding: 20px 15px;
   display: flex;
   justify-content: space-between;
@@ -112,12 +112,12 @@
   position: relative;
 }
 
-.panel-header h3 {
+.character-panel .panel-header h3 {
   margin: 0;
   font-size: 1.3em;
-  font-weight: bold;
+  font-weight: bold !important;
   letter-spacing: 0.5px;
-  color: #6366f1;
+  color: #6366f1 !important;
 }
 
 /* Retract Button Section */
@@ -667,13 +667,13 @@
 }
 
 /* Dark mode panel header styling */
-[data-theme="dark"] .panel-header {
-  background: #495057;
+[data-theme="dark"] .character-panel .panel-header {
+  background: #495057 !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-[data-theme="dark"] .panel-header h3 {
-  color: white;
+[data-theme="dark"] .character-panel .panel-header h3 {
+  color: white !important;
 }
 
 /* Responsive button styling */
