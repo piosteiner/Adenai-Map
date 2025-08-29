@@ -836,13 +836,13 @@
       "image": "https://adenai-admin.piogino.ch/public/images/eriosa_close.png",
       "status": "alive",
       "faction": "",
-      "relationship": "ally",
+      "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:33:05.493Z",
-      "updatedAt": "2025-08-29T20:33:23.811Z"
+      "updatedAt": "2025-08-29T20:35:35.116Z"
     },
     {
       "id": "eytan_karthright",
@@ -879,5 +879,5 @@
       "updatedAt": "2025-08-29T20:34:25.256Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:35:22.726Z"
+  "lastUpdated": "2025-08-29T20:35:35.116Z"
 }
