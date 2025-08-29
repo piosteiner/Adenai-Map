@@ -611,7 +611,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai-admin.piogino.ch/public/images/lyiss_close.png",
+      "image": "https://adenai.piogino.ch/public/images/lyiss_close.png",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -620,7 +620,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:40:44.352Z",
-      "updatedAt": "2025-08-29T20:41:22.949Z"
+      "updatedAt": "2025-08-29T20:50:19.430Z"
     },
     {
       "id": "marcoh_ludd",
@@ -795,5 +795,5 @@
       "updatedAt": "2025-08-29T20:46:20.848Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:50:05.859Z"
+  "lastUpdated": "2025-08-29T20:50:19.430Z"
 }
