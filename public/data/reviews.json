@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "201ee217bbe45f5d6d5a8eb0a28cd56175011351",
+      "action": "update",
+      "type": "character",
+      "itemName": "Zerith Kael",
+      "user": "gm",
+      "timestamp": "2025-08-29T21:02:27.844Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T21:02:27.844Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Zerith Kael (by gm) - Kalthar (5663-06-03)"
+    },
+    {
       "commitSha": "0d60837731fe11a4eee0490367658cb45bceba61",
       "action": "update",
       "type": "character",
@@ -3746,5 +3759,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T21:01:53.601Z"
+  "lastUpdated": "2025-08-29T21:02:27.844Z"
 }
