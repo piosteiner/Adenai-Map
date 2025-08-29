@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "13588ee70efe3403abb1fdf382dc8ff1d8db512a",
+      "action": "update",
+      "type": "character",
+      "itemName": "Vivi Wulbren",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:57:58.492Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:57:58.492Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Vivi Wulbren (by gm) - Glesburg (5663-06-03)"
+    },
+    {
       "commitSha": "a01f19a96d90df68887bb357dd27d72ba7ee929a",
       "action": "update",
       "type": "character",
@@ -3616,5 +3629,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:57:30.696Z"
+  "lastUpdated": "2025-08-29T20:57:58.492Z"
 }
