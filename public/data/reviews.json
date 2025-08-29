@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "4192b0e10ebfba4f065b90fb12eb5098b333904b",
+      "action": "delete",
+      "type": "character",
+      "itemName": "Test2",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:37:24.296Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:37:24.296Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Delete character: Test2 (by gm) - Removed from campaign"
+    },
+    {
       "commitSha": "927fb7f1dc8defab4271358d18e486cdc8704a74",
       "action": "delete",
       "type": "character",
@@ -2966,5 +2979,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:37:19.601Z"
+  "lastUpdated": "2025-08-29T20:37:24.297Z"
 }
