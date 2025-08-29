@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "3063f9f2674e8df568185d29bab0f2eea762293c",
+      "action": "create",
+      "type": "character",
+      "itemName": "Graf Honza",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:34:26.076Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:34:26.076Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Graf Honza (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "90fa58de54eb0fbd9c8f48df659bdeb50daf740e",
       "action": "create",
       "type": "character",
@@ -2797,5 +2810,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:33:50.405Z"
+  "lastUpdated": "2025-08-29T20:34:26.077Z"
 }
