@@ -681,12 +681,13 @@
       "image": "https://adenai-admin.piogino.ch/public/images/ruben_close.png",
       "status": "alive",
       "faction": "",
-      "relationship": "unknown",
+      "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2025-08-29T20:43:21.033Z",
-      "updatedAt": "2025-08-29T20:43:21.033Z"
+      "updatedAt": "2025-08-29T20:43:31.952Z"
     },
     {
       "id": "ruben_karthright",
@@ -706,5 +707,5 @@
       "updatedAt": "2025-08-29T20:43:21.763Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:43:21.763Z"
+  "lastUpdated": "2025-08-29T20:43:31.952Z"
 }
