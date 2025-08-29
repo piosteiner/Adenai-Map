@@ -13,6 +13,7 @@ class CharacterPanel {
         this.hoverDelay = 200; // 200ms delay
         this.collapseHoverTimer = null;
         this.collapseHoverDelay = 1000; // 1.0 seconds delay for collapse
+        this.collapseTimer = null; // Timer for resize handle collapse delay
         this.isHoverExpanded = false; // Track if panel was expanded by hover
         
         // Resize properties
@@ -44,6 +45,8 @@ class CharacterPanel {
         this.grid = document.getElementById('character-grid');
         this.resizeHandle = document.getElementById('resize-handle');
         this.retractBtn = document.getElementById('retract-panel');
+        
+        console.log('🔧 Panel init - resize handle found:', !!this.resizeHandle);
         
         if (!this.panel || !this.grid) {
             console.warn('Character panel elements not found');
@@ -100,29 +103,42 @@ class CharacterPanel {
                     }
                 },
                 onLeave: () => {
-                    // Panel stays open once hover-triggered (no auto-collapse)
+                    // Panel stays open once hover-triggered (no auto-collapse from main panel)
                 }
             });
         }
 
         // Setup hover behavior for resize handle
         if (this.resizeHandle) {
+            console.log('🔧 Setting up resize handle hover behavior');
+            console.log('🔧 EventUtils available:', typeof EventUtils !== 'undefined');
             this.handleHoverCleanup = EventUtils.setupHoverBehavior(this.resizeHandle, {
                 enterDelay: this.hoverDelay,
                 leaveDelay: this.collapseHoverDelay,
                 onEnter: () => {
+                    console.log('🖱️ Resize handle mouse enter');
                     if (this.panel.classList.contains('collapsed') && !this.isResizing) {
+                        console.log('🖱️ Expanding panel from resize handle hover');
                         this.expandPanel();
                         this.isHoverExpanded = true;
+                    } else if (!this.panel.classList.contains('collapsed') && !this.isResizing) {
+                        // Panel is open - start timer to collapse it after delay
+                        console.log('🖱️ Panel is open - starting collapse timer');
+                        this.collapseTimer = setTimeout(() => {
+                            console.log('🖱️ Collapsing panel after hover delay');
+                            this.collapsePanel();
+                            this.isHoverExpanded = false;
+                        }, 1500); // 1.5 second delay
                     }
                 },
                 onLeave: () => {
-                    // Check if mouse has left both handle and panel
-                    setTimeout(() => {
-                        if (!this.panel.matches(':hover') && !this.isResizing) {
-                            // Panel stays open once hover-triggered
-                        }
-                    }, 50);
+                    console.log('🖱️ Resize handle mouse leave');
+                    // Clear any pending collapse timer
+                    if (this.collapseTimer) {
+                        console.log('🖱️ Clearing collapse timer');
+                        clearTimeout(this.collapseTimer);
+                        this.collapseTimer = null;
+                    }
                 }
             });
         }
