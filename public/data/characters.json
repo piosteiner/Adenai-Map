@@ -722,7 +722,24 @@
       "movementHistory": [],
       "createdAt": "2025-08-29T20:43:56.783Z",
       "updatedAt": "2025-08-29T20:43:56.783Z"
+    },
+    {
+      "id": "prinz_torren",
+      "name": "Prinz Torren",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/torren_close.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:44:34.697Z",
+      "updatedAt": "2025-08-29T20:44:34.697Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:43:56.783Z"
+  "lastUpdated": "2025-08-29T20:44:34.697Z"
 }
