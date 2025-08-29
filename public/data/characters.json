@@ -22,10 +22,10 @@
       "id": "avery",
       "name": "Avery",
       "title": "von Rena",
-      "location": "",
+      "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/avery.png",
+      "image": "https://adenai.piogino.ch/public/images/avery_close.png",
       "status": "alive",
       "faction": "Regierung von Rena",
       "relationship": "friendly",
@@ -59,8 +59,9 @@
           "movement_nr": 1
         }
       ],
+      "currentLocation": null,
       "createdAt": "2025-08-22T00:21:35.645Z",
-      "updatedAt": "2025-08-28T05:00:05.156Z"
+      "updatedAt": "2025-08-29T20:21:32.167Z"
     },
     {
       "id": "lia_karthright",
@@ -735,5 +736,5 @@
       "updatedAt": "2025-08-29T20:21:10.180Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:21:10.180Z"
+  "lastUpdated": "2025-08-29T20:21:32.168Z"
 }
