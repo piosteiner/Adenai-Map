@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "1a3092012988289d29852e152859e48a887d1cce",
+      "action": "update",
+      "type": "character",
+      "itemName": "Ly'iss Moy",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:59:58.720Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:59:58.720Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Ly'iss Moy (by gm) - Neudalen (5663-06-03)"
+    },
+    {
       "commitSha": "98241407e848e4b7b39f1ad770e38f032805bb9c",
       "action": "update",
       "type": "character",
@@ -3668,5 +3681,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:59:36.622Z"
+  "lastUpdated": "2025-08-29T20:59:58.720Z"
 }
