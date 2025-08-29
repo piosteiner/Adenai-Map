@@ -162,17 +162,36 @@ class LocationSystem {
     createLocationIcon() {
         // Create the classic orange dot icon with larger size to match cluster proxy markers
         if (!this.dotOrangeIcon) {
-            try {
-                this.dotOrangeIcon = L.icon({
-                    iconUrl: 'public/icons/dot_orange.svg',
-                    iconSize: [32, 32],
-                    iconAnchor: [16, 16],
-                    popupAnchor: [0, -16]
-                });
-                Logger.success('Orange dot icon created successfully');
-            } catch (error) {
-                Logger.error('Failed to create orange dot icon:', error);
-            }
+            // Generate orange dot icon programmatically using Canvas to prevent image hover enlargement
+            const canvas = document.createElement('canvas');
+            canvas.width = 32;
+            canvas.height = 32;
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, 32, 32);
+            
+            // Draw orange circle
+            ctx.beginPath();
+            ctx.arc(16, 16, 12, 0, 2 * Math.PI);
+            ctx.fillStyle = '#ff6b24';
+            ctx.fill();
+            
+            // Add subtle border for better visibility
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Convert canvas to data URL
+            const iconUrl = canvas.toDataURL('image/png');
+            
+            this.dotOrangeIcon = L.icon({
+                iconUrl: iconUrl,
+                iconSize: [32, 32],
+                iconAnchor: [16, 16],
+                popupAnchor: [0, -16]
+            });
+            Logger.success('Orange dot icon created programmatically (prevents image hover enlargement)');
         }
     }
 
@@ -374,24 +393,13 @@ class LocationSystem {
             
             // Double-check that icon was created successfully
             if (!this.dotOrangeIcon) {
-                Logger.error('Failed to create location icon, using default marker');
-                const geoLayer = L.geoJSON(data, {
-                    pointToLayer: (feature, latlng) => {
-                        // Use the classic orange dot icon even in fallback
-                        return L.marker(latlng, { icon: this.dotOrangeIcon });
-                    },
-                    onEachFeature: async (feature, layer) => {
-                        await this.processLocationFeature(feature, layer);
-                        // Setup simple click-only interactions
-                        this.setupMarkerInteractions(layer);
-                    }
-                }).addTo(map);
-                return geoLayer;
+                Logger.warning('Location icon not ready, creating it now...');
+                this.createLocationIcon();
             }
             
             const geoLayer = L.geoJSON(data, {
                 pointToLayer: (feature, latlng) => {
-                    // Use the classic orange dot icon
+                    // Use the programmatically created orange dot icon (prevents image hover enlargement)
                     return L.marker(latlng, { icon: this.dotOrangeIcon });
                 },
                 onEachFeature: async (feature, layer) => {
@@ -756,7 +764,12 @@ class LocationSystem {
     // Add a new location programmatically (useful for admin interface)
     addLocation(locationData) {
         MapUtils.withMap((map) => {
-            // Create marker
+            // Ensure icon is created
+            if (!this.dotOrangeIcon) {
+                this.createLocationIcon();
+            }
+            
+            // Create marker with programmatically generated icon (prevents image hover enlargement)
             const marker = L.marker([locationData.lat, locationData.lng], { 
                 icon: this.dotOrangeIcon 
             });
