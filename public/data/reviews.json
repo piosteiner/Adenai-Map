@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "dbabff32b526ee03059b15ff5bf708a969ab3d06",
+      "action": "create",
+      "type": "character",
+      "itemName": "Eriosa Süssblatt",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:33:06.236Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:33:06.236Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Eriosa Süssblatt (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "1869f118d5fd9973e8df69c61a4ae4baeef71455",
       "action": "create",
       "type": "character",
@@ -2758,5 +2771,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:31:55.314Z"
+  "lastUpdated": "2025-08-29T20:33:06.236Z"
 }
