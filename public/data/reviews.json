@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ab90c60de58f0f77f1985e436ff7fbdf2769f0a8",
+      "action": "create",
+      "type": "character",
+      "itemName": "Dina Eisfeld",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:28:54.934Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:28:54.934Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Dina Eisfeld (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "62a138b1e161f581f1b53f28f6c3053f4546bbe4",
       "action": "update",
       "type": "character",
@@ -2706,5 +2719,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:25:24.763Z"
+  "lastUpdated": "2025-08-29T20:28:54.934Z"
 }
