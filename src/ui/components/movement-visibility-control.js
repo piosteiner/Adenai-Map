@@ -1,27 +1,172 @@
 /**
- * Movement Visibility Control
- * Provides a global toggle for movement paths and markers visibility
- * Acts as an overlay filter on top of character panel selections
+ * Simple Movement Visibility Control
+ * A working 3-mode toggle for movement paths and markers
  */
 
 class MovementVisibilityControl {
     constructor() {
-        this.currentMode = 'default'; // 'default', 'paths-only', 'hidden'
+        this.currentMode = 'default';
         this.controlElement = null;
-        this.isInitialized = false;
-        
-        // Bind methods
-        this.setMode = this.setMode.bind(this);
-        this.updateVisibility = this.updateVisibility.bind(this);
-        this.onCharacterSelectionChanged = this.onCharacterSelectionChanged.bind(this);
     }
 
-    // Initialize the visibility control
     init() {
-        if (this.isInitialized) {
-            console.log('🎛️ Movement Visibility Control already initialized');
+        console.log('🎛️ Initializing Movement Visibility Control...');
+        this.createControl();
+        this.attachEvents();
+        console.log('✅ Movement Visibility Control ready');
+    }
+
+    createControl() {
+        // Remove any existing control
+        const existing = document.querySelector('.movement-visibility-control');
+        if (existing) existing.remove();
+
+        // Create the control HTML
+        const controlHTML = `
+            <div class="movement-visibility-control">
+                <div class="visibility-slider">
+                    <button class="slider-option active" data-mode="default" title="Show all">
+                        <span class="option-icon">👁️</span>
+                        <span class="option-label">All</span>
+                    </button>
+                    <button class="slider-option" data-mode="paths-only" title="Paths only">
+                        <span class="option-icon">🛤️</span>
+                        <span class="option-label">Paths</span>
+                    </button>
+                    <button class="slider-option" data-mode="hidden" title="Hide all">
+                        <span class="option-icon">❌</span>
+                        <span class="option-label">None</span>
+                    </button>
+                </div>
+            </div>
+        `;
+
+        // Add to page
+        document.body.insertAdjacentHTML('beforeend', controlHTML);
+        this.controlElement = document.querySelector('.movement-visibility-control');
+    }
+
+    attachEvents() {
+        if (!this.controlElement) return;
+
+        const buttons = this.controlElement.querySelectorAll('.slider-option');
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const mode = e.currentTarget.dataset.mode;
+                this.setMode(mode);
+            });
+        });
+    }
+
+    setMode(mode) {
+        console.log('🎛️ Setting mode:', mode);
+        this.currentMode = mode;
+
+        // Update UI
+        this.controlElement.querySelectorAll('.slider-option').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.mode === mode);
+        });
+
+        // Apply visibility changes
+        this.updateVisibility();
+
+        // Notify other systems
+        window.dispatchEvent(new CustomEvent('movementVisibilityChanged', {
+            detail: { mode }
+        }));
+    }
+
+    updateVisibility() {
+        console.log('🎛️ Updating visibility for mode:', this.currentMode);
+        
+        // Get movement system
+        const movementSystem = window.movementSystem;
+        if (!movementSystem) {
+            console.log('🎛️ No movement system found');
             return;
         }
+
+        // Apply visibility to all character movements
+        const visibleCharacters = this.getVisibleCharacters();
+        console.log('🎛️ Visible characters:', visibleCharacters);
+        
+        visibleCharacters.forEach(characterId => {
+            this.applyVisibilityToCharacter(characterId);
+        });
+    }
+
+    getVisibleCharacters() {
+        // Try to get from movement system
+        if (window.movementSystem && window.movementSystem.getVisibleCharacters) {
+            return window.movementSystem.getVisibleCharacters();
+        }
+        
+        // Fallback: check character panel directly
+        const characterPanel = window.characterPanel;
+        if (characterPanel && characterPanel.selectedCharacters) {
+            return Array.from(characterPanel.selectedCharacters);
+        }
+        
+        return [];
+    }
+
+    applyVisibilityToCharacter(characterId) {
+        const map = window.mapCore?.getMap();
+        if (!map) return;
+
+        switch (this.currentMode) {
+            case 'default':
+                this.setCharacterMovementVisibility(characterId, true, true);
+                break;
+            case 'paths-only':
+                this.setCharacterMovementVisibility(characterId, true, false);
+                break;
+            case 'hidden':
+                this.setCharacterMovementVisibility(characterId, false, false);
+                break;
+        }
+    }
+
+    setCharacterMovementVisibility(characterId, showPaths, showMarkers) {
+        const map = window.mapCore?.getMap();
+        if (!map) return;
+
+        // Handle paths
+        if (window.movementSystem && window.movementSystem.characterPaths) {
+            const pathData = window.movementSystem.characterPaths.find(p => p.character?.id === characterId);
+            if (pathData && pathData.layer) {
+                if (showPaths && pathData.isVisible) {
+                    if (!map.hasLayer(pathData.layer)) {
+                        pathData.layer.addTo(map);
+                    }
+                } else {
+                    if (map.hasLayer(pathData.layer)) {
+                        map.removeLayer(pathData.layer);
+                    }
+                }
+            }
+        }
+
+        // Handle markers
+        if (window.movementSystem && window.movementSystem.markersSystem) {
+            const markers = window.movementSystem.markersSystem.markers?.filter(m => m.characterId === characterId);
+            if (markers) {
+                markers.forEach(markerInfo => {
+                    if (markerInfo.marker) {
+                        if (showMarkers && markerInfo.isVisible) {
+                            if (!map.hasLayer(markerInfo.marker)) {
+                                markerInfo.marker.addTo(map);
+                            }
+                        } else {
+                            if (map.hasLayer(markerInfo.marker)) {
+                                map.removeLayer(markerInfo.marker);
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    }
         
         console.log('🎛️ Creating Movement Visibility Control...');
         this.createControlElement();
@@ -39,22 +184,17 @@ class MovementVisibilityControl {
         const controlHtml = `
             <div class="movement-visibility-control">
                 <div class="visibility-slider">
-                    <div class="slider-track">
-                        <div class="slider-thumb" data-mode="default"></div>
+                    <div class="slider-option active" data-mode="default" title="Show paths and markers">
+                        <div class="option-icon">👁️</div>
+                        <div class="option-label">All</div>
                     </div>
-                    <div class="slider-options">
-                        <div class="slider-option active" data-mode="default" title="Default - Show paths and markers">
-                            <span class="option-icon">👁️</span>
-                            <span class="option-label">All</span>
-                        </div>
-                        <div class="slider-option" data-mode="paths-only" title="Paths only - Hide markers">
-                            <span class="option-icon">📍</span>
-                            <span class="option-label">Paths</span>
-                        </div>
-                        <div class="slider-option" data-mode="hidden" title="Hidden - Hide paths and markers">
-                            <span class="option-icon">🚫</span>
-                            <span class="option-label">None</span>
-                        </div>
+                    <div class="slider-option" data-mode="paths-only" title="Show paths only">
+                        <div class="option-icon">�️</div>
+                        <div class="option-label">Paths</div>
+                    </div>
+                    <div class="slider-option" data-mode="hidden" title="Hide all">
+                        <div class="option-icon">❌</div>
+                        <div class="option-label">None</div>
                     </div>
                 </div>
             </div>
@@ -218,69 +358,20 @@ class MovementVisibilityControl {
     }
 }
 
-// Export for use in other modules
-if (typeof window !== 'undefined') {
-    window.MovementVisibilityControl = MovementVisibilityControl;
-}
-
-// Auto-initialize when DOM is ready
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🎛️ DOM Content Loaded - Attempting to initialize Movement Visibility Control...');
-    setTimeout(() => {
-        if (!window.movementVisibilityControl) {
-            console.log('🎛️ Creating new MovementVisibilityControl instance...');
-            try {
-                window.movementVisibilityControl = new MovementVisibilityControl();
-                window.movementVisibilityControl.init();
-                console.log('✅ MovementVisibilityControl created and initialized successfully');
-            } catch (error) {
-                console.error('❌ Error creating MovementVisibilityControl:', error);
-            }
-        }
-    }, 1000);
-});
-
-// Also try to initialize when the map is ready
-if (typeof window !== 'undefined') {
-    // Immediate test
-    console.log('🎛️ Script loaded - MovementVisibilityControl class available');
+    console.log('🎛️ DOM ready - initializing Movement Visibility Control...');
     
-    window.addEventListener('load', () => {
-        console.log('🎛️ Window Load Event - Attempting fallback initialization...');
-        setTimeout(() => {
-            if (!window.movementVisibilityControl) {
-                console.log('🎛️ Creating MovementVisibilityControl (fallback)...');
-                try {
-                    window.movementVisibilityControl = new MovementVisibilityControl();
-                    window.movementVisibilityControl.init();
-                    console.log('✅ MovementVisibilityControl (fallback) created successfully');
-                } catch (error) {
-                    console.error('❌ Error in fallback MovementVisibilityControl:', error);
-                }
-            }
-        }, 2000);
-    });
-}
-document.addEventListener('DOMContentLoaded', () => {
-    // Wait a bit for other systems to initialize
+    // Wait a bit for other systems to load
     setTimeout(() => {
         if (!window.movementVisibilityControl) {
-            console.log('🎛️ Initializing Movement Visibility Control...');
             window.movementVisibilityControl = new MovementVisibilityControl();
             window.movementVisibilityControl.init();
         }
     }, 1000);
 });
 
-// Also try to initialize when the map is ready
+// Export for global access
 if (typeof window !== 'undefined') {
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            if (!window.movementVisibilityControl) {
-                console.log('🎛️ Initializing Movement Visibility Control (fallback)...');
-                window.movementVisibilityControl = new MovementVisibilityControl();
-                window.movementVisibilityControl.init();
-            }
-        }, 2000);
-    });
+    window.MovementVisibilityControl = MovementVisibilityControl;
 }
