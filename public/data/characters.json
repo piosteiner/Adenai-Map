@@ -653,7 +653,24 @@
       "movementHistory": [],
       "createdAt": "2025-08-29T20:42:21.319Z",
       "updatedAt": "2025-08-29T20:42:21.319Z"
+    },
+    {
+      "id": "orvil_plig",
+      "name": "Orvil Plig",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/orvil_close.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:42:49.715Z",
+      "updatedAt": "2025-08-29T20:42:49.715Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:42:21.319Z"
+  "lastUpdated": "2025-08-29T20:42:49.715Z"
 }
