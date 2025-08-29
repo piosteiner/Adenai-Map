@@ -235,7 +235,6 @@ class SearchSystem {
 
     renderCharacterResult(result, query) {
         const char = result.character;
-        const matchBadges = this.createMatchBadges(result.matchedFields);
         const highlightedName = this.highlightText(char.name, query);
         const highlightedTitle = char.title ? this.highlightText(char.title, query) : '';
         const highlightedLocation = char.location ? this.highlightText(char.location, query) : 'Unknown location';
@@ -255,10 +254,6 @@ class SearchSystem {
                 <div class="dropdown-text">
                     <div class="result-header">
                         <strong>${highlightedName}</strong>
-                        <div class="result-badges">
-                            ${matchBadges}
-                            <span class="relevance-score">${result.relevanceScore}</span>
-                        </div>
                     </div>
                     ${highlightedTitle ? `<div class="character-title">${highlightedTitle}</div>` : ''}
                     <div class="character-meta">
@@ -267,7 +262,7 @@ class SearchSystem {
                         </span>
                         📍 ${highlightedLocation}
                     </div>
-                    ${char.description ? `<div class="character-preview">${this.highlightText(char.description.substring(0, 80), query)}${char.description.length > 80 ? '...' : ''}</div>` : ''}
+                    ${char.description ? `<div class="character-preview">${this.highlightText(char.description.substring(0, 120), query)}${char.description.length > 120 ? '...' : ''}</div>` : ''}
                 </div>
             </div>
         `;
@@ -276,8 +271,7 @@ class SearchSystem {
     renderLocationResult(result, query) {
         const filename = window.mapCore.sanitizeFilename(result.name);
         const highlightedName = this.highlightText(result.name, query);
-        const highlightedDesc = this.highlightText(result.desc.replace(/(<([^>]+)>)/gi, '').substring(0, 100), query);
-        const matchBadges = this.createMatchBadges(result.matchedFields);
+        const highlightedDesc = this.highlightText(result.desc.replace(/(<([^>]+)>)/gi, '').substring(0, 120), query);
         
         return `
             <div class="dropdown-item location-result" data-relevance="${result.relevanceScore}">
@@ -288,12 +282,8 @@ class SearchSystem {
                 <div class="dropdown-text">
                     <div class="result-header">
                         <strong>📍 ${highlightedName}</strong>
-                        <div class="result-badges">
-                            ${matchBadges}
-                            <span class="relevance-score">${result.relevanceScore}</span>
-                        </div>
                     </div>
-                    <div class="location-preview">${highlightedDesc}${result.desc.length > 100 ? '...' : ''}</div>
+                    <div class="location-preview">${highlightedDesc}${result.desc.length > 120 ? '...' : ''}</div>
                 </div>
             </div>
         `;
