@@ -32,7 +32,7 @@ class SearchSystem {
         this.dropdown = document.getElementById("resultsDropdown");
 
         if (!this.searchInput || !this.dropdown) {
-            console.warn('Search elements not found');
+            Logger.warning('Search elements not found');
             return;
         }
 
@@ -159,24 +159,24 @@ class SearchSystem {
     }
 
     selectSearchResult(result) {
-        const map = window.mapCore.getMap();
-        
-        if (result.type === 'character') {
-            // For characters, use character system to focus
-            console.log(`🔍 Search requesting focus for character: "${result.character.name}"`);
-            window.characterSystem.focusCharacter(result.character.name);
-        } else {
-            // For locations, use locations system if available
-            if (window.locationsSystem && window.locationsSystem.focusLocation) {
-                window.locationsSystem.focusLocation(result.name);
+        MapUtils.withMap((map) => {
+            if (result.type === 'character') {
+                // For characters, use character system to focus
+                Logger.info(`Search requesting focus for character: "${result.character.name}"`);
+                window.characterSystem.focusCharacter(result.character.name);
             } else {
-                // Fallback to direct map navigation
-                map.setView([result.latlng.lat, result.latlng.lng], Math.max(map.getZoom(), 1));
+                // For locations, use locations system if available
+                if (window.locationsSystem && window.locationsSystem.focusLocation) {
+                    window.locationsSystem.focusLocation(result.name);
+                } else {
+                    // Fallback to direct map navigation
+                    map.setView([result.latlng.lat, result.latlng.lng], Math.max(map.getZoom(), 1));
+                }
             }
-        }
-        
-        this.dropdown.style.display = 'none';
-        this.searchInput.blur();
+            
+            this.dropdown.style.display = 'none';
+            this.searchInput.blur();
+        });
     }
 
     handleKeyNavigation(e) {
@@ -217,7 +217,7 @@ class SearchSystem {
         // Add characters to search index
         window.characterSystem.addToSearchIndex(this.searchIndex);
         
-        console.log(`🔍 Updated search index with characters. Total entries: ${this.searchIndex.length}`);
+        Logger.success(`Updated search index with characters. Total entries: ${this.searchIndex.length}`);
     }
 
     updateSearchIndexWithLocations(locations) {
@@ -242,7 +242,7 @@ class SearchSystem {
             });
         });
         
-        console.log(`🔍 Updated search index with locations. Total entries: ${this.searchIndex.length}`);
+        Logger.success(`Updated search index with locations. Total entries: ${this.searchIndex.length}`);
     }
 
     // Public method to manually add items to search index

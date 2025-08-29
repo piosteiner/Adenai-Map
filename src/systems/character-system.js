@@ -43,12 +43,12 @@ class CharacterSystem {
                 // Add click listener to each location marker
                 locationData.layer.on('click', () => {
                     this.closeCurrentCharacterPopup();
-                    console.log('🎯 Character popup closed due to location marker click');
+                    Logger.character('Character popup closed due to location marker click');
                 });
             }
         });
         
-        console.log(`🎯 Set up close listeners on ${geoFeatureLayers.length} location markers`);
+        Logger.success(`Set up close listeners on ${geoFeatureLayers.length} location markers`);
     }
 
     async loadCharacters() {
@@ -108,13 +108,13 @@ class CharacterSystem {
             const withoutCoords = this.characterData.length - withCoords;
             const withMovements = this.characterData.filter(c => c.movementHistory && c.movementHistory.length > 0).length;
             
-            console.log(`🗺️ Characters with coordinates: ${withCoords}`);
-            console.log(`🛤️ Characters with movement history: ${withMovements}`);
+            Logger.success(`Characters with coordinates: ${withCoords}`);
+            Logger.success(`Characters with movement history: ${withMovements}`);
             if (withoutCoords > 0) {
-                console.warn(`⚠️ Characters without coordinates: ${withoutCoords}`);
+                Logger.warning(`Characters without coordinates: ${withoutCoords}`);
             }
             
-            console.log('🎯 Character data loaded - no visual markers created');
+            Logger.character('Character data loaded - no visual markers created');
             
             // Notify other systems that characters are loaded
             document.dispatchEvent(new CustomEvent('charactersLoaded', { 
@@ -157,7 +157,7 @@ class CharacterSystem {
         const mapLng = x;  // lng = x coordinate
         const mapLat = y;  // lat = y coordinate
         
-        console.log(`📍 Coordinate conversion for "${characterName}": Using coordinates as-is [lng=${mapLng}, lat=${mapLat}]`);
+        Logger.info(`Coordinate conversion for "${characterName}": Using coordinates as-is [lng=${mapLng}, lat=${mapLat}]`);
         
         return [mapLng, mapLat];  // Return as [lng, lat] for L.latLng(lat, lng)
     }
@@ -186,7 +186,7 @@ class CharacterSystem {
         }
         
         // Priority 3: No coordinates available
-        console.log(`📋 No coordinates available for ${character.name}, will show panel popup`);
+        Logger.info(`No coordinates available for ${character.name}, will show panel popup`);
         return null;
     }
 
@@ -194,7 +194,7 @@ class CharacterSystem {
     focusCharacter(characterName) {
         const character = this.getCharacterByName(characterName);
         if (!character) {
-            console.warn(`⚠️ Character "${characterName}" not found`);
+            Logger.warning(`Character "${characterName}" not found`);
             return false;
         }
 
@@ -238,7 +238,7 @@ class CharacterSystem {
 
         const panel = document.getElementById('character-panel');
         if (!panel) {
-            console.warn('⚠️ Character panel not found');
+            Logger.warning('Character panel not found');
             return;
         }
 
@@ -432,7 +432,7 @@ class CharacterSystem {
         // Show popup after a reasonable delay (no verification needed)
         setTimeout(() => {
             this.showCharacterPopup(character, targetLatLng);
-            console.log(`✅ Character "${characterName}" centered smoothly`);
+            Logger.success(`Character "${characterName}" centered smoothly`);
         }, 900);
     }
 
@@ -674,9 +674,9 @@ window.characterSystem = new CharacterSystem();
 document.addEventListener('DOMContentLoaded', () => {
     // Wait for map core to be initialized
     setTimeout(() => {
-        if (window.mapCore && window.mapCore.getMap()) {
+        MapUtils.withMap(() => {
             // Map is ready, characters will be loaded by the main initialization
-        }
+        });
     }, 100);
 });
 

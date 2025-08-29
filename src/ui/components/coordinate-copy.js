@@ -11,43 +11,41 @@ class CoordinateCopySystem {
 
     init() {
         // Wait for map to be ready
-        if (window.mapCore && window.mapCore.getMap()) {
+        MapUtils.withMap(() => {
             this.setupMapListeners();
-        } else {
+        }, () => {
             // Wait for map initialization
             document.addEventListener('adenaiMapReady', () => {
                 this.setupMapListeners();
             });
-        }
+        });
     }
 
     setupMapListeners() {
-        const map = window.mapCore.getMap();
-        if (!map) {
-            console.warn('⚠️ Could not setup coordinate copy - map not available');
-            return;
-        }
+        MapUtils.withMap((map) => {
+            Logger.info('Setting up coordinate copy system (Click+Hold+C)');
 
-        console.log('🎯 Setting up coordinate copy system (Click+Hold+C)');
+            // Mouse events
+            map.on('mousedown', (e) => this.startHold(e));
+            map.on('mouseup', () => this.endHold());
+            map.on('mousemove', (e) => this.handleMouseMove(e));
 
-        // Mouse events
-        map.on('mousedown', (e) => this.startHold(e));
-        map.on('mouseup', () => this.endHold());
-        map.on('mousemove', (e) => this.handleMouseMove(e));
+            // Touch events for mobile
+            map.on('touchstart', (e) => this.startHold(e));
+            map.on('touchend', () => this.endHold());
+            map.on('touchmove', (e) => this.handleMouseMove(e));
 
-        // Touch events for mobile
-        map.on('touchstart', (e) => this.startHold(e));
-        map.on('touchend', () => this.endHold());
-        map.on('touchmove', (e) => this.handleMouseMove(e));
+            // Keyboard listener
+            document.addEventListener('keydown', (e) => this.handleKeyPress(e));
 
-        // Keyboard listener
-        document.addEventListener('keydown', (e) => this.handleKeyPress(e));
+            // Cleanup on mouse leave
+            map.on('mouseout', () => this.endHold());
 
-        // Cleanup on mouse leave
-        map.on('mouseout', () => this.endHold());
-
-        // Add styles
-        this.addStyles();
+            // Add styles
+            this.addStyles();
+        }, () => {
+            Logger.warning('Could not setup coordinate copy - map not available');
+        });
     }
 
     startHold(e) {
@@ -59,7 +57,7 @@ class CoordinateCopySystem {
         this.holdTimer = setTimeout(() => {
             this.isHolding = true;
             this.showHoldIndicator(e);
-            console.log('🎯 Hold activated - press C to copy coordinates:', this.currentCoordinates);
+            Logger.info('Hold activated - press C to copy coordinates:', this.currentCoordinates);
         }, this.holdThreshold);
     }
 
@@ -130,11 +128,11 @@ class CoordinateCopySystem {
                 this.fallbackCopyToClipboard(coordString);
             }
             
-            console.log('📋 Copied coordinates:', coordString);
+            Logger.success('Copied coordinates:', coordString);
             this.endHold();
             
         } catch (error) {
-            console.error('❌ Failed to copy coordinates:', error);
+            Logger.error('Failed to copy coordinates:', error);
             this.showErrorNotification();
         }
     }
@@ -154,7 +152,7 @@ class CoordinateCopySystem {
             document.execCommand('copy');
             this.showSuccessNotification(text);
         } catch (err) {
-            console.error('❌ Fallback copy failed:', err);
+            Logger.error('Fallback copy failed:', err);
             this.showErrorNotification();
         } finally {
             document.body.removeChild(textArea);
@@ -316,11 +314,11 @@ class CoordinateCopySystem {
     // Public methods for external control
     disable() {
         this.endHold();
-        console.log('📍 Coordinate copy system disabled');
+        Logger.info('Coordinate copy system disabled');
     }
 
     enable() {
-        console.log('📍 Coordinate copy system enabled');
+        Logger.info('Coordinate copy system enabled');
     }
 }
 
@@ -332,17 +330,17 @@ window.coordinateCopySystem = coordinateCopySystem;
 
 // Add help command
 window.showCoordinateHelp = function() {
-    console.log('📍 COORDINATE COPY SYSTEM HELP');
-    console.log('==============================');
-    console.log('1. Click and hold anywhere on the map');
-    console.log('2. Wait 300ms for the indicator to appear');
-    console.log('3. Press "C" to copy coordinates to clipboard');
-    console.log('4. Press "Escape" to cancel');
-    console.log('');
-    console.log('💡 Works on both desktop and mobile!');
-    console.log('🎯 Coordinates are formatted as [x, y]');
+    Logger.info('📍 COORDINATE COPY SYSTEM HELP');
+    Logger.info('==============================');
+    Logger.info('1. Click and hold anywhere on the map');
+    Logger.info('2. Wait 300ms for the indicator to appear');
+    Logger.info('3. Press "C" to copy coordinates to clipboard');
+    Logger.info('4. Press "Escape" to cancel');
+    Logger.info('');
+    Logger.info('💡 Works on both desktop and mobile!');
+    Logger.info('🎯 Coordinates are formatted as [x, y]');
 };
 
-console.log('📍 Coordinate Copy System loaded!');
-console.log('🎯 Usage: Click+Hold on map, then press C to copy coordinates');
-console.log('❓ Run showCoordinateHelp() for detailed instructions');
+Logger.success('Coordinate Copy System loaded!');
+Logger.info('Usage: Click+Hold on map, then press C to copy coordinates');
+Logger.info('❓ Run showCoordinateHelp() for detailed instructions');
