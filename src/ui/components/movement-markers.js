@@ -74,7 +74,7 @@ class MovementMarkers {
             const [x, y] = coordKey.split(',').map(Number);
             const mapCoords = [y, x]; // Leaflet expects [lat, lng]
             
-            // Check for nearby location markers (10px proximity)
+            // Check for nearby location markers
             const nearbyLocations = this.findNearbyLocationMarkers(mapCoords, 10);
             
             if (movements.length === 1 && nearbyLocations.length === 0) {
@@ -93,7 +93,7 @@ class MovementMarkers {
                     });
                 }
             } else {
-                // Either multiple movements OR nearby locations - create cluster
+                // Clustered markers for same location OR single movement with nearby locations
                 const clusterMarker = this.createClusteredMovementMarker(mapCoords, movements, characterData.name, characterData.id, nearbyLocations);
                 
                 if (clusterMarker) {
@@ -101,7 +101,6 @@ class MovementMarkers {
                         marker: clusterMarker,
                         characterId: characterData.id,
                         movements: movements,
-                        nearbyLocations: nearbyLocations,
                         isVisible: false,
                         type: 'cluster'
                     });
@@ -159,19 +158,17 @@ class MovementMarkers {
         return marker;
     }
 
-    // Create a clustered movement marker for multiple visits to same location or with nearby locations
+    // Create a clustered movement marker for multiple visits to same location
     createClusteredMovementMarker(coordinates, movements, characterName, characterId, nearbyLocations = []) {
         const map = window.mapCore.getMap();
         if (!map) return null;
 
         const movementCount = movements.length;
-        const locationCount = nearbyLocations.length;
-        const totalCount = movementCount + locationCount;
         const pathColor = this.getCharacterPathColor(characterId);
+        const hasNearbyLocations = nearbyLocations.length > 0;
 
-        // Create enhanced marker HTML with location indicator if locations are present
         let markerHtml;
-        if (locationCount > 0) {
+        if (hasNearbyLocations) {
             // Show mixed content indicator
             markerHtml = `
                 <div class="movement-marker cluster-marker mixed-cluster" style="${this.getMarkerStyles(pathColor)}">
@@ -191,11 +188,12 @@ class MovementMarkers {
                         font-size: 8px;
                         color: white;
                         font-weight: bold;
-                    ">${locationCount}</div>
+                        z-index: 10;
+                    ">${nearbyLocations.length}</div>
                 </div>
             `;
         } else {
-            // Regular movement cluster
+            // Standard cluster marker
             markerHtml = `
                 <div class="movement-marker cluster-marker" style="${this.getMarkerStyles(pathColor)}">
                     ${movementCount}x
@@ -212,11 +210,11 @@ class MovementMarkers {
 
         const marker = L.marker(coordinates, { icon: customIcon });
         
-        // Store movements and location data for fanning out
+        // Store movements data for fanning out
         marker._movements = movements;
-        marker._nearbyLocations = nearbyLocations;
         marker._characterName = characterName;
         marker._characterId = characterId;
+        marker._nearbyLocations = nearbyLocations;
         marker._isFannedOut = false;
         marker._fanMarkers = [];
         marker._hoverTimeout = null;
@@ -274,19 +272,21 @@ class MovementMarkers {
         const centerLatLng = clusterMarker.getLatLng();
         const pathColor = this.getCharacterPathColor(characterId);
         
+        // Combine movements and locations for spiral arrangement
+        const allItems = [
+            ...movements.map(m => ({ type: 'movement', data: m })),
+            ...nearbyLocations.map(l => ({ type: 'location', data: l }))
+        ];
+        
         // Track fan positions for popup placement
         this.currentFanPositions = [];
-        
-        // Combine movements and locations for fanning out
-        const allItems = [
-            ...movements.map(movement => ({ type: 'movement', data: movement })),
-            ...nearbyLocations.map(location => ({ type: 'location', data: location }))
-        ];
         
         // Spiral configuration
         const baseRadius = 33; // Starting radius in pixels
         const radiusIncrement = 15; // How much radius increases per revolution
         const itemsPerRevolution = 6; // How many items before increasing radius
+        
+        clusterMarker._fanMarkers = [];
         
         allItems.forEach((item, index) => {
             // Calculate spiral position
@@ -312,13 +312,11 @@ class MovementMarkers {
             // Track this fan position for popup placement
             this.currentFanPositions.push(fanLatLng);
             
+            // Create appropriate marker type
             let fanMarker;
-            
             if (item.type === 'movement') {
-                // Create movement marker for fanning out
                 fanMarker = this.createFanMovementMarker(item.data, fanLatLng, characterName, characterId, pathColor, centerLatLng);
-            } else if (item.type === 'location') {
-                // Create location proxy marker for fanning out
+            } else {
                 fanMarker = this.createFanLocationMarker(item.data, fanLatLng);
             }
             
@@ -333,19 +331,19 @@ class MovementMarkers {
                 });
                 
                 fanMarker.addTo(map);
-                
-                // Animate the fan out with spiral timing
-                setTimeout(() => {
-                    const element = fanMarker.getElement();
-                    if (element) {
-                        const markerDiv = element.querySelector('.fan-marker, .fan-location-marker');
-                        if (markerDiv) {
-                            markerDiv.style.transform = 'scale(1)';
-                            markerDiv.style.animation = 'fanOut 0.4s ease-out';
-                        }
+            
+            // Animate the fan out with spiral timing
+            setTimeout(() => {
+                const element = fanMarker.getElement();
+                if (element) {
+                    const markerDiv = element.querySelector('.fan-marker, .fan-location-marker');
+                    if (markerDiv) {
+                        markerDiv.style.transform = 'scale(1)';
+                        markerDiv.style.animation = 'fanOut 0.4s ease-out';
                     }
-                }, index * 60); // Slightly longer stagger for spiral effect
-                
+                }
+            }, index * 60); // Slightly longer stagger for spiral effect
+            
                 clusterMarker._fanMarkers.push(fanMarker);
             }
         });
@@ -355,74 +353,6 @@ class MovementMarkers {
         if (clusterElement) {
             clusterElement.style.zIndex = '1001';
         }
-    }
-
-    // Create a movement marker for fan-out
-    createFanMovementMarker(movement, fanLatLng, characterName, characterId, pathColor, centerLatLng) {
-        const markerNumber = (movement.movement_nr || 0) + 1;
-
-        const fanMarkerHtml = `
-            <div class="movement-marker fan-marker" style="${this.getMarkerStyles(pathColor)}">${markerNumber}</div>
-        `;
-
-        const fanIcon = L.divIcon({
-            html: fanMarkerHtml,
-            className: 'movement-marker-icon fan-icon',
-            iconSize: [24, 24],
-            iconAnchor: [12, 12]
-        });
-
-        const fanMarker = L.marker(fanLatLng, { icon: fanIcon });
-        
-        // Add click event for detailed popup
-        fanMarker.on('click', () => {
-            // Pass the cluster center and fan positions for optimal popup placement
-            this.showMovementPopup(movement, characterName, markerNumber, {
-                clickedPosition: fanLatLng,
-                clusterCenter: centerLatLng,
-                allFanPositions: this.currentFanPositions || []
-            });
-        });
-
-        return fanMarker;
-    }
-
-    // Create a location proxy marker for fan-out
-    createFanLocationMarker(locationData, fanLatLng) {
-        // Create a divIcon (HTML) instead of SVG icon to match movement markers and enable animations
-        const fanMarkerHtml = `
-            <div class="movement-marker fan-marker fan-location-marker" style="background: #ff6b24; --path-color: #ff6b24;">
-            </div>
-        `;
-
-        const fanIcon = L.divIcon({
-            html: fanMarkerHtml,
-            className: 'movement-marker-icon fan-icon location-proxy-icon',
-            iconSize: [24, 24],
-            iconAnchor: [12, 12]
-        });
-
-        const fanMarker = L.marker(fanLatLng, { icon: fanIcon });
-        
-        // Add click event that shows the original location popup
-        fanMarker.on('click', () => {
-            const originalMarker = locationData.layer;
-            if (originalMarker && originalMarker.getPopup) {
-                const originalPopup = originalMarker.getPopup();
-                if (originalPopup) {
-                    const map = window.mapCore.getMap();
-                    const popup = L.popup({
-                        maxWidth: 400,
-                        className: 'custom-popup'
-                    })
-                    .setLatLng(fanLatLng)
-                    .setContent(originalPopup.getContent())
-                    .openOn(map);
-                }
-            }
-        });
-
-        return fanMarker;
     }
 
     // Fan in clustered markers
@@ -440,8 +370,7 @@ class MovementMarkers {
             setTimeout(() => {
                 const element = fanMarker.getElement();
                 if (element) {
-                    // Handle both movement and location markers
-                    const markerDiv = element.querySelector('.fan-marker') || element.querySelector('.fan-location-marker') || element;
+                    const markerDiv = element.querySelector('.fan-marker');
                     if (markerDiv) {
                         markerDiv.style.transform = 'scale(0)';
                         markerDiv.style.animation = 'fanIn 0.2s ease-in';
@@ -475,8 +404,7 @@ class MovementMarkers {
             setTimeout(() => {
                 const element = fanMarker.getElement();
                 if (element) {
-                    // Handle both movement and location markers
-                    const markerDiv = element.querySelector('.fan-marker') || element.querySelector('.fan-location-marker') || element;
+                    const markerDiv = element.querySelector('.fan-marker');
                     if (markerDiv) {
                         // Add bounce animation class
                         markerDiv.style.animation = 'bounceAttention 0.6s ease-in-out';
@@ -654,6 +582,74 @@ class MovementMarkers {
         }
         
         return topmostPosition;
+    }
+
+    // Create a movement marker for fan-out
+    createFanMovementMarker(movement, fanLatLng, characterName, characterId, pathColor, centerLatLng) {
+        const markerNumber = (movement.movement_nr || 0) + 1;
+
+        const fanMarkerHtml = `
+            <div class="movement-marker fan-marker" style="${this.getMarkerStyles(pathColor)}">${markerNumber}</div>
+        `;
+
+        const fanIcon = L.divIcon({
+            html: fanMarkerHtml,
+            className: 'movement-marker-icon fan-icon',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        });
+
+        const fanMarker = L.marker(fanLatLng, { icon: fanIcon });
+        
+        // Add click event for detailed popup
+        fanMarker.on('click', () => {
+            // Pass the cluster center and fan positions for optimal popup placement
+            this.showMovementPopup(movement, characterName, markerNumber, {
+                clickedPosition: fanLatLng,
+                clusterCenter: centerLatLng,
+                allFanPositions: this.currentFanPositions || []
+            });
+        });
+
+        return fanMarker;
+    }
+
+    // Create a location proxy marker for fan-out
+    createFanLocationMarker(locationData, fanLatLng) {
+        // Create a divIcon (HTML) instead of SVG icon to match movement markers and enable animations
+        const fanMarkerHtml = `
+            <div class="movement-marker fan-marker fan-location-marker" style="background: #ff6b24; --path-color: #ff6b24;">
+            </div>
+        `;
+
+        const fanIcon = L.divIcon({
+            html: fanMarkerHtml,
+            className: 'movement-marker-icon fan-icon location-proxy-icon',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        });
+
+        const fanMarker = L.marker(fanLatLng, { icon: fanIcon });
+        
+        // Add click event that shows the original location popup
+        fanMarker.on('click', () => {
+            const originalMarker = locationData.layer;
+            if (originalMarker && originalMarker.getPopup) {
+                const originalPopup = originalMarker.getPopup();
+                if (originalPopup) {
+                    const map = window.mapCore.getMap();
+                    const popup = L.popup({
+                        maxWidth: 400,
+                        className: 'custom-popup'
+                    })
+                    .setLatLng(fanLatLng)
+                    .setContent(originalPopup.getContent())
+                    .openOn(map);
+                }
+            }
+        });
+
+        return fanMarker;
     }
 }
 

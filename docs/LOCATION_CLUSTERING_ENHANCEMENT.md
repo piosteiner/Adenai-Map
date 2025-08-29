@@ -16,7 +16,7 @@ Enhanced the existing movement marker clustering system to detect and include ne
 - Creates "proxy" location markers that are included in movement clusters
 - **Same Size**: Proxy markers use 24x24px size matching movement markers
 - **Same Animation**: Uses `divIcon` (HTML) instead of SVG for CSS animation support
-- **Visual Consistency**: Orange background (#ff6b24) with white dot icon maintains location identity
+- **Visual Consistency**: Orange background (#ff6b24) with clean design - no inner dot, just orange circle with white border
 - Proxy markers show same popup content as originals when clicked
 - No impact on location system - completely independent enhancement
 
