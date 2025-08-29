@@ -19,7 +19,7 @@ class MovementSystem {
             try {
                 await this.loadAndDisplayPaths();
             } catch (error) {
-                console.error('❌ Failed to load character paths:', error);
+                Logger.error('Failed to load character paths:', error);
             }
         });
     }
@@ -27,22 +27,22 @@ class MovementSystem {
     // API-only path loading and display
     async loadAndDisplayPaths() {
         try {
-            console.log('🚀 Starting path loading process...');
+            Logger.movement('Starting path loading process...');
             const apiData = await this.pathManager.loadCharacterPaths();
-            console.log('✅ API data received, processing paths...');
+            Logger.movement('API data received, processing paths...');
             
             this.displayPaths(apiData.paths);
-            console.log('✅ Paths displayed successfully');
+            Logger.movement('Paths displayed successfully');
             
             // Load character data for markers
-            console.log('🎯 Loading character movement markers...');
+            Logger.movement('Loading character movement markers...');
             await this.loadCharacterMovementMarkers();
-            console.log('✅ Movement markers loaded successfully');
+            Logger.movement('Movement markers loaded successfully');
             
         } catch (error) {
-            console.error('❌ Error in loadAndDisplayPaths:', error);
-            console.error('❌ Error stack:', error.stack);
-            console.error('❌ Character Paths API unavailable');
+            Logger.error('Error in loadAndDisplayPaths:', error);
+            Logger.error('Error stack:', error.stack);
+            Logger.error('Character Paths API unavailable');
             this.showError('Character movement data unavailable. Please contact developer through GitHub.');
         }
     }
@@ -65,50 +65,42 @@ class MovementSystem {
                 this.movementMarkers.push(...characterMarkers);
             });
             
-            console.log(`✅ Created ${this.movementMarkers.length} movement markers`);
+            Logger.movement(`Created ${this.movementMarkers.length} movement markers`);
             
         } catch (error) {
-            console.error('❌ Failed to load character movement markers:', error);
+            Logger.error('Failed to load character movement markers:', error);
         }
     }
 
     // Display paths on the map
     displayPaths(paths) {
-        console.log('🗺️ Starting displayPaths with data:', paths);
-        const map = window.mapCore.getMap();
+        Logger.movement('Starting displayPaths with data:', paths);
         
-        if (!map) {
-            console.error('❌ Map not available for path display');
+        if (!MapUtils.isMapAvailable()) {
+            Logger.error('Map not available for path display');
             return;
         }
         
-        console.log('✅ Map available for path display');
+        Logger.success('Map available for path display');
         
         // Hide existing paths before loading new ones
         this.hideAllPaths();
-        console.log('🧹 Existing paths hidden');
+        Logger.cleanup('Existing paths hidden');
         
         try {
             Object.values(paths).forEach((pathInfo, index) => {
-                console.log(`🛤️ Processing path ${index + 1}:`, pathInfo.name || pathInfo.id);
+                Logger.movement(`Processing path ${index + 1}:`, pathInfo.name || pathInfo.id);
                 
                 if (pathInfo.type === 'movement' && pathInfo.coordinates.length >= 2) {
-                    // Filter out null coordinates before creating polyline
-                    const validCoordinates = pathInfo.coordinates.filter(coord => {
-                        return coord && 
-                               coord.length === 2 && 
-                               coord[0] !== null && 
-                               coord[1] !== null &&
-                               typeof coord[0] === 'number' && 
-                               typeof coord[1] === 'number';
-                    });
+                    // Use centralized coordinate validation
+                    const coordValidation = DataUtils.validateCoordinatePath(pathInfo.coordinates);
                     
-                    console.log(`🗺️ ${pathInfo.name}: ${pathInfo.coordinates.length} total coords, ${validCoordinates.length} valid coords`);
+                    Logger.movement(`${pathInfo.name}: ${coordValidation.originalCount} total coords, ${coordValidation.validCount} valid coords`);
                     
                     // Only create polyline if we have at least 2 valid coordinates
-                    if (validCoordinates.length >= 2) {
+                    if (coordValidation.valid) {
                         // Create path line using server-provided styling
-                        const pathLine = L.polyline(validCoordinates, {
+                        const pathLine = L.polyline(coordValidation.coordinates, {
                             color: pathInfo.style.color,
                             weight: pathInfo.style.weight,
                             opacity: pathInfo.style.opacity,
@@ -145,15 +137,15 @@ class MovementSystem {
                             isVisible: isVsuzH // Track initial visibility state
                         });
                     } else {
-                        console.warn(`⚠️ Skipping ${pathInfo.name}: insufficient valid coordinates (${validCoordinates.length})`);
+                        Logger.warning(`Skipping ${pathInfo.name}: insufficient valid coordinates (${validCoordinates.length})`);
                     }
             }
         });
         
-        console.log('✅ All paths processed successfully');
+        Logger.movement('All paths processed successfully');
         
         } catch (pathError) {
-            console.error('❌ Error in displayPaths:', pathError);
+            Logger.error('Error in displayPaths:', pathError);
             throw pathError; // Re-throw to be caught by parent
         }
         
@@ -170,129 +162,124 @@ class MovementSystem {
 
     // Show VsuzH movement markers by default
     showInitialVsuzHMarkers() {
-        const map = window.mapCore.getMap();
-        if (!map) return;
-
-        this.movementMarkers
-            .filter(markerData => {
-                const isVsuzH = markerData.characterId?.toLowerCase().includes('vsuzh');
-                return isVsuzH;
-            })
-            .forEach(markerData => {
-                if (!map.hasLayer(markerData.marker)) {
-                    markerData.marker.addTo(map);
-                    markerData.isVisible = true;
-                }
-            });
+        MapUtils.withMap(map => {
+            this.movementMarkers
+                .filter(markerData => {
+                    const isVsuzH = markerData.characterId?.toLowerCase().includes('vsuzh');
+                    return isVsuzH;
+                })
+                .forEach(markerData => {
+                    if (!map.hasLayer(markerData.marker)) {
+                        MapUtils.addToMap(markerData.marker);
+                        markerData.isVisible = true;
+                    }
+                });
+        }, 'Cannot show initial VsuzH markers - map not available');
     }
 
     // Show all character paths
     showAllPaths() {
-        const map = window.mapCore.getMap();
-        if (!map) return;
-
-        // Show all path layers
-        this.movementLayers.forEach(layer => {
-            if (!map.hasLayer(layer)) {
-                layer.addTo(map);
-            }
-        });
-        
-        // Show all movement markers
-        this.movementMarkers.forEach(markerData => {
-            if (!map.hasLayer(markerData.marker)) {
-                markerData.marker.addTo(map);
-                markerData.isVisible = true;
-            }
-        });
-        
-        // Update visibility state for paths
-        this.characterPaths.forEach(pathData => {
-            pathData.isVisible = true;
-        });
+        return MapUtils.withMap(map => {
+            // Show all path layers
+            this.movementLayers.forEach(layer => {
+                MapUtils.addToMap(layer);
+            });
+            
+            // Show all movement markers
+            this.movementMarkers.forEach(markerData => {
+                if (MapUtils.addToMap(markerData.marker)) {
+                    markerData.isVisible = true;
+                }
+            });
+            
+            // Update visibility state for paths
+            this.characterPaths.forEach(pathData => {
+                pathData.isVisible = true;
+            });
+            
+            return true;
+        }, 'Cannot show paths - map not available');
     }
 
     // Hide all character paths
     hideAllPaths() {
-        const map = window.mapCore.getMap();
-        if (!map) return;
-
-        // Hide all path layers
-        this.movementLayers.forEach(layer => {
-            if (map.hasLayer(layer)) {
-                map.removeLayer(layer);
-            }
-        });
-        
-        // Hide all movement markers
-        this.movementMarkers.forEach(markerData => {
-            if (map.hasLayer(markerData.marker)) {
-                map.removeLayer(markerData.marker);
-                markerData.isVisible = false;
-            }
-        });
-        
-        // Update visibility state for paths
-        this.characterPaths.forEach(pathData => {
-            pathData.isVisible = false;
-        });
+        return MapUtils.withMap(map => {
+            // Hide all path layers
+            this.movementLayers.forEach(layer => {
+                MapUtils.removeFromMap(layer);
+            });
+            
+            // Hide all movement markers
+            this.movementMarkers.forEach(markerData => {
+                if (MapUtils.removeFromMap(markerData.marker)) {
+                    markerData.isVisible = false;
+                }
+            });
+            
+            // Update visibility state for paths
+            this.characterPaths.forEach(pathData => {
+                pathData.isVisible = false;
+            });
+            
+            return true;
+        }, 'Cannot hide paths - map not available');
     }
 
     // Show specific character path by ID
     showCharacterPath(characterId) {
-        const map = window.mapCore.getMap();
-        if (!map) return false;
-
-        // Find and show the path layer for this character
-        const pathData = this.characterPaths.find(path => path.character?.id === characterId);
-        if (pathData && pathData.pathLine && !map.hasLayer(pathData.pathLine)) {
-            pathData.pathLine.addTo(map);
-            pathData.isVisible = true; // Update visibility state
-            
-            // Also show movement markers for this character
-            this.movementMarkers
-                .filter(markerData => markerData.characterId === characterId)
-                .forEach(markerData => {
-                    if (!map.hasLayer(markerData.marker)) {
-                        markerData.marker.addTo(map);
-                        markerData.isVisible = true;
-                    }
-                });
-            
-            return true;
-        }
-        return false;
+        return MapUtils.withMap(map => {
+            // Find and show the path layer for this character
+            const pathData = this.characterPaths.find(path => path.character?.id === characterId);
+            if (pathData && pathData.pathLine) {
+                if (MapUtils.addToMap(pathData.pathLine)) {
+                    pathData.isVisible = true; // Update visibility state
+                }
+                
+                // Also show movement markers for this character
+                this.movementMarkers
+                    .filter(markerData => markerData.characterId === characterId)
+                    .forEach(markerData => {
+                        if (MapUtils.addToMap(markerData.marker)) {
+                            markerData.isVisible = true;
+                        }
+                    });
+                
+                return true;
+            }
+            return false;
+        }, 'Cannot show character path - map not available');
     }
 
     // Hide specific character path by ID
     hideCharacterPath(characterId) {
-        const map = window.mapCore.getMap();
-        if (!map) return false;
-
-        // Find and hide the path layer for this character
-        const pathData = this.characterPaths.find(path => path.character?.id === characterId);
-        if (pathData && pathData.pathLine && map.hasLayer(pathData.pathLine)) {
-            map.removeLayer(pathData.pathLine);
-            pathData.isVisible = false; // Update visibility state
-            
-            // Also hide movement markers for this character
-            this.movementMarkers
-                .filter(markerData => markerData.characterId === characterId)
-                .forEach(markerData => {
-                    if (map.hasLayer(markerData.marker)) {
-                        map.removeLayer(markerData.marker);
-                        markerData.isVisible = false;
-                        
-                        // Clean up any fanned out markers for clusters
-                        if (markerData.type === 'cluster' && markerData.marker._fanMarkers) {
-                            this.markersSystem.fanInClusteredMarkers(markerData.marker);
+        Logger.movement(`Hiding paths for character ${characterId}...`);
+        
+        return MapUtils.withMap(map => {
+            // Find and hide the path layer for this character
+            const pathData = this.characterPaths.find(path => path.character?.id === characterId);
+            if (pathData && pathData.pathLine && map.hasLayer(pathData.pathLine)) {
+                MapUtils.removeFromMap(pathData.pathLine);
+                pathData.isVisible = false; // Update visibility state
+                
+                // Also hide movement markers for this character
+                this.movementMarkers
+                    .filter(markerData => markerData.characterId === characterId)
+                    .forEach(markerData => {
+                        if (map.hasLayer(markerData.marker)) {
+                            MapUtils.removeFromMap(markerData.marker);
+                            markerData.isVisible = false;
+                            
+                            // Clean up any fanned out markers for clusters
+                            if (markerData.type === 'cluster' && markerData.marker._fanMarkers) {
+                                this.markersSystem.fanInClusteredMarkers(markerData.marker);
+                            }
                         }
-                    }
-                });
-            
-            return true;
-        }
-        return false;
+                    });
+                
+                return true;
+            }
+            return false;
+        }, 'Cannot hide character path - map not available');
     }
 
     // Check if a character path is currently visible

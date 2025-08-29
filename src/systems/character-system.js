@@ -1,7 +1,7 @@
 // character-system.js - Character Loading, Rendering, and Management
 class CharacterSystem {
     constructor() {
-        console.log('🎯 CHARACTER SYSTEM LOADED - VERSION 1.2.0 - UPDATED WITH ENHANCED POPUPS');
+        Logger.system('CHARACTER SYSTEM LOADED - VERSION 1.2.0 - UPDATED WITH ENHANCED POPUPS');
         this.characterData = [];
         this.currentCharacterPopup = null; // Track current popup
         this.currentFocusedCharacter = null; // Track which character has focus
@@ -26,7 +26,7 @@ class CharacterSystem {
     }
 
     init() {
-        console.log('🎯 Character system initialized without visual markers');
+        Logger.character('Character system initialized without visual markers');
         
         // Listen for locations loaded to set up location marker click handlers
         document.addEventListener('locationsLoaded', (e) => {
@@ -53,7 +53,7 @@ class CharacterSystem {
 
     async loadCharacters() {
         try {
-            console.log('👥 Loading characters from server...');
+            Logger.character('Loading characters from server...');
             // Try different potential URLs in case of server routing issues
             let response;
             const urls = [
@@ -82,7 +82,7 @@ class CharacterSystem {
             const data = await response.json();
             this.characterData = data.characters || [];
             
-            console.log(`✅ Loaded ${this.characterData.length} characters`);
+            Logger.success(`Loaded ${this.characterData.length} characters`);
             
             // Debug: Log a sample character to verify all fields are present
             if (this.characterData.length > 0) {
@@ -122,7 +122,7 @@ class CharacterSystem {
             }));
             
         } catch (error) {
-            console.error('❌ Error loading characters:', error);
+            Logger.error('Error loading characters:', error);
             
             // Show user-friendly error message
             const errorMsg = error.message.includes('404') 
@@ -211,28 +211,24 @@ class CharacterSystem {
         
         // If character has no coordinates, show panel-anchored popup
         if (!coordinates) {
-            console.log(`📋 Showing panel popup for "${characterName}" (no coordinates)`);
+            Logger.character(`Showing panel popup for "${characterName}" (no coordinates)`);
             this.showPanelAnchoredPopup(character);
             this.currentFocusedCharacter = characterName;
             return true;
         }
 
-        const map = window.mapCore.getMap();
-        if (!map) {
-            console.warn('⚠️ Map not available');
-            return false;
-        }
+        return MapUtils.withMap(map => {
+            // FIXED: Properly convert coordinates
+            const [mapLng, mapLat] = this.convertImageCoordinatesToMapCoordinates(coordinates, characterName);
+            const targetLatLng = L.latLng(mapLat, mapLng);
+            
+            Logger.character(`Focusing on "${characterName}" at image coords ${coordinates} → map coords [${mapLng}, ${mapLat}]`);
 
-        // FIXED: Properly convert coordinates
-        const [mapLng, mapLat] = this.convertImageCoordinatesToMapCoordinates(coordinates, characterName);
-        const targetLatLng = L.latLng(mapLat, mapLng);
-        
-        console.log(`🎯 Focusing on "${characterName}" at image coords ${coordinates} → map coords [${mapLng}, ${mapLat}]`);
-
-        // Single, smooth centering approach
-        this.performSmoothCentering(map, targetLatLng, characterName, character);
-        
-        return true;
+            // Single, smooth centering approach
+            this.performSmoothCentering(map, targetLatLng, characterName, character);
+            
+            return true;
+        }, 'Map not available for character focus') || false;
     }
 
     // Show popup anchored to character panel for characters without locations
@@ -516,38 +512,38 @@ class CharacterSystem {
 
     // Simplified popup showing with offset positioning
     showCharacterPopup(character, latlng) {
-        const map = window.mapCore.getMap();
-        
-        // Remove any existing character focus popup
-        if (this.currentCharacterPopup) {
-            map.removeLayer(this.currentCharacterPopup);
-        }
+        return MapUtils.withMap(map => {
+            // Remove any existing character focus popup
+            if (this.currentCharacterPopup) {
+                MapUtils.removeFromMap(this.currentCharacterPopup);
+            }
 
-        // Create popup content
-        const popupContent = this.createCharacterPopup(character);
+            // Create popup content
+            const popupContent = this.createCharacterPopup(character);
 
-        // Create popup with enhanced options and offset
-        this.currentCharacterPopup = L.popup({
-            closeButton: true,
-            autoClose: false,
-            closeOnClick: false,
-            closeOnEscapeKey: true,
-            className: 'character-focus-popup',
-            autoPan: false,           // Disable auto-pan since we already centered properly
-            keepInView: true,         // Keep popup in view when map is panned
-            offset: [0, -25]          // Position popup directly above the coordinate point, like location popups
-        })
-        .setLatLng(latlng)
-        .setContent(popupContent)
-        .openOn(map);
+            // Create popup with enhanced options and offset
+            this.currentCharacterPopup = L.popup({
+                closeButton: true,
+                autoClose: false,
+                closeOnClick: false,
+                closeOnEscapeKey: true,
+                className: 'character-focus-popup',
+                autoPan: false,           // Disable auto-pan since we already centered properly
+                keepInView: true,         // Keep popup in view when map is panned
+                offset: [0, -25]          // Position popup directly above the coordinate point, like location popups
+            })
+            .setLatLng(latlng)
+            .setContent(popupContent)
+            .openOn(map);
 
-        // Track which character is currently focused
-        this.currentFocusedCharacter = character.name;
+            // Track which character is currently focused
+            this.currentFocusedCharacter = character.name;
 
-        // Set up event listeners for controlled closing
-        this.setupPopupCloseListeners();
+            // Set up event listeners for controlled closing
+            this.setupPopupCloseListeners();
 
-        console.log(`🎯 Character popup opened for "${character.name}" with offset positioning`);
+            Logger.character(`Character popup opened for "${character.name}" with offset positioning`);
+        }, 'Cannot show character popup - map not available');
     }
 
     // Set up listeners to close character popup when needed
@@ -557,7 +553,7 @@ class CharacterSystem {
             this.currentCharacterPopup.on('remove', () => {
                 this.currentCharacterPopup = null;
                 this.currentFocusedCharacter = null; // Clear focused character when popup is removed
-                console.log('🎯 Character popup reference cleaned up');
+                Logger.character('Character popup reference cleaned up');
             });
         }
     }
@@ -569,13 +565,14 @@ class CharacterSystem {
 
     // Close the current character popup
     closeCurrentCharacterPopup() {
-        const map = window.mapCore.getMap();
-        if (this.currentCharacterPopup && map.hasLayer(this.currentCharacterPopup)) {
-            map.removeLayer(this.currentCharacterPopup);
-            this.currentCharacterPopup = null;
-            this.currentFocusedCharacter = null; // Clear focused character
-            console.log('🎯 Character popup closed');
-        }
+        MapUtils.withMap(map => {
+            if (this.currentCharacterPopup && map.hasLayer(this.currentCharacterPopup)) {
+                MapUtils.removeFromMap(this.currentCharacterPopup);
+                this.currentCharacterPopup = null;
+                this.currentFocusedCharacter = null; // Clear focused character
+                Logger.character('Character popup closed');
+            }
+        }, 'Cannot close character popup - map not available');
     }
 
     createCharacterPopup(character) {

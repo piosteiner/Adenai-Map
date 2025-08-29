@@ -89,73 +89,42 @@ class CharacterPanel {
     }
 
     setupHoverBehavior() {
-        // Hover on panel to expand when collapsed
-        this.panel.addEventListener('mouseenter', () => {
-            if (this.panel.classList.contains('collapsed') && !this.isResizing) {
-                this.startHoverTimer();
-            }
-        });
-
-        this.panel.addEventListener('mouseleave', () => {
-            this.clearHoverTimer();
-            // Remove auto-collapse behavior - panel stays open once hover-triggered
-        });
-
-        // Also trigger on resize handle hover when panel is collapsed
-        this.resizeHandle?.addEventListener('mouseenter', () => {
-            if (this.panel.classList.contains('collapsed') && !this.isResizing) {
-                this.startHoverTimer();
-            } else if (!this.panel.classList.contains('collapsed') && !this.isResizing) {
-                // Start collapse timer when hovering over handle and panel is expanded
-                this.startCollapseHoverTimer();
-            }
-        });
-
-        this.resizeHandle?.addEventListener('mouseleave', () => {
-            // Clear both timers when leaving the handle
-            this.clearHoverTimer();
-            this.clearCollapseHoverTimer();
-            
-            // Only clear timer if not over the panel itself
-            setTimeout(() => {
-                if (!this.panel.matches(':hover')) {
-                    this.clearHoverTimer();
-                    // Remove auto-collapse behavior - panel stays open once hover-triggered
+        // Setup hover behavior for panel expansion/collapse
+        if (this.panel) {
+            this.panelHoverCleanup = EventUtils.setupHoverBehavior(this.panel, {
+                enterDelay: this.hoverDelay,
+                onEnter: () => {
+                    if (this.panel.classList.contains('collapsed') && !this.isResizing) {
+                        this.expandPanel();
+                        this.isHoverExpanded = true;
+                    }
+                },
+                onLeave: () => {
+                    // Panel stays open once hover-triggered (no auto-collapse)
                 }
-            }, 50); // Small delay to allow moving from handle to panel
-        });
-    }
-
-    startHoverTimer() {
-        this.clearHoverTimer(); // Clear any existing timer
-        this.hoverTimer = setTimeout(() => {
-            if (this.panel.classList.contains('collapsed')) {
-                this.expandPanel();
-                this.isHoverExpanded = true;
-            }
-        }, this.hoverDelay);
-    }
-
-    clearHoverTimer() {
-        if (this.hoverTimer) {
-            clearTimeout(this.hoverTimer);
-            this.hoverTimer = null;
+            });
         }
-    }
 
-    startCollapseHoverTimer() {
-        this.clearCollapseHoverTimer(); // Clear any existing collapse timer
-        this.collapseHoverTimer = setTimeout(() => {
-            if (!this.panel.classList.contains('collapsed') && !this.isResizing) {
-                this.collapsePanel();
-            }
-        }, this.collapseHoverDelay);
-    }
-
-    clearCollapseHoverTimer() {
-        if (this.collapseHoverTimer) {
-            clearTimeout(this.collapseHoverTimer);
-            this.collapseHoverTimer = null;
+        // Setup hover behavior for resize handle
+        if (this.resizeHandle) {
+            this.handleHoverCleanup = EventUtils.setupHoverBehavior(this.resizeHandle, {
+                enterDelay: this.hoverDelay,
+                leaveDelay: this.collapseHoverDelay,
+                onEnter: () => {
+                    if (this.panel.classList.contains('collapsed') && !this.isResizing) {
+                        this.expandPanel();
+                        this.isHoverExpanded = true;
+                    }
+                },
+                onLeave: () => {
+                    // Check if mouse has left both handle and panel
+                    setTimeout(() => {
+                        if (!this.panel.matches(':hover') && !this.isResizing) {
+                            // Panel stays open once hover-triggered
+                        }
+                    }, 50);
+                }
+            });
         }
     }
 
@@ -340,20 +309,10 @@ class CharacterPanel {
     }
 
     matchesSearchQuery(character, query) {
-        const searchFields = [
-            character.name,
-            character.title,
-            character.location,
-            character.relationship,
-            character.status,
-            character.faction,
-            character.description,
-            character.notes
-        ];
-
-        return searchFields.some(field => 
-            field && field.toLowerCase().includes(query)
-        );
+        return DataUtils.matchesSearchQuery(character, query, [
+            'name', 'title', 'location', 'relationship', 
+            'status', 'faction', 'description', 'notes'
+        ]);
     }
 
     // Panel management
@@ -510,17 +469,9 @@ class CharacterPanel {
             totalCharacters: this.characters.length,
             withMovements: this.characters.filter(c => c.movementHistory && c.movementHistory.length > 0).length,
             withCoordinates: this.characters.filter(c => c.coordinates).length,
-            byStatus: this.groupBy(this.characters, 'status'),
-            byRelationship: this.groupBy(this.characters, 'relationship')
+            byStatus: DataUtils.groupBy(this.characters, 'status'),
+            byRelationship: DataUtils.groupBy(this.characters, 'relationship')
         };
-    }
-
-    groupBy(array, property) {
-        return array.reduce((acc, item) => {
-            const key = item[property] || 'unknown';
-            acc[key] = (acc[key] || 0) + 1;
-            return acc;
-        }, {});
     }
 }
 
