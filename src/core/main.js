@@ -531,21 +531,22 @@ class DragonShadowController {
 
     // Convert map coordinates to screen percentage
     mapCoordsToScreenPercent(x, y) {
-        const map = window.mapCore.getMap();
-        if (!map) return { x: 50, y: 50 }; // Fallback to center
-        
-        // Convert map coordinates to LatLng
-        const point = map.project([y, x], map.getZoom());
-        const bounds = map.getPixelBounds();
-        
-        // Calculate percentage position within map view
-        const percentX = ((point.x - bounds.min.x) / (bounds.max.x - bounds.min.x)) * 100;
-        const percentY = ((point.y - bounds.min.y) / (bounds.max.y - bounds.min.y)) * 100;
-        
-        return { 
-            x: Math.max(0, Math.min(100, percentX)), 
-            y: Math.max(0, Math.min(100, percentY)) 
-        };
+        return MapUtils.withMap((map) => {
+            // Convert map coordinates to LatLng
+            const point = map.project([y, x], map.getZoom());
+            const bounds = map.getPixelBounds();
+            
+            // Calculate percentage position within map view
+            const percentX = ((point.x - bounds.min.x) / (bounds.max.x - bounds.min.x)) * 100;
+            const percentY = ((point.y - bounds.min.y) / (bounds.max.y - bounds.min.y)) * 100;
+            
+            return { 
+                x: Math.max(0, Math.min(100, percentX)), 
+                y: Math.max(0, Math.min(100, percentY)) 
+            };
+        }, () => {
+            return { x: 50, y: 50 }; // Fallback to center
+        });
     }
 
     // Get random position within map bounds

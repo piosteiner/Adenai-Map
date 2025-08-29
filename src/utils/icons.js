@@ -5,25 +5,9 @@
 // Waits for map initialization before adding overlays
 
 function initializeMapOverlays() {
-    // Get map reference using modern approach
-    let map = null;
-    
-    if (window.mapCore && typeof window.mapCore.getMap === 'function') {
-        map = window.mapCore.getMap();
-        console.log('🖼️ Got map from mapCore.getMap()');
-    } else if (window.map) {
-        map = window.map;
-        console.log('🖼️ Got map from window.map');
-    }
-    
-    if (!map) {
-        console.warn('🖼️ Map not ready yet, waiting for initialization...');
-        return false; // Return false to indicate failure
-    }
+    return MapUtils.withMap((map) => {
+        Logger.info('Initializing map image overlays...');
 
-    console.log('🖼️ Initializing map image overlays...');
-
-    try {
         //Map Expansion
         const mapextension1 = [
           [850 - 450, 2248 - 200],  // Southwest corner
@@ -132,16 +116,14 @@ function initializeMapOverlays() {
         //L.imageOverlay(atlantisImage, atlantisGeneral1, atlantisOptions).addTo(map);
         //L.imageOverlay(atlantisImage, atlantisGeneral2, atlantisOptions).addTo(map);
 
-        console.log('✅ Map image overlays initialized successfully');
+        Logger.success('Map image overlays initialized successfully');
         return true; // Return true to indicate success
         
-    } catch (error) {
-        console.error('❌ Error initializing map overlays:', error);
+    }, () => {
+        Logger.warning('Map not ready yet, waiting for initialization...');
         return false; // Return false to indicate failure
-    }
-}
-
-// Initialize when map is ready - multiple fallback strategies
+    });
+}// Initialize when map is ready - multiple fallback strategies
 function tryInitializeOverlays() {
     if (initializeMapOverlays()) {
         return; // Success, stop trying
@@ -162,18 +144,18 @@ function tryInitializeOverlays() {
 
 // Listen for map initialization event
 document.addEventListener('adenaiMapInitialized', () => {
-    console.log('🖼️ Received adenaiMapInitialized event, attempting overlay initialization');
+    Logger.info('Received adenaiMapInitialized event, attempting overlay initialization');
     tryInitializeOverlays();
 });
 
 // Listen for DOMContentLoaded as fallback
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🖼️ DOM loaded, attempting overlay initialization');
+    Logger.info('DOM loaded, attempting overlay initialization');
     setTimeout(tryInitializeOverlays, 100);
 });
 
 // Immediate attempt if scripts load after map is ready
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    console.log('🖼️ Document already ready, attempting immediate overlay initialization');
+    Logger.info('Document already ready, attempting immediate overlay initialization');
     setTimeout(tryInitializeOverlays, 100);
 }
