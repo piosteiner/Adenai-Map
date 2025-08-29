@@ -12,7 +12,7 @@ class CharacterPanel {
         this.hoverTimer = null;
         this.hoverDelay = 200; // 200ms delay
         this.collapseHoverTimer = null;
-        this.collapseHoverDelay = 3000; // 3 seconds delay for collapse
+        this.collapseHoverDelay = 2000; // 3 seconds delay for collapse
         this.isHoverExpanded = false; // Track if panel was expanded by hover
         
         // Resize properties
