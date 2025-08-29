@@ -162,36 +162,46 @@ class LocationSystem {
     createLocationIcon() {
         // Create the classic orange dot icon with larger size to match cluster proxy markers
         if (!this.dotOrangeIcon) {
-            // Generate orange dot icon programmatically using Canvas to prevent image hover enlargement
-            const canvas = document.createElement('canvas');
-            canvas.width = 32;
-            canvas.height = 32;
-            const ctx = canvas.getContext('2d');
-            
-            // Clear canvas
-            ctx.clearRect(0, 0, 32, 32);
-            
-            // Draw orange circle
-            ctx.beginPath();
-            ctx.arc(16, 16, 12, 0, 2 * Math.PI);
-            ctx.fillStyle = '#ff6b24';
-            ctx.fill();
-            
-            // Add subtle border for better visibility
-            ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            
-            // Convert canvas to data URL
-            const iconUrl = canvas.toDataURL('image/png');
-            
-            this.dotOrangeIcon = L.icon({
-                iconUrl: iconUrl,
+            // Use pure CSS/HTML divIcon to prevent ANY image hover enlargement
+            this.dotOrangeIcon = L.divIcon({
+                className: 'location-dot-icon',
+                html: '<div class="location-dot-inner"></div>',
                 iconSize: [32, 32],
                 iconAnchor: [16, 16],
                 popupAnchor: [0, -16]
             });
-            Logger.success('Orange dot icon created programmatically (prevents image hover enlargement)');
+            
+            // Add CSS for the icon (only once)
+            if (!document.getElementById('location-dot-styles')) {
+                const style = document.createElement('style');
+                style.id = 'location-dot-styles';
+                style.textContent = `
+                    .location-dot-icon {
+                        background: transparent !important;
+                        border: none !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                    }
+                    
+                    .location-dot-inner {
+                        width: 24px;
+                        height: 24px;
+                        background: #ff6b24;
+                        border: 2px solid #ffffff;
+                        border-radius: 50%;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                        transition: transform 0.2s ease;
+                    }
+                    
+                    .location-dot-icon:hover .location-dot-inner {
+                        transform: scale(1.2);
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            Logger.success('Orange dot icon created with pure CSS (NO images - prevents hover enlargement)');
         }
     }
 
@@ -399,7 +409,7 @@ class LocationSystem {
             
             const geoLayer = L.geoJSON(data, {
                 pointToLayer: (feature, latlng) => {
-                    // Use the programmatically created orange dot icon (prevents image hover enlargement)
+                    // Use the pure CSS divIcon (NO images - prevents hover enlargement)
                     return L.marker(latlng, { icon: this.dotOrangeIcon });
                 },
                 onEachFeature: async (feature, layer) => {
@@ -769,7 +779,7 @@ class LocationSystem {
                 this.createLocationIcon();
             }
             
-            // Create marker with programmatically generated icon (prevents image hover enlargement)
+            // Create marker with pure CSS divIcon (NO images - prevents hover enlargement)
             const marker = L.marker([locationData.lat, locationData.lng], { 
                 icon: this.dotOrangeIcon 
             });
