@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "f4a3bec74ddf06af485bdf6936b918ebb141a925",
+      "action": "update",
+      "type": "character",
+      "itemName": "Dravak Svya",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:35:07.817Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:35:07.817Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: dravak_svya (by gm) - changed relationship to unknown"
+    },
+    {
       "commitSha": "752cdd2e857837046f64cb9a246fb70a2f9cba40",
       "action": "update",
       "type": "character",
@@ -2849,5 +2862,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:34:56.546Z"
+  "lastUpdated": "2025-08-29T20:35:07.818Z"
 }
