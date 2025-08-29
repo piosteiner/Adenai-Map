@@ -128,7 +128,7 @@ class CharacterPanel {
                             console.log('🖱️ Collapsing panel after hover delay');
                             this.collapsePanel();
                             this.isHoverExpanded = false;
-                        }, 1500); // 1.5 second delay
+                        }, 1000); // 1.0 second delay
                     }
                 },
                 onLeave: () => {
