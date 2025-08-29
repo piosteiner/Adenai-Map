@@ -1,9 +1,6 @@
 // char-path-api.js - Character Paths API Client
 // Provides character path data from server API
 
-import { HttpUtils } from './http-utils.js';
-import { Logger } from './logger.js';
-
 class CharPathAPI {
     constructor() {
         this.cache = new Map();

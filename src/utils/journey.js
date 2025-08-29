@@ -1,9 +1,6 @@
 // Dynamic Journey Loader - Improved Version
 // Enhanced with better map detection and error handling
 
-import { HttpUtils } from './http-utils.js';
-import { Logger } from './logger.js';
-
 let journeyLayers = [];
 
 // 🔥 IMPROVED: Get map with fallback options

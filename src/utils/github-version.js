@@ -1,7 +1,4 @@
 // GitHub Version Checker - Automatically fetch last commit info
-import { HttpUtils } from './http-utils.js';
-import { Logger } from './logger.js';
-
 class GitHubVersionChecker {
     constructor() {
         this.owner = 'piosteiner';
