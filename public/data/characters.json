@@ -770,7 +770,24 @@
       "currentLocation": null,
       "createdAt": "2025-08-29T20:24:46.436Z",
       "updatedAt": "2025-08-29T20:25:23.933Z"
+    },
+    {
+      "id": "dina_eisfeld",
+      "name": "Dina Eisfeld",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/dina_close.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "Magierin der Yosefka Akademie",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:28:54.142Z",
+      "updatedAt": "2025-08-29T20:28:54.142Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:25:23.933Z"
+  "lastUpdated": "2025-08-29T20:28:54.142Z"
 }
