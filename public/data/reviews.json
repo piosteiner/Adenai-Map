@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "b8696ccc14e24d0f259153d29a5f57403da020dc",
+      "action": "update",
+      "type": "character",
+      "itemName": "Jara Koreen",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:59:04.802Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:59:04.802Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Jara Koreen (by gm) - Olecea (5663-06-03)"
+    },
+    {
       "commitSha": "e79a390da967bb1d9f0ee587cba5c318dff3a871",
       "action": "update",
       "type": "character",
@@ -3642,5 +3655,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:58:40.592Z"
+  "lastUpdated": "2025-08-29T20:59:04.802Z"
 }
