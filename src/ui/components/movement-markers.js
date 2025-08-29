@@ -170,6 +170,13 @@ class MovementMarkers {
             }, 500);
         });
         
+        // Add click event to bounce fanned markers as visual cue
+        marker.on('click', () => {
+            if (marker._isFannedOut && marker._fanMarkers.length > 0) {
+                this.bounceAllFanMarkers(marker);
+            }
+        });
+        
         // Keep area active when hovering over fanned markers
         marker._keepFannedOut = () => {
             if (marker._hoverTimeout) {
@@ -330,6 +337,31 @@ class MovementMarkers {
         
         clusterMarker._fanMarkers = [];
         clusterMarker._isFannedOut = false;
+    }
+
+    // Bounce all fan markers to indicate they are clickable
+    bounceAllFanMarkers(clusterMarker) {
+        if (!clusterMarker._fanMarkers || clusterMarker._fanMarkers.length === 0) return;
+        
+        clusterMarker._fanMarkers.forEach((fanMarker, index) => {
+            setTimeout(() => {
+                const element = fanMarker.getElement();
+                if (element) {
+                    const markerDiv = element.querySelector('.fan-marker');
+                    if (markerDiv) {
+                        // Add bounce animation class
+                        markerDiv.style.animation = 'bounceAttention 0.6s ease-in-out';
+                        
+                        // Remove animation after it completes to allow re-triggering
+                        setTimeout(() => {
+                            if (markerDiv) {
+                                markerDiv.style.animation = '';
+                            }
+                        }, 600);
+                    }
+                }
+            }, index * 100); // Stagger the bounce animation for visual appeal
+        });
     }
 
     // Show detailed movement popup
