@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6b0137305eb9e0a9b89a864bad99e9f5ef4a6ba4",
+      "action": "update",
+      "type": "character",
+      "itemName": "Dina Eisfeld",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:47:32.821Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:47:32.821Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: dina_eisfeld (by gm) - updated image"
+    },
+    {
       "commitSha": "6cfeb6ae62f65b6a6913a72f45aeea2fd4646617",
       "action": "update",
       "type": "character",
@@ -3239,5 +3252,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:47:21.976Z"
+  "lastUpdated": "2025-08-29T20:47:32.821Z"
 }
