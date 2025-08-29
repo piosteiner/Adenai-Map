@@ -636,7 +636,24 @@
       "movementHistory": [],
       "createdAt": "2025-08-29T20:41:12.704Z",
       "updatedAt": "2025-08-29T20:41:12.704Z"
+    },
+    {
+      "id": "matteo_gill",
+      "name": "Matteo Gill",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/matteo_close.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:42:21.319Z",
+      "updatedAt": "2025-08-29T20:42:21.319Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:41:31.720Z"
+  "lastUpdated": "2025-08-29T20:42:21.319Z"
 }
