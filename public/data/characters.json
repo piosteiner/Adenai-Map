@@ -751,7 +751,10 @@
       "name": "Marcoh Ludd",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": null,
+      "coordinates": [
+        790,
+        769
+      ],
       "description": "",
       "image": "https://adenai.piogino.ch/public/images/marcoh_close.png",
       "status": "alive",
@@ -759,10 +762,38 @@
       "relationship": "unknown",
       "firstMet": "",
       "notes": "",
-      "movementHistory": [],
-      "currentLocation": null,
+      "movementHistory": [
+        {
+          "id": "movement_1756501225350",
+          "movement_nr": 0,
+          "date": "5663-06-03",
+          "dateStart": "5663-06-03",
+          "dateEnd": null,
+          "location": "Wesdalen",
+          "coordinates": [
+            790,
+            769
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-29T21:00:25.350Z"
+        }
+      ],
+      "currentLocation": {
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "location": "Wesdalen",
+        "coordinates": [
+          790,
+          769
+        ],
+        "notes": ""
+      },
       "createdAt": "2025-08-29T20:41:12.704Z",
-      "updatedAt": "2025-08-29T20:50:26.555Z"
+      "updatedAt": "2025-08-29T21:00:25.350Z",
+      "location": "Wesdalen"
     },
     {
       "id": "matteo_gill",
@@ -1032,5 +1063,5 @@
       "updatedAt": "2025-08-29T20:53:20.812Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:59:57.978Z"
+  "lastUpdated": "2025-08-29T21:00:25.350Z"
 }
