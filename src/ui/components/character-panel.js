@@ -401,9 +401,9 @@ class CharacterPanel {
                     <div class="character-details">
                         <h4>${character.name}</h4>
                         ${character.title ? `<div class="character-title">${character.title}</div>` : ''}
-                        <div class="character-location">📍 ${character.location || 'Unknown'}</div>
+                        <div class="character-location">📍 ${character.location || '❓ Unbekannt'}</div>
                         <div class="character-badges">
-                            <span class="badge status-${character.status}">${AdenaiConfig.getCharacterStatusLabel(character.status) || 'unknown'}</span>
+                            <span class="badge status-${character.status}">${AdenaiConfig.getCharacterStatusLabel(character.status) || '❓ Unbekannt'}</span>
                             <span class="badge relationship-${character.relationship}">
                                 ${this.formatRelationship(character.relationship)}
                             </span>
