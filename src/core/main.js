@@ -8,7 +8,7 @@ class AdenaiMap {
 
     async init() {
         try {
-            console.log('🎮 Initializing Adenai Map...');
+            Logger.system('Adenai Map', 'Initializing...');
             
             // Wait for DOM to be ready
             if (document.readyState === 'loading') {
@@ -26,7 +26,7 @@ class AdenaiMap {
             this.setupGlobalEventListeners();
             
             this.initialized = true;
-            console.log('🎉 Adenai Map initialization complete!');
+            Logger.success('Adenai Map initialization complete!');
             
             // Dispatch initialization complete event
             document.dispatchEvent(new CustomEvent('adenaiMapReady', {
@@ -37,20 +37,20 @@ class AdenaiMap {
             }));
             
         } catch (error) {
-            console.error('❌ Failed to initialize Adenai Map:', error);
+        Logger.error('Failed to initialize Adenai Map:', error);
         }
     }
 
     // 🔥 NEW: Wait for map core to be ready
     async waitForMapCore() {
-        console.log('⏳ Waiting for map core...');
+        Logger.loading('Waiting for map core...');
         
         let attempts = 0;
         const maxAttempts = 50; // 5 seconds max
         
         while (attempts < maxAttempts) {
             if (window.mapCore && window.mapCore.map && window.map === window.mapCore.map) {
-                console.log('✅ Map core ready!');
+                Logger.success('Map core ready!');
                 return;
             }
             
@@ -62,7 +62,7 @@ class AdenaiMap {
     }
 
     async initializeSystems() {
-        console.log('⚙️ Initializing core systems...');
+        Logger.system('Systems', 'Initializing core systems...');
         
         // Systems are already initialized via their constructors
         // We just need to register them for easier access
@@ -95,8 +95,8 @@ class AdenaiMap {
             throw new Error('Leaflet map not properly initialized for systems');
         }
 
-        console.log('✅ All systems initialized');
-        console.log('📍 Map reference validated:', {
+        Logger.success('All systems initialized');
+        Logger.info('Map reference validated:', {
             hasMap: !!map,
             hasAddLayer: typeof map.addLayer === 'function',
             mapType: map.constructor.name
@@ -104,7 +104,7 @@ class AdenaiMap {
     }
 
     async loadData() {
-        console.log('📊 Loading map data...');
+        Logger.loading('Loading map data...');
         
         try {
             // Load locations first (they provide coordinates for characters)
@@ -129,7 +129,7 @@ class AdenaiMap {
                 this.initializeJourneys();
             }, 200);
             
-            console.log('✅ All data loaded successfully');
+            Logger.success('All data loaded successfully');
             
         } catch (error) {
             console.error('❌ Error loading map data:', error);
@@ -165,7 +165,7 @@ class AdenaiMap {
     setupGlobalEventListeners() {
         // Listen for data updates (useful for admin interface integration)
         document.addEventListener('charactersUpdated', () => {
-            console.log('🔄 Characters updated, reloading...');
+            Logger.refresh('Characters updated, reloading...');
             if (this.systems.characterSystem) {
                 this.systems.characterSystem.reloadCharacters();
             }
@@ -173,7 +173,7 @@ class AdenaiMap {
 
         // Listen for location updates
         document.addEventListener('locationsUpdated', () => {
-            console.log('🔄 Locations updated, reloading...');
+            Logger.refresh('Locations updated, reloading...');
             if (this.systems.locationsSystem) {
                 this.systems.locationsSystem.reloadLocations();
             }
@@ -181,7 +181,7 @@ class AdenaiMap {
 
         // 🔥 NEW: Listen for journey updates
         document.addEventListener('journeysUpdated', () => {
-            console.log('🔄 Journeys updated, reloading...');
+            Logger.refresh('Journeys updated, reloading...');
             if (typeof window.refreshJourneys === 'function') {
                 window.refreshJourneys();
             }

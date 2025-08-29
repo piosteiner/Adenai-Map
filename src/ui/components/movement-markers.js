@@ -132,268 +132,262 @@ class MovementMarkers {
 
     // Create a single movement marker
     createSingleMovementMarker(coordinates, movementData, characterName, characterId) {
-        const map = window.mapCore.getMap();
-        if (!map) return null;
+        return MapUtils.withMap(map => {
+            const markerNumber = (movementData.movement_nr || 0) + 1;
+            const pathColor = this.getCharacterPathColor(characterId);
 
-        const markerNumber = (movementData.movement_nr || 0) + 1;
-        const pathColor = this.getCharacterPathColor(characterId);
+            const markerHtml = `
+                <div class="movement-marker single-marker" style="${this.getMarkerStyles(pathColor)}">${markerNumber}</div>
+            `;
 
-        const markerHtml = `
-            <div class="movement-marker single-marker" style="${this.getMarkerStyles(pathColor)}">${markerNumber}</div>
-        `;
+            const customIcon = L.divIcon({
+                html: markerHtml,
+                className: 'movement-marker-icon',
+                iconSize: [24, 24],
+                iconAnchor: [12, 12]
+            });
 
-        const customIcon = L.divIcon({
-            html: markerHtml,
-            className: 'movement-marker-icon',
-            iconSize: [24, 24],
-            iconAnchor: [12, 12]
-        });
+            const marker = L.marker(coordinates, { icon: customIcon });
+            
+            marker.on('click', () => {
+                this.showMovementPopup(movementData, characterName, markerNumber);
+            });
 
-        const marker = L.marker(coordinates, { icon: customIcon });
-        
-        marker.on('click', () => {
-            this.showMovementPopup(movementData, characterName, markerNumber);
-        });
-
-        return marker;
+            return marker;
+        }, 'Cannot create movement marker - map not available');
     }
 
     // Create a clustered movement marker for multiple visits to same location
     createClusteredMovementMarker(coordinates, movements, characterName, characterId, nearbyLocations = []) {
-        const map = window.mapCore.getMap();
-        if (!map) return null;
+        return MapUtils.withMap(map => {
+            const movementCount = movements.length;
+            const pathColor = this.getCharacterPathColor(characterId);
+            const hasNearbyLocations = nearbyLocations.length > 0;
 
-        const movementCount = movements.length;
-        const pathColor = this.getCharacterPathColor(characterId);
-        const hasNearbyLocations = nearbyLocations.length > 0;
-
-        let markerHtml;
-        if (hasNearbyLocations) {
-            // Show mixed content indicator
-            markerHtml = `
-                <div class="movement-marker cluster-marker mixed-cluster" style="${this.getMarkerStyles(pathColor)}">
-                    ${movementCount}x
-                    <div class="location-indicator" style="
-                        position: absolute;
-                        bottom: -2px;
-                        right: -2px;
-                        background: #ff6b24;
-                        border-radius: 50%;
-                        width: 12px;
-                        height: 12px;
-                        border: 1px solid white;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 8px;
-                        color: white;
-                        font-weight: bold;
-                        z-index: 10;
-                    ">${nearbyLocations.length}</div>
-                </div>
-            `;
-        } else {
-            // Standard cluster marker
-            markerHtml = `
-                <div class="movement-marker cluster-marker" style="${this.getMarkerStyles(pathColor)}">
-                    ${movementCount}x
-                </div>
-            `;
-        }
-
-        const customIcon = L.divIcon({
-            html: markerHtml,
-            className: 'movement-marker-icon cluster-icon',
-            iconSize: [32, 32],
-            iconAnchor: [16, 16]
-        });
-
-        const marker = L.marker(coordinates, { icon: customIcon });
-        
-        // Store movements data for fanning out
-        marker._movements = movements;
-        marker._characterName = characterName;
-        marker._characterId = characterId;
-        marker._nearbyLocations = nearbyLocations;
-        marker._isFannedOut = false;
-        marker._fanMarkers = [];
-        marker._hoverTimeout = null;
-        
-        // Add hover events for fanning out with better control
-        marker.on('mouseover', () => {
-            if (marker._hoverTimeout) {
-                clearTimeout(marker._hoverTimeout);
+            let markerHtml;
+            if (hasNearbyLocations) {
+                // Show mixed content indicator
+                markerHtml = `
+                    <div class="movement-marker cluster-marker mixed-cluster" style="${this.getMarkerStyles(pathColor)}">
+                        ${movementCount}x
+                        <div class="location-indicator" style="
+                            position: absolute;
+                            bottom: -2px;
+                            right: -2px;
+                            background: #ff6b24;
+                            border-radius: 50%;
+                            width: 12px;
+                            height: 12px;
+                            border: 1px solid white;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 8px;
+                            color: white;
+                            font-weight: bold;
+                            z-index: 10;
+                        ">${nearbyLocations.length}</div>
+                    </div>
+                `;
+            } else {
+                // Standard cluster marker
+                markerHtml = `
+                    <div class="movement-marker cluster-marker" style="${this.getMarkerStyles(pathColor)}">
+                        ${movementCount}x
+                    </div>
+                `;
             }
-            this.fanOutClusteredMarkers(marker);
-        });
-        
-        marker.on('mouseout', () => {
-            // Delay the fan-in to allow moving to fanned markers
-            marker._hoverTimeout = setTimeout(() => {
-                this.fanInClusteredMarkers(marker);
-            }, 500);
-        });
-        
-        // Add click event to bounce fanned markers as visual cue
-        marker.on('click', () => {
-            if (marker._isFannedOut && marker._fanMarkers.length > 0) {
-                this.bounceAllFanMarkers(marker);
-            }
-        });
-        
-        // Keep area active when hovering over fanned markers
-        marker._keepFannedOut = () => {
-            if (marker._hoverTimeout) {
-                clearTimeout(marker._hoverTimeout);
-            }
-        };
-        
-        marker._scheduleFanIn = () => {
-            marker._hoverTimeout = setTimeout(() => {
-                this.fanInClusteredMarkers(marker);
-            }, 300);
-        };
 
-        return marker;
+            const customIcon = L.divIcon({
+                html: markerHtml,
+                className: 'movement-marker-icon cluster-icon',
+                iconSize: [32, 32],
+                iconAnchor: [16, 16]
+            });
+
+            const marker = L.marker(coordinates, { icon: customIcon });
+            
+            // Store movements data for fanning out
+            marker._movements = movements;
+            marker._characterName = characterName;
+            marker._characterId = characterId;
+            marker._nearbyLocations = nearbyLocations;
+            marker._isFannedOut = false;
+            marker._fanMarkers = [];
+            marker._hoverTimeout = null;
+            
+            // Add hover events for fanning out with better control
+            marker.on('mouseover', () => {
+                if (marker._hoverTimeout) {
+                    clearTimeout(marker._hoverTimeout);
+                }
+                this.fanOutClusteredMarkers(marker);
+            });
+            
+            marker.on('mouseout', () => {
+                // Delay the fan-in to allow moving to fanned markers
+                marker._hoverTimeout = setTimeout(() => {
+                    this.fanInClusteredMarkers(marker);
+                }, 500);
+            });
+            
+            // Add click event to bounce fanned markers as visual cue
+            marker.on('click', () => {
+                if (marker._isFannedOut && marker._fanMarkers.length > 0) {
+                    this.bounceAllFanMarkers(marker);
+                }
+            });
+            
+            // Keep area active when hovering over fanned markers
+            marker._keepFannedOut = () => {
+                if (marker._hoverTimeout) {
+                    clearTimeout(marker._hoverTimeout);
+                }
+            };
+            
+            marker._scheduleFanIn = () => {
+                marker._hoverTimeout = setTimeout(() => {
+                    this.fanInClusteredMarkers(marker);
+                }, 300);
+            };
+
+            return marker;
+        }, 'Cannot create clustered movement marker - map not available');
     }
 
     // Fan out clustered markers on hover
     fanOutClusteredMarkers(clusterMarker) {
         if (clusterMarker._isFannedOut) return;
         
-        const map = window.mapCore.getMap();
-        if (!map) return;
-        
-        clusterMarker._isFannedOut = true;
-        const movements = clusterMarker._movements;
-        const nearbyLocations = clusterMarker._nearbyLocations || [];
-        const characterName = clusterMarker._characterName;
-        const characterId = clusterMarker._characterId;
-        const centerLatLng = clusterMarker.getLatLng();
-        const pathColor = this.getCharacterPathColor(characterId);
-        
-        // Combine movements and locations for spiral arrangement
-        const allItems = [
-            ...movements.map(m => ({ type: 'movement', data: m })),
+        MapUtils.withMap(map => {
+            clusterMarker._isFannedOut = true;
+            const movements = clusterMarker._movements;
+            const nearbyLocations = clusterMarker._nearbyLocations || [];
+            const characterName = clusterMarker._characterName;
+            const characterId = clusterMarker._characterId;
+            const centerLatLng = clusterMarker.getLatLng();
+            const pathColor = this.getCharacterPathColor(characterId);
+            
+            // Combine movements and locations for spiral arrangement
+            const allItems = [
+                ...movements.map(m => ({ type: 'movement', data: m })),
             ...nearbyLocations.map(l => ({ type: 'location', data: l }))
-        ];
-        
-        // Track fan positions for popup placement
-        this.currentFanPositions = [];
-        
-        // Spiral configuration
-        const baseRadius = 33; // Starting radius in pixels
-        const radiusIncrement = 15; // How much radius increases per revolution
-        const itemsPerRevolution = 6; // How many items before increasing radius
-        
-        clusterMarker._fanMarkers = [];
-        
-        allItems.forEach((item, index) => {
-            // Calculate spiral position
-            const revolutionIndex = Math.floor(index / itemsPerRevolution);
-            const positionInRevolution = index % itemsPerRevolution;
+            ];
             
-            // Start from top (0 degrees = top) and go clockwise
-            const angleStep = (2 * Math.PI) / itemsPerRevolution;
-            const angle = (positionInRevolution * angleStep) - (Math.PI / 2); // -π/2 to start from top
+            // Track fan positions for popup placement
+            this.currentFanPositions = [];
             
-            // Calculate radius for this position (spiral outward)
-            const radius = baseRadius + (revolutionIndex * radiusIncrement);
+            // Spiral configuration
+            const baseRadius = 33; // Starting radius in pixels
+            const radiusIncrement = 15; // How much radius increases per revolution
+            const itemsPerRevolution = 6; // How many items before increasing radius
             
-            const offsetX = Math.cos(angle) * radius;
-            const offsetY = Math.sin(angle) * radius;
+            clusterMarker._fanMarkers = [];
             
-            // Get the map container to calculate pixel offsets
-            const mapContainer = map.getContainer();
-            const centerPoint = map.latLngToContainerPoint(centerLatLng);
-            const fanPoint = L.point(centerPoint.x + offsetX, centerPoint.y + offsetY);
-            const fanLatLng = map.containerPointToLatLng(fanPoint);
-            
-            // Track this fan position for popup placement
-            this.currentFanPositions.push(fanLatLng);
-            
-            // Create appropriate marker type
-            let fanMarker;
-            if (item.type === 'movement') {
-                fanMarker = this.createFanMovementMarker(item.data, fanLatLng, characterName, characterId, pathColor, centerLatLng);
-            } else {
-                fanMarker = this.createFanLocationMarker(item.data, fanLatLng);
-            }
-            
-            if (fanMarker) {
-                // Add hover events to keep cluster fanned out
-                fanMarker.on('mouseover', () => {
-                    clusterMarker._keepFannedOut();
-                });
+            allItems.forEach((item, index) => {
+                // Calculate spiral position
+                const revolutionIndex = Math.floor(index / itemsPerRevolution);
+                const positionInRevolution = index % itemsPerRevolution;
                 
-                fanMarker.on('mouseout', () => {
-                    clusterMarker._scheduleFanIn();
-                });
+                // Start from top (0 degrees = top) and go clockwise
+                const angleStep = (2 * Math.PI) / itemsPerRevolution;
+                const angle = (positionInRevolution * angleStep) - (Math.PI / 2); // -π/2 to start from top
                 
-                fanMarker.addTo(map);
-            
-            // Animate the fan out with spiral timing
-            setTimeout(() => {
-                const element = fanMarker.getElement();
-                if (element) {
-                    const markerDiv = element.querySelector('.fan-marker, .fan-location-marker');
-                    if (markerDiv) {
-                        markerDiv.style.transform = 'scale(1)';
-                        markerDiv.style.animation = 'fanOut 0.4s ease-out';
-                    }
+                // Calculate radius for this position (spiral outward)
+                const radius = baseRadius + (revolutionIndex * radiusIncrement);
+                
+                const offsetX = Math.cos(angle) * radius;
+                const offsetY = Math.sin(angle) * radius;
+                
+                // Get the map container to calculate pixel offsets
+                const mapContainer = map.getContainer();
+                const centerPoint = map.latLngToContainerPoint(centerLatLng);
+                const fanPoint = L.point(centerPoint.x + offsetX, centerPoint.y + offsetY);
+                const fanLatLng = map.containerPointToLatLng(fanPoint);
+                
+                // Track this fan position for popup placement
+                this.currentFanPositions.push(fanLatLng);
+                
+                // Create appropriate marker type
+                let fanMarker;
+                if (item.type === 'movement') {
+                    fanMarker = this.createFanMovementMarker(item.data, fanLatLng, characterName, characterId, pathColor, centerLatLng);
+                } else {
+                    fanMarker = this.createFanLocationMarker(item.data, fanLatLng);
                 }
-            }, index * 60); // Slightly longer stagger for spiral effect
+                
+                if (fanMarker) {
+                    // Add hover events to keep cluster fanned out
+                    fanMarker.on('mouseover', () => {
+                        clusterMarker._keepFannedOut();
+                    });
+                    
+                    fanMarker.on('mouseout', () => {
+                        clusterMarker._scheduleFanIn();
+                    });
+                    
+                    MapUtils.addToMap(fanMarker);
+                
+                // Animate the fan out with spiral timing
+                setTimeout(() => {
+                    const element = fanMarker.getElement();
+                    if (element) {
+                        const markerDiv = element.querySelector('.fan-marker, .fan-location-marker');
+                        if (markerDiv) {
+                            markerDiv.style.transform = 'scale(1)';
+                            markerDiv.style.animation = 'fanOut 0.4s ease-out';
+                        }
+                    }
+                }, index * 60); // Slightly longer stagger for spiral effect
+                
+                    clusterMarker._fanMarkers.push(fanMarker);
+                }
+            });
             
-                clusterMarker._fanMarkers.push(fanMarker);
+            // Keep the cluster marker visible and on top
+            const clusterElement = clusterMarker.getElement();
+            if (clusterElement) {
+                clusterElement.style.zIndex = '1001';
             }
-        });
-        
-        // Keep the cluster marker visible and on top
-        const clusterElement = clusterMarker.getElement();
-        if (clusterElement) {
-            clusterElement.style.zIndex = '1001';
-        }
-    }
-
-    // Fan in clustered markers
+        }, 'Cannot fan out clustered markers - map not available');
+    }    // Fan in clustered markers
     fanInClusteredMarkers(clusterMarker) {
         if (!clusterMarker._isFannedOut) return;
         
-        const map = window.mapCore.getMap();
-        if (!map) return;
-        
-        // Clear fan positions tracking
-        this.currentFanPositions = [];
-        
-        // Animate fan in
-        clusterMarker._fanMarkers.forEach((fanMarker, index) => {
-            setTimeout(() => {
-                const element = fanMarker.getElement();
-                if (element) {
-                    const markerDiv = element.querySelector('.fan-marker');
-                    if (markerDiv) {
-                        markerDiv.style.transform = 'scale(0)';
-                        markerDiv.style.animation = 'fanIn 0.2s ease-in';
-                    }
-                }
-                
-                // Remove marker after animation
+        MapUtils.withMap(map => {
+            // Clear fan positions tracking
+            this.currentFanPositions = [];
+            
+            // Animate fan in
+            clusterMarker._fanMarkers.forEach((fanMarker, index) => {
                 setTimeout(() => {
-                    if (map.hasLayer(fanMarker)) {
-                        map.removeLayer(fanMarker);
+                    const element = fanMarker.getElement();
+                    if (element) {
+                        const markerDiv = element.querySelector('.fan-marker');
+                        if (markerDiv) {
+                            markerDiv.style.transform = 'scale(0)';
+                            markerDiv.style.animation = 'fanIn 0.2s ease-in';
+                        }
                     }
-                }, 200);
-            }, index * 30);
-        });
-        
-        // Reset cluster marker z-index
-        const clusterElement = clusterMarker.getElement();
-        if (clusterElement) {
-            clusterElement.style.zIndex = '600';
-        }
-        
-        clusterMarker._fanMarkers = [];
-        clusterMarker._isFannedOut = false;
+                    
+                    // Remove marker after animation
+                    setTimeout(() => {
+                        if (map.hasLayer(fanMarker)) {
+                            MapUtils.removeFromMap(fanMarker);
+                        }
+                    }, 200);
+                }, index * 30);
+            });
+            
+            // Reset cluster marker z-index
+            const clusterElement = clusterMarker.getElement();
+            if (clusterElement) {
+                clusterElement.style.zIndex = '600';
+            }
+            
+            clusterMarker._fanMarkers = [];
+            clusterMarker._isFannedOut = false;
+        }, 'Cannot fan in clustered markers - map not available');
     }
 
     // Bounce all fan markers to indicate they are clickable
@@ -423,16 +417,14 @@ class MovementMarkers {
 
     // Show detailed movement popup
     showMovementPopup(movementData, characterName, markerNumber, customPosition = null) {
-        const map = window.mapCore.getMap();
-        if (!map) return;
-
-        // Calculate duration if we have both start and end dates
-        let durationText = null;
-        let hasEndDate = false;
-        
-        const endDate = movementData.endDate || movementData.dateEnd;
-        if (endDate) {
-            hasEndDate = true;
+        MapUtils.withMap(map => {
+            // Calculate duration if we have both start and end dates
+            let durationText = null;
+            let hasEndDate = false;
+            
+            const endDate = movementData.endDate || movementData.dateEnd;
+            if (endDate) {
+                hasEndDate = true;
             
             if (movementData.date) {
                 const startDate = new Date(movementData.date);
@@ -486,78 +478,74 @@ class MovementMarkers {
                 </div>
                 ` : ''}
             </div>
-        `;
+            `;
 
-        // Create and show popup
-        const popup = L.popup({
-            maxWidth: 300
-        })
-        .setLatLng(map.getCenter())
-        .setContent(popupContent)
-        .openOn(map);
+            // Create and show popup
+            const popup = L.popup({
+                maxWidth: 300
+            })
+            .setLatLng(map.getCenter())
+            .setContent(popupContent)
+            .openOn(map);
 
-        // Position popup near the marker if possible
-        try {
-            let markerLatLng;
-            if (customPosition) {
-                // Use the fan marker position, but adjust to be above the topmost marker
-                if (typeof customPosition === 'object' && customPosition.allFanPositions) {
-                    // New enhanced positioning with all fan positions
-                    markerLatLng = this.calculateOptimalPopupPosition(customPosition);
+            // Position popup near the marker if possible
+            try {
+                let markerLatLng;
+                if (customPosition) {
+                    // Use the fan marker position, but adjust to be above the topmost marker
+                    if (typeof customPosition === 'object' && customPosition.allFanPositions) {
+                        // New enhanced positioning with all fan positions
+                        markerLatLng = this.calculateOptimalPopupPosition(customPosition);
+                    } else {
+                        // Legacy single position support
+                        markerLatLng = this.calculateOptimalPopupPosition({ clickedPosition: customPosition });
+                    }
                 } else {
-                    // Legacy single position support
-                    markerLatLng = this.calculateOptimalPopupPosition({ clickedPosition: customPosition });
+                    // Use original coordinates for regular markers
+                    markerLatLng = L.latLng(movementData.coordinates[1], movementData.coordinates[0]);
                 }
-            } else {
-                // Use original coordinates for regular markers
-                markerLatLng = L.latLng(movementData.coordinates[1], movementData.coordinates[0]);
+                popup.setLatLng(markerLatLng);
+            } catch (e) {
+                // Fallback to map center if positioning fails
+                Logger.warning('Could not position popup at marker location');
             }
-            popup.setLatLng(markerLatLng);
-        } catch (e) {
-            // Fallback to map center if positioning fails
-            console.warn('Could not position popup at marker location');
-        }
-    }
-
-    /**
+        }, 'Cannot show movement popup - map not available');
+    }    /**
      * Calculate optimal popup position above fan markers
      * @param {Object|L.LatLng} positionData - Position data (enhanced object or legacy LatLng)
      * @returns {L.LatLng} Optimal position for popup
      */
     calculateOptimalPopupPosition(positionData) {
-        const map = window.mapCore.getMap();
-        if (!map) {
-            return positionData.clickedPosition || positionData;
-        }
-        
-        try {
-            let targetPosition;
-            
-            if (positionData.allFanPositions && positionData.allFanPositions.length > 0) {
-                // Find the topmost marker position for multiple fan markers
-                targetPosition = this.findTopmostPosition(positionData.allFanPositions);
-            } else if (positionData.clickedPosition) {
-                // Single marker position
-                targetPosition = positionData.clickedPosition;
-            } else {
-                // Legacy support - positionData is the LatLng directly
-                targetPosition = positionData;
+        return MapUtils.withMap(map => {
+            try {
+                let targetPosition;
+                
+                if (positionData.allFanPositions && positionData.allFanPositions.length > 0) {
+                    // Find the topmost marker position for multiple fan markers
+                    targetPosition = this.findTopmostPosition(positionData.allFanPositions);
+                } else if (positionData.clickedPosition) {
+                    // Single marker position
+                    targetPosition = positionData.clickedPosition;
+                } else {
+                    // Legacy support - positionData is the LatLng directly
+                    targetPosition = positionData;
+                }
+                
+                // Convert to container coordinates for pixel-based calculations
+                const targetPoint = map.latLngToContainerPoint(targetPosition);
+                
+                // Offset the popup to be above the marker (negative Y in screen coordinates)
+                // Add extra space to account for marker size and proper visual separation
+                const popupOffset = 50; // pixels above the topmost marker
+                const adjustedPoint = L.point(targetPoint.x, targetPoint.y - popupOffset);
+                
+                // Convert back to lat/lng
+                return map.containerPointToLatLng(adjustedPoint);
+            } catch (e) {
+                Logger.warning('Could not calculate optimal popup position, using fallback');
+                return positionData.clickedPosition || positionData;
             }
-            
-            // Convert to container coordinates for pixel-based calculations
-            const targetPoint = map.latLngToContainerPoint(targetPosition);
-            
-            // Offset the popup to be above the marker (negative Y in screen coordinates)
-            // Add extra space to account for marker size and proper visual separation
-            const popupOffset = 50; // pixels above the topmost marker
-            const adjustedPoint = L.point(targetPoint.x, targetPoint.y - popupOffset);
-            
-            // Convert back to lat/lng
-            return map.containerPointToLatLng(adjustedPoint);
-        } catch (e) {
-            console.warn('Could not calculate optimal popup position, using fallback');
-            return positionData.clickedPosition || positionData;
-        }
+        }, 'Cannot calculate popup position - map not available') || positionData.clickedPosition || positionData;
     }
 
     /**
@@ -566,22 +554,23 @@ class MovementMarkers {
      * @returns {L.LatLng} Position of the topmost marker
      */
     findTopmostPosition(positions) {
-        const map = window.mapCore.getMap();
-        if (!map || positions.length === 0) return positions[0];
-        
-        // Convert all positions to screen coordinates and find the one with smallest Y (topmost)
-        let topmostPosition = positions[0];
-        let smallestY = map.latLngToContainerPoint(positions[0]).y;
-        
-        for (let i = 1; i < positions.length; i++) {
-            const screenPoint = map.latLngToContainerPoint(positions[i]);
-            if (screenPoint.y < smallestY) {
-                smallestY = screenPoint.y;
-                topmostPosition = positions[i];
+        return MapUtils.withMap(map => {
+            if (positions.length === 0) return positions[0];
+            
+            // Convert all positions to screen coordinates and find the one with smallest Y (topmost)
+            let topmostPosition = positions[0];
+            let smallestY = map.latLngToContainerPoint(positions[0]).y;
+            
+            for (let i = 1; i < positions.length; i++) {
+                const screenPoint = map.latLngToContainerPoint(positions[i]);
+                if (screenPoint.y < smallestY) {
+                    smallestY = screenPoint.y;
+                    topmostPosition = positions[i];
+                }
             }
-        }
-        
-        return topmostPosition;
+            
+            return topmostPosition;
+        }, 'Cannot find topmost position - map not available') || positions[0];
     }
 
     // Create a movement marker for fan-out
@@ -637,14 +626,15 @@ class MovementMarkers {
             if (originalMarker && originalMarker.getPopup) {
                 const originalPopup = originalMarker.getPopup();
                 if (originalPopup) {
-                    const map = window.mapCore.getMap();
-                    const popup = L.popup({
-                        maxWidth: 400,
-                        className: 'custom-popup'
-                    })
-                    .setLatLng(fanLatLng)
-                    .setContent(originalPopup.getContent())
-                    .openOn(map);
+                    MapUtils.withMap(map => {
+                        const popup = L.popup({
+                            maxWidth: 400,
+                            className: 'custom-popup'
+                        })
+                        .setLatLng(fanLatLng)
+                        .setContent(originalPopup.getContent())
+                        .openOn(map);
+                    }, 'Cannot show location popup - map not available');
                 }
             }
         });

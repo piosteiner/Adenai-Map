@@ -43,7 +43,7 @@ class MovementSystem {
             Logger.error('Error in loadAndDisplayPaths:', error);
             Logger.error('Error stack:', error.stack);
             Logger.error('Character Paths API unavailable');
-            this.showError('Character movement data unavailable. Please contact developer through GitHub.');
+            EventUtils.showError('Character movement data unavailable. Please contact developer through GitHub.');
         }
     }
 
@@ -288,41 +288,6 @@ class MovementSystem {
         if (!pathData) return false;
         
         return pathData.isVisible || false;
-    }
-
-    // Show error message
-    showError(message) {
-        const errorDiv = document.createElement('div');
-        errorDiv.style.cssText = `
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #dc3545;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            z-index: 10000;
-            max-width: 500px;
-            text-align: center;
-        `;
-        
-        errorDiv.innerHTML = `
-            <h3>⚠️ System Unavailable</h3>
-            <p>${message}</p>
-            <a href="https://github.com/piosteiner" target="_blank" style="color: #fff; text-decoration: underline;">
-                🐙 Contact Developer on GitHub
-            </a>
-        `;
-        
-        document.body.appendChild(errorDiv);
-        
-        // Auto-remove after 10 seconds
-        setTimeout(() => {
-            if (errorDiv.parentNode) {
-                errorDiv.parentNode.removeChild(errorDiv);
-            }
-        }, 10000);
     }
 
     // Required by main.js
