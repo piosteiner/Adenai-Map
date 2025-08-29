@@ -485,7 +485,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/eliana_close.png",
+      "image": "https://adenai.piogino.ch/public/images/eliana_karthright_close.png",
       "status": "alive",
       "faction": "",
       "relationship": "friendly",
@@ -494,7 +494,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:31:54.501Z",
-      "updatedAt": "2025-08-29T20:47:48.287Z"
+      "updatedAt": "2025-08-29T20:48:42.698Z"
     },
     {
       "id": "eriosa_s_ssblatt",
@@ -793,5 +793,5 @@
       "updatedAt": "2025-08-29T20:46:20.848Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:47:58.658Z"
+  "lastUpdated": "2025-08-29T20:48:42.698Z"
 }
