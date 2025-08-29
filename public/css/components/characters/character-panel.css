@@ -320,7 +320,7 @@
   height: 20px;
   border: 2px solid var(--dropdown-border);
   border-radius: 4px;
-  background: var(--popup-bg);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(230, 230, 230, 0.9) 50%, rgba(200, 200, 200, 0.8) 100%);
   transition: all 0.3s ease;
   position: relative;
   display: flex;
@@ -440,7 +440,7 @@
 
 [data-theme="dark"] .checkmark {
   border-color: var(--dropdown-border);
-  background: var(--card-bg);
+  background: linear-gradient(135deg, rgba(70, 70, 70, 0.8) 0%, rgba(50, 50, 50, 0.9) 50%, rgba(30, 30, 30, 0.8) 100%);
 }
 
 [data-theme="dark"] .movement-checkbox input[type="checkbox"]:checked + .checkmark {
