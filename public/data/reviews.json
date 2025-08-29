@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "4ff9e443f3ee9739d179c49affafe378266ffa62",
+      "action": "update",
+      "type": "character",
+      "itemName": "Eliana Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:48:43.362Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:48:43.362Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: eliana_karthright (by gm) - updated image"
+    },
+    {
       "commitSha": "a6c93adcb6488d84fa488cb71fdb033996017ef7",
       "action": "update",
       "type": "character",
@@ -3291,5 +3304,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:47:59.357Z"
+  "lastUpdated": "2025-08-29T20:48:43.364Z"
 }
