@@ -1,7 +1,124 @@
+/* ========================================
+   UNIFIED POPUP SYSTEM
+   ======================================== 
+
+   This file provides a unified design system for all popup types in the application:
+
+   POPUP TYPES:
+   1. Character Focus Popup (.character-focus-popup) - Regular character popups on map
+   2. Panel Anchored Popup (.panel-anchored-popup) - Character popups without locations  
+   3. Location/Custom Popup (.custom-popup) - Location popups on map
+   4. Movement Detail Popup (.movement-detail-popup) - Movement marker popups
+
+   UNIFIED STRUCTURE:
+   - All popups use the same base styling (.popup-base-content)
+   - All Leaflet popups use the same wrapper styling (.popup-base-wrapper)
+   - Content follows consistent structure with themed sections
+   - Unified dark theme support
+   - Consistent sizing, colors, typography, and spacing
+
+   CONTENT STRUCTURE CLASSES:
+   - .character-popup-header-info: Header with avatar and basic info
+   - .character-popup-avatar: Character image styling  
+   - .character-popup-details: Main character details
+   - .character-popup-[type]: Content sections (faction, notes, description, etc.)
+   - .popup-title: Main popup title
+   - .popup-details/.popup-detail: Generic content sections
+
+   BENEFITS:
+   - Change one base style and it applies to all popup types
+   - Consistent user experience across all popups
+   - Easy maintenance and updates
+   - Unified dark theme support
+   - Same behavior and positioning logic
+
+   ======================================== */
+
 /* All Popup Related Styles */
 
-/* Character popup styling */
+/* ========================================
+   BASE POPUP SYSTEM - UNIFIED FOUNDATION
+   ======================================== */
+
+/* Base popup content styling - shared by all popup types */
+.popup-base-content {
+  max-width: 300px;
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.popup-base-content img {
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.popup-base-content img:hover {
+  transform: scale(1.05);
+}
+
+.popup-base-content div {
+  margin-bottom: 6px;
+  word-wrap: break-word;
+}
+
+.popup-base-content div:last-child {
+  margin-bottom: 0;
+}
+
+/* Base popup wrapper styling - for leaflet popups */
+.popup-base-wrapper .leaflet-popup-content-wrapper {
+  background: var(--popup-bg);
+  border: 2px solid var(--dropdown-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  min-width: 280px;
+  max-width: 350px;
+  padding: 0;
+}
+
+.popup-base-wrapper .leaflet-popup-content {
+  margin: 16px;
+  line-height: 1.4;
+  color: var(--text-color);
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.popup-base-wrapper .leaflet-popup-tip {
+  background: var(--popup-bg);
+  border: 2px solid var(--dropdown-border);
+  width: 12px;
+  height: 12px;
+}
+
+.popup-base-wrapper .leaflet-popup-close-button {
+  color: var(--text-muted);
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  line-height: 16px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.popup-base-wrapper .leaflet-popup-close-button:hover {
+  background: var(--dropdown-hover);
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.popup-base-wrapper.leaflet-popup {
+  z-index: 1002 !important;
+}
+
+/* Character popup styling - inherits from base */
 .character-popup {
+  /* Inherits all styles from .popup-base-content */
   max-width: 300px;
   font-size: 14px;
   line-height: 1.4;
@@ -27,7 +144,7 @@
   margin-bottom: 0;
 }
 
-/* Enhanced Character Focus Popup Styles */
+/* Enhanced Character Focus Popup Styles - uses base system */
 .character-focus-popup .leaflet-popup-content-wrapper {
   background: var(--popup-bg);
   border: 2px solid var(--dropdown-border);
@@ -76,7 +193,7 @@
   z-index: 1002 !important;
 }
 
-/* Enhanced Location Popup Styles - Match Character Popup Design */
+/* Enhanced Location Popup Styles - uses base system */
 .custom-popup .leaflet-popup-content-wrapper {
   background: var(--popup-bg);
   border: 2px solid var(--dropdown-border);
@@ -123,6 +240,55 @@
 
 /* Enhanced positioning for location popups */
 .custom-popup.leaflet-popup {
+  z-index: 1002 !important;
+}
+
+/* Movement Detail Popup - uses base system */
+.movement-detail-popup .leaflet-popup-content-wrapper {
+  background: var(--popup-bg);
+  border: 2px solid var(--dropdown-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  min-width: 280px;
+  max-width: 350px;
+  padding: 0;
+}
+
+.movement-detail-popup .leaflet-popup-content {
+  margin: 16px;
+  line-height: 1.4;
+  color: var(--text-color);
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.movement-detail-popup .leaflet-popup-tip {
+  background: var(--popup-bg);
+  border: 2px solid var(--dropdown-border);
+  width: 12px;
+  height: 12px;
+}
+
+.movement-detail-popup .leaflet-popup-close-button {
+  color: var(--text-muted);
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  line-height: 16px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.movement-detail-popup .leaflet-popup-close-button:hover {
+  background: var(--dropdown-hover);
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.movement-detail-popup.leaflet-popup {
   z-index: 1002 !important;
 }
 
@@ -194,32 +360,32 @@
   color: #6c757d;
 }
 
-/* Panel-Anchored Character Popup */
+/* Panel-Anchored Character Popup - unified base system */
 .panel-anchored-popup {
-  background: white;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  min-width: 300px;
-  max-width: 400px;
-  font-family: sans-serif;
+  background: var(--popup-bg);
+  border: 2px solid var(--dropdown-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  min-width: 280px;
+  max-width: 350px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 14px;
   margin-left: 10px;
 }
 
 .panel-popup-header {
   padding: 15px 20px 10px 20px;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid var(--dropdown-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f8f9fa;
-  border-radius: 8px 8px 0 0;
+  background: var(--dropdown-hover);
+  border-radius: 12px 12px 0 0;
 }
 
 .panel-popup-header h3 {
   margin: 0;
-  color: #495057;
+  color: var(--text-color);
   font-size: 18px;
   font-weight: bold;
 }
@@ -227,29 +393,35 @@
 .panel-popup-close {
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 18px;
   cursor: pointer;
-  color: #6c757d;
-  padding: 0;
-  width: 30px;
-  height: 30px;
+  color: var(--text-muted);
+  padding: 8px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 50%;
   transition: all 0.2s ease;
 }
 
 .panel-popup-close:hover {
-  background: #e9ecef;
-  color: #495057;
+  background: var(--dropdown-hover);
+  color: var(--text-color);
 }
 
 .panel-popup-content {
-  padding: 20px;
-  line-height: 1.5;
+  padding: 16px;
+  line-height: 1.4;
+  color: var(--text-color);
 }
 
+/* ========================================
+   POPUP CONTENT STRUCTURE - UNIFIED
+   ======================================== */
+
+/* Header section with avatar and basic info */
 .character-popup-header-info {
   display: flex;
   gap: 15px;
@@ -261,7 +433,7 @@
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #dee2e6;
+  border: 2px solid var(--dropdown-border);
   flex-shrink: 0;
 }
 
@@ -271,7 +443,7 @@
 
 .character-popup-title {
   font-style: italic;
-  color: #6c757d;
+  color: var(--text-muted);
   margin-bottom: 5px;
 }
 
@@ -287,16 +459,19 @@
   font-style: italic;
 }
 
+/* Content sections with unified styling */
+.character-popup-name,
 .character-popup-faction,
 .character-popup-met,
 .character-popup-notes,
 .character-popup-description,
 .character-popup-origin,
 .character-popup-movement,
-.character-popup-dates {
+.character-popup-dates,
+.character-popup-duration {
   margin-bottom: 10px;
   padding: 8px 12px;
-  background: #f8f9fa;
+  background: var(--dropdown-hover);
   border-radius: 6px;
   border-left: 3px solid #007bff;
 }
@@ -323,6 +498,7 @@
   opacity: 0.8;
 }
 
+/* Generic popup content structure */
 .popup-details {
   margin-top: 0.75rem;
 }
@@ -332,15 +508,20 @@
   line-height: 1.4;
 }
 
-/* Dark theme popup support */
+/* ========================================
+   DARK THEME SUPPORT - UNIFIED
+   ======================================== */
+
+/* Base character popup dark theme */
 [data-theme="dark"] .character-popup {
-  color: #f0f0f0;
+  color: var(--text-color);
 }
 
 [data-theme="dark"] .character-popup img {
   border-color: var(--dropdown-border);
 }
 
+/* Character Focus Popup dark theme */
 [data-theme="dark"] .character-focus-popup .leaflet-popup-content-wrapper {
   background: var(--popup-bg);
   color: var(--text-color);
@@ -361,41 +542,74 @@
   color: var(--text-color);
 }
 
+/* Custom/Location Popup dark theme */
+[data-theme="dark"] .custom-popup .popup-title {
+  color: #8b5cf6;
+}
+
+[data-theme="dark"] .custom-popup .popup-desc {
+  color: var(--text-color);
+}
+
+/* Movement Detail Popup dark theme */
+[data-theme="dark"] .movement-detail-popup .leaflet-popup-content-wrapper {
+  background: var(--popup-bg);
+  color: var(--text-color);
+  border-color: var(--dropdown-border);
+}
+
+[data-theme="dark"] .movement-detail-popup .leaflet-popup-tip {
+  background: var(--popup-bg);
+  border-color: var(--dropdown-border);
+}
+
+[data-theme="dark"] .movement-detail-popup .leaflet-popup-close-button {
+  color: var(--text-muted);
+}
+
+[data-theme="dark"] .movement-detail-popup .leaflet-popup-close-button:hover {
+  background: var(--dropdown-hover);
+  color: var(--text-color);
+}
+
+/* Character lists in popups dark theme */
 [data-theme="dark"] .character-list-button {
-  background: #495057;
-  border-color: #6c757d;
-  color: #f8f9fa;
+  background: var(--dropdown-hover);
+  border-color: var(--dropdown-border);
+  color: var(--text-color);
 }
 
 [data-theme="dark"] .character-list-button:hover {
-  background: #5a6268;
-  border-color: #adb5bd;
+  background: var(--dropdown-border);
+  border-color: var(--text-muted);
 }
 
+/* Panel-Anchored Popup dark theme */
 [data-theme="dark"] .panel-anchored-popup {
-  background: #343a40;
-  border-color: #6c757d;
-  color: #f8f9fa;
+  background: var(--popup-bg);
+  border-color: var(--dropdown-border);
+  color: var(--text-color);
 }
 
 [data-theme="dark"] .panel-popup-header {
-  background: #495057;
-  border-color: #6c757d;
+  background: var(--dropdown-hover);
+  border-color: var(--dropdown-border);
 }
 
 [data-theme="dark"] .panel-popup-header h3 {
-  color: #f8f9fa;
+  color: var(--text-color);
 }
 
 [data-theme="dark"] .panel-popup-close {
-  color: #adb5bd;
+  color: var(--text-muted);
 }
 
 [data-theme="dark"] .panel-popup-close:hover {
-  background: #5a6268;
-  color: #f8f9fa;
+  background: var(--dropdown-hover);
+  color: var(--text-color);
 }
 
+/* Content sections dark theme */
 [data-theme="dark"] .character-popup-faction,
 [data-theme="dark"] .character-popup-met,
 [data-theme="dark"] .character-popup-notes,
@@ -403,6 +617,14 @@
 [data-theme="dark"] .character-popup-origin,
 [data-theme="dark"] .character-popup-movement,
 [data-theme="dark"] .character-popup-dates {
-  background: #495057;
-  color: #f8f9fa;
+  background: var(--dropdown-hover);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .character-popup-title {
+  color: var(--text-muted);
+}
+
+[data-theme="dark"] .character-popup-avatar {
+  border-color: var(--dropdown-border);
 }
