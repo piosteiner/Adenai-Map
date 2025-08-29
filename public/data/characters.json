@@ -739,7 +739,24 @@
       "movementHistory": [],
       "createdAt": "2025-08-29T20:44:34.697Z",
       "updatedAt": "2025-08-29T20:44:34.697Z"
+    },
+    {
+      "id": "vivi_wulbren",
+      "name": "Vivi Wulbren",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/vivi_close.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:45:11.123Z",
+      "updatedAt": "2025-08-29T20:45:11.123Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:44:34.697Z"
+  "lastUpdated": "2025-08-29T20:45:11.123Z"
 }
