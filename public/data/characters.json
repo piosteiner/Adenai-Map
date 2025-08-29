@@ -757,7 +757,24 @@
       "currentLocation": null,
       "createdAt": "2025-08-29T20:45:11.123Z",
       "updatedAt": "2025-08-29T20:45:20.869Z"
+    },
+    {
+      "id": "zerith_kael",
+      "name": "Zerith Kael",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/zerith_close.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:45:52.030Z",
+      "updatedAt": "2025-08-29T20:45:52.030Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:45:20.869Z"
+  "lastUpdated": "2025-08-29T20:45:52.030Z"
 }
