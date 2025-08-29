@@ -539,15 +539,16 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai-admin.piogino.ch/public/images/honza_close.png",
+      "image": "https://adenai.piogino.ch/public/images/honza_close.png",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2025-08-29T20:34:25.256Z",
-      "updatedAt": "2025-08-29T20:34:25.256Z"
+      "updatedAt": "2025-08-29T20:49:23.239Z"
     },
     {
       "id": "jara_koreen",
@@ -793,5 +794,5 @@
       "updatedAt": "2025-08-29T20:46:20.848Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:49:03.852Z"
+  "lastUpdated": "2025-08-29T20:49:23.239Z"
 }
