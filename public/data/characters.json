@@ -705,7 +705,24 @@
       "movementHistory": [],
       "createdAt": "2025-08-29T20:43:21.763Z",
       "updatedAt": "2025-08-29T20:43:21.763Z"
+    },
+    {
+      "id": "sorin_karthright",
+      "name": "Sorin Karthright",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/sorin_close.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:43:56.783Z",
+      "updatedAt": "2025-08-29T20:43:56.783Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:43:31.952Z"
+  "lastUpdated": "2025-08-29T20:43:56.783Z"
 }
