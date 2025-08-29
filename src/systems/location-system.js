@@ -176,78 +176,6 @@ class LocationSystem {
         }
     }
 
-    createInteractiveLocationMarker(location) {
-        const isMobile = window.mapCore && window.mapCore.getIsMobile ? window.mapCore.getIsMobile() : false;
-        const size = isMobile ? 48 : 32;
-        
-        // Create SVG icon with interactive animations
-        const svgIcon = L.divIcon({
-            className: 'interactive-location-marker',
-            html: this.createLocationMarkerSVG(size),
-            iconSize: [size, size],
-            iconAnchor: [size/2, size/2],
-            popupAnchor: [0, -size/2]
-        });
-
-        // Create and return a proper Leaflet marker with the interactive icon
-        const coordinates = location.geometry.coordinates;
-        const marker = L.marker([coordinates[1], coordinates[0]], { icon: svgIcon });
-        
-        return marker;
-    }
-
-    createLocationMarkerSVG(size) {
-        const radius = size * 0.35; // 35% of container size
-        const strokeWidth = size * 0.08; // 8% of container size
-        
-        return `
-            <svg class="location-marker-svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-                <defs>
-                    <radialGradient id="orangeGradient-${Date.now()}" cx="30%" cy="30%">
-                        <stop offset="0%" style="stop-color:#ff8c42;stop-opacity:1" />
-                        <stop offset="50%" style="stop-color:#ff6b1a;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#e55a00;stop-opacity:1" />
-                    </radialGradient>
-                    <filter id="glow-${Date.now()}">
-                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                        <feMerge> 
-                            <feMergeNode in="coloredBlur"/>
-                            <feMergeNode in="SourceGraphic"/>
-                        </feMerge>
-                    </filter>
-                </defs>
-                
-                <!-- Pulse ring for hover effect -->
-                <circle class="pulse-ring" 
-                        cx="${size/2}" 
-                        cy="${size/2}" 
-                        r="${radius}" 
-                        fill="none" 
-                        stroke="#ff6b1a" 
-                        stroke-width="2" 
-                        opacity="0"/>
-                
-                <!-- Main location dot -->
-                <circle class="location-dot" 
-                        cx="${size/2}" 
-                        cy="${size/2}" 
-                        r="${radius}" 
-                        fill="url(#orangeGradient-${Date.now()})" 
-                        stroke="#ffffff" 
-                        stroke-width="${strokeWidth}"
-                        filter="url(#glow-${Date.now()})"/>
-                
-                <!-- Inner highlight -->
-                <circle class="location-highlight" 
-                        cx="${size/2 - radius*0.3}" 
-                        cy="${size/2 - radius*0.3}" 
-                        r="${radius*0.25}" 
-                        fill="#ffb366" 
-                        opacity="0.6"/>
-            </svg>
-        `;
-    }
-
     // Parse link syntax [text:type:id] and convert to clickable elements
     parseLinks(text) {
         if (!text || !this.mediaLibrary) return text;
@@ -449,15 +377,12 @@ class LocationSystem {
                 Logger.error('Failed to create location icon, using default marker');
                 const geoLayer = L.geoJSON(data, {
                     pointToLayer: (feature, latlng) => {
-                        // Use interactive markers even in fallback case
-                        return this.createInteractiveLocationMarker({
-                            geometry: { coordinates: [latlng.lng, latlng.lat] },
-                            properties: feature.properties
-                        });
+                        // Use the classic orange dot icon even in fallback
+                        return L.marker(latlng, { icon: this.dotOrangeIcon });
                     },
                     onEachFeature: async (feature, layer) => {
                         await this.processLocationFeature(feature, layer);
-                        // Setup enhanced interactions after popup is bound
+                        // Setup simple click-only interactions
                         this.setupMarkerInteractions(layer);
                     }
                 }).addTo(map);
@@ -466,15 +391,12 @@ class LocationSystem {
             
             const geoLayer = L.geoJSON(data, {
                 pointToLayer: (feature, latlng) => {
-                    // Use the new interactive marker for all location points
-                    return this.createInteractiveLocationMarker({
-                        geometry: { coordinates: [latlng.lng, latlng.lat] },
-                        properties: feature.properties
-                    });
+                    // Use the classic orange dot icon
+                    return L.marker(latlng, { icon: this.dotOrangeIcon });
                 },
                 onEachFeature: async (feature, layer) => {
                     await this.processLocationFeature(feature, layer);
-                    // Setup enhanced interactions after popup is bound
+                    // Setup simple click-only interactions
                     this.setupMarkerInteractions(layer);
                 }
             }).addTo(map);
@@ -484,20 +406,13 @@ class LocationSystem {
     }
 
     setupMarkerInteractions(marker) {
-        let hoverTimeout;
         marker._isPopupSticky = false; // Store sticky state on the marker itself
-        
-        // Add interactive behaviors to the marker
-        this.addMarkerAnimations(marker);
         
         // Disable default popup behavior
         marker.off('click');
         
         // Click event - toggles popup (opens/closes) and makes it sticky
         marker.on('click', () => {
-            // Add click animation
-            this.triggerClickAnimation(marker);
-            
             // If this marker's popup is already open, close it (toggle behavior)
             if (this.currentOpenPopup === marker && marker._isPopupSticky) {
                 marker._isPopupSticky = false;
@@ -520,37 +435,6 @@ class LocationSystem {
             Logger.info('Location popup opened by click (sticky)');
         });
         
-        // Hover events
-        marker.on('mouseover', () => {
-            // Clear any existing timeout
-            if (hoverTimeout) {
-                clearTimeout(hoverTimeout);
-                hoverTimeout = null;
-            }
-            
-            // Only open popup on hover if it's not already sticky
-            if (!marker._isPopupSticky) {
-                hoverTimeout = setTimeout(() => {
-                    marker.openPopup();
-                    Logger.info('Location popup opened by hover');
-                }, 100); // 100ms delay
-            }
-        });
-        
-        marker.on('mouseout', () => {
-            // Clear hover timeout if mouse leaves before 100ms
-            if (hoverTimeout) {
-                clearTimeout(hoverTimeout);
-                hoverTimeout = null;
-            }
-            
-            // Only close popup if it's not sticky
-            if (!marker._isPopupSticky) {
-                marker.closePopup();
-                Logger.info('Location popup closed by mouseout');
-            }
-        });
-        
         // Reset sticky state when popup is manually closed
         marker.on('popupclose', () => {
             marker._isPopupSticky = false;
@@ -560,102 +444,6 @@ class LocationSystem {
             }
             Logger.info('Location popup closed, sticky state reset');
         });
-    }
-
-    addMarkerAnimations(marker) {
-        const markerElement = marker.getElement();
-        if (!markerElement) return;
-
-        // Set up cursor proximity detection
-        this.setupProximityDetection(marker);
-        
-        // Add mouse events for enhanced interactions
-        markerElement.addEventListener('mouseenter', () => {
-            this.startHoverEffects(marker);
-        });
-
-        markerElement.addEventListener('mouseleave', () => {
-            this.stopHoverEffects(marker);
-        });
-    }
-
-    setupProximityDetection(marker) {
-        if (!window.mapCore || !window.mapCore.map) return;
-
-        const map = window.mapCore.map;
-        const markerElement = marker.getElement();
-        if (!markerElement) return;
-
-        // Mouse move handler for proximity detection
-        const handleMouseMove = (e) => {
-            const rect = markerElement.getBoundingClientRect();
-            const markerCenterX = rect.left + rect.width / 2;
-            const markerCenterY = rect.top + rect.height / 2;
-            
-            const distance = Math.sqrt(
-                Math.pow(e.clientX - markerCenterX, 2) + 
-                Math.pow(e.clientY - markerCenterY, 2)
-            );
-
-            // Proximity thresholds (in pixels)
-            const closeThreshold = 60;
-            const nearThreshold = 100;
-
-            // Remove existing proximity classes
-            markerElement.classList.remove('proximity-close', 'proximity-near');
-
-            // Add appropriate proximity class
-            if (distance < closeThreshold) {
-                markerElement.classList.add('proximity-close');
-            } else if (distance < nearThreshold) {
-                markerElement.classList.add('proximity-near');
-            }
-        };
-
-        // Add mouse move listener to map container
-        const mapContainer = map.getContainer();
-        mapContainer.addEventListener('mousemove', handleMouseMove);
-
-        // Store cleanup function on marker
-        marker._proximityCleanup = () => {
-            mapContainer.removeEventListener('mousemove', handleMouseMove);
-            markerElement.classList.remove('proximity-close', 'proximity-near');
-        };
-    }
-
-    startHoverEffects(marker) {
-        const markerElement = marker.getElement();
-        if (!markerElement) return;
-
-        // Find the pulse ring and start pulsing
-        const pulseRing = markerElement.querySelector('.pulse-ring');
-        if (pulseRing) {
-            pulseRing.style.opacity = '0.6';
-        }
-    }
-
-    stopHoverEffects(marker) {
-        const markerElement = marker.getElement();
-        if (!markerElement) return;
-
-        // Stop pulsing
-        const pulseRing = markerElement.querySelector('.pulse-ring');
-        if (pulseRing) {
-            pulseRing.style.opacity = '0';
-        }
-    }
-
-    triggerClickAnimation(marker) {
-        const markerElement = marker.getElement();
-        if (!markerElement) return;
-
-        // Add click animation class
-        markerElement.classList.add('clicked');
-
-        // Remove animation class after animation completes
-        setTimeout(() => {
-            markerElement.classList.remove('clicked');
-        }, 600);
     }
 
     // Close all open location popups
@@ -1088,17 +876,10 @@ class LocationSystem {
         };
     }
 
-    // Cleanup methods for markers and proximity detection
+    // Cleanup methods for markers
     clearMarkers() {
         return this.withMap(map => {
             if (this.markersLayer) {
-                // Clean up proximity detection for all markers
-                this.markersLayer.eachLayer(layer => {
-                    if (layer._proximityCleanup) {
-                        layer._proximityCleanup();
-                    }
-                });
-                
                 this.markersLayer.clearLayers();
                 Logger.info('All location markers cleared');
             }
@@ -1106,15 +887,6 @@ class LocationSystem {
     }
 
     destroy() {
-        // Clean up all proximity detection listeners
-        if (this.markersLayer) {
-            this.markersLayer.eachLayer(layer => {
-                if (layer._proximityCleanup) {
-                    layer._proximityCleanup();
-                }
-            });
-        }
-        
         if (this.loadingIndicator) {
             this.loadingIndicator.destroy();
         }
