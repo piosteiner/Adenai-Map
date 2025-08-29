@@ -583,7 +583,24 @@
       "movementHistory": [],
       "createdAt": "2025-08-29T20:39:29.421Z",
       "updatedAt": "2025-08-29T20:39:29.421Z"
+    },
+    {
+      "id": "krull_sturmbann",
+      "name": "Krull Sturmbann",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/krull_close.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:40:02.491Z",
+      "updatedAt": "2025-08-29T20:40:02.491Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:39:29.421Z"
+  "lastUpdated": "2025-08-29T20:40:02.491Z"
 }
