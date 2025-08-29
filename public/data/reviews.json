@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "cbb5787cd3241b4fe9a6014f624093a723f68dd2",
+      "action": "update",
+      "type": "character",
+      "itemName": "Ruben Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-29T21:14:14.585Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T21:14:14.585Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: ruben_karthright (by gm) - updated image"
+    },
+    {
       "commitSha": "fc5e38009aa0f98514da1db071a723b06c702640",
       "action": "update",
       "type": "character",
@@ -3798,5 +3811,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T21:03:57.401Z"
+  "lastUpdated": "2025-08-29T21:14:14.585Z"
 }
