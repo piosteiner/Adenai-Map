@@ -132,12 +132,12 @@ class MovementSystem {
                                 relationship: pathInfo.metadata?.relationship || 'unknown'
                             },
                             pathLine: pathLine,
-                            coordinates: validCoordinates, // Use filtered coordinates
+                            coordinates: coordValidation.coordinates, // Use filtered coordinates
                             style: pathInfo.style,
                             isVisible: isVsuzH // Track initial visibility state
                         });
                     } else {
-                        Logger.warning(`Skipping ${pathInfo.name}: insufficient valid coordinates (${validCoordinates.length})`);
+                        Logger.warning(`Skipping ${pathInfo.name}: insufficient valid coordinates (${coordValidation.validCount})`);
                     }
             }
         });
