@@ -617,7 +617,24 @@
       "movementHistory": [],
       "createdAt": "2025-08-29T20:40:44.352Z",
       "updatedAt": "2025-08-29T20:40:44.352Z"
+    },
+    {
+      "id": "marcoh_ludd",
+      "name": "Marcoh Ludd",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/marcoh_close.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:41:12.704Z",
+      "updatedAt": "2025-08-29T20:41:12.704Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:40:44.352Z"
+  "lastUpdated": "2025-08-29T20:41:12.704Z"
 }
