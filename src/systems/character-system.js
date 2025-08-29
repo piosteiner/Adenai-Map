@@ -64,14 +64,14 @@ class CharacterSystem {
             
             for (const url of urls) {
                 try {
-                    console.log(`🔄 Trying URL: ${url}`);
+                    Logger.character(`Trying URL: ${url}`);
                     response = await fetch(url);
                     if (response.ok) {
-                        console.log(`✅ Successfully loaded from: ${url}`);
+                        Logger.success(`Successfully loaded from: ${url}`);
                         break;
                     }
                 } catch (e) {
-                    console.log(`❌ Failed URL: ${url} - ${e.message}`);
+                    Logger.warning(`Failed URL: ${url} - ${e.message}`);
                 }
             }
             
