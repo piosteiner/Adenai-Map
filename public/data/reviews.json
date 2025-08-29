@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "0d60837731fe11a4eee0490367658cb45bceba61",
+      "action": "update",
+      "type": "character",
+      "itemName": "Dravak Svya",
+      "user": "gm",
+      "timestamp": "2025-08-29T21:01:53.600Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T21:01:53.600Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: dravak_svya (by gm) - added place of origin"
+    },
+    {
       "commitSha": "3b8684c784c7caefe8117b32e2f6948eaa6c9bf3",
       "action": "update",
       "type": "character",
@@ -3733,5 +3746,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T21:01:34.143Z"
+  "lastUpdated": "2025-08-29T21:01:53.601Z"
 }
