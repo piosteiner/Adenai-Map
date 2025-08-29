@@ -160,14 +160,14 @@ class LocationSystem {
     }
 
     createLocationIcon() {
-        // Create the classic orange dot icon for fallback compatibility
+        // Create the classic orange dot icon with larger size to match cluster proxy markers
         if (!this.dotOrangeIcon) {
             try {
                 this.dotOrangeIcon = L.icon({
                     iconUrl: 'public/icons/dot_orange.svg',
-                    iconSize: [24, 24],
-                    iconAnchor: [12, 12],
-                    popupAnchor: [0, -12]
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 16],
+                    popupAnchor: [0, -16]
                 });
                 Logger.success('Orange dot icon created successfully');
             } catch (error) {
