@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "c13dbdf6f9f5727dd50b00ecfcac4220376b833c",
+      "action": "update",
+      "type": "character",
+      "itemName": "Colette Pinet",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:34:45.368Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:34:45.368Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: colette_pinet (by gm) - changed relationship to unknown"
+    },
+    {
       "commitSha": "3854faf8aa3d6ccf7867887b9db9349cbc502496",
       "action": "update",
       "type": "character",
@@ -2823,5 +2836,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:34:38.490Z"
+  "lastUpdated": "2025-08-29T20:34:45.368Z"
 }
