@@ -401,7 +401,7 @@ class CharacterPanel {
                     <div class="character-details">
                         <h4>${character.name}</h4>
                         ${character.title ? `<div class="character-title">${character.title}</div>` : ''}
-                        <div class="character-location">📍 ${character.location || '❓ Unbekannt'}</div>
+                        <div class="character-location">📍 ${this.getCurrentLocation(character)}</div>
                         <div class="character-badges">
                             <span class="badge status-${character.status}">${AdenaiConfig.getCharacterStatusLabel(character.status) || '❓ Unbekannt'}</span>
                             <span class="badge relationship-${character.relationship}">
@@ -466,6 +466,40 @@ class CharacterPanel {
     }
 
     // Helper methods
+    getCurrentLocation(character) {
+        // Priority 1: currentLocation object
+        if (character.currentLocation && character.currentLocation.location) {
+            return character.currentLocation.location;
+        }
+        
+        // Priority 2: location field
+        if (character.location) {
+            return character.location;
+        }
+        
+        // Priority 3: Latest movement from movementHistory
+        if (character.movementHistory && character.movementHistory.length > 0) {
+            // Find the movement with the highest movement_nr
+            const latestMovement = character.movementHistory.reduce((latest, current) => {
+                const currentNr = current.movement_nr || 0;
+                const latestNr = latest.movement_nr || 0;
+                return currentNr > latestNr ? current : latest;
+            });
+            
+            if (latestMovement.location) {
+                return latestMovement.location;
+            }
+        }
+        
+        // Priority 4: Place of origin
+        if (character.placeOfOrigin) {
+            return character.placeOfOrigin;
+        }
+        
+        // Fallback: Unknown
+        return '❓ Unbekannt';
+    }
+
     getRelationshipColor(relationship) {
         const colors = {
             ally: '#4CAF50',
