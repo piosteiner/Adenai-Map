@@ -366,51 +366,46 @@ class MovementMarkers {
 
         const formattedEndDate = formatDate(endDate);
 
-        // Create popup content using unified popup structure
+        // Create popup content using character popup styling
         const popupContent = `
             <div class="character-popup">
                 <div class="popup-title" style="color: #6366f1; margin-bottom: 8px;">
                     ${markerNumber} - ${movementData.location || 'Unknown Location'}
                 </div>
-                <div class="character-popup-name">
+                <div style="margin-bottom: 8px;">
                     <strong>🙋 Name:</strong> ${characterName}
                 </div>
-                <div class="character-popup-movement">
+                <div style="margin-bottom: 8px;">
                     <strong>🚶 Movement Type:</strong> ${movementData.type || 'travel'}
                 </div>
-                <div class="character-popup-dates">
+                <div style="margin-bottom: 8px;">
                     <strong>📅 Start Date:</strong> ${formatDate(movementData.date) || 'Not specified'}
                 </div>
                 ${hasEndDate && formattedEndDate ? `
-                <div class="character-popup-dates">
+                <div style="margin-bottom: 8px;">
                     <strong>📅 End Date:</strong> ${formattedEndDate}
                 </div>
                 ` : ''}
                 ${durationText ? `
-                <div class="character-popup-duration">
+                <div style="margin-bottom: 8px;">
                     <strong>⏱️ Duration:</strong> ${durationText}
                 </div>
                 ` : ''}
                 ${movementData.notes ? `
-                <div class="character-popup-notes">
+                <div style="margin-bottom: 0;">
                     <strong>📝 Notes:</strong> ${movementData.notes}
                 </div>
                 ` : ''}
             </div>
         `;
 
-        // Create and show popup using unified popup system
-        const popup = window.PopupUtils ? 
-            window.PopupUtils.createLeafletPopup('movement') :
-            L.popup({
-                maxWidth: 300,
-                className: 'movement-detail-popup'
-            });
-
-        popup
-            .setLatLng(map.getCenter())
-            .setContent(popupContent)
-            .openOn(map);
+        // Create and show popup
+        const popup = L.popup({
+            maxWidth: 300
+        })
+        .setLatLng(map.getCenter())
+        .setContent(popupContent)
+        .openOn(map);
 
         // Position popup near the marker if possible
         try {

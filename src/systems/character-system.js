@@ -249,46 +249,33 @@ class CharacterSystem {
         // Create popup content
         const popupContent = this.createCharacterPopupContent(character);
 
-        // Create popup element using utilities or fallback
-        const popup = window.PopupUtils ? 
-            window.PopupUtils.createPanelPopup(character.name, popupContent) :
-            this.createFallbackPanelPopup(character.name, popupContent);
-
+        // Create popup element
+        const popup = document.createElement('div');
         popup.id = 'panel-anchored-popup';
+        popup.className = 'panel-anchored-popup';
+        popup.innerHTML = `
+            <div class="panel-popup-header">
+                <h3>${character.name}</h3>
+                <button class="panel-popup-close" onclick="window.characterSystem.closePanelAnchoredPopup()">×</button>
+            </div>
+            <div class="panel-popup-content">
+                ${popupContent}
+            </div>
+        `;
 
-        // Position popup using utilities or fallback
-        if (window.PopupUtils) {
-            window.PopupUtils.positionPanelPopup(popup);
-        } else {
-            popup.style.position = 'fixed';
-            popup.style.right = (panel.offsetWidth + 20) + 'px';
-            popup.style.top = '30px';
-            popup.style.zIndex = '10001';
-        }
+        // Position popup to the left of panel with 20px spacing, near top
+        popup.style.position = 'fixed'; // Use fixed positioning for better control
+        popup.style.right = (panel.offsetWidth + 20) + 'px'; // 20px to the left of panel
+        popup.style.top = '30px'; // 30px from top of screen
+        popup.style.zIndex = '10001';
 
-        // Append to body
+        // Append to body instead of panel for fixed positioning
         document.body.appendChild(popup);
 
         // Track current popup
         this.currentPanelPopup = popup;
 
         console.log(`📋 Panel popup opened for "${character.name}"`);
-    }
-
-    // Fallback method for creating panel popup without utilities
-    createFallbackPanelPopup(title, content) {
-        const popup = document.createElement('div');
-        popup.className = 'panel-anchored-popup';
-        popup.innerHTML = `
-            <div class="panel-popup-header">
-                <h3>${title}</h3>
-                <button class="panel-popup-close" onclick="window.characterSystem.closePanelAnchoredPopup()">×</button>
-            </div>
-            <div class="panel-popup-content">
-                ${content}
-            </div>
-        `;
-        return popup;
     }
 
     // Close panel-anchored popup
@@ -535,28 +522,20 @@ class CharacterSystem {
         // Create popup content
         const popupContent = this.createCharacterPopup(character);
 
-        // Create popup with unified styling
-        this.currentCharacterPopup = window.PopupUtils ? 
-            window.PopupUtils.createLeafletPopup('character', {
-                autoPan: false,
-                keepInView: true,
-                offset: [0, -25]
-            }) :
-            L.popup({
-                closeButton: true,
-                autoClose: false,
-                closeOnClick: false,
-                closeOnEscapeKey: true,
-                className: 'character-focus-popup',
-                autoPan: false,
-                keepInView: true,
-                offset: [0, -25]
-            });
-
-        this.currentCharacterPopup
-            .setLatLng(latlng)
-            .setContent(popupContent)
-            .openOn(map);
+        // Create popup with enhanced options and offset
+        this.currentCharacterPopup = L.popup({
+            closeButton: true,
+            autoClose: false,
+            closeOnClick: false,
+            closeOnEscapeKey: true,
+            className: 'character-focus-popup',
+            autoPan: false,           // Disable auto-pan since we already centered properly
+            keepInView: true,         // Keep popup in view when map is panned
+            offset: [0, -25]          // Position popup directly above the coordinate point, like location popups
+        })
+        .setLatLng(latlng)
+        .setContent(popupContent)
+        .openOn(map);
 
         // Track which character is currently focused
         this.currentFocusedCharacter = character.name;

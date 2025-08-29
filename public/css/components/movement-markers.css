@@ -80,31 +80,27 @@
     }
 }
 
-/* Movement detail popup styles - now uses unified popup system */
+/* Movement detail popup styles */
 .movement-detail-popup {
-    /* Style is handled by the unified popup system in popups.css */
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .movement-popup {
-    /* Inherits from .popup-base-content in popups.css */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     max-width: 300px;
-    font-size: 14px;
-    line-height: 1.4;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .movement-popup-header {
     margin-bottom: 12px;
     padding-bottom: 8px;
-    border-bottom: 1px solid var(--dropdown-border);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .movement-popup-header h3 {
     margin: 0;
     font-size: 16px;
-    color: var(--text-color);
+    color: #333;
     font-weight: 600;
 }
 
@@ -115,7 +111,7 @@
 
 .movement-info-row {
     margin-bottom: 8px;
-    color: var(--text-color);
+    color: #555;
 }
 
 .movement-info-row:last-child {
