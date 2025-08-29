@@ -1,0 +1,180 @@
+/* Global Cluster System Styles */
+
+.global-cluster-icon {
+    transition: all 0.3s ease;
+}
+
+.global-cluster-icon:hover {
+    transform: scale(1.1);
+}
+
+.global-cluster-marker {
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.global-cluster-marker:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+}
+
+/* Enhanced fan out animations for global clusters */
+@keyframes globalFanOut {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes globalFanIn {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+/* Global cluster fan marker styles */
+.global-cluster-icon .fan-marker {
+    animation: globalFanOut 0.4s ease-out forwards;
+}
+
+.global-cluster-icon .fan-marker.fan-in {
+    animation: globalFanIn 0.2s ease-in forwards;
+}
+
+/* Mixed marker type indicator */
+.global-cluster-marker .marker-type-indicator {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+.global-cluster-marker .marker-type-indicator.location {
+    background: #f59e0b;
+}
+
+.global-cluster-marker .marker-type-indicator.movement {
+    background: #6366f1;
+}
+
+.global-cluster-marker .marker-type-indicator.mixed {
+    background: linear-gradient(45deg, #f59e0b 50%, #6366f1 50%);
+}
+
+/* Enhanced popup styles for global clusters */
+.global-cluster-popup {
+    max-width: 350px;
+}
+
+.global-cluster-popup .cluster-summary {
+    background: #f8fafc;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border-left: 4px solid #6366f1;
+}
+
+.global-cluster-popup .marker-type-breakdown {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.global-cluster-popup .marker-type-count {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.global-cluster-popup .marker-type-count .icon {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.global-cluster-popup .marker-type-count .icon.location {
+    background: #f59e0b;
+}
+
+.global-cluster-popup .marker-type-count .icon.movement {
+    background: #6366f1;
+}
+
+/* Responsive adjustments for global clusters */
+@media (max-width: 768px) {
+    .global-cluster-marker {
+        width: 32px;
+        height: 32px;
+        font-size: 11px;
+    }
+    
+    .global-cluster-icon {
+        width: 32px !important;
+        height: 32px !important;
+    }
+}
+
+/* Hover state enhancements */
+.global-cluster-marker:hover::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 2px solid rgba(99, 102, 241, 0.5);
+    border-radius: 50%;
+    animation: pulseCluster 2s infinite;
+}
+
+@keyframes pulseCluster {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Loading state for cluster rebuilding */
+.global-cluster-rebuilding {
+    position: relative;
+}
+
+.global-cluster-rebuilding::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f4f6;
+    border-top: 2px solid #6366f1;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
