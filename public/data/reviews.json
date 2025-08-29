@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "5199a68710b2f06fb88f8ea5eb5482ea0768d4ab",
+      "action": "update",
+      "type": "character",
+      "itemName": "Ly'iss Moy",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:50:20.330Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:50:20.330Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: ly_iss_moy (by gm) - updated image"
+    },
+    {
       "commitSha": "1e96f6fca0567aa24ce65aef057fe44a7a1a7c07",
       "action": "update",
       "type": "character",
@@ -3382,5 +3395,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:50:06.643Z"
+  "lastUpdated": "2025-08-29T20:50:20.330Z"
 }
