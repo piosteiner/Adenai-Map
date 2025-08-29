@@ -683,24 +683,6 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/ruben_karthright_close.png",
-      "status": "alive",
-      "faction": "",
-      "relationship": "friendly",
-      "firstMet": "",
-      "notes": "",
-      "movementHistory": [],
-      "currentLocation": null,
-      "createdAt": "2025-08-29T20:43:21.033Z",
-      "updatedAt": "2025-08-29T20:52:33.059Z"
-    },
-    {
-      "id": "ruben_karthright",
-      "name": "Ruben Karthright",
-      "title": "",
-      "placeOfOrigin": "",
-      "coordinates": null,
-      "description": "",
       "image": "https://adenai-admin.piogino.ch/public/images/ruben_close.png",
       "status": "alive",
       "faction": "",
@@ -800,5 +782,5 @@
       "updatedAt": "2025-08-29T20:46:20.848Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:52:49.704Z"
+  "lastUpdated": "2025-08-29T20:53:09.308Z"
 }
