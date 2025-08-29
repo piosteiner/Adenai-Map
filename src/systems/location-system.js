@@ -27,10 +27,10 @@ class LocationSystem {
             const response = await fetch('public/data/media-library.json');
             if (response.ok) {
                 this.mediaLibrary = await response.json();
-                console.log('📚 Media library loaded');
+                Logger.media('Media library loaded');
             }
         } catch (error) {
-            console.warn('⚠️ Could not load media library:', error);
+            Logger.warning('Could not load media library:', error);
         }
     }
 
@@ -50,9 +50,9 @@ class LocationSystem {
                 popupAnchor: [0, -32]
             });
             
-            console.log('📍 Location icon created successfully with path:', iconUrl);
+            Logger.success('Location icon created successfully with path:', iconUrl);
         } catch (error) {
-            console.error('❌ Error creating location icon:', error);
+            Logger.error('Error creating location icon:', error);
             // Fallback to default marker if icon creation fails
             this.dotOrangeIcon = null;
         }
@@ -192,11 +192,11 @@ class LocationSystem {
 
     async loadLocations() {
         try {
-            console.log('📍 Loading locations from GeoJSON...');
+            Logger.info('Loading locations from GeoJSON...');
             
             // Ensure icon is ready before loading locations
             if (!this.dotOrangeIcon) {
-                console.log('📍 Creating location icon before loading...');
+                Logger.info('Creating location icon before loading...');
                 this.createLocationIcon();
             }
             
@@ -211,7 +211,7 @@ class LocationSystem {
             const data = await response.json();
             await this.processGeoJSONData(data);
             
-            console.log(`✅ Loaded ${this.geoFeatureLayers.length} locations`);
+            Logger.success(`Loaded ${this.geoFeatureLayers.length} locations`);
             
             // Notify other systems that locations are loaded
             document.dispatchEvent(new CustomEvent('locationsLoaded', { 
@@ -222,18 +222,18 @@ class LocationSystem {
             }));
             
         } catch (error) {
-            console.error('❌ Error loading locations:', error);
+            Logger.error('Error loading locations:', error);
         }
     }
 
     // Clear existing location data before loading new data
     clearExistingLocations() {
-        console.log('🧹 Clearing existing location data...');
+        Logger.cleanup('Clearing existing location data...');
         
         // Remove existing markers from map
         this.geoFeatureLayers.forEach(locationData => {
-            if (locationData.layer && window.mapCore?.getMap()) {
-                window.mapCore.getMap().removeLayer(locationData.layer);
+            if (locationData.layer) {
+                MapUtils.removeFromMap(locationData.layer);
             }
         });
         
@@ -241,49 +241,49 @@ class LocationSystem {
         this.geoFeatureLayers = [];
         this.locations = [];
         
-        console.log(`🗑️ Removed ${this.geoFeatureLayers.length} existing location markers`);
+        Logger.cleanup(`Removed ${this.geoFeatureLayers.length} existing location markers`);
     }
 
     // Add proper reload method for admin interface integration
     async reloadLocations() {
-        console.log('🔄 Reloading locations from admin update...');
+        Logger.info('Reloading locations from admin update...');
         await this.loadLocations();
     }
 
     async processGeoJSONData(data) {
-        const map = window.mapCore.getMap();
-        
-        // Ensure icon is created before using it
-        if (!this.dotOrangeIcon) {
-            console.warn('⚠️ Location icon not ready, creating it now...');
-            this.createLocationIcon();
-        }
-        
-        // Double-check that icon was created successfully
-        if (!this.dotOrangeIcon) {
-            console.error('❌ Failed to create location icon, using default marker');
+        return MapUtils.withMap(map => {
+            // Ensure icon is created before using it
+            if (!this.dotOrangeIcon) {
+                Logger.warning('Location icon not ready, creating it now...');
+                this.createLocationIcon();
+            }
+            
+            // Double-check that icon was created successfully
+            if (!this.dotOrangeIcon) {
+                Logger.error('Failed to create location icon, using default marker');
+                const geoLayer = L.geoJSON(data, {
+                    onEachFeature: async (feature, layer) => {
+                        await this.processLocationFeature(feature, layer);
+                        // Setup enhanced interactions after popup is bound
+                        this.setupMarkerInteractions(layer);
+                    }
+                }).addTo(map);
+                return geoLayer;
+            }
+            
             const geoLayer = L.geoJSON(data, {
+                pointToLayer: (feature, latlng) => {
+                    return L.marker(latlng, { icon: this.dotOrangeIcon });
+                },
                 onEachFeature: async (feature, layer) => {
                     await this.processLocationFeature(feature, layer);
                     // Setup enhanced interactions after popup is bound
                     this.setupMarkerInteractions(layer);
                 }
             }).addTo(map);
-            return geoLayer;
-        }
-        
-        const geoLayer = L.geoJSON(data, {
-            pointToLayer: (feature, latlng) => {
-                return L.marker(latlng, { icon: this.dotOrangeIcon });
-            },
-            onEachFeature: async (feature, layer) => {
-                await this.processLocationFeature(feature, layer);
-                // Setup enhanced interactions after popup is bound
-                this.setupMarkerInteractions(layer);
-            }
-        }).addTo(map);
 
-        return geoLayer;
+            return geoLayer;
+        }, 'Cannot process GeoJSON data - map not available');
     }
 
     setupMarkerInteractions(marker) {
@@ -300,7 +300,7 @@ class LocationSystem {
                 marker._isPopupSticky = false;
                 marker.closePopup();
                 this.currentOpenPopup = null;
-                console.log('📍 Location popup toggled closed');
+                Logger.info('Location popup toggled closed');
                 return;
             }
             
@@ -308,13 +308,13 @@ class LocationSystem {
             if (this.currentOpenPopup && this.currentOpenPopup !== marker) {
                 this.currentOpenPopup._isPopupSticky = false;
                 this.currentOpenPopup.closePopup();
-                console.log('📍 Previous location popup closed automatically');
+                Logger.info('Previous location popup closed automatically');
             }
             
             marker._isPopupSticky = true;
             marker.openPopup();
             this.currentOpenPopup = marker; // Track this as the current open popup
-            console.log('📍 Location popup opened by click (sticky)');
+            Logger.info('Location popup opened by click (sticky)');
         });
         
         // Hover events
@@ -329,7 +329,7 @@ class LocationSystem {
             if (!marker._isPopupSticky) {
                 hoverTimeout = setTimeout(() => {
                     marker.openPopup();
-                    console.log('📍 Location popup opened by hover');
+                    Logger.info('Location popup opened by hover');
                 }, 100); // 100ms delay
             }
         });
@@ -344,7 +344,7 @@ class LocationSystem {
             // Only close popup if it's not sticky
             if (!marker._isPopupSticky) {
                 marker.closePopup();
-                console.log('📍 Location popup closed by mouseout');
+                Logger.info('Location popup closed by mouseout');
             }
         });
         
@@ -355,7 +355,7 @@ class LocationSystem {
             if (this.currentOpenPopup === marker) {
                 this.currentOpenPopup = null;
             }
-            console.log('📍 Location popup closed, sticky state reset');
+            Logger.info('Location popup closed, sticky state reset');
         });
     }
 
@@ -365,7 +365,7 @@ class LocationSystem {
             this.currentOpenPopup._isPopupSticky = false;
             this.currentOpenPopup.closePopup();
             this.currentOpenPopup = null;
-            console.log('📍 All location popups closed');
+            Logger.info('All location popups closed');
         }
     }
 
@@ -392,7 +392,7 @@ class LocationSystem {
             } catch (error) {
                 // Fallback to local description if external content fails
                 popupContent = this.createPopupFromProperties(name, desc, details);
-                console.warn(`⚠️ Failed to load content for ${name}: ${error.message}`);
+                Logger.warning(`Failed to load content for ${name}: ${error.message}`);
             }
         } else {
             // No contentUrl: use local description and details
@@ -617,12 +617,13 @@ class LocationSystem {
     focusLocation(locationName) {
         const location = this.findLocationByName(locationName);
         if (location) {
-            const map = window.mapCore.getMap();
-            map.setView(location.layer.getLatLng(), Math.max(map.getZoom(), 1));
-            location.layer.openPopup();
+            MapUtils.withMap((map) => {
+                map.setView(location.layer.getLatLng(), Math.max(map.getZoom(), 1));
+                location.layer.openPopup();
+            });
             return true;
         }
-        console.warn(`⚠️ Location "${locationName}" not found`);
+        Logger.warning(`Location "${locationName}" not found`);
         return false;
     }
 
@@ -660,64 +661,64 @@ class LocationSystem {
 
     // Add a new location programmatically (useful for admin interface)
     addLocation(locationData) {
-        const map = window.mapCore.getMap();
-        
-        // Create marker
-        const marker = L.marker([locationData.lat, locationData.lng], { 
-            icon: this.dotOrangeIcon 
-        });
-        
-        // Create popup content
-        const popupContent = `
-            <div class="popup-title">${locationData.name}</div>
-            <div class="popup-desc">${locationData.description || ''}</div>
-        `;
-        marker.bindPopup(popupContent);
-        
-        // Add to map
-        marker.addTo(map);
-        
-        // Create feature object
-        const feature = {
-            type: 'Feature',
-            properties: {
-                name: locationData.name,
-                description: locationData.description || '',
-                region: locationData.region || '',
-                type: locationData.type || 'other'
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: [locationData.lng, locationData.lat]
-            }
-        };
-        
-        // Store location data
-        const newLocationData = {
-            feature: feature,
-            layer: marker,
-            desc: locationData.description || '',
-            name: locationData.name,
-            latlng: { lat: locationData.lat, lng: locationData.lng }
-        };
-        
-        this.geoFeatureLayers.push(newLocationData);
-        this.locations.push(newLocationData);
-        
-        console.log(`✅ Added location "${locationData.name}" to map`);
-        
-        // Notify search system
-        if (window.searchSystem) {
-            window.searchSystem.addToIndex({
-                name: locationData.name,
-                desc: locationData.description || '',
-                latlng: { lat: locationData.lat, lng: locationData.lng },
-                type: 'location',
-                feature: feature
+        MapUtils.withMap((map) => {
+            // Create marker
+            const marker = L.marker([locationData.lat, locationData.lng], { 
+                icon: this.dotOrangeIcon 
             });
-        }
-        
-        return newLocationData;
+            
+            // Create popup content
+            const popupContent = `
+                <div class="popup-title">${locationData.name}</div>
+                <div class="popup-desc">${locationData.description || ''}</div>
+            `;
+            marker.bindPopup(popupContent);
+            
+            // Add to map
+            marker.addTo(map);
+            
+            // Create feature object
+            const feature = {
+                type: 'Feature',
+                properties: {
+                    name: locationData.name,
+                    description: locationData.description || '',
+                    region: locationData.region || '',
+                    type: locationData.type || 'other'
+                },
+                geometry: {
+                    type: 'Point',
+                    coordinates: [locationData.lng, locationData.lat]
+                }
+            };
+            
+            // Store location data
+            const newLocationData = {
+                feature: feature,
+                layer: marker,
+                desc: locationData.description || '',
+                name: locationData.name,
+                latlng: { lat: locationData.lat, lng: locationData.lng }
+            };
+            
+            this.geoFeatureLayers.push(newLocationData);
+            this.locations.push(newLocationData);
+            
+            Logger.success(`Added location "${locationData.name}" to map`);
+            
+            // Notify search system
+            if (window.searchSystem) {
+                window.searchSystem.addToIndex({
+                    name: locationData.name,
+                    desc: locationData.description || '',
+                    latlng: { lat: locationData.lat, lng: locationData.lng },
+                    type: 'location',
+                    feature: feature
+                });
+            }
+            
+            return newLocationData;
+        });
     }
 
     // Remove a location
@@ -728,12 +729,13 @@ class LocationSystem {
         
         if (locationIndex !== -1) {
             const location = this.locations[locationIndex];
-            const map = window.mapCore.getMap();
             
-            // Remove from map
-            if (map.hasLayer(location.layer)) {
-                map.removeLayer(location.layer);
-            }
+            MapUtils.withMap((map) => {
+                // Remove from map
+                if (map.hasLayer(location.layer)) {
+                    map.removeLayer(location.layer);
+                }
+            });
             
             // Remove from arrays
             this.locations.splice(locationIndex, 1);
@@ -745,11 +747,11 @@ class LocationSystem {
                 this.geoFeatureLayers.splice(geoLayerIndex, 1);
             }
             
-            console.log(`✅ Removed location "${name}" from map`);
+            Logger.success(`Removed location "${name}" from map`);
             return true;
         }
         
-        console.warn(`⚠️ Location "${name}" not found for removal`);
+        Logger.warning(`Location "${name}" not found for removal`);
         return false;
     }
 
