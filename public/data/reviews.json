@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "07922dcca94296b877367703f35cb33df05edd04",
+      "action": "update",
+      "type": "character",
+      "itemName": "Dravak Svya",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:47:42.334Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:47:42.334Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: dravak_svya (by gm) - updated image"
+    },
+    {
       "commitSha": "6b0137305eb9e0a9b89a864bad99e9f5ef4a6ba4",
       "action": "update",
       "type": "character",
@@ -3252,5 +3265,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:47:32.821Z"
+  "lastUpdated": "2025-08-29T20:47:42.335Z"
 }
