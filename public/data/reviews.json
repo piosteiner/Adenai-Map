@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "a01f19a96d90df68887bb357dd27d72ba7ee929a",
+      "action": "update",
+      "type": "character",
+      "itemName": "Vivi Wulbren",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:57:30.695Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:57:30.695Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vivi_wulbren (by gm) - updated image"
+    },
+    {
       "commitSha": "d55415572c18e7ad3512d7f8aac4e234cddd12e7",
       "action": "update",
       "type": "character",
@@ -3603,5 +3616,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:57:17.977Z"
+  "lastUpdated": "2025-08-29T20:57:30.696Z"
 }
