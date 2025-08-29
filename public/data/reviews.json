@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "4dc02658ee258420ba451c43910f1be2bfd0d9ae",
+      "action": "update",
+      "type": "character",
+      "itemName": "Graf Honza",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:49:24.011Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:49:24.011Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: graf_honza (by gm) - updated image"
+    },
+    {
       "commitSha": "658c41699f50bae9f8266d716c16361c0a10886a",
       "action": "update",
       "type": "character",
@@ -3317,5 +3330,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:49:04.643Z"
+  "lastUpdated": "2025-08-29T20:49:24.011Z"
 }
