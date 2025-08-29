@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "38b8c5e261d7c6f3f748056d82af21f027d6986e",
+      "action": "update",
+      "type": "character",
+      "itemName": "Eytan Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:35:48.539Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:35:48.539Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: eytan_karthright (by gm) - changed relationship to friendly"
+    },
+    {
       "commitSha": "45ea08aeb097c2be7935a807b3669e47cd2b26c5",
       "action": "update",
       "type": "character",
@@ -2888,5 +2901,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:35:35.841Z"
+  "lastUpdated": "2025-08-29T20:35:48.540Z"
 }
