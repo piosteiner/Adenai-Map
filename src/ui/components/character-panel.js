@@ -132,11 +132,19 @@ class CharacterPanel {
     }
 
     setupResizeHandlers() {
-        if (!this.resizeHandle) return;
+        if (!this.resizeHandle) {
+            Logger.error('🔧 Resize handle not found - cannot setup resize handlers!');
+            return;
+        }
+
+        Logger.debug('🔧 Setting up resize handlers for element:', this.resizeHandle);
+        Logger.debug('🔧 MemoryUtils available:', typeof MemoryUtils !== 'undefined');
+        Logger.debug('🔧 MemoryUtils.addEventListener available:', typeof MemoryUtils?.addEventListener === 'function');
 
         let startX, startWidth;
 
         const startResize = (e) => {
+            Logger.debug('🖱️ Resize started:', e);
             this.isResizing = true;
             startX = e.clientX || e.touches[0].clientX;
             startWidth = parseInt(document.defaultView.getComputedStyle(this.panel).width, 10);
@@ -185,17 +193,34 @@ class CharacterPanel {
             this.updateHandlePosition();
         };
 
-        // Mouse events with optimized listeners
-        this.resizeListeners = [
-            MemoryUtils.addEventListener(this.resizeHandle, 'mousedown', startResize),
-            MemoryUtils.addThrottledEventListener(document, 'mousemove', doResize, 16),
-            MemoryUtils.addEventListener(document, 'mouseup', stopResize),
+        // Mouse events with optimized listeners - fallback to regular listeners if MemoryUtils not available
+        if (typeof MemoryUtils !== 'undefined' && MemoryUtils.addEventListener) {
+            this.resizeListeners = [
+                MemoryUtils.addEventListener(this.resizeHandle, 'mousedown', startResize),
+                MemoryUtils.addThrottledEventListener(document, 'mousemove', doResize, 16),
+                MemoryUtils.addEventListener(document, 'mouseup', stopResize),
+                
+                // Touch events for mobile
+                MemoryUtils.addEventListener(this.resizeHandle, 'touchstart', startResize),
+                MemoryUtils.addThrottledEventListener(document, 'touchmove', doResize, 16),
+                MemoryUtils.addEventListener(document, 'touchend', stopResize)
+            ];
+        } else {
+            Logger.warn('🔧 MemoryUtils not available, using regular event listeners');
+            // Fallback to regular event listeners
+            this.resizeHandle.addEventListener('mousedown', startResize);
+            document.addEventListener('mousemove', doResize);
+            document.addEventListener('mouseup', stopResize);
             
             // Touch events for mobile
-            MemoryUtils.addEventListener(this.resizeHandle, 'touchstart', startResize),
-            MemoryUtils.addThrottledEventListener(document, 'touchmove', doResize, 16),
-            MemoryUtils.addEventListener(document, 'touchend', stopResize)
-        ];
+            this.resizeHandle.addEventListener('touchstart', startResize);
+            document.addEventListener('touchmove', doResize);
+            document.addEventListener('touchend', stopResize);
+            
+            this.resizeListeners = []; // Track that we're using regular listeners
+        }
+        
+        Logger.debug('🔧 Resize listeners setup completed');
         
         // Initialize handle position
         this.updateHandlePosition();
