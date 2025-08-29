@@ -201,6 +201,41 @@ class CharacterSystem {
         return null;
     }
 
+    // Get current location text based on priority: 1) currentLocation 2) location 3) latest movement 4) place of origin
+    getCurrentLocation(character) {
+        // Priority 1: currentLocation object
+        if (character.currentLocation && character.currentLocation.location) {
+            return character.currentLocation.location;
+        }
+        
+        // Priority 2: location field
+        if (character.location) {
+            return character.location;
+        }
+        
+        // Priority 3: Latest movement from movementHistory
+        if (character.movementHistory && character.movementHistory.length > 0) {
+            // Find the movement with the highest movement_nr
+            const latestMovement = character.movementHistory.reduce((latest, current) => {
+                const currentNr = current.movement_nr || 0;
+                const latestNr = latest.movement_nr || 0;
+                return currentNr > latestNr ? current : latest;
+            });
+            
+            if (latestMovement.location) {
+                return latestMovement.location;
+            }
+        }
+        
+        // Priority 4: Place of origin
+        if (character.placeOfOrigin) {
+            return character.placeOfOrigin;
+        }
+        
+        // Fallback: Unknown
+        return '❓ Unbekannt';
+    }
+
     // Enhanced focus character method with coordinate fix
     focusCharacter(characterName) {
         const character = this.getCharacterByName(characterName);
@@ -319,26 +354,25 @@ class CharacterSystem {
         // Title
         const title = character.title ? `<div class="character-popup-title">${character.title}</div>` : '';
         
-        // Last seen location (from currentLocation, location, or latest movement)
+        // Last seen location (using unified getCurrentLocation method)
+        const currentLocation = this.getCurrentLocation(character);
         let lastSeenContent = '';
-        if (character.currentLocation && character.currentLocation.location) {
-            const date = character.currentLocation.date || character.currentLocation.dateStart || '';
-            lastSeenContent = `📍 <strong>Last Seen:</strong> ${character.currentLocation.location}${date ? ` (${date})` : ''}`;
-            Logger.debug('✅ Using currentLocation for last seen:', character.currentLocation.location);
-        } else if (character.location) {
-            lastSeenContent = `📍 <strong>Last Seen:</strong> ${character.location}`;
-            Logger.debug('✅ Using location field for last seen:', character.location);
-        } else if (character.movementHistory && character.movementHistory.length > 0) {
-            // Get the most recent movement entry
-            const latestMovement = character.movementHistory[character.movementHistory.length - 1];
-            if (latestMovement && latestMovement.location) {
-                const date = latestMovement.date || latestMovement.dateStart || '';
-                lastSeenContent = `📍 <strong>Last Seen:</strong> ${latestMovement.location}${date ? ` (${date})` : ''}`;
-                Logger.debug('✅ Using movement history for last seen:', latestMovement.location, 'from', latestMovement.date);
-            } else {
-                lastSeenContent = `📍 <strong>Last Seen:</strong> <span class="location-unknown">Unknown</span>`;
-                Logger.debug('❌ No location found in movement history');
+        if (currentLocation && currentLocation !== '❓ Unbekannt') {
+            // Try to get a date from currentLocation, latest movement, or leave empty
+            let date = '';
+            if (character.currentLocation && character.currentLocation.date) {
+                date = character.currentLocation.date || character.currentLocation.dateStart || '';
+            } else if (character.movementHistory && character.movementHistory.length > 0) {
+                const latestMovement = character.movementHistory.reduce((latest, current) => {
+                    const currentNr = current.movement_nr || 0;
+                    const latestNr = latest.movement_nr || 0;
+                    return currentNr > latestNr ? current : latest;
+                });
+                date = latestMovement.date || latestMovement.dateStart || '';
             }
+            
+            lastSeenContent = `📍 <strong>Last Seen:</strong> ${currentLocation}${date ? ` (${date})` : ''}`;
+            Logger.debug('✅ Using getCurrentLocation for last seen:', currentLocation);
         } else {
             lastSeenContent = `📍 <strong>Last Seen:</strong> <span class="location-unknown">Unknown</span>`;
             Logger.debug('❌ No location data found anywhere');
@@ -609,7 +643,7 @@ class CharacterSystem {
                 </div>
                 ${character.faction ? `<div><strong>🛡️ Fraktion:</strong> ${character.faction}</div>` : ''}
                 ${character.firstMet ? `<div><strong>📅 Erstmals getroffen:</strong> ${character.firstMet}</div>` : ''}
-                <div><strong>📍 Aktueller Ort:</strong> ${character.location || '❓ Unbekannt'}</div>
+                <div><strong>📍 Aktueller Ort:</strong> ${this.getCurrentLocation(character)}</div>
                 ${movementInfo}
                 ${character.placeOfOrigin ? `<div><strong>🌍 Herkunftsort:</strong> ${character.placeOfOrigin}</div>` : ''}
                 ${character.description ? `<div style="margin-top: 8px;"><strong>📝 Beschreibung:</strong><br>${character.description}</div>` : ''}
@@ -673,7 +707,7 @@ class CharacterSystem {
                     <strong>${character.name}</strong>
                     ${character.title ? `<em> - ${character.title}</em>` : ''}
                     <br>
-                    <span>${AdenaiConfig.getCharacterStatusLabel(character.status)} ${AdenaiConfig.getCharacterRelationshipLabel(character.relationship)} • ${character.location || 'Unknown location'}</span>
+                    <span>${AdenaiConfig.getCharacterStatusLabel(character.status)} ${AdenaiConfig.getCharacterRelationshipLabel(character.relationship)} • ${this.getCurrentLocation(character)}</span>
                 </div>
             </div>
         `;
