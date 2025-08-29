@@ -611,12 +611,13 @@
       "image": "https://adenai-admin.piogino.ch/public/images/lyiss_close.png",
       "status": "alive",
       "faction": "",
-      "relationship": "ally",
+      "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2025-08-29T20:40:44.352Z",
-      "updatedAt": "2025-08-29T20:40:44.352Z"
+      "updatedAt": "2025-08-29T20:41:22.949Z"
     },
     {
       "id": "marcoh_ludd",
@@ -636,5 +637,5 @@
       "updatedAt": "2025-08-29T20:41:12.704Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:41:12.704Z"
+  "lastUpdated": "2025-08-29T20:41:22.949Z"
 }
