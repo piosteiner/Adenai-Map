@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "143a53e22b8546016ea1ac34d19a51229639d788",
+      "action": "create",
+      "type": "character",
+      "itemName": "Krista",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:39:30.155Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:39:30.155Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Krista (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "609a2675674bbef888e92eafaf6a05c15456f8ad",
       "action": "update",
       "type": "character",
@@ -3005,5 +3018,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:38:37.715Z"
+  "lastUpdated": "2025-08-29T20:39:30.156Z"
 }
