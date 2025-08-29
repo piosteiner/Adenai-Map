@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "3cd5e0149eab2bf2283792c2285e9f8246112c8a",
+      "action": "update",
+      "type": "character",
+      "itemName": "Orvil Plig",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:50:48.020Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:50:48.020Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: orvil_plig (by gm) - updated image"
+    },
+    {
       "commitSha": "3848f284f9931569db3811352a168cdcf3f6a0d4",
       "action": "update",
       "type": "character",
@@ -3421,5 +3434,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:50:38.812Z"
+  "lastUpdated": "2025-08-29T20:50:48.020Z"
 }
