@@ -854,12 +854,13 @@
       "image": "https://adenai-admin.piogino.ch/public/images/eytan_close.png",
       "status": "alive",
       "faction": "",
-      "relationship": "ally",
+      "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2025-08-29T20:33:49.688Z",
-      "updatedAt": "2025-08-29T20:33:49.688Z"
+      "updatedAt": "2025-08-29T20:35:47.685Z"
     },
     {
       "id": "graf_honza",
@@ -879,5 +880,5 @@
       "updatedAt": "2025-08-29T20:34:25.256Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:35:35.116Z"
+  "lastUpdated": "2025-08-29T20:35:47.685Z"
 }
