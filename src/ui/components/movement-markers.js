@@ -376,7 +376,7 @@ class MovementMarkers {
                     <strong>🙋 Name:</strong> ${characterName}
                 </div>
                 <div style="margin-bottom: 8px;">
-                    <strong>🚶 Bewegungsart:</strong> ${AdenaiConfig.getMovementTypeLabel(movementData.type) || AdenaiConfig.getMovementTypeLabel('travel')}
+                    <strong>✨ Ereignis:</strong> ${AdenaiConfig.getMovementTypeLabel(movementData.type) || AdenaiConfig.getMovementTypeLabel('travel')}
                 </div>
                 <div style="margin-bottom: 8px;">
                     <strong>📅 Startdatum:</strong> ${formatDate(movementData.date) || 'Nicht angegeben'}
