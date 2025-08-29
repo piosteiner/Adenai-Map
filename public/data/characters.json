@@ -623,37 +623,6 @@
       "location": "Theos Hof"
     },
     {
-      "id": "pio_s_origin_character",
-      "name": "Pio's Origin Character",
-      "title": "",
-      "placeOfOrigin": "Apit Sal",
-      "coordinates": [
-        1677,
-        1229
-      ],
-      "description": "",
-      "image": "",
-      "status": "undead",
-      "faction": "",
-      "relationship": "neutral",
-      "firstMet": "",
-      "notes": "",
-      "movementHistory": [],
-      "createdAt": "2025-08-28T10:18:10.800Z",
-      "updatedAt": "2025-08-28T10:18:10.800Z",
-      "currentLocation": {
-        "location": "Apit Sal",
-        "date": "2025-08-28",
-        "dateStart": "2025-08-28",
-        "dateEnd": null,
-        "coordinates": [
-          1677,
-          1229
-        ],
-        "notes": "Initial location based on place of origin"
-      }
-    },
-    {
       "id": "pio_s_fully_loaded_char",
       "name": "Pio's fully loaded char",
       "title": "Novice Typer",
@@ -863,5 +832,5 @@
       "updatedAt": "2025-08-29T20:34:25.256Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:36:20.946Z"
+  "lastUpdated": "2025-08-29T20:36:51.706Z"
 }
