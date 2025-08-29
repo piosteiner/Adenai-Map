@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<!--
+⡆⣐⢕⢕⢕⢕⢕⢕⢕⢕⠅⢗⢕⢕⢕⢕⢕⢕⢕⠕⠕⢕⢕⢕⢕⢕⢕⢕⢕⢕
+⢐⢕⢕⢕⢕⢕⣕⢕⢕⠕⠁⢕⢕⢕⢕⢕⢕⢕⢕⠅⡄⢕⢕⢕⢕⢕⢕⢕⢕⢕
+⢕⢕⢕⢕⢕⠅⢗⢕⠕⣠⠄⣗⢕⢕⠕⢕⢕⢕⠕⢠⣿⠐⢕⢕⢕⠑⢕⢕⠵⢕
+⢕⢕⢕⢕⠁⢜⠕⢁⣴⣿⡇⢓⢕⢵⢐⢕⢕⠕⢁⣾⢿⣧⠑⢕⢕⠄⢑⢕⠅⢕
+⢕⢕⠵⢁⠔⢁⣤⣤⣶⣶⣶⡐⣕⢽⠐⢕⠕⣡⣾⣶⣶⣶⣤⡁⢓⢕⠄⢑⢅⢑
+⠍⣧⠄⣶⣾⣿⣿⣿⣿⣿⣿⣷⣔⢕⢄⢡⣾⣿⣿⣿⣿⣿⣿⣿⣦⡑⢕⢤⠱⢐
+⢠⢕⠅⣾⣿⠋⢿⣿⣿⣿⠉⣿⣿⣷⣦⣶⣽⣿⣿⠈⣿⣿⣿⣿⠏⢹⣷⣷⡅⢐
+⣔⢕⢥⢻⣿⡀⠈⠛⠛⠁⢠⣿⣿⣿⣿⣿⣿⣿⣿⡀⠈⠛⠛⠁⠄⣼⣿⣿⡇⢔
+⢕⢕⢽⢸⢟⢟⢖⢖⢤⣶⡟⢻⣿⡿⠻⣿⣿⡟⢀⣿⣦⢤⢤⢔⢞⢿⢿⣿⠁⢕
+⢕⢕⠅⣐⢕⢕⢕⢕⢕⣿⣿⡄⠛⢀⣦⠈⠛⢁⣼⣿⢗⢕⢕⢕⢕⢕⢕⡏⣘⢕
+⢕⢕⠅⢓⣕⣕⣕⣕⣵⣿⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣷⣕⢕⢕⢕⢕⡵⢀⢕⢕
+⢑⢕⠃⡈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢃⢕⢕⢕
+⣆⢕⠄⢱⣄⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⢁⢕⢕⠕⢁
+⣿⣦⡀⣿⣿⣷⣶⣬⣍⣛⣛⣛⡛⠿⠿⠿⠛⠛⢛⣛⣉⣭⣤⣂⢜⠕⢑⣡⣴⣿-->
+<!--Ein uwu für Nici <3-->
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adenai Map</title>
+  <meta property="og:title" content="Adenai Map – DnD Kampagne VsuzH">
+  <meta property="og:description" content="Karte der Welt Adenai, mit dem Abenteuerpfad der Gruppe VsuzH.">
+  <meta property="og:image" content="public/icons/uwu_1.png">
+  
+  <link rel="icon" type="image/png" href="public/icons/uwu_1.png">
+
+  <!-- Critical CSS (inline for fastest loading) -->
+  <style>
+    /* Critical above-the-fold styles */
+    #map { 
+      width: 100vw; 
+      height: 100vh; 
+      position: relative; 
+      background: #1a1a1a; 
+    }
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #1a1a1a;
+      color: #f1e1bd;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #333;
+      border-top: 4px solid #c5c6ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .loading-progress {
+      width: 300px;
+      height: 4px;
+      background: #333;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    .loading-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #c5c6ff, #8a9cff);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+  </style>
+
+  <!-- Leaflet CSS (critical for map) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
+  <!-- Load non-critical CSS asynchronously -->
+  <link rel="preload" href="public/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="public/css/components/features/gallery.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="public/css/components/map/map-core.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Progressive CSS loading -->
+  <script>
+    // CSS loading utility
+    function loadCSS(href) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = href;
+      document.head.appendChild(link);
+    }
+    
+    // Load CSS progressively when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      const cssFiles = [
+        'public/css/components/map/coordinates.css',
+        'public/css/components/characters/character-paths.css',
+        'public/css/components/characters/character-panel.css',
+        'public/css/components/characters/character-system.css',
+        'public/css/components/movement/movement-markers.css',
+        'public/css/components/ui/controls.css',
+        'public/css/components/ui/modals.css',
+        'public/css/components/ui/popups.css',
+        'public/css/components/ui/badges.css',
+        'public/css/components/features/search.css'
+      ];
+      
+      cssFiles.forEach((css, index) => {
+        setTimeout(() => loadCSS(css), index * 50);
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <!-- Loading overlay -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="loading-spinner"></div>
+    <div style="font-size: 18px; margin-bottom: 10px;">Adenai Map wird geladen...</div>
+    <div id="loading-status" style="font-size: 14px; opacity: 0.8;">Initialisierung...</div>
+    <div class="loading-progress">
+      <div id="loading-bar" class="loading-bar"></div>
+    </div>
+  </div>
+
+  <div id="map"></div>
+  
+  <!-- Dragon Shadow Overlay (hidden until main app loads) -->
+  <div class="dragon-shadow-overlay" style="display: none;">
+    <div class="dragon-shadow"></div>
+    <div class="dragon-shadow variant-2"></div>
+    <div class="dragon-shadow variant-3"></div>
+  </div>
+  
+  <div id="coords" style="display: none;">X: –, Y: –</div>
+  
+  <!-- Version indicator (hidden until loaded) -->
+  <div id="version-info" style="display: none;">
+    <!-- Auto-populated by GitHub Version Checker -->
+  </div>
+
+  <!-- Search Container (hidden until search system loads) -->
+  <div id="search-container" style="display: none;">
+    <input type="text" id="searchBox" placeholder="Begriff suchen..." />
+    <div id="resultsDropdown"></div>
+  </div>
+
+  <!-- Character Panel (hidden until character system loads) -->
+  <div id="character-panel" class="character-panel" style="display: none;">
+    <div class="resize-handle" id="resize-handle"></div>
+    
+    <div class="panel-header">
+      <h3 style="color:#c5c6ff;">Pfade der Charaktere</h3>
+    </div>
+    
+    <div class="panel-content">
+      <div class="character-grid" id="character-grid">
+          <!-- Character cards will be populated here by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- No JavaScript fallback -->
+  <noscript>
+    <div style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #222;
+      color: #f1e1bd;
+      padding: 20px;
+      font-family: sans-serif;
+      border-radius: 8px;
+      z-index: 2000;
+      text-align: center;">
+      Diese Karte benötigt JavaScript. Bitte aktiviere JavaScript in deinem Browser, um sie anzuzeigen.
+    </div>
+  </noscript>
+  
+  <!-- 🚀 PHASE 8: PROGRESSIVE MODULE LOADING -->
+  
+  <!-- Step 1: External Dependencies (Load immediately) -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="src/vendor/leaflet.curve.js"></script>
+  
+  <!-- Step 2: Bundle Optimization Tools -->
+  <script src="src/utils/bundle-analyzer.js?v=8.0"></script>
+  <script src="src/utils/module-loader.js?v=8.0"></script>
+  
+  <!-- Step 3: Critical Module Loading (Progressive) -->
+  <script>
+    // Global loading progress tracking
+    let loadingProgress = 0;
+    const totalSteps = 10;
+    
+    function updateLoadingProgress(step, message) {
+      loadingProgress = Math.min(step, totalSteps);
+      const percentage = (loadingProgress / totalSteps) * 100;
+      
+      const loadingBar = document.getElementById('loading-bar');
+      const loadingStatus = document.getElementById('loading-status');
+      
+      if (loadingBar) loadingBar.style.width = percentage + '%';
+      if (loadingStatus) loadingStatus.textContent = message;
+      
+      console.log(`[Loading] ${percentage.toFixed(0)}% - ${message}`);
+    }
+    
+    // Start progressive loading when DOM is ready
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        updateLoadingProgress(1, 'Starte progressive Modulladung...');
+        
+        // Initialize progressive loading
+        await ModuleLoader.initializeProgressiveLoading();
+        
+        updateLoadingProgress(3, 'Kritische Module geladen...');
+        
+        // Start bundle analysis in background
+        BundleAnalyzer.analyzeBundleStructure().then(analysis => {
+          console.log('📊 Bundle Analysis:', analysis);
+          
+          // Log optimization recommendations
+          if (analysis.recommendations.length > 0) {
+            console.group('📈 Optimization Recommendations:');
+            analysis.recommendations.forEach(rec => {
+              console.log(`${rec.priority === 'high' ? '🔴' : '🟡'} ${rec.message}`);
+            });
+            console.groupEnd();
+          }
+        });
+        
+      } catch (error) {
+        console.error('❌ Progressive loading failed:', error);
+        updateLoadingProgress(10, 'Fehler beim Laden - Fallback aktiv');
+        
+        // Fallback to traditional loading
+        ModuleLoader.fallbackToTraditionalLoading();
+      }
+    });
+    
+    // Listen for module loading events
+    document.addEventListener('criticalModulesLoaded', () => {
+      updateLoadingProgress(4, 'Kartengrundlagen geladen...');
+      
+      // Can start basic map initialization
+      if (typeof window.MapCore !== 'undefined') {
+        updateLoadingProgress(5, 'Karte wird initialisiert...');
+      }
+    });
+    
+    document.addEventListener('importantModulesLoaded', () => {
+      updateLoadingProgress(7, 'Hauptfunktionen geladen...');
+      
+      // Show main UI elements
+      setTimeout(() => {
+        const elementsToShow = [
+          'dragon-shadow-overlay',
+          'coords',
+          'search-container',
+          'character-panel'
+        ];
+        
+        elementsToShow.forEach(id => {
+          const element = document.getElementById(id);
+          if (element) element.style.display = '';
+        });
+        
+        updateLoadingProgress(8, 'Benutzeroberfläche aktiviert...');
+      }, 500);
+    });
+    
+    document.addEventListener('moduleLoaded', (event) => {
+      const { module, category } = event.detail;
+      console.log(`✅ Module loaded: ${module.split('/').pop()} (${category})`);
+      
+      // Update progress based on category
+      if (category === 'important') {
+        updateLoadingProgress(6, 'Wichtige Module laden...');
+      } else if (category === 'optional') {
+        updateLoadingProgress(9, 'Zusatzfunktionen werden geladen...');
+      }
+    });
+    
+    // Hide loading overlay when everything is ready
+    document.addEventListener('appReady', () => {
+      updateLoadingProgress(10, 'Adenai Map bereit!');
+      
+      setTimeout(() => {
+        const overlay = document.getElementById('loading-overlay');
+        if (overlay) {
+          overlay.style.opacity = '0';
+          overlay.style.transition = 'opacity 0.5s ease';
+          setTimeout(() => overlay.remove(), 500);
+        }
+      }, 500);
+    });
+    
+    // Performance monitoring
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        // Get performance stats
+        const bundleStats = BundleAnalyzer.getPerformanceStats();
+        const moduleHealth = ModuleLoader.checkModuleHealth();
+        
+        console.group('📊 Performance Summary:');
+        console.log('Bundle Stats:', bundleStats);
+        console.log('Module Health:', moduleHealth);
+        console.log('Total Load Time:', performance.now().toFixed(2) + 'ms');
+        console.groupEnd();
+        
+        // Dispatch app ready event
+        if (moduleHealth.status !== 'critical-missing') {
+          document.dispatchEvent(new CustomEvent('appReady'));
+        }
+      }, 1000);
+    });
+  </script>
+  
+  <!-- Step 4: Feature-based Loading Triggers -->
+  <script>
+    // Preload modules based on user interactions
+    document.addEventListener('DOMContentLoaded', () => {
+      // Preload character panel when user hovers over character elements
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest('.character-marker') || e.target.closest('[data-character]')) {
+          ModuleLoader.preloadForAction('open-character-panel');
+        }
+      });
+      
+      // Preload search when user focuses on search-like elements
+      document.addEventListener('focus', (e) => {
+        if (e.target.type === 'text' || e.target.placeholder?.includes('suchen')) {
+          ModuleLoader.preloadForAction('search-locations');
+        }
+      });
+      
+      // Preload coordinate copy on map interactions
+      document.addEventListener('contextmenu', () => {
+        ModuleLoader.preloadForAction('copy-coordinates');
+      });
+      
+      // Load features on demand
+      window.loadFeature = (featureName) => {
+        return ModuleLoader.loadFeature(featureName);
+      };
+    });
+  </script>
+  
+  <!-- Step 5: External Library Loading (Deferred) -->
+  <script>
+    // Load heavy external libraries when idle
+    function loadExternalLibraries() {
+      const libraries = [
+        'https://cdn.jsdelivr.net/gh/bbecquet/Leaflet.PolylineDecorator@master/dist/leaflet.polylineDecorator.min.js',
+        'https://unpkg.com/@panzoom/panzoom/dist/panzoom.min.js'
+      ];
+      
+      libraries.forEach((lib, index) => {
+        setTimeout(() => {
+          const script = document.createElement('script');
+          script.src = lib;
+          script.async = true;
+          document.head.appendChild(script);
+        }, index * 200);
+      });
+    }
+    
+    // Load when idle or after critical modules
+    document.addEventListener('criticalModulesLoaded', () => {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadExternalLibraries);
+      } else {
+        setTimeout(loadExternalLibraries, 1000);
+      }
+    });
+  </script>
+  
+  <!-- Emergency fallback script loading (if progressive loading completely fails) -->
+  <script>
+    // Fallback timeout - if nothing loads in 10 seconds, force traditional loading
+    setTimeout(() => {
+      if (!window.ModuleLoader || ModuleLoader.getLoadingStats().loaded === 0) {
+        console.warn('⚠️ Progressive loading timeout - activating emergency fallback');
+        
+        // Load essential scripts synchronously
+        const essentialScripts = [
+          'src/core/config.js',
+          'src/utils/logger.js',
+          'src/core/map-core.js',
+          'src/utils/http-utils.js',
+          'src/utils/data-manager.js',
+          'src/core/main.js'
+        ];
+        
+        essentialScripts.forEach(src => {
+          const script = document.createElement('script');
+          script.src = src + '?fallback=true';
+          script.async = false;
+          document.head.appendChild(script);
+        });
+        
+        updateLoadingProgress(10, 'Notfall-Modus aktiviert');
+      }
+    }, 10000);
+  </script>
+</body>
+</html>

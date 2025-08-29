@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 8: Bundle Optimization Test Suite</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #f1e1bd;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1, h2, h3 {
+            color: #c5c6ff;
+        }
+        
+        .test-section {
+            background: #2a2a2a;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #c5c6ff;
+        }
+        
+        .status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 5px 5px 5px 0;
+        }
+        
+        .status.success { background: #4CAF50; color: white; }
+        .status.warning { background: #FF9800; color: white; }
+        .status.error { background: #f44336; color: white; }
+        .status.info { background: #2196F3; color: white; }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: #333;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #555;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #c5c6ff;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #c5c6ff, #8a9cff);
+            transition: width 0.3s ease;
+        }
+        
+        .test-results {
+            background: #222;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        
+        .btn {
+            background: #c5c6ff;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #8a9cff;
+        }
+        
+        .recommendations {
+            background: #2a2a2a;
+            border: 1px solid #555;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .recommendation {
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #c5c6ff;
+            background: #333;
+        }
+        
+        .priority-high { border-left-color: #f44336; }
+        .priority-medium { border-left-color: #FF9800; }
+        .priority-low { border-left-color: #4CAF50; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #555;
+        }
+        
+        th {
+            background: #333;
+            color: #c5c6ff;
+        }
+        
+        tr:hover {
+            background: #2a2a2a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📦 Phase 8: Bundle Optimization Test Suite</h1>
+        <p>Advanced bundle analysis, code splitting, and optimization testing for Adenai Map</p>
+        
+        <!-- Test Controls -->
+        <div class="test-section">
+            <h2>🎮 Test Controls</h2>
+            <button class="btn" onclick="runAllTests()">Run All Tests</button>
+            <button class="btn" onclick="analyzeBundleStructure()">Analyze Bundle Structure</button>
+            <button class="btn" onclick="testProgressiveLoading()">Test Progressive Loading</button>
+            <button class="btn" onclick="simulateTreeShaking()">Simulate Tree Shaking</button>
+            <button class="btn" onclick="benchmarkPerformance()">Performance Benchmark</button>
+            <button class="btn" onclick="clearResults()">Clear Results</button>
+        </div>
+        
+        <!-- Performance Overview -->
+        <div class="test-section">
+            <h2>📊 Performance Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Total Bundle Size</h4>
+                    <div class="stat-value" id="totalBundleSize">-</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="bundleSizeProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h4>Modules Loaded</h4>
+                    <div class="stat-value" id="modulesLoaded">-</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="modulesProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h4>Load Time</h4>
+                    <div class="stat-value" id="loadTime">-</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="loadTimeProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h4>Optimization Score</h4>
+                    <div class="stat-value" id="optimizationScore">-</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="optimizationProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bundle Analysis Results -->
+        <div class="test-section">
+            <h2>🔍 Bundle Analysis Results</h2>
+            <div id="bundleAnalysisStatus" class="status info">Ready to analyze</div>
+            <div class="test-results" id="bundleAnalysisResults">
+                Click "Analyze Bundle Structure" to start analysis...
+            </div>
+        </div>
+        
+        <!-- Progressive Loading Test -->
+        <div class="test-section">
+            <h2>🚀 Progressive Loading Test</h2>
+            <div id="progressiveLoadingStatus" class="status info">Ready to test</div>
+            <div class="test-results" id="progressiveLoadingResults">
+                Click "Test Progressive Loading" to start test...
+            </div>
+        </div>
+        
+        <!-- Tree Shaking Simulation -->
+        <div class="test-section">
+            <h2>🌳 Tree Shaking Simulation</h2>
+            <div id="treeShakingStatus" class="status info">Ready to simulate</div>
+            <div class="test-results" id="treeShakingResults">
+                Click "Simulate Tree Shaking" to start simulation...
+            </div>
+        </div>
+        
+        <!-- Optimization Recommendations -->
+        <div class="test-section">
+            <h2>💡 Optimization Recommendations</h2>
+            <div id="recommendationsContainer">
+                <p>Run bundle analysis to get optimization recommendations...</p>
+            </div>
+        </div>
+        
+        <!-- Chunk Analysis -->
+        <div class="test-section">
+            <h2>📋 Chunk Analysis</h2>
+            <div id="chunkAnalysisContainer">
+                <table id="chunkTable" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>Chunk Name</th>
+                            <th>Size</th>
+                            <th>Modules</th>
+                            <th>Dependencies</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="chunkTableBody">
+                    </tbody>
+                </table>
+                <p id="noChunkData">Run bundle analysis to see chunk breakdown...</p>
+            </div>
+        </div>
+        
+        <!-- Performance Benchmark -->
+        <div class="test-section">
+            <h2>⚡ Performance Benchmark</h2>
+            <div id="benchmarkStatus" class="status info">Ready to benchmark</div>
+            <div class="test-results" id="benchmarkResults">
+                Click "Performance Benchmark" to start benchmarking...
+            </div>
+        </div>
+    </div>
+
+    <!-- Include required utilities -->
+    <script>
+        // Mock Logger for testing
+        const Logger = {
+            loading: (msg) => console.log(`🔄 ${msg}`),
+            success: (msg) => console.log(`✅ ${msg}`),
+            error: (msg) => console.error(`❌ ${msg}`),
+            warning: (msg) => console.warn(`⚠️ ${msg}`),
+            info: (msg) => console.info(`ℹ️ ${msg}`),
+            debug: (msg) => console.log(`🐛 ${msg}`)
+        };
+        
+        // Simplified HTTP utility
+        class HttpUtils {
+            static async fetchJSON(url) {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return await response.json();
+            }
+        }
+    </script>
+    
+    <!-- Load bundle optimization utilities -->
+    <script src="../src/utils/bundle-analyzer.js"></script>
+    <script src="../src/utils/module-loader.js"></script>
+    <script src="../src/utils/webpack-analyzer.js"></script>
+    
+    <script>
+        let testData = {
+            bundleAnalysis: null,
+            progressiveLoading: null,
+            treeShaking: null,
+            benchmark: null
+        };
+        
+        /**
+         * Run all tests
+         */
+        async function runAllTests() {
+            Logger.loading('🚀 Running all bundle optimization tests...');
+            
+            try {
+                await analyzeBundleStructure();
+                await testProgressiveLoading();
+                await simulateTreeShaking();
+                await benchmarkPerformance();
+                
+                Logger.success('✅ All tests completed successfully!');
+                updateOverallStats();
+                
+            } catch (error) {
+                Logger.error('❌ Test suite failed:', error);
+            }
+        }
+        
+        /**
+         * Analyze bundle structure
+         */
+        async function analyzeBundleStructure() {
+            const statusEl = document.getElementById('bundleAnalysisStatus');
+            const resultsEl = document.getElementById('bundleAnalysisResults');
+            
+            statusEl.textContent = 'Analyzing...';
+            statusEl.className = 'status info';
+            
+            try {
+                // Run bundle analysis
+                const analysis = await BundleAnalyzer.analyzeBundleStructure();
+                testData.bundleAnalysis = analysis;
+                
+                // Display results
+                resultsEl.innerHTML = `
+                    <strong>Bundle Analysis Complete:</strong><br>
+                    📦 Total Modules: ${analysis.totalModules}<br>
+                    📏 Total Size: ${(analysis.totalSize / 1024).toFixed(1)}KB<br>
+                    🔧 Recommendations: ${analysis.recommendations.length}<br><br>
+                    
+                    <strong>Bundle Breakdown:</strong><br>
+                    ${Object.entries(analysis.bundles).map(([category, bundle]) => 
+                        `${category}: ${bundle.modules.length} modules, ${(bundle.size / 1024).toFixed(1)}KB`
+                    ).join('<br>')}<br><br>
+                    
+                    <strong>Load Order Analysis:</strong><br>
+                    ${analysis.loadOrder.slice(0, 5).map((module, i) => 
+                        `${i + 1}. ${module.module.split('/').pop()} (${module.category}, ${(module.size / 1024).toFixed(1)}KB)`
+                    ).join('<br>')}
+                `;
+                
+                statusEl.textContent = 'Analysis Complete';
+                statusEl.className = 'status success';
+                
+                // Update recommendations
+                displayRecommendations(analysis.recommendations);
+                
+                // Update chunk analysis
+                displayChunkAnalysis(analysis.bundles);
+                
+                Logger.success('📊 Bundle structure analysis completed');
+                
+            } catch (error) {
+                resultsEl.innerHTML = `<span style="color: #f44336;">Error: ${error.message}</span>`;
+                statusEl.textContent = 'Analysis Failed';
+                statusEl.className = 'status error';
+                Logger.error('Bundle analysis failed:', error);
+            }
+        }
+        
+        /**
+         * Test progressive loading
+         */
+        async function testProgressiveLoading() {
+            const statusEl = document.getElementById('progressiveLoadingStatus');
+            const resultsEl = document.getElementById('progressiveLoadingResults');
+            
+            statusEl.textContent = 'Testing...';
+            statusEl.className = 'status info';
+            
+            try {
+                const startTime = performance.now();
+                
+                // Test module loader functionality
+                const loadingStats = ModuleLoader.getLoadingStats();
+                const moduleHealth = ModuleLoader.checkModuleHealth();
+                
+                const endTime = performance.now();
+                const testTime = endTime - startTime;
+                
+                testData.progressiveLoading = {
+                    loadingStats,
+                    moduleHealth,
+                    testTime
+                };
+                
+                resultsEl.innerHTML = `
+                    <strong>Progressive Loading Test Complete:</strong><br>
+                    ⏱️ Test Time: ${testTime.toFixed(2)}ms<br>
+                    📦 Loaded Modules: ${loadingStats.loaded}<br>
+                    🔄 Loading Modules: ${loadingStats.loading}<br>
+                    🎯 Module Health: ${moduleHealth.status}<br>
+                    📊 Critical Loaded: ${moduleHealth.criticalLoaded}<br>
+                    📊 Important Loaded: ${moduleHealth.importantLoaded}<br>
+                    📊 Optional Loaded: ${moduleHealth.optionalLoaded}<br><br>
+                    
+                    <strong>Loaded Modules:</strong><br>
+                    ${loadingStats.loadedModules.slice(0, 5).map(module => 
+                        `✅ ${module.split('/').pop()}`
+                    ).join('<br>')}
+                `;
+                
+                statusEl.textContent = 'Test Complete';
+                statusEl.className = moduleHealth.status === 'excellent' ? 'status success' : 'status warning';
+                
+                Logger.success('🚀 Progressive loading test completed');
+                
+            } catch (error) {
+                resultsEl.innerHTML = `<span style="color: #f44336;">Error: ${error.message}</span>`;
+                statusEl.textContent = 'Test Failed';
+                statusEl.className = 'status error';
+                Logger.error('Progressive loading test failed:', error);
+            }
+        }
+        
+        /**
+         * Simulate tree shaking
+         */
+        async function simulateTreeShaking() {
+            const statusEl = document.getElementById('treeShakingStatus');
+            const resultsEl = document.getElementById('treeShakingResults');
+            
+            statusEl.textContent = 'Simulating...';
+            statusEl.className = 'status info';
+            
+            try {
+                // Run webpack-style analysis
+                const analysis = await WebpackAnalyzer.analyzeBundleComposition();
+                testData.treeShaking = analysis;
+                
+                const report = WebpackAnalyzer.generateBundleReport(analysis);
+                
+                resultsEl.innerHTML = `
+                    <strong>Tree Shaking Simulation Complete:</strong><br>
+                    📦 Total Chunks: ${report.summary.totalChunks}<br>
+                    📏 Total Size: ${report.summary.totalSize}<br>
+                    🔄 Duplications: ${report.summary.duplications}<br>
+                    🌳 Unused Exports: ${report.summary.unusedExports}<br>
+                    🔧 Optimizations: ${report.summary.optimizations}<br><br>
+                    
+                    <strong>Top Duplicated Modules:</strong><br>
+                    ${report.duplicatedModules.slice(0, 3).map(dup => 
+                        `📋 ${dup.module} in [${dup.chunks.join(', ')}] - Save: ${dup.savings}`
+                    ).join('<br>')}<br><br>
+                    
+                    <strong>Unused Code (Top 5):</strong><br>
+                    ${report.unusedCode.slice(0, 5).map(unused => 
+                        `🗑️ ${unused.export} (${unused.type}) in ${unused.module} - ${unused.size}`
+                    ).join('<br>')}
+                `;
+                
+                statusEl.textContent = 'Simulation Complete';
+                statusEl.className = 'status success';
+                
+                Logger.success('🌳 Tree shaking simulation completed');
+                
+            } catch (error) {
+                resultsEl.innerHTML = `<span style="color: #f44336;">Error: ${error.message}</span>`;
+                statusEl.textContent = 'Simulation Failed';
+                statusEl.className = 'status error';
+                Logger.error('Tree shaking simulation failed:', error);
+            }
+        }
+        
+        /**
+         * Benchmark performance
+         */
+        async function benchmarkPerformance() {
+            const statusEl = document.getElementById('benchmarkStatus');
+            const resultsEl = document.getElementById('benchmarkResults');
+            
+            statusEl.textContent = 'Benchmarking...';
+            statusEl.className = 'status info';
+            
+            try {
+                const startTime = performance.now();
+                
+                // Get performance stats
+                const bundleStats = BundleAnalyzer.getPerformanceStats();
+                const moduleHealth = ModuleLoader.checkModuleHealth();
+                
+                // Calculate performance score
+                const performanceScore = calculatePerformanceScore(bundleStats, moduleHealth);
+                
+                const endTime = performance.now();
+                const benchmarkTime = endTime - startTime;
+                
+                testData.benchmark = {
+                    bundleStats,
+                    moduleHealth,
+                    performanceScore,
+                    benchmarkTime
+                };
+                
+                resultsEl.innerHTML = `
+                    <strong>Performance Benchmark Complete:</strong><br>
+                    ⏱️ Benchmark Time: ${benchmarkTime.toFixed(2)}ms<br>
+                    🎯 Performance Score: ${performanceScore.score}/100<br>
+                    📊 Load Time Score: ${performanceScore.loadTimeScore}/25<br>
+                    📦 Bundle Size Score: ${performanceScore.bundleSizeScore}/25<br>
+                    🔧 Module Health Score: ${performanceScore.moduleHealthScore}/25<br>
+                    💾 Memory Score: ${performanceScore.memoryScore}/25<br><br>
+                    
+                    <strong>Bundle Stats:</strong><br>
+                    Average Load Time: ${bundleStats.averageLoadTime?.toFixed(2) || 'N/A'}ms<br>
+                    Total Transfer Size: ${(bundleStats.totalTransferSize / 1024).toFixed(1)}KB<br>
+                    Compression Ratio: ${(bundleStats.compressionRatio * 100).toFixed(1)}%<br><br>
+                    
+                    <strong>Performance Grade:</strong> ${getPerformanceGrade(performanceScore.score)}
+                `;
+                
+                statusEl.textContent = 'Benchmark Complete';
+                statusEl.className = performanceScore.score >= 80 ? 'status success' : 
+                                   performanceScore.score >= 60 ? 'status warning' : 'status error';
+                
+                Logger.success('⚡ Performance benchmark completed');
+                
+            } catch (error) {
+                resultsEl.innerHTML = `<span style="color: #f44336;">Error: ${error.message}</span>`;
+                statusEl.textContent = 'Benchmark Failed';
+                statusEl.className = 'status error';
+                Logger.error('Performance benchmark failed:', error);
+            }
+        }
+        
+        /**
+         * Calculate performance score
+         */
+        function calculatePerformanceScore(bundleStats, moduleHealth) {
+            // Load time score (25 points max)
+            const avgLoadTime = bundleStats.averageLoadTime || 1000;
+            const loadTimeScore = Math.max(0, 25 - (avgLoadTime / 100));
+            
+            // Bundle size score (25 points max)
+            const totalSize = bundleStats.totalTransferSize || 500000;
+            const bundleSizeScore = Math.max(0, 25 - (totalSize / 50000));
+            
+            // Module health score (25 points max)
+            const healthScores = {
+                'excellent': 25,
+                'good': 20,
+                'minimal': 15,
+                'critical-missing': 5
+            };
+            const moduleHealthScore = healthScores[moduleHealth.status] || 10;
+            
+            // Memory score (25 points max)
+            const compressionRatio = bundleStats.compressionRatio || 0.7;
+            const memoryScore = Math.min(25, compressionRatio * 35);
+            
+            const totalScore = Math.round(loadTimeScore + bundleSizeScore + moduleHealthScore + memoryScore);
+            
+            return {
+                score: totalScore,
+                loadTimeScore: Math.round(loadTimeScore),
+                bundleSizeScore: Math.round(bundleSizeScore),
+                moduleHealthScore,
+                memoryScore: Math.round(memoryScore)
+            };
+        }
+        
+        /**
+         * Get performance grade
+         */
+        function getPerformanceGrade(score) {
+            if (score >= 90) return 'A+ (Excellent)';
+            if (score >= 80) return 'A (Very Good)';
+            if (score >= 70) return 'B (Good)';
+            if (score >= 60) return 'C (Fair)';
+            if (score >= 50) return 'D (Poor)';
+            return 'F (Needs Work)';
+        }
+        
+        /**
+         * Display recommendations
+         */
+        function displayRecommendations(recommendations) {
+            const container = document.getElementById('recommendationsContainer');
+            
+            if (recommendations.length === 0) {
+                container.innerHTML = '<p>🎉 No optimization recommendations - your bundle is well optimized!</p>';
+                return;
+            }
+            
+            const html = recommendations.map(rec => `
+                <div class="recommendation priority-${rec.priority}">
+                    <h4>${rec.type === 'size-warning' ? '📏' : rec.type === 'heavy-module' ? '📦' : '🔧'} ${rec.message}</h4>
+                    <p><strong>Priority:</strong> ${rec.priority}</p>
+                    <p><strong>Action:</strong> ${rec.action}</p>
+                </div>
+            `).join('');
+            
+            container.innerHTML = `<div class="recommendations">${html}</div>`;
+        }
+        
+        /**
+         * Display chunk analysis
+         */
+        function displayChunkAnalysis(bundles) {
+            const table = document.getElementById('chunkTable');
+            const tbody = document.getElementById('chunkTableBody');
+            const noDataEl = document.getElementById('noChunkData');
+            
+            if (Object.keys(bundles).length === 0) {
+                table.style.display = 'none';
+                noDataEl.style.display = 'block';
+                return;
+            }
+            
+            tbody.innerHTML = Object.entries(bundles).map(([category, bundle]) => `
+                <tr>
+                    <td>${category}</td>
+                    <td>${(bundle.size / 1024).toFixed(1)}KB</td>
+                    <td>${bundle.modules.length}</td>
+                    <td>-</td>
+                    <td><span class="status success">Loaded</span></td>
+                </tr>
+            `).join('');
+            
+            table.style.display = 'table';
+            noDataEl.style.display = 'none';
+        }
+        
+        /**
+         * Update overall stats
+         */
+        function updateOverallStats() {
+            if (!testData.bundleAnalysis) return;
+            
+            const analysis = testData.bundleAnalysis;
+            const benchmark = testData.benchmark;
+            
+            // Update stats
+            document.getElementById('totalBundleSize').textContent = (analysis.totalSize / 1024).toFixed(1) + 'KB';
+            document.getElementById('modulesLoaded').textContent = analysis.totalModules;
+            
+            if (benchmark) {
+                document.getElementById('loadTime').textContent = benchmark.bundleStats.averageLoadTime?.toFixed(0) + 'ms' || 'N/A';
+                document.getElementById('optimizationScore').textContent = benchmark.performanceScore.score + '/100';
+                
+                // Update progress bars
+                document.getElementById('bundleSizeProgress').style.width = Math.min(100, (analysis.totalSize / 1024) / 5) + '%';
+                document.getElementById('modulesProgress').style.width = Math.min(100, (analysis.totalModules / 20) * 100) + '%';
+                document.getElementById('loadTimeProgress').style.width = Math.max(0, 100 - (benchmark.bundleStats.averageLoadTime || 100) / 10) + '%';
+                document.getElementById('optimizationProgress').style.width = benchmark.performanceScore.score + '%';
+            }
+        }
+        
+        /**
+         * Clear all results
+         */
+        function clearResults() {
+            const resultElements = [
+                'bundleAnalysisResults',
+                'progressiveLoadingResults', 
+                'treeShakingResults',
+                'benchmarkResults'
+            ];
+            
+            resultElements.forEach(id => {
+                document.getElementById(id).innerHTML = 'Results cleared...';
+            });
+            
+            const statusElements = [
+                'bundleAnalysisStatus',
+                'progressiveLoadingStatus',
+                'treeShakingStatus', 
+                'benchmarkStatus'
+            ];
+            
+            statusElements.forEach(id => {
+                const el = document.getElementById(id);
+                el.textContent = 'Ready';
+                el.className = 'status info';
+            });
+            
+            // Clear recommendations
+            document.getElementById('recommendationsContainer').innerHTML = '<p>Run bundle analysis to get optimization recommendations...</p>';
+            
+            // Clear chunk analysis
+            document.getElementById('chunkTable').style.display = 'none';
+            document.getElementById('noChunkData').style.display = 'block';
+            
+            // Reset stats
+            ['totalBundleSize', 'modulesLoaded', 'loadTime', 'optimizationScore'].forEach(id => {
+                document.getElementById(id).textContent = '-';
+            });
+            
+            ['bundleSizeProgress', 'modulesProgress', 'loadTimeProgress', 'optimizationProgress'].forEach(id => {
+                document.getElementById(id).style.width = '0%';
+            });
+            
+            testData = {
+                bundleAnalysis: null,
+                progressiveLoading: null,
+                treeShaking: null,
+                benchmark: null
+            };
+            
+            Logger.info('🧹 Test results cleared');
+        }
+        
+        // Auto-run basic analysis on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                Logger.info('📦 Bundle optimization test suite ready');
+                Logger.info('💡 Click "Run All Tests" to start comprehensive analysis');
+            }, 500);
+        });
+    </script>
+</body>
+</html>
