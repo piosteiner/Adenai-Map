@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "1cd722afb2d60e7f243fd70d64e051c6fc84574b",
+      "action": "update",
+      "type": "character",
+      "itemName": "König Torrack",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:36:02.730Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:36:02.730Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: k_nig_torrack (by gm) - changed relationship to unknown"
+    },
+    {
       "commitSha": "38b8c5e261d7c6f3f748056d82af21f027d6986e",
       "action": "update",
       "type": "character",
@@ -2901,5 +2914,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:35:48.540Z"
+  "lastUpdated": "2025-08-29T20:36:02.730Z"
 }
