@@ -69,8 +69,6 @@ class ImageHoverPreview {
 
             .preview-container {
                 position: relative;
-                max-width: 90vw;
-                max-height: 90vh;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -120,7 +118,7 @@ class ImageHoverPreview {
             /* Hover-enabled images styling */
             .hover-preview-enabled {
                 transition: transform 0.2s ease, opacity 0.2s ease;
-                cursor: zoom-in;
+                cursor: pointer;
             }
 
             .hover-preview-enabled:hover {
@@ -146,8 +144,15 @@ class ImageHoverPreview {
             }
         });
 
-        // Close preview when clicking anywhere
-        document.addEventListener('click', () => {
+        // Handle image clicks to open in new tab
+        document.addEventListener('click', (e) => {
+            if (this.shouldPreviewImage(e.target)) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.handleImageClick(e.target);
+                return;
+            }
+            // Close preview when clicking anywhere else
             this.hidePreview();
         });
 
@@ -216,6 +221,22 @@ class ImageHoverPreview {
         this.hidePreview();
     }
 
+    handleImageClick(image) {
+        // Open image in new tab without switching to it
+        const newTab = window.open(image.src, '_blank');
+        
+        // Prevent the browser from switching to the new tab
+        if (newTab) {
+            newTab.blur();
+            window.focus();
+        }
+        
+        // Hide any visible preview
+        this.hidePreview();
+        
+        Logger.debug('🖼️ Image opened in new tab:', image.src);
+    }
+
     showPreview(originalImage) {
         if (this.isPreviewVisible) return;
 
@@ -227,14 +248,14 @@ class ImageHoverPreview {
         previewImage.src = originalImage.src;
         previewImage.alt = originalImage.alt || '';
 
-        // Calculate optimal size - limit the larger dimension to 80% of viewport
+        // Calculate optimal size - limit to 60% of viewport for reasonable sizing
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
         
-        // Set container to use 80% of viewport for both dimensions
+        // Set container to use 60% of viewport for both dimensions
         // The image will scale proportionally within these constraints
-        container.style.maxWidth = `${viewportWidth * 0.8}px`;
-        container.style.maxHeight = `${viewportHeight * 0.8}px`;
+        container.style.maxWidth = `${viewportWidth * 0.6}px`;
+        container.style.maxHeight = `${viewportHeight * 0.6}px`;
 
         // Set caption
         const captionText = originalImage.alt || 
