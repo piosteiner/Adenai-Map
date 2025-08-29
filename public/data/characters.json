@@ -857,7 +857,24 @@
       "movementHistory": [],
       "createdAt": "2025-08-29T20:33:49.688Z",
       "updatedAt": "2025-08-29T20:33:49.688Z"
+    },
+    {
+      "id": "graf_honza",
+      "name": "Graf Honza",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/honza_close.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:34:25.256Z",
+      "updatedAt": "2025-08-29T20:34:25.256Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:33:49.688Z"
+  "lastUpdated": "2025-08-29T20:34:25.256Z"
 }
