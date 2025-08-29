@@ -756,7 +756,7 @@
     {
       "id": "colette_pinet",
       "name": "Colette Pinet",
-      "title": "",
+      "title": "Tochter der Pinet Familie",
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
@@ -767,9 +767,10 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2025-08-29T20:24:46.436Z",
-      "updatedAt": "2025-08-29T20:24:46.436Z"
+      "updatedAt": "2025-08-29T20:25:23.933Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:24:46.436Z"
+  "lastUpdated": "2025-08-29T20:25:23.933Z"
 }
