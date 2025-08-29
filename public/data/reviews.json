@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "2f748503adedb76a0ec703dd4d83e2453069852f",
+      "action": "create",
+      "type": "character",
+      "itemName": "Dravak Svya",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:31:03.482Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:31:03.482Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Dravak Svya (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "ab90c60de58f0f77f1985e436ff7fbdf2769f0a8",
       "action": "create",
       "type": "character",
@@ -2719,5 +2732,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:28:54.934Z"
+  "lastUpdated": "2025-08-29T20:31:03.482Z"
 }
