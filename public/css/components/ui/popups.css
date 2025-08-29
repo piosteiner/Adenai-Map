@@ -227,22 +227,27 @@
 .panel-popup-close {
   background: none;
   border: none;
-  font-size: 24px;
   cursor: pointer;
   color: #6c757d;
-  padding: 0;
-  width: 30px;
-  height: 30px;
+  padding: 6px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: all 0.2s ease;
+  position: relative;
 }
 
 .panel-popup-close:hover {
-  background: #e9ecef;
-  color: #495057;
+  background: #f8f9fa;
+  color: #343a40;
+  transform: scale(1.05);
+}
+
+.panel-popup-close:active {
+  transform: scale(0.95);
 }
 
 .panel-popup-content {
@@ -392,7 +397,7 @@
 }
 
 [data-theme="dark"] .panel-popup-close:hover {
-  background: #5a6268;
+  background: #495057;
   color: #f8f9fa;
 }
 
