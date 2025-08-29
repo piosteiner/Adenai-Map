@@ -622,10 +622,6 @@ class CharacterSystem {
         const imageHtml = character.image ? 
             `<img src="${character.image}" alt="${character.name}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px; float: right; margin-left: 10px;">` : '';
         
-        // Show movement count if available
-        const movementCount = character.movementHistory ? character.movementHistory.length : 0;
-        const movementInfo = movementCount > 0 ? `<div><strong>🛤️ Movement History:</strong> ${movementCount} locations</div>` : '';
-        
         return `
             <div class="character-popup">
                 ${imageHtml}
@@ -644,7 +640,6 @@ class CharacterSystem {
                 ${character.faction ? `<div><strong>🛡️ Fraktion:</strong> ${character.faction}</div>` : ''}
                 ${character.firstMet ? `<div><strong>📅 Erstmals getroffen:</strong> ${character.firstMet}</div>` : ''}
                 <div><strong>📍 Aktueller Ort:</strong> ${this.getCurrentLocation(character)}</div>
-                ${movementInfo}
                 ${character.placeOfOrigin ? `<div><strong>🌍 Herkunftsort:</strong> ${character.placeOfOrigin}</div>` : ''}
                 ${character.description ? `<div style="margin-top: 8px;"><strong>📝 Beschreibung:</strong><br>${character.description}</div>` : ''}
                 ${character.notes ? `<div style="margin-top: 8px;"><strong>📋 Notizen:</strong><br>${character.notes}</div>` : ''}
