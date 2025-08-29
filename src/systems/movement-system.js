@@ -67,6 +67,13 @@ class MovementSystem {
             
             console.log(`✅ Created ${this.movementMarkers.length} movement markers`);
             
+            // Emit event that movement markers are loaded
+            document.dispatchEvent(new CustomEvent('movementMarkersLoaded', { 
+                detail: { 
+                    markers: this.movementMarkers 
+                } 
+            }));
+            
         } catch (error) {
             console.error('❌ Failed to load character movement markers:', error);
         }
@@ -210,6 +217,14 @@ class MovementSystem {
         this.characterPaths.forEach(pathData => {
             pathData.isVisible = true;
         });
+        
+        // Emit event that character path visibility changed
+        document.dispatchEvent(new CustomEvent('characterPathVisibilityChanged', { 
+            detail: { 
+                action: 'showAll',
+                visiblePaths: this.characterPaths.filter(p => p.isVisible)
+            } 
+        }));
     }
 
     // Hide all character paths
@@ -236,6 +251,14 @@ class MovementSystem {
         this.characterPaths.forEach(pathData => {
             pathData.isVisible = false;
         });
+        
+        // Emit event that character path visibility changed
+        document.dispatchEvent(new CustomEvent('characterPathVisibilityChanged', { 
+            detail: { 
+                action: 'hideAll',
+                visiblePaths: this.characterPaths.filter(p => p.isVisible)
+            } 
+        }));
     }
 
     // Show specific character path by ID
@@ -258,6 +281,15 @@ class MovementSystem {
                         markerData.isVisible = true;
                     }
                 });
+            
+            // Emit event that character path visibility changed
+            document.dispatchEvent(new CustomEvent('characterPathVisibilityChanged', { 
+                detail: { 
+                    action: 'showCharacter',
+                    characterId: characterId,
+                    visiblePaths: this.characterPaths.filter(p => p.isVisible)
+                } 
+            }));
             
             return true;
         }
@@ -289,6 +321,15 @@ class MovementSystem {
                         }
                     }
                 });
+            
+            // Emit event that character path visibility changed
+            document.dispatchEvent(new CustomEvent('characterPathVisibilityChanged', { 
+                detail: { 
+                    action: 'hideCharacter',
+                    characterId: characterId,
+                    visiblePaths: this.characterPaths.filter(p => p.isVisible)
+                } 
+            }));
             
             return true;
         }

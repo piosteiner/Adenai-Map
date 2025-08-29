@@ -180,6 +180,32 @@
   transform: translateY(0);
 }
 
+/* Global Clustering Button States */
+.movement-btn.clustering-active {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border-color: #059669;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+.movement-btn.clustering-active:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.movement-btn.clustering-inactive {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  color: white;
+  border-color: #4b5563;
+  opacity: 0.7;
+}
+
+.movement-btn.clustering-inactive:hover {
+  background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+  opacity: 1;
+  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+}
+
 /* Date Controls */
 .date-controls {
   padding: 12px;
