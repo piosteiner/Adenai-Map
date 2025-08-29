@@ -795,16 +795,17 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/dravak_close.png",
       "status": "alive",
       "faction": "",
       "relationship": "ally",
       "firstMet": "",
       "notes": "Stadthalter von Donnermund",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2025-08-29T20:31:02.748Z",
-      "updatedAt": "2025-08-29T20:31:02.748Z"
+      "updatedAt": "2025-08-29T20:31:24.807Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:31:02.748Z"
+  "lastUpdated": "2025-08-29T20:31:24.807Z"
 }
