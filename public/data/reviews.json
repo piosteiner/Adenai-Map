@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "748d5f4f30fa35559186119d18ba9b31c8f8f31d",
+      "action": "update",
+      "type": "character",
+      "itemName": "Ceres Golwit",
+      "user": "gm",
+      "timestamp": "2025-08-29T21:00:50.663Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T21:00:50.663Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Ceres Golwit (by gm) - Rena (5663-06-03)"
+    },
+    {
       "commitSha": "bfa6fd1a13cab47118a8faa351ed7ef8ccebceaa",
       "action": "update",
       "type": "character",
@@ -3694,5 +3707,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T21:00:26.283Z"
+  "lastUpdated": "2025-08-29T21:00:50.663Z"
 }
