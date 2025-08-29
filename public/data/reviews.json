@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6b7a9d044c255a22fe26311657413d358fc90071",
+      "action": "update",
+      "type": "character",
+      "itemName": "Prinz Torren",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:55:54.077Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:55:54.077Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Prinz Torren (by gm) - Rena (5663-06-03)"
+    },
+    {
       "commitSha": "619f7b6832592322831b9984463e5cab5c781099",
       "action": "update",
       "type": "character",
@@ -3551,5 +3564,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:53:31.033Z"
+  "lastUpdated": "2025-08-29T20:55:54.078Z"
 }
