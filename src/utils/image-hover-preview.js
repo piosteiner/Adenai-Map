@@ -207,10 +207,10 @@ class ImageHoverPreview {
         // Add hover styling
         image.classList.add('hover-preview-enabled');
 
-        // Show preview after short delay
+        // Show preview after delay
         this.hoverTimeout = setTimeout(() => {
             this.showPreview(image);
-        }, 300); // 300ms delay to prevent accidental triggers
+        }, 500); // 500ms delay to prevent accidental triggers
     }
 
     handleImageLeave(image, event) {
