@@ -180,7 +180,7 @@ class MovementMarkers {
                         position: absolute;
                         bottom: -2px;
                         right: -2px;
-                        background: #f59e0b;
+                        background: #ff6b24;
                         border-radius: 50%;
                         width: 12px;
                         height: 12px;
