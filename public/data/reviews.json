@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "609a2675674bbef888e92eafaf6a05c15456f8ad",
+      "action": "update",
+      "type": "character",
+      "itemName": "Jara Koreen",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:38:37.715Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:38:37.715Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: jara_koreen (by gm) - added image"
+    },
+    {
       "commitSha": "8cb74e370eda46de3c112ff4693d8194112e2f0e",
       "action": "create",
       "type": "character",
@@ -2992,5 +3005,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:38:02.166Z"
+  "lastUpdated": "2025-08-29T20:38:37.715Z"
 }
