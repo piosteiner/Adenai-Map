@@ -21,7 +21,7 @@ class MapCore {
         // Dispatch map initialization event for other systems
         setTimeout(() => {
             document.dispatchEvent(new CustomEvent('adenaiMapInitialized'));
-            console.log('🗺️ Map initialization event dispatched');
+            Logger.info('🗺️ Map initialization event dispatched');
         }, 100);
     }
 
@@ -146,14 +146,14 @@ class MapCore {
         this.map.setMaxBounds(maxBounds);
         this.map.options.maxBoundsViscosity = 1.0; // Prevent any movement outside bounds
 
-        console.log(`🗺️ Map bounds restricted to: ${restrictionDistance}px beyond map edges`);
+        Logger.info(`🗺️ Map bounds restricted to: ${restrictionDistance}px beyond map edges`);
 
         // Add custom zoom control
         try {
             // this.setupCustomZoomControl(); // Commented out to remove zoom slider
-            console.log('✅ Custom zoom control disabled by user request');
+            Logger.success('✅ Custom zoom control disabled by user request');
         } catch (error) {
-            console.error('❌ Failed to setup custom zoom control:', error);
+            Logger.error('❌ Failed to setup custom zoom control:', error);
         }
 
         // Set dragging container
@@ -162,7 +162,7 @@ class MapCore {
         // 🔥 ADD THIS LINE - Fix for journey system
         window.map = this.map;
         
-        console.log('🗺️ Leaflet map initialized:', this.map);
+        Logger.success('🗺️ Leaflet map initialized:', this.map);
     }
 
     // 🔥 NEW METHOD: Expose map globally for compatibility with existing journey system
@@ -174,10 +174,10 @@ class MapCore {
         window.mapCore = this;
         
         // Add debug info
-        console.log('🌍 Global map references set:');
-        console.log('  window.map:', window.map);
-        console.log('  window.mapCore:', window.mapCore);
-        console.log('  Map has addLayer method:', typeof window.map?.addLayer === 'function');
+        Logger.info('🌍 Global map references set:');
+        Logger.info('  window.map:', window.map);
+        Logger.info('  window.mapCore:', window.mapCore);
+        Logger.info('  Map has addLayer method:', typeof window.map?.addLayer === 'function');
         
         // Dispatch event for modules waiting for map to be ready
         document.dispatchEvent(new CustomEvent('leafletMapReady', {
@@ -293,21 +293,21 @@ class MapCore {
         }
         
         if (issues.length > 0) {
-            console.error('🚨 Map setup issues:', issues);
+            Logger.error('🚨 Map setup issues:', issues);
             return false;
         }
         
-        console.log('✅ Map setup validation passed');
+        Logger.success('✅ Map setup validation passed');
         return true;
     }
 
     setupCustomZoomControl() {
-        console.log('🔧 Setting up custom zoom control...');
-        console.log('Map object:', this.map);
-        console.log('Map type:', typeof this.map);
+        Logger.debug('🔧 Setting up custom zoom control...');
+        Logger.debug('Map object:', this.map);
+        Logger.debug('Map type:', typeof this.map);
         
         if (!this.map) {
-            console.error('❌ Map object is not available');
+            Logger.error('❌ Map object is not available');
             return;
         }
         // Create zoom control container
@@ -368,7 +368,7 @@ class MapCore {
         // Initial display update
         zoomDisplay.textContent = this.getZoomPercentage();
         
-        console.log('🎚️ Custom zoom control initialized');
+        Logger.success('🎚️ Custom zoom control initialized');
     }
     
     getZoomPercentage() {
@@ -384,7 +384,7 @@ class MapCore {
 
 // Create global map core instance after DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 DOM loaded, initializing MapCore...');
+    Logger.init('🚀 DOM loaded, initializing MapCore...');
     window.mapCore = new MapCore();
     
     // Validate setup after a short delay to ensure everything is ready
@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.mapCore) {
             const isValid = window.mapCore.validateMapSetup();
             if (isValid) {
-                console.log('🎉 Map core ready for journey system!');
+                Logger.success('🎉 Map core ready for journey system!');
             }
         }
     }, 100);

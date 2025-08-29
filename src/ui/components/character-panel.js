@@ -45,10 +45,10 @@ class CharacterPanel {
         this.resizeHandle = document.getElementById('resize-handle');
         this.retractBtn = document.getElementById('retract-panel');
         
-        console.log('🔧 Panel init - resize handle found:', !!this.resizeHandle);
+        Logger.debug('🔧 Panel init - resize handle found:', !!this.resizeHandle);
         
         if (!this.panel || !this.grid) {
-            console.warn('Character panel elements not found');
+            Logger.warn('Character panel elements not found');
             return;
         }
         
@@ -73,7 +73,7 @@ class CharacterPanel {
             if (characterInfo) {
                 const characterName = characterInfo.dataset.characterName;
                 if (characterName) {
-                    console.log(`🖱️ Character clicked: "${characterName}"`);
+                    Logger.debug(`🖱️ Character clicked: "${characterName}"`);
                     this.focusCharacter(characterName);
                 }
             }
@@ -109,22 +109,22 @@ class CharacterPanel {
 
         // Setup hover behavior for resize handle - only for collapse when panel is open
         if (this.resizeHandle) {
-            console.log('🔧 Setting up resize handle hover behavior');
-            console.log('🔧 EventUtils available:', typeof EventUtils !== 'undefined');
+            Logger.debug('🔧 Setting up resize handle hover behavior');
+            Logger.debug('🔧 EventUtils available:', typeof EventUtils !== 'undefined');
             this.handleHoverCleanup = EventUtils.setupHoverBehavior(this.resizeHandle, {
                 enterDelay: 1000, // 1 second delay before collapse
                 onEnter: () => {
-                    console.log('🖱️ Resize handle mouse enter');
+                    Logger.debug('🖱️ Resize handle mouse enter');
                     // Only handle collapse behavior when panel is already open
                     if (!this.panel.classList.contains('collapsed') && !this.isResizing) {
-                        console.log('🖱️ Panel is open - will collapse after 1 second hover');
+                        Logger.debug('🖱️ Panel is open - will collapse after 1 second hover');
                         // The enterDelay handles the 1-second wait automatically
                         this.collapsePanel();
                         this.isHoverExpanded = false;
                     }
                 },
                 onLeave: () => {
-                    console.log('🖱️ Resize handle mouse leave - no action needed');
+                    Logger.debug('🖱️ Resize handle mouse leave - no action needed');
                     // No action needed on leave since EventUtils handles the delay cancellation
                 }
             });
@@ -379,7 +379,7 @@ class CharacterPanel {
 
     toggleCharacterPath(characterId) {
         if (!window.movementSystem) {
-            console.warn('⚠️ Movement system not available');
+            Logger.warn('⚠️ Movement system not available');
             return;
         }
         
@@ -398,27 +398,27 @@ class CharacterPanel {
     }
 
     focusCharacter(characterName) {
-        console.log(`🎯 Character panel requesting focus for: "${characterName}"`);
+        Logger.panel(`🎯 Character panel requesting focus for: "${characterName}"`);
         
         // Check if character system is available
         if (!window.characterSystem) {
-            console.error('❌ Character system not available!');
+            Logger.error('❌ Character system not available!');
             return;
         }
         
         if (typeof window.characterSystem.focusCharacter !== 'function') {
-            console.error('❌ Character system focusCharacter method not available!');
+            Logger.error('❌ Character system focusCharacter method not available!');
             return;
         }
         
         const success = window.characterSystem.focusCharacter(characterName);
         
         if (!success) {
-            console.warn(`⚠️ Could not focus on character "${characterName}"`);
+            Logger.warn(`⚠️ Could not focus on character "${characterName}"`);
             return;
         }
 
-        console.log(`✅ Successfully focused on character "${characterName}"`);
+        Logger.success(`✅ Successfully focused on character "${characterName}"`);
         
         // Collapse panel on mobile for better map visibility
         if (window.innerWidth <= 768) {

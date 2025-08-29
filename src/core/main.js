@@ -85,7 +85,7 @@ class AdenaiMap {
             .map(([name]) => name);
 
         if (missingSystems.length > 0) {
-            console.warn('⚠️ Missing systems:', missingSystems);
+            Logger.warn('⚠️ Missing systems:', missingSystems);
             // Don't throw error, just warn - some systems might be optional
         }
 
@@ -132,33 +132,33 @@ class AdenaiMap {
             Logger.success('All data loaded successfully');
             
         } catch (error) {
-            console.error('❌ Error loading map data:', error);
+            Logger.error('❌ Error loading map data:', error);
             throw error;
         }
     }
 
     // 🔥 NEW: Initialize journey system
     initializeJourneys() {
-        console.log('🛤️ Initializing journey system...');
+        Logger.init('🛤️ Initializing journey system...');
         
         // Check if journey functions are available
         if (typeof window.loadJourneys === 'function') {
             // Validate map is available for journeys
             if (window.map && typeof window.map.addLayer === 'function') {
-                console.log('📍 Map validated for journeys, loading...');
+                Logger.success('📍 Map validated for journeys, loading...');
                 window.loadJourneys().catch(error => {
-                    console.error('❌ Failed to load journeys:', error);
+                    Logger.error('❌ Failed to load journeys:', error);
                 });
             } else {
-                console.error('❌ Map not available for journey system');
-                console.log('Debug info:', {
+                Logger.error('❌ Map not available for journey system');
+                Logger.debug('Debug info:', {
                     windowMap: !!window.map,
                     mapType: window.map?.constructor?.name,
                     hasAddLayer: typeof window.map?.addLayer
                 });
             }
         } else {
-            console.log('ℹ️ Journey system not loaded (loadJourneys function not found)');
+            Logger.info('ℹ️ Journey system not loaded (loadJourneys function not found)');
         }
     }
 
@@ -189,12 +189,12 @@ class AdenaiMap {
 
         // Error handling
         window.addEventListener('error', (event) => {
-            console.error('🚨 Global error caught:', event.error);
+            Logger.error('🚨 Global error caught:', event.error);
         });
 
         // Unhandled promise rejections
         window.addEventListener('unhandledrejection', (event) => {
-            console.error('🚨 Unhandled promise rejection:', event.reason);
+            Logger.error('🚨 Unhandled promise rejection:', event.reason);
         });
     }
 
@@ -224,11 +224,11 @@ class AdenaiMap {
     getMap() {
         const map = this.getLeafletMap();
         if (!map) {
-            console.error('❌ No Leaflet map available');
+            Logger.error('❌ No Leaflet map available');
             return null;
         }
         if (typeof map.addLayer !== 'function') {
-            console.error('❌ Invalid map object (missing addLayer method)');
+            Logger.error('❌ Invalid map object (missing addLayer method)');
             return null;
         }
         return map;
@@ -260,21 +260,21 @@ class AdenaiMap {
         if (typeof window.loadJourneys === 'function') {
             return window.loadJourneys();
         }
-        console.warn('⚠️ Journey system not available');
+        Logger.warn('⚠️ Journey system not available');
     }
 
     refreshJourneys() {
         if (typeof window.refreshJourneys === 'function') {
             return window.refreshJourneys();
         }
-        console.warn('⚠️ Journey system not available');
+        Logger.warn('⚠️ Journey system not available');
     }
 
     clearJourneys() {
         if (typeof window.clearJourneys === 'function') {
             return window.clearJourneys();
         }
-        console.warn('⚠️ Journey system not available');
+        Logger.warn('⚠️ Journey system not available');
     }
 
     // Debug and utility methods
@@ -354,7 +354,7 @@ class AdenaiMap {
 
     printStats() {
         const stats = this.getMapStats();
-        console.log('📊 Adenai Map Statistics:', stats);
+        Logger.stats('📊 Adenai Map Statistics', stats);
         return stats;
     }
 
@@ -374,11 +374,11 @@ class AdenaiMap {
     // 🔥 NEW: Map debugging helper
     debugMap() {
         const map = this.getLeafletMap();
-        console.log('🔍 Map Debug Info:');
-        console.log('  window.map:', window.map);
-        console.log('  window.mapCore:', window.mapCore);
-        console.log('  this.getLeafletMap():', map);
-        console.log('  Map methods available:', {
+        Logger.debug('🔍 Map Debug Info:');
+        Logger.debug('  window.map:', window.map);
+        Logger.debug('  window.mapCore:', window.mapCore);
+        Logger.debug('  this.getLeafletMap():', map);
+        Logger.debug('  Map methods available:', {
             addLayer: typeof map?.addLayer,
             removeLayer: typeof map?.removeLayer,
             fitBounds: typeof map?.fitBounds,
