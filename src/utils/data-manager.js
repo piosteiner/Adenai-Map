@@ -87,11 +87,19 @@ class DataManager {
     async getData(type, options = {}) {
         const startTime = performance.now();
         
-        // Check if we already have the data
-        if (this.hasData(type) && !options.forceRefresh) {
+        // Check if this is always-fresh data (API with daily updates)
+        const isAlwaysFresh = AdvancedLoader.config.alwaysFresh?.includes(type);
+        
+        // Check if we already have the data (skip cache for always-fresh data)
+        if (!isAlwaysFresh && this.hasData(type) && !options.forceRefresh) {
             const data = this.getCachedData(type);
             Logger.cache(`📋 Retrieved cached ${type} (${Array.isArray(data) ? data.length : 'object'} items)`);
             return data;
+        }
+        
+        // Log fresh data loading for API endpoints
+        if (isAlwaysFresh) {
+            Logger.loading(`🔄 Loading fresh ${type} data (daily API updates)`);
         }
         
         // Check loading state

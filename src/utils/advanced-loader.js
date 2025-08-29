@@ -9,14 +9,24 @@ class AdvancedLoader {
     static activeLoads = 0;
     
     static config = {
-        // Cache TTL for different data types (milliseconds)
+        // Cache TTL for different data types (now managed by DataConfig)
         cacheTTL: {
-            characters: 10 * 60 * 1000,    // 10 minutes
-            locations: 30 * 60 * 1000,     // 30 minutes  
-            reviews: 60 * 60 * 1000,       // 1 hour
-            journeys: 5 * 60 * 1000,       // 5 minutes (more dynamic)
-            'media-library': 24 * 60 * 60 * 1000  // 24 hours
+            characters: DataConfig?.getCacheDuration('characters') || 10 * 60 * 1000,
+            locations: DataConfig?.getCacheDuration('locations') || 30 * 60 * 1000,
+            reviews: DataConfig?.getCacheDuration('reviews') || 60 * 60 * 1000,
+            journeys: DataConfig?.getCacheDuration('journeys') || 0, // Always fresh
+            'media-library': DataConfig?.getCacheDuration('media-library') || 24 * 60 * 60 * 1000
         },
+        
+        // Data source types for different caching strategies
+        dataSources: {
+            static: DataConfig?.getStaticFileTypes() || ['characters', 'locations', 'reviews', 'media-library'],
+            api: DataConfig?.getDailyUpdateTypes() || ['journeys'],
+            hybrid: [] // Mix of API and static
+        },
+        
+        // Force fresh load for specific data types (bypasses cache)
+        alwaysFresh: DataConfig?.getDailyUpdateTypes() || ['journeys'], // API data that updates daily
         
         // Progressive loading priorities
         priorities: {
@@ -80,11 +90,18 @@ class AdvancedLoader {
     static async loadDataOptimized(dataType, options = {}) {
         const startTime = performance.now();
         
-        // Check cache first
-        const cached = this.getFromCache(dataType);
-        if (cached && !options.forceRefresh) {
-            Logger.cache(`📋 Using cached ${dataType} (${cached.data.length || 'N/A'} items)`);
-            return cached.data;
+        // Check if this data type should always be fresh (API data)
+        const shouldAlwaysFresh = this.config.alwaysFresh.includes(dataType);
+        
+        // Check cache first (skip for always-fresh data)
+        if (!shouldAlwaysFresh) {
+            const cached = this.getFromCache(dataType);
+            if (cached && !options.forceRefresh) {
+                Logger.cache(`📋 Using cached ${dataType} (${cached.data.length || 'N/A'} items)`);
+                return cached.data;
+            }
+        } else {
+            Logger.loading(`🔄 Loading fresh ${dataType} data (daily updates)`);
         }
         
         // Check for pending request

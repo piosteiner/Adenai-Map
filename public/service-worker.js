@@ -85,39 +85,44 @@ class ServiceWorkerManager {
         }
     }
     
-    // Handle API requests with background sync
+    // Handle API requests with network-first strategy (always fresh for daily updates)
     static async handleApiRequest(event) {
         const url = event.request.url;
         
         try {
-            // Try network first for API calls
+            // Always try network first for API calls (daily updates)
+            console.log('🌐 Service Worker: Loading fresh API data:', url);
             const networkResponse = await fetch(event.request);
             
             if (networkResponse.ok) {
-                // Cache successful API responses
+                // Cache successful API responses for offline fallback only
                 const cache = await caches.open(DATA_CACHE_NAME);
                 cache.put(event.request, networkResponse.clone());
                 
-                console.log('🌐 Service Worker: API request served from network:', url);
+                console.log('🌐 Service Worker: Fresh API data served and cached for offline:', url);
                 return networkResponse;
             }
             
         } catch (error) {
-            console.log('⚠️ Service Worker: Network failed for API, trying cache:', url);
+            console.log('⚠️ Service Worker: Network failed for API, trying offline cache:', url);
         }
         
-        // Fallback to cache
+        // Fallback to cache only if network fails (offline scenario)
         const cachedResponse = await caches.match(event.request);
         if (cachedResponse) {
-            console.log('📋 Service Worker: API request served from cache:', url);
-            return cachedResponse;
+            console.log('📋 Service Worker: API request served from offline cache:', url);
+            // Add header to indicate this is cached data
+            const response = cachedResponse.clone();
+            response.headers.set('X-Cached-Data', 'true');
+            return response;
         }
         
         // Return offline response
         return new Response(JSON.stringify({
-            error: 'Offline',
-            message: 'This data is not available offline',
-            cached: false
+            error: 'Offline - No cached data available',
+            message: 'This API data is not available offline',
+            cached: false,
+            timestamp: new Date().toISOString()
         }), {
             status: 503,
             headers: { 'Content-Type': 'application/json' }
