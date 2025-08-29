@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "aca96cf80fe581f684b876511e4fa65db7336379",
+      "action": "update",
+      "type": "character",
+      "itemName": "Prinz Torren",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:51:00.485Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:51:00.485Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: prinz_torren (by gm) - updated image"
+    },
+    {
       "commitSha": "3cd5e0149eab2bf2283792c2285e9f8246112c8a",
       "action": "update",
       "type": "character",
@@ -3434,5 +3447,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:50:48.020Z"
+  "lastUpdated": "2025-08-29T20:51:00.485Z"
 }
