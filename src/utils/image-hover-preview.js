@@ -222,19 +222,31 @@ class ImageHoverPreview {
     }
 
     handleImageClick(image) {
-        // Open image in new tab without switching to it
-        const newTab = window.open(image.src, '_blank');
+        // Create a temporary link element to open image without switching tabs
+        const link = document.createElement('a');
+        link.href = image.src;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
         
-        // Prevent the browser from switching to the new tab
-        if (newTab) {
-            newTab.blur();
-            window.focus();
-        }
+        // Add the link to the document temporarily
+        document.body.appendChild(link);
+        
+        // Override the default behavior to prevent tab switching
+        const clickEvent = new MouseEvent('click', {
+            ctrlKey: true,  // Ctrl+click behavior (background tab)
+            bubbles: true,
+            cancelable: true
+        });
+        
+        link.dispatchEvent(clickEvent);
+        
+        // Clean up
+        document.body.removeChild(link);
         
         // Hide any visible preview
         this.hidePreview();
         
-        Logger.debug('🖼️ Image opened in new tab:', image.src);
+        Logger.debug('🖼️ Image opened in background tab:', image.src);
     }
 
     showPreview(originalImage) {
@@ -248,14 +260,14 @@ class ImageHoverPreview {
         previewImage.src = originalImage.src;
         previewImage.alt = originalImage.alt || '';
 
-        // Calculate optimal size - limit to 60% of viewport for reasonable sizing
+        // Calculate optimal size - limit to 40% of viewport for smaller, more manageable size
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
         
-        // Set container to use 60% of viewport for both dimensions
+        // Set container to use 40% of viewport for both dimensions
         // The image will scale proportionally within these constraints
-        container.style.maxWidth = `${viewportWidth * 0.6}px`;
-        container.style.maxHeight = `${viewportHeight * 0.6}px`;
+        container.style.maxWidth = `${viewportWidth * 0.4}px`;
+        container.style.maxHeight = `${viewportHeight * 0.4}px`;
 
         // Set caption
         const captionText = originalImage.alt || 
