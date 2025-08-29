@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "45ea08aeb097c2be7935a807b3669e47cd2b26c5",
+      "action": "update",
+      "type": "character",
+      "itemName": "Eriosa Süssblatt",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:35:35.841Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:35:35.841Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: eriosa_s_ssblatt (by gm) - changed relationship to unknown"
+    },
+    {
       "commitSha": "b047d9dd64a0e773034a88d3fa485258c8c2b75f",
       "action": "update",
       "type": "character",
@@ -2875,5 +2888,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:35:23.605Z"
+  "lastUpdated": "2025-08-29T20:35:35.841Z"
 }
