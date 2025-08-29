@@ -20,6 +20,25 @@ class LocationSystem {
             });
         }
         this.loadMediaLibrary();
+        this.setupKeyboardHandlers();
+    }
+
+    setupKeyboardHandlers() {
+        // Add escape key handler for closing popups
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.currentOpenPopup) {
+                this.closeCurrentPopup();
+            }
+        });
+    }
+
+    closeCurrentPopup() {
+        if (this.currentOpenPopup) {
+            this.currentOpenPopup._isPopupSticky = false;
+            this.currentOpenPopup.closePopup();
+            this.currentOpenPopup = null;
+            Logger.info('Location popup closed by escape key');
+        }
     }
 
     async loadMediaLibrary() {
