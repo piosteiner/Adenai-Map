@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "7697435e2d898d99bd443975d36cd516e0193a04",
+      "action": "create",
+      "type": "character",
+      "itemName": "Matteo Gill",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:42:22.044Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:42:22.044Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Matteo Gill (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "a84d4a5f2dec264a6c00cf9fdec057f787ed5d88",
       "action": "update",
       "type": "character",
@@ -3083,5 +3096,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:41:32.386Z"
+  "lastUpdated": "2025-08-29T20:42:22.044Z"
 }
