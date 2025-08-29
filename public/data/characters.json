@@ -771,16 +771,17 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai-admin.piogino.ch/public/images/xarnice_close.png",
+      "image": "https://adenai.piogino.ch/public/images/xarnice_close.png",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2025-08-29T20:46:20.848Z",
-      "updatedAt": "2025-08-29T20:46:20.848Z"
+      "updatedAt": "2025-08-29T20:53:19.788Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:53:09.308Z"
+  "lastUpdated": "2025-08-29T20:53:19.788Z"
 }
