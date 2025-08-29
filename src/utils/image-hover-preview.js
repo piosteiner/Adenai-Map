@@ -55,6 +55,11 @@ class ImageHoverPreview {
                 align-items: center;
                 justify-content: center;
                 opacity: 1;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
             }
 
             .preview-backdrop {
@@ -72,6 +77,7 @@ class ImageHoverPreview {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                justify-content: center;
                 pointer-events: none;
                 z-index: 1;
             }
@@ -260,14 +266,14 @@ class ImageHoverPreview {
         previewImage.src = originalImage.src;
         previewImage.alt = originalImage.alt || '';
 
-        // Calculate optimal size - limit to 40% of viewport for smaller, more manageable size
+        // Calculate optimal size - limit to 25% of viewport for small preview
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
         
-        // Set container to use 40% of viewport for both dimensions
+        // Set container to use 25% of viewport for both dimensions
         // The image will scale proportionally within these constraints
-        container.style.maxWidth = `${viewportWidth * 0.4}px`;
-        container.style.maxHeight = `${viewportHeight * 0.4}px`;
+        container.style.maxWidth = `${viewportWidth * 0.25}px`;
+        container.style.maxHeight = `${viewportHeight * 0.25}px`;
 
         // Set caption
         const captionText = originalImage.alt || 
