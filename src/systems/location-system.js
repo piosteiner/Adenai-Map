@@ -163,85 +163,17 @@ class LocationSystem {
         // Create the classic orange dot icon with larger size to match cluster proxy markers
         if (!this.dotOrangeIcon) {
             try {
-                // Generate orange dot icon programmatically using Canvas
-                const canvas = document.createElement('canvas');
-                canvas.width = 32;
-                canvas.height = 32;
-                const ctx = canvas.getContext('2d');
-                
-                // Clear canvas
-                ctx.clearRect(0, 0, 32, 32);
-                
-                // Draw orange circle
-                ctx.beginPath();
-                ctx.arc(16, 16, 12, 0, 2 * Math.PI);
-                ctx.fillStyle = '#ff6b24';
-                ctx.fill();
-                
-                // Add subtle border for better visibility
-                ctx.strokeStyle = '#ffffff';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-                
-                // Convert canvas to data URL
-                const iconUrl = canvas.toDataURL('image/png');
-                
                 this.dotOrangeIcon = L.icon({
-                    iconUrl: iconUrl,
+                    iconUrl: 'public/icons/dot_orange.svg',
                     iconSize: [32, 32],
                     iconAnchor: [16, 16],
                     popupAnchor: [0, -16]
                 });
-                Logger.success('Orange dot icon created programmatically');
+                Logger.success('Orange dot icon created successfully');
             } catch (error) {
                 Logger.error('Failed to create orange dot icon:', error);
-                // Fallback to a simple DivIcon if canvas fails
-                this.createFallbackLocationIcon();
             }
         }
-    }
-
-    createFallbackLocationIcon() {
-        // CSS-based fallback icon if canvas fails
-        this.dotOrangeIcon = L.divIcon({
-            className: 'location-dot-icon',
-            html: '<div class="location-dot-inner"></div>',
-            iconSize: [32, 32],
-            iconAnchor: [16, 16],
-            popupAnchor: [0, -16]
-        });
-        
-        // Add CSS for the fallback icon
-        if (!document.getElementById('location-dot-fallback-styles')) {
-            const style = document.createElement('style');
-            style.id = 'location-dot-fallback-styles';
-            style.textContent = `
-                .location-dot-icon {
-                    background: transparent !important;
-                    border: none !important;
-                    display: flex !important;
-                    align-items: center !important;
-                    justify-content: center !important;
-                }
-                
-                .location-dot-inner {
-                    width: 24px;
-                    height: 24px;
-                    background: #ff6b24;
-                    border: 2px solid #ffffff;
-                    border-radius: 50%;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                }
-                
-                .location-dot-icon:hover .location-dot-inner {
-                    transform: scale(1.2);
-                    transition: transform 0.2s ease;
-                }
-            `;
-            document.head.appendChild(style);
-        }
-        
-        Logger.success('Fallback CSS-based orange dot icon created');
     }
 
     // Parse link syntax [text:type:id] and convert to clickable elements
@@ -442,13 +374,24 @@ class LocationSystem {
             
             // Double-check that icon was created successfully
             if (!this.dotOrangeIcon) {
-                Logger.error('Failed to create location icon, creating fallback...');
-                this.createFallbackLocationIcon();
+                Logger.error('Failed to create location icon, using default marker');
+                const geoLayer = L.geoJSON(data, {
+                    pointToLayer: (feature, latlng) => {
+                        // Use the classic orange dot icon even in fallback
+                        return L.marker(latlng, { icon: this.dotOrangeIcon });
+                    },
+                    onEachFeature: async (feature, layer) => {
+                        await this.processLocationFeature(feature, layer);
+                        // Setup simple click-only interactions
+                        this.setupMarkerInteractions(layer);
+                    }
+                }).addTo(map);
+                return geoLayer;
             }
             
             const geoLayer = L.geoJSON(data, {
                 pointToLayer: (feature, latlng) => {
-                    // Use the programmatically created orange dot icon
+                    // Use the classic orange dot icon
                     return L.marker(latlng, { icon: this.dotOrangeIcon });
                 },
                 onEachFeature: async (feature, layer) => {
@@ -813,12 +756,7 @@ class LocationSystem {
     // Add a new location programmatically (useful for admin interface)
     addLocation(locationData) {
         MapUtils.withMap((map) => {
-            // Ensure icon is created
-            if (!this.dotOrangeIcon) {
-                this.createLocationIcon();
-            }
-            
-            // Create marker with programmatically generated icon
+            // Create marker
             const marker = L.marker([locationData.lat, locationData.lng], { 
                 icon: this.dotOrangeIcon 
             });
