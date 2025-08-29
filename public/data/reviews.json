@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6ec362ebdebc97f3dd4bc42b205a99bcb029616c",
+      "action": "create",
+      "type": "character",
+      "itemName": "Zerith Kael",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:45:52.820Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:45:52.820Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Zerith Kael (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "a3dd6d040f2214fc60697395b88fca10a1aaf51c",
       "action": "update",
       "type": "character",
@@ -3187,5 +3200,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:45:21.657Z"
+  "lastUpdated": "2025-08-29T20:45:52.820Z"
 }
