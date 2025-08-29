@@ -735,7 +735,24 @@
       "currentLocation": null,
       "createdAt": "2025-08-29T20:21:10.180Z",
       "updatedAt": "2025-08-29T20:21:48.085Z"
+    },
+    {
+      "id": "ceres_golwit",
+      "name": "Ceres Golwit",
+      "title": "Hafenmeisterin von Rena",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/ceres_close.png",
+      "status": "alive",
+      "faction": "Regierung von Rena",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:23:32.979Z",
+      "updatedAt": "2025-08-29T20:23:32.979Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:21:48.085Z"
+  "lastUpdated": "2025-08-29T20:23:32.979Z"
 }
