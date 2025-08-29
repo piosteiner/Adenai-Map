@@ -566,7 +566,24 @@
       "currentLocation": null,
       "createdAt": "2025-08-29T20:38:01.289Z",
       "updatedAt": "2025-08-29T20:38:36.984Z"
+    },
+    {
+      "id": "krista",
+      "name": "Krista",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/krista_close.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:39:29.421Z",
+      "updatedAt": "2025-08-29T20:39:29.421Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:38:36.984Z"
+  "lastUpdated": "2025-08-29T20:39:29.421Z"
 }
