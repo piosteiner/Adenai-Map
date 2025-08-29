@@ -59,6 +59,22 @@ class Logger {
     static stats(title, stats) {
         console.log(`📊 ${title}:`, stats);
     }
+
+    static init(message, data = null) {
+        console.log(`🚀 ${message}`, data ? data : '');
+    }
+
+    static cache(message, data = null) {
+        console.log(`📋 ${message}`, data ? data : '');
+    }
+
+    static debug(message, data = null) {
+        console.log(`🔍 ${message}`, data ? data : '');
+    }
+
+    static warn(message, data = null) {
+        console.warn(`⚠️ ${message}`, data ? data : '');
+    }
 }
 
 // Make available globally
