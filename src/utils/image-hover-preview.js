@@ -227,15 +227,14 @@ class ImageHoverPreview {
         previewImage.src = originalImage.src;
         previewImage.alt = originalImage.alt || '';
 
-        // Calculate optimal size based on viewport and image dimensions
+        // Calculate optimal size - limit the larger dimension to 80% of viewport
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
-        const maxDimension = Math.max(viewportWidth, viewportHeight);
-        const maxSize = maxDimension * 0.9; // 90% of the larger viewport dimension
-
-        // Apply size constraints to container
-        container.style.maxWidth = `${Math.min(maxSize, viewportWidth * 0.9)}px`;
-        container.style.maxHeight = `${Math.min(maxSize, viewportHeight * 0.9)}px`;
+        
+        // Set container to use 80% of viewport for both dimensions
+        // The image will scale proportionally within these constraints
+        container.style.maxWidth = `${viewportWidth * 0.8}px`;
+        container.style.maxHeight = `${viewportHeight * 0.8}px`;
 
         // Set caption
         const captionText = originalImage.alt || 
