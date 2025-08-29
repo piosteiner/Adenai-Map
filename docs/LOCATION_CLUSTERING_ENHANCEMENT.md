@@ -55,14 +55,14 @@ Enhanced the existing movement marker clustering system to detect and include ne
 ### Proximity Logic
 
 ```javascript
-// 20-pixel proximity detection
+// 10-pixel proximity detection
 const targetPoint = map.latLngToContainerPoint(mapCoords);
 const locationPoint = map.latLngToContainerPoint(locationData.layer.getLatLng());
 const distance = Math.sqrt(
     Math.pow(targetPoint.x - locationPoint.x, 2) + 
     Math.pow(targetPoint.y - locationPoint.y, 2)
 );
-return distance <= 20; // 20px threshold
+return distance <= 10; // 10px threshold
 ```
 
 ### Visual Design
@@ -116,9 +116,9 @@ return distance <= 20; // 20px threshold
 ## Configuration
 
 ### Proximity Threshold
-Currently set to 20 pixels. Can be adjusted in `findNearbyLocationMarkers()`:
+Currently set to 10 pixels. Can be adjusted in `findNearbyLocationMarkers()`:
 ```javascript
-const nearbyLocations = this.findNearbyLocationMarkers(mapCoords, 20);
+const nearbyLocations = this.findNearbyLocationMarkers(mapCoords, 10);
 ```
 
 ### Visual Styling
