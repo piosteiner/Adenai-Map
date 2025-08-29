@@ -764,13 +764,13 @@
       "image": "https://adenai-admin.piogino.ch/public/images/colette_close.png",
       "status": "alive",
       "faction": "",
-      "relationship": "ally",
+      "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:24:46.436Z",
-      "updatedAt": "2025-08-29T20:25:23.933Z"
+      "updatedAt": "2025-08-29T20:34:44.604Z"
     },
     {
       "id": "dina_eisfeld",
@@ -877,5 +877,5 @@
       "updatedAt": "2025-08-29T20:34:25.256Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:34:37.743Z"
+  "lastUpdated": "2025-08-29T20:34:44.604Z"
 }
