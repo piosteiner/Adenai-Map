@@ -509,7 +509,10 @@
       "name": "Dina Eisfeld",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": null,
+      "coordinates": [
+        1090,
+        1260
+      ],
       "description": "",
       "image": "https://adenai.piogino.ch/public/images/dina_close.png",
       "status": "alive",
@@ -517,10 +520,38 @@
       "relationship": "unknown",
       "firstMet": "",
       "notes": "Magierin der Yosefka Akademie",
-      "movementHistory": [],
-      "currentLocation": null,
+      "movementHistory": [
+        {
+          "id": "movement_1756501271932",
+          "movement_nr": 0,
+          "date": "5663-06-03",
+          "dateStart": "5663-06-03",
+          "dateEnd": null,
+          "location": "Yosefka Akademie",
+          "coordinates": [
+            1090,
+            1260
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-29T21:01:11.932Z"
+        }
+      ],
+      "currentLocation": {
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "location": "Yosefka Akademie",
+        "coordinates": [
+          1090,
+          1260
+        ],
+        "notes": ""
+      },
       "createdAt": "2025-08-29T20:28:54.142Z",
-      "updatedAt": "2025-08-29T20:47:32.002Z"
+      "updatedAt": "2025-08-29T21:01:11.932Z",
+      "location": "Yosefka Akademie"
     },
     {
       "id": "dravak_svya",
@@ -1094,5 +1125,5 @@
       "updatedAt": "2025-08-29T20:53:20.812Z"
     }
   ],
-  "lastUpdated": "2025-08-29T21:00:49.683Z"
+  "lastUpdated": "2025-08-29T21:01:11.932Z"
 }
