@@ -840,7 +840,24 @@
       "currentLocation": null,
       "createdAt": "2025-08-29T20:33:05.493Z",
       "updatedAt": "2025-08-29T20:33:23.811Z"
+    },
+    {
+      "id": "eytan_karthright",
+      "name": "Eytan Karthright",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/eytan_close.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:33:49.688Z",
+      "updatedAt": "2025-08-29T20:33:49.688Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:33:23.811Z"
+  "lastUpdated": "2025-08-29T20:33:49.688Z"
 }
