@@ -728,13 +728,13 @@
       "image": "https://adenai-admin.piogino.ch/public/images/torrack_close.png",
       "status": "alive",
       "faction": "Regierung von Rena",
-      "relationship": "ally",
+      "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:21:10.180Z",
-      "updatedAt": "2025-08-29T20:21:48.085Z"
+      "updatedAt": "2025-08-29T20:36:01.886Z"
     },
     {
       "id": "ceres_golwit",
@@ -880,5 +880,5 @@
       "updatedAt": "2025-08-29T20:34:25.256Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:35:47.685Z"
+  "lastUpdated": "2025-08-29T20:36:01.886Z"
 }
