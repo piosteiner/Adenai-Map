@@ -805,7 +805,24 @@
       "currentLocation": null,
       "createdAt": "2025-08-29T20:31:02.748Z",
       "updatedAt": "2025-08-29T20:31:24.807Z"
+    },
+    {
+      "id": "eliana_karthright",
+      "name": "Eliana Karthright",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/eliana_close.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:31:54.501Z",
+      "updatedAt": "2025-08-29T20:31:54.501Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:31:24.807Z"
+  "lastUpdated": "2025-08-29T20:31:54.501Z"
 }
