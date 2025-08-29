@@ -787,7 +787,24 @@
       "movementHistory": [],
       "createdAt": "2025-08-29T20:28:54.142Z",
       "updatedAt": "2025-08-29T20:28:54.142Z"
+    },
+    {
+      "id": "dravak_svya",
+      "name": "Dravak Svya",
+      "title": "Bergspalter",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "Stadthalter von Donnermund",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:31:02.748Z",
+      "updatedAt": "2025-08-29T20:31:02.748Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:28:54.142Z"
+  "lastUpdated": "2025-08-29T20:31:02.748Z"
 }
