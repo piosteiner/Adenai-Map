@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "0a0ff097a5be966ab1076a02c0933efd85a212d9",
+      "action": "create",
+      "type": "character",
+      "itemName": "Orvil Plig",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:42:50.541Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:42:50.542Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Orvil Plig (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "7697435e2d898d99bd443975d36cd516e0193a04",
       "action": "create",
       "type": "character",
@@ -3096,5 +3109,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:42:22.044Z"
+  "lastUpdated": "2025-08-29T20:42:50.542Z"
 }
