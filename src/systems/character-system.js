@@ -609,12 +609,13 @@ class CharacterSystem {
                         ${AdenaiConfig.getCharacterStatusLabel(character.status) || '❓ Unbekannt'}
                     </span>
                 </div>
-                ${character.faction ? `<div><strong>🛡️ Faction:</strong> ${character.faction}</div>` : ''}
-                ${character.firstMet ? `<div><strong>📅 First Met:</strong> ${character.firstMet}</div>` : ''}
-                <div><strong>📍 Location:</strong> ${character.location || 'Unknown'}</div>
+                ${character.faction ? `<div><strong>🛡️ Fraktion:</strong> ${character.faction}</div>` : ''}
+                ${character.firstMet ? `<div><strong>📅 Erstmals getroffen:</strong> ${character.firstMet}</div>` : ''}
+                <div><strong>📍 Aktueller Ort:</strong> ${character.location || '❓ Unbekannt'}</div>
                 ${movementInfo}
-                ${character.description ? `<div style="margin-top: 8px;"><strong>📝 Description:</strong><br>${character.description}</div>` : ''}
-                ${character.notes ? `<div style="margin-top: 8px;"><strong>📋 Notes:</strong><br>${character.notes}</div>` : ''}
+                ${character.description ? `<div style="margin-top: 8px;"><strong>📝 Beschreibung:</strong><br>${character.description}</div>` : ''}
+                ${character.placeOfOrigin ? `<div><strong>🌍 Herkunftsort:</strong> ${character.placeOfOrigin}</div>` : ''}
+                ${character.notes ? `<div style="margin-top: 8px;"><strong>📋 Notizen:</strong><br>${character.notes}</div>` : ''}
             </div>
         `;
     }
