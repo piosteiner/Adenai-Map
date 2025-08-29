@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "2014717db6da182c763acabfb7d49662f698ba76",
+      "action": "create",
+      "type": "character",
+      "itemName": "Krull Sturmbann",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:40:03.292Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:40:03.292Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Krull Sturmbann (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "143a53e22b8546016ea1ac34d19a51229639d788",
       "action": "create",
       "type": "character",
@@ -3018,5 +3031,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:39:30.156Z"
+  "lastUpdated": "2025-08-29T20:40:03.292Z"
 }
