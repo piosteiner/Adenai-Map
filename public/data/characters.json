@@ -800,13 +800,13 @@
       "image": "https://adenai-admin.piogino.ch/public/images/dravak_close.png",
       "status": "alive",
       "faction": "",
-      "relationship": "ally",
+      "relationship": "unknown",
       "firstMet": "",
       "notes": "Stadthalter von Donnermund",
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:31:02.748Z",
-      "updatedAt": "2025-08-29T20:31:24.807Z"
+      "updatedAt": "2025-08-29T20:35:07.011Z"
     },
     {
       "id": "eliana_karthright",
@@ -878,5 +878,5 @@
       "updatedAt": "2025-08-29T20:34:25.256Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:34:55.718Z"
+  "lastUpdated": "2025-08-29T20:35:07.011Z"
 }
