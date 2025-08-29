@@ -352,7 +352,7 @@ class MovementMarkers {
                 if (!isNaN(startDate.getTime()) && !isNaN(endDateObj.getTime())) {
                     const diffTime = Math.abs(endDateObj - startDate);
                     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                    durationText = `${diffDays} day${diffDays !== 1 ? 's' : ''}`;
+                    durationText = `${diffDays} Tag${diffDays !== 1 ? 'e' : ''}`;
                 }
             }
         }
@@ -370,30 +370,30 @@ class MovementMarkers {
         const popupContent = `
             <div class="character-popup">
                 <div class="popup-title" style="color: #6366f1; margin-bottom: 8px;">
-                    ${markerNumber} - ${movementData.location || 'Unknown Location'}
+                    ${markerNumber} - ${movementData.location || 'Unbekannter Ort'}
                 </div>
                 <div style="margin-bottom: 8px;">
                     <strong>🙋 Name:</strong> ${characterName}
                 </div>
                 <div style="margin-bottom: 8px;">
-                    <strong>🚶 Movement Type:</strong> ${movementData.type || 'travel'}
+                    <strong>🚶 Bewegungsart:</strong> ${AdenaiConfig.getMovementTypeLabel(movementData.type) || AdenaiConfig.getMovementTypeLabel('travel')}
                 </div>
                 <div style="margin-bottom: 8px;">
-                    <strong>📅 Start Date:</strong> ${formatDate(movementData.date) || 'Not specified'}
+                    <strong>📅 Startdatum:</strong> ${formatDate(movementData.date) || 'Nicht angegeben'}
                 </div>
                 ${hasEndDate && formattedEndDate ? `
                 <div style="margin-bottom: 8px;">
-                    <strong>📅 End Date:</strong> ${formattedEndDate}
+                    <strong>📅 Enddatum:</strong> ${formattedEndDate}
                 </div>
                 ` : ''}
                 ${durationText ? `
                 <div style="margin-bottom: 8px;">
-                    <strong>⏱️ Duration:</strong> ${durationText}
+                    <strong>⏱️ Dauer:</strong> ${durationText}
                 </div>
                 ` : ''}
                 ${movementData.notes ? `
                 <div style="margin-bottom: 0;">
-                    <strong>📝 Notes:</strong> ${movementData.notes}
+                    <strong>📝 Notizen:</strong> ${movementData.notes}
                 </div>
                 ` : ''}
             </div>

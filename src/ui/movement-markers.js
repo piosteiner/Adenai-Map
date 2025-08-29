@@ -364,7 +364,7 @@ class MovementMarkers {
                 if (!isNaN(startDate.getTime()) && !isNaN(endDateObj.getTime())) {
                     const diffTime = Math.abs(endDateObj - startDate);
                     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                    durationText = `${diffDays} day${diffDays !== 1 ? 's' : ''}`;
+                    durationText = `${diffDays} Tag${diffDays !== 1 ? 'e' : ''}`;
                 }
             }
         }
@@ -382,31 +382,31 @@ class MovementMarkers {
         const popupContent = `
             <div class="movement-popup">
                 <div class="movement-popup-header">
-                    <h3>🛤️ ${characterName} - Stop ${markerNumber}</h3>
+                    <h3>🛤️ ${characterName} - Stopp ${markerNumber}</h3>
                 </div>
                 <div class="movement-popup-content">
                     <div class="movement-info-row">
-                        <strong>📍 Location:</strong> ${movementData.location || 'Unknown'}
+                        <strong>📍 Ort:</strong> ${movementData.location || 'Unbekannt'}
                     </div>
                     <div class="movement-info-row">
-                        <strong>🚶 Movement Type:</strong> ${movementData.type || 'travel'}
+                        <strong>🚶 Bewegungsart:</strong> ${AdenaiConfig.getMovementTypeLabel(movementData.type) || AdenaiConfig.getMovementTypeLabel('travel')}
                     </div>
                     <div class="movement-info-row">
-                        <strong>📅 Start Date:</strong> ${formatDate(movementData.date) || 'Not specified'}
+                        <strong>📅 Startdatum:</strong> ${formatDate(movementData.date) || 'Nicht angegeben'}
                     </div>
                     ${hasEndDate && formattedEndDate ? `
                     <div class="movement-info-row">
-                        <strong>📅 End Date:</strong> ${formattedEndDate}
+                        <strong>📅 Enddatum:</strong> ${formattedEndDate}
                     </div>
                     ` : ''}
                     ${durationText ? `
                     <div class="movement-info-row">
-                        <strong>⏱️ Duration:</strong> ${durationText}
+                        <strong>⏱️ Dauer:</strong> ${durationText}
                     </div>
                     ` : ''}
                     ${movementData.notes ? `
                     <div class="movement-info-row">
-                        <strong>📝 Notes:</strong> ${movementData.notes}
+                        <strong>📝 Notizen:</strong> ${movementData.notes}
                     </div>
                     ` : ''}
                 </div>
