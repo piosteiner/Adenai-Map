@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "7c8baed55a7d23498a5fa6e894182f3b9e694730",
+      "action": "delete",
+      "type": "character",
+      "itemName": "Pio's Origin Character",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:36:52.476Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:36:52.476Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Delete character: Pio's Origin Character (by gm) - Removed from campaign"
+    },
+    {
       "commitSha": "e84e440c665b4eaa5593def5f5da79db59b5142f",
       "action": "delete",
       "type": "character",
@@ -2927,5 +2940,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:36:21.754Z"
+  "lastUpdated": "2025-08-29T20:36:52.476Z"
 }
