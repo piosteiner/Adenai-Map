@@ -154,92 +154,6 @@
       "updatedAt": "2025-08-26T23:56:27.950Z"
     },
     {
-      "id": "test",
-      "name": "Test",
-      "title": "Herrscher des Tests",
-      "placeOfOrigin": "Atlantis (aufgestiegen)",
-      "coordinates": [
-        2210,
-        1200
-      ],
-      "description": "Beschreibung-Test",
-      "image": "",
-      "status": "dead",
-      "faction": "Testfraktion",
-      "relationship": "ally",
-      "firstMet": "2022-01-01",
-      "notes": "Notizen-Test",
-      "movementHistory": [
-        {
-          "id": "movement_1755878742652",
-          "date": "2025-08-04",
-          "location": "Donnermund",
-          "coordinates": [
-            981,
-            656
-          ],
-          "notes": "",
-          "type": "travel",
-          "createdAt": "2025-08-22T16:05:42.652Z",
-          "movement_nr": 0
-        },
-        {
-          "id": "movement_1755878751956",
-          "date": "2025-08-07",
-          "location": "Elissastadt",
-          "coordinates": [
-            372,
-            343
-          ],
-          "notes": "",
-          "type": "travel",
-          "createdAt": "2025-08-22T16:05:51.956Z",
-          "movement_nr": 1
-        },
-        {
-          "id": "movement_1755878763565",
-          "date": "2025-08-16",
-          "location": "Föhrenhauch",
-          "coordinates": [
-            863,
-            1122
-          ],
-          "notes": "",
-          "type": "mission",
-          "createdAt": "2025-08-22T16:06:03.565Z",
-          "movement_nr": 2
-        },
-        {
-          "id": "movement_1755878791013",
-          "date": "2025-08-25",
-          "location": "Yosefka Akademie",
-          "coordinates": [
-            1090,
-            1260
-          ],
-          "notes": "Fled from a molerat",
-          "type": "escape",
-          "createdAt": "2025-08-22T16:06:31.013Z",
-          "movement_nr": 3
-        },
-        {
-          "id": "movement_1755928483342",
-          "date": "2025-08-30",
-          "location": "Estu Vin",
-          "coordinates": [
-            1846,
-            1203
-          ],
-          "notes": "",
-          "type": "capture",
-          "createdAt": "2025-08-23T05:54:43.342Z",
-          "movement_nr": 4
-        }
-      ],
-      "createdAt": "2025-08-22T15:11:48.559Z",
-      "updatedAt": "2025-08-28T05:00:05.156Z"
-    },
-    {
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
@@ -832,5 +746,5 @@
       "updatedAt": "2025-08-29T20:34:25.256Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:36:51.706Z"
+  "lastUpdated": "2025-08-29T20:37:11.619Z"
 }
