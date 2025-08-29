@@ -347,6 +347,24 @@ class MovementSystem {
         
         return true;
     }
+
+    // Get list of currently visible character IDs
+    getVisibleCharacters() {
+        return this.characterPaths
+            .filter(pathData => pathData.isVisible)
+            .map(pathData => pathData.character?.id)
+            .filter(id => id !== undefined);
+    }
+
+    // Get all character paths
+    getCharacterPaths() {
+        return this.characterPaths;
+    }
+
+    // Get markers system
+    getMarkersSystem() {
+        return this.markersSystem;
+    }
 }
 
 // Export for use in other modules

@@ -308,6 +308,11 @@ class CharacterPanel {
         
         window.movementSystem.showAllPaths();
         this.updateAllCheckboxes(true);
+        
+        // Notify visibility control of character selection change
+        if (window.movementVisibilityControl) {
+            window.movementVisibilityControl.onCharacterSelectionChanged();
+        }
     }
 
     hideAllCharacterPaths() {
@@ -315,6 +320,11 @@ class CharacterPanel {
         
         window.movementSystem.hideAllPaths();
         this.updateAllCheckboxes(false);
+        
+        // Notify visibility control of character selection change
+        if (window.movementVisibilityControl) {
+            window.movementVisibilityControl.onCharacterSelectionChanged();
+        }
     }
 
     updateAllCheckboxes(checked) {
@@ -434,6 +444,11 @@ class CharacterPanel {
             }
         } else {
             window.movementSystem.hideCharacterPath(characterId);
+        }
+        
+        // Notify visibility control of character selection change
+        if (window.movementVisibilityControl) {
+            window.movementVisibilityControl.onCharacterSelectionChanged();
         }
     }
 
