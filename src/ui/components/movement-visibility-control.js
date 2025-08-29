@@ -11,23 +11,31 @@ class MovementVisibilityControl {
         this.isInitialized = false;
         
         // Bind methods
-        this.onModeChange = this.onModeChange.bind(this);
+        this.setMode = this.setMode.bind(this);
         this.updateVisibility = this.updateVisibility.bind(this);
+        this.onCharacterSelectionChanged = this.onCharacterSelectionChanged.bind(this);
     }
 
     // Initialize the visibility control
     init() {
-        if (this.isInitialized) return;
+        if (this.isInitialized) {
+            console.log('🎛️ Movement Visibility Control already initialized');
+            return;
+        }
         
+        console.log('🎛️ Creating Movement Visibility Control...');
         this.createControlElement();
         this.attachEventListeners();
         this.isInitialized = true;
         
-        console.log('Movement Visibility Control initialized');
+        console.log('✅ Movement Visibility Control initialized successfully');
+        console.log('🎛️ Control element:', this.controlElement);
     }
 
     // Create the control element
     createControlElement() {
+        console.log('🎛️ Creating control element HTML...');
+        
         const controlHtml = `
             <div class="movement-visibility-control">
                 <div class="visibility-slider">
@@ -53,8 +61,16 @@ class MovementVisibilityControl {
         `;
 
         // Insert into page
+        console.log('🎛️ Inserting control into DOM...');
         document.body.insertAdjacentHTML('beforeend', controlHtml);
         this.controlElement = document.querySelector('.movement-visibility-control');
+        
+        if (this.controlElement) {
+            console.log('✅ Control element created successfully');
+            console.log('🎛️ Element position:', this.controlElement.getBoundingClientRect());
+        } else {
+            console.error('❌ Failed to create control element');
+        }
     }
 
     // Attach event listeners
@@ -209,8 +225,62 @@ if (typeof window !== 'undefined') {
 
 // Auto-initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    if (!window.movementVisibilityControl) {
-        window.movementVisibilityControl = new MovementVisibilityControl();
-        window.movementVisibilityControl.init();
-    }
+    console.log('🎛️ DOM Content Loaded - Attempting to initialize Movement Visibility Control...');
+    setTimeout(() => {
+        if (!window.movementVisibilityControl) {
+            console.log('🎛️ Creating new MovementVisibilityControl instance...');
+            try {
+                window.movementVisibilityControl = new MovementVisibilityControl();
+                window.movementVisibilityControl.init();
+                console.log('✅ MovementVisibilityControl created and initialized successfully');
+            } catch (error) {
+                console.error('❌ Error creating MovementVisibilityControl:', error);
+            }
+        }
+    }, 1000);
 });
+
+// Also try to initialize when the map is ready
+if (typeof window !== 'undefined') {
+    // Immediate test
+    console.log('🎛️ Script loaded - MovementVisibilityControl class available');
+    
+    window.addEventListener('load', () => {
+        console.log('🎛️ Window Load Event - Attempting fallback initialization...');
+        setTimeout(() => {
+            if (!window.movementVisibilityControl) {
+                console.log('🎛️ Creating MovementVisibilityControl (fallback)...');
+                try {
+                    window.movementVisibilityControl = new MovementVisibilityControl();
+                    window.movementVisibilityControl.init();
+                    console.log('✅ MovementVisibilityControl (fallback) created successfully');
+                } catch (error) {
+                    console.error('❌ Error in fallback MovementVisibilityControl:', error);
+                }
+            }
+        }, 2000);
+    });
+}
+document.addEventListener('DOMContentLoaded', () => {
+    // Wait a bit for other systems to initialize
+    setTimeout(() => {
+        if (!window.movementVisibilityControl) {
+            console.log('🎛️ Initializing Movement Visibility Control...');
+            window.movementVisibilityControl = new MovementVisibilityControl();
+            window.movementVisibilityControl.init();
+        }
+    }, 1000);
+});
+
+// Also try to initialize when the map is ready
+if (typeof window !== 'undefined') {
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            if (!window.movementVisibilityControl) {
+                console.log('🎛️ Initializing Movement Visibility Control (fallback)...');
+                window.movementVisibilityControl = new MovementVisibilityControl();
+                window.movementVisibilityControl.init();
+            }
+        }, 2000);
+    });
+}
