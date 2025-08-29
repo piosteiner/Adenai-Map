@@ -42,7 +42,7 @@
 
 /* Dark mode styling */
 [data-theme="dark"] .movement-marker {
-    background: #36332e !important;
+    background: #1c1c1c !important;
     border-color: var(--path-color, #fff) !important;
     color: var(--path-color, #fff) !important;
 }
