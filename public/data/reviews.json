@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ddf20000ef6e9e60dd3de10159da6a9de6f091f0",
+      "action": "create",
+      "type": "character",
+      "itemName": "Marcoh Ludd",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:41:13.439Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:41:13.439Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Marcoh Ludd (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "718178327df7fee3c40badeec0119c785cfc20d6",
       "action": "create",
       "type": "character",
@@ -3044,5 +3057,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:40:44.982Z"
+  "lastUpdated": "2025-08-29T20:41:13.441Z"
 }
