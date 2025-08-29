@@ -264,9 +264,7 @@ class CharacterSystem {
             <div class="panel-popup-header">
                 <h3>${character.name}</h3>
                 <button class="panel-popup-close" onclick="window.characterSystem.closePanelAnchoredPopup()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    ×
                 </button>
             </div>
             <div class="panel-popup-content">
@@ -613,8 +611,8 @@ class CharacterSystem {
                 ${character.firstMet ? `<div><strong>📅 Erstmals getroffen:</strong> ${character.firstMet}</div>` : ''}
                 <div><strong>📍 Aktueller Ort:</strong> ${character.location || '❓ Unbekannt'}</div>
                 ${movementInfo}
-                ${character.description ? `<div style="margin-top: 8px;"><strong>📝 Beschreibung:</strong><br>${character.description}</div>` : ''}
                 ${character.placeOfOrigin ? `<div><strong>🌍 Herkunftsort:</strong> ${character.placeOfOrigin}</div>` : ''}
+                ${character.description ? `<div style="margin-top: 8px;"><strong>📝 Beschreibung:</strong><br>${character.description}</div>` : ''}
                 ${character.notes ? `<div style="margin-top: 8px;"><strong>📋 Notizen:</strong><br>${character.notes}</div>` : ''}
             </div>
         `;
