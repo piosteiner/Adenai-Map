@@ -43,8 +43,8 @@ function testLocationClustering() {
         const testCoords = testLocation.layer.getLatLng();
         console.log(`🎯 Testing proximity detection at: ${testLocation.name} (${testCoords.lat}, ${testCoords.lng})`);
         
-        const nearbyLocations = markersSystem.findNearbyLocationMarkers(testCoords, 20);
-        console.log(`📍 Found ${nearbyLocations.length} nearby locations within 20px`);
+        const nearbyLocations = markersSystem.findNearbyLocationMarkers(testCoords, 10);
+        console.log(`📍 Found ${nearbyLocations.length} nearby locations within 10px`);
         
         // Test with larger radius
         const nearbyLocationsLarge = markersSystem.findNearbyLocationMarkers(testCoords, 100);

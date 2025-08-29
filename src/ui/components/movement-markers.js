@@ -16,7 +16,7 @@ class MovementMarkers {
     }
 
     // Check for nearby location markers within proximity threshold
-    findNearbyLocationMarkers(mapCoords, proximityPixels = 20) {
+    findNearbyLocationMarkers(mapCoords, proximityPixels = 10) {
         const map = window.mapCore?.getMap();
         const locationSystem = window.locationSystem || window.locationsSystem;
         
@@ -74,8 +74,8 @@ class MovementMarkers {
             const [x, y] = coordKey.split(',').map(Number);
             const mapCoords = [y, x]; // Leaflet expects [lat, lng]
             
-            // Check for nearby location markers (20px proximity)
-            const nearbyLocations = this.findNearbyLocationMarkers(mapCoords, 20);
+            // Check for nearby location markers (10px proximity)
+            const nearbyLocations = this.findNearbyLocationMarkers(mapCoords, 10);
             
             if (movements.length === 1 && nearbyLocations.length === 0) {
                 // Single marker with no nearby locations

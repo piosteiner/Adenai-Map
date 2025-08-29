@@ -2,12 +2,12 @@
 
 ## Overview
 
-Enhanced the existing movement marker clustering system to detect and include nearby location markers (orange dots) within a 20-pixel proximity threshold. This prevents visual overlap between movement markers and location markers while preserving all original functionality.
+Enhanced the existing movement marker clustering system to detect and include nearby location markers (orange dots) within a 10-pixel proximity threshold. This prevents visual overlap between movement markers and location markers while preserving all original functionality.
 
 ## Key Features
 
 ### 🎯 **Smart Proximity Detection**
-- 20-pixel proximity threshold for detecting overlapping markers
+- 10-pixel proximity threshold for detecting overlapping markers
 - Works regardless of zoom level using pixel-based calculations
 - Maintains performance with efficient distance calculations
 
