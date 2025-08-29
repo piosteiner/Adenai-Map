@@ -628,13 +628,25 @@ class CharacterSystem {
     // FIXED: Add all characters to search index, including those without coordinates
     addToSearchIndex(searchIndex) {
         this.characterData.forEach(character => {
+            // Build comprehensive description for search
+            const searchableText = [
+                character.title,
+                character.description,
+                character.notes,
+                character.location,
+                character.faction,
+                character.firstMet,
+                AdenaiConfig.getCharacterStatusLabel(character.status),
+                AdenaiConfig.getCharacterRelationshipLabel(character.relationship)
+            ].filter(Boolean).join(' ');
+
             if (character.coordinates && Array.isArray(character.coordinates)) {
                 // Convert image coordinates to map coordinates for search
                 const [mapLng, mapLat] = this.convertImageCoordinatesToMapCoordinates(character.coordinates, character.name);
                 
                 searchIndex.push({
                     name: character.name,
-                    desc: `${character.title || ''} ${character.description || ''} ${character.notes || ''}`.trim(),
+                    desc: searchableText,
                     latlng: { lat: mapLat, lng: mapLng },
                     type: 'character',
                     character: character
@@ -643,7 +655,7 @@ class CharacterSystem {
                 // Include characters without coordinates for panel popup
                 searchIndex.push({
                     name: character.name,
-                    desc: `${character.title || ''} ${character.description || ''} ${character.notes || ''}`.trim(),
+                    desc: searchableText,
                     latlng: null, // No map coordinates
                     type: 'character',
                     character: character

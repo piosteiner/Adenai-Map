@@ -77,14 +77,16 @@ class SearchSystem {
         }
 
         const results = this.searchIndex
-            .filter(item =>
-                item.name.toLowerCase().includes(queryLower) || 
-                item.desc.toLowerCase().includes(queryLower)
-            )
+            .map(item => ({
+                ...item,
+                relevanceScore: this.calculateRelevanceScore(item, queryLower),
+                matchedFields: this.getMatchedFields(item, queryLower)
+            }))
+            .filter(item => item.relevanceScore > 0)
             .sort((a, b) => this.sortSearchResults(a, b, queryLower));
 
         if (results.length > 0) {
-            this.renderSearchResults(results);
+            this.renderSearchResults(results.slice(0, 15)); // Limit to top 15 results
             this.dropdown.style.display = 'block';
         } else {
             this.showNoResults();
@@ -93,29 +95,119 @@ class SearchSystem {
     }
 
     sortSearchResults(a, b, query) {
+        // First sort by relevance score (higher is better)
+        if (a.relevanceScore !== b.relevanceScore) {
+            return b.relevanceScore - a.relevanceScore;
+        }
+        
         const nameA = a.name.toLowerCase();
         const nameB = b.name.toLowerCase();
         
-        // 🥇 PRIORITY 1: Exact matches first
+        // Then by exact matches
         const exactMatchA = nameA === query;
         const exactMatchB = nameB === query;
         if (exactMatchA && !exactMatchB) return -1;
         if (!exactMatchA && exactMatchB) return 1;
         
-        // 🥈 PRIORITY 2: Names starting with the query
+        // Then by starts with
         const startsWithA = nameA.startsWith(query);
         const startsWithB = nameB.startsWith(query);
         if (startsWithA && !startsWithB) return -1;
         if (!startsWithA && startsWithB) return 1;
         
-        // 🥉 PRIORITY 3: Characters before locations (if same match quality)
-        if (startsWithA === startsWithB) {
+        // Then by type priority (characters first)
+        if (a.type !== b.type) {
             if (a.type === 'character' && b.type === 'location') return -1;
             if (a.type === 'location' && b.type === 'character') return 1;
         }
         
-        // 🔤 FINAL: Alphabetical order
+        // Finally alphabetical
         return nameA.localeCompare(nameB);
+    }
+
+    calculateRelevanceScore(item, query) {
+        let score = 0;
+        const name = item.name.toLowerCase();
+        const desc = item.desc.toLowerCase();
+        
+        // Name matching (highest priority)
+        if (name === query) score += 100;
+        else if (name.startsWith(query)) score += 80;
+        else if (name.includes(query)) score += 60;
+        else if (this.fuzzyMatch(name, query)) score += 40;
+        
+        // Description matching
+        if (desc.includes(query)) score += 30;
+        else if (this.fuzzyMatch(desc, query)) score += 15;
+        
+        // Character-specific fields
+        if (item.type === 'character' && item.character) {
+            const char = item.character;
+            const searchableFields = [
+                char.title, char.location, char.faction, 
+                char.description, char.notes, char.status, char.relationship
+            ];
+            
+            searchableFields.forEach(field => {
+                if (field && field.toLowerCase().includes(query)) {
+                    score += 20;
+                } else if (field && this.fuzzyMatch(field.toLowerCase(), query)) {
+                    score += 10;
+                }
+            });
+        }
+        
+        // Boost for shorter names (more likely to be relevant)
+        if (score > 0 && name.length < 15) {
+            score += 5;
+        }
+        
+        return score;
+    }
+
+    getMatchedFields(item, query) {
+        const matches = [];
+        
+        if (item.name.toLowerCase().includes(query)) {
+            matches.push('name');
+        }
+        
+        if (item.desc.toLowerCase().includes(query)) {
+            matches.push('description');
+        }
+        
+        if (item.type === 'character' && item.character) {
+            const char = item.character;
+            if (char.title && char.title.toLowerCase().includes(query)) matches.push('title');
+            if (char.location && char.location.toLowerCase().includes(query)) matches.push('location');
+            if (char.faction && char.faction.toLowerCase().includes(query)) matches.push('faction');
+            if (char.notes && char.notes.toLowerCase().includes(query)) matches.push('notes');
+            if (char.status && char.status.toLowerCase().includes(query)) matches.push('status');
+            if (char.relationship && char.relationship.toLowerCase().includes(query)) matches.push('relationship');
+        }
+        
+        return matches;
+    }
+
+    fuzzyMatch(text, query) {
+        if (query.length < 3) return false; // Too short for fuzzy matching
+        
+        // Simple fuzzy matching - allows for 1 character difference per 3 characters
+        const allowedErrors = Math.floor(query.length / 3);
+        let errors = 0;
+        let textIndex = 0;
+        
+        for (let i = 0; i < query.length; i++) {
+            const found = text.indexOf(query[i], textIndex);
+            if (found === -1) {
+                errors++;
+                if (errors > allowedErrors) return false;
+            } else {
+                textIndex = found + 1;
+            }
+        }
+        
+        return true;
     }
 
     renderSearchResults(results) {
@@ -132,21 +224,128 @@ class SearchSystem {
     }
 
     renderSearchResult(result) {
+        const query = this.searchInput.value.toLowerCase();
+        
         if (result.type === 'character') {
-            return window.characterSystem.renderSearchResult(result.character);
+            return this.renderCharacterResult(result, query);
         } else {
-            // Location result
-            const filename = window.mapCore.sanitizeFilename(result.name);
-            return `
-                <div class="dropdown-item location-result">
-                    <img src="public/images/${filename}.jpg" alt="${result.name}" onerror="this.style.display='none'" />
-                    <div class="dropdown-text">
-                        <strong>📍 ${result.name}</strong><br>
-                        <span>${result.desc.replace(/(<([^>]+)>)/gi, '').substring(0, 100)}...</span>
-                    </div>
-                </div>
-            `;
+            return this.renderLocationResult(result, query);
         }
+    }
+
+    renderCharacterResult(result, query) {
+        const char = result.character;
+        const matchBadges = this.createMatchBadges(result.matchedFields);
+        const highlightedName = this.highlightText(char.name, query);
+        const highlightedTitle = char.title ? this.highlightText(char.title, query) : '';
+        const highlightedLocation = char.location ? this.highlightText(char.location, query) : 'Unknown location';
+        
+        // Relationship emoji
+        const relationshipEmoji = this.getRelationshipEmoji(char.relationship);
+        
+        // Status color
+        const statusColor = this.getStatusColor(char.status);
+        
+        return `
+            <div class="dropdown-item character-result" data-relevance="${result.relevanceScore}">
+                <div class="result-avatar">
+                    ${char.image ? `<img src="${char.image}" alt="${char.name}" />` : '<div class="character-placeholder">👤</div>'}
+                    <div class="relationship-indicator">${relationshipEmoji}</div>
+                </div>
+                <div class="dropdown-text">
+                    <div class="result-header">
+                        <strong>${highlightedName}</strong>
+                        <div class="result-badges">
+                            ${matchBadges}
+                            <span class="relevance-score">${result.relevanceScore}</span>
+                        </div>
+                    </div>
+                    ${highlightedTitle ? `<div class="character-title">${highlightedTitle}</div>` : ''}
+                    <div class="character-meta">
+                        <span class="status-badge" style="background-color: ${statusColor}">
+                            ${AdenaiConfig.getCharacterStatusLabel(char.status)}
+                        </span>
+                        📍 ${highlightedLocation}
+                    </div>
+                    ${char.description ? `<div class="character-preview">${this.highlightText(char.description.substring(0, 80), query)}${char.description.length > 80 ? '...' : ''}</div>` : ''}
+                </div>
+            </div>
+        `;
+    }
+
+    renderLocationResult(result, query) {
+        const filename = window.mapCore.sanitizeFilename(result.name);
+        const highlightedName = this.highlightText(result.name, query);
+        const highlightedDesc = this.highlightText(result.desc.replace(/(<([^>]+)>)/gi, '').substring(0, 100), query);
+        const matchBadges = this.createMatchBadges(result.matchedFields);
+        
+        return `
+            <div class="dropdown-item location-result" data-relevance="${result.relevanceScore}">
+                <div class="result-avatar">
+                    <img src="public/images/${filename}.jpg" alt="${result.name}" onerror="this.style.display='none'" />
+                    <div class="location-indicator">🏛️</div>
+                </div>
+                <div class="dropdown-text">
+                    <div class="result-header">
+                        <strong>📍 ${highlightedName}</strong>
+                        <div class="result-badges">
+                            ${matchBadges}
+                            <span class="relevance-score">${result.relevanceScore}</span>
+                        </div>
+                    </div>
+                    <div class="location-preview">${highlightedDesc}${result.desc.length > 100 ? '...' : ''}</div>
+                </div>
+            </div>
+        `;
+    }
+
+    highlightText(text, query) {
+        if (!text || !query || query.length < 2) return text;
+        
+        const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+        return text.replace(regex, '<mark>$1</mark>');
+    }
+
+    createMatchBadges(matchedFields) {
+        if (!matchedFields || matchedFields.length === 0) return '';
+        
+        const badgeMap = {
+            'name': '📛',
+            'title': '👑',
+            'location': '📍',
+            'description': '📝',
+            'faction': '🏰',
+            'notes': '📋',
+            'status': '💫',
+            'relationship': '❤️'
+        };
+        
+        return matchedFields.slice(0, 3).map(field => 
+            `<span class="match-badge" title="Matched in ${field}">${badgeMap[field] || '🔍'}</span>`
+        ).join('');
+    }
+
+    getRelationshipEmoji(relationship) {
+        const emojiMap = {
+            'ally': '🤝',
+            'friendly': '😊',
+            'neutral': '😐',
+            'suspicious': '🤨',
+            'hostile': '😠',
+            'enemy': '⚔️',
+            'party': '⭐'
+        };
+        return emojiMap[relationship] || '❓';
+    }
+
+    getStatusColor(status) {
+        const colorMap = {
+            'alive': '#4ade80',
+            'dead': '#f87171',
+            'missing': '#fbbf24',
+            'unknown': '#94a3b8'
+        };
+        return colorMap[status] || '#94a3b8';
     }
 
     showNoResults() {
