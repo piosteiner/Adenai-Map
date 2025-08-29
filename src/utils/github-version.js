@@ -1,4 +1,7 @@
 // GitHub Version Checker - Automatically fetch last commit info
+import { HttpUtils } from './http-utils.js';
+import { Logger } from './logger.js';
+
 class GitHubVersionChecker {
     constructor() {
         this.owner = 'piosteiner';
@@ -11,21 +14,16 @@ class GitHubVersionChecker {
     }
 
     async fetchLastCommit() {
-        console.log('🐙 Fetching last commit from GitHub...');
+        Logger.api('🐙 Fetching last commit from GitHub...');
         
         try {
             // Check cache first
             if (this.cachedData && this.cacheTime && (Date.now() - this.cacheTime < this.cacheTimeout)) {
-                console.log('📦 Using cached GitHub data');
+                Logger.cache('📦 Using cached GitHub data');
                 return this.cachedData;
             }
 
-            const response = await fetch(this.apiUrl);
-            
-            if (!response.ok) {
-                throw new Error(`GitHub API returned ${response.status}: ${response.statusText}`);
-            }
-            
+            const response = await HttpUtils.fetch(this.apiUrl);
             const data = await response.json();
             
             // Cache the data
@@ -38,11 +36,11 @@ class GitHubVersionChecker {
             };
             this.cacheTime = Date.now();
             
-            console.log('✅ GitHub commit data fetched:', this.cachedData);
+            Logger.success('✅ GitHub commit data fetched:', this.cachedData);
             return this.cachedData;
             
         } catch (error) {
-            console.error('❌ Failed to fetch GitHub commit data:', error);
+            Logger.error('❌ Failed to fetch GitHub commit data:', error);
             
             // Return fallback data
             return {
@@ -59,7 +57,7 @@ class GitHubVersionChecker {
     async updateVersionDisplay() {
         const versionInfo = document.getElementById('version-info');
         if (!versionInfo) {
-            console.warn('⚠️ Version info element not found');
+            Logger.warn('⚠️ Version info element not found');
             return;
         }
 
@@ -103,7 +101,7 @@ class GitHubVersionChecker {
             versionInfo.style.cursor = 'pointer';
             versionInfo.onclick = () => {
                 window.open(commitData.url, '_blank');
-                console.log('🔗 Opened GitHub commit:', commitData.url);
+                Logger.debug('🔗 Opened GitHub commit:', commitData.url);
             };
             
             // Add hover effect
@@ -138,5 +136,5 @@ document.addEventListener('adenaiMapReady', () => {
     gitHubVersionChecker.updateVersionDisplay();
 });
 
-console.log('🐙 GitHub Version Checker loaded');
-console.log('💡 Use gitHubVersionChecker.forceRefresh() to update manually');
+Logger.init('🐙 GitHub Version Checker loaded');
+Logger.info('💡 Use gitHubVersionChecker.forceRefresh() to update manually');

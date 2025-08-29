@@ -24,11 +24,8 @@ class LocationSystem {
 
     async loadMediaLibrary() {
         try {
-            const response = await fetch('public/data/media-library.json');
-            if (response.ok) {
-                this.mediaLibrary = await response.json();
-                Logger.media('Media library loaded');
-            }
+            this.mediaLibrary = await HttpUtils.fetchLocalData('public/data/media-library.json');
+            Logger.media('Media library loaded');
         } catch (error) {
             Logger.warning('Could not load media library:', error);
         }
@@ -203,12 +200,7 @@ class LocationSystem {
             // 🔥 CLEAR EXISTING DATA FIRST
             this.clearExistingLocations();
             
-            const response = await fetch(`public/data/places.geojson?t=${Date.now()}`);
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const data = await response.json();
+            const data = await HttpUtils.fetchLocalData('public/data/places.geojson');
             await this.processGeoJSONData(data);
             
             Logger.success(`Loaded ${this.geoFeatureLayers.length} locations`);
@@ -381,14 +373,10 @@ class LocationSystem {
 
         if (url) {
             try {
-                const response = await fetch(url);
-                if (response.ok) {
-                    const html = await response.text();
-                    finalDesc = html.replace(/(<([^>]+)>)/gi, ''); // Remove HTML tags for search
-                    popupContent = `<div class="popup-title">${name}</div><div class="popup-desc">${this.parseLinks(html)}</div>`;
-                } else {
-                    throw new Error('Fetch failed');
-                }
+                const response = await HttpUtils.fetch(url);
+                const html = await response.text();
+                finalDesc = html.replace(/(<([^>]+)>)/gi, ''); // Remove HTML tags for search
+                popupContent = `<div class="popup-title">${name}</div><div class="popup-desc">${this.parseLinks(html)}</div>`;
             } catch (error) {
                 // Fallback to local description if external content fails
                 popupContent = this.createPopupFromProperties(name, desc, details);

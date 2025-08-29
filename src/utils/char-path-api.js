@@ -1,6 +1,9 @@
 // char-path-api.js - Character Paths API Client
 // Provides character path data from server API
 
+import { HttpUtils } from './http-utils.js';
+import { Logger } from './logger.js';
+
 class CharPathAPI {
     constructor() {
         this.cache = new Map();
@@ -19,15 +22,15 @@ class CharPathAPI {
     }
 
     init() {
-        console.log('🚀 Character Path API Client initialized');
+        Logger.init('🚀 Character Path API Client initialized');
         if (this.isDebugMode) {
-            console.log('🔧 Debug mode enabled for Character Path API');
+            Logger.debug('🔧 Debug mode enabled for Character Path API');
         }
     }
 
     // Main public method to load character paths
     async loadCharacterPaths() {
-        console.log('📊 Loading character paths from API...');
+        Logger.api('📊 Loading character paths from API...');
         const startTime = performance.now();
         
         try {
@@ -35,13 +38,13 @@ class CharPathAPI {
             const processedData = this.processAPIData(apiData);
             
             const loadTime = performance.now() - startTime;
-            console.log(`✅ API character paths loaded in ${loadTime.toFixed(2)}ms`);
+            Logger.success(`✅ API character paths loaded in ${loadTime.toFixed(2)}ms`);
             this.logPerformanceMetrics(apiData, loadTime, 'api');
             
             return processedData;
             
         } catch (error) {
-            console.error('❌ Character Paths API unavailable:', error.message);
+            Logger.error('❌ Character Paths API unavailable:', error.message);
             
             // Show user-friendly error message
             this.showAPIError(error);
@@ -97,38 +100,28 @@ class CharPathAPI {
         const cached = this.getCachedData(cacheKey);
         
         if (cached) {
-            console.log('📋 Using cached character paths data');
+            Logger.cache('📋 Using cached character paths data');
             this.stats.cacheHits++;
             return cached;
         }
 
-        console.log('🌐 Fetching character paths from API...');
+        Logger.api('🌐 Fetching character paths from API...');
         this.stats.apiCalls++;
 
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
-
         try {
-            console.log(`🌐 Attempting fetch to: ${this.apiBaseUrl}`);
+            Logger.api(`Attempting fetch to: ${this.apiBaseUrl}`);
             
-            const response = await fetch(this.apiBaseUrl, {
-                method: 'GET',
+            const response = await HttpUtils.fetch(this.apiBaseUrl, {
                 headers: {
-                    'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                signal: controller.signal,
-                cache: 'no-cache' // Force fresh request
+                cache: 'no-cache', // Force fresh request
+                timeout: 10000,
+                retries: 0 // Handle retries manually if needed
             });
 
-            clearTimeout(timeoutId);
-            
-            console.log(`📊 API Response - Status: ${response.status}, StatusText: ${response.statusText}`);
-            console.log(`📊 API Response Headers:`, [...response.headers.entries()]);
-
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
+            Logger.api(`API Response - Status: ${response.status}, StatusText: ${response.statusText}`);
+            Logger.api(`API Response Headers:`, [...response.headers.entries()]);
 
             const data = await response.json();
             
@@ -141,15 +134,13 @@ class CharPathAPI {
             this.setCachedData(cacheKey, data);
             
             if (this.isDebugMode) {
-                console.log('🔍 API Response:', data);
+                Logger.debug('🔍 API Response:', data);
             }
 
             return data;
 
         } catch (error) {
-            clearTimeout(timeoutId);
-            
-            console.error('🚨 Detailed fetch error:', {
+            Logger.error('🚨 Detailed fetch error:', {
                 name: error.name,
                 message: error.message,
                 stack: error.stack,
@@ -179,11 +170,11 @@ class CharPathAPI {
         // The API data is already in the correct format, just validate it
         Object.values(apiData.paths).forEach(path => {
             if (!path.id || !path.name || !path.coordinates || !Array.isArray(path.coordinates)) {
-                console.warn('⚠️ Invalid path data:', path);
+                Logger.warn('⚠️ Invalid path data:', path);
             }
         });
 
-        console.log(`✅ Processed ${Object.keys(apiData.paths).length} character paths from API`);
+        Logger.success(`✅ Processed ${Object.keys(apiData.paths).length} character paths from API`);
         return apiData;
     }
 
@@ -213,10 +204,10 @@ class CharPathAPI {
         const dataSize = new Blob([JSON.stringify(data)]).size;
         const dataSizeKB = (dataSize / 1024).toFixed(2);
         
-        console.log(`📊 Performance Metrics (${source}):`);
-        console.log(`  - Load time: ${loadTime.toFixed(2)}ms`);
-        console.log(`  - Data size: ${dataSizeKB}KB`);
-        console.log(`  - Paths: ${Object.keys(data.paths || {}).length}`);
+        Logger.debug(`📊 Performance Metrics (${source}):`);
+        Logger.debug(`  - Load time: ${loadTime.toFixed(2)}ms`);
+        Logger.debug(`  - Data size: ${dataSizeKB}KB`);
+        Logger.debug(`  - Paths: ${Object.keys(data.paths || {}).length}`);
         
         this.stats.dataSizeComparisons.push({
             source: source,
@@ -237,38 +228,32 @@ class CharPathAPI {
 
     printStatistics() {
         const stats = this.getStatistics();
-        console.log('📈 Character Path Manager Statistics:', stats);
+        Logger.debug('📈 Character Path Manager Statistics:', stats);
         return stats;
     }
 
     clearCache() {
         this.cache.clear();
-        console.log('🧹 Character path cache cleared');
+        Logger.cache('🧹 Character path cache cleared');
     }
 
     setDebugMode(enabled) {
         this.isDebugMode = enabled;
-        console.log(`🔧 Debug mode ${enabled ? 'enabled' : 'disabled'}`);
+        Logger.debug(`🔧 Debug mode ${enabled ? 'enabled' : 'disabled'}`);
     }
 
     // Test methods for development
     async testAPIConnection() {
         try {
-            const response = await fetch(`${this.apiBaseUrl}/stats`, {
-                method: 'GET',
+            const response = await HttpUtils.fetch(`${this.apiBaseUrl}/stats`, {
                 headers: { 'Accept': 'application/json' }
             });
             
-            if (response.ok) {
-                const stats = await response.json();
-                console.log('✅ API connection test successful:', stats);
-                return true;
-            } else {
-                console.error('❌ API connection test failed:', response.status);
-                return false;
-            }
+            const stats = await response.json();
+            Logger.success('✅ API connection test successful:', stats);
+            return true;
         } catch (error) {
-            console.error('❌ API connection test error:', error);
+            Logger.error('❌ API connection test error:', error);
             return false;
         }
     }

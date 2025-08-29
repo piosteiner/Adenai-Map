@@ -50,13 +50,8 @@ class MovementSystem {
     // Load character data and create movement markers
     async loadCharacterMovementMarkers() {
         try {
-            // Load character data (adjust URL if needed)
-            const response = await fetch('public/data/characters.json');
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-            
-            const data = await response.json();
+            // Load character data using HttpUtils
+            const data = await HttpUtils.fetchLocalData('public/data/characters.json');
             const characters = data.characters || [];
             
             // Create markers for each character

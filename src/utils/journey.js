@@ -59,22 +59,15 @@ async function loadJourneys() {
             throw new Error('No valid Leaflet map available for journey rendering');
         }
         
-        // Load from CMS using singular endpoint
-        const response = await fetch('https://adenai-admin.piogino.ch/api/journey', {
-            method: 'GET',
+        // Load from CMS using HttpUtils
+        const journeys = await HttpUtils.fetchJSON('https://adenai-admin.piogino.ch/api/journey', {
             headers: {
-                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         });
         
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        
-        const journeys = await response.json();
-        console.log(`✅ Loaded ${journeys.length} journey(s) from CMS`);
-        console.log('Journey data:', journeys);
+        Logger.success(`Loaded ${journeys.length} journey(s) from CMS`);
+        Logger.journey('Journey data:', journeys);
         
         // Clear existing journeys
         clearJourneys();

@@ -65,18 +65,16 @@ class CharacterSystem {
             for (const url of urls) {
                 try {
                     Logger.character(`Trying URL: ${url}`);
-                    response = await fetch(url);
-                    if (response.ok) {
-                        Logger.success(`Successfully loaded from: ${url}`);
-                        break;
-                    }
+                    response = await HttpUtils.fetch(url, { retries: 0 });
+                    Logger.success(`Successfully loaded from: ${url}`);
+                    break;
                 } catch (e) {
                     Logger.warning(`Failed URL: ${url} - ${e.message}`);
                 }
             }
             
-            if (!response || !response.ok) {
-                throw new Error(`HTTP ${response?.status || 'No response'}: ${response?.statusText || 'Failed all URLs'}`);
+            if (!response) {
+                throw new Error('Failed all URLs - no successful response');
             }
             
             const data = await response.json();
