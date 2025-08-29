@@ -600,7 +600,24 @@
       "movementHistory": [],
       "createdAt": "2025-08-29T20:40:02.491Z",
       "updatedAt": "2025-08-29T20:40:02.491Z"
+    },
+    {
+      "id": "ly_iss_moy",
+      "name": "Ly'iss Moy",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/lyiss_close.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-29T20:40:44.352Z",
+      "updatedAt": "2025-08-29T20:40:44.352Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:40:02.491Z"
+  "lastUpdated": "2025-08-29T20:40:44.352Z"
 }
