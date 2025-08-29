@@ -718,15 +718,16 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai-admin.piogino.ch/public/images/sorin_close.png",
+      "image": "https://adenai.piogino.ch/public/images/sorin_karthright_close.png",
       "status": "alive",
       "faction": "",
       "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2025-08-29T20:43:56.783Z",
-      "updatedAt": "2025-08-29T20:43:56.783Z"
+      "updatedAt": "2025-08-29T20:52:49.704Z"
     },
     {
       "id": "prinz_torren",
@@ -799,5 +800,5 @@
       "updatedAt": "2025-08-29T20:46:20.848Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:52:33.059Z"
+  "lastUpdated": "2025-08-29T20:52:49.704Z"
 }
