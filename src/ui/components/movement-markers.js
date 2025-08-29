@@ -392,9 +392,6 @@ class MovementMarkers {
         // Create a divIcon (HTML) instead of SVG icon to match movement markers and enable animations
         const fanMarkerHtml = `
             <div class="movement-marker fan-marker fan-location-marker" style="background: #ff6b24; --path-color: #ff6b24;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                    <circle cx="12" cy="12" r="6"/>
-                </svg>
             </div>
         `;
 
