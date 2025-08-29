@@ -556,16 +556,17 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "",
+      "image": "https://adenai-admin.piogino.ch/public/images/jara_close.png",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2025-08-29T20:38:01.289Z",
-      "updatedAt": "2025-08-29T20:38:01.289Z"
+      "updatedAt": "2025-08-29T20:38:36.984Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:38:01.289Z"
+  "lastUpdated": "2025-08-29T20:38:36.984Z"
 }
