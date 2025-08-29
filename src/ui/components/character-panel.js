@@ -393,7 +393,9 @@ class CharacterPanel {
                                    ${isPathVisible ? 'checked' : ''} 
                                    ${!hasMovement ? 'disabled' : ''}
                                    onchange="window.characterPanel.toggleCharacterPath('${character.id}')">
-                            <span class="checkmark" style="border-color: ${this.getRelationshipColor(character.relationship)}"></span>
+                            <span class="checkmark" 
+                                  style="border-color: ${this.getRelationshipColor(character.relationship)}; 
+                                         --checkmark-color: ${this.getRelationshipColor(character.relationship)}"></span>
                         </label>
                     </div>
                 </div>

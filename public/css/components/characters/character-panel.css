@@ -329,7 +329,7 @@
 }
 
 .movement-checkbox input[type="checkbox"]:checked + .checkmark {
-  background: var(--dropdown-border);
+  background: var(--checkmark-color, var(--dropdown-border));
 }
 
 .movement-checkbox input[type="checkbox"]:checked + .checkmark::after {
