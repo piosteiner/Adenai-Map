@@ -374,23 +374,6 @@
       "updatedAt": "2025-08-28T10:02:02.622Z"
     },
     {
-      "id": "pio",
-      "name": "Pio",
-      "title": "",
-      "placeOfOrigin": "",
-      "coordinates": null,
-      "description": "",
-      "image": "",
-      "status": "alive",
-      "faction": "",
-      "relationship": "ally",
-      "firstMet": "",
-      "notes": "",
-      "movementHistory": [],
-      "createdAt": "2025-08-27T00:35:18.828Z",
-      "updatedAt": "2025-08-27T00:35:18.828Z"
-    },
-    {
       "id": "viktoria_karthright",
       "name": "Viktoria Karthright",
       "title": "Familienoberhaupt",
@@ -880,5 +863,5 @@
       "updatedAt": "2025-08-29T20:34:25.256Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:36:01.886Z"
+  "lastUpdated": "2025-08-29T20:36:20.946Z"
 }
