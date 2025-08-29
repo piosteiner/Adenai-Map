@@ -102,16 +102,38 @@
 }
 
 .panel-header {
-  background: #333;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
   color: white;
-  padding: 15px;
+  padding: 20px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 3px solid #e67e22;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.panel-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #e67e22 0%, #f39c12 50%, #e67e22 100%);
 }
 
 .panel-header h3 {
   margin: 0;
+  font-size: 1.3em;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: white; /* Fallback for browsers that don't support background-clip */
 }
 
 /* Retract Button Section */
@@ -658,6 +680,26 @@
   box-shadow: 
     0 4px 12px rgba(220, 38, 38, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Dark mode panel header styling */
+[data-theme="dark"] .panel-header {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
+  border-bottom-color: #d69e2e;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .panel-header::before {
+  background: linear-gradient(90deg, #d69e2e 0%, #ed8936 50%, #d69e2e 100%);
+}
+
+[data-theme="dark"] .panel-header h3 {
+  background: linear-gradient(135deg, #f7fafc 0%, #e2e8f0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #f7fafc; /* Fallback for browsers that don't support background-clip */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Responsive button styling */
