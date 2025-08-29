@@ -341,73 +341,6 @@
       "updatedAt": "2025-08-28T05:00:05.156Z"
     },
     {
-      "id": "test2",
-      "name": "Test2",
-      "title": "",
-      "placeOfOrigin": "Atlantis (versunken)",
-      "coordinates": [
-        1412,
-        657
-      ],
-      "description": "",
-      "image": "",
-      "status": "missing",
-      "faction": "",
-      "relationship": "hostile",
-      "firstMet": "",
-      "notes": "",
-      "movementHistory": [
-        {
-          "id": "movement_1756355528007",
-          "date": "5663-05-20",
-          "dateStart": "5663-05-20",
-          "dateEnd": null,
-          "location": "Altes Weingut",
-          "coordinates": [
-            1296,
-            694
-          ],
-          "notes": "",
-          "type": "stay",
-          "isCustomLocation": false,
-          "createdAt": "2025-08-28T04:32:08.007Z",
-          "movement_nr": 0,
-          "updatedAt": "2025-08-28T05:29:17.258Z"
-        },
-        {
-          "id": "movement_1756355579692",
-          "date": "5663-05-26",
-          "dateStart": "5663-05-26",
-          "dateEnd": null,
-          "location": "Osdalen",
-          "coordinates": [
-            1412,
-            657
-          ],
-          "notes": "",
-          "type": "stay",
-          "isCustomLocation": false,
-          "createdAt": "2025-08-28T04:32:59.692Z",
-          "movement_nr": 1,
-          "updatedAt": "2025-08-28T05:29:17.258Z"
-        }
-      ],
-      "createdAt": "2025-08-28T04:31:45.676Z",
-      "updatedAt": "2025-08-28T05:29:17.258Z",
-      "currentLocation": {
-        "date": "5663-05-26",
-        "dateStart": "5663-05-26",
-        "dateEnd": null,
-        "location": "Osdalen",
-        "coordinates": [
-          1412,
-          657
-        ],
-        "notes": ""
-      },
-      "location": "Osdalen"
-    },
-    {
       "id": "pio_s_fully_loaded_char",
       "name": "Pio's fully loaded char",
       "title": "Novice Typer",
@@ -617,5 +550,5 @@
       "updatedAt": "2025-08-29T20:34:25.256Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:37:18.809Z"
+  "lastUpdated": "2025-08-29T20:37:23.600Z"
 }
