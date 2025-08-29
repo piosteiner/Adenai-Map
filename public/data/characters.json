@@ -467,7 +467,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai-admin.piogino.ch/public/images/dravak_close.png",
+      "image": "https://adenai.piogino.ch/public/images/dravak_close.png",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -476,7 +476,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:31:02.748Z",
-      "updatedAt": "2025-08-29T20:35:07.011Z"
+      "updatedAt": "2025-08-29T20:47:41.536Z"
     },
     {
       "id": "eliana_karthright",
@@ -793,5 +793,5 @@
       "updatedAt": "2025-08-29T20:46:20.848Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:47:32.002Z"
+  "lastUpdated": "2025-08-29T20:47:41.536Z"
 }
