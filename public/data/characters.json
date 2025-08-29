@@ -593,7 +593,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai-admin.piogino.ch/public/images/krull_close.png",
+      "image": "https://adenai.piogino.ch/public/images/krull_close.png",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -602,7 +602,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:40:02.491Z",
-      "updatedAt": "2025-08-29T20:41:31.720Z"
+      "updatedAt": "2025-08-29T20:50:05.859Z"
     },
     {
       "id": "ly_iss_moy",
@@ -795,5 +795,5 @@
       "updatedAt": "2025-08-29T20:46:20.848Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:49:57.691Z"
+  "lastUpdated": "2025-08-29T20:50:05.859Z"
 }
