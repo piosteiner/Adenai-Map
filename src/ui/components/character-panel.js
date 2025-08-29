@@ -13,7 +13,6 @@ class CharacterPanel {
         this.hoverDelay = 200; // 200ms delay
         this.collapseHoverTimer = null;
         this.collapseHoverDelay = 1000; // 1.0 seconds delay for collapse
-        this.collapseTimer = null; // Timer for resize handle collapse delay
         this.isHoverExpanded = false; // Track if panel was expanded by hover
         
         // Resize properties
@@ -108,37 +107,25 @@ class CharacterPanel {
             });
         }
 
-        // Setup hover behavior for resize handle
+        // Setup hover behavior for resize handle - only for collapse when panel is open
         if (this.resizeHandle) {
             console.log('🔧 Setting up resize handle hover behavior');
             console.log('🔧 EventUtils available:', typeof EventUtils !== 'undefined');
             this.handleHoverCleanup = EventUtils.setupHoverBehavior(this.resizeHandle, {
-                enterDelay: this.hoverDelay,
-                leaveDelay: this.collapseHoverDelay,
+                enterDelay: 1000, // 1 second delay before collapse
                 onEnter: () => {
                     console.log('🖱️ Resize handle mouse enter');
-                    if (this.panel.classList.contains('collapsed') && !this.isResizing) {
-                        console.log('🖱️ Expanding panel from resize handle hover');
-                        this.expandPanel();
-                        this.isHoverExpanded = true;
-                    } else if (!this.panel.classList.contains('collapsed') && !this.isResizing) {
-                        // Panel is open - start timer to collapse it after delay
-                        console.log('🖱️ Panel is open - starting collapse timer');
-                        this.collapseTimer = setTimeout(() => {
-                            console.log('🖱️ Collapsing panel after hover delay');
-                            this.collapsePanel();
-                            this.isHoverExpanded = false;
-                        }, 1000); // 1.0 second delay
+                    // Only handle collapse behavior when panel is already open
+                    if (!this.panel.classList.contains('collapsed') && !this.isResizing) {
+                        console.log('🖱️ Panel is open - will collapse after 1 second hover');
+                        // The enterDelay handles the 1-second wait automatically
+                        this.collapsePanel();
+                        this.isHoverExpanded = false;
                     }
                 },
                 onLeave: () => {
-                    console.log('🖱️ Resize handle mouse leave');
-                    // Clear any pending collapse timer
-                    if (this.collapseTimer) {
-                        console.log('🖱️ Clearing collapse timer');
-                        clearTimeout(this.collapseTimer);
-                        this.collapseTimer = null;
-                    }
+                    console.log('🖱️ Resize handle mouse leave - no action needed');
+                    // No action needed on leave since EventUtils handles the delay cancellation
                 }
             });
         }
@@ -155,8 +142,6 @@ class CharacterPanel {
             startWidth = parseInt(document.defaultView.getComputedStyle(this.panel).width, 10);
             
             // Clear hover state when user starts dragging
-            this.clearHoverTimer();
-            this.clearCollapseHoverTimer();
             this.isHoverExpanded = false;
             
             this.resizeHandle.classList.add('dragging');
@@ -233,8 +218,6 @@ class CharacterPanel {
         this.setWidth(this.minWidth);
         this.updateHandlePosition();
         // Clear hover state when manually collapsing
-        this.clearHoverTimer();
-        this.clearCollapseHoverTimer();
         this.isHoverExpanded = false;
     }
 
