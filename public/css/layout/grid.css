@@ -66,8 +66,9 @@
 .movement-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 12px;
   margin-bottom: 15px;
+  padding: 0 3px;
 }
 
 .date-inputs {
