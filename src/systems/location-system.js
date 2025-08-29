@@ -160,15 +160,15 @@ class LocationSystem {
     }
 
     createLocationIcon() {
-        // Create the classic orange dot icon with larger size to match cluster proxy markers
+        // Create the classic orange dot icon (smaller size like original)
         if (!this.dotOrangeIcon) {
             // Use pure CSS/HTML divIcon to prevent ANY image hover enlargement
             this.dotOrangeIcon = L.divIcon({
                 className: 'location-dot-icon',
                 html: '<div class="location-dot-inner"></div>',
-                iconSize: [32, 32],
-                iconAnchor: [16, 16],
-                popupAnchor: [0, -16]
+                iconSize: [20, 20],
+                iconAnchor: [10, 10],
+                popupAnchor: [0, -10]
             });
             
             // Add CSS for the icon (only once)
@@ -185,23 +185,23 @@ class LocationSystem {
                     }
                     
                     .location-dot-inner {
-                        width: 24px;
-                        height: 24px;
+                        width: 12px;
+                        height: 12px;
                         background: #ff6b24;
-                        border: 2px solid #ffffff;
+                        border: 1px solid #ffffff;
                         border-radius: 50%;
-                        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
                         transition: transform 0.2s ease;
                     }
                     
                     .location-dot-icon:hover .location-dot-inner {
-                        transform: scale(1.2);
+                        transform: scale(1.3);
                     }
                 `;
                 document.head.appendChild(style);
             }
             
-            Logger.success('Orange dot icon created with pure CSS (NO images - prevents hover enlargement)');
+            Logger.success('Orange dot icon created with pure CSS (smaller size like original - NO images)');
         }
     }
 
