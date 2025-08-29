@@ -746,12 +746,13 @@
       "image": "https://adenai-admin.piogino.ch/public/images/ceres_close.png",
       "status": "alive",
       "faction": "Regierung von Rena",
-      "relationship": "ally",
+      "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2025-08-29T20:23:32.979Z",
-      "updatedAt": "2025-08-29T20:23:32.979Z"
+      "updatedAt": "2025-08-29T20:34:37.743Z"
     },
     {
       "id": "colette_pinet",
@@ -876,5 +877,5 @@
       "updatedAt": "2025-08-29T20:34:25.256Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:34:25.256Z"
+  "lastUpdated": "2025-08-29T20:34:37.743Z"
 }
