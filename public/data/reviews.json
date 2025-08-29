@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "797a5a88e17d16f1172a218e4551d49186359802",
+      "action": "update",
+      "type": "character",
+      "itemName": "Dina Eisfeld",
+      "user": "gm",
+      "timestamp": "2025-08-29T21:01:12.792Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T21:01:12.792Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Dina Eisfeld (by gm) - Yosefka Akademie (5663-06-03)"
+    },
+    {
       "commitSha": "748d5f4f30fa35559186119d18ba9b31c8f8f31d",
       "action": "update",
       "type": "character",
@@ -3707,5 +3720,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T21:00:50.663Z"
+  "lastUpdated": "2025-08-29T21:01:12.793Z"
 }
