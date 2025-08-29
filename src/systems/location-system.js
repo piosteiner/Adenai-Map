@@ -160,12 +160,23 @@ class LocationSystem {
     }
 
     createLocationIcon() {
-        // Create dynamic interactive location marker instead of static icon
-        this.dotOrangeIcon = this.createInteractiveLocationMarker();
-        Logger.success('Interactive location marker created successfully');
+        // Create the classic orange dot icon for fallback compatibility
+        if (!this.dotOrangeIcon) {
+            try {
+                this.dotOrangeIcon = L.icon({
+                    iconUrl: 'public/icons/dot_orange.svg',
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 12],
+                    popupAnchor: [0, -12]
+                });
+                Logger.success('Orange dot icon created successfully');
+            } catch (error) {
+                Logger.error('Failed to create orange dot icon:', error);
+            }
+        }
     }
 
-    createInteractiveLocationMarker() {
+    createInteractiveLocationMarker(location) {
         const isMobile = window.mapCore && window.mapCore.getIsMobile ? window.mapCore.getIsMobile() : false;
         const size = isMobile ? 48 : 32;
         
@@ -178,7 +189,11 @@ class LocationSystem {
             popupAnchor: [0, -size/2]
         });
 
-        return svgIcon;
+        // Create and return a proper Leaflet marker with the interactive icon
+        const coordinates = location.geometry.coordinates;
+        const marker = L.marker([coordinates[1], coordinates[0]], { icon: svgIcon });
+        
+        return marker;
     }
 
     createLocationMarkerSVG(size) {
@@ -658,7 +673,18 @@ class LocationSystem {
         const desc = feature.properties.description || '';
         const details = feature.properties.details || [];
         const url = feature.properties.contentUrl;
-        const latlng = layer.getLatLng();
+        
+        // Ensure we have a valid layer with getLatLng method
+        let latlng;
+        if (layer && typeof layer.getLatLng === 'function') {
+            latlng = layer.getLatLng();
+        } else if (feature.geometry && feature.geometry.coordinates) {
+            // Fallback: extract coordinates from feature
+            latlng = L.latLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]);
+        } else {
+            Logger.error('Cannot determine location coordinates for feature:', feature);
+            return;
+        }
 
         let finalDesc = desc;
         let popupContent = '';
