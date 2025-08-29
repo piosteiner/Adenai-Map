@@ -607,8 +607,8 @@
 }
 
 [data-theme="dark"] .movement-checkbox input[type="checkbox"]:checked + .checkmark {
-  background: #4CAF50;
-  border-color: #4CAF50;
+  background: var(--checkmark-color, var(--dropdown-border));
+  border-color: var(--checkmark-color, var(--dropdown-border));
 }
 
 [data-theme="dark"] .character-panel .character-card {
