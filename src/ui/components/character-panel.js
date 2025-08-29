@@ -375,7 +375,7 @@ class CharacterPanel {
                 
                 <div class="character-info" data-character-name="${character.name}">
                     <div class="character-details">
-                        <h4>${character.name}${hasMovement ? ` 🛤️ ${movementCount + 1}` : ''}</h4>
+                        <h4>${character.name}</h4>
                         ${character.title ? `<div class="character-title">${character.title}</div>` : ''}
                         <div class="character-location">📍 ${character.location || 'Unknown'}</div>
                         <div class="character-badges">
