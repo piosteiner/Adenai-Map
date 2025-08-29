@@ -80,4 +80,4 @@ class Logger {
 // Make available globally
 window.Logger = Logger;
 
-console.log('📝 Logger utilities loaded successfully');
+Logger.loading('📝 Logger utilities loaded successfully');

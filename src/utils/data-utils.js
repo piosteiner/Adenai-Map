@@ -119,4 +119,4 @@ class DataUtils {
 // Make available globally
 window.DataUtils = DataUtils;
 
-console.log('📊 Data utilities loaded successfully');
+Logger.loading('📊 Data utilities loaded successfully');

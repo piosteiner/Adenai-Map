@@ -43,7 +43,7 @@ class MovementSystem {
             Logger.error('Error in loadAndDisplayPaths:', error);
             Logger.error('Error stack:', error.stack);
             Logger.error('Character Paths API unavailable');
-            EventUtils.showError('Character movement data unavailable. Please contact developer through GitHub.');
+            NotificationUtils.showError('Character movement data unavailable. Please contact developer through GitHub.');
         }
     }
 

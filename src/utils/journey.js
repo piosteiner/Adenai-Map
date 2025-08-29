@@ -180,26 +180,7 @@ function isMobile() {
 }
 
 function showJourneyError(message) {
-    Logger.warn('🚫 Journey loading failed:', message);
-    
-    // Create a simple error notification
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'journey-error-notification';
-    errorDiv.innerHTML = `
-        <div style="position: fixed; top: 20px; right: 20px; background: #f44336; color: white; padding: 12px 16px; border-radius: 4px; z-index: 10000; max-width: 300px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-            <strong>⚠️ Journey Loading Failed</strong><br>
-            <small>${escapeHtml(message)}</small>
-        </div>
-    `;
-    
-    document.body.appendChild(errorDiv);
-    
-    // Auto-remove after 10 seconds
-    setTimeout(() => {
-        if (errorDiv.parentNode) {
-            errorDiv.parentNode.removeChild(errorDiv);
-        }
-    }, 10000);
+    NotificationUtils.showJourneyError(message);
 }
 
 // Refresh function for manual updates
@@ -219,7 +200,7 @@ async function initJourneys() {
         if (map) {
             Logger.success('🚀 Map ready, loading journeys...');
             await loadJourneys();
-            console.log('✅ Journey system initialized successfully');
+            Logger.success('✅ Journey system initialized successfully');
         } else {
             throw new Error('Map not available for journey initialization');
         }
@@ -297,18 +278,18 @@ window.clearJourneys = clearJourneys;
 window.debugJourneys = function() {
     const map = getMap();
     
-    console.log('🔍 Journey Debug Info:');
-    console.log('- Layers loaded:', journeyLayers.length);
-    console.log('- Map available:', !!map);
-    console.log('- Map type:', map?.constructor?.name || 'N/A');
-    console.log('- Map methods:', {
+    Logger.debug('🔍 Journey Debug Info:');
+    Logger.debug('- Layers loaded:', journeyLayers.length);
+    Logger.debug('- Map available:', !!map);
+    Logger.debug('- Map type:', map?.constructor?.name || 'N/A');
+    Logger.debug('- Map methods:', {
         addLayer: typeof map?.addLayer,
         removeLayer: typeof map?.removeLayer,
         hasLayer: typeof map?.hasLayer
     });
-    console.log('- Mobile mode:', isMobile());
-    console.log('- Layers:', journeyLayers);
-    console.log('- Global references:', {
+    Logger.debug('- Mobile mode:', isMobile());
+    Logger.debug('- Layers:', journeyLayers);
+    Logger.debug('- Global references:', {
         windowMap: !!window.map,
         mapCore: !!window.mapCore,
         adenaiMap: !!window.adenaiMap
@@ -316,9 +297,9 @@ window.debugJourneys = function() {
     
     // Try to validate each layer
     if (journeyLayers.length > 0) {
-        console.log('- Layer validation:');
+        Logger.debug('- Layer validation:');
         journeyLayers.forEach((layer, i) => {
-            console.log(`  Layer ${i}:`, {
+            Logger.debug(`  Layer ${i}:`, {
                 type: layer.constructor.name,
                 onMap: map ? map.hasLayer(layer) : 'unknown'
             });
@@ -334,12 +315,12 @@ window.debugJourneys = function() {
 
 // 🔥 NEW: Manual map detection for debugging
 window.detectMaps = function() {
-    console.log('🔍 Detecting all available maps:');
-    console.log('- window.map:', window.map, window.map?.constructor?.name);
-    console.log('- window.mapCore:', window.mapCore);
-    console.log('- window.mapCore.map:', window.mapCore?.map, window.mapCore?.map?.constructor?.name);
-    console.log('- window.adenaiMap:', window.adenaiMap);
-    console.log('- getMap() result:', getMap());
+    Logger.debug('🔍 Detecting all available maps:');
+    Logger.debug('- window.map:', window.map, window.map?.constructor?.name);
+    Logger.debug('- window.mapCore:', window.mapCore);
+    Logger.debug('- window.mapCore.map:', window.mapCore?.map, window.mapCore?.map?.constructor?.name);
+    Logger.debug('- window.adenaiMap:', window.adenaiMap);
+    Logger.debug('- getMap() result:', getMap());
     
     // Look for any Leaflet map instances
     const allMaps = [];
@@ -348,9 +329,9 @@ window.detectMaps = function() {
             allMaps.push({ key, map: window[key] });
         }
     }
-    console.log('- All Leaflet Map instances found:', allMaps);
+    Logger.debug('- All Leaflet Map instances found:', allMaps);
     
     return { allMaps, currentMap: getMap() };
 };
 
-console.log('📚 Enhanced journey system script loaded successfully');
+Logger.loading('📚 Enhanced journey system script loaded successfully');

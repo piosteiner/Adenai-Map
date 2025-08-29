@@ -13,7 +13,7 @@ class MapUtils {
     static withMap(callback, errorMessage = 'Map not available') {
         const map = this.getMap();
         if (!map) {
-            console.error(`❌ ${errorMessage}`);
+            Logger.error(errorMessage);
             return false;
         }
         return callback(map);
@@ -55,4 +55,4 @@ class MapUtils {
 // Make available globally
 window.MapUtils = MapUtils;
 
-console.log('🗺️ Map utilities loaded successfully');
+Logger.loading('🗺️ Map utilities loaded successfully');

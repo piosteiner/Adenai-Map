@@ -132,4 +132,4 @@ class EventUtils {
 // Make available globally
 window.EventUtils = EventUtils;
 
-console.log('🎛️ Event utilities loaded successfully');
+Logger.loading('🎛️ Event utilities loaded successfully');

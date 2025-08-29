@@ -386,7 +386,7 @@ class AdenaiMap {
         });
         
         if (map && map.getContainer) {
-            console.log('  Map container:', map.getContainer());
+            Logger.debug('  Map container:', map.getContainer());
         }
         
         return {

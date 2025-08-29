@@ -115,25 +115,10 @@ class CoordinateCopySystem {
 
     async copyCoordinates() {
         if (!this.currentCoordinates) return;
-
-        const coordString = `${this.currentCoordinates[0]} ${this.currentCoordinates[1]}`;
         
-        try {
-            // Try modern clipboard API first
-            if (navigator.clipboard && window.isSecureContext) {
-                await navigator.clipboard.writeText(coordString);
-                this.showSuccessNotification(coordString);
-            } else {
-                // Fallback for older browsers
-                this.fallbackCopyToClipboard(coordString);
-            }
-            
-            Logger.success('Copied coordinates:', coordString);
+        const success = await CoordinateUtils.copyToClipboard(this.currentCoordinates);
+        if (success) {
             this.endHold();
-            
-        } catch (error) {
-            Logger.error('Failed to copy coordinates:', error);
-            this.showErrorNotification();
         }
     }
 
@@ -200,11 +185,11 @@ class CoordinateCopySystem {
     }
 
     showSuccessNotification(coordinates) {
-        this.showNotification(`📋 Copied: ${coordinates}`, 'success');
+        NotificationUtils.showCopySuccess(coordinates);
     }
 
     showErrorNotification() {
-        this.showNotification('❌ Failed to copy coordinates', 'error');
+        NotificationUtils.showCopyError();
     }
 
     showNotification(message, type = 'info') {

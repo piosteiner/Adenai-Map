@@ -85,7 +85,7 @@ class CharacterSystem {
             // Debug: Log a sample character to verify all fields are present
             if (this.characterData.length > 0) {
                 const sampleChar = this.characterData.find(c => c.id === 'test') || this.characterData[0];
-                console.log('🔍 Sample character data:', {
+                Logger.debug('🔍 Sample character data:', {
                     id: sampleChar.id,
                     name: sampleChar.name,
                     title: sampleChar.title,
@@ -172,14 +172,14 @@ class CharacterSystem {
             });
             
             if (latestMovement.coordinates && Array.isArray(latestMovement.coordinates) && latestMovement.coordinates.length === 2) {
-                console.log(`🛤️ Using latest travel point (movement_nr: ${latestMovement.movement_nr}) for ${character.name}:`, latestMovement.coordinates);
+                Logger.debug(`🛤️ Using latest travel point (movement_nr: ${latestMovement.movement_nr}) for ${character.name}:`, latestMovement.coordinates);
                 return latestMovement.coordinates;
             }
         }
         
         // Priority 2: Place of origin (character.coordinates)
         if (character.coordinates && Array.isArray(character.coordinates) && character.coordinates.length === 2) {
-            console.log(`🏠 Using place of origin for ${character.name}:`, character.coordinates);
+            Logger.debug(`🏠 Using place of origin for ${character.name}:`, character.coordinates);
             return character.coordinates;
         }
         
@@ -198,7 +198,7 @@ class CharacterSystem {
 
         // Check if this character is already focused - if so, close the popup
         if (this.currentFocusedCharacter === characterName && this.currentCharacterPopup) {
-            console.log(`🔄 Toggling off popup for "${characterName}"`);
+            Logger.debug(`🔄 Toggling off popup for "${characterName}"`);
             this.closeCurrentCharacterPopup();
             this.currentFocusedCharacter = null;
             return true;
@@ -273,7 +273,7 @@ class CharacterSystem {
         // Track current popup
         this.currentPanelPopup = popup;
 
-        console.log(`📋 Panel popup opened for "${character.name}"`);
+        Logger.panel(`📋 Panel popup opened for "${character.name}"`);
     }
 
     // Close panel-anchored popup
@@ -281,13 +281,13 @@ class CharacterSystem {
         if (this.currentPanelPopup) {
             this.currentPanelPopup.remove();
             this.currentPanelPopup = null;
-            console.log('📋 Panel popup closed');
+            Logger.panel('📋 Panel popup closed');
         }
     }
 
     // Create character popup content
     createCharacterPopupContent(character) {
-        console.log('🔍 Creating popup for character:', character.name, 'with data:', {
+        Logger.character('🔍 Creating popup for character:', character.name, 'with data:', {
             placeOfOrigin: character.placeOfOrigin,
             currentLocation: character.currentLocation,
             location: character.location,
@@ -313,24 +313,24 @@ class CharacterSystem {
         if (character.currentLocation && character.currentLocation.location) {
             const date = character.currentLocation.date || character.currentLocation.dateStart || '';
             lastSeenContent = `📍 <strong>Last Seen:</strong> ${character.currentLocation.location}${date ? ` (${date})` : ''}`;
-            console.log('✅ Using currentLocation for last seen:', character.currentLocation.location);
+            Logger.debug('✅ Using currentLocation for last seen:', character.currentLocation.location);
         } else if (character.location) {
             lastSeenContent = `📍 <strong>Last Seen:</strong> ${character.location}`;
-            console.log('✅ Using location field for last seen:', character.location);
+            Logger.debug('✅ Using location field for last seen:', character.location);
         } else if (character.movementHistory && character.movementHistory.length > 0) {
             // Get the most recent movement entry
             const latestMovement = character.movementHistory[character.movementHistory.length - 1];
             if (latestMovement && latestMovement.location) {
                 const date = latestMovement.date || latestMovement.dateStart || '';
                 lastSeenContent = `📍 <strong>Last Seen:</strong> ${latestMovement.location}${date ? ` (${date})` : ''}`;
-                console.log('✅ Using movement history for last seen:', latestMovement.location, 'from', latestMovement.date);
+                Logger.debug('✅ Using movement history for last seen:', latestMovement.location, 'from', latestMovement.date);
             } else {
                 lastSeenContent = `📍 <strong>Last Seen:</strong> <span class="location-unknown">Unknown</span>`;
-                console.log('❌ No location found in movement history');
+                Logger.debug('❌ No location found in movement history');
             }
         } else {
             lastSeenContent = `📍 <strong>Last Seen:</strong> <span class="location-unknown">Unknown</span>`;
-            console.log('❌ No location data found anywhere');
+            Logger.debug('❌ No location data found anywhere');
         }
         
         // Build content sections
@@ -339,15 +339,15 @@ class CharacterSystem {
         // Faction
         if (character.faction) {
             contentSections.push(`<div class="character-popup-faction">🏛️ <strong>Faction:</strong> ${character.faction}</div>`);
-            console.log('✅ Adding faction:', character.faction);
+            Logger.debug('✅ Adding faction:', character.faction);
         }
         
         // Place of Origin
         if (character.placeOfOrigin) {
             contentSections.push(`<div class="character-popup-origin">🏠 <strong>Place of Origin:</strong> ${character.placeOfOrigin}</div>`);
-            console.log('✅ Adding place of origin:', character.placeOfOrigin);
+            Logger.debug('✅ Adding place of origin:', character.placeOfOrigin);
         } else {
-            console.log('❌ No placeOfOrigin found');
+            Logger.debug('❌ No placeOfOrigin found');
         }
         
         // Movement History count
@@ -412,7 +412,7 @@ class CharacterSystem {
         // Calculate appropriate zoom level
         const targetZoom = this.calculateOptimalZoom(map);
         
-        console.log(`📍 Zoom: ${map.getZoom().toFixed(2)} → ${targetZoom.toFixed(2)}`);
+        Logger.debug(`📍 Zoom: ${map.getZoom().toFixed(2)} → ${targetZoom.toFixed(2)}`);
         
         // Use fitBounds for reliable centering (always works)
         const padding = this.calculateViewportPadding();
@@ -457,7 +457,7 @@ class CharacterSystem {
         const lngOffset = shiftedLatLng.lng - currentCenter.lng;
         const adjustedTarget = L.latLng(originalTarget.lat, originalTarget.lng + lngOffset);
         
-        console.log(`📱 Panel open: adjusting target by ${lngOffset.toFixed(2)} lng units`);
+        Logger.debug(`📱 Panel open: adjusting target by ${lngOffset.toFixed(2)} lng units`);
         return adjustedTarget;
     }
 
@@ -608,7 +608,7 @@ class CharacterSystem {
 
     // Reload characters (for admin updates)
     async reloadCharacters() {
-        console.log('🔄 Reloading characters...');
+        Logger.refresh('🔄 Reloading characters...');
         await this.loadCharacters();
     }
 
@@ -635,7 +635,7 @@ class CharacterSystem {
                     type: 'character',
                     character: character
                 });
-                console.log(`📋 Character "${character.name}" added to search (no coordinates - will show panel popup)`);
+                Logger.panel(`📋 Character "${character.name}" added to search (no coordinates - will show panel popup)`);
             }
         });
     }

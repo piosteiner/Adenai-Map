@@ -266,4 +266,4 @@ window.CharPathAPI = CharPathAPI;
 // Legacy alias for backward compatibility
 window.CharacterPathManager = CharPathAPI;
 
-console.log('📚 Character Path API Client loaded successfully');
+Logger.loading('📚 Character Path API Client loaded successfully');
