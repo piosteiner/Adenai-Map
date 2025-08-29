@@ -242,9 +242,6 @@ class SearchSystem {
         // Relationship emoji
         const relationshipEmoji = this.getRelationshipEmoji(char.relationship);
         
-        // Status color
-        const statusColor = this.getStatusColor(char.status);
-        
         return `
             <div class="dropdown-item character-result" data-relevance="${result.relevanceScore}">
                 <div class="result-avatar">
@@ -257,9 +254,6 @@ class SearchSystem {
                     </div>
                     ${highlightedTitle ? `<div class="character-title">${highlightedTitle}</div>` : ''}
                     <div class="character-meta">
-                        <span class="status-badge" style="background-color: ${statusColor}">
-                            ${AdenaiConfig.getCharacterStatusLabel(char.status)}
-                        </span>
                         📍 ${highlightedLocation}
                     </div>
                     ${char.description ? `<div class="character-preview">${this.highlightText(char.description.substring(0, 120), query)}${char.description.length > 120 ? '...' : ''}</div>` : ''}
