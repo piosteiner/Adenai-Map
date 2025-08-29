@@ -719,22 +719,23 @@
       "updatedAt": "2025-08-28T10:27:05.732Z"
     },
     {
-      "id": "k_nig_torrik",
-      "name": "König Torrik",
+      "id": "k_nig_torrack",
+      "name": "König Torrack",
       "title": "König von Rena",
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai-admin.piogino.ch/public/images/torrak_close.png",
+      "image": "https://adenai-admin.piogino.ch/public/images/torrack_close.png",
       "status": "alive",
       "faction": "Regierung von Rena",
       "relationship": "ally",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2025-08-29T20:21:10.180Z",
-      "updatedAt": "2025-08-29T20:21:10.180Z"
+      "updatedAt": "2025-08-29T20:21:48.085Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:21:33.875Z"
+  "lastUpdated": "2025-08-29T20:21:48.085Z"
 }
