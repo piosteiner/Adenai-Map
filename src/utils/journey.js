@@ -1,6 +1,9 @@
 // Dynamic Journey Loader - Improved Version
 // Enhanced with better map detection and error handling
 
+import { HttpUtils } from './http-utils.js';
+import { Logger } from './logger.js';
+
 let journeyLayers = [];
 
 // 🔥 IMPROVED: Get map with fallback options
@@ -19,7 +22,7 @@ function getMap() {
     
     // If we have a map but it's not valid, log debug info
     if (map) {
-        console.error('❌ Invalid map object found:', {
+        Logger.error('❌ Invalid map object found:', {
             type: map.constructor.name,
             hasAddLayer: typeof map.addLayer,
             methods: Object.getOwnPropertyNames(map).filter(name => typeof map[name] === 'function')
@@ -36,11 +39,11 @@ async function waitForMap(maxAttempts = 50) {
     while (attempts < maxAttempts) {
         const map = getMap();
         if (map) {
-            console.log('✅ Map found for journeys:', map.constructor.name);
+            Logger.success('✅ Map found for journeys:', map.constructor.name);
             return map;
         }
         
-        console.log(`⏳ Waiting for map... (${attempts + 1}/${maxAttempts})`);
+        Logger.loading(`⏳ Waiting for map... (${attempts + 1}/${maxAttempts})`);
         await new Promise(resolve => setTimeout(resolve, 100));
         attempts++;
     }
@@ -51,7 +54,7 @@ async function waitForMap(maxAttempts = 50) {
 // Dynamic journey loader
 async function loadJourneys() {
     try {
-        console.log('🔄 Loading journeys from CMS...');
+        Logger.journey('🔄 Loading journeys from CMS...');
         
         // 🔥 Wait for map to be available
         const map = await waitForMap();
@@ -75,17 +78,17 @@ async function loadJourneys() {
         // Render each active journey
         journeys.forEach((journey, index) => {
             if (!journey.active) {
-                console.log(`⏭️ Skipping inactive journey: ${journey.name}`);
+                Logger.journey(`⏭️ Skipping inactive journey: ${journey.name}`);
                 return;
             }
             
             try {
-                console.log(`🎨 Rendering journey: ${journey.name}`);
+                Logger.journey(`🎨 Rendering journey: ${journey.name}`);
                 const pathData = buildPathFromSegments(journey.segments);
-                console.log('Path data:', pathData);
+                Logger.debug('Path data:', pathData);
                 
                 if (pathData.length === 0) {
-                    console.warn(`⚠️ No valid path data for journey: ${journey.name}`);
+                    Logger.warn(`⚠️ No valid path data for journey: ${journey.name}`);
                     return;
                 }
                 
@@ -113,20 +116,20 @@ async function loadJourneys() {
                     // Store reference for cleanup
                     journeyLayers.push(journeyLayer);
                     
-                    console.log(`✨ Rendered: ${journey.name} (${journey.segments ? journey.segments.length : 0} segments)`);
+                    Logger.success(`✨ Rendered: ${journey.name} (${journey.segments ? journey.segments.length : 0} segments)`);
                 } else {
-                    console.error('❌ Map not available for journey rendering');
+                    Logger.error('❌ Map not available for journey rendering');
                 }
                 
             } catch (renderError) {
-                console.error(`❌ Error rendering journey ${journey.name}:`, renderError);
+                Logger.error(`❌ Error rendering journey ${journey.name}:`, renderError);
             }
         });
         
-        console.log(`🎉 Successfully rendered ${journeyLayers.length} active journeys`);
+        Logger.success(`🎉 Successfully rendered ${journeyLayers.length} active journeys`);
         
     } catch (error) {
-        console.error('❌ Could not load journeys from CMS:', error);
+        Logger.error('❌ Could not load journeys from CMS:', error);
         // Show user-friendly error
         showJourneyError(error.message);
     }
@@ -134,7 +137,7 @@ async function loadJourneys() {
 
 function buildPathFromSegments(segments) {
     if (!segments || !Array.isArray(segments)) {
-        console.warn('⚠️ Invalid segments data');
+        Logger.warn('⚠️ Invalid segments data');
         return [];
     }
     
@@ -142,7 +145,7 @@ function buildPathFromSegments(segments) {
     
     for (const segment of segments) {
         if (!segment.coords || !Array.isArray(segment.coords) || segment.coords.length !== 2) {
-            console.warn('⚠️ Invalid segment coordinates:', segment);
+            Logger.warn('⚠️ Invalid segment coordinates:', segment);
             continue;
         }
         
@@ -158,12 +161,12 @@ function buildPathFromSegments(segments) {
         }
     }
     
-    console.log(`🔧 Built path data with ${pathData.length} elements from ${segments.length} segments`);
+    Logger.debug(`🔧 Built path data with ${pathData.length} elements from ${segments.length} segments`);
     return pathData;
 }
 
 function clearJourneys() {
-    console.log('🧹 Clearing existing journeys...');
+    Logger.cleanup('🧹 Clearing existing journeys...');
     const map = getMap();
     
     journeyLayers.forEach(layer => {
@@ -180,7 +183,7 @@ function isMobile() {
 }
 
 function showJourneyError(message) {
-    console.warn('🚫 Journey loading failed:', message);
+    Logger.warn('🚫 Journey loading failed:', message);
     
     // Create a simple error notification
     const errorDiv = document.createElement('div');
@@ -204,20 +207,20 @@ function showJourneyError(message) {
 
 // Refresh function for manual updates
 async function refreshJourneys() {
-    console.log('🔄 Refreshing journeys...');
+    Logger.refresh('🔄 Refreshing journeys...');
     await loadJourneys();
 }
 
 // 🔥 IMPROVED: Initialize with better error handling
 async function initJourneys() {
     try {
-        console.log('🚀 Initializing journey system...');
+        Logger.init('🚀 Initializing journey system...');
         
         // Wait for map with timeout
         const map = await waitForMap();
         
         if (map) {
-            console.log('🚀 Map ready, loading journeys...');
+            Logger.success('🚀 Map ready, loading journeys...');
             await loadJourneys();
             console.log('✅ Journey system initialized successfully');
         } else {
@@ -225,14 +228,14 @@ async function initJourneys() {
         }
         
     } catch (error) {
-        console.error('❌ Failed to initialize journey system:', error);
+        Logger.error('❌ Failed to initialize journey system:', error);
         showJourneyError(`Initialization failed: ${error.message}`);
     }
 }
 
 // Auto-initialize based on document state
 function startJourneySystem() {
-    console.log('🎯 Starting journey system...');
+    Logger.init('🎯 Starting journey system...');
     
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initJourneys);
