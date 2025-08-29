@@ -158,7 +158,7 @@
     position: absolute;
     bottom: -2px;
     right: -2px;
-    background: #f59e0b;
+    background: #ff6b24;
     border-radius: 50%;
     width: 12px;
     height: 12px;
@@ -175,10 +175,22 @@
 /* Fan location marker styles */
 .fan-location-marker {
     transition: all 0.3s ease;
+    /* Uses the same size as fan-marker from base .fan-marker rule */
 }
 
 .fan-location-marker:hover {
-    transform: scale(1.1);
+    transform: scale(1.15) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Location proxy icon specific styling */
+.location-proxy-icon {
+    z-index: 1002;
+}
+
+/* Location proxy markers get same animation as movement markers */
+.fan-location-marker svg {
+    color: white;
 }
 
 /* Enhanced cluster marker hover for mixed clusters */
@@ -187,7 +199,7 @@
 }
 
 .movement-marker.mixed-cluster:hover .location-indicator {
-    background: #fbbf24;
+    background: #ff8542;
     transform: scale(1.1);
 }
 

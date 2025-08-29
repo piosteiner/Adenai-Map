@@ -49,6 +49,57 @@ function testLocationClustering() {
         // Test with larger radius
         const nearbyLocationsLarge = markersSystem.findNearbyLocationMarkers(testCoords, 100);
         console.log(`📍 Found ${nearbyLocationsLarge.length} nearby locations within 100px`);
+        
+        // Test location proxy marker creation and styling
+        console.log('\n=== Testing Location Proxy Marker Styling ===');
+        
+        if (nearbyLocations.length > 0) {
+            const testLocation = nearbyLocations[0];
+            const testLatLng = L.latLng(48.1385, 11.5795); // Test coordinates
+            
+            try {
+                const proxyMarker = markersSystem.createFanLocationMarker(testLocation, testLatLng);
+                
+                if (proxyMarker) {
+                    console.log('✅ Proxy location marker created successfully');
+                    
+                    // Add to map temporarily to test element properties
+                    const map = window.mapCore?.getMap();
+                    if (map) {
+                        proxyMarker.addTo(map);
+                        
+                        setTimeout(() => {
+                            const element = proxyMarker.getElement();
+                            if (element) {
+                                const markerDiv = element.querySelector('.fan-location-marker');
+                                if (markerDiv) {
+                                    console.log('✅ Location proxy uses divIcon (HTML) instead of SVG icon');
+                                    console.log('✅ Location proxy has fan-location-marker class for animations');
+                                    
+                                    const styles = window.getComputedStyle(markerDiv);
+                                    console.log(`   Size: ${styles.width} x ${styles.height}`);
+                                    console.log(`   Background: ${styles.backgroundColor}`);
+                                    console.log(`   Animation properties available: ${styles.transition}`);
+                                } else {
+                                    console.log('❌ Could not find .fan-location-marker element');
+                                }
+                            } else {
+                                console.log('❌ Could not get marker element');
+                            }
+                            
+                            // Clean up test marker
+                            map.removeLayer(proxyMarker);
+                        }, 50);
+                    }
+                } else {
+                    console.log('❌ Failed to create proxy location marker');
+                }
+            } catch (error) {
+                console.log('❌ Error creating proxy location marker:', error);
+            }
+        } else {
+            console.log('⚠️ No nearby locations to test proxy marker creation');
+        }
     }
     
     // Look for mixed clusters

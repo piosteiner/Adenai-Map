@@ -389,32 +389,23 @@ class MovementMarkers {
 
     // Create a location proxy marker for fan-out
     createFanLocationMarker(locationData, fanLatLng) {
-        const locationSystem = window.locationSystem || window.locationsSystem;
-        
-        // Use the same icon as the original location marker
-        let fanIcon;
-        if (locationSystem?.dotOrangeIcon) {
-            fanIcon = locationSystem.dotOrangeIcon;
-        } else {
-            // Fallback to creating a similar icon
-            fanIcon = L.icon({
-                iconUrl: 'public/icons/dot_orange.svg',
-                iconSize: [24, 24],
-                iconAnchor: [12, 12]
-            });
-        }
+        // Create a divIcon (HTML) instead of SVG icon to match movement markers and enable animations
+        const fanMarkerHtml = `
+            <div class="movement-marker fan-marker fan-location-marker" style="background: #ff6b24; --path-color: #ff6b24;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="12" r="6"/>
+                </svg>
+            </div>
+        `;
+
+        const fanIcon = L.divIcon({
+            html: fanMarkerHtml,
+            className: 'movement-marker-icon fan-icon location-proxy-icon',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        });
 
         const fanMarker = L.marker(fanLatLng, { icon: fanIcon });
-        
-        // Add CSS class to identify as fan location marker
-        if (fanMarker.getElement) {
-            setTimeout(() => {
-                const element = fanMarker.getElement();
-                if (element) {
-                    element.classList.add('fan-location-marker');
-                }
-            }, 10);
-        }
         
         // Add click event that shows the original location popup
         fanMarker.on('click', () => {

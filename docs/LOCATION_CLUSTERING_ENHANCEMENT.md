@@ -14,7 +14,10 @@ Enhanced the existing movement marker clustering system to detect and include ne
 ### 🔗 **Location Proxy System**
 - Original location markers remain untouched and always visible
 - Creates "proxy" location markers that are included in movement clusters
-- Proxy markers look identical to originals and show same popup content
+- **Same Size**: Proxy markers use 24x24px size matching movement markers
+- **Same Animation**: Uses `divIcon` (HTML) instead of SVG for CSS animation support
+- **Visual Consistency**: Orange background (#ff6b24) with white dot icon maintains location identity
+- Proxy markers show same popup content as originals when clicked
 - No impact on location system - completely independent enhancement
 
 ### 🎨 **Enhanced Visual Indicators**
@@ -25,9 +28,10 @@ Enhanced the existing movement marker clustering system to detect and include ne
 
 ### 🌀 **Extended Fan-Out Behavior**
 - Spiral arrangement includes both movement and location markers
-- Location markers use original orange dot styling in fan-out
+- **Unified Animations**: Both movement and location markers use `fanOut`/`fanIn` animations
+- **Consistent Sizing**: All fan-out markers are 24x24px for visual harmony
+- **Enhanced Interactions**: Hover effects and smooth transitions for all marker types
 - Clicking location markers in fan-out shows original location popup
-- Smooth animations for both marker types
 
 ## Technical Implementation
 
