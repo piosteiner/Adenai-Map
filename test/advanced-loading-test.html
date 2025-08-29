@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Loading System Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+        .loading {
+            color: #2196F3;
+        }
+        .success {
+            color: #4CAF50;
+        }
+        .error {
+            color: #f44336;
+        }
+        .warning {
+            color: #FF9800;
+        }
+        .stats {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1976D2;
+        }
+        .cache-info {
+            background: #e8f5e8;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .loading-state {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            margin: 2px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .state-idle { background: #f5f5f5; }
+        .state-loading { background: #fff3cd; color: #856404; }
+        .state-loaded { background: #d4edda; color: #155724; }
+        .state-error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Advanced Loading & Caching System Test</h1>
+        <p>Testing Phase 7 optimization: Progressive loading, intelligent caching, and background sync</p>
+        
+        <div class="test-section">
+            <h2>📊 System Status</h2>
+            <div id="systemStatus">Initializing...</div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📋 Loading States</h2>
+            <div id="loadingStates">
+                <span class="loading-state state-idle">characters: idle</span>
+                <span class="loading-state state-idle">locations: idle</span>
+                <span class="loading-state state-idle">reviews: idle</span>
+                <span class="loading-state state-idle">journeys: idle</span>
+                <span class="loading-state state-idle">media-library: idle</span>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>⚡ Performance Tests</h2>
+            <button onclick="testProgressiveLoading()">Test Progressive Loading</button>
+            <button onclick="testCachePerformance()">Test Cache Performance</button>
+            <button onclick="testDataManager()">Test Data Manager</button>
+            <button onclick="testServiceWorker()">Test Service Worker</button>
+            <button onclick="refreshAllData()">Refresh All Data</button>
+            <div id="performanceResults"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🗄️ Cache Statistics</h2>
+            <button onclick="updateCacheStats()">Refresh Cache Stats</button>
+            <div id="cacheStats"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📝 Test Results</h2>
+            <div id="testLog"></div>
+        </div>
+    </div>
+
+    <!-- Include utilities in correct order -->
+    <script>
+        // Simple logger for testing
+        class Logger {
+            static log(level, ...args) {
+                const timestamp = new Date().toLocaleTimeString();
+                const message = `[${timestamp}] ${level.toUpperCase()}: ${args.join(' ')}`;
+                console.log(message);
+                this.addToTestLog(level, message);
+            }
+            
+            static loading(...args) { this.log('loading', ...args); }
+            static success(...args) { this.log('success', ...args); }
+            static error(...args) { this.log('error', ...args); }
+            static warning(...args) { this.log('warning', ...args); }
+            static debug(...args) { this.log('debug', ...args); }
+            static cache(...args) { this.log('cache', ...args); }
+            static cleanup(...args) { this.log('cleanup', ...args); }
+            
+            static addToTestLog(level, message) {
+                const logDiv = document.getElementById('testLog');
+                const entry = document.createElement('div');
+                entry.className = level;
+                entry.textContent = message;
+                logDiv.insertBefore(entry, logDiv.firstChild);
+                
+                // Keep only last 20 entries
+                while (logDiv.children.length > 20) {
+                    logDiv.removeChild(logDiv.lastChild);
+                }
+            }
+        }
+        
+        // Mock PerformanceUtils for testing
+        class PerformanceUtils {
+            static timers = new Map();
+            
+            static setTimeout(callback, delay, id) {
+                const timerId = setTimeout(callback, delay);
+                if (id) this.timers.set(id, timerId);
+                return timerId;
+            }
+            
+            static setInterval(callback, interval, id) {
+                const timerId = setInterval(callback, interval);
+                if (id) this.timers.set(id, timerId);
+                return timerId;
+            }
+            
+            static clearTimeout(id) {
+                if (typeof id === 'string') {
+                    const timerId = this.timers.get(id);
+                    if (timerId) {
+                        clearTimeout(timerId);
+                        this.timers.delete(id);
+                    }
+                } else {
+                    clearTimeout(id);
+                }
+            }
+            
+            static getPerformanceStats() {
+                return {
+                    activeTimers: this.timers.size,
+                    memoryUsage: performance.memory ? Math.round(performance.memory.usedJSHeapSize / 1024 / 1024) : 'N/A'
+                };
+            }
+        }
+        
+        // Mock HttpUtils for testing
+        class HttpUtils {
+            static async fetchJSON(url, options = {}) {
+                const response = await fetch(url, options);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return await response.json();
+            }
+        }
+    </script>
+    
+    <script src="../src/utils/advanced-loader.js"></script>
+    <script src="../src/utils/data-manager.js"></script>
+    <script src="../src/utils/sw-manager.js"></script>
+    
+    <script>
+        let dataManager = null;
+        let swManager = null;
+        
+        // Initialize systems
+        async function initialize() {
+            try {
+                Logger.loading('Initializing test environment...');
+                
+                // Initialize Service Worker Manager
+                swManager = SWManager.get();
+                await swManager.register();
+                
+                // Initialize Data Manager
+                dataManager = DataManager.get();
+                await dataManager.initialize();
+                
+                updateSystemStatus();
+                setupEventListeners();
+                
+                Logger.success('Test environment initialized successfully!');
+                
+            } catch (error) {
+                Logger.error('Initialization failed:', error.message);
+            }
+        }
+        
+        // Update system status display
+        function updateSystemStatus() {
+            const status = document.getElementById('systemStatus');
+            const dmSummary = dataManager ? dataManager.getDataSummary() : null;
+            const swStatus = swManager ? swManager.getStatus() : null;
+            
+            status.innerHTML = `
+                <div class="stats">
+                    <h3>Data Manager</h3>
+                    <div>Initialized: ${dmSummary?.initialized || false}</div>
+                    <div>Critical Data: ${dmSummary?.dataTypes.critical.length || 0} types loaded</div>
+                    <div>Active Subscribers: ${Object.keys(dmSummary?.subscriberCounts || {}).length}</div>
+                </div>
+                <div class="stats">
+                    <h3>Service Worker</h3>
+                    <div>Supported: ${swStatus?.supported || false}</div>
+                    <div>Registered: ${swStatus?.registered || false}</div>
+                    <div>Active: ${swStatus?.active || false}</div>
+                    <div>Update Available: ${swStatus?.updateAvailable || false}</div>
+                </div>
+            `;
+        }
+        
+        // Setup event listeners for real-time updates
+        function setupEventListeners() {
+            ['characters', 'locations', 'reviews', 'journeys', 'media-library'].forEach(dataType => {
+                document.addEventListener(`${dataType}LoadingState`, (event) => {
+                    updateLoadingState(dataType, event.detail.state);
+                });
+            });
+        }
+        
+        // Update loading state display
+        function updateLoadingState(dataType, state) {
+            const statesDiv = document.getElementById('loadingStates');
+            const stateSpan = statesDiv.querySelector(`[data-type="${dataType}"]`) || 
+                            (() => {
+                                const span = document.createElement('span');
+                                span.className = 'loading-state';
+                                span.setAttribute('data-type', dataType);
+                                statesDiv.appendChild(span);
+                                return span;
+                            })();
+            
+            stateSpan.className = `loading-state state-${state}`;
+            stateSpan.textContent = `${dataType}: ${state}`;
+        }
+        
+        // Test progressive loading
+        async function testProgressiveLoading() {
+            Logger.loading('Testing progressive loading...');
+            const startTime = performance.now();
+            
+            try {
+                const results = await AdvancedLoader.loadProgressively();
+                const endTime = performance.now();
+                
+                const resultsDiv = document.getElementById('performanceResults');
+                resultsDiv.innerHTML = `
+                    <div class="stats">
+                        <h3>Progressive Loading Results (${(endTime - startTime).toFixed(2)}ms)</h3>
+                        <div>Critical Data: ${Object.keys(results.critical).length} types</div>
+                        <div>Important Data: ${Object.keys(results.important).length} types</div>
+                        <div>Optional Data: ${Object.keys(results.optional).length} types</div>
+                        <div>Errors: ${results.errors.length}</div>
+                    </div>
+                `;
+                
+                Logger.success(`Progressive loading completed in ${(endTime - startTime).toFixed(2)}ms`);
+                
+            } catch (error) {
+                Logger.error('Progressive loading test failed:', error.message);
+            }
+        }
+        
+        // Test cache performance
+        async function testCachePerformance() {
+            Logger.loading('Testing cache performance...');
+            
+            const tests = [
+                () => dataManager.getCharacters(),
+                () => dataManager.getLocations(),
+                () => dataManager.getCharacters(), // Should be cached
+                () => dataManager.getLocations()   // Should be cached
+            ];
+            
+            const results = [];
+            
+            for (const test of tests) {
+                const start = performance.now();
+                try {
+                    await test();
+                    results.push(performance.now() - start);
+                } catch (error) {
+                    results.push(-1);
+                }
+            }
+            
+            const resultsDiv = document.getElementById('performanceResults');
+            resultsDiv.innerHTML = `
+                <div class="stats">
+                    <h3>Cache Performance Test</h3>
+                    <div>First Characters Load: ${results[0]?.toFixed(2) || 'Failed'}ms</div>
+                    <div>First Locations Load: ${results[1]?.toFixed(2) || 'Failed'}ms</div>
+                    <div>Cached Characters Load: ${results[2]?.toFixed(2) || 'Failed'}ms</div>
+                    <div>Cached Locations Load: ${results[3]?.toFixed(2) || 'Failed'}ms</div>
+                    <div>Cache Speedup: ${results[0] > 0 && results[2] > 0 ? (results[0] / results[2]).toFixed(2) + 'x' : 'N/A'}</div>
+                </div>
+            `;
+            
+            Logger.success('Cache performance test completed');
+        }
+        
+        // Test Data Manager functionality
+        async function testDataManager() {
+            Logger.loading('Testing Data Manager functionality...');
+            
+            try {
+                // Test specific methods
+                const activeChars = await dataManager.getActiveCharacters();
+                const recentReviews = await dataManager.getRecentReviews(5);
+                
+                const resultsDiv = document.getElementById('performanceResults');
+                resultsDiv.innerHTML = `
+                    <div class="stats">
+                        <h3>Data Manager Test Results</h3>
+                        <div>Active Characters: ${activeChars ? activeChars.length : 'Failed'}</div>
+                        <div>Recent Reviews: ${recentReviews ? recentReviews.length : 'Failed'}</div>
+                        <div>Loading States: ${JSON.stringify(dataManager.getLoadingStates())}</div>
+                    </div>
+                `;
+                
+                Logger.success('Data Manager test completed');
+                
+            } catch (error) {
+                Logger.error('Data Manager test failed:', error.message);
+            }
+        }
+        
+        // Test Service Worker
+        async function testServiceWorker() {
+            Logger.loading('Testing Service Worker...');
+            
+            try {
+                const cacheStats = await swManager.getCacheStats();
+                await swManager.forceSync();
+                
+                const resultsDiv = document.getElementById('performanceResults');
+                resultsDiv.innerHTML = `
+                    <div class="stats">
+                        <h3>Service Worker Test Results</h3>
+                        <div>Status: ${JSON.stringify(swManager.getStatus())}</div>
+                        <div>Cache Stats: ${cacheStats ? Object.keys(cacheStats).length + ' caches' : 'Not available'}</div>
+                        <div>Background Sync: Triggered</div>
+                    </div>
+                `;
+                
+                Logger.success('Service Worker test completed');
+                
+            } catch (error) {
+                Logger.error('Service Worker test failed:', error.message);
+            }
+        }
+        
+        // Refresh all data
+        async function refreshAllData() {
+            Logger.loading('Refreshing all data...');
+            
+            try {
+                await dataManager.refreshAllData();
+                updateSystemStatus();
+                Logger.success('All data refreshed successfully');
+            } catch (error) {
+                Logger.error('Data refresh failed:', error.message);
+            }
+        }
+        
+        // Update cache statistics
+        async function updateCacheStats() {
+            const cacheStatsDiv = document.getElementById('cacheStats');
+            
+            try {
+                const advancedStats = AdvancedLoader.getCacheStats();
+                const swStats = await swManager.getCacheStats();
+                
+                cacheStatsDiv.innerHTML = `
+                    <div class="cache-info">
+                        <h3>Advanced Loader Cache</h3>
+                        <div>Entries: ${advancedStats.entries}</div>
+                        <div>Total Size: ${(advancedStats.totalSize / 1024).toFixed(2)} KB</div>
+                        <div>By Type: ${JSON.stringify(advancedStats.byType, null, 2)}</div>
+                    </div>
+                    <div class="cache-info">
+                        <h3>Service Worker Caches</h3>
+                        <pre>${JSON.stringify(swStats, null, 2)}</pre>
+                    </div>
+                `;
+                
+            } catch (error) {
+                cacheStatsDiv.innerHTML = `<div class="error">Failed to load cache stats: ${error.message}</div>`;
+            }
+        }
+        
+        // Auto-initialize when page loads
+        document.addEventListener('DOMContentLoaded', initialize);
+        
+        // Auto-update cache stats every 10 seconds
+        setInterval(updateCacheStats, 10000);
+    </script>
+</body>
+</html>

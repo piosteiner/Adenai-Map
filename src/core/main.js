@@ -1,14 +1,17 @@
-// main.js - Modular Adenai Map Initialization
+// main.js - Modular Adenai Map Initialization with Advanced Loading
 class AdenaiMap {
     constructor() {
         this.initialized = false;
         this.systems = {};
+        this.dataManager = null;
+        this.swManager = null;
+        this.loadingStartTime = performance.now();
         this.init();
     }
 
     async init() {
         try {
-            Logger.system('Adenai Map', 'Initializing...');
+            Logger.system('Adenai Map', 'Initializing with advanced loading...');
             
             // Wait for DOM to be ready
             if (document.readyState === 'loading') {
@@ -17,30 +20,71 @@ class AdenaiMap {
                 });
             }
 
+            // 🚀 NEW: Initialize Service Worker first
+            await this.initializeServiceWorker();
+            
+            // 🚀 NEW: Initialize Data Manager
+            await this.initializeDataManager();
+
             // Wait for map core to be ready
             await this.waitForMapCore();
             
-            // Initialize systems in order
+            // Initialize systems in order with progressive data
             await this.initializeSystems();
-            await this.loadData();
+            
+            // Setup event listeners
             this.setupGlobalEventListeners();
             
-        this.initialized = true;
-        Logger.success('Adenai Map initialization complete!');
-        
-        // 🔥 NEW: Start performance monitoring
-        MemoryUtils.startMemoryMonitoring();
-        
-        // Dispatch initialization complete event
-        document.dispatchEvent(new CustomEvent('adenaiMapReady', {
-            detail: { 
-                systems: this.systems,
-                map: this.getLeafletMap(), // 🔥 Include map reference
-                performance: PerformanceUtils.getPerformanceStats(),
-                memory: MemoryUtils.getMemoryStats()
-            }
-        }));        } catch (error) {
-        Logger.error('Failed to initialize Adenai Map:', error);
+            this.initialized = true;
+            const totalTime = performance.now() - this.loadingStartTime;
+            Logger.success(`✅ Adenai Map initialization complete in ${totalTime.toFixed(2)}ms!`);
+            
+            // 🔥 NEW: Start performance monitoring
+            MemoryUtils.startMemoryMonitoring();
+            
+            // Dispatch initialization complete event
+            document.dispatchEvent(new CustomEvent('adenaiMapReady', {
+                detail: { 
+                    systems: this.systems,
+                    map: this.getLeafletMap(), // 🔥 Include map reference
+                    performance: PerformanceUtils.getPerformanceStats(),
+                    memory: MemoryUtils.getMemoryStats(),
+                    dataManager: this.dataManager,
+                    swManager: this.swManager,
+                    totalLoadTime: totalTime
+                }
+            }));
+        } catch (error) {
+            Logger.error('Failed to initialize Adenai Map:', error);
+        }
+    }
+    
+    // 🚀 NEW: Initialize Service Worker
+    async initializeServiceWorker() {
+        try {
+            Logger.loading('🔧 Initializing Service Worker...');
+            this.swManager = SWManager.get();
+            await this.swManager.initialize();
+            Logger.success('✅ Service Worker ready');
+        } catch (error) {
+            Logger.warning('Service Worker initialization failed:', error);
+            // Continue without service worker
+        }
+    }
+    
+    // 🚀 NEW: Initialize Data Manager with progressive loading
+    async initializeDataManager() {
+        try {
+            Logger.loading('📊 Initializing Data Manager...');
+            this.dataManager = DataManager.get();
+            
+            // Start progressive loading (critical data loads first)
+            await this.dataManager.initialize();
+            
+            Logger.success('✅ Data Manager ready with critical data');
+        } catch (error) {
+            Logger.error('Data Manager initialization failed:', error);
+            throw error; // This is critical, so fail if it doesn't work
         }
     }
 
@@ -106,18 +150,24 @@ class AdenaiMap {
         });
     }
 
+    // 🚀 UPDATED: Load data using DataManager (called by systems as needed)
     async loadData() {
-        Logger.loading('Loading map data...');
+        Logger.loading('🔄 Loading map data through DataManager...');
         
         try {
+            // Data is already being loaded progressively by DataManager
+            // Systems will request data as needed through DataManager.getData()
+            
             // Load locations first (they provide coordinates for characters)
             if (this.systems.locationsSystem) {
-                await this.systems.locationsSystem.loadLocations();
+                const locations = await this.dataManager.getLocations();
+                await this.systems.locationsSystem.loadLocations(locations);
             }
             
             // Then load characters (which depend on location coordinates)
             if (this.systems.characterSystem) {
-                await this.systems.characterSystem.loadCharacters();
+                const characters = await this.dataManager.getCharacters();
+                await this.systems.characterSystem.loadCharacters(characters);
             }
             
             // Initialize movement controls after characters are loaded
@@ -132,7 +182,7 @@ class AdenaiMap {
                 this.initializeJourneys();
             }, 200, 'journeys_init');
             
-            Logger.success('All data loaded successfully');
+            Logger.success('✅ All data loaded successfully through DataManager');
             
         } catch (error) {
             Logger.error('❌ Error loading map data:', error);
