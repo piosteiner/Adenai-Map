@@ -4,22 +4,7 @@ class CharacterPanel {
         this.panel = null;
         this.grid = null;
         this.resizeHandle = null;
-        this.isPanelOpen = true; // Always visible, but c            <div class="movement-section">
-                <div class="movement-buttons">
-                    <button id="show-all-paths" class="movement-btn show-all">
-                        <span>
-                            <span class="btn-icon">🗺️</span>
-                            Alle Pfade zeigen
-                        </span>
-                    </button>
-                    <button id="hide-all-paths" class="movement-btn hide-all">
-                        <span>
-                            <span class="btn-icon">👻</span>
-                            Alle Pfade ausblenden
-                        </span>
-                    </button>
-                </div>
-            </div>psed by default
+        this.isPanelOpen = true; // Always visible, but collapsed by default
         this.characters = [];
         this.showMovementControls = false;
         
