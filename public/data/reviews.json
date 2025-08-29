@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "3854faf8aa3d6ccf7867887b9db9349cbc502496",
+      "action": "update",
+      "type": "character",
+      "itemName": "Ceres Golwit",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:34:38.490Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:34:38.490Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: ceres_golwit (by gm) - changed relationship to unknown"
+    },
+    {
       "commitSha": "3063f9f2674e8df568185d29bab0f2eea762293c",
       "action": "create",
       "type": "character",
@@ -2810,5 +2823,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:34:26.077Z"
+  "lastUpdated": "2025-08-29T20:34:38.490Z"
 }
