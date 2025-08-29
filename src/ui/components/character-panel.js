@@ -185,15 +185,17 @@ class CharacterPanel {
             this.updateHandlePosition();
         };
 
-        // Mouse events
-        this.resizeHandle.addEventListener('mousedown', startResize);
-        document.addEventListener('mousemove', doResize);
-        document.addEventListener('mouseup', stopResize);
-
-        // Touch events for mobile
-        this.resizeHandle.addEventListener('touchstart', startResize);
-        document.addEventListener('touchmove', doResize);
-        document.addEventListener('touchend', stopResize);
+        // Mouse events with optimized listeners
+        this.resizeListeners = [
+            MemoryUtils.addEventListener(this.resizeHandle, 'mousedown', startResize),
+            MemoryUtils.addThrottledEventListener(document, 'mousemove', doResize, 16),
+            MemoryUtils.addEventListener(document, 'mouseup', stopResize),
+            
+            // Touch events for mobile
+            MemoryUtils.addEventListener(this.resizeHandle, 'touchstart', startResize),
+            MemoryUtils.addThrottledEventListener(document, 'touchmove', doResize, 16),
+            MemoryUtils.addEventListener(document, 'touchend', stopResize)
+        ];
         
         // Initialize handle position
         this.updateHandlePosition();
@@ -471,6 +473,26 @@ class CharacterPanel {
             byStatus: DataUtils.groupBy(this.characters, 'status'),
             byRelationship: DataUtils.groupBy(this.characters, 'relationship')
         };
+    }
+    
+    // Cleanup method for memory management
+    cleanup() {
+        // Remove resize event listeners
+        if (this.resizeListeners) {
+            this.resizeListeners.forEach(listener => {
+                if (listener && listener.remove) {
+                    listener.remove();
+                }
+            });
+            this.resizeListeners = [];
+        }
+        
+        // Clear character grid
+        if (this.grid) {
+            MemoryUtils.cleanupDOMNode(this.grid);
+        }
+        
+        Logger.cleanup('Character panel cleaned up');
     }
 }
 

@@ -428,10 +428,10 @@ class CharacterSystem {
         });
         
         // Show popup after a reasonable delay (no verification needed)
-        setTimeout(() => {
+        PerformanceUtils.setTimeout(() => {
             this.showCharacterPopup(character, targetLatLng);
             Logger.success(`Character "${characterName}" centered smoothly`);
-        }, 900);
+        }, 900, `character_popup_${character.id}`);
     }
 
     // Calculate target position accounting for character panel
@@ -671,11 +671,11 @@ window.characterSystem = new CharacterSystem();
 // Listen for when the map is ready
 document.addEventListener('DOMContentLoaded', () => {
     // Wait for map core to be initialized
-    setTimeout(() => {
+    PerformanceUtils.setTimeout(() => {
         MapUtils.withMap(() => {
             // Map is ready, characters will be loaded by the main initialization
         });
-    }, 100);
+    }, 100, 'character_system_dom_ready');
 });
 
 // Export for module systems

@@ -25,18 +25,21 @@ class AdenaiMap {
             await this.loadData();
             this.setupGlobalEventListeners();
             
-            this.initialized = true;
-            Logger.success('Adenai Map initialization complete!');
-            
-            // Dispatch initialization complete event
-            document.dispatchEvent(new CustomEvent('adenaiMapReady', {
-                detail: { 
-                    systems: this.systems,
-                    map: this.getLeafletMap() // 🔥 Include map reference
-                }
-            }));
-            
-        } catch (error) {
+        this.initialized = true;
+        Logger.success('Adenai Map initialization complete!');
+        
+        // 🔥 NEW: Start performance monitoring
+        MemoryUtils.startMemoryMonitoring();
+        
+        // Dispatch initialization complete event
+        document.dispatchEvent(new CustomEvent('adenaiMapReady', {
+            detail: { 
+                systems: this.systems,
+                map: this.getLeafletMap(), // 🔥 Include map reference
+                performance: PerformanceUtils.getPerformanceStats(),
+                memory: MemoryUtils.getMemoryStats()
+            }
+        }));        } catch (error) {
         Logger.error('Failed to initialize Adenai Map:', error);
         }
     }
@@ -54,7 +57,7 @@ class AdenaiMap {
                 return;
             }
             
-            await new Promise(resolve => setTimeout(resolve, 100));
+            await new Promise(resolve => PerformanceUtils.setTimeout(resolve, 100, `map_poll_${attempts}`));
             attempts++;
         }
         
@@ -118,16 +121,16 @@ class AdenaiMap {
             }
             
             // Initialize movement controls after characters are loaded
-            setTimeout(() => {
+            PerformanceUtils.setTimeout(() => {
                 if (this.systems.movementSystem) {
                     this.systems.movementSystem.addIntegratedMovementControls();
                 }
-            }, 100);
+            }, 100, 'movement_controls_init');
             
             // 🔥 Initialize journeys after map and systems are ready
-            setTimeout(() => {
+            PerformanceUtils.setTimeout(() => {
                 this.initializeJourneys();
-            }, 200);
+            }, 200, 'journeys_init');
             
             Logger.success('All data loaded successfully');
             
