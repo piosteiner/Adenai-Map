@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "92bef218a345898297f70f6420c829a13a435eb8",
+      "action": "update",
+      "type": "character",
+      "itemName": "Xarnice Zed'ul",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:53:21.637Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:53:21.637Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: xarnice_zed_ul (by gm) - Updated character details"
+    },
+    {
       "commitSha": "84adb3aee8f65ef312f591a104d24a8e4fc0e340",
       "action": "delete",
       "type": "character",
@@ -3525,5 +3538,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:53:10.060Z"
+  "lastUpdated": "2025-08-29T20:53:21.638Z"
 }
