@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "42b21df139ee414c51bf67eae0e760f4cc6edf4c",
+      "action": "update",
+      "type": "character",
+      "itemName": "Xarnice Zed'ul",
+      "user": "gm",
+      "timestamp": "2025-08-29T21:03:24.615Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T21:03:24.615Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Xarnice Zed'ul (by gm) - Makir (5663-06-03)"
+    },
+    {
       "commitSha": "8f7c476cb08e9c7b1150a7215bacb1ae15d5fd76",
       "action": "update",
       "type": "character",
@@ -3772,5 +3785,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T21:02:53.045Z"
+  "lastUpdated": "2025-08-29T21:03:24.616Z"
 }
