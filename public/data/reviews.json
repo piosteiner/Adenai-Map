@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "0a832618a5fed66eb666c8327e25daebdcfc3fd3",
+      "action": "update",
+      "type": "character",
+      "itemName": "König Torrack",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:56:56.240Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:56:56.240Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: König Torrack (by gm) - Rena (5663-06-03)"
+    },
+    {
       "commitSha": "179d028b1a9e8fc489072778090c44ba258eba37",
       "action": "update",
       "type": "character",
@@ -3577,5 +3590,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:56:27.999Z"
+  "lastUpdated": "2025-08-29T20:56:56.241Z"
 }
