@@ -69,8 +69,8 @@ class ImageHoverPreview {
 
             .preview-container {
                 position: relative;
-                max-width: 80vw;
-                max-height: 80vh;
+                max-width: 90vw;
+                max-height: 90vh;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -81,6 +81,8 @@ class ImageHoverPreview {
             .preview-image {
                 max-width: 100%;
                 max-height: 100%;
+                width: auto;
+                height: auto;
                 object-fit: contain;
                 border-radius: 8px;
                 box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
@@ -219,10 +221,21 @@ class ImageHoverPreview {
 
         const previewImage = this.previewElement.querySelector('.preview-image');
         const caption = this.previewElement.querySelector('.preview-caption');
+        const container = this.previewElement.querySelector('.preview-container');
 
         // Set image source
         previewImage.src = originalImage.src;
         previewImage.alt = originalImage.alt || '';
+
+        // Calculate optimal size based on viewport and image dimensions
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        const maxDimension = Math.max(viewportWidth, viewportHeight);
+        const maxSize = maxDimension * 0.9; // 90% of the larger viewport dimension
+
+        // Apply size constraints to container
+        container.style.maxWidth = `${Math.min(maxSize, viewportWidth * 0.9)}px`;
+        container.style.maxHeight = `${Math.min(maxSize, viewportHeight * 0.9)}px`;
 
         // Set caption
         const captionText = originalImage.alt || 
