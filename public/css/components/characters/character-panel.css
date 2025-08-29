@@ -60,7 +60,7 @@
   top: 0;
   width: 16px; /* Doubled from 8px to 16px */
   height: 100vh; /* Full screen height */
-  background: rgba(0, 0, 0, 0.1);
+  background: transparent;
   cursor: ew-resize;
   z-index: 1003; /* Above panel */
   border-left: 2px solid transparent;
@@ -68,12 +68,12 @@
 }
 
 .resize-handle:hover {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.1);
   border-left-color: var(--dropdown-border);
 }
 
 .resize-handle.dragging {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.2);
   border-left-color: #4CAF50;
 }
 
