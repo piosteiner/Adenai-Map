@@ -803,7 +803,10 @@
       "name": "Krull Sturmbann",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": null,
+      "coordinates": [
+        790,
+        769
+      ],
       "description": "",
       "image": "https://adenai.piogino.ch/public/images/krull_close.png",
       "status": "alive",
@@ -811,10 +814,38 @@
       "relationship": "unknown",
       "firstMet": "",
       "notes": "",
-      "movementHistory": [],
-      "currentLocation": null,
+      "movementHistory": [
+        {
+          "id": "movement_1756501436576",
+          "movement_nr": 0,
+          "date": "5663-06-03",
+          "dateStart": "5663-06-03",
+          "dateEnd": null,
+          "location": "Wesdalen",
+          "coordinates": [
+            790,
+            769
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-29T21:03:56.576Z"
+        }
+      ],
+      "currentLocation": {
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "location": "Wesdalen",
+        "coordinates": [
+          790,
+          769
+        ],
+        "notes": ""
+      },
       "createdAt": "2025-08-29T20:40:02.491Z",
-      "updatedAt": "2025-08-29T20:50:05.859Z"
+      "updatedAt": "2025-08-29T21:03:56.576Z",
+      "location": "Wesdalen"
     },
     {
       "id": "ly_iss_moy",
@@ -1244,5 +1275,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-29T21:03:23.588Z"
+  "lastUpdated": "2025-08-29T21:03:56.576Z"
 }
