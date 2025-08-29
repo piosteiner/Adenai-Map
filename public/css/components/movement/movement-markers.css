@@ -43,12 +43,7 @@
     z-index: 1002;
 }
 
-/* Dark mode styling */
-[data-theme="dark"] .movement-marker {
-    background: #1c1c1c !important;
-    border-color: var(--path-color, #fff) !important;
-    color: var(--path-color, #fff) !important;
-}
+/* Dark mode styling removed - using light theme styles for all themes */
 
 .movement-marker:hover {
     transform: scale(1.1);
