@@ -503,7 +503,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai-admin.piogino.ch/public/images/eriosa_close.png",
+      "image": "https://adenai.piogino.ch/public/images/eriosa_close.png",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -512,7 +512,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:33:05.493Z",
-      "updatedAt": "2025-08-29T20:35:35.116Z"
+      "updatedAt": "2025-08-29T20:47:58.658Z"
     },
     {
       "id": "eytan_karthright",
@@ -793,5 +793,5 @@
       "updatedAt": "2025-08-29T20:46:20.848Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:47:48.287Z"
+  "lastUpdated": "2025-08-29T20:47:58.658Z"
 }
