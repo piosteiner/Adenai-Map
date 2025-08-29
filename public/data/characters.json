@@ -594,12 +594,13 @@
       "image": "https://adenai-admin.piogino.ch/public/images/krull_close.png",
       "status": "alive",
       "faction": "",
-      "relationship": "ally",
+      "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2025-08-29T20:40:02.491Z",
-      "updatedAt": "2025-08-29T20:40:02.491Z"
+      "updatedAt": "2025-08-29T20:41:31.720Z"
     },
     {
       "id": "ly_iss_moy",
@@ -637,5 +638,5 @@
       "updatedAt": "2025-08-29T20:41:12.704Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:41:22.949Z"
+  "lastUpdated": "2025-08-29T20:41:31.720Z"
 }
