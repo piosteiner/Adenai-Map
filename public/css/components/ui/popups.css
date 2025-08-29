@@ -194,32 +194,33 @@
   color: #6c757d;
 }
 
-/* Panel-Anchored Character Popup */
+/* Panel-Anchored Character Popup - Enhanced Design */
 .panel-anchored-popup {
-  background: white;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: var(--popup-bg);
+  border: 2px solid var(--dropdown-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
   min-width: 300px;
   max-width: 400px;
-  font-family: sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 14px;
   margin-left: 10px;
+  color: var(--text-color);
 }
 
 .panel-popup-header {
-  padding: 15px 20px 10px 20px;
-  border-bottom: 1px solid #dee2e6;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--dropdown-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f8f9fa;
-  border-radius: 8px 8px 0 0;
+  background: var(--card-bg);
+  border-radius: 12px 12px 0 0;
 }
 
 .panel-popup-header h3 {
   margin: 0;
-  color: #495057;
+  color: var(--text-color);
   font-size: 18px;
   font-weight: bold;
 }
@@ -227,42 +228,46 @@
 .panel-popup-close {
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 18px;
   cursor: pointer;
-  color: #6c757d;
-  padding: 0;
-  width: 30px;
-  height: 30px;
+  color: var(--text-muted);
+  padding: 8px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 50%;
   transition: all 0.2s ease;
+  font-weight: bold;
+  line-height: 16px;
 }
 
 .panel-popup-close:hover {
-  background: #e9ecef;
-  color: #495057;
+  background: var(--dropdown-hover);
+  color: var(--text-color);
 }
 
 .panel-popup-content {
-  padding: 20px;
-  line-height: 1.5;
+  padding: 16px;
+  line-height: 1.4;
 }
 
 .character-popup-header-info {
   display: flex;
   gap: 15px;
   margin-bottom: 15px;
+  align-items: flex-start;
 }
 
 .character-popup-avatar {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #dee2e6;
+  border: 2px solid var(--dropdown-border);
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .character-popup-details {
@@ -271,15 +276,38 @@
 
 .character-popup-title {
   font-style: italic;
-  color: #6c757d;
-  margin-bottom: 5px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-size: 13px;
 }
 
 .character-popup-status,
 .character-popup-relationship,
 .character-popup-location {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   font-size: 13px;
+  line-height: 1.3;
+}
+
+.character-popup-status {
+  font-weight: 600;
+}
+
+.character-popup-relationship {
+  font-weight: 500;
+}
+
+/* Status badges */
+.relationship-ally {
+  color: #28a745;
+}
+
+.relationship-enemy {
+  color: #dc3545;
+}
+
+.relationship-neutral {
+  color: var(--text-muted);
 }
 
 .location-unknown {
@@ -294,11 +322,24 @@
 .character-popup-origin,
 .character-popup-movement,
 .character-popup-dates {
-  margin-bottom: 10px;
-  padding: 8px 12px;
-  background: #f8f9fa;
-  border-radius: 6px;
-  border-left: 3px solid #007bff;
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  background: var(--card-bg);
+  border-radius: 8px;
+  border-left: 3px solid #6366f1;
+  font-size: 13px;
+  line-height: 1.4;
+  transition: all 0.2s ease;
+}
+
+.character-popup-faction:hover,
+.character-popup-met:hover,
+.character-popup-notes:hover,
+.character-popup-description:hover,
+.character-popup-origin:hover,
+.character-popup-movement:hover {
+  background: var(--dropdown-hover);
+  transform: translateX(2px);
 }
 
 .character-popup-description {
@@ -317,10 +358,27 @@
   border-left-color: #fd7e14;
 }
 
+.character-popup-faction {
+  border-left-color: #17a2b8;
+}
+
+.character-popup-met {
+  border-left-color: #e83e8c;
+}
+
 .character-popup-dates {
-  border-left-color: #6c757d;
+  border-left-color: var(--text-muted);
   font-size: 12px;
   opacity: 0.8;
+  margin-bottom: 0;
+}
+
+/* Styling for missing/unknown data */
+.missing-data {
+  opacity: 0.7;
+  font-style: italic;
+  color: var(--text-muted) !important;
+  background: var(--dropdown-bg) !important;
 }
 
 .popup-details {
@@ -373,27 +431,35 @@
 }
 
 [data-theme="dark"] .panel-anchored-popup {
-  background: #343a40;
-  border-color: #6c757d;
-  color: #f8f9fa;
+  background: var(--popup-bg);
+  border-color: var(--dropdown-border);
+  color: var(--text-color);
 }
 
 [data-theme="dark"] .panel-popup-header {
-  background: #495057;
-  border-color: #6c757d;
+  background: var(--card-bg);
+  border-color: var(--dropdown-border);
 }
 
 [data-theme="dark"] .panel-popup-header h3 {
-  color: #f8f9fa;
+  color: var(--text-color);
 }
 
 [data-theme="dark"] .panel-popup-close {
-  color: #adb5bd;
+  color: var(--text-muted);
 }
 
 [data-theme="dark"] .panel-popup-close:hover {
-  background: #5a6268;
-  color: #f8f9fa;
+  background: var(--dropdown-hover);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .character-popup-avatar {
+  border-color: var(--dropdown-border);
+}
+
+[data-theme="dark"] .character-popup-title {
+  color: var(--text-muted);
 }
 
 [data-theme="dark"] .character-popup-faction,
@@ -403,6 +469,33 @@
 [data-theme="dark"] .character-popup-origin,
 [data-theme="dark"] .character-popup-movement,
 [data-theme="dark"] .character-popup-dates {
-  background: #495057;
-  color: #f8f9fa;
+  background: var(--card-bg);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .character-popup-faction:hover,
+[data-theme="dark"] .character-popup-met:hover,
+[data-theme="dark"] .character-popup-notes:hover,
+[data-theme="dark"] .character-popup-description:hover,
+[data-theme="dark"] .character-popup-origin:hover,
+[data-theme="dark"] .character-popup-movement:hover {
+  background: var(--dropdown-hover);
+}
+
+[data-theme="dark"] .relationship-ally {
+  color: #4ade80;
+}
+
+[data-theme="dark"] .relationship-enemy {
+  color: #f87171;
+}
+
+[data-theme="dark"] .relationship-neutral {
+  color: var(--text-muted);
+}
+
+/* Dark theme support for missing data */
+[data-theme="dark"] .missing-data {
+  color: var(--text-muted) !important;
+  background: var(--dropdown-bg) !important;
 }

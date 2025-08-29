@@ -246,8 +246,8 @@ class CharacterSystem {
             return;
         }
 
-        // Create popup content
-        const popupContent = this.createCharacterPopupContent(character);
+        // Create popup content using the SAME function as map-based popups
+        const popupContent = this.createCharacterPopup(character);
 
         // Create popup element
         const popup = document.createElement('div');
@@ -285,125 +285,6 @@ class CharacterSystem {
             this.currentPanelPopup = null;
             console.log('📋 Panel popup closed');
         }
-    }
-
-    // Create character popup content
-    createCharacterPopupContent(character) {
-        console.log('🔍 Creating popup for character:', character.name, 'with data:', {
-            placeOfOrigin: character.placeOfOrigin,
-            currentLocation: character.currentLocation,
-            location: character.location,
-            movementHistory: character.movementHistory?.length || 0,
-            faction: character.faction,
-            firstMet: character.firstMet,
-            description: character.description,
-            notes: character.notes
-        });
-        
-        const statusEmoji = this.statusEmojis[character.status] || '🤷';
-        const statusLabel = character.status || 'unknown';
-        const relationship = character.relationship || 'neutral';
-        
-        // Image
-        const image = character.image ? `<img src="${character.image}" alt="${character.name}" class="character-popup-avatar">` : '';
-        
-        // Title
-        const title = character.title ? `<div class="character-popup-title">${character.title}</div>` : '';
-        
-        // Last seen location (from currentLocation, location, or latest movement)
-        let lastSeenContent = '';
-        if (character.currentLocation && character.currentLocation.location) {
-            const date = character.currentLocation.date || character.currentLocation.dateStart || '';
-            lastSeenContent = `📍 <strong>Last Seen:</strong> ${character.currentLocation.location}${date ? ` (${date})` : ''}`;
-            console.log('✅ Using currentLocation for last seen:', character.currentLocation.location);
-        } else if (character.location) {
-            lastSeenContent = `📍 <strong>Last Seen:</strong> ${character.location}`;
-            console.log('✅ Using location field for last seen:', character.location);
-        } else if (character.movementHistory && character.movementHistory.length > 0) {
-            // Get the most recent movement entry
-            const latestMovement = character.movementHistory[character.movementHistory.length - 1];
-            if (latestMovement && latestMovement.location) {
-                const date = latestMovement.date || latestMovement.dateStart || '';
-                lastSeenContent = `📍 <strong>Last Seen:</strong> ${latestMovement.location}${date ? ` (${date})` : ''}`;
-                console.log('✅ Using movement history for last seen:', latestMovement.location, 'from', latestMovement.date);
-            } else {
-                lastSeenContent = `📍 <strong>Last Seen:</strong> <span class="location-unknown">Unknown</span>`;
-                console.log('❌ No location found in movement history');
-            }
-        } else {
-            lastSeenContent = `📍 <strong>Last Seen:</strong> <span class="location-unknown">Unknown</span>`;
-            console.log('❌ No location data found anywhere');
-        }
-        
-        // Build content sections
-        const contentSections = [];
-        
-        // Faction
-        if (character.faction) {
-            contentSections.push(`<div class="character-popup-faction">🏛️ <strong>Faction:</strong> ${character.faction}</div>`);
-            console.log('✅ Adding faction:', character.faction);
-        }
-        
-        // Place of Origin
-        if (character.placeOfOrigin) {
-            contentSections.push(`<div class="character-popup-origin">🏠 <strong>Place of Origin:</strong> ${character.placeOfOrigin}</div>`);
-            console.log('✅ Adding place of origin:', character.placeOfOrigin);
-        } else {
-            console.log('❌ No placeOfOrigin found');
-        }
-        
-        // Movement History count
-        if (character.movementHistory && character.movementHistory.length > 0) {
-            const historyCount = character.movementHistory.length;
-            const historyText = historyCount === 1 ? '1 location' : `${historyCount} locations`;
-            contentSections.push(`<div class="character-popup-movement">🗺️ <strong>Movement History:</strong> ${historyText}</div>`);
-        }
-        
-        // First Met
-        if (character.firstMet) {
-            contentSections.push(`<div class="character-popup-met">🗓️ <strong>First Met:</strong> ${character.firstMet}</div>`);
-        }
-        
-        // Description
-        if (character.description) {
-            contentSections.push(`<div class="character-popup-description">📖 <strong>Description:</strong> ${character.description}</div>`);
-        }
-        
-        // Notes
-        if (character.notes) {
-            contentSections.push(`<div class="character-popup-notes">📝 <strong>Notes:</strong> ${character.notes}</div>`);
-        }
-        
-        // Created/Updated dates (for reference, like in CMS)
-        if (character.createdAt || character.updatedAt) {
-            const createdDate = character.createdAt ? new Date(character.createdAt).toLocaleDateString() : '';
-            const updatedDate = character.updatedAt ? new Date(character.updatedAt).toLocaleDateString() : '';
-            
-            if (updatedDate && updatedDate !== createdDate) {
-                contentSections.push(`<div class="character-popup-dates">📅 <strong>Last Updated:</strong> ${updatedDate}</div>`);
-            } else if (createdDate) {
-                contentSections.push(`<div class="character-popup-dates">📅 <strong>Created:</strong> ${createdDate}</div>`);
-            }
-        }
-
-        return `
-            <div class="character-popup-header-info">
-                ${image}
-                <div class="character-popup-details">
-                    ${title}
-                    <div class="character-popup-status">
-                        ${statusEmoji} <strong>Status:</strong> ${statusLabel}
-                    </div>
-                    <div class="character-popup-relationship relationship-${relationship}">
-                        <strong>Relationship:</strong> ${relationship}
-                    </div>
-                    <div class="character-popup-location">
-                        ${lastSeenContent}
-                    </div>
-                </div>
-            </div>
-            ${contentSections.join('')}
-        `;
     }
 
     // Simple, reliable centering with panel awareness
@@ -575,35 +456,118 @@ class CharacterSystem {
     }
 
     createCharacterPopup(character) {
-        const imageHtml = character.image ? 
-            `<img src="${character.image}" alt="${character.name}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px; float: right; margin-left: 10px;">` : '';
+        console.log('🔍 Creating popup for character:', character.name, 'with data:', {
+            placeOfOrigin: character.placeOfOrigin,
+            currentLocation: character.currentLocation,
+            location: character.location,
+            movementHistory: character.movementHistory?.length || 0,
+            faction: character.faction,
+            firstMet: character.firstMet,
+            description: character.description,
+            notes: character.notes
+        });
         
-        // Show movement count if available
-        const movementCount = character.movementHistory ? character.movementHistory.length : 0;
-        const movementInfo = movementCount > 0 ? `<div><strong>🛤️ Movement History:</strong> ${movementCount} locations</div>` : '';
+        const statusEmoji = this.statusEmojis[character.status] || '🤷';
+        const statusLabel = character.status || 'unknown';
+        const relationship = character.relationship || 'neutral';
         
+        // Image
+        const image = character.image ? `<img src="${character.image}" alt="${character.name}" class="character-popup-avatar">` : '';
+        
+        // Title
+        const title = character.title ? `<div class="character-popup-title">${character.title}</div>` : '';
+        
+        // Last seen location (from currentLocation, location, or latest movement)
+        let lastSeenContent = '';
+        if (character.currentLocation && character.currentLocation.location) {
+            const date = character.currentLocation.date || character.currentLocation.dateStart || '';
+            lastSeenContent = `📍 <strong>Last Seen:</strong> ${character.currentLocation.location}${date ? ` (${date})` : ''}`;
+            console.log('✅ Using currentLocation for last seen:', character.currentLocation.location);
+        } else if (character.location) {
+            lastSeenContent = `📍 <strong>Last Seen:</strong> ${character.location}`;
+            console.log('✅ Using location field for last seen:', character.location);
+        } else if (character.movementHistory && character.movementHistory.length > 0) {
+            // Get the most recent movement entry
+            const latestMovement = character.movementHistory[character.movementHistory.length - 1];
+            if (latestMovement && latestMovement.location) {
+                const date = latestMovement.date || latestMovement.dateStart || '';
+                lastSeenContent = `📍 <strong>Last Seen:</strong> ${latestMovement.location}${date ? ` (${date})` : ''}`;
+                console.log('✅ Using movement history for last seen:', latestMovement.location, 'from', latestMovement.date);
+            } else {
+                lastSeenContent = `📍 <strong>Last Seen:</strong> <span class="location-unknown">Unknown</span>`;
+                console.log('❌ No location found in movement history');
+            }
+        } else {
+            lastSeenContent = `📍 <strong>Last Seen:</strong> <span class="location-unknown">Unknown</span>`;
+            console.log('❌ No location data found anywhere');
+        }
+        
+        // Build content sections - ALWAYS show the same structure
+        const contentSections = [];
+        
+        // Faction (always show)
+        const faction = character.faction || 'Unknown';
+        const factionClass = character.faction ? 'character-popup-faction' : 'character-popup-faction missing-data';
+        contentSections.push(`<div class="${factionClass}">🏛️ <strong>Faction:</strong> ${faction}</div>`);
+        
+        // Place of Origin (always show)
+        const placeOfOrigin = character.placeOfOrigin || 'Unknown';
+        const originClass = character.placeOfOrigin ? 'character-popup-origin' : 'character-popup-origin missing-data';
+        contentSections.push(`<div class="${originClass}">🏠 <strong>Place of Origin:</strong> ${placeOfOrigin}</div>`);
+        
+        // Movement History (always show)
+        if (character.movementHistory && character.movementHistory.length > 0) {
+            const historyCount = character.movementHistory.length;
+            const historyText = historyCount === 1 ? '1 location' : `${historyCount} locations`;
+            contentSections.push(`<div class="character-popup-movement">🗺️ <strong>Movement History:</strong> ${historyText}</div>`);
+        } else {
+            contentSections.push(`<div class="character-popup-movement missing-data">🗺️ <strong>Movement History:</strong> No recorded movements</div>`);
+        }
+        
+        // First Met (always show)
+        const firstMet = character.firstMet || 'Unknown';
+        const metClass = character.firstMet ? 'character-popup-met' : 'character-popup-met missing-data';
+        contentSections.push(`<div class="${metClass}">🗓️ <strong>First Met:</strong> ${firstMet}</div>`);
+        
+        // Description (always show)
+        const description = character.description || 'No description available';
+        const descClass = character.description ? 'character-popup-description' : 'character-popup-description missing-data';
+        contentSections.push(`<div class="${descClass}">📖 <strong>Description:</strong> ${description}</div>`);
+        
+        // Notes (always show if has any content)
+        if (character.notes) {
+            contentSections.push(`<div class="character-popup-notes">📝 <strong>Notes:</strong> ${character.notes}</div>`);
+        }
+        
+        // Created/Updated dates (for reference, like in CMS)
+        if (character.createdAt || character.updatedAt) {
+            const createdDate = character.createdAt ? new Date(character.createdAt).toLocaleDateString() : '';
+            const updatedDate = character.updatedAt ? new Date(character.updatedAt).toLocaleDateString() : '';
+            
+            if (updatedDate && updatedDate !== createdDate) {
+                contentSections.push(`<div class="character-popup-dates">📅 <strong>Last Updated:</strong> ${updatedDate}</div>`);
+            } else if (createdDate) {
+                contentSections.push(`<div class="character-popup-dates">📅 <strong>Created:</strong> ${createdDate}</div>`);
+            }
+        }
+
         return `
-            <div class="character-popup">
-                ${imageHtml}
-                <div class="popup-title" style="color: ${this.relationshipColors[character.relationship] || '#333'}">
-                    ${character.name}
+            <div class="character-popup-header-info">
+                ${image}
+                <div class="character-popup-details">
+                    ${title}
+                    <div class="character-popup-status">
+                        ${statusEmoji} <strong>Status:</strong> ${statusLabel}
+                    </div>
+                    <div class="character-popup-relationship relationship-${relationship}">
+                        <strong>Relationship:</strong> ${relationship}
+                    </div>
+                    <div class="character-popup-location">
+                        ${lastSeenContent}
+                    </div>
                 </div>
-                ${character.title ? `<div style="font-style: italic; margin-bottom: 8px;">${character.title}</div>` : ''}
-                <div style="margin-bottom: 8px;">
-                    <span style="background: ${this.relationshipColors[character.relationship] || '#ccc'}; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.8em;">
-                        ${AdenaiConfig.getCharacterRelationshipLabel(character.relationship) || 'unknown'}
-                    </span>
-                    <span style="margin-left: 8px;">
-                        ${AdenaiConfig.getCharacterStatusLabel(character.status) || '❓ Unbekannt'}
-                    </span>
-                </div>
-                ${character.faction ? `<div><strong>🛡️ Faction:</strong> ${character.faction}</div>` : ''}
-                ${character.firstMet ? `<div><strong>📅 First Met:</strong> ${character.firstMet}</div>` : ''}
-                <div><strong>📍 Location:</strong> ${character.location || 'Unknown'}</div>
-                ${movementInfo}
-                ${character.description ? `<div style="margin-top: 8px;"><strong>📝 Description:</strong><br>${character.description}</div>` : ''}
-                ${character.notes ? `<div style="margin-top: 8px;"><strong>📋 Notes:</strong><br>${character.notes}</div>` : ''}
             </div>
+            ${contentSections.join('')}
         `;
     }
 
