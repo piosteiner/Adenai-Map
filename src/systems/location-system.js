@@ -21,6 +21,115 @@ class LocationSystem {
         }
         this.loadMediaLibrary();
         this.setupKeyboardHandlers();
+        this.addLocationMarkerStyles();
+    }
+
+    addLocationMarkerStyles() {
+        const style = document.createElement('style');
+        style.id = 'interactive-location-markers-style';
+        style.textContent = `
+            .interactive-location-marker {
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+
+            .location-marker-svg {
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                transform-origin: center;
+            }
+
+            .location-dot {
+                transition: all 0.3s ease;
+                transform-origin: center;
+            }
+
+            .pulse-ring {
+                transition: all 0.4s ease;
+                transform-origin: center;
+            }
+
+            /* Proximity scaling effect */
+            .interactive-location-marker.proximity-close {
+                transform: scale(1.2);
+            }
+
+            .interactive-location-marker.proximity-near {
+                transform: scale(1.1);
+            }
+
+            /* Hover effects */
+            .interactive-location-marker:hover .location-marker-svg {
+                transform: scale(1.3);
+            }
+
+            .interactive-location-marker:hover .pulse-ring {
+                opacity: 0.6 !important;
+                animation: pulse-animation 1.5s infinite ease-in-out;
+            }
+
+            .interactive-location-marker:hover .location-dot {
+                filter: brightness(1.2) saturate(1.3);
+            }
+
+            /* Click effect */
+            .interactive-location-marker.clicked {
+                animation: click-bounce 0.6s ease-out;
+            }
+
+            .interactive-location-marker.clicked .location-dot {
+                animation: click-flash 0.6s ease-out;
+            }
+
+            /* Pulse animation */
+            @keyframes pulse-animation {
+                0% {
+                    transform: scale(1);
+                    opacity: 0.6;
+                }
+                50% {
+                    transform: scale(1.4);
+                    opacity: 0.3;
+                }
+                100% {
+                    transform: scale(1.8);
+                    opacity: 0;
+                }
+            }
+
+            /* Click bounce animation */
+            @keyframes click-bounce {
+                0% { transform: scale(1); }
+                30% { transform: scale(1.4); }
+                50% { transform: scale(1.2); }
+                70% { transform: scale(1.35); }
+                100% { transform: scale(1.3); }
+            }
+
+            /* Click flash animation */
+            @keyframes click-flash {
+                0% { fill: #ff6b1a; filter: brightness(1); }
+                30% { fill: #ffdb4d; filter: brightness(1.8) saturate(1.5); }
+                100% { fill: #ff6b1a; filter: brightness(1.2) saturate(1.3); }
+            }
+
+            /* Dark theme adjustments */
+            [data-theme="dark"] .location-dot {
+                stroke: #1a1a1a;
+            }
+
+            [data-theme="dark"] .pulse-ring {
+                stroke: #ff8c42;
+            }
+        `;
+
+        // Remove existing styles if any
+        const existing = document.getElementById('interactive-location-markers-style');
+        if (existing) {
+            existing.remove();
+        }
+
+        document.head.appendChild(style);
+        Logger.debug('🎨 Interactive location marker styles added');
     }
 
     setupKeyboardHandlers() {
@@ -51,27 +160,77 @@ class LocationSystem {
     }
 
     createLocationIcon() {
-        try {
-            const isMobile = window.mapCore && window.mapCore.getIsMobile ? window.mapCore.getIsMobile() : false;
-            
-            // Try different icon paths in case of path issues
-            const iconUrl = window.location.pathname.includes('public') 
-                ? 'icons/dot_orange.svg' 
-                : 'public/icons/dot_orange.svg';
-            
-            this.dotOrangeIcon = L.icon({
-                iconUrl: iconUrl,
-                iconSize: isMobile ? [48, 48] : [32, 32],
-                iconAnchor: isMobile ? [24, 24] : [16, 16],
-                popupAnchor: [0, -32]
-            });
-            
-            Logger.success('Location icon created successfully with path:', iconUrl);
-        } catch (error) {
-            Logger.error('Error creating location icon:', error);
-            // Fallback to default marker if icon creation fails
-            this.dotOrangeIcon = null;
-        }
+        // Create dynamic interactive location marker instead of static icon
+        this.dotOrangeIcon = this.createInteractiveLocationMarker();
+        Logger.success('Interactive location marker created successfully');
+    }
+
+    createInteractiveLocationMarker() {
+        const isMobile = window.mapCore && window.mapCore.getIsMobile ? window.mapCore.getIsMobile() : false;
+        const size = isMobile ? 48 : 32;
+        
+        // Create SVG icon with interactive animations
+        const svgIcon = L.divIcon({
+            className: 'interactive-location-marker',
+            html: this.createLocationMarkerSVG(size),
+            iconSize: [size, size],
+            iconAnchor: [size/2, size/2],
+            popupAnchor: [0, -size/2]
+        });
+
+        return svgIcon;
+    }
+
+    createLocationMarkerSVG(size) {
+        const radius = size * 0.35; // 35% of container size
+        const strokeWidth = size * 0.08; // 8% of container size
+        
+        return `
+            <svg class="location-marker-svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+                <defs>
+                    <radialGradient id="orangeGradient-${Date.now()}" cx="30%" cy="30%">
+                        <stop offset="0%" style="stop-color:#ff8c42;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#ff6b1a;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#e55a00;stop-opacity:1" />
+                    </radialGradient>
+                    <filter id="glow-${Date.now()}">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge> 
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <!-- Pulse ring for hover effect -->
+                <circle class="pulse-ring" 
+                        cx="${size/2}" 
+                        cy="${size/2}" 
+                        r="${radius}" 
+                        fill="none" 
+                        stroke="#ff6b1a" 
+                        stroke-width="2" 
+                        opacity="0"/>
+                
+                <!-- Main location dot -->
+                <circle class="location-dot" 
+                        cx="${size/2}" 
+                        cy="${size/2}" 
+                        r="${radius}" 
+                        fill="url(#orangeGradient-${Date.now()})" 
+                        stroke="#ffffff" 
+                        stroke-width="${strokeWidth}"
+                        filter="url(#glow-${Date.now()})"/>
+                
+                <!-- Inner highlight -->
+                <circle class="location-highlight" 
+                        cx="${size/2 - radius*0.3}" 
+                        cy="${size/2 - radius*0.3}" 
+                        r="${radius*0.25}" 
+                        fill="#ffb366" 
+                        opacity="0.6"/>
+            </svg>
+        `;
     }
 
     // Parse link syntax [text:type:id] and convert to clickable elements
@@ -274,6 +433,13 @@ class LocationSystem {
             if (!this.dotOrangeIcon) {
                 Logger.error('Failed to create location icon, using default marker');
                 const geoLayer = L.geoJSON(data, {
+                    pointToLayer: (feature, latlng) => {
+                        // Use interactive markers even in fallback case
+                        return this.createInteractiveLocationMarker({
+                            geometry: { coordinates: [latlng.lng, latlng.lat] },
+                            properties: feature.properties
+                        });
+                    },
                     onEachFeature: async (feature, layer) => {
                         await this.processLocationFeature(feature, layer);
                         // Setup enhanced interactions after popup is bound
@@ -285,7 +451,11 @@ class LocationSystem {
             
             const geoLayer = L.geoJSON(data, {
                 pointToLayer: (feature, latlng) => {
-                    return L.marker(latlng, { icon: this.dotOrangeIcon });
+                    // Use the new interactive marker for all location points
+                    return this.createInteractiveLocationMarker({
+                        geometry: { coordinates: [latlng.lng, latlng.lat] },
+                        properties: feature.properties
+                    });
                 },
                 onEachFeature: async (feature, layer) => {
                     await this.processLocationFeature(feature, layer);
@@ -302,11 +472,17 @@ class LocationSystem {
         let hoverTimeout;
         marker._isPopupSticky = false; // Store sticky state on the marker itself
         
+        // Add interactive behaviors to the marker
+        this.addMarkerAnimations(marker);
+        
         // Disable default popup behavior
         marker.off('click');
         
         // Click event - toggles popup (opens/closes) and makes it sticky
         marker.on('click', () => {
+            // Add click animation
+            this.triggerClickAnimation(marker);
+            
             // If this marker's popup is already open, close it (toggle behavior)
             if (this.currentOpenPopup === marker && marker._isPopupSticky) {
                 marker._isPopupSticky = false;
@@ -369,6 +545,102 @@ class LocationSystem {
             }
             Logger.info('Location popup closed, sticky state reset');
         });
+    }
+
+    addMarkerAnimations(marker) {
+        const markerElement = marker.getElement();
+        if (!markerElement) return;
+
+        // Set up cursor proximity detection
+        this.setupProximityDetection(marker);
+        
+        // Add mouse events for enhanced interactions
+        markerElement.addEventListener('mouseenter', () => {
+            this.startHoverEffects(marker);
+        });
+
+        markerElement.addEventListener('mouseleave', () => {
+            this.stopHoverEffects(marker);
+        });
+    }
+
+    setupProximityDetection(marker) {
+        if (!window.mapCore || !window.mapCore.map) return;
+
+        const map = window.mapCore.map;
+        const markerElement = marker.getElement();
+        if (!markerElement) return;
+
+        // Mouse move handler for proximity detection
+        const handleMouseMove = (e) => {
+            const rect = markerElement.getBoundingClientRect();
+            const markerCenterX = rect.left + rect.width / 2;
+            const markerCenterY = rect.top + rect.height / 2;
+            
+            const distance = Math.sqrt(
+                Math.pow(e.clientX - markerCenterX, 2) + 
+                Math.pow(e.clientY - markerCenterY, 2)
+            );
+
+            // Proximity thresholds (in pixels)
+            const closeThreshold = 60;
+            const nearThreshold = 100;
+
+            // Remove existing proximity classes
+            markerElement.classList.remove('proximity-close', 'proximity-near');
+
+            // Add appropriate proximity class
+            if (distance < closeThreshold) {
+                markerElement.classList.add('proximity-close');
+            } else if (distance < nearThreshold) {
+                markerElement.classList.add('proximity-near');
+            }
+        };
+
+        // Add mouse move listener to map container
+        const mapContainer = map.getContainer();
+        mapContainer.addEventListener('mousemove', handleMouseMove);
+
+        // Store cleanup function on marker
+        marker._proximityCleanup = () => {
+            mapContainer.removeEventListener('mousemove', handleMouseMove);
+            markerElement.classList.remove('proximity-close', 'proximity-near');
+        };
+    }
+
+    startHoverEffects(marker) {
+        const markerElement = marker.getElement();
+        if (!markerElement) return;
+
+        // Find the pulse ring and start pulsing
+        const pulseRing = markerElement.querySelector('.pulse-ring');
+        if (pulseRing) {
+            pulseRing.style.opacity = '0.6';
+        }
+    }
+
+    stopHoverEffects(marker) {
+        const markerElement = marker.getElement();
+        if (!markerElement) return;
+
+        // Stop pulsing
+        const pulseRing = markerElement.querySelector('.pulse-ring');
+        if (pulseRing) {
+            pulseRing.style.opacity = '0';
+        }
+    }
+
+    triggerClickAnimation(marker) {
+        const markerElement = marker.getElement();
+        if (!markerElement) return;
+
+        // Add click animation class
+        markerElement.classList.add('clicked');
+
+        // Remove animation class after animation completes
+        setTimeout(() => {
+            markerElement.classList.remove('clicked');
+        }, 600);
     }
 
     // Close all open location popups
@@ -788,6 +1060,40 @@ class LocationSystem {
             type: 'FeatureCollection',
             features: this.locations.map(location => location.feature)
         };
+    }
+
+    // Cleanup methods for markers and proximity detection
+    clearMarkers() {
+        return this.withMap(map => {
+            if (this.markersLayer) {
+                // Clean up proximity detection for all markers
+                this.markersLayer.eachLayer(layer => {
+                    if (layer._proximityCleanup) {
+                        layer._proximityCleanup();
+                    }
+                });
+                
+                this.markersLayer.clearLayers();
+                Logger.info('All location markers cleared');
+            }
+        }, 'Cannot clear markers - map not available');
+    }
+
+    destroy() {
+        // Clean up all proximity detection listeners
+        if (this.markersLayer) {
+            this.markersLayer.eachLayer(layer => {
+                if (layer._proximityCleanup) {
+                    layer._proximityCleanup();
+                }
+            });
+        }
+        
+        if (this.loadingIndicator) {
+            this.loadingIndicator.destroy();
+        }
+        
+        Logger.info('LocationSystem destroyed');
     }
 }
 
