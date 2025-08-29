@@ -51,34 +51,47 @@ class CharacterSystem {
         Logger.success(`Set up close listeners on ${geoFeatureLayers.length} location markers`);
     }
 
-    async loadCharacters() {
+    async loadCharacters(preloadedData = null) {
         try {
-            Logger.character('Loading characters from server...');
-            // Try different potential URLs in case of server routing issues
-            let response;
-            const urls = [
-                `/data/characters.json?t=${Date.now()}`,
-                `public/data/characters.json?t=${Date.now()}`,
-                `./public/data/characters.json?t=${Date.now()}`
-            ];
+            Logger.character('Loading characters...');
             
-            for (const url of urls) {
-                try {
-                    Logger.character(`Trying URL: ${url}`);
-                    response = await HttpUtils.fetch(url, { retries: 0 });
-                    Logger.success(`Successfully loaded from: ${url}`);
-                    break;
-                } catch (e) {
-                    Logger.warning(`Failed URL: ${url} - ${e.message}`);
+            let data;
+            
+            if (preloadedData) {
+                // Use preloaded data from DataManager
+                Logger.character('Using preloaded character data from DataManager');
+                data = preloadedData;
+                // Handle both array and object formats
+                this.characterData = Array.isArray(data) ? data : (data.characters || []);
+            } else {
+                // Fallback to direct loading if no preloaded data
+                Logger.character('Loading characters from server...');
+                // Try different potential URLs in case of server routing issues
+                let response;
+                const urls = [
+                    `/data/characters.json?t=${Date.now()}`,
+                    `public/data/characters.json?t=${Date.now()}`,
+                    `./public/data/characters.json?t=${Date.now()}`
+                ];
+                
+                for (const url of urls) {
+                    try {
+                        Logger.character(`Trying URL: ${url}`);
+                        response = await HttpUtils.fetch(url, { retries: 0 });
+                        Logger.success(`Successfully loaded from: ${url}`);
+                        break;
+                    } catch (e) {
+                        Logger.warning(`Failed URL: ${url} - ${e.message}`);
+                    }
                 }
+                
+                if (!response) {
+                    throw new Error('Failed all URLs - no successful response');
+                }
+                
+                data = await response.json();
+                this.characterData = data.characters || [];
             }
-            
-            if (!response) {
-                throw new Error('Failed all URLs - no successful response');
-            }
-            
-            const data = await response.json();
-            this.characterData = data.characters || [];
             
             Logger.success(`Loaded ${this.characterData.length} characters`);
             

@@ -32,6 +32,9 @@ class AdenaiMap {
             // Initialize systems in order with progressive data
             await this.initializeSystems();
             
+            // 🚀 NEW: Load data through DataManager after systems are ready
+            await this.loadDataToSystems();
+            
             // Setup event listeners
             this.setupGlobalEventListeners();
             
@@ -149,6 +152,20 @@ class AdenaiMap {
             mapType: map.constructor.name
         });
     }
+    
+    // 🚀 NEW: Load data to systems using DataManager
+    async loadDataToSystems() {
+        Logger.loading('🎯 Loading data to systems through DataManager...');
+        
+        try {
+            // Call the existing loadData method
+            await this.loadData();
+            Logger.success('✅ Systems loaded with data successfully');
+        } catch (error) {
+            Logger.error('❌ Failed to load data to systems:', error);
+            throw error;
+        }
+    }
 
     // 🚀 UPDATED: Load data using DataManager (called by systems as needed)
     async loadData() {
@@ -160,14 +177,20 @@ class AdenaiMap {
             
             // Load locations first (they provide coordinates for characters)
             if (this.systems.locationsSystem) {
+                Logger.debug('🗺️ Loading locations for location system...');
                 const locations = await this.dataManager.getLocations();
+                Logger.debug(`📍 Retrieved ${locations?.features?.length || 0} locations from DataManager`);
                 await this.systems.locationsSystem.loadLocations(locations);
+                Logger.success('✅ Locations loaded to system');
             }
             
             // Then load characters (which depend on location coordinates)
             if (this.systems.characterSystem) {
+                Logger.debug('👤 Loading characters for character system...');
                 const characters = await this.dataManager.getCharacters();
+                Logger.debug(`🎭 Retrieved ${Array.isArray(characters) ? characters.length : 'unknown'} characters from DataManager`);
                 await this.systems.characterSystem.loadCharacters(characters);
+                Logger.success('✅ Characters loaded to system');
             }
             
             // Initialize movement controls after characters are loaded

@@ -187,7 +187,7 @@ class LocationSystem {
         this.showModal(alt, `<img src="${src}" alt="${alt}" class="full-image">`);
     }
 
-    async loadLocations() {
+    async loadLocations(preloadedData = null) {
         try {
             Logger.info('Loading locations from GeoJSON...');
             
@@ -200,7 +200,8 @@ class LocationSystem {
             // 🔥 CLEAR EXISTING DATA FIRST
             this.clearExistingLocations();
             
-            const data = await HttpUtils.fetchLocalData('public/data/places.geojson');
+            // Use preloaded data if available, otherwise fetch
+            const data = preloadedData || await HttpUtils.fetchLocalData('public/data/places.geojson');
             await this.processGeoJSONData(data);
             
             Logger.success(`Loaded ${this.geoFeatureLayers.length} locations`);
