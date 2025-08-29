@@ -1,0 +1,165 @@
+Date : 2025-08-29 17:07:22
+Directory : c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map
+Total : 104 files,  20039 codes, 1539 comments, 3295 blanks, all 24873 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         36 |      8,604 |      1,284 |      1,829 |     11,717 |
+| JSON       |          4 |      4,451 |          0 |          1 |      4,452 |
+| PostCSS    |         21 |      2,714 |        153 |        493 |      3,360 |
+| Markdown   |         17 |      2,589 |         10 |        670 |      3,269 |
+| HTML       |         20 |      1,636 |         90 |        285 |      2,011 |
+| XML        |          6 |         45 |          2 |         17 |         64 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                  | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                     |        104 |     20,039 |      1,539 |      3,295 |     24,873 |
+| . (Files)                                                                                             |          3 |        506 |         79 |        110 |        695 |
+| Server and CMS files                                                                                  |          2 |          0 |          0 |          2 |          2 |
+| Server and CMS files\admin-public                                                                     |          2 |          0 |          0 |          2 |          2 |
+| Server and CMS files\admin-public\js                                                                  |          2 |          0 |          0 |          2 |          2 |
+| docs                                                                                                  |         15 |      2,387 |         10 |        615 |      3,012 |
+| public                                                                                                |         49 |      7,810 |        195 |        624 |      8,629 |
+| public (Files)                                                                                        |          1 |        259 |         40 |         57 |        356 |
+| public\content                                                                                        |         16 |        220 |          0 |         26 |        246 |
+| public\content\locations                                                                              |         16 |        220 |          0 |         26 |        246 |
+| public\css                                                                                            |         22 |      2,835 |        153 |        523 |      3,511 |
+| public\css (Files)                                                                                    |          2 |        141 |          7 |         36 |        184 |
+| public\css\animations                                                                                 |          1 |         80 |          4 |          9 |         93 |
+| public\css\base                                                                                       |          3 |         74 |          5 |         16 |         95 |
+| public\css\components                                                                                 |         12 |      2,362 |        121 |        418 |      2,901 |
+| public\css\components\characters                                                                      |          3 |        976 |         48 |        169 |      1,193 |
+| public\css\components\features                                                                        |          2 |        273 |          4 |         44 |        321 |
+| public\css\components\map                                                                             |          2 |         92 |          6 |         18 |        116 |
+| public\css\components\movement                                                                        |          1 |        171 |         21 |         31 |        223 |
+| public\css\components\ui                                                                              |          4 |        850 |         42 |        156 |      1,048 |
+| public\css\layout                                                                                     |          2 |        178 |          8 |         38 |        224 |
+| public\css\themes                                                                                     |          2 |          0 |          8 |          6 |         14 |
+| public\data                                                                                           |          4 |      4,451 |          0 |          1 |      4,452 |
+| public\icons                                                                                          |          6 |         45 |          2 |         17 |         64 |
+| src                                                                                                   |         33 |      8,345 |      1,244 |      1,770 |     11,359 |
+| src\core                                                                                              |          3 |        929 |        159 |        200 |      1,288 |
+| src\systems                                                                                           |          4 |      1,568 |        211 |        289 |      2,068 |
+| src\ui                                                                                                |          4 |      1,208 |        152 |        246 |      1,606 |
+| src\ui (Files)                                                                                        |          1 |         90 |          8 |         23 |        121 |
+| src\ui\components                                                                                     |          3 |      1,118 |        144 |        223 |      1,485 |
+| src\utils                                                                                             |         21 |      4,239 |        698 |        969 |      5,906 |
+| src\vendor                                                                                            |          1 |        401 |         24 |         66 |        491 |
+| test                                                                                                  |          2 |        991 |         11 |        174 |      1,176 |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                              | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\README.md                                               | Markdown   |         81 |          0 |         25 |        106 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\Server and CMS files\admin-public\js\admin-core.js      | JavaScript |          0 |          0 |          1 |          1 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\Server and CMS files\admin-public\js\admin-locations.js | JavaScript |          0 |          0 |          1 |          1 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\CHARACTER_PATHS_API.md                             | Markdown   |        138 |          0 |         44 |        182 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\CMS_INTEGRATION_PROMPT.md                          | Markdown   |        444 |          0 |         86 |        530 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\FILE_STRUCTURE.md                                  | Markdown   |        113 |          0 |         20 |        133 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\FRESH_DATA_STRATEGY.md                             | Markdown   |        156 |          0 |         34 |        190 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\GLOBAL_CLUSTERING_SYSTEM.md                        | Markdown   |        146 |          0 |         52 |        198 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\IMAGE_STORAGE_STRATEGY.md                          | Markdown   |        167 |          0 |         35 |        202 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\LOCATION_CLUSTERING_ENHANCEMENT.md                 | Markdown   |        118 |          0 |         35 |        153 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\MEDIA_LIBRARY_MANAGEMENT.md                        | Markdown   |        146 |          0 |         28 |        174 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\MOVEMENT_VISIBILITY_CONTROL.md                     | Markdown   |          0 |          0 |          1 |          1 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\PHASE_5_OPTIMIZATION_SUMMARY.md                    | Markdown   |        135 |          0 |         42 |        177 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\PHASE_6_PERFORMANCE_SUMMARY.md                     | Markdown   |        134 |          0 |         41 |        175 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\PHASE_7_ADVANCED_LOADING_COMPLETE.md               | Markdown   |        181 |          0 |         48 |        229 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\PHASE_7_BUG_FIXES_COMPLETE.md                      | Markdown   |         75 |          0 |         26 |        101 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\PHASE_8_BUNDLE_OPTIMIZATION_COMPLETE.md            | Markdown   |        324 |          1 |         92 |        417 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\docs\STRUCTURE.md                                       | Markdown   |        110 |          9 |         31 |        150 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\index-optimized.html                                    | HTML       |        325 |         35 |         59 |        419 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\index.html                                              | HTML       |        100 |         44 |         26 |        170 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\aablank.html                   | HTML       |         10 |          0 |          1 |         11 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\barbenfall.html                | HTML       |         10 |          0 |          1 |         11 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\basapo.html                    | HTML       |         26 |          0 |          4 |         30 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\byrgenwerft.html               | HTML       |         16 |          0 |          2 |         18 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\donnermund.html                | HTML       |         10 |          0 |          1 |         11 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\elissastadt.html               | HTML       |         10 |          0 |          1 |         11 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\glesburg.html                  | HTML       |         10 |          0 |          1 |         11 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\kalthar.html                   | HTML       |         10 |          0 |          1 |         11 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\makir.html                     | HTML       |         10 |          0 |          1 |         11 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\neudalen.html                  | HTML       |         10 |          0 |          1 |         11 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\nordmund.html                  | HTML       |         10 |          0 |          1 |         11 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\olecea.html                    | HTML       |         10 |          0 |          1 |         11 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\rena.html                      | HTML       |         22 |          0 |          3 |         25 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\valaris.html                   | HTML       |         33 |          0 |          4 |         37 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\wesdalen.html                  | HTML       |         10 |          0 |          1 |         11 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\content\locations\yosefka_akademie.html          | HTML       |         13 |          0 |          2 |         15 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\README.md                                    | Markdown   |        121 |          0 |         30 |        151 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\animations\effects.css                       | PostCSS    |         80 |          4 |          9 |         93 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\base\reset.css                               | PostCSS    |         17 |          1 |          4 |         22 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\base\typography.css                          | PostCSS    |         35 |          3 |          9 |         47 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\base\variables.css                           | PostCSS    |         22 |          1 |          3 |         26 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\characters\character-panel.css    | PostCSS    |        377 |         19 |         66 |        462 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\characters\character-paths.css    | PostCSS    |        187 |          6 |         38 |        231 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\characters\character-system.css   | PostCSS    |        412 |         23 |         65 |        500 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\features\gallery.css              | PostCSS    |        165 |          0 |         26 |        191 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\features\search.css               | PostCSS    |        108 |          4 |         18 |        130 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\map\coordinates.css               | PostCSS    |         61 |          3 |         11 |         75 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\map\map-core.css                  | PostCSS    |         31 |          3 |          7 |         41 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\movement\movement-markers.css     | PostCSS    |        171 |         21 |         31 |        223 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\ui\badges.css                     | PostCSS    |        104 |          8 |         23 |        135 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\ui\controls.css                   | PostCSS    |        105 |         16 |         19 |        140 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\ui\modals.css                     | PostCSS    |        301 |          8 |         50 |        359 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\ui\popups.css                     | PostCSS    |        340 |         10 |         64 |        414 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\layout\grid.css                              | PostCSS    |         72 |          2 |         12 |         86 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\layout\responsive.css                        | PostCSS    |        106 |          6 |         26 |        138 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\styles.css                                   | PostCSS    |         20 |          7 |          6 |         33 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\themes\dark.css                              | PostCSS    |          0 |          4 |          3 |          7 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\themes\light.css                             | PostCSS    |          0 |          4 |          3 |          7 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\data\characters.json                             | JSON       |        722 |          0 |          0 |        722 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\data\media-library.json                          | JSON       |        120 |          0 |          1 |        121 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\data\places.geojson                              | JSON       |        990 |          0 |          0 |        990 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\data\reviews.json                                | JSON       |      2,619 |          0 |          0 |      2,619 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\icons\character.svg                              | XML        |          5 |          0 |          0 |          5 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\icons\character_ally.svg                         | XML        |          6 |          0 |          0 |          6 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\icons\character_enemy.svg                        | XML        |          6 |          0 |          0 |          6 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\icons\character_neutral.svg                      | XML        |          8 |          0 |          0 |          8 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\icons\dot_orange.svg                             | XML        |         10 |          1 |          8 |         19 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\icons\dot_orange_dark.svg                        | XML        |         10 |          1 |          9 |         20 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\service-worker.js                                | JavaScript |        259 |         40 |         57 |        356 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\core\config.js                                      | JavaScript |         98 |         28 |         17 |        143 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\core\main.js                                        | JavaScript |        542 |         84 |        115 |        741 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\core\map-core.js                                    | JavaScript |        289 |         47 |         68 |        404 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\systems\character-system.js                         | JavaScript |        525 |         78 |         94 |        697 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\systems\location-system.js                          | JavaScript |        617 |         67 |         98 |        782 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\systems\movement-system.js                          | JavaScript |        214 |         39 |         53 |        306 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\systems\search-system.js                            | JavaScript |        212 |         27 |         44 |        283 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\ui\components\character-panel.js                    | JavaScript |        389 |         36 |         79 |        504 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\ui\components\coordinate-copy.js                    | JavaScript |        259 |         26 |         46 |        331 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\ui\components\movement-markers.js                   | JavaScript |        470 |         82 |         98 |        650 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\ui\gallery.js                                       | JavaScript |         90 |          8 |         23 |        121 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\advanced-loader.js                            | JavaScript |        318 |         43 |         66 |        427 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\bundle-analyzer.js                            | JavaScript |        363 |         76 |         82 |        521 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\char-path-api.js                              | JavaScript |        200 |         20 |         49 |        269 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\coordinate-utils.js                           | JavaScript |        140 |         17 |         34 |        191 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\data-config.js                                | JavaScript |         87 |         24 |         23 |        134 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\data-manager.js                               | JavaScript |        333 |         45 |         84 |        462 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\data-utils.js                                 | JavaScript |         98 |          8 |         17 |        123 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\event-utils.js                                | JavaScript |        109 |          9 |         18 |        136 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\github-version.js                             | JavaScript |        102 |         14 |         22 |        138 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\http-utils.js                                 | JavaScript |        150 |         53 |         33 |        236 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\icons.js                                      | JavaScript |         84 |         43 |         34 |        161 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\journey.js                                    | JavaScript |        248 |         33 |         56 |        337 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\logger.js                                     | JavaScript |         67 |          2 |         23 |         92 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\map-utils.js                                  | JavaScript |         48 |          2 |          9 |         59 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\memory-utils.js                               | JavaScript |        227 |         32 |         55 |        314 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\module-loader.js                              | JavaScript |        338 |         83 |         79 |        500 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\notification-utils.js                         | JavaScript |        130 |         20 |         30 |        180 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\performance-utils.js                          | JavaScript |        245 |         20 |         58 |        323 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\state-manager.js                              | JavaScript |        234 |         24 |         53 |        311 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\sw-manager.js                                 | JavaScript |        285 |         32 |         56 |        373 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\webpack-analyzer.js                           | JavaScript |        433 |         98 |         88 |        619 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\vendor\leaflet.curve.js                             | JavaScript |        401 |         24 |         66 |        491 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\test\advanced-loading-test.html                         | HTML       |        387 |          1 |         58 |        446 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\test\bundle-optimization-test.html                      | HTML       |        604 |         10 |        116 |        730 |
+| Total                                                                                                 |            |     20,039 |      1,539 |      3,295 |     24,873 |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
