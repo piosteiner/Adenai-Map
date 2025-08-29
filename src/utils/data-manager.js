@@ -21,6 +21,9 @@ class DataManager {
         this.important = {};
         this.optional = {};
         
+        // Initialize subscribers map
+        this.subscribers = new Map();
+        
         // Track data loading states
         this.loadingStates = {
             characters: 'idle',
@@ -288,6 +291,11 @@ class DataManager {
     
     // Data subscription system
     subscribe(dataType, callback) {
+        // Ensure subscribers map exists
+        if (!this.subscribers) {
+            this.subscribers = new Map();
+        }
+        
         if (!this.subscribers.has(dataType)) {
             this.subscribers.set(dataType, new Set());
         }
@@ -307,12 +315,20 @@ class DataManager {
         
         // Return unsubscribe function
         return () => {
-            this.subscribers.get(dataType)?.delete(callback);
+            if (this.subscribers) {
+                this.subscribers.get(dataType)?.delete(callback);
+            }
         };
     }
     
     // Notify subscribers
     notifySubscribers(dataType, data) {
+        // Ensure subscribers map exists
+        if (!this.subscribers) {
+            this.subscribers = new Map();
+            Logger.debug(`⚠️ Subscribers map was not initialized, creating it now`);
+        }
+        
         const callbacks = this.subscribers.get(dataType);
         if (!callbacks) return;
         
@@ -336,15 +352,24 @@ class DataManager {
     
     // Setup event listeners for background loads
     setupEventListeners() {
+        // Ensure subscribers map is initialized
+        if (!this.subscribers) {
+            this.subscribers = new Map();
+        }
+        
         // Listen for background load completions
         ['journeys', 'reviews', 'media-library'].forEach(dataType => {
             document.addEventListener(`${dataType}Loaded`, (event) => {
-                this.storeData(dataType, event.detail.data);
-                this.loadingStates[dataType] = 'loaded';
-                this.notifySubscribers(dataType, event.detail.data);
-                this.notifyLoadingState(dataType, 'loaded');
-                
-                Logger.debug(`📡 Background loaded: ${dataType}`);
+                try {
+                    this.storeData(dataType, event.detail.data);
+                    this.loadingStates[dataType] = 'loaded';
+                    this.notifySubscribers(dataType, event.detail.data);
+                    this.notifyLoadingState(dataType, 'loaded');
+                    
+                    Logger.debug(`📡 Background loaded: ${dataType}`);
+                } catch (error) {
+                    Logger.error(`Error handling background load for ${dataType}:`, error);
+                }
             });
         });
     }
@@ -368,9 +393,11 @@ class DataManager {
             subscriberCounts: {}
         };
         
-        this.subscribers.forEach((callbacks, dataType) => {
-            summary.subscriberCounts[dataType] = callbacks.size;
-        });
+        if (this.subscribers) {
+            this.subscribers.forEach((callbacks, dataType) => {
+                summary.subscriberCounts[dataType] = callbacks.size;
+            });
+        }
         
         return summary;
     }
@@ -399,7 +426,9 @@ class DataManager {
     
     // Cleanup
     cleanup() {
-        this.subscribers.clear();
+        if (this.subscribers) {
+            this.subscribers.clear();
+        }
         DataManager.data.clear();
         DataManager.loadingPromises.clear();
         this.critical = {};

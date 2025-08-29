@@ -33,6 +33,12 @@ class SWManager {
             return null;
         }
         
+        // Check if we're in a secure context (HTTPS or localhost)
+        if (!window.isSecureContext) {
+            Logger.warning('Service Worker requires HTTPS or localhost');
+            return null;
+        }
+
         try {
             Logger.loading('🔧 Registering service worker...');
             

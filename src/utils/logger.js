@@ -75,6 +75,14 @@ class Logger {
     static warn(message, data = null) {
         console.warn(`⚠️ ${message}`, data ? data : '');
     }
+    
+    static media(message, data = null) {
+        console.log(`🎵 [Media] ${message}`, data ? data : '');
+    }
+    
+    static location(message, data = null) {
+        console.log(`📍 [Location] ${message}`, data ? data : '');
+    }
 }
 
 // Make available globally
