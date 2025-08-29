@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "b047d9dd64a0e773034a88d3fa485258c8c2b75f",
+      "action": "update",
+      "type": "character",
+      "itemName": "Eliana Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:35:23.605Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:35:23.605Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: eliana_karthright (by gm) - changed relationship to friendly"
+    },
+    {
       "commitSha": "f4a3bec74ddf06af485bdf6936b918ebb141a925",
       "action": "update",
       "type": "character",
@@ -2862,5 +2875,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:35:07.818Z"
+  "lastUpdated": "2025-08-29T20:35:23.605Z"
 }
