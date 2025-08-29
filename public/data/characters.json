@@ -665,15 +665,16 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai-admin.piogino.ch/public/images/orvil_close.png",
+      "image": "https://adenai.piogino.ch/public/images/orvil_close.png",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2025-08-29T20:42:49.715Z",
-      "updatedAt": "2025-08-29T20:42:49.715Z"
+      "updatedAt": "2025-08-29T20:50:47.241Z"
     },
     {
       "id": "ruben_karthright",
@@ -797,5 +798,5 @@
       "updatedAt": "2025-08-29T20:46:20.848Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:50:38.005Z"
+  "lastUpdated": "2025-08-29T20:50:47.241Z"
 }
