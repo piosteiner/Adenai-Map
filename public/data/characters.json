@@ -431,7 +431,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai-admin.piogino.ch/public/images/colette_close.png",
+      "image": "https://adenai.piogino.ch/public/images/colette_close.png",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -440,7 +440,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:24:46.436Z",
-      "updatedAt": "2025-08-29T20:34:44.604Z"
+      "updatedAt": "2025-08-29T20:47:21.176Z"
     },
     {
       "id": "dina_eisfeld",
@@ -793,5 +793,5 @@
       "updatedAt": "2025-08-29T20:46:20.848Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:47:14.448Z"
+  "lastUpdated": "2025-08-29T20:47:21.176Z"
 }
