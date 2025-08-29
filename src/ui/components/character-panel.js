@@ -276,7 +276,6 @@ class CharacterPanel {
             <div class="movement-actions">
                 <button id="show-all-paths" class="movement-btn">✅ Alle Pfade zeigen</button>
                 <button id="hide-all-paths" class="movement-btn">❌ Alle Pfade ausblenden</button>
-                <button id="toggle-global-clustering" class="movement-btn clustering-active">🎯 Clustering</button>
             </div>
         `;
     }
@@ -300,10 +299,6 @@ class CharacterPanel {
         
         document.getElementById('hide-all-paths')?.addEventListener('click', () => {
             this.hideAllCharacterPaths();
-        });
-        
-        document.getElementById('toggle-global-clustering')?.addEventListener('click', () => {
-            this.toggleGlobalClustering();
         });
     }
 
@@ -329,38 +324,6 @@ class CharacterPanel {
                 checkbox.checked = checked;
             }
         });
-    }
-
-    // Global clustering toggle
-    toggleGlobalClustering() {
-        const globalClusterSystem = window.adenaiMap?.systems?.globalClusterSystem;
-        if (!globalClusterSystem) {
-            console.warn('⚠️ Global cluster system not available');
-            return;
-        }
-
-        const button = document.getElementById('toggle-global-clustering');
-        if (!button) return;
-
-        const isActive = button.classList.contains('clustering-active');
-        
-        if (isActive) {
-            // Disable clustering
-            globalClusterSystem.disable();
-            button.classList.remove('clustering-active');
-            button.classList.add('clustering-inactive');
-            button.innerHTML = '🔘 Clustering';
-            button.title = 'Globales Clustering aktivieren';
-            console.log('🎯 Global clustering disabled');
-        } else {
-            // Enable clustering
-            globalClusterSystem.enable();
-            button.classList.remove('clustering-inactive');
-            button.classList.add('clustering-active');
-            button.innerHTML = '🎯 Clustering';
-            button.title = 'Globales Clustering deaktivieren';
-            console.log('🎯 Global clustering enabled');
-        }
     }
 
     // Search functionality

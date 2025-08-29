@@ -64,9 +64,6 @@ class AdenaiMap {
     async initializeSystems() {
         console.log('⚙️ Initializing core systems...');
         
-        // Initialize global clustering system
-        this.globalClusterSystem = new GlobalClusterSystem();
-        
         // Systems are already initialized via their constructors
         // We just need to register them for easier access
         this.systems = {
@@ -76,8 +73,7 @@ class AdenaiMap {
             locationsSystem: window.locationsSystem,
             locationSystem: window.locationSystem, // Add this line for new naming
             searchSystem: window.searchSystem,
-            characterPanel: window.characterPanel,
-            globalClusterSystem: this.globalClusterSystem
+            characterPanel: window.characterPanel
         };
 
         // Make location system available globally for media modal access
@@ -134,14 +130,6 @@ class AdenaiMap {
             }, 200);
             
             console.log('✅ All data loaded successfully');
-            
-            // Enable global clustering by default after a short delay
-            setTimeout(() => {
-                if (this.systems.globalClusterSystem) {
-                    this.systems.globalClusterSystem.enable();
-                    console.log('🎯 Global clustering enabled by default');
-                }
-            }, 500);
             
         } catch (error) {
             console.error('❌ Error loading map data:', error);
