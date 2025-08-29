@@ -490,8 +490,11 @@
       "id": "colette_pinet",
       "name": "Colette Pinet",
       "title": "Tochter der Pinet Familie",
-      "placeOfOrigin": "",
-      "coordinates": null,
+      "placeOfOrigin": "Nordmund",
+      "coordinates": [
+        1082,
+        967
+      ],
       "description": "",
       "image": "https://adenai.piogino.ch/public/images/colette_close.png",
       "status": "alive",
@@ -500,9 +503,19 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "currentLocation": null,
+      "currentLocation": {
+        "location": "Nordmund",
+        "date": "2025-08-29",
+        "dateStart": "2025-08-29",
+        "dateEnd": null,
+        "coordinates": [
+          1082,
+          967
+        ],
+        "notes": "Location set based on place of origin"
+      },
       "createdAt": "2025-08-29T20:24:46.436Z",
-      "updatedAt": "2025-08-29T20:47:21.176Z"
+      "updatedAt": "2025-08-29T21:01:33.199Z"
     },
     {
       "id": "dina_eisfeld",
@@ -1125,5 +1138,5 @@
       "updatedAt": "2025-08-29T20:53:20.812Z"
     }
   ],
-  "lastUpdated": "2025-08-29T21:01:11.932Z"
+  "lastUpdated": "2025-08-29T21:01:33.199Z"
 }
