@@ -149,6 +149,48 @@
 
 /* Movement popups now use character-popup styling from ui/popups.css */
 
+/* Mixed cluster styles - for clusters containing both movement and location markers */
+.movement-marker.mixed-cluster {
+    position: relative;
+}
+
+.movement-marker.mixed-cluster .location-indicator {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    background: #f59e0b;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    border: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    color: white;
+    font-weight: bold;
+    z-index: 10;
+}
+
+/* Fan location marker styles */
+.fan-location-marker {
+    transition: all 0.3s ease;
+}
+
+.fan-location-marker:hover {
+    transform: scale(1.1);
+}
+
+/* Enhanced cluster marker hover for mixed clusters */
+.movement-marker.mixed-cluster:hover {
+    transform: scale(1.05);
+}
+
+.movement-marker.mixed-cluster:hover .location-indicator {
+    background: #fbbf24;
+    transform: scale(1.1);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .movement-marker {
