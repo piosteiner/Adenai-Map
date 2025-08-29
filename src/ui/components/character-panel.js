@@ -273,11 +273,9 @@ class CharacterPanel {
 
     getMovementControlsHTML() {
         return `
-            <div class="movement-section">
-                <div class="movement-actions">
-                    <button id="show-all-paths" class="movement-btn">✅ Show All</button>
-                    <button id="hide-all-paths" class="movement-btn">❌ Hide All</button>
-                </div>
+            <div class="movement-actions">
+                <button id="show-all-paths" class="movement-btn">✅ Show All</button>
+                <button id="hide-all-paths" class="movement-btn">❌ Hide All</button>
             </div>
         `;
     }
