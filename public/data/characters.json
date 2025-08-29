@@ -557,7 +557,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai-admin.piogino.ch/public/images/jara_close.png",
+      "image": "https://adenai.piogino.ch/public/images/jara_close.png",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -566,7 +566,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:38:01.289Z",
-      "updatedAt": "2025-08-29T20:38:36.984Z"
+      "updatedAt": "2025-08-29T20:49:38.935Z"
     },
     {
       "id": "krista",
@@ -794,5 +794,5 @@
       "updatedAt": "2025-08-29T20:46:20.848Z"
     }
   ],
-  "lastUpdated": "2025-08-29T20:49:23.239Z"
+  "lastUpdated": "2025-08-29T20:49:38.935Z"
 }
