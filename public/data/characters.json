@@ -1050,7 +1050,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/ruben_Karthright.close.png",
+      "image": "https://adenai.piogino.ch/public/images/ruben_karthright.close.png",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1059,7 +1059,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:43:21.763Z",
-      "updatedAt": "2025-08-29T21:14:45.810Z"
+      "updatedAt": "2025-08-29T21:15:04.783Z"
     },
     {
       "id": "sorin_karthright",
@@ -1276,5 +1276,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-29T21:14:45.810Z"
+  "lastUpdated": "2025-08-29T21:15:04.783Z"
 }
