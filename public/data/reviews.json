@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "fb904275bf7f52d594c20434b635f1b338ae9b75",
+      "action": "update",
+      "type": "character",
+      "itemName": "Krista",
+      "user": "gm",
+      "timestamp": "2025-08-29T20:49:58.416Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T20:49:58.416Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: krista (by gm) - updated image"
+    },
+    {
       "commitSha": "d594c347e62c1b7797d7c340405047664d7fc0cd",
       "action": "update",
       "type": "character",
@@ -3356,5 +3369,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T20:49:48.504Z"
+  "lastUpdated": "2025-08-29T20:49:58.417Z"
 }
