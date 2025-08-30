@@ -788,12 +788,20 @@ class MovementTimeline {
     renderTimeline() {
         // Prevent multiple simultaneous renders
         if (this.renderScheduled) return;
+        
+        // Performance check: Skip render if browser is busy
+        if (performance.now() - (this.lastRenderTime || 0) < 16) {
+            // Too soon since last render, skip this one
+            return;
+        }
+        
         this.renderScheduled = true;
 
         // Use requestAnimationFrame for smooth rendering
         requestAnimationFrame(() => {
             this.performRender();
             this.renderScheduled = false;
+            this.lastRenderTime = performance.now();
         });
     }
 
@@ -806,34 +814,46 @@ class MovementTimeline {
             return;
         }
 
-        // Calculate timeline dimensions and positions (only if not cached)
-        if (!this.timelineData || this.zoomLevel !== this.lastZoomLevel) {
-            this.calculateTimelineData();
+        // Calculate timeline dimensions and positions (only if not cached or zoom changed significantly)
+        const zoomChanged = !this.lastZoomLevel || Math.abs(this.zoomLevel - this.lastZoomLevel) > 0.1;
+        if (!this.timelineData || zoomChanged) {
+            this.measurePerformance('calculateTimelineData', () => {
+                this.calculateTimelineData();
+            });
             this.lastZoomLevel = this.zoomLevel;
         }
         
-        // Use efficient rendering methods
-        this.renderTimeScaleEfficient(scale);
-        this.renderEventsEfficient(track);
+        // Use efficient rendering methods with performance monitoring
+        this.measurePerformance('renderTimeScale', () => {
+            this.renderTimeScaleEfficient(scale);
+        });
+        
+        this.measurePerformance('renderEvents', () => {
+            this.renderEventsEfficient(track);
+        });
     }
 
     calculateTimelineData() {
         const movements = this.vsuzHData.movementHistory;
         
-        // Parse dates and find min/max
-        this.timelineData = movements.map((movement, index) => {
-            const parsedDate = this.parseDate(movement.date);
-            return {
-                ...movement,
-                parsedDate,
-                index
-            };
-        }).filter(item => item.parsedDate); // Remove invalid dates
+        // Parse dates and find min/max (cache parsed dates)
+        if (!this.cachedTimelineData) {
+            this.cachedTimelineData = movements.map((movement, index) => {
+                const parsedDate = this.parseDate(movement.date);
+                return {
+                    ...movement,
+                    parsedDate,
+                    index
+                };
+            }).filter(item => item.parsedDate); // Remove invalid dates
 
-        if (this.timelineData.length === 0) return;
+            if (this.cachedTimelineData.length === 0) return;
 
-        // Sort by date
-        this.timelineData.sort((a, b) => a.parsedDate - b.parsedDate);
+            // Sort by date (only once)
+            this.cachedTimelineData.sort((a, b) => a.parsedDate - b.parsedDate);
+        }
+        
+        this.timelineData = this.cachedTimelineData;
 
         // Find exact date range - start at first event, end at last event
         this.minDate = new Date(this.timelineData[0].parsedDate);
@@ -859,8 +879,8 @@ class MovementTimeline {
         this.pixelsPerMs = this.timelineWidth / (this.maxDate - this.minDate);
         
         // Current zoom and pan state
-        this.zoomLevel = 1;
-        this.panOffset = 0;
+        this.zoomLevel = this.zoomLevel || 1;
+        this.panOffset = this.panOffset || 0;
     }
 
     parseDate(dateString) {
@@ -891,34 +911,43 @@ class MovementTimeline {
 
         const totalDays = Math.ceil((this.maxDate - this.minDate) / (24 * 60 * 60 * 1000)) + 1;
         const dayWidth = this.timelineWidth / totalDays;
+        const effectiveDayWidth = dayWidth * (this.zoomLevel || 1);
         
-        // Create different types of markers based on zoom level
+        // Performance: Only generate markers that will be visible and useful
         const markers = [];
-        const startDate = new Date(this.minDate);
-        const endDate = new Date(this.maxDate);
         
-        // Generate daily markers (short lines)
-        this.generateDayMarkers(markers, startDate, endDate, dayWidth);
-        
-        // Generate weekly markers (longer lines)
-        this.generateWeekMarkers(markers, startDate, endDate, dayWidth);
-        
-        // Generate monthly markers (month change indicators)
-        this.generateMonthMarkers(markers, startDate, endDate, dayWidth);
+        // Determine what level of detail to show based on zoom
+        if (effectiveDayWidth >= 20) {
+            // Zoomed in enough to show daily markers
+            this.generateOptimizedDayMarkers(markers, effectiveDayWidth);
+        } else if (effectiveDayWidth >= 8) {
+            // Medium zoom: show weekly markers with some daily labels
+            this.generateOptimizedWeekMarkers(markers, effectiveDayWidth);
+        } else {
+            // Zoomed out: only show monthly markers
+            this.generateOptimizedMonthMarkers(markers);
+        }
 
         // Efficiently update existing elements or create new ones
         this.updateScaleElements(scale, markers);
     }
 
-    generateDayMarkers(markers, startDate, endDate, dayWidth) {
+    generateOptimizedDayMarkers(markers, effectiveDayWidth) {
+        const startDate = new Date(this.minDate);
+        const endDate = new Date(this.maxDate);
         let currentDate = new Date(startDate);
+        
+        // Limit to reasonable number of markers for performance
+        const maxDayMarkers = 200;
+        const totalDays = Math.ceil((endDate - startDate) / (24 * 60 * 60 * 1000));
+        const skipDays = Math.max(1, Math.floor(totalDays / maxDayMarkers));
         
         while (currentDate <= endDate) {
             const position = (currentDate - this.minDate) * this.pixelsPerMs;
-            const dayOfWeek = currentDate.getDay(); // 0 = Sunday, 1 = Monday, etc.
+            const dayOfWeek = currentDate.getDay();
             
-            // Only show labels on Monday (1), Wednesday (3), and Saturday (6)
-            const showLabel = (dayOfWeek === 1 || dayOfWeek === 3 || dayOfWeek === 6);
+            // Show labels only on Monday, Wednesday, Saturday and only if spacing allows
+            const showLabel = (dayOfWeek === 1 || dayOfWeek === 3 || dayOfWeek === 6) && effectiveDayWidth >= 40;
             
             markers.push({
                 position,
@@ -929,37 +958,44 @@ class MovementTimeline {
                 className: 'day-marker'
             });
             
-            currentDate.setDate(currentDate.getDate() + 1);
+            currentDate.setDate(currentDate.getDate() + skipDays);
         }
     }
 
-    generateWeekMarkers(markers, startDate, endDate, dayWidth) {
+    generateOptimizedWeekMarkers(markers, effectiveDayWidth) {
+        const startDate = new Date(this.minDate);
+        const endDate = new Date(this.maxDate);
         let currentDate = new Date(startDate);
         
         // Find the first Monday
-        while (currentDate.getDay() !== 1) {
+        while (currentDate.getDay() !== 1 && currentDate <= endDate) {
             currentDate.setDate(currentDate.getDate() + 1);
         }
         
         while (currentDate <= endDate) {
             const position = (currentDate - this.minDate) * this.pixelsPerMs;
             
+            // Show weekly markers
             markers.push({
                 position,
                 date: new Date(currentDate),
                 type: 'week',
-                showLabel: false,
+                showLabel: effectiveDayWidth >= 15,
                 height: '15px',
                 className: 'week-marker'
             });
             
             currentDate.setDate(currentDate.getDate() + 7);
         }
+        
+        // Add monthly markers too
+        this.generateOptimizedMonthMarkers(markers);
     }
 
-    generateMonthMarkers(markers, startDate, endDate, dayWidth) {
-        let currentDate = new Date(startDate);
-        currentDate.setDate(1); // First day of the month
+    generateOptimizedMonthMarkers(markers) {
+        const startDate = new Date(this.minDate);
+        const endDate = new Date(this.maxDate);
+        let currentDate = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
         
         while (currentDate <= endDate) {
             const position = (currentDate - this.minDate) * this.pixelsPerMs;
@@ -980,10 +1016,24 @@ class MovementTimeline {
     }
 
     updateScaleElements(scale, markers) {
-        // Remove excess elements
-        while (this.scaleElements.length > markers.length) {
-            const element = this.scaleElements.pop();
-            element.remove();
+        // Performance limit: Cap the number of scale markers
+        const maxMarkers = 150;
+        if (markers.length > maxMarkers) {
+            // Keep monthly markers and reduce others
+            const monthMarkers = markers.filter(m => m.type === 'month');
+            const otherMarkers = markers.filter(m => m.type !== 'month');
+            const reducedOthers = otherMarkers.filter((_, index) => index % Math.ceil(otherMarkers.length / (maxMarkers - monthMarkers.length)) === 0);
+            markers = [...monthMarkers, ...reducedOthers].sort((a, b) => a.position - b.position);
+        }
+
+        // Remove excess elements efficiently
+        const excessCount = this.scaleElements.length - markers.length;
+        if (excessCount > 0) {
+            // Remove in batches for better performance
+            const toRemove = this.scaleElements.splice(markers.length, excessCount);
+            const fragment = document.createDocumentFragment();
+            toRemove.forEach(element => fragment.appendChild(element));
+            // Fragment removes all elements at once when it goes out of scope
         }
 
         // Update existing and create new elements
@@ -991,32 +1041,47 @@ class MovementTimeline {
             let element = this.scaleElements[index];
             
             if (!element) {
-                // Create new element
+                // Create new element efficiently
                 element = document.createElement('div');
-                const label = document.createElement('div');
-                label.className = 'scale-label';
-                element.appendChild(label);
+                element.innerHTML = '<div class="scale-label"></div>';
                 scale.appendChild(element);
                 this.scaleElements.push(element);
             }
 
-            // Update element properties based on marker type
-            element.className = `scale-marker ${marker.className} ${marker.type}`;
-            element.style.left = marker.position + 'px';
-            element.style.height = marker.height;
+            // Update element properties using efficient property setting
+            if (element.currentMarkerType !== marker.type) {
+                element.className = `scale-marker ${marker.className} ${marker.type}`;
+                element.style.height = marker.height;
+                element.currentMarkerType = marker.type;
+            }
             
-            // Update label content
-            const label = element.firstChild;
+            // Only update position if it changed
+            const newLeft = marker.position + 'px';
+            if (element.style.left !== newLeft) {
+                element.style.left = newLeft;
+            }
+            
+            // Update label efficiently
+            const label = element.firstElementChild;
             if (marker.showLabel) {
-                label.textContent = this.formatMarkerDate(marker.date, marker.type);
-                label.style.display = 'block';
+                const newText = this.formatMarkerDate(marker.date, marker.type);
+                if (label.textContent !== newText) {
+                    label.textContent = newText;
+                }
+                if (label.style.display === 'none') {
+                    label.style.display = 'block';
+                }
             } else {
-                label.style.display = 'none';
+                if (label.style.display !== 'none') {
+                    label.style.display = 'none';
+                }
             }
             
             // Special styling for month markers
-            if (marker.isMonthChange) {
+            if (marker.isMonthChange && !element.classList.contains('month-change')) {
                 element.classList.add('month-change');
+            } else if (!marker.isMonthChange && element.classList.contains('month-change')) {
+                element.classList.remove('month-change');
             }
         });
     }
@@ -1370,28 +1435,29 @@ class MovementTimeline {
         // Zoom functionality with mouse wheel - heavily optimized
         let zoomTimeout = null;
         let lastZoomTime = 0;
+        let pendingZoomLevel = this.zoomLevel || 1;
         
         timelineContainer.addEventListener('wheel', (e) => {
             e.preventDefault();
             
             const now = Date.now();
-            if (now - lastZoomTime < 16) return; // Limit to ~60fps
+            if (now - lastZoomTime < 32) return; // Limit to ~30fps for zoom
             lastZoomTime = now;
             
             if (zoomTimeout) clearTimeout(zoomTimeout);
             
             const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
-            const newZoomLevel = Math.max(0.5, Math.min(3, this.zoomLevel * zoomFactor));
+            pendingZoomLevel = Math.max(0.5, Math.min(3, pendingZoomLevel * zoomFactor));
             
-            // Only re-render if zoom level actually changed significantly
-            if (Math.abs(newZoomLevel - this.zoomLevel) > 0.01) {
-                this.zoomLevel = newZoomLevel;
+            // Only re-render if zoom level changed significantly
+            if (Math.abs(pendingZoomLevel - this.zoomLevel) > 0.05) {
+                this.zoomLevel = pendingZoomLevel;
                 
-                // Debounce the expensive re-render
+                // Aggressive debounce for expensive re-render
                 zoomTimeout = setTimeout(() => {
                     this.renderTimeline();
                     zoomTimeout = null;
-                }, 100); // Increased debounce time
+                }, 150); // Increased debounce time
             }
         });
 
