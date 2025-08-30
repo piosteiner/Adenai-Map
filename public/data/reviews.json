@@ -2,6 +2,58 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "9e0af246cee95a1690e58f2c159d6cc53e3d8d53",
+      "action": "update",
+      "type": "character",
+      "itemName": "Ruben Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-29T21:15:30.410Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T21:15:30.410Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: ruben_karthright (by gm) - updated image"
+    },
+    {
+      "commitSha": "9fd96edb5eec1cbb785a56cfe6a5f5b540858a56",
+      "action": "update",
+      "type": "character",
+      "itemName": "Ruben Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-29T21:15:05.742Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T21:15:05.743Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: ruben_karthright (by gm) - updated image"
+    },
+    {
+      "commitSha": "1c3f757f5872ff3185687ef8d0be62f0e392671e",
+      "action": "update",
+      "type": "character",
+      "itemName": "Ruben Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-29T21:14:46.684Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T21:14:46.684Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: ruben_karthright (by gm) - updated image"
+    },
+    {
+      "commitSha": "cbb5787cd3241b4fe9a6014f624093a723f68dd2",
+      "action": "update",
+      "type": "character",
+      "itemName": "Ruben Karthright",
+      "user": "gm",
+      "timestamp": "2025-08-29T21:14:14.585Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-29T21:14:14.585Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: ruben_karthright (by gm) - updated image"
+    },
+    {
       "commitSha": "fc5e38009aa0f98514da1db071a723b06c702640",
       "action": "update",
       "type": "character",
@@ -3798,5 +3850,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T21:03:57.401Z"
+  "lastUpdated": "2025-08-29T21:15:30.410Z"
 }
