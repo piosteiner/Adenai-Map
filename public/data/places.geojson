@@ -247,8 +247,8 @@
         "description": "Ein grosser Handelsposten im Süden von Valaris.",
         "contentUrl": null,
         "image": "https://adenai.piogino.ch/public/images/basapo_bottom.jpg",
-        "region": "",
-        "type": "",
+        "region": "upeto",
+        "type": "city",
         "visited": true
       },
       "geometry": {
