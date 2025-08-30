@@ -26,6 +26,7 @@ class LocationSystem {
         
         // Location region definitions with German labels
         this.locationRegions = {
+            // English keys (keeping for backward compatibility)
             north_adenai: { value: 'north_adenai', label: 'Nord-Adenai' },
             eastern_adenai: { value: 'eastern_adenai', label: 'Ost-Adenai' },
             south_adenai: { value: 'south_adenai', label: 'Süd-Adenai' },
@@ -44,6 +45,27 @@ class LocationSystem {
             heaven: { value: 'heaven', label: 'Himmel' },
             underdark: { value: 'underdark', label: 'Underdark' },
             feywild: { value: 'feywild', label: 'Feywild' },
+            
+            // German keys to match GeoJSON data
+            'Nord-Adenai': { value: 'nord_adenai', label: 'Nord-Adenai' },
+            'Ost-Adenai': { value: 'ost_adenai', label: 'Ost-Adenai' },
+            'Süd-Adenai': { value: 'sued_adenai', label: 'Süd-Adenai' },
+            'West-Adenai': { value: 'west_adenai', label: 'West-Adenai' },
+            'Valaris Region': { value: 'valaris_region', label: 'Valaris Region' },
+            'Upeto': { value: 'upeto', label: 'Upeto' },
+            'Harak': { value: 'harak', label: 'Harak' },
+            'Tua Danar': { value: 'tua_danar', label: 'Tua Danar' },
+            'Rena Region': { value: 'rena_region', label: 'Rena Region' },
+            'Arkane Höhen': { value: 'arcane_heights', label: 'Arkane Höhen' },
+            'Sonnenspitzen': { value: 'sun_peaks', label: 'Sonnenspitzen' },
+            'Zinnober Felder': { value: 'cinnabar_fields', label: 'Zinnober Felder' },
+            'Ewige Donnerklüfte': { value: 'ewige_donnerkluefte', label: 'Ewige Donnerklüfte' },
+            'Östliche See': { value: 'east_sea', label: 'Östliche See' },
+            'Westliche See': { value: 'west_sea', label: 'Westliche See' },
+            'Himmel': { value: 'heaven', label: 'Himmel' },
+            'Underdark': { value: 'underdark', label: 'Underdark' },
+            'Feywild': { value: 'feywild', label: 'Feywild' },
+            
             unknown: { value: 'unknown', label: '❗ Error contact the owner' },
             other: { value: 'other', label: 'Andere' }
         };
