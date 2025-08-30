@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Ice Ice Mephit",
+      "location": "Südlicher Ausläufer des Torftgarder Waldes",
       "coordinates": [
-        1298,
-        1061
+        1362,
+        1050
       ],
       "description": "",
       "image": "",
@@ -272,34 +272,34 @@
         },
         {
           "id": "movement_1756140699063",
-          "date": "5663-06-08",
-          "dateStart": "5663-06-08",
-          "dateEnd": "5663-06-12",
-          "location": "Toftgard",
+          "date": "5663-06-12",
+          "dateStart": "5663-06-12",
+          "dateEnd": "5663-06-19",
+          "location": "Südlicher Ausläufer des Torftgarder Waldes",
           "coordinates": [
-            1392,
-            1083
+            1362,
+            1050
           ],
-          "notes": "Reise durch das Sonnengipfel Gebirfe durch den letzten Schnee des Winters.",
-          "type": "stay",
-          "isCustomLocation": false,
+          "notes": "Die Gruppe traff auf einen verletzten Halbelfen, Ellas Nebesi, und einen älteren Boten, Oliver.\nEllas war vergiftet und sie übernahmen ihn von Oliver, welcher in die entgegengesetzte Richtung reiste. Die VsuzH nahmen Ellas mit und machten noch eine Giftpflanze platt.",
+          "type": "travel",
+          "isCustomLocation": true,
           "createdAt": "2025-08-25T16:51:39.063Z",
           "movement_nr": 6,
-          "updatedAt": "2025-08-30T13:07:48.489Z"
+          "updatedAt": "2025-08-30T13:16:56.784Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T13:07:48.489Z",
+      "updatedAt": "2025-08-30T13:16:56.784Z",
       "currentLocation": {
-        "date": "5663-06-08",
-        "dateStart": "5663-06-08",
-        "dateEnd": "5663-06-12",
-        "location": "Ice Ice Mephit",
+        "date": "5663-06-12",
+        "dateStart": "5663-06-12",
+        "dateEnd": "5663-06-19",
+        "location": "Südlicher Ausläufer des Torftgarder Waldes",
         "coordinates": [
-          1298,
-          1061
+          1362,
+          1050
         ],
-        "notes": "Reise durch das Sonnenspitzen Gebirge und den letzten Schnee des Winters. Die gingen einem Yeti aus dem Weg und hatten eine friedliche Begegnung mit Ice Mephits."
+        "notes": "Die Gruppe traff auf einen verletzten Halbelfen, Ellas Nebesi, und einen älteren Boten, Oliver.\nEllas war vergiftet und sie übernahmen ihn von Oliver, welcher in die entgegengesetzte Richtung reiste. Die VsuzH nahmen Ellas mit und machten noch eine Giftpflanze platt."
       }
     },
     {
@@ -1291,5 +1291,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T13:07:48.489Z"
+  "lastUpdated": "2025-08-30T13:16:56.784Z"
 }
