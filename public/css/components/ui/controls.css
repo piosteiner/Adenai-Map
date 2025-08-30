@@ -66,9 +66,47 @@
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   /* Add inner highlight like real cluster markers */
   background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+}
+
+/* Cluster Count Text inside the circle */
+.cluster-count {
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  line-height: 1;
+}
+
+/* Location Indicator - Small orange dot */
+.location-indicator {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, #ff6b24 0%, #ff8a50 100%);
+  border: 2px solid white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* Location Count Text inside the orange dot */
+.location-count {
+  font-size: 8px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  line-height: 1;
 }
 
 /* Status Text */
@@ -88,6 +126,15 @@
 
 .map-control-btn:not(.active) .cluster-dot {
   background: linear-gradient(135deg, #f44336 0%, #ef5350 100%);
+}
+
+/* Opacity reduction for "off" state */
+.map-control-btn:not(.active) {
+  opacity: 0.8;
+}
+
+.map-control-btn:not(.active):hover {
+  opacity: 0.9;
 }
 
 /* Visual connection line to panel */
@@ -151,6 +198,22 @@
     border: 2px solid white;
   }
   
+  .cluster-count {
+    font-size: 9px;
+  }
+  
+  .location-indicator {
+    width: 14px;
+    height: 14px;
+    border: 1px solid white;
+    bottom: -1px;
+    right: -1px;
+  }
+  
+  .location-count {
+    font-size: 7px;
+  }
+  
   .cluster-status-text {
     font-size: 11px;
   }
@@ -176,6 +239,22 @@
     width: 20px;
     height: 20px;
     border: 2px solid white;
+  }
+  
+  .cluster-count {
+    font-size: 8px;
+  }
+  
+  .location-indicator {
+    width: 12px;
+    height: 12px;
+    border: 1px solid white;
+    bottom: -1px;
+    right: -1px;
+  }
+  
+  .location-count {
+    font-size: 6px;
   }
   
   .cluster-status-text {
