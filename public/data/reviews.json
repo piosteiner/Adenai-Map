@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "bfe800a67c897d83296fdd9a85e6854072e85482",
+      "action": "update",
+      "type": "location",
+      "itemName": "Barbenfall",
+      "user": "gm",
+      "timestamp": "2025-08-30T18:12:57.358Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T18:12:57.358Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Barbenfall (by gm) - updated description, updated region"
+    },
+    {
       "commitSha": "dd11ada932c242f692c71229866aef269c9d1e28",
       "action": "update",
       "type": "location",
@@ -4734,5 +4747,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T17:26:11.938Z"
+  "lastUpdated": "2025-08-30T18:12:57.359Z"
 }
