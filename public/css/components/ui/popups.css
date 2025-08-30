@@ -127,13 +127,34 @@
 }
 
 /* Location popup specific styling */
-.custom-popup .popup-title {
-  font-size: 18px;
-  font-weight: bold;
+.custom-popup .popup-header {
   margin-bottom: 12px;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--dropdown-border);
+}
+
+.custom-popup .popup-title {
+  font-size: 18px;
+  font-weight: bold;
   color: #6366f1;
+  margin: 0;
+}
+
+.custom-popup .popup-title-with-image {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.custom-popup .popup-title-with-image .popup-title {
+  flex: 1;
+  margin: 0;
+}
+
+.custom-popup .popup-title-with-image .popup-image-container {
+  flex-shrink: 0;
+  margin: 0;
 }
 
 .custom-popup .popup-desc {
@@ -166,18 +187,17 @@
   color: #aaa;
 }
 
-/* Location image preview */
+/* Location image preview - updated for title placement */
 .popup-image-container {
-  margin: 10px 0;
   text-align: center;
 }
 
 .popup-location-image {
-  max-width: 100%;
-  max-height: 120px;
+  max-width: 80px;
+  max-height: 60px;
   width: auto;
   height: auto;
-  border-radius: 8px;
+  border-radius: 6px;
   border: 2px solid var(--dropdown-border);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
