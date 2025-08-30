@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "c66e66874c2facc457568b2e52024a135808cd0d",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T14:35:15.261Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T14:35:15.261Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Torftgarder Forst (5663-06-27)"
+    },
+    {
       "commitSha": "cdbd7f0b28ce660d3fe047a4aa6696d1c8925e00",
       "action": "update",
       "type": "character",
@@ -4149,5 +4162,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T14:34:22.140Z"
+  "lastUpdated": "2025-08-30T14:35:15.261Z"
 }
