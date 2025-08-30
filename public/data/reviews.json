@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "17b93970f59d77f075d36ebb409e6c305a30363f",
+      "action": "update",
+      "type": "location",
+      "itemName": "Erhabene See",
+      "user": "gm",
+      "timestamp": "2025-08-30T22:32:04.446Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T22:32:04.446Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Erhabene See (by gm) - Updated location details"
+    },
+    {
       "commitSha": "0da0a695b1e5ce32e4268c9936cb3478a6f4adf6",
       "action": "create",
       "type": "location",
@@ -5189,5 +5202,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T22:22:14.211Z"
+  "lastUpdated": "2025-08-30T22:32:04.446Z"
 }
