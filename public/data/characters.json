@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Unser fliegendes Boot",
+      "location": "Platsch! Wieder auf dem Meer",
       "coordinates": [
         2275,
-        992
+        825
       ],
       "description": "",
       "image": "",
@@ -689,18 +689,34 @@
           "isCustomLocation": true,
           "createdAt": "2025-08-30T15:23:30.993Z",
           "updatedAt": "2025-08-30T15:24:39.130Z"
+        },
+        {
+          "id": "movement_1756567538109",
+          "movement_nr": 31,
+          "date": "5663-08-15",
+          "dateStart": "5663-08-15",
+          "dateEnd": null,
+          "location": "Platsch! Wieder auf dem Meer",
+          "coordinates": [
+            2275,
+            825
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T15:25:38.109Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T15:24:39.130Z",
+      "updatedAt": "2025-08-30T15:25:38.109Z",
       "currentLocation": {
         "date": "5663-08-15",
         "dateStart": "5663-08-15",
         "dateEnd": null,
-        "location": "Unser fliegendes Boot",
+        "location": "Platsch! Wieder auf dem Meer",
         "coordinates": [
           2275,
-          992
+          825
         ],
         "notes": ""
       }
@@ -1694,5 +1710,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T15:24:39.130Z"
+  "lastUpdated": "2025-08-30T15:25:38.109Z"
 }
