@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Aufs Meer hinaus",
+      "location": "Motu Motu",
       "coordinates": [
-        1710,
-        989
+        2005,
+        1025
       ],
       "description": "",
       "image": "",
@@ -591,18 +591,34 @@
           "type": "travel",
           "isCustomLocation": true,
           "createdAt": "2025-08-30T15:02:20.304Z"
+        },
+        {
+          "id": "movement_1756566224810",
+          "movement_nr": 25,
+          "date": "5663-08-08",
+          "dateStart": "5663-08-08",
+          "dateEnd": "5663-08-13",
+          "location": "Motu Motu",
+          "coordinates": [
+            2005,
+            1025
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:03:44.810Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T15:02:20.304Z",
+      "updatedAt": "2025-08-30T15:03:44.810Z",
       "currentLocation": {
         "date": "5663-08-08",
         "dateStart": "5663-08-08",
-        "dateEnd": null,
-        "location": "Aufs Meer hinaus",
+        "dateEnd": "5663-08-13",
+        "location": "Motu Motu",
         "coordinates": [
-          1710,
-          989
+          2005,
+          1025
         ],
         "notes": ""
       }
@@ -1596,5 +1612,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T15:02:20.305Z"
+  "lastUpdated": "2025-08-30T15:03:44.810Z"
 }
