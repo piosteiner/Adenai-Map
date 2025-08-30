@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Torftgarder Forst",
+      "location": "Fitchers Turm",
       "coordinates": [
-        1310,
-        1094
+        1344,
+        1128
       ],
       "description": "",
       "image": "",
@@ -318,20 +318,36 @@
           "type": "travel",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T13:23:43.428Z"
+        },
+        {
+          "id": "movement_1756560288939",
+          "movement_nr": 9,
+          "date": "5663-06-22",
+          "dateStart": "5663-06-22",
+          "dateEnd": "5663-06-23",
+          "location": "Fitchers Turm",
+          "coordinates": [
+            1344,
+            1128
+          ],
+          "notes": "Die VsuzH finden den Turm von Fitcher.",
+          "type": "travel",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T13:24:48.939Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T13:23:43.428Z",
+      "updatedAt": "2025-08-30T13:24:48.939Z",
       "currentLocation": {
-        "date": "5663-06-21",
-        "dateStart": "5663-06-21",
-        "dateEnd": "5663-06-22",
-        "location": "Torftgarder Forst",
+        "date": "5663-06-22",
+        "dateStart": "5663-06-22",
+        "dateEnd": "5663-06-23",
+        "location": "Fitchers Turm",
         "coordinates": [
-          1310,
-          1094
+          1344,
+          1128
         ],
-        "notes": "Mit Orren auf den Spuren der merkwürdigen Monster."
+        "notes": "Die VsuzH finden den Turm von Fitcher."
       }
     },
     {
@@ -1323,5 +1339,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T13:23:43.428Z"
+  "lastUpdated": "2025-08-30T13:24:48.939Z"
 }
