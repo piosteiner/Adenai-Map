@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Ruine von Zurak'thar",
+      "location": "Fitchers Turm",
       "coordinates": [
-        1291,
-        1163
+        1344,
+        1128
       ],
       "description": "",
       "image": "",
@@ -350,20 +350,36 @@
           "type": "mission",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T14:32:47.757Z"
+        },
+        {
+          "id": "movement_1756564461302",
+          "movement_nr": 11,
+          "date": "5663-06-25",
+          "dateStart": "5663-06-25",
+          "dateEnd": "5663-06-27",
+          "location": "Fitchers Turm",
+          "coordinates": [
+            1344,
+            1128
+          ],
+          "notes": "Rast und Lernen bei Fitcher",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:34:21.302Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T14:32:47.757Z",
+      "updatedAt": "2025-08-30T14:34:21.302Z",
       "currentLocation": {
-        "date": "5663-06-24",
-        "dateStart": "5663-06-24",
-        "dateEnd": "5663-06-25",
-        "location": "Ruine von Zurak'thar",
+        "date": "5663-06-25",
+        "dateStart": "5663-06-25",
+        "dateEnd": "5663-06-27",
+        "location": "Fitchers Turm",
         "coordinates": [
-          1291,
-          1163
+          1344,
+          1128
         ],
-        "notes": ""
+        "notes": "Rast und Lernen bei Fitcher"
       }
     },
     {
@@ -1355,5 +1371,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T14:32:47.757Z"
+  "lastUpdated": "2025-08-30T14:34:21.302Z"
 }
