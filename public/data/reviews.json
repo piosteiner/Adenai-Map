@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "1816179a595046ce36e2dc797dc6be4451c68e3f",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T14:47:48.721Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T14:47:48.721Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Zur Prallen Traube (5663-07-22)"
+    },
+    {
       "commitSha": "d159f96ab4c595d254857318681cf83ec4b311a0",
       "action": "update",
       "type": "character",
@@ -4240,5 +4253,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T14:47:12.092Z"
+  "lastUpdated": "2025-08-30T14:47:48.721Z"
 }
