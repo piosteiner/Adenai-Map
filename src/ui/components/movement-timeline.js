@@ -1,16 +1,20 @@
-// movement-timeline.js - VsuzH Movement Timeline Component
-// Displays a horizontal timeline of VsuzH's movement history at the bottom of the screen
+// movement-timeline.js - Lightweight SVG-based VsuzH Movement Timeline
+// High-performance approach using SVG instead of heavy DOM manipulation
 
 class MovementTimeline {
     constructor() {
         this.timeline = null;
         this.vsuzHData = null;
         this.isVisible = true;
-        this.timelineElements = null; // Cache DOM elements
-        this.eventElements = []; // Cache event elements
-        this.scaleElements = []; // Cache scale elements
-        this.renderScheduled = false; // Prevent multiple renders
-        this.isInitialized = false; // Track initialization state
+        this.isInitialized = false;
+        this.svgTimeline = null;
+        this.timelineData = null;
+        
+        // Performance settings
+        this.zoomLevel = 1;
+        this.panOffset = 0;
+        this.minTimelineWidth = 2000;
+        this.maxTimelineWidth = 8000;
         
         // Wait for movement markers to be loaded before initializing
         this.waitForMovementMarkers();
