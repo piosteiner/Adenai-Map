@@ -255,34 +255,34 @@
         },
         {
           "id": "movement_1756140699063",
-          "date": "5663-06-20",
-          "dateStart": "5663-06-20",
-          "dateEnd": "5663-06-25",
+          "date": "5663-06-08",
+          "dateStart": "5663-06-08",
+          "dateEnd": "5663-06-12",
           "location": "Toftgard",
           "coordinates": [
             1392,
             1083
           ],
-          "notes": "Test übernachtung in toftgard",
+          "notes": "Reise durch das Sonnengipfel Gebirfe durch den letzten Schnee des Winters.",
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-25T16:51:39.063Z",
           "movement_nr": 5,
-          "updatedAt": "2025-08-30T12:40:39.475Z"
+          "updatedAt": "2025-08-30T13:01:31.495Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T12:57:47.338Z",
+      "updatedAt": "2025-08-30T13:01:31.495Z",
       "currentLocation": {
-        "date": "5663-06-20",
-        "dateStart": "5663-06-20",
-        "dateEnd": "5663-06-25",
+        "date": "5663-06-08",
+        "dateStart": "5663-06-08",
+        "dateEnd": "5663-06-12",
         "location": "Toftgard",
         "coordinates": [
           1392,
           1083
         ],
-        "notes": "Test übernachtung in toftgard"
+        "notes": "Reise durch das Sonnengipfel Gebirfe durch den letzten Schnee des Winters."
       }
     },
     {
@@ -1274,5 +1274,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T12:57:47.338Z"
+  "lastUpdated": "2025-08-30T13:01:31.495Z"
 }
