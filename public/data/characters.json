@@ -188,18 +188,18 @@
         },
         {
           "id": "movement_1756076882170",
-          "date": "5663-06-04",
-          "location": "Nice Custom Lococo",
+          "date": "5663-06-03",
+          "location": "Pilz Buster",
           "coordinates": [
             1264,
             1008
           ],
-          "notes": "",
+          "notes": "Die Höhle von Goldira Erzschub, das Erz und die Leichen der Minenarbeiter*innen waren leider von Pilzen befallen, was bei letzteren zu aggressiven Tendenzen führte. Die Monster wurden besiegt, aber das Myzel konnte nicht vollständig entfernt werden.",
           "type": "mission",
           "createdAt": "2025-08-24T23:08:02.170Z",
           "movement_nr": 1,
-          "updatedAt": "2025-08-30T11:56:20.266Z",
-          "dateStart": "5663-06-04",
+          "updatedAt": "2025-08-30T12:02:12.209Z",
+          "dateStart": "5663-06-03",
           "dateEnd": null,
           "isCustomLocation": true
         },
@@ -270,7 +270,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T11:57:06.246Z",
+      "updatedAt": "2025-08-30T12:02:12.209Z",
       "currentLocation": {
         "date": "5663-06-20",
         "dateStart": "5663-06-20",
@@ -1272,5 +1272,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T11:57:06.246Z"
+  "lastUpdated": "2025-08-30T12:02:12.209Z"
 }
