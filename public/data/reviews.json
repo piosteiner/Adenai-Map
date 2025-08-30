@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ccc4ac66fe33ecf8621f4654e5dab1460f850934",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T15:20:09.863Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T15:20:09.863Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Luvatu entry (5663-08-13 to 5663-08-14)"
+    },
+    {
       "commitSha": "638786e97165c105c7728a6dc23aa88b1bf48c27",
       "action": "update",
       "type": "character",
@@ -4500,5 +4513,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T15:19:39.960Z"
+  "lastUpdated": "2025-08-30T15:20:09.863Z"
 }
