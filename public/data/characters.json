@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Zur Prallen Traube",
+      "location": "Bootsfahrt auf dem Adenui - III",
       "coordinates": [
-        1481,
-        1053
+        1506,
+        1060
       ],
       "description": "",
       "image": "",
@@ -496,18 +496,34 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T14:48:33.715Z"
+        },
+        {
+          "id": "movement_1756565390091",
+          "movement_nr": 20,
+          "date": "5663-07-23",
+          "dateStart": "5663-07-23",
+          "dateEnd": null,
+          "location": "Bootsfahrt auf dem Adenui - III",
+          "coordinates": [
+            1506,
+            1060
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T14:49:50.091Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T14:48:33.715Z",
+      "updatedAt": "2025-08-30T14:49:50.091Z",
       "currentLocation": {
-        "date": "5663-07-22",
-        "dateStart": "5663-07-22",
-        "dateEnd": "5663-07-23",
-        "location": "Zur Prallen Traube",
+        "date": "5663-07-23",
+        "dateStart": "5663-07-23",
+        "dateEnd": null,
+        "location": "Bootsfahrt auf dem Adenui - III",
         "coordinates": [
-          1481,
-          1053
+          1506,
+          1060
         ],
         "notes": ""
       }
@@ -1501,5 +1517,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T14:48:33.715Z"
+  "lastUpdated": "2025-08-30T14:49:50.091Z"
 }
