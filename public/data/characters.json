@@ -369,24 +369,8 @@
           "updatedAt": "2025-08-30T14:56:00.737Z"
         },
         {
-          "id": "movement_1756564514270",
-          "movement_nr": 12,
-          "date": "5663-06-27",
-          "dateStart": "5663-06-27",
-          "dateEnd": null,
-          "location": "Torftgarder Forst",
-          "coordinates": [
-            1310,
-            1094
-          ],
-          "notes": "Kügeli joins the Party",
-          "type": "stay",
-          "isCustomLocation": false,
-          "createdAt": "2025-08-30T14:35:14.270Z"
-        },
-        {
           "id": "movement_1756564587469",
-          "movement_nr": 13,
+          "movement_nr": 12,
           "date": "5663-06-27",
           "dateStart": "5663-06-27",
           "dateEnd": "5663-06-28",
@@ -402,7 +386,7 @@
         },
         {
           "id": "movement_1756564888223",
-          "movement_nr": 14,
+          "movement_nr": 13,
           "date": "5663-06-28",
           "dateStart": "5663-06-28",
           "dateEnd": "5663-07-13",
@@ -416,6 +400,23 @@
           "isCustomLocation": false,
           "createdAt": "2025-08-30T14:41:28.223Z",
           "updatedAt": "2025-08-30T14:46:55.232Z"
+        },
+        {
+          "id": "movement_1756564514270",
+          "movement_nr": 14,
+          "date": "5663-06-30",
+          "dateStart": "5663-06-30",
+          "dateEnd": null,
+          "location": "Torftgarder Forst",
+          "coordinates": [
+            1310,
+            1094
+          ],
+          "notes": "Kügeli joins the Party",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:35:14.270Z",
+          "updatedAt": "2025-08-30T14:56:10.131Z"
         },
         {
           "id": "movement_1756565130708",
@@ -564,7 +565,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T14:56:00.737Z",
+      "updatedAt": "2025-08-30T14:56:10.131Z",
       "currentLocation": {
         "date": "5663-07-26",
         "dateStart": "5663-07-26",
@@ -1566,5 +1567,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T14:56:00.737Z"
+  "lastUpdated": "2025-08-30T14:56:10.131Z"
 }
