@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Atlantis (aufgestiegen)",
+      "location": "Unser fliegendes Boot",
       "coordinates": [
-        2210,
-        1200
+        2320,
+        978
       ],
       "description": "",
       "image": "",
@@ -672,18 +672,34 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T15:22:07.678Z"
+        },
+        {
+          "id": "movement_1756567410993",
+          "movement_nr": 30,
+          "date": "5663-08-15",
+          "dateStart": "5663-08-15",
+          "dateEnd": null,
+          "location": "Unser fliegendes Boot",
+          "coordinates": [
+            2320,
+            978
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T15:23:30.993Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T15:22:07.678Z",
+      "updatedAt": "2025-08-30T15:23:30.993Z",
       "currentLocation": {
-        "date": "5663-08-14",
-        "dateStart": "5663-08-14",
-        "dateEnd": "5663-08-15",
-        "location": "Atlantis (aufgestiegen)",
+        "date": "5663-08-15",
+        "dateStart": "5663-08-15",
+        "dateEnd": null,
+        "location": "Unser fliegendes Boot",
         "coordinates": [
-          2210,
-          1200
+          2320,
+          978
         ],
         "notes": ""
       }
@@ -1677,5 +1693,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T15:22:07.678Z"
+  "lastUpdated": "2025-08-30T15:23:30.993Z"
 }
