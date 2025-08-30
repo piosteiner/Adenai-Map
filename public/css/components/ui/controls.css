@@ -1,5 +1,130 @@
 /* UI Controls (Theme Toggle, Zoom, etc.) */
 
+/* Map Controls Container */
+#map-controls {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1001; /* Slightly higher than panel to ensure visibility */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-right: 10px; /* Space from the panel edge */
+  transition: right 0.3s ease; /* Smooth movement when panel resizes */
+}
+
+/* Map Control Button */
+.map-control-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(139, 90, 60, 0.95);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  transition: all 0.3s ease;
+  user-select: none;
+  min-width: 120px;
+  position: relative;
+}
+
+/* Visual connection line to panel */
+.map-control-btn::before {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 2px;
+  background: rgba(212, 175, 55, 0.4);
+  border-radius: 1px;
+  transition: background 0.3s ease;
+}
+
+.map-control-btn:hover {
+  background: rgba(159, 110, 80, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.map-control-btn:hover::before {
+  background: rgba(212, 175, 55, 0.6);
+}
+
+.map-control-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.map-control-btn.active {
+  background: rgba(76, 175, 80, 0.95);
+  border-color: rgba(129, 199, 132, 0.5);
+}
+
+.map-control-btn.active:hover {
+  background: rgba(96, 195, 100, 0.95);
+}
+
+.marker-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.control-text {
+  font-weight: 600;
+}
+
+/* Hide markers when button is inactive */
+.map-control-btn:not(.active) .marker-icon {
+  opacity: 0.7;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  #map-controls {
+    margin-right: 5px; /* Less margin on mobile */
+  }
+  
+  .map-control-btn {
+    padding: 10px 12px;
+    font-size: 12px;
+    min-width: 100px;
+  }
+  
+  .marker-icon {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  #map-controls {
+    margin-right: 2px; /* Minimal margin on very small screens */
+  }
+  
+  .map-control-btn {
+    padding: 8px 10px;
+    min-width: 80px;
+  }
+  
+  .control-text {
+    display: none; /* Hide text on very small screens, keep only icon */
+  }
+  
+  .map-control-btn {
+    min-width: 44px; /* Touch-friendly minimum size */
+  }
+}
+
 /* Toggle Button */
 #themeToggle {
   position: absolute;

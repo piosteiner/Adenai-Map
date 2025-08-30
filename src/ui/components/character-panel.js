@@ -229,6 +229,14 @@ class CharacterPanel {
     setWidth(width) {
         this.currentWidth = width;
         this.panel.style.width = width + 'px';
+        
+        // Dispatch event for other components (like map controls) to respond to width changes
+        document.dispatchEvent(new CustomEvent('characterPanelResized', {
+            detail: { 
+                width: width,
+                isCollapsed: width <= this.expandThreshold
+            }
+        }));
     }
 
     updateHandlePosition() {

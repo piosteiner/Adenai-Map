@@ -3,6 +3,7 @@ class MovementSystem {
         this.characterPaths = [];
         this.movementLayers = [];
         this.movementMarkers = []; // Track movement location markers
+        this.markersVisible = true; // Global toggle state for all movement markers
         
         // Initialize Character Path Manager for API integration
         this.pathManager = new CharacterPathManager();
@@ -196,6 +197,12 @@ class MovementSystem {
 
     // Show VsuzH movement markers by default
     showInitialVsuzHMarkers() {
+        // Only show if markers are globally enabled
+        if (!this.markersVisible) {
+            Logger.movement('Skipping VsuzH markers - markers globally disabled');
+            return;
+        }
+
         MapUtils.withMap(map => {
             Logger.movement('Showing initial VsuzH movement markers...');
             
@@ -286,14 +293,16 @@ class MovementSystem {
                     pathData.isVisible = true; // Update visibility state
                 }
                 
-                // Also show movement markers for this character
-                this.movementMarkers
-                    .filter(markerData => markerData.characterId === characterId)
-                    .forEach(markerData => {
-                        if (MapUtils.addToMap(markerData.marker)) {
-                            markerData.isVisible = true;
-                        }
-                    });
+                // Also show movement markers for this character (if markers are globally visible)
+                if (this.markersVisible) {
+                    this.movementMarkers
+                        .filter(markerData => markerData.characterId === characterId)
+                        .forEach(markerData => {
+                            if (MapUtils.addToMap(markerData.marker)) {
+                                markerData.isVisible = true;
+                            }
+                        });
+                }
                 
                 return true;
             }
@@ -348,6 +357,73 @@ class MovementSystem {
         const isVsuzH = characterId?.toLowerCase().includes('vsuzh');
         
         return pathVisible || markersVisible || isVsuzH;
+    }
+
+    // Toggle all movement markers visibility
+    toggleAllMovementMarkers() {
+        this.markersVisible = !this.markersVisible;
+        
+        if (this.markersVisible) {
+            this.showAllMovementMarkers();
+        } else {
+            this.hideAllMovementMarkers();
+        }
+        
+        return this.markersVisible;
+    }
+
+    // Show all movement markers (respecting individual character path states)
+    showAllMovementMarkers() {
+        return MapUtils.withMap(map => {
+            Logger.movement('Showing all movement markers...');
+            
+            let shownCount = 0;
+            this.movementMarkers.forEach(markerData => {
+                // Only show markers for characters whose paths are currently visible
+                const pathData = this.characterPaths.find(path => path.character?.id === markerData.characterId);
+                const shouldShow = pathData?.isVisible || markerData.characterId?.toLowerCase().includes('vsuzh');
+                
+                if (shouldShow && !map.hasLayer(markerData.marker)) {
+                    MapUtils.addToMap(markerData.marker);
+                    markerData.isVisible = true;
+                    shownCount++;
+                }
+            });
+            
+            this.markersVisible = true;
+            Logger.success(`✅ Showed ${shownCount} movement markers`);
+            return true;
+        }, 'Cannot show movement markers - map not available');
+    }
+
+    // Hide all movement markers
+    hideAllMovementMarkers() {
+        return MapUtils.withMap(map => {
+            Logger.movement('Hiding all movement markers...');
+            
+            let hiddenCount = 0;
+            this.movementMarkers.forEach(markerData => {
+                if (map.hasLayer(markerData.marker)) {
+                    MapUtils.removeFromMap(markerData.marker);
+                    markerData.isVisible = false;
+                    hiddenCount++;
+                    
+                    // Clean up any fanned out markers for clusters
+                    if (markerData.type === 'cluster' && markerData.marker._fanMarkers) {
+                        this.markersSystem.fanInClusteredMarkers(markerData.marker);
+                    }
+                }
+            });
+            
+            this.markersVisible = false;
+            Logger.success(`✅ Hid ${hiddenCount} movement markers`);
+            return true;
+        }, 'Cannot hide movement markers - map not available');
+    }
+
+    // Check if markers are currently visible globally
+    areMarkersVisible() {
+        return this.markersVisible;
     }
 
     // Required by main.js
