@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Valaris",
+      "location": "Aufs Meer hinaus",
       "coordinates": [
-        1700,
-        1008
+        1710,
+        989
       ],
       "description": "",
       "image": "",
@@ -575,18 +575,34 @@
           "isCustomLocation": false,
           "createdAt": "2025-08-30T14:55:46.513Z",
           "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756566140304",
+          "movement_nr": 24,
+          "date": "5663-08-08",
+          "dateStart": "5663-08-08",
+          "dateEnd": null,
+          "location": "Aufs Meer hinaus",
+          "coordinates": [
+            1710,
+            989
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T15:02:20.304Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T15:01:31.783Z",
+      "updatedAt": "2025-08-30T15:02:20.304Z",
       "currentLocation": {
-        "date": "5663-07-26",
-        "dateStart": "5663-07-26",
-        "dateEnd": "5663-08-08",
-        "location": "Valaris",
+        "date": "5663-08-08",
+        "dateStart": "5663-08-08",
+        "dateEnd": null,
+        "location": "Aufs Meer hinaus",
         "coordinates": [
-          1700,
-          1008
+          1710,
+          989
         ],
         "notes": ""
       }
@@ -1580,5 +1596,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T15:01:31.783Z"
+  "lastUpdated": "2025-08-30T15:02:20.305Z"
 }
