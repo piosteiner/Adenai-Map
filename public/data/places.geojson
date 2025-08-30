@@ -81,8 +81,9 @@
       "type": "Feature",
       "properties": {
         "name": "Yosefka Akademie",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung der Yosefka Akademie, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Die höchste Autorität im Bereich der arkanen Magie. Forschungs und Ausbildungsstädte für Magier:innen. Gegründet von der mächtigen Yosefka Familie.",
         "contentUrl": null,
+        "image": "",
         "region": "arcane_heights",
         "type": "village",
         "visited": false
