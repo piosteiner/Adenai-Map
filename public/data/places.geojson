@@ -956,7 +956,9 @@
         "name": "Unbekannter Ort auf Upeto",
         "description": "Details sind noch zu entdecken.",
         "contentUrl": null,
-        "region": "Upeto",
+        "image": "",
+        "region": "upeto",
+        "type": "unknown",
         "visited": false
       },
       "geometry": {
