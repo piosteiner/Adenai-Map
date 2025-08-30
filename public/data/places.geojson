@@ -479,7 +479,8 @@
         "name": "Zur Prallen Traube",
         "description": "Die VsuzH haben einen Überfall auf das Gasthaus und das umliegende Dorf gerächt.",
         "contentUrl": null,
-        "region": "Ost-Adenai",
+        "image": "https://adenai.piogino.ch/public/images/pralle_traube.png",
+        "region": "eastern_adenai",
         "type": "village",
         "visited": true
       },
