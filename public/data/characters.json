@@ -212,10 +212,10 @@
             1041
           ],
           "notes": "Rückkehr nach Silbergrat nach dem Aufrag in der Mine.\nLuna stösst zur Gruppe hinzu und auch der erste Kontakt mit dem Sternenfall Zirkel (aka. Sternschnuppenclub, Sternenheinis, Sternenzirkel). Es ist eine deutliche Feindseligkeit wird von dem Sternenzirkel gegenüber Abu vernommen.",
-          "type": "stay",
+          "type": "return",
           "createdAt": "2025-08-24T23:31:46.547Z",
           "movement_nr": 2,
-          "updatedAt": "2025-08-30T13:07:48.489Z",
+          "updatedAt": "2025-08-30T13:25:02.401Z",
           "dateStart": "5663-06-03",
           "dateEnd": null
         },
@@ -337,7 +337,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T13:24:48.939Z",
+      "updatedAt": "2025-08-30T13:25:02.401Z",
       "currentLocation": {
         "date": "5663-06-22",
         "dateStart": "5663-06-22",
@@ -1339,5 +1339,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T13:24:48.939Z"
+  "lastUpdated": "2025-08-30T13:25:02.401Z"
 }
