@@ -6,15 +6,8 @@
       "properties": {
         "name": "Valaris",
         "description": "Die grösste Stadt im Osten von Adenai. Regiert von [Petrel Kormorant:character:petrel-kormorant].",
-        "details": [
-          "[Tasbor:character:tasbor] und [Abu Sasion:character:abu-sasion] haben hier ihre Detektei.",
-          "Ehemaliger Wohnort von [Shiho:character:shiho] - wurde in ihrem Elternhaus von Sandschreitern ermordet.",
-          "Kunos, aka der Hagere, hatte die Stadt indirekt übernommen bis die vsuzH seine Machenschaften aufdeckten und ihn erledigten.",
-          "[Petrel Kormorant:character:petrel-kormorant] und die gesamte Stadt sind den Helden für ihre Hilfe äusserst dankbar.",
-          "Lerna hat Rocky, der für den Sternenzirkel Spruchrollen herstellte, bei sich eingesperrt.",
-          "Die Stadt hat eine [detaillierte Karte:gallery:valaris-map] die alle wichtigen Gebäude zeigt."
-        ],
         "contentUrl": null,
+        "image": "https://adenai.piogino.ch/public/images/valaris.png",
         "region": "valaris_region",
         "type": "city",
         "visited": true
