@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "fb4dab21008240ff29cc0627bfe4b7f6e96f0d20",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T15:27:28.396Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T15:27:28.396Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Verlassenes Fischereidorf (5663-08-22)"
+    },
+    {
       "commitSha": "dca07ca652cd5c7bd9c71d43791da02ddb09fab0",
       "action": "update",
       "type": "character",
@@ -4591,5 +4604,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T15:26:53.411Z"
+  "lastUpdated": "2025-08-30T15:27:28.397Z"
 }
