@@ -2,6 +2,136 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "e4d4a532de14e228011671a43331e2ae8f52c972",
+      "action": "update",
+      "type": "location",
+      "itemName": "Donnermund",
+      "user": "gm",
+      "timestamp": "2025-08-30T22:07:57.896Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T22:07:57.896Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Donnermund (by gm) - updated region"
+    },
+    {
+      "commitSha": "4041567552967cccebb1652772f5e5d68d653f90",
+      "action": "update",
+      "type": "location",
+      "itemName": "Unbekannter Ort auf Upeto",
+      "user": "gm",
+      "timestamp": "2025-08-30T22:07:10.262Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T22:07:10.262Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Unbekannter Ort auf Upeto (by gm) - updated region, updated type"
+    },
+    {
+      "commitSha": "d3ae6377f6017755301419e6e5148ffe5bcfac63",
+      "action": "update",
+      "type": "location",
+      "itemName": "Yosefka Akademie",
+      "user": "gm",
+      "timestamp": "2025-08-30T22:01:32.887Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T22:01:32.887Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Yosefka Akademie (by gm) - updated description"
+    },
+    {
+      "commitSha": "89366df941b05f5737841de0401506448b52e816",
+      "action": "update",
+      "type": "location",
+      "itemName": "Wesdalen",
+      "user": "gm",
+      "timestamp": "2025-08-30T22:00:00.701Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T22:00:00.701Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Wesdalen (by gm) - updated description"
+    },
+    {
+      "commitSha": "36ec925d3627fc82ec981ccbce1dd1703e9d91fd",
+      "action": "update",
+      "type": "location",
+      "itemName": "Rena",
+      "user": "gm",
+      "timestamp": "2025-08-30T21:59:10.521Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T21:59:10.521Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Rena (by gm) - updated description"
+    },
+    {
+      "commitSha": "b1d3b9fe4dc356edce70fcb0616e0cfee6d23115",
+      "action": "update",
+      "type": "location",
+      "itemName": "Olecea",
+      "user": "gm",
+      "timestamp": "2025-08-30T21:58:45.729Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T21:58:45.729Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Olecea (by gm) - updated description"
+    },
+    {
+      "commitSha": "6a39daa0b653cedbb8759c4977392ad1f9f9a67b",
+      "action": "update",
+      "type": "location",
+      "itemName": "Nordmund",
+      "user": "gm",
+      "timestamp": "2025-08-30T21:58:04.944Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T21:58:04.944Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Nordmund (by gm) - updated description"
+    },
+    {
+      "commitSha": "99ec288bca84ce2d8c902e39053c3f7fdf22960e",
+      "action": "update",
+      "type": "location",
+      "itemName": "Nordmund",
+      "user": "gm",
+      "timestamp": "2025-08-30T21:57:48.715Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T21:57:48.715Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Nordmund (by gm) - updated description, updated region, updated type"
+    },
+    {
+      "commitSha": "b078360f258d84e15b8b20283662607fac79ae7f",
+      "action": "update",
+      "type": "location",
+      "itemName": "Neudalen",
+      "user": "gm",
+      "timestamp": "2025-08-30T21:56:15.218Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T21:56:15.218Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Neudalen (by gm) - updated description"
+    },
+    {
+      "commitSha": "7c572332bb2dc6d788a765925a7c567e0f1ae6f0",
+      "action": "update",
+      "type": "location",
+      "itemName": "Makir",
+      "user": "gm",
+      "timestamp": "2025-08-30T21:55:08.368Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T21:55:08.368Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Makir (by gm) - updated description, updated region"
+    },
+    {
       "commitSha": "5a0329bd9bd206378cde01adc80bcfcdac00f79d",
       "action": "create",
       "type": "character",
@@ -5046,5 +5176,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T21:53:56.492Z"
+  "lastUpdated": "2025-08-30T22:07:57.897Z"
 }
