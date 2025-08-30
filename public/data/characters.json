@@ -171,23 +171,6 @@
       "notes": "",
       "movementHistory": [
         {
-          "id": "movement_1756076882170",
-          "date": "5663-06-04",
-          "location": "Nice Custom Lococo",
-          "coordinates": [
-            1264,
-            1008
-          ],
-          "notes": "",
-          "type": "mission",
-          "createdAt": "2025-08-24T23:08:02.170Z",
-          "movement_nr": 0,
-          "updatedAt": "2025-08-30T11:56:14.457Z",
-          "dateStart": "5663-06-04",
-          "dateEnd": null,
-          "isCustomLocation": true
-        },
-        {
           "id": "movement_1756076815342",
           "date": "5663-06-03",
           "location": "Silbergrat",
@@ -198,8 +181,25 @@
           "notes": "",
           "type": "mission",
           "createdAt": "2025-08-24T23:06:55.342Z",
+          "movement_nr": 0,
+          "updatedAt": "2025-08-30T11:56:20.265Z"
+        },
+        {
+          "id": "movement_1756076882170",
+          "date": "5663-06-04",
+          "location": "Nice Custom Lococo",
+          "coordinates": [
+            1264,
+            1008
+          ],
+          "notes": "",
+          "type": "mission",
+          "createdAt": "2025-08-24T23:08:02.170Z",
           "movement_nr": 1,
-          "updatedAt": "2025-08-30T11:56:14.457Z"
+          "updatedAt": "2025-08-30T11:56:20.266Z",
+          "dateStart": "5663-06-04",
+          "dateEnd": null,
+          "isCustomLocation": true
         },
         {
           "id": "movement_1756078306547",
@@ -213,7 +213,7 @@
           "type": "stay",
           "createdAt": "2025-08-24T23:31:46.547Z",
           "movement_nr": 2,
-          "updatedAt": "2025-08-30T11:56:14.457Z"
+          "updatedAt": "2025-08-30T11:56:20.266Z"
         },
         {
           "id": "movement_1756117483681",
@@ -227,7 +227,7 @@
           "type": "mission",
           "createdAt": "2025-08-25T10:24:43.681Z",
           "movement_nr": 3,
-          "updatedAt": "2025-08-30T11:56:14.457Z",
+          "updatedAt": "2025-08-30T11:56:20.266Z",
           "dateStart": "5663-06-05",
           "dateEnd": null,
           "isCustomLocation": true
@@ -246,7 +246,7 @@
           "dateStart": "5663-06-05",
           "dateEnd": "5663-06-14",
           "isCustomLocation": true,
-          "updatedAt": "2025-08-30T11:56:14.457Z",
+          "updatedAt": "2025-08-30T11:56:20.266Z",
           "movement_nr": 4
         },
         {
@@ -264,11 +264,11 @@
           "isCustomLocation": false,
           "createdAt": "2025-08-25T16:51:39.063Z",
           "movement_nr": 5,
-          "updatedAt": "2025-08-30T11:56:14.457Z"
+          "updatedAt": "2025-08-30T11:56:20.266Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T11:56:14.457Z",
+      "updatedAt": "2025-08-30T11:56:20.266Z",
       "currentLocation": {
         "date": "5663-06-20",
         "dateStart": "5663-06-20",
@@ -1270,5 +1270,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T11:56:14.457Z"
+  "lastUpdated": "2025-08-30T11:56:20.266Z"
 }
