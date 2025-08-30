@@ -42,8 +42,9 @@
       "type": "Feature",
       "properties": {
         "name": "Olecea",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Olecea, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Zentrale Stadt auf Harak - Sitz der Grossen Bibliothek.",
         "contentUrl": null,
+        "image": "",
         "region": "harak",
         "type": "city",
         "visited": false
