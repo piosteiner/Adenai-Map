@@ -351,9 +351,11 @@
       "type": "Feature",
       "properties": {
         "name": "Nordmund",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Nordmund, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Stadt am Rande der Sonnen Spitzen. Regiert von der Pinet Familie",
         "contentUrl": null,
-        "region": "Sonnenspitzen",
+        "image": "",
+        "region": "eastern_adenai",
+        "type": "city",
         "visited": false
       },
       "geometry": {
