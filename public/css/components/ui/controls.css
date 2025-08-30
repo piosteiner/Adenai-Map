@@ -96,7 +96,8 @@
   right: 2px;
   width: 18px;
   height: 18px;
-  background: #ff6b24;
+  color: #ff6b24;
+  border: 1px solid white;
   border-radius: 50%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   display: flex;
