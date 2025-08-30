@@ -120,21 +120,19 @@
       "id": "remus",
       "name": "Remus",
       "title": "Lord",
-      "location": "Sternenzirkel Base?",
-      "coordinates": [
-        1155,
-        540
-      ],
+      "placeOfOrigin": "",
+      "coordinates": null,
       "description": "",
-      "image": "",
+      "image": "https://adenai.piogino.ch/public/images/remus.png",
       "status": "alive",
-      "faction": "",
+      "faction": "Sternenzirkel",
       "relationship": "enemy",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2025-08-22T04:28:11.542Z",
-      "updatedAt": "2025-08-22T15:11:17.200Z"
+      "updatedAt": "2025-08-30T21:27:54.160Z"
     },
     {
       "id": "tasbor",
@@ -1807,5 +1805,5 @@
       "updatedAt": "2025-08-30T21:09:19.139Z"
     }
   ],
-  "lastUpdated": "2025-08-30T21:09:19.139Z"
+  "lastUpdated": "2025-08-30T21:27:54.160Z"
 }
