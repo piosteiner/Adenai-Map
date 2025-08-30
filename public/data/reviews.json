@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "4d0bdb1007d046c9aa347eaad76f0e8987eff206",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T21:49:07.812Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T21:49:07.812Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Motu Motu entry (5663-08-08 to 5663-08-13)"
+    },
+    {
       "commitSha": "eff53a228a0cd35febc263b0aad9b39c1751a24a",
       "action": "update",
       "type": "character",
@@ -5020,5 +5033,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T21:49:00.490Z"
+  "lastUpdated": "2025-08-30T21:49:07.813Z"
 }
