@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "92fa95a087a18b122c7ebd37c413bd76b48597c1",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T11:56:06.705Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T11:56:06.705Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Delete character movement: VsuzH (by gm) - Removed Nordmund entry"
+    },
+    {
       "commitSha": "9e0af246cee95a1690e58f2c159d6cc53e3d8d53",
       "action": "update",
       "type": "character",
@@ -3850,5 +3863,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-29T21:15:30.410Z"
+  "lastUpdated": "2025-08-30T11:56:06.705Z"
 }
