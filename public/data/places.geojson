@@ -431,9 +431,10 @@
       "type": "Feature",
       "properties": {
         "name": "Barbenfall",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Barbenfall, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Sitz des Clubs der Armen",
         "contentUrl": null,
-        "region": "Rena Region",
+        "image": "",
+        "region": "",
         "type": "town",
         "visited": false
       },
