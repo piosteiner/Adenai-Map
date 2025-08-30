@@ -1023,6 +1023,25 @@
           558
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VsuzH & Partner Erzmine",
+        "description": "Die Mine von Goldira Erzschub, welche von den VsuzH befreit wurden und sich somit ihren Anteil verdient haben.",
+        "contentUrl": null,
+        "image": "",
+        "region": "sun_peaks",
+        "type": "camp",
+        "visited": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1264,
+          1008
+        ]
+      }
     }
   ]
 }
