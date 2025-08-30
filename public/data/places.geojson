@@ -294,9 +294,11 @@
       "type": "Feature",
       "properties": {
         "name": "Glesburg",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Glesburg, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Die grösste noch aktive von Zwergen geschaffene Stadt auf Adenai.",
         "contentUrl": null,
-        "region": "Ewige Donnerklüfte",
+        "image": "",
+        "region": "",
+        "type": "",
         "visited": false
       },
       "geometry": {
