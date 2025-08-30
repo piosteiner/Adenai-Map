@@ -266,7 +266,8 @@
         "name": "Akónetchie",
         "description": "Auch nur 'Ako' genannt. Alte heilige Städte im Dschungel von Upeto.",
         "contentUrl": null,
-        "region": "",
+        "image": "",
+        "region": "upeto",
         "type": "town",
         "visited": true
       },
