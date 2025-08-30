@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ba370c8e812fa7e83c71cc0030ac9ecd6f260485",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T12:57:48.166Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T12:57:48.166Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Silbergrat entry (5663-06-04 to 5663-06-08)"
+    },
+    {
       "commitSha": "0942aae14b868a1c861a832a12cf7af41037ca3e",
       "action": "update",
       "type": "character",
@@ -3993,5 +4006,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T12:51:28.791Z"
+  "lastUpdated": "2025-08-30T12:57:48.166Z"
 }
