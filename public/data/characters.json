@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Torftgarder Forst",
+      "location": "Toftgard",
       "coordinates": [
-        1310,
-        1094
+        1392,
+        1083
       ],
       "description": "",
       "image": "",
@@ -382,20 +382,36 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T14:35:14.270Z"
+        },
+        {
+          "id": "movement_1756564587469",
+          "movement_nr": 13,
+          "date": "5663-06-27",
+          "dateStart": "5663-06-27",
+          "dateEnd": "5663-06-28",
+          "location": "Toftgard",
+          "coordinates": [
+            1392,
+            1083
+          ],
+          "notes": "Zurück nach Toftgard",
+          "type": "return",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:36:27.469Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T14:35:14.270Z",
+      "updatedAt": "2025-08-30T14:36:27.469Z",
       "currentLocation": {
         "date": "5663-06-27",
         "dateStart": "5663-06-27",
-        "dateEnd": null,
-        "location": "Torftgarder Forst",
+        "dateEnd": "5663-06-28",
+        "location": "Toftgard",
         "coordinates": [
-          1310,
-          1094
+          1392,
+          1083
         ],
-        "notes": "Kügeli joins the Party"
+        "notes": "Zurück nach Toftgard"
       }
     },
     {
@@ -1387,5 +1403,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T14:35:14.270Z"
+  "lastUpdated": "2025-08-30T14:36:27.469Z"
 }
