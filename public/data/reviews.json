@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "dca07ca652cd5c7bd9c71d43791da02ddb09fab0",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T15:26:53.411Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T15:26:53.411Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Zur Küste von Upeto (5663-08-15 to 5663-08-19)"
+    },
+    {
       "commitSha": "2247351ca68829ba64cb134faac694aac49dd243",
       "action": "update",
       "type": "character",
@@ -4578,5 +4591,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T15:25:38.949Z"
+  "lastUpdated": "2025-08-30T15:26:53.411Z"
 }
