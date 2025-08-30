@@ -40,7 +40,7 @@
 
 /* Active state - light pastel green background */
 .map-control-btn.active {
-  background: rgba(112, 233, 116, 0.95); /* Light pastel green */
+  background: rgba(103, 172, 105, 0.95); /* Light pastel green */
   border-color: rgba(83, 153, 86, 0.5);
 }
 
