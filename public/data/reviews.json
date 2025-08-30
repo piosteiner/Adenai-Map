@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "eda7edc5bcbdb2e9fa165080ed88c59c5b562575",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T12:02:13.127Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T12:02:13.127Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Pilz Buster entry (5663-06-03)"
+    },
+    {
       "commitSha": "c5a57beeb6211ca73892ad89b12dc84385efd89b",
       "action": "update",
       "type": "character",
@@ -3902,5 +3915,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T11:57:07.014Z"
+  "lastUpdated": "2025-08-30T12:02:13.127Z"
 }
