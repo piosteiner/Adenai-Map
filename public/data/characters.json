@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Verlassenes Fischereidorf",
+      "location": "Basapo",
       "coordinates": [
-        1985,
-        546
+        1957,
+        488
       ],
       "description": "",
       "image": "",
@@ -737,18 +737,34 @@
           "type": "mission",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T15:27:27.587Z"
+        },
+        {
+          "id": "movement_1756567894569",
+          "movement_nr": 34,
+          "date": "5663-08-23",
+          "dateStart": "5663-08-23",
+          "dateEnd": "5663-08-27",
+          "location": "Basapo",
+          "coordinates": [
+            1957,
+            488
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:31:34.569Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T15:27:27.587Z",
+      "updatedAt": "2025-08-30T15:31:34.569Z",
       "currentLocation": {
-        "date": "5663-08-22",
-        "dateStart": "5663-08-22",
-        "dateEnd": null,
-        "location": "Verlassenes Fischereidorf",
+        "date": "5663-08-23",
+        "dateStart": "5663-08-23",
+        "dateEnd": "5663-08-27",
+        "location": "Basapo",
         "coordinates": [
-          1985,
-          546
+          1957,
+          488
         ],
         "notes": ""
       }
@@ -1742,5 +1758,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T15:27:27.587Z"
+  "lastUpdated": "2025-08-30T15:31:34.569Z"
 }
