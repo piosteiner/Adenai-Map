@@ -90,7 +90,7 @@
   right: 2px;
   width: 18px;
   height: 18px;
-  background: linear-gradient(135deg, #ff6b24 0%, #ff8a50 100%);
+  background: #ff6b24;
   border: 2px solid white;
   border-radius: 50%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
