@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Akónetchie",
+      "location": "Underdark bei Ako",
       "coordinates": [
-        1869,
-        556
+        1839,
+        558
       ],
       "description": "",
       "image": "",
@@ -769,20 +769,36 @@
           "type": "mission",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T15:34:19.435Z"
+        },
+        {
+          "id": "movement_1756568335088",
+          "movement_nr": 36,
+          "date": "5663-09-04",
+          "dateStart": "5663-09-04",
+          "dateEnd": "5663-09-05",
+          "location": "Underdark bei Ako",
+          "coordinates": [
+            1839,
+            558
+          ],
+          "notes": "Stand Session 55 ist die Gruppe am 2. Tag, am 05.09.5663 im Underdark.",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:38:55.088Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T15:34:19.435Z",
+      "updatedAt": "2025-08-30T15:38:55.088Z",
       "currentLocation": {
-        "date": "5663-09-01",
-        "dateStart": "5663-09-01",
-        "dateEnd": "5663-09-04",
-        "location": "Akónetchie",
+        "date": "5663-09-04",
+        "dateStart": "5663-09-04",
+        "dateEnd": "5663-09-05",
+        "location": "Underdark bei Ako",
         "coordinates": [
-          1869,
-          556
+          1839,
+          558
         ],
-        "notes": ""
+        "notes": "Stand Session 55 ist die Gruppe am 2. Tag, am 05.09.5663 im Underdark."
       }
     },
     {
@@ -1774,5 +1790,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T15:34:19.435Z"
+  "lastUpdated": "2025-08-30T15:38:55.088Z"
 }
