@@ -6,15 +6,48 @@ class MovementTimeline {
         this.timeline = null;
         this.vsuzHData = null;
         this.isVisible = true;
-        this.init();
+        this.timelineElements = null; // Cache DOM elements
+        this.eventElements = []; // Cache event elements
+        this.scaleElements = []; // Cache scale elements
+        this.renderScheduled = false; // Prevent multiple renders
+        this.isInitialized = false; // Track initialization state
+        
+        // Wait for movement markers to be loaded before initializing
+        this.waitForMovementMarkers();
+    }
+
+    waitForMovementMarkers() {
+        Logger.loading('🕒 Timeline waiting for movement markers to load...');
+        
+        // Listen for movement markers loaded event
+        document.addEventListener('movementMarkersLoaded', (e) => {
+            Logger.loading('🎯 Movement markers loaded, initializing timeline...');
+            Logger.loading(`📊 Found ${e.detail.markersCount} movement markers`);
+            this.init();
+        });
+        
+        // Fallback: Initialize after a delay if event doesn't fire
+        setTimeout(() => {
+            if (!this.isInitialized) {
+                Logger.warning('⚠️ Timeline fallback initialization after 5 seconds');
+                this.init();
+            }
+        }, 5000);
     }
 
     async init() {
+        // Prevent double initialization
+        if (this.isInitialized) {
+            Logger.warning('Timeline already initialized, skipping...');
+            return;
+        }
+        
         try {
             await this.loadVsuzHData();
             this.createTimelineElement();
             this.renderTimeline();
             this.setupEventHandlers();
+            this.isInitialized = true;
             Logger.loading('📍 VsuzH Movement Timeline loaded');
         } catch (error) {
             Logger.error('Failed to initialize movement timeline:', error);
@@ -24,11 +57,21 @@ class MovementTimeline {
     async loadVsuzHData() {
         try {
             const response = await fetch('public/data/characters.json');
+            if (!response.ok) {
+                throw new Error(`Failed to fetch characters.json: ${response.status}`);
+            }
+            
             const data = await response.json();
             this.vsuzHData = data.characters.find(char => char.id === 'vsuzh');
             
             if (!this.vsuzHData) {
-                throw new Error('VsuzH character not found');
+                throw new Error('VsuzH character not found in characters.json');
+            }
+            
+            if (!this.vsuzHData.movementHistory || this.vsuzHData.movementHistory.length === 0) {
+                Logger.warning('VsuzH has no movement history data');
+                this.vsuzHData.movementHistory = [];
+                return;
             }
             
             // Sort movement history by date and movement_nr
@@ -38,6 +81,8 @@ class MovementTimeline {
                 }
                 return new Date(a.date) - new Date(b.date);
             });
+            
+            Logger.success(`📍 Loaded ${this.vsuzHData.movementHistory.length} VsuzH movement entries`);
             
         } catch (error) {
             Logger.error('Failed to load VsuzH data:', error);
@@ -683,6 +728,18 @@ class MovementTimeline {
     }
 
     renderTimeline() {
+        // Prevent multiple simultaneous renders
+        if (this.renderScheduled) return;
+        this.renderScheduled = true;
+
+        // Use requestAnimationFrame for smooth rendering
+        requestAnimationFrame(() => {
+            this.performRender();
+            this.renderScheduled = false;
+        });
+    }
+
+    performRender() {
         const track = this.timeline.querySelector('#timeline-track');
         const scale = this.timeline.querySelector('#timeline-scale');
         
@@ -691,14 +748,15 @@ class MovementTimeline {
             return;
         }
 
-        // Calculate timeline dimensions and positions
-        this.calculateTimelineData();
+        // Calculate timeline dimensions and positions (only if not cached)
+        if (!this.timelineData || this.zoomLevel !== this.lastZoomLevel) {
+            this.calculateTimelineData();
+            this.lastZoomLevel = this.zoomLevel;
+        }
         
-        // Render time scale markers
-        this.renderTimeScale(scale);
-        
-        // Render events
-        this.renderEvents(track);
+        // Use efficient rendering methods
+        this.renderTimeScaleEfficient(scale);
+        this.renderEventsEfficient(track);
     }
 
     calculateTimelineData() {
@@ -731,7 +789,10 @@ class MovementTimeline {
         const minTimelineWidth = totalDays * minWidthPerDay;
         
         // Calculate total timeline width (minimum width or 3x viewport, whichever is larger)
-        this.timelineWidth = Math.max(minTimelineWidth, window.innerWidth * 3);
+        // BUT cap it at a reasonable maximum to prevent performance issues
+        const maxTimelineWidth = window.innerWidth * 8; // Maximum 8x viewport width
+        this.timelineWidth = Math.min(Math.max(minTimelineWidth, window.innerWidth * 3), maxTimelineWidth);
+        
         this.pixelsPerMs = this.timelineWidth / (this.maxDate - this.minDate);
         
         // Current zoom and pan state
@@ -757,9 +818,7 @@ class MovementTimeline {
         }
     }
 
-    renderTimeScale(scale) {
-        scale.innerHTML = '';
-        
+    renderTimeScaleEfficient(scale) {
         if (!this.timelineData || this.timelineData.length === 0) return;
 
         const totalDays = Math.ceil((this.maxDate - this.minDate) / (24 * 60 * 60 * 1000)) + 1;
@@ -771,25 +830,20 @@ class MovementTimeline {
         if (dayWidth * this.zoomLevel < 10) interval = 30; // months
         if (dayWidth * this.zoomLevel < 3) interval = 365; // years
 
-        // Start from the actual first date, not a padded date
+        // Calculate required markers
+        const markers = [];
         const startDate = new Date(this.minDate);
         const endDate = new Date(this.maxDate);
-        
         let currentDate = new Date(startDate);
         
         while (currentDate <= endDate) {
             const position = (currentDate - this.minDate) * this.pixelsPerMs;
-            
-            const marker = document.createElement('div');
-            marker.className = `scale-marker ${interval >= 30 ? 'major' : ''}`;
-            marker.style.left = position + 'px';
-            
-            const label = document.createElement('div');
-            label.className = 'scale-label';
-            label.textContent = this.formatScaleDate(currentDate, interval);
-            marker.appendChild(label);
-            
-            scale.appendChild(marker);
+            markers.push({
+                position,
+                date: new Date(currentDate),
+                interval,
+                isMajor: interval >= 30
+            });
             
             // Move to next interval
             if (interval >= 365) {
@@ -800,6 +854,37 @@ class MovementTimeline {
                 currentDate.setDate(currentDate.getDate() + interval);
             }
         }
+
+        // Efficiently update existing elements or create new ones
+        this.updateScaleElements(scale, markers);
+    }
+
+    updateScaleElements(scale, markers) {
+        // Remove excess elements
+        while (this.scaleElements.length > markers.length) {
+            const element = this.scaleElements.pop();
+            element.remove();
+        }
+
+        // Update existing and create new elements
+        markers.forEach((marker, index) => {
+            let element = this.scaleElements[index];
+            
+            if (!element) {
+                // Create new element
+                element = document.createElement('div');
+                const label = document.createElement('div');
+                label.className = 'scale-label';
+                element.appendChild(label);
+                scale.appendChild(element);
+                this.scaleElements.push(element);
+            }
+
+            // Update element properties
+            element.className = `scale-marker ${marker.isMajor ? 'major' : ''}`;
+            element.style.left = marker.position + 'px';
+            element.firstChild.textContent = this.formatScaleDate(marker.date, marker.interval);
+        });
     }
 
     formatScaleDate(date, interval) {
@@ -814,18 +899,38 @@ class MovementTimeline {
         }
     }
 
-    renderEvents(track) {
-        track.innerHTML = '';
-        
+    renderEventsEfficient(track) {
         if (!this.timelineData || this.timelineData.length === 0) return;
 
-        this.timelineData.forEach((movement, index) => {
-            const event = this.createEventElement(movement, index === this.timelineData.length - 1);
-            track.appendChild(event);
+        // Efficiently update existing elements or create new ones
+        this.updateEventElements(track, this.timelineData);
+    }
+
+    updateEventElements(track, timelineData) {
+        // Remove excess elements
+        while (this.eventElements.length > timelineData.length) {
+            const element = this.eventElements.pop();
+            element.remove();
+        }
+
+        // Update existing and create new elements
+        timelineData.forEach((movement, index) => {
+            let element = this.eventElements[index];
+            const isLatest = index === timelineData.length - 1;
+            
+            if (!element) {
+                // Create new element structure
+                element = this.createEventElementOptimized(movement, isLatest);
+                track.appendChild(element);
+                this.eventElements.push(element);
+            } else {
+                // Update existing element
+                this.updateEventElement(element, movement, isLatest);
+            }
         });
     }
 
-    createEventElement(movement, isLatest) {
+    createEventElementOptimized(movement, isLatest) {
         const position = (movement.parsedDate - this.minDate) * this.pixelsPerMs;
         
         const event = document.createElement('div');
@@ -833,22 +938,61 @@ class MovementTimeline {
         event.style.left = position + 'px';
         event.dataset.movementId = movement.id;
 
-        event.innerHTML = `
-            <div class="event-marker"></div>
-            <div class="event-popup">
-                <div class="event-location">${movement.location || 'Unknown'}</div>
-                <div class="event-date">${this.formatDate(movement.date)}</div>
-                <div class="event-type ${movement.type || 'travel'}">${movement.type || 'travel'}</div>
-            </div>
-        `;
+        // Create structure once
+        const marker = document.createElement('div');
+        marker.className = 'event-marker';
+        
+        const popup = document.createElement('div');
+        popup.className = 'event-popup';
+        
+        const location = document.createElement('div');
+        location.className = 'event-location';
+        
+        const date = document.createElement('div');
+        date.className = 'event-date';
+        
+        const type = document.createElement('div');
+        type.className = 'event-type';
+        
+        popup.appendChild(location);
+        popup.appendChild(date);
+        popup.appendChild(type);
+        event.appendChild(marker);
+        event.appendChild(popup);
 
-        // Add click handler
+        // Set content
+        this.updateEventContent(event, movement, isLatest);
+
+        // Add click handler (only once)
         event.addEventListener('click', (e) => {
             e.stopPropagation();
             this.handleTimelineItemClick(movement);
         });
 
         return event;
+    }
+
+    updateEventElement(element, movement, isLatest) {
+        const position = (movement.parsedDate - this.minDate) * this.pixelsPerMs;
+        
+        // Update position and classes efficiently
+        element.style.left = position + 'px';
+        element.className = `timeline-event ${movement.type || 'travel'} ${isLatest ? 'current' : ''}`;
+        element.dataset.movementId = movement.id;
+        
+        // Update content
+        this.updateEventContent(element, movement, isLatest);
+    }
+
+    updateEventContent(element, movement, isLatest) {
+        const location = element.querySelector('.event-location');
+        const date = element.querySelector('.event-date');
+        const type = element.querySelector('.event-type');
+        
+        location.textContent = movement.location || 'Unknown';
+        date.textContent = this.formatDate(movement.date);
+        type.textContent = movement.type || 'travel';
+        type.className = `event-type ${movement.type || 'travel'}`;
     }
 
     createChapters(movements) {
@@ -1007,17 +1151,22 @@ class MovementTimeline {
             }
         });
 
-        // Drag functionality for timeline
+        // Drag functionality for timeline - optimized with RAF throttling
         let isDragging = false;
         let lastX = 0;
         let currentTranslateX = 0;
         let animationId = null;
+        let lastUpdateTime = 0;
 
-        // Throttle function for performance
+        // More efficient throttle function
         const throttleTransform = (translateX) => {
-            if (animationId) return;
+            const now = Date.now();
+            if (now - lastUpdateTime < 8) return; // Limit to ~120fps for smoother dragging
+            
+            if (animationId) cancelAnimationFrame(animationId);
             animationId = requestAnimationFrame(() => {
                 this.updateTimelinePosition(translateX);
+                lastUpdateTime = now;
                 animationId = null;
             });
         };
@@ -1081,20 +1230,32 @@ class MovementTimeline {
             isDragging = false;
         });
 
-        // Zoom functionality with mouse wheel - throttled for performance
+        // Zoom functionality with mouse wheel - heavily optimized
         let zoomTimeout = null;
+        let lastZoomTime = 0;
+        
         timelineContainer.addEventListener('wheel', (e) => {
             e.preventDefault();
             
-            if (zoomTimeout) return; // Throttle zoom events
+            const now = Date.now();
+            if (now - lastZoomTime < 16) return; // Limit to ~60fps
+            lastZoomTime = now;
+            
+            if (zoomTimeout) clearTimeout(zoomTimeout);
             
             const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
-            this.zoomLevel = Math.max(0.5, Math.min(3, this.zoomLevel * zoomFactor));
+            const newZoomLevel = Math.max(0.5, Math.min(3, this.zoomLevel * zoomFactor));
             
-            zoomTimeout = setTimeout(() => {
-                this.renderTimeline(); // Re-render with new scale
-                zoomTimeout = null;
-            }, 50); // Throttle to every 50ms
+            // Only re-render if zoom level actually changed significantly
+            if (Math.abs(newZoomLevel - this.zoomLevel) > 0.01) {
+                this.zoomLevel = newZoomLevel;
+                
+                // Debounce the expensive re-render
+                zoomTimeout = setTimeout(() => {
+                    this.renderTimeline();
+                    zoomTimeout = null;
+                }, 100); // Increased debounce time
+            }
         });
 
         // Zoom controls
@@ -1177,19 +1338,45 @@ class MovementTimeline {
     }
 
     refresh() {
+        if (!this.isInitialized) {
+            Logger.warning('Timeline not initialized yet, waiting for movement markers...');
+            return;
+        }
+        
         this.loadVsuzHData().then(() => {
             this.renderTimeline();
+            Logger.success('📍 Timeline refreshed with updated data');
         }).catch(error => {
             Logger.error('Failed to refresh timeline:', error);
         });
     }
 
-    // Cleanup method
+    // Enhanced cleanup method
     cleanup() {
         if (this.timeline && this.timeline.parentNode) {
             this.timeline.parentNode.removeChild(this.timeline);
         }
+        
+        // Clear cached elements to prevent memory leaks
+        this.eventElements = [];
+        this.scaleElements = [];
+        this.timelineElements = null;
+        
+        // Clear data
+        this.timelineData = null;
+        
         Logger.cleanup('Movement timeline cleaned up');
+    }
+
+    // Performance monitoring method
+    measurePerformance(operation, fn) {
+        const start = performance.now();
+        const result = fn();
+        const end = performance.now();
+        if (end - start > 5) { // Only log slow operations
+            console.log(`Timeline ${operation}: ${(end - start).toFixed(2)}ms`);
+        }
+        return result;
     }
 }
 

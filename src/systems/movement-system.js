@@ -62,6 +62,16 @@ class MovementSystem {
             
             Logger.movement(`Created ${this.movementMarkers.length} movement markers`);
             
+            // Dispatch event that movement markers are ready
+            Logger.movement('🚀 Dispatching movementMarkersLoaded event...');
+            document.dispatchEvent(new CustomEvent('movementMarkersLoaded', {
+                detail: { 
+                    markersCount: this.movementMarkers.length,
+                    characters: data.characters 
+                }
+            }));
+            Logger.movement('✅ Movement markers loading complete');
+            
         } catch (error) {
             Logger.error('Failed to load character movement markers:', error);
         }
