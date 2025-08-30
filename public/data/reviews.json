@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "9040b8cc72a316b85c0bff24d397cd0c9f738bf9",
+      "action": "update",
+      "type": "location",
+      "itemName": "Kalthar",
+      "user": "gm",
+      "timestamp": "2025-08-30T21:47:55.010Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T21:47:55.010Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Kalthar (by gm) - updated description"
+    },
+    {
       "commitSha": "3e439c72326073f0aa0934564fed0ca824c7f557",
       "action": "update",
       "type": "location",
@@ -4968,5 +4981,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T21:47:36.192Z"
+  "lastUpdated": "2025-08-30T21:47:55.010Z"
 }
