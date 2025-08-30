@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Toftgard",
+      "location": "Ice Ice Mephit",
       "coordinates": [
-        1392,
-        1083
+        1298,
+        1061
       ],
       "description": "",
       "image": "",
@@ -269,20 +269,36 @@
           "createdAt": "2025-08-25T16:51:39.063Z",
           "movement_nr": 5,
           "updatedAt": "2025-08-30T13:01:31.495Z"
+        },
+        {
+          "id": "movement_1756559250651",
+          "movement_nr": 6,
+          "date": "5663-06-08",
+          "dateStart": "5663-06-08",
+          "dateEnd": "5663-06-12",
+          "location": "Ice Ice Mephit",
+          "coordinates": [
+            1298,
+            1061
+          ],
+          "notes": "Reise durch das Sonnenspitzen Gebirge und den letzten Schnee des Winters. Die gingen einem Yeti aus dem Weg und hatten eine friedliche Begegnung mit Ice Mephits.",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T13:07:30.651Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T13:01:31.495Z",
+      "updatedAt": "2025-08-30T13:07:30.651Z",
       "currentLocation": {
         "date": "5663-06-08",
         "dateStart": "5663-06-08",
         "dateEnd": "5663-06-12",
-        "location": "Toftgard",
+        "location": "Ice Ice Mephit",
         "coordinates": [
-          1392,
-          1083
+          1298,
+          1061
         ],
-        "notes": "Reise durch das Sonnengipfel Gebirfe durch den letzten Schnee des Winters."
+        "notes": "Reise durch das Sonnenspitzen Gebirge und den letzten Schnee des Winters. Die gingen einem Yeti aus dem Weg und hatten eine friedliche Begegnung mit Ice Mephits."
       }
     },
     {
@@ -1274,5 +1290,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T13:01:31.495Z"
+  "lastUpdated": "2025-08-30T13:07:30.651Z"
 }
