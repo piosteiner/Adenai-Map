@@ -182,7 +182,7 @@
           "type": "stay",
           "createdAt": "2025-08-24T23:06:55.342Z",
           "movement_nr": 0,
-          "updatedAt": "2025-08-30T12:40:35.524Z",
+          "updatedAt": "2025-08-30T12:40:39.475Z",
           "dateStart": "5663-06-03",
           "dateEnd": null
         },
@@ -198,7 +198,7 @@
           "type": "mission",
           "createdAt": "2025-08-24T23:08:02.170Z",
           "movement_nr": 1,
-          "updatedAt": "2025-08-30T12:40:35.524Z",
+          "updatedAt": "2025-08-30T12:40:39.475Z",
           "dateStart": "5663-06-03",
           "dateEnd": null,
           "isCustomLocation": true
@@ -215,9 +215,26 @@
           "type": "stay",
           "createdAt": "2025-08-24T23:31:46.547Z",
           "movement_nr": 2,
-          "updatedAt": "2025-08-30T12:40:35.524Z",
+          "updatedAt": "2025-08-30T12:40:39.475Z",
           "dateStart": "5663-06-03",
           "dateEnd": null
+        },
+        {
+          "id": "movement_1756117483681",
+          "date": "5663-06-05",
+          "location": "Sternenbobos wollen Abu ans Fell",
+          "coordinates": [
+            1268,
+            1043
+          ],
+          "notes": "Kampf gegen die Sternen-Heinis, nachdem sie Abu böse beäugt haben.",
+          "type": "mission",
+          "createdAt": "2025-08-25T10:24:43.681Z",
+          "movement_nr": 3,
+          "updatedAt": "2025-08-30T12:40:39.475Z",
+          "dateStart": "5663-06-05",
+          "dateEnd": null,
+          "isCustomLocation": true
         },
         {
           "id": "movement_1756137677339",
@@ -233,25 +250,8 @@
           "dateStart": "5663-06-05",
           "dateEnd": "5663-06-14",
           "isCustomLocation": true,
-          "updatedAt": "2025-08-30T12:40:35.524Z",
-          "movement_nr": 3
-        },
-        {
-          "id": "movement_1756117483681",
-          "date": "5663-06-05",
-          "location": "Sternenbobos wollen Abu ans Fell",
-          "coordinates": [
-            1268,
-            1043
-          ],
-          "notes": "Kampf gegen die Sternen-Heinis, nachdem sie Abu böse beäugt haben.",
-          "type": "mission",
-          "createdAt": "2025-08-25T10:24:43.681Z",
-          "movement_nr": 4,
-          "updatedAt": "2025-08-30T12:40:35.524Z",
-          "dateStart": "5663-06-05",
-          "dateEnd": null,
-          "isCustomLocation": true
+          "updatedAt": "2025-08-30T12:40:39.475Z",
+          "movement_nr": 4
         },
         {
           "id": "movement_1756140699063",
@@ -268,11 +268,11 @@
           "isCustomLocation": false,
           "createdAt": "2025-08-25T16:51:39.063Z",
           "movement_nr": 5,
-          "updatedAt": "2025-08-30T12:40:35.524Z"
+          "updatedAt": "2025-08-30T12:40:39.475Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T12:40:35.524Z",
+      "updatedAt": "2025-08-30T12:40:39.475Z",
       "currentLocation": {
         "date": "5663-06-20",
         "dateStart": "5663-06-20",
@@ -1274,5 +1274,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T12:40:35.524Z"
+  "lastUpdated": "2025-08-30T12:40:39.475Z"
 }
