@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "0942aae14b868a1c861a832a12cf7af41037ca3e",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T12:51:28.791Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T12:51:28.791Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Sternenbobos wollen Abu ans Fell entry (5663-06-03 to 5663-06-04)"
+    },
+    {
       "commitSha": "c7efc6c237618b39fc583d7736152c9ebe0826e5",
       "action": "update",
       "type": "character",
@@ -3980,5 +3993,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T12:42:10.993Z"
+  "lastUpdated": "2025-08-30T12:51:28.791Z"
 }
