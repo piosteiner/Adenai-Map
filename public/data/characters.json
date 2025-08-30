@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Südlicher Ausläufer des Torftgarder Waldes",
+      "location": "Toftgard",
       "coordinates": [
-        1362,
-        1050
+        1392,
+        1083
       ],
       "description": "",
       "image": "",
@@ -286,20 +286,36 @@
           "createdAt": "2025-08-25T16:51:39.063Z",
           "movement_nr": 6,
           "updatedAt": "2025-08-30T13:16:56.784Z"
+        },
+        {
+          "id": "movement_1756560086621",
+          "movement_nr": 7,
+          "date": "5663-06-19",
+          "dateStart": "5663-06-19",
+          "dateEnd": "5663-06-20",
+          "location": "Toftgard",
+          "coordinates": [
+            1392,
+            1083
+          ],
+          "notes": "Die Gruppe bringt den letzten Abschnitt nach Toftgard mit Ellas auf dem Rücken von Roger hinter sich. Dabei schnappt sich Abu ein \"Glühebli\" von einem der Felder um die Stadt.",
+          "type": "travel",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T13:21:26.621Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T13:16:56.784Z",
+      "updatedAt": "2025-08-30T13:21:26.621Z",
       "currentLocation": {
-        "date": "5663-06-12",
-        "dateStart": "5663-06-12",
-        "dateEnd": "5663-06-19",
-        "location": "Südlicher Ausläufer des Torftgarder Waldes",
+        "date": "5663-06-19",
+        "dateStart": "5663-06-19",
+        "dateEnd": "5663-06-20",
+        "location": "Toftgard",
         "coordinates": [
-          1362,
-          1050
+          1392,
+          1083
         ],
-        "notes": "Die Gruppe traff auf einen verletzten Halbelfen, Ellas Nebesi, und einen älteren Boten, Oliver.\nEllas war vergiftet und sie übernahmen ihn von Oliver, welcher in die entgegengesetzte Richtung reiste. Die VsuzH nahmen Ellas mit und machten noch eine Giftpflanze platt."
+        "notes": "Die Gruppe bringt den letzten Abschnitt nach Toftgard mit Ellas auf dem Rücken von Roger hinter sich. Dabei schnappt sich Abu ein \"Glühebli\" von einem der Felder um die Stadt."
       }
     },
     {
@@ -1291,5 +1307,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T13:16:56.784Z"
+  "lastUpdated": "2025-08-30T13:21:26.621Z"
 }
