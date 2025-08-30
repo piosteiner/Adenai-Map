@@ -405,7 +405,8 @@
         "name": "Kalthar",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Kalthar, bitte kontaktiere den Websitenbetreiber.",
         "contentUrl": null,
-        "region": "Rena Region",
+        "image": "https://adenai.piogino.ch/public/images/kalthar.png",
+        "region": "eastern_adenai",
         "type": "town",
         "visited": false
       },
