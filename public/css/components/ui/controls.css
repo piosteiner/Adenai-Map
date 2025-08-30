@@ -33,8 +33,8 @@
   border: 1px solid rgba(212, 175, 55, 0.3);
   transition: all 0.3s ease;
   user-select: none;
-  min-width: 80px;
-  min-height: 80px;
+  min-width: 90px;
+  min-height: 90px;
   position: relative;
 }
 
@@ -48,8 +48,8 @@
 
 /* Cluster Marker Visual */
 .cluster-marker-visual {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   position: relative;
   display: flex;
   align-items: center;
@@ -58,8 +58,8 @@
 
 /* Cluster Dot - Main marker circle */
 .cluster-dot {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   background: #4CAF50; /* Green when active/on */
   border: 3px solid white;
   border-radius: 50%;
@@ -76,7 +76,7 @@
 
 /* Cluster Count Text inside the circle */
 .cluster-count {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: bold;
   color: white;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
@@ -86,10 +86,10 @@
 /* Location Indicator - Small orange dot */
 .location-indicator {
   position: absolute;
-  bottom: -2px;
-  right: -2px;
-  width: 16px;
-  height: 16px;
+  bottom: 2px;
+  right: 2px;
+  width: 18px;
+  height: 18px;
   background: linear-gradient(135deg, #ff6b24 0%, #ff8a50 100%);
   border: 2px solid white;
   border-radius: 50%;
@@ -102,7 +102,7 @@
 
 /* Location Count Text inside the orange dot */
 .location-count {
-  font-size: 8px;
+  font-size: 10px;
   font-weight: bold;
   color: white;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
