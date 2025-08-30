@@ -171,23 +171,6 @@
       "notes": "",
       "movementHistory": [
         {
-          "id": "movement_1756361407508",
-          "movement_nr": 0,
-          "date": "5055-05-05",
-          "dateStart": "5055-05-05",
-          "dateEnd": null,
-          "location": "Nordmund",
-          "coordinates": [
-            1082,
-            967
-          ],
-          "notes": "",
-          "type": "stay",
-          "isCustomLocation": false,
-          "createdAt": "2025-08-28T06:10:07.508Z",
-          "updatedAt": "2025-08-28T06:10:43.758Z"
-        },
-        {
           "id": "movement_1756076815342",
           "date": "5663-06-03",
           "location": "Silbergrat",
@@ -285,7 +268,18 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-28T10:02:02.622Z"
+      "updatedAt": "2025-08-30T11:56:05.865Z",
+      "currentLocation": {
+        "date": "5663-06-20",
+        "dateStart": "5663-06-20",
+        "dateEnd": "5663-06-25",
+        "location": "Toftgard",
+        "coordinates": [
+          1392,
+          1083
+        ],
+        "notes": "Test übernachtung in toftgard"
+      }
     },
     {
       "id": "viktoria_karthright",
@@ -1276,5 +1270,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-29T21:15:29.569Z"
+  "lastUpdated": "2025-08-30T11:56:05.865Z"
 }
