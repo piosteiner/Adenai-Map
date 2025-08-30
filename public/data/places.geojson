@@ -284,7 +284,9 @@
         "name": "Silbergrat",
         "description": "Der Start der Reise der VsuzH. An diesem Ort kam Luna von Moonhaven in die Material Plane.",
         "contentUrl": null,
-        "region": "Sonnenspitzen",
+        "image": "https://adenai.piogino.ch/public/images/silbergrat.png",
+        "region": "sun_peaks",
+        "type": "town",
         "visited": true
       },
       "geometry": {
