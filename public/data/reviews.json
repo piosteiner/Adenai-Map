@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "99ec288bca84ce2d8c902e39053c3f7fdf22960e",
+      "action": "update",
+      "type": "location",
+      "itemName": "Nordmund",
+      "user": "gm",
+      "timestamp": "2025-08-30T21:57:48.715Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T21:57:48.715Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Nordmund (by gm) - updated description, updated region, updated type"
+    },
+    {
       "commitSha": "b078360f258d84e15b8b20283662607fac79ae7f",
       "action": "update",
       "type": "location",
@@ -5072,5 +5085,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T21:56:15.218Z"
+  "lastUpdated": "2025-08-30T21:57:48.715Z"
 }
