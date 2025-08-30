@@ -409,7 +409,7 @@
         "description": "Details zu diesem Ort sind noch zu entdecken.",
         "contentUrl": null,
         "image": "https://adenai.piogino.ch/public/images/kalthar.png",
-        "region": "eastern_adenai",
+        "region": "western_adenai",
         "type": "town",
         "visited": false
       },
