@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Motu Motu",
+      "location": "test",
       "coordinates": [
-        2005,
-        1025
+        3100,
+        2700
       ],
       "description": "",
       "image": "",
@@ -607,18 +607,34 @@
           "type": "travel",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T15:03:44.810Z"
+        },
+        {
+          "id": "movement_1756566440392",
+          "movement_nr": 26,
+          "date": "5663-09-09",
+          "dateStart": "5663-09-09",
+          "dateEnd": null,
+          "location": "test",
+          "coordinates": [
+            3100,
+            2700
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T15:07:20.393Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T15:03:44.810Z",
+      "updatedAt": "2025-08-30T15:07:20.394Z",
       "currentLocation": {
-        "date": "5663-08-08",
-        "dateStart": "5663-08-08",
-        "dateEnd": "5663-08-13",
-        "location": "Motu Motu",
+        "date": "5663-09-09",
+        "dateStart": "5663-09-09",
+        "dateEnd": null,
+        "location": "test",
         "coordinates": [
-          2005,
-          1025
+          3100,
+          2700
         ],
         "notes": ""
       }
@@ -1612,5 +1628,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T15:03:44.810Z"
+  "lastUpdated": "2025-08-30T15:07:20.394Z"
 }
