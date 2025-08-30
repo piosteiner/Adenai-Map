@@ -159,8 +159,8 @@
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
       "location": "Unser fliegendes Boot",
       "coordinates": [
-        2320,
-        978
+        2275,
+        992
       ],
       "description": "",
       "image": "",
@@ -681,25 +681,26 @@
           "dateEnd": null,
           "location": "Unser fliegendes Boot",
           "coordinates": [
-            2320,
-            978
+            2275,
+            992
           ],
           "notes": "",
           "type": "travel",
           "isCustomLocation": true,
-          "createdAt": "2025-08-30T15:23:30.993Z"
+          "createdAt": "2025-08-30T15:23:30.993Z",
+          "updatedAt": "2025-08-30T15:24:39.130Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T15:23:30.993Z",
+      "updatedAt": "2025-08-30T15:24:39.130Z",
       "currentLocation": {
         "date": "5663-08-15",
         "dateStart": "5663-08-15",
         "dateEnd": null,
         "location": "Unser fliegendes Boot",
         "coordinates": [
-          2320,
-          978
+          2275,
+          992
         ],
         "notes": ""
       }
@@ -1693,5 +1694,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T15:23:30.993Z"
+  "lastUpdated": "2025-08-30T15:24:39.130Z"
 }
