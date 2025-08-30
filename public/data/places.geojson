@@ -24,8 +24,9 @@
       "type": "Feature",
       "properties": {
         "name": "Rena",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Rena, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Hauptstadt von Adenai",
         "contentUrl": null,
+        "image": "",
         "region": "rena_region",
         "type": "city",
         "visited": false
