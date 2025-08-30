@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Toftgard",
+      "location": "Bootsfahrt auf dem Adenui - I",
       "coordinates": [
-        1392,
-        1083
+        1488,
+        1084
       ],
       "description": "",
       "image": "",
@@ -414,18 +414,34 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T14:41:28.223Z"
+        },
+        {
+          "id": "movement_1756565130708",
+          "movement_nr": 15,
+          "date": "5663-07-07",
+          "dateStart": "5663-07-07",
+          "dateEnd": null,
+          "location": "Bootsfahrt auf dem Adenui - I",
+          "coordinates": [
+            1488,
+            1084
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T14:45:30.708Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T14:41:28.223Z",
+      "updatedAt": "2025-08-30T14:45:30.708Z",
       "currentLocation": {
-        "date": "5663-06-28",
-        "dateStart": "5663-06-28",
-        "dateEnd": "5663-07-07",
-        "location": "Toftgard",
+        "date": "5663-07-07",
+        "dateStart": "5663-07-07",
+        "dateEnd": null,
+        "location": "Bootsfahrt auf dem Adenui - I",
         "coordinates": [
-          1392,
-          1083
+          1488,
+          1084
         ],
         "notes": ""
       }
@@ -1419,5 +1435,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T14:41:28.223Z"
+  "lastUpdated": "2025-08-30T14:45:30.708Z"
 }
