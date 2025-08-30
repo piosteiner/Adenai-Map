@@ -404,7 +404,7 @@
           "movement_nr": 14,
           "date": "5663-06-28",
           "dateStart": "5663-06-28",
-          "dateEnd": "5663-07-07",
+          "dateEnd": "5663-07-13",
           "location": "Toftgard",
           "coordinates": [
             1392,
@@ -413,7 +413,8 @@
           "notes": "",
           "type": "stay",
           "isCustomLocation": false,
-          "createdAt": "2025-08-30T14:41:28.223Z"
+          "createdAt": "2025-08-30T14:41:28.223Z",
+          "updatedAt": "2025-08-30T14:46:55.232Z"
         },
         {
           "id": "movement_1756565130708",
@@ -449,7 +450,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T14:46:23.638Z",
+      "updatedAt": "2025-08-30T14:46:55.232Z",
       "currentLocation": {
         "date": "5663-07-18",
         "dateStart": "5663-07-18",
@@ -1451,5 +1452,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T14:46:23.638Z"
+  "lastUpdated": "2025-08-30T14:46:55.232Z"
 }
