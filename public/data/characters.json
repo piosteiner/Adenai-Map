@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Toftgard",
+      "location": "Torftgarder Forst",
       "coordinates": [
-        1392,
-        1083
+        1310,
+        1094
       ],
       "description": "",
       "image": "",
@@ -302,20 +302,36 @@
           "type": "travel",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T13:21:26.621Z"
+        },
+        {
+          "id": "movement_1756560223428",
+          "movement_nr": 8,
+          "date": "5663-06-21",
+          "dateStart": "5663-06-21",
+          "dateEnd": "5663-06-22",
+          "location": "Torftgarder Forst",
+          "coordinates": [
+            1310,
+            1094
+          ],
+          "notes": "Mit Orren auf den Spuren der merkwürdigen Monster.",
+          "type": "travel",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T13:23:43.428Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T13:22:39.895Z",
+      "updatedAt": "2025-08-30T13:23:43.428Z",
       "currentLocation": {
-        "date": "5663-06-19",
-        "dateStart": "5663-06-19",
-        "dateEnd": "5663-06-20",
-        "location": "Toftgard",
+        "date": "5663-06-21",
+        "dateStart": "5663-06-21",
+        "dateEnd": "5663-06-22",
+        "location": "Torftgarder Forst",
         "coordinates": [
-          1392,
-          1083
+          1310,
+          1094
         ],
-        "notes": "Die Gruppe bringt den letzten Abschnitt nach Toftgard mit Ellas auf dem Rücken von Roger hinter sich. Dabei schnappt sich Abu ein \"Glühebli\" von einem der Felder um die Stadt."
+        "notes": "Mit Orren auf den Spuren der merkwürdigen Monster."
       }
     },
     {
@@ -1307,5 +1323,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T13:22:39.895Z"
+  "lastUpdated": "2025-08-30T13:23:43.428Z"
 }
