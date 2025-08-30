@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Zur Küste von Upeto",
+      "location": "Verlassenes Fischereidorf",
       "coordinates": [
-        2026,
-        671
+        1985,
+        546
       ],
       "description": "",
       "image": "",
@@ -721,18 +721,34 @@
           "type": "travel",
           "isCustomLocation": true,
           "createdAt": "2025-08-30T15:26:52.548Z"
+        },
+        {
+          "id": "movement_1756567647587",
+          "movement_nr": 33,
+          "date": "5663-08-22",
+          "dateStart": "5663-08-22",
+          "dateEnd": null,
+          "location": "Verlassenes Fischereidorf",
+          "coordinates": [
+            1985,
+            546
+          ],
+          "notes": "",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:27:27.587Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T15:26:52.548Z",
+      "updatedAt": "2025-08-30T15:27:27.587Z",
       "currentLocation": {
-        "date": "5663-08-15",
-        "dateStart": "5663-08-15",
-        "dateEnd": "5663-08-19",
-        "location": "Zur Küste von Upeto",
+        "date": "5663-08-22",
+        "dateStart": "5663-08-22",
+        "dateEnd": null,
+        "location": "Verlassenes Fischereidorf",
         "coordinates": [
-          2026,
-          671
+          1985,
+          546
         ],
         "notes": ""
       }
@@ -1726,5 +1742,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T15:26:52.548Z"
+  "lastUpdated": "2025-08-30T15:27:27.587Z"
 }
