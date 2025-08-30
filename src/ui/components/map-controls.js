@@ -149,13 +149,17 @@ class MapControls {
         const markersVisible = window.movementSystem.toggleAllMovementMarkers();
         
         // Update button appearance
+        const statusText = this.markersToggleBtn.querySelector('.cluster-status-text');
+        
         if (markersVisible) {
             this.markersToggleBtn.classList.add('active');
             this.markersToggleBtn.title = 'Hide Movement Markers';
+            if (statusText) statusText.textContent = 'On';
             Logger.info('🟢 Movement markers shown');
         } else {
             this.markersToggleBtn.classList.remove('active');
             this.markersToggleBtn.title = 'Show Movement Markers';
+            if (statusText) statusText.textContent = 'Off';
             Logger.info('🔴 Movement markers hidden');
         }
     }
@@ -167,13 +171,16 @@ class MapControls {
 
         // Sync button state with movement system
         const markersVisible = window.movementSystem.areMarkersVisible();
+        const statusText = this.markersToggleBtn.querySelector('.cluster-status-text');
         
         if (markersVisible) {
             this.markersToggleBtn.classList.add('active');
             this.markersToggleBtn.title = 'Hide Movement Markers';
+            if (statusText) statusText.textContent = 'On';
         } else {
             this.markersToggleBtn.classList.remove('active');
             this.markersToggleBtn.title = 'Show Movement Markers';
+            if (statusText) statusText.textContent = 'Off';
         }
     }
 

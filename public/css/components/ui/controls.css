@@ -18,8 +18,8 @@
 .map-control-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
+  justify-content: center;
+  padding: 16px;
   background: rgba(139, 90, 60, 0.95);
   color: white;
   border: none;
@@ -33,8 +33,61 @@
   border: 1px solid rgba(212, 175, 55, 0.3);
   transition: all 0.3s ease;
   user-select: none;
-  min-width: 120px;
+  min-width: 80px;
+  min-height: 80px;
   position: relative;
+}
+
+/* Cluster Marker Button Layout */
+.cluster-marker-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Cluster Marker Visual */
+.cluster-marker-visual {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cluster Dot - Main marker circle */
+.cluster-dot {
+  width: 28px;
+  height: 28px;
+  background: #4CAF50; /* Green when active/on */
+  border: 3px solid white;
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  
+  /* Add inner highlight like real cluster markers */
+  background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+}
+
+/* Status Text */
+.cluster-status-text {
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Button States */
+.map-control-btn.active .cluster-dot {
+  background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+}
+
+.map-control-btn:not(.active) .cluster-dot {
+  background: linear-gradient(135deg, #f44336 0%, #ef5350 100%);
 }
 
 /* Visual connection line to panel */
@@ -61,32 +114,18 @@
   background: rgba(212, 175, 55, 0.6);
 }
 
+.map-control-btn:hover .cluster-dot {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
 .map-control-btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.map-control-btn.active {
-  background: rgba(76, 175, 80, 0.95);
-  border-color: rgba(129, 199, 132, 0.5);
-}
-
-.map-control-btn.active:hover {
-  background: rgba(96, 195, 100, 0.95);
-}
-
-.marker-icon {
-  font-size: 16px;
-  line-height: 1;
-}
-
-.control-text {
-  font-weight: 600;
-}
-
-/* Hide markers when button is inactive */
-.map-control-btn:not(.active) .marker-icon {
-  opacity: 0.7;
+.map-control-btn:active .cluster-dot {
+  transform: scale(0.95);
 }
 
 /* Responsive design for smaller screens */
@@ -96,13 +135,24 @@
   }
   
   .map-control-btn {
-    padding: 10px 12px;
-    font-size: 12px;
-    min-width: 100px;
+    padding: 12px;
+    min-width: 70px;
+    min-height: 70px;
   }
   
-  .marker-icon {
-    font-size: 14px;
+  .cluster-marker-visual {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .cluster-dot {
+    width: 24px;
+    height: 24px;
+    border: 2px solid white;
+  }
+  
+  .cluster-status-text {
+    font-size: 11px;
   }
 }
 
@@ -112,16 +162,24 @@
   }
   
   .map-control-btn {
-    padding: 8px 10px;
-    min-width: 80px;
+    padding: 10px;
+    min-width: 60px;
+    min-height: 60px;
   }
   
-  .control-text {
-    display: none; /* Hide text on very small screens, keep only icon */
+  .cluster-marker-visual {
+    width: 24px;
+    height: 24px;
   }
   
-  .map-control-btn {
-    min-width: 44px; /* Touch-friendly minimum size */
+  .cluster-dot {
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+  }
+  
+  .cluster-status-text {
+    font-size: 10px;
   }
 }
 
