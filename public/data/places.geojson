@@ -294,9 +294,11 @@
       "type": "Feature",
       "properties": {
         "name": "Glesburg",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Glesburg, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Die grösste noch aktive von Zwergen geschaffene Stadt auf Adenai.",
         "contentUrl": null,
-        "region": "Ewige Donnerklüfte",
+        "image": "",
+        "region": "eastern_adenai",
+        "type": "city",
         "visited": false
       },
       "geometry": {
@@ -311,7 +313,7 @@
       "type": "Feature",
       "properties": {
         "name": "Byrgenwerft",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Byrgenwerft, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Grösste Stadt in der Nähe der Yosefka Akademie.",
         "contentUrl": null,
         "image": "",
         "region": "arcane_heights",
@@ -385,9 +387,10 @@
       "type": "Feature",
       "properties": {
         "name": "Donnermund",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Donnermund, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Details zu diesem Ort sind noch zu entdecken.",
         "contentUrl": null,
-        "region": "Ewige Donnerklüfte",
+        "image": "",
+        "region": "",
         "type": "town",
         "visited": false
       },
@@ -403,10 +406,10 @@
       "type": "Feature",
       "properties": {
         "name": "Kalthar",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Kalthar, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Details zu diesem Ort sind noch zu entdecken.",
         "contentUrl": null,
         "image": "https://adenai.piogino.ch/public/images/kalthar.png",
-        "region": "eastern_adenai",
+        "region": "western_adenai",
         "type": "town",
         "visited": false
       },
