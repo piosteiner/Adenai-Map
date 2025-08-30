@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "432c0970247b81043e24381db5f5758ddc270652",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T15:31:35.301Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T15:31:35.301Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Basapo (5663-08-23 to 5663-08-27)"
+    },
+    {
       "commitSha": "fb4dab21008240ff29cc0627bfe4b7f6e96f0d20",
       "action": "update",
       "type": "character",
@@ -4604,5 +4617,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T15:27:28.397Z"
+  "lastUpdated": "2025-08-30T15:31:35.301Z"
 }
