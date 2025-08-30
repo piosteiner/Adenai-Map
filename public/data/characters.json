@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Bootsfahrt auf dem Adenui - III",
+      "location": "Bootsfahrt auf dem Adenui - IV",
       "coordinates": [
-        1506,
-        1060
+        1607,
+        1010
       ],
       "description": "",
       "image": "",
@@ -512,18 +512,34 @@
           "type": "travel",
           "isCustomLocation": true,
           "createdAt": "2025-08-30T14:49:50.091Z"
+        },
+        {
+          "id": "movement_1756565432871",
+          "movement_nr": 21,
+          "date": "5663-07-23",
+          "dateStart": "5663-07-23",
+          "dateEnd": "5663-07-25",
+          "location": "Bootsfahrt auf dem Adenui - IV",
+          "coordinates": [
+            1607,
+            1010
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T14:50:32.871Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T14:49:50.091Z",
+      "updatedAt": "2025-08-30T14:50:32.872Z",
       "currentLocation": {
         "date": "5663-07-23",
         "dateStart": "5663-07-23",
-        "dateEnd": null,
-        "location": "Bootsfahrt auf dem Adenui - III",
+        "dateEnd": "5663-07-25",
+        "location": "Bootsfahrt auf dem Adenui - IV",
         "coordinates": [
-          1506,
-          1060
+          1607,
+          1010
         ],
         "notes": ""
       }
@@ -1517,5 +1533,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T14:49:50.091Z"
+  "lastUpdated": "2025-08-30T14:50:32.872Z"
 }
