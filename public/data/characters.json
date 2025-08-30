@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Ice Ice Mephit",
+      "location": "Underdark bei Ako",
       "coordinates": [
-        1298,
-        1061
+        1839,
+        558
       ],
       "description": "",
       "image": "",
@@ -182,7 +182,7 @@
           "type": "stay",
           "createdAt": "2025-08-24T23:06:55.342Z",
           "movement_nr": 0,
-          "updatedAt": "2025-08-30T13:07:48.489Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z",
           "dateStart": "5663-06-03",
           "dateEnd": null
         },
@@ -198,7 +198,7 @@
           "type": "mission",
           "createdAt": "2025-08-24T23:08:02.170Z",
           "movement_nr": 1,
-          "updatedAt": "2025-08-30T13:07:48.489Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z",
           "dateStart": "5663-06-03",
           "dateEnd": null,
           "isCustomLocation": true
@@ -212,10 +212,10 @@
             1041
           ],
           "notes": "Rückkehr nach Silbergrat nach dem Aufrag in der Mine.\nLuna stösst zur Gruppe hinzu und auch der erste Kontakt mit dem Sternenfall Zirkel (aka. Sternschnuppenclub, Sternenheinis, Sternenzirkel). Es ist eine deutliche Feindseligkeit wird von dem Sternenzirkel gegenüber Abu vernommen.",
-          "type": "stay",
+          "type": "return",
           "createdAt": "2025-08-24T23:31:46.547Z",
           "movement_nr": 2,
-          "updatedAt": "2025-08-30T13:07:48.489Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z",
           "dateStart": "5663-06-03",
           "dateEnd": null
         },
@@ -231,7 +231,7 @@
           "type": "mission",
           "createdAt": "2025-08-25T10:24:43.681Z",
           "movement_nr": 3,
-          "updatedAt": "2025-08-30T13:07:48.489Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z",
           "dateStart": "5663-06-03",
           "dateEnd": "5663-06-04",
           "isCustomLocation": true
@@ -250,7 +250,7 @@
           "dateStart": "5663-06-04",
           "dateEnd": "5663-06-08",
           "isCustomLocation": true,
-          "updatedAt": "2025-08-30T13:07:48.489Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z",
           "movement_nr": 4
         },
         {
@@ -268,38 +268,537 @@
           "type": "travel",
           "isCustomLocation": true,
           "createdAt": "2025-08-30T13:07:30.651Z",
-          "updatedAt": "2025-08-30T13:07:48.489Z"
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756140699063",
-          "date": "5663-06-08",
-          "dateStart": "5663-06-08",
-          "dateEnd": "5663-06-12",
+          "date": "5663-06-12",
+          "dateStart": "5663-06-12",
+          "dateEnd": "5663-06-19",
+          "location": "Südlicher Ausläufer des Torftgarder Forstes",
+          "coordinates": [
+            1362,
+            1050
+          ],
+          "notes": "Die Gruppe traff auf einen verletzten Halbelfen, Ellas Nebesi, und einen älteren Boten, Oliver.\nEllas war vergiftet und sie übernahmen ihn von Oliver, welcher in die entgegengesetzte Richtung reiste. Die VsuzH nahmen Ellas mit und machten noch eine Giftpflanze platt.",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-25T16:51:39.063Z",
+          "movement_nr": 6,
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756560086621",
+          "movement_nr": 7,
+          "date": "5663-06-19",
+          "dateStart": "5663-06-19",
+          "dateEnd": "5663-06-20",
           "location": "Toftgard",
           "coordinates": [
             1392,
             1083
           ],
-          "notes": "Reise durch das Sonnengipfel Gebirfe durch den letzten Schnee des Winters.",
+          "notes": "Die Gruppe bringt den letzten Abschnitt nach Toftgard mit Ellas auf dem Rücken von Roger hinter sich. Dabei schnappt sich Abu ein \"Glühebli\" von einem der Felder um die Stadt.",
+          "type": "travel",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T13:21:26.621Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756560223428",
+          "movement_nr": 8,
+          "date": "5663-06-21",
+          "dateStart": "5663-06-21",
+          "dateEnd": "5663-06-22",
+          "location": "Torftgarder Forst",
+          "coordinates": [
+            1310,
+            1094
+          ],
+          "notes": "Mit Orren auf den Spuren der merkwürdigen Monster.",
+          "type": "travel",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T13:23:43.428Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756560288939",
+          "movement_nr": 9,
+          "date": "5663-06-22",
+          "dateStart": "5663-06-22",
+          "dateEnd": "5663-06-23",
+          "location": "Fitchers Turm",
+          "coordinates": [
+            1344,
+            1128
+          ],
+          "notes": "Die VsuzH finden den Turm von Fitcher.",
+          "type": "travel",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T13:24:48.939Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756564367757",
+          "movement_nr": 10,
+          "date": "5663-06-24",
+          "dateStart": "5663-06-24",
+          "dateEnd": "5663-06-25",
+          "location": "Ruine von Zurak'thar",
+          "coordinates": [
+            1291,
+            1163
+          ],
+          "notes": "",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:32:47.757Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756564461302",
+          "movement_nr": 11,
+          "date": "5663-06-25",
+          "dateStart": "5663-06-25",
+          "dateEnd": "5663-06-30",
+          "location": "Fitchers Turm",
+          "coordinates": [
+            1344,
+            1128
+          ],
+          "notes": "Rast und Lernen bei Fitcher",
           "type": "stay",
           "isCustomLocation": false,
-          "createdAt": "2025-08-25T16:51:39.063Z",
-          "movement_nr": 6,
-          "updatedAt": "2025-08-30T13:07:48.489Z"
+          "createdAt": "2025-08-30T14:34:21.302Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756564514270",
+          "movement_nr": 12,
+          "date": "5663-06-30",
+          "dateStart": "5663-06-30",
+          "dateEnd": null,
+          "location": "Torftgarder Forst",
+          "coordinates": [
+            1310,
+            1094
+          ],
+          "notes": "Kügeli joins the Party",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:35:14.270Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756564587469",
+          "movement_nr": 13,
+          "date": "5663-06-30",
+          "dateStart": "5663-06-30",
+          "dateEnd": "5663-07-01",
+          "location": "Toftgard",
+          "coordinates": [
+            1392,
+            1083
+          ],
+          "notes": "Zurück nach Toftgard",
+          "type": "return",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:36:27.469Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756564888223",
+          "movement_nr": 14,
+          "date": "5663-07-01",
+          "dateStart": "5663-07-01",
+          "dateEnd": "5663-07-13",
+          "location": "Toftgard",
+          "coordinates": [
+            1392,
+            1083
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:41:28.223Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756565130708",
+          "movement_nr": 15,
+          "date": "5663-07-13",
+          "dateStart": "5663-07-13",
+          "dateEnd": "5663-07-18",
+          "location": "Bootsfahrt auf dem Adenui - I",
+          "coordinates": [
+            1488,
+            1084
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T14:45:30.708Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756565183638",
+          "movement_nr": 16,
+          "date": "5663-07-18",
+          "dateStart": "5663-07-18",
+          "dateEnd": "5663-07-22",
+          "location": "Bootsfahrt auf dem Adenui - II",
+          "coordinates": [
+            1498,
+            1067
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T14:46:23.638Z",
+          "updatedAt": "2025-08-30T15:01:31.783Z"
+        },
+        {
+          "id": "movement_1756565268019",
+          "movement_nr": 17,
+          "date": "5663-07-22",
+          "dateStart": "5663-07-22",
+          "dateEnd": null,
+          "location": "Zur Prallen Traube",
+          "coordinates": [
+            1481,
+            1053
+          ],
+          "notes": "",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:47:48.019Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756565284687",
+          "movement_nr": 18,
+          "date": "5663-07-22",
+          "dateStart": "5663-07-22",
+          "dateEnd": null,
+          "location": "Goblin Loch",
+          "coordinates": [
+            1472,
+            1040
+          ],
+          "notes": "",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:48:04.687Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756565313715",
+          "movement_nr": 19,
+          "date": "5663-07-22",
+          "dateStart": "5663-07-22",
+          "dateEnd": "5663-07-23",
+          "location": "Zur Prallen Traube",
+          "coordinates": [
+            1481,
+            1053
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:48:33.715Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756565390091",
+          "movement_nr": 20,
+          "date": "5663-07-23",
+          "dateStart": "5663-07-23",
+          "dateEnd": null,
+          "location": "Bootsfahrt auf dem Adenui - III",
+          "coordinates": [
+            1506,
+            1060
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T14:49:50.091Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756565432871",
+          "movement_nr": 21,
+          "date": "5663-07-23",
+          "dateStart": "5663-07-23",
+          "dateEnd": "5663-07-25",
+          "location": "Bootsfahrt auf dem Adenui - IV",
+          "coordinates": [
+            1607,
+            1010
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T14:50:32.871Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756565503759",
+          "movement_nr": 22,
+          "date": "5663-07-25",
+          "dateStart": "5663-07-25",
+          "dateEnd": "5663-07-26",
+          "location": "Ankunft in Valatis",
+          "coordinates": [
+            1667,
+            1007
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T14:51:43.759Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756565746513",
+          "movement_nr": 23,
+          "date": "5663-07-26",
+          "dateStart": "5663-07-26",
+          "dateEnd": "5663-08-08",
+          "location": "Valaris",
+          "coordinates": [
+            1700,
+            1008
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:55:46.513Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756566140304",
+          "movement_nr": 24,
+          "date": "5663-08-08",
+          "dateStart": "5663-08-08",
+          "dateEnd": null,
+          "location": "Aufs Meer hinaus",
+          "coordinates": [
+            1710,
+            989
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T15:02:20.304Z"
+        },
+        {
+          "id": "movement_1756566224810",
+          "movement_nr": 25,
+          "date": "5663-08-08",
+          "dateStart": "5663-08-08",
+          "dateEnd": "5663-08-13",
+          "location": "Motu Motu",
+          "coordinates": [
+            2005,
+            1025
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:03:44.810Z"
+        },
+        {
+          "id": "movement_1756566953760",
+          "movement_nr": 26,
+          "date": "5663-08-13",
+          "dateStart": "5663-08-13",
+          "dateEnd": null,
+          "location": "Sternenzirkel Insel",
+          "coordinates": [
+            2106,
+            1070
+          ],
+          "notes": "",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:15:53.760Z"
+        },
+        {
+          "id": "movement_1756567179182",
+          "movement_nr": 27,
+          "date": "5663-08-13",
+          "dateStart": "5663-08-13",
+          "dateEnd": "5663-08-14",
+          "location": "Luvatu",
+          "coordinates": [
+            2126,
+            992
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:19:39.182Z",
+          "updatedAt": "2025-08-30T15:20:08.955Z"
+        },
+        {
+          "id": "movement_1756567248493",
+          "movement_nr": 28,
+          "date": "5663-08-14",
+          "dateStart": "5663-08-14",
+          "dateEnd": null,
+          "location": "Atlantis (versunken)",
+          "coordinates": [
+            2210,
+            975
+          ],
+          "notes": "",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:20:48.493Z"
+        },
+        {
+          "id": "movement_1756567327678",
+          "movement_nr": 29,
+          "date": "5663-08-14",
+          "dateStart": "5663-08-14",
+          "dateEnd": "5663-08-15",
+          "location": "Atlantis (aufgestiegen)",
+          "coordinates": [
+            2210,
+            1200
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:22:07.678Z"
+        },
+        {
+          "id": "movement_1756567410993",
+          "movement_nr": 30,
+          "date": "5663-08-15",
+          "dateStart": "5663-08-15",
+          "dateEnd": null,
+          "location": "Unser fliegendes Boot",
+          "coordinates": [
+            2275,
+            992
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T15:23:30.993Z",
+          "updatedAt": "2025-08-30T15:24:39.130Z"
+        },
+        {
+          "id": "movement_1756567538109",
+          "movement_nr": 31,
+          "date": "5663-08-15",
+          "dateStart": "5663-08-15",
+          "dateEnd": null,
+          "location": "Platsch! Wieder auf dem Meer",
+          "coordinates": [
+            2275,
+            825
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T15:25:38.109Z"
+        },
+        {
+          "id": "movement_1756567612548",
+          "movement_nr": 32,
+          "date": "5663-08-15",
+          "dateStart": "5663-08-15",
+          "dateEnd": "5663-08-19",
+          "location": "Zur Küste von Upeto",
+          "coordinates": [
+            2026,
+            671
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T15:26:52.548Z"
+        },
+        {
+          "id": "movement_1756567647587",
+          "movement_nr": 33,
+          "date": "5663-08-22",
+          "dateStart": "5663-08-22",
+          "dateEnd": null,
+          "location": "Verlassenes Fischereidorf",
+          "coordinates": [
+            1985,
+            546
+          ],
+          "notes": "",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:27:27.587Z"
+        },
+        {
+          "id": "movement_1756567894569",
+          "movement_nr": 34,
+          "date": "5663-08-23",
+          "dateStart": "5663-08-23",
+          "dateEnd": "5663-08-27",
+          "location": "Basapo",
+          "coordinates": [
+            1957,
+            488
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:31:34.569Z"
+        },
+        {
+          "id": "movement_1756568059435",
+          "movement_nr": 35,
+          "date": "5663-09-01",
+          "dateStart": "5663-09-01",
+          "dateEnd": "5663-09-04",
+          "location": "Akónetchie",
+          "coordinates": [
+            1869,
+            556
+          ],
+          "notes": "",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:34:19.435Z"
+        },
+        {
+          "id": "movement_1756568335088",
+          "movement_nr": 36,
+          "date": "5663-09-04",
+          "dateStart": "5663-09-04",
+          "dateEnd": "5663-09-05",
+          "location": "Underdark bei Ako",
+          "coordinates": [
+            1839,
+            558
+          ],
+          "notes": "Stand Session 55 ist die Gruppe am 2. Tag, am 05.09.5663 im Underdark.",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:38:55.088Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T13:07:48.489Z",
+      "updatedAt": "2025-08-30T15:38:55.088Z",
       "currentLocation": {
-        "date": "5663-06-08",
-        "dateStart": "5663-06-08",
-        "dateEnd": "5663-06-12",
-        "location": "Ice Ice Mephit",
+        "date": "5663-09-04",
+        "dateStart": "5663-09-04",
+        "dateEnd": "5663-09-05",
+        "location": "Underdark bei Ako",
         "coordinates": [
-          1298,
-          1061
+          1839,
+          558
         ],
-        "notes": "Reise durch das Sonnenspitzen Gebirge und den letzten Schnee des Winters. Die gingen einem Yeti aus dem Weg und hatten eine friedliche Begegnung mit Ice Mephits."
+        "notes": "Stand Session 55 ist die Gruppe am 2. Tag, am 05.09.5663 im Underdark."
       }
     },
     {
@@ -1291,5 +1790,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T13:07:48.489Z"
+  "lastUpdated": "2025-08-30T15:38:55.088Z"
 }
