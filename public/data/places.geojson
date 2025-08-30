@@ -155,14 +155,16 @@
         "name": "Motu Motu",
         "description": "Die schwimmende Stadt.",
         "contentUrl": null,
+        "image": "",
         "region": "east_sea",
+        "type": "",
         "visited": true
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          2005,
-          1025
+          2057,
+          1054
         ]
       }
     },
