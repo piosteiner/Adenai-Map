@@ -44,7 +44,7 @@ class LocationSystem {
             heaven: { value: 'heaven', label: 'Himmel' },
             underdark: { value: 'underdark', label: 'Underdark' },
             feywild: { value: 'feywild', label: 'Feywild' },
-            unknown: { value: 'unknown', label: 'Unbekannt' },
+            unknown: { value: 'unknown', label: '❗ Error contact the owner' },
             other: { value: 'other', label: 'Andere' }
         };
         
@@ -601,6 +601,7 @@ class LocationSystem {
         this.locations.push(locationData);
     }
 
+    // Helper method to normalize region values from GeoJSON to standardized keys
     // Create popup content from properties
     createPopupFromProperties(name, description, details, type, region) {
         let content = `<div class="popup-title">${name}</div>`;
@@ -617,7 +618,7 @@ class LocationSystem {
             if (region) {
                 const regionInfo = this.locationRegions[region] || this.locationRegions.unknown;
                 if (type) content += ' • '; // Add separator if both type and region
-                content += `<span class="popup-region">Region: ${regionInfo.label}</span>`;
+                content += `<span class="popup-region">📍 ${regionInfo.label}</span>`;
             }
             
             content += '</div>';
