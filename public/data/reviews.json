@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6cddbcb4c83593dadb5b6745264451c4dc99c830",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T15:24:40.054Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T15:24:40.054Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Unser fliegendes Boot entry (5663-08-15)"
+    },
+    {
       "commitSha": "c9b8e35ec88e0a960133306cd865272be0790afb",
       "action": "update",
       "type": "character",
@@ -4552,5 +4565,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T15:23:31.789Z"
+  "lastUpdated": "2025-08-30T15:24:40.054Z"
 }
