@@ -166,6 +166,41 @@
   color: #aaa;
 }
 
+/* Location image preview */
+.popup-image-container {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.popup-location-image {
+  max-width: 100%;
+  max-height: 120px;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  border: 2px solid var(--dropdown-border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.popup-location-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  border-color: #6366f1;
+}
+
+[data-theme="dark"] .popup-location-image {
+  border-color: var(--dropdown-border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+[data-theme="dark"] .popup-location-image:hover {
+  border-color: #8b5cf6;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
 /* Character lists in popups */
 .popup-characters {
   margin-top: 10px;

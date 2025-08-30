@@ -628,6 +628,15 @@ class LocationSystem {
     createPopupFromProperties(name, description, details, type, region) {
         let content = `<div class="popup-title">${name}</div>`;
         
+        // Add location image preview if available
+        const imageUrl = this.getLocationImageUrl(name);
+        if (imageUrl) {
+            content += `<div class="popup-image-container">
+                <img class="popup-location-image" src="${imageUrl}" alt="${name}" 
+                     title="Hover to enlarge • Click to open full size">
+            </div>`;
+        }
+        
         // Add type and region information
         if (type || region) {
             content += '<div class="popup-meta">';
@@ -659,6 +668,67 @@ class LocationSystem {
         }
         
         return content;
+    }
+
+    // Get location image URL based on location name
+    getLocationImageUrl(locationName) {
+        if (!locationName) return null;
+        
+        // Normalize location name for filename lookup
+        const normalizedName = locationName
+            .toLowerCase()
+            .replace(/[^a-z0-9]/g, '_')  // Replace non-alphanumeric with underscore
+            .replace(/_+/g, '_')         // Replace multiple underscores with single
+            .replace(/^_|_$/g, '');      // Remove leading/trailing underscores
+        
+        // Common image extensions to try
+        const extensions = ['png', 'jpg', 'jpeg'];
+        
+        // Check for direct matches with normalized name
+        for (const ext of extensions) {
+            const filename = `${normalizedName}.${ext}`;
+            // For now, we'll assume the image exists if the name is reasonable
+            // In production, you might want to check if the file actually exists
+            if (this.isKnownLocationImage(normalizedName)) {
+                return `public/images/${filename}`;
+            }
+        }
+        
+        // If no direct match, try some common mapping patterns
+        const locationImageMap = {
+            'valaris': 'valaris.png',
+            'goblin_hole': 'goblin_hole.png', 
+            'goblin_loch': 'goblin_hole.png',
+            'pralle_traube': 'pralle_traube.png',
+            'silbergrat': 'silbergrat.png',
+            'basapo': 'basapo_bottom.jpg',
+            'akonetchie': 'akonetchie.jpg',
+            'atlantis': 'atlantis_general.png',
+            'kalthar': 'kalthar.png',
+            'underdark': 'underdark_ako.PNG'
+        };
+        
+        if (locationImageMap[normalizedName]) {
+            return `public/images/${locationImageMap[normalizedName]}`;
+        }
+        
+        return null; // No image found
+    }
+    
+    // Check if this is a known location image
+    isKnownLocationImage(normalizedName) {
+        const knownLocationImages = [
+            'valaris', 'goblin_hole', 'pralle_traube', 'silbergrat', 
+            'basapo_bottom', 'akonetchie', 'atlantis_general', 'atlantis_bubble', 
+            'atlantis_clouds', 'kalthar', 'underdark_ako', 'map_valaris',
+            'mapextension', 'mapextension_east', 'mapextension_small'
+        ];
+        
+        return knownLocationImages.some(known => 
+            normalizedName === known || 
+            normalizedName.includes(known) || 
+            known.includes(normalizedName)
+        );
     }
 
     // Add character lists to popup content
