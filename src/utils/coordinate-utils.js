@@ -3,11 +3,14 @@
 
 class CoordinateUtils {
     // Format coordinates for display
-    static formatCoordinates(coords, precision = 2) {
+    static formatCoordinates(coords, precision = 0) {
         if (!DataUtils.isValidCoordinate(coords)) {
             return 'Invalid coordinates';
         }
-        return `${coords[0].toFixed(precision)} ${coords[1].toFixed(precision)}`;
+        // Format as requested: x-coordinate y-coordinate
+        const x = Math.round(coords[0]);
+        const y = Math.round(coords[1]);
+        return `${x} ${y}`;
     }
     
     // Copy coordinates to clipboard with user feedback
