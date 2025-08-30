@@ -997,7 +997,7 @@
         "name": "Underdark bei Ako",
         "description": "Zugang zum Underdark bei Ako. Die Sonnenwurzel Mpako liegt über dem Zugang.",
         "contentUrl": null,
-        "image": "",
+        "image": "https://adenai.piogino.ch/public/images/underdark_ako.png",
         "region": "north_adenai",
         "type": "town",
         "visited": true
