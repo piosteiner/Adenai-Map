@@ -182,7 +182,7 @@
           "type": "stay",
           "createdAt": "2025-08-24T23:06:55.342Z",
           "movement_nr": 0,
-          "updatedAt": "2025-08-30T12:40:39.475Z",
+          "updatedAt": "2025-08-30T13:07:48.489Z",
           "dateStart": "5663-06-03",
           "dateEnd": null
         },
@@ -198,7 +198,7 @@
           "type": "mission",
           "createdAt": "2025-08-24T23:08:02.170Z",
           "movement_nr": 1,
-          "updatedAt": "2025-08-30T12:40:39.475Z",
+          "updatedAt": "2025-08-30T13:07:48.489Z",
           "dateStart": "5663-06-03",
           "dateEnd": null,
           "isCustomLocation": true
@@ -215,7 +215,7 @@
           "type": "stay",
           "createdAt": "2025-08-24T23:31:46.547Z",
           "movement_nr": 2,
-          "updatedAt": "2025-08-30T12:40:39.475Z",
+          "updatedAt": "2025-08-30T13:07:48.489Z",
           "dateStart": "5663-06-03",
           "dateEnd": null
         },
@@ -231,7 +231,7 @@
           "type": "mission",
           "createdAt": "2025-08-25T10:24:43.681Z",
           "movement_nr": 3,
-          "updatedAt": "2025-08-30T12:51:28.080Z",
+          "updatedAt": "2025-08-30T13:07:48.489Z",
           "dateStart": "5663-06-03",
           "dateEnd": "5663-06-04",
           "isCustomLocation": true
@@ -250,8 +250,25 @@
           "dateStart": "5663-06-04",
           "dateEnd": "5663-06-08",
           "isCustomLocation": true,
-          "updatedAt": "2025-08-30T12:57:47.338Z",
+          "updatedAt": "2025-08-30T13:07:48.489Z",
           "movement_nr": 4
+        },
+        {
+          "id": "movement_1756559250651",
+          "movement_nr": 5,
+          "date": "5663-06-08",
+          "dateStart": "5663-06-08",
+          "dateEnd": "5663-06-12",
+          "location": "Ice Ice Mephit",
+          "coordinates": [
+            1298,
+            1061
+          ],
+          "notes": "Reise durch das Sonnenspitzen Gebirge und den letzten Schnee des Winters. Die gingen einem Yeti aus dem Weg und hatten eine friedliche Begegnung mit Ice Mephits.",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T13:07:30.651Z",
+          "updatedAt": "2025-08-30T13:07:48.489Z"
         },
         {
           "id": "movement_1756140699063",
@@ -267,28 +284,12 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-25T16:51:39.063Z",
-          "movement_nr": 5,
-          "updatedAt": "2025-08-30T13:01:31.495Z"
-        },
-        {
-          "id": "movement_1756559250651",
           "movement_nr": 6,
-          "date": "5663-06-08",
-          "dateStart": "5663-06-08",
-          "dateEnd": "5663-06-12",
-          "location": "Ice Ice Mephit",
-          "coordinates": [
-            1298,
-            1061
-          ],
-          "notes": "Reise durch das Sonnenspitzen Gebirge und den letzten Schnee des Winters. Die gingen einem Yeti aus dem Weg und hatten eine friedliche Begegnung mit Ice Mephits.",
-          "type": "travel",
-          "isCustomLocation": true,
-          "createdAt": "2025-08-30T13:07:30.651Z"
+          "updatedAt": "2025-08-30T13:07:48.489Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T13:07:30.651Z",
+      "updatedAt": "2025-08-30T13:07:48.489Z",
       "currentLocation": {
         "date": "5663-06-08",
         "dateStart": "5663-06-08",
@@ -1290,5 +1291,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T13:07:30.651Z"
+  "lastUpdated": "2025-08-30T13:07:48.489Z"
 }
