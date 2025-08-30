@@ -245,15 +245,10 @@
       "properties": {
         "name": "Basapo",
         "description": "Ein grosser Handelsposten im Süden von Valaris.",
-        "details": [
-          "Hier suchten [Abu Sasion:character:abu-sasion] und [Tasbor:character:tasbor] nach einem kriminellen Netzwerk.",
-          "Bei ihrer [Ermittlung in Basapo:event:basapo-visit] entdeckten sie korrupte Beamte und Verbindungen zu Kunos.",
-          "Die Stadt ist voll von [Steckbriefen gefährlicher Krimineller:gallery:basapo-wanted].",
-          "Ein wichtiger Handelsposten an der Kreuzung mehrerer Handelsrouten."
-        ],
         "contentUrl": null,
-        "region": "Upeto",
-        "type": "settlement",
+        "image": "https://adenai.piogino.ch/public/images/basapo_bottom.jpg",
+        "region": "upeto",
+        "type": "city",
         "visited": true
       },
       "geometry": {
