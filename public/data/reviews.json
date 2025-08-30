@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "d75965efe417e4d932261d735b6782807e71aa4f",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T13:16:57.696Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T13:16:57.696Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Südlicher Ausläufer des Torftgarder Waldes entry (5663-06-12 to 5663-06-19)"
+    },
+    {
       "commitSha": "0dd644fd07d0895b500b34985f3dc1c945d6f626",
       "action": "update",
       "type": "character",
@@ -4045,5 +4058,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T13:07:49.271Z"
+  "lastUpdated": "2025-08-30T13:16:57.696Z"
 }
