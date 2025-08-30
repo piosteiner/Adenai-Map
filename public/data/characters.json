@@ -629,24 +629,25 @@
           "movement_nr": 27,
           "date": "5663-08-13",
           "dateStart": "5663-08-13",
-          "dateEnd": null,
+          "dateEnd": "5663-08-14",
           "location": "Luvatu",
           "coordinates": [
             2126,
             992
           ],
           "notes": "",
-          "type": "travel",
+          "type": "stay",
           "isCustomLocation": false,
-          "createdAt": "2025-08-30T15:19:39.182Z"
+          "createdAt": "2025-08-30T15:19:39.182Z",
+          "updatedAt": "2025-08-30T15:20:08.955Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T15:19:39.182Z",
+      "updatedAt": "2025-08-30T15:20:08.955Z",
       "currentLocation": {
         "date": "5663-08-13",
         "dateStart": "5663-08-13",
-        "dateEnd": null,
+        "dateEnd": "5663-08-14",
         "location": "Luvatu",
         "coordinates": [
           2126,
@@ -1644,5 +1645,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T15:19:39.182Z"
+  "lastUpdated": "2025-08-30T15:20:08.955Z"
 }
