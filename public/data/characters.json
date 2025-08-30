@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Fitchers Turm",
+      "location": "Ruine von Zurak'thar",
       "coordinates": [
-        1344,
-        1128
+        1291,
+        1163
       ],
       "description": "",
       "image": "",
@@ -334,20 +334,36 @@
           "type": "travel",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T13:24:48.939Z"
+        },
+        {
+          "id": "movement_1756564367757",
+          "movement_nr": 10,
+          "date": "5663-06-24",
+          "dateStart": "5663-06-24",
+          "dateEnd": "5663-06-25",
+          "location": "Ruine von Zurak'thar",
+          "coordinates": [
+            1291,
+            1163
+          ],
+          "notes": "",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:32:47.757Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T13:25:02.401Z",
+      "updatedAt": "2025-08-30T14:32:47.757Z",
       "currentLocation": {
-        "date": "5663-06-22",
-        "dateStart": "5663-06-22",
-        "dateEnd": "5663-06-23",
-        "location": "Fitchers Turm",
+        "date": "5663-06-24",
+        "dateStart": "5663-06-24",
+        "dateEnd": "5663-06-25",
+        "location": "Ruine von Zurak'thar",
         "coordinates": [
-          1344,
-          1128
+          1291,
+          1163
         ],
-        "notes": "Die VsuzH finden den Turm von Fitcher."
+        "notes": ""
       }
     },
     {
@@ -1339,5 +1355,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T13:25:02.401Z"
+  "lastUpdated": "2025-08-30T14:32:47.757Z"
 }
