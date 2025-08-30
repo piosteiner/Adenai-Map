@@ -221,7 +221,7 @@
         },
         {
           "id": "movement_1756117483681",
-          "date": "5663-06-05",
+          "date": "5663-06-03",
           "location": "Sternenbobos wollen Abu ans Fell",
           "coordinates": [
             1268,
@@ -231,9 +231,9 @@
           "type": "mission",
           "createdAt": "2025-08-25T10:24:43.681Z",
           "movement_nr": 3,
-          "updatedAt": "2025-08-30T12:40:39.475Z",
-          "dateStart": "5663-06-05",
-          "dateEnd": null,
+          "updatedAt": "2025-08-30T12:51:28.080Z",
+          "dateStart": "5663-06-03",
+          "dateEnd": "5663-06-04",
           "isCustomLocation": true
         },
         {
@@ -272,7 +272,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T12:42:10.286Z",
+      "updatedAt": "2025-08-30T12:51:28.080Z",
       "currentLocation": {
         "date": "5663-06-20",
         "dateStart": "5663-06-20",
@@ -1274,5 +1274,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T12:42:10.286Z"
+  "lastUpdated": "2025-08-30T12:51:28.080Z"
 }
