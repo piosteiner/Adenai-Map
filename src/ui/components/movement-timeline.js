@@ -66,9 +66,33 @@ class MovementTimeline {
                     </div>
                 </div>
                 <div class="timeline-controls">
-                    <button class="timeline-control-btn" id="zoom-out">Zoom Out</button>
-                    <button class="timeline-control-btn" id="zoom-in">Zoom In</button>
-                    <button class="timeline-control-btn" id="reset-view">Reset</button>
+                    <div class="timeline-legend">
+                        <div class="legend-item">
+                            <div class="legend-marker travel"></div>
+                            <span>Travel</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-marker stay"></div>
+                            <span>Stay</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-marker mission"></div>
+                            <span>Mission</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-marker combat"></div>
+                            <span>Combat</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-marker diplomacy"></div>
+                            <span>Diplomacy</span>
+                        </div>
+                    </div>
+                    <div class="timeline-zoom-controls">
+                        <button class="timeline-control-btn" id="zoom-out">Zoom Out</button>
+                        <button class="timeline-control-btn" id="zoom-in">Zoom In</button>
+                        <button class="timeline-control-btn" id="reset-view">Reset</button>
+                    </div>
                 </div>
             </div>
         `;
@@ -180,6 +204,10 @@ class MovementTimeline {
                 cursor: grabbing;
             }
 
+            .timeline-container.dragging * {
+                pointer-events: none;
+            }
+
             .timeline-track {
                 position: absolute;
                 top: 0;
@@ -187,10 +215,10 @@ class MovementTimeline {
                 height: 100%;
                 display: flex;
                 align-items: center;
-                transition: transform 0.3s ease;
                 min-width: 200%;
                 padding: 0 50px;
                 box-sizing: border-box;
+                will-change: transform;
             }
 
             .timeline-scale {
@@ -265,6 +293,7 @@ class MovementTimeline {
                 position: relative;
                 box-shadow: 0 2px 8px rgba(139, 90, 60, 0.3);
                 transition: all 0.2s ease;
+                will-change: transform;
             }
 
             .timeline-event:hover .event-marker {
@@ -276,16 +305,88 @@ class MovementTimeline {
                 background: #8b5a3c;
                 border-color: #d4af37;
                 box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+                animation: pulse 2s infinite;
+            }
+
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.1); }
             }
 
             .timeline-event.mission .event-marker {
                 border-color: #dc2626;
                 background: #dc2626;
+                border-width: 4px;
+                width: 24px;
+                height: 24px;
+            }
+
+            .timeline-event.mission .event-marker::after {
+                content: '⚔';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-size: 12px;
+                font-weight: bold;
             }
 
             .timeline-event.stay .event-marker {
                 border-color: #059669;
                 background: #059669;
+                border-radius: 20%;
+                border-width: 4px;
+            }
+
+            .timeline-event.stay .event-marker::after {
+                content: '🏠';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 10px;
+            }
+
+            .timeline-event.travel .event-marker {
+                border-color: #0284c7;
+                background: #0284c7;
+                clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+                border-radius: 0;
+                width: 22px;
+                height: 22px;
+            }
+
+            .timeline-event.combat .event-marker {
+                border-color: #991b1b;
+                background: #991b1b;
+                border-width: 5px;
+                box-shadow: 0 0 15px rgba(153, 27, 27, 0.6);
+            }
+
+            .timeline-event.combat .event-marker::after {
+                content: '⚡';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-size: 12px;
+                font-weight: bold;
+            }
+
+            .timeline-event.diplomacy .event-marker {
+                border-color: #7c3aed;
+                background: #7c3aed;
+            }
+
+            .timeline-event.diplomacy .event-marker::after {
+                content: '🤝';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 10px;
             }
 
             .timeline-event.travel .event-marker {
@@ -370,10 +471,110 @@ class MovementTimeline {
             .timeline-controls {
                 position: absolute;
                 bottom: 10px;
+                left: 20px;
                 right: 20px;
                 display: flex;
-                gap: 8px;
+                justify-content: space-between;
+                align-items: center;
                 z-index: 20;
+            }
+
+            .timeline-legend {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+            }
+
+            .legend-item {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 0.8em;
+                color: #8b5a3c;
+                font-weight: 500;
+            }
+
+            .legend-marker {
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                border: 2px solid;
+                position: relative;
+                flex-shrink: 0;
+            }
+
+            .legend-marker.travel {
+                border-color: #0284c7;
+                background: #0284c7;
+                clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+                border-radius: 0;
+            }
+
+            .legend-marker.stay {
+                border-color: #059669;
+                background: #059669;
+                border-radius: 20%;
+            }
+
+            .legend-marker.stay::after {
+                content: '🏠';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 8px;
+            }
+
+            .legend-marker.mission {
+                border-color: #dc2626;
+                background: #dc2626;
+            }
+
+            .legend-marker.mission::after {
+                content: '⚔';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-size: 10px;
+                font-weight: bold;
+            }
+
+            .legend-marker.combat {
+                border-color: #991b1b;
+                background: #991b1b;
+                border-width: 3px;
+            }
+
+            .legend-marker.combat::after {
+                content: '⚡';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-size: 10px;
+                font-weight: bold;
+            }
+
+            .legend-marker.diplomacy {
+                border-color: #7c3aed;
+                background: #7c3aed;
+            }
+
+            .legend-marker.diplomacy::after {
+                content: '🤝';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 8px;
+            }
+
+            .timeline-zoom-controls {
+                display: flex;
+                gap: 8px;
             }
 
             .timeline-control-btn {
@@ -810,12 +1011,23 @@ class MovementTimeline {
         let isDragging = false;
         let lastX = 0;
         let currentTranslateX = 0;
+        let animationId = null;
+
+        // Throttle function for performance
+        const throttleTransform = (translateX) => {
+            if (animationId) return;
+            animationId = requestAnimationFrame(() => {
+                this.updateTimelinePosition(translateX);
+                animationId = null;
+            });
+        };
 
         // Mouse drag functionality
         timelineContainer.addEventListener('mousedown', (e) => {
             isDragging = true;
             lastX = e.clientX;
             timelineContainer.style.cursor = 'grabbing';
+            timelineContainer.classList.add('dragging');
             e.preventDefault();
         });
 
@@ -830,7 +1042,7 @@ class MovementTimeline {
             const minTranslate = Math.min(0, window.innerWidth - (this.timelineWidth || 2000));
             currentTranslateX = Math.max(minTranslate, Math.min(maxTranslate, currentTranslateX));
             
-            this.updateTimelinePosition(currentTranslateX);
+            throttleTransform(currentTranslateX);
             lastX = e.clientX;
         });
 
@@ -838,13 +1050,16 @@ class MovementTimeline {
             isDragging = false;
             if (timelineContainer) {
                 timelineContainer.style.cursor = 'grab';
+                timelineContainer.classList.remove('dragging');
             }
         });
 
-        // Touch support for mobile
+        // Touch support for mobile with performance optimization
+        let touchStartX = 0;
         timelineContainer.addEventListener('touchstart', (e) => {
             isDragging = true;
-            lastX = e.touches[0].clientX;
+            touchStartX = e.touches[0].clientX;
+            lastX = touchStartX;
         });
 
         timelineContainer.addEventListener('touchmove', (e) => {
@@ -857,7 +1072,7 @@ class MovementTimeline {
             const minTranslate = Math.min(0, window.innerWidth - (this.timelineWidth || 2000));
             currentTranslateX = Math.max(minTranslate, Math.min(maxTranslate, currentTranslateX));
             
-            this.updateTimelinePosition(currentTranslateX);
+            throttleTransform(currentTranslateX);
             lastX = e.touches[0].clientX;
             e.preventDefault();
         });
@@ -866,20 +1081,26 @@ class MovementTimeline {
             isDragging = false;
         });
 
-        // Zoom functionality with mouse wheel
+        // Zoom functionality with mouse wheel - throttled for performance
+        let zoomTimeout = null;
         timelineContainer.addEventListener('wheel', (e) => {
             e.preventDefault();
+            
+            if (zoomTimeout) return; // Throttle zoom events
             
             const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
             this.zoomLevel = Math.max(0.5, Math.min(3, this.zoomLevel * zoomFactor));
             
-            this.renderTimeline(); // Re-render with new scale
+            zoomTimeout = setTimeout(() => {
+                this.renderTimeline(); // Re-render with new scale
+                zoomTimeout = null;
+            }, 50); // Throttle to every 50ms
         });
 
         // Zoom controls
-        const zoomInBtn = this.timeline.querySelector('.zoom-in');
-        const zoomOutBtn = this.timeline.querySelector('.zoom-out');
-        const resetBtn = this.timeline.querySelector('.reset-zoom');
+        const zoomInBtn = this.timeline.querySelector('#zoom-in');
+        const zoomOutBtn = this.timeline.querySelector('#zoom-out');
+        const resetBtn = this.timeline.querySelector('#reset-view');
 
         if (zoomInBtn) {
             zoomInBtn.addEventListener('click', () => {
@@ -912,11 +1133,14 @@ class MovementTimeline {
         const track = this.timeline.querySelector('#timeline-track');
         const scale = this.timeline.querySelector('#timeline-scale');
         
+        // Use transform3d for hardware acceleration
+        const transform = `translate3d(${translateX}px, 0, 0) scaleX(${this.zoomLevel || 1})`;
+        
         if (track) {
-            track.style.transform = `translateX(${translateX}px) scaleX(${this.zoomLevel || 1})`;
+            track.style.transform = transform;
         }
         if (scale) {
-            scale.style.transform = `translateX(${translateX}px) scaleX(${this.zoomLevel || 1})`;
+            scale.style.transform = transform;
         }
         
         this.currentTranslateX = translateX;
