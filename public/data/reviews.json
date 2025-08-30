@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "5a0329bd9bd206378cde01adc80bcfcdac00f79d",
+      "action": "create",
+      "type": "character",
+      "itemName": "Mae",
+      "user": "gm",
+      "timestamp": "2025-08-30T21:53:56.492Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T21:53:56.492Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Mae (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "4d0bdb1007d046c9aa347eaad76f0e8987eff206",
       "action": "update",
       "type": "character",
@@ -5033,5 +5046,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T21:49:07.813Z"
+  "lastUpdated": "2025-08-30T21:53:56.492Z"
 }
