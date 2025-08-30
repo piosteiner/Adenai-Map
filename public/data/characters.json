@@ -179,10 +179,12 @@
             1041
           ],
           "notes": "",
-          "type": "mission",
+          "type": "stay",
           "createdAt": "2025-08-24T23:06:55.342Z",
           "movement_nr": 0,
-          "updatedAt": "2025-08-30T11:56:20.265Z"
+          "updatedAt": "2025-08-30T11:57:06.246Z",
+          "dateStart": "5663-06-03",
+          "dateEnd": null
         },
         {
           "id": "movement_1756076882170",
@@ -268,7 +270,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T11:56:20.266Z",
+      "updatedAt": "2025-08-30T11:57:06.246Z",
       "currentLocation": {
         "date": "5663-06-20",
         "dateStart": "5663-06-20",
@@ -1270,5 +1272,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T11:56:20.266Z"
+  "lastUpdated": "2025-08-30T11:57:06.246Z"
 }
