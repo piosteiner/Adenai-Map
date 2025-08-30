@@ -174,7 +174,9 @@
         "name": "Atlantis (versunken)",
         "description": "Atlantis versunken im Mirog Graben - auch bekannt als das Unterwasser Paradies.",
         "contentUrl": null,
+        "image": "",
         "region": "east_sea",
+        "type": "ruin",
         "visited": true
       },
       "geometry": {
@@ -191,7 +193,9 @@
         "name": "Atlantis (aufgestiegen)",
         "description": "Standort von Atlantis, nachdem es von den VsuzH wieder in den Himmel gehoben wurde.",
         "contentUrl": null,
-        "region": "other",
+        "image": "",
+        "region": "heaven",
+        "type": "ruin",
         "visited": true
       },
       "geometry": {
@@ -266,7 +270,8 @@
         "name": "Akónetchie",
         "description": "Auch nur 'Ako' genannt. Alte heilige Städte im Dschungel von Upeto.",
         "contentUrl": null,
-        "region": "",
+        "image": "",
+        "region": "upeto",
         "type": "town",
         "visited": true
       },
@@ -318,7 +323,9 @@
         "name": "Byrgenwerft",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Byrgenwerft, bitte kontaktiere den Websitenbetreiber.",
         "contentUrl": null,
-        "region": "Rena Region",
+        "image": "",
+        "region": "arcane_heights",
+        "type": "city",
         "visited": false
       },
       "geometry": {
@@ -371,7 +378,9 @@
         "name": "Elissastadt",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Elissastadt, bitte kontaktiere den Websitenbetreiber.",
         "contentUrl": null,
-        "region": "Tua Danar",
+        "image": "",
+        "region": "tua_danar",
+        "type": "city",
         "visited": false
       },
       "geometry": {
@@ -422,9 +431,10 @@
       "type": "Feature",
       "properties": {
         "name": "Barbenfall",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Barbenfall, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Sitz des Clubs der Armen",
         "contentUrl": null,
-        "region": "Rena Region",
+        "image": "",
+        "region": "",
         "type": "town",
         "visited": false
       },

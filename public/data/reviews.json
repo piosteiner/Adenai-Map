@@ -2,6 +2,84 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "bfe800a67c897d83296fdd9a85e6854072e85482",
+      "action": "update",
+      "type": "location",
+      "itemName": "Barbenfall",
+      "user": "gm",
+      "timestamp": "2025-08-30T18:12:57.358Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T18:12:57.358Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Barbenfall (by gm) - updated description, updated region"
+    },
+    {
+      "commitSha": "dd11ada932c242f692c71229866aef269c9d1e28",
+      "action": "update",
+      "type": "location",
+      "itemName": "Byrgenwerft",
+      "user": "gm",
+      "timestamp": "2025-08-30T17:26:11.938Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T17:26:11.938Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Byrgenwerft (by gm) - updated region, updated type"
+    },
+    {
+      "commitSha": "378aade152d66537e9540b9c9ed0bd4a3fa38851",
+      "action": "update",
+      "type": "location",
+      "itemName": "Atlantis (versunken)",
+      "user": "gm",
+      "timestamp": "2025-08-30T17:25:48.762Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T17:25:48.762Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Atlantis (versunken) (by gm) - updated type"
+    },
+    {
+      "commitSha": "20c240f2ed90b2ea81303ec754baa7aadaab7a58",
+      "action": "update",
+      "type": "location",
+      "itemName": "Atlantis (aufgestiegen)",
+      "user": "gm",
+      "timestamp": "2025-08-30T17:25:33.217Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T17:25:33.217Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Atlantis (aufgestiegen) (by gm) - updated region, updated type"
+    },
+    {
+      "commitSha": "3c0aba8954e9c15cfb487794ea6167c167713b60",
+      "action": "update",
+      "type": "location",
+      "itemName": "Akónetchie",
+      "user": "gm",
+      "timestamp": "2025-08-30T17:24:27.338Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T17:24:27.338Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Akónetchie (by gm) - updated region"
+    },
+    {
+      "commitSha": "1466106b317675391441e6998f19bc7cddd6c923",
+      "action": "update",
+      "type": "location",
+      "itemName": "Elissastadt",
+      "user": "gm",
+      "timestamp": "2025-08-30T17:23:36.613Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T17:23:36.613Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Elissastadt (by gm) - updated region, updated type"
+    },
+    {
       "commitSha": "3ab5777f554f8cc1948ab848098ba6c719e72a43",
       "action": "update",
       "type": "location",
@@ -4669,5 +4747,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T17:22:15.176Z"
+  "lastUpdated": "2025-08-30T18:12:57.359Z"
 }
