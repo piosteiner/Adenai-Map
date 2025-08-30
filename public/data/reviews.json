@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "4fee51e1c2eedabcc997eba04ba7a549f8c17cc3",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T14:50:33.694Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T14:50:33.694Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Bootsfahrt auf dem Adenui - IV (5663-07-23 to 5663-07-25)"
+    },
+    {
       "commitSha": "0e2aa6399ca88cc9e5adf1656dee2f480cb40e70",
       "action": "update",
       "type": "character",
@@ -4292,5 +4305,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T14:49:51.032Z"
+  "lastUpdated": "2025-08-30T14:50:33.694Z"
 }
