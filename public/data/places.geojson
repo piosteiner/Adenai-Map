@@ -716,7 +716,8 @@
         "name": "Siedlung an der nördlichen Grenze zur Harak Wüste",
         "description": "Details sind noch zu entdecken.",
         "contentUrl": null,
-        "region": "Harak",
+        "image": "https://adenai.piogino.ch/public/images/unknown_1.png",
+        "region": "harak",
         "type": "town",
         "visited": false
       },
