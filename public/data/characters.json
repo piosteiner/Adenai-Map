@@ -222,16 +222,16 @@
         {
           "id": "movement_1756117483681",
           "date": "5663-06-05",
-          "location": "Another nice Custom Lococo",
+          "location": "Sternenbobos wollen Abu ans Fell",
           "coordinates": [
-            1234,
-            1234
+            1268,
+            1043
           ],
           "notes": "Kampf gegen die Sternen-Heinis, nachdem sie Abu böse beäugt haben.",
           "type": "mission",
           "createdAt": "2025-08-25T10:24:43.681Z",
           "movement_nr": 3,
-          "updatedAt": "2025-08-30T11:56:20.266Z",
+          "updatedAt": "2025-08-30T12:39:43.980Z",
           "dateStart": "5663-06-05",
           "dateEnd": null,
           "isCustomLocation": true
@@ -272,7 +272,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T12:06:10.498Z",
+      "updatedAt": "2025-08-30T12:39:43.980Z",
       "currentLocation": {
         "date": "5663-06-20",
         "dateStart": "5663-06-20",
@@ -1274,5 +1274,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T12:06:10.498Z"
+  "lastUpdated": "2025-08-30T12:39:43.980Z"
 }
