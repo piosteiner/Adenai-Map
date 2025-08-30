@@ -22,6 +22,17 @@ class MovementSystem {
                 Logger.error('Failed to load character paths:', error);
             }
         });
+
+        // Listen for map ready event to ensure VsuzH markers are visible
+        document.addEventListener('adenaiMapReady', () => {
+            // Ensure VsuzH movement markers are visible after map is fully initialized
+            setTimeout(() => {
+                if (this.movementMarkers.length > 0) {
+                    Logger.movement('🔄 Ensuring VsuzH markers are visible after map ready...');
+                    this.showInitialVsuzHMarkers();
+                }
+            }, 500);
+        });
     }
 
     // API-only path loading and display
@@ -70,6 +81,18 @@ class MovementSystem {
                     characters: data.characters 
                 }
             }));
+            
+            // Show markers immediately after creation (only VsuzH by default)
+            setTimeout(() => {
+                this.showInitialVsuzHMarkers();
+                
+                // Refresh character panel to sync checkbox states
+                if (window.characterPanel && window.characterPanel.refreshPanel) {
+                    Logger.movement('🔄 Refreshing character panel to sync checkbox states...');
+                    window.characterPanel.refreshPanel();
+                }
+            }, 50);
+            
             Logger.movement('✅ Movement markers loading complete');
             
         } catch (error) {
@@ -157,6 +180,12 @@ class MovementSystem {
         // Show VsuzH markers by default (after markers are loaded)
         setTimeout(() => {
             this.showInitialVsuzHMarkers();
+            
+            // Refresh character panel to sync checkbox states after both paths and markers are loaded
+            if (window.characterPanel && window.characterPanel.refreshPanel) {
+                Logger.movement('🔄 Refreshing character panel after paths loaded...');
+                window.characterPanel.refreshPanel();
+            }
         }, 100);
         
         // Refresh character panel checkboxes after paths are loaded
@@ -168,6 +197,9 @@ class MovementSystem {
     // Show VsuzH movement markers by default
     showInitialVsuzHMarkers() {
         MapUtils.withMap(map => {
+            Logger.movement('Showing initial VsuzH movement markers...');
+            
+            let vsuzHCount = 0;
             this.movementMarkers
                 .filter(markerData => {
                     const isVsuzH = markerData.characterId?.toLowerCase().includes('vsuzh');
@@ -177,8 +209,22 @@ class MovementSystem {
                     if (!map.hasLayer(markerData.marker)) {
                         MapUtils.addToMap(markerData.marker);
                         markerData.isVisible = true;
+                        vsuzHCount++;
                     }
                 });
+                
+            if (vsuzHCount > 0) {
+                Logger.success(`✅ Made ${vsuzHCount} VsuzH movement markers visible`);
+                
+                // Update VsuzH checkbox state if character panel is available
+                setTimeout(() => {
+                    const vsuzHCheckbox = document.getElementById('path-vsuzh');
+                    if (vsuzHCheckbox && !vsuzHCheckbox.checked) {
+                        vsuzHCheckbox.checked = true;
+                        Logger.movement('✅ Synced VsuzH checkbox to checked state');
+                    }
+                }, 100);
+            }
         }, 'Cannot show initial VsuzH markers - map not available');
     }
 
@@ -289,10 +335,19 @@ class MovementSystem {
 
     // Check if a character path is currently visible
     isCharacterPathVisible(characterId) {
+        // Check both path visibility and movement marker visibility
         const pathData = this.characterPaths.find(path => path.character?.id === characterId);
-        if (!pathData) return false;
+        const pathVisible = pathData?.isVisible || false;
         
-        return pathData.isVisible || false;
+        // Also check if movement markers are visible for this character
+        const markersVisible = this.movementMarkers.some(markerData => 
+            markerData.characterId === characterId && markerData.isVisible
+        );
+        
+        // Special case: VsuzH should be considered visible by default
+        const isVsuzH = characterId?.toLowerCase().includes('vsuzh');
+        
+        return pathVisible || markersVisible || isVsuzH;
     }
 
     // Required by main.js
