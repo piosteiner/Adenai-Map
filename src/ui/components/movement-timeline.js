@@ -279,10 +279,37 @@ class MovementTimeline {
             .scale-marker {
                 position: absolute;
                 top: 0;
-                width: 2px;
-                height: 20px;
+                width: 1px;
+                height: 8px;
                 background: #8b5a3c;
                 transform: translateX(-50%);
+                opacity: 0.6;
+            }
+
+            .scale-marker.day-marker {
+                height: 8px;
+                width: 1px;
+                background: #8b5a3c;
+                opacity: 0.4;
+            }
+
+            .scale-marker.week-marker {
+                height: 15px;
+                width: 2px;
+                background: #8b5a3c;
+                opacity: 0.7;
+            }
+
+            .scale-marker.month-marker {
+                height: 25px;
+                width: 3px;
+                background: #d4af37;
+                opacity: 1;
+            }
+
+            .scale-marker.month-change {
+                background: #d4af37;
+                box-shadow: 0 0 4px rgba(212, 175, 55, 0.6);
             }
 
             .scale-marker.major {
@@ -293,14 +320,26 @@ class MovementTimeline {
 
             .scale-label {
                 position: absolute;
-                top: -15px;
+                top: -18px;
                 left: 50%;
                 transform: translateX(-50%);
-                font-size: 0.7em;
+                font-size: 0.65em;
                 color: #8b5a3c;
                 font-weight: 600;
                 white-space: nowrap;
                 text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+                padding: 1px 3px;
+                background: rgba(255, 255, 255, 0.9);
+                border-radius: 2px;
+                border: 1px solid rgba(139, 90, 60, 0.2);
+            }
+
+            .scale-marker.month .scale-label {
+                font-weight: 700;
+                color: #d4af37;
+                background: rgba(139, 90, 60, 0.9);
+                color: white;
+                top: -20px;
             }
 
             .timeline-events-line {
@@ -656,6 +695,18 @@ class MovementTimeline {
                 background: #6b7280;
             }
 
+            [data-theme="dark"] .scale-marker.day-marker {
+                background: #6b7280;
+            }
+
+            [data-theme="dark"] .scale-marker.week-marker {
+                background: #9ca3af;
+            }
+
+            [data-theme="dark"] .scale-marker.month-marker {
+                background: #fbbf24;
+            }
+
             [data-theme="dark"] .scale-marker.major {
                 background: #9ca3af;
             }
@@ -663,6 +714,13 @@ class MovementTimeline {
             [data-theme="dark"] .scale-label {
                 color: #d1d5db;
                 text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+                background: rgba(31, 41, 55, 0.9);
+                border-color: rgba(107, 114, 128, 0.3);
+            }
+
+            [data-theme="dark"] .scale-marker.month .scale-label {
+                background: rgba(251, 191, 36, 0.9);
+                color: #1f2937;
             }
 
             [data-theme="dark"] .timeline-events-line {
@@ -778,11 +836,16 @@ class MovementTimeline {
         this.timelineData.sort((a, b) => a.parsedDate - b.parsedDate);
 
         // Find exact date range - start at first event, end at last event
-        this.minDate = this.timelineData[0].parsedDate;
-        this.maxDate = this.timelineData[this.timelineData.length - 1].parsedDate;
+        this.minDate = new Date(this.timelineData[0].parsedDate);
+        this.maxDate = new Date(this.timelineData[this.timelineData.length - 1].parsedDate);
         
-        // Calculate total days in the journey
-        const totalDays = Math.ceil((this.maxDate - this.minDate) / (24 * 60 * 60 * 1000)) + 1; // +1 to include the last day
+        // Expand by 1 week on each side
+        const oneWeek = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+        this.minDate = new Date(this.minDate.getTime() - oneWeek);
+        this.maxDate = new Date(this.maxDate.getTime() + oneWeek);
+        
+        // Calculate total days in the journey (including the 2-week expansion)
+        const totalDays = Math.ceil((this.maxDate - this.minDate) / (24 * 60 * 60 * 1000)) + 1;
         
         // Set minimum width per day (40px seems good for readability)
         const minWidthPerDay = 40;
@@ -804,16 +867,21 @@ class MovementTimeline {
         if (!dateString) return null;
         
         try {
-            // Handle fantasy dates like "5055-05-05"
+            // Handle fantasy dates like "5055-05-05" and standard dates
             if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
                 const [year, month, day] = dateString.split('-').map(Number);
-                return new Date(year, month - 1, day);
+                // Create date in a way that works with fantasy years
+                const date = new Date();
+                date.setFullYear(year, month - 1, day);
+                date.setHours(0, 0, 0, 0);
+                return date;
             }
             
             // Try parsing as regular date
             const date = new Date(dateString);
             return isNaN(date.getTime()) ? null : date;
         } catch (error) {
+            Logger.warning(`Failed to parse date: ${dateString}`, error);
             return null;
         }
     }
@@ -824,39 +892,91 @@ class MovementTimeline {
         const totalDays = Math.ceil((this.maxDate - this.minDate) / (24 * 60 * 60 * 1000)) + 1;
         const dayWidth = this.timelineWidth / totalDays;
         
-        // Determine scale interval based on day width and zoom level
-        let interval = 1; // days
-        if (dayWidth * this.zoomLevel < 30) interval = 7; // weeks
-        if (dayWidth * this.zoomLevel < 10) interval = 30; // months
-        if (dayWidth * this.zoomLevel < 3) interval = 365; // years
-
-        // Calculate required markers
+        // Create different types of markers based on zoom level
         const markers = [];
         const startDate = new Date(this.minDate);
         const endDate = new Date(this.maxDate);
+        
+        // Generate daily markers (short lines)
+        this.generateDayMarkers(markers, startDate, endDate, dayWidth);
+        
+        // Generate weekly markers (longer lines)
+        this.generateWeekMarkers(markers, startDate, endDate, dayWidth);
+        
+        // Generate monthly markers (month change indicators)
+        this.generateMonthMarkers(markers, startDate, endDate, dayWidth);
+
+        // Efficiently update existing elements or create new ones
+        this.updateScaleElements(scale, markers);
+    }
+
+    generateDayMarkers(markers, startDate, endDate, dayWidth) {
         let currentDate = new Date(startDate);
         
         while (currentDate <= endDate) {
             const position = (currentDate - this.minDate) * this.pixelsPerMs;
+            const dayOfWeek = currentDate.getDay(); // 0 = Sunday, 1 = Monday, etc.
+            
+            // Only show labels on Monday (1), Wednesday (3), and Saturday (6)
+            const showLabel = (dayOfWeek === 1 || dayOfWeek === 3 || dayOfWeek === 6);
+            
             markers.push({
                 position,
                 date: new Date(currentDate),
-                interval,
-                isMajor: interval >= 30
+                type: 'day',
+                showLabel,
+                height: '8px',
+                className: 'day-marker'
             });
             
-            // Move to next interval
-            if (interval >= 365) {
-                currentDate.setFullYear(currentDate.getFullYear() + 1);
-            } else if (interval >= 30) {
-                currentDate.setMonth(currentDate.getMonth() + 1);
-            } else {
-                currentDate.setDate(currentDate.getDate() + interval);
-            }
+            currentDate.setDate(currentDate.getDate() + 1);
         }
+    }
 
-        // Efficiently update existing elements or create new ones
-        this.updateScaleElements(scale, markers);
+    generateWeekMarkers(markers, startDate, endDate, dayWidth) {
+        let currentDate = new Date(startDate);
+        
+        // Find the first Monday
+        while (currentDate.getDay() !== 1) {
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+        
+        while (currentDate <= endDate) {
+            const position = (currentDate - this.minDate) * this.pixelsPerMs;
+            
+            markers.push({
+                position,
+                date: new Date(currentDate),
+                type: 'week',
+                showLabel: false,
+                height: '15px',
+                className: 'week-marker'
+            });
+            
+            currentDate.setDate(currentDate.getDate() + 7);
+        }
+    }
+
+    generateMonthMarkers(markers, startDate, endDate, dayWidth) {
+        let currentDate = new Date(startDate);
+        currentDate.setDate(1); // First day of the month
+        
+        while (currentDate <= endDate) {
+            const position = (currentDate - this.minDate) * this.pixelsPerMs;
+            
+            markers.push({
+                position,
+                date: new Date(currentDate),
+                type: 'month',
+                showLabel: true,
+                height: '25px',
+                className: 'month-marker',
+                isMonthChange: true
+            });
+            
+            // Move to first day of next month
+            currentDate.setMonth(currentDate.getMonth() + 1, 1);
+        }
     }
 
     updateScaleElements(scale, markers) {
@@ -880,22 +1000,39 @@ class MovementTimeline {
                 this.scaleElements.push(element);
             }
 
-            // Update element properties
-            element.className = `scale-marker ${marker.isMajor ? 'major' : ''}`;
+            // Update element properties based on marker type
+            element.className = `scale-marker ${marker.className} ${marker.type}`;
             element.style.left = marker.position + 'px';
-            element.firstChild.textContent = this.formatScaleDate(marker.date, marker.interval);
+            element.style.height = marker.height;
+            
+            // Update label content
+            const label = element.firstChild;
+            if (marker.showLabel) {
+                label.textContent = this.formatMarkerDate(marker.date, marker.type);
+                label.style.display = 'block';
+            } else {
+                label.style.display = 'none';
+            }
+            
+            // Special styling for month markers
+            if (marker.isMonthChange) {
+                element.classList.add('month-change');
+            }
         });
     }
 
-    formatScaleDate(date, interval) {
-        if (interval >= 365) {
-            return date.getFullYear().toString();
-        } else if (interval >= 30) {
-            return `${date.getMonth() + 1}/${date.getFullYear()}`;
-        } else if (interval >= 7) {
-            return `${date.getDate()}.${date.getMonth() + 1}`;
-        } else {
-            return `${date.getDate()}.${date.getMonth() + 1}`;
+    formatMarkerDate(date, type) {
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        
+        switch (type) {
+            case 'day':
+                return `${day}.${month}`;
+            case 'month':
+                return `${month}/${year}`;
+            default:
+                return `${day}.${month}`;
         }
     }
 
