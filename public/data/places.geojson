@@ -323,7 +323,9 @@
         "name": "Byrgenwerft",
         "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Byrgenwerft, bitte kontaktiere den Websitenbetreiber.",
         "contentUrl": null,
-        "region": "Rena Region",
+        "image": "",
+        "region": "arcane_heights",
+        "type": "city",
         "visited": false
       },
       "geometry": {
