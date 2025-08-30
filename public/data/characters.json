@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Motu Motu",
+      "location": "Sternenzirkel Insel",
       "coordinates": [
-        2005,
-        1025
+        2106,
+        1070
       ],
       "description": "",
       "image": "",
@@ -607,18 +607,34 @@
           "type": "travel",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T15:03:44.810Z"
+        },
+        {
+          "id": "movement_1756566953760",
+          "movement_nr": 26,
+          "date": "5663-08-13",
+          "dateStart": "5663-08-13",
+          "dateEnd": null,
+          "location": "Sternenzirkel Insel",
+          "coordinates": [
+            2106,
+            1070
+          ],
+          "notes": "",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:15:53.760Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T15:07:29.775Z",
+      "updatedAt": "2025-08-30T15:15:53.761Z",
       "currentLocation": {
-        "date": "5663-08-08",
-        "dateStart": "5663-08-08",
-        "dateEnd": "5663-08-13",
-        "location": "Motu Motu",
+        "date": "5663-08-13",
+        "dateStart": "5663-08-13",
+        "dateEnd": null,
+        "location": "Sternenzirkel Insel",
         "coordinates": [
-          2005,
-          1025
+          2106,
+          1070
         ],
         "notes": ""
       }
@@ -1612,5 +1628,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T15:07:29.775Z"
+  "lastUpdated": "2025-08-30T15:15:53.761Z"
 }
