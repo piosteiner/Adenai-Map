@@ -617,7 +617,7 @@ class LocationSystem {
             if (region) {
                 const regionInfo = this.locationRegions[region] || this.locationRegions.unknown;
                 if (type) content += ' • '; // Add separator if both type and region
-                content += `<span class="popup-region">📍 ${regionInfo.label}</span>`;
+                content += `<span class="popup-region">Region: ${regionInfo.label}</span>`;
             }
             
             content += '</div>';
