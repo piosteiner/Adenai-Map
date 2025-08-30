@@ -182,7 +182,7 @@
           "type": "stay",
           "createdAt": "2025-08-24T23:06:55.342Z",
           "movement_nr": 0,
-          "updatedAt": "2025-08-30T13:07:48.489Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z",
           "dateStart": "5663-06-03",
           "dateEnd": null
         },
@@ -198,7 +198,7 @@
           "type": "mission",
           "createdAt": "2025-08-24T23:08:02.170Z",
           "movement_nr": 1,
-          "updatedAt": "2025-08-30T13:07:48.489Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z",
           "dateStart": "5663-06-03",
           "dateEnd": null,
           "isCustomLocation": true
@@ -215,7 +215,7 @@
           "type": "return",
           "createdAt": "2025-08-24T23:31:46.547Z",
           "movement_nr": 2,
-          "updatedAt": "2025-08-30T13:25:02.401Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z",
           "dateStart": "5663-06-03",
           "dateEnd": null
         },
@@ -231,7 +231,7 @@
           "type": "mission",
           "createdAt": "2025-08-25T10:24:43.681Z",
           "movement_nr": 3,
-          "updatedAt": "2025-08-30T13:07:48.489Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z",
           "dateStart": "5663-06-03",
           "dateEnd": "5663-06-04",
           "isCustomLocation": true
@@ -250,7 +250,7 @@
           "dateStart": "5663-06-04",
           "dateEnd": "5663-06-08",
           "isCustomLocation": true,
-          "updatedAt": "2025-08-30T13:07:48.489Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z",
           "movement_nr": 4
         },
         {
@@ -268,7 +268,7 @@
           "type": "travel",
           "isCustomLocation": true,
           "createdAt": "2025-08-30T13:07:30.651Z",
-          "updatedAt": "2025-08-30T13:07:48.489Z"
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756140699063",
@@ -285,7 +285,7 @@
           "isCustomLocation": true,
           "createdAt": "2025-08-25T16:51:39.063Z",
           "movement_nr": 6,
-          "updatedAt": "2025-08-30T13:22:39.895Z"
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756560086621",
@@ -301,7 +301,8 @@
           "notes": "Die Gruppe bringt den letzten Abschnitt nach Toftgard mit Ellas auf dem Rücken von Roger hinter sich. Dabei schnappt sich Abu ein \"Glühebli\" von einem der Felder um die Stadt.",
           "type": "travel",
           "isCustomLocation": false,
-          "createdAt": "2025-08-30T13:21:26.621Z"
+          "createdAt": "2025-08-30T13:21:26.621Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756560223428",
@@ -317,7 +318,8 @@
           "notes": "Mit Orren auf den Spuren der merkwürdigen Monster.",
           "type": "travel",
           "isCustomLocation": false,
-          "createdAt": "2025-08-30T13:23:43.428Z"
+          "createdAt": "2025-08-30T13:23:43.428Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756560288939",
@@ -333,7 +335,8 @@
           "notes": "Die VsuzH finden den Turm von Fitcher.",
           "type": "travel",
           "isCustomLocation": false,
-          "createdAt": "2025-08-30T13:24:48.939Z"
+          "createdAt": "2025-08-30T13:24:48.939Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756564367757",
@@ -349,7 +352,8 @@
           "notes": "",
           "type": "mission",
           "isCustomLocation": false,
-          "createdAt": "2025-08-30T14:32:47.757Z"
+          "createdAt": "2025-08-30T14:32:47.757Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756564461302",
@@ -366,28 +370,11 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T14:34:21.302Z",
-          "updatedAt": "2025-08-30T14:56:00.737Z"
-        },
-        {
-          "id": "movement_1756564587469",
-          "movement_nr": 12,
-          "date": "5663-06-30",
-          "dateStart": "5663-06-30",
-          "dateEnd": "5663-07-01",
-          "location": "Toftgard",
-          "coordinates": [
-            1392,
-            1083
-          ],
-          "notes": "Zurück nach Toftgard",
-          "type": "return",
-          "isCustomLocation": false,
-          "createdAt": "2025-08-30T14:36:27.469Z",
-          "updatedAt": "2025-08-30T14:57:20.889Z"
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756564514270",
-          "movement_nr": 13,
+          "movement_nr": 12,
           "date": "5663-06-30",
           "dateStart": "5663-06-30",
           "dateEnd": null,
@@ -400,7 +387,24 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T14:35:14.270Z",
-          "updatedAt": "2025-08-30T14:56:10.131Z"
+          "updatedAt": "2025-08-30T14:58:12.834Z"
+        },
+        {
+          "id": "movement_1756564587469",
+          "movement_nr": 13,
+          "date": "5663-06-30",
+          "dateStart": "5663-06-30",
+          "dateEnd": "5663-07-01",
+          "location": "Toftgard",
+          "coordinates": [
+            1392,
+            1083
+          ],
+          "notes": "Zurück nach Toftgard",
+          "type": "return",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:36:27.469Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756564888223",
@@ -417,7 +421,7 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T14:41:28.223Z",
-          "updatedAt": "2025-08-30T14:57:35.851Z"
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756565130708",
@@ -434,7 +438,7 @@
           "type": "travel",
           "isCustomLocation": true,
           "createdAt": "2025-08-30T14:45:30.708Z",
-          "updatedAt": "2025-08-30T14:47:11.366Z"
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756565183638",
@@ -450,7 +454,8 @@
           "notes": "",
           "type": "travel",
           "isCustomLocation": true,
-          "createdAt": "2025-08-30T14:46:23.638Z"
+          "createdAt": "2025-08-30T14:46:23.638Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756565268019",
@@ -466,7 +471,8 @@
           "notes": "",
           "type": "mission",
           "isCustomLocation": false,
-          "createdAt": "2025-08-30T14:47:48.019Z"
+          "createdAt": "2025-08-30T14:47:48.019Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756565284687",
@@ -482,7 +488,8 @@
           "notes": "",
           "type": "mission",
           "isCustomLocation": false,
-          "createdAt": "2025-08-30T14:48:04.687Z"
+          "createdAt": "2025-08-30T14:48:04.687Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756565313715",
@@ -498,7 +505,8 @@
           "notes": "",
           "type": "stay",
           "isCustomLocation": false,
-          "createdAt": "2025-08-30T14:48:33.715Z"
+          "createdAt": "2025-08-30T14:48:33.715Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756565390091",
@@ -514,7 +522,8 @@
           "notes": "",
           "type": "travel",
           "isCustomLocation": true,
-          "createdAt": "2025-08-30T14:49:50.091Z"
+          "createdAt": "2025-08-30T14:49:50.091Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756565432871",
@@ -530,7 +539,8 @@
           "notes": "",
           "type": "travel",
           "isCustomLocation": true,
-          "createdAt": "2025-08-30T14:50:32.871Z"
+          "createdAt": "2025-08-30T14:50:32.871Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756565503759",
@@ -546,7 +556,8 @@
           "notes": "",
           "type": "travel",
           "isCustomLocation": true,
-          "createdAt": "2025-08-30T14:51:43.759Z"
+          "createdAt": "2025-08-30T14:51:43.759Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         },
         {
           "id": "movement_1756565746513",
@@ -562,11 +573,12 @@
           "notes": "",
           "type": "stay",
           "isCustomLocation": false,
-          "createdAt": "2025-08-30T14:55:46.513Z"
+          "createdAt": "2025-08-30T14:55:46.513Z",
+          "updatedAt": "2025-08-30T14:58:12.834Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T14:57:35.851Z",
+      "updatedAt": "2025-08-30T14:58:12.834Z",
       "currentLocation": {
         "date": "5663-07-26",
         "dateStart": "5663-07-26",
@@ -1568,5 +1580,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T14:57:35.851Z"
+  "lastUpdated": "2025-08-30T14:58:12.834Z"
 }
