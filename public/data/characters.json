@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Zur Prallen Traube",
+      "location": "Goblin Loch",
       "coordinates": [
-        1481,
-        1053
+        1472,
+        1040
       ],
       "description": "",
       "image": "",
@@ -464,18 +464,34 @@
           "type": "mission",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T14:47:48.019Z"
+        },
+        {
+          "id": "movement_1756565284687",
+          "movement_nr": 18,
+          "date": "5663-07-22",
+          "dateStart": "5663-07-22",
+          "dateEnd": null,
+          "location": "Goblin Loch",
+          "coordinates": [
+            1472,
+            1040
+          ],
+          "notes": "",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:48:04.687Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T14:47:48.019Z",
+      "updatedAt": "2025-08-30T14:48:04.687Z",
       "currentLocation": {
         "date": "5663-07-22",
         "dateStart": "5663-07-22",
         "dateEnd": null,
-        "location": "Zur Prallen Traube",
+        "location": "Goblin Loch",
         "coordinates": [
-          1481,
-          1053
+          1472,
+          1040
         ],
         "notes": ""
       }
@@ -1469,5 +1485,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T14:47:48.019Z"
+  "lastUpdated": "2025-08-30T14:48:04.687Z"
 }
