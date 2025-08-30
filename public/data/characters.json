@@ -419,9 +419,9 @@
         {
           "id": "movement_1756565130708",
           "movement_nr": 15,
-          "date": "5663-07-07",
-          "dateStart": "5663-07-07",
-          "dateEnd": null,
+          "date": "5663-07-13",
+          "dateStart": "5663-07-13",
+          "dateEnd": "5663-07-18",
           "location": "Bootsfahrt auf dem Adenui - I",
           "coordinates": [
             1488,
@@ -430,7 +430,8 @@
           "notes": "",
           "type": "travel",
           "isCustomLocation": true,
-          "createdAt": "2025-08-30T14:45:30.708Z"
+          "createdAt": "2025-08-30T14:45:30.708Z",
+          "updatedAt": "2025-08-30T14:47:11.366Z"
         },
         {
           "id": "movement_1756565183638",
@@ -450,7 +451,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T14:46:55.232Z",
+      "updatedAt": "2025-08-30T14:47:11.366Z",
       "currentLocation": {
         "date": "5663-07-18",
         "dateStart": "5663-07-18",
@@ -1452,5 +1453,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T14:46:55.232Z"
+  "lastUpdated": "2025-08-30T14:47:11.366Z"
 }
