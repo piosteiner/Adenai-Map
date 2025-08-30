@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "d159f96ab4c595d254857318681cf83ec4b311a0",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T14:47:12.092Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T14:47:12.092Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Bootsfahrt auf dem Adenui - I entry (5663-07-13 to 5663-07-18)"
+    },
+    {
       "commitSha": "1662de69910217e129b415fbb18ddd65c82c2934",
       "action": "update",
       "type": "character",
@@ -4227,5 +4240,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T14:46:56.185Z"
+  "lastUpdated": "2025-08-30T14:47:12.092Z"
 }
