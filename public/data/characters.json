@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Luvatu",
+      "location": "Atlantis (versunken)",
       "coordinates": [
-        2126,
-        992
+        2210,
+        975
       ],
       "description": "",
       "image": "",
@@ -640,18 +640,34 @@
           "isCustomLocation": false,
           "createdAt": "2025-08-30T15:19:39.182Z",
           "updatedAt": "2025-08-30T15:20:08.955Z"
+        },
+        {
+          "id": "movement_1756567248493",
+          "movement_nr": 28,
+          "date": "5663-08-14",
+          "dateStart": "5663-08-14",
+          "dateEnd": null,
+          "location": "Atlantis (versunken)",
+          "coordinates": [
+            2210,
+            975
+          ],
+          "notes": "",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T15:20:48.493Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T15:20:08.955Z",
+      "updatedAt": "2025-08-30T15:20:48.493Z",
       "currentLocation": {
-        "date": "5663-08-13",
-        "dateStart": "5663-08-13",
-        "dateEnd": "5663-08-14",
-        "location": "Luvatu",
+        "date": "5663-08-14",
+        "dateStart": "5663-08-14",
+        "dateEnd": null,
+        "location": "Atlantis (versunken)",
         "coordinates": [
-          2126,
-          992
+          2210,
+          975
         ],
         "notes": ""
       }
@@ -1645,5 +1661,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T15:20:08.955Z"
+  "lastUpdated": "2025-08-30T15:20:48.493Z"
 }
