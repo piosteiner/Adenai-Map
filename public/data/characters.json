@@ -1845,7 +1845,38 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "mae",
+      "name": "Mae",
+      "title": "Prinzessin von Basapo",
+      "placeOfOrigin": "Akónetchie",
+      "coordinates": [
+        1869,
+        556
+      ],
+      "description": "Tochter von Königin Maeba II., Prinzessin von Basapo und Anführerin des Rückeroberungs Regiments in Ako.",
+      "image": "https://adenai.piogino.ch/public/images/mae_1.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "5663-09-01",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-30T21:53:55.749Z",
+      "updatedAt": "2025-08-30T21:53:55.749Z",
+      "currentLocation": {
+        "location": "Akónetchie",
+        "date": "2025-08-30",
+        "dateStart": "2025-08-30",
+        "dateEnd": null,
+        "coordinates": [
+          1869,
+          556
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2025-08-30T21:49:07.015Z"
+  "lastUpdated": "2025-08-30T21:53:55.749Z"
 }
