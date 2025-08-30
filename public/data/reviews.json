@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "955b70da26a2f7c19e1f8f7f24271ce20aba1ad8",
+      "action": "create",
+      "type": "character",
+      "itemName": "Königin Maeba II.",
+      "user": "gm",
+      "timestamp": "2025-08-30T21:37:03.986Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T21:37:03.986Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Königin Maeba II. (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "ba4e014d94f4a0c04a9e05b8c0b1f3b8745845e5",
       "action": "update",
       "type": "character",
@@ -4903,5 +4916,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T21:29:27.611Z"
+  "lastUpdated": "2025-08-30T21:37:03.986Z"
 }
