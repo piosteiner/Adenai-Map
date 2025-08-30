@@ -297,8 +297,8 @@
         "description": "Die grösste noch aktive von Zwergen geschaffene Stadt auf Adenai.",
         "contentUrl": null,
         "image": "",
-        "region": "",
-        "type": "",
+        "region": "eastern_adenai",
+        "type": "city",
         "visited": false
       },
       "geometry": {
