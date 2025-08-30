@@ -444,9 +444,10 @@
       "type": "Feature",
       "properties": {
         "name": "Makir",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Makir, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Details zu diesem Ort sind noch zu entdecken.",
         "contentUrl": null,
-        "region": "Harak",
+        "image": "",
+        "region": "harak",
         "type": "town",
         "visited": false
       },
