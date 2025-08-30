@@ -191,7 +191,9 @@
         "name": "Atlantis (aufgestiegen)",
         "description": "Standort von Atlantis, nachdem es von den VsuzH wieder in den Himmel gehoben wurde.",
         "contentUrl": null,
-        "region": "other",
+        "image": "",
+        "region": "heaven",
+        "type": "ruin",
         "visited": true
       },
       "geometry": {
