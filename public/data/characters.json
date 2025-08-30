@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Platsch! Wieder auf dem Meer",
+      "location": "Zur Küste von Upeto",
       "coordinates": [
-        2275,
-        825
+        2026,
+        671
       ],
       "description": "",
       "image": "",
@@ -705,18 +705,34 @@
           "type": "travel",
           "isCustomLocation": true,
           "createdAt": "2025-08-30T15:25:38.109Z"
+        },
+        {
+          "id": "movement_1756567612548",
+          "movement_nr": 32,
+          "date": "5663-08-15",
+          "dateStart": "5663-08-15",
+          "dateEnd": "5663-08-19",
+          "location": "Zur Küste von Upeto",
+          "coordinates": [
+            2026,
+            671
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": true,
+          "createdAt": "2025-08-30T15:26:52.548Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T15:25:38.109Z",
+      "updatedAt": "2025-08-30T15:26:52.548Z",
       "currentLocation": {
         "date": "5663-08-15",
         "dateStart": "5663-08-15",
-        "dateEnd": null,
-        "location": "Platsch! Wieder auf dem Meer",
+        "dateEnd": "5663-08-19",
+        "location": "Zur Küste von Upeto",
         "coordinates": [
-          2275,
-          825
+          2026,
+          671
         ],
         "notes": ""
       }
@@ -1710,5 +1726,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T15:25:38.109Z"
+  "lastUpdated": "2025-08-30T15:26:52.548Z"
 }
