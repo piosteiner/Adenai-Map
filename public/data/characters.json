@@ -1803,7 +1803,38 @@
       "movementHistory": [],
       "createdAt": "2025-08-30T21:09:19.139Z",
       "updatedAt": "2025-08-30T21:09:19.139Z"
+    },
+    {
+      "id": "k_nigin_maeba_ii_",
+      "name": "Königin Maeba II.",
+      "title": "Hüterin von Basapo",
+      "placeOfOrigin": "Akónetchie",
+      "coordinates": [
+        1869,
+        556
+      ],
+      "description": "Eine Bekannte von Luna.",
+      "image": "https://www.dndbeyond.com/avatars/thumbnails/40650/175/1000/1000/638463690085746933.png",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-08-30T21:37:03.126Z",
+      "updatedAt": "2025-08-30T21:37:03.126Z",
+      "currentLocation": {
+        "location": "Akónetchie",
+        "date": "2025-08-30",
+        "dateStart": "2025-08-30",
+        "dateEnd": null,
+        "coordinates": [
+          1869,
+          556
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2025-08-30T21:28:04.031Z"
+  "lastUpdated": "2025-08-30T21:37:03.126Z"
 }
