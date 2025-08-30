@@ -157,10 +157,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Fitchers Turm",
+      "location": "Torftgarder Forst",
       "coordinates": [
-        1344,
-        1128
+        1310,
+        1094
       ],
       "description": "",
       "image": "",
@@ -366,20 +366,36 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-08-30T14:34:21.302Z"
+        },
+        {
+          "id": "movement_1756564514270",
+          "movement_nr": 12,
+          "date": "5663-06-27",
+          "dateStart": "5663-06-27",
+          "dateEnd": null,
+          "location": "Torftgarder Forst",
+          "coordinates": [
+            1310,
+            1094
+          ],
+          "notes": "Kügeli joins the Party",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-08-30T14:35:14.270Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-08-30T14:34:21.302Z",
+      "updatedAt": "2025-08-30T14:35:14.270Z",
       "currentLocation": {
-        "date": "5663-06-25",
-        "dateStart": "5663-06-25",
-        "dateEnd": "5663-06-27",
-        "location": "Fitchers Turm",
+        "date": "5663-06-27",
+        "dateStart": "5663-06-27",
+        "dateEnd": null,
+        "location": "Torftgarder Forst",
         "coordinates": [
-          1344,
-          1128
+          1310,
+          1094
         ],
-        "notes": "Rast und Lernen bei Fitcher"
+        "notes": "Kügeli joins the Party"
       }
     },
     {
@@ -1371,5 +1387,5 @@
       "location": "Makir"
     }
   ],
-  "lastUpdated": "2025-08-30T14:34:21.302Z"
+  "lastUpdated": "2025-08-30T14:35:14.270Z"
 }
