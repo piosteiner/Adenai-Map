@@ -396,7 +396,7 @@
         "description": "Details zu diesem Ort sind noch zu entdecken.",
         "contentUrl": null,
         "image": "",
-        "region": "",
+        "region": "western_adenai",
         "type": "town",
         "visited": false
       },
