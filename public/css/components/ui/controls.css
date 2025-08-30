@@ -162,10 +162,6 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-.map-control-btn:hover::before {
-  background: rgba(212, 175, 55, 0.6);
-}
-
 .map-control-btn:hover .cluster-dot {
   transform: scale(1.1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
