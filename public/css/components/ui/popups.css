@@ -150,6 +150,22 @@
   color: var(--text-color);
 }
 
+/* Location meta information (type and region) */
+.popup-meta {
+  font-size: 12px;
+  color: #666;
+  margin: 5px 0 10px 0;
+  line-height: 1.4;
+}
+
+.popup-type, .popup-region {
+  font-weight: 500;
+}
+
+[data-theme="dark"] .popup-meta {
+  color: #aaa;
+}
+
 /* Character lists in popups */
 .popup-characters {
   margin-top: 10px;

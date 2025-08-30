@@ -6,6 +6,48 @@ class LocationSystem {
         this.dotOrangeIcon = null;
         this.mediaLibrary = null;
         this.currentOpenPopup = null; // Track currently open popup
+        
+        // Location type definitions with icons and German labels
+        this.locationTypes = {
+            city: { value: 'city', label: '🏙️ Stadt' },
+            town: { value: 'town', label: '🏘️ Dorf' },
+            village: { value: 'village', label: '🏡 Weiler' },
+            camp: { value: 'camp', label: '⛺ Lager' },
+            landmark: { value: 'landmark', label: '🗿 Orientierungspunkt' },
+            ruin: { value: 'ruin', label: '🏛️ Ruine' },
+            dungeon: { value: 'dungeon', label: '☠️ Dungeon' },
+            monster: { value: 'monster', label: '🐉 Monster' },
+            environment: { value: 'environment', label: '🌳 Umgebung' },
+            mountain: { value: 'mountain', label: '⛰️ Berg/Gebirge' },
+            lake: { value: 'lake', label: '💧 Gewässer' },
+            island: { value: 'island', label: '🏝️ Insel' },
+            unknown: { value: 'unknown', label: '❓ Unbekannt' }
+        };
+        
+        // Location region definitions with German labels
+        this.locationRegions = {
+            north_adenai: { value: 'north_adenai', label: 'Nord-Adenai' },
+            eastern_adenai: { value: 'eastern_adenai', label: 'Ost-Adenai' },
+            south_adenai: { value: 'south_adenai', label: 'Süd-Adenai' },
+            western_adenai: { value: 'western_adenai', label: 'West-Adenai' },
+            valaris_region: { value: 'valaris_region', label: 'Valaris Region' },
+            upeto: { value: 'upeto', label: 'Upeto' },
+            harak: { value: 'harak', label: 'Harak' },
+            tua_danar: { value: 'tua_danar', label: 'Tua Danar' },
+            rena_region: { value: 'rena_region', label: 'Rena Region' },
+            arcane_heights: { value: 'arcane_heights', label: 'Arkane Höhen' },
+            sun_peaks: { value: 'sun_peaks', label: 'Sonnenspitzen' },
+            cinnabar_fields: { value: 'cinnabar_fields', label: 'Zinnober Felder' },
+            ewige_donnerkluefte: { value: 'ewige_donnerkluefte', label: 'Ewige Donnerklüfte' },
+            east_sea: { value: 'east_sea', label: 'Östliche See' },
+            west_sea: { value: 'west_sea', label: 'Westliche See' },
+            heaven: { value: 'heaven', label: 'Himmel' },
+            underdark: { value: 'underdark', label: 'Underdark' },
+            feywild: { value: 'feywild', label: 'Feywild' },
+            unknown: { value: 'unknown', label: 'Unbekannt' },
+            other: { value: 'other', label: 'Andere' }
+        };
+        
         this.init();
     }
 
@@ -479,6 +521,8 @@ class LocationSystem {
         const desc = feature.properties.description || '';
         const details = feature.properties.details || [];
         const url = feature.properties.contentUrl;
+        const type = feature.properties.type || '';
+        const region = feature.properties.region || '';
         
         // Ensure we have a valid layer with getLatLng method
         let latlng;
@@ -500,15 +544,37 @@ class LocationSystem {
                 const response = await HttpUtils.fetch(url);
                 const html = await response.text();
                 finalDesc = html.replace(/(<([^>]+)>)/gi, ''); // Remove HTML tags for search
-                popupContent = `<div class="popup-title">${name}</div><div class="popup-desc">${this.parseLinks(html)}</div>`;
+                
+                // Create popup with external content but add type/region meta info
+                popupContent = `<div class="popup-title">${name}</div>`;
+                
+                // Add type and region information
+                if (type || region) {
+                    popupContent += '<div class="popup-meta">';
+                    
+                    if (type) {
+                        const typeInfo = this.locationTypes[type] || this.locationTypes.unknown;
+                        popupContent += `<span class="popup-type">${typeInfo.label}</span>`;
+                    }
+                    
+                    if (region) {
+                        const regionInfo = this.locationRegions[region] || this.locationRegions.unknown;
+                        if (type) popupContent += ' • '; // Add separator if both type and region
+                        popupContent += `<span class="popup-region">📍 ${regionInfo.label}</span>`;
+                    }
+                    
+                    popupContent += '</div>';
+                }
+                
+                popupContent += `<div class="popup-desc">${this.parseLinks(html)}</div>`;
             } catch (error) {
                 // Fallback to local description if external content fails
-                popupContent = this.createPopupFromProperties(name, desc, details);
+                popupContent = this.createPopupFromProperties(name, desc, details, type, region);
                 Logger.warning(`Failed to load content for ${name}: ${error.message}`);
             }
         } else {
             // No contentUrl: use local description and details
-            popupContent = this.createPopupFromProperties(name, desc, details);
+            popupContent = this.createPopupFromProperties(name, desc, details, type, region);
         }
 
         // Add character lists to popup content
@@ -536,8 +602,26 @@ class LocationSystem {
     }
 
     // Create popup content from properties
-    createPopupFromProperties(name, description, details) {
+    createPopupFromProperties(name, description, details, type, region) {
         let content = `<div class="popup-title">${name}</div>`;
+        
+        // Add type and region information
+        if (type || region) {
+            content += '<div class="popup-meta">';
+            
+            if (type) {
+                const typeInfo = this.locationTypes[type] || this.locationTypes.unknown;
+                content += `<span class="popup-type">${typeInfo.label}</span>`;
+            }
+            
+            if (region) {
+                const regionInfo = this.locationRegions[region] || this.locationRegions.unknown;
+                if (type) content += ' • '; // Add separator if both type and region
+                content += `<span class="popup-region">📍 ${regionInfo.label}</span>`;
+            }
+            
+            content += '</div>';
+        }
         
         if (description) {
             content += `<div class="popup-desc">${this.parseLinks(description)}</div>`;
