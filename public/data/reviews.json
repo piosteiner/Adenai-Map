@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "1662de69910217e129b415fbb18ddd65c82c2934",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T14:46:56.184Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T14:46:56.184Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Toftgard entry (5663-06-28 to 5663-07-13)"
+    },
+    {
       "commitSha": "10cd3349fe4a3cc312292f33916008d5b53e1cc6",
       "action": "update",
       "type": "character",
@@ -4214,5 +4227,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T14:46:24.373Z"
+  "lastUpdated": "2025-08-30T14:46:56.185Z"
 }
