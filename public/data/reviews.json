@@ -2,17 +2,17 @@
   "version": "1.0",
   "reviews": [
     {
-      "commitSha": "b98e607450f8f72092663558b1248039c4f8327b",
+      "commitSha": "ba4e014d94f4a0c04a9e05b8c0b1f3b8745845e5",
       "action": "update",
       "type": "character",
       "itemName": "Remus",
       "user": "gm",
-      "timestamp": "2025-08-30T21:28:04.801Z",
+      "timestamp": "2025-08-30T21:29:27.610Z",
       "status": "approved",
       "reviewedBy": "gm",
-      "reviewedAt": "2025-08-30T21:28:04.801Z",
+      "reviewedAt": "2025-08-30T21:29:27.610Z",
       "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Update character: remus (by gm) - Updated character details"
+      "commitMessage": "Update character: remus (by gm) - updated place of origin, added faction, added image"
     },
     {
       "commitSha": "78868f6827cf8abde423ea2d71cb9d108ae5738c",
@@ -4903,5 +4903,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T21:28:04.801Z"
+  "lastUpdated": "2025-08-30T21:29:27.611Z"
 }
