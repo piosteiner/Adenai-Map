@@ -385,9 +385,10 @@
       "type": "Feature",
       "properties": {
         "name": "Donnermund",
-        "description": "Es gab einen Fehler beim Laden der Ortsbeschreibung von Donnermund, bitte kontaktiere den Websitenbetreiber.",
+        "description": "Details zu diesem Ort sind noch zu entdecken.",
         "contentUrl": null,
-        "region": "Ewige Donnerklüfte",
+        "image": "",
+        "region": "",
         "type": "town",
         "visited": false
       },
