@@ -153,7 +153,7 @@
   transform: translateY(-50%);
   width: 8px;
   height: 2px;
-  background: rgba(212, 175, 55, 0.4);
+  background: #495057;
   border-radius: 1px;
   transition: background 0.3s ease;
 }
