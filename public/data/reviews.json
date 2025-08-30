@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "3eea2de9d4becdd951f0556fe814bc4b9ec46c11",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2025-08-30T14:56:01.500Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-30T14:56:01.500Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Fitchers Turm entry (5663-06-25 to 5663-06-30)"
+    },
+    {
       "commitSha": "514e43bb9166e23fcfd88ae6a7dd4554ec774e82",
       "action": "update",
       "type": "character",
@@ -4331,5 +4344,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-30T14:55:47.269Z"
+  "lastUpdated": "2025-08-30T14:56:01.500Z"
 }
