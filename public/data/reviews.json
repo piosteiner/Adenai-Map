@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "a425690561e6aec571793a18cf4f1ef98e559df9",
+      "action": "update",
+      "type": "location",
+      "itemName": "Underdark bei Ako",
+      "user": "gm",
+      "timestamp": "2025-08-31T12:14:46.041Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-08-31T12:14:46.041Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Underdark bei Ako (by gm) - updated type"
+    },
+    {
       "commitSha": "dae7a644e1883e9ae0a429525aba6947c575f571",
       "action": "update",
       "type": "location",
@@ -5215,5 +5228,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-08-31T12:14:30.374Z"
+  "lastUpdated": "2025-08-31T12:14:46.042Z"
 }
