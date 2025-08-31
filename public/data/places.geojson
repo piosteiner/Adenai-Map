@@ -1014,7 +1014,7 @@
         "contentUrl": null,
         "image": "https://adenai.piogino.ch/public/images/underdark_ako.png",
         "region": "north_adenai",
-        "type": "town",
+        "type": "landmark",
         "visited": true
       },
       "geometry": {
