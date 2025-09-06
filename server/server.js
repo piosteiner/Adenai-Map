@@ -13,7 +13,7 @@ const { router: charactersRouter, initGitHub: initCharactersGitHub } = require('
 const { router: characterPathsRouter, initGitHub: initCharacterPathsGitHub } = require('./routes/character-paths');
 const changelogRoutes = require('./routes/changelog');
 const journeyRoutes = require('./routes/journey');
-const temporalRoutes = require('./routes/temporal-features');
+const dynamicsRoutes = require('./routes/dynamics');
 const configRoutes = require('./routes/config');
 
 // Import middleware
@@ -87,7 +87,7 @@ app.use('/api/characters', charactersRouter);
 app.use('/api/character-paths', authenticateJourneyAPI, characterPathsRouter);
 app.use('/api/changelog', changelogRoutes);
 app.use('/api/journey', authenticateJourneyAPI, journeyRoutes);
-app.use('/api/temporal', authenticateJourneyAPI, temporalRoutes);
+app.use('/api/dynamics', authenticateJourneyAPI, dynamicsRoutes);
 app.use('/api/config', configRoutes);
 
 // Activity routes (uncomment when you have the activity routes file)

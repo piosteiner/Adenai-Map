@@ -3,13 +3,13 @@ const fs = require('fs').promises;
 const path = require('path');
 const router = express.Router();
 
-const TEMPORAL_DATA_PATH = path.join(__dirname, '../data/temporal-features.json');
-const CLIENT_TEMPORAL_PATH = path.join(__dirname, '../client-sync/temporal-features.js');
+const DYNAMICS_DATA_PATH = path.join(__dirname, '../data/dynamics.json');
+const CLIENT_DYNAMICS_PATH = path.join(__dirname, '../client-sync/dynamics.js');
 
-// Initialize temporal features data file if it doesn't exist
-async function initializeTemporalData() {
+// Initialize dynamics data file if it doesn't exist
+async function initializeDynamicsData() {
     try {
-        await fs.access(TEMPORAL_DATA_PATH);
+        await fs.access(DYNAMICS_DATA_PATH);
     } catch (error) {
         const initialData = {
             political_areas: [],
@@ -17,20 +17,20 @@ async function initializeTemporalData() {
             strategic_markers: [],
             timeline_dates: [] // Available dates for the timeline
         };
-        await fs.writeFile(TEMPORAL_DATA_PATH, JSON.stringify(initialData, null, 2));
+        await fs.writeFile(DYNAMICS_DATA_PATH, JSON.stringify(initialData, null, 2));
     }
 }
 
-// Get all temporal features
+// Get all dynamics
 router.get('/', async (req, res) => {
     try {
-        await initializeTemporalData();
-        const data = await fs.readFile(TEMPORAL_DATA_PATH, 'utf8');
-        const temporalData = JSON.parse(data);
-        res.json(temporalData);
+        await initializeDynamicsData();
+        const data = await fs.readFile(DYNAMICS_DATA_PATH, 'utf8');
+        const dynamicsData = JSON.parse(data);
+        res.json(dynamicsData);
     } catch (error) {
-        console.error('Error fetching temporal features:', error);
-        res.status(500).json({ error: 'Failed to fetch temporal features' });
+        console.error('Error fetching dynamics:', error);
+        res.status(500).json({ error: 'Failed to fetch dynamics' });
     }
 });
 
@@ -38,14 +38,14 @@ router.get('/', async (req, res) => {
 router.get('/:type', async (req, res) => {
     try {
         const data = await fs.readFile(TEMPORAL_DATA_PATH, 'utf8');
-        const temporalData = JSON.parse(data);
+        const dynamicsData = JSON.parse(data);
         const type = req.params.type;
         
-        if (!temporalData[type]) {
+        if (!dynamicsData[type]) {
             return res.status(404).json({ error: 'Feature type not found' });
         }
         
-        res.json(temporalData[type]);
+        res.json(dynamicsData[type]);
     } catch (error) {
         console.error('Error fetching features by type:', error);
         res.status(500).json({ error: 'Failed to fetch features' });
@@ -56,14 +56,14 @@ router.get('/:type', async (req, res) => {
 router.get('/:type/:id', async (req, res) => {
     try {
         const data = await fs.readFile(TEMPORAL_DATA_PATH, 'utf8');
-        const temporalData = JSON.parse(data);
+        const dynamicsData = JSON.parse(data);
         const { type, id } = req.params;
         
-        if (!temporalData[type]) {
+        if (!dynamicsData[type]) {
             return res.status(404).json({ error: 'Feature type not found' });
         }
         
-        const feature = temporalData[type].find(f => f.id === id);
+        const feature = dynamicsData[type].find(f => f.id === id);
         if (!feature) {
             return res.status(404).json({ error: 'Feature not found' });
         }
@@ -75,14 +75,14 @@ router.get('/:type/:id', async (req, res) => {
     }
 });
 
-// Create new temporal feature
+// Create new dynamics feature
 router.post('/:type', async (req, res) => {
     try {
         const data = await fs.readFile(TEMPORAL_DATA_PATH, 'utf8');
-        const temporalData = JSON.parse(data);
+        const dynamicsData = JSON.parse(data);
         const type = req.params.type;
         
-        if (!temporalData[type]) {
+        if (!dynamicsData[type]) {
             return res.status(404).json({ error: 'Feature type not found' });
         }
         
@@ -100,80 +100,80 @@ router.post('/:type', async (req, res) => {
             updatedAt: new Date().toISOString()
         };
         
-        temporalData[type].push(newFeature);
-        await fs.writeFile(TEMPORAL_DATA_PATH, JSON.stringify(temporalData, null, 2));
+        dynamicsData[type].push(newFeature);
+        await fs.writeFile(TEMPORAL_DATA_PATH, JSON.stringify(dynamicsData, null, 2));
         
         // Generate client-side file
-        await generateClientTemporalFile(temporalData);
+        await generateClientDynamicsFile(dynamicsData);
         
         res.status(201).json(newFeature);
     } catch (error) {
-        console.error('Error creating temporal feature:', error);
+        console.error('Error creating dynamics feature:', error);
         res.status(500).json({ error: 'Failed to create feature' });
     }
 });
 
-// Update temporal feature
+// Update dynamics feature
 router.put('/:type/:id', async (req, res) => {
     try {
         const data = await fs.readFile(TEMPORAL_DATA_PATH, 'utf8');
-        const temporalData = JSON.parse(data);
+        const dynamicsData = JSON.parse(data);
         const { type, id } = req.params;
         
-        if (!temporalData[type]) {
+        if (!dynamicsData[type]) {
             return res.status(404).json({ error: 'Feature type not found' });
         }
         
-        const featureIndex = temporalData[type].findIndex(f => f.id === id);
+        const featureIndex = dynamicsData[type].findIndex(f => f.id === id);
         if (featureIndex === -1) {
             return res.status(404).json({ error: 'Feature not found' });
         }
         
-        temporalData[type][featureIndex] = {
-            ...temporalData[type][featureIndex],
+        dynamicsData[type][featureIndex] = {
+            ...dynamicsData[type][featureIndex],
             ...req.body,
             updatedAt: new Date().toISOString()
         };
         
-        await fs.writeFile(TEMPORAL_DATA_PATH, JSON.stringify(temporalData, null, 2));
+        await fs.writeFile(TEMPORAL_DATA_PATH, JSON.stringify(dynamicsData, null, 2));
         
         // Generate client-side file
-        await generateClientTemporalFile(temporalData);
+        await generateClientDynamicsFile(dynamicsData);
         
-        res.json(temporalData[type][featureIndex]);
+        res.json(dynamicsData[type][featureIndex]);
     } catch (error) {
-        console.error('Error updating temporal feature:', error);
+        console.error('Error updating dynamics feature:', error);
         res.status(500).json({ error: 'Failed to update feature' });
     }
 });
 
-// Delete temporal feature
+// Delete dynamics feature
 router.delete('/:type/:id', async (req, res) => {
     try {
         const data = await fs.readFile(TEMPORAL_DATA_PATH, 'utf8');
-        const temporalData = JSON.parse(data);
+        const dynamicsData = JSON.parse(data);
         const { type, id } = req.params;
         
-        if (!temporalData[type]) {
+        if (!dynamicsData[type]) {
             return res.status(404).json({ error: 'Feature type not found' });
         }
         
-        const featureIndex = temporalData[type].findIndex(f => f.id === id);
+        const featureIndex = dynamicsData[type].findIndex(f => f.id === id);
         if (featureIndex === -1) {
             return res.status(404).json({ error: 'Feature not found' });
         }
         
-        const deletedFeature = temporalData[type][featureIndex];
-        temporalData[type].splice(featureIndex, 1);
+        const deletedFeature = dynamicsData[type][featureIndex];
+        dynamicsData[type].splice(featureIndex, 1);
         
-        await fs.writeFile(TEMPORAL_DATA_PATH, JSON.stringify(temporalData, null, 2));
+        await fs.writeFile(TEMPORAL_DATA_PATH, JSON.stringify(dynamicsData, null, 2));
         
         // Generate client-side file
-        await generateClientTemporalFile(temporalData);
+        await generateClientDynamicsFile(dynamicsData);
         
         res.json({ message: 'Feature deleted successfully', feature: deletedFeature });
     } catch (error) {
-        console.error('Error deleting temporal feature:', error);
+        console.error('Error deleting dynamics feature:', error);
         res.status(500).json({ error: 'Failed to delete feature' });
     }
 });
@@ -182,14 +182,14 @@ router.delete('/:type/:id', async (req, res) => {
 router.post('/:type/:id/timeframes', async (req, res) => {
     try {
         const data = await fs.readFile(TEMPORAL_DATA_PATH, 'utf8');
-        const temporalData = JSON.parse(data);
+        const dynamicsData = JSON.parse(data);
         const { type, id } = req.params;
         
-        if (!temporalData[type]) {
+        if (!dynamicsData[type]) {
             return res.status(404).json({ error: 'Feature type not found' });
         }
         
-        const featureIndex = temporalData[type].findIndex(f => f.id === id);
+        const featureIndex = dynamicsData[type].findIndex(f => f.id === id);
         if (featureIndex === -1) {
             return res.status(404).json({ error: 'Feature not found' });
         }
@@ -203,18 +203,18 @@ router.post('/:type/:id/timeframes', async (req, res) => {
             properties: req.body.properties || {}
         };
         
-        temporalData[type][featureIndex].timeframes.push(newTimeframe);
-        temporalData[type][featureIndex].updatedAt = new Date().toISOString();
+        dynamicsData[type][featureIndex].timeframes.push(newTimeframe);
+        dynamicsData[type][featureIndex].updatedAt = new Date().toISOString();
         
         // Sort timeframes by date
-        temporalData[type][featureIndex].timeframes.sort((a, b) => 
+        dynamicsData[type][featureIndex].timeframes.sort((a, b) => 
             new Date(a.date) - new Date(b.date)
         );
         
-        await fs.writeFile(TEMPORAL_DATA_PATH, JSON.stringify(temporalData, null, 2));
+        await fs.writeFile(TEMPORAL_DATA_PATH, JSON.stringify(dynamicsData, null, 2));
         
         // Generate client-side file
-        await generateClientTemporalFile(temporalData);
+        await generateClientDynamicsFile(dynamicsData);
         
         res.status(201).json(newTimeframe);
     } catch (error) {
@@ -223,14 +223,14 @@ router.post('/:type/:id/timeframes', async (req, res) => {
     }
 });
 
-// Generate client-side temporal features file
-async function generateClientTemporalFile(temporalData) {
+// Generate client-side dynamics file
+async function generateClientDynamicsFile(dynamicsData) {
     try {
-        let clientCode = `// Auto-generated temporal features file - Do not edit manually
+        let clientCode = `// Auto-generated dynamics file - Do not edit manually
 // Generated at: ${new Date().toISOString()}
 
 // Temporal Features Controller
-class TemporalFeaturesController {
+class DynamicsController {
     constructor(map) {
         this.map = map;
         this.currentDate = null;
@@ -239,7 +239,7 @@ class TemporalFeaturesController {
             military_movements: [],
             strategic_markers: []
         };
-        this.featureData = ${JSON.stringify(temporalData, null, 2)};
+        this.featureData = ${JSON.stringify(dynamicsData, null, 2)};
     }
 
     setCurrentDate(dateString) {
@@ -250,7 +250,7 @@ class TemporalFeaturesController {
     updateMapFeatures() {
         if (!this.currentDate) return;
         
-        // Clear existing temporal features
+        // Clear existing dynamics
         this.clearTemporalFeatures();
         
         // Add political areas for current date
@@ -419,14 +419,14 @@ class TemporalFeaturesController {
     }
 }
 
-// Initialize temporal features when map is ready
+// Initialize dynamics when map is ready
 if (typeof map !== 'undefined') {
-    window.temporalController = new TemporalFeaturesController(map);
+    window.dynamicsController = new DynamicsController(map);
 }
 `;
         
-        await fs.writeFile(CLIENT_TEMPORAL_PATH, clientCode);
-        console.log('Client temporal features file generated successfully');
+        await fs.writeFile(CLIENT_DYNAMICS_PATH, clientCode);
+        console.log('Client dynamics file generated successfully');
     } catch (error) {
         console.error('Error generating client temporal file:', error);
     }
@@ -436,11 +436,11 @@ if (typeof map !== 'undefined') {
 router.post('/sync', async (req, res) => {
     try {
         const data = await fs.readFile(TEMPORAL_DATA_PATH, 'utf8');
-        const temporalData = JSON.parse(data);
-        await generateClientTemporalFile(temporalData);
-        res.json({ message: 'Client temporal features file generated successfully' });
+        const dynamicsData = JSON.parse(data);
+        await generateClientDynamicsFile(dynamicsData);
+        res.json({ message: 'Client dynamics file generated successfully' });
     } catch (error) {
-        console.error('Error syncing temporal features:', error);
+        console.error('Error syncing dynamics:', error);
         res.status(500).json({ error: 'Failed to sync to client' });
     }
 });

@@ -1,6 +1,6 @@
-// admin-interface/js/modules/temporal/index.js - Temporal Features Management
+// admin-interface/js/modules/temporal/index.js - Dynamics Features Management
 
-class TemporalManager {
+class DynamicsManager {
     constructor() {
         this.ui = window.adminUI;
         this.auth = window.adminAuth;
@@ -9,28 +9,28 @@ class TemporalManager {
         this.debugMode = true;
         
         // Initialize sub-modules
-        this.operations = new TemporalOperations(this.auth, this.ui);
-        this.mapManager = new TemporalMap(this.ui);
-        this.timelineManager = new TemporalTimeline(this.ui);
+        this.operations = new DynamicsOperations(this.auth, this.ui);
+        this.mapManager = new DynamicsMap(this.ui);
+        this.timelineManager = new DynamicsTimeline(this.ui);
         
         this.setupFormListeners();
         this.setupTypeSelector();
         
-        console.log('Temporal Manager created and ready');
+        console.log('Dynamics Manager created and ready');
     }
 
     setupFormListeners() {
         document.addEventListener('click', (e) => {
             // Feature management
-            if (e.target.id === 'add-temporal-feature-btn') {
+            if (e.target.id === 'add-dynamics-feature-btn') {
                 this.createNewFeature();
             }
             
-            if (e.target.id === 'delete-temporal-feature-btn') {
+            if (e.target.id === 'delete-dynamics-feature-btn') {
                 this.deleteFeature();
             }
             
-            if (e.target.id === 'close-temporal-editor') {
+            if (e.target.id === 'close-dynamics-editor') {
                 this.closeEditor();
             }
             
@@ -45,22 +45,22 @@ class TemporalManager {
             }
             
             // Timeline controls
-            if (e.target.id === 'temporal-timeline-play') {
+            if (e.target.id === 'dynamics-timeline-play') {
                 this.timelineManager.play();
             }
             
-            if (e.target.id === 'temporal-timeline-pause') {
+            if (e.target.id === 'dynamics-timeline-pause') {
                 this.timelineManager.pause();
             }
             
-            if (e.target.id === 'sync-temporal-btn') {
+            if (e.target.id === 'sync-dynamics-btn') {
                 this.syncToClient();
             }
         });
 
         // Feature form submission
         document.addEventListener('submit', (e) => {
-            if (e.target.id === 'temporal-feature-form') {
+            if (e.target.id === 'dynamics-feature-form') {
                 e.preventDefault();
                 this.saveFeature();
             }
@@ -68,7 +68,7 @@ class TemporalManager {
 
         // Type selector change
         document.addEventListener('change', (e) => {
-            if (e.target.id === 'temporal-type-selector') {
+            if (e.target.id === 'dynamics-type-selector') {
                 this.currentType = e.target.value;
                 this.renderFeatureList();
             }
@@ -76,14 +76,14 @@ class TemporalManager {
 
         // Timeline date selector
         document.addEventListener('input', (e) => {
-            if (e.target.id === 'temporal-date-slider') {
+            if (e.target.id === 'dynamics-date-slider') {
                 this.timelineManager.setDate(e.target.value);
             }
         });
     }
 
     setupTypeSelector() {
-        const selector = document.getElementById('temporal-type-selector');
+        const selector = document.getElementById('dynamics-type-selector');
         if (selector) {
             selector.innerHTML = `
                 <option value="political_areas">Political Areas</option>
@@ -95,13 +95,13 @@ class TemporalManager {
 
     async initializeTemporalTab() {
         if (this.operations.getFeatures(this.currentType).length > 0 && this.mapManager.map) {
-            this.log('Temporal tab already initialized, refreshing...');
+            this.log('Dynamics tab already initialized, refreshing...');
             this.mapManager.forceMapResize();
             this.renderFeatureList();
             return;
         }
 
-        const listContainer = document.getElementById('temporal-features-list');
+        const listContainer = document.getElementById('dynamics-features-list');
         if (listContainer) {
             listContainer.innerHTML = '<div class="loading">Loading temporal features...</div>';
         }
@@ -114,7 +114,7 @@ class TemporalManager {
                 this.mapManager.initializeMap();
                 this.timelineManager.initializeTimeline();
                 this.renderFeatureList();
-                this.log('Temporal tab initialized successfully');
+                this.log('Dynamics tab initialized successfully');
             }, 150);
             
         } catch (error) {
@@ -138,9 +138,9 @@ class TemporalManager {
     }
 
     renderFeatureList() {
-        const listContainer = document.getElementById('temporal-features-list');
+        const listContainer = document.getElementById('dynamics-features-list');
         if (!listContainer) {
-            this.log('Temporal features list container not found');
+            this.log('Dynamics features list container not found');
             return;
         }
 
@@ -158,8 +158,8 @@ class TemporalManager {
         }
 
         listContainer.innerHTML = features.map(feature => `
-            <div class="temporal-feature-item ${feature.active ? 'active' : 'inactive'}" 
-                 onclick="temporalManager.selectFeature('${feature.id}')">
+            <div class="dynamics-feature-item ${feature.active ? 'active' : 'inactive'}" 
+                 onclick="dynamicsManager.selectFeature('${feature.id}')">
                 <div class="feature-item-header">
                     <h4>${this.escapeHtml(feature.name)}</h4>
                     <span class="feature-status" style="background-color: ${feature.color}"></span>
@@ -193,7 +193,7 @@ class TemporalManager {
     }
 
     showEditor() {
-        const editor = document.getElementById('temporal-editor');
+        const editor = document.getElementById('dynamics-editor');
         if (editor) {
             editor.style.display = 'block';
             setTimeout(() => this.mapManager.forceMapResize(), 100);
@@ -201,7 +201,7 @@ class TemporalManager {
     }
 
     closeEditor() {
-        const editor = document.getElementById('temporal-editor');
+        const editor = document.getElementById('dynamics-editor');
         if (editor) {
             editor.style.display = 'none';
         }
@@ -213,11 +213,11 @@ class TemporalManager {
     populateEditor() {
         if (!this.currentFeature) return;
 
-        const form = document.getElementById('temporal-feature-form');
+        const form = document.getElementById('dynamics-feature-form');
         if (!form) return;
 
         // Populate form fields based on feature type
-        this.ui.populateForm('temporal-feature-form', {
+        this.ui.populateForm('dynamics-feature-form', {
             'feature-name': this.currentFeature.name || '',
             'feature-category': this.currentFeature.category || '',
             'feature-color': this.currentFeature.color || '#3366cc',
@@ -230,7 +230,7 @@ class TemporalManager {
     async saveFeature() {
         if (!this.currentFeature) return;
 
-        const formData = this.ui.getFormData('temporal-feature-form');
+        const formData = this.ui.getFormData('dynamics-feature-form');
         if (!formData) return;
 
         // Validate form data
@@ -386,7 +386,7 @@ class TemporalManager {
 
     log(...args) {
         if (this.debugMode) {
-            console.log('[TemporalManager]', ...args);
+            console.log('[DynamicsManager]', ...args);
         }
     }
 
@@ -403,5 +403,5 @@ class TemporalManager {
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = TemporalManager;
+    module.exports = DynamicsManager;
 }
