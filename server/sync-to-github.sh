@@ -87,14 +87,18 @@ fi
 
 # Copy data directory structure (preserve .gitkeep files)
 if [ -d "$SERVER_SOURCE/data" ]; then
-    cp -r "$SERVER_SOURCE/data/"*.gitkeep server/data/ 2>/dev/null || echo "No data .gitkeep files found"
+    if [ -f "$SERVER_SOURCE/data/.gitkeep" ]; then
+        cp "$SERVER_SOURCE/data/.gitkeep" server/data/
+    fi
 else
     echo "No data directory found"
 fi
 
 # Copy client-sync directory structure (preserve .gitkeep files)
 if [ -d "$SERVER_SOURCE/client-sync" ]; then
-    cp -r "$SERVER_SOURCE/client-sync/"*.gitkeep server/client-sync/ 2>/dev/null || echo "No client-sync .gitkeep files found"
+    if [ -f "$SERVER_SOURCE/client-sync/.gitkeep" ]; then
+        cp "$SERVER_SOURCE/client-sync/.gitkeep" server/client-sync/
+    fi
 else
     echo "No client-sync directory found"
 fi
