@@ -127,6 +127,7 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Adenai Admin Server running on port ${PORT}`);
   console.log(`📁 Repository: ${REPO_OWNER}/${REPO_NAME}`);
   console.log(`🌐 Access admin at: http://your-vps-ip:${PORT}`);
+  console.log(`🔄 GitHub sync available via: ./sync-to-github.sh`);
 });
 
 // Graceful shutdown
