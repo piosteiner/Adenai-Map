@@ -54,7 +54,7 @@ app.use(session({
   }
 }));
 
-app.use(express.static('admin-public'));
+app.use(express.static('admin-interface'));
 app.use('/uploads', express.static('uploads'));
 
 // File upload configuration
