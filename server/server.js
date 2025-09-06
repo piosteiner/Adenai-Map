@@ -128,6 +128,8 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`📁 Repository: ${REPO_OWNER}/${REPO_NAME}`);
   console.log(`🌐 Access admin at: http://your-vps-ip:${PORT}`);
   console.log(`🔄 GitHub sync available via: ./sync-to-github.sh`);
+  console.log(`🚀 GitHub deploy available via: ./deploy-from-github.sh`);
+  console.log(`🧪 Testing bi-directional workflow - ${new Date().toISOString()}`);
 });
 
 // Graceful shutdown
