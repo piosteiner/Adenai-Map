@@ -158,6 +158,32 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+// Delete journey
+router.delete('/:id', async (req, res) => {
+    try {
+        const data = await fs.readFile(JOURNEY_DATA_PATH, 'utf8');
+        const journeyData = JSON.parse(data);
+        const journeyIndex = journeyData.journeys.findIndex(j => j.id === req.params.id);
+        
+        if (journeyIndex === -1) {
+            return res.status(404).json({ error: 'Journey not found' });
+        }
+        
+        const deletedJourney = journeyData.journeys[journeyIndex];
+        journeyData.journeys.splice(journeyIndex, 1);
+        
+        await fs.writeFile(JOURNEY_DATA_PATH, JSON.stringify(journeyData, null, 2));
+        
+        // Generate client-side file
+        await generateClientJourneyFile(journeyData);
+        
+        res.json({ message: 'Journey deleted successfully', journey: deletedJourney });
+    } catch (error) {
+        console.error('Error deleting journey:', error);
+        res.status(500).json({ error: 'Failed to delete journey' });
+    }
+});
+
 // Add segment to journey
 router.post('/:id/segments', async (req, res) => {
     try {

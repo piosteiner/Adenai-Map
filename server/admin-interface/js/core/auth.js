@@ -47,7 +47,9 @@ class AdminAuth {
 
     async checkAuthStatus() {
         try {
-            const response = await fetch('/api/auth-status');
+            const response = await fetch('/api/auth-status', {
+                credentials: 'same-origin'
+            });
             const data = await response.json();
             this.isAuthenticated = data.authenticated;
             this.username = data.username;
@@ -128,6 +130,7 @@ class AdminAuth {
             const response = await fetch('/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'same-origin',
                 body: JSON.stringify({
                     username: formData.username,
                     password: formData.password
@@ -158,7 +161,10 @@ class AdminAuth {
 
     async logout() {
         try {
-            const response = await fetch('/api/logout', { method: 'POST' });
+            const response = await fetch('/api/logout', { 
+                method: 'POST',
+                credentials: 'same-origin'
+            });
             const result = await response.json();
             
             if (result.success) {
@@ -231,7 +237,13 @@ class AdminAuth {
             throw new Error('Authentication required');
         }
 
-        const response = await fetch(url, options);
+        // Ensure credentials are included in the request
+        const fetchOptions = {
+            ...options,
+            credentials: 'same-origin'
+        };
+
+        const response = await fetch(url, fetchOptions);
         
         if (!this.checkApiResponse(response)) {
             throw new Error('Session expired');
