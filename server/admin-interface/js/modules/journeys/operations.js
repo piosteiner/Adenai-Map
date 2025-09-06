@@ -296,23 +296,23 @@ class JourneyOperations {
     validateJourneyData(formData) {
         const errors = [];
         
-        if (!formData.name?.trim()) {
+        if (!formData['journey-name']?.trim()) {
             errors.push('Journey name is required');
         }
         
-        if (formData.name && formData.name.length > 100) {
+        if (formData['journey-name'] && formData['journey-name'].length > 100) {
             errors.push('Journey name must be less than 100 characters');
         }
         
-        if (formData.color && !/^#[0-9A-F]{6}$/i.test(formData.color)) {
+        if (formData['journey-color'] && !/^#[0-9A-F]{6}$/i.test(formData['journey-color'])) {
             errors.push('Invalid color format - must be hex color (e.g., #ff6600)');
         }
         
-        if (formData.opacity && (formData.opacity < 0 || formData.opacity > 1)) {
+        if (formData['journey-opacity'] && (formData['journey-opacity'] < 0 || formData['journey-opacity'] > 1)) {
             errors.push('Opacity must be between 0 and 1');
         }
         
-        if (formData.weight && (formData.weight < 1 || formData.weight > 20)) {
+        if (formData['journey-weight'] && (formData['journey-weight'] < 1 || formData['journey-weight'] > 20)) {
             errors.push('Weight must be between 1 and 20');
         }
         

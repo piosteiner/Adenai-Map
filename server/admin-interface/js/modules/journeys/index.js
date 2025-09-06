@@ -293,7 +293,7 @@ class JourneyManager {
             opacity: parseFloat(formData['journey-opacity']),
             weight: parseInt(formData['journey-weight']),
             weightMobile: parseInt(formData['journey-weight-mobile']),
-            active: formData['journey-active'],
+            active: formData['journey-active'] === 'on', // Handle checkbox properly
             segments: this.currentJourney.segments || []
         };
 
