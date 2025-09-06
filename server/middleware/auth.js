@@ -21,7 +21,19 @@ const authenticateJourneyAPI = (req, res, next) => {
     return requireAuth(req, res, next);
 };
 
+// Dynamics-specific middleware for API protection
+const authenticateDynamicsAPI = (req, res, next) => {
+    // For GET requests to dynamics (read-only), allow public access for the admin interface
+    if (req.method === 'GET') {
+        return next(); // Allow public read access to load dynamics in admin
+    }
+    
+    // All other operations (POST, PUT, DELETE) require admin authentication
+    return requireAuth(req, res, next);
+};
+
 module.exports = {
     requireAuth,
-    authenticateJourneyAPI
+    authenticateJourneyAPI,
+    authenticateDynamicsAPI
 };

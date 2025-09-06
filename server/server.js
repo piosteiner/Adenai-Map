@@ -17,7 +17,7 @@ const dynamicsRoutes = require('./routes/dynamics');
 const configRoutes = require('./routes/config');
 
 // Import middleware
-const { requireAuth, authenticateJourneyAPI } = require('./middleware/auth');
+const { requireAuth, authenticateJourneyAPI, authenticateDynamicsAPI } = require('./middleware/auth');
 
 // Import activity routes (optional - only if you have the activity routes file)
 // const activityRoutes = require('./routes/activity');
@@ -87,7 +87,7 @@ app.use('/api/characters', charactersRouter);
 app.use('/api/character-paths', authenticateJourneyAPI, characterPathsRouter);
 app.use('/api/changelog', changelogRoutes);
 app.use('/api/journey', authenticateJourneyAPI, journeyRoutes);
-app.use('/api/dynamics', authenticateJourneyAPI, dynamicsRoutes);
+app.use('/api/dynamics', authenticateDynamicsAPI, dynamicsRoutes);
 app.use('/api/config', configRoutes);
 
 // Activity routes (uncomment when you have the activity routes file)
