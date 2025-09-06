@@ -154,23 +154,23 @@
                             <form id="journey-form" class="journey-form">
                                 <div class="form-group">
                                     <label>📝 Name</label>
-                                    <input type="text" id="journey-name" required placeholder="Journey name">
+                                    <input type="text" id="journey-name" name="journey-name" required placeholder="Journey name">
                                 </div>
                                 
                                 <div class="form-group">
                                     <label>📖 Description</label>
-                                    <textarea id="journey-description" rows="3" placeholder="Journey description"></textarea>
+                                    <textarea id="journey-description" name="journey-description" rows="3" placeholder="Journey description"></textarea>
                                 </div>
                                 
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label>🎨 Color</label>
-                                        <input type="color" id="journey-color" value="#ff6600">
+                                        <input type="color" id="journey-color" name="journey-color" value="#ff6600">
                                     </div>
                                     
                                     <div class="form-group">
                                         <label>👻 Opacity</label>
-                                        <input type="range" id="journey-opacity" min="0" max="1" step="0.1" value="0.7">
+                                        <input type="range" id="journey-opacity" name="journey-opacity" min="0" max="1" step="0.1" value="0.7">
                                         <small class="opacity-value">0.7</small>
                                     </div>
                                 </div>
@@ -178,18 +178,18 @@
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label>📏 Line Weight</label>
-                                        <input type="number" id="journey-weight" min="1" max="20" value="4">
+                                        <input type="number" id="journey-weight" name="journey-weight" min="1" max="20" value="4">
                                     </div>
                                     
                                     <div class="form-group">
                                         <label>📱 Mobile Weight</label>
-                                        <input type="number" id="journey-weight-mobile" min="1" max="20" value="6">
+                                        <input type="number" id="journey-weight-mobile" name="journey-weight-mobile" min="1" max="20" value="6">
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label>
-                                        <input type="checkbox" id="journey-active" checked> ✅ Active
+                                        <input type="checkbox" id="journey-active" name="journey-active" checked> ✅ Active
                                     </label>
                                 </div>
                                 
