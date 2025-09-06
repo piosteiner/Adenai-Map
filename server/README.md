@@ -305,28 +305,81 @@ PM2 provides several advantages over running `node server.js` directly:
 4. Commit changes when satisfied
 
 ### For Backend Changes (Routes, Server Logic)
+
+#### Option A: VPS-First Workflow (Recommended for quick changes)
 1. Make changes to server files (routes/, middleware/, server.js, etc.)
 2. **Restart required**: `pm2 restart adenai-cms` (PREFERRED METHOD)
 3. Test API endpoints: `curl http://localhost:3001/api/locations`
 4. Monitor for errors: `pm2 logs adenai-cms`
 5. **Sync to GitHub**: `./sync-to-github.sh "Description of changes"`
 
+#### Option B: Git-First Workflow (Recommended for major features)
+1. Edit locally: `git clone https://github.com/piosteiner/Adenai-Map.git`
+2. Work in `/server/` directory with proper IDE
+3. Commit and push: `git commit -m "New feature" && git push origin main`
+4. Deploy to VPS: `./deploy-from-github.sh`
+5. Test: `curl http://localhost:3001/api/locations`
+
 **⚠️ Important**: Always use `pm2 restart adenai-cms` instead of manual `pkill` commands!
 
 ## 🔄 GitHub Repository Sync
 
-### Quick Sync to GitHub
-Your server code is mirrored to GitHub for better Copilot integration and backup:
+Your server code is mirrored to GitHub for better Copilot integration and backup. You can work with two different workflows:
+
+### Workflow 1: VPS-First (Quick Changes)
+Best for small fixes, bug fixes, and quick iterations:
 
 ```bash
-# After making server changes, sync to GitHub:
-./sync-to-github.sh "Added new API endpoints"
+# 1. Edit directly on VPS
+nano routes/characters.js
 
-# Or just use default message:
-./sync-to-github.sh
+# 2. Test immediately  
+pm2 restart adenai-cms
+curl http://localhost:3001/api/characters
+
+# 3. Sync to GitHub
+./sync-to-github.sh "Fix character filter bug"
 ```
 
-### What Gets Synced
+### Workflow 2: Git-First (Major Features)
+Best for new features, refactoring, and collaboration:
+
+```bash
+# 1. Edit locally or on GitHub
+git clone https://github.com/piosteiner/Adenai-Map.git
+cd Adenai-Map/server/
+# Edit with your preferred IDE
+
+# 2. Commit and push
+git commit -m "Add character timeline feature"
+git push origin main
+
+# 3. Deploy to VPS
+./deploy-from-github.sh
+```
+
+### Choose Your Workflow
+
+| Change Type | Recommended Method | Why |
+|-------------|-------------------|-----|
+| **Bug fixes** | VPS-First | Quick testing in real environment |
+| **Small features** | VPS-First | Fast iteration cycle |
+| **Configuration** | VPS-First | Immediate testing |
+| **Major features** | Git-First | Better development tools |
+| **Refactoring** | Git-First | Proper version control |
+| **Collaboration** | Git-First | Multiple developers |
+
+### Sync Commands
+
+```bash
+# Sync VPS changes TO GitHub:
+./sync-to-github.sh "Description of changes"
+
+# Deploy GitHub changes TO VPS:
+./deploy-from-github.sh
+```
+
+### What Gets Synced/Deployed
 - ✅ **Server code**: server.js, routes/, middleware/
 - ✅ **Admin interface**: All admin UI files
 - ✅ **Documentation**: README, API docs
@@ -353,11 +406,21 @@ https://github.com/piosteiner/Adenai-Map/
 └── docs/            # Shared documentation
 ```
 
+### Deployment Safety Features
+The `deploy-from-github.sh` script includes safety measures:
+- ✅ **Automatic backup** of current server before deployment
+- ✅ **Configuration preservation** (.env, users.js stay intact)
+- ✅ **Syntax checking** before going live
+- ✅ **Rollback capability** if deployment fails
+- ✅ **Health checks** after deployment
+- ✅ **Zero-downtime** deployment process
+
 ### Benefits
 - 🧠 **Enhanced Copilot**: Sees both client and server code for better suggestions
 - 📱 **Unified Development**: Work on client knowing server structure
 - 🔒 **Secure Backup**: Code backed up without exposing secrets
 - 🤝 **Collaboration Ready**: Easy for others to understand full stack
+- 🔄 **Flexible Workflow**: Choose the right method for each task
 
 ### Quick Testing Commands
 ```bash
@@ -371,19 +434,25 @@ node -c server.js
 curl -s http://localhost:3001/api/locations | head -5
 curl -s http://localhost:3001/api/characters | head -5
 
-# Sync changes to GitHub
+# VPS-First workflow: Sync changes to GitHub
 ./sync-to-github.sh "Updated API endpoints"
+
+# Git-First workflow: Deploy from GitHub
+./deploy-from-github.sh
 ```
 
 ## Contributing
 
 When making changes:
-1. Test routes work correctly
-2. Use PM2 for all production deployments
-3. **Sync to GitHub**: `./sync-to-github.sh "Description of changes"`
-4. Update this README if adding new features
-5. Document any new environment variables
-6. Test GitHub integration after changes
+1. **Choose your workflow**: VPS-first for quick changes, Git-first for major features
+2. Test routes work correctly
+3. Use PM2 for all production deployments
+4. **Sync appropriately**: 
+   - VPS changes: `./sync-to-github.sh "Description"`
+   - GitHub changes: `./deploy-from-github.sh`
+5. Update this README if adding new features
+6. Document any new environment variables
+7. Test GitHub integration after changes
 
 ---
 
