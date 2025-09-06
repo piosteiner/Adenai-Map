@@ -32,7 +32,7 @@ git clone https://github.com/piosteiner/Adenai-Map.git .
 echo -e "${BLUE}🔄 Syncing server files...${NC}"
 
 # Make sure server directories exist
-mkdir -p server/{admin-interface,routes,middleware,scripts,config,docs}
+mkdir -p server/{admin-interface,routes,middleware,scripts,config,docs,data,client-sync}
 
 # Remove old server files (but keep the directory structure)
 rm -rf server/admin-interface/* server/routes/* server/middleware/* server/scripts/*
@@ -83,6 +83,20 @@ if [ -d "$SERVER_SOURCE/docs" ]; then
     cp -r "$SERVER_SOURCE/docs/"* server/docs/
 else
     echo "No docs directory found"
+fi
+
+# Copy data directory structure (preserve .gitkeep files)
+if [ -d "$SERVER_SOURCE/data" ]; then
+    cp -r "$SERVER_SOURCE/data/"*.gitkeep server/data/ 2>/dev/null || echo "No data .gitkeep files found"
+else
+    echo "No data directory found"
+fi
+
+# Copy client-sync directory structure (preserve .gitkeep files)
+if [ -d "$SERVER_SOURCE/client-sync" ]; then
+    cp -r "$SERVER_SOURCE/client-sync/"*.gitkeep server/client-sync/ 2>/dev/null || echo "No client-sync .gitkeep files found"
+else
+    echo "No client-sync directory found"
 fi
 
 # Copy deployment scripts to GitHub
