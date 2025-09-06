@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<!--
+⡆⣐⢕⢕⢕⢕⢕⢕⢕⢕⠅⢗⢕⢕⢕⢕⢕⢕⢕⠕⠕⢕⢕⢕⢕⢕⢕⢕⢕⢕
+⢐⢕⢕⢕⢕⢕⣕⢕⢕⠕⠁⢕⢕⢕⢕⢕⢕⢕⢕⠅⡄⢕⢕⢕⢕⢕⢕⢕⢕⢕
+⢕⢕⢕⢕⢕⠅⢗⢕⠕⣠⠄⣗⢕⢕⠕⢕⢕⢕⠕⢠⣿⠐⢕⢕⢕⠑⢕⢕⠵⢕
+⢕⢕⢕⢕⠁⢜⠕⢁⣴⣿⡇⢓⢕⢵⢐⢕⢕⠕⢁⣾⢿⣧⠑⢕⢕⠄⢑⢕⠅⢕
+⢕⢕⠵⢁⠔⢁⣤⣤⣶⣶⣶⡐⣕⢽⠐⢕⠕⣡⣾⣶⣶⣶⣤⡁⢓⢕⠄⢑⢅⢑
+⠍⣧⠄⣶⣾⣿⣿⣿⣿⣿⣿⣷⣔⢕⢄⢡⣾⣿⣿⣿⣿⣿⣿⣿⣦⡑⢕⢤⠱⢐
+⢠⢕⠅⣾⣿⠋⢿⣿⣿⣿⠉⣿⣿⣷⣦⣶⣽⣿⣿⠈⣿⣿⣿⣿⠏⢹⣷⣷⡅⢐
+⣔⢕⢥⢻⣿⡀⠈⠛⠛⠁⢠⣿⣿⣿⣿⣿⣿⣿⣿⡀⠈⠛⠛⠁⠄⣼⣿⣿⡇⢔
+⢕⢕⢽⢸⢟⢟⢖⢖⢤⣶⡟⢻⣿⡿⠻⣿⣿⡟⢀⣿⣦⢤⢤⢔⢞⢿⢿⣿⠁⢕
+⢕⢕⠅⣐⢕⢕⢕⢕⢕⣿⣿⡄⠛⢀⣦⠈⠛⢁⣼⣿⢗⢕⢕⢕⢕⢕⢕⡏⣘⢕
+⢕⢕⠅⢓⣕⣕⣕⣕⣵⣿⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣷⣕⢕⢕⢕⢕⡵⢀⢕⢕
+⢑⢕⠃⡈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢃⢕⢕⢕
+⣆⢕⠄⢱⣄⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⢁⢕⢕⠕⢁
+⣿⣦⡀⣿⣿⣷⣶⣬⣍⣛⣛⣛⡛⠿⠿⠿⠛⠛⢛⣛⣉⣭⣤⣂⢜⠕⢑⣡⣴⣿-->
+<!--Ein uwu für Nici <3-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🗺️ Adenai Campaign Admin</title>
+    
+    <!-- Modular CSS - Load in correct order -->
+    <!-- Core system styles -->
+    <link rel="stylesheet" href="css/core/variables.css">
+    <link rel="stylesheet" href="css/core/base.css">
+    <link rel="stylesheet" href="css/core/layout.css">
+    <link rel="stylesheet" href="css/core/components.css">
+    <link rel="stylesheet" href="css/core/card-grid.css">
+    <link rel="stylesheet" href="css/core/forms.css">
+    <link rel="stylesheet" href="css/core/modals.css">
+    <link rel="stylesheet" href="css/core/image-popup.css">
+    <link rel="stylesheet" href="css/core/responsive.css">
+    
+    <!-- Module-specific styles -->
+    <link rel="stylesheet" href="css/modules/activity/activity.css">
+    <link rel="stylesheet" href="css/modules/changelog/changelog.css">
+    <link rel="stylesheet" href="css/modules/journeys/journey.css">
+    <link rel="stylesheet" href="css/modules/journeys/summary.css">
+    <link rel="stylesheet" href="css/modules/characters/movement.css">
+    
+    <!-- Core integration and overrides -->
+    <link rel="stylesheet" href="css/core/overrides.css">
+    
+    <!-- Leaflet CSS for Journey Management -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>🗺️ Adenai Campaign Admin</h1>
+            <div class="header-links" style="margin-top: 0.5em;">
+                <a href="https://adenai.piogino.ch/" target="_blank" rel="noopener" style="margin-right: 1em;">🗺️ Main Site</a>
+                <a href="https://adenai-admin.piogino.ch/" target="_self" rel="noopener">💻 Adenai Admin</a>
+            </div>
+            <div class="header-right">
+                <div class="connection-status" id="connection-status">
+                    <span id="status-indicator">🔄</span>
+                    <span id="status-text">Connecting...</span>
+                </div>
+                <!-- Theme toggle will be inserted here by js/core/theme.js -->
+                <div id="auth-container" class="auth-container">
+                </div>
+            </div>
+        </header>
+
+        <nav class="admin-nav">
+            <button class="tab-btn" data-tab="locations">📍 Locations</button>
+            <button class="tab-btn" data-tab="characters">👥 Characters</button>
+            <button class="tab-btn" data-tab="journeys">🗺️ Journeys</button>
+            <button class="tab-btn" data-tab="overview">📊 Overview</button>
+            <button class="tab-btn" data-tab="backup">💾 Backup</button>
+            <button class="tab-btn" data-tab="changelog">📜 Changelog</button>
+        </nav>
+
+        <main class="admin-main">
+            <!-- Locations Tab -->
+            <div id="locations-tab" class="tab-content">
+                <div class="content-header">
+                    <h2>Campaign Locations</h2>
+                    <div class="actions">
+                        <button id="add-location-btn" class="btn-primary admin-action">+ Add Location</button>
+                        <div class="location-filters">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" id="visited-filter" />
+                                <span>Visited only</span>
+                            </label>
+                            <select id="type-filter" class="filter-select">
+                                <option value="">All Types</option>
+                            </select>
+                            <input type="text" id="location-search" placeholder="Search locations..." class="search-input">
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="locations-list" class="content-list">
+                    <div class="loading">Loading locations... 🔄</div>
+                </div>
+            </div>
+
+            <!-- Characters Tab -->
+            <div id="characters-tab" class="tab-content">
+                <div class="content-header">
+                    <h2>Campaign Characters</h2>
+                    <div class="actions">
+                        <button id="add-character-btn" class="btn-primary admin-action">+ Add Character</button>
+                        <div class="filter-controls">
+                            <select id="character-status-filter" class="filter-select">
+                                <option value="">All Status</option>
+                            </select>
+                            <select id="character-relationship-filter" class="filter-select">
+                                <option value="">All Relationships</option>
+                            </select>
+                            <input type="text" id="character-search" placeholder="Search characters..." class="search-input">
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="characters-list" class="content-list">
+                    <div class="loading">Loading characters... 🔄</div>
+                </div>
+            </div>
+
+            <!-- Journeys Tab -->
+            <div id="journeys-tab" class="tab-content">
+                <div class="content-header">
+                    <h2>🗺️ Journey Management</h2>
+                    <div class="actions">
+                        <button id="add-journey-btn" class="btn-primary admin-action">+ New Journey</button>
+                        <button id="sync-journey-btn" class="btn-secondary admin-action">🔄 Client Sync</button>
+                    </div>
+                </div>
+                
+                <div class="journeys-layout">
+                    <div class="journeys-sidebar">
+                        <div id="journeys-list" class="content-list">
+                            <div class="loading">Loading journeys... 🔄</div>
+                        </div>
+                        
+                        <!-- Journey Editor Panel -->
+                        <div id="journey-editor" class="journey-editor" style="display: none;">
+                            <div class="editor-header">
+                                <h3>✏️ Edit Journey</h3>
+                                <button id="close-journey-editor" class="btn-secondary btn-small">✕</button>
+                            </div>
+                            
+                            <form id="journey-form" class="journey-form">
+                                <div class="form-group">
+                                    <label>📝 Name</label>
+                                    <input type="text" id="journey-name" required placeholder="Journey name">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>📖 Description</label>
+                                    <textarea id="journey-description" rows="3" placeholder="Journey description"></textarea>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>🎨 Color</label>
+                                        <input type="color" id="journey-color" value="#ff6600">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>👻 Opacity</label>
+                                        <input type="range" id="journey-opacity" min="0" max="1" step="0.1" value="0.7">
+                                        <small class="opacity-value">0.7</small>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>📏 Line Weight</label>
+                                        <input type="number" id="journey-weight" min="1" max="20" value="4">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>📱 Mobile Weight</label>
+                                        <input type="number" id="journey-weight-mobile" min="1" max="20" value="6">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" id="journey-active" checked> ✅ Active
+                                    </label>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="submit" class="btn-primary">💾 Save Journey</button>
+                                    <button type="button" id="delete-journey-btn" class="btn-danger">🗑️ Delete</button>
+                                </div>
+                            </form>
+                            
+                            <!-- Segments Section -->
+                            <div class="segments-section">
+                                <h4>🛤️ Route Segments</h4>
+                                <div class="segment-controls">
+                                    <button id="add-segment-btn" class="btn-primary btn-small">+ Add Segment</button>
+                                    <button id="toggle-edit-mode" class="btn-secondary btn-small">✏️ Edit Mode</button>
+                                </div>
+                                
+                                <div id="segments-list" class="segments-list">
+                                    <!-- Segments will be rendered here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="journeys-map-container">
+                        <div id="journeys-map"></div>
+                        
+                        <!-- Map Instructions Overlay -->
+                        <div id="map-instructions" class="map-instructions" style="display: none;">
+                            <p>🖱️ Click on the map to add waypoints</p>
+                            <div class="instruction-actions">
+                                <button id="finish-segment-btn" class="btn-primary btn-small">✅ Finish</button>
+                                <button id="cancel-segment-btn" class="btn-secondary btn-small">❌ Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overview Tab -->
+            <div id="overview-tab" class="tab-content">
+                <div class="content-header">
+                    <h2>Campaign Overview</h2>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-locations">0</div>
+                        <div class="stat-label">Total Locations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="visited-locations">0</div>
+                        <div class="stat-label">Visited</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="regions-count">0</div>
+                        <div class="stat-label">Regions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-characters">0</div>
+                        <div class="stat-label">Characters</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="alive-characters">0</div>
+                        <div class="stat-label">Alive</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-journeys">0</div>
+                        <div class="stat-label">Journeys</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backup Tab -->
+            <div id="backup-tab" class="tab-content">
+                <div class="content-header">
+                    <h2>Data Management</h2>
+                </div>
+                <div class="backup-actions">
+                    <button id="export-btn" class="btn-secondary">📤 Export Data</button>
+                    <button id="view-raw-btn" class="btn-secondary">👁️ View Raw JSON</button>
+                    <button id="migrate-characters-btn" class="btn-primary">🔄 Migrate Character Data</button>
+                    <button id="reset-migrate-characters-btn" class="btn-danger">🔄 Reset & Fix Character Data</button>
+                    <button id="test-character-paths-btn" class="btn-secondary">🗺️ Test Character Paths API</button>
+                </div>
+            </div>
+            
+            <!-- Changelog Tab -->
+            <div id="changelog-tab" class="tab-content">
+                <div id="main-content">
+                    <div class="loading">Loading changelog... 🔄</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Location Modal -->
+    <div id="add-location-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Location</h3>
+                <span class="close-btn">&times;</span>
+            </div>
+            
+            <form id="location-form" class="location-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>📍 Name *</label>
+                        <input type="text" name="name" required placeholder="e.g., Neue Stadt">
+                    </div>
+                    <div class="form-group">
+                        <label>🗺️ Region</label>
+                        <select name="region" id="location-region-select">
+                            <!-- Options will be populated by config.js -->
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>📍 X Coordinate *</label>
+                        <input type="text" name="x" required placeholder="1000">
+                        <small>Left-right position on map</small>
+                    </div>
+                    <div class="form-group">
+                        <label>📍 Y Coordinate *</label>
+                        <input type="text" name="y" required placeholder="1000">
+                        <small>Up-down position on map</small>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>🏛️ Type</label>
+                    <select name="type" id="location-type-select">
+                        <!-- Options will be populated by config.js -->
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>📝 Description</label>
+                    <textarea name="description" rows="3" placeholder="Describe this location..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>🖼️ Image URL</label>
+                    <input type="url" name="image" placeholder="https://example.com/image.jpg">
+                    <small>Optional: URL to an image representing this location</small>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="visited"> ✅ Visited by party
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">💾 Save Location</button>
+                    <button type="button" class="btn-secondary" onclick="closeModal()">❌ Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Character Modal -->
+    <div id="add-character-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Character</h3>
+                <span class="close-character-btn">&times;</span>
+            </div>
+            
+            <form id="character-form" class="character-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>👤 Name *</label>
+                        <input type="text" name="name" required placeholder="e.g., Petrel Kormorant">
+                    </div>
+                    <div class="form-group">
+                        <label>👑 Title/Role</label>
+                        <input type="text" name="title" placeholder="e.g., Ruler of Valaris">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>🏡 Place of Origin</label>
+                        <select name="placeOfOrigin" id="character-origin-select">
+                            <option value="">Select place of origin...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>💗 Status</label>
+                        <select name="status" id="character-status-select">
+                            <!-- Options will be populated by config.js -->
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>🏛️ Faction</label>
+                        <input type="text" name="faction" placeholder="e.g., Valaris Government">
+                    </div>
+                    <div class="form-group">
+                        <label>🤝 Relationship</label>
+                        <select name="relationship" id="character-relationship-select">
+                            <!-- Options will be populated by config.js -->
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>📝 Beschreibung</label>
+                    <textarea name="description" rows="3" placeholder="Beschreibe diesen Charakter..."></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>📅 Erstes Treffen</label>
+                        <input type="date" name="firstMet">
+                    </div>
+                    <div class="form-group">
+                        <label>🖼️ Image URL</label>
+                        <input type="text" name="image" placeholder="https://example.com/character.jpg">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>📋 Notizen</label>
+                    <textarea name="notes" rows="2" placeholder="Zusätzliche Notizen zu diesem Charakter..."></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">💾 Save Character</button>
+                    <button type="button" class="btn-secondary" onclick="closeCharacterModal()">❌ Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Character Movement Modal -->
+    <div id="character-movement-modal" class="modal" style="display: none;">
+        <div class="modal-content movement-modal-content">
+            <div class="modal-header">
+                <h3>🛤️ Character Movement History</h3>
+                <button class="close-movement-btn">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Movement History Display -->
+                <div class="movement-history-section">
+                    <h4>📍 Movement History</h4>
+                    <div id="movement-history-list" class="movement-history-list">
+                        <!-- Movement entries will be populated here -->
+                    </div>
+                </div>
+                
+                <!-- Add/Edit Movement Form -->
+                <div class="add-movement-section">
+                    <h4 id="movement-form-title">➕ Add New Movement</h4>
+                    <form id="movement-form" class="movement-form">
+                        
+                        <!-- Location Type Selection -->
+                        <div class="form-group">
+                            <label for="movement-location-type">📍 Location Type:</label>
+                            <select id="movement-location-type" name="movementLocationType" required>
+                                <option value="existing">Existing Location</option>
+                                <option value="custom">Custom Coordinates</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Existing Location Input -->
+                        <div id="existing-location-input" class="form-group">
+                            <label for="movement-location-select">🏛️ Location:</label>
+                            <select id="movement-location-select" name="movementLocation">
+                                <option value="">Select location...</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Custom Coordinates Input - ENHANCED VERSION -->
+                        <div id="custom-coordinates-input" class="form-group" style="display: none;">
+                            <!-- Custom Location Name Field -->
+                            <div class="form-group">
+                                <label for="movement-custom-name">🏷️ Custom Location Name:</label>
+                                <input type="text" id="movement-custom-name" name="movementCustomName" placeholder="e.g., Hidden Cave, Secret Camp">
+                                <small style="color: #666; font-size: 0.8em;">Give this custom location a memorable name</small>
+                            </div>
+                    
+                            <!-- Coordinates Row -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="movement-x">🗺️ X Coordinate:</label>
+                                    <input type="text" id="movement-x" name="movementX" placeholder="e.g., 1700">
+                                </div>
+                                <div class="form-group">
+                                    <label for="movement-y">🗺️ Y Coordinate:</label>
+                                    <input type="text" id="movement-y" name="movementY" placeholder="e.g., 1008">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 🔥 ENHANCED: Date Range Section -->
+                        <div class="form-group date-range-section">
+                            <div class="date-range-container">
+                                <!-- Start Date (Required) -->
+                                <div class="date-input-group">
+                                    <label for="movement-date-start" class="date-sublabel">📅 Start Date *</label>
+                                    <input type="date" id="movement-date-start" name="movementDateStart" required>
+                                </div>
+                                
+                                <!-- End Date (Optional) -->
+                                <div class="date-input-group">
+                                    <label for="movement-date-end" class="date-sublabel">📅 End Date (Optional)</label>
+                                    <input type="date" id="movement-date-end" name="movementDateEnd">
+                                </div>
+                            </div>
+                            
+                            <!-- Duration Display -->
+                            <div id="duration-display" class="duration-display" style="display: none;">
+                                <span class="duration-icon">⏱️</span>
+                                <span id="duration-text">Duration will appear here</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Movement Type -->
+                        <div class="form-group">
+                            <label for="movement-type">🎯 Movement Type:</label>
+                            <select id="movement-type" name="movementType">
+                                <!-- Options will be populated by config.js -->
+                            </select>
+                        </div>
+                        
+                        <!-- Notes -->
+                        <div class="form-group">
+                            <label for="movement-notes">📝 Notes:</label>
+                            <textarea id="movement-notes" name="movementNotes" rows="3" placeholder="Optional notes about this movement..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">💾 Add Movement</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔒 Admin Login</h3>
+                <span class="close-login-btn">&times;</span>
+            </div>
+            
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label>👤 Username</label>
+                    <input type="text" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>🔒 Password</label>
+                    <input type="password" name="password" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">🔓 Login</button>
+                    <button type="button" class="btn-secondary" onclick="admin.closeLoginModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toast-container"></div>
+
+    <!-- Third-party libraries -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/libs/leaflet.curve.min.js"></script>
+
+    <!-- Core system -->
+    <script src="js/core/config.js"></script>
+    <script src="js/core/form-init.js"></script>
+    <script src="js/core/theme.js"></script>
+    <script src="js/core/ui.js"></script>
+    <script src="js/core/auth.js"></script>
+
+    <!-- Module operations (dependencies first) -->
+    <script src="js/modules/locations/operations.js"></script>
+    <script src="js/modules/locations/ui.js"></script>
+    <script src="js/modules/characters/operations.js"></script>
+    <script src="js/modules/characters/movements.js"></script>
+    <script src="js/modules/characters/ui.js"></script>
+    <script src="js/modules/journeys/operations.js"></script>
+    <script src="js/modules/journeys/map.js"></script>
+    <script src="js/modules/journeys/segments.js"></script>
+    <script src="js/modules/changelog/operations.js"></script>
+
+    <!-- Module coordinators -->
+    <script src="js/modules/locations/index.js"></script>
+    <script src="js/modules/characters/index.js"></script>
+    <script src="js/modules/journeys/index.js"></script>
+    <script src="js/modules/changelog/index.js"></script>
+
+    <!-- System integration -->
+    <script src="js/core/core.js"></script>
+    <script src="js/modules/activity/index.js"></script>
+</body>
+</html>

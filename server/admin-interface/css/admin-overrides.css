@@ -1,0 +1,99 @@
+/* Admin Integration, Overrides, and System Styles */
+
+/* ===== ADMIN ACTION VISIBILITY ===== */
+/* These are shown/hidden based on authentication state by JavaScript */
+.admin-action {
+    display: none; /* Hidden by default, shown when authenticated */
+}
+
+.admin-action.visible {
+    display: inline-flex;
+}
+
+/* ===== INTEGRATION OVERRIDES ===== */
+/* Small overrides to ensure modular CSS works together properly */
+
+/* Ensure tab content transitions work */
+.tab-content {
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.tab-content.active {
+    opacity: 1;
+}
+
+/* Ensure toast container is properly positioned above everything */
+#toast-container {
+    z-index: 10000;
+}
+
+/* Ensure modals are above everything else */
+.modal {
+    z-index: 9999;
+}
+
+/* Map container z-index to ensure it doesn't interfere with modals */
+#journeys-map {
+    z-index: 1;
+}
+
+.map-instructions {
+    z-index: 1000;
+}
+
+/* ===== PRINT OPTIMIZATION ===== */
+@media print {
+    .admin-header,
+    .admin-nav,
+    .actions,
+    .location-actions,
+    .character-actions,
+    .form-actions,
+    .movement-actions,
+    .theme-toggle,
+    #toast-container,
+    .modal,
+    #map-instructions {
+        display: none !important;
+    }
+    
+    .journeys-map-container {
+        height: 400px !important;
+        page-break-inside: avoid;
+    }
+    
+    .movement-modal-content {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .movement-entry {
+        border-width: 2px;
+    }
+    
+    .journey-item {
+        border-width: 2px;
+    }
+    
+    .segment-item {
+        border-width: 2px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .movement-entry:hover,
+    .journey-item:hover,
+    .segment-item:hover {
+        transform: none;
+    }
+    
+    .tab-content {
+        transition: none;
+    }
+}

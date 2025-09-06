@@ -1,0 +1,594 @@
+/* css/core/card-grid.css - Enhanced Card Grid Layout */
+
+/* Grid Layout for Cards - Force 4 columns with higher specificity */
+.admin-main .content-list,
+#locations-tab .content-list,
+#characters-tab .content-list {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr 1fr !important; /* Force 4 equal columns */
+    gap: var(--spacing-sm) !important;
+    transition: all var(--transition-normal);
+    align-items: start;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Ensure container has enough width */
+.admin-container {
+    max-width: 1600px !important;
+}
+
+.admin-main {
+    padding: var(--spacing-md) !important;
+}
+
+/* Card Base Styles */
+.location-card,
+.character-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-sm);
+    box-shadow: var(--card-shadow);
+    transition: all var(--transition-normal);
+    overflow: hidden;
+    position: relative;
+    height: 150px;
+    cursor: pointer;
+    isolation: isolate;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+}
+
+/* Location Type Color Coding - Updated color scheme */
+.location-card[data-location-type="city"] {
+    border-top: 4px solid #b8860b; /* Dark goldenrod - most important settlements */
+}
+.location-card[data-location-type="town"] {
+    border-top: 4px solid #daa520; /* Goldenrod - medium settlements */
+}
+.location-card[data-location-type="village"] {
+    border-top: 4px solid #f0e68c; /* Khaki - small settlements */
+}
+.location-card[data-location-type="camp"] {
+    border-top: 4px solid #ffa500; /* Pure orange - temporary locations */
+}
+.location-card[data-location-type="landmark"] {
+    border-top: 4px solid #9b59b6; /* Purple - notable, memorable */
+}
+.location-card[data-location-type="ruin"] {
+    border-top: 4px solid #deb887; /* Sand/beige - abandoned, ancient */
+}
+.location-card[data-location-type="dungeon"] {
+    border-top: 4px solid #e74c3c; /* Red - dangerous, hostile */
+}
+.location-card[data-location-type="monster"] {
+    border-top: 4px solid #c0392b; /* Dark red - threatening, avoid */
+}
+.location-card[data-location-type="environment"] {
+    border-top: 4px solid #228b22; /* Green - natural, wild */
+}
+.location-card[data-location-type="mountain"] {
+    border-top: 4px solid #7d3c98; /* Purple - elevated, majestic */
+}
+.location-card[data-location-type="lake"] {
+    border-top: 4px solid #1e90ff; /* Bright blue - water features */
+}
+.location-card[data-location-type="island"] {
+    border-top: 4px solid #4682b4; /* Steel blue - isolated water locations */
+}
+.location-card[data-location-type="unknown"] {
+    border-top: 4px solid #ffffff; /* White - mysterious, unidentified */
+}
+
+/* Compact card content */
+.location-card .location-details,
+.character-card .character-details {
+    max-height: 80px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Truncation gradient for compact view */
+.location-card .location-details::after,
+.character-card .character-details::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(transparent, var(--card-bg));
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity var(--transition-normal);
+}
+
+/* Hover expansion */
+.location-card:hover,
+.character-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-hover-shadow);
+    height: auto;
+    min-height: 150px; /* Adjusted min-height */
+    z-index: 20;
+}
+
+/* Character cards keep the default accent color on hover */
+.character-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: 0 8px 25px rgba(107, 91, 149, 0.15);
+}
+
+/* Character Relationship Color Coding - Clean top border */
+.character-card[data-character-relationship="ally"] {
+    border-top: 4px solid #2ecc71; /* Green - friendly, helpful */
+}
+.character-card[data-character-relationship="friendly"] {
+    border-top: 4px solid #27ae60; /* Light green - positive */
+}
+.character-card[data-character-relationship="neutral"] {
+    border-top: 4px solid #95a5a6; /* Gray - neutral, unknown stance */
+}
+.character-card[data-character-relationship="suspicious"] {
+    border-top: 4px solid #f39c12; /* Orange - cautious, uncertain */
+}
+.character-card[data-character-relationship="hostile"] {
+    border-top: 4px solid #e67e22; /* Orange-red - unfriendly */
+}
+.character-card[data-character-relationship="enemy"] {
+    border-top: 4px solid #e74c3c; /* Red - dangerous, threatening */
+}
+.character-card[data-character-relationship="unknown"] {
+    border-top: 4px solid #9b59b6; /* Purple - mysterious */
+}
+.character-card[data-character-relationship="party"] {
+    border-top: 4px solid #3498db; /* Blue - party members, trusted */
+}
+
+/* Character relationship specific hover colors - matching the top border */
+.character-card[data-character-relationship="ally"]:hover {
+    border-color: #2ecc71;
+    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.15);
+}
+.character-card[data-character-relationship="friendly"]:hover {
+    border-color: #27ae60;
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.15);
+}
+.character-card[data-character-relationship="neutral"]:hover {
+    border-color: #95a5a6;
+    box-shadow: 0 8px 25px rgba(149, 165, 166, 0.15);
+}
+.character-card[data-character-relationship="suspicious"]:hover {
+    border-color: #f39c12;
+    box-shadow: 0 8px 25px rgba(243, 156, 18, 0.15);
+}
+.character-card[data-character-relationship="hostile"]:hover {
+    border-color: #e67e22;
+    box-shadow: 0 8px 25px rgba(230, 126, 34, 0.15);
+}
+.character-card[data-character-relationship="enemy"]:hover {
+    border-color: #e74c3c;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.15);
+}
+.character-card[data-character-relationship="unknown"]:hover {
+    border-color: #9b59b6;
+    box-shadow: 0 8px 25px rgba(155, 89, 182, 0.15);
+}
+.character-card[data-character-relationship="party"]:hover {
+    border-color: #3498db;
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.15);
+}
+
+/* Location type specific hover colors - matching the top border */
+.location-card[data-location-type="city"]:hover {
+    border-color: #3498db;
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.15);
+}
+.location-card[data-location-type="town"]:hover {
+    border-color: #2ecc71;
+    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.15);
+}
+.location-card[data-location-type="village"]:hover {
+    border-color: #27ae60;
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.15);
+}
+.location-card[data-location-type="camp"]:hover {
+    border-color: #e67e22;
+    box-shadow: 0 8px 25px rgba(230, 126, 34, 0.15);
+}
+.location-card[data-location-type="landmark"]:hover {
+    border-color: #9b59b6;
+    box-shadow: 0 8px 25px rgba(155, 89, 182, 0.15);
+}
+.location-card[data-location-type="ruin"]:hover {
+    border-color: #95a5a6;
+    box-shadow: 0 8px 25px rgba(149, 165, 166, 0.15);
+}
+.location-card[data-location-type="dungeon"]:hover {
+    border-color: #e74c3c;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.15);
+}
+.location-card[data-location-type="monster"]:hover {
+    border-color: #c0392b;
+    box-shadow: 0 8px 25px rgba(192, 57, 43, 0.15);
+}
+.location-card[data-location-type="environment"]:hover {
+    border-color: #228b22;
+    box-shadow: 0 8px 25px rgba(34, 139, 34, 0.15);
+}
+.location-card[data-location-type="mountain"]:hover {
+    border-color: #7d3c98;
+    box-shadow: 0 8px 25px rgba(125, 60, 152, 0.15);
+}
+.location-card[data-location-type="lake"]:hover {
+    border-color: #3498db;
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.15);
+}
+.location-card[data-location-type="island"]:hover {
+    border-color: #1abc9c;
+    box-shadow: 0 8px 25px rgba(26, 188, 156, 0.15);
+}
+.location-card[data-location-type="unknown"]:hover {
+    border-color: #95a5a6;
+    box-shadow: 0 8px 25px rgba(149, 165, 166, 0.15);
+}
+
+/* Remove truncation gradient on hover */
+.location-card:hover .location-details::after,
+.character-card:hover .character-details::after {
+    opacity: 0;
+}
+
+/* Expand details on hover */
+.location-card:hover .location-details,
+.character-card:hover .character-details {
+    max-height: none;
+    overflow: visible;
+}
+
+/* Adjust header for compact cards */
+.location-header,
+.character-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-xs);
+    gap: var(--spacing-xs);
+}
+
+/* Character info with image layout */
+.character-info {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    flex: 1;
+    min-width: 0; /* Allow text to shrink */
+}
+
+.character-image {
+    flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.character-image img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+    transition: border-color var(--transition-normal);
+}
+
+.character-card:hover .character-image img {
+    border-color: var(--accent-primary);
+}
+
+.character-text {
+    flex: 1;
+    min-width: 0; /* Allow text to shrink and wrap */
+}
+
+.location-header h3,
+.character-header h3 {
+    color: var(--text-primary);
+    font-size: var(--font-size-base); /* Increased from sm */
+    margin: 0;
+    flex: 1;
+    line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.character-title {
+    color: var(--text-secondary);
+    font-style: italic;
+    margin: 0;
+    font-size: var(--font-size-sm); /* Increased from 0.70rem */
+    line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Compact text */
+.location-details p,
+.character-details p {
+    margin: 3px 0; /* Slightly increased margin */
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm); /* Increased from 0.75rem */
+    line-height: 1.3;
+}
+
+/* Compact badges */
+.location-type {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: var(--spacing-xs) var(--spacing-sm); /* Increased padding */
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm); /* Increased from 0.6rem */
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+}
+
+.character-status {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs); /* Increased gap */
+    align-items: flex-end;
+    flex-shrink: 0; /* Prevent status badges from shrinking */
+    min-width: fit-content; /* Ensure badges have enough space */
+}
+
+.status-badge,
+.relationship-badge {
+    padding: var(--spacing-xs) var(--spacing-sm); /* Increased padding */
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm); /* Increased from 0.55rem */
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+    white-space: nowrap;
+    line-height: 1.1;
+}
+
+/* Compact actions - Hidden by default, visible on hover */
+.location-actions,
+.character-actions {
+    margin-top: var(--spacing-sm); /* Increased margin */
+    display: flex;
+    gap: var(--spacing-xs); /* Increased gap */
+    flex-wrap: wrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all var(--transition-normal);
+    pointer-events: none;
+}
+
+/* Show actions on card hover */
+.location-card:hover .location-actions,
+.character-card:hover .character-actions,
+/* Also show on focus for accessibility and touch devices */
+.location-card:focus-within .location-actions,
+.character-card:focus-within .character-actions,
+/* Show on tap/active for touch devices */
+.location-card:active .location-actions,
+.character-card:active .character-actions {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* For touch devices, show actions immediately on first tap */
+@media (hover: none) and (pointer: coarse) {
+    .location-card:active .location-actions,
+    .character-card:active .character-actions {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+}
+
+.location-actions .btn-secondary,
+.location-actions .btn-danger,
+.character-actions .btn-secondary,
+.character-actions .btn-danger {
+    padding: var(--spacing-xs) var(--spacing-sm); /* Increased padding */
+    font-size: var(--font-size-sm); /* Increased from 0.6rem */
+    border-radius: var(--radius-sm);
+}
+
+/* Responsive adjustments with higher specificity */
+@media (min-width: 1200px) {
+    .admin-main .content-list,
+    #locations-tab .content-list,
+    #characters-tab .content-list {
+        grid-template-columns: 1fr 1fr 1fr 1fr !important; /* Force 4 columns on larger screens */
+    }
+}
+
+@media (max-width: 1199px) {
+    .admin-main .content-list,
+    #locations-tab .content-list,
+    #characters-tab .content-list {
+        grid-template-columns: 1fr 1fr 1fr !important; /* 3 columns */
+    }
+}
+
+@media (max-width: 900px) {
+    .admin-main .content-list,
+    #locations-tab .content-list,
+    #characters-tab .content-list {
+        grid-template-columns: 1fr 1fr !important; /* 2 columns */
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-main .content-list,
+    #locations-tab .content-list,
+    #characters-tab .content-list {
+        grid-template-columns: 1fr !important; /* 1 column */
+    }
+    
+    .location-card,
+    .character-card {
+        height: auto;
+        min-height: 120px;
+    }
+    
+    .location-card .location-details,
+    .character-card .character-details {
+        max-height: none;
+    }
+    
+    .location-card .location-details::after,
+    .character-card .character-details::after {
+        display: none;
+    }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .character-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: 0 8px 25px rgba(107, 91, 149, 0.2);
+}
+
+/* Dark mode - character relationship specific hover colors */
+[data-theme="dark"] .character-card[data-character-relationship="ally"]:hover {
+    border-color: #2ecc71;
+    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.2);
+}
+[data-theme="dark"] .character-card[data-character-relationship="friendly"]:hover {
+    border-color: #27ae60;
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.2);
+}
+[data-theme="dark"] .character-card[data-character-relationship="neutral"]:hover {
+    border-color: #95a5a6;
+    box-shadow: 0 8px 25px rgba(149, 165, 166, 0.2);
+}
+[data-theme="dark"] .character-card[data-character-relationship="suspicious"]:hover {
+    border-color: #f39c12;
+    box-shadow: 0 8px 25px rgba(243, 156, 18, 0.2);
+}
+[data-theme="dark"] .character-card[data-character-relationship="hostile"]:hover {
+    border-color: #e67e22;
+    box-shadow: 0 8px 25px rgba(230, 126, 34, 0.2);
+}
+[data-theme="dark"] .character-card[data-character-relationship="enemy"]:hover {
+    border-color: #e74c3c;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.2);
+}
+[data-theme="dark"] .character-card[data-character-relationship="unknown"]:hover {
+    border-color: #9b59b6;
+    box-shadow: 0 8px 25px rgba(155, 89, 182, 0.2);
+}
+[data-theme="dark"] .character-card[data-character-relationship="party"]:hover {
+    border-color: #3498db;
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.2);
+}
+
+/* Dark mode - location type specific hover colors */
+[data-theme="dark"] .location-card[data-location-type="city"]:hover {
+    border-color: #3498db;
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.2);
+}
+[data-theme="dark"] .location-card[data-location-type="town"]:hover {
+    border-color: #2ecc71;
+    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.2);
+}
+[data-theme="dark"] .location-card[data-location-type="village"]:hover {
+    border-color: #27ae60;
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.2);
+}
+[data-theme="dark"] .location-card[data-location-type="camp"]:hover {
+    border-color: #e67e22;
+    box-shadow: 0 8px 25px rgba(230, 126, 34, 0.2);
+}
+[data-theme="dark"] .location-card[data-location-type="landmark"]:hover {
+    border-color: #9b59b6;
+    box-shadow: 0 8px 25px rgba(155, 89, 182, 0.2);
+}
+[data-theme="dark"] .location-card[data-location-type="ruin"]:hover {
+    border-color: #95a5a6;
+    box-shadow: 0 8px 25px rgba(149, 165, 166, 0.2);
+}
+[data-theme="dark"] .location-card[data-location-type="dungeon"]:hover {
+    border-color: #e74c3c;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.2);
+}
+[data-theme="dark"] .location-card[data-location-type="monster"]:hover {
+    border-color: #c0392b;
+    box-shadow: 0 8px 25px rgba(192, 57, 43, 0.2);
+}
+[data-theme="dark"] .location-card[data-location-type="environment"]:hover {
+    border-color: #228b22;
+    box-shadow: 0 8px 25px rgba(34, 139, 34, 0.2);
+}
+[data-theme="dark"] .location-card[data-location-type="mountain"]:hover {
+    border-color: #7d3c98;
+    box-shadow: 0 8px 25px rgba(125, 60, 152, 0.2);
+}
+[data-theme="dark"] .location-card[data-location-type="lake"]:hover {
+    border-color: #3498db;
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.2);
+}
+[data-theme="dark"] .location-card[data-location-type="island"]:hover {
+    border-color: #1abc9c;
+    box-shadow: 0 8px 25px rgba(26, 188, 156, 0.2);
+}
+[data-theme="dark"] .location-card[data-location-type="unknown"]:hover {
+    border-color: #95a5a6;
+    box-shadow: 0 8px 25px rgba(149, 165, 166, 0.2);
+}
+
+/* ===== LOCATION CARD IMAGE LAYOUT ===== */
+.location-header {
+    margin-bottom: var(--spacing-sm);
+}
+
+.location-info {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+}
+
+.location-image {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid var(--border-color);
+    background: var(--bg-secondary);
+}
+
+.location-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.location-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.location-text h3 {
+    margin: 0 0 var(--spacing-xs) 0;
+    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+}
+
+.location-type {
+    background: var(--accent-primary);
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}

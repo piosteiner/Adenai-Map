@@ -1,0 +1,338 @@
+/* css/core/components.css - Component Styles */
+/* Component Styles */
+
+/* Buttons */
+/* Primary Button */
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(107, 91, 149, 0.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 91, 149, 0.3);
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--accent-secondary);
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--accent-secondary);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: var(--text-secondary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    transition: background var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.btn-secondary:hover {
+    background: var(--text-primary);
+}
+
+.btn-danger {
+    background: var(--toast-error);
+    color: white;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    transition: filter var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.btn-danger:hover {
+    filter: brightness(0.9);
+}
+
+/* Cards - Basic styles only (layout handled by card-grid.css) */
+
+/* Badges and Status */
+.location-type {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: var(--spacing-xs) 0.75rem;
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+}
+
+.character-status {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: flex-end;
+}
+
+.status-badge,
+.relationship-badge {
+    padding: var(--spacing-xs) 0.75rem;
+    border-radius: var(--radius-lg);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Status Badge Colors */
+.status-alive { 
+    background: #d4edda; 
+    color: #155724; 
+}
+
+.status-dead { 
+    background: #f8d7da; 
+    color: #721c24; 
+}
+
+.status-missing { 
+    background: #fff3cd; 
+    color: #856404; 
+}
+
+.status-unknown { 
+    background: #e2e3e5; 
+    color: #6c757d; 
+}
+
+/* Relationship Badge Colors */
+.relationship-ally { 
+    background: #d1ecf1; 
+    color: #0c5460; 
+}
+
+.relationship-friendly { 
+    background: #d4edda; 
+    color: #155724; 
+}
+
+.relationship-neutral { 
+    background: #e2e3e5; 
+    color: #6c757d; 
+}
+
+.relationship-suspicious { 
+    background: #fff3cd; 
+    color: #856404; 
+}
+
+.relationship-hostile { 
+    background: #f8d7da; 
+    color: #721c24; 
+}
+
+.relationship-enemy { 
+    background: #f5c6cb; 
+    color: #721c24; 
+}
+
+.relationship-party { 
+    background: rgb(196, 212, 255); 
+    color: #584cffff; 
+}
+
+/* Enhanced dark mode badge adjustments */
+[data-theme="dark"] .status-alive { 
+    background: var(--status-approved-bg); 
+    color: var(--status-approved-text); 
+}
+
+[data-theme="dark"] .status-dead { 
+    background: var(--status-rejected-bg); 
+    color: var(--status-rejected-text); 
+}
+
+[data-theme="dark"] .status-missing { 
+    background: var(--status-pending-bg); 
+    color: var(--status-pending-text); 
+}
+
+[data-theme="dark"] .status-unknown { 
+    background: var(--status-untracked-bg); 
+    color: var(--status-untracked-text); 
+}
+
+[data-theme="dark"] .relationship-ally { 
+    background: #1e3a5f; 
+    color: #60a5fa; 
+}
+
+[data-theme="dark"] .relationship-friendly { 
+    background: var(--status-approved-bg); 
+    color: var(--status-approved-text); 
+}
+
+[data-theme="dark"] .relationship-neutral { 
+    background: var(--status-untracked-bg); 
+    color: var(--status-untracked-text); 
+}
+
+[data-theme="dark"] .relationship-suspicious { 
+    background: var(--status-pending-bg); 
+    color: var(--status-pending-text); 
+}
+
+[data-theme="dark"] .relationship-hostile { 
+    background: var(--status-rejected-bg); 
+    color: var(--status-rejected-text); 
+}
+
+[data-theme="dark"] .relationship-enemy { 
+    background: #5d1a2a; 
+    color: #fca5a5;
+}
+
+[data-theme="dark"] .relationship-party { 
+    background: #3730a3; 
+    color: #a5b4fc;
+}
+
+/* Stat Cards */
+.stat-card {
+    background: var(--card-bg);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.stat-number {
+    font-size: var(--font-size-huge);
+    font-weight: var(--font-weight-bold);
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Enhanced dark mode stat cards */
+[data-theme="dark"] .stat-number {
+    color: var(--accent-primary);
+}
+
+/* Toast Notifications */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+    pointer-events: none;
+}
+
+.toast {
+    background: var(--toast-success);
+    color: white;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    animation: slideIn 0.3s ease;
+    pointer-events: auto;
+    font-weight: var(--font-weight-medium);
+    max-width: 300px;
+}
+
+.toast.error {
+    background: var(--toast-error);
+}
+
+.toast.warning {
+    background: var(--toast-warning);
+    color: #212529;
+}
+
+/* Enhanced dark mode toast */
+[data-theme="dark"] .toast.warning {
+    color: #0f172a;
+}
+
+@keyframes slideIn {
+    from { 
+        transform: translateX(100%); 
+        opacity: 0; 
+    }
+    to { 
+        transform: translateX(0); 
+        opacity: 1; 
+    }
+}
+
+/* Search Input */
+.search-input {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    min-width: 250px;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--focus-border);
+    box-shadow: 0 0 0 2px var(--focus-ring);
+}
+
+.search-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Enhanced button hover states for dark mode */
+[data-theme="dark"] .btn-primary:hover {
+    box-shadow: 0 4px 16px rgba(139, 122, 168, 0.4);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+    background: var(--scrollbar-thumb-hover);
+}

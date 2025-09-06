@@ -1,0 +1,80 @@
+/* css/core/image-popup.css - Shared Image Popup Functionality */
+/* Image Popup Styles - Used across Characters, Locations, and other modules */
+
+/* ===== BASE IMAGE POPUP STYLES ===== */
+.character-image-popup,
+.location-image-popup,
+.image-popup {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border: 3px solid var(--card-bg);
+    background: var(--card-bg);
+    padding: 4px;
+    max-width: 300px;
+    max-height: 400px;
+}
+
+.character-image-popup.show,
+.location-image-popup.show,
+.image-popup.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.character-image-popup img,
+.location-image-popup img,
+.image-popup img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    display: block;
+}
+
+/* ===== ENHANCED HOVER EFFECTS FOR IMAGES ===== */
+.character-image img,
+.location-image img,
+.hoverable-image img {
+    transition: transform 0.2s ease, filter 0.2s ease;
+    cursor: pointer;
+}
+
+.character-image:hover img,
+.location-image:hover img,
+.hoverable-image:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* ===== DARK THEME SUPPORT ===== */
+[data-theme="dark"] .character-image-popup,
+[data-theme="dark"] .location-image-popup,
+[data-theme="dark"] .image-popup {
+    border-color: var(--border-color);
+    background: var(--modal-bg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 768px) {
+    .character-image-popup,
+    .location-image-popup,
+    .image-popup {
+        max-width: 250px;
+        max-height: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .character-image-popup,
+    .location-image-popup,
+    .image-popup {
+        max-width: 200px;
+        max-height: 300px;
+    }
+}

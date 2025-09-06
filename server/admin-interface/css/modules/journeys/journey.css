@@ -1,0 +1,609 @@
+/* css/modules/journeys/journey.css - Journey Management Styles - Responsive & Cross-Device */
+/* Journey Management Styles - Responsive & Cross-Device */
+
+/* ===== LAYOUT & GRID ===== */
+.journeys-layout {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 20px;
+    height: calc(100vh - 250px);
+    min-height: 600px;
+}
+
+/* ===== SIDEBAR ===== */
+.journeys-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    border-right: 1px solid var(--border-color);
+    padding-right: 20px;
+}
+
+/* ===== JOURNEY ITEMS ===== */
+.journey-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-bottom: var(--spacing-sm);
+}
+
+.journey-item:hover {
+    background: var(--tab-hover-bg);
+    transform: translateY(-1px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.journey-item.active {
+    border-color: var(--accent-primary);
+    background: rgba(107, 91, 149, 0.05);
+}
+
+.journey-item.inactive {
+    opacity: 0.6;
+}
+
+.journey-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.journey-item-header h4 {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+.journey-status {
+    width: 12px;
+    height: 12px;
+    border-radius: var(--radius-round);
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.5);
+    flex-shrink: 0;
+}
+
+.journey-description {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin: var(--spacing-xs) 0;
+    font-style: italic;
+    line-height: 1.3;
+}
+
+.journey-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-top: var(--spacing-xs);
+}
+
+/* ===== JOURNEY EDITOR ===== */
+.journey-editor {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    max-height: 70vh;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+}
+
+.journey-editor .editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.journey-editor .editor-header h3 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: var(--font-size-lg);
+}
+
+/* ===== JOURNEY FORM ===== */
+.journey-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.journey-form .form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.journey-form label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+}
+
+.journey-form input,
+.journey-form textarea,
+.journey-form select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+    background: var(--input-bg);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+}
+
+.journey-form input:focus,
+.journey-form textarea:focus,
+.journey-form select:focus {
+    outline: none;
+    border-color: var(--focus-border);
+    box-shadow: 0 0 0 2px var(--focus-ring);
+}
+
+.journey-form input[type="color"] {
+    height: 40px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.journey-form input[type="range"] {
+    cursor: pointer;
+}
+
+.journey-form input[type="checkbox"] {
+    width: auto;
+    margin-right: var(--spacing-xs);
+}
+
+.opacity-value {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin-left: var(--spacing-xs);
+    font-weight: var(--font-weight-normal);
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+/* ===== SEGMENTS SECTION ===== */
+.segments-section {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+}
+
+.segments-section h4 {
+    margin: 0 0 var(--spacing-md) 0;
+    color: var(--text-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+}
+
+.segment-controls {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.segments-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-sm);
+    background: var(--card-bg);
+}
+
+.segment-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    transition: box-shadow var(--transition-fast);
+}
+
+.segment-item:hover {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.segment-item:last-child {
+    margin-bottom: 0;
+}
+
+.segment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.segment-header > div {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.segment-type {
+    background: var(--accent-primary);
+    color: white;
+    padding: 2px var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    min-width: 20px;
+    text-align: center;
+}
+
+.segment-coords {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    padding: 2px var(--spacing-xs);
+    border-radius: var(--radius-sm);
+}
+
+.segment-description {
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin-top: var(--spacing-xs);
+    line-height: 1.3;
+}
+
+.segment-control {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-top: var(--spacing-xs);
+}
+
+/* ===== FIXED MAP CONTAINER - CORRECT 4:3 ASPECT RATIO ===== */
+.journeys-map-container {
+    position: relative;
+    background: white;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    
+    /* 🔥 CORRECTED: Use proper 4:3 aspect ratio matching map dimensions (2048x1536) */
+    width: 100%;
+    height: 0;
+    padding-bottom: 75%; /* 🔥 FIXED: 3/4 = 0.75 = 75% for 4:3 aspect ratio */
+    min-height: 400px;
+}
+
+/* Modern browsers with aspect-ratio support */
+@supports (aspect-ratio: 4/3) {
+    .journeys-map-container {
+        height: auto;
+        padding-bottom: 0;
+        aspect-ratio: 4/3; /* 🔥 CORRECTED: 4:3 instead of 5:3 */
+        min-height: 400px;
+    }
+}
+
+#journeys-map {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1;
+}
+
+/* Force Leaflet to respect container dimensions */
+#journeys-map .leaflet-container {
+    width: 100% !important;
+    height: 100% !important;
+    background: transparent;
+}
+
+/* Leaflet controls positioning */
+#journeys-map .leaflet-control-container {
+    position: relative;
+}
+
+/* Fix for Leaflet attribution */
+#journeys-map .leaflet-control-attribution {
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* ===== MAP INSTRUCTIONS ===== */
+.map-instructions {
+    position: absolute;
+    top: var(--spacing-sm);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--card-bg);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--card-shadow);
+    z-index: 1000;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    max-width: 90%;
+}
+
+.map-instructions p {
+    margin: 0 0 var(--spacing-sm) 0;
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+}
+
+.instruction-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ===== EMPTY STATES ===== */
+.no-journeys {
+    text-align: center;
+    padding: var(--spacing-xxl);
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.no-journeys p {
+    margin: var(--spacing-sm) 0;
+}
+
+.no-segments {
+    text-align: center;
+    padding: var(--spacing-lg);
+    color: var(--text-secondary);
+    font-style: italic;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    margin: var(--spacing-sm) 0;
+}
+
+/* ===== BUTTON STYLES ===== */
+.btn-small {
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    border-radius: var(--radius-sm);
+}
+
+/* ===== MOBILE RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 1200px) {
+    .journeys-layout {
+        grid-template-columns: 350px 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .journeys-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        height: auto;
+        gap: var(--spacing-md);
+    }
+    
+    .journeys-sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding-right: 0;
+        padding-bottom: var(--spacing-lg);
+        max-height: 400px;
+    }
+    
+    /* 🔥 CORRECTED: Maintain 4:3 aspect ratio on mobile */
+    .journeys-map-container {
+        padding-bottom: 75%; /* Keep 4:3 ratio */
+        min-height: 300px;
+    }
+    
+    @supports (aspect-ratio: 4/3) {
+        .journeys-map-container {
+            aspect-ratio: 4/3;
+            padding-bottom: 0;
+        }
+    }
+    
+    .journey-form .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .journey-editor {
+        padding: var(--spacing-md);
+    }
+    
+    .segment-controls {
+        flex-direction: column;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .journey-item {
+        padding: var(--spacing-sm);
+    }
+    
+    .journey-editor {
+        padding: var(--spacing-sm);
+    }
+    
+    .segments-section {
+        margin-top: var(--spacing-lg);
+        padding-top: var(--spacing-md);
+    }
+    
+    /* 🔥 CORRECTED: Still maintain 4:3 ratio on small screens */
+    .journeys-map-container {
+        min-height: 250px;
+        padding-bottom: 75%; /* Keep 4:3 ratio */
+    }
+    
+    @supports (aspect-ratio: 4/3) {
+        .journeys-map-container {
+            aspect-ratio: 4/3;
+            padding-bottom: 0;
+        }
+    }
+    
+    .map-instructions {
+        padding: var(--spacing-sm) var(--spacing-md);
+        max-width: 95%;
+    }
+}
+
+/* ===== DARK THEME SUPPORT ===== */
+[data-theme="dark"] .journey-item.active {
+    background: rgba(107, 91, 149, 0.1);
+    border-color: var(--accent-primary);
+}
+
+[data-theme="dark"] .journey-status {
+    border-color: rgba(255,255,255,0.3);
+}
+
+[data-theme="dark"] .segment-type {
+    background: var(--accent-primary);
+}
+
+[data-theme="dark"] .journeys-map-container {
+    background: var(--card-bg);
+}
+
+[data-theme="dark"] .map-instructions {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .segment-item {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .segment-item:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+.journeys-sidebar::-webkit-scrollbar,
+.segments-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.journeys-sidebar::-webkit-scrollbar-track,
+.segments-list::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+    border-radius: var(--radius-sm);
+}
+
+.journeys-sidebar::-webkit-scrollbar-thumb,
+.segments-list::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: var(--radius-sm);
+}
+
+.journeys-sidebar::-webkit-scrollbar-thumb:hover,
+.segments-list::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+}
+
+/* ===== CHARACTER PANEL CLOSE BUTTON FIX ===== */
+/* Fix for character panel close button being clipped */
+.leaflet-control-custom,
+.leaflet-control-characters,
+.leaflet-control-container .leaflet-control {
+    position: relative !important;
+    overflow: visible !important;
+    z-index: 1000;
+}
+
+/* Allow close button to overlap outside panel bounds */
+.leaflet-control-custom .close-btn,
+.leaflet-control-characters .close-btn,
+.leaflet-control-custom .close-character-btn,
+.leaflet-control-characters .close-character-btn,
+.leaflet-control .close-btn,
+.leaflet-control .close-character-btn {
+    position: absolute !important;
+    top: -12px !important;
+    right: -12px !important;
+    z-index: 1001 !important;
+    background: var(--modal-bg) !important;
+    border: 2px solid var(--border-color) !important;
+    border-radius: 50% !important;
+    width: 28px !important;
+    height: 28px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.2rem !important;
+    color: var(--text-secondary) !important;
+    cursor: pointer !important;
+    transition: all var(--transition-fast) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+}
+
+.leaflet-control-custom .close-btn:hover,
+.leaflet-control-characters .close-btn:hover,
+.leaflet-control-custom .close-character-btn:hover,
+.leaflet-control-characters .close-character-btn:hover,
+.leaflet-control .close-btn:hover,
+.leaflet-control .close-character-btn:hover {
+    background: var(--toast-error) !important;
+    color: white !important;
+    transform: scale(1.1) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25) !important;
+}
+
+/* Ensure the panel content has enough padding to not interfere with close button */
+.leaflet-control-custom .leaflet-control,
+.leaflet-control-characters .leaflet-control,
+.leaflet-control {
+    padding-top: 16px !important;
+    padding-right: 16px !important;
+}
+
+/* Hide any old square close buttons in favor of the new circular ones */
+.leaflet-control .close-btn.square,
+.leaflet-control .close-character-btn.square,
+.close-btn[style*="border-radius"][style*="var(--radius-sm)"] {
+    display: none !important;
+}
+
+/* Dark theme support for character panel close button */
+[data-theme="dark"] .leaflet-control-custom .close-btn,
+[data-theme="dark"] .leaflet-control-characters .close-btn,
+[data-theme="dark"] .leaflet-control-custom .close-character-btn,
+[data-theme="dark"] .leaflet-control-characters .close-character-btn,
+[data-theme="dark"] .leaflet-control .close-btn,
+[data-theme="dark"] .leaflet-control .close-character-btn {
+    background: var(--modal-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-secondary) !important;
+}

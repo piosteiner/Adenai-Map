@@ -1,0 +1,29 @@
+{
+  "name": "adenai-admin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "node server.js",
+    "prod": "pm2 start ecosystem.config.js",
+    "sync-config": "node scripts/sync-config.js",
+    "sync-to-main": "node scripts/sync-to-main-site.js",
+    "sync-to-github": "node scripts/sync-config-to-github.js",
+    "git-setup": "git init && git add . && git commit -m 'Initial server setup'",
+    "git-push": "git push origin main"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@octokit/rest": "^22.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-basic-auth": "^1.2.1",
+    "express-session": "^1.18.2",
+    "multer": "^2.0.2"
+  }
+}
