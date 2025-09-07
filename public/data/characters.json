@@ -125,7 +125,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/remus.png",
+      "image": "/media/ejhjt2k1p4bj-small.webp",
       "status": "alive",
       "faction": "Sternenzirkel",
       "relationship": "enemy",
@@ -134,7 +134,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-22T04:28:11.542Z",
-      "updatedAt": "2025-08-30T21:28:04.031Z"
+      "updatedAt": "2025-09-07T19:46:18.815Z"
     },
     {
       "id": "tasbor",
@@ -1801,5 +1801,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:46:07.607Z"
+  "lastUpdated": "2025-09-07T19:46:18.815Z"
 }
