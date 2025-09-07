@@ -26,7 +26,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/avery_close.png",
+      "image": "/media/wvfe6kbcship-small.webp",
       "status": "alive",
       "faction": "Regierung von Rena",
       "relationship": "friendly",
@@ -62,7 +62,7 @@
       ],
       "currentLocation": null,
       "createdAt": "2025-08-22T00:21:35.645Z",
-      "updatedAt": "2025-08-29T20:21:33.875Z"
+      "updatedAt": "2025-09-07T19:25:38.317Z"
     },
     {
       "id": "lia_karthright",
@@ -1896,5 +1896,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T14:02:06.657Z"
+  "lastUpdated": "2025-09-07T19:25:38.319Z"
 }
