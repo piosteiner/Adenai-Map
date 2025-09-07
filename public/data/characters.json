@@ -1288,7 +1288,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/krista_close.png",
+      "image": "/media/dlymg4j3u4gk-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1297,7 +1297,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:39:29.421Z",
-      "updatedAt": "2025-08-29T20:49:57.691Z"
+      "updatedAt": "2025-09-07T19:44:10.842Z"
     },
     {
       "id": "krull_sturmbann",
@@ -1873,5 +1873,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:43:52.998Z"
+  "lastUpdated": "2025-09-07T19:44:10.842Z"
 }
