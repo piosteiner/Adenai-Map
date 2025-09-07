@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "4a8d80c60ffec239eca78bac8d262003c58dfe71",
+      "action": "delete",
+      "type": "character",
+      "itemName": "Pio's fully loaded char",
+      "user": "gm",
+      "timestamp": "2025-09-07T19:45:49.417Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T19:45:49.417Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Delete character: Pio's fully loaded char (by gm) - Removed from campaign"
+    },
+    {
       "commitSha": "947c9b25366d1477afcc6be7c184f21816976ab1",
       "action": "update",
       "type": "character",
@@ -5631,5 +5644,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-07T19:45:41.168Z"
+  "lastUpdated": "2025-09-07T19:45:49.418Z"
 }
