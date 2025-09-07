@@ -2210,7 +2210,50 @@
       },
       "fileSize": 3544554,
       "mimeType": "image/png"
+    },
+    "characters-a2eua15nmpn4": {
+      "id": "characters-a2eua15nmpn4",
+      "category": "characters",
+      "title": "Prinz Torren",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:57:08.573Z",
+      "sizes": {
+        "thumb": {
+          "filename": "a2eua15nmpn4-thumb.webp",
+          "url": "/media/a2eua15nmpn4-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "a2eua15nmpn4-small.webp",
+          "url": "/media/a2eua15nmpn4-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "a2eua15nmpn4-medium.webp",
+          "url": "/media/a2eua15nmpn4-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "a2eua15nmpn4-large.webp",
+          "url": "/media/a2eua15nmpn4-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "a2eua15nmpn4-original.webp",
+          "url": "/media/a2eua15nmpn4-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3894148,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:56:35.573Z"
+  "lastUpdated": "2025-09-07T17:57:08.846Z"
 }
