@@ -1517,12 +1517,9 @@
       "name": "Prinz Torren",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": [
-        650,
-        1000
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/torren_close.png",
+      "image": "/media/a2eua15nmpn4-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1558,8 +1555,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:44:34.697Z",
-      "updatedAt": "2025-08-29T20:55:53.307Z",
-      "location": "Rena"
+      "updatedAt": "2025-09-07T19:46:07.607Z"
     },
     {
       "id": "vivi_wulbren",
@@ -1805,5 +1801,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:45:55.311Z"
+  "lastUpdated": "2025-09-07T19:46:07.607Z"
 }
