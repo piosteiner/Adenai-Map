@@ -1657,12 +1657,9 @@
       "name": "Xarnice Zed'ul",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": [
-        782,
-        443
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/xarnice_close.png",
+      "image": "/media/t959cl6pwbrk-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1698,8 +1695,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:46:20.848Z",
-      "updatedAt": "2025-08-29T21:03:23.588Z",
-      "location": "Makir"
+      "updatedAt": "2025-09-07T19:48:40.569Z"
     },
     {
       "id": "k_nigin_maeba_ii_",
@@ -1781,5 +1777,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:48:20.864Z"
+  "lastUpdated": "2025-09-07T19:48:40.569Z"
 }
