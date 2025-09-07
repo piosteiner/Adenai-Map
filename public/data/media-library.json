@@ -3199,7 +3199,50 @@
       },
       "fileSize": 1791418,
       "mimeType": "image/png"
+    },
+    "characters-50dulk5ira0l": {
+      "id": "characters-50dulk5ira0l",
+      "category": "characters",
+      "title": "Kobold Rogue",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:07:16.835Z",
+      "sizes": {
+        "thumb": {
+          "filename": "50dulk5ira0l-thumb.webp",
+          "url": "/media/50dulk5ira0l-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "50dulk5ira0l-small.webp",
+          "url": "/media/50dulk5ira0l-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "50dulk5ira0l-medium.webp",
+          "url": "/media/50dulk5ira0l-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "50dulk5ira0l-large.webp",
+          "url": "/media/50dulk5ira0l-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "50dulk5ira0l-original.webp",
+          "url": "/media/50dulk5ira0l-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2664113,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:06:50.024Z"
+  "lastUpdated": "2025-09-07T18:07:17.106Z"
 }
