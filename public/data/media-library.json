@@ -3973,7 +3973,50 @@
       },
       "fileSize": 3105810,
       "mimeType": "image/png"
+    },
+    "locations-fgvdrnuyt9xe": {
+      "id": "locations-fgvdrnuyt9xe",
+      "category": "locations",
+      "title": "Kalathar",
+      "caption": "",
+      "credits": "AI Generated - Midjourney",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:21:14.410Z",
+      "sizes": {
+        "thumb": {
+          "filename": "fgvdrnuyt9xe-thumb.webp",
+          "url": "/media/fgvdrnuyt9xe-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "fgvdrnuyt9xe-small.webp",
+          "url": "/media/fgvdrnuyt9xe-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "fgvdrnuyt9xe-medium.webp",
+          "url": "/media/fgvdrnuyt9xe-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "fgvdrnuyt9xe-large.webp",
+          "url": "/media/fgvdrnuyt9xe-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "fgvdrnuyt9xe-original.webp",
+          "url": "/media/fgvdrnuyt9xe-original.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "fileSize": 1605875,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:16:33.753Z"
+  "lastUpdated": "2025-09-07T18:21:14.663Z"
 }
