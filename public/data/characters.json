@@ -1826,26 +1826,26 @@
         556
       ],
       "description": "Tochter von Königin Maeba II., Prinzessin von Basapo und Anführerin des Rückeroberungs Regiments in Ako.",
-      "image": "https://adenai.piogino.ch/public/images/mae_1.png",
+      "image": "/media/mjf9mjovvqtl-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "ally",
       "firstMet": "5663-09-01",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2025-08-30T21:53:55.749Z",
-      "updatedAt": "2025-08-30T21:53:55.749Z",
       "currentLocation": {
         "location": "Akónetchie",
-        "date": "2025-08-30",
-        "dateStart": "2025-08-30",
+        "date": "2025-09-07",
+        "dateStart": "2025-09-07",
         "dateEnd": null,
         "coordinates": [
           1869,
           556
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2025-08-30T21:53:55.749Z",
+      "updatedAt": "2025-09-07T19:44:57.540Z"
     },
     {
       "id": "lady_rivea",
@@ -1865,5 +1865,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:44:41.861Z"
+  "lastUpdated": "2025-09-07T19:44:57.540Z"
 }
