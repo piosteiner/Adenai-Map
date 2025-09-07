@@ -414,7 +414,7 @@
         "name": "Kalthar",
         "description": "Details zu diesem Ort sind noch zu entdecken.",
         "contentUrl": null,
-        "image": "https://adenai.piogino.ch/public/images/kalthar.png",
+        "image": "/media/fgvdrnuyt9xe-small.webp",
         "region": "western_adenai",
         "type": "town",
         "visited": false
