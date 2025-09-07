@@ -4102,7 +4102,50 @@
       },
       "fileSize": 9375104,
       "mimeType": "image/png"
+    },
+    "locations-01ln4jgoxpje": {
+      "id": "locations-01ln4jgoxpje",
+      "category": "locations",
+      "title": "Basapo",
+      "caption": "Visual Aid for Basapo",
+      "credits": "Mangrove Village by Joshua Jay Christie found on ArtStation",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:36:35.705Z",
+      "sizes": {
+        "thumb": {
+          "filename": "01ln4jgoxpje-thumb.webp",
+          "url": "/media/01ln4jgoxpje-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "01ln4jgoxpje-small.webp",
+          "url": "/media/01ln4jgoxpje-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "01ln4jgoxpje-medium.webp",
+          "url": "/media/01ln4jgoxpje-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "01ln4jgoxpje-large.webp",
+          "url": "/media/01ln4jgoxpje-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "01ln4jgoxpje-original.webp",
+          "url": "/media/01ln4jgoxpje-original.webp",
+          "width": 3840,
+          "height": 1637
+        }
+      },
+      "fileSize": 1539949,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2025-09-07T18:35:04.416Z"
+  "lastUpdated": "2025-09-07T18:36:35.936Z"
 }
