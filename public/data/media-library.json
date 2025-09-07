@@ -4403,7 +4403,50 @@
       },
       "fileSize": 1506408,
       "mimeType": "image/png"
+    },
+    "characters-krx8e5u6w6pn": {
+      "id": "characters-krx8e5u6w6pn",
+      "category": "characters",
+      "title": "Abu Wanted Poster",
+      "caption": "",
+      "credits": "drawn by Pio Gino Steiner",
+      "tags": [],
+      "uploadDate": "2025-09-07T19:04:05.493Z",
+      "sizes": {
+        "thumb": {
+          "filename": "krx8e5u6w6pn-thumb.webp",
+          "url": "/media/krx8e5u6w6pn-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "krx8e5u6w6pn-small.webp",
+          "url": "/media/krx8e5u6w6pn-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "krx8e5u6w6pn-medium.webp",
+          "url": "/media/krx8e5u6w6pn-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "krx8e5u6w6pn-large.webp",
+          "url": "/media/krx8e5u6w6pn-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "krx8e5u6w6pn-original.webp",
+          "url": "/media/krx8e5u6w6pn-original.webp",
+          "width": 2048,
+          "height": 2732
+        }
+      },
+      "fileSize": 812527,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T19:03:39.947Z"
+  "lastUpdated": "2025-09-07T19:04:05.852Z"
 }
