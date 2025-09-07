@@ -993,7 +993,7 @@
         "name": "Erhabene See",
         "description": "Eine Hochebene mit riesigen Sand Dünen aus dem zerribenen Gestein des süd-östlichen Ausläufers des Sonnenspitzen Gebirges.",
         "contentUrl": null,
-        "image": "https://adenai.piogino.ch/public/images/erhabene_see.png",
+        "image": "/media/xwrsm4c088bp-small.webp",
         "region": "tua_danar",
         "type": "environment",
         "visited": false
