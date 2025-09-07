@@ -1520,7 +1520,50 @@
       },
       "fileSize": 3019380,
       "mimeType": "image/png"
+    },
+    "characters-bo1ukulgxr7x": {
+      "id": "characters-bo1ukulgxr7x",
+      "category": "characters",
+      "title": "Lia Karthright",
+      "caption": "",
+      "credits": "AI Generated - Midjourney",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:16:25.707Z",
+      "sizes": {
+        "thumb": {
+          "filename": "bo1ukulgxr7x-thumb.webp",
+          "url": "/media/bo1ukulgxr7x-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "bo1ukulgxr7x-small.webp",
+          "url": "/media/bo1ukulgxr7x-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "bo1ukulgxr7x-medium.webp",
+          "url": "/media/bo1ukulgxr7x-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "bo1ukulgxr7x-large.webp",
+          "url": "/media/bo1ukulgxr7x-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "bo1ukulgxr7x-original.webp",
+          "url": "/media/bo1ukulgxr7x-original.webp",
+          "width": 4096,
+          "height": 4096
+        }
+      },
+      "fileSize": 17928544,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:15:50.010Z"
+  "lastUpdated": "2025-09-07T17:16:26.017Z"
 }
