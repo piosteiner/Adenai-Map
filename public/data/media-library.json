@@ -4188,7 +4188,50 @@
       },
       "fileSize": 1296801,
       "mimeType": "image/png"
+    },
+    "locations-pkiqhx1x53id": {
+      "id": "locations-pkiqhx1x53id",
+      "category": "locations",
+      "title": "Valaris",
+      "caption": "Rough Visual Aid for Valaris",
+      "credits": "AI Generated",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:41:33.425Z",
+      "sizes": {
+        "thumb": {
+          "filename": "pkiqhx1x53id-thumb.webp",
+          "url": "/media/pkiqhx1x53id-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "pkiqhx1x53id-small.webp",
+          "url": "/media/pkiqhx1x53id-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "pkiqhx1x53id-medium.webp",
+          "url": "/media/pkiqhx1x53id-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "pkiqhx1x53id-large.webp",
+          "url": "/media/pkiqhx1x53id-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "pkiqhx1x53id-original.webp",
+          "url": "/media/pkiqhx1x53id-original.webp",
+          "width": 2048,
+          "height": 2048
+        }
+      },
+      "fileSize": 6248230,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:39:36.977Z"
+  "lastUpdated": "2025-09-07T18:41:33.799Z"
 }
