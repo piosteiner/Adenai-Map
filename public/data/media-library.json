@@ -1004,7 +1004,50 @@
       },
       "fileSize": 2923839,
       "mimeType": "image/png"
+    },
+    "characters-uq3kwrktvdic": {
+      "id": "characters-uq3kwrktvdic",
+      "category": "characters",
+      "title": "Krull Sturmbann",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:11:09.970Z",
+      "sizes": {
+        "thumb": {
+          "filename": "uq3kwrktvdic-thumb.webp",
+          "url": "/media/uq3kwrktvdic-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "uq3kwrktvdic-small.webp",
+          "url": "/media/uq3kwrktvdic-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "uq3kwrktvdic-medium.webp",
+          "url": "/media/uq3kwrktvdic-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "uq3kwrktvdic-large.webp",
+          "url": "/media/uq3kwrktvdic-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "uq3kwrktvdic-original.webp",
+          "url": "/media/uq3kwrktvdic-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2944156,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:10:38.581Z"
+  "lastUpdated": "2025-09-07T17:11:10.177Z"
 }
