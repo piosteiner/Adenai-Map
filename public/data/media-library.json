@@ -789,7 +789,50 @@
       },
       "fileSize": 2625704,
       "mimeType": "image/png"
+    },
+    "characters-no2ehobxx7l6": {
+      "id": "characters-no2ehobxx7l6",
+      "category": "characters",
+      "title": "Graf Honza",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:07:01.779Z",
+      "sizes": {
+        "thumb": {
+          "filename": "no2ehobxx7l6-thumb.webp",
+          "url": "/media/no2ehobxx7l6-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "no2ehobxx7l6-small.webp",
+          "url": "/media/no2ehobxx7l6-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "no2ehobxx7l6-medium.webp",
+          "url": "/media/no2ehobxx7l6-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "no2ehobxx7l6-large.webp",
+          "url": "/media/no2ehobxx7l6-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "no2ehobxx7l6-original.webp",
+          "url": "/media/no2ehobxx7l6-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3090419,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:06:35.248Z"
+  "lastUpdated": "2025-09-07T17:07:02.025Z"
 }
