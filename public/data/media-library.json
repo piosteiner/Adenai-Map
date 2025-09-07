@@ -1694,7 +1694,50 @@
       },
       "fileSize": 3580367,
       "mimeType": "image/png"
+    },
+    "characters-1n1bsh0qw4t1": {
+      "id": "characters-1n1bsh0qw4t1",
+      "category": "characters",
+      "title": "Female Human",
+      "caption": "",
+      "credits": "AI Generated - GPT5: heavily based on NAME from the Witcher Series",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:50:06.632Z",
+      "sizes": {
+        "thumb": {
+          "filename": "1n1bsh0qw4t1-thumb.webp",
+          "url": "/media/1n1bsh0qw4t1-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "1n1bsh0qw4t1-small.webp",
+          "url": "/media/1n1bsh0qw4t1-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "1n1bsh0qw4t1-medium.webp",
+          "url": "/media/1n1bsh0qw4t1-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "1n1bsh0qw4t1-large.webp",
+          "url": "/media/1n1bsh0qw4t1-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "1n1bsh0qw4t1-original.webp",
+          "url": "/media/1n1bsh0qw4t1-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3798210,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:49:19.394Z"
+  "lastUpdated": "2025-09-07T17:50:07.003Z"
 }
