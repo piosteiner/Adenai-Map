@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ed87af503a9766c60c1d0a5e4f9e1867d6a14d7e",
+      "action": "update",
+      "type": "character",
+      "itemName": "Sorin Karthright",
+      "user": "gm",
+      "timestamp": "2025-09-07T21:46:29.087Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T21:46:29.087Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: sorin_karthright (by gm) - updated image"
+    },
+    {
       "commitSha": "3e6865fe4f6f67bb79029699710d01f5b641ff4b",
       "action": "update",
       "type": "character",
@@ -5813,5 +5826,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-07T21:03:23.780Z"
+  "lastUpdated": "2025-09-07T21:46:29.087Z"
 }
