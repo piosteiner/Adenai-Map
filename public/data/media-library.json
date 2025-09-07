@@ -1391,7 +1391,50 @@
       },
       "fileSize": 2963274,
       "mimeType": "image/png"
+    },
+    "characters-9fakv8oomkpk": {
+      "id": "characters-9fakv8oomkpk",
+      "category": "characters",
+      "title": "Zerith Kael",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:14:54.118Z",
+      "sizes": {
+        "thumb": {
+          "filename": "9fakv8oomkpk-thumb.webp",
+          "url": "/media/9fakv8oomkpk-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "9fakv8oomkpk-small.webp",
+          "url": "/media/9fakv8oomkpk-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "9fakv8oomkpk-medium.webp",
+          "url": "/media/9fakv8oomkpk-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "9fakv8oomkpk-large.webp",
+          "url": "/media/9fakv8oomkpk-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "9fakv8oomkpk-original.webp",
+          "url": "/media/9fakv8oomkpk-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2849640,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:14:17.173Z"
+  "lastUpdated": "2025-09-07T17:14:54.383Z"
 }
