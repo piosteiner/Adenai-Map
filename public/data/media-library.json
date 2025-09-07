@@ -2339,7 +2339,50 @@
       },
       "fileSize": 3464577,
       "mimeType": "image/png"
+    },
+    "characters-slb5vrra5bsz": {
+      "id": "characters-slb5vrra5bsz",
+      "category": "characters",
+      "title": "dandy human female",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:58:47.708Z",
+      "sizes": {
+        "thumb": {
+          "filename": "slb5vrra5bsz-thumb.webp",
+          "url": "/media/slb5vrra5bsz-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "slb5vrra5bsz-small.webp",
+          "url": "/media/slb5vrra5bsz-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "slb5vrra5bsz-medium.webp",
+          "url": "/media/slb5vrra5bsz-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "slb5vrra5bsz-large.webp",
+          "url": "/media/slb5vrra5bsz-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "slb5vrra5bsz-original.webp",
+          "url": "/media/slb5vrra5bsz-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3688014,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:58:14.255Z"
+  "lastUpdated": "2025-09-07T17:58:47.962Z"
 }
