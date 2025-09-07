@@ -2253,7 +2253,50 @@
       },
       "fileSize": 3894148,
       "mimeType": "image/png"
+    },
+    "characters-byryrolvxbdz": {
+      "id": "characters-byryrolvxbdz",
+      "category": "characters",
+      "title": "Woman",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:57:41.100Z",
+      "sizes": {
+        "thumb": {
+          "filename": "byryrolvxbdz-thumb.webp",
+          "url": "/media/byryrolvxbdz-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "byryrolvxbdz-small.webp",
+          "url": "/media/byryrolvxbdz-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "byryrolvxbdz-medium.webp",
+          "url": "/media/byryrolvxbdz-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "byryrolvxbdz-large.webp",
+          "url": "/media/byryrolvxbdz-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "byryrolvxbdz-original.webp",
+          "url": "/media/byryrolvxbdz-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3957259,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:57:08.846Z"
+  "lastUpdated": "2025-09-07T17:57:41.369Z"
 }
