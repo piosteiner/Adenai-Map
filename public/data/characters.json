@@ -1483,7 +1483,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/ruben_karthright_close.png",
+      "image": "/media/i2wgrvgm96vy-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1492,7 +1492,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:43:21.763Z",
-      "updatedAt": "2025-08-29T21:15:29.569Z"
+      "updatedAt": "2025-09-07T19:46:31.446Z"
     },
     {
       "id": "sorin_karthright",
@@ -1801,5 +1801,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:46:18.815Z"
+  "lastUpdated": "2025-09-07T19:46:31.446Z"
 }
