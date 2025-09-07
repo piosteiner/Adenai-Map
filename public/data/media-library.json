@@ -4059,7 +4059,50 @@
       },
       "fileSize": 3753667,
       "mimeType": "image/png"
+    },
+    "characters-qt1ttvmhk66g": {
+      "id": "characters-qt1ttvmhk66g",
+      "category": "characters",
+      "title": "Underdark Ako",
+      "caption": "Underdark beneath Akonektchie",
+      "credits": "drawn by Pio Gino Steiner",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:35:04.039Z",
+      "sizes": {
+        "thumb": {
+          "filename": "qt1ttvmhk66g-thumb.webp",
+          "url": "/media/qt1ttvmhk66g-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "qt1ttvmhk66g-small.webp",
+          "url": "/media/qt1ttvmhk66g-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "qt1ttvmhk66g-medium.webp",
+          "url": "/media/qt1ttvmhk66g-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "qt1ttvmhk66g-large.webp",
+          "url": "/media/qt1ttvmhk66g-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "qt1ttvmhk66g-original.webp",
+          "url": "/media/qt1ttvmhk66g-original.webp",
+          "width": 2732,
+          "height": 2048
+        }
+      },
+      "fileSize": 9375104,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:34:20.900Z"
+  "lastUpdated": "2025-09-07T18:35:04.416Z"
 }
