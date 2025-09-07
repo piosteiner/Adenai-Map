@@ -16,6 +16,7 @@
 @import 'components/features/search.css';
 @import 'components/features/gallery.css';
 @import 'components/ui/popups.css';
+@import 'components/ui/image-popup.css';
 @import 'components/ui/modals.css';
 @import 'components/ui/controls.css';
 @import 'components/ui/badges.css';

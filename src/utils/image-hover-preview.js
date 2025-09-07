@@ -12,6 +12,15 @@ class ImageHoverPreview {
     init() {
         this.createPreviewElement();
         this.setupGlobalImageHandlers();
+        
+        // Listen for enhanced popup events to hide hover preview
+        if (window.imagePopupManager) {
+            // If enhanced popup manager exists, listen for its events
+            document.addEventListener('image-popup-opened', () => {
+                this.hidePreview();
+            });
+        }
+        
         Logger.loading('🖼️ Image hover preview system loaded');
     }
 
@@ -27,14 +36,14 @@ class ImageHoverPreview {
             </div>
         `;
         
-        // Add styles
+        // Add styles - ensure it doesn't conflict with enhanced popup (lower z-index)
         this.previewElement.style.cssText = `
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 10000;
+            z-index: 998;
             display: none;
             pointer-events: none;
         `;
@@ -47,7 +56,7 @@ class ImageHoverPreview {
         const style = document.createElement('style');
         style.textContent = `
             #image-hover-preview {
-                transition: opacity 0.2s ease;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
             }
 
             #image-hover-preview.visible {
@@ -68,8 +77,8 @@ class ImageHoverPreview {
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: rgba(0, 0, 0, 0.7);
-                backdrop-filter: blur(2px);
+                background: rgba(0, 0, 0, 0.85);
+                backdrop-filter: blur(8px);
             }
 
             .preview-container {
@@ -80,17 +89,19 @@ class ImageHoverPreview {
                 justify-content: center;
                 pointer-events: none;
                 z-index: 1;
+                max-width: 90vw;
+                max-height: 90vh;
             }
 
             .preview-image {
                 max-width: 100%;
-                max-height: 100%;
+                max-height: 70vh;
                 width: auto;
                 height: auto;
                 object-fit: contain;
                 border-radius: 8px;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-                transform: scale(0.9);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+                transform: scale(0.8);
                 transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             }
 
@@ -99,37 +110,100 @@ class ImageHoverPreview {
             }
 
             .preview-caption {
-                margin-top: 12px;
-                padding: 8px 16px;
-                background: rgba(0, 0, 0, 0.8);
-                color: white;
-                border-radius: 16px;
-                font-size: 0.9em;
+                position: absolute;
+                bottom: -60px;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                padding: 12px 16px;
+                border-radius: 8px;
+                color: #333;
+                font-size: 14px;
                 text-align: center;
-                backdrop-filter: blur(4px);
-                max-width: 400px;
-                word-wrap: break-word;
+                backdrop-filter: blur(10px);
+                min-width: 200px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                font-weight: 500;
+                line-height: 1.4;
+                opacity: 0;
+                transform: translateY(10px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+
+            #image-hover-preview.visible .preview-caption {
+                opacity: 1;
+                transform: translateY(0);
             }
 
             /* Dark theme adjustments */
             [data-theme="dark"] .preview-backdrop {
-                background: rgba(0, 0, 0, 0.8);
+                background: rgba(0, 0, 0, 0.9);
             }
 
             [data-theme="dark"] .preview-caption {
-                background: rgba(255, 255, 255, 0.1);
-                color: #f1f5f9;
+                background: rgba(30, 30, 30, 0.95);
+                color: #f0f0f0;
             }
 
             /* Hover-enabled images styling */
             .hover-preview-enabled {
-                transition: transform 0.2s ease, opacity 0.2s ease;
+                transition: transform 0.2s ease, filter 0.2s ease;
                 cursor: pointer;
             }
 
             .hover-preview-enabled:hover {
                 transform: scale(1.05);
-                opacity: 0.9;
+                filter: brightness(1.1);
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                .preview-image {
+                    max-height: 60vh;
+                }
+                
+                .preview-caption {
+                    bottom: -80px;
+                    padding: 10px 12px;
+                    font-size: 13px;
+                    min-width: auto;
+                    left: 10px;
+                    right: 10px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .preview-image {
+                    max-height: 50vh;
+                }
+                
+                .preview-caption {
+                    bottom: -100px;
+                    padding: 8px 10px;
+                    font-size: 12px;
+                }
+            }
+
+            /* Hover instruction hint */
+            #image-hover-preview::before {
+                content: "Hover to preview • Click for full size";
+                position: absolute;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 0, 0, 0.7);
+                color: white;
+                padding: 6px 12px;
+                border-radius: 4px;
+                font-size: 11px;
+                opacity: 0;
+                animation: fadeInOut 3s ease-in-out;
+                pointer-events: none;
+            }
+
+            @keyframes fadeInOut {
+                0%, 100% { opacity: 0; }
+                20%, 80% { opacity: 0.8; }
             }
         `;
 
@@ -228,7 +302,16 @@ class ImageHoverPreview {
     }
 
     handleImageClick(image) {
-        // Create a temporary link element to open image without switching tabs
+        // Hide hover preview immediately
+        this.hidePreview();
+        
+        // Check if enhanced image popup manager is available
+        if (window.imagePopupManager) {
+            // Let the enhanced popup manager handle the click
+            return; // Don't prevent default - let the enhanced popup handle it
+        }
+        
+        // Fallback behavior: Create a temporary link element to open image
         const link = document.createElement('a');
         link.href = image.src;
         link.target = '_blank';
@@ -249,9 +332,6 @@ class ImageHoverPreview {
         // Clean up
         document.body.removeChild(link);
         
-        // Hide any visible preview
-        this.hidePreview();
-        
         Logger.debug('🖼️ Image opened in background tab:', image.src);
     }
 
@@ -266,20 +346,8 @@ class ImageHoverPreview {
         previewImage.src = originalImage.src;
         previewImage.alt = originalImage.alt || '';
 
-        // Calculate optimal size - limit to 25% of viewport for small preview
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-        
-        // Set container to use 25% of viewport for both dimensions
-        // The image will scale proportionally within these constraints
-        container.style.maxWidth = `${viewportWidth * 0.25}px`;
-        container.style.maxHeight = `${viewportHeight * 0.25}px`;
-
-        // Set caption
-        const captionText = originalImage.alt || 
-                           originalImage.title || 
-                           originalImage.getAttribute('data-caption') || 
-                           '';
+        // Extract enhanced caption information
+        const captionText = this.generateEnhancedCaption(originalImage);
         
         if (captionText) {
             caption.textContent = captionText;
@@ -297,7 +365,49 @@ class ImageHoverPreview {
         });
 
         this.isPreviewVisible = true;
-        Logger.debug('🖼️ Image preview shown');
+        Logger.debug('🖼️ Enhanced image preview shown');
+    }
+
+    generateEnhancedCaption(image) {
+        // Check if image is in a character popup
+        const popup = image.closest('.character-popup') || 
+                     image.closest('.leaflet-popup-content') || 
+                     image.closest('.panel-anchored-popup');
+        
+        if (popup) {
+            // Extract character information
+            const titleElement = popup.querySelector('.popup-title') || 
+                               popup.querySelector('h3') ||
+                               popup.querySelector('.character-popup-title');
+            
+            const title = titleElement ? titleElement.textContent.trim() : '';
+            
+            if (title) {
+                // Parse additional info from popup
+                const content = popup.textContent;
+                let location = '';
+                
+                // Extract location info
+                const locationMatch = content.match(/(?:Last Seen|Aktueller Ort|Current Location):\s*([^\n\(]+)/i);
+                if (locationMatch) {
+                    location = locationMatch[1].trim();
+                }
+                
+                // Generate enhanced caption
+                let caption = `Portrait of ${title}`;
+                if (location && location !== '❓ Unbekannt' && location !== 'Unknown') {
+                    caption += ` - Last seen in ${location}`;
+                }
+                
+                return caption;
+            }
+        }
+        
+        // Fall back to original caption methods
+        return image.alt || 
+               image.title || 
+               image.getAttribute('data-caption') || 
+               'Character Portrait';
     }
 
     hidePreview() {
