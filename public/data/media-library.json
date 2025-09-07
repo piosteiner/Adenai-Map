@@ -1262,7 +1262,50 @@
       },
       "fileSize": 2787889,
       "mimeType": "image/png"
+    },
+    "characters-n18hyg8qnnul": {
+      "id": "characters-n18hyg8qnnul",
+      "category": "characters",
+      "title": "Sorin Karthright",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:13:27.440Z",
+      "sizes": {
+        "thumb": {
+          "filename": "n18hyg8qnnul-thumb.webp",
+          "url": "/media/n18hyg8qnnul-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "n18hyg8qnnul-small.webp",
+          "url": "/media/n18hyg8qnnul-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "n18hyg8qnnul-medium.webp",
+          "url": "/media/n18hyg8qnnul-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "n18hyg8qnnul-large.webp",
+          "url": "/media/n18hyg8qnnul-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "n18hyg8qnnul-original.webp",
+          "url": "/media/n18hyg8qnnul-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2935308,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:13:10.971Z"
+  "lastUpdated": "2025-09-07T17:13:27.662Z"
 }
