@@ -3242,7 +3242,50 @@
       },
       "fileSize": 2664113,
       "mimeType": "image/png"
+    },
+    "characters-y1n3vxu48z4x": {
+      "id": "characters-y1n3vxu48z4x",
+      "category": "characters",
+      "title": "Dragonborn Cleric",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:07:53.667Z",
+      "sizes": {
+        "thumb": {
+          "filename": "y1n3vxu48z4x-thumb.webp",
+          "url": "/media/y1n3vxu48z4x-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "y1n3vxu48z4x-small.webp",
+          "url": "/media/y1n3vxu48z4x-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "y1n3vxu48z4x-medium.webp",
+          "url": "/media/y1n3vxu48z4x-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "y1n3vxu48z4x-large.webp",
+          "url": "/media/y1n3vxu48z4x-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "y1n3vxu48z4x-original.webp",
+          "url": "/media/y1n3vxu48z4x-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2832971,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:07:17.106Z"
+  "lastUpdated": "2025-09-07T18:07:53.896Z"
 }
