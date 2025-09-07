@@ -5,8 +5,11 @@
       "id": "petrel_kormorant",
       "name": "Petrel Kormorant",
       "title": "Ruler of Valaris",
-      "placeOfOrigin": "",
-      "coordinates": null,
+      "placeOfOrigin": "Valaris",
+      "coordinates": [
+        1700,
+        1008
+      ],
       "description": "",
       "image": "https://adenai-admin.piogino.ch/media/g7b7j6jhzs5f-small.webp",
       "status": "alive",
@@ -15,9 +18,19 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "currentLocation": null,
+      "currentLocation": {
+        "location": "Valaris",
+        "date": "2025-09-07",
+        "dateStart": "2025-09-07",
+        "dateEnd": null,
+        "coordinates": [
+          1700,
+          1008
+        ],
+        "notes": "Location set based on place of origin"
+      },
       "createdAt": "2025-08-27T17:53:53.624Z",
-      "updatedAt": "2025-09-07T14:02:06.651Z"
+      "updatedAt": "2025-09-07T21:03:22.965Z"
     },
     {
       "id": "avery",
@@ -1774,5 +1787,5 @@
       "updatedAt": "2025-09-07T20:40:44.661Z"
     }
   ],
-  "lastUpdated": "2025-09-07T20:40:44.662Z"
+  "lastUpdated": "2025-09-07T21:03:22.965Z"
 }
