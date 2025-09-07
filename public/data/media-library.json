@@ -108,12 +108,6 @@
     }
   },
   "images": {
-    "atlantis-general": {
-      "src": "atlantis_general.png",
-      "alt": "Atlantis Übersicht",
-      "caption": "Allgemeine Ansicht von Atlantis",
-      "category": "location"
-    },
     "characters-1757235629299-uz2z00fvc": {
       "id": "characters-1757235629299-uz2z00fvc",
       "category": "characters",
@@ -253,5 +247,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T12:56:18.113Z"
+  "lastUpdated": "2025-09-07T12:56:20.935Z"
 }
