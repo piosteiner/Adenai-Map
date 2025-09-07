@@ -7,7 +7,7 @@
         "name": "Valaris",
         "description": "Die grösste Stadt im Osten von Adenai. Regiert von [Petrel Kormorant:character:petrel-kormorant].",
         "contentUrl": null,
-        "image": "/media/hsxm3mxbyg8r-small.webp",
+        "image": "https://adenai-admin.piogino.ch/media/hsxm3mxbyg8r-small.webp",
         "region": "valaris_region",
         "type": "city",
         "visited": true
@@ -243,7 +243,7 @@
         "name": "Basapo",
         "description": "Ein grosser Handelsposten im Süden von Valaris.",
         "contentUrl": null,
-        "image": "/media/01ln4jgoxpje-small.webp",
+        "image": "https://adenai-admin.piogino.ch/media/01ln4jgoxpje-small.webp",
         "region": "upeto",
         "type": "city",
         "visited": true
@@ -262,7 +262,7 @@
         "name": "Akónetchie",
         "description": "Auch nur 'Ako' genannt. Alte heilige Städte im Dschungel von Upeto. Hier befindet sich der M'pako, die Sonnenwurzel. Wie in Basapo wird hier primär Talona als Göttin verehrt. Ein Zugang zum Underdark befindet sich hier.",
         "contentUrl": null,
-        "image": "/media/yo2c0exwe5z6-small.webp",
+        "image": "https://adenai-admin.piogino.ch/media/yo2c0exwe5z6-small.webp",
         "region": "upeto",
         "type": "town",
         "visited": true
@@ -281,7 +281,7 @@
         "name": "Silbergrat",
         "description": "Der Start der Reise der VsuzH. An diesem Ort kam Luna von Moonhaven in die Material Plane.",
         "contentUrl": null,
-        "image": "/media/hsxm3mxbyg8r-small.webp",
+        "image": "https://adenai-admin.piogino.ch/media/hsxm3mxbyg8r-small.webp",
         "region": "sun_peaks",
         "type": "town",
         "visited": true
@@ -414,7 +414,7 @@
         "name": "Kalthar",
         "description": "Details zu diesem Ort sind noch zu entdecken.",
         "contentUrl": null,
-        "image": "/media/fgvdrnuyt9xe-small.webp",
+        "image": "https://adenai-admin.piogino.ch/media/fgvdrnuyt9xe-small.webp",
         "region": "western_adenai",
         "type": "town",
         "visited": false
@@ -489,7 +489,7 @@
         "name": "Zur Prallen Traube",
         "description": "Die VsuzH haben einen Überfall auf das Gasthaus und das umliegende Dorf gerächt.",
         "contentUrl": null,
-        "image": "/media/njof8v5mhxne-small.webp",
+        "image": "https://adenai-admin.piogino.ch/media/njof8v5mhxne-small.webp",
         "region": "eastern_adenai",
         "type": "village",
         "visited": true
@@ -723,7 +723,7 @@
         "name": "Siedlung an der nördlichen Grenze zur Harak Wüste",
         "description": "Details sind noch zu entdecken.",
         "contentUrl": null,
-        "image": "/media/sfp29t68v924-small.webp",
+        "image": "https://adenai-admin.piogino.ch/media/sfp29t68v924-small.webp",
         "region": "harak",
         "type": "town",
         "visited": false
@@ -993,7 +993,7 @@
         "name": "Erhabene See",
         "description": "Eine Hochebene mit riesigen Sand Dünen aus dem zerribenen Gestein des süd-östlichen Ausläufers des Sonnenspitzen Gebirges.",
         "contentUrl": null,
-        "image": "/media/xwrsm4c088bp-small.webp",
+        "image": "https://adenai-admin.piogino.ch/media/xwrsm4c088bp-small.webp",
         "region": "tua_danar",
         "type": "environment",
         "visited": false
@@ -1012,7 +1012,7 @@
         "name": "Underdark bei Ako",
         "description": "Zugang zum Underdark bei Ako. Die Sonnenwurzel Mpako liegt über dem Zugang.",
         "contentUrl": null,
-        "image": "/media/qt1ttvmhk66g-small.webp",
+        "image": "https://adenai-admin.piogino.ch/media/qt1ttvmhk66g-small.webp",
         "region": "north_adenai",
         "type": "landmark",
         "visited": true
