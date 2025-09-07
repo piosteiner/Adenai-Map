@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "df0f9222f67b948eb45a1fbdb57512be81ea719f",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lady Rivea",
+      "user": "gm",
+      "timestamp": "2025-09-07T20:40:45.415Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T20:40:45.415Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: lady_rivea (by gm) - changed relationship to enemy, updated image"
+    },
+    {
       "commitSha": "bf2cf53cae1e7198830841a73a7b284e537d6639",
       "action": "update",
       "type": "character",
@@ -5787,5 +5800,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-07T20:06:53.094Z"
+  "lastUpdated": "2025-09-07T20:40:45.418Z"
 }
