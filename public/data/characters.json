@@ -1608,12 +1608,9 @@
       "name": "Zerith Kael",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": [
-        389,
-        941
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/zerith_close.png",
+      "image": "/media/9fakv8oomkpk-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1649,8 +1646,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:45:52.030Z",
-      "updatedAt": "2025-08-29T21:02:26.928Z",
-      "location": "Kalthar"
+      "updatedAt": "2025-09-07T19:48:54.091Z"
     },
     {
       "id": "xarnice_zed_ul",
@@ -1777,5 +1773,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:48:40.569Z"
+  "lastUpdated": "2025-09-07T19:48:54.091Z"
 }
