@@ -1606,7 +1606,52 @@
       },
       "fileSize": 2905399,
       "mimeType": "image/png"
+    },
+    "characters-uhaz82qaykdc": {
+      "id": "characters-uhaz82qaykdc",
+      "category": "characters",
+      "title": "Human Aristocat",
+      "caption": "",
+      "credits": "AI Generated - GPT5: heavily based on Sigismund Dijkstra from the Witcher Series",
+      "tags": [
+        "-missing-"
+      ],
+      "uploadDate": "2025-09-07T17:18:36.049Z",
+      "sizes": {
+        "thumb": {
+          "filename": "uhaz82qaykdc-thumb.webp",
+          "url": "/media/uhaz82qaykdc-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "uhaz82qaykdc-small.webp",
+          "url": "/media/uhaz82qaykdc-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "uhaz82qaykdc-medium.webp",
+          "url": "/media/uhaz82qaykdc-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "uhaz82qaykdc-large.webp",
+          "url": "/media/uhaz82qaykdc-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "uhaz82qaykdc-original.webp",
+          "url": "/media/uhaz82qaykdc-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3573478,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:17:12.871Z"
+  "lastUpdated": "2025-09-07T17:18:36.316Z"
 }
