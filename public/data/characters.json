@@ -1876,7 +1876,24 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "lady_rivea",
+      "name": "Lady Rivea",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "/media/1757248806291-ChatGPT_Image_Sep_7__2025__02_38_43_PM_small.webp",
+      "status": "dead",
+      "faction": "Sternenzirkel",
+      "relationship": "ally",
+      "firstMet": "5663-09-05",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-09-07T12:41:46.791Z",
+      "updatedAt": "2025-09-07T12:41:46.791Z"
     }
   ],
-  "lastUpdated": "2025-08-30T21:53:55.749Z"
+  "lastUpdated": "2025-09-07T12:41:46.791Z"
 }
