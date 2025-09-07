@@ -1183,7 +1183,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/eytan_karthright_close.png",
+      "image": "/media/7r8s2u5d5rio-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "friendly",
@@ -1192,7 +1192,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:33:49.688Z",
-      "updatedAt": "2025-08-29T20:49:03.852Z"
+      "updatedAt": "2025-09-07T19:27:20.302Z"
     },
     {
       "id": "graf_honza",
@@ -1884,5 +1884,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:27:07.844Z"
+  "lastUpdated": "2025-09-07T19:27:20.302Z"
 }
