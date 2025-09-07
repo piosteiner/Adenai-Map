@@ -25,6 +25,17 @@ class CharacterSystem {
         this.init();
     }
 
+    getCharacterNameColor(relationship) {
+        // Return relationship color if available
+        if (this.relationshipColors[relationship]) {
+            return this.relationshipColors[relationship];
+        }
+        
+        // For unknown/undefined relationships, use theme-appropriate color
+        const isDarkTheme = document.documentElement.getAttribute('data-theme') === 'dark';
+        return isDarkTheme ? '#ffffff' : '#333333';
+    }
+
     init() {
         Logger.character('Character system initialized without visual markers');
         
@@ -625,7 +636,7 @@ class CharacterSystem {
         return `
             <div class="character-popup">
                 ${imageHtml}
-                <div class="popup-title" style="color: ${this.relationshipColors[character.relationship] || '#333'}">
+                <div class="popup-title" style="color: ${this.getCharacterNameColor(character.relationship)}">
                     ${character.name}
                 </div>
                 ${character.title ? `<div style="font-style: italic; margin-bottom: 8px;">${character.title}</div>` : ''}
