@@ -966,12 +966,9 @@
       "name": "Ceres Golwit",
       "title": "Hafenmeisterin von Rena",
       "placeOfOrigin": "",
-      "coordinates": [
-        650,
-        1000
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/ceres_close.png",
+      "image": "/media/h3e5xschetg5-small.webp",
       "status": "alive",
       "faction": "Regierung von Rena",
       "relationship": "unknown",
@@ -1007,8 +1004,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:23:32.979Z",
-      "updatedAt": "2025-08-29T21:00:49.683Z",
-      "location": "Rena"
+      "updatedAt": "2025-09-07T19:25:54.393Z"
     },
     {
       "id": "colette_pinet",
@@ -1896,5 +1892,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:25:38.319Z"
+  "lastUpdated": "2025-09-07T19:25:54.394Z"
 }
