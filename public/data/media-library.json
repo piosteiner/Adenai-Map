@@ -1909,7 +1909,50 @@
       },
       "fileSize": 3632464,
       "mimeType": "image/png"
+    },
+    "characters-fpxwwcltf3al": {
+      "id": "characters-fpxwwcltf3al",
+      "category": "characters",
+      "title": "Edgy Human",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:53:13.252Z",
+      "sizes": {
+        "thumb": {
+          "filename": "fpxwwcltf3al-thumb.webp",
+          "url": "/media/fpxwwcltf3al-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "fpxwwcltf3al-small.webp",
+          "url": "/media/fpxwwcltf3al-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "fpxwwcltf3al-medium.webp",
+          "url": "/media/fpxwwcltf3al-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "fpxwwcltf3al-large.webp",
+          "url": "/media/fpxwwcltf3al-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "fpxwwcltf3al-original.webp",
+          "url": "/media/fpxwwcltf3al-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3221553,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:52:35.655Z"
+  "lastUpdated": "2025-09-07T17:53:13.503Z"
 }
