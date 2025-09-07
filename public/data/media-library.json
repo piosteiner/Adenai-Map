@@ -617,7 +617,50 @@
       },
       "fileSize": 3192065,
       "mimeType": "image/png"
+    },
+    "characters-f4cg9rj04oam": {
+      "id": "characters-f4cg9rj04oam",
+      "category": "characters",
+      "title": "Dravak Svya",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:03:40.051Z",
+      "sizes": {
+        "thumb": {
+          "filename": "f4cg9rj04oam-thumb.webp",
+          "url": "/media/f4cg9rj04oam-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "f4cg9rj04oam-small.webp",
+          "url": "/media/f4cg9rj04oam-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "f4cg9rj04oam-medium.webp",
+          "url": "/media/f4cg9rj04oam-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "f4cg9rj04oam-large.webp",
+          "url": "/media/f4cg9rj04oam-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "f4cg9rj04oam-original.webp",
+          "url": "/media/f4cg9rj04oam-original.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "fileSize": 2099916,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:02:49.031Z"
+  "lastUpdated": "2025-09-07T17:03:40.310Z"
 }
