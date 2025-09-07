@@ -918,7 +918,50 @@
       },
       "fileSize": 3476057,
       "mimeType": "image/png"
+    },
+    "characters-65gefpmsli6y": {
+      "id": "characters-65gefpmsli6y",
+      "category": "characters",
+      "title": "Krista",
+      "caption": "Portrait von Krista als Kind",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:10:24.387Z",
+      "sizes": {
+        "thumb": {
+          "filename": "65gefpmsli6y-thumb.webp",
+          "url": "/media/65gefpmsli6y-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "65gefpmsli6y-small.webp",
+          "url": "/media/65gefpmsli6y-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "65gefpmsli6y-medium.webp",
+          "url": "/media/65gefpmsli6y-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "65gefpmsli6y-large.webp",
+          "url": "/media/65gefpmsli6y-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "65gefpmsli6y-original.webp",
+          "url": "/media/65gefpmsli6y-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2991370,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:08:29.824Z"
+  "lastUpdated": "2025-09-07T17:10:24.623Z"
 }
