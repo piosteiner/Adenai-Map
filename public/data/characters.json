@@ -1199,12 +1199,9 @@
       "name": "Graf Honza",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": [
-        650,
-        1000
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/honza_close.png",
+      "image": "/media/no2ehobxx7l6-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1240,8 +1237,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:34:25.256Z",
-      "updatedAt": "2025-08-29T20:56:27.224Z",
-      "location": "Rena"
+      "updatedAt": "2025-09-07T19:28:56.730Z"
     },
     {
       "id": "jara_koreen",
@@ -1884,5 +1880,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:27:20.302Z"
+  "lastUpdated": "2025-09-07T19:28:56.731Z"
 }
