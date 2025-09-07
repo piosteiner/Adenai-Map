@@ -251,7 +251,7 @@
       "category": "characters",
       "originalName": "ChatGPT Image Sep 7, 2025, 01_01_09 PM.png",
       "alt": "Vivi Wulbren",
-      "caption": "Vivi Wulbren",
+      "caption": "Portrait of Vivi Wulbren",
       "credits": "AI Generated - OpenAI based on own drawing",
       "tags": [
         "NPC"
@@ -290,7 +290,8 @@
         }
       },
       "fileSize": 2569153,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-07T12:59:18.962Z"
     }
   },
   "lastUpdated": "2025-09-07T12:59:09.011Z"
