@@ -4489,7 +4489,50 @@
       },
       "fileSize": 1284645,
       "mimeType": "image/png"
+    },
+    "characters-8qp40gi1xwvn": {
+      "id": "characters-8qp40gi1xwvn",
+      "category": "characters",
+      "title": "Luna Wanted Poster",
+      "caption": "",
+      "credits": "drawn by Pio Gino Steiner",
+      "tags": [],
+      "uploadDate": "2025-09-07T19:04:40.125Z",
+      "sizes": {
+        "thumb": {
+          "filename": "8qp40gi1xwvn-thumb.webp",
+          "url": "/media/8qp40gi1xwvn-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "8qp40gi1xwvn-small.webp",
+          "url": "/media/8qp40gi1xwvn-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "8qp40gi1xwvn-medium.webp",
+          "url": "/media/8qp40gi1xwvn-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "8qp40gi1xwvn-large.webp",
+          "url": "/media/8qp40gi1xwvn-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "8qp40gi1xwvn-original.webp",
+          "url": "/media/8qp40gi1xwvn-original.webp",
+          "width": 2048,
+          "height": 2732
+        }
+      },
+      "fileSize": 1086663,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T19:04:20.519Z"
+  "lastUpdated": "2025-09-07T19:04:40.392Z"
 }
