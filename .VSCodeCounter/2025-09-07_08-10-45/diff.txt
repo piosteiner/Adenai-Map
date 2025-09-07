@@ -1,0 +1,166 @@
+Date : 2025-09-07 08:10:45
+Directory : c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map
+Total : 91 files,  23000 codes, 1549 comments, 3363 blanks, all 27912 lines
+
+Languages
++--------------+------------+------------+------------+------------+------------+
+| language     | files      | code       | comment    | blank      | total      |
++--------------+------------+------------+------------+------------+------------+
+| JavaScript   |         57 |     13,202 |      1,110 |      2,245 |     16,557 |
+| PostCSS      |         23 |      4,599 |        351 |        811 |      5,761 |
+| JSON         |          4 |      3,860 |          0 |          1 |      3,861 |
+| Markdown     |          3 |        757 |          0 |        207 |        964 |
+| HTML         |          2 |        486 |         65 |         70 |        621 |
+| Shell Script |          2 |         96 |         23 |         29 |        148 |
++--------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                          | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                             |         91 |     23,000 |      1,549 |      3,363 |     27,912 |
+| . (Files)                                                                                                     |          1 |         17 |          3 |          1 |         21 |
+| Server and CMS files                                                                                          |          2 |          0 |          0 |         -2 |         -2 |
+| Server and CMS files\admin-public                                                                             |          2 |          0 |          0 |         -2 |         -2 |
+| Server and CMS files\admin-public\js                                                                          |          2 |          0 |          0 |         -2 |         -2 |
+| public                                                                                                        |          9 |      4,377 |         39 |         95 |      4,511 |
+| public\css                                                                                                    |          6 |        546 |         39 |         95 |        680 |
+| public\css\components                                                                                         |          6 |        546 |         39 |         95 |        680 |
+| public\css\components\characters                                                                              |          2 |        147 |         19 |         31 |        197 |
+| public\css\components\features                                                                                |          1 |        134 |          3 |         16 |        153 |
+| public\css\components\movement                                                                                |          1 |         -5 |          0 |          0 |         -5 |
+| public\css\components\ui                                                                                      |          2 |        270 |         17 |         48 |        335 |
+| public\data                                                                                                   |          3 |      3,831 |          0 |          0 |      3,831 |
+| server                                                                                                        |         68 |     16,017 |      1,280 |      2,871 |     20,168 |
+| server (Files)                                                                                                |          5 |        587 |         39 |        162 |        788 |
+| server\admin-interface                                                                                        |         45 |     11,458 |        873 |      1,992 |     14,323 |
+| server\admin-interface (Files)                                                                                |          1 |        469 |         62 |         69 |        600 |
+| server\admin-interface\css                                                                                    |         17 |      4,053 |        312 |        716 |      5,081 |
+| server\admin-interface\css (Files)                                                                            |          1 |         69 |         13 |         17 |         99 |
+| server\admin-interface\css\core                                                                               |         10 |      2,296 |        191 |        383 |      2,870 |
+| server\admin-interface\css\modules                                                                            |          6 |      1,688 |        108 |        316 |      2,112 |
+| server\admin-interface\css\modules\activity                                                                   |          1 |        264 |         12 |         62 |        338 |
+| server\admin-interface\css\modules\changelog                                                                  |          1 |        299 |         42 |         58 |        399 |
+| server\admin-interface\css\modules\characters                                                                 |          1 |        538 |         20 |         96 |        654 |
+| server\admin-interface\css\modules\journeys                                                                   |          2 |        587 |         34 |         99 |        720 |
+| server\admin-interface\css\modules\timeline                                                                   |          1 |          0 |          0 |          1 |          1 |
+| server\admin-interface\js                                                                                     |         27 |      6,936 |        499 |      1,207 |      8,642 |
+| server\admin-interface\js\core                                                                                |          6 |      1,345 |        167 |        257 |      1,769 |
+| server\admin-interface\js\libs                                                                                |          1 |        115 |         10 |         25 |        150 |
+| server\admin-interface\js\modules                                                                             |         20 |      5,476 |        322 |        925 |      6,723 |
+| server\admin-interface\js\modules\activity                                                                    |          1 |        353 |         26 |         50 |        429 |
+| server\admin-interface\js\modules\changelog                                                                   |          2 |        824 |         24 |        103 |        951 |
+| server\admin-interface\js\modules\characters                                                                  |          6 |      1,352 |        123 |        285 |      1,760 |
+| server\admin-interface\js\modules\dynamics                                                                    |          1 |        321 |         17 |         70 |        408 |
+| server\admin-interface\js\modules\journeys                                                                    |          4 |      1,536 |         48 |        176 |      1,760 |
+| server\admin-interface\js\modules\locations                                                                   |          3 |        769 |         67 |        169 |      1,005 |
+| server\admin-interface\js\modules\temporal                                                                    |          1 |        321 |         17 |         70 |        408 |
+| server\admin-interface\js\modules\timeline                                                                    |          2 |          0 |          0 |          2 |          2 |
+| server\docs                                                                                                   |          2 |        401 |          0 |         95 |        496 |
+| server\middleware                                                                                             |          1 |         27 |          7 |          5 |         39 |
+| server\routes                                                                                                 |         10 |      3,359 |        327 |        566 |      4,252 |
+| server\scripts                                                                                                |          5 |        185 |         34 |         51 |        270 |
+| src                                                                                                           |         11 |      2,589 |        227 |        398 |      3,214 |
+| src\systems                                                                                                   |          4 |        518 |         40 |         77 |        635 |
+| src\ui                                                                                                        |          5 |      1,796 |        149 |        265 |      2,210 |
+| src\ui\components                                                                                             |          5 |      1,796 |        149 |        265 |      2,210 |
+| src\utils                                                                                                     |          2 |        275 |         38 |         56 |        369 |
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+
+| filename                                                                                                      | language     | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\Server and CMS files\admin-public\js\admin-core.js              | JavaScript   |          0 |          0 |         -1 |         -1 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\Server and CMS files\admin-public\js\admin-locations.js         | JavaScript   |          0 |          0 |         -1 |         -1 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\index.html                                                      | HTML         |         17 |          3 |          1 |         21 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\characters\character-panel.css            | PostCSS      |        180 |         18 |         34 |        232 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\characters\character-system.css           | PostCSS      |        -33 |          1 |         -3 |        -35 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\features\search.css                       | PostCSS      |        134 |          3 |         16 |        153 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\movement\movement-markers.css             | PostCSS      |         -5 |          0 |          0 |         -5 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\ui\controls.css                           | PostCSS      |        213 |         15 |         36 |        264 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\css\components\ui\popups.css                             | PostCSS      |         57 |          2 |         12 |         71 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\data\characters.json                                     | JSON         |      1,160 |          0 |          0 |      1,160 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\data\places.geojson                                      | JSON         |         58 |          0 |          0 |         58 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\public\data\reviews.json                                        | JSON         |      2,613 |          0 |          0 |      2,613 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\README.md                                                | Markdown     |        356 |          0 |        112 |        468 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\admin-overrides.css                  | PostCSS      |         69 |         13 |         17 |         99 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\core\base.css                        | PostCSS      |        184 |         18 |         42 |        244 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\core\card-grid.css                   | PostCSS      |        519 |         28 |         48 |        595 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\core\components.css                  | PostCSS      |        271 |         16 |         51 |        338 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\core\forms.css                       | PostCSS      |        253 |         21 |         42 |        316 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\core\image-popup.css                 | PostCSS      |         66 |          6 |          9 |         81 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\core\layout.css                      | PostCSS      |        283 |         23 |         58 |        364 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\core\modals.css                      | PostCSS      |        255 |         18 |         40 |        313 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\core\overrides.css                   | PostCSS      |         69 |         14 |         17 |        100 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\core\responsive.css                  | PostCSS      |        301 |         32 |         64 |        397 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\core\variables.css                   | PostCSS      |         95 |         15 |         12 |        122 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\modules\activity\activity.css        | PostCSS      |        264 |         12 |         62 |        338 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\modules\changelog\changelog.css      | PostCSS      |        299 |         42 |         58 |        399 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\modules\characters\movement.css      | PostCSS      |        538 |         20 |         96 |        654 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\modules\journeys\journey.css         | PostCSS      |        498 |         28 |         83 |        609 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\modules\journeys\summary.css         | PostCSS      |         89 |          6 |         16 |        111 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\css\modules\timeline\timeline.css        | PostCSS      |          0 |          0 |          1 |          1 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\index.html                               | HTML         |        469 |         62 |         69 |        600 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\core\auth.js                          | JavaScript   |        213 |         20 |         39 |        272 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\core\config.js                        | JavaScript   |        110 |         20 |         19 |        149 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\core\core.js                          | JavaScript   |        250 |         24 |         48 |        322 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\core\form-init.js                     | JavaScript   |        241 |         35 |         48 |        324 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\core\theme.js                         | JavaScript   |        181 |         21 |         37 |        239 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\core\ui.js                            | JavaScript   |        350 |         47 |         66 |        463 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\libs\leaflet.curve.min.js             | JavaScript   |        115 |         10 |         25 |        150 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\activity\index.js             | JavaScript   |        353 |         26 |         50 |        429 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\changelog\index.js            | JavaScript   |        552 |         17 |         50 |        619 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\changelog\operations.js       | JavaScript   |        272 |          7 |         53 |        332 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\characters\index.js           | JavaScript   |        340 |         32 |         87 |        459 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\characters\map-integration.js | JavaScript   |          0 |          0 |          1 |          1 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\characters\movements.js       | JavaScript   |        429 |         31 |         70 |        530 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\characters\operations.js      | JavaScript   |        202 |         15 |         52 |        269 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\characters\ui-fix.js          | JavaScript   |         29 |          6 |          4 |         39 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\characters\ui.js              | JavaScript   |        352 |         39 |         71 |        462 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\dynamics\index.js             | JavaScript   |        321 |         17 |         70 |        408 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\journeys\index.js             | JavaScript   |        416 |          7 |         30 |        453 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\journeys\map.js               | JavaScript   |        445 |         23 |         55 |        523 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\journeys\operations.js        | JavaScript   |        312 |         16 |         84 |        412 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\journeys\segments.js          | JavaScript   |        363 |          2 |          7 |        372 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\locations\index.js            | JavaScript   |        224 |         33 |         64 |        321 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\locations\operations.js       | JavaScript   |        224 |         18 |         56 |        298 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\locations\ui.js               | JavaScript   |        321 |         16 |         49 |        386 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\temporal\index.js             | JavaScript   |        321 |         17 |         70 |        408 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\timeline\init.js              | JavaScript   |          0 |          0 |          1 |          1 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\admin-interface\js\modules\timeline\timeline.js          | JavaScript   |          0 |          0 |          1 |          1 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\deploy-from-github.sh                                    | Shell Script |         10 |          2 |          1 |         13 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\docs\API.md                                              | Markdown     |        180 |          0 |         29 |        209 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\docs\DEPLOYMENT.md                                       | Markdown     |        221 |          0 |         66 |        287 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\middleware\auth.js                                       | JavaScript   |         27 |          7 |          5 |         39 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\package.json                                             | JSON         |         29 |          0 |          1 |         30 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\routes\activity.js                                       | JavaScript   |        148 |         21 |         29 |        198 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\routes\auth.js                                           | JavaScript   |         57 |          5 |         12 |         74 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\routes\changelog.js                                      | JavaScript   |        383 |         47 |         67 |        497 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\routes\character-paths.js                                | JavaScript   |        229 |         25 |         43 |        297 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\routes\characters.js                                     | JavaScript   |      1,061 |        125 |        203 |      1,389 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\routes\config.js                                         | JavaScript   |        107 |          4 |          8 |        119 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\routes\dynamics.js                                       | JavaScript   |        389 |         15 |         45 |        449 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\routes\journey.js                                        | JavaScript   |        255 |         16 |         47 |        318 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\routes\locations.js                                      | JavaScript   |        341 |         54 |         67 |        462 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\routes\temporal-features.js                              | JavaScript   |        389 |         15 |         45 |        449 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\scripts\config.js                                        | JavaScript   |         98 |         14 |         17 |        129 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\scripts\journey.js                                       | JavaScript   |          0 |          2 |          2 |          4 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\scripts\sync-config-to-github.js                         | JavaScript   |         30 |          7 |         11 |         48 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\scripts\sync-config.js                                   | JavaScript   |         25 |          5 |         10 |         40 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\scripts\sync-to-main-site.js                             | JavaScript   |         32 |          6 |         11 |         49 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\server.js                                                | JavaScript   |        106 |         16 |         20 |        142 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\server\sync-to-github.sh                                        | Shell Script |         86 |         21 |         28 |        135 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\systems\character-system.js                                 | JavaScript   |         29 |          5 |          6 |         40 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\systems\location-system.js                                  | JavaScript   |        238 |         12 |         21 |        271 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\systems\movement-system.js                                  | JavaScript   |        100 |         17 |         24 |        141 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\systems\search-system.js                                    | JavaScript   |        151 |          6 |         26 |        183 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\ui\components\character-panel.js                            | JavaScript   |         59 |          9 |         11 |         79 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\ui\components\coordinate-copy.js                            | JavaScript   |        -82 |          1 |         -9 |        -90 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\ui\components\map-controls.js                               | JavaScript   |        150 |         27 |         40 |        217 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\ui\components\movement-timeline-optimized.js                | JavaScript   |        322 |         21 |         55 |        398 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\ui\components\movement-timeline.js                          | JavaScript   |      1,347 |         91 |        168 |      1,606 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\coordinate-utils.js                                   | JavaScript   |          2 |          1 |          0 |          3 |
+| c:\Users\piogi\OneDrive\Coding\Git\Adenai-Map\src\utils\image-hover-preview.js                                | JavaScript   |        273 |         37 |         56 |        366 |
+| Total                                                                                                         |              |     23,000 |      1,549 |      3,363 |     27,912 |
++---------------------------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+
