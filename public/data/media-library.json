@@ -1305,7 +1305,50 @@
       },
       "fileSize": 2935308,
       "mimeType": "image/png"
+    },
+    "characters-0kxwjpujrynw": {
+      "id": "characters-0kxwjpujrynw",
+      "category": "characters",
+      "title": "König Torrak",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:13:49.284Z",
+      "sizes": {
+        "thumb": {
+          "filename": "0kxwjpujrynw-thumb.webp",
+          "url": "/media/0kxwjpujrynw-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "0kxwjpujrynw-small.webp",
+          "url": "/media/0kxwjpujrynw-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "0kxwjpujrynw-medium.webp",
+          "url": "/media/0kxwjpujrynw-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "0kxwjpujrynw-large.webp",
+          "url": "/media/0kxwjpujrynw-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "0kxwjpujrynw-original.webp",
+          "url": "/media/0kxwjpujrynw-original.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "fileSize": 2073879,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:13:27.662Z"
+  "lastUpdated": "2025-09-07T17:13:49.544Z"
 }
