@@ -1477,7 +1477,50 @@
       },
       "fileSize": 3046665,
       "mimeType": "image/png"
+    },
+    "characters-mjf9mjovvqtl": {
+      "id": "characters-mjf9mjovvqtl",
+      "category": "characters",
+      "title": "Mae",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:15:49.643Z",
+      "sizes": {
+        "thumb": {
+          "filename": "mjf9mjovvqtl-thumb.webp",
+          "url": "/media/mjf9mjovvqtl-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "mjf9mjovvqtl-small.webp",
+          "url": "/media/mjf9mjovvqtl-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "mjf9mjovvqtl-medium.webp",
+          "url": "/media/mjf9mjovvqtl-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "mjf9mjovvqtl-large.webp",
+          "url": "/media/mjf9mjovvqtl-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "mjf9mjovvqtl-original.webp",
+          "url": "/media/mjf9mjovvqtl-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3019380,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:15:28.820Z"
+  "lastUpdated": "2025-09-07T17:15:50.010Z"
 }
