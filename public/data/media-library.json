@@ -358,7 +358,50 @@
       },
       "fileSize": 3000003,
       "mimeType": "image/png"
+    },
+    "characters-ldojuws9w6ai": {
+      "id": "characters-ldojuws9w6ai",
+      "category": "characters",
+      "title": "Blue Dragonborn with Knife",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T16:58:12.586Z",
+      "sizes": {
+        "thumb": {
+          "filename": "ldojuws9w6ai-thumb.webp",
+          "url": "/media/ldojuws9w6ai-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "ldojuws9w6ai-small.webp",
+          "url": "/media/ldojuws9w6ai-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "ldojuws9w6ai-medium.webp",
+          "url": "/media/ldojuws9w6ai-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "ldojuws9w6ai-large.webp",
+          "url": "/media/ldojuws9w6ai-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "ldojuws9w6ai-original.webp",
+          "url": "/media/ldojuws9w6ai-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3011204,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T16:57:45.884Z"
+  "lastUpdated": "2025-09-07T16:58:12.875Z"
 }
