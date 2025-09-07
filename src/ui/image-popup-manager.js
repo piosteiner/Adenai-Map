@@ -5,11 +5,15 @@ class ImagePopupManager {
     constructor() {
         this.currentPopup = null;
         this.isInitialized = false;
+        this.mediaLibrary = null;
         this.init();
     }
 
-    init() {
+    async init() {
         if (this.isInitialized) return;
+        
+        // Load media library
+        await this.loadMediaLibrary();
         
         // Create popup container
         this.createPopupContainer();
@@ -19,6 +23,67 @@ class ImagePopupManager {
         
         this.isInitialized = true;
         console.log('✅ Enhanced Image Popup System initialized');
+    }
+
+    async loadMediaLibrary() {
+        try {
+            const response = await fetch('/data/media-library.json');
+            if (response.ok) {
+                const data = await response.json();
+                this.mediaLibrary = data;
+                console.log('📚 Media library loaded:', Object.keys(data.images).length, 'images');
+            } else {
+                console.warn('⚠️ Could not load media library');
+            }
+        } catch (error) {
+            console.warn('⚠️ Error loading media library:', error);
+        }
+    }
+
+    findImageMetadata(imageSrc) {
+        if (!this.mediaLibrary || !this.mediaLibrary.images) {
+            return null;
+        }
+
+        // Try to find the image in the media library by URL
+        for (const [id, imageData] of Object.entries(this.mediaLibrary.images)) {
+            if (imageData.sizes) {
+                // Check all size variants
+                for (const [sizeKey, sizeData] of Object.entries(imageData.sizes)) {
+                    if (sizeData.url === imageSrc || imageSrc.includes(sizeData.filename)) {
+                        return {
+                            id: id,
+                            title: imageData.title || imageData.caption || 'Untitled',
+                            caption: imageData.caption || '',
+                            credits: imageData.credits || '',
+                            tags: imageData.tags || [],
+                            uploadDate: imageData.uploadDate,
+                            category: imageData.category,
+                            ...imageData
+                        };
+                    }
+                }
+            }
+        }
+
+        // If no exact match, try partial matching
+        const filename = imageSrc.split('/').pop().split('?')[0];
+        for (const [id, imageData] of Object.entries(this.mediaLibrary.images)) {
+            if (filename.includes(id) || id.includes(filename.replace(/\.(webp|jpg|jpeg|png)$/, ''))) {
+                return {
+                    id: id,
+                    title: imageData.title || imageData.caption || 'Untitled',
+                    caption: imageData.caption || '',
+                    credits: imageData.credits || '',
+                    tags: imageData.tags || [],
+                    uploadDate: imageData.uploadDate,
+                    category: imageData.category,
+                    ...imageData
+                };
+            }
+        }
+
+        return null;
     }
 
     createPopupContainer() {
@@ -34,7 +99,9 @@ class ImagePopupManager {
                     <div class="image-popup-title"></div>
                     <div class="image-popup-character-info"></div>
                     <div class="image-popup-caption"></div>
+                    <div class="image-popup-tags"></div>
                     <div class="image-popup-credits"></div>
+                    <div class="image-popup-metadata"></div>
                 </div>
             </div>
         `;
@@ -148,20 +215,31 @@ class ImagePopupManager {
     showImagePopup(imageSrc, data = {}) {
         if (!this.overlay) return;
 
+        // First, try to get metadata from media library
+        const mediaMetadata = this.findImageMetadata(imageSrc);
+        
+        // Merge character data with media metadata, prioritizing media metadata
+        const combinedData = {
+            ...data, // Character data from popup
+            ...(mediaMetadata || {}) // Media library metadata (takes priority)
+        };
+
         const image = this.overlay.querySelector('.image-popup-image');
         const title = this.overlay.querySelector('.image-popup-title');
         const characterInfo = this.overlay.querySelector('.image-popup-character-info');
         const caption = this.overlay.querySelector('.image-popup-caption');
         const credits = this.overlay.querySelector('.image-popup-credits');
+        const tags = this.overlay.querySelector('.image-popup-tags');
+        const metadata = this.overlay.querySelector('.image-popup-metadata');
 
         // Set image
         image.src = imageSrc;
-        image.alt = data.title || 'Character Portrait';
+        image.alt = combinedData.title || 'Image';
 
-        // Set title
-        title.textContent = data.title || 'Character Portrait';
+        // Set title - prefer media library title, fallback to character name
+        title.textContent = combinedData.title || data.title || 'Untitled';
 
-        // Set character info badges
+        // Set character info badges (only for character data)
         characterInfo.innerHTML = '';
         if (data.location && data.location !== '❓ Unbekannt' && data.location !== 'Unknown') {
             const locationBadge = document.createElement('span');
@@ -177,20 +255,57 @@ class ImagePopupManager {
             characterInfo.appendChild(statusBadge);
         }
 
-        // Set caption
-        caption.textContent = data.caption || '';
+        // Set caption - prefer media library caption, fallback to generated caption
+        caption.textContent = combinedData.caption || data.caption || '';
+
+        // Set tags
+        tags.innerHTML = '';
+        if (combinedData.tags && combinedData.tags.length > 0) {
+            combinedData.tags.forEach(tag => {
+                const tagElement = document.createElement('span');
+                tagElement.className = 'image-popup-tag';
+                tagElement.textContent = tag;
+                tags.appendChild(tagElement);
+            });
+        }
 
         // Set credits
-        credits.textContent = data.credits || 'Source: Adenai Campaign';
+        credits.textContent = combinedData.credits || 'Source: Adenai Campaign';
+
+        // Set metadata
+        metadata.innerHTML = '';
+        if (combinedData.category) {
+            const categoryItem = document.createElement('div');
+            categoryItem.className = 'image-popup-metadata-item';
+            categoryItem.innerHTML = `
+                <span class="image-popup-metadata-label">Category:</span>
+                <span class="image-popup-metadata-value">${combinedData.category}</span>
+            `;
+            metadata.appendChild(categoryItem);
+        }
+
+        if (combinedData.uploadDate) {
+            const dateItem = document.createElement('div');
+            dateItem.className = 'image-popup-metadata-item';
+            const uploadDate = new Date(combinedData.uploadDate).toLocaleDateString();
+            dateItem.innerHTML = `
+                <span class="image-popup-metadata-label">Added:</span>
+                <span class="image-popup-upload-date">${uploadDate}</span>
+            `;
+            metadata.appendChild(dateItem);
+        }
 
         // Show popup
         this.overlay.classList.add('active');
-        this.currentPopup = data;
+        this.currentPopup = combinedData;
         
         // Prevent body scrolling
         document.body.style.overflow = 'hidden';
 
-        console.log('🖼️ Showing enhanced image popup for:', data.title || 'character');
+        // Dispatch event for other systems
+        document.dispatchEvent(new CustomEvent('image-popup-opened', { detail: combinedData }));
+
+        console.log('🖼️ Showing enhanced image popup:', combinedData.title || 'image', mediaMetadata ? '(with metadata)' : '(character data only)');
     }
 
     closePopup() {

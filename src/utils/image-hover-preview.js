@@ -6,10 +6,14 @@ class ImageHoverPreview {
         this.previewElement = null;
         this.isPreviewVisible = false;
         this.hoverTimeout = null;
+        this.mediaLibrary = null;
         this.init();
     }
 
-    init() {
+    async init() {
+        // Load media library
+        await this.loadMediaLibrary();
+        
         this.createPreviewElement();
         this.setupGlobalImageHandlers();
         
@@ -24,6 +28,67 @@ class ImageHoverPreview {
         Logger.loading('🖼️ Image hover preview system loaded');
     }
 
+    async loadMediaLibrary() {
+        try {
+            const response = await fetch('/data/media-library.json');
+            if (response.ok) {
+                const data = await response.json();
+                this.mediaLibrary = data;
+                Logger.debug('📚 Media library loaded for hover preview:', Object.keys(data.images).length, 'images');
+            } else {
+                Logger.warn('⚠️ Could not load media library for hover preview');
+            }
+        } catch (error) {
+            Logger.warn('⚠️ Error loading media library for hover preview:', error);
+        }
+    }
+
+    findImageMetadata(imageSrc) {
+        if (!this.mediaLibrary || !this.mediaLibrary.images) {
+            return null;
+        }
+
+        // Try to find the image in the media library by URL
+        for (const [id, imageData] of Object.entries(this.mediaLibrary.images)) {
+            if (imageData.sizes) {
+                // Check all size variants
+                for (const [sizeKey, sizeData] of Object.entries(imageData.sizes)) {
+                    if (sizeData.url === imageSrc || imageSrc.includes(sizeData.filename)) {
+                        return {
+                            id: id,
+                            title: imageData.title || imageData.caption || 'Untitled',
+                            caption: imageData.caption || '',
+                            credits: imageData.credits || '',
+                            tags: imageData.tags || [],
+                            uploadDate: imageData.uploadDate,
+                            category: imageData.category,
+                            ...imageData
+                        };
+                    }
+                }
+            }
+        }
+
+        // If no exact match, try partial matching
+        const filename = imageSrc.split('/').pop().split('?')[0];
+        for (const [id, imageData] of Object.entries(this.mediaLibrary.images)) {
+            if (filename.includes(id) || id.includes(filename.replace(/\.(webp|jpg|jpeg|png)$/, ''))) {
+                return {
+                    id: id,
+                    title: imageData.title || imageData.caption || 'Untitled',
+                    caption: imageData.caption || '',
+                    credits: imageData.credits || '',
+                    tags: imageData.tags || [],
+                    uploadDate: imageData.uploadDate,
+                    category: imageData.category,
+                    ...imageData
+                };
+            }
+        }
+
+        return null;
+    }
+
     createPreviewElement() {
         // Create the preview overlay element
         this.previewElement = document.createElement('div');
@@ -32,7 +97,11 @@ class ImageHoverPreview {
             <div class="preview-backdrop"></div>
             <div class="preview-container">
                 <img class="preview-image" src="" alt="">
-                <div class="preview-caption"></div>
+                <div class="preview-info">
+                    <div class="preview-caption"></div>
+                    <div class="preview-tags"></div>
+                    <div class="preview-credits"></div>
+                </div>
             </div>
         `;
         
@@ -110,15 +179,59 @@ class ImageHoverPreview {
             }
 
             .preview-caption {
+                background: rgba(255, 255, 255, 0.95);
+                padding: 8px 12px;
+                border-radius: 6px 6px 0 0;
+                color: #333;
+                font-size: 13px;
+                font-weight: 500;
+                line-height: 1.3;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+                text-shadow: none;
+                margin: 0;
+            }
+
+            .preview-info {
                 position: absolute;
-                bottom: -60px;
+                bottom: -80px;
                 left: 0;
                 right: 0;
                 background: rgba(255, 255, 255, 0.95);
-                padding: 12px 16px;
                 border-radius: 8px;
                 color: #333;
-                font-size: 14px;
+                max-width: 400px;
+                min-width: 250px;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            }
+
+            .preview-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px;
+                padding: 8px 12px;
+                margin: 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            .preview-tag {
+                background: rgba(99, 102, 241, 0.1);
+                color: #4f46e5;
+                padding: 2px 6px;
+                border-radius: 10px;
+                font-size: 10px;
+                font-weight: 500;
+                border: 1px solid rgba(99, 102, 241, 0.2);
+            }
+
+            .preview-credits {
+                padding: 6px 12px;
+                font-size: 11px;
+                color: #666;
+                font-style: italic;
+                margin: 0;
+            }
                 text-align: center;
                 backdrop-filter: blur(10px);
                 min-width: 200px;
@@ -143,6 +256,27 @@ class ImageHoverPreview {
             [data-theme="dark"] .preview-caption {
                 background: rgba(30, 30, 30, 0.95);
                 color: #f0f0f0;
+                border-bottom-color: rgba(255, 255, 255, 0.1);
+            }
+
+            [data-theme="dark"] .preview-info {
+                background: rgba(30, 30, 30, 0.95);
+                color: #f0f0f0;
+            }
+
+            [data-theme="dark"] .preview-tag {
+                background: rgba(139, 92, 246, 0.2);
+                color: #a78bfa;
+                border-color: rgba(139, 92, 246, 0.3);
+            }
+
+            [data-theme="dark"] .preview-credits {
+                color: #999;
+                border-top-color: rgba(255, 255, 255, 0.1);
+            }
+
+            [data-theme="dark"] .preview-tags {
+                border-bottom-color: rgba(255, 255, 255, 0.1);
             }
 
             /* Hover-enabled images styling */
@@ -340,20 +474,55 @@ class ImageHoverPreview {
 
         const previewImage = this.previewElement.querySelector('.preview-image');
         const caption = this.previewElement.querySelector('.preview-caption');
+        const tags = this.previewElement.querySelector('.preview-tags');
+        const credits = this.previewElement.querySelector('.preview-credits');
         const container = this.previewElement.querySelector('.preview-container');
 
         // Set image source
         previewImage.src = originalImage.src;
         previewImage.alt = originalImage.alt || '';
 
-        // Extract enhanced caption information
-        const captionText = this.generateEnhancedCaption(originalImage);
+        // Get metadata from media library
+        const mediaMetadata = this.findImageMetadata(originalImage.src);
+        
+        // Set caption
+        let captionText = '';
+        if (mediaMetadata) {
+            captionText = mediaMetadata.title || mediaMetadata.caption || '';
+        }
+        
+        if (!captionText) {
+            // Fallback to character extraction
+            captionText = this.generateEnhancedCaption(originalImage);
+        }
         
         if (captionText) {
             caption.textContent = captionText;
             caption.style.display = 'block';
         } else {
             caption.style.display = 'none';
+        }
+
+        // Set tags
+        tags.innerHTML = '';
+        if (mediaMetadata && mediaMetadata.tags && mediaMetadata.tags.length > 0) {
+            mediaMetadata.tags.forEach(tag => {
+                const tagElement = document.createElement('span');
+                tagElement.className = 'preview-tag';
+                tagElement.textContent = tag;
+                tags.appendChild(tagElement);
+            });
+            tags.style.display = 'flex';
+        } else {
+            tags.style.display = 'none';
+        }
+
+        // Set credits
+        if (mediaMetadata && mediaMetadata.credits) {
+            credits.textContent = mediaMetadata.credits;
+            credits.style.display = 'block';
+        } else {
+            credits.style.display = 'none';
         }
 
         // Show preview
@@ -365,10 +534,13 @@ class ImageHoverPreview {
         });
 
         this.isPreviewVisible = true;
-        Logger.debug('🖼️ Enhanced image preview shown');
+        Logger.debug('🖼️ Enhanced image preview shown', mediaMetadata ? 'with metadata' : 'without metadata');
     }
 
     generateEnhancedCaption(image) {
+        // This method now serves as fallback for character popup extraction
+        // when media library metadata is not available
+        
         // Check if image is in a character popup
         const popup = image.closest('.character-popup') || 
                      image.closest('.leaflet-popup-content') || 

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Metadata Integration Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .test-image:hover {
+            transform: scale(1.05);
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .image-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .character-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+        .character-popup.active {
+            display: block;
+        }
+        .popup-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .toggle-theme {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background: #007acc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        [data-theme="dark"] {
+            background: #1a1a1a;
+            color: #f0f0f0;
+        }
+        [data-theme="dark"] .test-container {
+            background: #2a2a2a;
+            color: #f0f0f0;
+        }
+        [data-theme="dark"] .test-section {
+            border-color: #444;
+            background: #333;
+        }
+        [data-theme="dark"] .character-popup {
+            background: #2a2a2a;
+            color: #f0f0f0;
+        }
+    </style>
+    
+    <!-- Include CSS files -->
+    <link rel="stylesheet" href="../public/css/components/ui/image-popup.css">
+</head>
+<body>
+    <button class="toggle-theme" onclick="toggleTheme()">Toggle Dark Theme</button>
+    
+    <div class="test-container">
+        <h1>Image Metadata Integration Test</h1>
+        <p>This page tests the enhanced image popup and hover preview systems with media library metadata integration.</p>
+        
+        <div class="test-section">
+            <h3>Test Instructions</h3>
+            <ul>
+                <li><strong>Hover:</strong> Hover over any image to see the enhanced preview with title, description, tags, and credits</li>
+                <li><strong>Click:</strong> Click any image to open the full enhanced popup with complete metadata</li>
+                <li><strong>Dark Theme:</strong> Toggle dark theme to test theme compatibility</li>
+                <li><strong>Character Context:</strong> Click "Show Character Popup" to test character-specific images</li>
+            </ul>
+        </div>
+        
+        <div class="test-section">
+            <h3>Sample Images from Media Library</h3>
+            <div class="image-grid">
+                <!-- These should load from your media library -->
+                <img class="test-image" src="https://adenai-admin.piogino.ch/media/6jugrtuo6jq5-medium.webp" alt="Theo Portrait">
+                <img class="test-image" src="https://adenai-admin.piogino.ch/media/g7b7j6jhzs5f-medium.webp" alt="Character Image">
+                <img class="test-image" src="https://adenai-admin.piogino.ch/media/characters-medium.webp" alt="Another Character">
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>Character Popup Test</h3>
+            <button onclick="showCharacterPopup()">Show Character Popup</button>
+            <p>This simulates how images appear in character popups on the map.</p>
+        </div>
+    </div>
+    
+    <!-- Character popup simulation -->
+    <div id="characterPopup" class="character-popup">
+        <div class="popup-title">Theo</div>
+        <img class="test-image" src="https://adenai-admin.piogino.ch/media/6jugrtuo6jq5-medium.webp" alt="Theo Portrait">
+        <p><strong>Status:</strong> alive</p>
+        <p><strong>Current Location:</strong> Atlantis</p>
+        <p><strong>Faction:</strong> Karthright Family</p>
+        <button onclick="hideCharacterPopup()">Close</button>
+    </div>
+    
+    <!-- Include core utilities -->
+    <script>
+        // Simple Logger for testing
+        window.Logger = {
+            debug: (...args) => console.log('[DEBUG]', ...args),
+            info: (...args) => console.log('[INFO]', ...args),
+            warn: (...args) => console.warn('[WARN]', ...args),
+            error: (...args) => console.error('[ERROR]', ...args),
+            loading: (...args) => console.log('[LOADING]', ...args)
+        };
+        
+        // Theme toggle
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            body.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+        }
+        
+        // Character popup simulation
+        function showCharacterPopup() {
+            document.getElementById('characterPopup').classList.add('active');
+        }
+        
+        function hideCharacterPopup() {
+            document.getElementById('characterPopup').classList.remove('active');
+        }
+        
+        // Close popup when clicking outside
+        document.addEventListener('click', (e) => {
+            const popup = document.getElementById('characterPopup');
+            if (popup.classList.contains('active') && !popup.contains(e.target) && !e.target.matches('button')) {
+                hideCharacterPopup();
+            }
+        });
+    </script>
+    
+    <!-- Include the enhanced image systems -->
+    <script src="../src/ui/image-popup-manager.js"></script>
+    <script src="../src/utils/image-hover-preview.js"></script>
+    
+    <script>
+        // Initialize systems
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('🚀 Initializing image metadata test...');
+            
+            // Initialize image popup manager
+            if (typeof ImagePopupManager !== 'undefined') {
+                window.imagePopupManager = new ImagePopupManager();
+                console.log('✅ Image Popup Manager initialized');
+            }
+            
+            // Initialize hover preview
+            if (typeof ImageHoverPreview !== 'undefined') {
+                window.imageHoverPreview = new ImageHoverPreview();
+                console.log('✅ Image Hover Preview initialized');
+            }
+            
+            console.log('🎉 Test page ready! Try hovering and clicking on images.');
+        });
+    </script>
+</body>
+</html>
