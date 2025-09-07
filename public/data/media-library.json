@@ -3887,7 +3887,50 @@
       },
       "fileSize": 2629349,
       "mimeType": "image/png"
+    },
+    "characters-iuh1y285rgq6": {
+      "id": "characters-iuh1y285rgq6",
+      "category": "characters",
+      "title": "Old Monk",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:15:25.439Z",
+      "sizes": {
+        "thumb": {
+          "filename": "iuh1y285rgq6-thumb.webp",
+          "url": "/media/iuh1y285rgq6-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "iuh1y285rgq6-small.webp",
+          "url": "/media/iuh1y285rgq6-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "iuh1y285rgq6-medium.webp",
+          "url": "/media/iuh1y285rgq6-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "iuh1y285rgq6-large.webp",
+          "url": "/media/iuh1y285rgq6-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "iuh1y285rgq6-original.webp",
+          "url": "/media/iuh1y285rgq6-original.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "fileSize": 1819524,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:15:02.776Z"
+  "lastUpdated": "2025-09-07T18:15:25.700Z"
 }
