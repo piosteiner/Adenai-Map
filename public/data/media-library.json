@@ -1,43 +1,4 @@
 {
-  "galleries": {
-    "valaris-map": {
-      "title": "Valaris Stadtplan",
-      "description": "Detaillierte Karte der Stadt Valaris",
-      "images": [
-        {
-          "src": "map_valaris.png",
-          "alt": "Valaris Karte",
-          "caption": "Übersicht der Stadt Valaris mit allen wichtigen Gebäuden"
-        }
-      ]
-    },
-    "basapo-wanted": {
-      "title": "Wanted Poster von Basapo",
-      "description": "Sammlung der Wanted Poster die in Basapo hängen",
-      "images": [
-        {
-          "src": "wantedposter_ally.png",
-          "alt": "Ally Wanted Poster",
-          "caption": "Ally - Wanted für verschiedene Verbrechen"
-        },
-        {
-          "src": "wantedposter_luna.png",
-          "alt": "Luna Wanted Poster",
-          "caption": "Luna - Wanted für magische Störungen"
-        },
-        {
-          "src": "wantedposter_tasbor.png",
-          "alt": "Tasbor Wanted Poster",
-          "caption": "Tasbor - Wanted für Detektivarbeiten"
-        },
-        {
-          "src": "wantedposter_abu.png",
-          "alt": "Abu Wanted Poster",
-          "caption": "Abu - Wanted als Komplize"
-        }
-      ]
-    }
-  },
   "images": {
     "characters-6jugrtuo6jq5": {
       "id": "characters-6jugrtuo6jq5",
@@ -270,5 +231,5 @@
       "lastModified": "2025-09-07T14:20:14.113Z"
     }
   },
-  "lastUpdated": "2025-09-07T14:30:04.733Z"
+  "lastUpdated": "2025-09-07T14:36:59.267Z"
 }
