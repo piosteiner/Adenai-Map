@@ -4618,50 +4618,7 @@
       },
       "fileSize": 2790611,
       "mimeType": "image/png"
-    },
-    "characters-udceubjzhpg4": {
-      "id": "characters-udceubjzhpg4",
-      "category": "characters",
-      "title": "Kalathar",
-      "caption": "",
-      "credits": "AI Generated - Midjourney",
-      "tags": [],
-      "uploadDate": "2025-09-07T19:08:33.543Z",
-      "sizes": {
-        "thumb": {
-          "filename": "udceubjzhpg4-thumb.webp",
-          "url": "/media/udceubjzhpg4-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "udceubjzhpg4-small.webp",
-          "url": "/media/udceubjzhpg4-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "udceubjzhpg4-medium.webp",
-          "url": "/media/udceubjzhpg4-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "udceubjzhpg4-large.webp",
-          "url": "/media/udceubjzhpg4-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "udceubjzhpg4-original.webp",
-          "url": "/media/udceubjzhpg4-original.webp",
-          "width": 1024,
-          "height": 1024
-        }
-      },
-      "fileSize": 1605875,
-      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T19:08:34.031Z"
+  "lastUpdated": "2025-09-07T19:09:22.276Z"
 }
