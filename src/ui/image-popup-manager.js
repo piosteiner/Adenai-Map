@@ -93,6 +93,59 @@ class ImagePopupManager {
         return null;
     }
 
+    getOptimalImageSize(mediaMetadata, context = 'popup') {
+        if (!mediaMetadata || !mediaMetadata.sizes) {
+            return null;
+        }
+
+        const sizes = mediaMetadata.sizes;
+        const screenWidth = window.innerWidth;
+        
+        switch (context) {
+            case 'thumbnail':
+                return sizes.thumbnail || sizes.small || sizes.medium;
+                
+            case 'preview':
+                if (screenWidth < 768) {
+                    return sizes.thumbnail || sizes.small || sizes.medium;
+                } else {
+                    return sizes.small || sizes.medium || sizes.thumbnail;
+                }
+                
+            case 'popup':
+                // For character popups - responsive quality
+                if (screenWidth < 768) {
+                    return sizes.small || sizes.medium || sizes.thumbnail;
+                } else if (screenWidth < 1024) {
+                    return sizes.medium || sizes.large || sizes.small;
+                } else {
+                    return sizes.large || sizes.medium || sizes.small;
+                }
+                
+            case 'fullview':
+                if (screenWidth < 1024) {
+                    return sizes.medium || sizes.large || sizes.small;
+                } else {
+                    return sizes.large || sizes.original || sizes.medium;
+                }
+                
+            case 'original':
+                return sizes.original || sizes.large || sizes.medium;
+                
+            default:
+                return sizes.medium || sizes.small || sizes.large;
+        }
+    }
+
+    preloadImage(url) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            img.src = url;
+        });
+    }
+
     createPopupContainer() {
         const overlay = document.createElement('div');
         overlay.className = 'image-popup-overlay';
@@ -239,8 +292,39 @@ class ImagePopupManager {
         const tags = this.overlay.querySelector('.image-popup-tags');
         const metadata = this.overlay.querySelector('.image-popup-metadata');
 
-        // Set image
-        image.src = imageSrc;
+        // Set image with optimal size and progressive loading
+        if (mediaMetadata) {
+            // Start with thumbnail for instant display
+            const thumbnailSize = this.getOptimalImageSize(mediaMetadata, 'thumbnail');
+            const popupSize = this.getOptimalImageSize(mediaMetadata, 'popup');
+            
+            if (thumbnailSize && popupSize && thumbnailSize.url !== popupSize.url) {
+                // Progressive loading: thumbnail first, then upgrade to popup quality
+                image.src = thumbnailSize.url;
+                image.classList.add('loading');
+                
+                // Preload the higher quality version
+                this.preloadImage(popupSize.url).then(() => {
+                    if (image && this.currentPopup) {
+                        image.src = popupSize.url;
+                        image.classList.remove('loading');
+                    }
+                }).catch(err => {
+                    console.debug('Failed to load popup image:', err);
+                    image.classList.remove('loading');
+                });
+            } else if (popupSize) {
+                // Use popup size directly
+                image.src = popupSize.url;
+            } else {
+                // Fallback to original source
+                image.src = imageSrc;
+            }
+        } else {
+            // No metadata available, use original source
+            image.src = imageSrc;
+        }
+        
         image.alt = combinedData.title || 'Image';
 
         // Set title - prefer media library title, fallback to character name

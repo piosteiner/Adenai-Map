@@ -504,6 +504,15 @@ class ImageHoverPreview {
             captionText = this.generateEnhancedCaption(image);
         }
         
+        // Get optimal image size for full view
+        let fullViewImageUrl = image.src;
+        if (mediaMetadata) {
+            const fullViewSize = this.getOptimalImageSize(mediaMetadata, 'fullview');
+            if (fullViewSize && fullViewSize.url) {
+                fullViewImageUrl = fullViewSize.url;
+            }
+        }
+        
         // Create HTML content for the new tab
         const htmlContent = `
 <!DOCTYPE html>
@@ -576,7 +585,7 @@ class ImageHoverPreview {
 </head>
 <body>
     <div class="image-container">
-        <img src="${image.src}" alt="${image.alt || ''}" />
+        <img src="${fullViewImageUrl}" alt="${image.alt || ''}" />
     </div>
     <div class="metadata">
         ${captionText ? `<h1>${captionText}</h1>` : ''}
@@ -604,12 +613,40 @@ class ImageHoverPreview {
         const credits = this.previewElement.querySelector('.preview-credits');
         const container = this.previewElement.querySelector('.preview-container');
 
-        // Set image source
-        previewImage.src = originalImage.src;
-        previewImage.alt = originalImage.alt || '';
-
         // Get metadata from media library
         const mediaMetadata = this.findImageMetadata(originalImage.src);
+        
+        // Set optimal image source with progressive loading
+        if (mediaMetadata) {
+            // Start with thumbnail for instant display
+            const thumbnailSize = this.getOptimalImageSize(mediaMetadata, 'thumbnail');
+            const previewSize = this.getOptimalImageSize(mediaMetadata, 'preview');
+            
+            if (thumbnailSize && previewSize && thumbnailSize.url !== previewSize.url) {
+                // Progressive loading: thumbnail first, then upgrade to preview quality
+                previewImage.src = thumbnailSize.url;
+                
+                // Preload the higher quality version
+                this.preloadImage(previewSize.url).then(() => {
+                    if (this.isPreviewVisible && previewImage) {
+                        previewImage.src = previewSize.url;
+                    }
+                }).catch(err => {
+                    Logger.debug('Failed to load preview image:', err);
+                });
+            } else if (previewSize) {
+                // Use preview size directly
+                previewImage.src = previewSize.url;
+            } else {
+                // Fallback to original source
+                previewImage.src = originalImage.src;
+            }
+        } else {
+            // No metadata available, use original source
+            previewImage.src = originalImage.src;
+        }
+        
+        previewImage.alt = originalImage.alt || '';
         
         // Set caption (title or main description)
         let captionText = '';
@@ -663,6 +700,61 @@ class ImageHoverPreview {
         });
 
         this.isPreviewVisible = true;
+    }
+
+    getOptimalImageSize(mediaMetadata, context = 'preview') {
+        if (!mediaMetadata || !mediaMetadata.sizes) {
+            return null;
+        }
+
+        const sizes = mediaMetadata.sizes;
+        const screenWidth = window.innerWidth;
+        
+        switch (context) {
+            case 'thumbnail':
+                // For very small previews or loading states
+                return sizes.thumbnail || sizes.small || sizes.medium;
+                
+            case 'preview':
+                // For hover previews - balance quality and speed, responsive to screen size
+                if (screenWidth < 768) {
+                    return sizes.thumbnail || sizes.small || sizes.medium;
+                } else {
+                    return sizes.small || sizes.medium || sizes.thumbnail;
+                }
+                
+            case 'popup':
+                // For character popups - responsive quality
+                if (screenWidth < 768) {
+                    return sizes.small || sizes.medium || sizes.thumbnail;
+                } else {
+                    return sizes.medium || sizes.large || sizes.small;
+                }
+                
+            case 'fullview':
+                // For new tab full viewing - high quality, responsive
+                if (screenWidth < 1024) {
+                    return sizes.medium || sizes.large || sizes.small;
+                } else {
+                    return sizes.large || sizes.original || sizes.medium;
+                }
+                
+            case 'original':
+                // When original quality is needed
+                return sizes.original || sizes.large || sizes.medium;
+                
+            default:
+                return sizes.medium || sizes.small || sizes.large;
+        }
+    }
+
+    preloadImage(url) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            img.src = url;
+        });
     }
 
     generateEnhancedCaption(image) {
