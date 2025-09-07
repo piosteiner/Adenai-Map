@@ -3629,7 +3629,50 @@
       },
       "fileSize": 2781106,
       "mimeType": "image/png"
+    },
+    "characters-9jbrquifcksq": {
+      "id": "characters-9jbrquifcksq",
+      "category": "characters",
+      "title": "Orc Sailor",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:12:53.956Z",
+      "sizes": {
+        "thumb": {
+          "filename": "9jbrquifcksq-thumb.webp",
+          "url": "/media/9jbrquifcksq-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "9jbrquifcksq-small.webp",
+          "url": "/media/9jbrquifcksq-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "9jbrquifcksq-medium.webp",
+          "url": "/media/9jbrquifcksq-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "9jbrquifcksq-large.webp",
+          "url": "/media/9jbrquifcksq-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "9jbrquifcksq-original.webp",
+          "url": "/media/9jbrquifcksq-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2986617,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:11:48.731Z"
+  "lastUpdated": "2025-09-07T18:12:54.224Z"
 }
