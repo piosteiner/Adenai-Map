@@ -531,7 +531,50 @@
       },
       "fileSize": 3355907,
       "mimeType": "image/png"
+    },
+    "characters-yt0ky5hs5rg7": {
+      "id": "characters-yt0ky5hs5rg7",
+      "category": "characters",
+      "title": "Colette Pinet",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:02:21.883Z",
+      "sizes": {
+        "thumb": {
+          "filename": "yt0ky5hs5rg7-thumb.webp",
+          "url": "/media/yt0ky5hs5rg7-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "yt0ky5hs5rg7-small.webp",
+          "url": "/media/yt0ky5hs5rg7-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "yt0ky5hs5rg7-medium.webp",
+          "url": "/media/yt0ky5hs5rg7-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "yt0ky5hs5rg7-large.webp",
+          "url": "/media/yt0ky5hs5rg7-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "yt0ky5hs5rg7-original.webp",
+          "url": "/media/yt0ky5hs5rg7-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3588524,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:01:59.927Z"
+  "lastUpdated": "2025-09-07T17:02:22.112Z"
 }
