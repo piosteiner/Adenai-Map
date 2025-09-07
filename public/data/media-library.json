@@ -2726,7 +2726,50 @@
       },
       "fileSize": 2996737,
       "mimeType": "image/png"
+    },
+    "characters-h3h3ac859i94": {
+      "id": "characters-h3h3ac859i94",
+      "category": "characters",
+      "title": "Elf",
+      "caption": "",
+      "credits": "AI Generated - GPT5: heavily based on a design from Dungeon Meshi",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:03:12.225Z",
+      "sizes": {
+        "thumb": {
+          "filename": "h3h3ac859i94-thumb.webp",
+          "url": "/media/h3h3ac859i94-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "h3h3ac859i94-small.webp",
+          "url": "/media/h3h3ac859i94-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "h3h3ac859i94-medium.webp",
+          "url": "/media/h3h3ac859i94-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "h3h3ac859i94-large.webp",
+          "url": "/media/h3h3ac859i94-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "h3h3ac859i94-original.webp",
+          "url": "/media/h3h3ac859i94-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3757558,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:02:29.250Z"
+  "lastUpdated": "2025-09-07T18:03:12.488Z"
 }
