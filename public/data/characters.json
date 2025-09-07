@@ -1394,12 +1394,9 @@
       "name": "Marcoh Ludd",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": [
-        790,
-        769
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/marcoh_close.png",
+      "image": "/media/1vbt0kf0gbs8-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1435,8 +1432,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:41:12.704Z",
-      "updatedAt": "2025-08-29T21:00:25.350Z",
-      "location": "Wesdalen"
+      "updatedAt": "2025-09-07T19:45:14.960Z"
     },
     {
       "id": "matteo_gill",
@@ -1865,5 +1861,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:45:02.508Z"
+  "lastUpdated": "2025-09-07T19:45:14.960Z"
 }
