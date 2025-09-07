@@ -395,7 +395,8 @@ class ImageHoverPreview {
             }
         });
 
-        // Handle image clicks to open in new tab
+        // Handle image clicks to open in new tab - COMMENTED OUT
+        /*
         document.addEventListener('click', (e) => {
             if (this.shouldPreviewImage(e.target)) {
                 e.preventDefault();
@@ -404,6 +405,12 @@ class ImageHoverPreview {
                 return;
             }
             // Close preview when clicking anywhere else
+            this.hidePreview();
+        });
+        */
+
+        // Close preview when clicking anywhere else
+        document.addEventListener('click', (e) => {
             this.hidePreview();
         });
 
