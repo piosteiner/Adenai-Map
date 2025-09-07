@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "309b3e41446e6dbad4ae5e0421cda447442a3c6b",
+      "action": "delete",
+      "type": "character",
+      "itemName": "Pio's Minimalist",
+      "user": "gm",
+      "timestamp": "2025-09-07T19:45:56.091Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T19:45:56.091Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Delete character: Pio's Minimalist (by gm) - Removed from campaign"
+    },
+    {
       "commitSha": "4a8d80c60ffec239eca78bac8d262003c58dfe71",
       "action": "delete",
       "type": "character",
@@ -5644,5 +5657,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-07T19:45:49.418Z"
+  "lastUpdated": "2025-09-07T19:45:56.091Z"
 }
