@@ -917,12 +917,9 @@
       "name": "König Torrack",
       "title": "König von Rena",
       "placeOfOrigin": "",
-      "coordinates": [
-        650,
-        1000
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/torrack_close.png",
+      "image": "/media/0kxwjpujrynw-small.webp",
       "status": "alive",
       "faction": "Regierung von Rena",
       "relationship": "unknown",
@@ -958,8 +955,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:21:10.180Z",
-      "updatedAt": "2025-08-29T20:56:55.403Z",
-      "location": "Rena"
+      "updatedAt": "2025-09-07T19:29:22.243Z"
     },
     {
       "id": "ceres_golwit",
@@ -1876,5 +1872,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:29:07.486Z"
+  "lastUpdated": "2025-09-07T19:29:22.243Z"
 }
