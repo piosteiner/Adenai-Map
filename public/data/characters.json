@@ -1563,12 +1563,9 @@
       "name": "Vivi Wulbren",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": [
-        1184,
-        648
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/vivi_close.png",
+      "image": "/media/0r2kk9zndrgw-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1604,8 +1601,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:45:11.123Z",
-      "updatedAt": "2025-08-29T20:57:57.755Z",
-      "location": "Glesburg"
+      "updatedAt": "2025-09-07T19:48:20.864Z"
     },
     {
       "id": "zerith_kael",
@@ -1785,5 +1781,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:48:05.514Z"
+  "lastUpdated": "2025-09-07T19:48:20.864Z"
 }
