@@ -119,7 +119,53 @@
       "alt": "Goblin Höhle",
       "caption": "Eingang zur mysteriösen Goblin Höhle",
       "category": "location"
+    },
+    "characters-1757235629299-uz2z00fvc": {
+      "id": "characters-1757235629299-uz2z00fvc",
+      "category": "characters",
+      "originalName": "theo.png",
+      "alt": "Portrait of Theo",
+      "caption": "Portrait of Theo",
+      "credits": "AI Generated - OpenAI",
+      "tags": [
+        "NPC"
+      ],
+      "uploadDate": "2025-09-07T09:00:29.300Z",
+      "sizes": {
+        "thumbnail": {
+          "filename": "1757235628678-theo_thumb.webp",
+          "url": "/media/1757235628678-theo_thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "1757235628678-theo_small.webp",
+          "url": "/media/1757235628678-theo_small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "1757235628678-theo_medium.webp",
+          "url": "/media/1757235628678-theo_medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "1757235628678-theo_large.webp",
+          "url": "/media/1757235628678-theo_large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "1757235628678-theo_original.webp",
+          "url": "/media/1757235628678-theo_original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2163771,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T08:08:39.943Z"
+  "lastUpdated": "2025-09-07T09:00:29.521Z"
 }
