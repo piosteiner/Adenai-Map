@@ -401,7 +401,50 @@
       },
       "fileSize": 3011204,
       "mimeType": "image/png"
+    },
+    "characters-u4albain4s0q": {
+      "id": "characters-u4albain4s0q",
+      "category": "characters",
+      "title": "Female Goliath Fighter",
+      "caption": "",
+      "credits": "AI",
+      "tags": [],
+      "uploadDate": "2025-09-07T16:58:48.742Z",
+      "sizes": {
+        "thumb": {
+          "filename": "u4albain4s0q-thumb.webp",
+          "url": "/media/u4albain4s0q-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "u4albain4s0q-small.webp",
+          "url": "/media/u4albain4s0q-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "u4albain4s0q-medium.webp",
+          "url": "/media/u4albain4s0q-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "u4albain4s0q-large.webp",
+          "url": "/media/u4albain4s0q-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "u4albain4s0q-original.webp",
+          "url": "/media/u4albain4s0q-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2784294,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T16:58:12.875Z"
+  "lastUpdated": "2025-09-07T16:58:48.967Z"
 }
