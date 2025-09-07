@@ -746,7 +746,50 @@
       },
       "fileSize": 2968497,
       "mimeType": "image/png"
+    },
+    "characters-7r8s2u5d5rio": {
+      "id": "characters-7r8s2u5d5rio",
+      "category": "characters",
+      "title": "Eytan Karthright",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:06:35.014Z",
+      "sizes": {
+        "thumb": {
+          "filename": "7r8s2u5d5rio-thumb.webp",
+          "url": "/media/7r8s2u5d5rio-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "7r8s2u5d5rio-small.webp",
+          "url": "/media/7r8s2u5d5rio-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "7r8s2u5d5rio-medium.webp",
+          "url": "/media/7r8s2u5d5rio-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "7r8s2u5d5rio-large.webp",
+          "url": "/media/7r8s2u5d5rio-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "7r8s2u5d5rio-original.webp",
+          "url": "/media/7r8s2u5d5rio-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2625704,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:06:09.294Z"
+  "lastUpdated": "2025-09-07T17:06:35.248Z"
 }
