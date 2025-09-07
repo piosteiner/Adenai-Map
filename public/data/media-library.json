@@ -272,7 +272,50 @@
       },
       "fileSize": 2981065,
       "mimeType": "image/png"
+    },
+    "characters-fo5klmkgtnah": {
+      "id": "characters-fo5klmkgtnah",
+      "category": "characters",
+      "title": "Druid with Antlers",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T16:57:21.973Z",
+      "sizes": {
+        "thumb": {
+          "filename": "fo5klmkgtnah-thumb.webp",
+          "url": "/media/fo5klmkgtnah-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "fo5klmkgtnah-small.webp",
+          "url": "/media/fo5klmkgtnah-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "fo5klmkgtnah-medium.webp",
+          "url": "/media/fo5klmkgtnah-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "fo5klmkgtnah-large.webp",
+          "url": "/media/fo5klmkgtnah-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "fo5klmkgtnah-original.webp",
+          "url": "/media/fo5klmkgtnah-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3216233,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T16:56:58.456Z"
+  "lastUpdated": "2025-09-07T16:57:22.183Z"
 }
