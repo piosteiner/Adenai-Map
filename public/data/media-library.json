@@ -4622,7 +4622,50 @@
       },
       "fileSize": 2790611,
       "mimeType": "image/png"
+    },
+    "characters-njof8v5mhxne": {
+      "id": "characters-njof8v5mhxne",
+      "category": "characters",
+      "title": "Zur Prallen Traube",
+      "caption": "",
+      "credits": "AI Generated - Midjourney",
+      "tags": [],
+      "uploadDate": "2025-09-07T19:43:06.014Z",
+      "sizes": {
+        "thumb": {
+          "filename": "njof8v5mhxne-thumb.webp",
+          "url": "/media/njof8v5mhxne-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "njof8v5mhxne-small.webp",
+          "url": "/media/njof8v5mhxne-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "njof8v5mhxne-medium.webp",
+          "url": "/media/njof8v5mhxne-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "njof8v5mhxne-large.webp",
+          "url": "/media/njof8v5mhxne-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "njof8v5mhxne-original.webp",
+          "url": "/media/njof8v5mhxne-original.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "fileSize": 1504277,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T19:09:22.276Z"
+  "lastUpdated": "2025-09-07T19:43:06.250Z"
 }
