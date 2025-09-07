@@ -295,7 +295,53 @@
       "fileSize": 2569153,
       "mimeType": "image/png",
       "lastModified": "2025-09-07T13:42:51.828Z"
+    },
+    "locations-xwrsm4c088bp": {
+      "id": "locations-xwrsm4c088bp",
+      "category": "locations",
+      "originalName": "710bc097-1383-4c7a-8591-750c4ed6724c.png",
+      "alt": "Erhabene See",
+      "caption": "Erhabene See",
+      "credits": "AI Generated - GPT5: based on the the High Dunes in Colorado, USA",
+      "tags": [
+        "Location"
+      ],
+      "uploadDate": "2025-09-07T14:05:17.263Z",
+      "sizes": {
+        "thumb": {
+          "filename": "xwrsm4c088bp-thumb.webp",
+          "url": "/media/xwrsm4c088bp-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "xwrsm4c088bp-small.webp",
+          "url": "/media/xwrsm4c088bp-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "xwrsm4c088bp-medium.webp",
+          "url": "/media/xwrsm4c088bp-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "xwrsm4c088bp-large.webp",
+          "url": "/media/xwrsm4c088bp-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "xwrsm4c088bp-original.webp",
+          "url": "/media/xwrsm4c088bp-original.webp",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "fileSize": 3307380,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T13:42:51.828Z"
+  "lastUpdated": "2025-09-07T14:05:17.492Z"
 }
