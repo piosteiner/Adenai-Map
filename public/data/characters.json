@@ -1136,12 +1136,9 @@
       "name": "Eriosa Süssblatt",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": [
-        776,
-        962
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/eriosa_close.png",
+      "image": "/media/rcnvmy7kkvn6-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1177,8 +1174,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:33:05.493Z",
-      "updatedAt": "2025-08-29T21:02:52.186Z",
-      "location": "Barbenfall"
+      "updatedAt": "2025-09-07T19:27:07.844Z"
     },
     {
       "id": "eytan_karthright",
@@ -1888,5 +1884,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:26:51.770Z"
+  "lastUpdated": "2025-09-07T19:27:07.844Z"
 }
