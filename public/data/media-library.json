@@ -4360,7 +4360,50 @@
       },
       "fileSize": 2242514,
       "mimeType": "image/png"
+    },
+    "characters-wvfe6kbcship": {
+      "id": "characters-wvfe6kbcship",
+      "category": "characters",
+      "title": "Avery von Rena",
+      "caption": "",
+      "credits": "AI Generated",
+      "tags": [],
+      "uploadDate": "2025-09-07T19:03:39.673Z",
+      "sizes": {
+        "thumb": {
+          "filename": "wvfe6kbcship-thumb.webp",
+          "url": "/media/wvfe6kbcship-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "wvfe6kbcship-small.webp",
+          "url": "/media/wvfe6kbcship-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "wvfe6kbcship-medium.webp",
+          "url": "/media/wvfe6kbcship-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "wvfe6kbcship-large.webp",
+          "url": "/media/wvfe6kbcship-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "wvfe6kbcship-original.webp",
+          "url": "/media/wvfe6kbcship-original.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "fileSize": 1506408,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:43:38.179Z"
+  "lastUpdated": "2025-09-07T19:03:39.947Z"
 }
