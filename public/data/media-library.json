@@ -1823,7 +1823,50 @@
       },
       "fileSize": 3670327,
       "mimeType": "image/png"
+    },
+    "characters-rphnqy163cr7": {
+      "id": "characters-rphnqy163cr7",
+      "category": "characters",
+      "title": "Human Nord",
+      "caption": "",
+      "credits": "AI Generated - GPT5: heavily based on NAME from the Witcher Series",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:51:57.904Z",
+      "sizes": {
+        "thumb": {
+          "filename": "rphnqy163cr7-thumb.webp",
+          "url": "/media/rphnqy163cr7-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "rphnqy163cr7-small.webp",
+          "url": "/media/rphnqy163cr7-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "rphnqy163cr7-medium.webp",
+          "url": "/media/rphnqy163cr7-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "rphnqy163cr7-large.webp",
+          "url": "/media/rphnqy163cr7-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "rphnqy163cr7-original.webp",
+          "url": "/media/rphnqy163cr7-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3668161,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:51:38.815Z"
+  "lastUpdated": "2025-09-07T17:51:58.121Z"
 }
