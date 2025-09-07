@@ -2468,7 +2468,50 @@
       },
       "fileSize": 3196564,
       "mimeType": "image/png"
+    },
+    "characters-n7600htdmokw": {
+      "id": "characters-n7600htdmokw",
+      "category": "characters",
+      "title": "Vorname Koreen",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:59:44.345Z",
+      "sizes": {
+        "thumb": {
+          "filename": "n7600htdmokw-thumb.webp",
+          "url": "/media/n7600htdmokw-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "n7600htdmokw-small.webp",
+          "url": "/media/n7600htdmokw-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "n7600htdmokw-medium.webp",
+          "url": "/media/n7600htdmokw-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "n7600htdmokw-large.webp",
+          "url": "/media/n7600htdmokw-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "n7600htdmokw-original.webp",
+          "url": "/media/n7600htdmokw-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 4017017,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:59:17.086Z"
+  "lastUpdated": "2025-09-07T17:59:44.605Z"
 }
