@@ -1219,7 +1219,50 @@
       },
       "fileSize": 3371370,
       "mimeType": "image/png"
+    },
+    "characters-i2wgrvgm96vy": {
+      "id": "characters-i2wgrvgm96vy",
+      "category": "characters",
+      "title": "Ruben Karthright",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:13:10.731Z",
+      "sizes": {
+        "thumb": {
+          "filename": "i2wgrvgm96vy-thumb.webp",
+          "url": "/media/i2wgrvgm96vy-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "i2wgrvgm96vy-small.webp",
+          "url": "/media/i2wgrvgm96vy-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "i2wgrvgm96vy-medium.webp",
+          "url": "/media/i2wgrvgm96vy-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "i2wgrvgm96vy-large.webp",
+          "url": "/media/i2wgrvgm96vy-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "i2wgrvgm96vy-original.webp",
+          "url": "/media/i2wgrvgm96vy-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2787889,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:12:41.750Z"
+  "lastUpdated": "2025-09-07T17:13:10.971Z"
 }
