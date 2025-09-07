@@ -2597,7 +2597,50 @@
       },
       "fileSize": 3070483,
       "mimeType": "image/png"
+    },
+    "characters-yv5kot2s97ro": {
+      "id": "characters-yv5kot2s97ro",
+      "category": "characters",
+      "title": "Slim Halfling",
+      "caption": "",
+      "credits": "AI Generated - GPT5: heavily based on a design from Dungeon Meshi",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:01:56.788Z",
+      "sizes": {
+        "thumb": {
+          "filename": "yv5kot2s97ro-thumb.webp",
+          "url": "/media/yv5kot2s97ro-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "yv5kot2s97ro-small.webp",
+          "url": "/media/yv5kot2s97ro-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "yv5kot2s97ro-medium.webp",
+          "url": "/media/yv5kot2s97ro-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "yv5kot2s97ro-large.webp",
+          "url": "/media/yv5kot2s97ro-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "yv5kot2s97ro-original.webp",
+          "url": "/media/yv5kot2s97ro-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3165542,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:01:19.014Z"
+  "lastUpdated": "2025-09-07T18:01:57.049Z"
 }
