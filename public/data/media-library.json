@@ -3371,7 +3371,50 @@
       },
       "fileSize": 2977516,
       "mimeType": "image/png"
+    },
+    "characters-pk2osr27ftiq": {
+      "id": "characters-pk2osr27ftiq",
+      "category": "characters",
+      "title": "Human Guard",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:09:16.465Z",
+      "sizes": {
+        "thumb": {
+          "filename": "pk2osr27ftiq-thumb.webp",
+          "url": "/media/pk2osr27ftiq-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "pk2osr27ftiq-small.webp",
+          "url": "/media/pk2osr27ftiq-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "pk2osr27ftiq-medium.webp",
+          "url": "/media/pk2osr27ftiq-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "pk2osr27ftiq-large.webp",
+          "url": "/media/pk2osr27ftiq-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "pk2osr27ftiq-original.webp",
+          "url": "/media/pk2osr27ftiq-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2715320,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:09:00.925Z"
+  "lastUpdated": "2025-09-07T18:09:16.754Z"
 }
