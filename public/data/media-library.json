@@ -2425,7 +2425,50 @@
       },
       "fileSize": 3746851,
       "mimeType": "image/png"
+    },
+    "characters-a062nsdf3fys": {
+      "id": "characters-a062nsdf3fys",
+      "category": "characters",
+      "title": "Human",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:59:16.843Z",
+      "sizes": {
+        "thumb": {
+          "filename": "a062nsdf3fys-thumb.webp",
+          "url": "/media/a062nsdf3fys-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "a062nsdf3fys-small.webp",
+          "url": "/media/a062nsdf3fys-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "a062nsdf3fys-medium.webp",
+          "url": "/media/a062nsdf3fys-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "a062nsdf3fys-large.webp",
+          "url": "/media/a062nsdf3fys-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "a062nsdf3fys-original.webp",
+          "url": "/media/a062nsdf3fys-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3196564,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:59:03.853Z"
+  "lastUpdated": "2025-09-07T17:59:17.086Z"
 }
