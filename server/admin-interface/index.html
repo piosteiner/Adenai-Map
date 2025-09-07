@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="css/modules/journeys/journey.css">
     <link rel="stylesheet" href="css/modules/journeys/summary.css">
     <link rel="stylesheet" href="css/modules/characters/movement.css">
+    <link rel="stylesheet" href="css/modules/media/media.css">
     
     <!-- Core integration and overrides -->
     <link rel="stylesheet" href="css/core/overrides.css">
@@ -74,6 +75,7 @@
         <nav class="admin-nav">
             <button class="tab-btn" data-tab="locations">📍 Locations</button>
             <button class="tab-btn" data-tab="characters">👥 Characters</button>
+            <button class="tab-btn" data-tab="media">🖼️ Media</button>
             <button class="tab-btn" data-tab="journeys">🗺️ Journeys</button>
             <button class="tab-btn" data-tab="overview">📊 Overview</button>
             <button class="tab-btn" data-tab="backup">💾 Backup</button>
@@ -125,6 +127,53 @@
                 
                 <div id="characters-list" class="content-list">
                     <div class="loading">Loading characters... 🔄</div>
+                </div>
+            </div>
+
+            <!-- Media Tab -->
+            <div id="media-tab" class="tab-content">
+                <div class="content-header">
+                    <h2>🖼️ Media Library</h2>
+                    <div class="actions">
+                        <button id="upload-media-btn" class="btn-primary admin-action">📤 Upload Images</button>
+                        <div class="filter-controls">
+                            <select id="media-category-filter" class="filter-select">
+                                <option value="">All Categories</option>
+                                <option value="characters">Characters</option>
+                                <option value="locations">Locations</option>
+                                <option value="maps">Maps</option>
+                                <option value="items">Items</option>
+                                <option value="creatures">Creatures</option>
+                                <option value="sessions">Sessions</option>
+                                <option value="general">General</option>
+                            </select>
+                            <input type="text" id="media-search" placeholder="Search media..." class="search-input">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Upload Progress -->
+                <div id="upload-progress" class="upload-progress" style="display: none;">
+                    <div class="progress-header">
+                        <h3>📤 Uploading Images</h3>
+                        <span id="upload-count">0 / 0</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <div id="upload-status" class="upload-status">Preparing upload...</div>
+                </div>
+                
+                <!-- Media Grid -->
+                <div id="media-grid" class="media-grid">
+                    <div class="loading">Loading media library... 🔄</div>
+                </div>
+                
+                <!-- Pagination -->
+                <div id="media-pagination" class="pagination" style="display: none;">
+                    <button id="prev-page" class="btn-secondary">← Previous</button>
+                    <span id="page-info">Page 1 of 1</span>
+                    <button id="next-page" class="btn-secondary">Next →</button>
                 </div>
             </div>
 
@@ -562,6 +611,60 @@
         </div>
     </div>
 
+    <!-- Media Upload Modal -->
+    <div id="media-upload-modal" class="modal">
+        <div class="modal-content media-upload-content">
+            <div class="modal-header">
+                <h3>📤 Upload Campaign Images</h3>
+                <span class="close-media-btn">&times;</span>
+            </div>
+            
+            <form id="media-upload-form" class="media-upload-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>📂 Category</label>
+                    <select id="upload-category" name="category" required>
+                        <option value="characters">👥 Characters</option>
+                        <option value="locations">📍 Locations</option>
+                        <option value="maps">🗺️ Maps</option>
+                        <option value="items">⚔️ Items</option>
+                        <option value="creatures">🐲 Creatures</option>
+                        <option value="sessions">🎲 Sessions</option>
+                        <option value="general">📁 General</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>📝 Description (Optional)</label>
+                    <input type="text" id="upload-description" name="description" placeholder="Brief description for the images">
+                </div>
+                
+                <div class="form-group">
+                    <label>🏷️ Tags (Optional)</label>
+                    <input type="text" id="upload-tags" name="tags" placeholder="Comma-separated tags (e.g. npc, important, session-12)">
+                </div>
+                
+                <div class="form-group">
+                    <label>🖼️ Select Images</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="media-files" name="images" multiple accept="image/*" required>
+                        <div class="file-input-display">
+                            <div class="file-input-placeholder">
+                                <span class="file-icon">📁</span>
+                                <span class="file-text">Click to select images or drag & drop</span>
+                            </div>
+                            <div id="file-preview" class="file-preview" style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">📤 Upload Images</button>
+                    <button type="button" class="btn-secondary" onclick="media.closeUploadModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Toast notifications -->
     <div id="toast-container"></div>
 
@@ -582,6 +685,8 @@
     <script src="js/modules/characters/operations.js"></script>
     <script src="js/modules/characters/movements.js"></script>
     <script src="js/modules/characters/ui.js"></script>
+    <script src="js/modules/media/operations.js"></script>
+    <script src="js/modules/media/ui.js"></script>
     <script src="js/modules/journeys/operations.js"></script>
     <script src="js/modules/journeys/map.js"></script>
     <script src="js/modules/journeys/segments.js"></script>
@@ -590,6 +695,7 @@
     <!-- Module coordinators -->
     <script src="js/modules/locations/index.js"></script>
     <script src="js/modules/characters/index.js"></script>
+    <script src="js/modules/media/index.js"></script>
     <script src="js/modules/journeys/index.js"></script>
     <script src="js/modules/changelog/index.js"></script>
 

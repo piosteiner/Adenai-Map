@@ -183,6 +183,11 @@ class AdminUI {
             setTimeout(() => this.initializeJourneyTab(), 200);
         }
 
+        // Special handling for media tab
+        if (tabName === 'media') {
+            setTimeout(() => this.initializeMediaTab(), 200);
+        }
+
         // Notify admin core of tab change (for stats updates, etc.)
         if (window.admin && typeof window.admin.onTabChanged === 'function') {
             window.admin.onTabChanged(tabName);
@@ -212,6 +217,25 @@ class AdminUI {
         }
     }
 
+    // Media Tab Integration
+    initializeMediaTab() {
+        console.log('🖼️ Initializing media tab from AdminUI');
+        
+        try {
+            // Check if Media module exists
+            if (window.media) {
+                console.log('✅ Found existing Media module, activating...');
+                window.media.onTabActivated();
+            } else {
+                console.error('❌ Media module not found - check if js/modules/media/index.js is loaded');
+                this.showMediaError('Media module not loaded. Please refresh the page.');
+            }
+        } catch (error) {
+            console.error('❌ Error initializing media tab:', error);
+            this.showMediaError(`Failed to initialize media: ${error.message}`);
+        }
+    }
+
     // Show journey-specific error
     showJourneyError(message) {
         const journeysList = document.getElementById('journeys-list');
@@ -221,6 +245,23 @@ class AdminUI {
                     <p style="color: #dc3545; font-weight: bold;">❌ Journey Loading Error</p>
                     <p style="color: #666; margin: 10px 0;">${message}</p>
                     <button onclick="adminUI.initializeJourneyTab()" class="btn-primary" style="margin-top: 15px;">
+                        🔄 Retry
+                    </button>
+                </div>
+            `;
+        }
+        this.showToast(message, 'error');
+    }
+
+    // Show media-specific error
+    showMediaError(message) {
+        const mediaGrid = document.getElementById('media-grid');
+        if (mediaGrid) {
+            mediaGrid.innerHTML = `
+                <div class="error-state" style="text-align: center; padding: 40px 20px; grid-column: 1 / -1;">
+                    <p style="color: #dc3545; font-weight: bold;">❌ Media Loading Error</p>
+                    <p style="color: #666; margin: 10px 0;">${message}</p>
+                    <button onclick="adminUI.initializeMediaTab()" class="btn-primary" style="margin-top: 15px;">
                         🔄 Retry
                     </button>
                 </div>

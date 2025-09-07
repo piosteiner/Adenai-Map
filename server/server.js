@@ -11,6 +11,7 @@ const authRoutes = require('./routes/auth');
 const { router: locationsRouter, initGitHub: initLocationsGitHub } = require('./routes/locations');
 const { router: charactersRouter, initGitHub: initCharactersGitHub } = require('./routes/characters');
 const { router: characterPathsRouter, initGitHub: initCharacterPathsGitHub } = require('./routes/character-paths');
+const { router: mediaRouter, initGitHub: initMediaGitHub } = require('./routes/media');
 const changelogRoutes = require('./routes/changelog');
 const journeyRoutes = require('./routes/journey');
 const dynamicsRoutes = require('./routes/dynamics');
@@ -39,6 +40,7 @@ console.log(`Setting up admin for: ${REPO_OWNER}/${REPO_NAME}`);
 initLocationsGitHub(octokit, REPO_OWNER, REPO_NAME);
 initCharactersGitHub(octokit, REPO_OWNER, REPO_NAME);
 initCharacterPathsGitHub(octokit, REPO_OWNER, REPO_NAME);
+initMediaGitHub(octokit, REPO_OWNER, REPO_NAME);
 
 // Middleware
 app.use(cors());
@@ -57,6 +59,7 @@ app.use(session({
 
 app.use(express.static('admin-interface'));
 app.use('/uploads', express.static('uploads'));
+app.use('/media', express.static('uploads/optimized')); // Serve optimized media files
 
 // File upload configuration
 const storage = multer.diskStorage({
@@ -85,6 +88,7 @@ app.use('/api', authRoutes);
 app.use('/api/locations', locationsRouter);
 app.use('/api/characters', charactersRouter);
 app.use('/api/character-paths', authenticateJourneyAPI, characterPathsRouter);
+app.use('/api/media', mediaRouter);
 app.use('/api/changelog', changelogRoutes);
 app.use('/api/journey', authenticateJourneyAPI, journeyRoutes);
 app.use('/api/dynamics', authenticateDynamicsAPI, dynamicsRoutes);
