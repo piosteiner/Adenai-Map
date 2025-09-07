@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Direct Metadata Test</title>
+</head>
+<body>
+    <h1>Direct Metadata Test</h1>
+    <p>Testing media library loading...</p>
+    <div id="results"></div>
+
+    <script>
+        async function testMediaLibrary() {
+            const resultsDiv = document.getElementById('results');
+            
+            try {
+                console.log('🧪 Testing direct media library access...');
+                const response = await fetch('/public/data/media-library.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('✅ Media library loaded successfully');
+                console.log('📊 Total images:', Object.keys(data.images).length);
+                
+                // Test specific image lookup
+                const testUrl = 'https://adenai-admin.piogino.ch/media/6jugrtuo6jq5-medium.webp';
+                console.log('🔍 Testing URL:', testUrl);
+                
+                // Extract filename and base ID
+                const filename = testUrl.split('/').pop().split('?')[0];
+                const baseId = filename.replace(/-(thumb|small|medium|large|original)\.(webp|jpg|jpeg|png)$/, '');
+                
+                console.log('📄 Filename:', filename);
+                console.log('🆔 Base ID:', baseId);
+                
+                // Look for matching image
+                let found = null;
+                for (const [id, imageData] of Object.entries(data.images)) {
+                    console.log('🔍 Checking ID:', id);
+                    
+                    // Check exact URL matches
+                    if (imageData.sizes) {
+                        for (const [sizeKey, sizeData] of Object.entries(imageData.sizes)) {
+                            if (sizeData.url === testUrl) {
+                                console.log('✅ Found exact URL match in size:', sizeKey);
+                                found = imageData;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // Check ID contains base ID
+                    if (!found && id.includes(baseId)) {
+                        console.log('✅ Found ID match for base ID:', baseId, 'in:', id);
+                        found = imageData;
+                        break;
+                    }
+                }
+                
+                if (found) {
+                    console.log('🎉 Found metadata:', {
+                        title: found.title,
+                        caption: found.caption,
+                        credits: found.credits,
+                        tags: found.tags
+                    });
+                    
+                    resultsDiv.innerHTML = `
+                        <h2>✅ Success!</h2>
+                        <p><strong>Title:</strong> ${found.title}</p>
+                        <p><strong>Caption:</strong> ${found.caption}</p>
+                        <p><strong>Credits:</strong> ${found.credits}</p>
+                        <p><strong>Tags:</strong> ${found.tags ? found.tags.join(', ') : 'None'}</p>
+                    `;
+                } else {
+                    console.log('❌ No metadata found for test URL');
+                    resultsDiv.innerHTML = '<h2>❌ No metadata found</h2>';
+                }
+                
+            } catch (error) {
+                console.error('❌ Error testing media library:', error);
+                resultsDiv.innerHTML = `<h2>❌ Error: ${error.message}</h2>`;
+            }
+        }
+        
+        // Run test when page loads
+        document.addEventListener('DOMContentLoaded', testMediaLibrary);
+    </script>
+</body>
+</html>

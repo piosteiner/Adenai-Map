@@ -7,11 +7,14 @@ class ImageHoverPreview {
         this.isPreviewVisible = false;
         this.hoverTimeout = null;
         this.mediaLibrary = null;
+        this.isInitialized = false;
         this.init();
     }
 
     async init() {
-        // Load media library
+        if (this.isInitialized) return;
+        
+        // Load media library first
         await this.loadMediaLibrary();
         
         this.createPreviewElement();
@@ -25,35 +28,74 @@ class ImageHoverPreview {
             });
         }
         
+        this.isInitialized = true;
         Logger.loading('🖼️ Image hover preview system loaded');
     }
 
     async loadMediaLibrary() {
         try {
-            const response = await fetch('/data/media-library.json');
+            console.log('📚 Loading media library for hover preview...');
+            const response = await fetch('/public/data/media-library.json');
             if (response.ok) {
                 const data = await response.json();
                 this.mediaLibrary = data;
-                Logger.debug('📚 Media library loaded for hover preview:', Object.keys(data.images).length, 'images');
+                console.log('✅ Media library loaded for hover preview:', Object.keys(data.images || {}).length, 'images');
+                
+                // Debug: Log first few entries
+                const firstKeys = Object.keys(data.images || {}).slice(0, 3);
+                firstKeys.forEach(key => {
+                    const img = data.images[key];
+                    console.log(`📋 Sample image "${key}":`, {
+                        title: img.title,
+                        caption: img.caption,
+                        credits: img.credits,
+                        tags: img.tags
+                    });
+                });
             } else {
-                Logger.warn('⚠️ Could not load media library for hover preview');
+                console.warn('⚠️ Could not load media library for hover preview - Response:', response.status);
             }
         } catch (error) {
-            Logger.warn('⚠️ Error loading media library for hover preview:', error);
+            console.warn('⚠️ Error loading media library for hover preview:', error);
         }
     }
 
     findImageMetadata(imageSrc) {
+        console.log('🔍 Looking for metadata for image:', imageSrc);
+        
         if (!this.mediaLibrary || !this.mediaLibrary.images) {
+            console.warn('📚 No media library available');
             return null;
         }
 
-        // Try to find the image in the media library by URL
+        // Extract filename from URL
+        const filename = imageSrc.split('/').pop().split('?')[0];
+        console.log('📄 Extracted filename:', filename);
+
+        // Try to find the image in the media library by URL first
         for (const [id, imageData] of Object.entries(this.mediaLibrary.images)) {
             if (imageData.sizes) {
                 // Check all size variants
                 for (const [sizeKey, sizeData] of Object.entries(imageData.sizes)) {
-                    if (sizeData.url === imageSrc || imageSrc.includes(sizeData.filename)) {
+                    console.log(`🔍 Comparing "${imageSrc}" with "${sizeData.url}"`);
+                    console.log(`📄 Also checking if src includes filename "${sizeData.filename}"`);
+                    
+                    if (sizeData.url === imageSrc) {
+                        console.log('✅ Found EXACT URL match for:', id, 'in size:', sizeKey);
+                        return {
+                            id: id,
+                            title: imageData.title || imageData.caption || 'Untitled',
+                            caption: imageData.caption || '',
+                            credits: imageData.credits || '',
+                            tags: imageData.tags || [],
+                            uploadDate: imageData.uploadDate,
+                            category: imageData.category,
+                            ...imageData
+                        };
+                    }
+                    
+                    if (imageSrc.includes(sizeData.filename)) {
+                        console.log('✅ Found filename match for:', id, 'in size:', sizeKey);
                         return {
                             id: id,
                             title: imageData.title || imageData.caption || 'Untitled',
@@ -69,10 +111,17 @@ class ImageHoverPreview {
             }
         }
 
-        // If no exact match, try partial matching
-        const filename = imageSrc.split('/').pop().split('?')[0];
+        // If no exact match, try filename matching with ID extraction
+        console.log('🔍 No exact match, trying filename patterns...');
+        
+        // Extract the base ID from filename (e.g., "6jugrtuo6jq5" from "6jugrtuo6jq5-medium.webp")
+        const baseId = filename.replace(/-(thumb|small|medium|large|original)\.(webp|jpg|jpeg|png)$/, '');
+        console.log('🆔 Extracted base ID:', baseId);
+        
         for (const [id, imageData] of Object.entries(this.mediaLibrary.images)) {
-            if (filename.includes(id) || id.includes(filename.replace(/\.(webp|jpg|jpeg|png)$/, ''))) {
+            // Check if the ID contains the base ID
+            if (id.includes(baseId) || baseId === id) {
+                console.log('✅ Found ID match for:', id);
                 return {
                     id: id,
                     title: imageData.title || imageData.caption || 'Untitled',
@@ -86,6 +135,7 @@ class ImageHoverPreview {
             }
         }
 
+        console.warn('❌ No metadata found for image:', imageSrc, 'with filename:', filename, 'and base ID:', baseId);
         return null;
     }
 
@@ -409,6 +459,12 @@ class ImageHoverPreview {
     }
 
     handleImageHover(image, event) {
+        // Don't show preview if system isn't fully initialized
+        if (!this.isInitialized || !this.mediaLibrary) {
+            console.log('⏳ System not ready for hover preview, waiting...');
+            return;
+        }
+
         // Clear any existing timeout
         if (this.hoverTimeout) {
             clearTimeout(this.hoverTimeout);
@@ -469,6 +525,10 @@ class ImageHoverPreview {
     showPreview(originalImage) {
         if (this.isPreviewVisible) return;
 
+        console.log('🖼️ showPreview called for image:', originalImage.src);
+        console.log('📚 Media library status:', this.mediaLibrary ? 'loaded' : 'not loaded');
+        console.log('🔧 System initialized:', this.isInitialized);
+
         const previewImage = this.previewElement.querySelector('.preview-image');
         const caption = this.previewElement.querySelector('.preview-caption');
         const tags = this.previewElement.querySelector('.preview-tags');
@@ -481,10 +541,12 @@ class ImageHoverPreview {
 
         // Get metadata from media library
         const mediaMetadata = this.findImageMetadata(originalImage.src);
+        console.log('📋 Media metadata found:', mediaMetadata);
         
         // Set caption (title or main description)
         let captionText = '';
         if (mediaMetadata) {
+            console.log('✅ Using media metadata for caption');
             // Use title as the main caption, but add caption if it's different
             if (mediaMetadata.title) {
                 captionText = mediaMetadata.title;
@@ -500,9 +562,12 @@ class ImageHoverPreview {
         }
         
         if (!captionText) {
+            console.log('⚠️ No media metadata, falling back to character extraction');
             // Fallback to character extraction
             captionText = this.generateEnhancedCaption(originalImage);
         }
+        
+        console.log('📝 Final caption text:', captionText);
         
         if (captionText) {
             caption.textContent = captionText;
@@ -514,6 +579,7 @@ class ImageHoverPreview {
         // Set tags
         tags.innerHTML = '';
         if (mediaMetadata && mediaMetadata.tags && mediaMetadata.tags.length > 0) {
+            console.log('🏷️ Adding tags:', mediaMetadata.tags);
             mediaMetadata.tags.forEach(tag => {
                 const tagElement = document.createElement('span');
                 tagElement.className = 'preview-tag';
@@ -522,18 +588,27 @@ class ImageHoverPreview {
             });
             tags.style.display = 'flex';
         } else {
+            console.log('📝 No tags to display');
             tags.style.display = 'none';
         }
 
         // Set credits - ALWAYS show if available
         if (mediaMetadata && mediaMetadata.credits) {
+            console.log('💳 Using media credits:', mediaMetadata.credits);
             credits.textContent = mediaMetadata.credits;
             credits.style.display = 'block';
         } else {
+            console.log('💳 Using fallback credits');
             // Fallback credits for images without metadata
             credits.textContent = 'Source: Adenai Campaign';
             credits.style.display = 'block';
         }
+
+        // Debug: Check if elements are properly created
+        console.log('🔍 Debug element check:');
+        console.log('- Caption element:', caption, 'display:', caption?.style.display, 'text:', caption?.textContent);
+        console.log('- Tags element:', tags, 'display:', tags?.style.display, 'children:', tags?.children.length);
+        console.log('- Credits element:', credits, 'display:', credits?.style.display, 'text:', credits?.textContent);
 
         // Show preview
         this.previewElement.style.display = 'flex';
@@ -544,12 +619,7 @@ class ImageHoverPreview {
         });
 
         this.isPreviewVisible = true;
-        Logger.debug('🖼️ Enhanced image preview shown:', {
-            title: captionText,
-            tags: mediaMetadata?.tags?.length || 0,
-            credits: mediaMetadata?.credits || 'default',
-            hasMetadata: !!mediaMetadata
-        });
+        console.log('🎯 Preview shown with metadata:', !!mediaMetadata);
     }
 
     generateEnhancedCaption(image) {

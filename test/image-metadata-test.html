@@ -191,12 +191,29 @@
             if (typeof ImagePopupManager !== 'undefined') {
                 window.imagePopupManager = new ImagePopupManager();
                 console.log('✅ Image Popup Manager initialized');
+                
+                // Wait a bit for async initialization
+                setTimeout(() => {
+                    console.log('📊 Popup Manager Media Library:', window.imagePopupManager.mediaLibrary ? 'Loaded' : 'Not loaded');
+                }, 2000);
             }
             
             // Initialize hover preview
             if (typeof ImageHoverPreview !== 'undefined') {
                 window.imageHoverPreview = new ImageHoverPreview();
                 console.log('✅ Image Hover Preview initialized');
+                
+                // Wait a bit for async initialization
+                setTimeout(() => {
+                    console.log('📊 Hover Preview Media Library:', window.imageHoverPreview.mediaLibrary ? 'Loaded' : 'Not loaded');
+                    
+                    // Test metadata lookup
+                    if (window.imageHoverPreview.mediaLibrary) {
+                        const testUrl = 'https://adenai-admin.piogino.ch/media/6jugrtuo6jq5-medium.webp';
+                        const metadata = window.imageHoverPreview.findImageMetadata(testUrl);
+                        console.log('🧪 Test metadata lookup for Theo:', metadata);
+                    }
+                }, 2000);
             }
             
             // Add test click handlers to verify behavior
@@ -207,8 +224,54 @@
                 }
             });
             
+            // Test direct media library loading
+            setTimeout(async () => {
+                console.log('🧪 Testing direct media library loading...');
+                try {
+                    const response = await fetch('/public/data/media-library.json');
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log('✅ Direct media library test successful:', Object.keys(data.images).length, 'images');
+                        
+                        // Test specific image
+                        const theo = data.images['characters-6jugrtuo6jq5'];
+                        if (theo) {
+                            console.log('🎭 Theo metadata found:', {
+                                title: theo.title,
+                                caption: theo.caption,
+                                credits: theo.credits,
+                                tags: theo.tags
+                            });
+                        }
+                    } else {
+                        console.error('❌ Direct media library test failed:', response.status);
+                    }
+                } catch (error) {
+                    console.error('❌ Direct media library test error:', error);
+                }
+            }, 1000);
+            
             console.log('🎉 Test page ready! Try hovering and clicking on images.');
             console.log('📝 Check the console for debug information about metadata loading.');
+            
+            // Add global test function
+            window.testMetadata = function(imageUrl) {
+                console.log('🧪 Testing metadata lookup for:', imageUrl);
+                if (window.imageHoverPreview && window.imageHoverPreview.findImageMetadata) {
+                    const result = window.imageHoverPreview.findImageMetadata(imageUrl);
+                    console.log('📋 Result:', result);
+                    return result;
+                } else {
+                    console.log('❌ Hover preview system not available');
+                    return null;
+                }
+            };
+            
+            // Add test for the Theo image
+            setTimeout(() => {
+                console.log('🧪 Running automatic test for Theo image...');
+                window.testMetadata('https://adenai-admin.piogino.ch/media/6jugrtuo6jq5-medium.webp');
+            }, 3000);
         });
     </script>
 </body>

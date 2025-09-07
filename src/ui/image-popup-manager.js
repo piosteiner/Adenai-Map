@@ -12,7 +12,7 @@ class ImagePopupManager {
     async init() {
         if (this.isInitialized) return;
         
-        // Load media library
+        // Load media library first
         await this.loadMediaLibrary();
         
         // Create popup container
@@ -27,16 +27,17 @@ class ImagePopupManager {
 
     async loadMediaLibrary() {
         try {
-            const response = await fetch('/data/media-library.json');
+            console.log('📚 Loading media library for popup manager...');
+            const response = await fetch('/public/data/media-library.json');
             if (response.ok) {
                 const data = await response.json();
                 this.mediaLibrary = data;
-                console.log('📚 Media library loaded:', Object.keys(data.images).length, 'images');
+                console.log('✅ Media library loaded for popup manager:', Object.keys(data.images || {}).length, 'images');
             } else {
-                console.warn('⚠️ Could not load media library');
+                console.warn('⚠️ Could not load media library for popup manager - Response:', response.status);
             }
         } catch (error) {
-            console.warn('⚠️ Error loading media library:', error);
+            console.warn('⚠️ Error loading media library for popup manager:', error);
         }
     }
 
@@ -45,7 +46,10 @@ class ImagePopupManager {
             return null;
         }
 
-        // Try to find the image in the media library by URL
+        // Extract filename from URL
+        const filename = imageSrc.split('/').pop().split('?')[0];
+
+        // Try to find the image in the media library by URL first
         for (const [id, imageData] of Object.entries(this.mediaLibrary.images)) {
             if (imageData.sizes) {
                 // Check all size variants
@@ -66,10 +70,13 @@ class ImagePopupManager {
             }
         }
 
-        // If no exact match, try partial matching
-        const filename = imageSrc.split('/').pop().split('?')[0];
+        // If no exact match, try filename matching with ID extraction
+        // Extract the base ID from filename (e.g., "6jugrtuo6jq5" from "6jugrtuo6jq5-medium.webp")
+        const baseId = filename.replace(/-(thumb|small|medium|large|original)\.(webp|jpg|jpeg|png)$/, '');
+        
         for (const [id, imageData] of Object.entries(this.mediaLibrary.images)) {
-            if (filename.includes(id) || id.includes(filename.replace(/\.(webp|jpg|jpeg|png)$/, ''))) {
+            // Check if the ID contains the base ID
+            if (id.includes(baseId) || baseId === id) {
                 return {
                     id: id,
                     title: imageData.title || imageData.caption || 'Untitled',
