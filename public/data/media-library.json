@@ -488,7 +488,50 @@
       },
       "fileSize": 2673915,
       "mimeType": "image/png"
+    },
+    "characters-h3e5xschetg5": {
+      "id": "characters-h3e5xschetg5",
+      "category": "characters",
+      "title": "Ceres Golwit",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:01:59.699Z",
+      "sizes": {
+        "thumb": {
+          "filename": "h3e5xschetg5-thumb.webp",
+          "url": "/media/h3e5xschetg5-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "h3e5xschetg5-small.webp",
+          "url": "/media/h3e5xschetg5-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "h3e5xschetg5-medium.webp",
+          "url": "/media/h3e5xschetg5-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "h3e5xschetg5-large.webp",
+          "url": "/media/h3e5xschetg5-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "h3e5xschetg5-original.webp",
+          "url": "/media/h3e5xschetg5-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3355907,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T16:59:59.259Z"
+  "lastUpdated": "2025-09-07T17:01:59.927Z"
 }
