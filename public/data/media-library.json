@@ -114,12 +114,6 @@
       "caption": "Allgemeine Ansicht von Atlantis",
       "category": "location"
     },
-    "goblin-hole": {
-      "src": "goblin_hole.png",
-      "alt": "Goblin Höhle",
-      "caption": "Eingang zur mysteriösen Goblin Höhle",
-      "category": "location"
-    },
     "characters-1757235629299-uz2z00fvc": {
       "id": "characters-1757235629299-uz2z00fvc",
       "category": "characters",
@@ -259,5 +253,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T12:40:07.197Z"
+  "lastUpdated": "2025-09-07T12:56:18.113Z"
 }
