@@ -1090,7 +1090,50 @@
       },
       "fileSize": 3333590,
       "mimeType": "image/png"
+    },
+    "characters-cbd04p15kbdr": {
+      "id": "characters-cbd04p15kbdr",
+      "category": "characters",
+      "title": "Ly'iss May",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:11:53.041Z",
+      "sizes": {
+        "thumb": {
+          "filename": "cbd04p15kbdr-thumb.webp",
+          "url": "/media/cbd04p15kbdr-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "cbd04p15kbdr-small.webp",
+          "url": "/media/cbd04p15kbdr-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "cbd04p15kbdr-medium.webp",
+          "url": "/media/cbd04p15kbdr-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "cbd04p15kbdr-large.webp",
+          "url": "/media/cbd04p15kbdr-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "cbd04p15kbdr-original.webp",
+          "url": "/media/cbd04p15kbdr-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3340289,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:11:32.536Z"
+  "lastUpdated": "2025-09-07T17:11:53.258Z"
 }
