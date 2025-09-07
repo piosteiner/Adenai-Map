@@ -1952,7 +1952,50 @@
       },
       "fileSize": 3221553,
       "mimeType": "image/png"
+    },
+    "characters-n1dka1znlzki": {
+      "id": "characters-n1dka1znlzki",
+      "category": "characters",
+      "title": "Old Dandy Human",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:53:35.614Z",
+      "sizes": {
+        "thumb": {
+          "filename": "n1dka1znlzki-thumb.webp",
+          "url": "/media/n1dka1znlzki-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "n1dka1znlzki-small.webp",
+          "url": "/media/n1dka1znlzki-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "n1dka1znlzki-medium.webp",
+          "url": "/media/n1dka1znlzki-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "n1dka1znlzki-large.webp",
+          "url": "/media/n1dka1znlzki-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "n1dka1znlzki-original.webp",
+          "url": "/media/n1dka1znlzki-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3161763,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:53:13.503Z"
+  "lastUpdated": "2025-09-07T17:53:35.838Z"
 }
