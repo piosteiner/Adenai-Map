@@ -1802,26 +1802,26 @@
         556
       ],
       "description": "Eine Bekannte von Luna.",
-      "image": "https://www.dndbeyond.com/avatars/thumbnails/40650/175/1000/1000/638463690085746933.png",
+      "image": "/media/hjjumgifec7g-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "ally",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2025-08-30T21:37:03.126Z",
-      "updatedAt": "2025-08-30T21:37:03.126Z",
       "currentLocation": {
         "location": "Akónetchie",
-        "date": "2025-08-30",
-        "dateStart": "2025-08-30",
+        "date": "2025-09-07",
+        "dateStart": "2025-09-07",
         "dateEnd": null,
         "coordinates": [
           1869,
           556
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2025-08-30T21:37:03.126Z",
+      "updatedAt": "2025-09-07T19:29:37.368Z"
     },
     {
       "id": "mae",
@@ -1872,5 +1872,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:29:22.243Z"
+  "lastUpdated": "2025-09-07T19:29:37.368Z"
 }
