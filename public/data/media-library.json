@@ -3543,7 +3543,50 @@
       },
       "fileSize": 2985293,
       "mimeType": "image/png"
+    },
+    "characters-bzhql341tn9c": {
+      "id": "characters-bzhql341tn9c",
+      "category": "characters",
+      "title": "Halfling Orchard Worker",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:10:42.260Z",
+      "sizes": {
+        "thumb": {
+          "filename": "bzhql341tn9c-thumb.webp",
+          "url": "/media/bzhql341tn9c-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "bzhql341tn9c-small.webp",
+          "url": "/media/bzhql341tn9c-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "bzhql341tn9c-medium.webp",
+          "url": "/media/bzhql341tn9c-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "bzhql341tn9c-large.webp",
+          "url": "/media/bzhql341tn9c-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "bzhql341tn9c-original.webp",
+          "url": "/media/bzhql341tn9c-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3116122,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:10:23.257Z"
+  "lastUpdated": "2025-09-07T18:10:42.526Z"
 }
