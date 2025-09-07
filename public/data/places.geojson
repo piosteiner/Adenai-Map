@@ -243,7 +243,7 @@
         "name": "Basapo",
         "description": "Ein grosser Handelsposten im Süden von Valaris.",
         "contentUrl": null,
-        "image": "https://adenai.piogino.ch/public/images/basapo_bottom.jpg",
+        "image": "/media/01ln4jgoxpje-small.webp",
         "region": "upeto",
         "type": "city",
         "visited": true
@@ -262,7 +262,7 @@
         "name": "Akónetchie",
         "description": "Auch nur 'Ako' genannt. Alte heilige Städte im Dschungel von Upeto. Hier befindet sich der M'pako, die Sonnenwurzel. Wie in Basapo wird hier primär Talona als Göttin verehrt. Ein Zugang zum Underdark befindet sich hier.",
         "contentUrl": null,
-        "image": "https://adenai.piogino.ch/public/images/akonetchie.jpg",
+        "image": "/media/yo2c0exwe5z6-small.webp",
         "region": "upeto",
         "type": "town",
         "visited": true
@@ -993,7 +993,7 @@
         "name": "Erhabene See",
         "description": "Eine Hochebene mit riesigen Sand Dünen aus dem zerribenen Gestein des süd-östlichen Ausläufers des Sonnenspitzen Gebirges.",
         "contentUrl": null,
-        "image": "https://adenai.piogino.ch/public/images/erhabene_see.png",
+        "image": "/media/xwrsm4c088bp-small.webp",
         "region": "tua_danar",
         "type": "environment",
         "visited": false

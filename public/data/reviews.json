@@ -2,6 +2,45 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "9a43bc809cf626ffde040d4f9abf84e796e27b46",
+      "action": "update",
+      "type": "location",
+      "itemName": "Erhabene See",
+      "user": "gm",
+      "timestamp": "2025-09-07T19:06:39.158Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T19:06:39.158Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Erhabene See (by gm) - Updated location details"
+    },
+    {
+      "commitSha": "ee74448042578fc0f375421302ea3e45ae34921d",
+      "action": "update",
+      "type": "location",
+      "itemName": "Basapo",
+      "user": "gm",
+      "timestamp": "2025-09-07T19:06:15.106Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T19:06:15.106Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Basapo (by gm) - Updated location details"
+    },
+    {
+      "commitSha": "f5169e7906f5d071326cc916fc63c3269d224154",
+      "action": "update",
+      "type": "location",
+      "itemName": "Akónetchie",
+      "user": "gm",
+      "timestamp": "2025-09-07T19:05:38.394Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T19:05:38.394Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Akónetchie (by gm) - Updated location details"
+    },
+    {
       "commitSha": "d2173cdb9dc9732d4da24c08b547824b3e746512",
       "action": "update",
       "type": "character",
@@ -5254,5 +5293,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-07T12:42:13.816Z"
+  "lastUpdated": "2025-09-07T19:06:39.158Z"
 }
