@@ -158,7 +158,7 @@
       "id": "characters-1757247474927-sg95zcyou",
       "category": "characters",
       "originalName": "Petrel Kormorant.png",
-      "alt": "Portrait of Petrel Kormorant on his Veranda overlooking the Eastern See",
+      "alt": "Petrel Kormorant",
       "caption": "Portrait of Petrel Kormorant on his Veranda overlooking the Eastern See",
       "credits": "AI Generated - OpenAI",
       "tags": [
@@ -198,7 +198,8 @@
         }
       },
       "fileSize": 2731040,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-07T12:59:51.389Z"
     },
     "characters-1757248806900-c9papco3o": {
       "id": "characters-1757248806900-c9papco3o",
