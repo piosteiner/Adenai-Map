@@ -1349,12 +1349,9 @@
       "name": "Ly'iss Moy",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": [
-        596,
-        778
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/lyiss_close.png",
+      "image": "/media/cbd04p15kbdr-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1390,8 +1387,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:40:44.352Z",
-      "updatedAt": "2025-08-29T20:59:57.978Z",
-      "location": "Neudalen"
+      "updatedAt": "2025-09-07T19:44:41.861Z"
     },
     {
       "id": "marcoh_ludd",
@@ -1869,5 +1865,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:44:24.337Z"
+  "lastUpdated": "2025-09-07T19:44:41.861Z"
 }
