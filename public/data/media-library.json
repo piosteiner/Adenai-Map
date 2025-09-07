@@ -2855,7 +2855,50 @@
       },
       "fileSize": 2546294,
       "mimeType": "image/png"
+    },
+    "characters-r28ybpd4fxl6": {
+      "id": "characters-r28ybpd4fxl6",
+      "category": "characters",
+      "title": "Old Gnome",
+      "caption": "",
+      "credits": "AI Generated - GPT5: heavily based on a design from Dungeon Meshi",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:04:37.263Z",
+      "sizes": {
+        "thumb": {
+          "filename": "r28ybpd4fxl6-thumb.webp",
+          "url": "/media/r28ybpd4fxl6-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "r28ybpd4fxl6-small.webp",
+          "url": "/media/r28ybpd4fxl6-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "r28ybpd4fxl6-medium.webp",
+          "url": "/media/r28ybpd4fxl6-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "r28ybpd4fxl6-large.webp",
+          "url": "/media/r28ybpd4fxl6-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "r28ybpd4fxl6-original.webp",
+          "url": "/media/r28ybpd4fxl6-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3872566,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:03:53.757Z"
+  "lastUpdated": "2025-09-07T18:04:37.532Z"
 }
