@@ -537,6 +537,7 @@
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: top center;
   border: 2px solid var(--dropdown-border);
   flex-shrink: 0;
   margin-bottom: 12px; /* Reduced from 20px */
