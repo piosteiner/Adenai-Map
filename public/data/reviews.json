@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "b5beebfcf245d056afe6445c232ad8ef2647ef1a",
+      "action": "update",
+      "type": "character",
+      "itemName": "Marcoh Ludd",
+      "user": "gm",
+      "timestamp": "2025-09-07T19:45:15.839Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T19:45:15.839Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: marcoh_ludd (by gm) - updated image"
+    },
+    {
       "commitSha": "d610493a7042808041851b920bc7469c5b5b8dfe",
       "action": "update",
       "type": "character",
@@ -5592,5 +5605,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-07T19:45:03.173Z"
+  "lastUpdated": "2025-09-07T19:45:15.839Z"
 }
