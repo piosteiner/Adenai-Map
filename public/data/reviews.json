@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "f5618581a0afad55325d806b0f6ed73ba1da7944",
+      "action": "update",
+      "type": "location",
+      "itemName": "Silbergrat",
+      "user": "gm",
+      "timestamp": "2025-09-07T19:41:46.756Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T19:41:46.756Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Silbergrat (by gm) - Updated location details"
+    },
+    {
       "commitSha": "5818d747a0c3e3724d7d771939b2aa19c08a5e49",
       "action": "update",
       "type": "location",
@@ -5475,5 +5488,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-07T19:41:22.574Z"
+  "lastUpdated": "2025-09-07T19:41:46.756Z"
 }
