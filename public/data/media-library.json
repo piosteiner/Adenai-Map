@@ -211,7 +211,53 @@
       },
       "fileSize": 2731040,
       "mimeType": "image/png"
+    },
+    "characters-1757248806900-c9papco3o": {
+      "id": "characters-1757248806900-c9papco3o",
+      "category": "characters",
+      "originalName": "ChatGPT Image Sep 7, 2025, 02_38_43 PM.png",
+      "alt": "Portrait of Lady Rivea",
+      "caption": "Portrait of Lady Rivea",
+      "credits": "AI Generated - OpenAI based on own drawing",
+      "tags": [
+        "NPC"
+      ],
+      "uploadDate": "2025-09-07T12:40:06.900Z",
+      "sizes": {
+        "thumbnail": {
+          "filename": "1757248806291-ChatGPT_Image_Sep_7__2025__02_38_43_PM_thumb.webp",
+          "url": "/media/1757248806291-ChatGPT_Image_Sep_7__2025__02_38_43_PM_thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "1757248806291-ChatGPT_Image_Sep_7__2025__02_38_43_PM_small.webp",
+          "url": "/media/1757248806291-ChatGPT_Image_Sep_7__2025__02_38_43_PM_small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "1757248806291-ChatGPT_Image_Sep_7__2025__02_38_43_PM_medium.webp",
+          "url": "/media/1757248806291-ChatGPT_Image_Sep_7__2025__02_38_43_PM_medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "1757248806291-ChatGPT_Image_Sep_7__2025__02_38_43_PM_large.webp",
+          "url": "/media/1757248806291-ChatGPT_Image_Sep_7__2025__02_38_43_PM_large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "1757248806291-ChatGPT_Image_Sep_7__2025__02_38_43_PM_original.webp",
+          "url": "/media/1757248806291-ChatGPT_Image_Sep_7__2025__02_38_43_PM_original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2349105,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T12:17:55.157Z"
+  "lastUpdated": "2025-09-07T12:40:07.197Z"
 }
