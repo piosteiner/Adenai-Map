@@ -165,7 +165,53 @@
       },
       "fileSize": 2163771,
       "mimeType": "image/png"
+    },
+    "characters-1757247474927-sg95zcyou": {
+      "id": "characters-1757247474927-sg95zcyou",
+      "category": "characters",
+      "originalName": "Petrel Kormorant.png",
+      "alt": "Portrait of Petrel Kormorant on his Veranda overlooking the Eastern See",
+      "caption": "Portrait of Petrel Kormorant on his Veranda overlooking the Eastern See",
+      "credits": "AI Generated - OpenAI",
+      "tags": [
+        "NPC"
+      ],
+      "uploadDate": "2025-09-07T12:17:54.927Z",
+      "sizes": {
+        "thumbnail": {
+          "filename": "1757247474286-Petrel_Kormorant_thumb.webp",
+          "url": "/media/1757247474286-Petrel_Kormorant_thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "1757247474286-Petrel_Kormorant_small.webp",
+          "url": "/media/1757247474286-Petrel_Kormorant_small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "1757247474286-Petrel_Kormorant_medium.webp",
+          "url": "/media/1757247474286-Petrel_Kormorant_medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "1757247474286-Petrel_Kormorant_large.webp",
+          "url": "/media/1757247474286-Petrel_Kormorant_large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "1757247474286-Petrel_Kormorant_original.webp",
+          "url": "/media/1757247474286-Petrel_Kormorant_original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2731040,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T09:00:29.521Z"
+  "lastUpdated": "2025-09-07T12:17:55.157Z"
 }
