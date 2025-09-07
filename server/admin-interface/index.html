@@ -22,8 +22,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🗺️ Adenai Campaign Admin</title>
-    
-    <!-- Simple favicon to prevent CSP warnings -->
+    <!-- Updated: 2025-09-07 - Fixed form field placement -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>🗺️</text></svg>">
     
     <!-- Modular CSS - Load in correct order -->
@@ -382,9 +381,21 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>🖼️ Image URL</label>
-                    <input type="url" name="image" placeholder="https://example.com/image.jpg">
-                    <small>Optional: URL to an image representing this location</small>
+                    <label>🖼️ Location Image</label>
+                    <div class="media-picker-wrapper">
+                        <input type="hidden" name="image" id="location-image-url">
+                        <div class="media-picker-display" id="location-image-display">
+                            <div class="media-picker-placeholder">
+                                <span class="media-picker-icon">🖼️</span>
+                                <span class="media-picker-text">Click to select from uploaded images</span>
+                            </div>
+                        </div>
+                        <div class="media-picker-actions">
+                            <button type="button" class="btn-secondary" id="select-location-image">📂 Select Image</button>
+                            <button type="button" class="btn-secondary" id="clear-location-image" style="display:none;">🗑️ Clear</button>
+                            <a href="#" onclick="window.ui.switchTab('media'); return false;" class="btn-link">📤 Upload New Image</a>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="form-row">
@@ -461,8 +472,21 @@
                         <input type="date" name="firstMet">
                     </div>
                     <div class="form-group">
-                        <label>🖼️ Image URL</label>
-                        <input type="text" name="image" placeholder="https://example.com/character.jpg">
+                        <label>🖼️ Character Image</label>
+                        <div class="media-picker-wrapper">
+                            <input type="hidden" name="image" id="character-image-url">
+                            <div class="media-picker-display" id="character-image-display">
+                                <div class="media-picker-placeholder">
+                                    <span class="media-picker-icon">🖼️</span>
+                                    <span class="media-picker-text">Click to select from uploaded images</span>
+                                </div>
+                            </div>
+                            <div class="media-picker-actions">
+                                <button type="button" class="btn-secondary" id="select-character-image">📂 Select Image</button>
+                                <button type="button" class="btn-secondary" id="clear-character-image" style="display:none;">🗑️ Clear</button>
+                                <a href="#" onclick="window.ui.switchTab('media'); return false;" class="btn-link">📤 Upload New Image</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -634,8 +658,19 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>📝 Description (Optional)</label>
-                    <input type="text" id="upload-description" name="description" placeholder="Brief description for the images">
+                    <label>📄 Title <span style="color: #dc3545;">*</span></label>
+                    <input type="text" id="upload-title" name="title" placeholder="Short descriptive title for the image (e.g. character name, location name)" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>📝 Caption (Optional)</label>
+                    <input type="text" id="upload-caption" name="caption" placeholder="Brief caption or description for the images">
+                </div>
+                
+                <div class="form-group">
+                    <label>📸 Credits/Attribution <span style="color: #dc3545;">*</span></label>
+                    <input type="text" id="upload-credits" name="credits" placeholder="Image source, artist name, or attribution (required)" required>
+                    <small style="color: #666; font-size: 0.9em;">e.g., "Created by John Smith", "Source: Unsplash", "AI Generated - Midjourney"</small>
                 </div>
                 
                 <div class="form-group">
@@ -665,6 +700,91 @@
         </div>
     </div>
 
+    <!-- Media Edit Modal -->
+    <div id="media-edit-modal" class="modal">
+        <div class="modal-content media-edit-content">
+            <div class="modal-header">
+                <h3>✏️ Edit Image Metadata</h3>
+                <span class="close-edit-btn">&times;</span>
+            </div>
+            
+            <form id="media-edit-form" class="media-edit-form">
+                <input type="hidden" id="edit-media-id" name="mediaId">
+                
+                <div class="form-group">
+                    <label>📝 Title <span style="color: #dc3545;">*</span></label>
+                    <input type="text" id="edit-title" name="title" placeholder="Descriptive title for the image" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>📑 Caption</label>
+                    <textarea id="edit-caption" name="caption" placeholder="Image caption or description" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>📸 Credits/Attribution <span style="color: #dc3545;">*</span></label>
+                    <input type="text" id="edit-credits" name="credits" placeholder="Image source, artist name, or attribution (required)" required>
+                    <small style="color: #666; font-size: 0.9em;">e.g., "Created by John Smith", "Source: Unsplash", "AI Generated - Midjourney"</small>
+                </div>
+                
+                <div class="form-group">
+                    <label>📂 Category</label>
+                    <select id="edit-category" name="category" required>
+                        <option value="characters">👥 Characters</option>
+                        <option value="locations">📍 Locations</option>
+                        <option value="maps">🗺️ Maps</option>
+                        <option value="items">⚔️ Items</option>
+                        <option value="creatures">🐲 Creatures</option>
+                        <option value="sessions">🎲 Sessions</option>
+                        <option value="general">📁 General</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>🏷️ Tags</label>
+                    <input type="text" id="edit-tags" name="tags" placeholder="Comma-separated tags (e.g. npc, important, session-12)">
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">💾 Save Changes</button>
+                    <button type="button" class="btn-secondary close-edit-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Media Picker Modal -->
+    <div id="media-picker-modal" class="modal">
+        <div class="modal-content media-picker-content">
+            <div class="modal-header">
+                <h3>📂 Select Image</h3>
+                <span class="close-picker-btn">&times;</span>
+            </div>
+            
+            <div class="media-picker-filters">
+                <select id="picker-category-filter">
+                    <option value="">All Categories</option>
+                    <option value="characters">👥 Characters</option>
+                    <option value="locations">📍 Locations</option>
+                    <option value="maps">🗺️ Maps</option>
+                    <option value="items">⚔️ Items</option>
+                    <option value="creatures">🐲 Creatures</option>
+                    <option value="sessions">🎲 Sessions</option>
+                    <option value="general">📁 General</option>
+                </select>
+                <input type="text" id="picker-search" placeholder="Search by name, caption, credits, tags...">
+            </div>
+            
+            <div class="media-picker-grid" id="media-picker-grid">
+                <div class="loading">Loading images...</div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary close-picker-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast notifications -->
     <div id="toast-container"></div>
 
@@ -678,6 +798,7 @@
     <script src="js/core/theme.js"></script>
     <script src="js/core/ui.js"></script>
     <script src="js/core/auth.js"></script>
+    <script src="js/core/media-picker.js"></script>
 
     <!-- Module operations (dependencies first) -->
     <script src="js/modules/locations/operations.js"></script>

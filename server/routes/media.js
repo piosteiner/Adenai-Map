@@ -15,6 +15,19 @@ const initGitHub = (octokitInstance, repoOwner, repoName) => {
   REPO_NAME = repoName;
 };
 
+// Helper function to generate short unique IDs
+function generateShortId() {
+  return Math.random().toString(36).substr(2, 8) + Math.random().toString(36).substr(2, 4);
+}
+
+// Image size configurations
+const IMAGE_SIZES = {
+  thumb: { width: 150, height: 150 },
+  small: { width: 300, height: 300 },
+  medium: { width: 600, height: 600 },
+  large: { width: 1200, height: 1200 }
+};
+
 // Configure multer for media uploads
 const storage = multer.diskStorage({
   destination: async (req, file, cb) => {
@@ -27,16 +40,16 @@ const storage = multer.diskStorage({
     }
   },
   filename: (req, file, cb) => {
-    const timestamp = Date.now();
-    const cleanName = file.originalname.replace(/[^a-zA-Z0-9.-]/g, '_');
-    cb(null, `${timestamp}-${cleanName}`);
+    const shortId = generateShortId();
+    const ext = path.extname(file.originalname);
+    cb(null, `temp_${shortId}${ext}`);
   }
 });
 
 const upload = multer({
   storage,
   limits: { 
-    fileSize: 20 * 1024 * 1024, // 20MB limit
+    fileSize: 50 * 1024 * 1024, // 50MB limit
     files: 10 // Max 10 files at once
   },
   fileFilter: (req, file, cb) => {
@@ -49,18 +62,9 @@ const upload = multer({
   }
 });
 
-// Image optimization settings for D&D campaign assets
-const IMAGE_SIZES = {
-  thumbnail: { width: 150, height: 150, suffix: '_thumb' },
-  small: { width: 300, height: 300, suffix: '_small' },
-  medium: { width: 600, height: 600, suffix: '_medium' },
-  large: { width: 1200, height: 1200, suffix: '_large' }
-};
-
 // Helper function to optimize images
-async function optimizeImage(inputPath, outputDir, filename) {
+async function optimizeImage(inputPath, outputDir, baseId) {
   const optimized = {};
-  const baseFilename = path.parse(filename).name;
   
   try {
     // Get original image info
@@ -69,7 +73,7 @@ async function optimizeImage(inputPath, outputDir, filename) {
     
     // Generate different sizes
     for (const [sizeName, config] of Object.entries(IMAGE_SIZES)) {
-      const outputFilename = `${baseFilename}${config.suffix}.webp`;
+      const outputFilename = `${baseId}-${sizeName}.webp`;
       const outputPath = path.join(outputDir, outputFilename);
       
       await originalImage
@@ -88,13 +92,13 @@ async function optimizeImage(inputPath, outputDir, filename) {
     }
     
     // Also create a high-quality original version
-    const originalOutputPath = path.join(outputDir, `${baseFilename}_original.webp`);
+    const originalOutputPath = path.join(outputDir, `${baseId}-original.webp`);
     await originalImage
       .webp({ quality: 95 })
       .toFile(originalOutputPath);
       
     optimized.original = {
-      filename: `${baseFilename}_original.webp`,
+      filename: `${baseId}-original.webp`,
       path: originalOutputPath,
       width: metadata.width,
       height: metadata.height
@@ -134,6 +138,7 @@ router.get('/', async (req, res) => {
       filteredMedia = filteredMedia.filter(([id, item]) => 
         item.alt?.toLowerCase().includes(searchLower) ||
         item.caption?.toLowerCase().includes(searchLower) ||
+        item.credits?.toLowerCase().includes(searchLower) ||
         item.tags?.some(tag => tag.toLowerCase().includes(searchLower))
       );
     }
@@ -165,8 +170,16 @@ router.get('/', async (req, res) => {
 // POST /api/media/upload - Upload and process new media
 router.post('/upload', requireAuth, upload.array('images', 10), async (req, res) => {
   try {
-    const { category = 'general', tags = '', description = '' } = req.body;
+    const { category = 'general', tags = '', caption = '', title = '', credits = '' } = req.body;
     const uploadedFiles = req.files;
+    
+    // Validate required credits field
+    if (!credits || credits.trim() === '') {
+      return res.status(400).json({
+        success: false,
+        error: 'Credits/Attribution is required for all image uploads'
+      });
+    }
     
     if (!uploadedFiles || uploadedFiles.length === 0) {
       return res.status(400).json({
@@ -181,19 +194,22 @@ router.post('/upload', requireAuth, upload.array('images', 10), async (req, res)
     
     for (const file of uploadedFiles) {
       try {
+        // Generate clean base ID for this upload
+        const baseId = generateShortId();
+        
         // Optimize images
-        const optimized = await optimizeImage(file.path, optimizedDir, file.filename);
+        const optimized = await optimizeImage(file.path, optimizedDir, baseId);
         
         // Generate media ID
-        const mediaId = `${category}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        const mediaId = `${category}-${baseId}`;
         
         // Prepare media entry
         const mediaEntry = {
           id: mediaId,
           category,
-          originalName: file.originalname,
-          alt: description || path.parse(file.originalname).name,
-          caption: description,
+          title: title || path.parse(file.originalname).name,
+          caption: caption,
+          credits: credits.trim(),
           tags: tags.split(',').map(tag => tag.trim()).filter(Boolean),
           uploadDate: new Date().toISOString(),
           sizes: {},
@@ -310,6 +326,112 @@ router.get('/categories', async (req, res) => {
     res.status(500).json({
       success: false,
       error: 'Failed to fetch categories'
+    });
+  }
+});
+
+// Get single media item
+router.get('/:id', requireAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // Get media from GitHub
+    const response = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'public/data/media-library.json'
+    });
+    
+    const mediaLibrary = JSON.parse(Buffer.from(response.data.content, 'base64').toString());
+    const media = mediaLibrary.images || {};
+    
+    const mediaItem = media[id];
+    
+    if (!mediaItem) {
+      return res.status(404).json({
+        success: false,
+        error: 'Media item not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      media: mediaItem
+    });
+  } catch (error) {
+    console.error('Error getting media item:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to get media item'
+    });
+  }
+});
+
+// Update media metadata
+router.put('/:id', requireAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, caption, credits, category, tags } = req.body;
+    
+    // Validate required fields
+    if (!credits || credits.trim() === '') {
+      return res.status(400).json({
+        success: false,
+        error: 'Credits field is required'
+      });
+    }
+    
+    // Get current media data from GitHub
+    const response = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'public/data/media-library.json'
+    });
+    
+    const mediaLibrary = JSON.parse(Buffer.from(response.data.content, 'base64').toString());
+    const media = mediaLibrary.images || {};
+    
+    if (!media[id]) {
+      return res.status(404).json({
+        success: false,
+        error: 'Media item not found'
+      });
+    }
+    
+    // Update metadata
+    media[id] = {
+      ...media[id],
+      title: title || '',
+      caption: caption || '',
+      credits: credits.trim(),
+      category: category || 'general',
+      tags: Array.isArray(tags) ? tags : [],
+      lastModified: new Date().toISOString()
+    };
+    
+    // Update the media library structure
+    mediaLibrary.images = media;
+    
+    // Update GitHub
+    await octokit.rest.repos.createOrUpdateFileContents({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'public/data/media-library.json',
+      message: `Update metadata for media ${id}`,
+      content: Buffer.from(JSON.stringify(mediaLibrary, null, 2)).toString('base64'),
+      sha: response.data.sha
+    });
+    
+    res.json({
+      success: true,
+      message: 'Media metadata updated successfully',
+      media: media[id]
+    });
+  } catch (error) {
+    console.error('Error updating media metadata:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to update media metadata'
     });
   }
 });

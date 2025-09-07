@@ -146,5 +146,78 @@ window.mediaOperations = {
             general: '📁'
         };
         return emojis[category] || '📁';
+    },
+
+    // Get single media item
+    async getMediaItem(mediaId) {
+        try {
+            const response = await fetch(`/api/media/${mediaId}`, {
+                method: 'GET',
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                return data.media;
+            } else {
+                throw new Error(`Failed to get media: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error getting media item:', error);
+            throw error;
+        }
+    },
+
+    // Update media metadata
+    async updateMediaMetadata(mediaId, updateData) {
+        try {
+            console.log('Updating media metadata for:', mediaId, updateData);
+            
+            const response = await fetch(`/api/media/${mediaId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify(updateData)
+            });
+
+            console.log('Update response status:', response.status);
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Update result:', result);
+                return result;
+            } else {
+                const errorText = await response.text();
+                console.error('Update failed with status:', response.status, 'Response:', errorText);
+                
+                let errorMessage = `HTTP ${response.status}`;
+                try {
+                    const errorData = JSON.parse(errorText);
+                    errorMessage = errorData.error || errorMessage;
+                } catch (e) {
+                    // If we can't parse JSON, use status text
+                    errorMessage = response.statusText || errorMessage;
+                }
+                
+                throw new Error(errorMessage);
+            }
+        } catch (error) {
+            console.error('Error updating media metadata:', error);
+            
+            // Provide user-friendly error messages
+            if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                throw new Error('Network error - please check your connection');
+            } else if (error.message.includes('401')) {
+                throw new Error('Authentication required - please log in again');
+            } else if (error.message.includes('403')) {
+                throw new Error('Permission denied - you are not authorized to edit media');
+            } else if (error.message.includes('404')) {
+                throw new Error('Media item not found');
+            } else {
+                throw error;
+            }
+        }
     }
 };

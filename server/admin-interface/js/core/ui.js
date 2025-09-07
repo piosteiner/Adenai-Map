@@ -42,7 +42,8 @@ class AdminUI {
         // Map routes to tab names
         const routeMap = {
             'locations': 'locations',
-            'characters': 'characters', 
+            'characters': 'characters',
+            'media': 'media',
             'journeys': 'journeys',
             'overview': 'overview',
             'backup': 'backup',
