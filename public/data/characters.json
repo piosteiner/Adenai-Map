@@ -822,7 +822,7 @@
         1040
       ],
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/viktoria_karthright_close.png",
+      "image": "/media/849cknoayrlr-small.webp",
       "status": "alive",
       "faction": "Familie Karthright",
       "relationship": "friendly",
@@ -862,8 +862,9 @@
           "movement_nr": 1
         }
       ],
+      "currentLocation": null,
       "createdAt": "2025-08-27T10:32:15.038Z",
-      "updatedAt": "2025-08-28T05:00:05.156Z"
+      "updatedAt": "2025-09-07T19:48:05.514Z"
     },
     {
       "id": "k_nig_torrack",
@@ -1784,5 +1785,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:47:53.993Z"
+  "lastUpdated": "2025-09-07T19:48:05.514Z"
 }
