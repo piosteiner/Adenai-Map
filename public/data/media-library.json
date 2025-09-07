@@ -2167,7 +2167,50 @@
       },
       "fileSize": 3260692,
       "mimeType": "image/png"
+    },
+    "characters-73zn0bj2j39s": {
+      "id": "characters-73zn0bj2j39s",
+      "category": "characters",
+      "title": "Young Male Human",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:56:35.324Z",
+      "sizes": {
+        "thumb": {
+          "filename": "73zn0bj2j39s-thumb.webp",
+          "url": "/media/73zn0bj2j39s-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "73zn0bj2j39s-small.webp",
+          "url": "/media/73zn0bj2j39s-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "73zn0bj2j39s-medium.webp",
+          "url": "/media/73zn0bj2j39s-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "73zn0bj2j39s-large.webp",
+          "url": "/media/73zn0bj2j39s-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "73zn0bj2j39s-original.webp",
+          "url": "/media/73zn0bj2j39s-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3544554,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:56:08.191Z"
+  "lastUpdated": "2025-09-07T17:56:35.573Z"
 }
