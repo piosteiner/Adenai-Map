@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "f9232162f392d51d16b3f33cbd29340683d7bc63",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lia Karthright",
+      "user": "gm",
+      "timestamp": "2025-09-07T19:43:53.857Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T19:43:53.857Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: lia_karthright (by gm) - updated image"
+    },
+    {
       "commitSha": "aca1c086080055c57bf98785ebd82d6cc17e8a68",
       "action": "update",
       "type": "location",
@@ -5527,5 +5540,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-07T19:43:22.698Z"
+  "lastUpdated": "2025-09-07T19:43:53.857Z"
 }
