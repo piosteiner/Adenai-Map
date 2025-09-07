@@ -265,16 +265,9 @@ class ImagePopupManager {
         // Set caption - prefer media library caption, fallback to generated caption
         caption.textContent = combinedData.caption || data.caption || '';
 
-        // Set tags
+        // Set tags - HIDE THEM (user doesn't want tags shown)
         tags.innerHTML = '';
-        if (combinedData.tags && combinedData.tags.length > 0) {
-            combinedData.tags.forEach(tag => {
-                const tagElement = document.createElement('span');
-                tagElement.className = 'image-popup-tag';
-                tagElement.textContent = tag;
-                tags.appendChild(tagElement);
-            });
-        }
+        tags.style.display = 'none';
 
         // Set credits
         credits.textContent = combinedData.credits || 'Source: Adenai Campaign';

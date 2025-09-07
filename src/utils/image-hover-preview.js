@@ -236,7 +236,6 @@ class ImageHoverPreview {
                 font-size: 13px;
                 font-weight: 500;
                 line-height: 1.3;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
                 backdrop-filter: blur(10px);
                 text-shadow: none;
                 margin: 0;
@@ -258,22 +257,11 @@ class ImageHoverPreview {
             }
 
             .preview-tags {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 4px;
-                padding: 8px 12px;
-                margin: 0;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                display: none !important;
             }
 
             .preview-tag {
-                background: rgba(99, 102, 241, 0.1);
-                color: #4f46e5;
-                padding: 2px 6px;
-                border-radius: 10px;
-                font-size: 10px;
-                font-weight: 500;
-                border: 1px solid rgba(99, 102, 241, 0.2);
+                display: none !important;
             }
 
             .preview-credits {
@@ -282,6 +270,7 @@ class ImageHoverPreview {
                 color: #666;
                 font-style: italic;
                 margin: 0;
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
             }
                 text-align: center;
                 backdrop-filter: blur(10px);
@@ -307,7 +296,6 @@ class ImageHoverPreview {
             [data-theme="dark"] .preview-caption {
                 background: rgba(30, 30, 30, 0.95);
                 color: #f0f0f0;
-                border-bottom-color: rgba(255, 255, 255, 0.1);
             }
 
             [data-theme="dark"] .preview-info {
@@ -317,18 +305,15 @@ class ImageHoverPreview {
             }
 
             [data-theme="dark"] .preview-tag {
-                background: rgba(139, 92, 246, 0.2);
-                color: #a78bfa;
-                border-color: rgba(139, 92, 246, 0.3);
+                display: none !important;
             }
 
             [data-theme="dark"] .preview-credits {
                 color: #999;
-                border-top-color: rgba(255, 255, 255, 0.1);
             }
 
             [data-theme="dark"] .preview-tags {
-                border-bottom-color: rgba(255, 255, 255, 0.1);
+                display: none !important;
             }
 
             /* Hover-enabled images styling */
@@ -497,37 +482,121 @@ class ImageHoverPreview {
         // Hide hover preview immediately
         this.hidePreview();
         
-        // Always open image in background tab (don't use enhanced popup)
-        // Create a temporary link element to open image
-        const link = document.createElement('a');
-        link.href = image.src;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
+        // Get metadata for the image
+        const mediaMetadata = this.findImageMetadata(image.src);
         
-        // Add the link to the document temporarily
-        document.body.appendChild(link);
+        // Get caption text using the same logic as showPreview
+        let captionText = '';
+        if (mediaMetadata) {
+            if (mediaMetadata.title) {
+                captionText = mediaMetadata.title;
+                if (mediaMetadata.caption && 
+                    mediaMetadata.caption !== mediaMetadata.title && 
+                    mediaMetadata.caption.toLowerCase() !== mediaMetadata.title.toLowerCase()) {
+                    captionText += ` - ${mediaMetadata.caption}`;
+                }
+            } else if (mediaMetadata.caption) {
+                captionText = mediaMetadata.caption;
+            }
+        }
         
-        // Override the default behavior to prevent tab switching
-        const clickEvent = new MouseEvent('click', {
-            ctrlKey: true,  // Ctrl+click behavior (background tab)
-            bubbles: true,
-            cancelable: true
-        });
+        if (!captionText) {
+            captionText = this.generateEnhancedCaption(image);
+        }
         
-        link.dispatchEvent(clickEvent);
+        // Create HTML content for the new tab
+        const htmlContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${captionText || 'Image Viewer'}</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .image-container {
+            max-width: 95vw;
+            max-height: 80vh;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .metadata {
+            max-width: 800px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .metadata h1 {
+            margin: 0 0 15px 0;
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        .metadata .caption {
+            margin: 0 0 15px 0;
+            font-size: 1.1em;
+            line-height: 1.5;
+            color: #e0e0e0;
+        }
+        .metadata .credits {
+            margin: 0;
+            font-size: 0.9em;
+            color: #b0b0b0;
+            font-style: italic;
+        }
+        .metadata .section {
+            margin-bottom: 10px;
+        }
+        .metadata .section:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="${image.src}" alt="${image.alt || ''}" />
+    </div>
+    <div class="metadata">
+        ${captionText ? `<h1>${captionText}</h1>` : ''}
+        ${mediaMetadata && mediaMetadata.credits ? `<div class="section"><div class="credits">${mediaMetadata.credits}</div></div>` : ''}
+    </div>
+</body>
+</html>`;
         
-        // Clean up
-        document.body.removeChild(link);
+        // Open the HTML content in a new tab
+        const newWindow = window.open('', '_blank');
+        if (newWindow) {
+            newWindow.document.write(htmlContent);
+            newWindow.document.close();
+        }
         
-        Logger.debug('🖼️ Image opened in background tab:', image.src);
+        Logger.debug('🖼️ Image opened with metadata in new tab:', image.src);
     }
 
     showPreview(originalImage) {
         if (this.isPreviewVisible) return;
-
-        console.log('🖼️ showPreview called for image:', originalImage.src);
-        console.log('📚 Media library status:', this.mediaLibrary ? 'loaded' : 'not loaded');
-        console.log('🔧 System initialized:', this.isInitialized);
 
         const previewImage = this.previewElement.querySelector('.preview-image');
         const caption = this.previewElement.querySelector('.preview-caption');
@@ -541,12 +610,10 @@ class ImageHoverPreview {
 
         // Get metadata from media library
         const mediaMetadata = this.findImageMetadata(originalImage.src);
-        console.log('📋 Media metadata found:', mediaMetadata);
         
         // Set caption (title or main description)
         let captionText = '';
         if (mediaMetadata) {
-            console.log('✅ Using media metadata for caption');
             // Use title as the main caption, but add caption if it's different
             if (mediaMetadata.title) {
                 captionText = mediaMetadata.title;
@@ -562,12 +629,9 @@ class ImageHoverPreview {
         }
         
         if (!captionText) {
-            console.log('⚠️ No media metadata, falling back to character extraction');
             // Fallback to character extraction
             captionText = this.generateEnhancedCaption(originalImage);
         }
-        
-        console.log('📝 Final caption text:', captionText);
         
         if (captionText) {
             caption.textContent = captionText;
@@ -576,39 +640,19 @@ class ImageHoverPreview {
             caption.style.display = 'none';
         }
 
-        // Set tags
+        // Set tags - HIDE THEM (user doesn't want tags shown)
         tags.innerHTML = '';
-        if (mediaMetadata && mediaMetadata.tags && mediaMetadata.tags.length > 0) {
-            console.log('🏷️ Adding tags:', mediaMetadata.tags);
-            mediaMetadata.tags.forEach(tag => {
-                const tagElement = document.createElement('span');
-                tagElement.className = 'preview-tag';
-                tagElement.textContent = tag;
-                tags.appendChild(tagElement);
-            });
-            tags.style.display = 'flex';
-        } else {
-            console.log('📝 No tags to display');
-            tags.style.display = 'none';
-        }
+        tags.style.display = 'none';
 
         // Set credits - ALWAYS show if available
         if (mediaMetadata && mediaMetadata.credits) {
-            console.log('💳 Using media credits:', mediaMetadata.credits);
             credits.textContent = mediaMetadata.credits;
             credits.style.display = 'block';
         } else {
-            console.log('💳 Using fallback credits');
             // Fallback credits for images without metadata
             credits.textContent = 'Source: Adenai Campaign';
             credits.style.display = 'block';
         }
-
-        // Debug: Check if elements are properly created
-        console.log('🔍 Debug element check:');
-        console.log('- Caption element:', caption, 'display:', caption?.style.display, 'text:', caption?.textContent);
-        console.log('- Tags element:', tags, 'display:', tags?.style.display, 'children:', tags?.children.length);
-        console.log('- Credits element:', credits, 'display:', credits?.style.display, 'text:', credits?.textContent);
 
         // Show preview
         this.previewElement.style.display = 'flex';
@@ -619,7 +663,6 @@ class ImageHoverPreview {
         });
 
         this.isPreviewVisible = true;
-        console.log('🎯 Preview shown with metadata:', !!mediaMetadata);
     }
 
     generateEnhancedCaption(image) {
