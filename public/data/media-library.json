@@ -961,7 +961,50 @@
       },
       "fileSize": 2991370,
       "mimeType": "image/png"
+    },
+    "characters-dlymg4j3u4gk": {
+      "id": "characters-dlymg4j3u4gk",
+      "category": "characters",
+      "title": "Krista",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:10:38.365Z",
+      "sizes": {
+        "thumb": {
+          "filename": "dlymg4j3u4gk-thumb.webp",
+          "url": "/media/dlymg4j3u4gk-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "dlymg4j3u4gk-small.webp",
+          "url": "/media/dlymg4j3u4gk-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "dlymg4j3u4gk-medium.webp",
+          "url": "/media/dlymg4j3u4gk-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "dlymg4j3u4gk-large.webp",
+          "url": "/media/dlymg4j3u4gk-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "dlymg4j3u4gk-original.webp",
+          "url": "/media/dlymg4j3u4gk-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2923839,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:10:24.623Z"
+  "lastUpdated": "2025-09-07T17:10:38.581Z"
 }
