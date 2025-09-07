@@ -1434,7 +1434,50 @@
       },
       "fileSize": 2849640,
       "mimeType": "image/png"
+    },
+    "characters-hjjumgifec7g": {
+      "id": "characters-hjjumgifec7g",
+      "category": "characters",
+      "title": "Maeba II.",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:15:28.568Z",
+      "sizes": {
+        "thumb": {
+          "filename": "hjjumgifec7g-thumb.webp",
+          "url": "/media/hjjumgifec7g-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "hjjumgifec7g-small.webp",
+          "url": "/media/hjjumgifec7g-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "hjjumgifec7g-medium.webp",
+          "url": "/media/hjjumgifec7g-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "hjjumgifec7g-large.webp",
+          "url": "/media/hjjumgifec7g-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "hjjumgifec7g-original.webp",
+          "url": "/media/hjjumgifec7g-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3046665,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:14:54.383Z"
+  "lastUpdated": "2025-09-07T17:15:28.820Z"
 }
