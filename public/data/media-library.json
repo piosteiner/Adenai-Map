@@ -6,7 +6,7 @@
       "images": [
         {
           "src": "map_valaris.png",
-          "alt": "Valaris Karte", 
+          "alt": "Valaris Karte",
           "caption": "Übersicht der Stadt Valaris mit allen wichtigen Gebäuden"
         }
       ]
@@ -21,13 +21,13 @@
           "caption": "Ally - Wanted für verschiedene Verbrechen"
         },
         {
-          "src": "wantedposter_luna.png", 
+          "src": "wantedposter_luna.png",
           "alt": "Luna Wanted Poster",
           "caption": "Luna - Wanted für magische Störungen"
         },
         {
           "src": "wantedposter_tasbor.png",
-          "alt": "Tasbor Wanted Poster", 
+          "alt": "Tasbor Wanted Poster",
           "caption": "Tasbor - Wanted für Detektivarbeiten"
         },
         {
@@ -54,7 +54,7 @@
       "description": "Königin der Küstenstadt Basapo in der Region Upeto.",
       "image": "maeba.png",
       "relationship": "neutral",
-      "status": "alive", 
+      "status": "alive",
       "location": "Basapo"
     },
     "tasbor": {
@@ -67,7 +67,7 @@
       "location": "Valaris"
     },
     "abu-sasion": {
-      "name": "Abu Sasion", 
+      "name": "Abu Sasion",
       "title": "Detektiv",
       "description": "Detektiv in Valaris, Partner von Tasbor.",
       "image": "abu.png",
@@ -91,15 +91,19 @@
       "date": "Session 8",
       "location": "Valaris",
       "description": "Die Gruppe VsuzH deckte Kunos' Machenschaften auf und besiegte ihn, wodurch Valaris befreit wurde.",
-      "participants": ["vsuzh-gruppe"],
+      "participants": [
+        "vsuzh-gruppe"
+      ],
       "outcome": "victory"
     },
     "basapo-visit": {
-      "title": "Erster Besuch in Basapo", 
+      "title": "Erster Besuch in Basapo",
       "date": "Session 15",
       "location": "Basapo",
       "description": "Die Gruppe besuchte zum ersten Mal die Küstenstadt Basapo.",
-      "participants": ["vsuzh-gruppe"],
+      "participants": [
+        "vsuzh-gruppe"
+      ],
       "outcome": "peaceful"
     }
   },
@@ -111,10 +115,57 @@
       "category": "location"
     },
     "goblin-hole": {
-      "src": "goblin_hole.png", 
+      "src": "goblin_hole.png",
       "alt": "Goblin Höhle",
       "caption": "Eingang zur mysteriösen Goblin Höhle",
       "category": "location"
+    },
+    "test-1757232399987-u77so997g": {
+      "id": "test-1757232399987-u77so997g",
+      "category": "test",
+      "originalName": "test_image.png",
+      "alt": "Test upload from deployment check",
+      "caption": "Test upload from deployment check",
+      "tags": [
+        "test",
+        "deployment"
+      ],
+      "uploadDate": "2025-09-07T08:06:39.988Z",
+      "sizes": {
+        "thumbnail": {
+          "filename": "1757232399953-test_image_thumb.webp",
+          "url": "/media/1757232399953-test_image_thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "1757232399953-test_image_small.webp",
+          "url": "/media/1757232399953-test_image_small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "1757232399953-test_image_medium.webp",
+          "url": "/media/1757232399953-test_image_medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "1757232399953-test_image_large.webp",
+          "url": "/media/1757232399953-test_image_large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "1757232399953-test_image_original.webp",
+          "url": "/media/1757232399953-test_image_original.webp",
+          "width": 1,
+          "height": 1
+        }
+      },
+      "fileSize": 70,
+      "mimeType": "image/png"
     }
-  }
+  },
+  "lastUpdated": "2025-09-07T08:06:40.183Z"
 }
