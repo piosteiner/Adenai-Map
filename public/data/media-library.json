@@ -660,7 +660,50 @@
       },
       "fileSize": 2099916,
       "mimeType": "image/png"
+    },
+    "characters-o6y012da0juc": {
+      "id": "characters-o6y012da0juc",
+      "category": "characters",
+      "title": "Eliana Karthright",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:05:39.222Z",
+      "sizes": {
+        "thumb": {
+          "filename": "o6y012da0juc-thumb.webp",
+          "url": "/media/o6y012da0juc-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "o6y012da0juc-small.webp",
+          "url": "/media/o6y012da0juc-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "o6y012da0juc-medium.webp",
+          "url": "/media/o6y012da0juc-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "o6y012da0juc-large.webp",
+          "url": "/media/o6y012da0juc-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "o6y012da0juc-original.webp",
+          "url": "/media/o6y012da0juc-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2817963,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:03:40.310Z"
+  "lastUpdated": "2025-09-07T17:05:39.476Z"
 }
