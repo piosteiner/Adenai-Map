@@ -4532,7 +4532,50 @@
       },
       "fileSize": 1086663,
       "mimeType": "image/png"
+    },
+    "characters-gqm9fidr1pi9": {
+      "id": "characters-gqm9fidr1pi9",
+      "category": "characters",
+      "title": "Ally Wanted Poster",
+      "caption": "",
+      "credits": "drawn by Pio Gino Steiner",
+      "tags": [],
+      "uploadDate": "2025-09-07T19:04:55.439Z",
+      "sizes": {
+        "thumb": {
+          "filename": "gqm9fidr1pi9-thumb.webp",
+          "url": "/media/gqm9fidr1pi9-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "gqm9fidr1pi9-small.webp",
+          "url": "/media/gqm9fidr1pi9-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "gqm9fidr1pi9-medium.webp",
+          "url": "/media/gqm9fidr1pi9-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "gqm9fidr1pi9-large.webp",
+          "url": "/media/gqm9fidr1pi9-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "gqm9fidr1pi9-original.webp",
+          "url": "/media/gqm9fidr1pi9-original.webp",
+          "width": 2048,
+          "height": 2732
+        }
+      },
+      "fileSize": 885470,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T19:04:40.392Z"
+  "lastUpdated": "2025-09-07T19:04:55.650Z"
 }
