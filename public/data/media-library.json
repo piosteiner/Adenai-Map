@@ -2683,7 +2683,50 @@
       },
       "fileSize": 3470379,
       "mimeType": "image/png"
+    },
+    "characters-xh2q9qrt1xyw": {
+      "id": "characters-xh2q9qrt1xyw",
+      "category": "characters",
+      "title": "Dwarf",
+      "caption": "",
+      "credits": "AI Generated - GPT5: heavily based on a design from Dungeon Meshi",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:02:28.962Z",
+      "sizes": {
+        "thumb": {
+          "filename": "xh2q9qrt1xyw-thumb.webp",
+          "url": "/media/xh2q9qrt1xyw-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "xh2q9qrt1xyw-small.webp",
+          "url": "/media/xh2q9qrt1xyw-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "xh2q9qrt1xyw-medium.webp",
+          "url": "/media/xh2q9qrt1xyw-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "xh2q9qrt1xyw-large.webp",
+          "url": "/media/xh2q9qrt1xyw-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "xh2q9qrt1xyw-original.webp",
+          "url": "/media/xh2q9qrt1xyw-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2996737,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:02:15.744Z"
+  "lastUpdated": "2025-09-07T18:02:29.250Z"
 }
