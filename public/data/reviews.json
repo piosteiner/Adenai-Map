@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "d2173cdb9dc9732d4da24c08b547824b3e746512",
+      "action": "update",
+      "type": "character",
+      "itemName": "Petrel Kormorant",
+      "user": "gm",
+      "timestamp": "2025-09-07T12:42:13.815Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T12:42:13.815Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: petrel_kormorant (by gm) - added image"
+    },
+    {
       "commitSha": "cfef4f904a9309c13a79ee7ef7633ed883dd7828",
       "action": "create",
       "type": "character",
@@ -5241,5 +5254,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-07T12:41:47.477Z"
+  "lastUpdated": "2025-09-07T12:42:13.816Z"
 }
