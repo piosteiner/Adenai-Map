@@ -2941,7 +2941,50 @@
       },
       "fileSize": 3667847,
       "mimeType": "image/png"
+    },
+    "characters-3ped0er1jdn5": {
+      "id": "characters-3ped0er1jdn5",
+      "category": "characters",
+      "title": "Gnome",
+      "caption": "",
+      "credits": "AI Generated - GPT5: heavily based on a design from Dungeon Meshi",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:05:06.836Z",
+      "sizes": {
+        "thumb": {
+          "filename": "3ped0er1jdn5-thumb.webp",
+          "url": "/media/3ped0er1jdn5-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "3ped0er1jdn5-small.webp",
+          "url": "/media/3ped0er1jdn5-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "3ped0er1jdn5-medium.webp",
+          "url": "/media/3ped0er1jdn5-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "3ped0er1jdn5-large.webp",
+          "url": "/media/3ped0er1jdn5-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "3ped0er1jdn5-original.webp",
+          "url": "/media/3ped0er1jdn5-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3960878,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:04:54.975Z"
+  "lastUpdated": "2025-09-07T18:05:07.087Z"
 }
