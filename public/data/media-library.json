@@ -4231,7 +4231,50 @@
       },
       "fileSize": 6248230,
       "mimeType": "image/png"
+    },
+    "characters-849cknoayrlr": {
+      "id": "characters-849cknoayrlr",
+      "category": "characters",
+      "title": "Viktoria Karthright",
+      "caption": "",
+      "credits": "AI Generated - Midjourney",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:42:15.385Z",
+      "sizes": {
+        "thumb": {
+          "filename": "849cknoayrlr-thumb.webp",
+          "url": "/media/849cknoayrlr-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "849cknoayrlr-small.webp",
+          "url": "/media/849cknoayrlr-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "849cknoayrlr-medium.webp",
+          "url": "/media/849cknoayrlr-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "849cknoayrlr-large.webp",
+          "url": "/media/849cknoayrlr-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "849cknoayrlr-original.webp",
+          "url": "/media/849cknoayrlr-original.webp",
+          "width": 4096,
+          "height": 4096
+        }
+      },
+      "fileSize": 12293276,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:41:33.799Z"
+  "lastUpdated": "2025-09-07T18:42:15.653Z"
 }
