@@ -194,16 +194,17 @@ class ImageHoverPreview {
 
             .preview-info {
                 position: absolute;
-                bottom: -80px;
-                left: 0;
-                right: 0;
+                bottom: -120px;
+                left: 50%;
+                transform: translateX(-50%);
                 background: rgba(255, 255, 255, 0.95);
                 border-radius: 8px;
                 color: #333;
                 max-width: 400px;
-                min-width: 250px;
+                min-width: 280px;
                 backdrop-filter: blur(10px);
                 box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+                border: 1px solid rgba(0, 0, 0, 0.1);
             }
 
             .preview-tags {
@@ -262,6 +263,7 @@ class ImageHoverPreview {
             [data-theme="dark"] .preview-info {
                 background: rgba(30, 30, 30, 0.95);
                 color: #f0f0f0;
+                border-color: rgba(255, 255, 255, 0.1);
             }
 
             [data-theme="dark"] .preview-tag {
@@ -439,13 +441,8 @@ class ImageHoverPreview {
         // Hide hover preview immediately
         this.hidePreview();
         
-        // Check if enhanced image popup manager is available
-        if (window.imagePopupManager) {
-            // Let the enhanced popup manager handle the click
-            return; // Don't prevent default - let the enhanced popup handle it
-        }
-        
-        // Fallback behavior: Create a temporary link element to open image
+        // Always open image in background tab (don't use enhanced popup)
+        // Create a temporary link element to open image
         const link = document.createElement('a');
         link.href = image.src;
         link.target = '_blank';
@@ -485,10 +482,21 @@ class ImageHoverPreview {
         // Get metadata from media library
         const mediaMetadata = this.findImageMetadata(originalImage.src);
         
-        // Set caption
+        // Set caption (title or main description)
         let captionText = '';
         if (mediaMetadata) {
-            captionText = mediaMetadata.title || mediaMetadata.caption || '';
+            // Use title as the main caption, but add caption if it's different
+            if (mediaMetadata.title) {
+                captionText = mediaMetadata.title;
+                // If caption exists and is different from title, add it
+                if (mediaMetadata.caption && 
+                    mediaMetadata.caption !== mediaMetadata.title && 
+                    mediaMetadata.caption.toLowerCase() !== mediaMetadata.title.toLowerCase()) {
+                    captionText += ` - ${mediaMetadata.caption}`;
+                }
+            } else if (mediaMetadata.caption) {
+                captionText = mediaMetadata.caption;
+            }
         }
         
         if (!captionText) {
@@ -517,12 +525,14 @@ class ImageHoverPreview {
             tags.style.display = 'none';
         }
 
-        // Set credits
+        // Set credits - ALWAYS show if available
         if (mediaMetadata && mediaMetadata.credits) {
             credits.textContent = mediaMetadata.credits;
             credits.style.display = 'block';
         } else {
-            credits.style.display = 'none';
+            // Fallback credits for images without metadata
+            credits.textContent = 'Source: Adenai Campaign';
+            credits.style.display = 'block';
         }
 
         // Show preview
@@ -534,7 +544,12 @@ class ImageHoverPreview {
         });
 
         this.isPreviewVisible = true;
-        Logger.debug('🖼️ Enhanced image preview shown', mediaMetadata ? 'with metadata' : 'without metadata');
+        Logger.debug('🖼️ Enhanced image preview shown:', {
+            title: captionText,
+            tags: mediaMetadata?.tags?.length || 0,
+            credits: mediaMetadata?.credits || 'default',
+            hasMetadata: !!mediaMetadata
+        });
     }
 
     generateEnhancedCaption(image) {

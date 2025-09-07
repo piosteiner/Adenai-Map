@@ -108,10 +108,11 @@
             <h3>Test Instructions</h3>
             <ul>
                 <li><strong>Hover:</strong> Hover over any image to see the enhanced preview with title, description, tags, and credits</li>
-                <li><strong>Click:</strong> Click any image to open the full enhanced popup with complete metadata</li>
+                <li><strong>Click:</strong> Click any image to open it in a new background tab (you won't switch to it)</li>
                 <li><strong>Dark Theme:</strong> Toggle dark theme to test theme compatibility</li>
-                <li><strong>Character Context:</strong> Click "Show Character Popup" to test character-specific images</li>
+                <li><strong>Character Context:</strong> Click "Show Character Popup" to test character-specific enhanced popups</li>
             </ul>
+            <p><strong>Note:</strong> Regular images open in background tabs, while character images in popups show enhanced overlay.</p>
         </div>
         
         <div class="test-section">
@@ -198,7 +199,16 @@
                 console.log('✅ Image Hover Preview initialized');
             }
             
+            // Add test click handlers to verify behavior
+            document.addEventListener('click', (e) => {
+                if (e.target.tagName === 'IMG' && e.target.classList.contains('test-image')) {
+                    console.log('🖱️ Test image clicked:', e.target.src);
+                    console.log('📊 Expected behavior: Open in background tab');
+                }
+            });
+            
             console.log('🎉 Test page ready! Try hovering and clicking on images.');
+            console.log('📝 Check the console for debug information about metadata loading.');
         });
     </script>
 </body>
