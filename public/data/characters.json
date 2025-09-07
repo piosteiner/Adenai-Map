@@ -1705,23 +1705,6 @@
       "location": "Makir"
     },
     {
-      "id": "unbekannte_frau",
-      "name": "Unbekannte Frau",
-      "title": "",
-      "placeOfOrigin": "",
-      "coordinates": null,
-      "description": "",
-      "image": "https://adenai.piogino.ch/public/images/unknown_person_1.png",
-      "status": "alive",
-      "faction": "",
-      "relationship": "ally",
-      "firstMet": "",
-      "notes": "",
-      "movementHistory": [],
-      "createdAt": "2025-08-30T21:09:19.139Z",
-      "updatedAt": "2025-08-30T21:09:19.139Z"
-    },
-    {
       "id": "k_nigin_maeba_ii_",
       "name": "Königin Maeba II.",
       "title": "Hüterin von Basapo",
@@ -1801,5 +1784,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:46:44.103Z"
+  "lastUpdated": "2025-09-07T19:47:53.993Z"
 }
