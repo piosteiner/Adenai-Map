@@ -866,23 +866,6 @@
       "updatedAt": "2025-08-28T05:00:05.156Z"
     },
     {
-      "id": "pio_s_minimalist",
-      "name": "Pio's Minimalist",
-      "title": "",
-      "placeOfOrigin": "",
-      "coordinates": null,
-      "description": "",
-      "image": "",
-      "status": "unknown",
-      "faction": "",
-      "relationship": "unknown",
-      "firstMet": "",
-      "notes": "",
-      "movementHistory": [],
-      "createdAt": "2025-08-28T10:27:05.732Z",
-      "updatedAt": "2025-08-28T10:27:05.732Z"
-    },
-    {
       "id": "k_nig_torrack",
       "name": "König Torrack",
       "title": "König von Rena",
@@ -1822,5 +1805,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:45:48.711Z"
+  "lastUpdated": "2025-09-07T19:45:55.311Z"
 }
