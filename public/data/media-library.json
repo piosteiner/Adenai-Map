@@ -3801,7 +3801,50 @@
       },
       "fileSize": 3221126,
       "mimeType": "image/png"
+    },
+    "characters-msatd2dmywrx": {
+      "id": "characters-msatd2dmywrx",
+      "category": "characters",
+      "title": "Aasimar Cleric",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:14:29.617Z",
+      "sizes": {
+        "thumb": {
+          "filename": "msatd2dmywrx-thumb.webp",
+          "url": "/media/msatd2dmywrx-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "msatd2dmywrx-small.webp",
+          "url": "/media/msatd2dmywrx-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "msatd2dmywrx-medium.webp",
+          "url": "/media/msatd2dmywrx-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "msatd2dmywrx-large.webp",
+          "url": "/media/msatd2dmywrx-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "msatd2dmywrx-original.webp",
+          "url": "/media/msatd2dmywrx-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2806698,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:14:01.519Z"
+  "lastUpdated": "2025-09-07T18:14:29.888Z"
 }
