@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "d6ae5c180dad46e19f0697705b0d600151542a9d",
+      "action": "update",
+      "type": "character",
+      "itemName": "Matteo Gill",
+      "user": "gm",
+      "timestamp": "2025-09-07T19:45:27.051Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T19:45:27.051Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: matteo_gill (by gm) - updated image"
+    },
+    {
       "commitSha": "b5beebfcf245d056afe6445c232ad8ef2647ef1a",
       "action": "update",
       "type": "character",
@@ -5605,5 +5618,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-07T19:45:15.839Z"
+  "lastUpdated": "2025-09-07T19:45:27.051Z"
 }
