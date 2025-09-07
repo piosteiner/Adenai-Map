@@ -2296,7 +2296,50 @@
       },
       "fileSize": 3957259,
       "mimeType": "image/png"
+    },
+    "characters-stoeaf1v2w5b": {
+      "id": "characters-stoeaf1v2w5b",
+      "category": "characters",
+      "title": "Pretty Young Human",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:58:13.941Z",
+      "sizes": {
+        "thumb": {
+          "filename": "stoeaf1v2w5b-thumb.webp",
+          "url": "/media/stoeaf1v2w5b-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "stoeaf1v2w5b-small.webp",
+          "url": "/media/stoeaf1v2w5b-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "stoeaf1v2w5b-medium.webp",
+          "url": "/media/stoeaf1v2w5b-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "stoeaf1v2w5b-large.webp",
+          "url": "/media/stoeaf1v2w5b-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "stoeaf1v2w5b-original.webp",
+          "url": "/media/stoeaf1v2w5b-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3464577,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:57:41.369Z"
+  "lastUpdated": "2025-09-07T17:58:14.255Z"
 }
