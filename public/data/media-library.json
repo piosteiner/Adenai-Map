@@ -4016,7 +4016,50 @@
       },
       "fileSize": 1605875,
       "mimeType": "image/png"
+    },
+    "maps-dtdtu3sm9559": {
+      "id": "maps-dtdtu3sm9559",
+      "category": "maps",
+      "title": "Valaris",
+      "caption": "",
+      "credits": "drawn by Pio Gino Steiner",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:34:20.654Z",
+      "sizes": {
+        "thumb": {
+          "filename": "dtdtu3sm9559-thumb.webp",
+          "url": "/media/dtdtu3sm9559-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "dtdtu3sm9559-small.webp",
+          "url": "/media/dtdtu3sm9559-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "dtdtu3sm9559-medium.webp",
+          "url": "/media/dtdtu3sm9559-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "dtdtu3sm9559-large.webp",
+          "url": "/media/dtdtu3sm9559-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "dtdtu3sm9559-original.webp",
+          "url": "/media/dtdtu3sm9559-original.webp",
+          "width": 3508,
+          "height": 2480
+        }
+      },
+      "fileSize": 3753667,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:21:14.663Z"
+  "lastUpdated": "2025-09-07T18:34:20.900Z"
 }
