@@ -2511,7 +2511,50 @@
       },
       "fileSize": 4017017,
       "mimeType": "image/png"
+    },
+    "characters-eggmfttkj9ks": {
+      "id": "characters-eggmfttkj9ks",
+      "category": "characters",
+      "title": "Dark Human",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:00:11.990Z",
+      "sizes": {
+        "thumb": {
+          "filename": "eggmfttkj9ks-thumb.webp",
+          "url": "/media/eggmfttkj9ks-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "eggmfttkj9ks-small.webp",
+          "url": "/media/eggmfttkj9ks-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "eggmfttkj9ks-medium.webp",
+          "url": "/media/eggmfttkj9ks-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "eggmfttkj9ks-large.webp",
+          "url": "/media/eggmfttkj9ks-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "eggmfttkj9ks-original.webp",
+          "url": "/media/eggmfttkj9ks-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2451502,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:59:44.605Z"
+  "lastUpdated": "2025-09-07T18:00:12.273Z"
 }
