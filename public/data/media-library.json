@@ -407,7 +407,7 @@
       "category": "characters",
       "title": "Female Goliath Fighter",
       "caption": "",
-      "credits": "AI",
+      "credits": "AI Generated - GPT5",
       "tags": [],
       "uploadDate": "2025-09-07T16:58:48.742Z",
       "sizes": {
@@ -443,7 +443,8 @@
         }
       },
       "fileSize": 2784294,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-07T16:58:59.060Z"
     }
   },
   "lastUpdated": "2025-09-07T16:58:48.967Z"
