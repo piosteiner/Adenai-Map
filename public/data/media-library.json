@@ -1133,7 +1133,50 @@
       },
       "fileSize": 3340289,
       "mimeType": "image/png"
+    },
+    "characters-4zoogx6czkdj": {
+      "id": "characters-4zoogx6czkdj",
+      "category": "characters",
+      "title": "Matteo Gill",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:12:13.276Z",
+      "sizes": {
+        "thumb": {
+          "filename": "4zoogx6czkdj-thumb.webp",
+          "url": "/media/4zoogx6czkdj-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "4zoogx6czkdj-small.webp",
+          "url": "/media/4zoogx6czkdj-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "4zoogx6czkdj-medium.webp",
+          "url": "/media/4zoogx6czkdj-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "4zoogx6czkdj-large.webp",
+          "url": "/media/4zoogx6czkdj-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "4zoogx6czkdj-original.webp",
+          "url": "/media/4zoogx6czkdj-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3303695,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:11:53.258Z"
+  "lastUpdated": "2025-09-07T17:12:13.517Z"
 }
