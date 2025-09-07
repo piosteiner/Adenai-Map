@@ -3672,7 +3672,50 @@
       },
       "fileSize": 2986617,
       "mimeType": "image/png"
+    },
+    "characters-awr3vetelj1a": {
+      "id": "characters-awr3vetelj1a",
+      "category": "characters",
+      "title": "Gnome Sailor",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:13:16.965Z",
+      "sizes": {
+        "thumb": {
+          "filename": "awr3vetelj1a-thumb.webp",
+          "url": "/media/awr3vetelj1a-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "awr3vetelj1a-small.webp",
+          "url": "/media/awr3vetelj1a-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "awr3vetelj1a-medium.webp",
+          "url": "/media/awr3vetelj1a-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "awr3vetelj1a-large.webp",
+          "url": "/media/awr3vetelj1a-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "awr3vetelj1a-original.webp",
+          "url": "/media/awr3vetelj1a-original.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "fileSize": 1811603,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:12:54.224Z"
+  "lastUpdated": "2025-09-07T18:13:17.231Z"
 }
