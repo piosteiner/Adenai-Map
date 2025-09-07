@@ -4575,7 +4575,50 @@
       },
       "fileSize": 885470,
       "mimeType": "image/png"
+    },
+    "characters-ejhjt2k1p4bj": {
+      "id": "characters-ejhjt2k1p4bj",
+      "category": "characters",
+      "title": "Lord Remus",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T19:05:25.177Z",
+      "sizes": {
+        "thumb": {
+          "filename": "ejhjt2k1p4bj-thumb.webp",
+          "url": "/media/ejhjt2k1p4bj-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "ejhjt2k1p4bj-small.webp",
+          "url": "/media/ejhjt2k1p4bj-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "ejhjt2k1p4bj-medium.webp",
+          "url": "/media/ejhjt2k1p4bj-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "ejhjt2k1p4bj-large.webp",
+          "url": "/media/ejhjt2k1p4bj-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "ejhjt2k1p4bj-original.webp",
+          "url": "/media/ejhjt2k1p4bj-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2790611,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T19:04:55.650Z"
+  "lastUpdated": "2025-09-07T19:05:25.427Z"
 }
