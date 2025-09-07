@@ -3,9 +3,38 @@ window.mediaPicker = {
     currentCallback: null,
     selectedMedia: null,
 
+    // Reset both character and location image selectors
+    reset() {
+        this.clearCharacterImage();
+        this.clearLocationImage();
+    },
+
     // Initialize the media picker
     init() {
         this.setupEventListeners();
+    },
+
+    // Reinitialize event listeners (useful when modals are opened)
+    reinitialize() {
+        this.setupEventListeners();
+        this.checkExistingImages();
+    },
+
+    // Check and display existing images when reinitializing
+    checkExistingImages() {
+        // Check character image
+        const characterImageUrl = document.getElementById('character-image-url');
+        if (characterImageUrl && characterImageUrl.value) {
+            const mediaItem = { url: characterImageUrl.value, name: 'Selected Image' };
+            this.setCharacterImage(mediaItem);
+        }
+
+        // Check location image
+        const locationImageUrl = document.getElementById('location-image-url');
+        if (locationImageUrl && locationImageUrl.value) {
+            const mediaItem = { url: locationImageUrl.value, name: 'Selected Image' };
+            this.setLocationImage(mediaItem);
+        }
     },
 
     // Setup event listeners
@@ -128,9 +157,19 @@ window.mediaPicker = {
             if (matches) visibleCount++;
         });
 
-        // Show "no results" message if nothing matches
+        // Remove any existing "no results" message
+        const existingEmpty = grid.querySelector('.empty-search');
+        if (existingEmpty) {
+            existingEmpty.remove();
+        }
+
+        // Show "no results" message if nothing matches, but keep the items for future searches
         if (visibleCount === 0) {
-            grid.innerHTML = '<div class="empty">No images match your search</div>';
+            const emptyDiv = document.createElement('div');
+            emptyDiv.className = 'empty-search';
+            emptyDiv.textContent = 'No images match your search';
+            emptyDiv.style.cssText = 'text-align: center; padding: 2rem; color: var(--text-secondary); grid-column: 1 / -1;';
+            grid.appendChild(emptyDiv);
         }
     },
 
@@ -167,15 +206,16 @@ window.mediaPicker = {
         try {
             grid.innerHTML = '<div class="loading">Loading images...</div>';
 
-            // Build query parameters
-            const params = new URLSearchParams();
+            // Load ALL media for proper filtering, same as main media tab
+            const params = new URLSearchParams({
+                page: '1',
+                limit: '10000' // Load all images
+            });
+            
             if (categoryFilter?.value) {
                 params.append('category', categoryFilter.value);
             }
-            if (searchInput?.value) {
-                params.append('search', searchInput.value);
-            }
-            params.append('limit', '50'); // Load more items for picker
+            // Note: Don't add search param here - we handle search client-side for better UX
 
             const response = await fetch(`/api/media?${params}`, {
                 credentials: 'include'
@@ -187,6 +227,12 @@ window.mediaPicker = {
 
             const data = await response.json();
             this.renderMediaGrid(Object.entries(data.media || {}));
+
+            // Apply current search if there is one
+            const currentSearch = searchInput?.value?.toLowerCase().trim();
+            if (currentSearch) {
+                setTimeout(() => this.filterDisplayedItems(currentSearch), 100);
+            }
 
         } catch (error) {
             console.error('Error loading media:', error);
@@ -205,7 +251,7 @@ window.mediaPicker = {
         }
 
         grid.innerHTML = mediaArray.map(([id, item]) => {
-            const imageUrl = item.sizes?.small?.url || item.sizes?.thumbnail?.url || item.sizes?.original?.url;
+            const imageUrl = item.sizes?.small?.url || item.sizes?.medium?.url || item.sizes?.original?.url;
             const displayName = item.title || 'Unnamed';
             const credits = item.credits ? `📸 ${item.credits}` : '';
             const caption = item.caption || '';

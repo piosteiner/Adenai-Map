@@ -256,6 +256,11 @@ class AdminCharacters {
         this.editingCharacter = null;
         this.uiManager.populateCharacterForm();
         this.ui.openModal('add-character-modal');
+        
+        // Reinitialize media picker for this modal
+        if (window.mediaPicker) {
+            window.mediaPicker.reinitialize();
+        }
     }
 
     editCharacter(characterId) {
@@ -272,6 +277,11 @@ class AdminCharacters {
         this.editingCharacter = characterId;
         this.uiManager.populateCharacterForm(character);
         this.ui.openModal('add-character-modal');
+        
+        // Reinitialize media picker for this modal
+        if (window.mediaPicker) {
+            window.mediaPicker.reinitialize();
+        }
     }
 
     closeCharacterModal() {
@@ -294,6 +304,11 @@ class AdminCharacters {
         if (result) {
             await this.loadCharacters();
             this.closeCharacterModal();
+            
+            // Reset media picker to clear any selections
+            if (window.mediaPicker) {
+                window.mediaPicker.reset();
+            }
             
             // Restore scroll position for edits
             if (this.editingCharacter) {

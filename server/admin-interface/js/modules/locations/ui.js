@@ -190,6 +190,14 @@ class LocationUI {
                 y: coords[1] || '',
                 visited: !!props.visited
             });
+
+            // If there's an image, set up the media picker display
+            if (props.image && window.mediaPicker) {
+                setTimeout(() => {
+                    const mediaItem = { url: props.image, name: props.name || 'Selected Image' };
+                    window.mediaPicker.setLocationImage(mediaItem);
+                }, 100);
+            }
         } else {
             // Clear form for new location
             this.ui.resetForm('location-form');

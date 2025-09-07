@@ -1,0 +1,33 @@
+/* Media Picker Image Preview Height Fix */
+.picker-media-image {
+    min-height: 180px !important;
+    height: 180px !important;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    width: 100%;
+}
+
+/* Form media picker images should be smaller to fit the container */
+.media-picker-image {
+    height: 120px !important;
+    max-height: 120px !important;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+}
+
+/* Ensure the display container accommodates the buttons */
+.media-picker-wrapper {
+    overflow: visible !important;
+}
+
+.media-picker-display {
+    overflow: hidden !important;
+}
+
+/* If the grid items need a min height as well */
+.picker-media-item {
+    min-height: 240px !important;
+}

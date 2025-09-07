@@ -217,6 +217,14 @@ class CharacterUI {
                 firstMet: character.firstMet || '',
                 notes: character.notes || ''
             });
+
+            // If there's an image, set up the media picker display
+            if (character.image && window.mediaPicker) {
+                setTimeout(() => {
+                    const mediaItem = { url: character.image, name: character.name || 'Selected Image' };
+                    window.mediaPicker.setCharacterImage(mediaItem);
+                }, 100);
+            }
         } else {
             // Clear form
             this.ui.resetForm('character-form');

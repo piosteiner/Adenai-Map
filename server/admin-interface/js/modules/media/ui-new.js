@@ -112,17 +112,32 @@ window.mediaUI = {
         }
     },
     
-    // Setup infinite scroll (disabled since we load all at once)
+    // Setup infinite scroll
     setupInfiniteScroll() {
-        // No longer needed since we load all media at once for proper search functionality
-        return;
+        const mediaGrid = document.getElementById('media-grid');
+        if (!mediaGrid) return;
+        
+        this._infiniteScrollHandler = () => {
+            if (this._loadingMore || this._allMediaLoaded) return;
+            
+            const scrollBuffer = 300; // px from bottom
+            const scrollPosition = mediaGrid.scrollTop + mediaGrid.clientHeight;
+            const scrollHeight = mediaGrid.scrollHeight;
+            
+            if (scrollHeight - scrollPosition < scrollBuffer) {
+                this.loadMoreMedia();
+            }
+        };
+        
+        mediaGrid.addEventListener('scroll', this._infiniteScrollHandler);
     },
     
     // Reset scroll state
     resetScrollState() {
-        this._allMedia = null;
-        this._filteredMedia = null;
         this._allMediaLoaded = false;
+        this._loadingMore = false;
+        this._mediaCache = [];
+        window.mediaOperations.currentPage = 1;
     },
     
     // Open upload modal
@@ -268,10 +283,13 @@ window.mediaUI = {
         if (progress) progress.style.display = 'none';
     },
     
-    // Load and display media (load ALL images at once)
+    // Load and display media (initial load)
     async loadMedia(showUpdatingMessage = false) {
         const mediaGrid = document.getElementById('media-grid');
         if (!mediaGrid) return;
+        
+        // Reset state for new load
+        this.resetScrollState();
         
         try {
             if (showUpdatingMessage) {
@@ -280,23 +298,29 @@ window.mediaUI = {
                 mediaGrid.innerHTML = '<div class="loading">Loading media library... 🔄</div>';
             }
             
-            // Load ALL media at once with a very high limit for proper search functionality
-            const result = await window.mediaOperations.fetchMedia(1, '', '', 10000);
+            const category = document.getElementById('media-category-filter')?.value || '';
+            const search = document.getElementById('media-search')?.value || '';
+            
+            const result = await window.mediaOperations.fetchMedia(
+                window.mediaOperations.currentPage,
+                category,
+                search
+            );
             
             if (result.success) {
-                // Store all media for client-side filtering
-                this._allMedia = result.media;
-                this._filteredMedia = result.media;
+                this._mediaCache = Object.entries(result.media);
+                this.renderMediaGrid(result.media, true);
                 
-                // Apply current filters
-                this.applyClientSideFilters();
-                
-                // Hide pagination since we load everything
+                // Hide pagination
                 const paginationEl = document.getElementById('media-pagination');
                 if (paginationEl) paginationEl.style.display = 'none';
                 
-                // Mark as all loaded since we got everything
-                this._allMediaLoaded = true;
+                // Check if more pages available
+                if (result.pagination.page < result.pagination.totalPages) {
+                    this._allMediaLoaded = false;
+                } else {
+                    this._allMediaLoaded = true;
+                }
             } else {
                 throw new Error(result.error || 'Failed to load media');
             }
@@ -312,12 +336,48 @@ window.mediaUI = {
         }
     },
 
+    // Load more media for infinite scroll
+    async loadMoreMedia() {
+        if (this._allMediaLoaded || this._loadingMore) return;
+        
+        this._loadingMore = true;
+        
+        try {
+            window.mediaOperations.currentPage++;
+            const category = document.getElementById('media-category-filter')?.value || '';
+            const search = document.getElementById('media-search')?.value || '';
+            
+            const result = await window.mediaOperations.fetchMedia(
+                window.mediaOperations.currentPage,
+                category,
+                search
+            );
+            
+            if (result.success) {
+                const newMedia = Object.entries(result.media);
+                if (newMedia.length > 0) {
+                    this._mediaCache = this._mediaCache.concat(newMedia);
+                    // Append new items to grid
+                    this.appendMediaToGrid(result.media);
+                }
+                
+                if (result.pagination.page >= result.pagination.totalPages) {
+                    this._allMediaLoaded = true;
+                }
+            }
+        } catch (error) {
+            console.error('Error loading more media:', error);
+        } finally {
+            this._loadingMore = false;
+        }
+    },
+    
     // Render media grid (replace all content)
     renderMediaGrid(media, replaceAll = true) {
         const mediaGrid = document.getElementById('media-grid');
         if (!mediaGrid) return;
         
-        let mediaArray = Object.entries(media);
+        const mediaArray = Object.entries(media);
         
         if (mediaArray.length === 0) {
             mediaGrid.innerHTML = `
@@ -329,13 +389,6 @@ window.mediaUI = {
             `;
             return;
         }
-        
-        // Sort alphabetically by title on the frontend as well
-        mediaArray.sort((a, b) => {
-            const titleA = (a[1].title || a[0] || '').toLowerCase();
-            const titleB = (b[1].title || b[0] || '').toLowerCase();
-            return titleA.localeCompare(titleB);
-        });
         
         mediaGrid.innerHTML = mediaArray.map(([id, item]) => this.createMediaItem(id, item)).join('');
         this.setupMediaItemListeners();
@@ -519,48 +572,10 @@ window.mediaUI = {
         }
     },
     
-    // Apply client-side filters to all loaded media
-    applyClientSideFilters() {
-        if (!this._allMedia) return;
-        
-        const category = document.getElementById('media-category-filter')?.value || '';
-        const search = document.getElementById('media-search')?.value || '';
-        
-        let filteredEntries = Object.entries(this._allMedia);
-        
-        // Apply category filter
-        if (category) {
-            filteredEntries = filteredEntries.filter(([id, item]) => item.category === category);
-        }
-        
-        // Apply search filter
-        if (search) {
-            const searchLower = search.toLowerCase();
-            filteredEntries = filteredEntries.filter(([id, item]) => 
-                item.title?.toLowerCase().includes(searchLower) ||
-                item.caption?.toLowerCase().includes(searchLower) ||
-                item.credits?.toLowerCase().includes(searchLower) ||
-                item.tags?.some(tag => tag.toLowerCase().includes(searchLower))
-            );
-        }
-        
-        // Convert back to object
-        this._filteredMedia = Object.fromEntries(filteredEntries);
-        
-        // Render the filtered results
-        this.renderMediaGrid(this._filteredMedia, true);
-    },
-    
     // Apply filters
     applyFilters() {
-        if (this._allMedia) {
-            // Use client-side filtering if all media is loaded
-            this.applyClientSideFilters();
-        } else {
-            // Fallback to server-side filtering
-            this.resetScrollState();
-            this.loadMedia();
-        }
+        this.resetScrollState();
+        this.loadMedia();
     },
 
     // Open edit modal

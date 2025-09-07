@@ -136,18 +136,27 @@ router.get('/', async (req, res) => {
     if (search) {
       const searchLower = search.toLowerCase();
       filteredMedia = filteredMedia.filter(([id, item]) => 
-        item.alt?.toLowerCase().includes(searchLower) ||
+        item.title?.toLowerCase().includes(searchLower) ||
         item.caption?.toLowerCase().includes(searchLower) ||
         item.credits?.toLowerCase().includes(searchLower) ||
         item.tags?.some(tag => tag.toLowerCase().includes(searchLower))
       );
     }
     
+    // Sort alphabetically by title (fallback to id if no title)
+    filteredMedia.sort((a, b) => {
+      const titleA = (a[1].title || a[0] || '').toLowerCase();
+      const titleB = (b[1].title || b[0] || '').toLowerCase();
+      if (titleA < titleB) return -1;
+      if (titleA > titleB) return 1;
+      return 0;
+    });
+
     // Pagination
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + parseInt(limit);
     const paginatedMedia = filteredMedia.slice(startIndex, endIndex);
-    
+
     res.json({
       success: true,
       media: Object.fromEntries(paginatedMedia),

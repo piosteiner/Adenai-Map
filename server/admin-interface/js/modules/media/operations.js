@@ -47,11 +47,11 @@ window.mediaOperations = {
     },
     
     // Fetch media library with pagination and filtering
-    async fetchMedia(page = 1, category = '', search = '') {
+    async fetchMedia(page = 1, category = '', search = '', limit = null) {
         try {
             const params = new URLSearchParams({
                 page: page.toString(),
-                limit: this.itemsPerPage.toString()
+                limit: (limit || this.itemsPerPage).toString()
             });
             
             if (category) params.append('category', category);

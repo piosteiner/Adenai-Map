@@ -170,6 +170,11 @@ class AdminLocations {
         this.editingLocation = null;
         this.uiManager.populateLocationForm();
         this.ui.openModal('add-location-modal');
+        
+        // Reinitialize media picker for this modal
+        if (window.mediaPicker) {
+            window.mediaPicker.reinitialize();
+        }
     }
 
     editLocation(locationName) {
@@ -186,6 +191,11 @@ class AdminLocations {
         this.editingLocation = locationName;
         this.uiManager.populateLocationForm(location);
         this.ui.openModal('add-location-modal');
+        
+        // Reinitialize media picker for this modal
+        if (window.mediaPicker) {
+            window.mediaPicker.reinitialize();
+        }
     }
 
     closeModal() {
@@ -216,6 +226,11 @@ class AdminLocations {
             await this.loadLocations();
             
             this.closeModal();
+            
+            // Reset media picker to clear any selections
+            if (window.mediaPicker) {
+                window.mediaPicker.reset();
+            }
             
             // Restore scroll position for edits
             if (this.editingLocation) {
