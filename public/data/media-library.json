@@ -3156,7 +3156,50 @@
       },
       "fileSize": 1970019,
       "mimeType": "image/png"
+    },
+    "characters-jb6c3kph4hj6": {
+      "id": "characters-jb6c3kph4hj6",
+      "category": "characters",
+      "title": "Dragonborn Prisoner",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:06:49.743Z",
+      "sizes": {
+        "thumb": {
+          "filename": "jb6c3kph4hj6-thumb.webp",
+          "url": "/media/jb6c3kph4hj6-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "jb6c3kph4hj6-small.webp",
+          "url": "/media/jb6c3kph4hj6-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "jb6c3kph4hj6-medium.webp",
+          "url": "/media/jb6c3kph4hj6-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "jb6c3kph4hj6-large.webp",
+          "url": "/media/jb6c3kph4hj6-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "jb6c3kph4hj6-original.webp",
+          "url": "/media/jb6c3kph4hj6-original.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "fileSize": 1791418,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:06:33.346Z"
+  "lastUpdated": "2025-09-07T18:06:50.024Z"
 }
