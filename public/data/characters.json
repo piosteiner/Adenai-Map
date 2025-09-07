@@ -1042,12 +1042,9 @@
       "name": "Dina Eisfeld",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": [
-        1090,
-        1260
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/dina_close.png",
+      "image": "/media/hjqotmro1i0j-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1083,8 +1080,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:28:54.142Z",
-      "updatedAt": "2025-08-29T21:01:11.932Z",
-      "location": "Yosefka Akademie"
+      "updatedAt": "2025-09-07T19:26:25.340Z"
     },
     {
       "id": "dravak_svya",
@@ -1892,5 +1888,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:26:11.490Z"
+  "lastUpdated": "2025-09-07T19:26:25.340Z"
 }
