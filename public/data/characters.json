@@ -1016,7 +1016,7 @@
         967
       ],
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/colette_close.png",
+      "image": "/media/yt0ky5hs5rg7-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1025,8 +1025,8 @@
       "movementHistory": [],
       "currentLocation": {
         "location": "Nordmund",
-        "date": "2025-08-29",
-        "dateStart": "2025-08-29",
+        "date": "2025-09-07",
+        "dateStart": "2025-09-07",
         "dateEnd": null,
         "coordinates": [
           1082,
@@ -1035,7 +1035,7 @@
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2025-08-29T20:24:46.436Z",
-      "updatedAt": "2025-08-29T21:01:33.199Z"
+      "updatedAt": "2025-09-07T19:26:11.490Z"
     },
     {
       "id": "dina_eisfeld",
@@ -1892,5 +1892,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:25:54.394Z"
+  "lastUpdated": "2025-09-07T19:26:11.490Z"
 }
