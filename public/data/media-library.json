@@ -875,7 +875,50 @@
       },
       "fileSize": 2444432,
       "mimeType": "image/png"
+    },
+    "characters-vx2tquz3u31i": {
+      "id": "characters-vx2tquz3u31i",
+      "category": "characters",
+      "title": "Jara Koreen",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:08:29.577Z",
+      "sizes": {
+        "thumb": {
+          "filename": "vx2tquz3u31i-thumb.webp",
+          "url": "/media/vx2tquz3u31i-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "vx2tquz3u31i-small.webp",
+          "url": "/media/vx2tquz3u31i-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "vx2tquz3u31i-medium.webp",
+          "url": "/media/vx2tquz3u31i-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "vx2tquz3u31i-large.webp",
+          "url": "/media/vx2tquz3u31i-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "vx2tquz3u31i-original.webp",
+          "url": "/media/vx2tquz3u31i-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3476057,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:08:01.894Z"
+  "lastUpdated": "2025-09-07T17:08:29.824Z"
 }
