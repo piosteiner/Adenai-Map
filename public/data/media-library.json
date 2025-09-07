@@ -703,7 +703,50 @@
       },
       "fileSize": 2817963,
       "mimeType": "image/png"
+    },
+    "characters-rcnvmy7kkvn6": {
+      "id": "characters-rcnvmy7kkvn6",
+      "category": "characters",
+      "title": "Eriosa Süssblatt",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:06:09.075Z",
+      "sizes": {
+        "thumb": {
+          "filename": "rcnvmy7kkvn6-thumb.webp",
+          "url": "/media/rcnvmy7kkvn6-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "rcnvmy7kkvn6-small.webp",
+          "url": "/media/rcnvmy7kkvn6-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "rcnvmy7kkvn6-medium.webp",
+          "url": "/media/rcnvmy7kkvn6-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "rcnvmy7kkvn6-large.webp",
+          "url": "/media/rcnvmy7kkvn6-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "rcnvmy7kkvn6-original.webp",
+          "url": "/media/rcnvmy7kkvn6-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2968497,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:05:39.476Z"
+  "lastUpdated": "2025-09-07T17:06:09.294Z"
 }
