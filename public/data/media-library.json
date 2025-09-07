@@ -3457,7 +3457,50 @@
       },
       "fileSize": 2917235,
       "mimeType": "image/png"
+    },
+    "characters-0md8qrop8n7z": {
+      "id": "characters-0md8qrop8n7z",
+      "category": "characters",
+      "title": "Guard Chief",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:10:04.307Z",
+      "sizes": {
+        "thumb": {
+          "filename": "0md8qrop8n7z-thumb.webp",
+          "url": "/media/0md8qrop8n7z-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "0md8qrop8n7z-small.webp",
+          "url": "/media/0md8qrop8n7z-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "0md8qrop8n7z-medium.webp",
+          "url": "/media/0md8qrop8n7z-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "0md8qrop8n7z-large.webp",
+          "url": "/media/0md8qrop8n7z-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "0md8qrop8n7z-original.webp",
+          "url": "/media/0md8qrop8n7z-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2618733,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:09:34.808Z"
+  "lastUpdated": "2025-09-07T18:10:04.562Z"
 }
