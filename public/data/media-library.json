@@ -3930,7 +3930,50 @@
       },
       "fileSize": 1819524,
       "mimeType": "image/png"
+    },
+    "characters-hj4ptf2t6cce": {
+      "id": "characters-hj4ptf2t6cce",
+      "category": "characters",
+      "title": "Tabaxi Dual Wielder Fighter",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:16:33.510Z",
+      "sizes": {
+        "thumb": {
+          "filename": "hj4ptf2t6cce-thumb.webp",
+          "url": "/media/hj4ptf2t6cce-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "hj4ptf2t6cce-small.webp",
+          "url": "/media/hj4ptf2t6cce-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "hj4ptf2t6cce-medium.webp",
+          "url": "/media/hj4ptf2t6cce-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "hj4ptf2t6cce-large.webp",
+          "url": "/media/hj4ptf2t6cce-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "hj4ptf2t6cce-original.webp",
+          "url": "/media/hj4ptf2t6cce-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3105810,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:15:25.700Z"
+  "lastUpdated": "2025-09-07T18:16:33.753Z"
 }
