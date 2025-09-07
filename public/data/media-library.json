@@ -3070,7 +3070,50 @@
       },
       "fileSize": 3013239,
       "mimeType": "image/png"
+    },
+    "characters-cnsfag0f421s": {
+      "id": "characters-cnsfag0f421s",
+      "category": "characters",
+      "title": "Tiefling",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:06:13.253Z",
+      "sizes": {
+        "thumb": {
+          "filename": "cnsfag0f421s-thumb.webp",
+          "url": "/media/cnsfag0f421s-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "cnsfag0f421s-small.webp",
+          "url": "/media/cnsfag0f421s-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "cnsfag0f421s-medium.webp",
+          "url": "/media/cnsfag0f421s-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "cnsfag0f421s-large.webp",
+          "url": "/media/cnsfag0f421s-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "cnsfag0f421s-original.webp",
+          "url": "/media/cnsfag0f421s-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2758661,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:05:51.308Z"
+  "lastUpdated": "2025-09-07T18:06:13.515Z"
 }
