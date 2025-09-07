@@ -8,15 +8,16 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "",
+      "image": "/media/1757247474286-Petrel_Kormorant_small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "ally",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "updatedAt": "2025-08-27T10:41:04.735Z",
-      "createdAt": "2025-08-27T17:53:53.624Z"
+      "currentLocation": null,
+      "createdAt": "2025-08-27T17:53:53.624Z",
+      "updatedAt": "2025-09-07T12:42:12.683Z"
     },
     {
       "id": "avery",
@@ -1895,5 +1896,5 @@
       "updatedAt": "2025-09-07T12:41:46.791Z"
     }
   ],
-  "lastUpdated": "2025-09-07T12:41:46.791Z"
+  "lastUpdated": "2025-09-07T12:42:12.683Z"
 }
