@@ -4407,7 +4407,7 @@
     "characters-krx8e5u6w6pn": {
       "id": "characters-krx8e5u6w6pn",
       "category": "characters",
-      "title": "Abu Wanted Poster",
+      "title": "Wanted Poster - Abu",
       "caption": "",
       "credits": "drawn by Pio Gino Steiner",
       "tags": [],
@@ -4445,7 +4445,8 @@
         }
       },
       "fileSize": 812527,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-07T19:14:36.527Z"
     },
     "characters-0fphq5qtggmc": {
       "id": "characters-0fphq5qtggmc",
