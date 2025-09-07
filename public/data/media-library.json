@@ -4145,7 +4145,50 @@
       },
       "fileSize": 1539949,
       "mimeType": "image/jpeg"
+    },
+    "locations-hsxm3mxbyg8r": {
+      "id": "locations-hsxm3mxbyg8r",
+      "category": "locations",
+      "title": "Silbergrat",
+      "caption": "",
+      "credits": "AI Generated - Midjourney",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:39:36.730Z",
+      "sizes": {
+        "thumb": {
+          "filename": "hsxm3mxbyg8r-thumb.webp",
+          "url": "/media/hsxm3mxbyg8r-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "hsxm3mxbyg8r-small.webp",
+          "url": "/media/hsxm3mxbyg8r-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "hsxm3mxbyg8r-medium.webp",
+          "url": "/media/hsxm3mxbyg8r-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "hsxm3mxbyg8r-large.webp",
+          "url": "/media/hsxm3mxbyg8r-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "hsxm3mxbyg8r-original.webp",
+          "url": "/media/hsxm3mxbyg8r-original.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "fileSize": 1296801,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:36:35.936Z"
+  "lastUpdated": "2025-09-07T18:39:36.977Z"
 }
