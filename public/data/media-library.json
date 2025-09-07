@@ -445,7 +445,50 @@
       "fileSize": 2784294,
       "mimeType": "image/png",
       "lastModified": "2025-09-07T16:58:59.060Z"
+    },
+    "locations-yo2c0exwe5z6": {
+      "id": "locations-yo2c0exwe5z6",
+      "category": "locations",
+      "title": "Akonetchie",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T16:59:58.975Z",
+      "sizes": {
+        "thumb": {
+          "filename": "yo2c0exwe5z6-thumb.webp",
+          "url": "/media/yo2c0exwe5z6-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "yo2c0exwe5z6-small.webp",
+          "url": "/media/yo2c0exwe5z6-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "yo2c0exwe5z6-medium.webp",
+          "url": "/media/yo2c0exwe5z6-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "yo2c0exwe5z6-large.webp",
+          "url": "/media/yo2c0exwe5z6-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "yo2c0exwe5z6-original.webp",
+          "url": "/media/yo2c0exwe5z6-original.webp",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "fileSize": 2673915,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T16:58:48.967Z"
+  "lastUpdated": "2025-09-07T16:59:59.259Z"
 }
