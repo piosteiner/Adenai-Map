@@ -1244,12 +1244,9 @@
       "name": "Jara Koreen",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": [
-        916,
-        261
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/jara_close.png",
+      "image": "/media/vx2tquz3u31i-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1285,8 +1282,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:38:01.289Z",
-      "updatedAt": "2025-08-29T20:59:03.974Z",
-      "location": "Olecea"
+      "updatedAt": "2025-09-07T19:29:07.486Z"
     },
     {
       "id": "krista",
@@ -1880,5 +1876,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:28:56.731Z"
+  "lastUpdated": "2025-09-07T19:29:07.486Z"
 }
