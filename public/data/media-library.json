@@ -3586,7 +3586,50 @@
       },
       "fileSize": 3116122,
       "mimeType": "image/png"
+    },
+    "characters-okrt7otzbkbc": {
+      "id": "characters-okrt7otzbkbc",
+      "category": "characters",
+      "title": "Aarakocra Courier",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:11:48.461Z",
+      "sizes": {
+        "thumb": {
+          "filename": "okrt7otzbkbc-thumb.webp",
+          "url": "/media/okrt7otzbkbc-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "okrt7otzbkbc-small.webp",
+          "url": "/media/okrt7otzbkbc-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "okrt7otzbkbc-medium.webp",
+          "url": "/media/okrt7otzbkbc-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "okrt7otzbkbc-large.webp",
+          "url": "/media/okrt7otzbkbc-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "okrt7otzbkbc-original.webp",
+          "url": "/media/okrt7otzbkbc-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2781106,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:10:42.526Z"
+  "lastUpdated": "2025-09-07T18:11:48.731Z"
 }
