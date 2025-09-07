@@ -2812,7 +2812,50 @@
       },
       "fileSize": 3542548,
       "mimeType": "image/png"
+    },
+    "characters-c2h9wjpyfww9": {
+      "id": "characters-c2h9wjpyfww9",
+      "category": "characters",
+      "title": "Human",
+      "caption": "",
+      "credits": "AI Generated - GPT5: heavily based on a design from Dungeon Meshi",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:03:53.482Z",
+      "sizes": {
+        "thumb": {
+          "filename": "c2h9wjpyfww9-thumb.webp",
+          "url": "/media/c2h9wjpyfww9-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "c2h9wjpyfww9-small.webp",
+          "url": "/media/c2h9wjpyfww9-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "c2h9wjpyfww9-medium.webp",
+          "url": "/media/c2h9wjpyfww9-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "c2h9wjpyfww9-large.webp",
+          "url": "/media/c2h9wjpyfww9-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "c2h9wjpyfww9-original.webp",
+          "url": "/media/c2h9wjpyfww9-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2546294,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:03:24.801Z"
+  "lastUpdated": "2025-09-07T18:03:53.757Z"
 }
