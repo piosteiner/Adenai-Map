@@ -111,8 +111,6 @@
     "characters-6jugrtuo6jq5": {
       "id": "characters-6jugrtuo6jq5",
       "category": "characters",
-      "originalName": "theo.png",
-      "alt": "Theo",
       "caption": "Portrait of Theo",
       "credits": "AI Generated - OpenAI",
       "tags": [
@@ -153,13 +151,12 @@
       },
       "fileSize": 2163771,
       "mimeType": "image/png",
-      "lastModified": "2025-09-07T13:42:51.826Z"
+      "lastModified": "2025-09-07T14:20:14.111Z",
+      "title": "Theo"
     },
     "characters-g7b7j6jhzs5f": {
       "id": "characters-g7b7j6jhzs5f",
       "category": "characters",
-      "originalName": "Petrel Kormorant.png",
-      "alt": "Petrel Kormorant",
       "caption": "Portrait of Petrel Kormorant on his Veranda overlooking the Eastern See",
       "credits": "AI Generated - OpenAI",
       "tags": [
@@ -200,13 +197,12 @@
       },
       "fileSize": 2731040,
       "mimeType": "image/png",
-      "lastModified": "2025-09-07T13:42:51.827Z"
+      "lastModified": "2025-09-07T14:20:14.112Z",
+      "title": "Petrel Kormorant"
     },
     "characters-tryy7cw94miy": {
       "id": "characters-tryy7cw94miy",
       "category": "characters",
-      "originalName": "ChatGPT Image Sep 7, 2025, 02_38_43 PM.png",
-      "alt": "Lady Rivea",
       "caption": "Portrait of Lady Rivea",
       "credits": "AI Generated - OpenAI based on own drawing",
       "tags": [
@@ -247,13 +243,12 @@
       },
       "fileSize": 2349105,
       "mimeType": "image/png",
-      "lastModified": "2025-09-07T13:42:51.827Z"
+      "lastModified": "2025-09-07T14:20:14.112Z",
+      "title": "Lady Rivea"
     },
     "characters-0r2kk9zndrgw": {
       "id": "characters-0r2kk9zndrgw",
       "category": "characters",
-      "originalName": "ChatGPT Image Sep 7, 2025, 01_01_09 PM.png",
-      "alt": "Vivi Wulbren",
       "caption": "Portrait of Vivi Wulbren",
       "credits": "AI Generated - OpenAI based on own drawing",
       "tags": [
@@ -294,13 +289,12 @@
       },
       "fileSize": 2569153,
       "mimeType": "image/png",
-      "lastModified": "2025-09-07T13:42:51.828Z"
+      "lastModified": "2025-09-07T14:20:14.113Z",
+      "title": "Vivi Wulbren"
     },
     "locations-xwrsm4c088bp": {
       "id": "locations-xwrsm4c088bp",
       "category": "locations",
-      "originalName": "710bc097-1383-4c7a-8591-750c4ed6724c.png",
-      "alt": "Erhabene See",
       "caption": "Erhabene See",
       "credits": "AI Generated - GPT5: based on the the High Dunes in Colorado, USA",
       "tags": [
@@ -340,8 +334,10 @@
         }
       },
       "fileSize": 3307380,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "title": "Erhabene See",
+      "lastModified": "2025-09-07T14:20:14.113Z"
     }
   },
-  "lastUpdated": "2025-09-07T14:05:17.492Z"
+  "lastUpdated": "2025-09-07T14:20:14.113Z"
 }
