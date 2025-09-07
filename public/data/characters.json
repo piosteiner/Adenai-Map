@@ -1304,12 +1304,9 @@
       "name": "Krull Sturmbann",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": [
-        790,
-        769
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/krull_close.png",
+      "image": "/media/uq3kwrktvdic-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1345,8 +1342,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:40:02.491Z",
-      "updatedAt": "2025-08-29T21:03:56.576Z",
-      "location": "Wesdalen"
+      "updatedAt": "2025-09-07T19:44:24.337Z"
     },
     {
       "id": "ly_iss_moy",
@@ -1873,5 +1869,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:44:10.842Z"
+  "lastUpdated": "2025-09-07T19:44:24.337Z"
 }
