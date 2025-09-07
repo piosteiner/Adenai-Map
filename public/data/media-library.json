@@ -1651,7 +1651,50 @@
       },
       "fileSize": 3573478,
       "mimeType": "image/png"
+    },
+    "characters-w22t37548021": {
+      "id": "characters-w22t37548021",
+      "category": "characters",
+      "title": "Aristocat Human Male",
+      "caption": "",
+      "credits": "AI Generated - GPT5: heavily based on Emhyr var Emreis from the Witcher Series",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:49:19.144Z",
+      "sizes": {
+        "thumb": {
+          "filename": "w22t37548021-thumb.webp",
+          "url": "/media/w22t37548021-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "w22t37548021-small.webp",
+          "url": "/media/w22t37548021-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "w22t37548021-medium.webp",
+          "url": "/media/w22t37548021-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "w22t37548021-large.webp",
+          "url": "/media/w22t37548021-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "w22t37548021-original.webp",
+          "url": "/media/w22t37548021-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3580367,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:18:36.316Z"
+  "lastUpdated": "2025-09-07T17:49:19.394Z"
 }
