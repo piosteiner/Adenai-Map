@@ -1780,7 +1780,50 @@
       },
       "fileSize": 3873848,
       "mimeType": "image/png"
+    },
+    "characters-i6b65vr9h8es": {
+      "id": "characters-i6b65vr9h8es",
+      "category": "characters",
+      "title": "Human Artist",
+      "caption": "",
+      "credits": "AI Generated - GPT5: heavily based on Dandelion from the Witcher Series",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:51:38.507Z",
+      "sizes": {
+        "thumb": {
+          "filename": "i6b65vr9h8es-thumb.webp",
+          "url": "/media/i6b65vr9h8es-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "i6b65vr9h8es-small.webp",
+          "url": "/media/i6b65vr9h8es-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "i6b65vr9h8es-medium.webp",
+          "url": "/media/i6b65vr9h8es-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "i6b65vr9h8es-large.webp",
+          "url": "/media/i6b65vr9h8es-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "i6b65vr9h8es-original.webp",
+          "url": "/media/i6b65vr9h8es-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3670327,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:50:46.121Z"
+  "lastUpdated": "2025-09-07T17:51:38.815Z"
 }
