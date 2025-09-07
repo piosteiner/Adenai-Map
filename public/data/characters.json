@@ -1439,12 +1439,9 @@
       "name": "Matteo Gill",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": [
-        959,
-        1212
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/matteo_close.png",
+      "image": "/media/4zoogx6czkdj-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1480,8 +1477,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:42:21.319Z",
-      "updatedAt": "2025-08-29T20:58:39.705Z",
-      "location": "Byrgenwerft"
+      "updatedAt": "2025-09-07T19:45:26.206Z"
     },
     {
       "id": "orvil_plig",
@@ -1861,5 +1857,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:45:14.960Z"
+  "lastUpdated": "2025-09-07T19:45:26.206Z"
 }
