@@ -74,7 +74,7 @@
         407
       ],
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/lia_karthright_close.png",
+      "image": "/media/bo1ukulgxr7x-small.webp",
       "status": "alive",
       "faction": "Familie Karthright",
       "relationship": "ally",
@@ -114,8 +114,9 @@
           "movement_nr": 1
         }
       ],
+      "currentLocation": null,
       "createdAt": "2025-08-22T04:26:43.834Z",
-      "updatedAt": "2025-08-28T05:00:05.156Z"
+      "updatedAt": "2025-09-07T19:43:52.997Z"
     },
     {
       "id": "remus",
@@ -1872,5 +1873,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:29:37.368Z"
+  "lastUpdated": "2025-09-07T19:43:52.998Z"
 }
