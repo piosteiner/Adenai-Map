@@ -1484,12 +1484,9 @@
       "name": "Orvil Plig",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": [
-        650,
-        1000
-      ],
+      "coordinates": null,
       "description": "",
-      "image": "https://adenai.piogino.ch/public/images/orvil_close.png",
+      "image": "/media/wblxui2cop20-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1525,8 +1522,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:42:49.715Z",
-      "updatedAt": "2025-08-29T20:59:35.591Z",
-      "location": "Rena"
+      "updatedAt": "2025-09-07T19:45:40.469Z"
     },
     {
       "id": "ruben_karthright",
@@ -1857,5 +1853,5 @@
       "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T19:45:26.206Z"
+  "lastUpdated": "2025-09-07T19:45:40.469Z"
 }
