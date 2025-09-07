@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "b1a14c25cb49975c78c11a4e1e2d9faa08789ddb",
+      "action": "update",
+      "type": "character",
+      "itemName": "Königin Maeba II.",
+      "user": "gm",
+      "timestamp": "2025-09-07T19:29:38.355Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T19:29:38.355Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: k_nigin_maeba_ii_ (by gm) - updated image"
+    },
+    {
       "commitSha": "138ce75398d462cde56f7c045ec527ed2ac76b5b",
       "action": "update",
       "type": "character",
@@ -5436,5 +5449,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-07T19:29:23.032Z"
+  "lastUpdated": "2025-09-07T19:29:38.356Z"
 }
