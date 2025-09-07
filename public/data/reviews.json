@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "138ce75398d462cde56f7c045ec527ed2ac76b5b",
+      "action": "update",
+      "type": "character",
+      "itemName": "König Torrack",
+      "user": "gm",
+      "timestamp": "2025-09-07T19:29:23.032Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T19:29:23.032Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: k_nig_torrack (by gm) - updated image"
+    },
+    {
       "commitSha": "9503bdb13ca02460f7d3c4637a3dfa29d5bd89e7",
       "action": "update",
       "type": "character",
@@ -5423,5 +5436,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-07T19:29:08.628Z"
+  "lastUpdated": "2025-09-07T19:29:23.032Z"
 }
