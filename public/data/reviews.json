@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "d6ed911d3223272b5111419cd4c2f2aa8ac1f68d",
+      "action": "delete",
+      "type": "character",
+      "itemName": "Unbekannte Frau",
+      "user": "gm",
+      "timestamp": "2025-09-07T19:47:54.940Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-07T19:47:54.940Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Delete character: Unbekannte Frau (by gm) - Removed from campaign"
+    },
+    {
       "commitSha": "c0ead388d3ae0f5320a7157e1275e0188cdcfce4",
       "action": "update",
       "type": "character",
@@ -5709,5 +5722,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-07T19:46:45.096Z"
+  "lastUpdated": "2025-09-07T19:47:54.940Z"
 }
