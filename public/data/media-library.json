@@ -1563,7 +1563,50 @@
       },
       "fileSize": 17928544,
       "mimeType": "image/png"
+    },
+    "characters-hwmb1cg8q66o": {
+      "id": "characters-hwmb1cg8q66o",
+      "category": "characters",
+      "title": "Dwarfen Royal",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:17:12.629Z",
+      "sizes": {
+        "thumb": {
+          "filename": "hwmb1cg8q66o-thumb.webp",
+          "url": "/media/hwmb1cg8q66o-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "hwmb1cg8q66o-small.webp",
+          "url": "/media/hwmb1cg8q66o-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "hwmb1cg8q66o-medium.webp",
+          "url": "/media/hwmb1cg8q66o-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "hwmb1cg8q66o-large.webp",
+          "url": "/media/hwmb1cg8q66o-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "hwmb1cg8q66o-original.webp",
+          "url": "/media/hwmb1cg8q66o-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2905399,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:16:26.017Z"
+  "lastUpdated": "2025-09-07T17:17:12.871Z"
 }
