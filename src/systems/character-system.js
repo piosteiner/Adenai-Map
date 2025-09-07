@@ -620,7 +620,7 @@ class CharacterSystem {
 
     createCharacterPopup(character) {
         const imageHtml = character.image ? 
-            `<img src="${character.image}" alt="${character.name}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px; float: right; margin-left: 10px;">` : '';
+            `<img src="${character.image}" alt="${character.name}" style="width: 100px; height: 100px; object-fit: contain; border-radius: 8px; float: right; margin-left: 10px;">` : '';
         
         return `
             <div class="character-popup">
