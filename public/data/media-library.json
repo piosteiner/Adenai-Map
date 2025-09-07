@@ -1348,7 +1348,50 @@
       },
       "fileSize": 2073879,
       "mimeType": "image/png"
+    },
+    "characters-t959cl6pwbrk": {
+      "id": "characters-t959cl6pwbrk",
+      "category": "characters",
+      "title": "Xarnice Zed'ul",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:14:16.931Z",
+      "sizes": {
+        "thumb": {
+          "filename": "t959cl6pwbrk-thumb.webp",
+          "url": "/media/t959cl6pwbrk-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "t959cl6pwbrk-small.webp",
+          "url": "/media/t959cl6pwbrk-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "t959cl6pwbrk-medium.webp",
+          "url": "/media/t959cl6pwbrk-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "t959cl6pwbrk-large.webp",
+          "url": "/media/t959cl6pwbrk-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "t959cl6pwbrk-original.webp",
+          "url": "/media/t959cl6pwbrk-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2963274,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:13:49.544Z"
+  "lastUpdated": "2025-09-07T17:14:17.173Z"
 }
