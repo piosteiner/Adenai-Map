@@ -315,7 +315,50 @@
       },
       "fileSize": 3216233,
       "mimeType": "image/png"
+    },
+    "characters-locx1lzfwau8": {
+      "id": "characters-locx1lzfwau8",
+      "category": "characters",
+      "title": "Halfling Writer",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T16:57:45.650Z",
+      "sizes": {
+        "thumb": {
+          "filename": "locx1lzfwau8-thumb.webp",
+          "url": "/media/locx1lzfwau8-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "locx1lzfwau8-small.webp",
+          "url": "/media/locx1lzfwau8-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "locx1lzfwau8-medium.webp",
+          "url": "/media/locx1lzfwau8-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "locx1lzfwau8-large.webp",
+          "url": "/media/locx1lzfwau8-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "locx1lzfwau8-original.webp",
+          "url": "/media/locx1lzfwau8-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3000003,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T16:57:22.183Z"
+  "lastUpdated": "2025-09-07T16:57:45.884Z"
 }
