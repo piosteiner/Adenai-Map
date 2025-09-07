@@ -8,7 +8,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "/media/1757247474286-Petrel_Kormorant_small.webp",
+      "image": "/media/g7b7j6jhzs5f-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "ally",
@@ -17,7 +17,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-27T17:53:53.624Z",
-      "updatedAt": "2025-09-07T12:42:12.683Z"
+      "updatedAt": "2025-09-07T14:02:06.651Z"
     },
     {
       "id": "avery",
@@ -1885,7 +1885,7 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "/media/1757248806291-ChatGPT_Image_Sep_7__2025__02_38_43_PM_small.webp",
+      "image": "/media/tryy7cw94miy-small.webp",
       "status": "dead",
       "faction": "Sternenzirkel",
       "relationship": "ally",
@@ -1893,8 +1893,8 @@
       "notes": "",
       "movementHistory": [],
       "createdAt": "2025-09-07T12:41:46.791Z",
-      "updatedAt": "2025-09-07T12:41:46.791Z"
+      "updatedAt": "2025-09-07T14:02:06.657Z"
     }
   ],
-  "lastUpdated": "2025-09-07T12:42:12.683Z"
+  "lastUpdated": "2025-09-07T14:02:06.657Z"
 }
