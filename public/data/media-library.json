@@ -3414,7 +3414,50 @@
       },
       "fileSize": 2715320,
       "mimeType": "image/png"
+    },
+    "characters-8h3og7zztnem": {
+      "id": "characters-8h3og7zztnem",
+      "category": "characters",
+      "title": "Harengon Guard",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:09:34.447Z",
+      "sizes": {
+        "thumb": {
+          "filename": "8h3og7zztnem-thumb.webp",
+          "url": "/media/8h3og7zztnem-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "8h3og7zztnem-small.webp",
+          "url": "/media/8h3og7zztnem-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "8h3og7zztnem-medium.webp",
+          "url": "/media/8h3og7zztnem-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "8h3og7zztnem-large.webp",
+          "url": "/media/8h3og7zztnem-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "8h3og7zztnem-original.webp",
+          "url": "/media/8h3og7zztnem-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2917235,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:09:16.754Z"
+  "lastUpdated": "2025-09-07T18:09:34.808Z"
 }
