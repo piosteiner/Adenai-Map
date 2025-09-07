@@ -1176,7 +1176,50 @@
       },
       "fileSize": 3303695,
       "mimeType": "image/png"
+    },
+    "characters-wblxui2cop20": {
+      "id": "characters-wblxui2cop20",
+      "category": "characters",
+      "title": "Orvil Plig",
+      "caption": "",
+      "credits": "-missing-",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:12:41.477Z",
+      "sizes": {
+        "thumb": {
+          "filename": "wblxui2cop20-thumb.webp",
+          "url": "/media/wblxui2cop20-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "wblxui2cop20-small.webp",
+          "url": "/media/wblxui2cop20-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "wblxui2cop20-medium.webp",
+          "url": "/media/wblxui2cop20-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "wblxui2cop20-large.webp",
+          "url": "/media/wblxui2cop20-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "wblxui2cop20-original.webp",
+          "url": "/media/wblxui2cop20-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 3371370,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:12:13.517Z"
+  "lastUpdated": "2025-09-07T17:12:41.750Z"
 }
