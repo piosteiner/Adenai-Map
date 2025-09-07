@@ -18,7 +18,7 @@ const initGitHub = (octokitInstance, repoOwner, repoName) => {
 // Configure multer for media uploads
 const storage = multer.diskStorage({
   destination: async (req, file, cb) => {
-    const uploadDir = 'uploads/media';
+    const uploadDir = 'uploads/temp_media_upload';
     try {
       await fs.mkdir(uploadDir, { recursive: true });
       cb(null, uploadDir);
