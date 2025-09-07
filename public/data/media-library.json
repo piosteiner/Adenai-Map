@@ -4274,7 +4274,50 @@
       },
       "fileSize": 12293276,
       "mimeType": "image/png"
+    },
+    "locations-sfp29t68v924": {
+      "id": "locations-sfp29t68v924",
+      "category": "locations",
+      "title": "Küste nödlich von Harak",
+      "caption": "",
+      "credits": "AI Generated - Midjourney",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:42:56.332Z",
+      "sizes": {
+        "thumb": {
+          "filename": "sfp29t68v924-thumb.webp",
+          "url": "/media/sfp29t68v924-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "sfp29t68v924-small.webp",
+          "url": "/media/sfp29t68v924-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "sfp29t68v924-medium.webp",
+          "url": "/media/sfp29t68v924-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "sfp29t68v924-large.webp",
+          "url": "/media/sfp29t68v924-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "sfp29t68v924-original.webp",
+          "url": "/media/sfp29t68v924-original.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "fileSize": 2054927,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:42:15.653Z"
+  "lastUpdated": "2025-09-07T18:42:56.588Z"
 }
