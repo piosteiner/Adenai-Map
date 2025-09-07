@@ -228,9 +228,10 @@ router.post('/upload', requireAuth, upload.array('images', 10), async (req, res)
         
         // Add size information
         for (const [sizeName, sizeInfo] of Object.entries(optimized)) {
+          const mediaBaseUrl = process.env.MEDIA_BASE_URL || '';
           mediaEntry.sizes[sizeName] = {
             filename: sizeInfo.filename,
-            url: `/media/${sizeInfo.filename}`, // Will be served from your VPS
+            url: `${mediaBaseUrl}/media/${sizeInfo.filename}`, // Full URL for cross-domain access
             width: sizeInfo.width || sizeInfo.size?.width,
             height: sizeInfo.height || sizeInfo.size?.height
           };

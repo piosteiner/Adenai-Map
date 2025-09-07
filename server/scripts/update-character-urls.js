@@ -59,10 +59,14 @@ async function updateCharacterImageUrls() {
       '/media/1757249948180-ChatGPT_Image_Sep_7__2025__01_01_09_PM_original.webp': '/media/0r2kk9zndrgw-original.webp'
     };
     
-    // Also handle domain changes from adenai-admin.piogino to adenai.piogino
+    // Handle domain changes to ensure images point to admin server
     const updateDomainUrl = (url) => {
-      if (url && url.includes('adenai-admin.piogino')) {
-        return url.replace('adenai-admin.piogino', 'adenai.piogino');
+      if (url && url.includes('adenai.piogino.ch') && !url.includes('adenai-admin.piogino.ch')) {
+        return url.replace('adenai.piogino.ch', 'adenai-admin.piogino.ch');
+      }
+      // Also handle cases where URLs are relative and need full domain
+      if (url && url.startsWith('/media/') && !url.includes('://')) {
+        return `https://adenai-admin.piogino.ch${url}`;
       }
       return url;
     };
