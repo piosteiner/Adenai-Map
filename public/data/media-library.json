@@ -3285,7 +3285,50 @@
       },
       "fileSize": 2832971,
       "mimeType": "image/png"
+    },
+    "characters-zeh9x55yb1ud": {
+      "id": "characters-zeh9x55yb1ud",
+      "category": "characters",
+      "title": "Aarakocra",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T18:08:35.902Z",
+      "sizes": {
+        "thumb": {
+          "filename": "zeh9x55yb1ud-thumb.webp",
+          "url": "/media/zeh9x55yb1ud-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "zeh9x55yb1ud-small.webp",
+          "url": "/media/zeh9x55yb1ud-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "zeh9x55yb1ud-medium.webp",
+          "url": "/media/zeh9x55yb1ud-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "zeh9x55yb1ud-large.webp",
+          "url": "/media/zeh9x55yb1ud-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "zeh9x55yb1ud-original.webp",
+          "url": "/media/zeh9x55yb1ud-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2678084,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T18:07:53.896Z"
+  "lastUpdated": "2025-09-07T18:08:36.239Z"
 }
