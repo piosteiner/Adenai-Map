@@ -832,7 +832,50 @@
       },
       "fileSize": 3090419,
       "mimeType": "image/png"
+    },
+    "characters-b7dmj2g33fgi": {
+      "id": "characters-b7dmj2g33fgi",
+      "category": "characters",
+      "title": "Old White Male",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T17:08:01.630Z",
+      "sizes": {
+        "thumb": {
+          "filename": "b7dmj2g33fgi-thumb.webp",
+          "url": "/media/b7dmj2g33fgi-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "b7dmj2g33fgi-small.webp",
+          "url": "/media/b7dmj2g33fgi-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "b7dmj2g33fgi-medium.webp",
+          "url": "/media/b7dmj2g33fgi-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "b7dmj2g33fgi-large.webp",
+          "url": "/media/b7dmj2g33fgi-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "b7dmj2g33fgi-original.webp",
+          "url": "/media/b7dmj2g33fgi-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2444432,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T17:07:02.025Z"
+  "lastUpdated": "2025-09-07T17:08:01.894Z"
 }
