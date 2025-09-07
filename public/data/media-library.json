@@ -229,7 +229,50 @@
       "mimeType": "image/png",
       "title": "Erhabene See",
       "lastModified": "2025-09-07T14:20:14.113Z"
+    },
+    "characters-qh33vdou6v3k": {
+      "id": "characters-qh33vdou6v3k",
+      "category": "characters",
+      "title": "Ork mit Vogel",
+      "caption": "",
+      "credits": "AI Generated - GPT5",
+      "tags": [],
+      "uploadDate": "2025-09-07T16:56:58.217Z",
+      "sizes": {
+        "thumb": {
+          "filename": "qh33vdou6v3k-thumb.webp",
+          "url": "/media/qh33vdou6v3k-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "qh33vdou6v3k-small.webp",
+          "url": "/media/qh33vdou6v3k-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "qh33vdou6v3k-medium.webp",
+          "url": "/media/qh33vdou6v3k-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "qh33vdou6v3k-large.webp",
+          "url": "/media/qh33vdou6v3k-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "qh33vdou6v3k-original.webp",
+          "url": "/media/qh33vdou6v3k-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2981065,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T14:36:59.267Z"
+  "lastUpdated": "2025-09-07T16:56:58.456Z"
 }
