@@ -4870,7 +4870,7 @@
       "category": "characters",
       "title": "Valaris",
       "caption": "Visual Aid for Valaris",
-      "credits": "The Grand Duchy of Rosaria from \"The Art of Final Fantasy XVI\" by Square Enix (AI Altered - GPT5)",
+      "credits": "The Grand Duchy of Rosaria from \"The Art of Final Fantasy XVI\" by Square Enix - Altered by AI (GPT5)",
       "tags": [],
       "uploadDate": "2025-09-08T13:48:03.953Z",
       "sizes": {
@@ -4906,7 +4906,8 @@
         }
       },
       "fileSize": 674311,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T13:57:25.377Z"
     }
   },
   "lastUpdated": "2025-09-08T13:48:04.260Z"
