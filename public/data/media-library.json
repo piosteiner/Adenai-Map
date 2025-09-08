@@ -4369,7 +4369,7 @@
       "category": "characters",
       "title": "Avery von Rena",
       "caption": "",
-      "credits": "AI Generated",
+      "credits": "AI Generated - Midjourney",
       "tags": [],
       "uploadDate": "2025-09-07T19:03:39.673Z",
       "sizes": {
@@ -4405,7 +4405,8 @@
         }
       },
       "fileSize": 1506408,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T11:58:12.400Z"
     },
     "characters-krx8e5u6w6pn": {
       "id": "characters-krx8e5u6w6pn",
