@@ -627,7 +627,7 @@
       "category": "characters",
       "title": "Dravak Svya",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "Magic Armour, Beyond Steel from \"Baldur's Gate 3 Artbook\" (p. 172) - Altered by AI (GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:03:40.051Z",
       "sizes": {
@@ -663,7 +663,8 @@
         }
       },
       "fileSize": 2099916,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T14:36:28.284Z"
     },
     "characters-o6y012da0juc": {
       "id": "characters-o6y012da0juc",
