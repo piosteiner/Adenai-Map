@@ -4858,7 +4858,50 @@
       },
       "fileSize": 2782981,
       "mimeType": "image/png"
+    },
+    "characters-gxvgaxrnc2ez": {
+      "id": "characters-gxvgaxrnc2ez",
+      "category": "characters",
+      "title": "Valaris",
+      "caption": "Visual Aid for Valaris",
+      "credits": "The Grand Duchy of Rosaria from \"The Art of Final Fantasy XVI\" by Square Enix (AI Altered - GPT5)",
+      "tags": [],
+      "uploadDate": "2025-09-08T13:48:03.953Z",
+      "sizes": {
+        "thumb": {
+          "filename": "gxvgaxrnc2ez-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gxvgaxrnc2ez-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "gxvgaxrnc2ez-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gxvgaxrnc2ez-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "gxvgaxrnc2ez-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gxvgaxrnc2ez-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "gxvgaxrnc2ez-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gxvgaxrnc2ez-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "gxvgaxrnc2ez-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gxvgaxrnc2ez-original.webp",
+          "width": 685,
+          "height": 554
+        }
+      },
+      "fileSize": 674311,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-08T13:36:34.145Z"
+  "lastUpdated": "2025-09-08T13:48:04.260Z"
 }
