@@ -1805,7 +1805,7 @@
       "category": "characters",
       "title": "Human Artist",
       "caption": "",
-      "credits": "AI Generated - GPT5: heavily based on Dandelion from the Witcher Series",
+      "credits": "Dandelion from \"The Witcher 3 Wild Hunt Artbook\" (p. 123) - Altered by AI (GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:51:38.507Z",
       "sizes": {
@@ -1841,7 +1841,8 @@
         }
       },
       "fileSize": 3670327,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T14:06:21.942Z"
     },
     "characters-rphnqy163cr7": {
       "id": "characters-rphnqy163cr7",
