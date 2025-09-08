@@ -1325,7 +1325,7 @@
       "category": "characters",
       "title": "König Torrak",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "From \"Baldur's Gate 3 Artbook\" (p. 157) - Altered by AI (GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:13:49.284Z",
       "sizes": {
@@ -1361,7 +1361,8 @@
         }
       },
       "fileSize": 2073879,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T14:35:50.211Z"
     },
     "characters-t959cl6pwbrk": {
       "id": "characters-t959cl6pwbrk",
