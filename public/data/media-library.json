@@ -1198,7 +1198,7 @@
       "category": "characters",
       "title": "Orvil Plig",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "From \"Baldur's Gate 3 Artbook\" - Altered by AI (GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:12:41.477Z",
       "sizes": {
@@ -1234,7 +1234,8 @@
         }
       },
       "fileSize": 3371370,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T15:00:56.514Z"
     },
     "characters-i2wgrvgm96vy": {
       "id": "characters-i2wgrvgm96vy",
