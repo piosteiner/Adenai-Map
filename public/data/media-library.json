@@ -1847,7 +1847,7 @@
       "category": "characters",
       "title": "Human Nord",
       "caption": "",
-      "credits": "AI Generated - GPT5: heavily based on NAME from the Witcher Series",
+      "credits": "Krach from \"The Witcher 3 Wild Hunt Artbook\" (p. 132) - Altered by AI (GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:51:57.904Z",
       "sizes": {
@@ -1883,7 +1883,8 @@
         }
       },
       "fileSize": 3668161,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T14:02:51.302Z"
     },
     "characters-xmktyhbuz6mb": {
       "id": "characters-xmktyhbuz6mb",
