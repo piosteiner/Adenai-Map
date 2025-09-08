@@ -2309,7 +2309,7 @@
       "category": "characters",
       "title": "Pretty Young Human",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "Sleipnir from \"The Art of Final Fantasy XVI\" by Square Enix (AI Altered - GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:58:13.941Z",
       "sizes": {
@@ -2345,7 +2345,8 @@
         }
       },
       "fileSize": 3464577,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T13:40:08.224Z"
     },
     "characters-slb5vrra5bsz": {
       "id": "characters-slb5vrra5bsz",
