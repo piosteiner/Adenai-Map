@@ -4263,7 +4263,7 @@
       "category": "characters",
       "title": "Viktoria Karthright",
       "caption": "",
-      "credits": "AI Generated - Midjourney",
+      "credits": "AI Generated - Midjourney & GPT5",
       "tags": [],
       "uploadDate": "2025-09-07T18:42:15.385Z",
       "sizes": {
@@ -4299,7 +4299,8 @@
         }
       },
       "fileSize": 12293276,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T14:00:25.800Z"
     },
     "locations-sfp29t68v924": {
       "id": "locations-sfp29t68v924",
