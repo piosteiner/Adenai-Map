@@ -1584,7 +1584,7 @@
       "category": "characters",
       "title": "Dwarfen Royal",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "from \"Divinity Original Sin II Artbook\" (p. 46) - Altered by AI (GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:17:12.629Z",
       "sizes": {
@@ -1620,7 +1620,8 @@
         }
       },
       "fileSize": 2905399,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T14:11:41.517Z"
     },
     "characters-uhaz82qaykdc": {
       "id": "characters-uhaz82qaykdc",
