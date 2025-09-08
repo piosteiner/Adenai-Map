@@ -1717,7 +1717,7 @@
       "category": "characters",
       "title": "Female Human",
       "caption": "",
-      "credits": "AI Generated - GPT5: heavily based on NAME from the Witcher Series",
+      "credits": "Cerys from \"The Witcher 3 Wild Hunt Artbook\" (p. 133) - Altered by AI (GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:50:06.632Z",
       "sizes": {
@@ -1753,7 +1753,8 @@
         }
       },
       "fileSize": 3798210,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T14:03:12.176Z"
     },
     "characters-fa48xysfp8ko": {
       "id": "characters-fa48xysfp8ko",
