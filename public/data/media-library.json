@@ -1064,7 +1064,7 @@
       "category": "characters",
       "title": "Marcoh Ludd",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "Bardic Attire from \"Baldur's Gate 3 Artbook\" (p. 175) - Altered by AI (GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:11:32.310Z",
       "sizes": {
@@ -1100,7 +1100,8 @@
         }
       },
       "fileSize": 3333590,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T14:37:21.888Z"
     },
     "characters-cbd04p15kbdr": {
       "id": "characters-cbd04p15kbdr",
