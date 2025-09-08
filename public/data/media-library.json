@@ -799,7 +799,7 @@
       "category": "characters",
       "title": "Graf Honza",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "Havel from \"The Art of Final Fantasy XVI\" by Square Enix (AI Altered - GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:07:01.779Z",
       "sizes": {
@@ -835,7 +835,8 @@
         }
       },
       "fileSize": 3090419,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T13:41:02.224Z"
     },
     "characters-b7dmj2g33fgi": {
       "id": "characters-b7dmj2g33fgi",
