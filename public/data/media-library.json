@@ -4827,7 +4827,7 @@
       "category": "characters",
       "title": "Human Male",
       "caption": "",
-      "credits": "Hugo Kupka from \"The Art of Final Fantasy XVI\" by Square Enix (AI Altered - GPT5)",
+      "credits": "Hugo Kupka from \"The Art of Final Fantasy XVI\" by Square Enix - Altered by AI (GPT5)",
       "tags": [],
       "uploadDate": "2025-09-08T13:36:33.851Z",
       "sizes": {
@@ -4863,7 +4863,8 @@
         }
       },
       "fileSize": 2782981,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T13:58:34.080Z"
     },
     "characters-gxvgaxrnc2ez": {
       "id": "characters-gxvgaxrnc2ez",
