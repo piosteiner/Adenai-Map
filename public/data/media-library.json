@@ -1539,7 +1539,7 @@
       "category": "characters",
       "title": "Lia Karthright",
       "caption": "",
-      "credits": "AI Generated - Midjourney",
+      "credits": "AI Generated - Midjourney & GPT5",
       "tags": [],
       "uploadDate": "2025-09-07T17:16:25.707Z",
       "sizes": {
@@ -1575,7 +1575,8 @@
         }
       },
       "fileSize": 17928544,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T14:00:05.109Z"
     },
     "characters-hwmb1cg8q66o": {
       "id": "characters-hwmb1cg8q66o",
