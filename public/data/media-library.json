@@ -4759,7 +4759,50 @@
       "fileSize": 2837876,
       "mimeType": "image/png",
       "lastModified": "2025-09-08T13:20:22.227Z"
+    },
+    "characters-2lbjo8uusfn9": {
+      "id": "characters-2lbjo8uusfn9",
+      "category": "characters",
+      "title": "Human Male",
+      "caption": "",
+      "credits": "Cidolfus Telamon from \"The Art of Final Fantasy XVI\" by Square Enix (AI Altered - GPT5)",
+      "tags": [],
+      "uploadDate": "2025-09-08T13:28:46.319Z",
+      "sizes": {
+        "thumb": {
+          "filename": "2lbjo8uusfn9-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/2lbjo8uusfn9-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "2lbjo8uusfn9-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/2lbjo8uusfn9-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "2lbjo8uusfn9-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/2lbjo8uusfn9-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "2lbjo8uusfn9-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/2lbjo8uusfn9-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "2lbjo8uusfn9-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/2lbjo8uusfn9-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2857390,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-08T12:54:35.773Z"
+  "lastUpdated": "2025-09-08T13:28:46.620Z"
 }
