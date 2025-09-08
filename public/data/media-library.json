@@ -973,7 +973,7 @@
       "category": "characters",
       "title": "Krista",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "Kihel from \"The Art of Final Fantasy XVI\" by Square Enix (AI Altered - GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:10:38.365Z",
       "sizes": {
@@ -1009,7 +1009,8 @@
         }
       },
       "fileSize": 2923839,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T13:45:03.696Z"
     },
     "characters-uq3kwrktvdic": {
       "id": "characters-uq3kwrktvdic",
