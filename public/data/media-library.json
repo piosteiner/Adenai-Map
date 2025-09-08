@@ -2055,7 +2055,7 @@
       "category": "characters",
       "title": "Female Human",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "Edda from \"The Art of Final Fantasy XVI\" by Square Enix (AI Altered - GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:54:44.172Z",
       "sizes": {
@@ -2091,7 +2091,8 @@
         }
       },
       "fileSize": 3336223,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T13:45:57.262Z"
     },
     "characters-mja6yxd6e26q": {
       "id": "characters-mja6yxd6e26q",
