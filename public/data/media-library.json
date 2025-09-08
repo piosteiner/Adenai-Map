@@ -1490,7 +1490,7 @@
       "category": "characters",
       "title": "Mae",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "AI Generated - GPT5",
       "tags": [],
       "uploadDate": "2025-09-07T17:15:49.643Z",
       "sizes": {
@@ -1526,7 +1526,8 @@
         }
       },
       "fileSize": 3019380,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T13:42:55.709Z"
     },
     "characters-bo1ukulgxr7x": {
       "id": "characters-bo1ukulgxr7x",
