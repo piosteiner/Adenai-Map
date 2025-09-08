@@ -2435,7 +2435,7 @@
       "category": "characters",
       "title": "Human",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "AI Altered - GPT5: Benedikta Harman Concept Art from \"The Art Of Final Fantasy XVI\" by Square Enix",
       "tags": [],
       "uploadDate": "2025-09-07T17:59:16.843Z",
       "sizes": {
@@ -2471,7 +2471,8 @@
         }
       },
       "fileSize": 3196564,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T12:31:53.489Z"
     },
     "characters-n7600htdmokw": {
       "id": "characters-n7600htdmokw",
