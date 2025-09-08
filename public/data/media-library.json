@@ -4783,7 +4783,7 @@
       "category": "characters",
       "title": "Human Male",
       "caption": "",
-      "credits": "Cidolfus Telamon from \"The Art of Final Fantasy XVI\" by Square Enix (AI Altered - GPT5)",
+      "credits": "Cidolfus Telamon from \"The Art of Final Fantasy XVI\" by Square Enix - Altered by AI (GPT5)",
       "tags": [],
       "uploadDate": "2025-09-08T13:28:46.319Z",
       "sizes": {
@@ -4819,7 +4819,8 @@
         }
       },
       "fileSize": 2857390,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T13:56:53.044Z"
     },
     "characters-24nnwk6veuxw": {
       "id": "characters-24nnwk6veuxw",
