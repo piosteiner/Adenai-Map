@@ -2398,9 +2398,9 @@
     "characters-tjhby0i1lj9u": {
       "id": "characters-tjhby0i1lj9u",
       "category": "characters",
-      "title": "Human",
+      "title": "Human Male",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "Byron Rosfield from \"The Art of Final Fantasy XVI\" by Square Enix (AI Altered - GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:59:03.508Z",
       "sizes": {
@@ -2436,7 +2436,8 @@
         }
       },
       "fileSize": 3746851,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T13:43:41.168Z"
     },
     "characters-a062nsdf3fys": {
       "id": "characters-a062nsdf3fys",
