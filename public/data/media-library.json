@@ -4715,7 +4715,50 @@
       },
       "fileSize": 4003827,
       "mimeType": "image/png"
+    },
+    "characters-c55zbkrku4za": {
+      "id": "characters-c55zbkrku4za",
+      "category": "characters",
+      "title": "Female Human",
+      "caption": "",
+      "credits": "Jill Warrick from The Art of Final Fantasy XVI - Square Enix (AI Altered - GPT5)",
+      "tags": [],
+      "uploadDate": "2025-09-08T12:54:35.462Z",
+      "sizes": {
+        "thumb": {
+          "filename": "c55zbkrku4za-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/c55zbkrku4za-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "c55zbkrku4za-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/c55zbkrku4za-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "c55zbkrku4za-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/c55zbkrku4za-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "c55zbkrku4za-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/c55zbkrku4za-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "c55zbkrku4za-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/c55zbkrku4za-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2837876,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-08T12:16:14.273Z"
+  "lastUpdated": "2025-09-08T12:54:35.773Z"
 }
