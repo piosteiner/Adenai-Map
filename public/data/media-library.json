@@ -2547,7 +2547,7 @@
       "category": "characters",
       "title": "Dark Human",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "from \"Divinity Original Sin II Artbook\" (p. 16) - Altered by AI (GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T18:00:11.990Z",
       "sizes": {
@@ -2583,7 +2583,8 @@
         }
       },
       "fileSize": 2451502,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T14:10:49.409Z"
     },
     "characters-pngl3c44lj15": {
       "id": "characters-pngl3c44lj15",
