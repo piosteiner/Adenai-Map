@@ -2377,7 +2377,7 @@
       "category": "characters",
       "title": "dandy human female",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "Bardic Attire from \"Baldur's Gate 3 Artbook\" (p. 174) - Altered by AI (GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:58:47.708Z",
       "sizes": {
@@ -2413,7 +2413,8 @@
         }
       },
       "fileSize": 3688014,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T14:36:55.728Z"
     },
     "characters-tjhby0i1lj9u": {
       "id": "characters-tjhby0i1lj9u",
