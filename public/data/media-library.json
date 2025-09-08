@@ -4671,7 +4671,50 @@
       },
       "fileSize": 1504277,
       "mimeType": "image/png"
+    },
+    "locations-83ehquuz4878": {
+      "id": "locations-83ehquuz4878",
+      "category": "locations",
+      "title": "Badehaus in Wedalen",
+      "caption": "",
+      "credits": "Public Bathhouse in the Free City of Novigrad from The Witcher 3 Wild Hunt Artbook (p. 42-43)",
+      "tags": [],
+      "uploadDate": "2025-09-08T12:16:13.991Z",
+      "sizes": {
+        "thumb": {
+          "filename": "83ehquuz4878-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/83ehquuz4878-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "83ehquuz4878-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/83ehquuz4878-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "83ehquuz4878-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/83ehquuz4878-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "83ehquuz4878-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/83ehquuz4878-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "83ehquuz4878-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/83ehquuz4878-original.webp",
+          "width": 1849,
+          "height": 1034
+        }
+      },
+      "fileSize": 4003827,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-09-07T19:43:06.250Z"
+  "lastUpdated": "2025-09-08T12:16:14.273Z"
 }
