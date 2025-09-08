@@ -4062,7 +4062,7 @@
     },
     "characters-qt1ttvmhk66g": {
       "id": "characters-qt1ttvmhk66g",
-      "category": "characters",
+      "category": "maps",
       "title": "Underdark Ako",
       "caption": "Underdark beneath Akonektchie",
       "credits": "drawn by Pio Gino Steiner",
@@ -4101,7 +4101,8 @@
         }
       },
       "fileSize": 9375104,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T06:41:01.795Z"
     },
     "locations-01ln4jgoxpje": {
       "id": "locations-01ln4jgoxpje",
