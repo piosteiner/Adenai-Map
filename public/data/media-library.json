@@ -929,7 +929,7 @@
       "category": "characters",
       "title": "Krista",
       "caption": "Portrait von Krista als Kind",
-      "credits": "-missing-",
+      "credits": "Kihel from \"The Art of Final Fantasy XVI\" by Square Enix (AI Altered - GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:10:24.387Z",
       "sizes": {
@@ -965,7 +965,8 @@
         }
       },
       "fileSize": 2991370,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T13:44:51.946Z"
     },
     "characters-dlymg4j3u4gk": {
       "id": "characters-dlymg4j3u4gk",
