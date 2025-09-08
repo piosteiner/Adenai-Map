@@ -1983,7 +1983,7 @@
       "category": "characters",
       "title": "Old Dandy Human",
       "caption": "",
-      "credits": "-missing-",
+      "credits": "Sheogorath's Clothing from \"Elder Scrolls V Skyrim Collectors Edition Artbook\" (p. 143) - Altered by AI (GPT5)",
       "tags": [],
       "uploadDate": "2025-09-07T17:53:35.614Z",
       "sizes": {
@@ -2019,7 +2019,8 @@
         }
       },
       "fileSize": 3161763,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2025-09-08T14:43:06.580Z"
     },
     "characters-m1b2fbvb8v89": {
       "id": "characters-m1b2fbvb8v89",
