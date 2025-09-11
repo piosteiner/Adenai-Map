@@ -156,39 +156,153 @@ class CharacterSystem {
         return [mapLng, mapLat];  // Return as [lng, lat] for L.latLng(lat, lng)
     }
 
-    // Get character position using server-computed field
+    // Get character position using server-computed field with fallback
     getCharacterPosition(character) {
-        // Use server-computed coordinates for consistency
-        const position = character.computedPosition;
-        
-        if (!position) {
-            Logger.info(`No coordinates available for ${character.name}, will show panel popup`);
-            return null;
+        // First try server-computed position
+        if (character.computedPosition && Array.isArray(character.computedPosition) && character.computedPosition.length === 2) {
+            Logger.debug(`Using server-computed position for ${character.name}:`, character.computedPosition);
+            return character.computedPosition;
         }
         
-        Logger.debug(`Using server-computed position for ${character.name}:`, position);
-        return position;
+        // Fallback to original logic for backward compatibility
+        // Priority 1: Last travel point from movementHistory (highest movement_nr)
+        if (character.movementHistory && character.movementHistory.length > 0) {
+            // Find the movement with the highest movement_nr
+            const latestMovement = character.movementHistory.reduce((latest, current) => {
+                const currentNr = current.movement_nr || 0;
+                const latestNr = latest.movement_nr || 0;
+                return currentNr > latestNr ? current : latest;
+            });
+            
+            if (latestMovement.coordinates && Array.isArray(latestMovement.coordinates) && latestMovement.coordinates.length === 2) {
+                Logger.debug(`🛤️ Using latest travel point (movement_nr: ${latestMovement.movement_nr}) for ${character.name}:`, latestMovement.coordinates);
+                return latestMovement.coordinates;
+            }
+        }
+        
+        // Priority 2: Place of origin (character.coordinates)
+        if (character.coordinates && Array.isArray(character.coordinates) && character.coordinates.length === 2) {
+            Logger.debug(`🏠 Using place of origin for ${character.name}:`, character.coordinates);
+            return character.coordinates;
+        }
+        
+        // No coordinates available
+        Logger.info(`No coordinates available for ${character.name}, will show panel popup`);
+        return null;
     }
 
-    // Get current location text using server-computed field
+    // Get current location text using server-computed field with fallback
     getCurrentLocation(character) {
-        // Use server-computed field for consistency and performance
-        return character.computedCurrentLocation || '❓ Unbekannt';
+        Logger.debug(`🔍 Getting location for ${character.name}:`, {
+            computedCurrentLocation: character.computedCurrentLocation,
+            currentLocation: character.currentLocation,
+            location: character.location,
+            movementHistory: character.movementHistory?.length || 0,
+            placeOfOrigin: character.placeOfOrigin
+        });
+
+        // First try server-computed field
+        if (character.computedCurrentLocation) {
+            Logger.debug(`✅ Using computedCurrentLocation: ${character.computedCurrentLocation}`);
+            return character.computedCurrentLocation;
+        }
+        
+        // Use EXACT same logic as character-panel.js for consistency
+        // Priority 1: currentLocation object
+        if (character.currentLocation && character.currentLocation.location) {
+            Logger.debug(`✅ Using currentLocation.location: ${character.currentLocation.location}`);
+            return character.currentLocation.location;
+        }
+        
+        // Priority 2: location field
+        if (character.location) {
+            Logger.debug(`✅ Using location field: ${character.location}`);
+            return character.location;
+        }
+        
+        // Priority 3: Latest movement from movementHistory
+        if (character.movementHistory && character.movementHistory.length > 0) {
+            // Find the movement with the highest movement_nr
+            const latestMovement = character.movementHistory.reduce((latest, current) => {
+                const currentNr = current.movement_nr || 0;
+                const latestNr = latest.movement_nr || 0;
+                return currentNr > latestNr ? current : latest;
+            });
+            
+            Logger.debug(`🔍 Latest movement:`, latestMovement);
+            
+            if (latestMovement.location) {
+                Logger.debug(`✅ Using latest movement location: ${latestMovement.location}`);
+                return latestMovement.location;
+            }
+        }
+        
+        // Priority 4: Place of origin
+        if (character.placeOfOrigin) {
+            Logger.debug(`✅ Using placeOfOrigin: ${character.placeOfOrigin}`);
+            return character.placeOfOrigin;
+        }
+        
+        // Same fallback as character-panel: "Unbekannt" 
+        Logger.debug(`❌ No location found, returning Unbekannt`);
+        return 'Unbekannt';
     }
 
-    // Check if character has coordinates using server-computed field
+    // Check if character has coordinates using server-computed field with fallback
     hasCoordinates(character) {
-        return character.computedHasCoordinates || false;
+        // First try server-computed field
+        if (character.computedHasCoordinates !== undefined) {
+            return character.computedHasCoordinates;
+        }
+        
+        // Fallback to original logic for backward compatibility
+        // Check if character has place of origin coordinates
+        if (character.coordinates && Array.isArray(character.coordinates) && character.coordinates.length === 2) {
+            return true;
+        }
+        
+        // Check if character has movement history with coordinates
+        if (character.movementHistory && character.movementHistory.length > 0) {
+            const hasMovementCoords = character.movementHistory.some(movement => 
+                movement.coordinates && Array.isArray(movement.coordinates) && movement.coordinates.length === 2
+            );
+            if (hasMovementCoords) return true;
+        }
+        
+        return false;
     }
 
-    // Get movement count using server-computed field
+    // Get movement count using server-computed field with fallback
     getMovementCount(character) {
-        return character.computedMovementCount || 0;
+        // First try server-computed field
+        if (character.computedMovementCount !== undefined) {
+            return character.computedMovementCount;
+        }
+        
+        // Fallback to original logic
+        return (character.movementHistory && character.movementHistory.length) || 0;
     }
 
-    // Get last movement date using server-computed field
+    // Get last movement date using server-computed field with fallback
     getLastMovementDate(character) {
-        return character.computedLastMovementDate || null;
+        // First try server-computed field
+        if (character.computedLastMovementDate) {
+            return character.computedLastMovementDate;
+        }
+        
+        // Fallback to original logic
+        if (character.currentLocation && character.currentLocation.date) {
+            return character.currentLocation.date || character.currentLocation.dateStart || '';
+        } else if (character.movementHistory && character.movementHistory.length > 0) {
+            const latestMovement = character.movementHistory.reduce((latest, current) => {
+                const currentNr = current.movement_nr || 0;
+                const latestNr = latest.movement_nr || 0;
+                return currentNr > latestNr ? current : latest;
+            });
+            return latestMovement.date || latestMovement.dateStart || '';
+        }
+        
+        return null;
     }
 
     // Get enhanced character data from server (for individual character requests)
