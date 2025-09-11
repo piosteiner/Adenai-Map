@@ -64,30 +64,10 @@ class CharacterSystem {
                 // Handle both array and object formats
                 this.characterData = Array.isArray(data) ? data : (data.characters || []);
             } else {
-                // Fallback to direct loading if no preloaded data
-                Logger.character('Loading characters from server...');
-                // Try different potential URLs in case of server routing issues
-                let response;
-                const urls = [
-                    `/data/characters.json?t=${Date.now()}`,
-                    `public/data/characters.json?t=${Date.now()}`,
-                    `./public/data/characters.json?t=${Date.now()}`
-                ];
-                
-                for (const url of urls) {
-                    try {
-                        Logger.character(`Trying URL: ${url}`);
-                        response = await HttpUtils.fetch(url, { retries: 0 });
-                        Logger.success(`Successfully loaded from: ${url}`);
-                        break;
-                    } catch (e) {
-                        Logger.warning(`Failed URL: ${url} - ${e.message}`);
-                    }
-                }
-                
-                if (!response) {
-                    throw new Error('Failed all URLs - no successful response');
-                }
+                // Use the reliable API endpoint that returns enhanced character data
+                Logger.character('Loading characters from API...');
+                response = await HttpUtils.fetch('/api/characters');
+                Logger.success('Successfully loaded from API endpoint');
                 
                 data = await response.json();
                 this.characterData = data.characters || [];
@@ -114,16 +94,19 @@ class CharacterSystem {
                 });
             }
             
-            // Log coordinate status for debugging
-            const withCoords = this.characterData.filter(c => c.coordinates).length;
+            // Log coordinate and movement status using server-computed fields
+            const withCoords = this.characterData.filter(c => this.hasCoordinates(c)).length;
             const withoutCoords = this.characterData.length - withCoords;
-            const withMovements = this.characterData.filter(c => c.movementHistory && c.movementHistory.length > 0).length;
+            const withMovements = this.characterData.filter(c => this.getMovementCount(c) > 0).length;
             
             Logger.success(`Characters with coordinates: ${withCoords}`);
             Logger.success(`Characters with movement history: ${withMovements}`);
             if (withoutCoords > 0) {
                 Logger.warning(`Characters without coordinates: ${withoutCoords}`);
             }
+
+            // Log server enhancement status
+            Logger.success(`Using server-computed character fields for improved performance`);
             
             Logger.character('Character data loaded - no visual markers created');
             
@@ -173,67 +156,57 @@ class CharacterSystem {
         return [mapLng, mapLat];  // Return as [lng, lat] for L.latLng(lat, lng)
     }
 
-    // Get character position based on priority: 1) Last travel point 2) Place of origin 3) No coordinates
+    // Get character position using server-computed field
     getCharacterPosition(character) {
-        // Priority 1: Last travel point from movementHistory (highest movement_nr)
-        if (character.movementHistory && character.movementHistory.length > 0) {
-            // Find the movement with the highest movement_nr
-            const latestMovement = character.movementHistory.reduce((latest, current) => {
-                const currentNr = current.movement_nr || 0;
-                const latestNr = latest.movement_nr || 0;
-                return currentNr > latestNr ? current : latest;
-            });
-            
-            if (latestMovement.coordinates && Array.isArray(latestMovement.coordinates) && latestMovement.coordinates.length === 2) {
-                Logger.debug(`🛤️ Using latest travel point (movement_nr: ${latestMovement.movement_nr}) for ${character.name}:`, latestMovement.coordinates);
-                return latestMovement.coordinates;
-            }
+        // Use server-computed coordinates for consistency
+        const position = character.computedPosition;
+        
+        if (!position) {
+            Logger.info(`No coordinates available for ${character.name}, will show panel popup`);
+            return null;
         }
         
-        // Priority 2: Place of origin (character.coordinates)
-        if (character.coordinates && Array.isArray(character.coordinates) && character.coordinates.length === 2) {
-            Logger.debug(`🏠 Using place of origin for ${character.name}:`, character.coordinates);
-            return character.coordinates;
-        }
-        
-        // Priority 3: No coordinates available
-        Logger.info(`No coordinates available for ${character.name}, will show panel popup`);
-        return null;
+        Logger.debug(`Using server-computed position for ${character.name}:`, position);
+        return position;
     }
 
-    // Get current location text based on priority: 1) currentLocation 2) location 3) latest movement 4) place of origin
+    // Get current location text using server-computed field
     getCurrentLocation(character) {
-        // Priority 1: currentLocation object
-        if (character.currentLocation && character.currentLocation.location) {
-            return character.currentLocation.location;
-        }
-        
-        // Priority 2: location field
-        if (character.location) {
-            return character.location;
-        }
-        
-        // Priority 3: Latest movement from movementHistory
-        if (character.movementHistory && character.movementHistory.length > 0) {
-            // Find the movement with the highest movement_nr
-            const latestMovement = character.movementHistory.reduce((latest, current) => {
-                const currentNr = current.movement_nr || 0;
-                const latestNr = latest.movement_nr || 0;
-                return currentNr > latestNr ? current : latest;
-            });
+        // Use server-computed field for consistency and performance
+        return character.computedCurrentLocation || '❓ Unbekannt';
+    }
+
+    // Check if character has coordinates using server-computed field
+    hasCoordinates(character) {
+        return character.computedHasCoordinates || false;
+    }
+
+    // Get movement count using server-computed field
+    getMovementCount(character) {
+        return character.computedMovementCount || 0;
+    }
+
+    // Get last movement date using server-computed field
+    getLastMovementDate(character) {
+        return character.computedLastMovementDate || null;
+    }
+
+    // Get enhanced character data from server (for individual character requests)
+    async getEnhancedCharacter(characterId) {
+        try {
+            const response = await HttpUtils.fetch(`/api/characters/${characterId}`);
+            const result = await response.json();
             
-            if (latestMovement.location) {
-                return latestMovement.location;
+            if (result.success) {
+                return result.character;
+            } else {
+                Logger.warning(`Failed to get enhanced character data: ${result.error}`);
+                return null;
             }
+        } catch (error) {
+            Logger.error(`Error getting enhanced character data:`, error);
+            return null;
         }
-        
-        // Priority 4: Place of origin
-        if (character.placeOfOrigin) {
-            return character.placeOfOrigin;
-        }
-        
-        // Fallback: Unknown
-        return '❓ Unbekannt';
     }
 
     // Enhanced focus character method with coordinate fix
@@ -252,16 +225,15 @@ class CharacterSystem {
             return true;
         }
 
-        // Get position based on priority rules
-        const coordinates = this.getCharacterPosition(character);
-        
-        // If character has no coordinates, show panel-anchored popup
-        if (!coordinates) {
+        // Use server-computed position and coordinates flag
+        if (!this.hasCoordinates(character)) {
             Logger.character(`Showing panel popup for "${characterName}" (no coordinates)`);
             this.showPanelAnchoredPopup(character);
             this.currentFocusedCharacter = characterName;
             return true;
         }
+
+        const coordinates = this.getCharacterPosition(character);
 
         return MapUtils.withMap(map => {
             // FIXED: Properly convert coordinates
@@ -354,28 +326,18 @@ class CharacterSystem {
         // Title
         const title = character.title ? `<div class="character-popup-title">${character.title}</div>` : '';
         
-        // Last seen location (using unified getCurrentLocation method)
-        const currentLocation = this.getCurrentLocation(character);
+        // Last seen location using server-computed fields
+        const currentLocation = this.getCurrentLocation(character); // Now uses computedCurrentLocation
+        const lastMovementDate = this.getLastMovementDate(character); // Uses computedLastMovementDate
+
         let lastSeenContent = '';
         if (currentLocation && currentLocation !== '❓ Unbekannt') {
-            // Try to get a date from currentLocation, latest movement, or leave empty
-            let date = '';
-            if (character.currentLocation && character.currentLocation.date) {
-                date = character.currentLocation.date || character.currentLocation.dateStart || '';
-            } else if (character.movementHistory && character.movementHistory.length > 0) {
-                const latestMovement = character.movementHistory.reduce((latest, current) => {
-                    const currentNr = current.movement_nr || 0;
-                    const latestNr = latest.movement_nr || 0;
-                    return currentNr > latestNr ? current : latest;
-                });
-                date = latestMovement.date || latestMovement.dateStart || '';
-            }
-            
-            lastSeenContent = `📍 <strong>Last Seen:</strong> ${currentLocation}${date ? ` (${date})` : ''}`;
-            Logger.debug('✅ Using getCurrentLocation for last seen:', currentLocation);
+            const dateText = lastMovementDate ? ` (${lastMovementDate})` : '';
+            lastSeenContent = `📍 <strong>Last Seen:</strong> ${currentLocation}${dateText}`;
+            Logger.debug('✅ Using server-computed location for last seen:', currentLocation);
         } else {
             lastSeenContent = `📍 <strong>Last Seen:</strong> <span class="location-unknown">Unknown</span>`;
-            Logger.debug('❌ No location data found anywhere');
+            Logger.debug('❌ No location data available');
         }
         
         // Build content sections
@@ -395,10 +357,10 @@ class CharacterSystem {
             Logger.debug('❌ No placeOfOrigin found');
         }
         
-        // Movement History count
-        if (character.movementHistory && character.movementHistory.length > 0) {
-            const historyCount = character.movementHistory.length;
-            const historyText = historyCount === 1 ? '1 location' : `${historyCount} locations`;
+        // Movement History count using server-computed field
+        const movementCount = this.getMovementCount(character);
+        if (movementCount > 0) {
+            const historyText = movementCount === 1 ? '1 location' : `${movementCount} locations`;
             contentSections.push(`<div class="character-popup-movement">🗺️ <strong>Movement History:</strong> ${historyText}</div>`);
         }
         
@@ -668,9 +630,10 @@ class CharacterSystem {
                 AdenaiConfig.getCharacterRelationshipLabel(character.relationship)
             ].filter(Boolean).join(' ');
 
-            if (character.coordinates && Array.isArray(character.coordinates)) {
-                // Convert image coordinates to map coordinates for search
-                const [mapLng, mapLat] = this.convertImageCoordinatesToMapCoordinates(character.coordinates, character.name);
+            // Use server-computed position and coordinates flag
+            if (this.hasCoordinates(character)) {
+                const position = this.getCharacterPosition(character);
+                const [mapLng, mapLat] = this.convertImageCoordinatesToMapCoordinates(position, character.name);
                 
                 searchIndex.push({
                     name: character.name,
