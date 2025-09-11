@@ -17,7 +17,8 @@ class ImageHoverPreview {
         // Load media library first
         await this.loadMediaLibrary();
         
-        this.createPreviewElement();
+        // Create subtle preview element (not full screen)
+        this.createSubtlePreviewElement();
         this.setupGlobalImageHandlers();
         
         // Listen for enhanced popup events to hide hover preview
@@ -29,7 +30,7 @@ class ImageHoverPreview {
         }
         
         this.isInitialized = true;
-        Logger.loading('🖼️ Image hover preview system loaded');
+        Logger.loading('🖼️ Image hover preview system loaded (subtle mode)');
     }
 
     async loadMediaLibrary() {
@@ -139,184 +140,113 @@ class ImageHoverPreview {
         return null;
     }
 
-    createPreviewElement() {
-        // Create the preview overlay element
+    createSubtlePreviewElement() {
+        // Create a small popup next to the hovered image
         this.previewElement = document.createElement('div');
         this.previewElement.id = 'image-hover-preview';
+        this.previewElement.className = 'subtle-image-popup';
         this.previewElement.innerHTML = `
-            <div class="preview-backdrop"></div>
-            <div class="preview-container">
-                <img class="preview-image" src="" alt="">
-                <div class="preview-info">
-                    <div class="preview-caption"></div>
-                    <div class="preview-tags"></div>
-                    <div class="preview-credits"></div>
-                </div>
+            <img class="preview-image" src="" alt="">
+            <div class="preview-info">
+                <div class="preview-caption"></div>
+                <div class="preview-credits"></div>
             </div>
         `;
         
-        // Add styles - ensure it doesn't conflict with enhanced popup (lower z-index)
-        this.previewElement.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 998;
-            display: none;
-            pointer-events: none;
-        `;
-
         document.body.appendChild(this.previewElement);
-        this.addStyles();
+        this.addSubtleStyles();
     }
 
-    addStyles() {
+    addSubtleStyles() {
         const style = document.createElement('style');
         style.textContent = `
-            #image-hover-preview {
-                transition: opacity 0.3s ease, visibility 0.3s ease;
-            }
-
-            #image-hover-preview.visible {
-                display: flex !important;
-                align-items: center;
-                justify-content: center;
-                opacity: 1;
+            .subtle-image-popup {
                 position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-            }
-
-            .preview-backdrop {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.85);
-                backdrop-filter: blur(8px);
-            }
-
-            .preview-container {
-                position: relative;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
+                z-index: 9999;
                 pointer-events: none;
-                z-index: 1;
-                max-width: 90vw;
-                max-height: 90vh;
-            }
-
-            .preview-image {
-                max-width: 100%;
-                max-height: 70vh;
-                width: auto;
-                height: auto;
-                object-fit: contain;
-                border-radius: 8px;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-                transform: scale(0.8);
-                transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            }
-
-            #image-hover-preview.visible .preview-image {
-                transform: scale(1);
-            }
-
-            .preview-caption {
-                background: rgba(255, 255, 255, 0.95);
-                padding: 8px 12px;
-                border-radius: 6px 6px 0 0;
-                color: #333;
-                font-size: 13px;
-                font-weight: 500;
-                line-height: 1.3;
-                backdrop-filter: blur(10px);
-                text-shadow: none;
-                margin: 0;
-            }
-
-            .preview-info {
-                position: absolute;
-                bottom: -120px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: rgba(255, 255, 255, 0.95);
-                border-radius: 8px;
-                color: #333;
-                max-width: 400px;
-                min-width: 280px;
-                backdrop-filter: blur(10px);
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-                border: 1px solid rgba(0, 0, 0, 0.1);
-            }
-
-            .preview-tags {
-                display: none !important;
-            }
-
-            .preview-tag {
-                display: none !important;
-            }
-
-            .preview-credits {
-                padding: 6px 12px;
-                font-size: 11px;
-                color: #666;
-                font-style: italic;
-                margin: 0;
-                border-top: 1px solid rgba(0, 0, 0, 0.1);
-            }
-                text-align: center;
-                backdrop-filter: blur(10px);
-                min-width: 200px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-                font-weight: 500;
-                line-height: 1.4;
                 opacity: 0;
-                transform: translateY(10px);
+                transform: scale(0.8);
                 transition: opacity 0.3s ease, transform 0.3s ease;
+                border-radius: 8px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+                border: 3px solid var(--card-bg, #fff);
+                background: var(--card-bg, #fff);
+                padding: 4px;
+                max-width: 300px;
+                max-height: 400px;
+                display: none;
             }
 
-            #image-hover-preview.visible .preview-caption {
+            .subtle-image-popup.show {
                 opacity: 1;
-                transform: translateY(0);
+                transform: scale(1);
+                display: block;
             }
 
-            /* Dark theme adjustments */
-            [data-theme="dark"] .preview-backdrop {
-                background: rgba(0, 0, 0, 0.9);
+            .subtle-image-popup .preview-image {
+                width: 100%;
+                height: auto;
+                border-radius: 4px;
+                display: block;
+                max-height: 350px;
+                object-fit: cover;
             }
 
-            [data-theme="dark"] .preview-caption {
-                background: rgba(30, 30, 30, 0.95);
-                color: #f0f0f0;
+            .subtle-image-popup .preview-info {
+                padding: 8px;
+                background: var(--card-bg, #fff);
+                border-radius: 0 0 4px 4px;
             }
 
-            [data-theme="dark"] .preview-info {
-                background: rgba(30, 30, 30, 0.95);
-                color: #f0f0f0;
-                border-color: rgba(255, 255, 255, 0.1);
+            .subtle-image-popup .preview-caption {
+                font-size: 12px;
+                font-weight: 600;
+                color: var(--text-color, #333);
+                margin-bottom: 4px;
+                line-height: 1.3;
             }
 
-            [data-theme="dark"] .preview-tag {
-                display: none !important;
+            .subtle-image-popup .preview-credits {
+                font-size: 10px;
+                color: var(--text-muted, #666);
+                font-style: italic;
             }
 
-            [data-theme="dark"] .preview-credits {
-                color: #999;
+            /* Dark theme support */
+            [data-theme="dark"] .subtle-image-popup {
+                border-color: var(--border-color, #444);
+                background: var(--modal-bg, #2a2a2a);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             }
 
-            [data-theme="dark"] .preview-tags {
-                display: none !important;
+            [data-theme="dark"] .subtle-image-popup .preview-info {
+                background: var(--modal-bg, #2a2a2a);
             }
 
-            /* Hover-enabled images styling */
+            [data-theme="dark"] .subtle-image-popup .preview-caption {
+                color: var(--text-color, #f0f0f0);
+            }
+
+            [data-theme="dark"] .subtle-image-popup .preview-credits {
+                color: var(--text-muted, #999);
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                .subtle-image-popup {
+                    max-width: 250px;
+                    max-height: 350px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .subtle-image-popup {
+                    max-width: 200px;
+                    max-height: 300px;
+                }
+            }
+
+            /* Enhanced hover effects for images */
             .hover-preview-enabled {
                 transition: transform 0.2s ease, filter 0.2s ease;
                 cursor: pointer;
@@ -326,63 +256,13 @@ class ImageHoverPreview {
                 transform: scale(1.05);
                 filter: brightness(1.1);
             }
-
-            /* Responsive adjustments */
-            @media (max-width: 768px) {
-                .preview-image {
-                    max-height: 60vh;
-                }
-                
-                .preview-caption {
-                    bottom: -80px;
-                    padding: 10px 12px;
-                    font-size: 13px;
-                    min-width: auto;
-                    left: 10px;
-                    right: 10px;
-                }
-            }
-
-            @media (max-width: 480px) {
-                .preview-image {
-                    max-height: 50vh;
-                }
-                
-                .preview-caption {
-                    bottom: -100px;
-                    padding: 8px 10px;
-                    font-size: 12px;
-                }
-            }
-
-            /* Hover instruction hint */
-            #image-hover-preview::before {
-                content: "Hover to preview • Click for full size";
-                position: absolute;
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: rgba(0, 0, 0, 0.7);
-                color: white;
-                padding: 6px 12px;
-                border-radius: 4px;
-                font-size: 11px;
-                opacity: 0;
-                animation: fadeInOut 3s ease-in-out;
-                pointer-events: none;
-            }
-
-            @keyframes fadeInOut {
-                0%, 100% { opacity: 0; }
-                20%, 80% { opacity: 0.8; }
-            }
         `;
 
         document.head.appendChild(style);
     }
 
     setupGlobalImageHandlers() {
-        // Use event delegation to handle all images
+        // Use event delegation to handle all images with subtle previews
         document.addEventListener('mouseover', (e) => {
             if (this.shouldPreviewImage(e.target)) {
                 this.handleImageHover(e.target, e);
@@ -395,21 +275,25 @@ class ImageHoverPreview {
             }
         });
 
-        // Handle image clicks to open in new tab - COMMENTED OUT
-        /*
-        document.addEventListener('click', (e) => {
-            if (this.shouldPreviewImage(e.target)) {
-                e.preventDefault();
-                e.stopPropagation();
-                this.handleImageClick(e.target);
-                return;
+        // Keep the preview visible when hovering over the popup itself
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest('.subtle-image-popup')) {
+                // Clear the hide timeout when hovering over popup
+                if (this.hoverTimeout) {
+                    clearTimeout(this.hoverTimeout);
+                    this.hoverTimeout = null;
+                }
             }
-            // Close preview when clicking anywhere else
-            this.hidePreview();
         });
-        */
 
-        // Close preview when clicking anywhere else
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest('.subtle-image-popup')) {
+                // Hide when leaving the popup
+                this.hidePreview();
+            }
+        });
+
+        // Close preview when clicking anywhere
         document.addEventListener('click', (e) => {
             this.hidePreview();
         });
@@ -467,8 +351,8 @@ class ImageHoverPreview {
 
         // Show preview after delay
         this.hoverTimeout = setTimeout(() => {
-            this.showPreview(image);
-        }, 500); // 500ms delay to prevent accidental triggers
+            this.showSubtlePreview(image, event);
+        }, 300); // 300ms delay to prevent accidental triggers
     }
 
     handleImageLeave(image, event) {
@@ -611,45 +495,25 @@ class ImageHoverPreview {
         Logger.debug('🖼️ Image opened with metadata in new tab:', image.src);
     }
 
-    showPreview(originalImage) {
+    showSubtlePreview(originalImage, event) {
         if (this.isPreviewVisible) return;
 
         const previewImage = this.previewElement.querySelector('.preview-image');
         const caption = this.previewElement.querySelector('.preview-caption');
-        const tags = this.previewElement.querySelector('.preview-tags');
         const credits = this.previewElement.querySelector('.preview-credits');
-        const container = this.previewElement.querySelector('.preview-container');
 
         // Get metadata from media library
         const mediaMetadata = this.findImageMetadata(originalImage.src);
         
-        // Set optimal image source with progressive loading
+        // Set optimal image source
         if (mediaMetadata) {
-            // Start with thumbnail for instant display
-            const thumbnailSize = this.getOptimalImageSize(mediaMetadata, 'thumbnail');
-            const previewSize = this.getOptimalImageSize(mediaMetadata, 'preview');
-            
-            if (thumbnailSize && previewSize && thumbnailSize.url !== previewSize.url) {
-                // Progressive loading: thumbnail first, then upgrade to preview quality
-                previewImage.src = thumbnailSize.url;
-                
-                // Preload the higher quality version
-                this.preloadImage(previewSize.url).then(() => {
-                    if (this.isPreviewVisible && previewImage) {
-                        previewImage.src = previewSize.url;
-                    }
-                }).catch(err => {
-                    Logger.debug('Failed to load preview image:', err);
-                });
-            } else if (previewSize) {
-                // Use preview size directly
+            const previewSize = this.getOptimalImageSize(mediaMetadata, 'popup');
+            if (previewSize) {
                 previewImage.src = previewSize.url;
             } else {
-                // Fallback to original source
                 previewImage.src = originalImage.src;
             }
         } else {
-            // No metadata available, use original source
             previewImage.src = originalImage.src;
         }
         
@@ -658,10 +522,8 @@ class ImageHoverPreview {
         // Set caption (title or main description)
         let captionText = '';
         if (mediaMetadata) {
-            // Use title as the main caption, but add caption if it's different
             if (mediaMetadata.title) {
                 captionText = mediaMetadata.title;
-                // If caption exists and is different from title, add it
                 if (mediaMetadata.caption && 
                     mediaMetadata.caption !== mediaMetadata.title && 
                     mediaMetadata.caption.toLowerCase() !== mediaMetadata.title.toLowerCase()) {
@@ -673,7 +535,6 @@ class ImageHoverPreview {
         }
         
         if (!captionText) {
-            // Fallback to character extraction
             captionText = this.generateEnhancedCaption(originalImage);
         }
         
@@ -684,29 +545,51 @@ class ImageHoverPreview {
             caption.style.display = 'none';
         }
 
-        // Set tags - HIDE THEM (user doesn't want tags shown)
-        tags.innerHTML = '';
-        tags.style.display = 'none';
-
-        // Set credits - ALWAYS show if available
+        // Set credits
         if (mediaMetadata && mediaMetadata.credits) {
             credits.textContent = mediaMetadata.credits;
             credits.style.display = 'block';
         } else {
-            // Fallback credits for images without metadata
             credits.textContent = 'Source: Adenai Campaign';
             credits.style.display = 'block';
         }
 
-        // Show preview
-        this.previewElement.style.display = 'flex';
-        
-        // Trigger animation
-        requestAnimationFrame(() => {
-            this.previewElement.classList.add('visible');
-        });
+        // Position popup next to the original image
+        this.positionPopupNearImage(originalImage);
 
+        // Show popup
+        this.previewElement.classList.add('show');
         this.isPreviewVisible = true;
+
+        console.log('🖼️ Showing subtle image preview:', captionText || 'image');
+    }
+
+    positionPopupNearImage(image) {
+        const rect = image.getBoundingClientRect();
+        const popup = this.previewElement;
+        const margin = 20;
+        const popupWidth = 300; // max-width from CSS
+        const popupHeight = 400; // estimated max-height
+        
+        let left = rect.right + margin;
+        let top = rect.top;
+        
+        // Check if popup would go off the right edge
+        if (left + popupWidth > window.innerWidth) {
+            left = rect.left - popupWidth - margin;
+        }
+        
+        // Check if popup would go off the bottom edge  
+        if (top + popupHeight > window.innerHeight) {
+            top = window.innerHeight - popupHeight - margin;
+        }
+        
+        // Ensure popup doesn't go off the left or top edges
+        left = Math.max(margin, left);
+        top = Math.max(margin, top);
+        
+        popup.style.left = left + 'px';
+        popup.style.top = top + 'px';
     }
 
     getOptimalImageSize(mediaMetadata, context = 'preview') {
@@ -812,15 +695,10 @@ class ImageHoverPreview {
     hidePreview() {
         if (!this.isPreviewVisible) return;
 
-        this.previewElement.classList.remove('visible');
-        
-        // Hide after animation
-        setTimeout(() => {
-            this.previewElement.style.display = 'none';
-        }, 200);
-
+        this.previewElement.classList.remove('show');
         this.isPreviewVisible = false;
-        Logger.debug('🖼️ Image preview hidden');
+        
+        console.log('🖼️ Image preview hidden');
     }
 
     // Public methods for manual control
