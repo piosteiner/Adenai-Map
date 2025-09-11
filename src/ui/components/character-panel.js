@@ -383,8 +383,11 @@ class CharacterPanel {
         const card = document.createElement('div');
         card.className = 'character-card';
         
-        const hasMovement = character.movementHistory && character.movementHistory.length > 0;
-        const movementCount = hasMovement ? character.movementHistory.length : 0;
+        // Use server-computed movement count with fallback
+        const movementCount = character.computedMovementCount !== undefined 
+            ? character.computedMovementCount 
+            : (character.movementHistory?.length || 0);
+        const hasMovement = movementCount > 0;
         const isPathVisible = window.movementSystem?.isCharacterPathVisible?.(character.id) || false;
         
         card.innerHTML = `
@@ -475,6 +478,12 @@ class CharacterPanel {
 
     // Helper methods
     getCurrentLocation(character) {
+        // First try server-computed field
+        if (character.computedCurrentLocation) {
+            return character.computedCurrentLocation;
+        }
+        
+        // Fallback to original logic for backward compatibility
         // Priority 1: currentLocation object
         if (character.currentLocation && character.currentLocation.location) {
             return character.currentLocation.location;

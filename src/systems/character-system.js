@@ -90,8 +90,27 @@ class CharacterSystem {
                     description: sampleChar.description,
                     notes: sampleChar.notes,
                     currentLocation: sampleChar.currentLocation,
-                    movementHistory: sampleChar.movementHistory?.length || 0
+                    movementHistory: sampleChar.movementHistory?.length || 0,
+                    // SERVER-COMPUTED FIELDS:
+                    computedCurrentLocation: sampleChar.computedCurrentLocation,
+                    computedPosition: sampleChar.computedPosition,
+                    computedHasCoordinates: sampleChar.computedHasCoordinates,
+                    computedMovementCount: sampleChar.computedMovementCount,
+                    computedLastMovementDate: sampleChar.computedLastMovementDate
                 });
+
+                // Check if we have any server-computed fields
+                const hasServerFields = sampleChar.computedCurrentLocation || 
+                                      sampleChar.computedPosition || 
+                                      sampleChar.computedHasCoordinates !== undefined ||
+                                      sampleChar.computedMovementCount !== undefined ||
+                                      sampleChar.computedLastMovementDate;
+
+                if (hasServerFields) {
+                    Logger.success('✅ Server-computed fields detected - using enhanced data');
+                } else {
+                    Logger.warning('⚠️ No server-computed fields found - using fallback logic');
+                }
             }
             
             // Log coordinate and movement status using server-computed fields
