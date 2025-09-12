@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "d24dc87c60ff3ca488d9c1101bb887c8b26b28ab",
+      "action": "update",
+      "type": "location",
+      "itemName": "Valaris",
+      "user": "gm",
+      "timestamp": "2025-09-12T17:34:07.187Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-12T17:34:07.188Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Valaris (by gm) - Updated location details"
+    },
+    {
       "commitSha": "d52dcf6c3e1841119a4b7450504625eac2f919af",
       "action": "update",
       "type": "location",
@@ -5865,5 +5878,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-12T17:33:55.342Z"
+  "lastUpdated": "2025-09-12T17:34:07.188Z"
 }
