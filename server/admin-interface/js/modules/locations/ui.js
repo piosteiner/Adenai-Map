@@ -124,6 +124,9 @@ class LocationUI {
         const coords = location.geometry.coordinates;
         const locationType = props.type || 'unknown';
         
+        // Get character count for this location
+        const characterCount = this.locationOps.getCharacterCountForLocation(props.name);
+        
         // Only show edit/delete buttons if authenticated
         const actionButtons = this.auth.isAuthenticated ? `
             <div class="location-actions">
@@ -146,10 +149,25 @@ class LocationUI {
                             <span class="location-type">${this.formatType(locationType)}</span>
                         </div>
                     </div>
+                    <div class="location-meta">
+                        <span class="coordinates">${coords[0]}, ${coords[1]}</span>
+                        ${props.visited ? '<span class="visited-badge">✓ Visited</span>' : ''}
+                    </div>
                 </div>
+                
+                <!-- NEW: Character section -->
+                <div class="location-characters-section">
+                    <button class="location-characters-toggle" data-location="${props.name}">
+                        👥 Characters (${characterCount})
+                        <span class="toggle-icon">▼</span>
+                    </button>
+                    <div class="location-characters-list" data-location="${props.name}" style="display: none;">
+                        <div class="characters-loading">Loading characters...</div>
+                    </div>
+                </div>
+
                 <div class="location-details">
                     <p><strong>Region:</strong> ${this.formatRegion(props.region || 'Unknown')}</p>
-                    <p><strong>Coordinates:</strong> ${coords[0]}, ${coords[1]}</p>
                     <p><strong>Visited:</strong> ${props.visited ? 'Yes' : 'No'}</p>
                     ${props.description ? `<p><strong>Description:</strong> ${props.description}</p>` : ''}
                 </div>
@@ -385,6 +403,157 @@ class LocationUI {
                 region: location.properties.region
             }))
             .slice(0, 5); // Limit to 5 suggestions
+    }
+
+    // NEW: Render character list for location
+    renderLocationCharacters(characters, locationName) {
+        if (!characters || characters.length === 0) {
+            return `
+                <div class="location-characters-empty">
+                    <span class="empty-icon">👻</span>
+                    <p>No characters currently at this location</p>
+                </div>
+            `;
+        }
+
+        const characterCards = characters.map(character => this.renderCharacterMiniCard(character)).join('');
+        
+        return `
+            <div class="location-characters-grid">
+                ${characterCards}
+            </div>
+        `;
+    }
+
+    // NEW: Render compact character card
+    renderCharacterMiniCard(character) {
+        const statusEmoji = this.getStatusEmoji(character.status);
+        const relationshipEmoji = this.getRelationshipEmoji(character.relationship);
+        
+        return `
+            <div class="character-mini-card" data-character-id="${character.id}">
+                <div class="character-mini-header">
+                    ${character.image ? `
+                        <div class="character-mini-image">
+                            <img src="${character.image}" alt="${character.name}" />
+                        </div>
+                    ` : '<div class="character-mini-placeholder">👤</div>'}
+                    <div class="character-mini-info">
+                        <h4 class="character-mini-name">${character.name}</h4>
+                        ${character.title ? `<p class="character-mini-title">${character.title}</p>` : ''}
+                    </div>
+                </div>
+                <div class="character-mini-badges">
+                    <span class="status-badge mini status-${character.status}" title="Status: ${character.status}">
+                        ${statusEmoji}
+                    </span>
+                    <span class="relationship-badge mini relationship-${character.relationship}" title="Relationship: ${character.relationship}">
+                        ${relationshipEmoji}
+                    </span>
+                </div>
+                <div class="character-mini-meta">
+                    ${character.movementCount ? `<span class="movement-count">🛤️ ${character.movementCount}</span>` : ''}
+                    ${character.lastMovementDate ? `<span class="last-movement" title="Last movement">${character.lastMovementDate}</span>` : ''}
+                </div>
+            </div>
+        `;
+    }
+
+    // NEW: Helper methods for character display
+    getStatusEmoji(status) {
+        const statusMap = {
+            'alive': '😊',
+            'dead': '💀',
+            'undead': '🧟',
+            'missing': '❓',
+            'unknown': '🤷'
+        };
+        return statusMap[status] || '🤷';
+    }
+
+    getRelationshipEmoji(relationship) {
+        const relationshipMap = {
+            'ally': '😊',
+            'friendly': '🙂',
+            'neutral': '😐',
+            'suspicious': '🤨',
+            'hostile': '😠',
+            'enemy': '⚔️',
+            'party': '👥'
+        };
+        return relationshipMap[relationship] || '😐';
+    }
+
+    // NEW: Toggle character list display
+    async toggleLocationCharacters(locationName) {
+        const toggleButton = document.querySelector(`[data-location="${locationName}"].location-characters-toggle`);
+        const charactersList = document.querySelector(`[data-location="${locationName}"].location-characters-list`);
+        const toggleIcon = toggleButton.querySelector('.toggle-icon');
+        
+        if (!charactersList) return;
+
+        const isVisible = charactersList.style.display !== 'none';
+        
+        if (isVisible) {
+            // Hide characters
+            charactersList.style.display = 'none';
+            toggleIcon.textContent = '▼';
+        } else {
+            // Show characters
+            charactersList.style.display = 'block';
+            toggleIcon.textContent = '▲';
+            
+            // Load characters if not already loaded
+            if (charactersList.querySelector('.characters-loading')) {
+                await this.loadCharactersForLocation(locationName);
+            }
+        }
+    }
+
+    // NEW: Load and display characters for location
+    async loadCharactersForLocation(locationName) {
+        const charactersList = document.querySelector(`[data-location="${locationName}"].location-characters-list`);
+        if (!charactersList) return;
+
+        try {
+            charactersList.innerHTML = '<div class="characters-loading">Loading characters...</div>';
+            
+            const result = await this.locationOps.getCharactersForLocation(locationName);
+            
+            if (result.success) {
+                const charactersHtml = this.renderLocationCharacters(result.characters, locationName);
+                charactersList.innerHTML = charactersHtml;
+                
+                // Add click handlers for character mini-cards
+                this.setupCharacterMiniCardHandlers(charactersList);
+            } else {
+                charactersList.innerHTML = `<div class="characters-error">Failed to load characters: ${result.error}</div>`;
+            }
+        } catch (error) {
+            console.error('❌ Error loading characters for location:', error);
+            charactersList.innerHTML = '<div class="characters-error">Error loading characters</div>';
+        }
+    }
+
+    // NEW: Setup click handlers for character mini-cards
+    setupCharacterMiniCardHandlers(container) {
+        container.querySelectorAll('.character-mini-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const characterId = e.currentTarget.dataset.characterId;
+                this.showCharacterDetails(characterId);
+            });
+        });
+    }
+
+    // NEW: Show character details (integration with character module)
+    showCharacterDetails(characterId) {
+        // Trigger character detail view if character module is available
+        if (window.adminCharacters && typeof window.adminCharacters.showCharacterDetail === 'function') {
+            window.adminCharacters.showCharacterDetail(characterId);
+        } else {
+            console.log('📍 Show character details for:', characterId);
+            // Could implement a simple modal or navigate to character page
+        }
     }
 }
 

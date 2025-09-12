@@ -5,6 +5,7 @@ class LocationOperations {
         this.auth = auth;
         this.ui = ui;
         this.locations = [];
+        this.locationGroups = {}; // NEW: Store character groups
         this.apiBaseUrl = '/api/locations';
     }
 
@@ -25,6 +26,30 @@ class LocationOperations {
             console.error('❌ Failed to load locations:', error);
             this.ui.showToast('Failed to load locations', 'error');
             this.locations = [];
+            throw error;
+        }
+    }
+
+    // NEW: Load locations with character data
+    async loadLocationsWithCharacters() {
+        try {
+            console.log('📡 Loading locations and character data...');
+            
+            // Load locations
+            await this.loadLocations();
+            
+            // Load character groups
+            const response = await fetch('/api/characters');
+            const characterData = await response.json();
+            
+            if (characterData.locationGroups) {
+                this.locationGroups = characterData.locationGroups;
+                console.log(`👥 Loaded character groups for ${Object.keys(this.locationGroups).length} locations`);
+            }
+            
+            return { locations: this.locations, locationGroups: this.locationGroups };
+        } catch (error) {
+            console.error('❌ Failed to load locations with characters:', error);
             throw error;
         }
     }
@@ -281,6 +306,47 @@ class LocationOperations {
             features: this.locations
         };
         this.ui.exportJson(data, 'adenai-locations');
+    }
+
+    // NEW: Get characters for specific location
+    async getCharactersForLocation(locationName) {
+        try {
+            // First try cached data
+            if (this.locationGroups[locationName]) {
+                return {
+                    success: true,
+                    location: locationName,
+                    characters: this.locationGroups[locationName],
+                    totalCharacters: this.locationGroups[locationName].length,
+                    cached: true
+                };
+            }
+            
+            // Fallback to API call
+            const response = await fetch(`/api/characters/location/${encodeURIComponent(locationName)}`);
+            const data = await response.json();
+            
+            // Update cache
+            if (data.success && data.characters) {
+                this.locationGroups[locationName] = data.characters;
+            }
+            
+            return data;
+        } catch (error) {
+            console.error('❌ Failed to get characters for location:', error);
+            return { success: false, error: error.message };
+        }
+    }
+
+    // NEW: Get character count for location
+    getCharacterCountForLocation(locationName) {
+        return this.locationGroups[locationName] ? this.locationGroups[locationName].length : 0;
+    }
+
+    // NEW: Update character groups when character data changes
+    updateLocationGroups(newLocationGroups) {
+        this.locationGroups = newLocationGroups || {};
+        console.log('🔄 Updated location groups cache');
     }
 
     viewRawJson() {

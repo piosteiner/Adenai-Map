@@ -72,6 +72,25 @@ class AdminLocations {
 
         // Location image hover popup functionality
         this.setupLocationImagePopup();
+
+        // NEW: Character toggle button handler
+        this.ui.addDelegatedListener('locations-list', '.location-characters-toggle', 'click', (e) => {
+            e.preventDefault();
+            const locationName = e.target.dataset.location;
+            this.uiManager.toggleLocationCharacters(locationName);
+        });
+
+        // NEW: Listen for character data changes
+        document.addEventListener('dataChanged', (e) => {
+            if (e.detail.type === 'characters') {
+                this.refreshCharacterData();
+            }
+        });
+
+        // NEW: Listen for character movement updates
+        document.addEventListener('characterMovementUpdated', (e) => {
+            this.refreshCharacterData();
+        });
     }
 
     setupLocationImagePopup() {
@@ -150,13 +169,15 @@ class AdminLocations {
 
     async loadLocations() {
         try {
-            console.log('🔄 Starting location reload...');
-            this.ui.showLoading('locations-list', 'Loading locations...');
+            console.log('🔄 Starting location reload with characters...');
+            this.ui.showLoading('locations-list', 'Loading locations and characters...');
             
-            const locations = await this.operations.loadLocations();
-            console.log(`🔄 Received ${locations.length} locations, rendering...`);
+            // Use enhanced loader that includes character data
+            const { locations, locationGroups } = await this.operations.loadLocationsWithCharacters();
+            console.log(`🔄 Received ${locations.length} locations and ${Object.keys(locationGroups).length} location groups`);
+            
             this.uiManager.renderLocations(locations);
-            console.log('✅ Location rendering complete');
+            console.log('✅ Location and character rendering complete');
             
         } catch (error) {
             console.error('❌ Failed to load locations:', error);
@@ -311,6 +332,34 @@ class AdminLocations {
         // Could display in modal or dedicated view
         console.log('Location stats:', stats);
         return { stats, html: statsHtml };
+    }
+
+    // NEW: Refresh character data when characters change
+    async refreshCharacterData() {
+        try {
+            console.log('🔄 Refreshing character data for locations...');
+            
+            const response = await fetch('/api/characters');
+            const characterData = await response.json();
+            
+            if (characterData.locationGroups) {
+                this.operations.updateLocationGroups(characterData.locationGroups);
+                
+                // Update character counts in UI
+                this.updateCharacterCounts();
+            }
+        } catch (error) {
+            console.error('❌ Failed to refresh character data:', error);
+        }
+    }
+
+    // NEW: Update character counts in location cards
+    updateCharacterCounts() {
+        document.querySelectorAll('.location-characters-toggle').forEach(button => {
+            const locationName = button.dataset.location;
+            const count = this.operations.getCharacterCountForLocation(locationName);
+            button.innerHTML = `👥 Characters (${count}) <span class="toggle-icon">▼</span>`;
+        });
     }
 }
 

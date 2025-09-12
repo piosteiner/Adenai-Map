@@ -1,0 +1,346 @@
+/* Location Characters Section */
+.location-characters-section {
+    margin-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.location-characters-toggle {
+    width: 100%;
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.75rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+    color: var(--text-color);
+}
+
+.location-characters-toggle:hover {
+    background: var(--hover-bg);
+    border-color: var(--primary-color);
+}
+
+.location-characters-toggle .toggle-icon {
+    transition: transform 0.2s ease;
+    font-size: 0.8rem;
+}
+
+.location-characters-list {
+    margin-top: 0.5rem;
+    padding: 1rem;
+    background: var(--tertiary-bg);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+/* Character Mini Cards */
+.location-characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+}
+
+.character-mini-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.character-mini-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.character-mini-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.character-mini-image {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.character-mini-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.character-mini-placeholder {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--secondary-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.character-mini-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.character-mini-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-color);
+}
+
+.character-mini-title {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.character-mini-badges {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.character-mini-badges .status-badge.mini,
+.character-mini-badges .relationship-badge.mini {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+/* Status badge colors */
+.status-badge.mini.status-alive {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-badge.mini.status-dead {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.status-badge.mini.status-undead {
+    background: #e2e3e5;
+    color: #383d41;
+    border: 1px solid #d6d8db;
+}
+
+.status-badge.mini.status-missing {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.status-badge.mini.status-unknown {
+    background: var(--secondary-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+
+/* Relationship badge colors */
+.relationship-badge.mini.relationship-ally {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.relationship-badge.mini.relationship-friendly {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.relationship-badge.mini.relationship-neutral {
+    background: var(--secondary-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.relationship-badge.mini.relationship-suspicious {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.relationship-badge.mini.relationship-hostile {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.relationship-badge.mini.relationship-enemy {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.relationship-badge.mini.relationship-party {
+    background: #e7e3ff;
+    color: #5a2d91;
+    border: 1px solid #d1ecf1;
+}
+
+.character-mini-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.movement-count {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.last-movement {
+    font-style: italic;
+}
+
+/* Empty and Loading States */
+.location-characters-empty {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+}
+
+.location-characters-empty .empty-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.characters-loading,
+.characters-error {
+    text-align: center;
+    padding: 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.characters-error {
+    color: var(--error-color);
+}
+
+/* Location card enhancements */
+.location-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.location-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+}
+
+.location-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.coordinates {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: monospace;
+}
+
+.visited-badge {
+    background: #d4edda;
+    color: #155724;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    border: 1px solid #c3e6cb;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .location-characters-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .character-mini-card {
+        padding: 0.5rem;
+    }
+    
+    .location-characters-toggle {
+        font-size: 0.8rem;
+        padding: 0.5rem;
+    }
+    
+    .location-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .location-meta {
+        align-items: flex-start;
+    }
+}
+
+/* Dark theme support */
+[data-theme="dark"] .status-badge.mini.status-alive {
+    background: #1a4a2d;
+    color: #90ee90;
+    border-color: #2d5a3d;
+}
+
+[data-theme="dark"] .status-badge.mini.status-dead {
+    background: #4a1a1a;
+    color: #ff6b6b;
+    border-color: #5a2d2d;
+}
+
+[data-theme="dark"] .relationship-badge.mini.relationship-ally {
+    background: #1a3a4a;
+    color: #87ceeb;
+    border-color: #2d4a5a;
+}
+
+[data-theme="dark"] .relationship-badge.mini.relationship-enemy {
+    background: #4a1a1a;
+    color: #ff6b6b;
+    border-color: #5a2d2d;
+}
+
+[data-theme="dark"] .visited-badge {
+    background: #1a4a2d;
+    color: #90ee90;
+    border-color: #2d5a3d;
+}
