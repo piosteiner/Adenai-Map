@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "fbee1340ac04e81f4152383d36d940bae19460ec",
+      "action": "create",
+      "type": "character",
+      "itemName": "Simi",
+      "user": "gm",
+      "timestamp": "2025-09-14T14:57:34.300Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-14T14:57:34.300Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Simi (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "b2d29fe6a53db92a83aa92ace92655c67c15b434",
       "action": "create",
       "type": "character",
@@ -5904,5 +5917,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-14T14:50:07.011Z"
+  "lastUpdated": "2025-09-14T14:57:34.300Z"
 }
