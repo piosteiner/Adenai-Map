@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "f3ad559fd960f389ebc9c270d9a31341d029980a",
+      "action": "update",
+      "type": "character",
+      "itemName": "Puglia",
+      "user": "gm",
+      "timestamp": "2025-09-14T19:39:28.092Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-14T19:39:28.092Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: puglia (by gm) - changed relationship to unknown"
+    },
+    {
       "commitSha": "3ce99e20ef3ef4a4132c06db4640a43608363eb1",
       "action": "update",
       "type": "character",
@@ -5930,5 +5943,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-14T19:39:16.420Z"
+  "lastUpdated": "2025-09-14T19:39:28.092Z"
 }
