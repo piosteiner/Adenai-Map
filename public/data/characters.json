@@ -1799,12 +1799,10 @@
       "image": "https://adenai-admin.piogino.ch/media/e42g03uurwlh-small.webp",
       "status": "alive",
       "faction": "",
-      "relationship": "neutral",
+      "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2025-09-14T14:49:41.390Z",
-      "updatedAt": "2025-09-14T14:49:41.390Z",
       "currentLocation": {
         "location": "Osdalen",
         "date": "2025-09-14",
@@ -1814,8 +1812,10 @@
           1412,
           657
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2025-09-14T14:49:41.390Z",
+      "updatedAt": "2025-09-14T19:39:27.417Z"
     },
     {
       "id": "valentino",
@@ -1880,5 +1880,5 @@
       "updatedAt": "2025-09-14T19:39:15.688Z"
     }
   ],
-  "lastUpdated": "2025-09-14T19:39:15.689Z"
+  "lastUpdated": "2025-09-14T19:39:27.417Z"
 }
