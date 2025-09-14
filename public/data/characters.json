@@ -1861,12 +1861,10 @@
       "image": "https://adenai-admin.piogino.ch/media/jlt84s78tcst-small.webp",
       "status": "alive",
       "faction": "",
-      "relationship": "ally",
+      "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2025-09-14T14:57:33.444Z",
-      "updatedAt": "2025-09-14T14:57:33.444Z",
       "currentLocation": {
         "location": "Glesburg",
         "date": "2025-09-14",
@@ -1876,9 +1874,11 @@
           1184,
           648
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2025-09-14T14:57:33.444Z",
+      "updatedAt": "2025-09-14T19:39:15.688Z"
     }
   ],
-  "lastUpdated": "2025-09-14T14:57:33.444Z"
+  "lastUpdated": "2025-09-14T19:39:15.689Z"
 }
