@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "18617c2948d5e7ec4f8066b639ced7cd5f1c8ccc",
+      "action": "create",
+      "type": "character",
+      "itemName": "Puglia",
+      "user": "gm",
+      "timestamp": "2025-09-14T14:49:42.076Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-14T14:49:42.076Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Puglia (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "d24dc87c60ff3ca488d9c1101bb887c8b26b28ab",
       "action": "update",
       "type": "location",
@@ -5878,5 +5891,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-12T17:34:07.188Z"
+  "lastUpdated": "2025-09-14T14:49:42.077Z"
 }
