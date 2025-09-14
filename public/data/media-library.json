@@ -4974,7 +4974,50 @@
       },
       "fileSize": 80812,
       "mimeType": "image/jpeg"
+    },
+    "characters-e42g03uurwlh": {
+      "id": "characters-e42g03uurwlh",
+      "category": "characters",
+      "title": "Portrait von Puglia",
+      "caption": "",
+      "credits": "https://www.pinterest.com/i/1VeWNbdwT/",
+      "tags": [],
+      "uploadDate": "2025-09-14T14:48:51.533Z",
+      "sizes": {
+        "thumb": {
+          "filename": "e42g03uurwlh-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/e42g03uurwlh-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "e42g03uurwlh-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/e42g03uurwlh-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "e42g03uurwlh-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/e42g03uurwlh-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "e42g03uurwlh-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/e42g03uurwlh-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "e42g03uurwlh-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/e42g03uurwlh-original.webp",
+          "width": 736,
+          "height": 981
+        }
+      },
+      "fileSize": 113368,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2025-09-14T14:48:05.262Z"
+  "lastUpdated": "2025-09-14T14:48:51.808Z"
 }
