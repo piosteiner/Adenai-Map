@@ -1816,7 +1816,38 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "valentino",
+      "name": "Valentino",
+      "title": "der Hübsche",
+      "placeOfOrigin": "Glesburg",
+      "coordinates": [
+        1184,
+        648
+      ],
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/media/004twrbjol4f-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-09-14T14:50:06.344Z",
+      "updatedAt": "2025-09-14T14:50:06.344Z",
+      "currentLocation": {
+        "location": "Glesburg",
+        "date": "2025-09-14",
+        "dateStart": "2025-09-14",
+        "dateEnd": null,
+        "coordinates": [
+          1184,
+          648
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2025-09-14T14:49:41.390Z"
+  "lastUpdated": "2025-09-14T14:50:06.345Z"
 }
