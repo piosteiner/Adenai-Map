@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "3c3e163b11d32b2e9873aecc1f7c661cb6c7a33e",
+      "action": "update",
+      "type": "character",
+      "itemName": "Valentino",
+      "user": "gm",
+      "timestamp": "2025-09-14T19:39:44.704Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-09-14T19:39:44.704Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: valentino (by gm) - changed relationship to unknown"
+    },
+    {
       "commitSha": "f3ad559fd960f389ebc9c270d9a31341d029980a",
       "action": "update",
       "type": "character",
@@ -5943,5 +5956,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-09-14T19:39:28.092Z"
+  "lastUpdated": "2025-09-14T19:39:44.704Z"
 }
