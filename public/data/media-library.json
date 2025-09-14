@@ -4931,7 +4931,50 @@
       "fileSize": 674311,
       "mimeType": "image/png",
       "lastModified": "2025-09-12T22:03:18.230Z"
+    },
+    "characters-004twrbjol4f": {
+      "id": "characters-004twrbjol4f",
+      "category": "characters",
+      "title": "Valentino",
+      "caption": "Portrait von Valentino",
+      "credits": "https://www.pinterest.com/i/5zhSdvLXl/",
+      "tags": [],
+      "uploadDate": "2025-09-14T14:48:04.982Z",
+      "sizes": {
+        "thumb": {
+          "filename": "004twrbjol4f-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/004twrbjol4f-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "004twrbjol4f-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/004twrbjol4f-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "004twrbjol4f-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/004twrbjol4f-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "004twrbjol4f-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/004twrbjol4f-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "004twrbjol4f-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/004twrbjol4f-original.webp",
+          "width": 1000,
+          "height": 1278
+        }
+      },
+      "fileSize": 80812,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2025-09-08T13:48:04.260Z"
+  "lastUpdated": "2025-09-14T14:48:05.262Z"
 }
