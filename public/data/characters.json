@@ -1847,7 +1847,38 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "simi",
+      "name": "Simi",
+      "title": "",
+      "placeOfOrigin": "Glesburg",
+      "coordinates": [
+        1184,
+        648
+      ],
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/media/jlt84s78tcst-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2025-09-14T14:57:33.444Z",
+      "updatedAt": "2025-09-14T14:57:33.444Z",
+      "currentLocation": {
+        "location": "Glesburg",
+        "date": "2025-09-14",
+        "dateStart": "2025-09-14",
+        "dateEnd": null,
+        "coordinates": [
+          1184,
+          648
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2025-09-14T14:50:06.345Z"
+  "lastUpdated": "2025-09-14T14:57:33.444Z"
 }
