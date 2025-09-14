@@ -5017,7 +5017,50 @@
       },
       "fileSize": 113368,
       "mimeType": "image/jpeg"
+    },
+    "characters-jlt84s78tcst": {
+      "id": "characters-jlt84s78tcst",
+      "category": "characters",
+      "title": "Simi",
+      "caption": "",
+      "credits": "https://www.pinterest.com/i/3NuOEHKsT/",
+      "tags": [],
+      "uploadDate": "2025-09-14T14:57:14.285Z",
+      "sizes": {
+        "thumb": {
+          "filename": "jlt84s78tcst-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jlt84s78tcst-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "jlt84s78tcst-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jlt84s78tcst-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "jlt84s78tcst-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jlt84s78tcst-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "jlt84s78tcst-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jlt84s78tcst-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "jlt84s78tcst-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jlt84s78tcst-original.webp",
+          "width": 800,
+          "height": 1197
+        }
+      },
+      "fileSize": 66709,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2025-09-14T14:48:51.808Z"
+  "lastUpdated": "2025-09-14T14:57:14.545Z"
 }
