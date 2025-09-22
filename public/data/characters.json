@@ -170,10 +170,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Treffen mit Valentino dem Schönen",
+      "location": "Flusstal unweit von Glesburg",
       "coordinates": [
-        1252,
-        630
+        1236,
+        628
       ],
       "description": "",
       "image": "",
@@ -841,20 +841,36 @@
           "type": "meeting",
           "isCustomLocation": true,
           "createdAt": "2025-09-22T12:45:54.944Z"
+        },
+        {
+          "id": "movement_1758545212954",
+          "movement_nr": 39,
+          "date": "5663-09-11",
+          "dateStart": "5663-09-11",
+          "dateEnd": null,
+          "location": "Flusstal unweit von Glesburg",
+          "coordinates": [
+            1236,
+            628
+          ],
+          "notes": "Angriff der Standschreiter",
+          "type": "mission",
+          "isCustomLocation": true,
+          "createdAt": "2025-09-22T12:46:52.954Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-09-22T12:45:54.944Z",
+      "updatedAt": "2025-09-22T12:46:52.954Z",
       "currentLocation": {
         "date": "5663-09-11",
         "dateStart": "5663-09-11",
         "dateEnd": null,
-        "location": "Treffen mit Valentino dem Schönen",
+        "location": "Flusstal unweit von Glesburg",
         "coordinates": [
-          1252,
-          630
+          1236,
+          628
         ],
-        "notes": ""
+        "notes": "Angriff der Standschreiter"
       }
     },
     {
@@ -1912,5 +1928,5 @@
       "updatedAt": "2025-09-14T19:39:15.688Z"
     }
   ],
-  "lastUpdated": "2025-09-22T12:45:54.944Z"
+  "lastUpdated": "2025-09-22T12:46:52.954Z"
 }
