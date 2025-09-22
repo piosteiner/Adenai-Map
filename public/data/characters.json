@@ -170,10 +170,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Fitchers Turm bei Glesburg",
+      "location": "Treffen mit Valentino dem Schönen",
       "coordinates": [
-        1259,
-        594
+        1252,
+        630
       ],
       "description": "",
       "image": "",
@@ -825,20 +825,36 @@
           "type": "travel",
           "isCustomLocation": true,
           "createdAt": "2025-09-22T12:44:40.545Z"
+        },
+        {
+          "id": "movement_1758545154944",
+          "movement_nr": 38,
+          "date": "5663-09-11",
+          "dateStart": "5663-09-11",
+          "dateEnd": null,
+          "location": "Treffen mit Valentino dem Schönen",
+          "coordinates": [
+            1252,
+            630
+          ],
+          "notes": "",
+          "type": "meeting",
+          "isCustomLocation": true,
+          "createdAt": "2025-09-22T12:45:54.944Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-09-22T12:44:40.545Z",
+      "updatedAt": "2025-09-22T12:45:54.944Z",
       "currentLocation": {
-        "date": "5663-09-10",
-        "dateStart": "5663-09-10",
+        "date": "5663-09-11",
+        "dateStart": "5663-09-11",
         "dateEnd": null,
-        "location": "Fitchers Turm bei Glesburg",
+        "location": "Treffen mit Valentino dem Schönen",
         "coordinates": [
-          1259,
-          594
+          1252,
+          630
         ],
-        "notes": "Die Gruppe teleportierte sich mit Lia, Fitcher und seinem Turm in die Nähe von Glesburg."
+        "notes": ""
       }
     },
     {
@@ -1896,5 +1912,5 @@
       "updatedAt": "2025-09-14T19:39:15.688Z"
     }
   ],
-  "lastUpdated": "2025-09-22T12:44:40.545Z"
+  "lastUpdated": "2025-09-22T12:45:54.944Z"
 }
