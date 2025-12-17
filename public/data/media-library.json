@@ -5060,7 +5060,50 @@
       },
       "fileSize": 66709,
       "mimeType": "image/jpeg"
+    },
+    "characters-qdo1ofv1ks4o": {
+      "id": "characters-qdo1ofv1ks4o",
+      "category": "characters",
+      "title": "Lohezet",
+      "caption": "Ausgestossener Magier von Rena",
+      "credits": "Dragonlance: Shadow of the Dragon Queen",
+      "tags": [],
+      "uploadDate": "2025-12-17T00:42:47.685Z",
+      "sizes": {
+        "thumb": {
+          "filename": "qdo1ofv1ks4o-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qdo1ofv1ks4o-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "qdo1ofv1ks4o-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qdo1ofv1ks4o-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "qdo1ofv1ks4o-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qdo1ofv1ks4o-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "qdo1ofv1ks4o-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qdo1ofv1ks4o-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "qdo1ofv1ks4o-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qdo1ofv1ks4o-original.webp",
+          "width": 551,
+          "height": 1000
+        }
+      },
+      "fileSize": 157819,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2025-09-14T14:57:14.545Z"
+  "lastUpdated": "2025-12-17T00:42:48.077Z"
 }
