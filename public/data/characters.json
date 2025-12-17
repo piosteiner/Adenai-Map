@@ -1948,7 +1948,10 @@
       "name": "Lohezet",
       "title": "",
       "placeOfOrigin": "",
-      "coordinates": null,
+      "coordinates": [
+        1184,
+        648
+      ],
       "description": "",
       "image": "https://adenai-admin.piogino.ch/media/qdo1ofv1ks4o-small.webp",
       "status": "alive",
@@ -1956,10 +1959,39 @@
       "relationship": "neutral",
       "firstMet": "5663-09-12",
       "notes": "",
-      "movementHistory": [],
+      "movementHistory": [
+        {
+          "id": "movement_1765932275302",
+          "movement_nr": 0,
+          "date": "5663-09-12",
+          "dateStart": "5663-09-12",
+          "dateEnd": null,
+          "location": "Glesburg",
+          "coordinates": [
+            1184,
+            648
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-12-17T00:44:35.302Z"
+        }
+      ],
       "createdAt": "2025-12-17T00:44:01.279Z",
-      "updatedAt": "2025-12-17T00:44:01.279Z"
+      "updatedAt": "2025-12-17T00:44:35.302Z",
+      "location": "Glesburg",
+      "currentLocation": {
+        "date": "5663-09-12",
+        "dateStart": "5663-09-12",
+        "dateEnd": null,
+        "location": "Glesburg",
+        "coordinates": [
+          1184,
+          648
+        ],
+        "notes": ""
+      }
     }
   ],
-  "lastUpdated": "2025-12-17T00:44:01.279Z"
+  "lastUpdated": "2025-12-17T00:44:35.302Z"
 }
