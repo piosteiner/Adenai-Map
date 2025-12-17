@@ -5103,7 +5103,50 @@
       },
       "fileSize": 157819,
       "mimeType": "image/jpeg"
+    },
+    "general-5a86i7390twj": {
+      "id": "general-5a86i7390twj",
+      "category": "general",
+      "title": "Gornyje Gadse",
+      "caption": "",
+      "credits": "hand drawn copy of a cacaocat design from an article in Japan",
+      "tags": [],
+      "uploadDate": "2025-12-17T22:23:06.940Z",
+      "sizes": {
+        "thumb": {
+          "filename": "5a86i7390twj-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5a86i7390twj-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "5a86i7390twj-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5a86i7390twj-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "5a86i7390twj-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5a86i7390twj-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "5a86i7390twj-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5a86i7390twj-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "5a86i7390twj-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5a86i7390twj-original.webp",
+          "width": 1412,
+          "height": 1412
+        }
+      },
+      "fileSize": 543382,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-12-17T00:42:48.077Z"
+  "lastUpdated": "2025-12-17T22:23:07.285Z"
 }
