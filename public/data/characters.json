@@ -170,10 +170,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Flusstal unweit von Glesburg",
+      "location": "Glesburg",
       "coordinates": [
-        1236,
-        628
+        1184,
+        648
       ],
       "description": "",
       "image": "",
@@ -857,20 +857,36 @@
           "type": "mission",
           "isCustomLocation": true,
           "createdAt": "2025-09-22T12:46:52.954Z"
+        },
+        {
+          "id": "movement_1765932069438",
+          "movement_nr": 40,
+          "date": "5663-09-12",
+          "dateStart": "5663-09-12",
+          "dateEnd": "5663-09-13",
+          "location": "Glesburg",
+          "coordinates": [
+            1184,
+            648
+          ],
+          "notes": "Ankunft in Rena, Audienz bei Vivi Wulbren und Treffen auf Lohezet, Reise nach Rena um Avery zu treffen und Abu bei den Magier:innen der Yosefka Akademie und dem Ministerium für Heimatschutz zu melden.",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2025-12-17T00:41:09.438Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-09-22T12:46:52.954Z",
+      "updatedAt": "2025-12-17T00:41:09.440Z",
       "currentLocation": {
-        "date": "5663-09-11",
-        "dateStart": "5663-09-11",
-        "dateEnd": null,
-        "location": "Flusstal unweit von Glesburg",
+        "date": "5663-09-12",
+        "dateStart": "5663-09-12",
+        "dateEnd": "5663-09-13",
+        "location": "Glesburg",
         "coordinates": [
-          1236,
-          628
+          1184,
+          648
         ],
-        "notes": "Angriff der Standschreiter"
+        "notes": "Ankunft in Rena, Audienz bei Vivi Wulbren und Treffen auf Lohezet, Reise nach Rena um Avery zu treffen und Abu bei den Magier:innen der Yosefka Akademie und dem Ministerium für Heimatschutz zu melden."
       }
     },
     {
@@ -1928,5 +1944,5 @@
       "updatedAt": "2025-09-14T19:39:15.688Z"
     }
   ],
-  "lastUpdated": "2025-09-22T12:46:52.954Z"
+  "lastUpdated": "2025-12-17T00:41:09.440Z"
 }
