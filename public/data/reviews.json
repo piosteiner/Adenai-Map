@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "e099fc9ccf782c0a42f4d9060ec052734579d10a",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lohezet",
+      "user": "gm",
+      "timestamp": "2025-12-17T00:44:36.772Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2025-12-17T00:44:36.772Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: Lohezet (by gm) - Glesburg (5663-09-12)"
+    },
+    {
       "commitSha": "fd17eb8022c23fc92161218dcf9c1a1d90eb03ce",
       "action": "create",
       "type": "character",
@@ -54,5 +67,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2025-12-17T00:44:02.224Z"
+  "lastUpdated": "2025-12-17T00:44:36.772Z"
 }
