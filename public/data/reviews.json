@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "881ed7cc3577ede8a4ae2cc4053d7c57241a96d2",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2026-01-04T05:40:38.613Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-01-04T05:40:38.613Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Rena (5663-09-12)"
+    },
+    {
       "commitSha": "c6ad372f4ebe09d1b19531f3865944bf246768a1",
       "action": "update",
       "type": "character",
@@ -93,5 +106,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-01-04T05:26:34.501Z"
+  "lastUpdated": "2026-01-04T05:40:38.613Z"
 }
