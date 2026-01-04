@@ -170,10 +170,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Glesburg",
+      "location": "Rena",
       "coordinates": [
-        1184,
-        648
+        650,
+        1000
       ],
       "description": "",
       "image": "",
@@ -874,20 +874,36 @@
           "isCustomLocation": false,
           "createdAt": "2025-12-17T00:41:09.438Z",
           "updatedAt": "2026-01-04T05:26:33.572Z"
+        },
+        {
+          "id": "movement_1767505237601",
+          "movement_nr": 41,
+          "date": "5663-09-12",
+          "dateStart": "5663-09-12",
+          "dateEnd": null,
+          "location": "Rena",
+          "coordinates": [
+            650,
+            1000
+          ],
+          "notes": "Die Gruppe teleportiert sich zum \"Ministerium für Heimatschutz\" wo sich Abu als ehemalige Studentin der Yosefka Akademie meldet. Derweilen sind Luna, Tasbor und Ally in einen Mordfall an Dacien Valerio und an Sorsley. Im Hafenareal in welchem Sorsley von der Gruppe gefunden wurde, wurde die nette Nachbarin Lise von einer Tür-Mimic gefressen und Ally wurde mit einer Nachricht in Blut in Rena willkommen geheissen.",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2026-01-04T05:40:37.601Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-01-04T05:26:33.572Z",
+      "updatedAt": "2026-01-04T05:40:37.603Z",
       "currentLocation": {
         "date": "5663-09-12",
         "dateStart": "5663-09-12",
-        "dateEnd": "5663-09-12",
-        "location": "Glesburg",
+        "dateEnd": null,
+        "location": "Rena",
         "coordinates": [
-          1184,
-          648
+          650,
+          1000
         ],
-        "notes": "Ankunft in Glesburg, Audienz bei Vivi Wulbren und Treffen auf Lohezet, Reise nach Rena um Avery zu treffen und Abu bei den Magier:innen der Yosefka Akademie und dem Ministerium für Heimatschutz zu melden."
+        "notes": "Die Gruppe teleportiert sich zum \"Ministerium für Heimatschutz\" wo sich Abu als ehemalige Studentin der Yosefka Akademie meldet. Derweilen sind Luna, Tasbor und Ally in einen Mordfall an Dacien Valerio und an Sorsley. Im Hafenareal in welchem Sorsley von der Gruppe gefunden wurde, wurde die nette Nachbarin Lise von einer Tür-Mimic gefressen und Ally wurde mit einer Nachricht in Blut in Rena willkommen geheissen."
       }
     },
     {
@@ -1994,5 +2010,5 @@
       }
     }
   ],
-  "lastUpdated": "2026-01-04T05:26:33.572Z"
+  "lastUpdated": "2026-01-04T05:40:37.603Z"
 }
