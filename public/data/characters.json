@@ -863,7 +863,7 @@
           "movement_nr": 40,
           "date": "5663-09-12",
           "dateStart": "5663-09-12",
-          "dateEnd": "5663-09-13",
+          "dateEnd": "5663-09-12",
           "location": "Glesburg",
           "coordinates": [
             1184,
@@ -873,15 +873,15 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2025-12-17T00:41:09.438Z",
-          "updatedAt": "2025-12-17T00:45:02.231Z"
+          "updatedAt": "2026-01-04T05:26:33.572Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2025-12-17T00:45:02.231Z",
+      "updatedAt": "2026-01-04T05:26:33.572Z",
       "currentLocation": {
         "date": "5663-09-12",
         "dateStart": "5663-09-12",
-        "dateEnd": "5663-09-13",
+        "dateEnd": "5663-09-12",
         "location": "Glesburg",
         "coordinates": [
           1184,
@@ -1994,5 +1994,5 @@
       }
     }
   ],
-  "lastUpdated": "2025-12-17T00:45:02.231Z"
+  "lastUpdated": "2026-01-04T05:26:33.572Z"
 }
