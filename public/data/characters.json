@@ -2008,7 +2008,24 @@
         ],
         "notes": ""
       }
+    },
+    {
+      "id": "edgar",
+      "name": "Edgar",
+      "title": "Inspektor",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/media/yc1x0op7wzxg-small.webp",
+      "status": "alive",
+      "faction": "Rena Ordnungshüter",
+      "relationship": "friendly",
+      "firstMet": "5663-09-12",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-01-05T18:48:01.348Z",
+      "updatedAt": "2026-01-05T18:48:01.348Z"
     }
   ],
-  "lastUpdated": "2026-01-04T05:40:37.603Z"
+  "lastUpdated": "2026-01-05T18:48:01.348Z"
 }
