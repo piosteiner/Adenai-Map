@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "3e639ef6fe026e690c49e85ef9a6a6a1438a2834",
+      "action": "create",
+      "type": "character",
+      "itemName": "Edgar",
+      "user": "gm",
+      "timestamp": "2026-01-05T18:48:02.224Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-01-05T18:48:02.224Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Edgar (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "881ed7cc3577ede8a4ae2cc4053d7c57241a96d2",
       "action": "update",
       "type": "character",
@@ -106,5 +119,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-01-04T05:40:38.613Z"
+  "lastUpdated": "2026-01-05T18:48:02.224Z"
 }
