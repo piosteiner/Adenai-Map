@@ -5146,7 +5146,50 @@
       },
       "fileSize": 543382,
       "mimeType": "image/png"
+    },
+    "characters-yc1x0op7wzxg": {
+      "id": "characters-yc1x0op7wzxg",
+      "category": "characters",
+      "title": "Edgar",
+      "caption": "",
+      "credits": "Ebberon - Forge of the Artificer by WotC",
+      "tags": [],
+      "uploadDate": "2026-01-05T18:45:45.233Z",
+      "sizes": {
+        "thumb": {
+          "filename": "yc1x0op7wzxg-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/yc1x0op7wzxg-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "yc1x0op7wzxg-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/yc1x0op7wzxg-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "yc1x0op7wzxg-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/yc1x0op7wzxg-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "yc1x0op7wzxg-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/yc1x0op7wzxg-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "yc1x0op7wzxg-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/yc1x0op7wzxg-original.webp",
+          "width": 850,
+          "height": 2009
+        }
+      },
+      "fileSize": 849869,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2025-12-17T22:23:07.285Z"
+  "lastUpdated": "2026-01-05T18:45:45.847Z"
 }
