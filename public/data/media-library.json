@@ -5232,7 +5232,50 @@
       },
       "fileSize": 85929,
       "mimeType": "image/jpeg"
+    },
+    "characters-blsimdbgw1d9": {
+      "id": "characters-blsimdbgw1d9",
+      "category": "characters",
+      "title": "Emi Brach",
+      "caption": "",
+      "credits": "https://pin.it/5p9SoiLIR",
+      "tags": [],
+      "uploadDate": "2026-01-17T15:11:39.482Z",
+      "sizes": {
+        "thumb": {
+          "filename": "blsimdbgw1d9-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/blsimdbgw1d9-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "blsimdbgw1d9-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/blsimdbgw1d9-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "blsimdbgw1d9-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/blsimdbgw1d9-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "blsimdbgw1d9-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/blsimdbgw1d9-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "blsimdbgw1d9-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/blsimdbgw1d9-original.webp",
+          "width": 1199,
+          "height": 1440
+        }
+      },
+      "fileSize": 155216,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-01-17T15:11:08.260Z"
+  "lastUpdated": "2026-01-17T15:11:39.839Z"
 }
