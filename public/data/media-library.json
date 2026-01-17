@@ -5189,7 +5189,50 @@
       },
       "fileSize": 849869,
       "mimeType": "image/png"
+    },
+    "characters-monvonnobeq9": {
+      "id": "characters-monvonnobeq9",
+      "category": "characters",
+      "title": "Lulloq Doro",
+      "caption": "",
+      "credits": "https://pin.it/THShUJADk",
+      "tags": [],
+      "uploadDate": "2026-01-17T15:11:07.886Z",
+      "sizes": {
+        "thumb": {
+          "filename": "monvonnobeq9-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/monvonnobeq9-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "monvonnobeq9-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/monvonnobeq9-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "monvonnobeq9-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/monvonnobeq9-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "monvonnobeq9-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/monvonnobeq9-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "monvonnobeq9-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/monvonnobeq9-original.webp",
+          "width": 900,
+          "height": 1273
+        }
+      },
+      "fileSize": 85929,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-01-05T18:45:45.847Z"
+  "lastUpdated": "2026-01-17T15:11:08.260Z"
 }
