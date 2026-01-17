@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "5cff855f6ae714e81ba22c472e97815a6cd4ec16",
+      "action": "create",
+      "type": "character",
+      "itemName": "Emi Brach",
+      "user": "gm",
+      "timestamp": "2026-01-17T15:12:08.830Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-01-17T15:12:08.830Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Emi Brach (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "3e639ef6fe026e690c49e85ef9a6a6a1438a2834",
       "action": "create",
       "type": "character",
@@ -41,58 +54,6 @@
       "commitMessage": "Update character movement: VsuzH (by gm) - Modified Glesburg entry (5663-09-12 to 5663-09-12)"
     },
     {
-      "commitSha": "5cab2a9e94ac142ab7f03a9909b23f43e04bc512",
-      "action": "update",
-      "type": "character",
-      "itemName": "VsuzH",
-      "user": "gm",
-      "timestamp": "2025-12-17T00:45:03.118Z",
-      "status": "approved",
-      "reviewedBy": "gm",
-      "reviewedAt": "2025-12-17T00:45:03.118Z",
-      "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Glesburg entry (5663-09-12 to 5663-09-13)"
-    },
-    {
-      "commitSha": "e099fc9ccf782c0a42f4d9060ec052734579d10a",
-      "action": "update",
-      "type": "character",
-      "itemName": "Lohezet",
-      "user": "gm",
-      "timestamp": "2025-12-17T00:44:36.772Z",
-      "status": "approved",
-      "reviewedBy": "gm",
-      "reviewedAt": "2025-12-17T00:44:36.772Z",
-      "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Add movement to character: Lohezet (by gm) - Glesburg (5663-09-12)"
-    },
-    {
-      "commitSha": "fd17eb8022c23fc92161218dcf9c1a1d90eb03ce",
-      "action": "create",
-      "type": "character",
-      "itemName": "Lohezet",
-      "user": "gm",
-      "timestamp": "2025-12-17T00:44:02.224Z",
-      "status": "approved",
-      "reviewedBy": "gm",
-      "reviewedAt": "2025-12-17T00:44:02.224Z",
-      "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Create character: Lohezet (by gm) - Initial character creation"
-    },
-    {
-      "commitSha": "fd4210eca619647318ac205c81a9b7c5ce631a09",
-      "action": "update",
-      "type": "character",
-      "itemName": "VsuzH",
-      "user": "gm",
-      "timestamp": "2025-12-17T00:41:10.755Z",
-      "status": "approved",
-      "reviewedBy": "gm",
-      "reviewedAt": "2025-12-17T00:41:10.755Z",
-      "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Add movement to character: VsuzH (by gm) - Glesburg (5663-09-12 to 5663-09-13)"
-    },
-    {
       "commitSha": "36620ccaa03755d9d389266236e9c54a967734c6",
       "action": "delete",
       "type": "character",
@@ -119,5 +80,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-01-05T18:48:02.224Z"
+  "lastUpdated": "2026-01-17T15:12:08.832Z"
 }
