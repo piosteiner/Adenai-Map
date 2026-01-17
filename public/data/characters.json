@@ -2025,7 +2025,24 @@
       "movementHistory": [],
       "createdAt": "2026-01-05T18:48:01.348Z",
       "updatedAt": "2026-01-05T18:48:01.348Z"
+    },
+    {
+      "id": "emi_brach",
+      "name": "Emi Brach",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/media/blsimdbgw1d9-small.webp",
+      "status": "unknown",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-01-17T15:12:07.988Z",
+      "updatedAt": "2026-01-17T15:12:07.988Z"
     }
   ],
-  "lastUpdated": "2026-01-05T18:48:01.348Z"
+  "lastUpdated": "2026-01-17T15:12:07.988Z"
 }
