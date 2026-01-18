@@ -2059,7 +2059,24 @@
       "movementHistory": [],
       "createdAt": "2026-01-17T15:12:30.476Z",
       "updatedAt": "2026-01-17T15:12:30.476Z"
+    },
+    {
+      "id": "zo_ob",
+      "name": "Zo'ob",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/media/j3losb4i5wmk-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-01-18T21:26:38.252Z",
+      "updatedAt": "2026-01-18T21:26:38.252Z"
     }
   ],
-  "lastUpdated": "2026-01-17T15:12:30.476Z"
+  "lastUpdated": "2026-01-18T21:26:38.252Z"
 }
