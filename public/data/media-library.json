@@ -5275,7 +5275,50 @@
       },
       "fileSize": 155216,
       "mimeType": "image/jpeg"
+    },
+    "characters-j3losb4i5wmk": {
+      "id": "characters-j3losb4i5wmk",
+      "category": "characters",
+      "title": "Zo'ob",
+      "caption": "",
+      "credits": "https://pin.it/z3eUOL15J",
+      "tags": [],
+      "uploadDate": "2026-01-18T21:26:11.029Z",
+      "sizes": {
+        "thumb": {
+          "filename": "j3losb4i5wmk-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j3losb4i5wmk-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "j3losb4i5wmk-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j3losb4i5wmk-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "j3losb4i5wmk-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j3losb4i5wmk-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "j3losb4i5wmk-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j3losb4i5wmk-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "j3losb4i5wmk-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j3losb4i5wmk-original.webp",
+          "width": 728,
+          "height": 1309
+        }
+      },
+      "fileSize": 306750,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-01-17T15:11:39.839Z"
+  "lastUpdated": "2026-01-18T21:26:11.539Z"
 }
