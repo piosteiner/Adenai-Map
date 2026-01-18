@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "2e52ee16d8d409a544d850beb0e999a5a170dd1a",
+      "action": "create",
+      "type": "character",
+      "itemName": "Riz",
+      "user": "gm",
+      "timestamp": "2026-01-18T21:28:24.535Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-01-18T21:28:24.535Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Riz (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "004ed14b3033545b4ba920b166cb8234ac59a64a",
       "action": "create",
       "type": "character",
@@ -106,5 +119,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-01-18T21:26:39.124Z"
+  "lastUpdated": "2026-01-18T21:28:24.535Z"
 }
