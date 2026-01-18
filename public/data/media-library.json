@@ -5318,7 +5318,50 @@
       },
       "fileSize": 306750,
       "mimeType": "image/jpeg"
+    },
+    "characters-cgtv3j5du702": {
+      "id": "characters-cgtv3j5du702",
+      "category": "characters",
+      "title": "Riz",
+      "caption": "",
+      "credits": "https://pin.it/6rbelVNwm",
+      "tags": [],
+      "uploadDate": "2026-01-18T21:27:37.606Z",
+      "sizes": {
+        "thumb": {
+          "filename": "cgtv3j5du702-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/cgtv3j5du702-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "cgtv3j5du702-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/cgtv3j5du702-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "cgtv3j5du702-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/cgtv3j5du702-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "cgtv3j5du702-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/cgtv3j5du702-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "cgtv3j5du702-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/cgtv3j5du702-original.webp",
+          "width": 735,
+          "height": 1057
+        }
+      },
+      "fileSize": 66044,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-01-18T21:26:11.539Z"
+  "lastUpdated": "2026-01-18T21:27:38.181Z"
 }
