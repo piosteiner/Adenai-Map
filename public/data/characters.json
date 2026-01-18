@@ -2076,7 +2076,38 @@
       "movementHistory": [],
       "createdAt": "2026-01-18T21:26:38.252Z",
       "updatedAt": "2026-01-18T21:26:38.252Z"
+    },
+    {
+      "id": "riz",
+      "name": "Riz",
+      "title": "",
+      "placeOfOrigin": "Rena",
+      "coordinates": [
+        650,
+        1000
+      ],
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/media/cgtv3j5du702-small.webp",
+      "status": "alive",
+      "faction": "Schwarze Katze",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-01-18T21:28:23.624Z",
+      "updatedAt": "2026-01-18T21:28:23.624Z",
+      "currentLocation": {
+        "location": "Rena",
+        "date": "2026-01-18",
+        "dateStart": "2026-01-18",
+        "dateEnd": null,
+        "coordinates": [
+          650,
+          1000
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-01-18T21:26:38.252Z"
+  "lastUpdated": "2026-01-18T21:28:23.625Z"
 }
