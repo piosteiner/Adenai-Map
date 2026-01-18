@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "004ed14b3033545b4ba920b166cb8234ac59a64a",
+      "action": "create",
+      "type": "character",
+      "itemName": "Zo'ob",
+      "user": "gm",
+      "timestamp": "2026-01-18T21:26:39.124Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-01-18T21:26:39.124Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Zo'ob (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "f655b9225804d21ce23576cf2d9e70c4af208743",
       "action": "create",
       "type": "character",
@@ -93,5 +106,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-01-17T15:12:31.318Z"
+  "lastUpdated": "2026-01-18T21:26:39.124Z"
 }
