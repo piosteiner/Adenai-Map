@@ -2078,8 +2078,8 @@
       "updatedAt": "2026-01-18T21:26:38.252Z"
     },
     {
-      "id": "riz",
-      "name": "Riz",
+      "id": "rizz",
+      "name": "Rizz",
       "title": "",
       "placeOfOrigin": "Rena",
       "coordinates": [
@@ -2094,20 +2094,20 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2026-01-18T21:28:23.624Z",
-      "updatedAt": "2026-01-18T21:28:23.624Z",
       "currentLocation": {
         "location": "Rena",
-        "date": "2026-01-18",
-        "dateStart": "2026-01-18",
+        "date": "2026-01-19",
+        "dateStart": "2026-01-19",
         "dateEnd": null,
         "coordinates": [
           650,
           1000
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2026-01-18T21:28:23.624Z",
+      "updatedAt": "2026-01-19T11:44:24.294Z"
     }
   ],
-  "lastUpdated": "2026-01-18T21:28:23.625Z"
+  "lastUpdated": "2026-01-19T11:44:24.296Z"
 }
