@@ -2107,7 +2107,24 @@
       },
       "createdAt": "2026-01-18T21:28:23.624Z",
       "updatedAt": "2026-01-19T11:44:24.294Z"
+    },
+    {
+      "id": "ischri_dimiourgia",
+      "name": "Ischri Dimiourgia",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "image": "https://adenai-admin.piogino.ch/media/13kqsdrpbcbi-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-02-01T16:05:15.873Z",
+      "updatedAt": "2026-02-01T16:05:15.873Z"
     }
   ],
-  "lastUpdated": "2026-01-19T11:44:24.296Z"
+  "lastUpdated": "2026-02-01T16:05:15.873Z"
 }
