@@ -2122,9 +2122,10 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-02-01T16:05:15.873Z",
-      "updatedAt": "2026-02-01T16:05:15.873Z"
+      "updatedAt": "2026-02-01T16:05:47.279Z"
     }
   ],
-  "lastUpdated": "2026-02-01T16:05:15.873Z"
+  "lastUpdated": "2026-02-01T16:05:47.279Z"
 }
