@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "567f825b8d56525a7788660cbcb5023869c874ea",
+      "action": "update",
+      "type": "character",
+      "itemName": "Ischri Dimiourgia",
+      "user": "gm",
+      "timestamp": "2026-02-01T16:05:48.111Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-02-01T16:05:48.111Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: ischri_dimiourgia (by gm) - Updated character details"
+    },
+    {
       "commitSha": "e2b6349881f3edeadc3f68c5645153da3f702477",
       "action": "create",
       "type": "character",
@@ -145,5 +158,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-02-01T16:05:16.765Z"
+  "lastUpdated": "2026-02-01T16:05:48.111Z"
 }
