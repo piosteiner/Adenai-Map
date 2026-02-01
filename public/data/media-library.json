@@ -5404,7 +5404,50 @@
       },
       "fileSize": 98926,
       "mimeType": "image/jpeg"
+    },
+    "characters-13kqsdrpbcbi": {
+      "id": "characters-13kqsdrpbcbi",
+      "category": "characters",
+      "title": "Ischri Dimiourgia",
+      "caption": "",
+      "credits": "https://uk.pinterest.com/pin/670825307037925512/",
+      "tags": [],
+      "uploadDate": "2026-02-01T16:04:44.292Z",
+      "sizes": {
+        "thumb": {
+          "filename": "13kqsdrpbcbi-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/13kqsdrpbcbi-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "13kqsdrpbcbi-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/13kqsdrpbcbi-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "13kqsdrpbcbi-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/13kqsdrpbcbi-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "13kqsdrpbcbi-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/13kqsdrpbcbi-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "13kqsdrpbcbi-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/13kqsdrpbcbi-original.webp",
+          "width": 736,
+          "height": 1236
+        }
+      },
+      "fileSize": 98926,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-02-01T16:04:42.777Z"
+  "lastUpdated": "2026-02-01T16:04:44.714Z"
 }
