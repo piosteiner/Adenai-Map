@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "1fae96a16c0bd94c1ac0771adc28554ef3105f43",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2026-10-10T19:44:29.321Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-10T19:44:29.321Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Donnermund (5663-09-19 to 5663-09-19)"
+    },
+    {
       "commitSha": "2c7e9d8da91b9391971d6a95bce4a66e66efe715",
       "action": "update",
       "type": "character",
@@ -171,5 +184,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-10T19:44:01.890Z"
+  "lastUpdated": "2026-10-10T19:44:29.321Z"
 }
