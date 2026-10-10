@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "7b31ad431af65cf739474af0e05a373baa9a4ab7",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2026-10-10T19:44:54.229Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-10T19:44:54.229Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Delfinklippe (5663-09-19 to 5663-09-24)"
+    },
+    {
       "commitSha": "1fae96a16c0bd94c1ac0771adc28554ef3105f43",
       "action": "update",
       "type": "character",
@@ -184,5 +197,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-10T19:44:29.321Z"
+  "lastUpdated": "2026-10-10T19:44:54.229Z"
 }
