@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "4b2dd9d872874e6cb69571660e4db7287757c3e2",
+      "action": "create",
+      "type": "location",
+      "itemName": "Cucurbita",
+      "user": "gm",
+      "timestamp": "2026-10-10T19:42:25.624Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-10T19:42:25.624Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create location: Cucurbita (by gm) - Initial location creation"
+    },
+    {
       "commitSha": "db4f965047790d12dca2dab2312e6da7c699e7f0",
       "action": "update",
       "type": "character",
@@ -132,5 +145,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-10T19:41:40.637Z"
+  "lastUpdated": "2026-10-10T19:42:25.624Z"
 }
