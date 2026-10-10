@@ -1004,14 +1004,30 @@
           "type": "travel",
           "isCustomLocation": false,
           "createdAt": "2026-10-10T19:45:39.938Z"
+        },
+        {
+          "id": "movement_1791661580891",
+          "movement_nr": 49,
+          "date": "5663-09-28",
+          "dateStart": "5663-09-28",
+          "dateEnd": "5663-09-30",
+          "location": "Wesdalen",
+          "coordinates": [
+            790,
+            769
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2026-10-10T19:46:20.891Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-10-10T19:45:39.938Z",
+      "updatedAt": "2026-10-10T19:46:20.891Z",
       "currentLocation": {
-        "date": "5663-09-24",
-        "dateStart": "5663-09-24",
-        "dateEnd": "5663-09-28",
+        "date": "5663-09-28",
+        "dateStart": "5663-09-28",
+        "dateEnd": "5663-09-30",
         "location": "Wesdalen",
         "coordinates": [
           790,
@@ -2241,5 +2257,5 @@
       "updatedAt": "2026-02-01T16:05:47.279Z"
     }
   ],
-  "lastUpdated": "2026-10-10T19:45:39.938Z"
+  "lastUpdated": "2026-10-10T19:46:20.891Z"
 }
