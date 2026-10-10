@@ -1043,6 +1043,25 @@
           1008
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Delfinklippe",
+        "description": "",
+        "contentUrl": null,
+        "image": "",
+        "region": "western_adenai",
+        "type": "city",
+        "visited": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          824,
+          642
+        ]
+      }
     }
   ]
 }
