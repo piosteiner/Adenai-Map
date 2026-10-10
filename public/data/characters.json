@@ -916,13 +916,14 @@
           "dateEnd": "5663-09-16",
           "location": "Gleissende Zitadell",
           "coordinates": [
-            -252,
-            1294
+            1402,
+            -108
           ],
           "notes": "",
           "type": "mission",
           "isCustomLocation": false,
-          "createdAt": "2026-10-10T19:41:15.729Z"
+          "createdAt": "2026-10-10T19:41:15.729Z",
+          "updatedAt": "2026-10-10T19:48:50.326Z"
         },
         {
           "id": "movement_1791661299407",
@@ -1023,7 +1024,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-10-10T19:46:20.891Z",
+      "updatedAt": "2026-10-10T19:48:50.326Z",
       "currentLocation": {
         "date": "5663-09-28",
         "dateStart": "5663-09-28",
@@ -2257,5 +2258,5 @@
       "updatedAt": "2026-02-01T16:05:47.279Z"
     }
   ],
-  "lastUpdated": "2026-10-10T19:46:20.891Z"
+  "lastUpdated": "2026-10-10T19:48:50.326Z"
 }
