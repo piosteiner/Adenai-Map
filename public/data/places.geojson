@@ -1062,6 +1062,25 @@
           642
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gleissende Zitadell",
+        "description": "Radiant Citadel",
+        "contentUrl": null,
+        "image": "",
+        "region": "unknown",
+        "type": "city",
+        "visited": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -252,
+          1294
+        ]
+      }
     }
   ]
 }
