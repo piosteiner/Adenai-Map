@@ -170,10 +170,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Rena",
+      "location": "Glesburg",
       "coordinates": [
-        650,
-        1000
+        1184,
+        648
       ],
       "description": "",
       "image": "",
@@ -890,20 +890,36 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2026-01-04T05:40:37.601Z"
+        },
+        {
+          "id": "movement_1791661183040",
+          "movement_nr": 42,
+          "date": "5663-09-15",
+          "dateStart": "5663-09-15",
+          "dateEnd": "5663-09-16",
+          "location": "Glesburg",
+          "coordinates": [
+            1184,
+            648
+          ],
+          "notes": "",
+          "type": "stay",
+          "isCustomLocation": false,
+          "createdAt": "2026-10-10T19:39:43.040Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-01-04T05:40:37.603Z",
+      "updatedAt": "2026-10-10T19:39:43.040Z",
       "currentLocation": {
-        "date": "5663-09-12",
-        "dateStart": "5663-09-12",
-        "dateEnd": null,
-        "location": "Rena",
+        "date": "5663-09-15",
+        "dateStart": "5663-09-15",
+        "dateEnd": "5663-09-16",
+        "location": "Glesburg",
         "coordinates": [
-          650,
-          1000
+          1184,
+          648
         ],
-        "notes": "Die Gruppe teleportiert sich zum \"Ministerium für Heimatschutz\" wo sich Abu als ehemalige Studentin der Yosefka Akademie meldet. Derweilen sind Luna, Tasbor und Ally in einen Mordfall an Dacien Valerio und an Sorsley. Im Hafenareal in welchem Sorsley von der Gruppe gefunden wurde, wurde die nette Nachbarin Lise von einer Tür-Mimic gefressen und Ally wurde mit einer Nachricht in Blut in Rena willkommen geheissen."
+        "notes": ""
       }
     },
     {
@@ -2127,5 +2143,5 @@
       "updatedAt": "2026-02-01T16:05:47.279Z"
     }
   ],
-  "lastUpdated": "2026-02-01T16:05:47.279Z"
+  "lastUpdated": "2026-10-10T19:39:43.040Z"
 }
