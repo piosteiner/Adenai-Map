@@ -954,11 +954,12 @@
           "notes": "",
           "type": "travel",
           "isCustomLocation": false,
-          "createdAt": "2026-10-10T19:43:28.386Z"
+          "createdAt": "2026-10-10T19:43:28.386Z",
+          "updatedAt": "2026-10-10T19:44:00.579Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-10-10T19:43:28.386Z",
+      "updatedAt": "2026-10-10T19:44:00.579Z",
       "currentLocation": {
         "date": "5663-09-18",
         "dateStart": "5663-09-18",
@@ -2192,5 +2193,5 @@
       "updatedAt": "2026-02-01T16:05:47.279Z"
     }
   ],
-  "lastUpdated": "2026-10-10T19:43:28.386Z"
+  "lastUpdated": "2026-10-10T19:44:00.579Z"
 }
