@@ -170,10 +170,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Glesburg",
+      "location": "Cucurbita",
       "coordinates": [
-        1184,
-        648
+        1047,
+        651
       ],
       "description": "",
       "image": "",
@@ -939,18 +939,34 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2026-10-10T19:41:39.407Z"
+        },
+        {
+          "id": "movement_1791661408386",
+          "movement_nr": 45,
+          "date": "5663-09-18",
+          "dateStart": "5663-09-18",
+          "dateEnd": "5663-09-19",
+          "location": "Cucurbita",
+          "coordinates": [
+            1047,
+            651
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": false,
+          "createdAt": "2026-10-10T19:43:28.386Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-10-10T19:41:39.407Z",
+      "updatedAt": "2026-10-10T19:43:28.386Z",
       "currentLocation": {
-        "date": "5663-09-16",
-        "dateStart": "5663-09-16",
-        "dateEnd": "5663-09-17",
-        "location": "Glesburg",
+        "date": "5663-09-18",
+        "dateStart": "5663-09-18",
+        "dateEnd": "5663-09-19",
+        "location": "Cucurbita",
         "coordinates": [
-          1184,
-          648
+          1047,
+          651
         ],
         "notes": ""
       }
@@ -2176,5 +2192,5 @@
       "updatedAt": "2026-02-01T16:05:47.279Z"
     }
   ],
-  "lastUpdated": "2026-10-10T19:41:39.407Z"
+  "lastUpdated": "2026-10-10T19:43:28.386Z"
 }
