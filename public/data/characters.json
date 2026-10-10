@@ -170,10 +170,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Delfinklippe",
+      "location": "Wesdalen",
       "coordinates": [
-        824,
-        642
+        790,
+        769
       ],
       "description": "",
       "image": "",
@@ -988,18 +988,34 @@
           "type": "travel",
           "isCustomLocation": false,
           "createdAt": "2026-10-10T19:44:52.827Z"
+        },
+        {
+          "id": "movement_1791661539938",
+          "movement_nr": 48,
+          "date": "5663-09-24",
+          "dateStart": "5663-09-24",
+          "dateEnd": "5663-09-28",
+          "location": "Wesdalen",
+          "coordinates": [
+            790,
+            769
+          ],
+          "notes": "",
+          "type": "travel",
+          "isCustomLocation": false,
+          "createdAt": "2026-10-10T19:45:39.938Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-10-10T19:44:52.827Z",
+      "updatedAt": "2026-10-10T19:45:39.938Z",
       "currentLocation": {
-        "date": "5663-09-19",
-        "dateStart": "5663-09-19",
-        "dateEnd": "5663-09-24",
-        "location": "Delfinklippe",
+        "date": "5663-09-24",
+        "dateStart": "5663-09-24",
+        "dateEnd": "5663-09-28",
+        "location": "Wesdalen",
         "coordinates": [
-          824,
-          642
+          790,
+          769
         ],
         "notes": ""
       }
@@ -2225,5 +2241,5 @@
       "updatedAt": "2026-02-01T16:05:47.279Z"
     }
   ],
-  "lastUpdated": "2026-10-10T19:44:52.827Z"
+  "lastUpdated": "2026-10-10T19:45:39.938Z"
 }
