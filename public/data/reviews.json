@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "7b56d6225574c3507613f5243c5cb7af69382e1b",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2026-10-10T19:41:16.859Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-10T19:41:16.859Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Gleissende Zitadell (5663-09-16 to 5663-09-16)"
+    },
+    {
       "commitSha": "5708d4a417a58814a2a4710e2e3d11171ba25feb",
       "action": "update",
       "type": "character",
@@ -106,5 +119,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-10T19:40:31.163Z"
+  "lastUpdated": "2026-10-10T19:41:16.859Z"
 }
