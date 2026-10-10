@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "4719d4ff2388295e0a99252cff723f2b70a27732",
+      "action": "update",
+      "type": "location",
+      "itemName": "Delfinklippe",
+      "user": "gm",
+      "timestamp": "2026-10-10T18:03:30.291Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-10T18:03:30.291Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Delfinklippe (by gm) - updated type"
+    },
+    {
       "commitSha": "b058cc5540fab55c8fd64958b139b289fd38fa0e",
       "action": "create",
       "type": "location",
@@ -41,5 +54,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-10T18:02:41.737Z"
+  "lastUpdated": "2026-10-10T18:03:30.291Z"
 }
