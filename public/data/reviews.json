@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "2c7e9d8da91b9391971d6a95bce4a66e66efe715",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2026-10-10T19:44:01.890Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-10T19:44:01.890Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Cucurbita entry (5663-09-18 to 5663-09-19)"
+    },
+    {
       "commitSha": "71d40bb922d01c11b09196187f2eb7a93fa270ce",
       "action": "update",
       "type": "character",
@@ -158,5 +171,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-10T19:43:29.684Z"
+  "lastUpdated": "2026-10-10T19:44:01.890Z"
 }
