@@ -170,10 +170,10 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Glesburg",
+      "location": "Gleissende Zitadell",
       "coordinates": [
-        1184,
-        648
+        -252,
+        1294
       ],
       "description": "",
       "image": "",
@@ -907,18 +907,34 @@
           "type": "stay",
           "isCustomLocation": false,
           "createdAt": "2026-10-10T19:39:43.040Z"
+        },
+        {
+          "id": "movement_1791661275729",
+          "movement_nr": 43,
+          "date": "5663-09-16",
+          "dateStart": "5663-09-16",
+          "dateEnd": "5663-09-16",
+          "location": "Gleissende Zitadell",
+          "coordinates": [
+            -252,
+            1294
+          ],
+          "notes": "",
+          "type": "mission",
+          "isCustomLocation": false,
+          "createdAt": "2026-10-10T19:41:15.729Z"
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-10-10T19:40:29.859Z",
+      "updatedAt": "2026-10-10T19:41:15.729Z",
       "currentLocation": {
-        "date": "5663-09-15",
-        "dateStart": "5663-09-15",
+        "date": "5663-09-16",
+        "dateStart": "5663-09-16",
         "dateEnd": "5663-09-16",
-        "location": "Glesburg",
+        "location": "Gleissende Zitadell",
         "coordinates": [
-          1184,
-          648
+          -252,
+          1294
         ],
         "notes": ""
       }
@@ -2144,5 +2160,5 @@
       "updatedAt": "2026-02-01T16:05:47.279Z"
     }
   ],
-  "lastUpdated": "2026-10-10T19:40:29.859Z"
+  "lastUpdated": "2026-10-10T19:41:15.729Z"
 }
