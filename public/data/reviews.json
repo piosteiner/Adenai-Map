@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "8d69a330520c9c062b55dea6543ad9384c7cac6a",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2026-10-10T19:50:20.092Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-10T19:50:20.092Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Reorder movements for character: VsuzH (by gm) - 50 movements reordered"
+    },
+    {
       "commitSha": "93aaceda01c5d24078a0c16c28d9cee1a2a9a33a",
       "action": "update",
       "type": "character",
@@ -262,5 +275,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-10T19:50:08.574Z"
+  "lastUpdated": "2026-10-10T19:50:20.092Z"
 }
