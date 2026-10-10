@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "1fa861191dc74f296e9ff30f44888b376761acb0",
+      "action": "create",
+      "type": "location",
+      "itemName": "Gleissende Zitadell",
+      "user": "gm",
+      "timestamp": "2026-10-10T18:07:33.217Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-10T18:07:33.217Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create location: Gleissende Zitadell (by gm) - Initial location creation"
+    },
+    {
       "commitSha": "4719d4ff2388295e0a99252cff723f2b70a27732",
       "action": "update",
       "type": "location",
@@ -54,5 +67,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-10T18:03:30.291Z"
+  "lastUpdated": "2026-10-10T18:07:33.217Z"
 }
