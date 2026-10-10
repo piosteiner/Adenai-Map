@@ -2,134 +2,17 @@
   "version": "1.0",
   "reviews": [
     {
-      "commitSha": "567f825b8d56525a7788660cbcb5023869c874ea",
-      "action": "update",
-      "type": "character",
-      "itemName": "Ischri Dimiourgia",
-      "user": "gm",
-      "timestamp": "2026-02-01T16:05:48.111Z",
-      "status": "approved",
-      "reviewedBy": "gm",
-      "reviewedAt": "2026-02-01T16:05:48.111Z",
-      "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Update character: ischri_dimiourgia (by gm) - Updated character details"
-    },
-    {
-      "commitSha": "e2b6349881f3edeadc3f68c5645153da3f702477",
+      "commitSha": "b058cc5540fab55c8fd64958b139b289fd38fa0e",
       "action": "create",
-      "type": "character",
-      "itemName": "Ischri Dimiourgia",
+      "type": "location",
+      "itemName": "Delfinklippe",
       "user": "gm",
-      "timestamp": "2026-02-01T16:05:16.765Z",
+      "timestamp": "2026-10-10T18:02:41.737Z",
       "status": "approved",
       "reviewedBy": "gm",
-      "reviewedAt": "2026-02-01T16:05:16.765Z",
+      "reviewedAt": "2026-10-10T18:02:41.737Z",
       "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Create character: Ischri Dimiourgia (by gm) - Initial character creation"
-    },
-    {
-      "commitSha": "6399882a8e31a187207be971bfedaaf604c825b0",
-      "action": "update",
-      "type": "character",
-      "itemName": "Rizz",
-      "user": "gm",
-      "timestamp": "2026-01-19T11:44:25.192Z",
-      "status": "approved",
-      "reviewedBy": "gm",
-      "reviewedAt": "2026-01-19T11:44:25.192Z",
-      "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Update character: riz (by gm) - updated name"
-    },
-    {
-      "commitSha": "2e52ee16d8d409a544d850beb0e999a5a170dd1a",
-      "action": "create",
-      "type": "character",
-      "itemName": "Riz",
-      "user": "gm",
-      "timestamp": "2026-01-18T21:28:24.535Z",
-      "status": "approved",
-      "reviewedBy": "gm",
-      "reviewedAt": "2026-01-18T21:28:24.535Z",
-      "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Create character: Riz (by gm) - Initial character creation"
-    },
-    {
-      "commitSha": "004ed14b3033545b4ba920b166cb8234ac59a64a",
-      "action": "create",
-      "type": "character",
-      "itemName": "Zo'ob",
-      "user": "gm",
-      "timestamp": "2026-01-18T21:26:39.124Z",
-      "status": "approved",
-      "reviewedBy": "gm",
-      "reviewedAt": "2026-01-18T21:26:39.124Z",
-      "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Create character: Zo'ob (by gm) - Initial character creation"
-    },
-    {
-      "commitSha": "f655b9225804d21ce23576cf2d9e70c4af208743",
-      "action": "create",
-      "type": "character",
-      "itemName": "Lulloq Doro",
-      "user": "gm",
-      "timestamp": "2026-01-17T15:12:31.318Z",
-      "status": "approved",
-      "reviewedBy": "gm",
-      "reviewedAt": "2026-01-17T15:12:31.318Z",
-      "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Create character: Lulloq Doro (by gm) - Initial character creation"
-    },
-    {
-      "commitSha": "5cff855f6ae714e81ba22c472e97815a6cd4ec16",
-      "action": "create",
-      "type": "character",
-      "itemName": "Emi Brach",
-      "user": "gm",
-      "timestamp": "2026-01-17T15:12:08.830Z",
-      "status": "approved",
-      "reviewedBy": "gm",
-      "reviewedAt": "2026-01-17T15:12:08.830Z",
-      "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Create character: Emi Brach (by gm) - Initial character creation"
-    },
-    {
-      "commitSha": "3e639ef6fe026e690c49e85ef9a6a6a1438a2834",
-      "action": "create",
-      "type": "character",
-      "itemName": "Edgar",
-      "user": "gm",
-      "timestamp": "2026-01-05T18:48:02.224Z",
-      "status": "approved",
-      "reviewedBy": "gm",
-      "reviewedAt": "2026-01-05T18:48:02.224Z",
-      "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Create character: Edgar (by gm) - Initial character creation"
-    },
-    {
-      "commitSha": "881ed7cc3577ede8a4ae2cc4053d7c57241a96d2",
-      "action": "update",
-      "type": "character",
-      "itemName": "VsuzH",
-      "user": "gm",
-      "timestamp": "2026-01-04T05:40:38.613Z",
-      "status": "approved",
-      "reviewedBy": "gm",
-      "reviewedAt": "2026-01-04T05:40:38.613Z",
-      "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Add movement to character: VsuzH (by gm) - Rena (5663-09-12)"
-    },
-    {
-      "commitSha": "c6ad372f4ebe09d1b19531f3865944bf246768a1",
-      "action": "update",
-      "type": "character",
-      "itemName": "VsuzH",
-      "user": "gm",
-      "timestamp": "2026-01-04T05:26:34.501Z",
-      "status": "approved",
-      "reviewedBy": "gm",
-      "reviewedAt": "2026-01-04T05:26:34.501Z",
-      "reviewNotes": "Auto-approved (GM/Admin)",
-      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Glesburg entry (5663-09-12 to 5663-09-12)"
+      "commitMessage": "Create location: Delfinklippe (by gm) - Initial location creation"
     },
     {
       "commitSha": "36620ccaa03755d9d389266236e9c54a967734c6",
@@ -158,5 +41,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-02-01T16:05:48.111Z"
+  "lastUpdated": "2026-10-10T18:02:41.737Z"
 }
