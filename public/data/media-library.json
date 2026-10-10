@@ -5404,7 +5404,50 @@
       },
       "fileSize": 98926,
       "mimeType": "image/jpeg"
+    },
+    "characters-hic3u8km9zpv": {
+      "id": "characters-hic3u8km9zpv",
+      "category": "characters",
+      "title": "Gleissende Zitadelle",
+      "caption": "",
+      "credits": "Book: Journeys through the Radiant Citadel",
+      "tags": [],
+      "uploadDate": "2026-10-10T18:08:31.826Z",
+      "sizes": {
+        "thumb": {
+          "filename": "hic3u8km9zpv-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hic3u8km9zpv-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "hic3u8km9zpv-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hic3u8km9zpv-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "hic3u8km9zpv-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hic3u8km9zpv-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "hic3u8km9zpv-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hic3u8km9zpv-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "hic3u8km9zpv-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hic3u8km9zpv-original.webp",
+          "width": 1700,
+          "height": 1136
+        }
+      },
+      "fileSize": 869939,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-02-01T16:05:28.858Z"
+  "lastUpdated": "2026-10-10T18:08:32.079Z"
 }
