@@ -1081,6 +1081,25 @@
           1294
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Serenissa",
+        "description": "",
+        "contentUrl": null,
+        "image": "",
+        "region": "western_adenai",
+        "type": "island",
+        "visited": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          741,
+          769
+        ]
+      }
     }
   ]
 }
