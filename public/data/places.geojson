@@ -1100,6 +1100,25 @@
           769
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cucurbita",
+        "description": "",
+        "contentUrl": null,
+        "image": "",
+        "region": "ewige_donnerkluefte",
+        "type": "town",
+        "visited": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1047,
+          651
+        ]
+      }
     }
   ]
 }
