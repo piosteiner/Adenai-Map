@@ -3115,49 +3115,6 @@
       "fileSize": 2758661,
       "mimeType": "image/png"
     },
-    "characters-l5e162jqkuba": {
-      "id": "characters-l5e162jqkuba",
-      "category": "characters",
-      "title": "Gnome Inventor",
-      "caption": "",
-      "credits": "AI Generated - GPT5",
-      "tags": [],
-      "uploadDate": "2025-09-07T18:06:32.080Z",
-      "sizes": {
-        "thumb": {
-          "filename": "l5e162jqkuba-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/l5e162jqkuba-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "l5e162jqkuba-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/l5e162jqkuba-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "l5e162jqkuba-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/l5e162jqkuba-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "l5e162jqkuba-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/l5e162jqkuba-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "l5e162jqkuba-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/l5e162jqkuba-original.webp",
-          "width": 1024,
-          "height": 1024
-        }
-      },
-      "fileSize": 1970019,
-      "mimeType": "image/png"
-    },
     "characters-jb6c3kph4hj6": {
       "id": "characters-jb6c3kph4hj6",
       "category": "characters",
@@ -5406,5 +5363,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-10T18:09:08.275Z"
+  "lastUpdated": "2026-10-10T18:09:23.015Z"
 }
