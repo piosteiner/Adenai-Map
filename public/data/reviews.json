@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "db4f965047790d12dca2dab2312e6da7c699e7f0",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2026-10-10T19:41:40.637Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-10T19:41:40.637Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Glesburg (5663-09-16 to 5663-09-17)"
+    },
+    {
       "commitSha": "7b56d6225574c3507613f5243c5cb7af69382e1b",
       "action": "update",
       "type": "character",
@@ -119,5 +132,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-10T19:41:16.859Z"
+  "lastUpdated": "2026-10-10T19:41:40.637Z"
 }
