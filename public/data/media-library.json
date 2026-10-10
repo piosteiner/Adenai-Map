@@ -2943,49 +2943,6 @@
       "fileSize": 3872566,
       "mimeType": "image/png"
     },
-    "characters-yiesem39urhn": {
-      "id": "characters-yiesem39urhn",
-      "category": "characters",
-      "title": "Elf",
-      "caption": "",
-      "credits": "AI Generated - GPT5: heavily based on a design from Dungeon Meshi",
-      "tags": [],
-      "uploadDate": "2025-09-07T18:04:54.729Z",
-      "sizes": {
-        "thumb": {
-          "filename": "yiesem39urhn-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/yiesem39urhn-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "yiesem39urhn-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/yiesem39urhn-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "yiesem39urhn-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/yiesem39urhn-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "yiesem39urhn-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/yiesem39urhn-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "yiesem39urhn-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/yiesem39urhn-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 3667847,
-      "mimeType": "image/png"
-    },
     "characters-3ped0er1jdn5": {
       "id": "characters-3ped0er1jdn5",
       "category": "characters",
@@ -5449,5 +5406,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-10T18:08:32.079Z"
+  "lastUpdated": "2026-10-10T18:09:08.275Z"
 }
