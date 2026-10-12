@@ -126,10 +126,12 @@ uploads/
 
 # Sensitive data files
 data/journeys.json
+
+# Generated client files (written by journey/dynamics routes)
+client-sync/*
+!client-sync/.gitkeep
 data/sensitive/
 
-# PM2 process manager
-ecosystem.config.js
 
 # SSL certificates
 *.pem
