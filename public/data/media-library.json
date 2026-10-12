@@ -1,51 +1,5 @@
 {
   "images": {
-    "characters-6jugrtuo6jq5": {
-      "id": "characters-6jugrtuo6jq5",
-      "category": "characters",
-      "caption": "Portrait of Theo",
-      "credits": "AI Generated - GPT5",
-      "tags": [
-        "NPC"
-      ],
-      "uploadDate": "2025-09-07T09:00:29.300Z",
-      "sizes": {
-        "thumbnail": {
-          "filename": "6jugrtuo6jq5-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/6jugrtuo6jq5-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "6jugrtuo6jq5-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/6jugrtuo6jq5-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "6jugrtuo6jq5-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/6jugrtuo6jq5-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "6jugrtuo6jq5-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/6jugrtuo6jq5-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "6jugrtuo6jq5-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/6jugrtuo6jq5-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 2163771,
-      "mimeType": "image/png",
-      "lastModified": "2025-09-07T15:06:25.277Z",
-      "title": "Theo"
-    },
     "characters-g7b7j6jhzs5f": {
       "id": "characters-g7b7j6jhzs5f",
       "category": "characters",
@@ -3850,5 +3804,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:38:40.221Z"
+  "lastUpdated": "2026-10-12T18:38:49.156Z"
 }
