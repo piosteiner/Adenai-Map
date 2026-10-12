@@ -2856,49 +2856,6 @@
       "fileSize": 3872566,
       "mimeType": "image/png"
     },
-    "characters-3ped0er1jdn5": {
-      "id": "characters-3ped0er1jdn5",
-      "category": "characters",
-      "title": "Gnome",
-      "caption": "",
-      "credits": "AI Generated - GPT5: heavily based on a design from Dungeon Meshi",
-      "tags": [],
-      "uploadDate": "2025-09-07T18:05:06.836Z",
-      "sizes": {
-        "thumb": {
-          "filename": "3ped0er1jdn5-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/3ped0er1jdn5-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "3ped0er1jdn5-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/3ped0er1jdn5-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "3ped0er1jdn5-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/3ped0er1jdn5-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "3ped0er1jdn5-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/3ped0er1jdn5-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "3ped0er1jdn5-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/3ped0er1jdn5-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 3960878,
-      "mimeType": "image/png"
-    },
     "characters-mus77you0tn5": {
       "id": "characters-mus77you0tn5",
       "category": "characters",
@@ -4975,5 +4932,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:33:25.800Z"
+  "lastUpdated": "2026-10-12T18:33:30.961Z"
 }
