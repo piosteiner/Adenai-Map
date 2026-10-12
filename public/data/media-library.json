@@ -3028,49 +3028,6 @@
       "fileSize": 2758661,
       "mimeType": "image/png"
     },
-    "characters-jb6c3kph4hj6": {
-      "id": "characters-jb6c3kph4hj6",
-      "category": "characters",
-      "title": "Dragonborn Prisoner",
-      "caption": "",
-      "credits": "AI Generated - GPT5",
-      "tags": [],
-      "uploadDate": "2025-09-07T18:06:49.743Z",
-      "sizes": {
-        "thumb": {
-          "filename": "jb6c3kph4hj6-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/jb6c3kph4hj6-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "jb6c3kph4hj6-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/jb6c3kph4hj6-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "jb6c3kph4hj6-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/jb6c3kph4hj6-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "jb6c3kph4hj6-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/jb6c3kph4hj6-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "jb6c3kph4hj6-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/jb6c3kph4hj6-original.webp",
-          "width": 1024,
-          "height": 1024
-        }
-      },
-      "fileSize": 1791418,
-      "mimeType": "image/png"
-    },
     "characters-50dulk5ira0l": {
       "id": "characters-50dulk5ira0l",
       "category": "characters",
@@ -5061,5 +5018,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:33:09.408Z"
+  "lastUpdated": "2026-10-12T18:33:14.706Z"
 }
