@@ -2636,49 +2636,6 @@
       "fileSize": 2618733,
       "mimeType": "image/png"
     },
-    "characters-9jbrquifcksq": {
-      "id": "characters-9jbrquifcksq",
-      "category": "characters",
-      "title": "Orc Sailor",
-      "caption": "",
-      "credits": "AI Generated - GPT5",
-      "tags": [],
-      "uploadDate": "2025-09-07T18:12:53.956Z",
-      "sizes": {
-        "thumb": {
-          "filename": "9jbrquifcksq-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/9jbrquifcksq-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "9jbrquifcksq-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/9jbrquifcksq-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "9jbrquifcksq-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/9jbrquifcksq-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "9jbrquifcksq-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/9jbrquifcksq-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "9jbrquifcksq-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/9jbrquifcksq-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 2986617,
-      "mimeType": "image/png"
-    },
     "characters-esydb2fp72s8": {
       "id": "characters-esydb2fp72s8",
       "category": "characters",
@@ -4109,5 +4066,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:36:46.575Z"
+  "lastUpdated": "2026-10-12T18:37:00.631Z"
 }
