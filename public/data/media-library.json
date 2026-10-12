@@ -2331,49 +2331,6 @@
       "fileSize": 2546294,
       "mimeType": "image/png"
     },
-    "characters-tb9vv3k9og94": {
-      "id": "characters-tb9vv3k9og94",
-      "category": "characters",
-      "title": "Tiefling",
-      "caption": "",
-      "credits": "AI Generated - GPT5",
-      "tags": [],
-      "uploadDate": "2025-09-07T18:05:51.002Z",
-      "sizes": {
-        "thumb": {
-          "filename": "tb9vv3k9og94-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/tb9vv3k9og94-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "tb9vv3k9og94-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/tb9vv3k9og94-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "tb9vv3k9og94-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/tb9vv3k9og94-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "tb9vv3k9og94-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/tb9vv3k9og94-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "tb9vv3k9og94-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/tb9vv3k9og94-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 3013239,
-      "mimeType": "image/png"
-    },
     "characters-0md8qrop8n7z": {
       "id": "characters-0md8qrop8n7z",
       "category": "characters",
@@ -3761,5 +3718,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:38:57.627Z"
+  "lastUpdated": "2026-10-12T18:39:04.975Z"
 }
