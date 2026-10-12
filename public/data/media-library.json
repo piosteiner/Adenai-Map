@@ -1546,50 +1546,6 @@
       "mimeType": "image/png",
       "lastModified": "2025-09-08T14:03:12.176Z"
     },
-    "characters-i6b65vr9h8es": {
-      "id": "characters-i6b65vr9h8es",
-      "category": "characters",
-      "title": "Human Artist",
-      "caption": "",
-      "credits": "Dandelion from \"The Witcher 3 Wild Hunt Artbook\" (p. 123) - Altered by AI (GPT5)",
-      "tags": [],
-      "uploadDate": "2025-09-07T17:51:38.507Z",
-      "sizes": {
-        "thumb": {
-          "filename": "i6b65vr9h8es-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/i6b65vr9h8es-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "i6b65vr9h8es-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/i6b65vr9h8es-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "i6b65vr9h8es-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/i6b65vr9h8es-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "i6b65vr9h8es-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/i6b65vr9h8es-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "i6b65vr9h8es-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/i6b65vr9h8es-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 3670327,
-      "mimeType": "image/png",
-      "lastModified": "2025-09-08T14:06:21.942Z"
-    },
     "characters-rphnqy163cr7": {
       "id": "characters-rphnqy163cr7",
       "category": "characters",
@@ -4326,5 +4282,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:35:45.631Z"
+  "lastUpdated": "2026-10-12T18:35:52.644Z"
 }
