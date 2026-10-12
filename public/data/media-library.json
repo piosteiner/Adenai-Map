@@ -3157,49 +3157,6 @@
       "fileSize": 2664113,
       "mimeType": "image/png"
     },
-    "characters-y1n3vxu48z4x": {
-      "id": "characters-y1n3vxu48z4x",
-      "category": "characters",
-      "title": "Dragonborn Cleric",
-      "caption": "",
-      "credits": "AI Generated - GPT5",
-      "tags": [],
-      "uploadDate": "2025-09-07T18:07:53.667Z",
-      "sizes": {
-        "thumb": {
-          "filename": "y1n3vxu48z4x-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/y1n3vxu48z4x-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "y1n3vxu48z4x-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/y1n3vxu48z4x-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "y1n3vxu48z4x-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/y1n3vxu48z4x-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "y1n3vxu48z4x-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/y1n3vxu48z4x-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "y1n3vxu48z4x-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/y1n3vxu48z4x-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 2832971,
-      "mimeType": "image/png"
-    },
     "characters-pk2osr27ftiq": {
       "id": "characters-pk2osr27ftiq",
       "category": "characters",
@@ -5147,5 +5104,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:32:56.435Z"
+  "lastUpdated": "2026-10-12T18:33:03.601Z"
 }
