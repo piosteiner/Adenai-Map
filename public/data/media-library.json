@@ -579,50 +579,6 @@
       "mimeType": "image/png",
       "lastModified": "2025-09-08T14:36:28.284Z"
     },
-    "characters-o6y012da0juc": {
-      "id": "characters-o6y012da0juc",
-      "category": "characters",
-      "title": "Eliana Karthright",
-      "caption": "",
-      "credits": "AI Generated - Midjourney & GPT5",
-      "tags": [],
-      "uploadDate": "2025-09-07T17:05:39.222Z",
-      "sizes": {
-        "thumb": {
-          "filename": "o6y012da0juc-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/o6y012da0juc-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "o6y012da0juc-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/o6y012da0juc-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "o6y012da0juc-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/o6y012da0juc-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "o6y012da0juc-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/o6y012da0juc-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "o6y012da0juc-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/o6y012da0juc-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 2817963,
-      "mimeType": "image/png",
-      "lastModified": "2025-09-08T13:59:57.145Z"
-    },
     "characters-rcnvmy7kkvn6": {
       "id": "characters-rcnvmy7kkvn6",
       "category": "characters",
@@ -4500,5 +4456,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:34:59.245Z"
+  "lastUpdated": "2026-10-12T18:35:05.276Z"
 }
