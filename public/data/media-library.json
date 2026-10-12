@@ -1941,50 +1941,6 @@
       "mimeType": "image/png",
       "lastModified": "2025-09-08T13:57:36.236Z"
     },
-    "characters-byryrolvxbdz": {
-      "id": "characters-byryrolvxbdz",
-      "category": "characters",
-      "title": "Woman",
-      "caption": "",
-      "credits": "Marleigh from \"The Art of Final Fantasy XVI\" by Square Enix - Altered by AI (GPT5)",
-      "tags": [],
-      "uploadDate": "2025-09-07T17:57:41.100Z",
-      "sizes": {
-        "thumb": {
-          "filename": "byryrolvxbdz-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/byryrolvxbdz-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "byryrolvxbdz-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/byryrolvxbdz-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "byryrolvxbdz-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/byryrolvxbdz-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "byryrolvxbdz-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/byryrolvxbdz-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "byryrolvxbdz-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/byryrolvxbdz-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 3957259,
-      "mimeType": "image/png",
-      "lastModified": "2025-09-08T13:57:13.158Z"
-    },
     "characters-stoeaf1v2w5b": {
       "id": "characters-stoeaf1v2w5b",
       "category": "characters",
@@ -4066,5 +4022,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:37:00.631Z"
+  "lastUpdated": "2026-10-12T18:37:06.856Z"
 }
