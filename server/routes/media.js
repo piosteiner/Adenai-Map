@@ -15,6 +15,49 @@ const initGitHub = (octokitInstance, repoOwner, repoName) => {
   REPO_NAME = repoName;
 };
 
+const MEDIA_LIBRARY_PATH = 'public/data/media-library.json';
+
+// Read-modify-write media-library.json on GitHub. If another commit landed in
+// between (409 sha mismatch, e.g. several quick deletes), re-read and retry.
+// `mutate` edits the library in place and returns a result, or null to skip the write.
+async function updateMediaLibrary(mutate, message, retries = 3) {
+  for (let attempt = 0; ; attempt++) {
+    const { data: currentFile } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: MEDIA_LIBRARY_PATH
+    });
+
+    const mediaLibrary = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
+    if (!mediaLibrary.images) {
+      mediaLibrary.images = {};
+    }
+
+    const result = mutate(mediaLibrary);
+    if (result === null) {
+      return null;
+    }
+    mediaLibrary.lastUpdated = new Date().toISOString();
+
+    try {
+      await octokit.rest.repos.createOrUpdateFileContents({
+        owner: REPO_OWNER,
+        repo: REPO_NAME,
+        path: MEDIA_LIBRARY_PATH,
+        message: typeof message === 'function' ? message(result) : message,
+        content: Buffer.from(JSON.stringify(mediaLibrary, null, 2)).toString('base64'),
+        sha: currentFile.sha
+      });
+      return result;
+    } catch (error) {
+      if (error.status !== 409 || attempt >= retries) {
+        throw error;
+      }
+      console.warn(`media-library.json changed concurrently, retrying (${attempt + 1}/${retries})`);
+    }
+  }
+}
+
 // Helper function to generate short unique IDs
 function generateShortId() {
   return Math.random().toString(36).substr(2, 8) + Math.random().toString(36).substr(2, 4);
@@ -257,36 +300,12 @@ router.post('/upload', requireAuth, upload.array('images', 10), async (req, res)
     
     // Update media library in GitHub
     try {
-      // Get current media library
-      const { data: currentFile } = await octokit.rest.repos.getContent({
-        owner: REPO_OWNER,
-        repo: REPO_NAME,
-        path: 'public/data/media-library.json'
-      });
-      
-      const mediaLibrary = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
-      
-      // Add new media entries
-      if (!mediaLibrary.images) {
-        mediaLibrary.images = {};
-      }
-      
-      processedMedia.forEach(media => {
-        mediaLibrary.images[media.id] = media;
-      });
-      
-      // Update last modified
-      mediaLibrary.lastUpdated = new Date().toISOString();
-      
-      // Commit to GitHub
-      await octokit.rest.repos.createOrUpdateFileContents({
-        owner: REPO_OWNER,
-        repo: REPO_NAME,
-        path: 'public/data/media-library.json',
-        message: `Add ${processedMedia.length} new media files via CMS`,
-        content: Buffer.from(JSON.stringify(mediaLibrary, null, 2)).toString('base64'),
-        sha: currentFile.sha
-      });
+      await updateMediaLibrary(mediaLibrary => {
+        processedMedia.forEach(media => {
+          mediaLibrary.images[media.id] = media;
+        });
+        return processedMedia;
+      }, `Add ${processedMedia.length} new media files via CMS`);
       
       res.json({
         success: true,
@@ -391,51 +410,35 @@ router.put('/:id', requireAuth, async (req, res) => {
       });
     }
     
-    // Get current media data from GitHub
-    const response = await octokit.rest.repos.getContent({
-      owner: REPO_OWNER,
-      repo: REPO_NAME,
-      path: 'public/data/media-library.json'
-    });
-    
-    const mediaLibrary = JSON.parse(Buffer.from(response.data.content, 'base64').toString());
-    const media = mediaLibrary.images || {};
-    
-    if (!media[id]) {
+    const updated = await updateMediaLibrary(mediaLibrary => {
+      const media = mediaLibrary.images;
+      if (!media[id]) {
+        return null;
+      }
+
+      media[id] = {
+        ...media[id],
+        title: title || '',
+        caption: caption || '',
+        credits: credits.trim(),
+        category: category || 'general',
+        tags: Array.isArray(tags) ? tags : [],
+        lastModified: new Date().toISOString()
+      };
+      return media[id];
+    }, `Update metadata for media ${id}`);
+
+    if (!updated) {
       return res.status(404).json({
         success: false,
         error: 'Media item not found'
       });
     }
-    
-    // Update metadata
-    media[id] = {
-      ...media[id],
-      title: title || '',
-      caption: caption || '',
-      credits: credits.trim(),
-      category: category || 'general',
-      tags: Array.isArray(tags) ? tags : [],
-      lastModified: new Date().toISOString()
-    };
-    
-    // Update the media library structure
-    mediaLibrary.images = media;
-    
-    // Update GitHub
-    await octokit.rest.repos.createOrUpdateFileContents({
-      owner: REPO_OWNER,
-      repo: REPO_NAME,
-      path: 'public/data/media-library.json',
-      message: `Update metadata for media ${id}`,
-      content: Buffer.from(JSON.stringify(mediaLibrary, null, 2)).toString('base64'),
-      sha: response.data.sha
-    });
-    
+
     res.json({
       success: true,
       message: 'Media metadata updated successfully',
-      media: media[id]
+      media: updated
     });
   } catch (error) {
     console.error('Error updating media metadata:', error);
@@ -451,48 +454,28 @@ router.delete('/:id', requireAuth, async (req, res) => {
   try {
     const mediaId = req.params.id;
     
-    // Get current media library
-    const { data: currentFile } = await octokit.rest.repos.getContent({
-      owner: REPO_OWNER,
-      repo: REPO_NAME,
-      path: 'public/data/media-library.json'
-    });
-    
-    const mediaLibrary = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
-    
-    if (!mediaLibrary.images || !mediaLibrary.images[mediaId]) {
+    const mediaToDelete = await updateMediaLibrary(mediaLibrary => {
+      const media = mediaLibrary.images[mediaId];
+      if (!media) {
+        return null;
+      }
+      delete mediaLibrary.images[mediaId];
+      return media;
+    }, media => `Delete media: ${media.title || media.caption || media.originalName || mediaId}`);
+
+    if (!mediaToDelete) {
       return res.status(404).json({
         success: false,
         error: 'Media not found'
       });
     }
-    
-    const mediaToDelete = mediaLibrary.images[mediaId];
-    
-    // Delete physical files
-    try {
-      for (const sizeInfo of Object.values(mediaToDelete.sizes)) {
-        const filePath = path.join('uploads/optimized', sizeInfo.filename);
-        await fs.unlink(filePath).catch(() => {}); // Ignore if file doesn't exist
-      }
-    } catch (fileError) {
-      console.warn('Some files could not be deleted:', fileError);
+
+    // Delete physical files only once the library no longer references them
+    for (const sizeInfo of Object.values(mediaToDelete.sizes || {})) {
+      const filePath = path.join('uploads/optimized', sizeInfo.filename);
+      await fs.unlink(filePath).catch(() => {}); // Ignore if file doesn't exist
     }
-    
-    // Remove from media library
-    delete mediaLibrary.images[mediaId];
-    mediaLibrary.lastUpdated = new Date().toISOString();
-    
-    // Update GitHub
-    await octokit.rest.repos.createOrUpdateFileContents({
-      owner: REPO_OWNER,
-      repo: REPO_NAME,
-      path: 'public/data/media-library.json',
-      message: `Delete media: ${mediaToDelete.originalName}`,
-      content: Buffer.from(JSON.stringify(mediaLibrary, null, 2)).toString('base64'),
-      sha: currentFile.sha
-    });
-    
+
     res.json({
       success: true,
       message: 'Media deleted successfully'
