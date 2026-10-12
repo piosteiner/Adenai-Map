@@ -5,6 +5,7 @@ const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
 const session = require('express-session');
+const FileStore = require('session-file-store')(session);
 
 // Import route modules
 const authRoutes = require('./routes/auth');
@@ -25,6 +26,15 @@ const { requireAuth, authenticateJourneyAPI, authenticateDynamicsAPI } = require
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Fail fast if a real session secret hasn't been configured
+if (!process.env.SESSION_SECRET) {
+  console.error('❌ SESSION_SECRET is not set. Define it in .env before starting the server.');
+  process.exit(1);
+}
+
+// Trust the nginx reverse proxy so secure cookies and client IPs work correctly
+app.set('trust proxy', 1);
 
 // GitHub API setup
 const octokit = new Octokit({
@@ -47,13 +57,21 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// Session management
+// Session management - sessions are persisted to disk so they survive server restarts
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'adenai-campaign-secret-key-change-this',
+  store: new FileStore({
+    path: path.join(__dirname, 'sessions'),
+    ttl: 24 * 60 * 60, // 24 hours, in seconds
+    retries: 0,
+    logFn: () => {} // silence session-file-store's noisy default logging
+  }),
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false, // Set to true if using HTTPS
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // HTTPS-only in production, behind nginx TLS termination
+    sameSite: 'lax',
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));

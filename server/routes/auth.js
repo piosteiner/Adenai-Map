@@ -55,17 +55,6 @@ router.get('/auth-status', (req, res) => {
   });
 });
 
-// Add this TEMPORARY debug route at the bottom of routes/auth.js
-router.get('/debug-users', (req, res) => {
-  try {
-    const { getAllUsers } = require('../config/users');
-    const users = getAllUsers();
-    res.json({ success: true, users: users });
-  } catch (error) {
-    res.json({ success: false, error: error.message });
-  }
-});
-
 // Simple test route
 router.get('/test-simple', (req, res) => {
   res.json({ message: 'Simple route works!', timestamp: new Date() });
