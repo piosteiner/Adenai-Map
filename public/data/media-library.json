@@ -3548,50 +3548,6 @@
       "mimeType": "image/png",
       "lastModified": "2025-09-08T13:56:53.044Z"
     },
-    "characters-24nnwk6veuxw": {
-      "id": "characters-24nnwk6veuxw",
-      "category": "characters",
-      "title": "Human Male",
-      "caption": "",
-      "credits": "Hugo Kupka from \"The Art of Final Fantasy XVI\" by Square Enix - Altered by AI (GPT5)",
-      "tags": [],
-      "uploadDate": "2025-09-08T13:36:33.851Z",
-      "sizes": {
-        "thumb": {
-          "filename": "24nnwk6veuxw-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/24nnwk6veuxw-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "24nnwk6veuxw-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/24nnwk6veuxw-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "24nnwk6veuxw-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/24nnwk6veuxw-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "24nnwk6veuxw-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/24nnwk6veuxw-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "24nnwk6veuxw-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/24nnwk6veuxw-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 2782981,
-      "mimeType": "image/png",
-      "lastModified": "2025-09-08T13:58:34.080Z"
-    },
     "characters-gxvgaxrnc2ez": {
       "id": "characters-gxvgaxrnc2ez",
       "category": "characters",
@@ -4153,5 +4109,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:36:40.936Z"
+  "lastUpdated": "2026-10-12T18:36:46.575Z"
 }
