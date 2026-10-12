@@ -2592,49 +2592,6 @@
       "fileSize": 2618733,
       "mimeType": "image/png"
     },
-    "characters-esydb2fp72s8": {
-      "id": "characters-esydb2fp72s8",
-      "category": "characters",
-      "title": "Warlock of Tiamat",
-      "caption": "",
-      "credits": "AI Generated - GPT5",
-      "tags": [],
-      "uploadDate": "2025-09-07T18:15:02.512Z",
-      "sizes": {
-        "thumb": {
-          "filename": "esydb2fp72s8-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/esydb2fp72s8-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "esydb2fp72s8-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/esydb2fp72s8-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "esydb2fp72s8-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/esydb2fp72s8-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "esydb2fp72s8-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/esydb2fp72s8-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "esydb2fp72s8-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/esydb2fp72s8-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 2629349,
-      "mimeType": "image/png"
-    },
     "characters-hj4ptf2t6cce": {
       "id": "characters-hj4ptf2t6cce",
       "category": "characters",
@@ -4022,5 +3979,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:37:06.856Z"
+  "lastUpdated": "2026-10-12T18:37:15.070Z"
 }
