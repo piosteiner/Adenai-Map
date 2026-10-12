@@ -3329,49 +3329,6 @@
       "fileSize": 3096581,
       "mimeType": "image/png"
     },
-    "characters-w863yxdodxj8": {
-      "id": "characters-w863yxdodxj8",
-      "category": "characters",
-      "title": "Goliath Miner",
-      "caption": "",
-      "credits": "AI Generated - GPT5",
-      "tags": [],
-      "uploadDate": "2025-09-07T18:14:01.278Z",
-      "sizes": {
-        "thumb": {
-          "filename": "w863yxdodxj8-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/w863yxdodxj8-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "w863yxdodxj8-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/w863yxdodxj8-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "w863yxdodxj8-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/w863yxdodxj8-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "w863yxdodxj8-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/w863yxdodxj8-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "w863yxdodxj8-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/w863yxdodxj8-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 3221126,
-      "mimeType": "image/png"
-    },
     "characters-esydb2fp72s8": {
       "id": "characters-esydb2fp72s8",
       "category": "characters",
@@ -4846,5 +4803,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:33:52.619Z"
+  "lastUpdated": "2026-10-12T18:34:06.181Z"
 }
