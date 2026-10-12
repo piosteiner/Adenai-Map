@@ -1676,50 +1676,6 @@
       "mimeType": "image/png",
       "lastModified": "2025-09-08T14:21:32.576Z"
     },
-    "characters-w22t37548021": {
-      "id": "characters-w22t37548021",
-      "category": "characters",
-      "title": "Aristocat Human Male",
-      "caption": "",
-      "credits": "Emhyr var Emreis from \"The Witcher 3 Wild Hunt Artbook\" (p. 125) - Altered by AI (GPT5)",
-      "tags": [],
-      "uploadDate": "2025-09-07T17:49:19.144Z",
-      "sizes": {
-        "thumb": {
-          "filename": "w22t37548021-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/w22t37548021-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "w22t37548021-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/w22t37548021-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "w22t37548021-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/w22t37548021-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "w22t37548021-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/w22t37548021-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "w22t37548021-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/w22t37548021-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 3580367,
-      "mimeType": "image/png",
-      "lastModified": "2025-09-08T14:01:02.911Z"
-    },
     "characters-1n1bsh0qw4t1": {
       "id": "characters-1n1bsh0qw4t1",
       "category": "characters",
@@ -5191,5 +5147,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:32:51.849Z"
+  "lastUpdated": "2026-10-12T18:32:56.435Z"
 }
