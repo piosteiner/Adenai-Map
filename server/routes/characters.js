@@ -56,6 +56,125 @@ async function resolveMovementCoordinates(locationName, directCoordinates) {
   return null;
 }
 
+// SERVER-SIDE: Get current location text based on priority (replaces client-side logic)
+function getCurrentLocationText(character) {
+  // Priority 1: currentLocation object
+  if (character.currentLocation && character.currentLocation.location) {
+    return character.currentLocation.location;
+  }
+  
+  // Priority 2: location field (legacy)
+  if (character.location) {
+    return character.location;
+  }
+  
+  // Priority 3: Latest movement from movementHistory
+  if (character.movementHistory && character.movementHistory.length > 0) {
+    // Find the movement with the highest movement_nr
+    const latestMovement = character.movementHistory.reduce((latest, current) => {
+      const currentNr = current.movement_nr || 0;
+      const latestNr = latest.movement_nr || 0;
+      return currentNr > latestNr ? current : latest;
+    });
+    
+    if (latestMovement.location) {
+      return latestMovement.location;
+    }
+  }
+  
+  // Priority 4: Place of origin
+  if (character.placeOfOrigin) {
+    return character.placeOfOrigin;
+  }
+  
+  // Fallback: Unknown
+  return 'Unknown';
+}
+
+// SERVER-SIDE: Get character position based on priority (replaces client-side logic)
+function getCharacterPosition(character) {
+  // Priority 1: Latest movement coordinates
+  if (character.movementHistory && character.movementHistory.length > 0) {
+    const latestMovement = character.movementHistory.reduce((latest, current) => {
+      const currentNr = current.movement_nr || 0;
+      const latestNr = latest.movement_nr || 0;
+      return currentNr > latestNr ? current : latest;
+    });
+    
+    if (latestMovement.coordinates && Array.isArray(latestMovement.coordinates) && latestMovement.coordinates.length === 2) {
+      return latestMovement.coordinates;
+    }
+  }
+  
+  // Priority 2: Place of origin coordinates
+  if (character.coordinates && Array.isArray(character.coordinates) && character.coordinates.length === 2) {
+    return character.coordinates;
+  }
+  
+  // Priority 3: No coordinates available
+  return null;
+}
+
+// SERVER-SIDE: Enhance character data with computed fields
+function enhanceCharacterData(character) {
+  return {
+    ...character,
+    // Add computed fields that client-side can use directly
+    computedCurrentLocation: getCurrentLocationText(character),
+    computedPosition: getCharacterPosition(character),
+    computedHasCoordinates: getCharacterPosition(character) !== null,
+    // Add movement summary
+    computedMovementCount: character.movementHistory ? character.movementHistory.length : 0,
+    computedLastMovementDate: character.movementHistory && character.movementHistory.length > 0 
+      ? character.movementHistory.reduce((latest, current) => {
+          const currentNr = current.movement_nr || 0;
+          const latestNr = latest.movement_nr || 0;
+          return currentNr > latestNr ? current : latest;
+        }).dateStart || character.movementHistory.reduce((latest, current) => {
+          const currentNr = current.movement_nr || 0;
+          const latestNr = latest.movement_nr || 0;
+          return currentNr > latestNr ? current : latest;
+        }).date
+      : null
+  };
+}
+
+// SERVER-SIDE: Generate location-based character groupings
+function generateLocationGroups(characters) {
+  const locationGroups = {};
+  
+  characters.forEach(character => {
+    const location = getCurrentLocationText(character);
+    if (!location || location === '❓ Unbekannt') {
+      return; // Skip characters without known locations
+    }
+    
+    if (!locationGroups[location]) {
+      locationGroups[location] = [];
+    }
+    
+    // Add essential character info for location display
+    locationGroups[location].push({
+      id: character.id,
+      name: character.name,
+      status: character.status || 'unknown',
+      relationship: character.relationship || 'neutral',
+      image: character.image || '',
+      title: character.title || '',
+      computedPosition: character.computedPosition,
+      lastMovementDate: character.computedLastMovementDate,
+      movementCount: character.computedMovementCount
+    });
+  });
+  
+  // Sort characters within each location by name
+  Object.keys(locationGroups).forEach(location => {
+    locationGroups[location].sort((a, b) => a.name.localeCompare(b.name));
+  });
+  
+  return locationGroups;
+}
+
 // TEST ROUTE - to verify routing works
 router.get('/test', async (req, res) => {
   console.log('🔍 TEST route hit successfully!');
@@ -84,6 +203,18 @@ router.get('/', async (req, res) => {
     const charactersData = JSON.parse(Buffer.from(data.content, 'base64').toString());
     console.log('✅ Characters parsed successfully, count:', charactersData.characters?.length || 0);
     
+    // SERVER-SIDE: Enhance character data with computed fields for client efficiency
+    if (charactersData.characters && Array.isArray(charactersData.characters)) {
+      charactersData.characters = charactersData.characters.map(character => 
+        enhanceCharacterData(character)
+      );
+      console.log('✨ Enhanced character data with computed fields');
+      
+      // Generate location-based character groupings
+      charactersData.locationGroups = generateLocationGroups(charactersData.characters);
+      console.log('🗺️ Generated location groups:', Object.keys(charactersData.locationGroups).length, 'locations');
+    }
+    
     res.json(charactersData);
   } catch (error) {
     console.log('❌ Characters route error:', error.message);
@@ -98,6 +229,107 @@ router.get('/', async (req, res) => {
       console.error('❌ Error fetching characters:', error.message);
       res.status(500).json({ error: error.message });
     }
+  }
+});
+
+// Get single character by ID with enhanced data (public)
+router.get('/:characterId', async (req, res) => {
+  try {
+    const characterId = req.params.characterId;
+    console.log('🔍 Fetching single character:', characterId);
+    
+    const { data } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'public/data/characters.json'
+    });
+    
+    const charactersData = JSON.parse(Buffer.from(data.content, 'base64').toString());
+    const character = charactersData.characters?.find(c => c.id === characterId);
+    
+    if (!character) {
+      return res.status(404).json({ 
+        success: false, 
+        error: 'Character not found' 
+      });
+    }
+    
+    // Enhance with computed fields
+    const enhancedCharacter = enhanceCharacterData(character);
+    
+    res.json({
+      success: true,
+      character: enhancedCharacter
+    });
+    
+  } catch (error) {
+    console.error('❌ Error fetching character:', error.message);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
+// Get characters by location (public)
+router.get('/location/:locationName', async (req, res) => {
+  try {
+    const locationName = decodeURIComponent(req.params.locationName);
+    console.log('🗺️ Fetching characters for location:', locationName);
+    
+    const { data } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: 'public/data/characters.json'
+    });
+    
+    const charactersData = JSON.parse(Buffer.from(data.content, 'base64').toString());
+    
+    if (!charactersData.characters || !Array.isArray(charactersData.characters)) {
+      return res.json({
+        success: true,
+        location: locationName,
+        characters: [],
+        totalCharacters: 0
+      });
+    }
+    
+    // Enhance character data first
+    const enhancedCharacters = charactersData.characters.map(character => 
+      enhanceCharacterData(character)
+    );
+    
+    // Filter characters by location using the same logic as location groups
+    const charactersAtLocation = enhancedCharacters.filter(character => {
+      const characterLocation = getCurrentLocationText(character);
+      return characterLocation === locationName;
+    }).map(character => ({
+      id: character.id,
+      name: character.name,
+      status: character.status || 'unknown',
+      relationship: character.relationship || 'neutral',
+      image: character.image || '',
+      title: character.title || '',
+      computedPosition: character.computedPosition,
+      lastMovementDate: character.computedLastMovementDate,
+      movementCount: character.computedMovementCount,
+      description: character.description || '',
+      faction: character.faction || ''
+    })).sort((a, b) => a.name.localeCompare(b.name));
+    
+    res.json({
+      success: true,
+      location: locationName,
+      characters: charactersAtLocation,
+      totalCharacters: charactersAtLocation.length
+    });
+    
+  } catch (error) {
+    console.error('❌ Error fetching characters by location:', error.message);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
   }
 });
 

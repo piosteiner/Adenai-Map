@@ -433,7 +433,7 @@ window.mediaUI = {
                         <span class="media-date">${uploadDate}</span>
                     </div>
                     ${item.caption ? `<div class="media-caption">${item.caption}</div>` : ''}
-                    ${item.credits ? `<div class="media-credits">📸 ${item.credits}</div>` : ''}
+                    ${item.credits ? `<div class="media-credits">Credits: ${item.credits}</div>` : ''}
                     ${tagsHtml}
                     <div class="media-actions">
                         <button class="media-action-btn view" data-action="view">👁️ View</button>
@@ -486,7 +486,7 @@ window.mediaUI = {
         return {
             title: title,
             caption: captionElement ? captionElement.textContent : null,
-            credits: creditsElement ? creditsElement.textContent.replace('📸 ', '') : null
+            credits: creditsElement ? creditsElement.textContent.replace('Credits: ', '') : null
         };
     },
     
@@ -505,7 +505,7 @@ window.mediaUI = {
         // Build info content
         const title = mediaData.title || 'Untitled';
         const caption = mediaData.caption ? `<div class="media-popup-caption">📝 ${mediaData.caption}</div>` : '';
-        const credits = mediaData.credits ? `<div class="media-popup-credits">📸 ${mediaData.credits}</div>` : '';
+        const credits = mediaData.credits ? `<div class="media-popup-credits">Credits: ${mediaData.credits}</div>` : '';
         
         popup.innerHTML = `
             <div class="media-popup-content">

@@ -41,7 +41,9 @@ curl -H "Content-Type: application/json" \
 ### Characters  
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
-| GET | `/api/characters` | List all characters | ❌ |
+| GET | `/api/characters` | List all characters with location groups | ❌ |
+| GET | `/api/characters/:id` | Get single character | ❌ |
+| GET | `/api/characters/location/:locationName` | Get characters at specific location | ❌ |
 | POST | `/api/characters` | Create character | ✅ |
 | PUT | `/api/characters/:id` | Update character | ✅ |
 | DELETE | `/api/characters/:id` | Delete character | ✅ |
@@ -205,4 +207,81 @@ curl -X POST http://localhost:3001/api/character-paths \
     "date": "2024-01-25",
     "sessionNumber": 7
   }'
+```
+
+## New Location-Based Character Features
+
+### Enhanced Characters Response
+
+The `/api/characters` endpoint now includes location-based character groupings:
+
+```json
+{
+  "version": "1.0",
+  "characters": [
+    {
+      "id": "char_001",
+      "name": "Thorin Ironbeard",
+      "computedCurrentLocation": "Silbergrat",
+      "computedPosition": [1041, 1240],
+      "computedMovementCount": 3,
+      "computedLastMovementDate": "2024-01-20",
+      // ... other character fields
+    }
+  ],
+  "locationGroups": {
+    "Silbergrat": [
+      {
+        "id": "char_001",
+        "name": "Thorin Ironbeard",
+        "status": "alive",
+        "relationship": "ally",
+        "image": "/uploads/thorin.jpg",
+        "title": "Dwarf Warrior",
+        "computedPosition": [1041, 1240],
+        "lastMovementDate": "2024-01-20",
+        "movementCount": 3
+      }
+    ],
+    "Toftgard": [
+      {
+        "id": "char_002",
+        "name": "Elara Moonwhisper",
+        // ... character summary
+      }
+    ]
+  }
+}
+```
+
+### Characters by Location
+
+Get characters at a specific location:
+
+```bash
+curl http://localhost:3001/api/characters/location/Silbergrat
+```
+
+Response:
+```json
+{
+  "success": true,
+  "location": "Silbergrat",
+  "characters": [
+    {
+      "id": "char_001",
+      "name": "Thorin Ironbeard",
+      "status": "alive",
+      "relationship": "ally",
+      "image": "/uploads/thorin.jpg",
+      "title": "Dwarf Warrior",
+      "computedPosition": [1041, 1240],
+      "lastMovementDate": "2024-01-20",
+      "movementCount": 3,
+      "description": "Veteran warrior",
+      "faction": "Ironforge Clan"
+    }
+  ],
+  "totalCharacters": 1
+}
 ```

@@ -253,7 +253,7 @@ window.mediaPicker = {
         grid.innerHTML = mediaArray.map(([id, item]) => {
             const imageUrl = item.sizes?.small?.url || item.sizes?.medium?.url || item.sizes?.original?.url;
             const displayName = item.title || 'Unnamed';
-            const credits = item.credits ? `📸 ${item.credits}` : '';
+            const credits = item.credits ? `Credits: ${item.credits}` : '';
             const caption = item.caption || '';
             const tags = item.tags?.length > 0 ? `🏷️ ${item.tags.join(', ')}` : '';
             

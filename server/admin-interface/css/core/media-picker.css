@@ -2,7 +2,8 @@
 .picker-media-image {
     min-height: 180px !important;
     height: 180px !important;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center center;
     border-radius: 8px;
     display: block;
     width: 100%;
@@ -12,7 +13,8 @@
 .media-picker-image {
     height: 120px !important;
     max-height: 120px !important;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center center;
     border-radius: 4px;
     display: block;
     width: 100%;

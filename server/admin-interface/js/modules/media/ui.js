@@ -380,7 +380,7 @@ window.mediaUI = {
                         <span class="media-date">${uploadDate}</span>
                     </div>
                     ${item.caption ? `<div class="media-caption">${item.caption}</div>` : ''}
-                    ${item.credits ? `<div class="media-credits">📸 ${item.credits}</div>` : ''}
+                    ${item.credits ? `                    <span class="media-credits">Credits: ${item.credits}</span>` : ''}
                     ${tagsHtml}
                     <div class="media-actions">
                         <button class="media-action-btn view" data-action="view">👁️ View</button>
@@ -433,7 +433,7 @@ window.mediaUI = {
         return {
             title: title,
             caption: captionElement ? captionElement.textContent : null,
-            credits: creditsElement ? creditsElement.textContent.replace('📸 ', '') : null
+            credits: creditsElement ? creditsElement.textContent.replace('Credits: ', '') : null
         };
     },
     

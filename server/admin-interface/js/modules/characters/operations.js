@@ -124,42 +124,40 @@ class CharacterOperations {
         let filteredCharacters = this.characters;
         
         // Apply status filter
-        if (statusFilter) {
+        if (statusFilter && statusFilter !== '') {
             filteredCharacters = filteredCharacters.filter(character => 
                 character.status === statusFilter
             );
         }
         
         // Apply relationship filter
-        if (relationshipFilter) {
+        if (relationshipFilter && relationshipFilter !== '') {
             filteredCharacters = filteredCharacters.filter(character => 
                 character.relationship === relationshipFilter
             );
         }
         
         // Apply search term filter
-        if (searchTerm) {
+        if (searchTerm && searchTerm.trim() !== '') {
             const term = searchTerm.toLowerCase();
             filteredCharacters = filteredCharacters.filter(character => {
-                const name = character.name?.toLowerCase() || '';
-                const title = character.title?.toLowerCase() || '';
-                const faction = character.faction?.toLowerCase() || '';
+                const name = (character.name || '').toLowerCase();
+                const title = (character.title || '').toLowerCase();
+                const description = (character.description || '').toLowerCase();
+                const notes = (character.notes || '').toLowerCase();
+                const faction = (character.faction || '').toLowerCase();
                 const placeOfOrigin = (character.placeOfOrigin || '').toLowerCase();
-                const description = character.description?.toLowerCase() || '';
-                const notes = character.notes?.toLowerCase() || '';
                 
-                // Get last seen location from movement history
-                const lastSeenLocation = character.movementHistory && character.movementHistory.length > 0 
-                    ? (character.movementHistory[character.movementHistory.length - 1].location || '').toLowerCase()
-                    : '';
+                // Use the new getCurrentLocation method for consistent search
+                const currentLocation = this.getCurrentLocation(character).toLowerCase();
                 
-                return name.includes(term) || 
-                    title.includes(term) || 
+                return name.includes(term) ||
+                    title.includes(term) ||
                     faction.includes(term) ||
                     placeOfOrigin.includes(term) ||
                     description.includes(term) ||
                     notes.includes(term) ||
-                    lastSeenLocation.includes(term);
+                    currentLocation.includes(term);
             });
         }
         
@@ -181,6 +179,41 @@ class CharacterOperations {
             isValid: errors.length === 0,
             errors
         };
+    }
+
+    // Get current location text based on priority: 1) currentLocation 2) location 3) latest movement 4) place of origin
+    getCurrentLocation(character) {
+        // Priority 1: currentLocation object
+        if (character.currentLocation && character.currentLocation.location) {
+            return character.currentLocation.location;
+        }
+        
+        // Priority 2: location field (legacy)
+        if (character.location) {
+            return character.location;
+        }
+        
+        // Priority 3: Latest movement from movementHistory
+        if (character.movementHistory && character.movementHistory.length > 0) {
+            // Find the movement with the highest movement_nr
+            const latestMovement = character.movementHistory.reduce((latest, current) => {
+                const currentNr = current.movement_nr || 0;
+                const latestNr = latest.movement_nr || 0;
+                return currentNr > latestNr ? current : latest;
+            });
+            
+            if (latestMovement.location) {
+                return latestMovement.location;
+            }
+        }
+        
+        // Priority 4: Place of origin
+        if (character.placeOfOrigin) {
+            return character.placeOfOrigin;
+        }
+        
+        // Fallback: Unknown
+        return '❓ Unbekannt';
     }
 
     exportData() {

@@ -75,7 +75,10 @@ class CharacterUI {
             </div>
         ` : '';
         
-        // Show latest movement info
+        // Get current location using the priority-based method
+        const currentLocationText = this.characterOps.getCurrentLocation(character);
+        
+        // Show latest movement info for additional context
         const latestMovement = hasMovements ? 
             character.movementHistory[character.movementHistory.length - 1] : null;
         
@@ -96,15 +99,13 @@ class CharacterUI {
                         <span class="relationship-badge relationship-${character.relationship}">${this.formatRelationship(character.relationship)}</span>
                     </div>
                 </div>
-                <div class="character-details">
-                    ${character.faction ? `<p><strong>🛡️ Faction:</strong> ${character.faction}</p>` : ''}
-                    ${latestMovement ? `<p><strong>📍 Last Seen:</strong> ${latestMovement.location || 'Custom Location'} (${latestMovement.date})</p>` : '<p><strong>📍 Last Seen:</strong> <em style="color: orange;">Whereabouts unknown</em></p>'}
+                                <div class="character-metadata">
+                    <p><strong>📍 Current Location:</strong> ${currentLocationText}</p>
+                    ${latestMovement ? `<p><strong>🏃‍♀️ Last Movement:</strong> ${latestMovement.dateStart || latestMovement.date}</p>` : ''}
                     <p><strong>🏡 Place of Origin:</strong> ${character.placeOfOrigin || '<em style="color: orange;">Place of origin unknown</em>'}</p>
                     ${hasMovements ? `<p><strong>🛤️ Movement History:</strong> ${movementCount} locations</p>` : ''}
                     ${character.firstMet ? `<p><strong>📅 First Met:</strong> ${character.firstMet}</p>` : ''}
                     ${character.description ? `<p><strong>📝 Description:</strong> ${character.description}</p>` : ''}
-                    ${character.notes ? `<p><strong>📋 Notes:</strong> ${character.notes}</p>` : ''}
-                </div>
                 ${actionButtons}
             </div>
         `;
