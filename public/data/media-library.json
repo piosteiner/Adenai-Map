@@ -3071,49 +3071,6 @@
       "fileSize": 2618733,
       "mimeType": "image/png"
     },
-    "characters-mxgklzvlgkqu": {
-      "id": "characters-mxgklzvlgkqu",
-      "category": "characters",
-      "title": "Halfling Artisan",
-      "caption": "",
-      "credits": "AI Generated - GPT5",
-      "tags": [],
-      "uploadDate": "2025-09-07T18:10:22.921Z",
-      "sizes": {
-        "thumb": {
-          "filename": "mxgklzvlgkqu-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/mxgklzvlgkqu-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "mxgklzvlgkqu-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/mxgklzvlgkqu-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "mxgklzvlgkqu-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/mxgklzvlgkqu-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "mxgklzvlgkqu-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/mxgklzvlgkqu-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "mxgklzvlgkqu-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/mxgklzvlgkqu-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 2985293,
-      "mimeType": "image/png"
-    },
     "characters-bzhql341tn9c": {
       "id": "characters-bzhql341tn9c",
       "category": "characters",
@@ -4717,5 +4674,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:34:19.810Z"
+  "lastUpdated": "2026-10-12T18:34:24.799Z"
 }
