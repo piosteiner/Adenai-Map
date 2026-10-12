@@ -402,50 +402,6 @@
       "fileSize": 3011204,
       "mimeType": "image/png"
     },
-    "characters-u4albain4s0q": {
-      "id": "characters-u4albain4s0q",
-      "category": "characters",
-      "title": "Female Goliath Fighter",
-      "caption": "",
-      "credits": "AI Generated - GPT5",
-      "tags": [],
-      "uploadDate": "2025-09-07T16:58:48.742Z",
-      "sizes": {
-        "thumb": {
-          "filename": "u4albain4s0q-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/u4albain4s0q-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "u4albain4s0q-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/u4albain4s0q-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "u4albain4s0q-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/u4albain4s0q-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "u4albain4s0q-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/u4albain4s0q-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "u4albain4s0q-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/u4albain4s0q-original.webp",
-          "width": 1024,
-          "height": 1536
-        }
-      },
-      "fileSize": 2784294,
-      "mimeType": "image/png",
-      "lastModified": "2025-09-07T16:58:59.060Z"
-    },
     "locations-yo2c0exwe5z6": {
       "id": "locations-yo2c0exwe5z6",
       "category": "locations",
@@ -4674,5 +4630,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-12T18:34:24.799Z"
+  "lastUpdated": "2026-10-12T18:34:33.305Z"
 }
