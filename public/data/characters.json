@@ -2267,7 +2267,39 @@
       "currentLocation": null,
       "createdAt": "2026-02-01T16:05:15.873Z",
       "updatedAt": "2026-02-01T16:05:47.279Z"
+    },
+    {
+      "id": "chovy",
+      "name": "Chovy",
+      "title": "",
+      "placeOfOrigin": "Tangoa",
+      "coordinates": [
+        1618,
+        452
+      ],
+      "description": "",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-17T19:42:22.578Z",
+      "updatedAt": "2026-10-17T19:42:22.578Z",
+      "currentLocation": {
+        "location": "Tangoa",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          1618,
+          452
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-17T18:28:42.999Z"
+  "lastUpdated": "2026-10-17T19:42:22.578Z"
 }
