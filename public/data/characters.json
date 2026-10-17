@@ -2317,7 +2317,39 @@
       "movementHistory": [],
       "createdAt": "2026-10-17T19:43:26.379Z",
       "updatedAt": "2026-10-17T19:43:26.379Z"
+    },
+    {
+      "id": "zala",
+      "name": "Zala",
+      "title": "Hofmagier von Olecea",
+      "placeOfOrigin": "Olecea",
+      "coordinates": [
+        916,
+        261
+      ],
+      "description": "",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-17T19:44:00.084Z",
+      "updatedAt": "2026-10-17T19:44:00.084Z",
+      "currentLocation": {
+        "location": "Olecea",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          916,
+          261
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-17T19:43:26.379Z"
+  "lastUpdated": "2026-10-17T19:44:00.084Z"
 }
