@@ -126,6 +126,9 @@ class MapCore {
             zoomControl: false // Disable default top-left zoom control
         });
 
+        // Privacy statement link, next to the Leaflet credit in the bottom-right corner
+        this.map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a> · <a href="datenschutz.html">Datenschutz</a>');
+
         // Custom zoom control will be added after map initialization
 
         // Overlay the image and fit bounds
