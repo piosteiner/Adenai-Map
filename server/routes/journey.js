@@ -1,105 +1,61 @@
+// Journeys (the party's routes drawn on the map). Stored in the repo as public/data/journeys.json, like locations and
+// characters: versioned, backed up by GitHub, and the map can load it as a static file. Until 2026-10-17 it was a
+// local file (server/data/journeys.json) that only this server had. Reads come from the shared cache (lib/github.js).
 const express = require('express');
-const fs = require('fs').promises;
-const path = require('path');
 const router = express.Router();
+const { octokit } = require('../lib/github');
 
-const JOURNEY_DATA_PATH = path.join(__dirname, '../data/journeys.json');
-const CLIENT_JOURNEY_PATH = path.join(__dirname, '../client-sync/journey.js');
+const OWNER = process.env.GITHUB_USERNAME;
+const REPO = process.env.GITHUB_REPO;
+const PATH = 'public/data/journeys.json';
 
-// Initialize journey data file if it doesn't exist
-async function initializeJourneyData() {
+async function load() {
     try {
-        await fs.access(JOURNEY_DATA_PATH);
+        const { data } = await octokit.rest.repos.getContent({ owner: OWNER, repo: REPO, path: PATH });
+        return { journeyData: JSON.parse(Buffer.from(data.content, 'base64').toString('utf8')), sha: data.sha };
     } catch (error) {
-        const initialData = {
-            journeys: [
-                {
-                    id: 'vsuzh_journey',
-                    name: 'VsuzH Reise',
-                    description: 'Die Hauptreise der Abenteurer',
-                    color: 'orange',
-                    weight: 4,
-                    weightMobile: 6,
-                    dashArray: '10,6',
-                    dashArrayMobile: '16,10',
-                    opacity: 0.7,
-                    active: true,
-                    segments: [
-                        { type: 'M', coords: [1041, 1240], description: 'Start in Silbergrat' },
-                        { type: 'Q', coords: [1062, 1287], control: [1044, 1338], description: 'Weg nach Toftgard' },
-                        { type: 'Q', coords: [1054, 1371], control: [1083, 1392], description: 'Ankunft in Toftgard' },
-                        { type: 'Q', coords: [1106, 1340], control: [1094, 1310], description: 'In den Toftgarder Forst' },
-                        { type: 'Q', coords: [1112, 1316], control: [1128, 1344], description: 'Ankunft zu Fitchers Turm' },
-                        { type: 'Q', coords: [1125, 1333], control: [1163, 1291], description: 'In die Ruine von Zurak\'thar' },
-                        { type: 'Q', coords: [1166, 1301], control: [1128, 1344], description: 'Zurück zu Fitcher' },
-                        { type: 'Q', coords: [1105, 1338], control: [1083, 1392], description: 'Zurück nach Toftgard' },
-                        { type: 'Q', coords: [1080, 1456], control: [1084, 1488], description: 'Flussreise Teil 1' },
-                        { type: 'L', coords: [1061, 1508], description: 'Flussreise Teil 2' },
-                        { type: 'L', coords: [1053, 1481], description: 'Landung' },
-                        { type: 'L', coords: [1040, 1472], description: 'Zum Goblin Loch' },
-                        { type: 'L', coords: [1053, 1481], description: 'Zurück zur Landung' },
-                        { type: 'L', coords: [1061, 1508], description: 'Zurück auf den Fluss' },
-                        { type: 'L', coords: [1034, 1569], description: 'Flussreise Teil 3' },
-                        { type: 'L', coords: [1008, 1608], description: 'Flussreise Teil 4' },
-                        { type: 'Q', coords: [1010, 1648], control: [1008, 1700], description: 'Ankunft in Valaris' },
-                        { type: 'Q', coords: [989, 1693], control: [985, 1724], description: 'Ausfahrt von Valaris' },
-                        { type: 'L', coords: [1025, 2005], description: 'Fahrt nach Motu Motu' },
-                        { type: 'Q', coords: [1046, 2010], control: [1070, 2106], description: 'Fahrt zur Sternenzirkel Insel' },
-                        { type: 'Q', coords: [1046, 2103], control: [1025, 2005], description: 'Fahrt zurück nach Motu Motu' },
-                        { type: 'L', coords: [992, 2126], description: 'Fahrt nach Luvatu' },
-                        { type: 'L', coords: [975, 2210], description: 'Fahrt zum Unterwasserparadies' },
-                        { type: 'L', coords: [1200, 2210], description: 'Aufstieg von Atlantis' },
-                        { type: 'Q', coords: [1140, 2340], control: [888, 2275], description: 'Rückkehr aufs Meer' },
-                        { type: 'Q', coords: [723, 2041], control: [708, 1983], description: 'Fahrt an die Küste von Upeto' },
-                        { type: 'Q', coords: [564, 2014], control: [488, 1957], description: 'Fahrt nach Basapo' },
-                        { type: 'Q', coords: [489, 1867], control: [556, 1869], description: 'Reise nach Ako' }
-                    ],
-                    createdAt: new Date().toISOString(),
-                    updatedAt: new Date().toISOString()
-                }
-            ]
-        };
-        await fs.writeFile(JOURNEY_DATA_PATH, JSON.stringify(initialData, null, 2));
+        if (error.status === 404) return { journeyData: { journeys: [] }, sha: undefined };
+        throw error;
     }
 }
+
+async function save(journeyData, sha, message, req) {
+    const user = req.session?.displayName || req.session?.username || 'Unknown';
+    journeyData.lastUpdated = new Date().toISOString();
+    await octokit.rest.repos.createOrUpdateFileContents({
+        owner: OWNER, repo: REPO, path: PATH, sha,
+        message: `${message} (by ${user})`,
+        content: Buffer.from(JSON.stringify(journeyData, null, 2)).toString('base64'),
+    });
+}
+
+const fail = (res, what) => (error) => {
+    console.error(`Error ${what}:`, error.message);
+    res.status(error.status === 409 ? 409 : 500).json({ error: error.status === 409 ? 'Journeys were changed meanwhile — reload and try again' : `Failed to ${what}` });
+};
 
 // Get all journeys
 router.get('/', async (req, res) => {
     try {
-        await initializeJourneyData();
-        const data = await fs.readFile(JOURNEY_DATA_PATH, 'utf8');
-        const journeyData = JSON.parse(data);
+        const { journeyData } = await load();
         res.json(journeyData.journeys);
-    } catch (error) {
-        console.error('Error fetching journeys:', error);
-        res.status(500).json({ error: 'Failed to fetch journeys' });
-    }
+    } catch (error) { fail(res, 'fetch journeys')(error); }
 });
 
 // Get specific journey
 router.get('/:id', async (req, res) => {
     try {
-        const data = await fs.readFile(JOURNEY_DATA_PATH, 'utf8');
-        const journeyData = JSON.parse(data);
+        const { journeyData } = await load();
         const journey = journeyData.journeys.find(j => j.id === req.params.id);
-        
-        if (!journey) {
-            return res.status(404).json({ error: 'Journey not found' });
-        }
-        
+        if (!journey) return res.status(404).json({ error: 'Journey not found' });
         res.json(journey);
-    } catch (error) {
-        console.error('Error fetching journey:', error);
-        res.status(500).json({ error: 'Failed to fetch journey' });
-    }
+    } catch (error) { fail(res, 'fetch journey')(error); }
 });
 
 // Create new journey
 router.post('/', async (req, res) => {
     try {
-        const data = await fs.readFile(JOURNEY_DATA_PATH, 'utf8');
-        const journeyData = JSON.parse(data);
-        
+        const { journeyData, sha } = await load();
         const newJourney = {
             id: req.body.id || `journey_${Date.now()}`,
             name: req.body.name || 'Neue Reise',
@@ -115,204 +71,71 @@ router.post('/', async (req, res) => {
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString()
         };
-        
         journeyData.journeys.push(newJourney);
-        await fs.writeFile(JOURNEY_DATA_PATH, JSON.stringify(journeyData, null, 2));
-        
-        // Generate client-side file
-        await generateClientJourneyFile(journeyData);
-        
+        await save(journeyData, sha, `Create journey: ${newJourney.name}`, req);
         res.status(201).json(newJourney);
-    } catch (error) {
-        console.error('Error creating journey:', error);
-        res.status(500).json({ error: 'Failed to create journey' });
-    }
+    } catch (error) { fail(res, 'create journey')(error); }
 });
 
 // Update journey
 router.put('/:id', async (req, res) => {
     try {
-        const data = await fs.readFile(JOURNEY_DATA_PATH, 'utf8');
-        const journeyData = JSON.parse(data);
-        const journeyIndex = journeyData.journeys.findIndex(j => j.id === req.params.id);
-        
-        if (journeyIndex === -1) {
-            return res.status(404).json({ error: 'Journey not found' });
-        }
-        
-        journeyData.journeys[journeyIndex] = {
-            ...journeyData.journeys[journeyIndex],
-            ...req.body,
-            updatedAt: new Date().toISOString()
-        };
-        
-        await fs.writeFile(JOURNEY_DATA_PATH, JSON.stringify(journeyData, null, 2));
-        
-        // Generate client-side file
-        await generateClientJourneyFile(journeyData);
-        
-        res.json(journeyData.journeys[journeyIndex]);
-    } catch (error) {
-        console.error('Error updating journey:', error);
-        res.status(500).json({ error: 'Failed to update journey' });
-    }
+        const { journeyData, sha } = await load();
+        const i = journeyData.journeys.findIndex(j => j.id === req.params.id);
+        if (i === -1) return res.status(404).json({ error: 'Journey not found' });
+        journeyData.journeys[i] = { ...journeyData.journeys[i], ...req.body, updatedAt: new Date().toISOString() };
+        await save(journeyData, sha, `Update journey: ${journeyData.journeys[i].name}`, req);
+        res.json(journeyData.journeys[i]);
+    } catch (error) { fail(res, 'update journey')(error); }
 });
 
 // Delete journey
 router.delete('/:id', async (req, res) => {
     try {
-        const data = await fs.readFile(JOURNEY_DATA_PATH, 'utf8');
-        const journeyData = JSON.parse(data);
-        const journeyIndex = journeyData.journeys.findIndex(j => j.id === req.params.id);
-        
-        if (journeyIndex === -1) {
-            return res.status(404).json({ error: 'Journey not found' });
-        }
-        
-        const deletedJourney = journeyData.journeys[journeyIndex];
-        journeyData.journeys.splice(journeyIndex, 1);
-        
-        await fs.writeFile(JOURNEY_DATA_PATH, JSON.stringify(journeyData, null, 2));
-        
-        // Generate client-side file
-        await generateClientJourneyFile(journeyData);
-        
+        const { journeyData, sha } = await load();
+        const i = journeyData.journeys.findIndex(j => j.id === req.params.id);
+        if (i === -1) return res.status(404).json({ error: 'Journey not found' });
+        const [deletedJourney] = journeyData.journeys.splice(i, 1);
+        await save(journeyData, sha, `Delete journey: ${deletedJourney.name}`, req);
         res.json({ message: 'Journey deleted successfully', journey: deletedJourney });
-    } catch (error) {
-        console.error('Error deleting journey:', error);
-        res.status(500).json({ error: 'Failed to delete journey' });
-    }
+    } catch (error) { fail(res, 'delete journey')(error); }
 });
 
 // Add segment to journey
 router.post('/:id/segments', async (req, res) => {
     try {
-        const data = await fs.readFile(JOURNEY_DATA_PATH, 'utf8');
-        const journeyData = JSON.parse(data);
-        const journeyIndex = journeyData.journeys.findIndex(j => j.id === req.params.id);
-        
-        if (journeyIndex === -1) {
-            return res.status(404).json({ error: 'Journey not found' });
-        }
-        
+        const { journeyData, sha } = await load();
+        const journey = journeyData.journeys.find(j => j.id === req.params.id);
+        if (!journey) return res.status(404).json({ error: 'Journey not found' });
         const newSegment = {
             type: req.body.type || 'L',
             coords: req.body.coords || [0, 0],
             control: req.body.control || null,
             description: req.body.description || ''
         };
-        
-        journeyData.journeys[journeyIndex].segments.push(newSegment);
-        journeyData.journeys[journeyIndex].updatedAt = new Date().toISOString();
-        
-        await fs.writeFile(JOURNEY_DATA_PATH, JSON.stringify(journeyData, null, 2));
-        
-        // Generate client-side file
-        await generateClientJourneyFile(journeyData);
-        
+        journey.segments.push(newSegment);
+        journey.updatedAt = new Date().toISOString();
+        await save(journeyData, sha, `Add segment to journey: ${journey.name}`, req);
         res.status(201).json(newSegment);
-    } catch (error) {
-        console.error('Error adding segment:', error);
-        res.status(500).json({ error: 'Failed to add segment' });
-    }
+    } catch (error) { fail(res, 'add segment')(error); }
 });
 
 // Delete segment from journey
 router.delete('/:id/segments/:segmentIndex', async (req, res) => {
     try {
-        const data = await fs.readFile(JOURNEY_DATA_PATH, 'utf8');
-        const journeyData = JSON.parse(data);
-        const journeyIndex = journeyData.journeys.findIndex(j => j.id === req.params.id);
-        
-        if (journeyIndex === -1) {
-            return res.status(404).json({ error: 'Journey not found' });
-        }
-        
+        const { journeyData, sha } = await load();
+        const journey = journeyData.journeys.find(j => j.id === req.params.id);
+        if (!journey) return res.status(404).json({ error: 'Journey not found' });
         const segmentIndex = parseInt(req.params.segmentIndex);
-        if (segmentIndex < 0 || segmentIndex >= journeyData.journeys[journeyIndex].segments.length) {
-            return res.status(404).json({ error: 'Segment not found' });
-        }
-        
-        journeyData.journeys[journeyIndex].segments.splice(segmentIndex, 1);
-        journeyData.journeys[journeyIndex].updatedAt = new Date().toISOString();
-        
-        await fs.writeFile(JOURNEY_DATA_PATH, JSON.stringify(journeyData, null, 2));
-        
-        // Generate client-side file
-        await generateClientJourneyFile(journeyData);
-        
+        if (!(segmentIndex >= 0 && segmentIndex < journey.segments.length)) return res.status(404).json({ error: 'Segment not found' });
+        journey.segments.splice(segmentIndex, 1);
+        journey.updatedAt = new Date().toISOString();
+        await save(journeyData, sha, `Delete segment ${segmentIndex + 1} of journey: ${journey.name}`, req);
         res.json({ message: 'Segment deleted successfully' });
-    } catch (error) {
-        console.error('Error deleting segment:', error);
-        res.status(500).json({ error: 'Failed to delete segment' });
-    }
+    } catch (error) { fail(res, 'delete segment')(error); }
 });
 
-// Generate client-side journey.js file
-async function generateClientJourneyFile(journeyData) {
-    try {
-        let clientCode = `// Auto-generated journey file - Do not edit manually
-// Generated at: ${new Date().toISOString()}
-
-`;
-
-        for (const journey of journeyData.journeys) {
-            if (!journey.active) continue;
-            
-            const varName = journey.id.replace(/[^a-zA-Z0-9]/g, '_');
-            
-            clientCode += `const ${varName} = L.curve(
-  [
-`;
-            
-            for (const segment of journey.segments) {
-                if (segment.type === 'Q' && segment.control) {
-                    clientCode += `    '${segment.type}', [${segment.coords[0]}, ${segment.coords[1]}], [${segment.control[0]}, ${segment.control[1]}], //${segment.description}\n`;
-                } else {
-                    clientCode += `    '${segment.type}', [${segment.coords[0]}, ${segment.coords[1]}], //${segment.description}\n`;
-                }
-            }
-            
-            clientCode += `  ],
-  {
-    color: '${journey.color}',
-    weight: isMobile ? ${journey.weightMobile} : ${journey.weight},
-    dashArray: isMobile ? '${journey.dashArrayMobile}' : '${journey.dashArray}',
-    opacity: ${journey.opacity},
-  }
-).addTo(map);
-
-${varName}.bindPopup("${journey.name}");
-
-`;
-        }
-        
-        // Create client-sync directory if it doesn't exist
-        const clientSyncDir = path.dirname(CLIENT_JOURNEY_PATH);
-        try {
-            await fs.access(clientSyncDir);
-        } catch {
-            await fs.mkdir(clientSyncDir, { recursive: true });
-        }
-        
-        await fs.writeFile(CLIENT_JOURNEY_PATH, clientCode);
-        console.log('Client journey file generated successfully');
-    } catch (error) {
-        console.error('Error generating client journey file:', error);
-    }
-}
-
-// Sync to client (manual trigger)
-router.post('/sync', async (req, res) => {
-    try {
-        const data = await fs.readFile(JOURNEY_DATA_PATH, 'utf8');
-        const journeyData = JSON.parse(data);
-        await generateClientJourneyFile(journeyData);
-        res.json({ message: 'Client file generated successfully' });
-    } catch (error) {
-        console.error('Error syncing to client:', error);
-        res.status(500).json({ error: 'Failed to sync to client' });
-    }
-});
+// Formerly wrote a client-side journey.js no page used; kept so older admin code gets an answer
+router.post('/sync', (req, res) => res.json({ message: 'Nothing to sync: the map reads public/data/journeys.json' }));
 
 module.exports = router;

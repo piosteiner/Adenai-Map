@@ -1,0 +1,13 @@
+# Installed at /etc/systemd/system/adenai-backup.service (copy kept in server/config/systemd/).
+# Nightly off-site backup of the Adenai media and server-only files — see scripts/backup.sh. Logs: journalctl -u adenai-backup
+[Unit]
+Description=Adenai backup (media, accounts, secrets; encrypted, off-site)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+ExecStart=/var/www/adenai-map/server/scripts/backup.sh
+Nice=10
+IOSchedulingClass=idle
