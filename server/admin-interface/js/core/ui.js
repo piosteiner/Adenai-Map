@@ -80,7 +80,7 @@ class AdminUI {
         const n = result?.linksUpdated;
         if (n && (n.locations || n.characters)) {
             const parts = [n.locations && `${n.locations} location(s)`, n.characters && `${n.characters} character(s)`].filter(Boolean);
-            this.showToast(`🔗 Links updated in ${parts.join(' and ')}`, 'success');
+            this.showToast(`🔗 Links and references updated in ${parts.join(' and ')}`, 'success');
             if (n.characters) await window.adminCharacters?.loadCharacters?.();
             if (n.locations) await window.adminLocations?.loadLocations?.();
         }

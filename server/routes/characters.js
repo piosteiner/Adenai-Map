@@ -1,5 +1,6 @@
 const express = require('express');
 const linkRename = require('../lib/link-rename');
+const { inBackground } = require('../lib/github');
 const router = express.Router();
 const { requireAuth } = require('../middleware/auth');
 
@@ -1138,7 +1139,13 @@ router.delete('/:id/movements/:movementId', requireAuth, async (req, res) => {
 });
 
 // Helper function to submit change for review
-async function submitChangeForReview(commitSha, action, type, itemName, commitMessage, user, userRole) {
+// The review entry (reviews.json) is a log: written in the background, so a save answers after one GitHub write.
+function submitChangeForReview(...args) {
+  inBackground('review entry', () => writeReviewEntry(...args));
+  return Promise.resolve();
+}
+
+async function writeReviewEntry(commitSha, action, type, itemName, commitMessage, user, userRole) {
   try {
     // Skip creating review entirely for GM self-actions
     if (userRole === 'gm' && user === 'gm') {

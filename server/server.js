@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
-const { Octokit } = require('@octokit/rest');
+const compression = require('compression');
+const github = require('./lib/github');
 const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
@@ -37,12 +38,15 @@ if (!process.env.SESSION_SECRET) {
 app.set('trust proxy', 1);
 
 // GitHub API setup
-const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN
-});
+// One shared client for all routes (lib/github.js)
+const octokit = github.octokit;
 
 const REPO_OWNER = process.env.GITHUB_USERNAME;
 const REPO_NAME = process.env.GITHUB_REPO;
+
+// Data files are answered from memory and written through to GitHub (lib/github-cache.js): the CMS no longer waits
+// 0.2–0.6 s for GitHub on every read.
+github.cache.warm(REPO_OWNER, REPO_NAME, ['public/data/places.geojson', 'public/data/characters.json', 'public/data/media-library.json', 'public/data/reviews.json']);
 
 console.log(`Setting up admin for: ${REPO_OWNER}/${REPO_NAME}`);
 
@@ -53,6 +57,7 @@ initCharacterPathsGitHub(octokit, REPO_OWNER, REPO_NAME);
 initMediaGitHub(octokit, REPO_OWNER, REPO_NAME);
 
 // Middleware
+app.use(compression()); // gzip: the admin's scripts and the JSON lists are a third of the size on the wire
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
@@ -117,12 +122,15 @@ app.use('/api/config', configRoutes);
 // app.use('/api/activity', requireAuth, activityRoutes);
 
 // Test GitHub connection (public)
+// The admin checks this on every page load: a good answer is kept for 5 minutes
+let repoCheck = null;
 app.get('/api/test', async (req, res) => {
   try {
-    const { data } = await octokit.rest.repos.get({
-      owner: REPO_OWNER,
-      repo: REPO_NAME
-    });
+    if (!repoCheck || Date.now() - repoCheck.at > 5 * 60 * 1000) {
+      const { data } = await octokit.rest.repos.get({ owner: REPO_OWNER, repo: REPO_NAME });
+      repoCheck = { data, at: Date.now() };
+    }
+    const { data } = repoCheck;
     res.json({
       success: true,
       message: 'GitHub connection successful!',

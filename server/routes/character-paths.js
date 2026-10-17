@@ -18,23 +18,25 @@ let pathCache = null;
 let cacheTimestamp = null;
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
-// Helper function to resolve location coordinates
+// Helper function to resolve location coordinates: a location name → [lat, lng] for Leaflet.
+// Locations live in places.geojson as GeoJSON points [x, y] (there is no locations.json).
 async function resolveLocationCoordinates(locationName) {
+  if (!locationName) return null;
   try {
     const { data } = await octokit.rest.repos.getContent({
       owner: REPO_OWNER,
       repo: REPO_NAME,
-      path: 'public/data/locations.json'
+      path: 'public/data/places.geojson'
     });
-    
-    const locationsContent = JSON.parse(Buffer.from(data.content, 'base64').toString());
-    const location = locationsContent.locations.find(loc => 
-      loc.name.toLowerCase() === locationName.toLowerCase()
-    );
-    
-    return location ? [location.y, location.x] : null; // [lat, lng] format for Leaflet
+
+    const places = JSON.parse(Buffer.from(data.content, 'base64').toString());
+    const wanted = locationName.toLowerCase();
+    const location = (places.features || []).find(f => (f.properties?.name || '').toLowerCase() === wanted);
+    const coords = location?.geometry?.coordinates;
+
+    return Array.isArray(coords) ? [coords[1], coords[0]] : null; // [x, y] → [lat, lng], as for direct coordinates
   } catch (error) {
-    console.error('Error resolving location coordinates:', error);
+    console.error('Error resolving location coordinates:', error.message);
     return null;
   }
 }

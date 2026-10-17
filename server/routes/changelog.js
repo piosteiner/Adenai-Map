@@ -1,12 +1,10 @@
 // routes/changelog.js - Fixed version without path issues, filtering out GM changes
 const express = require('express');
-const { Octokit } = require('@octokit/rest');
 const { requireAuth } = require('../middleware/auth');
 const router = express.Router();
 
-const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN
-});
+// The shared, cached client: reviews.json is also written by the location and character routes
+const { octokit } = require('../lib/github');
 
 const GITHUB_OWNER = process.env.GITHUB_USERNAME;
 const GITHUB_REPO = process.env.GITHUB_REPO;

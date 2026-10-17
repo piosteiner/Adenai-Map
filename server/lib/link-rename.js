@@ -23,13 +23,23 @@ function renameInLocations(geojson, oldName, newName) {
     return changed;
 }
 
-function renameInCharacters(data, oldName, newName) {
+// locationRefs: the renamed thing is a location — characters also name it in placeOfOrigin, currentLocation.location,
+// the old field location and in each movement's location.
+function renameInCharacters(data, oldName, newName, { locationRefs = false } = {}) {
     let changed = 0;
+    const key = fold(oldName);
+    const same = (v) => typeof v === 'string' && fold(v) === key;
     for (const c of data.characters || []) {
         let touched = false;
         for (const field of ['description', 'notes']) {
             const after = renameInText(c[field], oldName, newName);
             if (after !== c[field]) { c[field] = after; touched = true; }
+        }
+        if (locationRefs) {
+            if (same(c.placeOfOrigin)) { c.placeOfOrigin = newName; touched = true; }
+            if (same(c.location)) { c.location = newName; touched = true; }
+            if (c.currentLocation && same(c.currentLocation.location)) { c.currentLocation.location = newName; touched = true; }
+            for (const m of c.movementHistory || []) if (same(m.location)) { m.location = newName; touched = true; }
         }
         if (touched) changed++;
     }
@@ -38,7 +48,8 @@ function renameInCharacters(data, oldName, newName) {
 
 const FILES = {
     location: { path: 'public/data/places.geojson', rename: renameInLocations },
-    character: { path: 'public/data/characters.json', rename: renameInCharacters },
+    // called from a location rename: links and the location fields of characters
+    character: { path: 'public/data/characters.json', rename: (data, o, n) => renameInCharacters(data, o, n, { locationRefs: true }) },
 };
 
 // Rewrites the links in the *other* data file (the one the route doesn't save itself) as its own commit.
@@ -52,7 +63,9 @@ async function renameInRepoFile(octokit, owner, repo, which, oldName, newName, u
     if (which === 'character') content.lastUpdated = new Date().toISOString();
     await octokit.rest.repos.createOrUpdateFileContents({
         owner, repo, path, sha: file.sha,
-        message: `Update links: [[${oldName}]] → [[${newName}]] in ${changed} ${which === 'location' ? 'location' : 'character'}${changed === 1 ? '' : 's'} (by ${user})`,
+        message: which === 'location'
+            ? `Update links: [[${oldName}]] → [[${newName}]] in ${changed} location${changed === 1 ? '' : 's'} (by ${user})`
+            : `Rename location in characters: ${oldName} → ${newName} (links, origin, current location, movements) in ${changed} character${changed === 1 ? '' : 's'} (by ${user})`,
         content: Buffer.from(JSON.stringify(content, null, 2)).toString('base64'),
     });
     return changed;
