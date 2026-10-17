@@ -2439,7 +2439,39 @@
       "movementHistory": [],
       "createdAt": "2026-10-17T19:46:17.674Z",
       "updatedAt": "2026-10-17T19:46:17.674Z"
+    },
+    {
+      "id": "ramza",
+      "name": "Ramza",
+      "title": "",
+      "placeOfOrigin": "Donnermund",
+      "coordinates": [
+        981,
+        656
+      ],
+      "description": "",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-17T19:46:30.504Z",
+      "updatedAt": "2026-10-17T19:46:30.504Z",
+      "currentLocation": {
+        "location": "Donnermund",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          981,
+          656
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-17T19:46:17.674Z"
+  "lastUpdated": "2026-10-17T19:46:30.505Z"
 }
