@@ -1,0 +1,83 @@
+// The list column of a split view: search, filters, rows with the cover image, ↑/↓ to move, "/" to search.
+import { h, fold } from './dom';
+import { thumbOf } from './store';
+
+// config: { noun, newLabel, keyOf, thumbOf, titleOf, subtitleOf, badgesOf, textOf, filters: [{ id, label, options() → [{value,label}], test(item, value) }],
+//           onSelect(key), onNew() }
+export function createList(config) {
+    const state = { items: [], selected: null, query: '', filters: {} };
+    const search = h('input.search', { type: 'search', placeholder: `Search ${config.noun}…  ( / )`, 'aria-label': `Search ${config.noun}` });
+    const count = h('span.count');
+    const filterBox = h('div.filters');
+    const newBtn = config.onNew ? h('button.btn.primary.small', { type: 'button', title: config.newLabel, on: { click: () => config.onNew() } }, '＋ New') : null;
+    const rows = h('div.rows', { role: 'listbox', tabindex: '0', 'aria-label': config.noun });
+    const el = h('section.list', {}, h('div.list-head', {}, h('div.list-tools', {}, search, newBtn), filterBox, count), rows);
+
+    const selects = (config.filters || []).map((f) => {
+        const s = h('select', { 'aria-label': f.label, on: { change: () => { state.filters[f.id] = s.value; render(); } } });
+        filterBox.append(s);
+        return { f, s };
+    });
+
+    function fillFilters() {
+        for (const { f, s } of selects) {
+            const current = s.value;
+            s.replaceChildren(h('option', { value: '' }, f.label), ...f.options().map((o) => h('option', { value: o.value }, o.label)));
+            s.value = current;
+        }
+    }
+
+    function visible() {
+        const q = fold(state.query);
+        return state.items.filter((item) =>
+            (!q || fold(config.textOf(item)).includes(q))
+            && selects.every(({ f }) => !state.filters[f.id] || f.test(item, state.filters[f.id])));
+    }
+
+    function render() {
+        const list = visible();
+        count.textContent = list.length === state.items.length ? `${list.length}` : `${list.length} / ${state.items.length}`;
+        rows.replaceChildren(...list.map((item) => {
+            const key = config.keyOf(item);
+            const cover = config.thumbOf(item);
+            const title = config.titleOf(item);
+            return h('div.row', { role: 'option', dataset: { key }, 'aria-selected': String(key === state.selected), on: { click: () => config.onSelect(key) } },
+                cover ? h('img.thumb', { src: thumbOf(cover), alt: '', loading: 'lazy' }) : h('span.thumb.empty', { text: (title || '?').slice(0, 1) }),
+                h('span.row-text', {}, h('span.row-title', { text: title }), h('span.row-sub', { text: config.subtitleOf(item) })),
+                h('span.row-badges', {}, config.badgesOf(item)));
+        }));
+        if (!list.length) rows.append(h('p.empty-note', { text: state.items.length ? 'Nothing matches.' : `No ${config.noun} yet.` }));
+    }
+
+    function scrollToSelected() {
+        rows.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: 'nearest' });
+    }
+
+    search.addEventListener('input', () => { state.query = search.value; render(); });
+    rows.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+        e.preventDefault();
+        const keys = visible().map(config.keyOf);
+        const i = keys.indexOf(state.selected);
+        const next = keys[Math.max(0, Math.min(keys.length - 1, i + (e.key === 'ArrowDown' ? 1 : -1)))];
+        if (next !== undefined && next !== state.selected) config.onSelect(next);
+    });
+
+    return {
+        el,
+        focusSearch() { search.focus(); search.select(); },
+        update(items, selected) {
+            state.items = items;
+            state.selected = selected;
+            fillFilters();
+            render();
+            scrollToSelected();
+        },
+        select(selected) {
+            state.selected = selected;
+            rows.querySelectorAll('.row').forEach((r) => r.setAttribute('aria-selected', String(r.dataset.key === selected)));
+            scrollToSelected();
+        },
+        setNewVisible(on) { if (newBtn) newBtn.hidden = !on; },
+    };
+}

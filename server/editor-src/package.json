@@ -1,9 +1,10 @@
 {
   "name": "adenai-md-editor",
   "private": true,
-  "description": "Markdown editor with [[links]] for the Adenai admin. Build: npm run build → ../admin-interface/js/libs/md-editor.js",
+  "description": "Front-end builds of the Adenai CMS: the [[link]] editor for the classic CMS and the new CMS (v2). npm run build / build:cms",
   "scripts": {
-    "build": "esbuild md-editor.js --bundle --minify --format=iife --target=es2020 --outfile=../admin-interface/js/libs/md-editor.js && cp ../../src/utils/rich-text.js ../admin-interface/js/core/rich-text.js"
+    "build": "esbuild md-editor.js --bundle --minify --format=iife --target=es2020 --outfile=../admin-interface/js/libs/md-editor.js && cp ../../src/utils/rich-text.js ../admin-interface/js/core/rich-text.js",
+    "build:cms": "esbuild cms/main.js --bundle --minify --format=iife --target=es2020 --loader:.png=dataurl --loader:.svg=dataurl --outfile=../admin-interface/v2/app.js && node -e \"const fs=require('fs');const f='../admin-interface/v2/index.html';fs.writeFileSync(f,fs.readFileSync(f,'utf8').replace(/v=[^\\\"]+/g,'v='+Date.now().toString(36)))\""
   },
   "devDependencies": {
     "@codemirror/autocomplete": "6.20.3",
@@ -13,6 +14,7 @@
     "@codemirror/state": "6.7.6",
     "@codemirror/view": "6.43.13",
     "@lezer/highlight": "1.2.5",
-    "esbuild": "0.28.2"
+    "esbuild": "0.28.2",
+    "leaflet": "^1.9.4"
   }
 }

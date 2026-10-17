@@ -133,7 +133,8 @@ class MapCore {
 
         // Overlay the image and fit bounds
         const imageBounds = [[0, 0], [this.imageHeight, this.imageWidth]];
-        L.imageOverlay('adenai_map_01.jpg', imageBounds).addTo(this.map);
+        // WebP (2.0 MB) instead of the JPEG (5.7 MB), same 4096 × 3072 pixels; the JPEG stays as the source
+        L.imageOverlay('adenai_map_01.webp', imageBounds).addTo(this.map);
         this.map.fitBounds(imageBounds);
 
         // Set movement bounds - restrict to 80% map height distance from edges
