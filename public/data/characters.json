@@ -2349,7 +2349,25 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "lambert",
+      "name": "Lambert",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-17T19:44:24.963Z",
+      "updatedAt": "2026-10-17T19:44:24.963Z"
     }
   ],
-  "lastUpdated": "2026-10-17T19:44:00.084Z"
+  "lastUpdated": "2026-10-17T19:44:24.963Z"
 }
