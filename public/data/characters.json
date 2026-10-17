@@ -2471,7 +2471,25 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "letizia_griswold",
+      "name": "Letizia Griswold",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-17T19:47:10.532Z",
+      "updatedAt": "2026-10-17T19:47:10.532Z"
     }
   ],
-  "lastUpdated": "2026-10-17T19:46:30.505Z"
+  "lastUpdated": "2026-10-17T19:47:10.532Z"
 }
