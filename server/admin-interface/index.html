@@ -39,6 +39,7 @@
 
     <!-- Media Picker custom styles -->
     <link rel="stylesheet" href="css/core/media-picker.css">
+    <link rel="stylesheet" href="css/core/md-editor.css">
     
     <!-- Module-specific styles -->
     <link rel="stylesheet" href="css/modules/activity/activity.css">
@@ -381,7 +382,7 @@
                 
                 <div class="form-group">
                     <label>📝 Description</label>
-                    <textarea name="description" rows="3" placeholder="Describe this location..."></textarea>
+                    <textarea name="description" rows="4" data-md placeholder="Describe this location… [[ links to characters and places"></textarea>
                 </div>
                 
                 <div class="form-group">
@@ -467,7 +468,7 @@
                 
                 <div class="form-group">
                     <label>📝 Beschreibung</label>
-                    <textarea name="description" rows="3" placeholder="Beschreibe diesen Charakter..."></textarea>
+                    <textarea name="description" rows="4" data-md placeholder="Beschreibe diesen Charakter… [[ verlinkt Charaktere und Orte"></textarea>
                 </div>
                 
                 <div class="form-row">
@@ -496,7 +497,7 @@
                 
                 <div class="form-group">
                     <label>📋 Notizen</label>
-                    <textarea name="notes" rows="2" placeholder="Zusätzliche Notizen zu diesem Charakter..."></textarea>
+                    <textarea name="notes" rows="2" data-md placeholder="Zusätzliche Notizen zu diesem Charakter…"></textarea>
                 </div>
                 
                 <div class="form-actions">
@@ -803,6 +804,10 @@
     <script src="js/core/ui.js"></script>
     <script src="js/core/auth.js"></script>
     <script src="js/core/media-picker.js"></script>
+    <!-- Descriptions: Markdown + [[links]] (renderer shared with the map; editor built from server/editor-src) -->
+    <script src="js/core/rich-text.js"></script>
+    <script src="js/libs/md-editor.js"></script>
+    <script>window.renderRichText = window.renderRichText || ((t) => String(t ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]));</script>
 
     <!-- Module operations (dependencies first) -->
     <script src="js/modules/locations/operations.js"></script>

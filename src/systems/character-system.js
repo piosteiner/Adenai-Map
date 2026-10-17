@@ -504,12 +504,12 @@ class CharacterSystem {
         
         // Description
         if (character.description) {
-            contentSections.push(`<div class="character-popup-description">📖 <strong>Description:</strong> ${character.description}</div>`);
+            contentSections.push(`<div class="character-popup-description rich-text">📖 <strong>Description:</strong> ${RichText.render(character.description)}</div>`);
         }
         
         // Notes
         if (character.notes) {
-            contentSections.push(`<div class="character-popup-notes">📝 <strong>Notes:</strong> ${character.notes}</div>`);
+            contentSections.push(`<div class="character-popup-notes rich-text">📝 <strong>Notes:</strong> ${RichText.render(character.notes)}</div>`);
         }
         
         // Created/Updated dates (for reference, like in CMS)
@@ -736,8 +736,8 @@ class CharacterSystem {
                 ${character.firstMet ? `<div><strong>📅 Erstmals getroffen:</strong> ${character.firstMet}</div>` : ''}
                 <div><strong>📍 Aktueller Ort:</strong> ${this.getCurrentLocation(character)}</div>
                 ${character.placeOfOrigin ? `<div><strong>🌍 Herkunftsort:</strong> ${character.placeOfOrigin}</div>` : ''}
-                ${character.description ? `<div style="margin-top: 8px;"><strong>📝 Beschreibung:</strong><br>${character.description}</div>` : ''}
-                ${character.notes ? `<div style="margin-top: 8px;"><strong>📋 Notizen:</strong><br>${character.notes}</div>` : ''}
+                ${character.description ? `<div class="rich-text" style="margin-top: 8px;"><strong>📝 Beschreibung:</strong>${RichText.render(character.description)}</div>` : ''}
+                ${character.notes ? `<div class="rich-text" style="margin-top: 8px;"><strong>📋 Notizen:</strong>${RichText.render(character.notes)}</div>` : ''}
             </div>
         `;
     }

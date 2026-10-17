@@ -665,7 +665,7 @@ class LocationSystem {
         }
         
         if (description) {
-            content += `<div class="popup-desc">${this.parseLinks(description)}</div>`;
+            content += `<div class="popup-desc rich-text">${this.parseLinks(RichText.render(description))}</div>`;
         }
         
         if (details && details.length > 0) {
@@ -912,7 +912,7 @@ class LocationSystem {
             // Create popup content
             const popupContent = `
                 <div class="popup-title">${locationData.name}</div>
-                <div class="popup-desc">${locationData.description || ''}</div>
+                <div class="popup-desc rich-text">${RichText.render(locationData.description || '')}</div>
             `;
             marker.bindPopup(popupContent);
             

@@ -105,7 +105,7 @@ class CharacterUI {
                     <p><strong>🏡 Place of Origin:</strong> ${character.placeOfOrigin || '<em style="color: orange;">Place of origin unknown</em>'}</p>
                     ${hasMovements ? `<p><strong>🛤️ Movement History:</strong> ${movementCount} locations</p>` : ''}
                     ${character.firstMet ? `<p><strong>📅 First Met:</strong> ${character.firstMet}</p>` : ''}
-                    ${character.description ? `<p><strong>📝 Description:</strong> ${character.description}</p>` : ''}
+                    ${character.description ? `<div class="rich-text"><strong>📝 Description:</strong> ${window.renderRichText(character.description)}</div>` : ''}
                 ${actionButtons}
             </div>
         `;

@@ -169,7 +169,7 @@ class LocationUI {
                 <div class="location-details">
                     <p><strong>Region:</strong> ${this.formatRegion(props.region || 'Unknown')}</p>
                     <p><strong>Visited:</strong> ${props.visited ? 'Yes' : 'No'}</p>
-                    ${props.description ? `<p><strong>Description:</strong> ${props.description}</p>` : ''}
+                    ${props.description ? `<div class="rich-text"><strong>Description:</strong> ${window.renderRichText(props.description)}</div>` : ''}
                 </div>
                 ${actionButtons}
             </div>
@@ -310,7 +310,7 @@ class LocationUI {
                     ${props.description ? `
                         <div class="description-section">
                             <label>Description:</label>
-                            <p>${props.description}</p>
+                            <div class="rich-text">${window.renderRichText(props.description)}</div>
                         </div>
                     ` : ''}
                 </div>
