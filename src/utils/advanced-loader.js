@@ -178,9 +178,6 @@ class AdvancedLoader {
                 'public/data/media-library.json',
                 '/data/media-library.json',
                 './data/media-library.json'
-            ],
-            journeys: [
-                'https://adenai-admin.piogino.ch/api/journey'
             ]
         };
         

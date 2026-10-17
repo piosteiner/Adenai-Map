@@ -23,15 +23,14 @@ const DATA_FILES = {
     // Critical data - cache aggressively
     critical: [
         '/public/data/characters.json',
-        '/public/data/places.geojson',
-        '/public/data/journeys.json'
+        '/public/data/places.geojson'
     ],
     // Dynamic data - cache with TTL
     dynamic: [
         '/public/data/reviews.json',
         '/public/data/media-library.json'
     ],
-    // API endpoints (journeys are now public/data/journeys.json)
+    // API endpoints
     api: []
 };
 

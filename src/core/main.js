@@ -200,11 +200,8 @@ class AdenaiMap {
                 }
             }, 100, 'movement_controls_init');
             
-            // 🔥 Initialize journeys after map and systems are ready
-            PerformanceUtils.setTimeout(() => {
-                this.initializeJourneys();
-            }, 200, 'journeys_init');
-            
+            // (Journeys were dropped 2026-10-17: the party's route is the VsuzH movements; see the timeline.)
+
             Logger.success('✅ All data loaded successfully through DataManager');
             
         } catch (error) {
@@ -213,30 +210,6 @@ class AdenaiMap {
         }
     }
 
-    // 🔥 NEW: Initialize journey system
-    initializeJourneys() {
-        Logger.init('🛤️ Initializing journey system...');
-        
-        // Check if journey functions are available
-        if (typeof window.loadJourneys === 'function') {
-            // Validate map is available for journeys
-            if (window.map && typeof window.map.addLayer === 'function') {
-                Logger.success('📍 Map validated for journeys, loading...');
-                window.loadJourneys().catch(error => {
-                    Logger.error('❌ Failed to load journeys:', error);
-                });
-            } else {
-                Logger.error('❌ Map not available for journey system');
-                Logger.debug('Debug info:', {
-                    windowMap: !!window.map,
-                    mapType: window.map?.constructor?.name,
-                    hasAddLayer: typeof window.map?.addLayer
-                });
-            }
-        } else {
-            Logger.info('ℹ️ Journey system not loaded (loadJourneys function not found)');
-        }
-    }
 
     setupGlobalEventListeners() {
         // Listen for data updates (useful for admin interface integration)
@@ -252,14 +225,6 @@ class AdenaiMap {
             Logger.refresh('Locations updated, reloading...');
             if (this.systems.locationsSystem) {
                 this.systems.locationsSystem.reloadLocations();
-            }
-        });
-
-        // 🔥 NEW: Listen for journey updates
-        document.addEventListener('journeysUpdated', () => {
-            Logger.refresh('Journeys updated, reloading...');
-            if (typeof window.refreshJourneys === 'function') {
-                window.refreshJourneys();
             }
         });
 
@@ -331,28 +296,6 @@ class AdenaiMap {
         return this.systems.characterPanel?.togglePanel();
     }
 
-    // 🔥 NEW: Journey management shortcuts
-    loadJourneys() {
-        if (typeof window.loadJourneys === 'function') {
-            return window.loadJourneys();
-        }
-        Logger.warn('⚠️ Journey system not available');
-    }
-
-    refreshJourneys() {
-        if (typeof window.refreshJourneys === 'function') {
-            return window.refreshJourneys();
-        }
-        Logger.warn('⚠️ Journey system not available');
-    }
-
-    clearJourneys() {
-        if (typeof window.clearJourneys === 'function') {
-            return window.clearJourneys();
-        }
-        Logger.warn('⚠️ Journey system not available');
-    }
-
     // Debug and utility methods
     getMapStats() {
         const baseStats = {
@@ -403,27 +346,6 @@ class AdenaiMap {
             };
         }
 
-        // Add journey stats if available
-        if (typeof window.debugJourneys === 'function') {
-            try {
-                // This will log journey debug info to console
-                window.debugJourneys();
-                baseStats.journeys = {
-                    systemAvailable: true,
-                    checkConsoleForDetails: true
-                };
-            } catch (e) {
-                baseStats.journeys = {
-                    systemAvailable: false,
-                    error: e.message
-                };
-            }
-        } else {
-            baseStats.journeys = {
-                systemAvailable: false,
-                reason: 'debugJourneys function not found'
-            };
-        }
 
         return baseStats;
     }

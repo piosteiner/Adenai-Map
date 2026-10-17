@@ -20,7 +20,6 @@ const AREAS = [
 ];
 const CLASSIC = [
     { label: 'Media', href: '/#media' },
-    { label: 'Journeys', href: '/#journeys' },
     { label: 'Changelog', href: '/#changelog' },
 ];
 

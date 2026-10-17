@@ -401,3 +401,43 @@
 [data-theme="dark"] .zoom-slider::-moz-range-track {
   background: linear-gradient(to right, #555 0%, #66BB6A 100%);
 }
+
+/* Timeline at the bottom of the map (src/ui/components/timeline.js) */
+.map-timeline {
+    position: fixed;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: min(720px, calc(100vw - 420px));
+    min-width: 300px;
+    font: 13px/1.3 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.map-timeline.collapsed { width: auto; min-width: 0; }
+.map-timeline .timeline-open {
+    display: none;
+    padding: 6px 12px; border: 0; border-radius: 16px; cursor: pointer;
+    background: rgba(0, 0, 0, 0.65); color: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.map-timeline.collapsed .timeline-open { display: block; }
+.map-timeline.collapsed .timeline-body { display: none; }
+.map-timeline .timeline-body {
+    display: flex; align-items: center; gap: 10px; padding: 8px 12px;
+    border-radius: 12px; background: rgba(20, 18, 24, 0.82); color: #f1eef7;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); backdrop-filter: blur(4px);
+}
+.map-timeline button { font: inherit; }
+.timeline-play, .timeline-close {
+    flex: none; width: 30px; height: 30px; border: 0; border-radius: 50%; cursor: pointer;
+    background: rgba(255, 255, 255, 0.14); color: #fff;
+}
+.timeline-play:hover, .timeline-close:hover { background: rgba(255, 255, 255, 0.28); }
+.timeline-track { position: relative; flex: 1; height: 26px; }
+.timeline-range { position: absolute; inset: 0; width: 100%; margin: 0; accent-color: #a78bfa; background: transparent; }
+.timeline-ticks { position: absolute; left: 8px; right: 8px; top: 0; height: 6px; pointer-events: none; }
+.timeline-tick { position: absolute; width: 2px; height: 6px; margin-left: -1px; background: rgba(255, 255, 255, 0.55); border-radius: 1px; }
+.timeline-date { flex: none; min-width: 84px; text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.leaflet-tooltip.timeline-tip { padding: 2px 6px; font-size: 12px; }
+@media (max-width: 900px) {
+    .map-timeline { width: calc(100vw - 60px); bottom: 56px; left: calc(50% - 15px); }
+}

@@ -163,6 +163,7 @@ class MovementSystem {
                             pathLine: pathLine,
                             coordinates: coordValidation.coordinates, // Use filtered coordinates
                             style: pathInfo.style,
+                            info: pathInfo, // incl. metadata.movementHistory with dates, for the timeline
                             isVisible: isVsuzH // Track initial visibility state
                         });
                     } else {
@@ -172,6 +173,7 @@ class MovementSystem {
         });
         
         Logger.movement('All paths processed successfully');
+        document.dispatchEvent(new CustomEvent('characterPathsReady', { detail: { count: this.characterPaths.length } }));
         
         } catch (pathError) {
             Logger.error('Error in displayPaths:', pathError);

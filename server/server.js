@@ -46,7 +46,7 @@ const REPO_NAME = process.env.GITHUB_REPO;
 
 // Data files are answered from memory and written through to GitHub (lib/github-cache.js): the CMS no longer waits
 // 0.2–0.6 s for GitHub on every read.
-github.cache.warm(REPO_OWNER, REPO_NAME, ['public/data/places.geojson', 'public/data/characters.json', 'public/data/media-library.json', 'public/data/reviews.json', 'public/data/journeys.json']);
+github.cache.warm(REPO_OWNER, REPO_NAME, ['public/data/places.geojson', 'public/data/characters.json', 'public/data/media-library.json', 'public/data/reviews.json']);
 
 console.log(`Setting up admin for: ${REPO_OWNER}/${REPO_NAME}`);
 
