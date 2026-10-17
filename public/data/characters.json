@@ -2367,7 +2367,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-17T19:44:24.963Z",
       "updatedAt": "2026-10-17T19:44:24.963Z"
+    },
+    {
+      "id": "sophia",
+      "name": "Sophia",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Aus Elissastadt",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-17T19:45:01.093Z",
+      "updatedAt": "2026-10-17T19:45:01.093Z"
     }
   ],
-  "lastUpdated": "2026-10-17T19:44:24.963Z"
+  "lastUpdated": "2026-10-17T19:45:01.093Z"
 }
