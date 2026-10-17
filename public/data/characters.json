@@ -2299,7 +2299,25 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "nuri",
+      "name": "Nuri",
+      "title": "Hofmagierin von Glesburg",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-17T19:43:26.379Z",
+      "updatedAt": "2026-10-17T19:43:26.379Z"
     }
   ],
-  "lastUpdated": "2026-10-17T19:42:22.578Z"
+  "lastUpdated": "2026-10-17T19:43:26.379Z"
 }
