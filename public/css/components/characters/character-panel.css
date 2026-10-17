@@ -692,3 +692,8 @@
     font-size: 1em;
   }
 }
+
+/* Keep the map's bottom-right controls (Leaflet credit, Datenschutz link) clear of the collapsed panel strip */
+.leaflet-bottom.leaflet-right {
+  right: 30px;
+}
