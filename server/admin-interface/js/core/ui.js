@@ -74,6 +74,19 @@ class AdminUI {
     }
 
     // Toast Notification System
+    // After a rename the server also rewrites [[links]] to the old name (server/lib/link-rename.js): say so, and reload
+    // the other list so its texts in memory (and in the editor) are current.
+    async reportLinkUpdates(result) {
+        const n = result?.linksUpdated;
+        if (n && (n.locations || n.characters)) {
+            const parts = [n.locations && `${n.locations} location(s)`, n.characters && `${n.characters} character(s)`].filter(Boolean);
+            this.showToast(`🔗 Links updated in ${parts.join(' and ')}`, 'success');
+            if (n.characters) await window.adminCharacters?.loadCharacters?.();
+            if (n.locations) await window.adminLocations?.loadLocations?.();
+        }
+        if (result?.linksWarning) this.showToast(`⚠️ ${result.linksWarning}`, 'warning');
+    }
+
     showToast(message, type = 'success') {
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;

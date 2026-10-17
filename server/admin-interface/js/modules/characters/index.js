@@ -303,6 +303,7 @@ class AdminCharacters {
         const result = await this.operations.saveCharacter(formData, this.editingCharacter);
         if (result) {
             await this.loadCharacters();
+            await this.ui.reportLinkUpdates?.(result);
             this.closeCharacterModal();
             
             // Reset media picker to clear any selections

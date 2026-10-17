@@ -245,6 +245,7 @@ class AdminLocations {
             // Refresh the UI to show the new/updated location
             console.log('🔄 Refreshing location UI after save...');
             await this.loadLocations();
+            await this.ui.reportLinkUpdates?.(result);
             
             this.closeModal();
             

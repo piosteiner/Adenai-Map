@@ -32,5 +32,41 @@
         else window.locationSystem.focusLocation(hit.name);
     });
 
-    window.WikiLinks = { find };
+    // ---------- backlinks: "Erwähnt in …" ----------
+    // Every location description and character description/notes that links to name (not counting the entry itself).
+    function backlinks(name) {
+        const key = fold(name);
+        const sources = [
+            ...(window.characterSystem?.getCharacters?.() || []).map((c) => ({ kind: 'character', name: c.name, texts: [c.description, c.notes] })),
+            ...(window.locationSystem?.getLocations?.() || []).map((l) => {
+                const p = l.feature?.properties || l;
+                return { kind: 'location', name: p.name, texts: [p.description] };
+            }),
+        ];
+        return sources
+            .filter((s) => s.name && fold(s.name) !== key && s.texts.some((t) => RichText.links(t).some((n) => fold(n) === key)))
+            .sort((a, b) => a.name.localeCompare(b.name, 'de'));
+    }
+
+    // Popups contain this empty slot; it is filled once it is on the page, when all data has loaded.
+    function backlinksSlot(name) {
+        return `<div class="backlinks" data-backlinks-for="${RichText.escape(name)}" hidden></div>`;
+    }
+
+    function fill(slot) {
+        slot.dataset.filled = '1';
+        const hits = backlinks(slot.dataset.backlinksFor);
+        if (!hits.length) return;
+        const links = hits.map((h) => `<a href="#" class="wiki-link wiki-${h.kind}" data-kind="${h.kind}" data-name="${RichText.escape(h.name)}">${RichText.escape(h.name)}</a>`);
+        slot.innerHTML = `🔗 <strong>Erwähnt in:</strong> ${links.join(', ')}`;
+        slot.classList.add('rich-text');
+        slot.hidden = false;
+    }
+
+    const fillAll = (root) => root.querySelectorAll?.('.backlinks:not([data-filled])').forEach(fill);
+    new MutationObserver((records) => {
+        for (const r of records) for (const n of r.addedNodes) if (n.nodeType === 1) fillAll(n.matches?.('.backlinks') ? n.parentNode : n);
+    }).observe(document.documentElement, { childList: true, subtree: true });
+
+    window.WikiLinks = { find, backlinks, backlinksSlot };
 })();

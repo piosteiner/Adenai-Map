@@ -667,6 +667,7 @@ class LocationSystem {
         if (description) {
             content += `<div class="popup-desc rich-text">${this.parseLinks(RichText.render(description))}</div>`;
         }
+        content += WikiLinks.backlinksSlot(name); // "Erwähnt in …", filled when the popup is shown
         
         if (details && details.length > 0) {
             content += '<div class="popup-details">';

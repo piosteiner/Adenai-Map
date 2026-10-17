@@ -511,6 +511,9 @@ class CharacterSystem {
         if (character.notes) {
             contentSections.push(`<div class="character-popup-notes rich-text">📝 <strong>Notes:</strong> ${RichText.render(character.notes)}</div>`);
         }
+
+        // "Erwähnt in …": the texts that link here, filled when the popup is shown
+        contentSections.push(WikiLinks.backlinksSlot(character.name));
         
         // Created/Updated dates (for reference, like in CMS)
         if (character.createdAt || character.updatedAt) {

@@ -1,4 +1,5 @@
 const express = require('express');
+const linkRename = require('../lib/link-rename');
 const router = express.Router();
 const { requireAuth } = require('../middleware/auth');
 
@@ -511,9 +512,13 @@ router.put('/:id', requireAuth, async (req, res) => {
     
     currentContent.characters[characterIndex] = updatedCharacter;
     currentContent.lastUpdated = new Date().toISOString();
+
+    // Renamed: [[links]] to the old name follow — in the character texts now, in locations after this commit
+    const renamed = oldCharacter.name && updatedCharacter.name !== oldCharacter.name;
+    const linksUpdated = { characters: renamed ? linkRename.renameInCharacters(currentContent, oldCharacter.name, updatedCharacter.name) : 0, locations: 0 };
     
     // Enhanced commit message with user attribution and changes
-    const commitMessage = `Update character: ${originalId} (by ${user}) - ${changeDescription}`;
+    const commitMessage = `Update character: ${originalId} (by ${user}) - ${changeDescription}${linksUpdated.characters ? ` - links updated in ${linksUpdated.characters} character(s)` : ''}`;
     
     // Commit to GitHub
     const commitResponse = await octokit.rest.repos.createOrUpdateFileContents({
@@ -528,11 +533,23 @@ router.put('/:id', requireAuth, async (req, res) => {
     // Submit for review using the commit SHA
     const commitSha = commitResponse.data.commit.sha;
     await submitChangeForReview(commitSha, 'update', 'character', updatedCharacter.name, commitMessage, user, userRole);
+
+    let linksWarning = null;
+    if (renamed) {
+      try {
+        linksUpdated.locations = await linkRename.renameInRepoFile(octokit, REPO_OWNER, REPO_NAME, 'location', oldCharacter.name, updatedCharacter.name, user);
+      } catch (err) {
+        console.error('Updating links in locations failed:', err.message);
+        linksWarning = `Saved, but links in location texts still use the old name: ${err.message}`;
+      }
+    }
     
     res.json({ 
       success: true, 
       character: updatedCharacter,
-      commitSha: commitSha
+      commitSha: commitSha,
+      linksUpdated,
+      linksWarning
     });
   } catch (error) {
     console.error('Error updating character:', error.message);

@@ -1,4 +1,5 @@
 const express = require('express');
+const linkRename = require('../lib/link-rename');
 const router = express.Router();
 const { requireAuth } = require('../middleware/auth');
 
@@ -206,9 +207,14 @@ router.put('/:name', requireAuth, async (req, res) => {
     const changeDescription = changes.length > 0 ? changes.join(', ') : 'Updated location details';
     
     currentContent.features[locationIndex] = updatedFeature;
+
+    // Renamed: [[links]] to the old name follow — in the location descriptions now, in characters after this commit
+    const newName = updatedFeature.properties.name;
+    const renamed = newName && newName !== originalName;
+    const linksUpdated = { locations: renamed ? linkRename.renameInLocations(currentContent, originalName, newName) : 0, characters: 0 };
     
     // Enhanced commit message with user attribution and changes
-    const commitMessage = `Update location: ${originalName} (by ${user}) - ${changeDescription}`;
+    const commitMessage = `Update location: ${originalName} (by ${user}) - ${changeDescription}${linksUpdated.locations ? ` - links updated in ${linksUpdated.locations} location(s)` : ''}`;
     
     // Commit to GitHub
     const commitResponse = await octokit.rest.repos.createOrUpdateFileContents({
@@ -223,11 +229,23 @@ router.put('/:name', requireAuth, async (req, res) => {
     // Submit for review using the commit SHA
     const commitSha = commitResponse.data.commit.sha;
     await submitChangeForReview(commitSha, 'update', 'location', updatedFeature.properties.name, commitMessage, user, userRole);
+
+    let linksWarning = null;
+    if (renamed) {
+      try {
+        linksUpdated.characters = await linkRename.renameInRepoFile(octokit, REPO_OWNER, REPO_NAME, 'character', originalName, newName, user);
+      } catch (err) {
+        console.error('Updating links in characters failed:', err.message);
+        linksWarning = `Saved, but links in character texts still use the old name: ${err.message}`;
+      }
+    }
     
     res.json({ 
       success: true, 
       feature: updatedFeature,
-      commitSha: commitSha
+      commitSha: commitSha,
+      linksUpdated,
+      linksWarning
     });
   } catch (error) {
     console.error('Error updating location:', error.message);
