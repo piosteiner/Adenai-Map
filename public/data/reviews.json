@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ad8a73f892ecc0cea5b982f367db22a36ba190ab",
+      "action": "create",
+      "type": "character",
+      "itemName": "Zala",
+      "user": "gm",
+      "timestamp": "2026-10-17T19:44:01.080Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-17T19:44:01.081Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Zala (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "c121c598bb7b8f741cd50f55d525e6109e99d826",
       "action": "create",
       "type": "character",
@@ -353,5 +366,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-17T19:43:27.475Z"
+  "lastUpdated": "2026-10-17T19:44:01.081Z"
 }
