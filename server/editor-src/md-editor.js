@@ -63,6 +63,12 @@ const wikiDeco = new MatchDecorator({
     regexp: /\[\[([^\[\]|\n]+?)(?:\|[^\[\]\n]+?)?\]\]/g,
     decoration: (m) => Decoration.mark({ class: resolve(m[1]) ? 'cm-wikilink' : 'cm-wikilink cm-wikilink-missing' }),
 });
+const underlineDeco = new MatchDecorator({ regexp: /\+\+(?=\S)[^+\n]*?\S\+\+/g, decoration: () => Decoration.mark({ class: 'cm-underline' }) });
+const underlines = ViewPlugin.fromClass(class {
+    constructor(view) { this.decorations = underlineDeco.createDeco(view); }
+    update(u) { this.decorations = underlineDeco.updateDeco(u, this.decorations); }
+}, { decorations: (v) => v.decorations });
+
 const wikiLinks = ViewPlugin.fromClass(class {
     constructor(view) { this.decorations = wikiDeco.createDeco(view); }
     update(u) { this.decorations = wikiDeco.updateDeco(u, this.decorations); }
@@ -93,6 +99,7 @@ const theme = EditorView.theme({
     '.cm-placeholder': { color: 'var(--text-secondary)' },
     '&.cm-focused .cm-selectionBackground, .cm-selectionBackground': { background: 'var(--focus-ring)' },
     '.cm-wikilink': { color: 'var(--accent-primary)', fontWeight: '600' },
+    '.cm-underline': { textDecoration: 'underline' },
     '.cm-wikilink-missing': { color: 'var(--toast-error)', textDecoration: 'underline dotted' },
     '.cm-tooltip': { background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--border-color)', borderRadius: '6px' },
     '.cm-tooltip.cm-tooltip-autocomplete > ul': { fontFamily: 'inherit', maxHeight: '16em' },
@@ -169,6 +176,9 @@ function linePrefix(view, prefix) {
 const shortcuts = [
     { key: 'Mod-b', run: (v) => wrap(v, '**') },
     { key: 'Mod-i', run: (v) => wrap(v, '*') },
+    // Markdown has no underline; ++…++ is the usual extension (markdown-it-ins). Ctrl+U would otherwise open the
+    // browser's page source.
+    { key: 'Mod-u', run: (v) => wrap(v, '++'), preventDefault: true },
     { key: 'Mod-k', run: webLink },
 ];
 
@@ -216,6 +226,7 @@ function enhance(textarea) {
                 EditorView.lineWrapping,
                 autocompletion({ override: [linkCompletions], icons: false }),
                 wikiLinks,
+                underlines,
                 theme,
                 placeholder(textarea.placeholder || ''),
                 EditorView.contentAttributes.of({ 'aria-label': textarea.getAttribute('aria-label') || textarea.name || 'Text', spellcheck: 'true', lang: 'de' }),
@@ -268,6 +279,7 @@ function enhance(textarea) {
     toolbar.append(
         button('B', 'Fett (Ctrl/⌘+B)', () => wrap(view, '**')),
         button('I', 'Kursiv (Ctrl/⌘+I)', () => wrap(view, '*')),
+        button('U', 'Unterstrichen (Ctrl/⌘+U)', () => wrap(view, '++')),
         button('[[ ]]', 'Link zu einem Charakter oder Ort — oder einfach [[ tippen', () => wikiLink(view)),
         button('Web', 'Weblink (Ctrl/⌘+K)', () => webLink(view)),
         button('H', 'Überschrift', () => linePrefix(view, '## ')),
@@ -278,6 +290,7 @@ function enhance(textarea) {
     );
     toolbar.children[0].style.fontWeight = '700';
     toolbar.children[1].style.fontStyle = 'italic';
+    toolbar.children[2].style.textDecoration = 'underline';
 
     textarea.hidden = true;
     textarea.after(wrapper);

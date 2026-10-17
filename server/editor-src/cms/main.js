@@ -2,6 +2,7 @@
 // Built with `npm run build:cms` (server/editor-src) into admin-interface/v2/app.{js,css}.
 // Routes are in the hash: #/locations/<name>, #/characters/<id>.
 import '../md-editor.js'; // window.AdenaiEditor: Markdown editor with [[link]] suggestions
+import '../../../src/utils/date-field.js'; // window.DateField: date inputs you can type and paste into (dd.mm.yyyy)
 import './style.css';
 import { h, toast } from './dom';
 import { api } from './api';
@@ -168,6 +169,7 @@ onChange(() => { drawTabs(); drawUser(); });
 // ---------- start ----------
 
 installHoverPreview();
+window.DateField.observe(document.body);
 main.append(h('div.placeholder', {}, h('p', { text: 'Loading…' })));
 loadAll()
     .then(() => route(true))

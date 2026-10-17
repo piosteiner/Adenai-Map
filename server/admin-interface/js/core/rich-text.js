@@ -2,7 +2,7 @@
 //
 //   [[Mae]]                 link to a character or location by name (case does not matter)
 //   [[Tangoa|die Stadt]]    same, with its own link text
-//   **fett**  *kursiv*  ~~durchgestrichen~~  [Text](https://…)
+//   **fett**  *kursiv*  ++unterstrichen++  ~~durchgestrichen~~  [Text](https://…)
 //   "## " heading, "- " list, "> " quote at the start of a line; blank line = new paragraph
 //
 // All other HTML is escaped, so text from the CMS can't inject markup. Used by the map (src/) and, as a copy made by
@@ -34,7 +34,8 @@
         s = escape(s)
             .replace(/\*\*(?=\S)([^*]*?\S)\*\*/g, '<strong>$1</strong>')
             .replace(/(^|[^*])\*(?=\S)([^*]*?\S)\*(?!\*)/g, '$1<em>$2</em>')
-            .replace(/~~(?=\S)([^~]*?\S)~~/g, '<del>$1</del>');
+            .replace(/~~(?=\S)([^~]*?\S)~~/g, '<del>$1</del>')
+            .replace(/\+\+(?=\S)([^+]*?\S)\+\+/g, '<u>$1</u>'); // Markdown has no underline: ++…++ (as markdown-it-ins)
         return s.replace(/\u0000(\d+)\u0000/g, (_, i) => parts[Number(i)]);
     }
 

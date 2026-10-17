@@ -87,6 +87,7 @@ class MapProtocols {
             </header>
             <div class="pp-body"></div>`;
         document.body.appendChild(this.panel);
+        window.DateField?.observe(this.panel); // date fields you can type and paste into
         this.body = this.panel.querySelector('.pp-body');
         this.search = this.panel.querySelector('.pp-search');
         this.panel.querySelector('.pp-close').addEventListener('click', () => this.close());
