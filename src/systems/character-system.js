@@ -64,10 +64,10 @@ class CharacterSystem {
                 // Handle both array and object formats
                 this.characterData = Array.isArray(data) ? data : (data.characters || []);
             } else {
-                // Use the reliable API endpoint that returns enhanced character data
-                Logger.character('Loading characters from API...');
-                response = await HttpUtils.fetch('/api/characters');
-                Logger.success('Successfully loaded from API endpoint');
+                // Not preloaded (e.g. reloadCharacters): the static data file, like the DataManager.
+                // ("/api/characters" here asked GitHub Pages, which has no API.)
+                Logger.character('Loading characters from public/data/characters.json...');
+                const response = await HttpUtils.fetch('public/data/characters.json', { cache: 'no-cache' });
                 
                 data = await response.json();
                 this.characterData = data.characters || [];
@@ -322,24 +322,6 @@ class CharacterSystem {
         }
         
         return null;
-    }
-
-    // Get enhanced character data from server (for individual character requests)
-    async getEnhancedCharacter(characterId) {
-        try {
-            const response = await HttpUtils.fetch(`/api/characters/${characterId}`);
-            const result = await response.json();
-            
-            if (result.success) {
-                return result.character;
-            } else {
-                Logger.warning(`Failed to get enhanced character data: ${result.error}`);
-                return null;
-            }
-        } catch (error) {
-            Logger.error(`Error getting enhanced character data:`, error);
-            return null;
-        }
     }
 
     // Enhanced focus character method with coordinate fix

@@ -1,5 +1,7 @@
-// char-path-api.js - Character Paths API Client
-// Provides character path data from server API
+// char-path-api.js - Character paths
+// Computed here from the static data files (characters.json, places.geojson), the same way the CMS's
+// /api/character-paths does (server/routes/character-paths.js): the map no longer needs the CMS server for them.
+// The API stays as a fallback if the files can't be read.
 
 class CharPathAPI {
     constructor() {
@@ -91,7 +93,70 @@ class CharPathAPI {
         }, 10000);
     }
 
-    // Fetch from Character Paths API with caching
+    // ---------- computed in the browser (port of generateCharacterPaths in server/routes/character-paths.js) ----------
+
+    async computeFromData() {
+        const [chars, places] = await Promise.all(['public/data/characters.json', 'public/data/places.geojson'].map(async (url) => {
+            const res = await fetch(url, { cache: 'no-cache' });
+            if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
+            return res.json();
+        }));
+        const byName = new Map((places.features || []).map((f) => [String(f.properties?.name || '').toLowerCase(), f.geometry?.coordinates]));
+        const resolve = (name) => {
+            const c = name ? byName.get(String(name).toLowerCase()) : null;
+            return Array.isArray(c) ? [c[1], c[0]] : null; // GeoJSON [x, y] → [lat, lng]
+        };
+
+        const paths = {};
+        const stats = { totalCharacters: 0, charactersWithPaths: 0, totalMovements: 0, pathsGenerated: 0 };
+        for (const character of chars.characters || []) {
+            stats.totalCharacters++;
+            const style = CharPathAPI.styleFor(character);
+            const meta = { relationship: character.relationship || 'unknown', status: character.status || 'unknown' };
+
+            if (!character.movementHistory || character.movementHistory.length === 0) {
+                const at = Array.isArray(character.currentLocation)
+                    ? [character.currentLocation[1], character.currentLocation[0]]
+                    : resolve(character.placeOfOrigin);
+                if (at) {
+                    paths[character.id] = { id: character.id, name: character.name, type: 'static', coordinates: [at], currentLocation: at, style, metadata: { movementCount: 0, ...meta } };
+                    stats.pathsGenerated++;
+                }
+                continue;
+            }
+
+            const movements = [...character.movementHistory]
+                .sort((a, b) => new Date(a.dateStart) - new Date(b.dateStart))
+                .map((m, idx) => ({ ...m, movement_nr: idx }));
+            stats.totalMovements += movements.length;
+            const coordinates = movements
+                .map((m) => (Array.isArray(m.coordinates) ? [m.coordinates[1], m.coordinates[0]] : resolve(m.location)))
+                .filter(Boolean);
+            if (coordinates.length) {
+                paths[character.id] = {
+                    id: character.id, name: character.name, type: 'movement', coordinates,
+                    currentLocation: coordinates[coordinates.length - 1], style,
+                    metadata: { movementCount: movements.length, ...meta, firstMovement: movements[0]?.dateStart, lastMovement: movements[movements.length - 1]?.dateStart, movementHistory: movements },
+                };
+                stats.charactersWithPaths++;
+                stats.pathsGenerated++;
+            }
+        }
+        return { paths, metadata: { generated: new Date().toISOString(), statistics: stats, version: '1.0', source: 'browser' } };
+    }
+
+    static styleFor(character) {
+        const colors = {
+            ally: '#00ff0dff', friendly: '#35ffcdff', neutral: '#ffffffff', suspicious: '#ffc107',
+            hostile: '#f87c17ff', enemy: '#f31439ff', unknown: '#000000ff', party: 'rgba(212, 0, 255, 1)',
+        };
+        const style = { color: colors[String(character.relationship || 'unknown').toLowerCase()] || '#999999', weight: 5, opacity: 0.7, dashArray: '10,13' };
+        const status = String(character.status || 'unknown').toLowerCase();
+        if (status === 'dead' || status === 'deceased') { style.opacity = 0.4; style.weight = 3; }
+        return style;
+    }
+
+    // Paths: computed from the data files, the CMS API only if that fails
     async fetchFromAPI() {
         const cacheKey = 'character-paths-api';
         const cached = this.getCachedData(cacheKey);
@@ -100,6 +165,15 @@ class CharPathAPI {
             Logger.cache('📋 Using cached character paths data');
             this.stats.cacheHits++;
             return cached;
+        }
+
+        try {
+            const computed = await this.computeFromData();
+            this.setCachedData(cacheKey, computed);
+            Logger.success(`🧮 Character paths computed in the browser (${Object.keys(computed.paths).length})`);
+            return computed;
+        } catch (err) {
+            Logger.warning(`Computing character paths failed (${err.message}), asking the CMS`);
         }
 
         Logger.api('🌐 Fetching character paths from API...');
