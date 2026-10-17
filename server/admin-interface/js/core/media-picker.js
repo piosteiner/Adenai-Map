@@ -339,6 +339,50 @@ window.mediaPicker = {
     }
 };
 
+// Hover preview: the thumbnails in a form's gallery and in the picker are small — hovering one shows the 600 px
+// version beside it (the URL's -thumb/-small part swapped for -medium; the shown image stays if that doesn't exist).
+(function hoverPreview() {
+    const SELECTOR = '.media-gallery-item img, .picker-media-image';
+    let box = null;
+    let current = null;
+    const larger = (url) => String(url).replace(/-(thumb|small)\.webp$/, '-medium.webp');
+
+    function place(target) {
+        const r = target.getBoundingClientRect();
+        const w = box.offsetWidth;
+        const h = box.offsetHeight;
+        const right = r.right + 12 + w <= window.innerWidth;
+        const left = right ? r.right + 12 : Math.max(8, r.left - 12 - w);
+        const top = Math.min(Math.max(8, r.top + r.height / 2 - h / 2), window.innerHeight - h - 8);
+        box.style.left = `${left}px`;
+        box.style.top = `${top}px`;
+    }
+
+    document.addEventListener('mouseover', (e) => {
+        const img = e.target.closest?.(SELECTOR);
+        if (!img || img === current) return;
+        current = img;
+        if (!box) {
+            box = document.createElement('div');
+            box.className = 'media-hover-preview';
+            box.hidden = true;
+            box.append(document.createElement('img'));
+            document.body.append(box);
+        }
+        const big = box.firstChild;
+        big.onload = () => { if (current === img) { box.hidden = false; place(img); } };
+        big.onerror = () => { if (current === img && big.src !== img.src) big.src = img.src; };
+        big.src = larger(img.currentSrc || img.src);
+    });
+    document.addEventListener('mouseout', (e) => {
+        if (!current || e.target !== current || current.contains(e.relatedTarget)) return;
+        current = null;
+        if (box) box.hidden = true;
+    });
+    // a click (e.g. remove, or picking in the picker) or scrolling ends the preview
+    ['click', 'scroll'].forEach((ev) => document.addEventListener(ev, () => { current = null; if (box) box.hidden = true; }, true));
+})();
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     window.mediaPicker.init();

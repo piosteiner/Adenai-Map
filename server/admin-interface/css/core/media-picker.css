@@ -35,7 +35,7 @@
 }
 
 /* Several images per location/character (js/core/media-picker.js): the gallery in the form */
-.media-picker-display.has-gallery { padding: 8px; cursor: default; height: auto !important; min-height: 0 !important; }
+.media-picker-display.has-gallery { display: block !important; padding: 8px; cursor: default; height: auto !important; min-height: 0 !important; }
 .media-gallery { display: flex; flex-wrap: wrap; gap: 8px; }
 .media-gallery-item {
     position: relative;
@@ -83,3 +83,18 @@
     padding: 2px 6px; border-radius: 4px;
     background: rgba(0, 0, 0, 0.7); color: #fff; font-size: 0.75rem;
 }
+
+/* Hover preview of a gallery or picker image (js/core/media-picker.js: hover preview) */
+.media-hover-preview {
+    position: fixed;
+    z-index: 10000;
+    pointer-events: none;
+    max-width: 340px;
+    padding: 4px;
+    border-radius: 8px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+.media-hover-preview img { display: block; max-width: 330px; max-height: 330px; border-radius: 5px; }
+.media-hover-preview[hidden] { display: none; }
