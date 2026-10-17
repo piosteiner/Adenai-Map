@@ -1,6 +1,10 @@
 const express = require('express');
 const linkRename = require('../lib/link-rename');
 const { normalizeImages } = require('../lib/images');
+
+// Dates in the data are in-game dates (year 5663 …). Where a date is needed and none was given (a character placed
+// at its place of origin, a movement without date), this is used — not today's real-world date.
+const CAMPAIGN_START = '5663-06-03';
 const { inBackground } = require('../lib/github');
 const router = express.Router();
 const { requireAuth } = require('../middleware/auth');
@@ -395,8 +399,8 @@ router.post('/', requireAuth, async (req, res) => {
     if (req.body.placeOfOrigin && originCoordinates) {
       newCharacter.currentLocation = {
         location: req.body.placeOfOrigin,
-        date: new Date().toISOString().split('T')[0], // Today's date
-        dateStart: new Date().toISOString().split('T')[0],
+        date: CAMPAIGN_START,
+        dateStart: CAMPAIGN_START,
         dateEnd: null,
         coordinates: originCoordinates,
         notes: 'Initial location based on place of origin'
@@ -500,8 +504,8 @@ router.put('/:id', requireAuth, async (req, res) => {
         (!updatedCharacter.movementHistory || updatedCharacter.movementHistory.length === 0)) {
       updatedCharacter.currentLocation = {
         location: req.body.placeOfOrigin,
-        date: new Date().toISOString().split('T')[0],
-        dateStart: new Date().toISOString().split('T')[0],
+        date: CAMPAIGN_START,
+        dateStart: CAMPAIGN_START,
         dateEnd: null,
         coordinates: originCoordinates,
         notes: 'Location set based on place of origin'
@@ -704,8 +708,8 @@ router.post('/:id/movements', requireAuth, async (req, res) => {
     const newMovement = {
       id: `movement_${Date.now()}`,
       movement_nr: character.movementHistory.length, // Assign next sequence number
-      date: req.body.dateStart || req.body.date || new Date().toISOString().split('T')[0], // Legacy support
-      dateStart: req.body.dateStart || req.body.date || new Date().toISOString().split('T')[0],
+      date: req.body.dateStart || req.body.date || CAMPAIGN_START, // Legacy support
+      dateStart: req.body.dateStart || req.body.date || CAMPAIGN_START,
       dateEnd: req.body.dateEnd || null,
       location: req.body.location || null,
       coordinates: coordinates,
@@ -1089,8 +1093,8 @@ router.delete('/:id/movements/:movementId', requireAuth, async (req, res) => {
         character.location = character.placeOfOrigin;
         character.coordinates = originCoordinates || character.coordinates;
         character.currentLocation = {
-          date: new Date().toISOString().split('T')[0],
-          dateStart: new Date().toISOString().split('T')[0],
+          date: CAMPAIGN_START,
+          dateStart: CAMPAIGN_START,
           dateEnd: null,
           location: character.placeOfOrigin,
           coordinates: originCoordinates || character.coordinates,
@@ -1099,8 +1103,8 @@ router.delete('/:id/movements/:movementId', requireAuth, async (req, res) => {
       } else {
         // No place of origin either, keep current location as is
         character.currentLocation = {
-          date: new Date().toISOString().split('T')[0],
-          dateStart: new Date().toISOString().split('T')[0],
+          date: CAMPAIGN_START,
+          dateStart: CAMPAIGN_START,
           dateEnd: null,
           location: character.location || 'Unknown',
           coordinates: character.coordinates,
@@ -1397,8 +1401,8 @@ router.post('/migrate', requireAuth, async (req, res) => {
         if (originCoordinates) {
           character.currentLocation = {
             location: character.placeOfOrigin,
-            date: character.createdAt ? character.createdAt.split('T')[0] : new Date().toISOString().split('T')[0],
-            dateStart: character.createdAt ? character.createdAt.split('T')[0] : new Date().toISOString().split('T')[0],
+            date: CAMPAIGN_START,
+            dateStart: CAMPAIGN_START,
             dateEnd: null,
             coordinates: originCoordinates,
             notes: 'Migrated from place of origin (no movement history)'
@@ -1504,8 +1508,8 @@ router.post('/reset-and-migrate', requireAuth, async (req, res) => {
         if (originCoordinates) {
           character.currentLocation = {
             location: character.placeOfOrigin,
-            date: character.createdAt ? character.createdAt.split('T')[0] : new Date().toISOString().split('T')[0],
-            dateStart: character.createdAt ? character.createdAt.split('T')[0] : new Date().toISOString().split('T')[0],
+            date: CAMPAIGN_START,
+            dateStart: CAMPAIGN_START,
             dateEnd: null,
             coordinates: originCoordinates,
             notes: 'Set from place of origin (no movement history)'

@@ -500,3 +500,9 @@
 .popup-gallery { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0 8px; }
 .popup-gallery-thumb { width: 48px; height: 48px; object-fit: cover; border-radius: 4px; cursor: zoom-in; border: 1px solid rgba(127, 127, 127, 0.3); }
 .popup-gallery-thumb:hover { outline: 2px solid #8b5cf6; }
+
+/* Cropped images (portraits mostly): keep the upper part, where the face is, instead of the middle */
+.character-modal .character-image, .popup-location-image, .character-popup-avatar, .character-avatar,
+.dropdown-item img, .result-avatar img, .popup-gallery-thumb, .character-popup img {
+  object-position: center 20%;
+}

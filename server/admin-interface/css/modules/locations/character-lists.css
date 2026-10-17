@@ -344,3 +344,4 @@
     color: #90ee90;
     border-color: #2d5a3d;
 }
+.character-mini-image img { object-position: center 20%; }

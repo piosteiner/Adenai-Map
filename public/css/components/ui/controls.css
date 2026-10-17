@@ -441,3 +441,6 @@
 @media (max-width: 900px) {
     .map-timeline { width: calc(100vw - 60px); bottom: 56px; left: calc(50% - 15px); }
 }
+
+/* ✨ at the apex of a teleport arc (movement-system.js: teleportArc) */
+.teleport-spark { font-size: 16px; line-height: 20px; text-align: center; filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9)); pointer-events: none; }

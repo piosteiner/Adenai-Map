@@ -29,7 +29,14 @@ export function createMiniMap({ point = null, path = [], editable = false, onPic
         }
 
         if (path.length > 1) {
-            L.polyline(path.map(([x, y]) => [y, x]), { color: '#6b5b95', weight: 3, dashArray: '6,6' }).addTo(map);
+            // walked legs dashed, teleports (point.teleport) dotted and fainter
+            for (let i = 1; i < path.length; i++) {
+                const leg = [[path[i - 1][1], path[i - 1][0]], [path[i][1], path[i][0]]];
+                const line = L.polyline(leg, path[i].teleport
+                    ? { color: '#d4af37', weight: 3, dashArray: '1,7', lineCap: 'round', opacity: 0.9 }
+                    : { color: '#6b5b95', weight: 3, dashArray: '6,6' }).addTo(map);
+                if (path[i].teleport) line.bindTooltip('✨ Teleport', { sticky: true });
+            }
             path.forEach(([x, y], i) => L.circleMarker([y, x], { radius: 4, color: '#6b5b95', fillColor: i === path.length - 1 ? '#d4af37' : '#fff', fillOpacity: 1, weight: 2 }).addTo(map));
         }
 

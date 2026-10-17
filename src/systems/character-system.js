@@ -716,7 +716,7 @@ class CharacterSystem {
     createCharacterPopup(character) {
         const images = EntityImages.imagesOf(character);
         const imageHtml = images.length ? 
-            `<img src="${images[0]}" alt="${character.name}" style="width: 100px; height: 100px; object-fit: cover; object-position: top center; border-radius: 8px; float: right; margin-left: 10px;"${EntityImages.galleryAttrs(images, images[0])}>` : '';
+            `<img src="${images[0]}" alt="${character.name}" style="width: 100px; height: 100px; object-fit: cover; object-position: center 20%; border-radius: 8px; float: right; margin-left: 10px;"${EntityImages.galleryAttrs(images, images[0])}>` : '';
         
         return `
             <div class="character-popup">

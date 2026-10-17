@@ -128,8 +128,8 @@ class MovementSystem {
                     
                     // Only create polyline if we have at least 2 valid coordinates
                     if (coordValidation.valid) {
-                        // Create path line using server-provided styling
-                        const pathLine = L.polyline(coordValidation.coordinates, {
+                        // The path: walked stretches as lines, teleports as dotted arcs (buildPathLayer)
+                        const pathLine = this.buildPathLayer(pathInfo, coordValidation.coordinates, {
                             color: pathInfo.style.color,
                             weight: pathInfo.style.weight,
                             opacity: pathInfo.style.opacity,
@@ -195,6 +195,41 @@ class MovementSystem {
         if (window.characterPanel) {
             window.characterPanel.refreshPanel();
         }
+    }
+
+    // A character's path as one layer group: polylines for the walked stretches, and for each teleport movement a
+    // dotted arc with ✨ at its apex (a jump, not a route). The movement types pair with the coordinates only when
+    // every movement could be placed; otherwise (or without teleports) it is one polyline, as before.
+    buildPathLayer(pathInfo, coords, style) {
+        const moves = pathInfo.metadata?.movementHistory || [];
+        const types = moves.length === coords.length ? moves.map((m) => m.type) : null;
+        const group = L.featureGroup();
+        if (!types || !types.includes('teleport')) return group.addLayer(L.polyline(coords, style));
+        let run = [coords[0]];
+        for (let i = 1; i < coords.length; i++) {
+            if (types[i] === 'teleport') {
+                if (run.length > 1) group.addLayer(L.polyline(run, style));
+                group.addLayer(this.teleportArc(coords[i - 1], coords[i], style));
+                run = [coords[i]];
+            } else {
+                run.push(coords[i]);
+            }
+        }
+        if (run.length > 1) group.addLayer(L.polyline(run, style));
+        return group;
+    }
+
+    // a and b as [lat, lng]: a quadratic curve bulging sideways by a quarter of the distance
+    teleportArc(a, b, style) {
+        const mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+        const dLat = b[0] - a[0];
+        const dLng = b[1] - a[1];
+        const ctrl = [mid[0] + dLng * 0.25, mid[1] - dLat * 0.25];
+        const apex = [0.25 * a[0] + 0.5 * ctrl[0] + 0.25 * b[0], 0.25 * a[1] + 0.5 * ctrl[1] + 0.25 * b[1]];
+        const arc = L.curve(['M', a, 'Q', ctrl, b], { ...style, dashArray: '1, 10', lineCap: 'round', weight: (style.weight || 4) + 1 });
+        arc.bindTooltip('✨ Teleport', { sticky: true });
+        const spark = L.marker(apex, { icon: L.divIcon({ className: 'teleport-spark', html: '✨', iconSize: [20, 20], iconAnchor: [10, 10] }), interactive: false, keyboard: false });
+        return L.featureGroup([arc, spark]);
     }
 
     // Show VsuzH movement markers by default

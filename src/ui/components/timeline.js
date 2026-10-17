@@ -5,7 +5,8 @@
 //   - before the first movement: not on the timeline yet;
 //   - during a travel-like movement (Reise, Rückkehr, Flucht, Exil) with a date range: on the way from the previous
 //     place to this one, in proportion to the days passed;
-//   - otherwise: at the place of the last movement that started by D.
+//   - otherwise: at the place of the last movement that started by D;
+//   - a teleport is a jump on its day: no gliding, and a gap in the highlighted path (the map draws it as an arc).
 // Dates far from the rest (e.g. a real-world 2025 among in-game 5663 dates) are left out of the range and the path.
 class MapTimeline {
     constructor() {
@@ -70,20 +71,24 @@ class MapTimeline {
         return raw.filter((r) => r.stops.length);
     }
 
-    // { at: [lat, lng], done: [[lat, lng], …], place, moving } or null before the first movement
+    // { at: [lat, lng], done: [[[lat, lng], …], …] (runs, split at teleports), place, moving } or null before the first movement
     positionOn(stops, day) {
         if (!stops.length || day < stops[0].start) return null;
         let i = 0;
         while (i + 1 < stops.length && stops[i + 1].start <= day) i++;
         const s = stops[i];
-        const done = stops.slice(0, i).map((x) => x.at);
+        const runs = [[stops[0].at]];
+        const add = (stop, at = stop.at) => { if (stop.type === 'teleport') runs.push([at]); else runs[runs.length - 1].push(at); };
+        for (let k = 1; k < i; k++) add(stops[k]);
         if (i > 0 && this.TRAVEL.has(s.type) && s.end > s.start && day < s.end) {
             const f = (day - s.start) / (s.end - s.start);
             const [a, b] = [stops[i - 1].at, s.at];
             const at = [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f];
-            return { at, done: [...done, at], place: `unterwegs nach ${s.place}`, moving: true };
+            runs[runs.length - 1].push(at);
+            return { at, done: runs, place: `unterwegs nach ${s.place}`, moving: true };
         }
-        return { at: s.at, done: [...done, s.at], place: s.place, moving: false };
+        if (i > 0) add(s);
+        return { at: s.at, done: runs, place: s.type === 'teleport' ? `✨ ${s.place}` : s.place, moving: false };
     }
 
     // ---------- drawing ----------
@@ -96,7 +101,8 @@ class MapTimeline {
             for (const p of paths) {
                 seen.add(p.id);
                 if (!this.dimmed.has(p.id)) {
-                    this.dimmed.set(p.id, { opacity: p.pathData.pathLine.options.opacity });
+                    // the path is a layer group (lines, teleport arcs): its own style is kept with the path data
+                    this.dimmed.set(p.id, { opacity: p.pathData.style?.opacity ?? 0.7 });
                     p.pathData.pathLine.setStyle({ opacity: 0.25 });
                 }
                 const pos = this.positionOn(p.stops, this.day);

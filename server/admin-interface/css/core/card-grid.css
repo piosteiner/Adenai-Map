@@ -592,3 +592,6 @@
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
 }
+
+/* Cropped images (portraits mostly): keep the upper part, where the face is */
+.character-image img, .location-image img, .media-gallery-item img { object-position: center 20%; }

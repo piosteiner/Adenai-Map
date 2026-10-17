@@ -90,6 +90,7 @@ const AdenaiConfig = {
         exile: { value: 'exile', label: '🚪 Exil' },
         capture: { value: 'capture', label: '⛓️ Gefangenschaft' },
         escape: { value: 'escape', label: '🏃 Flucht' },
+        teleport: { value: 'teleport', label: '✨ Teleport' }, // drawn as a dotted arc, an instant jump on the timeline
         other: { value: 'other', label: '❓ Andere' }
     },
 

@@ -8,6 +8,10 @@ import { createGallery } from '../gallery';
 import { createMiniMap } from '../minimap';
 import { field, input, select, markdown, tracker } from '../form';
 
+// In-game calendar: the campaign starts on 3 June 5663. Date pickers open in 5663 (min), never at today's real date.
+export const CAMPAIGN_START = '5663-06-03';
+const CAMPAIGN_MIN = '5663-01-01';
+
 const STATUS_ICON = { alive: '🙂', dead: '💀', undead: '🧟', missing: '❔', unknown: '🤷' };
 
 export function charactersView(app) {
@@ -62,7 +66,7 @@ export function charactersView(app) {
         const relationship = select(d.relationship, options('characterRelationships'), { disabled: ro, empty: null });
         const faction = input(d.faction, { readOnly: ro, list: 'faction-list' });
         const factionList = h('datalist#faction-list', {}, [...new Set(store.characters.map((x) => x.faction).filter(Boolean))].map((f) => h('option', { value: f })));
-        const firstMet = input(d.firstMet, { type: 'date', readOnly: ro });
+        const firstMet = input(d.firstMet, { type: 'date', readOnly: ro, min: CAMPAIGN_MIN });
         const description = markdown(d.description, { placeholder: 'Beschreibung… [[ verlinkt Charaktere und Orte', rows: 5 });
         const notes = markdown(d.notes, { placeholder: 'Notizen…', rows: 3 });
         description.readOnly = notes.readOnly = ro;
@@ -223,8 +227,11 @@ export function charactersView(app) {
         }
 
         function editRow(m) {
-            const start = input(m?.dateStart || m?.date || '', { type: 'date', required: true });
-            const end = input(m?.dateEnd || '', { type: 'date' });
+            // a new movement starts where the last one ended (or started); the first one on the campaign start
+            const last = sortedMoves().at(-1);
+            const start = input(m?.dateStart || m?.date || last?.dateEnd || last?.dateStart || last?.date || CAMPAIGN_START, { type: 'date', required: true, min: CAMPAIGN_MIN });
+            const end = input(m?.dateEnd || '', { type: 'date', min: start.value || CAMPAIGN_MIN, title: 'Optional: until when' });
+            start.addEventListener('change', () => { end.min = start.value || CAMPAIGN_MIN; });
             const custom = !!(m?.isCustomLocation);
             const where = input(custom ? '' : (m?.location || ''), { list: 'location-list', placeholder: 'Location' });
             const cx = input(custom ? m.coordinates?.[0] : '', { type: 'number', placeholder: 'X' });
@@ -290,11 +297,15 @@ export function charactersView(app) {
 }
 
 // [x, y] points of a character's movements in time order (custom coordinates or the location's)
+// Each point carries .teleport when it was reached by a teleport (the mini map draws that leg dotted)
 function movementPath(c) {
     return [...(c.movementHistory || [])]
         .sort((a, b) => new Date(a.dateStart || a.date) - new Date(b.dateStart || b.date))
-        .map((m) => (Array.isArray(m.coordinates) ? m.coordinates : locationByName(m.location)?.geometry?.coordinates))
-        .filter((p) => Array.isArray(p));
+        .map((m) => {
+            const p = Array.isArray(m.coordinates) ? m.coordinates : locationByName(m.location)?.geometry?.coordinates;
+            return Array.isArray(p) ? Object.assign([...p], { teleport: m.type === 'teleport' }) : null;
+        })
+        .filter(Boolean);
 }
 
 function originPoint(c) {

@@ -20,8 +20,8 @@
       "movementHistory": [],
       "currentLocation": {
         "location": "Valaris",
-        "date": "2025-09-07",
-        "dateStart": "2025-09-07",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
         "dateEnd": null,
         "coordinates": [
           1700,
@@ -48,7 +48,7 @@
       "movementHistory": [
         {
           "id": "movement_1755876447794",
-          "date": "2025-08-20",
+          "date": "5663-08-20",
           "location": "Rena",
           "coordinates": [
             650,
@@ -57,11 +57,12 @@
           "notes": "",
           "type": "travel",
           "createdAt": "2025-08-22T15:27:27.794Z",
-          "movement_nr": 0
+          "movement_nr": 0,
+          "dateStart": "5663-08-20"
         },
         {
           "id": "movement_1755876469219",
-          "date": "2025-08-29",
+          "date": "5663-08-29",
           "location": "Wesdalen",
           "coordinates": [
             790,
@@ -70,7 +71,8 @@
           "notes": "",
           "type": "travel",
           "createdAt": "2025-08-22T15:27:49.219Z",
-          "movement_nr": 1
+          "movement_nr": 1,
+          "dateStart": "5663-08-29"
         }
       ],
       "currentLocation": null,
@@ -112,9 +114,9 @@
         },
         {
           "id": "movement_1756257904810",
-          "date": "6553-07-31",
-          "dateStart": "6553-07-31",
-          "dateEnd": "6553-08-03",
+          "date": "5663-07-31",
+          "dateStart": "5663-07-31",
+          "dateEnd": "5663-08-03",
           "location": "Goblin Loch",
           "coordinates": [
             1472,
@@ -1209,8 +1211,8 @@
       "movementHistory": [],
       "currentLocation": {
         "location": "Nordmund",
-        "date": "2025-09-07",
-        "dateStart": "2025-09-07",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
         "dateEnd": null,
         "coordinates": [
           1082,
@@ -1285,8 +1287,8 @@
       "movementHistory": [],
       "currentLocation": {
         "location": "Donnermund",
-        "date": "2025-09-07",
-        "dateStart": "2025-09-07",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
         "dateEnd": null,
         "coordinates": [
           981,
@@ -1946,8 +1948,8 @@
       "movementHistory": [],
       "currentLocation": {
         "location": "Akónetchie",
-        "date": "2025-09-07",
-        "dateStart": "2025-09-07",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
         "dateEnd": null,
         "coordinates": [
           1869,
@@ -1977,8 +1979,8 @@
       "movementHistory": [],
       "currentLocation": {
         "location": "Akónetchie",
-        "date": "2025-09-07",
-        "dateStart": "2025-09-07",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
         "dateEnd": null,
         "coordinates": [
           1869,
@@ -2026,8 +2028,8 @@
       "movementHistory": [],
       "currentLocation": {
         "location": "Osdalen",
-        "date": "2025-09-14",
-        "dateStart": "2025-09-14",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
         "dateEnd": null,
         "coordinates": [
           1412,
@@ -2057,8 +2059,8 @@
       "movementHistory": [],
       "currentLocation": {
         "location": "Glesburg",
-        "date": "2025-09-14",
-        "dateStart": "2025-09-14",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
         "dateEnd": null,
         "coordinates": [
           1184,
@@ -2088,8 +2090,8 @@
       "movementHistory": [],
       "currentLocation": {
         "location": "Glesburg",
-        "date": "2025-09-14",
-        "dateStart": "2025-09-14",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
         "dateEnd": null,
         "coordinates": [
           1184,
@@ -2236,8 +2238,8 @@
       "movementHistory": [],
       "currentLocation": {
         "location": "Rena",
-        "date": "2026-01-19",
-        "dateStart": "2026-01-19",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
         "dateEnd": null,
         "coordinates": [
           650,
@@ -2267,5 +2269,5 @@
       "updatedAt": "2026-02-01T16:05:47.279Z"
     }
   ],
-  "lastUpdated": "2026-10-10T19:50:39.084Z"
+  "lastUpdated": "2026-10-17T18:28:42.999Z"
 }

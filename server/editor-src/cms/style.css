@@ -244,3 +244,6 @@ input[readonly], select:disabled { background: var(--panel-2); color: var(--mute
     .main { height: auto; }
     .list { max-height: 45vh; border-right: 0; border-bottom: 1px solid var(--line); }
 }
+
+/* Cropped images (portraits mostly): keep the upper part, where the face is, instead of the middle */
+.thumb, .detail-cover img, .gallery-item img, .picker-item img { object-position: center 20%; }
