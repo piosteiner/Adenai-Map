@@ -105,53 +105,37 @@ const upload = multer({
   }
 });
 
-// Helper function to optimize images
+// Helper function to optimize images: WebP in four sizes plus a capped "original".
+// Each size gets its own sharp pipeline — a reused one keeps its resize, which made every earlier "original" a 1200 px
+// copy of "large" at quality 95. rotate() applies the EXIF orientation (phone photos), the rest of EXIF is dropped.
+// An image no larger than "large" stores no extra original: sizes.original is the large file.
+const ORIGINAL_MAX = 2048;
+const WEBP_QUALITY = 82;
+
 async function optimizeImage(inputPath, outputDir, baseId) {
   const optimized = {};
-  
-  try {
-    // Get original image info
-    const originalImage = sharp(inputPath);
-    const metadata = await originalImage.metadata();
-    
-    // Generate different sizes
-    for (const [sizeName, config] of Object.entries(IMAGE_SIZES)) {
-      const outputFilename = `${baseId}-${sizeName}.webp`;
-      const outputPath = path.join(outputDir, outputFilename);
-      
-      await originalImage
-        .resize(config.width, config.height, { 
-          fit: 'inside',
-          withoutEnlargement: true 
-        })
-        .webp({ quality: 85 })
-        .toFile(outputPath);
-        
-      optimized[sizeName] = {
-        filename: outputFilename,
-        path: outputPath,
-        size: config
-      };
-    }
-    
-    // Also create a high-quality original version
-    const originalOutputPath = path.join(outputDir, `${baseId}-original.webp`);
-    await originalImage
-      .webp({ quality: 95 })
-      .toFile(originalOutputPath);
-      
-    optimized.original = {
-      filename: `${baseId}-original.webp`,
-      path: originalOutputPath,
-      width: metadata.width,
-      height: metadata.height
-    };
-    
-    return optimized;
-  } catch (error) {
-    console.error('Image optimization error:', error);
-    throw error;
+  const write = async (name, maxSide) => {
+    const filename = `${baseId}-${name}.webp`;
+    const outputPath = path.join(outputDir, filename);
+    const info = await sharp(inputPath)
+      .rotate()
+      .resize(maxSide, maxSide, { fit: 'inside', withoutEnlargement: true })
+      .webp({ quality: WEBP_QUALITY })
+      .toFile(outputPath);
+    return { filename, path: outputPath, width: info.width, height: info.height };
+  };
+
+  const metadata = await sharp(inputPath).metadata();
+  const longSide = Math.max(metadata.width || 0, metadata.height || 0);
+
+  for (const [sizeName, config] of Object.entries(IMAGE_SIZES)) {
+    optimized[sizeName] = await write(sizeName, config.width);
   }
+  optimized.original = longSide > IMAGE_SIZES.large.width
+    ? await write('original', ORIGINAL_MAX)
+    : { ...optimized.large };
+
+  return optimized;
 }
 
 // GET /api/media - List all media with pagination and filtering
@@ -287,6 +271,7 @@ router.post('/upload', requireAuth, upload.array('images', 10), async (req, res)
         
       } catch (fileError) {
         console.error(`Error processing file ${file.originalname}:`, fileError);
+        await fs.unlink(file.path).catch(() => {}); // no leftover in temp_media_upload
         // Continue with other files
       }
     }
@@ -490,4 +475,4 @@ router.delete('/:id', requireAuth, async (req, res) => {
   }
 });
 
-module.exports = { router, initGitHub };
+module.exports = { router, initGitHub, optimizeImage };
