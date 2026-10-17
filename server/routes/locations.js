@@ -1,5 +1,6 @@
 const express = require('express');
 const linkRename = require('../lib/link-rename');
+const { normalizeImages } = require('../lib/images');
 const { inBackground } = require('../lib/github');
 const router = express.Router();
 const { requireAuth } = require('../middleware/auth');
@@ -111,7 +112,8 @@ router.post('/', requireAuth, async (req, res) => {
         name: req.body.properties.name,
         description: req.body.properties.description || '',
         contentUrl: req.body.properties.contentUrl || null,
-        ...req.body.properties
+        ...req.body.properties,
+        ...normalizeImages(req.body.properties.images, req.body.properties.image) // images: the list, image: its first
       },
       geometry: {
         type: "Point",
@@ -195,7 +197,8 @@ router.put('/:name', requireAuth, async (req, res) => {
         name: req.body.properties.name,
         description: req.body.properties.description || '',
         contentUrl: req.body.properties.contentUrl || null,
-        ...req.body.properties
+        ...req.body.properties,
+        ...normalizeImages(req.body.properties.images, req.body.properties.image) // images: the list, image: its first
       },
       geometry: {
         type: "Point",

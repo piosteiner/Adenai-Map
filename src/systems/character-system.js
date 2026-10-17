@@ -453,8 +453,9 @@ class CharacterSystem {
         const statusLabel = character.status || 'unknown';
         const relationship = character.relationship || 'neutral';
         
-        // Image
-        const image = character.image ? `<img src="${character.image}" alt="${character.name}" class="character-popup-avatar">` : '';
+        // Image: the cover; further images as thumbnails below
+        const images = EntityImages.imagesOf(character);
+        const image = images.length ? `<img src="${images[0]}" alt="${character.name}" class="character-popup-avatar"${EntityImages.galleryAttrs(images, images[0])}>` : '';
         
         // Title
         const title = character.title ? `<div class="character-popup-title">${character.title}</div>` : '';
@@ -543,6 +544,7 @@ class CharacterSystem {
                     </div>
                 </div>
             </div>
+            ${EntityImages.galleryStrip(images, character.name)}
             ${contentSections.join('')}
         `;
     }
@@ -717,8 +719,9 @@ class CharacterSystem {
     }
 
     createCharacterPopup(character) {
-        const imageHtml = character.image ? 
-            `<img src="${character.image}" alt="${character.name}" style="width: 100px; height: 100px; object-fit: cover; object-position: top center; border-radius: 8px; float: right; margin-left: 10px;">` : '';
+        const images = EntityImages.imagesOf(character);
+        const imageHtml = images.length ? 
+            `<img src="${images[0]}" alt="${character.name}" style="width: 100px; height: 100px; object-fit: cover; object-position: top center; border-radius: 8px; float: right; margin-left: 10px;"${EntityImages.galleryAttrs(images, images[0])}>` : '';
         
         return `
             <div class="character-popup">
@@ -741,6 +744,7 @@ class CharacterSystem {
                 ${character.placeOfOrigin ? `<div><strong>🌍 Herkunftsort:</strong> ${character.placeOfOrigin}</div>` : ''}
                 ${character.description ? `<div class="rich-text" style="margin-top: 8px;"><strong>📝 Beschreibung:</strong>${RichText.render(character.description)}</div>` : ''}
                 ${character.notes ? `<div class="rich-text" style="margin-top: 8px;"><strong>📋 Notizen:</strong>${RichText.render(character.notes)}</div>` : ''}
+                ${EntityImages.galleryStrip(images, character.name)}
             </div>
         `;
     }

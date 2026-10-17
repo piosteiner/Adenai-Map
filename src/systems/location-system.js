@@ -545,7 +545,8 @@ class LocationSystem {
         const url = feature.properties.contentUrl;
         const type = feature.properties.type || '';
         const region = feature.properties.region || '';
-        const imageUrl = feature.properties.image || '';
+        const images = EntityImages.imagesOf(feature.properties); // cover first
+        const imageUrl = images[0] || '';
         
         // Ensure we have a valid layer with getLatLng method
         let latlng;
@@ -592,12 +593,12 @@ class LocationSystem {
                 popupContent += `<div class="popup-desc">${this.parseLinks(html)}</div>`;
             } catch (error) {
                 // Fallback to local description if external content fails
-                popupContent = this.createPopupFromProperties(name, desc, details, type, region, imageUrl);
+                popupContent = this.createPopupFromProperties(name, desc, details, type, region, imageUrl, images);
                 Logger.warning(`Failed to load content for ${name}: ${error.message}`);
             }
         } else {
             // No contentUrl: use local description and details
-            popupContent = this.createPopupFromProperties(name, desc, details, type, region, imageUrl);
+            popupContent = this.createPopupFromProperties(name, desc, details, type, region, imageUrl, images);
         }
 
         // Add character lists to popup content
@@ -626,7 +627,7 @@ class LocationSystem {
 
     // Helper method to normalize region values from GeoJSON to standardized keys
     // Create popup content from properties
-    createPopupFromProperties(name, description, details, type, region, imageUrl = null) {
+    createPopupFromProperties(name, description, details, type, region, imageUrl = null, images = []) {
         // Use the imageUrl from GeoJSON data directly
         const hasImage = imageUrl && imageUrl.trim() !== '';
         
@@ -638,7 +639,7 @@ class LocationSystem {
                     <div class="popup-title">${name}</div>
                     <div class="popup-image-container">
                         <img class="popup-location-image" src="${imageUrl}" alt="${name}" 
-                             title="Hover to enlarge • Click to open full size">
+                             title="Hover to enlarge • Click to open full size"${EntityImages.galleryAttrs(images, imageUrl)}>
                     </div>
                 </div>`;
         } else {
@@ -664,6 +665,8 @@ class LocationSystem {
             content += '</div>';
         }
         
+        content += EntityImages.galleryStrip(images, name); // the further images
+
         if (description) {
             content += `<div class="popup-desc rich-text">${this.parseLinks(RichText.render(description))}</div>`;
         }

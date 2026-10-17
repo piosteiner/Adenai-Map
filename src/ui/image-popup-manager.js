@@ -154,6 +154,9 @@ class ImagePopupManager {
         overlay.innerHTML = `
             <div class="image-popup-content">
                 <button class="image-popup-close" onclick="window.imagePopupManager.closePopup()">×</button>
+                <button class="image-popup-nav image-popup-prev" type="button" aria-label="Vorheriges Bild" hidden>‹</button>
+                <button class="image-popup-nav image-popup-next" type="button" aria-label="Nächstes Bild" hidden>›</button>
+                <div class="image-popup-counter" hidden></div>
                 <img class="image-popup-image" src="" alt="">
                 <div class="image-popup-info">
                     <div class="image-popup-title"></div>
@@ -171,12 +174,17 @@ class ImagePopupManager {
     }
 
     setupEventListeners() {
-        // ESC key to close
+        // ESC key to close, arrow keys to page through a location's or character's images
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.currentPopup) {
                 this.closePopup();
+            } else if (this.currentPopup && this.gallery && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+                e.preventDefault();
+                this.stepGallery(e.key === 'ArrowLeft' ? -1 : 1);
             }
         });
+        this.overlay.querySelector('.image-popup-prev').addEventListener('click', () => this.stepGallery(-1));
+        this.overlay.querySelector('.image-popup-next').addEventListener('click', () => this.stepGallery(1));
 
         // Click outside to close
         this.overlay.addEventListener('click', (e) => {
@@ -205,7 +213,8 @@ class ImagePopupManager {
                 
                 // Extract character data
                 const characterData = this.extractCharacterData(img);
-                this.showImagePopup(img.src, characterData);
+                this.setGallery(img, characterData);
+                this.showImagePopup(img.dataset.src || img.src, characterData);
             }
         });
     }
@@ -392,8 +401,36 @@ class ImagePopupManager {
         console.log('🖼️ Showing enhanced image popup:', combinedData.title || 'image', mediaMetadata ? '(with metadata)' : '(character data only)');
     }
 
+    // An image with data-gallery (src/utils/entity-images.js) belongs to a list the viewer can page through.
+    setGallery(img, data) {
+        let list = null;
+        try { list = img.dataset.gallery ? JSON.parse(img.dataset.gallery) : null; } catch { list = null; }
+        const index = list ? list.indexOf(img.dataset.src || img.src) : -1;
+        this.gallery = list && list.length > 1 ? { list, index: Math.max(0, index), data } : null;
+        this.updateGalleryNav();
+    }
+
+    stepGallery(delta) {
+        if (!this.gallery) return;
+        const { list } = this.gallery;
+        this.gallery.index = (this.gallery.index + delta + list.length) % list.length;
+        this.showImagePopup(list[this.gallery.index], this.gallery.data);
+        this.updateGalleryNav();
+    }
+
+    updateGalleryNav() {
+        if (!this.overlay) return;
+        const on = !!this.gallery;
+        this.overlay.querySelector('.image-popup-prev').hidden = !on;
+        this.overlay.querySelector('.image-popup-next').hidden = !on;
+        const counter = this.overlay.querySelector('.image-popup-counter');
+        counter.hidden = !on;
+        if (on) counter.textContent = `${this.gallery.index + 1} / ${this.gallery.list.length}`;
+    }
+
     closePopup() {
         if (!this.overlay || !this.currentPopup) return;
+        this.gallery = null;
 
         this.overlay.classList.remove('active');
         this.currentPopup = null;

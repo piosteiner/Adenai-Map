@@ -386,9 +386,10 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>🖼️ Location Image</label>
+                    <label>🖼️ Location Images</label>
                     <div class="media-picker-wrapper">
                         <input type="hidden" name="image" id="location-image-url">
+                        <input type="hidden" name="images" id="location-images">
                         <div class="media-picker-display" id="location-image-display">
                             <div class="media-picker-placeholder">
                                 <span class="media-picker-icon">🖼️</span>
@@ -477,9 +478,10 @@
                         <input type="date" name="firstMet">
                     </div>
                     <div class="form-group">
-                        <label>🖼️ Character Image</label>
+                        <label>🖼️ Character Images</label>
                         <div class="media-picker-wrapper">
                             <input type="hidden" name="image" id="character-image-url">
+                            <input type="hidden" name="images" id="character-images">
                             <div class="media-picker-display" id="character-image-display">
                                 <div class="media-picker-placeholder">
                                     <span class="media-picker-icon">🖼️</span>
@@ -786,6 +788,7 @@
             
             <div class="modal-footer">
                 <button type="button" class="btn-secondary close-picker-btn">Cancel</button>
+                <button type="button" class="btn-primary" id="picker-confirm" hidden disabled>Add</button>
             </div>
         </div>
     </div>

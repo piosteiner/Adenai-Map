@@ -219,16 +219,12 @@ class CharacterUI {
                 notes: character.notes || ''
             });
 
-            // If there's an image, set up the media picker display
-            if (character.image && window.mediaPicker) {
-                setTimeout(() => {
-                    const mediaItem = { url: character.image, name: character.name || 'Selected Image' };
-                    window.mediaPicker.setCharacterImage(mediaItem);
-                }, 100);
-            }
+            // The gallery: all images, the first is the cover (older entries only have `image`)
+            window.mediaPicker?.setImages('character', character.images?.length ? character.images : (character.image ? [character.image] : []));
         } else {
-            // Clear form
+            // Clear form (form.reset() leaves the hidden image inputs as they were)
             this.ui.resetForm('character-form');
+            window.mediaPicker?.setImages('character', []);
         }
     }
 

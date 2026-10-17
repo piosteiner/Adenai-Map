@@ -209,16 +209,12 @@ class LocationUI {
                 visited: !!props.visited
             });
 
-            // If there's an image, set up the media picker display
-            if (props.image && window.mediaPicker) {
-                setTimeout(() => {
-                    const mediaItem = { url: props.image, name: props.name || 'Selected Image' };
-                    window.mediaPicker.setLocationImage(mediaItem);
-                }, 100);
-            }
+            // The gallery: all images, the first is the cover (older entries only have `image`)
+            window.mediaPicker?.setImages('location', props.images?.length ? props.images : (props.image ? [props.image] : []));
         } else {
-            // Clear form for new location
+            // Clear form for new location (form.reset() leaves the hidden image inputs as they were)
             this.ui.resetForm('location-form');
+            window.mediaPicker?.setImages('location', []);
         }
     }
 

@@ -1,169 +1,186 @@
-// Media Picker - Reusable component for selecting media items
+// Media Picker - choose images from the media library for a location or a character.
+//
+// Each form has a gallery of the chosen images, in order; the first is the cover. Two hidden inputs carry it:
+// name="images" (JSON list of URLs) and name="image" (the cover, which older code reads). The server keeps them
+// consistent (server/lib/images.js); the map shows the cover plus thumbnails of the rest (src/utils/entity-images.js).
+// Hidden inputs are not cleared by form.reset(), so forms set their gallery explicitly with setImages().
 window.mediaPicker = {
     currentCallback: null,
-    selectedMedia: null,
+    multiple: false,
+    selected: [],
+    bound: false,
 
-    // Reset both character and location image selectors
-    reset() {
-        this.clearCharacterImage();
-        this.clearLocationImage();
+    galleries: {
+        character: { list: 'character-images', cover: 'character-image-url', display: 'character-image-display', add: 'select-character-image', clear: 'clear-character-image' },
+        location: { list: 'location-images', cover: 'location-image-url', display: 'location-image-display', add: 'select-location-image', clear: 'clear-location-image' },
     },
 
-    // Initialize the media picker
+    // Empty both galleries
+    reset() {
+        this.setImages('character', []);
+        this.setImages('location', []);
+    },
+
     init() {
         this.setupEventListeners();
     },
 
-    // Reinitialize event listeners (useful when modals are opened)
+    // Called when a form opens: listeners once, galleries drawn from their inputs
     reinitialize() {
         this.setupEventListeners();
         this.checkExistingImages();
     },
 
-    // Check and display existing images when reinitializing
     checkExistingImages() {
-        // Check character image
-        const characterImageUrl = document.getElementById('character-image-url');
-        if (characterImageUrl && characterImageUrl.value) {
-            const mediaItem = { url: characterImageUrl.value, name: 'Selected Image' };
-            this.setCharacterImage(mediaItem);
-        }
-
-        // Check location image
-        const locationImageUrl = document.getElementById('location-image-url');
-        if (locationImageUrl && locationImageUrl.value) {
-            const mediaItem = { url: locationImageUrl.value, name: 'Selected Image' };
-            this.setLocationImage(mediaItem);
-        }
+        Object.keys(this.galleries).forEach((kind) => this.render(kind));
     },
 
-    // Setup event listeners
+    // ---------- the gallery in a form ----------
+
+    getImages(kind) {
+        const g = this.galleries[kind];
+        const list = document.getElementById(g.list);
+        try {
+            const parsed = JSON.parse(list?.value || '[]');
+            if (Array.isArray(parsed) && parsed.length) return parsed.filter(Boolean);
+        } catch { /* fall back to the cover */ }
+        const cover = document.getElementById(g.cover)?.value;
+        return cover ? [cover] : [];
+    },
+
+    setImages(kind, urls) {
+        const g = this.galleries[kind];
+        const list = [...new Set((urls || []).filter(Boolean))];
+        const listInput = document.getElementById(g.list);
+        const coverInput = document.getElementById(g.cover);
+        if (listInput) listInput.value = JSON.stringify(list);
+        if (coverInput) coverInput.value = list[0] || '';
+        this.render(kind);
+    },
+
+    addImages(kind, items) {
+        this.setImages(kind, [...this.getImages(kind), ...items.map((i) => i.url)]);
+    },
+
+    // Thumbnails with: make cover, move left/right, remove; and a tile to add more
+    render(kind) {
+        const g = this.galleries[kind];
+        const display = document.getElementById(g.display);
+        if (!display) return;
+        const list = this.getImages(kind);
+        const clearBtn = document.getElementById(g.clear);
+        if (clearBtn) clearBtn.style.display = list.length ? 'inline-block' : 'none';
+        const addBtn = document.getElementById(g.add);
+        if (addBtn) addBtn.textContent = list.length ? '📂 Add images' : '📂 Select images';
+
+        if (!list.length) {
+            display.classList.remove('has-gallery');
+            display.innerHTML = `
+                <div class="media-picker-placeholder" data-action="add">
+                    <span class="media-picker-icon">🖼️</span>
+                    <span class="media-picker-text">Click to select from uploaded images (several possible)</span>
+                </div>`;
+            return;
+        }
+        display.classList.add('has-gallery');
+        const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+        display.innerHTML = `<div class="media-gallery">${list.map((url, i) => `
+            <div class="media-gallery-item${i === 0 ? ' is-cover' : ''}" data-index="${i}">
+                <img src="${esc(url)}" alt="" loading="lazy">
+                ${i === 0 ? '<span class="media-gallery-badge" title="Shown first, e.g. as the portrait">★ Cover</span>' : ''}
+                <div class="media-gallery-actions">
+                    ${i > 0 ? '<button type="button" data-action="cover" title="Make cover">★</button>' : ''}
+                    ${i > 0 ? '<button type="button" data-action="left" title="Move left">←</button>' : ''}
+                    ${i < list.length - 1 ? '<button type="button" data-action="right" title="Move right">→</button>' : ''}
+                    <button type="button" data-action="remove" title="Remove">✕</button>
+                </div>
+            </div>`).join('')}
+            <button type="button" class="media-gallery-add" data-action="add" title="Add images">＋</button>
+        </div>
+        <div class="media-gallery-hint">${list.length} image${list.length === 1 ? '' : 's'} · the first is the cover</div>`;
+    },
+
+    onGalleryClick(kind, e) {
+        const action = e.target.closest('[data-action]')?.dataset.action;
+        if (!action) return;
+        e.preventDefault();
+        e.stopPropagation();
+        if (action === 'add') {
+            this.openPicker((items) => this.addImages(kind, items), { multiple: true, already: this.getImages(kind) });
+            return;
+        }
+        const i = Number(e.target.closest('[data-index]')?.dataset.index);
+        const list = this.getImages(kind);
+        if (!Number.isInteger(i) || i < 0 || i >= list.length) return;
+        const [item] = list.splice(i, 1);
+        if (action === 'cover') list.unshift(item);
+        else if (action === 'left') list.splice(i - 1, 0, item);
+        else if (action === 'right') list.splice(i + 1, 0, item);
+        // 'remove': already taken out
+        this.setImages(kind, list);
+    },
+
+    // Older names, still used here and there
+    setCharacterImage(mediaItem) { this.setImages('character', [mediaItem.url]); },
+    clearCharacterImage() { this.setImages('character', []); },
+    setLocationImage(mediaItem) { this.setImages('location', [mediaItem.url]); },
+    clearLocationImage() { this.setImages('location', []); },
+
+    // ---------- listeners (once: forms call reinitialize() every time they open) ----------
+
     setupEventListeners() {
-        // Character image selection
-        const selectCharacterImageBtn = document.getElementById('select-character-image');
-        if (selectCharacterImageBtn) {
-            selectCharacterImageBtn.addEventListener('click', () => {
-                this.openPicker((mediaItem) => {
-                    this.setCharacterImage(mediaItem);
-                });
-            });
+        if (this.bound) return;
+        this.bound = true;
+
+        for (const kind of Object.keys(this.galleries)) {
+            const g = this.galleries[kind];
+            document.getElementById(g.add)?.addEventListener('click', () =>
+                this.openPicker((items) => this.addImages(kind, items), { multiple: true, already: this.getImages(kind) }));
+            document.getElementById(g.clear)?.addEventListener('click', () => this.setImages(kind, []));
+            document.getElementById(g.display)?.addEventListener('click', (e) => this.onGalleryClick(kind, e));
         }
 
-        // Clear character image
-        const clearCharacterImageBtn = document.getElementById('clear-character-image');
-        if (clearCharacterImageBtn) {
-            clearCharacterImageBtn.addEventListener('click', () => {
-                this.clearCharacterImage();
-            });
-        }
-
-        // Character image display click
-        const characterImageDisplay = document.getElementById('character-image-display');
-        if (characterImageDisplay) {
-            characterImageDisplay.addEventListener('click', () => {
-                this.openPicker((mediaItem) => {
-                    this.setCharacterImage(mediaItem);
-                });
-            });
-        }
-
-        // Location image selection
-        const selectLocationImageBtn = document.getElementById('select-location-image');
-        if (selectLocationImageBtn) {
-            selectLocationImageBtn.addEventListener('click', () => {
-                this.openPicker((mediaItem) => {
-                    this.setLocationImage(mediaItem);
-                });
-            });
-        }
-
-        // Clear location image
-        const clearLocationImageBtn = document.getElementById('clear-location-image');
-        if (clearLocationImageBtn) {
-            clearLocationImageBtn.addEventListener('click', () => {
-                this.clearLocationImage();
-            });
-        }
-
-        // Location image display click
-        const locationImageDisplay = document.getElementById('location-image-display');
-        if (locationImageDisplay) {
-            locationImageDisplay.addEventListener('click', () => {
-                this.openPicker((mediaItem) => {
-                    this.setLocationImage(mediaItem);
-                });
-            });
-        }
-
-        // Modal close events
+        document.getElementById('picker-confirm')?.addEventListener('click', () => this.confirmSelection());
         this.setupModalEvents();
-
-        // Filter events
         this.setupFilterEvents();
     },
 
-    // Setup modal events
     setupModalEvents() {
         const modal = document.getElementById('media-picker-modal');
-        const closeBtns = modal?.querySelectorAll('.close-picker-btn');
-
-        closeBtns?.forEach(btn => {
-            btn.addEventListener('click', () => this.closePicker());
-        });
-
+        modal?.querySelectorAll('.close-picker-btn').forEach((btn) => btn.addEventListener('click', () => this.closePicker()));
         modal?.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                this.closePicker();
-            }
+            if (e.target === modal) this.closePicker();
         });
     },
 
-    // Setup filter events
     setupFilterEvents() {
         const categoryFilter = document.getElementById('picker-category-filter');
         const searchInput = document.getElementById('picker-search');
 
-        categoryFilter?.addEventListener('change', () => {
-            this.loadMediaGrid();
-        });
+        categoryFilter?.addEventListener('change', () => this.loadMediaGrid());
 
-        // Add real-time search with debouncing
+        // Real-time search, debounced
         let searchTimeout;
         searchInput?.addEventListener('input', (e) => {
             clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                const searchTerm = e.target.value.toLowerCase().trim();
-                if (searchTerm.length > 0) {
-                    this.filterDisplayedItems(searchTerm);
-                } else {
-                    this.loadMediaGrid(); // Reload to show all items
-                }
-            }, 300);
+            searchTimeout = setTimeout(() => this.filterDisplayedItems(e.target.value.toLowerCase().trim()), 200);
         });
     },
 
-    // Filter displayed items locally for real-time search
+    // Filter displayed items locally (an empty search shows all again)
     filterDisplayedItems(searchTerm) {
         const grid = document.getElementById('media-picker-grid');
         const items = grid?.querySelectorAll('.picker-media-item');
-        
         if (!items) return;
 
         let visibleCount = 0;
-        items.forEach(item => {
-            const searchText = item.dataset.searchText || '';
-            const matches = searchText.includes(searchTerm);
+        items.forEach((item) => {
+            const matches = !searchTerm || (item.dataset.searchText || '').includes(searchTerm);
             item.style.display = matches ? 'block' : 'none';
             if (matches) visibleCount++;
         });
 
-        // Remove any existing "no results" message
-        const existingEmpty = grid.querySelector('.empty-search');
-        if (existingEmpty) {
-            existingEmpty.remove();
-        }
-
-        // Show "no results" message if nothing matches, but keep the items for future searches
+        grid.querySelector('.empty-search')?.remove();
         if (visibleCount === 0) {
             const emptyDiv = document.createElement('div');
             emptyDiv.className = 'empty-search';
@@ -173,74 +190,71 @@ window.mediaPicker = {
         }
     },
 
-    // Open the picker modal
-    openPicker(callback) {
+    // ---------- the picker dialog ----------
+
+    // multiple: click several, then "Add"; already: URLs that are in the gallery (marked, not added twice)
+    openPicker(callback, { multiple = false, already = [] } = {}) {
         this.currentCallback = callback;
-        this.selectedMedia = null;
-        
+        this.multiple = multiple;
+        this.already = new Set(already);
+        this.selected = [];
+
         const modal = document.getElementById('media-picker-modal');
         if (modal) {
+            modal.querySelector('.modal-header h3').textContent = multiple ? '📂 Select images' : '📂 Select image';
+            this.updateConfirm();
             modal.style.display = 'block';
             this.loadMediaGrid();
         }
     },
 
-    // Close the picker modal
     closePicker() {
         const modal = document.getElementById('media-picker-modal');
-        if (modal) {
-            modal.style.display = 'none';
-        }
+        if (modal) modal.style.display = 'none';
         this.currentCallback = null;
-        this.selectedMedia = null;
+        this.selected = [];
     },
 
-    // Load media grid
+    updateConfirm() {
+        const btn = document.getElementById('picker-confirm');
+        if (!btn) return;
+        btn.hidden = !this.multiple;
+        btn.disabled = this.selected.length === 0;
+        btn.textContent = this.selected.length ? `Add ${this.selected.length} image${this.selected.length === 1 ? '' : 's'}` : 'Add';
+    },
+
+    confirmSelection() {
+        if (this.currentCallback && this.selected.length) this.currentCallback(this.selected);
+        this.closePicker();
+    },
+
     async loadMediaGrid() {
         const grid = document.getElementById('media-picker-grid');
         const categoryFilter = document.getElementById('picker-category-filter');
         const searchInput = document.getElementById('picker-search');
-
         if (!grid) return;
 
         try {
             grid.innerHTML = '<div class="loading">Loading images...</div>';
 
-            // Load ALL media for proper filtering, same as main media tab
-            const params = new URLSearchParams({
-                page: '1',
-                limit: '10000' // Load all images
-            });
-            
-            if (categoryFilter?.value) {
-                params.append('category', categoryFilter.value);
-            }
-            // Note: Don't add search param here - we handle search client-side for better UX
+            // All media, for client-side filtering (as the main media tab)
+            const params = new URLSearchParams({ page: '1', limit: '10000' });
+            if (categoryFilter?.value) params.append('category', categoryFilter.value);
 
-            const response = await fetch(`/api/media?${params}`, {
-                credentials: 'include'
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to load media');
-            }
+            const response = await fetch(`/api/media?${params}`, { credentials: 'include' });
+            if (!response.ok) throw new Error('Failed to load media');
 
             const data = await response.json();
             this.renderMediaGrid(Object.entries(data.media || {}));
 
-            // Apply current search if there is one
             const currentSearch = searchInput?.value?.toLowerCase().trim();
-            if (currentSearch) {
-                setTimeout(() => this.filterDisplayedItems(currentSearch), 100);
-            }
-
+            if (currentSearch) this.filterDisplayedItems(currentSearch);
         } catch (error) {
             console.error('Error loading media:', error);
             grid.innerHTML = '<div class="error">Failed to load images</div>';
         }
     },
 
-    // Render media grid
     renderMediaGrid(mediaArray) {
         const grid = document.getElementById('media-picker-grid');
         if (!grid) return;
@@ -256,11 +270,13 @@ window.mediaPicker = {
             const credits = item.credits ? `Credits: ${item.credits}` : '';
             const caption = item.caption || '';
             const tags = item.tags?.length > 0 ? `🏷️ ${item.tags.join(', ')}` : '';
-            
+            const inGallery = this.already?.has(imageUrl);
+
             return `
-                <div class="picker-media-item" data-media-id="${id}" data-media-url="${imageUrl}" 
+                <div class="picker-media-item${inGallery ? ' in-gallery' : ''}" data-media-id="${id}" data-media-url="${imageUrl}"
                      data-search-text="${this.buildSearchText(item)}">
-                    <img src="${imageUrl}" alt="${item.title}" class="picker-media-image">
+                    ${inGallery ? '<span class="picker-in-gallery">✓ already added</span>' : ''}
+                    <img src="${imageUrl}" alt="${item.title}" class="picker-media-image" loading="lazy">
                     <div class="picker-media-info">
                         <div class="picker-media-name">${displayName}</div>
                         <div class="picker-media-category">${this.getCategoryEmoji(item.category)} ${item.category}</div>
@@ -272,147 +288,43 @@ window.mediaPicker = {
             `;
         }).join('');
 
-        // Add click listeners to media items
-        grid.querySelectorAll('.picker-media-item').forEach(item => {
-            item.addEventListener('click', () => {
-                this.selectMediaItem(item);
-            });
+        grid.querySelectorAll('.picker-media-item').forEach((item) => {
+            item.addEventListener('click', () => this.selectMediaItem(item));
         });
     },
 
-    // Build searchable text from all metadata
     buildSearchText(item) {
-        const searchFields = [
-            item.title || '',
-            item.caption || '',
-            item.credits || '',
-            item.category || '',
-            ...(item.tags || [])
-        ];
-        return searchFields.join(' ').toLowerCase();
+        return [item.title || '', item.caption || '', item.credits || '', item.category || '', ...(item.tags || [])].join(' ').toLowerCase();
     },
 
-    // Select a media item
     selectMediaItem(itemElement) {
-        // Remove previous selection
-        const grid = document.getElementById('media-picker-grid');
-        grid?.querySelectorAll('.picker-media-item').forEach(item => {
-            item.classList.remove('selected');
-        });
-
-        // Select current item
-        itemElement.classList.add('selected');
-
-        const mediaId = itemElement.dataset.mediaId;
-        const mediaUrl = itemElement.dataset.mediaUrl;
-        const mediaName = itemElement.querySelector('.picker-media-name')?.textContent;
-
-        this.selectedMedia = {
-            id: mediaId,
-            url: mediaUrl,
-            name: mediaName
+        const media = {
+            id: itemElement.dataset.mediaId,
+            url: itemElement.dataset.mediaUrl,
+            name: itemElement.querySelector('.picker-media-name')?.textContent,
         };
 
-        // Auto-close and apply selection after a short delay
+        if (this.multiple) {
+            if (itemElement.classList.contains('in-gallery')) return; // already in the gallery
+            const at = this.selected.findIndex((m) => m.url === media.url);
+            if (at >= 0) this.selected.splice(at, 1); else this.selected.push(media);
+            itemElement.classList.toggle('selected', at < 0);
+            this.updateConfirm();
+            return;
+        }
+
+        // Single choice: select and apply after a short moment
+        document.getElementById('media-picker-grid')?.querySelectorAll('.picker-media-item').forEach((item) => item.classList.remove('selected'));
+        itemElement.classList.add('selected');
+        this.selected = [media];
         setTimeout(() => {
-            if (this.currentCallback && this.selectedMedia) {
-                this.currentCallback(this.selectedMedia);
+            if (this.currentCallback && this.selected.length) {
+                this.currentCallback(this.selected);
                 this.closePicker();
             }
         }, 300);
     },
 
-    // Set character image
-    setCharacterImage(mediaItem) {
-        const imageUrlInput = document.getElementById('character-image-url');
-        const imageDisplay = document.getElementById('character-image-display');
-        const clearBtn = document.getElementById('clear-character-image');
-
-        if (imageUrlInput) {
-            imageUrlInput.value = mediaItem.url;
-        }
-
-        if (imageDisplay) {
-            imageDisplay.innerHTML = `
-                <img src="${mediaItem.url}" alt="${mediaItem.name}" class="media-picker-image">
-            `;
-        }
-
-        if (clearBtn) {
-            clearBtn.style.display = 'inline-block';
-        }
-    },
-
-    // Clear character image
-    clearCharacterImage() {
-        const imageUrlInput = document.getElementById('character-image-url');
-        const imageDisplay = document.getElementById('character-image-display');
-        const clearBtn = document.getElementById('clear-character-image');
-
-        if (imageUrlInput) {
-            imageUrlInput.value = '';
-        }
-
-        if (imageDisplay) {
-            imageDisplay.innerHTML = `
-                <div class="media-picker-placeholder">
-                    <span class="media-picker-icon">🖼️</span>
-                    <span class="media-picker-text">Click to select from uploaded images</span>
-                </div>
-            `;
-        }
-
-        if (clearBtn) {
-            clearBtn.style.display = 'none';
-        }
-    },
-
-    // Set location image
-    setLocationImage(mediaItem) {
-        const imageUrlInput = document.getElementById('location-image-url');
-        const imageDisplay = document.getElementById('location-image-display');
-        const clearBtn = document.getElementById('clear-location-image');
-
-        if (imageUrlInput) {
-            imageUrlInput.value = mediaItem.url;
-        }
-
-        if (imageDisplay) {
-            imageDisplay.innerHTML = `
-                <img src="${mediaItem.url}" alt="${mediaItem.name}" class="media-picker-image">
-            `;
-        }
-
-        if (clearBtn) {
-            clearBtn.style.display = 'inline-block';
-        }
-    },
-
-    // Clear location image
-    clearLocationImage() {
-        const imageUrlInput = document.getElementById('location-image-url');
-        const imageDisplay = document.getElementById('location-image-display');
-        const clearBtn = document.getElementById('clear-location-image');
-
-        if (imageUrlInput) {
-            imageUrlInput.value = '';
-        }
-
-        if (imageDisplay) {
-            imageDisplay.innerHTML = `
-                <div class="media-picker-placeholder">
-                    <span class="media-picker-icon">🖼️</span>
-                    <span class="media-picker-text">Click to select from uploaded images</span>
-                </div>
-            `;
-        }
-
-        if (clearBtn) {
-            clearBtn.style.display = 'none';
-        }
-    },
-
-    // Get category emoji
     getCategoryEmoji(category) {
         const emojis = {
             characters: '👥',

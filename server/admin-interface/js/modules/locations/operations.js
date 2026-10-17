@@ -259,7 +259,8 @@ class LocationOperations {
             properties: {
                 name: formData.name,
                 description: formData.description || '',
-                image: formData.image || '', // Add image URL support
+                image: formData.image || '', // the cover (first of images)
+                images: (() => { try { return JSON.parse(formData.images || '[]'); } catch { return []; } })(),
                 region: formData.region || '',
                 type: formData.type || '',
                 visited: !!formData.visited,

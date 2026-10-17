@@ -1,5 +1,6 @@
 const express = require('express');
 const linkRename = require('../lib/link-rename');
+const { normalizeImages } = require('../lib/images');
 const { inBackground } = require('../lib/github');
 const router = express.Router();
 const { requireAuth } = require('../middleware/auth');
@@ -379,7 +380,7 @@ router.post('/', requireAuth, async (req, res) => {
       placeOfOrigin: req.body.placeOfOrigin || '',
       coordinates: originCoordinates,
       description: req.body.description || '',
-      image: req.body.image || '',
+      ...normalizeImages(req.body.images, req.body.image), // images: the list, image: its first
       status: req.body.status || 'alive',
       faction: req.body.faction || '',
       relationship: req.body.relationship || 'neutral',
@@ -482,7 +483,7 @@ router.put('/:id', requireAuth, async (req, res) => {
       placeOfOrigin: req.body.placeOfOrigin || '',
       coordinates: originCoordinates,
       description: req.body.description || '',
-      image: req.body.image || '',
+      ...normalizeImages(req.body.images, req.body.image), // images: the list, image: its first
       status: req.body.status || 'alive',
       faction: req.body.faction || '',
       relationship: req.body.relationship || 'neutral',
