@@ -18,6 +18,7 @@ const changelogRoutes = require('./routes/changelog');
 const journeyRoutes = require('./routes/journey');
 const dynamicsRoutes = require('./routes/dynamics');
 const configRoutes = require('./routes/config');
+const protocolRoutes = require('./routes/protocols');
 
 // Import middleware
 const { requireAuth, authenticateJourneyAPI, authenticateDynamicsAPI } = require('./middleware/auth');
@@ -117,6 +118,7 @@ app.use('/api/changelog', changelogRoutes);
 app.use('/api/journey', authenticateJourneyAPI, journeyRoutes);
 app.use('/api/dynamics', authenticateDynamicsAPI, dynamicsRoutes);
 app.use('/api/config', configRoutes);
+app.use('/api/protocols', protocolRoutes); // session minutes, behind the protocol password
 
 // Activity routes (uncomment when you have the activity routes file)
 // app.use('/api/activity', requireAuth, activityRoutes);

@@ -129,6 +129,9 @@ sessions/
 
 # Sensitive data files
 data/journeys.json
+# Session minutes and the protocol password: private, this server only (backed up by scripts/backup.sh)
+data/protocols*.json
+data/protocol-settings.json
 
 # Generated client files (written by journey/dynamics routes)
 client-sync/*

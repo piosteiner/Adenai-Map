@@ -44,6 +44,8 @@
     }
 
     document.addEventListener('click', (e) => {
+        const session = e.target.closest && e.target.closest('a.protocol-link');
+        if (session) { e.preventDefault(); window.mapProtocols?.open(session.dataset.session); return; }
         const link = e.target.closest && e.target.closest('a.wiki-link');
         if (!link) return;
         e.preventDefault();
@@ -82,8 +84,13 @@
     function fill(slot) {
         slot.dataset.filled = '1';
         const hits = backlinks(slot.dataset.backlinksFor);
-        if (!hits.length) return;
-        const links = hits.map((h) => `<a href="#" class="wiki-link wiki-${h.kind}" data-kind="${h.kind}" data-name="${RichText.escape(h.name)}">${RichText.escape(h.name)}</a>`);
+        // session minutes that mention it — only on a device unlocked for the protocols (components/protocols.js)
+        const sessions = window.mapProtocols?.mentions(slot.dataset.backlinksFor) || [];
+        if (!hits.length && !sessions.length) return;
+        const links = [
+            ...hits.map((h) => `<a href="#" class="wiki-link wiki-${h.kind}" data-kind="${h.kind}" data-name="${RichText.escape(h.name)}">${RichText.escape(h.name)}</a>`),
+            ...sessions.map((s) => `<a href="#" class="protocol-link" data-session="${RichText.escape(s.id)}" title="${RichText.escape(s.title || '')}">📜 Sitzung ${s.number}</a>`),
+        ];
         slot.innerHTML = `🔗 <strong>Erwähnt in:</strong> ${links.join(', ')}`;
         slot.classList.add('rich-text');
         slot.hidden = false;

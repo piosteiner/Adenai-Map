@@ -37,7 +37,7 @@
   <main>
     <a class="back" href="./">← Zur Karte</a>
     <h1>Datenschutz</h1>
-    <p class="updated">Stand: 17. Oktober 2026</p>
+    <p class="updated">Stand: 17. Oktober 2026 (Sitzungsprotokolle ergänzt)</p>
 
     <h2>Kurz gesagt</h2>
     <p>Keine Cookies, keine Analyse, keine Werbung, kein Tracking. Um dir die Karte zu zeigen, verbindet sich dein Browser
@@ -71,10 +71,21 @@
     <ul>
       <li><code>theme</code> im lokalen Speicher: helles oder dunkles Design, falls du es geändert hast</li>
       <li><code>http_cache_…</code> im lokalen Speicher: Kopien der Kartendaten (Orte, Charaktere, Reisen)</li>
+      <li><code>adenai-protocol-token</code> im lokalen Speicher, nur wenn du die Protokolle mit dem Passwort öffnest: ein
+        Schlüssel, der dieses Gerät 30 Tage für die Protokolle freischaltet (🔒 im Protokoll sperrt es wieder)</li>
       <li>eine Kopie der Seiten, Skripte und Daten der Karte, damit sie auch offline funktioniert</li>
     </ul>
-    <p>Nichts davon wird an uns gesendet. Du kannst alles jederzeit löschen, indem du die Website-Daten in den
+    <p>Nichts davon wird an uns gesendet, ausser dem Protokoll-Schlüssel bei jedem Abruf der Protokolle. Du kannst alles jederzeit löschen, indem du die Website-Daten in den
       Browser-Einstellungen entfernst, oder ein privates Fenster nutzen; die Karte funktioniert auch ohne.</p>
+
+    <h2>Sitzungsprotokolle</h2>
+    <p>Die Protokolle der Spielsitzungen sind nur für die Spielgruppe und mit einem Passwort geschützt. Ein Protokoll enthält
+      die Sitzungsnummer, das Datum der Sitzung, die Namen (oder Spitznamen) der anwesenden Spieler:innen und den Text, den
+      die Gruppe dazu schreibt. Die Protokolle liegen <strong>nur auf unserem eigenen Server bei Infomaniak in der
+      Schweiz</strong>, nicht in den öffentlichen Kartendaten. Frühere Fassungen eines Protokolls werden aufbewahrt, damit
+      nichts versehentlich verloren geht. Eine verschlüsselte Sicherungskopie liegt in einem privaten Repository bei
+      GitHub (USA); ohne unseren Schlüssel ist sie nicht lesbar. Auf Wunsch entfernen wir deinen Namen aus den
+      Protokollen: schreib an <a href="mailto:info@piogino.ch">info@piogino.ch</a>.</p>
 
     <h2>Daten im Ausland</h2>
     <p>GitHub hat seinen Sitz in den USA. Wenn die Seite geladen wird, gelangen deine IP-Adresse und die Anfrage daher in

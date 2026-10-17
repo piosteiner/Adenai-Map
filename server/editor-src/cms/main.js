@@ -9,6 +9,7 @@ import { store, loadAll, reload, onChange } from './store';
 import { installHoverPreview } from './gallery';
 import { locationsView } from './views/locations';
 import { charactersView } from './views/characters';
+import { protocolsView } from './views/protocols';
 
 // md-editor.js finds link targets through the classic CMS's modules: give it the same interface
 window.adminCharacters = { getCharacters: () => store.characters };
@@ -17,7 +18,9 @@ window.adminLocations = { getLocations: () => store.locations };
 const AREAS = [
     { id: 'locations', label: 'Locations', icon: '📍', count: () => store.locations.length },
     { id: 'characters', label: 'Characters', icon: '👤', count: () => store.characters.length },
+    { id: 'protocols', label: 'Protocols', icon: '📜', count: () => '' },
 ];
+const VIEWS = { locations: locationsView, characters: charactersView, protocols: protocolsView };
 const CLASSIC = [
     { label: 'Media', href: '/#media' },
     { label: 'Changelog', href: '/#changelog' },
@@ -57,7 +60,7 @@ document.body.append(
 
 function drawTabs() {
     tabs.replaceChildren(...AREAS.map((a) => h('a.tab', { href: `#/${a.id}`, 'aria-current': a.id === app.area ? 'page' : null },
-        `${a.icon} ${a.label}`, store.loaded ? h('span.tab-count', { text: a.count() }) : null)));
+        `${a.icon} ${a.label}`, store.loaded && a.count() !== '' ? h('span.tab-count', { text: a.count() }) : null)));
 }
 
 function drawUser() {
@@ -129,7 +132,7 @@ async function route(force = false) {
     if (!AREAS.some((a) => a.id === area)) { location.replace('#/locations'); return; }
     if (area !== app.area) {
         app.area = area;
-        app.views[area] ||= area === 'locations' ? locationsView(app) : charactersView(app);
+        app.views[area] ||= VIEWS[area](app);
         main.replaceChildren(app.views[area].el);
     }
     drawTabs();

@@ -1,7 +1,8 @@
 #!/bin/bash
 # Nightly off-site backup of what exists only on this server (systemd: adenai-backup.timer). Manual run: scripts/backup.sh
 #   - uploads/optimized/*.webp (the media; their names never change): each file encrypted once, on its first night
-#   - config/users.js (CMS accounts) and .env (tokens, secrets): encrypted again whenever they change
+#   - config/users.js (CMS accounts), .env (tokens, secrets) and the session minutes (data/protocols*.json,
+#     data/protocol-settings.json — private, never in the public repo): encrypted again whenever they change
 # The location, character, media-library and journey data are in the public repo (public/data) and need no backup here.
 # Target: the private GitHub repo cloned at ~/backups/adenai-offsite (SSH alias github-adenai-backups); its git history
 # keeps every version. Encryption: gpg AES256 with ~/.config/adenai/backup-passphrase — keep a copy of it elsewhere,
@@ -35,7 +36,7 @@ done
 # Secrets and accounts: only when their content changed (gpg output differs every run, so compare hashes)
 install -d "$OFFSITE/server"
 changed=0
-for rel in config/users.js .env; do
+for rel in config/users.js .env data/protocols.json data/protocol-settings.json data/protocols-deleted.json; do
   src="$SERVER/$rel"
   [ -f "$src" ] || continue
   name="$(echo "$rel" | tr '/' '_')"

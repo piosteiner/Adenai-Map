@@ -247,3 +247,6 @@ input[readonly], select:disabled { background: var(--panel-2); color: var(--mute
 
 /* Cropped images (portraits mostly): keep the upper part, where the face is, instead of the middle */
 .thumb, .detail-cover img, .gallery-item img, .picker-item img { object-position: center 20%; }
+
+.chip.missing { background: transparent; border: 1px dashed var(--bad); color: var(--bad); }
+.placeholder.pad { padding: 40px 16px; }
