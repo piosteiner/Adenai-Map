@@ -2385,7 +2385,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-17T19:45:01.093Z",
       "updatedAt": "2026-10-17T19:45:01.093Z"
+    },
+    {
+      "id": "lulloq_doro",
+      "name": "Lulloq Doro",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-17T19:45:22.893Z",
+      "updatedAt": "2026-10-17T19:45:22.893Z"
     }
   ],
-  "lastUpdated": "2026-10-17T19:45:01.093Z"
+  "lastUpdated": "2026-10-17T19:45:22.893Z"
 }
