@@ -18,6 +18,31 @@
 
     RichText.setResolver((name) => find(name) || { kind: 'auto', name });
 
+    // The popup a link was clicked in stays open ("pinned") while the linked one opens, so links can be followed
+    // in a chain; pinned popups close with their × only. Without this, Leaflet's autoClose, the single tracked
+    // character popup and the location markers' "close the previous popup" each closed it in some cases.
+    function pinSource(link) {
+        const cs = window.characterSystem;
+        const ls = window.locationSystem;
+        MapUtils.withMap((map) => {
+            map.eachLayer((layer) => {
+                if (!(layer instanceof L.Popup) || !layer.getElement()?.contains(link)) return;
+                layer.options.autoClose = false;
+                layer.options.closeOnClick = false;
+                layer.getElement().classList.add('popup-pinned');
+                if (cs && cs.currentCharacterPopup === layer) { cs.currentCharacterPopup = null; cs.currentFocusedCharacter = null; }
+                if (ls && layer._source && ls.currentOpenPopup === layer._source) ls.currentOpenPopup = null;
+            });
+        });
+        const panel = link.closest('.panel-anchored-popup');
+        if (panel && cs && cs.currentPanelPopup === panel) {
+            panel.classList.add('pinned');
+            panel.removeAttribute('id');
+            cs.currentPanelPopup = null;
+            cs.currentFocusedCharacter = null;
+        }
+    }
+
     document.addEventListener('click', (e) => {
         const link = e.target.closest && e.target.closest('a.wiki-link');
         if (!link) return;
@@ -28,6 +53,7 @@
             link.title = `Nicht gefunden: ${link.dataset.name}`;
             return;
         }
+        pinSource(link);
         if (hit.kind === 'character') window.characterSystem.focusCharacter(hit.name);
         else window.locationSystem.focusLocation(hit.name);
     });

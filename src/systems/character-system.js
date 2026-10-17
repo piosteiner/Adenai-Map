@@ -385,7 +385,7 @@ class CharacterSystem {
         popup.innerHTML = `
             <div class="panel-popup-header">
                 <h3>${character.name}</h3>
-                <button class="panel-popup-close" onclick="window.characterSystem.closePanelAnchoredPopup()">
+                <button class="panel-popup-close" onclick="window.characterSystem.closePanelPopupElement(this)">
                     ×
                 </button>
             </div>
@@ -394,10 +394,12 @@ class CharacterSystem {
             </div>
         `;
 
-        // Position popup to the left of panel with 20px spacing, near top
+        // Position popup to the left of panel with 20px spacing, near top; pinned ones (opened from a link in
+        // them, see wiki-links.js) stay, so a new one is offset to show them stacked
+        const pinned = document.querySelectorAll('.panel-anchored-popup.pinned').length;
         popup.style.position = 'fixed'; // Use fixed positioning for better control
-        popup.style.right = (panel.offsetWidth + 20) + 'px'; // 20px to the left of panel
-        popup.style.top = '30px'; // 30px from top of screen
+        popup.style.right = (panel.offsetWidth + 20 + pinned * 28) + 'px'; // 20px to the left of panel
+        popup.style.top = (30 + pinned * 28) + 'px'; // 30px from top of screen
         popup.style.zIndex = '10001';
 
         // Append to body instead of panel for fixed positioning
@@ -407,6 +409,13 @@ class CharacterSystem {
         this.currentPanelPopup = popup;
 
         Logger.panel(`📋 Panel popup opened for "${character.name}"`);
+    }
+
+    // The × of a panel popup: the current one, or a pinned one
+    closePanelPopupElement(button) {
+        const popup = button.closest('.panel-anchored-popup');
+        if (popup === this.currentPanelPopup) this.closePanelAnchoredPopup();
+        else popup?.remove();
     }
 
     // Close panel-anchored popup
@@ -674,8 +683,12 @@ class CharacterSystem {
     // Set up listeners to close character popup when needed
     setupPopupCloseListeners() {
         // Listen for popup close events to clean up references
-        if (this.currentCharacterPopup) {
-            this.currentCharacterPopup.on('remove', () => {
+        const popup = this.currentCharacterPopup;
+        if (popup) {
+            popup.on('remove', () => {
+                // only if it is still the tracked one: a pinned popup (wiki-links.js) closing later must not
+                // clear the reference to a newer popup
+                if (this.currentCharacterPopup !== popup) return;
                 this.currentCharacterPopup = null;
                 this.currentFocusedCharacter = null; // Clear focused character when popup is removed
                 Logger.character('Character popup reference cleaned up');

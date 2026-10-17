@@ -154,12 +154,59 @@ export function charactersView(app) {
 
     function movementsSection(c, editable) {
         const box = h('section.movements');
-        const sortedMoves = () => [...(characterById(c.id)?.movementHistory || [])].sort((a, b) => new Date(a.dateStart || a.date) - new Date(b.dateStart || b.date));
+        // The stored order (drag & drop changes it; the map follows it among movements of the same date)
+        const sortedMoves = () => [...(characterById(c.id)?.movementHistory || [])];
+        let dragFrom = null;
+
+        async function reorder(from, to) {
+            const moves = sortedMoves();
+            const [m] = moves.splice(from, 1);
+            moves.splice(to, 0, m);
+            try {
+                await api(`/api/characters/${encodeURIComponent(c.id)}/movements/reorder`, { method: 'PUT', body: { movements: moves.map((x) => ({ id: x.id })) } });
+                await reload('characters');
+                const t = (x) => new Date(x.dateStart || x.date).getTime();
+                const outOfDateOrder = moves.some((x, i) => i > 0 && t(x) < t(moves[i - 1]));
+                toast(outOfDateOrder ? 'Order saved — but the dates now run backwards: the map follows the dates, so adjust them too' : 'Order saved', outOfDateOrder ? 'warn' : 'ok', outOfDateOrder ? 7000 : 2500);
+                afterMovementChange();
+            } catch (err) { toast(`Order not saved: ${err.message}`, 'bad', 7000); draw(); }
+        }
+
+        // Rows can be dragged by their number cell (the handle); drop above or below another row
+        function dragProps(i) {
+            if (!editable) return {};
+            return {
+                draggable: 'true',
+                on: {
+                    dragstart: (e) => { dragFrom = i; e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', String(i)); e.currentTarget.classList.add('dragging'); },
+                    dragend: (e) => { e.currentTarget.classList.remove('dragging'); box.querySelectorAll('.drop-before, .drop-after').forEach((r) => r.classList.remove('drop-before', 'drop-after')); },
+                    dragover: (e) => {
+                        if (dragFrom === null) return;
+                        e.preventDefault();
+                        const r = e.currentTarget.getBoundingClientRect();
+                        const after = e.clientY > r.top + r.height / 2;
+                        e.currentTarget.classList.toggle('drop-after', after);
+                        e.currentTarget.classList.toggle('drop-before', !after);
+                    },
+                    dragleave: (e) => e.currentTarget.classList.remove('drop-before', 'drop-after'),
+                    drop: (e) => {
+                        e.preventDefault();
+                        const after = e.currentTarget.classList.contains('drop-after');
+                        e.currentTarget.classList.remove('drop-before', 'drop-after');
+                        const from = dragFrom;
+                        dragFrom = null;
+                        let to = i + (after ? 1 : 0);
+                        if (from < to) to -= 1;
+                        if (from !== null && to !== from) reorder(from, to);
+                    },
+                },
+            };
+        }
 
         function draw(editingId = null) {
             const moves = sortedMoves();
-            const rows = moves.map((m, i) => (m.id === editingId ? editRow(m) : h('tr', {},
-                h('td.num', { text: i + 1 }),
+            const rows = moves.map((m, i) => (m.id === editingId ? editRow(m) : h('tr', editingId === null ? dragProps(i) : {},
+                h('td.num', { title: editable ? 'Drag to reorder' : null }, editable && editingId === null ? h('span.grip', { text: '⋮⋮' }) : null, i + 1),
                 h('td.nowrap', { text: [m.dateStart || m.date, m.dateEnd].filter(Boolean).join(' – ') }),
                 h('td', {}, m.isCustomLocation || !m.location ? h('span.muted', { text: `(${(m.coordinates || []).join(', ')})` }) : h('a', { href: `#/locations/${encodeURIComponent(m.location)}` }, m.location)),
                 h('td', { text: labelOf('movementTypes', m.type) }),
