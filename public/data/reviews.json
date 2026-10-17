@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "9801cc1f0da222064bf522ff678ec3e726554777",
+      "action": "create",
+      "type": "character",
+      "itemName": "Chovy",
+      "user": "gm",
+      "timestamp": "2026-10-17T19:42:23.901Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-17T19:42:23.901Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Chovy (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "ba636df37cdd87c8bd2c044e9b3f94ea5dd76538",
       "action": "update",
       "type": "location",
@@ -327,5 +340,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-17T17:11:05.426Z"
+  "lastUpdated": "2026-10-17T19:42:23.901Z"
 }
