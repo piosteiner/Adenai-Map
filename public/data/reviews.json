@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "40de53a604d77d58e0c508d7b4b0d2fc343675b5",
+      "action": "create",
+      "type": "character",
+      "itemName": "Emi Brach",
+      "user": "gm",
+      "timestamp": "2026-10-17T19:45:36.775Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-17T19:45:36.775Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Emi Brach (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "9e57168b809a367ada57ef0b6a9145d9bb365fd8",
       "action": "create",
       "type": "character",
@@ -405,5 +418,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-17T19:45:24.003Z"
+  "lastUpdated": "2026-10-17T19:45:36.775Z"
 }
