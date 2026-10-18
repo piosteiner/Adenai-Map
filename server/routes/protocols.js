@@ -14,6 +14,7 @@
 //   DELETE /api/protocols/:id       delete (kept in protocols-deleted.json) CMS login only
 // Editing itself is live (lib/protocol-live.js) and goes into the session's draft.
 //   GET/PUT /api/protocols/settings/password                               CMS login only
+//   GET  /api/protocols/export      all private data as one JSON file      CMS login only
 //
 // Tokens: "<expiry>.<passwordVersion>.<hmac>", signed with SESSION_SECRET. Setting a new password bumps the version,
 // which ends every token handed out before.
@@ -90,6 +91,22 @@ router.get('/players', requireAccess, async (req, res) => {
 
 router.get('/suggestions', requireAccess, async (req, res) => {
     res.json({ success: true, ...(await store.suggestions()) });
+});
+
+// Everything private in one file, for the DM's own backup (CMS → Overview → Export): the minutes with their history and
+// drafts, deleted sessions, proposals and the password's change date (not the password)
+router.get('/export', requireAuth, async (req, res) => {
+    const fs = require('fs').promises;
+    const read = async (f, fallback) => { try { return JSON.parse(await fs.readFile(require('path').join(store.DIR, f), 'utf8')); } catch { return fallback; } };
+    const settings = await store.settings();
+    res.setHeader('Content-Disposition', `attachment; filename="adenai-minutes-${new Date().toISOString().slice(0, 10)}.json"`);
+    res.json({
+        exportedAt: new Date().toISOString(), exportedBy: cmsUser(req),
+        protocols: await read('protocols.json', { sessions: [] }),
+        deleted: await read('protocols-deleted.json', { sessions: [] }),
+        proposals: await read('pending-entries.json', { entries: [] }),
+        password: { set: !!settings.passwordHash, updatedAt: settings.updatedAt || null },
+    });
 });
 
 router.get('/:id', requireAccess, async (req, res) => {

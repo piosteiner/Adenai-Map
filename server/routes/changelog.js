@@ -444,6 +444,57 @@ router.post('/cleanup-reviews', requireAuth, async (req, res) => {
 });
 
 // Parse enhanced commit messages (same as activity.js)
+// ---------- History (CMS v2): every change to the data, with who, what and its review ----------
+//   GET /api/changelog/history?page=1   → { entries: [{ sha, url, date, action, kind, item, user, detail, review }], more }
+const KINDS = [
+  [/^(location in characters|locations?)\b/i, 'location'], [/^(characters?|character movement|movements? for character|movement to character)\b/i, 'character'],
+  [/^glossary term\b/i, 'term'], [/^media\b|new media files/i, 'media'], [/^links?\b/i, 'links'],
+];
+function describeCommit(message, author) {
+  const first = String(message).split('\n')[0];
+  const m = /^(Create|Add|Update|Delete|Reorder|Rename|Remove)\s+(.*?)(?::\s+(.*))?$/.exec(first);
+  const out = { action: 'change', kind: 'other', item: '', user: author, detail: first };
+  if (!m) return out;
+  out.action = { Create: 'create', Add: 'create', Update: 'update', Delete: 'delete', Remove: 'delete', Reorder: 'update', Rename: 'rename' }[m[1]];
+  const what = m[2] || '';
+  out.kind = (KINDS.find(([re]) => re.test(what)) || [null, /media/i.test(first) ? 'media' : 'other'])[1];
+  if (/movement/i.test(what)) out.detail = `${m[1]} ${what}`;
+  let rest = m[3] || what;
+  const by = / \(by ([^)]+)\)/.exec(rest);
+  if (by) { out.user = by[1]; rest = rest.replace(by[0], ''); }
+  const dash = rest.indexOf(' - ');
+  out.item = (dash >= 0 ? rest.slice(0, dash) : rest).trim();
+  if (dash >= 0) out.detail = rest.slice(dash + 3).trim();
+  else if (!/movement/i.test(what)) out.detail = '';
+  if (out.kind === 'media' && /^\d+ new media files/.test(what)) { out.item = what.replace(/ via CMS$/, ''); out.detail = ''; }
+  const meta = /^metadata for media (.+)$/.exec(what);
+  if (meta) { out.item = meta[1]; out.detail = 'metadata'; }
+  if (/movement/i.test(what)) out.action = 'update';
+  return out;
+}
+
+router.get('/history', requireAuth, async (req, res) => {
+  try {
+    const page = Math.max(1, parseInt(req.query.page, 10) || 1);
+    const { data: commits } = await octokit.rest.repos.listCommits({ owner: GITHUB_OWNER, repo: GITHUB_REPO, path: 'public/data', per_page: 100, page });
+    const reviews = Object.fromEntries((await loadReviews()).reviews.map((r) => [r.commitSha, r]));
+    const entries = commits
+      .filter((c) => !/^Update review status/.test(c.commit.message))
+      .map((c) => {
+        const d = describeCommit(c.commit.message, c.commit.author.name);
+        const r = reviews[c.sha];
+        return {
+          sha: c.sha, url: c.html_url, date: c.commit.author.date, ...d,
+          review: r ? { status: r.status, by: r.reviewedBy || null, at: r.reviewedAt || null, notes: r.reviewNotes || '', auto: r.reviewNotes === 'Auto-approved (GM/Admin)' } : null,
+        };
+      });
+    res.json({ success: true, entries, page, more: commits.length === 100, canReview: ['gm', 'admin'].includes(req.session.role) });
+  } catch (error) {
+    console.error('Error fetching history:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 function parseCommitMessage(message, author, date, sha) {
   try {
     const patterns = {
@@ -492,4 +543,5 @@ function parseCommitMessage(message, author, date, sha) {
   }
 }
 
+router.describeCommit = describeCommit; // for tests
 module.exports = router;

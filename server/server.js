@@ -84,6 +84,8 @@ const sessionMiddleware = session({
 });
 app.use(sessionMiddleware);
 
+// The CMS is the one at /v2/ (server/editor-src/cms); the classic one is retired — its address leads there
+app.get(['/', '/index.html'], (req, res) => res.redirect(302, '/v2/'));
 app.use(express.static('admin-interface'));
 app.use('/uploads', express.static('uploads'));
 app.use('/media', express.static('uploads/optimized')); // Serve optimized media files

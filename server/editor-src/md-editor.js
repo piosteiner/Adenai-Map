@@ -1,4 +1,5 @@
-// Markdown editor for the Adenai admin (bundled by `npm run build` → ../admin-interface/js/libs/md-editor.js).
+// Markdown editor for the Adenai CMS and the map's minutes (bundled into the CMS by `npm run build:cms` and for the
+// map by `npm run build:map` → src/vendor/md-editor.js).
 // Ported from the art history admin (backend/src/admin/editor/editor.js there).
 //
 // Every <textarea data-md> becomes a CodeMirror 6 editor with "live styling": **bold** looks bold, *italic* italic,

@@ -13,6 +13,9 @@ import { charactersView } from './views/characters';
 import { protocolsView } from './views/protocols';
 import { glossaryView } from './views/glossary';
 import { proposalsView, loadPending } from './views/proposals';
+import { mediaView } from './views/media';
+import { historyView } from './views/history';
+import { overviewView } from './views/overview';
 
 // md-editor.js finds link targets through the classic CMS's modules: give it the same interface
 window.adminCharacters = { getCharacters: () => store.characters };
@@ -20,17 +23,16 @@ window.adminLocations = { getLocations: () => store.locations };
 window.adminGlossary = { getTerms: () => store.terms };
 
 const AREAS = [
+    { id: 'overview', label: 'Overview', icon: '◆', count: () => '' },
     { id: 'locations', label: 'Locations', icon: '📍', count: () => store.locations.length },
     { id: 'characters', label: 'Characters', icon: '👤', count: () => store.characters.length },
     { id: 'glossary', label: 'Glossary', icon: '📖', count: () => store.terms.length },
     { id: 'protocols', label: 'Protocols', icon: '📜', count: () => '' },
     { id: 'proposals', label: 'Proposals', icon: '⏳', count: () => (store.pending?.length ? store.pending.length : '') },
+    { id: 'media', label: 'Media', icon: '🖼', count: () => Object.keys(store.media || {}).length },
+    { id: 'history', label: 'History', icon: '🕘', count: () => '' },
 ];
-const VIEWS = { locations: locationsView, characters: charactersView, glossary: glossaryView, protocols: protocolsView, proposals: proposalsView };
-const CLASSIC = [
-    { label: 'Media', href: '/#media' },
-    { label: 'Changelog', href: '/#changelog' },
-];
+const VIEWS = { overview: overviewView, locations: locationsView, characters: charactersView, glossary: glossaryView, protocols: protocolsView, proposals: proposalsView, media: mediaView, history: historyView };
 
 const app = {
     area: null,
@@ -55,10 +57,9 @@ const userBox = h('div.user');
 const main = h('main.main');
 document.body.append(
     h('header.topbar', {},
-        h('a.brand', { href: '#/locations' }, h('span.brand-mark', { text: '◆' }), 'Adenai', h('span.muted', { text: ' CMS' })),
+        h('a.brand', { href: '#/overview' }, h('span.brand-mark', { text: '◆' }), 'Adenai', h('span.muted', { text: ' CMS' })),
         tabs,
         h('span.spacer'),
-        h('nav.classic', { 'aria-label': 'Classic CMS' }, h('span.muted', { text: 'Classic: ' }), CLASSIC.map((c) => h('a', { href: c.href, title: 'Not yet in the new CMS' }, c.label))),
         h('a.btn.ghost.small', { href: 'https://adenai.piogino.ch/', target: '_blank', rel: 'noopener' }, 'Map ↗'),
         themeButton(),
         userBox),
@@ -133,9 +134,9 @@ async function logout() {
 let lastHash = '';
 async function route(force = false) {
     if (!store.loaded) return;
-    const [, area = 'locations', ...rest] = location.hash.replace(/^#\/?/, '#/').split('/');
+    const [, area = 'overview', ...rest] = location.hash.replace(/^#\/?/, '#/').split('/');
     const key = rest.length ? decodeURIComponent(rest.join('/')) : null;
-    if (!AREAS.some((a) => a.id === area)) { location.replace('#/locations'); return; }
+    if (!AREAS.some((a) => a.id === area)) { location.replace('#/overview'); return; }
     if (area !== app.area) {
         app.area = area;
         app.views[area] ||= VIEWS[area](app);

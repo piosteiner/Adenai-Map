@@ -3,8 +3,8 @@
   "private": true,
   "description": "Front-end builds of the Adenai CMS: the [[link]] editor for the classic CMS and the new CMS (v2). npm run build / build:cms",
   "scripts": {
-    "build": "esbuild md-editor.js --bundle --minify --format=iife --target=es2020 --outfile=../admin-interface/js/libs/md-editor.js && cp ../../src/utils/rich-text.js ../admin-interface/js/core/rich-text.js && npm run build:map",
-    "build:cms": "esbuild cms/main.js --bundle --minify --format=iife --target=es2020 --loader:.png=dataurl --loader:.svg=dataurl --outfile=../admin-interface/v2/app.js && node -e \"const fs=require('fs');const f='../admin-interface/v2/index.html';fs.writeFileSync(f,fs.readFileSync(f,'utf8').replace(/v=[^\\\"]+/g,'v='+Date.now().toString(36)))\"",
+    "build": "npm run build:map && npm run build:cms",
+    "build:cms": "esbuild cms/main.js --bundle --minify --format=iife --target=es2020 --loader:.png=dataurl --loader:.svg=dataurl --outfile=../admin-interface/v2/app.js && cp ../../src/utils/rich-text.js ../admin-interface/v2/rich-text.js && node -e \"const fs=require('fs');const f='../admin-interface/v2/index.html';fs.writeFileSync(f,fs.readFileSync(f,'utf8').replace(/v=[^\\\"]+/g,'v='+Date.now().toString(36)))\"",
     "build:map": "esbuild md-editor.js --bundle --minify --format=iife --target=es2020 --outfile=../../src/vendor/md-editor.js"
   },
   "devDependencies": {
