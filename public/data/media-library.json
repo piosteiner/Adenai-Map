@@ -3765,7 +3765,7 @@
     "characters-v2z2m39aur2t": {
       "id": "characters-v2z2m39aur2t",
       "category": "characters",
-      "title": "Servo",
+      "title": "Clippy",
       "caption": "",
       "credits": "https://pin.it/59QmY7AOO",
       "tags": [],
@@ -3804,7 +3804,7 @@
       },
       "fileSize": 47823,
       "mimeType": "image/jpeg",
-      "lastModified": "2026-10-18T12:28:12.113Z"
+      "lastModified": "2026-10-18T17:01:28.478Z"
     },
     "general-03ucqhu2n5ot": {
       "id": "general-03ucqhu2n5ot",
@@ -18538,5 +18538,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T16:57:31.990Z"
+  "lastUpdated": "2026-10-18T17:01:28.478Z"
 }
