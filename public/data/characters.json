@@ -2633,7 +2633,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:41:31.940Z",
       "updatedAt": "2026-10-18T04:41:31.940Z"
+    },
+    {
+      "id": "blechdose",
+      "name": "Blechdose",
+      "title": "Allys Duodrohne",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Eine [[Duodrohne]], die [[Ally]] bei [[Fitcher]] mitgenommen und Blechdose getauft hat. [[Simon-Alexander]] versucht ständig, sie abzulecken.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "VsuzH",
+      "relationship": "party",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:41:33.782Z",
+      "updatedAt": "2026-10-18T04:41:33.782Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:31.940Z"
+  "lastUpdated": "2026-10-18T04:41:33.782Z"
 }
