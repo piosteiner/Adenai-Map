@@ -45,6 +45,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_2339656f5f",
+      "name": "Die Tanzenden Couatl",
+      "aliases": [],
+      "category": "Theatergruppe",
+      "description": "Eine Theatergruppe aus [[Wesdalen]]. Ihre Mitglieder sind [[Greda]], [[Sylph]] und [[Zaphor]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T17:27:08.334Z",
+      "updatedAt": "2026-10-18T17:27:08.334Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_2dbbddd938",
       "name": "Duodrohne",
       "aliases": [
@@ -457,5 +470,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T16:12:42.240Z"
+  "lastUpdated": "2026-10-18T17:27:08.334Z"
 }
