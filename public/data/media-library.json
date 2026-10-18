@@ -3629,7 +3629,50 @@
       },
       "fileSize": 543382,
       "mimeType": "image/png"
+    },
+    "characters-ratq6cwo6cg8": {
+      "id": "characters-ratq6cwo6cg8",
+      "category": "characters",
+      "title": "Bulan",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/670825307041361976/",
+      "tags": [],
+      "uploadDate": "2026-10-18T12:24:43.307Z",
+      "sizes": {
+        "thumb": {
+          "filename": "ratq6cwo6cg8-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ratq6cwo6cg8-thumb.webp",
+          "width": 125,
+          "height": 150
+        },
+        "small": {
+          "filename": "ratq6cwo6cg8-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ratq6cwo6cg8-small.webp",
+          "width": 251,
+          "height": 300
+        },
+        "medium": {
+          "filename": "ratq6cwo6cg8-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ratq6cwo6cg8-medium.webp",
+          "width": 501,
+          "height": 600
+        },
+        "large": {
+          "filename": "ratq6cwo6cg8-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ratq6cwo6cg8-large.webp",
+          "width": 736,
+          "height": 881
+        },
+        "original": {
+          "filename": "ratq6cwo6cg8-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ratq6cwo6cg8-large.webp",
+          "width": 736,
+          "height": 881
+        }
+      },
+      "fileSize": 58572,
+      "mimeType": "image/webp"
     }
   },
-  "lastUpdated": "2026-10-18T12:21:03.408Z"
+  "lastUpdated": "2026-10-18T12:24:43.311Z"
 }
