@@ -18667,7 +18667,50 @@
       "fileSize": 112044,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-18T17:20:50.452Z"
+    },
+    "characters-68r5ycf7hj0u": {
+      "id": "characters-68r5ycf7hj0u",
+      "category": "characters",
+      "title": "Zaphor",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/296604325465667276/",
+      "tags": [],
+      "uploadDate": "2026-10-18T17:24:18.723Z",
+      "sizes": {
+        "thumb": {
+          "filename": "68r5ycf7hj0u-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/68r5ycf7hj0u-thumb.webp",
+          "width": 105,
+          "height": 150
+        },
+        "small": {
+          "filename": "68r5ycf7hj0u-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/68r5ycf7hj0u-small.webp",
+          "width": 210,
+          "height": 300
+        },
+        "medium": {
+          "filename": "68r5ycf7hj0u-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/68r5ycf7hj0u-medium.webp",
+          "width": 420,
+          "height": 600
+        },
+        "large": {
+          "filename": "68r5ycf7hj0u-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/68r5ycf7hj0u-large.webp",
+          "width": 840,
+          "height": 1200
+        },
+        "original": {
+          "filename": "68r5ycf7hj0u-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/68r5ycf7hj0u-original.webp",
+          "width": 1200,
+          "height": 1715
+        }
+      },
+      "fileSize": 222068,
+      "mimeType": "image/webp"
     }
   },
-  "lastUpdated": "2026-10-18T17:20:50.452Z"
+  "lastUpdated": "2026-10-18T17:24:18.730Z"
 }
