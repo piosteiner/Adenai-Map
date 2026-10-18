@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "933aa9025d83ebbeb1794017883663bd478b217d",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2026-10-18T05:24:49.036Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T05:24:49.036Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Bootsfahrt auf dem Valanui - III entry (5663-07-23)"
+    },
+    {
       "commitSha": "54a40f9c05aaf1e946e3947c864818c6fb50469c",
       "action": "update",
       "type": "character",
@@ -1484,5 +1497,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T05:24:46.837Z"
+  "lastUpdated": "2026-10-18T05:24:49.036Z"
 }
