@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "f5eee7d10f388b14dfc525de1d504d25915241af",
+      "action": "create",
+      "type": "character",
+      "itemName": "Asulana",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:43:32.383Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:43:32.383Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Asulana (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "5710ec7cf25074ca16a8e5d016f2b39f02c8fb9d",
       "action": "create",
       "type": "character",
@@ -1380,5 +1393,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:30.302Z"
+  "lastUpdated": "2026-10-18T04:43:32.383Z"
 }
