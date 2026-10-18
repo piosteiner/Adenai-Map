@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "bcf64df67233621fe669ba3e73790c251b05ed2e",
+      "action": "create",
+      "type": "location",
+      "itemName": "Upeto Küste",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:16:15.000Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:16:15.000Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create location: Upeto Küste (by gm) - Initial location creation"
+    },
+    {
       "commitSha": "f5fd20b354a1225799749f7e2421d325a9cd4341",
       "action": "create",
       "type": "location",
@@ -496,5 +509,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:16:12.976Z"
+  "lastUpdated": "2026-10-18T04:16:15.000Z"
 }
