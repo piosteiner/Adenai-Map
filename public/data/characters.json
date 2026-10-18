@@ -1203,10 +1203,10 @@
       ],
       "description": "",
       "images": [
-        "https://adenai-admin.piogino.ch/media/yt0ky5hs5rg7-small.webp",
-        "https://adenai-admin.piogino.ch/media/52lnf3dpdv5c-small.webp"
+        "https://adenai-admin.piogino.ch/media/52lnf3dpdv5c-small.webp",
+        "https://adenai-admin.piogino.ch/media/yt0ky5hs5rg7-small.webp"
       ],
-      "image": "https://adenai-admin.piogino.ch/media/yt0ky5hs5rg7-small.webp",
+      "image": "https://adenai-admin.piogino.ch/media/52lnf3dpdv5c-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
@@ -1225,7 +1225,7 @@
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2025-08-29T20:24:46.436Z",
-      "updatedAt": "2026-10-18T17:02:07.455Z"
+      "updatedAt": "2026-10-18T17:02:10.347Z"
     },
     {
       "id": "dina_eisfeld",
@@ -4067,5 +4067,5 @@
       "updatedAt": "2026-10-18T17:01:48.879Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:02:07.455Z"
+  "lastUpdated": "2026-10-18T17:02:10.347Z"
 }
