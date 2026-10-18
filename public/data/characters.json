@@ -3163,7 +3163,39 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:20.159Z",
       "updatedAt": "2026-10-18T04:42:20.159Z"
+    },
+    {
+      "id": "br_nhild",
+      "name": "Brünhild",
+      "title": "Brünhild Brunhilde, Goliath, Balinor-Priesterin",
+      "placeOfOrigin": "Toftgard",
+      "coordinates": [
+        1392,
+        1083
+      ],
+      "description": "Kahle Goliath-Frau und Heilerin in [[Toftgard]]. Nahm [[Ellas]] in Pflege und berichtete von eigentümlichen Kreaturen in Stadtnähe.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:21.953Z",
+      "updatedAt": "2026-10-18T04:42:21.953Z",
+      "currentLocation": {
+        "location": "Toftgard",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          1392,
+          1083
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:20.159Z"
+  "lastUpdated": "2026-10-18T04:42:21.953Z"
 }
