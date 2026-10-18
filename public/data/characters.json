@@ -3839,7 +3839,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:43:19.889Z",
       "updatedAt": "2026-10-18T04:43:19.889Z"
+    },
+    {
+      "id": "piper",
+      "name": "Piper",
+      "title": "Piper Schlopp, Workaholic",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Mitarbeiterin in Griswolds Forschungsanlage; [[Ally]] stahl ihre Sicherheitskarte, [[Tasbor]] gab sich als sie aus (siehe [[Taspipor]]). Soll an der Diadem-Party einen Vortrag halten.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:22.109Z",
+      "updatedAt": "2026-10-18T04:43:22.109Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:19.889Z"
+  "lastUpdated": "2026-10-18T04:43:22.109Z"
 }
