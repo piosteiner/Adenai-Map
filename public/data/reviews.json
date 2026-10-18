@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "3d7520532ee2afc178c1d011a6a01375c806b9db",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lulloq Doro",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:45:47.582Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:45:47.582Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: lulloq_doro (by gm) - changed relationship to suspicious"
+    },
+    {
       "commitSha": "6da71d97467202d1722e4fafe9af22bee19c7fb0",
       "action": "create",
       "type": "character",
@@ -1913,5 +1926,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:44:10.137Z"
+  "lastUpdated": "2026-10-18T16:45:47.582Z"
 }
