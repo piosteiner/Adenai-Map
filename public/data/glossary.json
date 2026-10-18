@@ -149,6 +149,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_be45afdbb6",
+      "name": "Krabbelkönig",
+      "aliases": [],
+      "category": "Wesen",
+      "description": "Ein Monster in den Tiefen der Erde, gegen das [[Moradin]] mit [[Rikka Brenner]]s Speer kämpfte.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:19.892Z",
+      "updatedAt": "2026-10-18T04:41:19.892Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_651307dfa1",
       "name": "Kugel von Zurag Tar",
       "aliases": [
@@ -331,5 +344,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:19.012Z"
+  "lastUpdated": "2026-10-18T04:41:19.892Z"
 }
