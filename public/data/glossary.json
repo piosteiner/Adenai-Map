@@ -48,6 +48,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_89c2d95a20",
+      "name": "Fliegender Teppich",
+      "aliases": [],
+      "category": "Gegenstand",
+      "description": "Hauptpreis im Glücksspiel der Versunkenen Schatztruhe in [[Basapo]], den [[Ally]] ersteigerte, weil niemand mitbot. Seither das Fluggerät der [[VsuzH]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:08.324Z",
+      "updatedAt": "2026-10-18T04:41:08.324Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_651307dfa1",
       "name": "Kugel von Zurag Tar",
       "aliases": [
@@ -163,5 +176,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:07.499Z"
+  "lastUpdated": "2026-10-18T04:41:08.324Z"
 }
