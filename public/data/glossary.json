@@ -61,6 +61,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_4d242b93c6",
+      "name": "Fulgurkäfer",
+      "aliases": [],
+      "category": "Gegenstand",
+      "description": "Ein Käfer, der mit einem Elektroschock Tote ins Leben zurückholt und dabei verschwindet. So retteten [[Abu]] [[Tasbor]] und [[Luna]] [[Naos]]. Benannt nach dem Drachen [[Fulgur]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:09.383Z",
+      "updatedAt": "2026-10-18T04:41:09.383Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_651307dfa1",
       "name": "Kugel von Zurag Tar",
       "aliases": [
@@ -176,5 +189,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:08.324Z"
+  "lastUpdated": "2026-10-18T04:41:09.383Z"
 }
