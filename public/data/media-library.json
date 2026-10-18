@@ -4926,7 +4926,50 @@
       },
       "fileSize": 131417,
       "mimeType": "image/jpeg"
+    },
+    "characters-gorw9003jana": {
+      "id": "characters-gorw9003jana",
+      "category": "characters",
+      "title": "54dc5e0be483e62b9ec47393d9c98cf2",
+      "caption": "",
+      "credits": "https://pin.it/2XqnAG7ke",
+      "tags": [],
+      "uploadDate": "2026-10-18T12:51:57.273Z",
+      "sizes": {
+        "thumb": {
+          "filename": "gorw9003jana-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gorw9003jana-thumb.webp",
+          "width": 91,
+          "height": 150
+        },
+        "small": {
+          "filename": "gorw9003jana-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gorw9003jana-small.webp",
+          "width": 182,
+          "height": 300
+        },
+        "medium": {
+          "filename": "gorw9003jana-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gorw9003jana-medium.webp",
+          "width": 365,
+          "height": 600
+        },
+        "large": {
+          "filename": "gorw9003jana-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gorw9003jana-large.webp",
+          "width": 496,
+          "height": 816
+        },
+        "original": {
+          "filename": "gorw9003jana-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gorw9003jana-large.webp",
+          "width": 496,
+          "height": 816
+        }
+      },
+      "fileSize": 65118,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T12:51:34.281Z"
+  "lastUpdated": "2026-10-18T12:51:57.274Z"
 }
