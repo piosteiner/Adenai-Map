@@ -3245,7 +3245,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:25.703Z",
       "updatedAt": "2026-10-18T04:42:25.703Z"
+    },
+    {
+      "id": "migo",
+      "name": "Migo",
+      "title": "Zauberer, Arena-Gegner",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Top-ausgebildeter Einzelgänger im Team, gegen das die [[VsuzH]] in der Arena von [[Toftgard]] antraten. Interessiert sich sehr für [[Abu]] und brachte ihr Gift of Gab bei.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:28.054Z",
+      "updatedAt": "2026-10-18T04:42:28.054Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:25.703Z"
+  "lastUpdated": "2026-10-18T04:42:28.054Z"
 }
