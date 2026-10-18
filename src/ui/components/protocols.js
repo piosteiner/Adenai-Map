@@ -106,6 +106,7 @@ class MapProtocols {
             <header class="pp-head">
                 <strong>📜 Protokolle</strong>
                 <span class="pp-status" hidden></span>
+                <button type="button" class="pp-toc" title="Sitzungen" aria-label="Liste der Sitzungen" hidden>☰</button>
                 <input type="search" class="pp-search" placeholder="Suchen…" aria-label="Protokolle durchsuchen" title="Enter: nächster Treffer · Umschalt+Enter: vorheriger" hidden>
                 <span class="pp-find-count" hidden></span>
                 <button type="button" class="pp-name" title="Dein Name beim gemeinsamen Schreiben" hidden></button>
@@ -126,6 +127,9 @@ class MapProtocols {
         this.newBtn.addEventListener('click', () => this.newSession());
         this.panel.querySelector('.pp-lock').addEventListener('click', () => this.lockDevice());
         this.nameBtn.addEventListener('click', () => this.askName());
+        // narrow screens: the list of sessions is a drawer over the text
+        this.tocBtn = this.panel.querySelector('.pp-toc');
+        this.tocBtn.addEventListener('click', () => this.panel.classList.toggle('toc-open'));
         this.search.addEventListener('input', () => { this.filter(); clearTimeout(this.findTimer); this.findTimer = setTimeout(() => this.find(), 200); });
         this.search.addEventListener('keydown', (e) => {
             if (e.key !== 'Enter') return;
@@ -142,7 +146,7 @@ class MapProtocols {
 
     toolbar(on) {
         if (!on) this.panel.querySelector('.pp-find-count').hidden = true;
-        ['.pp-search', '.pp-new', '.pp-lock', '.pp-name', '.pp-status'].forEach((s) => { this.panel.querySelector(s).hidden = !on; });
+        ['.pp-search', '.pp-new', '.pp-lock', '.pp-name', '.pp-status', '.pp-toc'].forEach((s) => { this.panel.querySelector(s).hidden = !on; });
         this.drawName();
     }
 
@@ -440,7 +444,7 @@ class MapProtocols {
                 title.prepend(Object.assign(this.el('span', 'pp-item-draft', '● '), { title: raw.published === false ? 'Entwurf – noch nicht gespeichert' : 'Ungespeicherte Änderungen' }));
             }
             b.append(this.el('strong', '', `${s.number ?? '?'}`), title, this.el('span', 'pp-item-meta', this.date(s.date)));
-            b.addEventListener('click', () => this.scrollTo(s.id));
+            b.addEventListener('click', () => { this.panel.classList.remove('toc-open'); this.scrollTo(s.id); });
             return b;
         }));
         if (this.activeId) this.setActive(this.activeId);
@@ -450,7 +454,28 @@ class MapProtocols {
     setActive(id) {
         this.activeId = id;
         this.listEl?.querySelectorAll('.pp-item').forEach((b) => b.classList.toggle('active', b.dataset.id === id));
-        this.listEl?.querySelector('.pp-item.active')?.scrollIntoView({ block: 'nearest' });
+        const item = this.listEl?.querySelector('.pp-item.active');
+        if (item) {
+            // only the list scrolls (scrollIntoView would also shift the panel and the page)
+            const l = this.listEl;
+            if (item.offsetTop < l.scrollTop) l.scrollTop = item.offsetTop - 4;
+            else if (item.offsetTop + item.offsetHeight > l.scrollTop + l.clientHeight) l.scrollTop = item.offsetTop + item.offsetHeight - l.clientHeight + 4;
+        }
+        const s = this.sessions.find((x) => x.id === id);
+        if (this.tocBtn && s) this.tocBtn.textContent = `☰ ${this.shown(s).number ?? ''}`;
+    }
+
+    // Scrolls the text column to el — and nothing else: Element.scrollIntoView also scrolls every scrollable ancestor,
+    // which on a narrow screen shifted the whole panel sideways and cut off its left edge
+    scrollWithin(el, { block = 'start', smooth = true } = {}) {
+        const view = this.view;
+        if (!view || !el) return;
+        const top = el.getBoundingClientRect().top - view.getBoundingClientRect().top + view.scrollTop;
+        const target = block === 'center' ? top - (view.clientHeight - el.getBoundingClientRect().height) / 2 : top - 8;
+        // far jumps (another session) at once; smooth only nearby, where the movement helps to follow
+        const far = Math.abs(target - view.scrollTop) > view.clientHeight * 3;
+        view.scrollTo({ top: Math.max(0, target), behavior: smooth && !far ? 'smooth' : 'instant' }); // 'auto' would follow the CSS scroll-behavior: smooth
+        this.panel.scrollLeft = 0;
     }
 
     scrollTo(id, smooth = true, highlight = null) {
@@ -461,12 +486,12 @@ class MapProtocols {
             if (sec.el.hidden) { this.search.value = ''; this.filter(); this.find(); }
             const first = this.mark(sec.el, highlight);
             if (first) {
-                first.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' });
+                this.scrollWithin(first, { block: 'center', smooth });
                 this.setActive(id);
                 return;
             }
         }
-        sec.el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+        this.scrollWithin(sec.el, { smooth });
         this.setActive(id);
     }
 
@@ -565,7 +590,7 @@ class MapProtocols {
         this.findIndex = (this.findIndex + dir + this.findMarks.length) % this.findMarks.length;
         const m = this.findMarks[this.findIndex];
         m.classList.add('current');
-        m.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        this.scrollWithin(m, { block: 'center' });
         this.panel.querySelector('.pp-find-count').textContent = `${this.findIndex + 1} / ${this.findMarks.length}`;
         const id = m.closest('.pp-session')?.dataset.id;
         if (id) this.setActive(id);
@@ -659,7 +684,7 @@ class MapProtocols {
         form.querySelector('.pp-discard').addEventListener('click', () => this.discard(id));
         this.drawPeople(id);
         this.drawEditState(id);
-        sec.el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        this.scrollWithin(sec.el);
     }
 
     // in the editor: does the shared draft differ from the published version?

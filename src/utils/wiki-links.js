@@ -105,7 +105,7 @@
         slot.hidden = false;
     }
 
-    const fillAll = (root) => root.querySelectorAll?.('.backlinks:not([data-filled])').forEach(fill);
+    const fillAll = (root) => root?.querySelectorAll?.('.backlinks:not([data-filled])').forEach(fill);
     new MutationObserver((records) => {
         for (const r of records) for (const n of r.addedNodes) if (n.nodeType === 1) fillAll(n.matches?.('.backlinks') ? n.parentNode : n);
     }).observe(document.documentElement, { childList: true, subtree: true });

@@ -1,0 +1,113 @@
+/* mobile.css - Phones (≤ 800 px), tablets (801–1100 px) and touch screens in general.
+   Loaded after the component styles. The panels (protocols, glossary, characters) fill the screen on phones; on touch
+   screens buttons and list rows are large enough to hit with a finger; things that only make sense with a mouse
+   (coordinates under the pointer, the build info) are left out. */
+
+/* ---------- everywhere: content that can't push a panel wider than itself ---------- */
+.pp-body { grid-template-columns: minmax(0, 210px) minmax(0, 1fr); }
+.pp-list { position: relative; }
+.pp-view, .pp-text, .gl-pending-note { overflow-wrap: break-word; }
+.pp-head { flex-wrap: wrap; row-gap: 6px; }
+.pp-search { min-width: 0; flex: 0 1 180px; }
+.pp-toc, .gl-back, .character-panel-button { display: none; }
+.panel-anchored-popup .popup-title { display: none; } /* the header shows the name already */
+
+/* ---------- touch: finger-sized targets ---------- */
+@media (pointer: coarse) {
+  .map-panel-button, .timeline-open { min-height: 40px; padding: 0 14px; }
+  .pp-head button, .pp-actions button, .pp-lockform button, .pp-edit, .gl-create button, .gl-edit button { min-height: 40px; }
+  .pp-search, .pp-form input, .gl-category, #searchBox { min-height: 40px; font-size: 16px; } /* 16 px: no zoom-in on iOS */
+  .pp-item { padding: 9px 8px; }
+  .timeline-play, .timeline-close { width: 40px; height: 40px; }
+  .panel-popup-close, .leaflet-container a.leaflet-popup-close-button { width: 36px; height: 36px; font-size: 22px; line-height: 36px; }
+  .dropdown-item { min-height: 44px; }
+  #coords { display: none; } /* shows the coordinates under the mouse pointer */
+  .rich-text .wiki-link, .backlinks a { padding: 2px 0; }
+}
+
+/* larger screens: the theme button beside the character panel's strip, not on it */
+@media (min-width: 801px) { #themeToggle { right: 40px !important; } }
+/* the build info is for the developer: not on tablets either */
+@media (max-width: 1100px), (pointer: coarse) { #version-info { display: none; } }
+
+/* ---------- tablets ---------- */
+@media (min-width: 801px) and (max-width: 1100px) {
+  .protocol-panel:not(.glossary-panel) { width: calc(100vw - 80px); }
+  .glossary-panel { width: min(560px, calc(100vw - 60px)); }
+  .pp-body { grid-template-columns: minmax(0, 190px) minmax(0, 1fr); }
+}
+
+/* ---------- phones ---------- */
+@media (max-width: 800px) {
+  #version-info { display: none; }
+
+  /* the panels fill the screen (dvh: without the browser's address bar) */
+  .protocol-panel, .glossary-panel {
+    inset: 0; width: auto !important; max-width: none; min-width: 0; height: 100dvh; border-radius: 0; z-index: 2000;
+  }
+  .pp-head { padding: 8px 10px; gap: 6px; }
+  .pp-head strong { font-size: 16px; order: 1; }
+  .pp-head .pp-status { order: 2; font-size: 11px; }
+  .pp-head .pp-toc { order: 3; }
+  .pp-head .pp-close { order: 4; }
+  .pp-head::after { content: ""; order: 5; flex-basis: 100%; } /* line break: search and buttons below */
+  .pp-head .pp-search { order: 6; flex: 1 1 120px; width: auto; }
+  .pp-head .pp-name { order: 7; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pp-head .pp-new { order: 8; }
+  .pp-head .pp-lock { order: 9; }
+  .pp-head .pp-find-count { order: 10; }
+  .glossary-panel .pp-head .gl-category { order: 6; flex: 0 1 140px; }
+  .pp-toc:not([hidden]) { display: inline-flex; align-items: center; gap: 4px; font-weight: 700; }
+
+  /* the session list is a drawer over the text (☰) */
+  .protocol-panel:not(.glossary-panel) .pp-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); position: relative; }
+  .protocol-panel:not(.glossary-panel) .pp-list { display: none; }
+  .protocol-panel.toc-open .pp-list {
+    display: grid; position: absolute; inset: 0; z-index: 3; max-height: none; border: 0;
+    background: var(--card-bg, #fbf7ee); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+  .protocol-panel .pp-view { padding: 12px 14px 60px; }
+  .pp-read-head h2 { font-size: 18px; }
+  .pp-text { font-size: 15.5px; }
+  .pp-session.editing { margin: 0 -10px 24px; padding: 10px; }
+  .pp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pp-form-head { flex-wrap: wrap; }
+  .pp-form textarea, .protocol-panel .cm-editor .cm-scroller { min-height: 50vh; }
+  .pp-actions { justify-content: stretch; }
+  .pp-actions .pp-publish { flex: 1 1 100%; }
+  .pp-actions .pp-note { flex-basis: 100%; }
+
+  /* glossary: the list, or one entry with a way back */
+  .glossary-panel .pp-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); }
+  .glossary-panel .pp-list { max-height: none; border: 0; }
+  .glossary-panel.gl-detail .pp-list, .glossary-panel:not(.gl-detail) .pp-view { display: none; }
+  .gl-back { display: inline-flex; justify-self: start; margin-bottom: 6px; min-height: 36px; padding: 0 12px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--card-bg); color: inherit; font: inherit; cursor: pointer; }
+
+  /* the character panel: no strip at the edge; "👥 Charaktere" opens it over the whole screen */
+  .character-panel-button { display: inline-flex; align-items: center; }
+  .character-panel:not(.mobile-open) { display: none; }
+  .character-panel.mobile-open { width: 100vw !important; max-width: none; height: 100dvh; z-index: 2000; }
+  .character-panel.mobile-open .resize-handle { display: none; }
+  .character-panel.mobile-open .panel-header { display: flex; align-items: center; justify-content: space-between; }
+  .panel-close-mobile { display: none; }
+  .character-panel.mobile-open .panel-close-mobile { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; background: transparent; color: inherit; font-size: 26px; cursor: pointer; }
+
+  /* popups never wider than the screen */
+  .leaflet-popup-content-wrapper { max-width: calc(100vw - 24px); }
+  .leaflet-popup-content { max-width: calc(100vw - 56px); width: auto !important; max-height: calc(100dvh - 240px); overflow-y: auto; }
+  .panel-anchored-popup {
+    left: 10px !important; right: 10px !important; top: 60px !important; width: auto !important; max-width: none !important; transform: none !important;
+    max-height: calc(100dvh - 80px); overflow: auto;
+  }
+
+  /* search results above the panel buttons, and not taller than the screen */
+  #search-container { z-index: 1002; right: 70px; width: auto; }
+  #resultsDropdown { max-height: calc(100dvh - 90px); }
+  #map-panel-buttons { flex-wrap: wrap; right: 10px; gap: 6px; }
+  .map-panel-button { padding: 0 11px; font-size: 14px; }
+
+  /* the movement marker switch smaller and out of the middle of the map */
+  #map-controls { top: auto !important; bottom: 70px; transform: scale(0.8); transform-origin: bottom right; }
+
+  .gl-create { padding: 14px; }
+}

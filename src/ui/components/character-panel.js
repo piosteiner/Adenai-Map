@@ -83,6 +83,43 @@ class CharacterPanel {
         if (this.retractBtn) {
             this.retractBtn.addEventListener('click', () => {
                 this.collapsePanel();
+                this.panel.classList.remove('mobile-open');
+            });
+        }
+
+        // Touch screens have no hover: a tap on the collapsed strip — or its resize handle — opens the panel (tablets)
+        this.panel.addEventListener('click', (e) => {
+            if (this.panel.classList.contains('collapsed') && !e.target.closest('#retract-panel')) this.expandPanel();
+        });
+
+
+        // Phones: no strip; a button beside "Protokoll" opens the panel over the whole screen, and choosing a character
+        // closes it again to show the character on the map
+        const bar = document.getElementById('map-panel-buttons') || document.body.appendChild(Object.assign(document.createElement('div'), { id: 'map-panel-buttons' }));
+        {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'map-panel-button character-panel-button';
+            btn.textContent = '👥 Charaktere';
+            btn.addEventListener('click', () => {
+                const open = !this.panel.classList.contains('mobile-open');
+                this.panel.classList.toggle('mobile-open', open);
+                if (open) this.expandPanel(); else this.collapsePanel();
+            });
+            bar.appendChild(btn);
+            // and a way to close it again (the strip's hover/drag doesn't exist on phones)
+            const close = document.createElement('button');
+            close.type = 'button';
+            close.className = 'panel-close-mobile';
+            close.setAttribute('aria-label', 'Schliessen');
+            close.textContent = '×';
+            close.addEventListener('click', (e) => { e.stopPropagation(); this.panel.classList.remove('mobile-open'); this.collapsePanel(); });
+            this.panel.querySelector('.panel-header')?.appendChild(close);
+            this.panel.addEventListener('click', (e) => {
+                if (this.panel.classList.contains('mobile-open') && e.target.closest('.character-info')) {
+                    this.panel.classList.remove('mobile-open');
+                    this.collapsePanel();
+                }
             });
         }
 
@@ -142,10 +179,12 @@ class CharacterPanel {
         Logger.debug('🔧 MemoryUtils.addEventListener available:', typeof MemoryUtils?.addEventListener === 'function');
 
         let startX, startWidth;
+        let moved = false; // a tap (no movement) on the handle of the collapsed strip opens the panel — touch screens
 
         const startResize = (e) => {
             Logger.debug('🖱️ Resize started:', e);
             this.isResizing = true;
+            moved = false;
             startX = e.clientX || e.touches[0].clientX;
             startWidth = parseInt(document.defaultView.getComputedStyle(this.panel).width, 10);
             
@@ -165,6 +204,7 @@ class CharacterPanel {
             
             const clientX = e.clientX || e.touches[0].clientX;
             const diff = startX - clientX;
+            if (Math.abs(diff) > 4) moved = true;
             let newWidth = startWidth + diff;
             
             // Clamp width between min and max
@@ -184,7 +224,9 @@ class CharacterPanel {
             document.body.style.userSelect = '';
             
             // Auto-collapse or expand logic
-            if (this.currentWidth < this.collapseThreshold) {
+            if (!moved && this.panel.classList.contains('collapsed')) {
+                this.expandPanel();
+            } else if (this.currentWidth < this.collapseThreshold) {
                 this.collapsePanel();
             } else if (this.panel.classList.contains('collapsed') && this.currentWidth > this.expandThreshold) {
                 this.expandPanel();
@@ -301,7 +343,7 @@ class CharacterPanel {
                 <input type="text" 
                        id="character-search" 
                        class="character-search" 
-                       placeholder="🔍 Search characters..."
+                       placeholder="🔍 Charaktere suchen…"
                        oninput="window.characterPanel.handleSearch()">
             </div>
         `;

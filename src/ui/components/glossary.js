@@ -180,6 +180,8 @@ class MapGlossary {
         this.drawList();
         if (term) this.show(term);
         else this.view.replaceChildren(this.el('p', 'pp-note', 'Noch keine Begriffe.'));
+        // narrow screens show either the list or an entry: from the button, the list first
+        if (!name) this.panel.classList.remove('gl-detail');
     }
 
     close() {
@@ -209,8 +211,12 @@ class MapGlossary {
         this.current = t;
         this.editing = false;
         this.drawList();
+        this.panel.classList.add('gl-detail');
         const head = this.el('header', 'pp-read-head');
-        head.append(this.el('h2', '', t.name));
+        const back = this.el('button', 'gl-back', '← Alle Begriffe');
+        back.type = 'button';
+        back.addEventListener('click', () => this.panel.classList.remove('gl-detail'));
+        head.append(back, this.el('h2', '', t.name));
         const meta = t.pending
             ? t.kindLabel
             : [t.category, (t.aliases || []).length ? `auch: ${t.aliases.join(', ')}` : ''].filter(Boolean).join(' · ');

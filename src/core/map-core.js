@@ -110,6 +110,10 @@ class MapCore {
             updateToggleIcon(newTheme);
         });
     }    initializeMap() {
+        // phones: a popup moved into view keeps clear of the search and the panel buttons at the top
+        if (window.innerWidth <= 800 && window.L) {
+            L.Popup.prototype.options.maxWidth = Math.min(L.Popup.prototype.options.maxWidth || 300, window.innerWidth - 40);
+        }
         // Flip Y axis: move origin to bottom-left (Originally 0,0 was on top left)
         this.mapCRS = L.extend({}, L.CRS.Simple, {
             transformation: new L.Transformation(1, 0, -1, this.imageHeight)
@@ -125,6 +129,24 @@ class MapCore {
             wheelPxPerZoomLevel: 120, // Optional: slower scroll-based zoom
             zoomControl: false // Disable default top-left zoom control
         });
+
+        // Phones: an opened popup is moved below the search and the panel buttons (and above the bottom edge) — popups
+        // opened from a link or the search centre the map on the place first, which put tall popups off the top
+        if (window.innerWidth <= 800) {
+            const place = (e) => {
+                const el = e.popup.getElement();
+                if (!el) return;
+                const r = el.getBoundingClientRect();
+                const top = (document.getElementById('map-panel-buttons')?.getBoundingClientRect().bottom || 60) + 8;
+                const bottom = window.innerHeight - 12;
+                let dy = 0;
+                if (r.top < top) dy = r.top - top;
+                else if (r.bottom > bottom) dy = Math.min(r.bottom - bottom, r.top - top);
+                if (Math.abs(dy) > 2) this.map.panBy([0, dy], { animate: false });
+            };
+            // after the map has finished moving to the place (and Leaflet's own popup panning)
+            this.map.on('popupopen', (e) => setTimeout(() => place(e), 450));
+        }
 
         // Privacy statement link, next to the Leaflet credit in the bottom-right corner
         this.map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a> · <a href="datenschutz.html">Datenschutz</a>');

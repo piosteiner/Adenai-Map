@@ -375,8 +375,8 @@ class CharacterSystem {
             return;
         }
 
-        // Create popup content
-        const popupContent = this.createCharacterPopupContent(character);
+        // the same content as the map popup of a character with a location (German labels, links, gallery)
+        const popupContent = this.createCharacterPopup(character);
 
         // Create popup element
         const popup = document.createElement('div');
