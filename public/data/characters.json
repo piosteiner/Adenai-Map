@@ -2859,7 +2859,39 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:41:53.974Z",
       "updatedAt": "2026-10-18T04:41:53.974Z"
+    },
+    {
+      "id": "minfilia",
+      "name": "Minfilia",
+      "title": "Shihos Mutter",
+      "placeOfOrigin": "Valaris",
+      "coordinates": [
+        1700,
+        1008
+      ],
+      "description": "Lebt in [[Valaris]]; [[Avery]] liess ihr durch [[Luna]] einen Brief bringen. Mutter der ermordeten [[Shiho]] und dankbar für Erinnerungsstücke an sie, etwa ihr Schiff, den [[Gelber Otter|Gelben Otter]].",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:41:56.061Z",
+      "updatedAt": "2026-10-18T04:41:56.061Z",
+      "currentLocation": {
+        "location": "Valaris",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          1700,
+          1008
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:53.974Z"
+  "lastUpdated": "2026-10-18T04:41:56.061Z"
 }
