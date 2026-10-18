@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "cd39d5a55f4de7671a9048bbb2d4c9f376a9fd7c",
+      "action": "update",
+      "type": "character",
+      "itemName": "Massimo",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:17:01.946Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:17:01.946Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: massimo (by gm) - added image"
+    },
+    {
       "commitSha": "e4c923c4a1fd3b866d529a86b1a09b46819efb2e",
       "action": "update",
       "type": "character",
@@ -1757,5 +1770,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:16:23.668Z"
+  "lastUpdated": "2026-10-18T16:17:01.946Z"
 }
