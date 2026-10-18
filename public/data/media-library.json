@@ -18623,7 +18623,50 @@
       "fileSize": 122304,
       "mimeType": "image/webp",
       "lastModified": "2026-10-18T17:06:08.823Z"
+    },
+    "characters-6r8m9at8gobd": {
+      "id": "characters-6r8m9at8gobd",
+      "category": "characters",
+      "title": "Silph",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/670825307040884236/",
+      "tags": [],
+      "uploadDate": "2026-10-18T17:20:41.702Z",
+      "sizes": {
+        "thumb": {
+          "filename": "6r8m9at8gobd-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/6r8m9at8gobd-thumb.webp",
+          "width": 117,
+          "height": 150
+        },
+        "small": {
+          "filename": "6r8m9at8gobd-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/6r8m9at8gobd-small.webp",
+          "width": 233,
+          "height": 300
+        },
+        "medium": {
+          "filename": "6r8m9at8gobd-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/6r8m9at8gobd-medium.webp",
+          "width": 467,
+          "height": 600
+        },
+        "large": {
+          "filename": "6r8m9at8gobd-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/6r8m9at8gobd-large.webp",
+          "width": 736,
+          "height": 946
+        },
+        "original": {
+          "filename": "6r8m9at8gobd-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/6r8m9at8gobd-large.webp",
+          "width": 736,
+          "height": 946
+        }
+      },
+      "fileSize": 112044,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T17:06:08.823Z"
+  "lastUpdated": "2026-10-18T17:20:41.706Z"
 }
