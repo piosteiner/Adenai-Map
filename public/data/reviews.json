@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6a84ba48e7bf0bf8319ce348d3e3397fc366b3f5",
+      "action": "update",
+      "type": "character",
+      "itemName": "Erissa Bulan",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:47:00.179Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:47:00.179Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: bulan (by gm) - updated name, updated title, added image - links updated in 1 character(s)"
+    },
+    {
       "commitSha": "2babbd46fe803ba1f590c92ae820e161688a0ee3",
       "action": "update",
       "type": "character",
@@ -1952,5 +1965,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:46:09.505Z"
+  "lastUpdated": "2026-10-18T16:47:00.179Z"
 }
