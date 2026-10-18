@@ -4098,8 +4098,11 @@
       "id": "zaphor",
       "name": "Zaphor",
       "title": "",
-      "placeOfOrigin": "",
-      "coordinates": null,
+      "placeOfOrigin": "Makir",
+      "coordinates": [
+        782,
+        443
+      ],
       "description": "In einer Theatergruppe namens [[Die Tanzenden Couatl]] in [[Wesdalen]] mit [[Greda]] und [[Sylph]].",
       "images": [
         "https://adenai-admin.piogino.ch/media/68r5ycf7hj0u-small.webp"
@@ -4111,10 +4114,20 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "currentLocation": null,
+      "currentLocation": {
+        "location": "Makir",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          782,
+          443
+        ],
+        "notes": "Location set based on place of origin"
+      },
       "createdAt": "2026-10-18T17:25:11.344Z",
-      "updatedAt": "2026-10-18T17:29:35.717Z"
+      "updatedAt": "2026-10-18T17:33:56.592Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:29:35.717Z"
+  "lastUpdated": "2026-10-18T17:33:56.592Z"
 }
