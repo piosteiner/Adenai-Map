@@ -7513,7 +7513,50 @@
       "fileSize": 177935,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-18T13:30:25.458Z"
+    },
+    "general-7sfut8aqsl62": {
+      "id": "general-7sfut8aqsl62",
+      "category": "general",
+      "title": "dravak svaja",
+      "caption": "",
+      "credits": "AI modified with GPT-5",
+      "tags": [],
+      "uploadDate": "2026-10-18T13:31:11.787Z",
+      "sizes": {
+        "thumb": {
+          "filename": "7sfut8aqsl62-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7sfut8aqsl62-thumb.webp",
+          "width": 100,
+          "height": 150
+        },
+        "small": {
+          "filename": "7sfut8aqsl62-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7sfut8aqsl62-small.webp",
+          "width": 200,
+          "height": 300
+        },
+        "medium": {
+          "filename": "7sfut8aqsl62-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7sfut8aqsl62-medium.webp",
+          "width": 400,
+          "height": 600
+        },
+        "large": {
+          "filename": "7sfut8aqsl62-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7sfut8aqsl62-large.webp",
+          "width": 800,
+          "height": 1200
+        },
+        "original": {
+          "filename": "7sfut8aqsl62-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7sfut8aqsl62-original.webp",
+          "width": 1024,
+          "height": 1536
+        }
+      },
+      "fileSize": 2713729,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-18T13:30:25.458Z"
+  "lastUpdated": "2026-10-18T13:31:11.790Z"
 }
