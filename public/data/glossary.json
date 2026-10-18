@@ -49,11 +49,11 @@
       "name": "Die Tanzenden Couatl",
       "aliases": [],
       "category": "Theatergruppe",
-      "description": "Eine Theatergruppe aus [[Wesdalen]]. Ihre Mitglieder sind [[Greda]], [[Sylph]] und [[Zaphor]].",
+      "description": "Eine Theatergruppe aus [[Wesdalen]]. Ihre Mitglieder sind [[Greda]], [[Sylph]] und [[Zaphor]].\n\nIhr Name bezieht sich auf die mystische Kreatur [Couatl](https://www.dndbeyond.com/monsters/5194953-couatl) die als Propheten und Beschützer von göttlichen Geheimnissen gelten. Die Couatel stellen sicher, dass sich das Schicksal so abspielt wie es vorherbestimmt ist.",
       "images": [],
       "image": "",
       "createdAt": "2026-10-18T17:27:08.334Z",
-      "updatedAt": "2026-10-18T17:27:08.334Z",
+      "updatedAt": "2026-10-18T17:28:37.784Z",
       "createdBy": "gm",
       "updatedBy": "gm"
     },
@@ -470,5 +470,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T17:27:08.334Z"
+  "lastUpdated": "2026-10-18T17:28:37.784Z"
 }
