@@ -18272,7 +18272,50 @@
       },
       "fileSize": 195826,
       "mimeType": "image/webp"
+    },
+    "characters-jezjxkc09ypb": {
+      "id": "characters-jezjxkc09ypb",
+      "category": "characters",
+      "title": "Jak-gur",
+      "caption": "",
+      "credits": "https://pt.pinterest.com/pin/196399233746382213/",
+      "tags": [],
+      "uploadDate": "2026-10-18T16:22:08.892Z",
+      "sizes": {
+        "thumb": {
+          "filename": "jezjxkc09ypb-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jezjxkc09ypb-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "jezjxkc09ypb-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jezjxkc09ypb-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "jezjxkc09ypb-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jezjxkc09ypb-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "jezjxkc09ypb-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jezjxkc09ypb-large.webp",
+          "width": 736,
+          "height": 736
+        },
+        "original": {
+          "filename": "jezjxkc09ypb-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jezjxkc09ypb-large.webp",
+          "width": 736,
+          "height": 736
+        }
+      },
+      "fileSize": 41478,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T16:21:36.118Z"
+  "lastUpdated": "2026-10-18T16:22:08.897Z"
 }
