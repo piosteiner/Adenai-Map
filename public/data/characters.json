@@ -3399,7 +3399,39 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "sven",
+      "name": "Sven",
+      "title": "Gruppenführer in Akónetchie",
+      "placeOfOrigin": "Akónetchie",
+      "coordinates": [
+        1869,
+        556
+      ],
+      "description": "Führte die [[VsuzH]] beim Suchtrupp für [[Azo]] in [[Akónetchie]] und erklärte die kultische Bedeutung des Gartens um den [[Mpako]].",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:43.704Z",
+      "updatedAt": "2026-10-18T04:42:43.704Z",
+      "currentLocation": {
+        "location": "Akónetchie",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          1869,
+          556
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:41.513Z"
+  "lastUpdated": "2026-10-18T04:42:43.704Z"
 }
