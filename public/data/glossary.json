@@ -45,6 +45,22 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_2dbbddd938",
+      "name": "Duodrohne",
+      "aliases": [
+        "Duodrone",
+        "Duodrohnen"
+      ],
+      "category": "Wesen",
+      "description": "Kleine mechanische Drohnen, wie [[Fitcher]] sie hat – [[Ally]]s [[Blechdose]] ist eine. In Griswolds Anlage schlagen sie Alarm.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:13.010Z",
+      "updatedAt": "2026-10-18T04:41:13.010Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_2a66dedf92",
       "name": "Familie Kleulenberg",
       "aliases": [
@@ -233,5 +249,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:12.121Z"
+  "lastUpdated": "2026-10-18T04:41:13.010Z"
 }
