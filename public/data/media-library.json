@@ -17969,7 +17969,50 @@
       },
       "fileSize": 2456447,
       "mimeType": "image/png"
+    },
+    "characters-7nk08yjj7bo1": {
+      "id": "characters-7nk08yjj7bo1",
+      "category": "characters",
+      "title": "nuri",
+      "caption": "",
+      "credits": "wizards of the coast",
+      "tags": [],
+      "uploadDate": "2026-10-18T16:06:17.082Z",
+      "sizes": {
+        "thumb": {
+          "filename": "7nk08yjj7bo1-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7nk08yjj7bo1-thumb.webp",
+          "width": 48,
+          "height": 150
+        },
+        "small": {
+          "filename": "7nk08yjj7bo1-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7nk08yjj7bo1-small.webp",
+          "width": 97,
+          "height": 300
+        },
+        "medium": {
+          "filename": "7nk08yjj7bo1-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7nk08yjj7bo1-medium.webp",
+          "width": 194,
+          "height": 600
+        },
+        "large": {
+          "filename": "7nk08yjj7bo1-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7nk08yjj7bo1-large.webp",
+          "width": 323,
+          "height": 1000
+        },
+        "original": {
+          "filename": "7nk08yjj7bo1-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7nk08yjj7bo1-large.webp",
+          "width": 323,
+          "height": 1000
+        }
+      },
+      "fileSize": 61822,
+      "mimeType": "image/webp"
     }
   },
-  "lastUpdated": "2026-10-18T16:04:49.862Z"
+  "lastUpdated": "2026-10-18T16:06:17.088Z"
 }
