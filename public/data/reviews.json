@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "515d12294ee165aeb58eac54991bfce8ad242f96",
+      "action": "update",
+      "type": "character",
+      "itemName": "Zaphor",
+      "user": "gm",
+      "timestamp": "2026-10-18T17:33:57.750Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T17:33:57.750Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: zaphor (by gm) - added place of origin"
+    },
+    {
       "commitSha": "44a61ab95057be7262f3b143648b0e62403a221f",
       "action": "update",
       "type": "character",
@@ -2225,5 +2238,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T17:29:36.882Z"
+  "lastUpdated": "2026-10-18T17:33:57.751Z"
 }
