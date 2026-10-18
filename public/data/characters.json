@@ -3671,7 +3671,39 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:43:06.068Z",
       "updatedAt": "2026-10-18T04:43:06.068Z"
+    },
+    {
+      "id": "greda",
+      "name": "Greda",
+      "title": "Schauspieler:in",
+      "placeOfOrigin": "Wesdalen",
+      "coordinates": [
+        790,
+        769
+      ],
+      "description": "Getarnte:r Schauspieler:in im Theater von [[Wesdalen]], begeistert von den [[VsuzH]], die eine Gastrolle in der Vorführung übernahmen. Verurteilt den Krieg und fürchtet, dass Griswold etwas richtig Grosses plant.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:08.034Z",
+      "updatedAt": "2026-10-18T04:43:08.034Z",
+      "currentLocation": {
+        "location": "Wesdalen",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          790,
+          769
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:06.068Z"
+  "lastUpdated": "2026-10-18T04:43:08.034Z"
 }
