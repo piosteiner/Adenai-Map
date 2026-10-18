@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "7bf8aa283f75b7a1eb59ce2f567ae7d7cfb87960",
+      "action": "update",
+      "type": "character",
+      "itemName": "Jaćek Wandermann",
+      "user": "gm",
+      "timestamp": "2026-10-18T18:25:03.387Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T18:25:03.387Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: ja_ek_wandermann (by gm) - added image"
+    },
+    {
       "commitSha": "6a3fad84a6af5d72227538a2c6ca71801da68cf9",
       "action": "update",
       "type": "character",
@@ -2303,5 +2316,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T17:40:23.069Z"
+  "lastUpdated": "2026-10-18T18:25:03.387Z"
 }
