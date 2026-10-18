@@ -18056,7 +18056,50 @@
       "fileSize": 72669,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-18T16:08:35.715Z"
+    },
+    "characters-j64z3enp0z62": {
+      "id": "characters-j64z3enp0z62",
+      "category": "characters",
+      "title": "naos",
+      "caption": "",
+      "credits": "https://cz.pinterest.com/pin/878131627341458596/",
+      "tags": [],
+      "uploadDate": "2026-10-18T16:10:05.566Z",
+      "sizes": {
+        "thumb": {
+          "filename": "j64z3enp0z62-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j64z3enp0z62-thumb.webp",
+          "width": 137,
+          "height": 150
+        },
+        "small": {
+          "filename": "j64z3enp0z62-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j64z3enp0z62-small.webp",
+          "width": 273,
+          "height": 300
+        },
+        "medium": {
+          "filename": "j64z3enp0z62-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j64z3enp0z62-medium.webp",
+          "width": 546,
+          "height": 600
+        },
+        "large": {
+          "filename": "j64z3enp0z62-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j64z3enp0z62-large.webp",
+          "width": 640,
+          "height": 703
+        },
+        "original": {
+          "filename": "j64z3enp0z62-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j64z3enp0z62-large.webp",
+          "width": 640,
+          "height": 703
+        }
+      },
+      "fileSize": 48484,
+      "mimeType": "image/webp"
     }
   },
-  "lastUpdated": "2026-10-18T16:08:35.715Z"
+  "lastUpdated": "2026-10-18T16:10:05.573Z"
 }
