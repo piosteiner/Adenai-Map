@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "16637306604248f6cb95eb5ea6c4e79388e4f184",
+      "action": "update",
+      "type": "character",
+      "itemName": "Gilbert Rümpel",
+      "user": "gm",
+      "timestamp": "2026-10-18T17:06:32.584Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T17:06:32.584Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: gilbert_r_mpel (by gm) - added image"
+    },
+    {
       "commitSha": "bed69209cc647396c107cfba0eec57f1a20a9b74",
       "action": "update",
       "type": "character",
@@ -2069,5 +2082,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T17:04:10.572Z"
+  "lastUpdated": "2026-10-18T17:06:32.584Z"
 }
