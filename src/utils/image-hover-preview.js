@@ -170,7 +170,7 @@ class ImageHoverPreview {
                 border-radius: 8px;
                 box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
                 border: 3px solid var(--card-bg, #fff);
-                background: var(--card-bg, #fff);
+                background: var(--card-bg, #fbf7ee);
                 padding: 4px;
                 max-width: 300px;
                 max-height: 400px;
@@ -194,7 +194,7 @@ class ImageHoverPreview {
 
             .subtle-image-popup .preview-info {
                 padding: 8px;
-                background: var(--card-bg, #fff);
+                background: var(--card-bg, #fbf7ee);
                 border-radius: 0 0 4px 4px;
             }
 

@@ -1,13 +1,13 @@
 /* Adenai CMS v2 — one stylesheet. Dense split views, light and dark. */
 
 :root {
-    --bg: #f4f3f0;
-    --panel: #ffffff;
-    --panel-2: #f8f7f4;
-    --line: #e3e0d9;
-    --line-2: #d3cfc5;
-    --text: #1e1c22;
-    --muted: #6e6a74;
+    --bg: #efe7d6;
+    --panel: #fbf7ee;
+    --panel-2: #f4ecdc;
+    --line: #e4d9c4;
+    --line-2: #d3c4a6;
+    --text: #2b241b;
+    --muted: #6f6352;
     --accent: #6b5b95;
     --accent-2: #ece8f5;
     --accent-ink: #ffffff;
@@ -19,7 +19,8 @@
     --radius: 6px;
     --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --top: 44px;
-    color-scheme: light;
+    color-scheme: light; /* sepia paper, as the map's protocol panel */
+    scrollbar-color: #c4b394 var(--panel-2);
 
     /* names md-editor.js (shared with the classic CMS) uses */
     --input-bg: var(--panel); --text-primary: var(--text); --text-secondary: var(--muted); --border-color: var(--line-2);
@@ -31,9 +32,11 @@
         --bg: #141317; --panel: #1c1b21; --panel-2: #222128; --line: #2d2b34; --line-2: #3a3743; --text: #e9e7ee;
         --muted: #9a96a4; --accent: #a594d6; --accent-2: #2b2638; --accent-ink: #141317; --gold: #e0b93a;
         --ok: #5fc48b; --warn: #e3a64a; --bad: #ff7b6e; --focus: rgba(165, 148, 214, 0.3); color-scheme: dark;
+        scrollbar-color: #4a4654 var(--panel);
     }
 }
 :root[data-theme="dark"] {
+    scrollbar-color: #4a4654 var(--panel);
     --bg: #141317; --panel: #1c1b21; --panel-2: #222128; --line: #2d2b34; --line-2: #3a3743; --text: #e9e7ee;
     --muted: #9a96a4; --accent: #a594d6; --accent-2: #2b2638; --accent-ink: #141317; --gold: #e0b93a;
     --ok: #5fc48b; --warn: #e3a64a; --bad: #ff7b6e; --focus: rgba(165, 148, 214, 0.3); color-scheme: dark;

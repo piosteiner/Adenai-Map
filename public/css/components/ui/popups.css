@@ -233,7 +233,7 @@
 .character-list-button {
   width: 100%;
   padding: 10px 12px;
-  background: #f8f9fa;
+  background: #f4ecdc;
   border: 1px solid #dee2e6;
   border-radius: 6px;
   cursor: pointer;
@@ -267,7 +267,7 @@
 
 /* Panel-Anchored Character Popup */
 .panel-anchored-popup {
-  background: white;
+  background: #fbf7ee;
   border: 1px solid #dee2e6;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -284,7 +284,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f8f9fa;
+  background: #f4ecdc;
   border-radius: 8px 8px 0 0;
 }
 
@@ -312,7 +312,7 @@
 }
 
 .panel-popup-close:hover {
-  background: #f8f9fa;
+  background: #f4ecdc;
   color: #343a40;
   transform: scale(1.05);
 }
@@ -372,7 +372,7 @@
 .character-popup-dates {
   margin-bottom: 10px;
   padding: 8px 12px;
-  background: #f8f9fa;
+  background: #f4ecdc;
   border-radius: 6px;
   border-left: 3px solid #007bff;
 }
@@ -506,3 +506,34 @@
 .dropdown-item img, .result-avatar img, .popup-gallery-thumb, .character-popup img {
   object-position: center 20%;
 }
+
+/* Character names and relationship badges in popups (character-system.js: rel-<relationship>), readable on sepia and
+   on dark. Text colours are darker in light mode, lighter in dark mode; badges carry their own text colour. */
+.rel-text.rel-ally { color: #2e7d32; }
+.rel-text.rel-friendly { color: #4f7a1f; }
+.rel-text.rel-neutral { color: #8a6100; }
+.rel-text.rel-suspicious { color: #b45309; }
+.rel-text.rel-hostile { color: #c2410c; }
+.rel-text.rel-enemy { color: #c62828; }
+.rel-text.rel-party { color: #4f46e5; }
+.rel-text.rel-unknown { color: var(--text-color); }
+[data-theme="dark"] .rel-text.rel-ally { color: #81c784; }
+[data-theme="dark"] .rel-text.rel-friendly { color: #aed581; }
+[data-theme="dark"] .rel-text.rel-neutral { color: #ffd54f; }
+[data-theme="dark"] .rel-text.rel-suspicious { color: #ffb74d; }
+[data-theme="dark"] .rel-text.rel-hostile { color: #ff8a65; }
+[data-theme="dark"] .rel-text.rel-enemy { color: #ef7b7b; }
+[data-theme="dark"] .rel-text.rel-party { color: #a5a0ff; }
+.rel-badge { padding: 2px 6px; border-radius: 4px; font-size: 0.8em; color: #fff; background: #7a6f5f; }
+.rel-badge.rel-ally { background: #2e7d32; }
+.rel-badge.rel-friendly { background: #558b2f; }
+.rel-badge.rel-neutral { background: #f5c13d; color: #2b241b; }
+.rel-badge.rel-suspicious { background: #c25e00; }
+.rel-badge.rel-hostile { background: #d84315; }
+.rel-badge.rel-enemy { background: #c62828; }
+.rel-badge.rel-party { background: #584cff; }
+
+/* Leaflet's own popups and controls follow the theme (its stylesheet makes them white) */
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--popup-bg); color: var(--text-color); }
+.leaflet-bar a, .leaflet-bar a:hover { background-color: var(--popup-bg); color: var(--text-color); border-bottom-color: var(--dropdown-border); }
+.leaflet-container a.leaflet-popup-close-button { color: var(--text-muted); }

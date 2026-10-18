@@ -158,7 +158,7 @@ class MovementTimeline {
                 bottom: 0;
                 left: 0;
                 right: 0;
-                background: rgba(255, 255, 255, 0.98);
+                background: rgba(251, 247, 238, 0.98);
                 border-top: 2px solid #8b5a3c;
                 box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
                 z-index: 1000;
@@ -333,7 +333,7 @@ class MovementTimeline {
                 white-space: nowrap;
                 text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
                 padding: 1px 3px;
-                background: rgba(255, 255, 255, 0.9);
+                background: rgba(251, 247, 238, 0.9);
                 border-radius: 2px;
                 border: 1px solid rgba(139, 90, 60, 0.2);
             }
@@ -376,7 +376,7 @@ class MovementTimeline {
                 height: 20px;
                 border-radius: 50%;
                 border: 3px solid #d4af37;
-                background: white;
+                background: #fbf7ee;
                 margin: 0 auto 8px;
                 position: relative;
                 box-shadow: 0 2px 8px rgba(139, 90, 60, 0.3);
@@ -487,7 +487,7 @@ class MovementTimeline {
                 bottom: 35px;
                 left: 50%;
                 transform: translateX(-50%);
-                background: white;
+                background: #fbf7ee;
                 border: 2px solid #d4af37;
                 border-radius: 8px;
                 padding: 8px 12px;

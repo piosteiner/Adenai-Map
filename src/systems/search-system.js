@@ -237,7 +237,7 @@ class SearchSystem {
         const char = result.character;
         const highlightedName = this.highlightText(char.name, query);
         const highlightedTitle = char.title ? this.highlightText(char.title, query) : '';
-        const highlightedLocation = char.location ? this.highlightText(char.location, query) : 'Unknown location';
+        const highlightedLocation = char.location ? this.highlightText(char.location, query) : 'Ort unbekannt';
         
         // Relationship emoji
         const relationshipEmoji = this.getRelationshipEmoji(char.relationship);

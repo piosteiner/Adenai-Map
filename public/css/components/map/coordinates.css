@@ -4,7 +4,7 @@
     position: absolute;
     bottom: 10px;
     left: 10px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(251, 247, 238, 0.9);
     padding: 8px 12px;
     border-radius: 6px;
     font-family: 'Courier New', monospace;
@@ -20,7 +20,7 @@
 }
 
 #coords:hover {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(251, 247, 238, 0.95);
     transform: scale(1.05);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }

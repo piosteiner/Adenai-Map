@@ -281,7 +281,7 @@ class OptimizedMovementTimeline {
                 bottom: 0;
                 left: 0;
                 right: 0;
-                background: rgba(255, 255, 255, 0.95);
+                background: rgba(251, 247, 238, 0.95);
                 border-top: 2px solid #8b5a3c;
                 box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
                 z-index: 1000;

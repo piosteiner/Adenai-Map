@@ -102,7 +102,7 @@
 }
 
 .character-panel .panel-header {
-  background: white !important;
+  background: #fbf7ee !important;
   color: #6366f1 !important;
   padding: 20px 15px;
   display: flex;
@@ -489,7 +489,7 @@
   height: 20px;
   border: 2px solid var(--dropdown-border);
   border-radius: 4px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(230, 230, 230, 0.9) 50%, rgba(200, 200, 200, 0.8) 100%);
+  background: linear-gradient(135deg, rgba(251, 247, 238, 0.8) 0%, rgba(230, 230, 230, 0.9) 50%, rgba(200, 200, 200, 0.8) 100%);
   transition: all 0.3s ease;
   position: relative;
   display: flex;

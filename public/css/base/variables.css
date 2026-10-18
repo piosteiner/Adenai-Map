@@ -1,15 +1,28 @@
 /* CSS Custom Properties and Theme Variables */
 
+/* Light mode is sepia paper (the protocol panel's colours) instead of white: --paper for surfaces, --paper-2 for
+   cards and table heads, --paper-3 for hover. color-scheme + scrollbar-color give native controls and scrollbars the
+   theme's colours — also in Chromium browsers (Chrome, Brave, Edge), not only Firefox. */
 :root {
+  --paper: #fbf7ee;
+  --paper-2: #f4ecdc;
+  --paper-3: #ebe0c9;
+  --paper-line: #d9ccb2;
+  --ink: #2b241b;
+  --ink-muted: #6f6352;
+
   --bg-color: #bbc3ac;
-  --text-color: #000;
-  --text-muted: #666;
-  --popup-bg: white;
-  --card-bg: #f9f9f9;
-  --dropdown-bg: #fff;
-  --dropdown-border: #ccc;
-  --dropdown-hover: #f0f0f0;
-  --dropdown-highlight: #000;
+  --text-color: var(--ink);
+  --text-muted: var(--ink-muted);
+  --popup-bg: var(--paper);
+  --card-bg: var(--paper-2);
+  --dropdown-bg: var(--paper);
+  --dropdown-border: var(--paper-line);
+  --dropdown-hover: var(--paper-3);
+  --dropdown-highlight: var(--ink);
+
+  color-scheme: light;
+  scrollbar-color: #c4b394 var(--paper-2);
 }
 
 [data-theme="dark"] {
@@ -22,4 +35,7 @@
   --dropdown-border: #444;
   --dropdown-hover: #3a3a3a;
   --dropdown-highlight: #f0f0f0;
+
+  color-scheme: dark;
+  scrollbar-color: #5c5650 #242424;
 }

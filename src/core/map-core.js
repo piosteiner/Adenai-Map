@@ -45,7 +45,7 @@ class MapCore {
         toggleBtn.style.display = "flex"; // Center the icon
         toggleBtn.style.alignItems = "center"; // Center vertically
         toggleBtn.style.justifyContent = "center"; // Center horizontally
-        toggleBtn.style.backgroundColor = "rgba(255, 255, 255, 0.9)"; // Slight background
+        toggleBtn.style.backgroundColor = "rgba(251, 247, 238, 0.92)"; // sepia paper (light mode)
         toggleBtn.style.boxShadow = "0 2px 6px rgba(0, 0, 0, 0.2)"; // Add shadow
         toggleBtn.style.transition = "all 0.2s ease"; // Smooth transitions
 
@@ -92,8 +92,8 @@ class MapCore {
             } else {
                 toggleBtn.textContent = "🌙"; // Moon icon for light mode (click to go dark)
                 toggleBtn.title = "Switch to Dark Mode";
-                toggleBtn.style.backgroundColor = "rgba(255, 255, 255, 0.9)"; // Light background
-                toggleBtn.style.color = "#000000"; // Dark text/icon
+                toggleBtn.style.backgroundColor = "rgba(251, 247, 238, 0.92)"; // sepia paper
+                toggleBtn.style.color = "#2b241b"; // ink
             }
         };
 

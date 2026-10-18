@@ -283,7 +283,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(251, 247, 238, 0.9);
   border-radius: 12px;
   padding: 12px 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -417,7 +417,7 @@
 .map-timeline .timeline-open {
     display: none;
     padding: 6px 12px; border: 0; border-radius: 16px; cursor: pointer;
-    background: rgba(0, 0, 0, 0.65); color: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.65); color: #fbf7ee; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 .map-timeline.collapsed .timeline-open { display: block; }
 .map-timeline.collapsed .timeline-body { display: none; }
@@ -429,7 +429,7 @@
 .map-timeline button { font: inherit; }
 .timeline-play, .timeline-close {
     flex: none; width: 30px; height: 30px; border: 0; border-radius: 50%; cursor: pointer;
-    background: rgba(255, 255, 255, 0.14); color: #fff;
+    background: rgba(255, 255, 255, 0.14); color: #fbf7ee;
 }
 .timeline-play:hover, .timeline-close:hover { background: rgba(255, 255, 255, 0.28); }
 .timeline-track { position: relative; flex: 1; height: 26px; }

@@ -713,6 +713,11 @@ class CharacterSystem {
         }, 'Cannot close character popup - map not available');
     }
 
+    // the relationship as a CSS class (rel-ally …): names and badges get colours readable in both themes (popups.css)
+    relationKey(relationship) {
+        return Object.prototype.hasOwnProperty.call(this.relationshipColors, relationship) ? relationship : 'unknown';
+    }
+
     createCharacterPopup(character) {
         const images = EntityImages.imagesOf(character);
         const imageHtml = images.length ? 
@@ -721,12 +726,12 @@ class CharacterSystem {
         return `
             <div class="character-popup">
                 ${imageHtml}
-                <div class="popup-title" style="color: ${this.relationshipColors[character.relationship] || '#333'}">
+                <div class="popup-title rel-text rel-${this.relationKey(character.relationship)}">
                     ${character.name}
                 </div>
                 ${character.title ? `<div style="font-style: italic; margin-bottom: 8px;">${character.title}</div>` : ''}
                 <div style="margin-bottom: 8px;">
-                    <span style="background: ${this.relationshipColors[character.relationship] || '#ccc'}; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.8em;">
+                    <span class="rel-badge rel-${this.relationKey(character.relationship)}">
                         ${AdenaiConfig.getCharacterRelationshipLabel(character.relationship) || 'unknown'}
                     </span>
                     <span style="margin-left: 8px;">

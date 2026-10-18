@@ -6,7 +6,7 @@
   padding: 6px 12px;
   border: 0;
   border-radius: 6px;
-  background: var(--popup-bg, #fff);
+  background: var(--popup-bg, #fbf7ee);
   color: var(--text-color, #222);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
   font: 600 13px/1.3 system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -172,3 +172,7 @@
 .pp-discard { color: #b3261e; }
 .pp-discard[hidden] { display: none; }
 .pp-publish:disabled { opacity: .6; cursor: wait; }
+
+/* Dark: the light purple buttons carry dark text; the date picker button follows the text colour */
+[data-theme="dark"] .pp-new, [data-theme="dark"] .pp-done, [data-theme="dark"] .pp-lockform button, [data-theme="dark"] .protocol-panel button.pp-publish { color: #1b1915; }
+.date-field-button { color: inherit; }
