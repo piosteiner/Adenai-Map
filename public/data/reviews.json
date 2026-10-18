@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "7ce3dd2807bdb6b8bbbec09ed771281749867af6",
+      "action": "update",
+      "type": "character",
+      "itemName": "Nele Wandermann",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:09:08.713Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:09:08.713Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: nele (by gm) - updated name, removed title, changed relationship to friendly, added image - links updated in 2 character(s)"
+    },
+    {
       "commitSha": "4a205302051711824dfbcef34ee3c418a777eb09",
       "action": "update",
       "type": "character",
@@ -1679,5 +1692,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:06:35.085Z"
+  "lastUpdated": "2026-10-18T16:09:08.713Z"
 }
