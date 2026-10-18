@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "86a0ed08a677f7e51ced0cbbf5d646e61bd6dc3e",
+      "action": "create",
+      "type": "character",
+      "itemName": "Vallis",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:42:06.342Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:42:06.342Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Vallis (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "edc68eeb7cc8264fab896d03ede47af527a01a9d",
       "action": "create",
       "type": "character",
@@ -834,5 +847,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:04.318Z"
+  "lastUpdated": "2026-10-18T04:42:06.343Z"
 }
