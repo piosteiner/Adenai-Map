@@ -1230,10 +1230,13 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/hjqotmro1i0j-small.webp"
+      ],
       "image": "https://adenai-admin.piogino.ch/media/hjqotmro1i0j-small.webp",
       "status": "alive",
       "faction": "",
-      "relationship": "unknown",
+      "relationship": "friendly",
       "firstMet": "",
       "notes": "Magierin der Yosefka Akademie",
       "movementHistory": [
@@ -1266,7 +1269,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:28:54.142Z",
-      "updatedAt": "2025-09-07T19:26:25.340Z"
+      "updatedAt": "2026-10-18T16:46:08.345Z"
     },
     {
       "id": "dravak_svya",
@@ -4027,5 +4030,5 @@
       "updatedAt": "2026-10-18T16:44:08.887Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:45:52.614Z"
+  "lastUpdated": "2026-10-18T16:46:08.345Z"
 }
