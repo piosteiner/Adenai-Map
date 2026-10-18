@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "59d1e2317f1bbaac9bc2627841cdc865d94e540a",
+      "action": "create",
+      "type": "character",
+      "itemName": "Nani",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:43:06.055Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:43:06.055Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Nani (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "aebebccc4ea0f43b9a036283dfa2a3ec689577c4",
       "action": "create",
       "type": "character",
@@ -1211,5 +1224,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:03.986Z"
+  "lastUpdated": "2026-10-18T04:43:06.056Z"
 }
