@@ -3195,7 +3195,39 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "vazeer",
+      "name": "Vazeer",
+      "title": "Vazeer Vezir, Lizardfolk",
+      "placeOfOrigin": "Tangoa",
+      "coordinates": [
+        1618,
+        452
+      ],
+      "description": "Lizardfolk aus [[Tangoa]], Gast beim Empfang der Karthrights in [[Toftgard]]. Liess einen Zettel fallen, der riet, vor einem Beitritt zu [[Viktoria Karthright|Viktoria]] eine Zweitmeinung einzuholen. Schickte später die [[Sturmreiter]] als Hilfe nach [[Basapo]].",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:23.736Z",
+      "updatedAt": "2026-10-18T04:42:23.737Z",
+      "currentLocation": {
+        "location": "Tangoa",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          1618,
+          452
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:21.953Z"
+  "lastUpdated": "2026-10-18T04:42:23.737Z"
 }
