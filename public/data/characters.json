@@ -3585,7 +3585,39 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "larial",
+      "name": "Larial",
+      "title": "Elfe im Heimatschutzministerium",
+      "placeOfOrigin": "Rena",
+      "coordinates": [
+        650,
+        1000
+      ],
+      "description": "Empfing die [[VsuzH]] im Ministerium für Heimatschutz in [[Rena]] und prüfte [[Abu]]. Arbeitet mit [[Dina Eisfeld]] zusammen und schickte die Gruppe zu den Teufeln im Anwesen der [[Familie Kleulenberg]].",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "Regierung von Rena",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:59.982Z",
+      "updatedAt": "2026-10-18T04:42:59.982Z",
+      "currentLocation": {
+        "location": "Rena",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          650,
+          1000
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:58.048Z"
+  "lastUpdated": "2026-10-18T04:42:59.982Z"
 }
