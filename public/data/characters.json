@@ -3836,22 +3836,25 @@
       "updatedAt": "2026-10-18T04:43:19.889Z"
     },
     {
-      "id": "piper",
-      "name": "Piper",
-      "title": "Piper Schlopp, Workaholic",
+      "id": "piper_schlopp",
+      "name": "Piper Schlopp",
+      "title": "Workaholic",
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Mitarbeiterin in Griswolds Forschungsanlage; [[Ally]] stahl ihre Sicherheitskarte, [[Tasbor]] gab sich als sie aus (siehe [[Taspipor]]). Soll an der Diadem-Party einen Vortrag halten.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/cyetqo5o7ufa-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/cyetqo5o7ufa-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "neutral",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:43:22.109Z",
-      "updatedAt": "2026-10-18T04:43:22.109Z"
+      "updatedAt": "2026-10-18T16:01:50.808Z"
     },
     {
       "id": "taspipor",
@@ -3859,7 +3862,7 @@
       "title": "Tasbor als Piper Schlopp",
       "placeOfOrigin": "",
       "coordinates": null,
-      "description": "[[Tasbor]] in der Tarnung als [[Piper]] Schlopp in Griswolds Anlage – mit einer Illusion, die man sehen, aber nicht ertasten kann.",
+      "description": "[[Tasbor]] in der Tarnung als [[Piper Schlopp]] Schlopp in Griswolds Anlage – mit einer Illusion, die man sehen, aber nicht ertasten kann.",
       "images": [],
       "image": "",
       "status": "alive",
@@ -3965,5 +3968,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:01:25.263Z"
+  "lastUpdated": "2026-10-18T16:01:50.808Z"
 }
