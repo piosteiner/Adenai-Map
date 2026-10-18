@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6f566a72a57afb2eb623384835bd972dec89f1b3",
+      "action": "create",
+      "type": "character",
+      "itemName": "Sonnhild",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:41:44.179Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:41:44.179Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Sonnhild (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "9f6bb708bebc7cc417d23793fe3f17663829015c",
       "action": "create",
       "type": "character",
@@ -691,5 +704,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:41.853Z"
+  "lastUpdated": "2026-10-18T04:41:44.179Z"
 }
