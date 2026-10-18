@@ -13539,7 +13539,50 @@
       },
       "fileSize": 57795,
       "mimeType": "image/jpeg"
+    },
+    "characters-krtiz8x3nn1z": {
+      "id": "characters-krtiz8x3nn1z",
+      "category": "characters",
+      "title": "49d9084d61663d8d517dc14fe0ef1fd7",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/670825307041599546/",
+      "tags": [],
+      "uploadDate": "2026-10-18T14:16:07.838Z",
+      "sizes": {
+        "thumb": {
+          "filename": "krtiz8x3nn1z-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/krtiz8x3nn1z-thumb.webp",
+          "width": 140,
+          "height": 150
+        },
+        "small": {
+          "filename": "krtiz8x3nn1z-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/krtiz8x3nn1z-small.webp",
+          "width": 280,
+          "height": 300
+        },
+        "medium": {
+          "filename": "krtiz8x3nn1z-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/krtiz8x3nn1z-medium.webp",
+          "width": 560,
+          "height": 600
+        },
+        "large": {
+          "filename": "krtiz8x3nn1z-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/krtiz8x3nn1z-large.webp",
+          "width": 1119,
+          "height": 1200
+        },
+        "original": {
+          "filename": "krtiz8x3nn1z-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/krtiz8x3nn1z-large.webp",
+          "width": 1119,
+          "height": 1200
+        }
+      },
+      "fileSize": 128517,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T14:15:56.565Z"
+  "lastUpdated": "2026-10-18T14:16:07.842Z"
 }
