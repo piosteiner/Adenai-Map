@@ -15,6 +15,21 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_608549e16e",
+      "name": "Das blaue Juwel des Nachthimmels",
+      "aliases": [
+        "blaue Juwel des Nachthimmels"
+      ],
+      "category": "Gegenstand",
+      "description": "[[Shiho]]s Tagebuch, das ihre Mutter [[Minfilia]] sucht; die Katalogseite dazu fehlte in der Bibliothek von [[Valaris]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:12.121Z",
+      "updatedAt": "2026-10-18T04:41:12.121Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_9c2d0c104d",
       "name": "DeWitts",
       "aliases": [
@@ -218,5 +233,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:11.123Z"
+  "lastUpdated": "2026-10-18T04:41:12.121Z"
 }
