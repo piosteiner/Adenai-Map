@@ -1181,6 +1181,26 @@
           671
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Epiphea",
+        "description": "Unterirdische Stadt im Underdark, auf den Ruinen der Aboleth-Stadt Erinea von einem Magier wieder aufgebaut. Die [[VsuzH]] gelangten im September 5663 über das [[Underdark bei Ako]] und mit [[Fitchers Turm]] hinein (Sitzungen 54–56). Die genaue Lage ist unbekannt; der Punkt liegt beim Zugang bei [[Akónetchie]].",
+        "contentUrl": null,
+        "type": "city",
+        "region": "upeto",
+        "visited": true,
+        "image": "",
+        "images": []
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1822,
+          578
+        ]
+      }
     }
   ]
 }
