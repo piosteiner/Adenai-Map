@@ -3081,7 +3081,39 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:14.273Z",
       "updatedAt": "2026-10-18T04:42:14.273Z"
+    },
+    {
+      "id": "goldira",
+      "name": "Goldira",
+      "title": "Goldira Erzschub, Zwergin",
+      "placeOfOrigin": "Silbergrat",
+      "coordinates": [
+        1240,
+        1041
+      ],
+      "description": "Wollte die Mine ihres Vaters bei [[Silbergrat]] übernehmen, die von Pilzen befallen war. Die [[VsuzH]] machten die Mine wieder betretbar; über die Teilhaberschaft wurde lange verhandelt (siehe [[VsuzH & Partner Erzmine]]).",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:16.418Z",
+      "updatedAt": "2026-10-18T04:42:16.418Z",
+      "currentLocation": {
+        "location": "Silbergrat",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          1240,
+          1041
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:14.273Z"
+  "lastUpdated": "2026-10-18T04:42:16.419Z"
 }
