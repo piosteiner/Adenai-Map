@@ -18840,7 +18840,50 @@
       "fileSize": 23909,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-18T17:44:30.460Z"
+    },
+    "general-1dmfw0nyx0tf": {
+      "id": "general-1dmfw0nyx0tf",
+      "category": "general",
+      "title": "Serinessa a new born",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/807199933261514290/",
+      "tags": [],
+      "uploadDate": "2026-10-18T17:45:40.190Z",
+      "sizes": {
+        "thumb": {
+          "filename": "1dmfw0nyx0tf-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1dmfw0nyx0tf-thumb.webp",
+          "width": 90,
+          "height": 150
+        },
+        "small": {
+          "filename": "1dmfw0nyx0tf-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1dmfw0nyx0tf-small.webp",
+          "width": 180,
+          "height": 300
+        },
+        "medium": {
+          "filename": "1dmfw0nyx0tf-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1dmfw0nyx0tf-medium.webp",
+          "width": 360,
+          "height": 600
+        },
+        "large": {
+          "filename": "1dmfw0nyx0tf-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1dmfw0nyx0tf-large.webp",
+          "width": 720,
+          "height": 1200
+        },
+        "original": {
+          "filename": "1dmfw0nyx0tf-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1dmfw0nyx0tf-original.webp",
+          "width": 992,
+          "height": 1654
+        }
+      },
+      "fileSize": 261797,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T17:44:30.460Z"
+  "lastUpdated": "2026-10-18T17:45:40.195Z"
 }
