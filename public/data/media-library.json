@@ -13367,7 +13367,50 @@
       },
       "fileSize": 251223,
       "mimeType": "image/jpeg"
+    },
+    "characters-baodavnal1ak": {
+      "id": "characters-baodavnal1ak",
+      "category": "characters",
+      "title": "39067c3d955c6f6a3709463de8a205e7",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/400820435586318603/",
+      "tags": [],
+      "uploadDate": "2026-10-18T14:14:55.380Z",
+      "sizes": {
+        "thumb": {
+          "filename": "baodavnal1ak-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/baodavnal1ak-thumb.webp",
+          "width": 110,
+          "height": 150
+        },
+        "small": {
+          "filename": "baodavnal1ak-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/baodavnal1ak-small.webp",
+          "width": 219,
+          "height": 300
+        },
+        "medium": {
+          "filename": "baodavnal1ak-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/baodavnal1ak-medium.webp",
+          "width": 437,
+          "height": 600
+        },
+        "large": {
+          "filename": "baodavnal1ak-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/baodavnal1ak-large.webp",
+          "width": 874,
+          "height": 1200
+        },
+        "original": {
+          "filename": "baodavnal1ak-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/baodavnal1ak-original.webp",
+          "width": 1000,
+          "height": 1373
+        }
+      },
+      "fileSize": 62159,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T14:14:38.582Z"
+  "lastUpdated": "2026-10-18T14:14:55.384Z"
 }
