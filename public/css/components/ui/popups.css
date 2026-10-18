@@ -503,8 +503,11 @@
 
 /* Cropped images (portraits mostly): keep the upper part, where the face is, instead of the middle */
 .character-modal .character-image, .popup-location-image, .character-popup-avatar, .character-avatar,
-.dropdown-item img, .result-avatar img, .popup-gallery-thumb, .character-popup img {
-  object-position: center 20%;
+/* Cropped pictures show their top: the heads of portraits stay in view (one rule for the whole map; images shown
+   whole — the lightbox, the gallery viewer — stay centred) */
+.dropdown-item img, .result-avatar img, .popup-gallery-thumb, .character-popup img, .character-popup-avatar,
+.character-avatar, .character-modal .character-image, .gallery-modal .gallery-image, .popup-location-image, .gl-cover {
+  object-position: center top;
 }
 
 /* Character names and relationship badges in popups (character-system.js: rel-<relationship>), readable on sepia and

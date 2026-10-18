@@ -251,7 +251,8 @@ input[readonly], select:disabled { background: var(--panel-2); color: var(--mute
 }
 
 /* Cropped images (portraits mostly): keep the upper part, where the face is, instead of the middle */
-.thumb, .detail-cover img, .gallery-item img, .picker-item img { object-position: center 20%; }
+/* cropped pictures show their top: the heads of portraits stay in view (one rule for the whole CMS) */
+.thumb, .detail-cover img, .gallery-item img, .picker-item img, .media-card img, .portrait-link img { object-position: center top; }
 
 .chip.missing { background: transparent; border: 1px dashed var(--bad); color: var(--bad); }
 .placeholder.pad { padding: 40px 16px; }
@@ -321,6 +322,6 @@ a.stat:hover { border-color: var(--accent); text-decoration: none; }
 .md-found .md-tool:disabled { opacity: .35; cursor: default; }
 /* a character's cover, large in the side column (views/characters.js) */
 .portrait-link, .portrait-empty { display: block; border-radius: 6px; overflow: hidden; background: var(--panel-2); }
-.portrait-link img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; }
+.portrait-link img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 .portrait-empty { aspect-ratio: 4 / 5; display: grid; place-content: center; justify-items: center; gap: 6px; font-size: 48px; text-align: center; }
 .portrait-empty .muted { font-size: 12px; max-width: 18ch; }

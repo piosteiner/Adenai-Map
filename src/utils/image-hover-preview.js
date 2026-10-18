@@ -190,6 +190,7 @@ class ImageHoverPreview {
                 display: block;
                 max-height: 350px;
                 object-fit: cover;
+                object-position: center top;
             }
 
             .subtle-image-popup .preview-info {
