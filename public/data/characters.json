@@ -3822,7 +3822,7 @@
       "image": "https://adenai-admin.piogino.ch/media/kpl60pwq45ld-small.webp",
       "status": "alive",
       "faction": "",
-      "relationship": "suspicious",
+      "relationship": "hostile",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
@@ -3838,7 +3838,7 @@
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2026-10-18T04:43:14.018Z",
-      "updatedAt": "2026-10-18T17:06:31.327Z"
+      "updatedAt": "2026-10-18T17:40:21.887Z"
     },
     {
       "id": "mortimer_peccatum",
@@ -4163,5 +4163,5 @@
       "updatedAt": "2026-10-18T17:39:53.966Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:39:53.966Z"
+  "lastUpdated": "2026-10-18T17:40:21.887Z"
 }
