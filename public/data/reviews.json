@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "2babbd46fe803ba1f590c92ae820e161688a0ee3",
+      "action": "update",
+      "type": "character",
+      "itemName": "Dina Eisfeld",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:46:09.505Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:46:09.505Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: dina_eisfeld (by gm) - changed relationship to friendly"
+    },
+    {
       "commitSha": "f652591f0bd1623a1377645e072e8a6987b9c154",
       "action": "update",
       "type": "character",
@@ -1939,5 +1952,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:45:53.715Z"
+  "lastUpdated": "2026-10-18T16:46:09.505Z"
 }
