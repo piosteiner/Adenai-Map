@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "00dcbfc49c599a9cdaeebb713d1548e4715c97f6",
+      "action": "delete",
+      "type": "character",
+      "itemName": "Maey",
+      "user": "gm",
+      "timestamp": "2026-10-18T06:59:40.890Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T06:59:40.890Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Delete character: Maey (by gm) - Removed from campaign"
+    },
+    {
       "commitSha": "d37ee80a17e21dd54870f17487bc16c0df1b5662",
       "action": "update",
       "type": "character",
@@ -1549,5 +1562,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T06:59:37.381Z"
+  "lastUpdated": "2026-10-18T06:59:40.890Z"
 }
