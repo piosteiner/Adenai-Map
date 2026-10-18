@@ -2689,16 +2689,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Ein Eisbär, dessen magisches Halsband im [[Toftgarder Forst]] Zauber auslöste. [[Fitcher]] lud das Halsband wieder auf und verband es mit einer Leine, damit die [[VsuzH]] ihn wiederfinden. Seit Sitzung 13 beratendes Kommissionsmitglied.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/8knz3u11pe49-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/8knz3u11pe49-small.webp",
       "status": "alive",
       "faction": "VsuzH",
       "relationship": "party",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:41:40.040Z",
-      "updatedAt": "2026-10-18T04:41:40.040Z"
+      "updatedAt": "2026-10-18T16:50:44.537Z"
     },
     {
       "id": "sonnhild",
@@ -4033,5 +4036,5 @@
       "updatedAt": "2026-10-18T16:44:08.887Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:46:58.927Z"
+  "lastUpdated": "2026-10-18T16:50:44.537Z"
 }
