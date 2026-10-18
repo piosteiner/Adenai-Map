@@ -4048,17 +4048,20 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/cd4vqdovgfaq-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/cd4vqdovgfaq-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "neutral",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T17:00:53.428Z",
-      "updatedAt": "2026-10-18T17:00:53.428Z"
+      "updatedAt": "2026-10-18T17:01:48.879Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:00:53.428Z"
+  "lastUpdated": "2026-10-18T17:01:48.879Z"
 }
