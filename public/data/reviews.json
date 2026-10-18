@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ff8680bf59e1400797ce9fc62e6db667ca4f25d9",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lambert",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:30:59.961Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:30:59.961Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: lambert (by gm) - added image"
+    },
+    {
       "commitSha": "6d554bf0ceb22019ea464e34291e82c9530f8126",
       "action": "update",
       "type": "character",
@@ -1887,5 +1900,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:30:21.748Z"
+  "lastUpdated": "2026-10-18T16:30:59.961Z"
 }
