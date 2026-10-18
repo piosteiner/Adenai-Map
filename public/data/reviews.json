@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "eabce8c94caaf65b5a30505537603a3f4115a541",
+      "action": "update",
+      "type": "character",
+      "itemName": "Slay",
+      "user": "gm",
+      "timestamp": "2026-10-18T19:28:42.914Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T19:28:42.914Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: slay (by gm) - changed relationship to friendly"
+    },
+    {
       "commitSha": "3f974ef855bd463ed4e1146bce4bd96228752b85",
       "action": "update",
       "type": "character",
@@ -2355,5 +2368,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T19:28:27.488Z"
+  "lastUpdated": "2026-10-18T19:28:42.914Z"
 }
