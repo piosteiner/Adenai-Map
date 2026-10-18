@@ -1,51 +1,5 @@
 {
   "images": {
-    "characters-g7b7j6jhzs5f": {
-      "id": "characters-g7b7j6jhzs5f",
-      "category": "characters",
-      "caption": "Portrait of Petrel Kormorant on his Veranda overlooking the Eastern See",
-      "credits": "AI Generated - GPT5",
-      "tags": [
-        "NPC"
-      ],
-      "uploadDate": "2025-09-07T12:17:54.927Z",
-      "sizes": {
-        "thumbnail": {
-          "filename": "g7b7j6jhzs5f-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/g7b7j6jhzs5f-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "g7b7j6jhzs5f-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/g7b7j6jhzs5f-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "g7b7j6jhzs5f-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/g7b7j6jhzs5f-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "g7b7j6jhzs5f-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/g7b7j6jhzs5f-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "g7b7j6jhzs5f-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/g7b7j6jhzs5f-large.webp",
-          "width": 1200,
-          "height": 1200
-        }
-      },
-      "fileSize": 2731040,
-      "mimeType": "image/png",
-      "lastModified": "2026-10-18T06:22:12.056Z",
-      "title": "Testbild Claude"
-    },
     "characters-tryy7cw94miy": {
       "id": "characters-tryy7cw94miy",
       "category": "characters",
@@ -3675,5 +3629,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-18T06:22:12.056Z"
+  "lastUpdated": "2026-10-18T06:22:15.483Z"
 }
