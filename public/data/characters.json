@@ -2809,7 +2809,39 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "kunos",
+      "name": "Kunos",
+      "title": "Kunos der Hagere, Aarakocra",
+      "placeOfOrigin": "Valaris",
+      "coordinates": [
+        1700,
+        1008
+      ],
+      "description": "Ein kränklicher Aarakocra, Leiter des [[Sternenzirkel]]s in [[Valaris]] und Berater von Kardinal [[Petrel Kormorant]]. Ging einen Pakt mit einem Energietentakelwesen ein, orchestrierte einen Gefängnisausbruch und erkundete via [[Luvatu]] einen Unterwassertempel. Die [[VsuzH]] töteten ihn in Sitzung 34; sein schimmernder Arm wurde gestohlen.",
+      "images": [],
+      "image": "",
+      "status": "dead",
+      "faction": "Sternenzirkel",
+      "relationship": "enemy",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:41:51.910Z",
+      "updatedAt": "2026-10-18T04:41:51.910Z",
+      "currentLocation": {
+        "location": "Valaris",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          1700,
+          1008
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:50.095Z"
+  "lastUpdated": "2026-10-18T04:41:51.910Z"
 }
