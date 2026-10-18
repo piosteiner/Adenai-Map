@@ -3893,7 +3893,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:43:26.231Z",
       "updatedAt": "2026-10-18T04:43:26.231Z"
+    },
+    {
+      "id": "fulgur",
+      "name": "Fulgur",
+      "title": "Blauer Drache",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Ein blauer Drache, gegen den sich die Zwerge von [[Wrag-Mûl]] mit dem Sturmgiganten Kataida verbündeten. Aus dem Kampf entstanden die [[Ewige Donnerklüfte|Ewigen Donnerklüfte]] und ein ewiger Sturm. Nach ihm sind die [[Fulgurkäfer]] benannt.",
+      "images": [],
+      "image": "",
+      "status": "dead",
+      "faction": "",
+      "relationship": "enemy",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:28.316Z",
+      "updatedAt": "2026-10-18T04:43:28.317Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:26.231Z"
+  "lastUpdated": "2026-10-18T04:43:28.317Z"
 }
