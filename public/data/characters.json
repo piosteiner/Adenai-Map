@@ -3263,7 +3263,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:28.054Z",
       "updatedAt": "2026-10-18T04:42:28.054Z"
+    },
+    {
+      "id": "kauris",
+      "name": "Kauris",
+      "title": "Firbolg",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Ein Firbolg, der eines Tages an der Tür der Detektei in [[Valaris]] stand. Half den [[VsuzH]] in der Kanalisation mit Geruchszaubern und Gesprächen mit den Kreaturen dort.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:29.678Z",
+      "updatedAt": "2026-10-18T04:42:29.678Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:28.054Z"
+  "lastUpdated": "2026-10-18T04:42:29.678Z"
 }
