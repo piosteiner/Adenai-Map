@@ -6822,7 +6822,50 @@
       },
       "fileSize": 116587,
       "mimeType": "image/jpeg"
+    },
+    "characters-vuongmujubu9": {
+      "id": "characters-vuongmujubu9",
+      "category": "characters",
+      "title": "4e1c3f1049f71842e80ba287ad67f25d",
+      "caption": "",
+      "credits": "https://pin.it/Rye56sapn",
+      "tags": [],
+      "uploadDate": "2026-10-18T13:17:37.752Z",
+      "sizes": {
+        "thumb": {
+          "filename": "vuongmujubu9-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/vuongmujubu9-thumb.webp",
+          "width": 119,
+          "height": 150
+        },
+        "small": {
+          "filename": "vuongmujubu9-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/vuongmujubu9-small.webp",
+          "width": 237,
+          "height": 300
+        },
+        "medium": {
+          "filename": "vuongmujubu9-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/vuongmujubu9-medium.webp",
+          "width": 474,
+          "height": 600
+        },
+        "large": {
+          "filename": "vuongmujubu9-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/vuongmujubu9-large.webp",
+          "width": 736,
+          "height": 931
+        },
+        "original": {
+          "filename": "vuongmujubu9-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/vuongmujubu9-large.webp",
+          "width": 736,
+          "height": 931
+        }
+      },
+      "fileSize": 89458,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T13:17:07.702Z"
+  "lastUpdated": "2026-10-18T13:17:37.753Z"
 }
