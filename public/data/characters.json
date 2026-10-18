@@ -4184,7 +4184,27 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T19:23:19.622Z",
       "updatedAt": "2026-10-18T19:23:19.622Z"
+    },
+    {
+      "id": "slay",
+      "name": "Slay",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Partnerin von [[Rizz]]",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/waffrms957wp-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/waffrms957wp-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T19:28:02.754Z",
+      "updatedAt": "2026-10-18T19:28:02.754Z"
     }
   ],
-  "lastUpdated": "2026-10-18T19:23:19.622Z"
+  "lastUpdated": "2026-10-18T19:28:02.754Z"
 }
