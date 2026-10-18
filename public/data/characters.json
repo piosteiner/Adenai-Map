@@ -2310,16 +2310,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/7nk08yjj7bo1-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/7nk08yjj7bo1-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-17T19:43:26.379Z",
-      "updatedAt": "2026-10-17T19:43:26.379Z"
+      "updatedAt": "2026-10-18T16:06:33.868Z"
     },
     {
       "id": "zala",
@@ -3984,5 +3987,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:05:13.246Z"
+  "lastUpdated": "2026-10-18T16:06:33.868Z"
 }
