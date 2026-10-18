@@ -2687,7 +2687,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:41:37.931Z",
       "updatedAt": "2026-10-18T04:41:37.931Z"
+    },
+    {
+      "id": "ch_geli",
+      "name": "Chügeli",
+      "title": "Eisbär mit magischem Halsband",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Ein Eisbär, dessen magisches Halsband im [[Toftgarder Forst]] Zauber auslöste. [[Fitcher]] lud das Halsband wieder auf und verband es mit einer Leine, damit die [[VsuzH]] ihn wiederfinden. Seit Sitzung 13 beratendes Kommissionsmitglied.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "VsuzH",
+      "relationship": "party",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:41:40.040Z",
+      "updatedAt": "2026-10-18T04:41:40.040Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:37.931Z"
+  "lastUpdated": "2026-10-18T04:41:40.040Z"
 }
