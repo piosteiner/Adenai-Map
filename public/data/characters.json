@@ -3726,7 +3726,7 @@
         790,
         769
       ],
-      "description": "Getarnte:r Schauspieler:in im Theater von [[Wesdalen]] mit [[Sylph]] und [[Zaphor]] bilden sie die [[Die Tanzenden Couatl]], begeistert von den [[VsuzH]], die eine Gastrolle in der Vorführung übernahmen. Verurteilt den Krieg und fürchtet, dass Griswold etwas richtig Grosses plant.",
+      "description": "Getarnte:r Schauspieler:in im Theater von [[Wesdalen]] mit [[Sylph]] und [[Zaphor]] bilden sie die [[Die Tanzenden Couatl]]. Greda war begeistert von den [[VsuzH]], die eine Gastrolle in der Vorführung übernahmen. Verurteilt den Krieg und fürchtet, dass Griswold etwas richtig Grosses plant.",
       "images": [
         "https://adenai-admin.piogino.ch/media/shn3vn2yhfw6-small.webp"
       ],
@@ -3749,7 +3749,7 @@
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2026-10-18T04:43:08.034Z",
-      "updatedAt": "2026-10-18T17:29:00.240Z"
+      "updatedAt": "2026-10-18T17:29:09.962Z"
     },
     {
       "id": "lord_ramvir_beridze",
@@ -4115,5 +4115,5 @@
       "updatedAt": "2026-10-18T17:25:11.344Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:29:00.240Z"
+  "lastUpdated": "2026-10-18T17:29:09.962Z"
 }
