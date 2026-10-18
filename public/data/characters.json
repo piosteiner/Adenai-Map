@@ -3145,7 +3145,25 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "ellas",
+      "name": "Ellas",
+      "title": "Ellas Nebesi, Halbelf",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Ein junger, spitzohriger, goldhäutiger Halbelf, den der Bote Oliver mit einer giftigen Wunde fand. Die [[VsuzH]] brachten ihn zur Heilerin [[Brünhild]] nach [[Toftgard]]. Später Fan der Gruppe in der Arena.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:20.159Z",
+      "updatedAt": "2026-10-18T04:42:20.159Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:18.505Z"
+  "lastUpdated": "2026-10-18T04:42:20.159Z"
 }
