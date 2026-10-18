@@ -3521,7 +3521,39 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:53.541Z",
       "updatedAt": "2026-10-18T04:42:53.541Z"
+    },
+    {
+      "id": "sorsley",
+      "name": "Sorsley",
+      "title": "Geschäftsmann, Eishersteller",
+      "placeOfOrigin": "Rena",
+      "coordinates": [
+        650,
+        1000
+      ],
+      "description": "Als Kind von einer Handelsfamilie gekauft, verpfiff er diese und erhielt einen Teil ihrer Flotte, mit der er für [[Rena]] arbeitete, bis er die Speiseeisherstellung entdeckte. Wollte mit [[Dacien]] ein Restaurant gründen. Von [[Zo'ob]] wegen korrupter Geschäfte mit Griswold getötet.",
+      "images": [],
+      "image": "",
+      "status": "dead",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:55.870Z",
+      "updatedAt": "2026-10-18T04:42:55.870Z",
+      "currentLocation": {
+        "location": "Rena",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          650,
+          1000
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:53.541Z"
+  "lastUpdated": "2026-10-18T04:42:55.870Z"
 }
