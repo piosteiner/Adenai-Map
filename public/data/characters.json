@@ -2507,7 +2507,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:16:18.892Z",
       "updatedAt": "2026-10-18T04:16:18.892Z"
+    },
+    {
+      "id": "ally",
+      "name": "Ally",
+      "title": "Air-Genasi-Rogue",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Air-Genasi-Rogue, sehr still und mysteriös. Seit der ersten Sitzung in [[Silbergrat]] Teil der [[VsuzH]].",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "VsuzH",
+      "relationship": "party",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:16:20.860Z",
+      "updatedAt": "2026-10-18T04:16:20.860Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:16:18.892Z"
+  "lastUpdated": "2026-10-18T04:16:20.860Z"
 }
