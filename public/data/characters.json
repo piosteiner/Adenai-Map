@@ -2458,16 +2458,16 @@
         656
       ],
       "description": "",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/qaplc2obagsb-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/qaplc2obagsb-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "ally",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2026-10-17T19:46:30.504Z",
-      "updatedAt": "2026-10-17T19:46:30.504Z",
       "currentLocation": {
         "location": "Donnermund",
         "date": "5663-06-03",
@@ -2477,8 +2477,10 @@
           981,
           656
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2026-10-17T19:46:30.504Z",
+      "updatedAt": "2026-10-18T16:01:25.263Z"
     },
     {
       "id": "letizia_griswold",
@@ -3963,5 +3965,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:00:54.506Z"
+  "lastUpdated": "2026-10-18T16:01:25.263Z"
 }
