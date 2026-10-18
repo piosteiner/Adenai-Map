@@ -15,6 +15,21 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_9c2d0c104d",
+      "name": "DeWitts",
+      "aliases": [
+        "DeWitt"
+      ],
+      "category": "Organisation",
+      "description": "Die alte Zivilisation von Atlantis, die verbotenes Wissen hütete. Sie erschufen Firmament, Sterne, Sonne und Mond, um die magischen Flüsse zu stabilisieren und die Leere fernzuhalten – und löschten im [[Projekt Wolkenbruch]] vor 6000 Jahren ihre eigene Zivilisation aus. Bekannt: [[Eldra]], [[Gal]], [[Meteus DeWitt]], [[Findel]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:02.463Z",
+      "updatedAt": "2026-10-18T04:41:02.463Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_5b94014772",
       "name": "Sandschreiter",
       "aliases": [
@@ -63,5 +78,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:01.451Z"
+  "lastUpdated": "2026-10-18T04:41:02.463Z"
 }
