@@ -3467,7 +3467,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:47.571Z",
       "updatedAt": "2026-10-18T04:42:47.571Z"
+    },
+    {
+      "id": "ja_ek_wandermann",
+      "name": "Jaćek Wandermann",
+      "title": "Entdecker und Kartograph",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Ein sehr aktiver Entdecker und Kartograph, der vor etwa 120 Jahren lebte und das [[Feywild]] besucht haben soll. Seine Karte des Underdark kopierte [[Azo]]; die [[VsuzH]] durchforsteten in der Traumwelt sein Gedächtnis. Vorfahr von [[Nele]].",
+      "images": [],
+      "image": "",
+      "status": "dead",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:49.859Z",
+      "updatedAt": "2026-10-18T04:42:49.859Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:47.571Z"
+  "lastUpdated": "2026-10-18T04:42:49.859Z"
 }
