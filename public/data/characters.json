@@ -3771,16 +3771,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Brachte den [[VsuzH]] die Theaterkarten von [[Lord Ramvir Beridze]]. Begegnete ihnen später in Griswolds Anlage wieder.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/gdjmeo73ul3b-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/gdjmeo73ul3b-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "neutral",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:43:11.819Z",
-      "updatedAt": "2026-10-18T04:43:11.819Z"
+      "updatedAt": "2026-10-18T16:20:14.974Z"
     },
     {
       "id": "gilbert_r_mpel",
@@ -4001,5 +4004,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:20:05.152Z"
+  "lastUpdated": "2026-10-18T16:20:14.974Z"
 }
