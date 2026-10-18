@@ -2991,7 +2991,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:04.332Z",
       "updatedAt": "2026-10-18T04:42:04.332Z"
+    },
+    {
+      "id": "naida",
+      "name": "Naida",
+      "title": "Hüterin der atlantischen Wassergärten",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Lebt seit sehr langer Zeit in den Wassergärten von [[Atlantis (versunken)|Atlantis]] und empfing die [[VsuzH]] als Wiederbringer:innen der atlantischen Relikte. [[Naos]], [[Shiho]] und [[Aykan]] hatten sie über die [[DeWitts]] ausgefragt.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:06.360Z",
+      "updatedAt": "2026-10-18T04:42:06.360Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:04.332Z"
+  "lastUpdated": "2026-10-18T04:42:06.360Z"
 }
