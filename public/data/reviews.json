@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "9229783e752fc68f10aa71a1eed03e6e4f8685ff",
+      "action": "create",
+      "type": "character",
+      "itemName": "Lord Ramvir",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:43:11.807Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:43:11.807Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Lord Ramvir (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "192375879d8998d3765c89f2118b04d767286fa6",
       "action": "create",
       "type": "character",
@@ -1250,5 +1263,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:09.967Z"
+  "lastUpdated": "2026-10-18T04:43:11.807Z"
 }
