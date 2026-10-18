@@ -3715,7 +3715,50 @@
       },
       "fileSize": 58600,
       "mimeType": "image/webp"
+    },
+    "general-gdjmeo73ul3b": {
+      "id": "general-gdjmeo73ul3b",
+      "category": "general",
+      "title": "kristina",
+      "caption": "",
+      "credits": "https://pin.it/1BQ2TwK9H",
+      "tags": [],
+      "uploadDate": "2026-10-18T12:26:20.707Z",
+      "sizes": {
+        "thumb": {
+          "filename": "gdjmeo73ul3b-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gdjmeo73ul3b-thumb.webp",
+          "width": 150,
+          "height": 141
+        },
+        "small": {
+          "filename": "gdjmeo73ul3b-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gdjmeo73ul3b-small.webp",
+          "width": 300,
+          "height": 282
+        },
+        "medium": {
+          "filename": "gdjmeo73ul3b-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gdjmeo73ul3b-medium.webp",
+          "width": 600,
+          "height": 565
+        },
+        "large": {
+          "filename": "gdjmeo73ul3b-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gdjmeo73ul3b-large.webp",
+          "width": 1000,
+          "height": 941
+        },
+        "original": {
+          "filename": "gdjmeo73ul3b-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/gdjmeo73ul3b-large.webp",
+          "width": 1000,
+          "height": 941
+        }
+      },
+      "fileSize": 81569,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T12:25:05.568Z"
+  "lastUpdated": "2026-10-18T12:26:20.710Z"
 }
