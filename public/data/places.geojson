@@ -1161,6 +1161,26 @@
           1062
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Upeto Küste",
+        "description": "Die Küste von Upeto, wo die [[VsuzH]] im August 5663 nach dem Absturz ihres fliegenden Bootes landeten, bevor sie nach [[Basapo]] weiterzogen (Sitzung 44).",
+        "contentUrl": null,
+        "type": "landmark",
+        "region": "upeto",
+        "visited": true,
+        "image": "",
+        "images": []
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2026,
+          671
+        ]
+      }
     }
   ]
 }
