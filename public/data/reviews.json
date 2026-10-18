@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "25f411c6bc8d3b894aa872f7036c101cca76dc0c",
+      "action": "create",
+      "type": "character",
+      "itemName": "Poison",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:16:29.122Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:16:29.122Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Poison (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "784fd79bd46753a69228e6c6ce7a28f12340c305",
       "action": "create",
       "type": "character",
@@ -587,5 +600,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:16:26.924Z"
+  "lastUpdated": "2026-10-18T04:16:29.122Z"
 }
