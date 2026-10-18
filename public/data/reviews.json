@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "da4426ce1c3eb12e66d55915e48646228f552466",
+      "action": "create",
+      "type": "character",
+      "itemName": "Sorsley",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:42:58.030Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:42:58.030Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Sorsley (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "ef1caffa31477580c90c0e17eca6187a64d97f03",
       "action": "create",
       "type": "character",
@@ -1159,5 +1172,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:55.850Z"
+  "lastUpdated": "2026-10-18T04:42:58.030Z"
 }
