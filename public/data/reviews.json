@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "5e2ccd1d94446d253350ee4b3f34cb2b113d80a4",
+      "action": "update",
+      "type": "character",
+      "itemName": "She-Ra",
+      "user": "gm",
+      "timestamp": "2026-10-18T17:39:55.117Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T17:39:55.117Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: she_ra (by gm) - changed relationship to ally"
+    },
+    {
       "commitSha": "6d9c43b2617b1f363f39a4f6f0e51d7e7409fb65",
       "action": "create",
       "type": "character",
@@ -2277,5 +2290,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T17:39:47.502Z"
+  "lastUpdated": "2026-10-18T17:39:55.117Z"
 }
