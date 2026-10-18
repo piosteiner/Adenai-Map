@@ -3017,8 +3017,11 @@
       "id": "naida",
       "name": "Naida",
       "title": "Hüterin der atlantischen Wassergärten",
-      "placeOfOrigin": "",
-      "coordinates": null,
+      "placeOfOrigin": "Atlantis (versunken)",
+      "coordinates": [
+        2210,
+        975
+      ],
       "description": "Lebt seit sehr langer Zeit in den Wassergärten von [[Atlantis (versunken)|Atlantis]] und empfing die [[VsuzH]] als Wiederbringer:innen der atlantischen Relikte. [[Naos]], [[Shiho]] und [[Aykan]] hatten sie über die [[DeWitts]] ausgefragt.",
       "images": [
         "https://adenai-admin.piogino.ch/media/5urqweicz6pt-small.webp"
@@ -3030,9 +3033,19 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "currentLocation": null,
+      "currentLocation": {
+        "location": "Atlantis (versunken)",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          2210,
+          975
+        ],
+        "notes": "Location set based on place of origin"
+      },
       "createdAt": "2026-10-18T04:42:06.360Z",
-      "updatedAt": "2026-10-18T16:28:32.067Z"
+      "updatedAt": "2026-10-18T16:29:52.916Z"
     },
     {
       "id": "findel",
@@ -4016,5 +4029,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:28:32.067Z"
+  "lastUpdated": "2026-10-18T16:29:52.916Z"
 }
