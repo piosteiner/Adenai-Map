@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "00f3c411608dbdf028b8005ee021c15e24153661",
+      "action": "update",
+      "type": "character",
+      "itemName": "Chügeli",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:50:45.840Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:50:45.840Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: ch_geli (by gm) - added image"
+    },
+    {
       "commitSha": "6a84ba48e7bf0bf8319ce348d3e3397fc366b3f5",
       "action": "update",
       "type": "character",
@@ -1965,5 +1978,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:47:00.179Z"
+  "lastUpdated": "2026-10-18T16:50:45.840Z"
 }
