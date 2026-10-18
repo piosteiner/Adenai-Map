@@ -3785,7 +3785,25 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "mortimer_peccatum",
+      "name": "Mortimer Peccatum",
+      "title": "Missionar",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Ein Missionar, nach dessen Kreuzzug das [[Mortimer-Archipel]] (früher Azur-Inseln) benannt ist. Ein Brief von ihm an [[Jaćek Wandermann]] führte die [[VsuzH]] auf seine Spur.",
+      "images": [],
+      "image": "",
+      "status": "dead",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:15.870Z",
+      "updatedAt": "2026-10-18T04:43:15.870Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:14.018Z"
+  "lastUpdated": "2026-10-18T04:43:15.870Z"
 }
