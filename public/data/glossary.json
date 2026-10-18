@@ -177,6 +177,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_27598377f7",
+      "name": "Moradin",
+      "aliases": [],
+      "category": "Gottheit",
+      "description": "Gott der Zwerge. [[Rikka Brenner]] schmiedete ihm einen Speer gegen den [[Krabbelkönig]]; in der [[Ruine von Zurak'thar]] steht sein Tempel.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:19.011Z",
+      "updatedAt": "2026-10-18T04:41:19.011Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_389ac0d3b0",
       "name": "Mpako",
       "aliases": [
@@ -318,5 +331,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:17.908Z"
+  "lastUpdated": "2026-10-18T04:41:19.012Z"
 }
