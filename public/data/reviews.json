@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "284122a6310627bba99b809f42a0baa78f001cc0",
+      "action": "create",
+      "type": "character",
+      "itemName": "Otto",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:41:45.922Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:41:45.922Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Otto (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "6f566a72a57afb2eb623384835bd972dec89f1b3",
       "action": "create",
       "type": "character",
@@ -704,5 +717,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:44.179Z"
+  "lastUpdated": "2026-10-18T04:41:45.922Z"
 }
