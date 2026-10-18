@@ -3635,7 +3635,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:43:01.821Z",
       "updatedAt": "2026-10-18T04:43:01.821Z"
+    },
+    {
+      "id": "nani",
+      "name": "Nani",
+      "title": "Tabaxi, Blumenzüchterin",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Schenkte [[Ally]] einen grossen Blumenstrauss aus ihrem Primelhaus. [[Abu]] besuchte die Blumenfelder ihrer Familie und nahm magische Blumen mit, darunter die mit den [[Glüebli]] verwandten Glüemli.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:04.010Z",
+      "updatedAt": "2026-10-18T04:43:04.010Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:01.821Z"
+  "lastUpdated": "2026-10-18T04:43:04.010Z"
 }
