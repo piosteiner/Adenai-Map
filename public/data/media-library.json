@@ -6217,7 +6217,50 @@
       },
       "fileSize": 170899,
       "mimeType": "image/jpeg"
+    },
+    "characters-urmeeovyate6": {
+      "id": "characters-urmeeovyate6",
+      "category": "characters",
+      "title": "d022c860a79c032a5a75b36192e7c000",
+      "caption": "",
+      "credits": "https://pin.it/64MhGZdZC",
+      "tags": [],
+      "uploadDate": "2026-10-18T13:08:35.566Z",
+      "sizes": {
+        "thumb": {
+          "filename": "urmeeovyate6-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/urmeeovyate6-thumb.webp",
+          "width": 130,
+          "height": 150
+        },
+        "small": {
+          "filename": "urmeeovyate6-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/urmeeovyate6-small.webp",
+          "width": 259,
+          "height": 300
+        },
+        "medium": {
+          "filename": "urmeeovyate6-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/urmeeovyate6-medium.webp",
+          "width": 517,
+          "height": 600
+        },
+        "large": {
+          "filename": "urmeeovyate6-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/urmeeovyate6-large.webp",
+          "width": 736,
+          "height": 854
+        },
+        "original": {
+          "filename": "urmeeovyate6-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/urmeeovyate6-large.webp",
+          "width": 736,
+          "height": 854
+        }
+      },
+      "fileSize": 58397,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T13:08:13.938Z"
+  "lastUpdated": "2026-10-18T13:08:35.567Z"
 }
