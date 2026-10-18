@@ -3929,7 +3929,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:43:30.318Z",
       "updatedAt": "2026-10-18T04:43:30.318Z"
+    },
+    {
+      "id": "rikka_brenner",
+      "name": "Rikka Brenner",
+      "title": "Zwergin, Gründerin von Zurag Tar",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Gründete die unterirdische Stadt Zurag Tar (heute [[Ruine von Zurak'thar]]), schmiedete [[Moradin]] einen Speer für seinen Kampf gegen den [[Krabbelkönig]] und schuf die [[Kugel von Zurag Tar]].",
+      "images": [],
+      "image": "",
+      "status": "dead",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:32.406Z",
+      "updatedAt": "2026-10-18T04:43:32.406Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:30.318Z"
+  "lastUpdated": "2026-10-18T04:43:32.406Z"
 }
