@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "06ece1ed0dfebe58a28e4e606f7e7949d78decfa",
+      "action": "update",
+      "type": "character",
+      "itemName": "Sophia",
+      "user": "gm",
+      "timestamp": "2026-10-18T15:59:11.864Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T15:59:11.864Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: sophia (by gm) - added image"
+    },
+    {
       "commitSha": "c3eb8c2f97e175af1b33df0df547df2962cd9707",
       "action": "update",
       "type": "character",
@@ -1575,5 +1588,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T15:58:52.596Z"
+  "lastUpdated": "2026-10-18T15:59:11.864Z"
 }
