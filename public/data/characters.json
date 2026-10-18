@@ -2723,7 +2723,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:41:41.864Z",
       "updatedAt": "2026-10-18T04:41:41.864Z"
+    },
+    {
+      "id": "otto",
+      "name": "Otto",
+      "title": "Schiffsseele des Gelben Otters",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Die Schiffsintelligenz des [[Gelber Otter|Gelben Otters]], [[Shiho]]s Schiff. Plaudert gerne mit [[Tasbor]] und kennt sich mit [[Motu Motu]] aus.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:41:44.191Z",
+      "updatedAt": "2026-10-18T04:41:44.191Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:41.864Z"
+  "lastUpdated": "2026-10-18T04:41:44.191Z"
 }
