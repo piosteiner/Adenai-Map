@@ -3854,22 +3854,25 @@
       "updatedAt": "2026-10-18T04:43:17.938Z"
     },
     {
-      "id": "jakbur",
-      "name": "Jakbur",
+      "id": "jak_gur",
+      "name": "Jak-gur",
       "title": "Dragonborn, Abteilungsleiter",
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Arbeitet unter [[Bulan]] in Griswolds Anlage; meint, Eindringlinge in Level 3 liessen sich per Knopfdruck in Testsubjekte verwandeln. Wollte «Piper» zur Sicherheit abtasten.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/jezjxkc09ypb-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/jezjxkc09ypb-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "suspicious",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:43:19.889Z",
-      "updatedAt": "2026-10-18T04:43:19.889Z"
+      "updatedAt": "2026-10-18T16:23:19.216Z"
     },
     {
       "id": "piper_schlopp",
@@ -4004,5 +4007,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:20:14.974Z"
+  "lastUpdated": "2026-10-18T16:23:19.216Z"
 }
