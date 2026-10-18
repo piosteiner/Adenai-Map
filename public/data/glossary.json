@@ -74,6 +74,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_4a9b59bbfe",
+      "name": "Graz'tchar",
+      "aliases": [],
+      "category": "Gegenstand",
+      "description": "Ein eindeutig suspektes Schwert, das [[Luna]] im Keller der [[Familie Kleulenberg]] klaute.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:10.251Z",
+      "updatedAt": "2026-10-18T04:41:10.251Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_651307dfa1",
       "name": "Kugel von Zurag Tar",
       "aliases": [
@@ -189,5 +202,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:09.383Z"
+  "lastUpdated": "2026-10-18T04:41:10.251Z"
 }
