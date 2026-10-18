@@ -4079,7 +4079,7 @@
       "title": "",
       "placeOfOrigin": "",
       "coordinates": null,
-      "description": "Mit [[Greda]] in einer Theatergruppe in [[Wesdalen]].",
+      "description": "Mit [[Greda]] und [[Zaphor]] in einer Theatergruppe in [[Wesdalen]].",
       "images": [
         "https://adenai-admin.piogino.ch/media/6r8m9at8gobd-small.webp"
       ],
@@ -4092,7 +4092,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2026-10-18T17:21:35.492Z",
-      "updatedAt": "2026-10-18T17:21:40.239Z"
+      "updatedAt": "2026-10-18T17:25:22.555Z"
     },
     {
       "id": "zaphor",
@@ -4115,5 +4115,5 @@
       "updatedAt": "2026-10-18T17:25:11.344Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:25:11.344Z"
+  "lastUpdated": "2026-10-18T17:25:22.555Z"
 }
