@@ -3349,7 +3349,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:37.517Z",
       "updatedAt": "2026-10-18T04:42:37.517Z"
+    },
+    {
+      "id": "figmar",
+      "name": "Figmar",
+      "title": "Hauptmann",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Zeigte dem als Kunos getarnten [[Tasbor]] in [[Motu Motu]] die erbeuteten Reliquien – und stach ihm dann einen Dolch in den Rücken, um selbst Anführer zu werden. Wurde danach von [[Luna]] angegriffen.",
+      "images": [],
+      "image": "",
+      "status": "unknown",
+      "faction": "",
+      "relationship": "enemy",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:39.433Z",
+      "updatedAt": "2026-10-18T04:42:39.433Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:37.517Z"
+  "lastUpdated": "2026-10-18T04:42:39.433Z"
 }
