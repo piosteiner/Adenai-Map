@@ -4093,7 +4093,27 @@
       "currentLocation": null,
       "createdAt": "2026-10-18T17:21:35.492Z",
       "updatedAt": "2026-10-18T17:21:40.239Z"
+    },
+    {
+      "id": "zaphor",
+      "name": "Zaphor",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "In einer Theatergruppe in [[Wesdalen]] mit [[Greda]] und [[Sylph]].",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/68r5ycf7hj0u-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/68r5ycf7hj0u-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T17:25:11.344Z",
+      "updatedAt": "2026-10-18T17:25:11.344Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:22:03.482Z"
+  "lastUpdated": "2026-10-18T17:25:11.344Z"
 }
