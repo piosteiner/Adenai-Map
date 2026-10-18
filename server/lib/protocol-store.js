@@ -235,28 +235,35 @@ function remove(id) {
     });
 }
 
-// A character, location or term was renamed: its [[links]] follow in titles and texts, published and drafts
-// (lib/link-rename.js). The previous published text goes into the history. Returns the number of sessions changed.
+// A character, location or term was renamed: its [[links]] follow in titles and texts, and the name in the players and
+// places lists, published and drafts (lib/link-rename.js). The previous published text goes into the history. Returns the number of sessions changed.
 function renameLinks(oldName, newName, by = 'rename') {
     const { renameInText } = require('./link-rename');
+    const fold = (x) => String(x).normalize('NFC').trim().toLowerCase();
+    const renameInList = (list) => (Array.isArray(list) ? [...new Set(list.map((x) => (fold(x) === fold(oldName) ? newName : x)))] : list);
     return serial(async () => {
         const data = await load();
         const changedSessions = [];
         const now = new Date().toISOString();
         for (const s of data.sessions) {
             let touched = false;
-            const title = renameInText(s.title, oldName, newName);
-            const content = renameInText(s.content, oldName, newName);
-            if (title !== s.title || content !== s.content) {
+            const renamed = (v) => ({
+                title: renameInText(v.title, oldName, newName),
+                content: renameInText(v.content, oldName, newName),
+                players: renameInList(v.players),
+                places: renameInList(v.places),
+            });
+            const changed = (v, r) => Object.keys(r).some((k) => JSON.stringify(v[k] ?? '') !== JSON.stringify(r[k] ?? ''));
+            const r = renamed(s);
+            if (changed(s, r)) {
                 const { history = [], ...previous } = s;
                 if (s.published !== false) s.history = [previous, ...history].slice(0, HISTORY_MAX);
-                Object.assign(s, { title, content, updatedAt: now, updatedBy: by, updatedVia: 'rename' });
+                Object.assign(s, r, { updatedAt: now, updatedBy: by, updatedVia: 'rename' });
                 touched = true;
             }
             if (s.draft) {
-                const dt = renameInText(s.draft.values.title, oldName, newName);
-                const dc = renameInText(s.draft.values.content, oldName, newName);
-                if (dt !== s.draft.values.title || dc !== s.draft.values.content) { Object.assign(s.draft.values, { title: dt, content: dc }); touched = true; }
+                const rd = renamed(s.draft.values);
+                if (changed(s.draft.values, rd)) { Object.assign(s.draft.values, rd); touched = true; }
             }
             if (touched) changedSessions.push(s);
         }

@@ -51,9 +51,23 @@ function withFileCache(octokit, log = console) {
         return copy(entry);
     };
 
+    // Writes go to GitHub one at a time: two commits sent at once (e.g. a save and the review log written behind it)
+    // race for the branch head and GitHub rejects one ("is at <sha> but expected <sha>"). Lost that race anyway (a
+    // commit from elsewhere): try once more — the file's own sha still guards against overwriting its changes.
+    let writes = Promise.resolve();
+    const headRace = (err) => err.status === 409 && /is at [0-9a-f]{40} but expected [0-9a-f]{40}/.test(err.message || '');
+    const putOnce = async (params) => {
+        try { return await put(params); } catch (err) {
+            if (!headRace(err)) throw err;
+            await new Promise((r) => setTimeout(r, 700));
+            return put(params);
+        }
+    };
+    const serialPut = (params) => { const job = writes.then(() => putOnce(params)); writes = job.catch(() => {}); return job; };
+
     repos.createOrUpdateFileContents = async (params) => {
         try {
-            const res = await put(params);
+            const res = await serialPut(params);
             files.set(keyOf(params), {
                 data: { type: 'file', encoding: 'base64', path: params.path, name: params.path.split('/').pop(), sha: res.data.content.sha, content: params.content },
                 etag: null, // the next refresh fetches the file in full
