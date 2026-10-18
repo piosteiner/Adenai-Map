@@ -2762,16 +2762,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Früherer Gefährte von [[Abu]]. Erforscht mit [[Aykan]] das entfernte Zeitalter der [[DeWitts]] und sucht einen [[Sonnenstein]]; seit einem Diebstahl in [[Olecea]] von den [[Sandschreiter]]n verfolgt. Lebte in [[Osdalen]] als «Rufus» bzw. «der Heilende Schatten». Wurde im Kampf gegen einen Golem getötet und von [[Luna]] mit einem [[Fulgurkäfer]] wiederbelebt.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/j64z3enp0z62-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/j64z3enp0z62-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:41:45.936Z",
-      "updatedAt": "2026-10-18T04:41:45.936Z"
+      "updatedAt": "2026-10-18T16:10:19.478Z"
     },
     {
       "id": "aykan",
@@ -3990,5 +3993,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:09:07.605Z"
+  "lastUpdated": "2026-10-18T16:10:19.478Z"
 }
