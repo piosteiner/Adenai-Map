@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "bed69209cc647396c107cfba0eec57f1a20a9b74",
+      "action": "update",
+      "type": "character",
+      "itemName": "Elissa III.",
+      "user": "gm",
+      "timestamp": "2026-10-18T17:04:10.572Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T17:04:10.572Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: elissa_iii_ (by gm) - added image"
+    },
+    {
       "commitSha": "0c3ab57d17bdbcb61fa75cdc953f01d10813a40f",
       "action": "update",
       "type": "character",
@@ -2056,5 +2069,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T17:02:11.549Z"
+  "lastUpdated": "2026-10-18T17:04:10.572Z"
 }
