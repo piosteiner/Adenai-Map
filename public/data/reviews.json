@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "e70a63b5cbcb853cdad9af7003fd0f802579b147",
+      "action": "create",
+      "type": "character",
+      "itemName": "Kauris",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:42:32.091Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:42:32.091Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Kauris (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "e8d58ab4604dcfce6a87f78438d910d364a43c50",
       "action": "create",
       "type": "character",
@@ -1003,5 +1016,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:29.663Z"
+  "lastUpdated": "2026-10-18T04:42:32.092Z"
 }
