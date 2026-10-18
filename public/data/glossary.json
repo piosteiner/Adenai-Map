@@ -121,6 +121,21 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_d411a2e38a",
+      "name": "Glüebli",
+      "aliases": [
+        "Sternenscheinrüebli"
+      ],
+      "category": "Pflanze",
+      "description": "Leuchtende Sternenscheinrüebli, die in [[Toftgard]] angebaut werden. Verwandt mit den Glüemli; der Sonnengott Pelor schuf laut einer Geschichte die Glüewürmli, diese die Glüemli und diese die Glüebli.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:14.045Z",
+      "updatedAt": "2026-10-18T04:41:14.045Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_4a9b59bbfe",
       "name": "Graz'tchar",
       "aliases": [],
@@ -249,5 +264,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:13.010Z"
+  "lastUpdated": "2026-10-18T04:41:14.045Z"
 }
