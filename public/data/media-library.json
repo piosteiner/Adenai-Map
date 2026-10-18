@@ -26014,7 +26014,52 @@
       },
       "fileSize": 29266,
       "mimeType": "image/jpeg"
+    },
+    "characters-92li6rzvtrnm": {
+      "id": "characters-92li6rzvtrnm",
+      "category": "characters",
+      "title": "fec5b90a056ce485b1887cb6223179bd",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/937733953664254836/",
+      "tags": [
+        "centaur"
+      ],
+      "uploadDate": "2026-10-18T18:34:08.041Z",
+      "sizes": {
+        "thumb": {
+          "filename": "92li6rzvtrnm-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/92li6rzvtrnm-thumb.webp",
+          "width": 120,
+          "height": 150
+        },
+        "small": {
+          "filename": "92li6rzvtrnm-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/92li6rzvtrnm-small.webp",
+          "width": 240,
+          "height": 300
+        },
+        "medium": {
+          "filename": "92li6rzvtrnm-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/92li6rzvtrnm-medium.webp",
+          "width": 480,
+          "height": 600
+        },
+        "large": {
+          "filename": "92li6rzvtrnm-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/92li6rzvtrnm-large.webp",
+          "width": 960,
+          "height": 1200
+        },
+        "original": {
+          "filename": "92li6rzvtrnm-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/92li6rzvtrnm-original.webp",
+          "width": 1200,
+          "height": 1500
+        }
+      },
+      "fileSize": 148413,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T18:33:39.197Z"
+  "lastUpdated": "2026-10-18T18:34:08.047Z"
 }
