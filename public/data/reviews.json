@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "e62eee1b195a7211f2a22f38d9bd2d51f2f0d070",
+      "action": "update",
+      "type": "character",
+      "itemName": "Nussbert",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:05:14.403Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:05:14.403Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: nussbert (by gm) - added place of origin"
+    },
+    {
       "commitSha": "0541077181e20797763968789fc156b09fd0e24c",
       "action": "update",
       "type": "character",
@@ -1653,5 +1666,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:05:07.331Z"
+  "lastUpdated": "2026-10-18T16:05:14.403Z"
 }
