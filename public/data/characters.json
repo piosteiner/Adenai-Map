@@ -3947,7 +3947,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:43:32.406Z",
       "updatedAt": "2026-10-18T04:43:32.406Z"
+    },
+    {
+      "id": "timmibald_grassel",
+      "name": "Timmibald Grassel",
+      "title": "Verbrecher",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Ein gefürchteter Verbrecher (62), der laut den Leuten in [[Toftgard]] auf freiem Fuss ist; später auch in [[Valaris]] erwähnt.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:34.390Z",
+      "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:32.406Z"
+  "lastUpdated": "2026-10-18T04:43:34.390Z"
 }
