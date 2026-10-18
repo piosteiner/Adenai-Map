@@ -289,6 +289,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_3a64d8eca0",
+      "name": "Tiamat",
+      "aliases": [],
+      "category": "Gottheit",
+      "description": "Die erste der chromatischen Drachen, in die Hölle verbannt. [[Lady Rivea]] scheint sie wiederbeleben zu wollen; eine Vielhändige rüstet ihre Armee.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:17.908Z",
+      "updatedAt": "2026-10-18T04:41:17.908Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_c23925c785",
       "name": "Чёрная Кошка",
       "aliases": [
@@ -305,5 +318,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:16.937Z"
+  "lastUpdated": "2026-10-18T04:41:17.908Z"
 }
