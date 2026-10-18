@@ -79,6 +79,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_c08f719447",
+      "name": "Feywild",
+      "aliases": [],
+      "category": "Ort",
+      "description": "Die Ebene der Feen, durch [[Mondstein]] stabil gehalten. Heimat von [[Moonhaven]]. [[Abu]] musste dort nach dem Studium mehrere Jahre als Bestatterin für eine Fee arbeiten.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:21.650Z",
+      "updatedAt": "2026-10-18T04:41:21.650Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_89c2d95a20",
       "name": "Fliegender Teppich",
       "aliases": [],
@@ -359,5 +372,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:20.743Z"
+  "lastUpdated": "2026-10-18T04:41:21.650Z"
 }
