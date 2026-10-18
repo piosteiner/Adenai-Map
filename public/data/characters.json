@@ -3753,7 +3753,39 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:43:11.819Z",
       "updatedAt": "2026-10-18T04:43:11.819Z"
+    },
+    {
+      "id": "gilbert_r_mpel",
+      "name": "Gilbert Rümpel",
+      "title": "Gnom, Antiquar",
+      "placeOfOrigin": "Wesdalen",
+      "coordinates": [
+        790,
+        769
+      ],
+      "description": "Führt einen Antiquitätenladen in [[Wesdalen]] mit Relikten aus [[Mortimer Peccatum|Mortimers]] Missionszug – manches überbepreist. Erhält Briefe in [[Thieves' Cant]] mit Zahlungsaufforderungen über 50'000 Gold.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "suspicious",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:14.018Z",
+      "updatedAt": "2026-10-18T04:43:14.018Z",
+      "currentLocation": {
+        "location": "Wesdalen",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          790,
+          769
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:11.819Z"
+  "lastUpdated": "2026-10-18T04:43:14.018Z"
 }
