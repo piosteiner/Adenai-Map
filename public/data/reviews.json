@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "fdb8c889c9782c59ebca76a15cd44d87ffd63563",
+      "action": "create",
+      "type": "character",
+      "itemName": "Sir Adrien",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:43:28.302Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:43:28.302Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Sir Adrien (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "cbcd9edf98bb4d2eb57889a5142cfa4d77705315",
       "action": "create",
       "type": "character",
@@ -1354,5 +1367,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:26.215Z"
+  "lastUpdated": "2026-10-18T04:43:28.302Z"
 }
