@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6da71d97467202d1722e4fafe9af22bee19c7fb0",
+      "action": "create",
+      "type": "character",
+      "itemName": "Versper Serinessa",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:44:10.136Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:44:10.136Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Versper Serinessa (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "ff8680bf59e1400797ce9fc62e6db667ca4f25d9",
       "action": "update",
       "type": "character",
@@ -1900,5 +1913,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:30:59.961Z"
+  "lastUpdated": "2026-10-18T16:44:10.137Z"
 }
