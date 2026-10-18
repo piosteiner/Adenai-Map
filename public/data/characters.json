@@ -546,7 +546,7 @@
           "date": "5663-07-23",
           "dateStart": "5663-07-23",
           "dateEnd": "5663-07-25",
-          "location": "Bootsfahrt auf dem Adenui - IV",
+          "location": "Bootsfahrt auf dem Valanui - IV",
           "coordinates": [
             1607,
             1010
@@ -555,7 +555,7 @@
           "type": "travel",
           "isCustomLocation": true,
           "createdAt": "2025-08-30T14:50:32.871Z",
-          "updatedAt": "2026-10-10T19:50:39.084Z"
+          "updatedAt": "2026-10-18T05:24:49.052Z"
         },
         {
           "id": "movement_1756565503759",
@@ -1035,7 +1035,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-10-18T05:24:46.853Z",
+      "updatedAt": "2026-10-18T05:24:49.052Z",
       "currentLocation": {
         "date": "5663-09-28",
         "dateStart": "5663-09-28",
@@ -3967,5 +3967,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T05:24:46.853Z"
+  "lastUpdated": "2026-10-18T05:24:49.052Z"
 }
