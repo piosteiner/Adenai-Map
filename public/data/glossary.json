@@ -177,6 +177,21 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_389ac0d3b0",
+      "name": "Mpako",
+      "aliases": [
+        "Sonnenwurzel"
+      ],
+      "category": "Pflanze",
+      "description": "Der heilige Baum von [[Akónetchie]], die Sonnenwurzel, über dem Zugang zum Underdark ([[Underdark bei Ako]]). Von einer Seuche befallen; im Stamm wohnte [[Nussbert]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:15.169Z",
+      "updatedAt": "2026-10-18T04:41:15.169Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_ac90c790b0",
       "name": "Projekt Wolkenbruch",
       "aliases": [],
@@ -264,5 +279,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:14.045Z"
+  "lastUpdated": "2026-10-18T04:41:15.169Z"
 }
