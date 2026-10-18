@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "b0655752f44ee2b9876e82afd7e9566f49512738",
+      "action": "create",
+      "type": "location",
+      "itemName": "Epiphea",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:16:16.923Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:16:16.923Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create location: Epiphea (by gm) - Initial location creation"
+    },
+    {
       "commitSha": "bcf64df67233621fe669ba3e73790c251b05ed2e",
       "action": "create",
       "type": "location",
@@ -509,5 +522,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:16:15.000Z"
+  "lastUpdated": "2026-10-18T04:16:16.923Z"
 }
