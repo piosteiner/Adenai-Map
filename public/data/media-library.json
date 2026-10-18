@@ -4883,7 +4883,50 @@
       },
       "fileSize": 107483,
       "mimeType": "image/jpeg"
+    },
+    "characters-22szoql6f0rp": {
+      "id": "characters-22szoql6f0rp",
+      "category": "characters",
+      "title": "versper",
+      "caption": "",
+      "credits": "https://pin.it/7qdB8aCLN",
+      "tags": [],
+      "uploadDate": "2026-10-18T12:51:34.277Z",
+      "sizes": {
+        "thumb": {
+          "filename": "22szoql6f0rp-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/22szoql6f0rp-thumb.webp",
+          "width": 123,
+          "height": 150
+        },
+        "small": {
+          "filename": "22szoql6f0rp-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/22szoql6f0rp-small.webp",
+          "width": 246,
+          "height": 300
+        },
+        "medium": {
+          "filename": "22szoql6f0rp-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/22szoql6f0rp-medium.webp",
+          "width": 491,
+          "height": 600
+        },
+        "large": {
+          "filename": "22szoql6f0rp-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/22szoql6f0rp-large.webp",
+          "width": 736,
+          "height": 899
+        },
+        "original": {
+          "filename": "22szoql6f0rp-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/22szoql6f0rp-large.webp",
+          "width": 736,
+          "height": 899
+        }
+      },
+      "fileSize": 131417,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T12:50:25.783Z"
+  "lastUpdated": "2026-10-18T12:51:34.281Z"
 }
