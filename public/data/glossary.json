@@ -219,16 +219,16 @@
     },
     {
       "id": "term_651307dfa1",
-      "name": "Kugel von Zurag Tar",
+      "name": "Kugel von Zurak'thar",
       "aliases": [
-        "Kugel von Zurak'thar"
+        "Chaoskugel"
       ],
       "category": "Gegenstand",
       "description": "Von [[Rikka Brenner]] geschaffen; die [[VsuzH]] gelobten in Sitzung 12, sie zu hüten. Bei der Berührung nahm [[Luna]] wilde Magie wahr (Nachwirkung: ein Federbart). In Atlantis als [[Sonnenstein]] erkannt.",
       "images": [],
       "image": "",
       "createdAt": "2026-10-18T04:41:07.499Z",
-      "updatedAt": "2026-10-18T04:41:07.499Z",
+      "updatedAt": "2026-10-18T05:02:11.722Z",
       "createdBy": "gm",
       "updatedBy": "gm"
     },
@@ -457,5 +457,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:28.022Z"
+  "lastUpdated": "2026-10-18T05:02:11.722Z"
 }
