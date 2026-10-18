@@ -3673,7 +3673,50 @@
       },
       "fileSize": 543382,
       "mimeType": "image/png"
+    },
+    "general-qdivh5igoinj": {
+      "id": "general-qdivh5igoinj",
+      "category": "general",
+      "title": "testbild",
+      "caption": "",
+      "credits": "Test – Claude",
+      "tags": [],
+      "uploadDate": "2026-10-18T06:24:35.458Z",
+      "sizes": {
+        "thumb": {
+          "filename": "qdivh5igoinj-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qdivh5igoinj-thumb.webp",
+          "width": 150,
+          "height": 113
+        },
+        "small": {
+          "filename": "qdivh5igoinj-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qdivh5igoinj-small.webp",
+          "width": 300,
+          "height": 225
+        },
+        "medium": {
+          "filename": "qdivh5igoinj-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qdivh5igoinj-medium.webp",
+          "width": 400,
+          "height": 300
+        },
+        "large": {
+          "filename": "qdivh5igoinj-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qdivh5igoinj-large.webp",
+          "width": 400,
+          "height": 300
+        },
+        "original": {
+          "filename": "qdivh5igoinj-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qdivh5igoinj-large.webp",
+          "width": 400,
+          "height": 300
+        }
+      },
+      "fileSize": 2476,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-18T06:24:13.906Z"
+  "lastUpdated": "2026-10-18T06:24:35.459Z"
 }
