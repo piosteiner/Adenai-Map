@@ -3347,16 +3347,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Die Teufelin, mit der [[Tasbor]] unwissentlich einen Vertrag einging (ausgelöst durch die Karte «die Flammen»). Tarnte sich als Meriel Muriel, um Sterbenden die Seele abzuluchsen, und tötete Tasbor in Sitzung 46 – [[Abu]] holte ihn mit einem [[Fulgurkäfer]] zurück.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/d2z0j59vyqcu-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/d2z0j59vyqcu-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "enemy",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:42:37.517Z",
-      "updatedAt": "2026-10-18T04:42:37.517Z"
+      "updatedAt": "2026-10-18T16:00:54.506Z"
     },
     {
       "id": "figmar",
@@ -3960,5 +3963,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T15:59:21.048Z"
+  "lastUpdated": "2026-10-18T16:00:54.506Z"
 }
