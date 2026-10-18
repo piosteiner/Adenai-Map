@@ -3227,7 +3227,25 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "eilana",
+      "name": "Eilana",
+      "title": "Halbelfe im Haus Karthright",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Dunkelhäutige Halbelfe im Gefolge von [[Viktoria Karthright]]. Ihre Vergangenheit: Diebesleben, ein Diebstahlversuch an der jungen Viktoria, Training mit [[Lia Karthright|Lia]] und Morde.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "Familie Karthright",
+      "relationship": "suspicious",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:25.703Z",
+      "updatedAt": "2026-10-18T04:42:25.703Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:23.737Z"
+  "lastUpdated": "2026-10-18T04:42:25.703Z"
 }
