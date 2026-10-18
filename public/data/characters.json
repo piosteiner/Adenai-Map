@@ -4077,10 +4077,10 @@
       "id": "sylph",
       "name": "Sylph",
       "title": "",
-      "placeOfOrigin": "Tangoa",
+      "placeOfOrigin": "Vorstadt von Wesdalen",
       "coordinates": [
-        1618,
-        452
+        810,
+        730
       ],
       "description": "Mit [[Greda]] und [[Zaphor]] in der Theatergruppe [[Die Tanzenden Couatl]] in [[Wesdalen]].",
       "images": [
@@ -4094,18 +4094,18 @@
       "notes": "",
       "movementHistory": [],
       "currentLocation": {
-        "location": "Tangoa",
+        "location": "Vorstadt von Wesdalen",
         "date": "5663-06-03",
         "dateStart": "5663-06-03",
         "dateEnd": null,
         "coordinates": [
-          1618,
-          452
+          810,
+          730
         ],
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2026-10-18T17:21:35.492Z",
-      "updatedAt": "2026-10-18T17:34:06.606Z"
+      "updatedAt": "2026-10-18T17:34:17.097Z"
     },
     {
       "id": "zaphor",
@@ -4142,5 +4142,5 @@
       "updatedAt": "2026-10-18T17:33:56.592Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:34:06.606Z"
+  "lastUpdated": "2026-10-18T17:34:17.097Z"
 }
