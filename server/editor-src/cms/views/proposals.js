@@ -26,6 +26,7 @@ export function proposalsView(app) {
         initialOf: (p) => ({ character: '👤', location: '📍', term: '📖' }[p.kind] || '?'),
         titleOf: (p) => p.name,
         subtitleOf: (p) => `${KINDS[p.kind] || ''} · by ${p.createdBy} · ${formatDate(p.createdAt)}`,
+        badgesOf: (p) => [p.updatedAt !== p.createdAt ? h('span.pill', { title: `Changed by ${p.updatedBy}` }, 'edited') : null],
         textOf: (p) => [p.name, p.description, p.createdBy].join(' '),
         filters: [{ id: 'kind', label: 'All kinds', options: () => Object.entries(KINDS).map(([value, label]) => ({ value, label })), test: (p, v) => p.kind === v }],
         onSelect: (key) => app.go(`proposals/${encodeURIComponent(key)}`),

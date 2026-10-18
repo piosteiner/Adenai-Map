@@ -50,8 +50,9 @@ class MapControls {
 
         // Add keyboard shortcut (M key)
         document.addEventListener('keydown', (e) => {
-            // Only trigger if not typing in an input field
-            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+            // Only when not typing: inputs, and editable areas like the minutes editor (a contenteditable, not a textarea)
+            const t = e.target;
+            if (!(t.isContentEditable || t.closest?.('input, textarea, select, [contenteditable], .cm-editor'))) {
                 if (e.key.toLowerCase() === 'm' && !e.ctrlKey && !e.altKey && !e.shiftKey) {
                     e.preventDefault();
                     this.toggleMovementMarkers();

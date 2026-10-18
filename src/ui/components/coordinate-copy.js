@@ -100,7 +100,8 @@ class CoordinateCopySystem {
 
     handleKeyPress(e) {
         // Check if we're holding and user pressed C
-        if (this.isHolding && (e.key === 'c' || e.key === 'C')) {
+        const typing = e.target.isContentEditable || e.target.closest?.('input, textarea, select, [contenteditable], .cm-editor');
+        if (this.isHolding && !typing && (e.key === 'c' || e.key === 'C')) {
             e.preventDefault();
             this.copyCoordinates();
         }
