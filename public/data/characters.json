@@ -3020,16 +3020,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Lebt seit sehr langer Zeit in den Wassergärten von [[Atlantis (versunken)|Atlantis]] und empfing die [[VsuzH]] als Wiederbringer:innen der atlantischen Relikte. [[Naos]], [[Shiho]] und [[Aykan]] hatten sie über die [[DeWitts]] ausgefragt.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/5urqweicz6pt-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/5urqweicz6pt-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:42:06.360Z",
-      "updatedAt": "2026-10-18T04:42:06.360Z"
+      "updatedAt": "2026-10-18T16:28:32.067Z"
     },
     {
       "id": "findel",
@@ -4013,5 +4016,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:25:55.409Z"
+  "lastUpdated": "2026-10-18T16:28:32.067Z"
 }
