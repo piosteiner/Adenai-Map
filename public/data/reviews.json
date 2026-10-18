@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "d8fd0a7f68b9dc8d51ee764d478fab2c8f0027da",
+      "action": "update",
+      "type": "location",
+      "itemName": "Toftgarder Forst",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:14:53.331Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:14:53.331Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Torftgarder Forst (by gm) - updated name"
+    },
+    {
       "commitSha": "e48b92975e53b89ca2aaf4cb56a387b8f8f1424a",
       "action": "create",
       "type": "character",
@@ -457,5 +470,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-17T19:47:11.614Z"
+  "lastUpdated": "2026-10-18T04:14:53.332Z"
 }
