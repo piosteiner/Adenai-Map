@@ -3511,16 +3511,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Ein sehr aktiver Entdecker und Kartograph, der vor etwa 120 Jahren lebte und das [[Feywild]] besucht haben soll. Seine Karte des Underdark kopierte [[Azo]]; die [[VsuzH]] durchforsteten in der Traumwelt sein Gedächtnis. Vorfahr von [[Nele Wandermann]].",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/zh73nac6pl27-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/zh73nac6pl27-small.webp",
       "status": "dead",
       "faction": "",
       "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:42:49.859Z",
-      "updatedAt": "2026-10-18T04:42:49.859Z"
+      "updatedAt": "2026-10-18T18:25:02.015Z"
     },
     {
       "id": "nele_wandermann",
@@ -4163,5 +4166,5 @@
       "updatedAt": "2026-10-18T17:39:53.966Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:40:21.887Z"
+  "lastUpdated": "2026-10-18T18:25:02.015Z"
 }
