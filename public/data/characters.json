@@ -3045,7 +3045,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:10.245Z",
       "updatedAt": "2026-10-18T04:42:10.245Z"
+    },
+    {
+      "id": "gal",
+      "name": "Gal",
+      "title": "Luft-Genasi, Gründer von Atlantis",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Gründete mit [[Eldra]] Atlantis in den Wolken und versiegelte mit ihr Sonne und Mond, wofür beide ihr Leben gaben. Sie erreichten Sonne und Mond mit einem Luftschiff.",
+      "images": [],
+      "image": "",
+      "status": "dead",
+      "faction": "DeWitts",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:12.344Z",
+      "updatedAt": "2026-10-18T04:42:12.344Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:10.245Z"
+  "lastUpdated": "2026-10-18T04:42:12.344Z"
 }
