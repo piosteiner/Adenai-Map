@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "b5b87638396da788379088851e8567ea4e03ac64",
+      "action": "create",
+      "type": "location",
+      "itemName": "Zentralgebirge",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:14:55.516Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:14:55.516Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create location: Zentralgebirge (by gm) - Initial location creation"
+    },
+    {
       "commitSha": "d8fd0a7f68b9dc8d51ee764d478fab2c8f0027da",
       "action": "update",
       "type": "location",
@@ -470,5 +483,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:14:53.332Z"
+  "lastUpdated": "2026-10-18T04:14:55.516Z"
 }
