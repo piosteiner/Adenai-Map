@@ -6432,7 +6432,50 @@
       },
       "fileSize": 92214,
       "mimeType": "image/jpeg"
+    },
+    "characters-undoh3n482fz": {
+      "id": "characters-undoh3n482fz",
+      "category": "characters",
+      "title": "Vesper",
+      "caption": "",
+      "credits": "https://pin.it/1VknM18q3",
+      "tags": [],
+      "uploadDate": "2026-10-18T13:10:20.665Z",
+      "sizes": {
+        "thumb": {
+          "filename": "undoh3n482fz-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/undoh3n482fz-thumb.webp",
+          "width": 118,
+          "height": 150
+        },
+        "small": {
+          "filename": "undoh3n482fz-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/undoh3n482fz-small.webp",
+          "width": 236,
+          "height": 300
+        },
+        "medium": {
+          "filename": "undoh3n482fz-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/undoh3n482fz-medium.webp",
+          "width": 472,
+          "height": 600
+        },
+        "large": {
+          "filename": "undoh3n482fz-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/undoh3n482fz-large.webp",
+          "width": 943,
+          "height": 1200
+        },
+        "original": {
+          "filename": "undoh3n482fz-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/undoh3n482fz-original.webp",
+          "width": 1080,
+          "height": 1374
+        }
+      },
+      "fileSize": 192471,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T13:10:03.506Z"
+  "lastUpdated": "2026-10-18T13:10:20.667Z"
 }
