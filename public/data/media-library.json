@@ -18403,7 +18403,50 @@
       },
       "fileSize": 293089,
       "mimeType": "image/png"
+    },
+    "creatures-8knz3u11pe49": {
+      "id": "creatures-8knz3u11pe49",
+      "category": "creatures",
+      "title": "chÃ¼geli",
+      "caption": "",
+      "credits": "https://se.pinterest.com/pin/579768152058569827/",
+      "tags": [],
+      "uploadDate": "2026-10-18T16:50:14.251Z",
+      "sizes": {
+        "thumb": {
+          "filename": "8knz3u11pe49-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/8knz3u11pe49-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "8knz3u11pe49-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/8knz3u11pe49-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "8knz3u11pe49-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/8knz3u11pe49-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "8knz3u11pe49-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/8knz3u11pe49-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "8knz3u11pe49-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/8knz3u11pe49-large.webp",
+          "width": 1200,
+          "height": 1200
+        }
+      },
+      "fileSize": 116584,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T16:44:19.692Z"
+  "lastUpdated": "2026-10-18T16:50:14.259Z"
 }
