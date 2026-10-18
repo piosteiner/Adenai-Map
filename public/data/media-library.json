@@ -6389,7 +6389,50 @@
       },
       "fileSize": 50929,
       "mimeType": "image/jpeg"
+    },
+    "characters-sb87jd8m6h0a": {
+      "id": "characters-sb87jd8m6h0a",
+      "category": "characters",
+      "title": "Anselm Halloran",
+      "caption": "",
+      "credits": "https://pin.it/1o6ejpQKt",
+      "tags": [],
+      "uploadDate": "2026-10-18T13:10:03.505Z",
+      "sizes": {
+        "thumb": {
+          "filename": "sb87jd8m6h0a-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/sb87jd8m6h0a-thumb.webp",
+          "width": 110,
+          "height": 150
+        },
+        "small": {
+          "filename": "sb87jd8m6h0a-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/sb87jd8m6h0a-small.webp",
+          "width": 220,
+          "height": 300
+        },
+        "medium": {
+          "filename": "sb87jd8m6h0a-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/sb87jd8m6h0a-medium.webp",
+          "width": 440,
+          "height": 600
+        },
+        "large": {
+          "filename": "sb87jd8m6h0a-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/sb87jd8m6h0a-large.webp",
+          "width": 735,
+          "height": 1002
+        },
+        "original": {
+          "filename": "sb87jd8m6h0a-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/sb87jd8m6h0a-large.webp",
+          "width": 735,
+          "height": 1002
+        }
+      },
+      "fileSize": 92214,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T13:09:46.190Z"
+  "lastUpdated": "2026-10-18T13:10:03.506Z"
 }
