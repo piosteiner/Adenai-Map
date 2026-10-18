@@ -24,12 +24,13 @@
       "type": "Feature",
       "properties": {
         "name": "Rena",
-        "description": "Hauptstadt von Adenai",
+        "description": "Rena ist die Hauptstadt von Adenai. Zumindest vom westlichen Teil von Adenai, denn der Osten hinter dem Gebirge ist faktisch immernoch sehr unabhängig. Auch der Süden mit [[Olecea]] als grösste Stadt ist weiterhin sehr selbstständig, auch wenn Rena hier bereits sehr enge Verbindungen hat. Und schliesslich ist da noch die grosse Insel von [[Tua Danar]]. Hier versucht Rena mit den expansiven Orten [[Neudalen]] und [[Elissastadt]] auf zwei unterschiedliche Arten Einfluss zu gewinnen. Insbesondere [[Neudalen]] ist aktuell in aller Munde, da dort [[Letizia Griswold|Griswolds]] Konstruktionen eingesetzt werden und ein Krieg herrscht.",
         "contentUrl": null,
         "image": "",
         "region": "rena_region",
         "type": "city",
-        "visited": false
+        "visited": false,
+        "images": []
       },
       "geometry": {
         "type": "Point",
