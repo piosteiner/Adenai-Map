@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "784fd79bd46753a69228e6c6ce7a28f12340c305",
+      "action": "create",
+      "type": "character",
+      "itemName": "Niall",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:16:26.924Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:16:26.924Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Niall (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "65a927897dac18a424067c91ccf8b564d97fbc8d",
       "action": "create",
       "type": "character",
@@ -574,5 +587,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:16:24.770Z"
+  "lastUpdated": "2026-10-18T04:16:26.924Z"
 }
