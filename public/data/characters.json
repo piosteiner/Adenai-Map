@@ -2841,7 +2841,25 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "shiho",
+      "name": "Shiho",
+      "title": "Shiho Chiho, Forscherin",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "[[Minfilia]]s Tochter. Forschte mit [[Aykan]] und [[Naos]] und reiste mit ihrem Schiff, dem [[Gelber Otter|Gelben Otter]], um ihre Erkenntnisse zu verbreiten, bis sie – wohl von den [[Sandschreiter]]n – ermordet wurde. Ihr Tagebuch ist [[Das blaue Juwel des Nachthimmels]].",
+      "images": [],
+      "image": "",
+      "status": "dead",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:41:53.974Z",
+      "updatedAt": "2026-10-18T04:41:53.974Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:51.910Z"
+  "lastUpdated": "2026-10-18T04:41:53.974Z"
 }
