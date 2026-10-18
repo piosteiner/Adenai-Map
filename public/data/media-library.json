@@ -6562,7 +6562,50 @@
       "fileSize": 87657,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-18T13:12:08.999Z"
+    },
+    "characters-52lnf3dpdv5c": {
+      "id": "characters-52lnf3dpdv5c",
+      "category": "characters",
+      "title": "colette pinet 3",
+      "caption": "",
+      "credits": "https://pin.it/2B2VSmh76",
+      "tags": [],
+      "uploadDate": "2026-10-18T13:12:16.769Z",
+      "sizes": {
+        "thumb": {
+          "filename": "52lnf3dpdv5c-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/52lnf3dpdv5c-thumb.webp",
+          "width": 120,
+          "height": 150
+        },
+        "small": {
+          "filename": "52lnf3dpdv5c-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/52lnf3dpdv5c-small.webp",
+          "width": 240,
+          "height": 300
+        },
+        "medium": {
+          "filename": "52lnf3dpdv5c-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/52lnf3dpdv5c-medium.webp",
+          "width": 480,
+          "height": 600
+        },
+        "large": {
+          "filename": "52lnf3dpdv5c-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/52lnf3dpdv5c-large.webp",
+          "width": 736,
+          "height": 920
+        },
+        "original": {
+          "filename": "52lnf3dpdv5c-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/52lnf3dpdv5c-large.webp",
+          "width": 736,
+          "height": 920
+        }
+      },
+      "fileSize": 63109,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T13:12:08.999Z"
+  "lastUpdated": "2026-10-18T13:12:16.771Z"
 }
