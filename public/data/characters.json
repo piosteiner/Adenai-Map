@@ -2651,7 +2651,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:41:33.782Z",
       "updatedAt": "2026-10-18T04:41:33.782Z"
+    },
+    {
+      "id": "simon_alexander",
+      "name": "Simon-Alexander",
+      "title": "Tasbors Saisonsalamander",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "[[Tasbor]]s Salamander, seit der 8. Sitzung bei den [[VsuzH]]. Leckt gerne an [[Blechdose]].",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "VsuzH",
+      "relationship": "party",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:41:35.735Z",
+      "updatedAt": "2026-10-18T04:41:35.735Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:33.782Z"
+  "lastUpdated": "2026-10-18T04:41:35.735Z"
 }
