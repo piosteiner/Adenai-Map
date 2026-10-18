@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "044f3d09e8f180bbdf66ef34272a5e6f65d293e5",
+      "action": "create",
+      "type": "character",
+      "itemName": "Alice",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:41:29.965Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:41:29.965Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Alice (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "25f411c6bc8d3b894aa872f7036c101cca76dc0c",
       "action": "create",
       "type": "character",
@@ -600,5 +613,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:16:29.122Z"
+  "lastUpdated": "2026-10-18T04:41:29.965Z"
 }
