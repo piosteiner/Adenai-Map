@@ -3488,7 +3488,7 @@
       "title": "Entdecker und Kartograph",
       "placeOfOrigin": "",
       "coordinates": null,
-      "description": "Ein sehr aktiver Entdecker und Kartograph, der vor etwa 120 Jahren lebte und das [[Feywild]] besucht haben soll. Seine Karte des Underdark kopierte [[Azo]]; die [[VsuzH]] durchforsteten in der Traumwelt sein Gedächtnis. Vorfahr von [[Nele]].",
+      "description": "Ein sehr aktiver Entdecker und Kartograph, der vor etwa 120 Jahren lebte und das [[Feywild]] besucht haben soll. Seine Karte des Underdark kopierte [[Azo]]; die [[VsuzH]] durchforsteten in der Traumwelt sein Gedächtnis. Vorfahr von [[Nele Wandermann]].",
       "images": [],
       "image": "",
       "status": "dead",
@@ -3501,22 +3501,25 @@
       "updatedAt": "2026-10-18T04:42:49.859Z"
     },
     {
-      "id": "nele",
-      "name": "Nele",
-      "title": "Nele Wandermann",
+      "id": "nele_wandermann",
+      "name": "Nele Wandermann",
+      "title": "",
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Nachfahrin von [[Jaćek Wandermann]] und ehemalige Untermieterin von [[Tasbor]]. Macht in [[Wesdalen]] Probleme und wird von Griswolds Leuten gesucht; reiste als «Geist» blind auf dem Schiff der [[VsuzH]] mit. Weiss von einem Griswold-Schiff mit einem [[Mondstein]], das bei der [[Glasinsel]] unterging.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/hf5nqnpw64cq-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/hf5nqnpw64cq-small.webp",
       "status": "alive",
       "faction": "",
-      "relationship": "neutral",
+      "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:42:51.792Z",
-      "updatedAt": "2026-10-18T04:42:51.792Z"
+      "updatedAt": "2026-10-18T16:09:07.605Z"
     },
     {
       "id": "vanischa",
@@ -3824,7 +3827,7 @@
       "title": "Erisa Bulan, Forschungsdirektorin",
       "placeOfOrigin": "",
       "coordinates": null,
-      "description": "Direktorin in Griswolds Forschungsanlage. Vermutete [[Nele]] hinter einem Einbruchsversuch und ist [[Taspipor]] gegenüber recht fürsorglich. Teil der Entourage von [[Letizia Griswold]].",
+      "description": "Direktorin in Griswolds Forschungsanlage. Vermutete [[Nele Wandermann]] hinter einem Einbruchsversuch und ist [[Taspipor]] gegenüber recht fürsorglich. Teil der Entourage von [[Letizia Griswold]].",
       "images": [],
       "image": "",
       "status": "alive",
@@ -3987,5 +3990,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:06:33.868Z"
+  "lastUpdated": "2026-10-18T16:09:07.605Z"
 }
