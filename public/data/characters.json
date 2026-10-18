@@ -2179,14 +2179,17 @@
       "coordinates": null,
       "description": "",
       "image": "https://adenai-admin.piogino.ch/media/blsimdbgw1d9-small.webp",
-      "status": "unknown",
+      "status": "alive",
       "faction": "",
-      "relationship": "unknown",
+      "relationship": "ally",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
       "createdAt": "2026-01-17T15:12:07.988Z",
-      "updatedAt": "2026-01-17T15:12:07.988Z"
+      "updatedAt": "2026-10-18T16:36:05.000Z",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/blsimdbgw1d9-small.webp"
+      ]
     },
     {
       "id": "lulloq_doro",
@@ -2196,14 +2199,17 @@
       "coordinates": null,
       "description": "",
       "image": "https://adenai-admin.piogino.ch/media/monvonnobeq9-small.webp",
-      "status": "unknown",
+      "status": "alive",
       "faction": "",
-      "relationship": "unknown",
+      "relationship": "ally",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
       "createdAt": "2026-01-17T15:12:30.476Z",
-      "updatedAt": "2026-01-17T15:12:30.476Z"
+      "updatedAt": "2026-10-18T16:36:05.000Z",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/monvonnobeq9-small.webp"
+      ]
     },
     {
       "id": "zo_ob",
@@ -2399,42 +2405,6 @@
       "currentLocation": null,
       "createdAt": "2026-10-17T19:45:01.093Z",
       "updatedAt": "2026-10-18T15:59:10.494Z"
-    },
-    {
-      "id": "lulloq_doro",
-      "name": "Lulloq Doro",
-      "title": "",
-      "placeOfOrigin": "",
-      "coordinates": null,
-      "description": "",
-      "images": [],
-      "image": "",
-      "status": "alive",
-      "faction": "",
-      "relationship": "ally",
-      "firstMet": "",
-      "notes": "",
-      "movementHistory": [],
-      "createdAt": "2026-10-17T19:45:22.893Z",
-      "updatedAt": "2026-10-17T19:45:22.893Z"
-    },
-    {
-      "id": "emi_brach",
-      "name": "Emi Brach",
-      "title": "",
-      "placeOfOrigin": "",
-      "coordinates": null,
-      "description": "",
-      "images": [],
-      "image": "",
-      "status": "alive",
-      "faction": "",
-      "relationship": "ally",
-      "firstMet": "",
-      "notes": "",
-      "movementHistory": [],
-      "createdAt": "2026-10-17T19:45:35.561Z",
-      "updatedAt": "2026-10-17T19:45:35.561Z"
     },
     {
       "id": "elissa_iii_",
@@ -4035,5 +4005,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:30:58.748Z"
+  "lastUpdated": "2026-10-18T16:36:05.000Z"
 }

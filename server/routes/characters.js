@@ -407,6 +407,12 @@ router.post('/', requireAuth, async (req, res) => {
       };
     }
     
+    // one entry per id (the id is the name's letters): a second "Emi Brach" would share the first one's id — the CMS
+    // then selects both and saves into the first. Refused; the existing entry is the one to edit.
+    const same = currentContent.characters.find((c) => c.id === newCharacter.id);
+    if (same) {
+      return res.status(409).json({ success: false, error: `A character "${same.name}" already exists (id ${same.id}) — edit that one instead.`, existing: same.id });
+    }
     currentContent.characters.push(newCharacter);
     currentContent.lastUpdated = new Date().toISOString();
     
@@ -478,6 +484,13 @@ router.put('/:id', requireAuth, async (req, res) => {
     
     // Get old character for change detection
     const oldCharacter = currentContent.characters[characterIndex];
+
+    // a new name gives a new id: not one another character has already (see the create route)
+    const newId = req.body.name.toLowerCase().replace(/[^a-z0-9]/g, '_');
+    const clash = currentContent.characters.find((c, i) => i !== characterIndex && c.id === newId);
+    if (clash) {
+      return res.status(409).json({ success: false, error: `The name "${req.body.name}" belongs to another character already ("${clash.name}", id ${clash.id}) — merge them or choose another name.`, existing: clash.id });
+    }
     
     // Update the character data with place of origin coordinates
     const updatedCharacter = {
