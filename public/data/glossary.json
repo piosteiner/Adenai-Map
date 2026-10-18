@@ -164,6 +164,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_f0e973ad4a",
+      "name": "Glasinsel",
+      "aliases": [],
+      "category": "Ort",
+      "description": "Eine Insel, um die sich Wetteranomalien häufen. Dort sank laut [[Nele]] ein Griswold-Schiff mit einem [[Mondstein]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:28.022Z",
+      "updatedAt": "2026-10-18T04:41:28.022Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_d411a2e38a",
       "name": "Glüebli",
       "aliases": [
@@ -444,5 +457,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:26.924Z"
+  "lastUpdated": "2026-10-18T04:41:28.022Z"
 }
