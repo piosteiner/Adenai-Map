@@ -3452,16 +3452,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Ein kettenrauchendes, neurotisches Eichhörnchen im [[Mpako]] bei [[Akónetchie]]. Freute sich unverhohlen über den Tod seines unheimlichen Mitbewohners «Stinkepopel».",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/755sjo3nr59u-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/755sjo3nr59u-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:42:47.571Z",
-      "updatedAt": "2026-10-18T04:42:47.571Z"
+      "updatedAt": "2026-10-18T16:05:06.133Z"
     },
     {
       "id": "ja_ek_wandermann",
@@ -3968,5 +3971,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:01:50.808Z"
+  "lastUpdated": "2026-10-18T16:05:06.133Z"
 }
