@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "a58469788972d1e2de14eff58e8ac8a009bda28a",
+      "action": "create",
+      "type": "character",
+      "itemName": "Fitcher",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:41:51.896Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:41:51.896Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Fitcher (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "8baac54dc1fb6153d03217166bf19fc0d543b81d",
       "action": "create",
       "type": "character",
@@ -743,5 +756,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:50.082Z"
+  "lastUpdated": "2026-10-18T04:41:51.896Z"
 }
