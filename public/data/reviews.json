@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "991b89eb76fba6cc095900ca2e86cafd7d8750d5",
+      "action": "update",
+      "type": "character",
+      "itemName": "Greda",
+      "user": "gm",
+      "timestamp": "2026-10-18T17:22:04.772Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T17:22:04.772Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: greda (by gm) - updated description"
+    },
+    {
       "commitSha": "c83b5df5fe3bb630f4de3c43a778b03d86feb4fe",
       "action": "update",
       "type": "character",
@@ -2121,5 +2134,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T17:21:41.379Z"
+  "lastUpdated": "2026-10-18T17:22:04.772Z"
 }
