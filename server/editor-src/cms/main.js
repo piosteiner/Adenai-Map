@@ -12,6 +12,7 @@ import { locationsView } from './views/locations';
 import { charactersView } from './views/characters';
 import { protocolsView } from './views/protocols';
 import { glossaryView } from './views/glossary';
+import { proposalsView, loadPending } from './views/proposals';
 
 // md-editor.js finds link targets through the classic CMS's modules: give it the same interface
 window.adminCharacters = { getCharacters: () => store.characters };
@@ -23,8 +24,9 @@ const AREAS = [
     { id: 'characters', label: 'Characters', icon: '👤', count: () => store.characters.length },
     { id: 'glossary', label: 'Glossary', icon: '📖', count: () => store.terms.length },
     { id: 'protocols', label: 'Protocols', icon: '📜', count: () => '' },
+    { id: 'proposals', label: 'Proposals', icon: '⏳', count: () => (store.pending?.length ? store.pending.length : '') },
 ];
-const VIEWS = { locations: locationsView, characters: charactersView, glossary: glossaryView, protocols: protocolsView };
+const VIEWS = { locations: locationsView, characters: charactersView, glossary: glossaryView, protocols: protocolsView, proposals: proposalsView };
 const CLASSIC = [
     { label: 'Media', href: '/#media' },
     { label: 'Changelog', href: '/#changelog' },
@@ -105,7 +107,7 @@ function loginDialog() {
         try {
             await api('/api/login', { method: 'POST', body: { username: user.value, password: pass.value } });
             close();
-            await reload('auth');
+            await reload('auth'); if (store.auth.authenticated) await loadPending(); else store.pending = [];
             toast(`Logged in as ${store.auth.username}`);
             route(true);
         } catch (e2) { err.textContent = e2.status === 401 ? 'Wrong user name or password' : e2.message; err.hidden = false; }
@@ -122,7 +124,7 @@ function loginDialog() {
 async function logout() {
     if (app.currentView()?.isDirty() && !(await (await import('./dom')).confirmDialog('Log out and discard the unsaved changes?', { ok: 'Log out', danger: true }))) return;
     await api('/api/logout', { method: 'POST' }).catch(() => {});
-    await reload('auth');
+    await reload('auth'); if (store.auth.authenticated) await loadPending(); else store.pending = [];
     route(true);
 }
 
@@ -174,6 +176,8 @@ onChange(() => { drawTabs(); drawUser(); });
 installHoverPreview();
 window.DateField.observe(document.body);
 main.append(h('div.placeholder', {}, h('p', { text: 'Loading…' })));
+app.drawTabs = () => drawTabs();
 loadAll()
+    .then(() => (store.auth.authenticated ? loadPending() : null))
     .then(() => route(true))
     .catch((err) => main.replaceChildren(h('div.placeholder', {}, h('p.error', { text: `Could not load the data: ${err.message}` }))));

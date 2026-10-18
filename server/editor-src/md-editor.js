@@ -31,7 +31,7 @@ function entries() {
     }));
     // glossary terms, and each alias as its own suggestion that links to the term: [[Term|alias]]
     const terms = (window.adminGlossary?.getTerms?.() || []).flatMap((t) => [
-        { kind: 'term', name: t.name, detail: ['Glossar', t.category].filter(Boolean).join(' · ') },
+        { kind: 'term', name: t.name, detail: t.pending ? `⏳ Vorschlag · ${t.kindLabel || ''}` : ['Glossar', t.category].filter(Boolean).join(' · ') },
         ...(t.aliases || []).map((a) => ({ kind: 'term', name: t.name, alias: a, detail: `→ ${t.name}` })),
     ]);
     return [...chars, ...locs, ...terms].filter((e) => e.name);
@@ -57,11 +57,33 @@ async function linkCompletions(context) {
         .sort((a, b) => a.score - b.score || (a.e.alias || a.e.name).localeCompare(b.e.alias || b.e.name, 'de'))
         .slice(0, 30);
     const after = context.state.sliceDoc(context.pos, context.pos + 2); // "]]" already typed after the cursor?
+    const options = ranked.map(({ e }) => ({ label: e.alias || e.name, detail: e.detail, type: 'text', apply: e.alias ? `[[${e.name}|${e.alias}]]` : `[[${e.name}]]` }));
+    // a name nothing has yet: offer to create an entry (only where the page provides window.AdenaiEditor.onCreateEntry —
+    // on the map: a proposal the DM confirms). The link goes in once it exists.
+    const typed = m.text.slice(2).trim();
+    const create = window.AdenaiEditor?.onCreateEntry;
+    if (create && typed.length >= 2 && !entries().some((e) => fold(e.alias || e.name) === fold(typed))) {
+        options.push({
+            label: `＋ „${typed}“ neu anlegen…`, detail: 'Vorschlag', type: 'text', boost: -99,
+            apply: (view, completion, from, to) => {
+                Promise.resolve(create(typed)).then((name) => {
+                    if (!name) return;
+                    // the text may have moved meanwhile (others typing): put the link where "[[typed" is now
+                    const doc = view.state.doc.toString();
+                    const at = doc.lastIndexOf(`[[${m.text.slice(2)}`, Math.max(from, view.state.selection.main.head));
+                    const start = at >= 0 ? at : view.state.selection.main.head;
+                    const end = at >= 0 ? start + m.text.length + (doc.slice(start + m.text.length, start + m.text.length + 2) === ']]' ? 2 : 0) : start;
+                    view.dispatch({ changes: { from: start, to: end, insert: `[[${name}]]` }, selection: { anchor: start + name.length + 4 } });
+                    view.focus();
+                });
+            },
+        });
+    }
     return {
         from: m.from,
         to: after === ']]' ? context.pos + 2 : context.pos,
         filter: false, // ranked above; the typed "[[ako" wouldn't match "Akónetchie" by CodeMirror's own filter
-        options: ranked.map(({ e }) => ({ label: e.alias || e.name, detail: e.detail, type: 'text', apply: e.alias ? `[[${e.name}|${e.alias}]]` : `[[${e.name}]]` })),
+        options,
     };
 }
 
@@ -317,6 +339,6 @@ window.renderRichText = (text) => (window.RichText ? window.RichText.render(text
 document.addEventListener('click', (e) => { if (e.target.closest?.('a.wiki-link')) e.preventDefault(); });
 
 window.AdenaiLive = AdenaiLive;
-window.AdenaiEditor = { enhance, enhanceAll, resolve, viewOf: (textarea) => views.get(textarea) };
+window.AdenaiEditor = { ...(window.AdenaiEditor || {}), enhance, enhanceAll, resolve, viewOf: (textarea) => views.get(textarea) };
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => enhanceAll());
 else enhanceAll();

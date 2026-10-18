@@ -13,9 +13,9 @@
             .map((l) => l.feature?.properties?.name || l.name)
             .find((n) => fold(n) === key);
         if (location) return { kind: 'location', name: location };
-        // glossary terms, by name or alias (components/glossary.js)
+        // glossary terms, by name or alias, and the players' proposals (components/glossary.js)
         const term = window.mapGlossary?.find(name);
-        if (term) return { kind: 'term', name: term.name };
+        if (term) return { kind: term.pending ? 'pending' : 'term', name: term.name };
         return null;
     }
 
@@ -60,7 +60,7 @@
         }
         pinSource(link);
         if (hit.kind === 'character') window.characterSystem.focusCharacter(hit.name);
-        else if (hit.kind === 'term') window.mapGlossary.open(hit.name);
+        else if (hit.kind === 'term' || hit.kind === 'pending') window.mapGlossary.open(hit.name);
         else window.locationSystem.focusLocation(hit.name);
     });
 
@@ -77,7 +77,7 @@
                 return { kind: 'location', name: p.name, texts: [p.description] };
             }),
         ];
-        sources.push(...(window.mapGlossary?.terms || []).map((t) => ({ kind: 'term', name: t.name, texts: [t.description] })));
+        sources.push(...(window.mapGlossary?.allTerms?.() || window.mapGlossary?.terms || []).map((t) => ({ kind: t.pending ? 'pending' : 'term', name: t.name, texts: [t.description] })));
         return sources
             .filter((s) => s.name && fold(s.name) !== key && s.texts.some((t) => RichText.links(t).some((n) => keys.has(fold(n)))))
             .sort((a, b) => a.name.localeCompare(b.name, 'de'));

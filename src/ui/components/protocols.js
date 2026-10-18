@@ -184,6 +184,7 @@ class MapProtocols {
 
     lockDevice(message = '') {
         this.token = null;
+        window.mapGlossary?.setPending([]);
         this.stopLive();
         this.sessions = [];
         this.listEl = null;
@@ -210,6 +211,7 @@ class MapProtocols {
                 const data = await res.json().catch(() => ({}));
                 if (!res.ok) throw new Error(data.error || `Fehler ${res.status}`);
                 this.token = { token: data.token, expiresAt: data.expiresAt };
+                window.mapGlossary?.loadPending();
                 this.open();
             } catch (e2) {
                 err.textContent = e2.message === 'Wrong password' ? 'Falsches Passwort.' : e2.message;
@@ -228,11 +230,15 @@ class MapProtocols {
         // md-editor.js finds link targets the way the CMS offers them
         window.adminCharacters ||= { getCharacters: () => window.characterSystem?.getCharacters?.() || [] };
         window.adminLocations ||= { getLocations: () => this.locations().map((name) => ({ properties: { name } })) };
-        window.adminGlossary ||= { getTerms: () => window.mapGlossary?.terms || [] };
+        window.adminGlossary ||= { getTerms: () => window.mapGlossary?.allTerms?.() || window.mapGlossary?.terms || [] };
         this.editorLoading ||= new Promise((resolve, reject) => {
             const sc = document.createElement('script');
-            sc.src = 'src/vendor/md-editor.js?v=4';
-            sc.onload = () => resolve();
+            sc.src = 'src/vendor/md-editor.js?v=5';
+            sc.onload = () => {
+                // "[[Name" for something without an entry: players propose one (components/glossary.js)
+                window.AdenaiEditor.onCreateEntry = (typed) => window.mapGlossary?.createEntry(typed);
+                resolve();
+            };
             sc.onerror = () => { this.editorLoading = null; reject(new Error('Editor konnte nicht geladen werden')); };
             document.head.appendChild(sc);
         });
@@ -259,6 +265,7 @@ class MapProtocols {
 
     // what the server tells every device: a session was published / created / discarded, a draft changed
     onNews(m) {
+        if (m.t === 'pending') return window.mapGlossary?.setPending(m.entries);
         if (m.t === 'gone') return this.removeSession(m.id);
         const i = this.sessions.findIndex((x) => x.id === (m.session?.id || m.id));
         if (m.t === 'session') {
@@ -274,6 +281,11 @@ class MapProtocols {
         if (sec && !sec.editing) this.drawSection(id);
         else if (sec) this.drawEditState(id);
         this.drawList();
+    }
+
+    // links render differently once a name has an entry (a new proposal): the sessions not being edited are drawn again
+    redrawAll() {
+        for (const [id, sec] of this.sections) if (!sec.editing) this.drawSection(id);
     }
 
     removeSession(id) {
@@ -456,6 +468,21 @@ class MapProtocols {
         }
         sec.el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
         this.setActive(id);
+    }
+
+    // From the map's search: the panel opens with query in its search field (matches highlighted) at the first match in
+    // session id — or, without one, at the first match at all. Enter goes on from there.
+    async openSearch(id, query) {
+        await this.open();
+        if (!this.listEl) return;
+        this.search.value = query;
+        this.filter();
+        this.findQuery = null;
+        this.find();
+        if (!this.findMarks?.length) return;
+        const first = id ? this.findMarks.findIndex((m) => m.closest('.pp-session')?.dataset.id === id) : 0;
+        this.findIndex = Math.max(0, first) - 1;
+        this.step(1);
     }
 
     // ---------- highlighting ----------
@@ -756,7 +783,8 @@ class MapProtocols {
             update();
         };
         suggest('players', () => this.suggestions.players);
-        suggest('places', () => [...new Set([...this.locations(), ...this.suggestions.places])].sort((a, b) => a.localeCompare(b, 'de')));
+        const proposedPlaces = () => (window.mapGlossary?.pending || []).filter((p) => p.kind === 'location').map((p) => p.name);
+        suggest('places', () => [...new Set([...this.locations(), ...proposedPlaces(), ...this.suggestions.places])].sort((a, b) => a.localeCompare(b, 'de')));
         check();
     }
 

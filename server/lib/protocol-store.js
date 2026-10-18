@@ -275,6 +275,41 @@ function renameLinks(oldName, newName, by = 'rename') {
     });
 }
 
+// A proposed entry was rejected: [[name]] / [[name|text]] become plain text again in titles and texts (published and
+// drafts); the previous published text goes into the history. Returns the number of sessions changed.
+function unlinkName(name, by = 'unlink') {
+    const key = String(name).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+    const fold = (x) => String(x).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+    const plain = (text) => String(text || '').replace(/\[\[([^\[\]|\n]+?)(?:\|([^\[\]\n]+?))?\]\]/g, (m, target, label) => (fold(target) === key ? (label || target) : m));
+    return serial(async () => {
+        const data = await load();
+        const changedSessions = [];
+        const now = new Date().toISOString();
+        for (const s of data.sessions) {
+            let touched = false;
+            const title = plain(s.title);
+            const content = plain(s.content);
+            if (title !== s.title || content !== s.content) {
+                const { history = [], ...previous } = s;
+                if (s.published !== false) s.history = [previous, ...history].slice(0, HISTORY_MAX);
+                Object.assign(s, { title, content, updatedAt: now, updatedBy: by, updatedVia: 'unlink' });
+                touched = true;
+            }
+            if (s.draft) {
+                const dt = plain(s.draft.values.title);
+                const dc = plain(s.draft.values.content);
+                if (dt !== s.draft.values.title || dc !== s.draft.values.content) { Object.assign(s.draft.values, { title: dt, content: dc }); touched = true; }
+            }
+            if (touched) changedSessions.push(s);
+        }
+        if (changedSessions.length) {
+            await writeJson(FILE, data);
+            changedSessions.forEach((s) => events.emit('changed', s));
+        }
+        return changedSessions.length;
+    });
+}
+
 // Names used in sessions so far, most frequent first (suggestions for the players and places fields)
 async function suggestions() {
     const count = { players: new Map(), places: new Map() };
@@ -292,6 +327,6 @@ const settings = () => readJson(SETTINGS, { passwordHash: null, passwordVersion:
 const saveSettings = (s) => serial(() => writeJson(SETTINGS, s));
 
 module.exports = {
-    list, get, create, save, saveDraft, publish, discardDraft, remove, renameLinks, players, suggestions, settings, saveSettings,
+    list, get, create, save, saveDraft, publish, discardDraft, remove, renameLinks, unlinkName, players, suggestions, settings, saveSettings,
     working, pick, strip, FIELDS, events, DIR,
 };

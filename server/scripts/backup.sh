@@ -36,7 +36,7 @@ done
 # Secrets and accounts: only when their content changed (gpg output differs every run, so compare hashes)
 install -d "$OFFSITE/server"
 changed=0
-for rel in config/users.js .env data/protocols.json data/protocol-settings.json data/protocols-deleted.json; do
+for rel in config/users.js .env data/protocols.json data/protocol-settings.json data/protocols-deleted.json data/pending-entries.json; do
   src="$SERVER/$rel"
   [ -f "$src" ] || continue
   name="$(echo "$rel" | tr '/' '_')"

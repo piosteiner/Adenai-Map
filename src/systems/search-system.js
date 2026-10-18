@@ -1,4 +1,5 @@
-// search-system.js - Search Functionality for Characters and Locations
+// search-system.js - Search Functionality for Characters and Locations, glossary terms and — on a device unlocked for
+// them — the session minutes (components/protocols.js): a session opens with the search term highlighted
 class SearchSystem {
     constructor() {
         this.searchIndex = [];
@@ -76,7 +77,8 @@ class SearchSystem {
             return;
         }
 
-        const results = this.searchIndex
+        const extra = (window.mapGlossary?.allTerms?.() || window.mapGlossary?.terms || []).map((t) => ({ name: t.name, desc: t.description || '', type: 'term', term: t }));
+        const results = [...this.searchIndex, ...extra]
             .map(item => ({
                 ...item,
                 relevanceScore: this.calculateRelevanceScore(item, queryLower),
@@ -85,8 +87,10 @@ class SearchSystem {
             .filter(item => item.relevanceScore > 0)
             .sort((a, b) => this.sortSearchResults(a, b, queryLower));
 
-        if (results.length > 0) {
+        const sessions = this.searchMinutes(query);
+        if (results.length > 0 || sessions.length) {
             this.renderSearchResults(results.slice(0, 15)); // Limit to top 15 results
+            this.renderMinutesResults(sessions, query);
             this.dropdown.style.display = 'block';
         } else {
             this.showNoResults();
@@ -223,9 +227,73 @@ class SearchSystem {
         });
     }
 
+    // Sessions whose title or text contains the query (accents don't matter), most matches first
+    searchMinutes(query) {
+        const mp = window.mapProtocols;
+        const q = query.trim();
+        if (!mp?.unlocked || !mp.sessions?.length || q.length < 3) return [];
+        const re = new RegExp(MapProtocols.loose(q), 'giu');
+        const plain = (t) => MapProtocols.plain(String(t || '')).replace(/\\(.)/g, '$1');
+        return mp.sessions
+            .filter((s) => s.published !== false)
+            .map((s) => {
+                const text = `${plain(s.title)}\n${plain(s.content)}`;
+                const hits = [...text.matchAll(re)];
+                return { s, n: hits.length, at: hits[0]?.index ?? -1, text };
+            })
+            .filter((x) => x.n)
+            .sort((a, b) => b.n - a.n || b.s.number - a.s.number);
+    }
+
+    renderMinutesResults(found, query) {
+        if (!found.length) return;
+        const esc = (t) => RichText.escape(t);
+        const head = document.createElement('div');
+        head.className = 'dropdown-heading';
+        head.textContent = `📜 Protokolle · ${found.length} Sitzung${found.length === 1 ? '' : 'en'}`;
+        this.dropdown.appendChild(head);
+        const re = new RegExp(MapProtocols.loose(query.trim()), 'giu');
+        for (const x of found.slice(0, 6)) {
+            const from = Math.max(0, x.at - 50);
+            let snippet = x.text.slice(from, x.at + 90).replace(/\s+/g, ' ');
+            snippet = esc(snippet).replace(re, (m) => `<mark>${m}</mark>`);
+            const item = document.createElement('div');
+            item.innerHTML = `
+                <div class="dropdown-item session-result">
+                    <div class="dropdown-text">
+                        <div class="result-header"><strong>Sitzung ${x.s.number}${x.s.title ? ` · ${esc(MapProtocols.plain(x.s.title))}` : ''}</strong> <span class="session-hits">${x.n}×</span></div>
+                        <div class="location-preview">${from ? '…' : ''}${snippet}…</div>
+                    </div>
+                </div>`;
+            item.addEventListener('click', () => this.selectSearchResult({ type: 'session', session: x.s, query }));
+            this.dropdown.appendChild(item);
+        }
+        const all = document.createElement('div');
+        all.innerHTML = `<div class="dropdown-item session-all">🔎 Alle ${found.reduce((n, x) => n + x.n, 0)} Treffer im Protokoll zeigen</div>`;
+        all.addEventListener('click', () => this.selectSearchResult({ type: 'session', session: null, query }));
+        this.dropdown.appendChild(all);
+    }
+
+    renderTermResult(result, query) {
+        const t = result.term;
+        const desc = MapProtocols.plain(t.description || '').replace(/\\(.)/g, '$1');
+        const kind = t.pending ? '⏳ Vorschlag' : (t.category || 'Glossar');
+        return `
+            <div class="dropdown-item term-result" data-relevance="${result.relevanceScore}">
+                <div class="result-avatar"><div class="character-placeholder">📖</div></div>
+                <div class="dropdown-text">
+                    <div class="result-header"><strong>${this.highlightText(RichText.escape(t.name), query)}</strong></div>
+                    <div class="character-title">${RichText.escape(kind)}</div>
+                    ${desc ? `<div class="character-preview">${this.highlightText(RichText.escape(desc.substring(0, 120)), query)}${desc.length > 120 ? '...' : ''}</div>` : ''}
+                </div>
+            </div>
+        `;
+    }
+
     renderSearchResult(result) {
         const query = this.searchInput.value.toLowerCase();
         
+        if (result.type === 'term') return this.renderTermResult(result, query);
         if (result.type === 'character') {
             return this.renderCharacterResult(result, query);
         } else {
@@ -342,6 +410,13 @@ class SearchSystem {
     }
 
     selectSearchResult(result) {
+        if (result.type === 'term' || result.type === 'session') {
+            if (result.type === 'term') window.mapGlossary?.open(result.term.name);
+            else window.mapProtocols?.openSearch(result.session?.id || null, result.query);
+            this.dropdown.style.display = 'none';
+            this.searchInput.blur();
+            return;
+        }
         MapUtils.withMap((map) => {
             if (result.type === 'character') {
                 // For characters, use character system to focus
@@ -349,8 +424,8 @@ class SearchSystem {
                 window.characterSystem.focusCharacter(result.character.name);
             } else {
                 // For locations, use locations system if available
-                if (window.locationsSystem && window.locationsSystem.focusLocation) {
-                    window.locationsSystem.focusLocation(result.name);
+                if (window.locationSystem && window.locationSystem.focusLocation) {
+                    window.locationSystem.focusLocation(result.name);
                 } else {
                     // Fallback to direct map navigation
                     map.setView([result.latlng.lat, result.latlng.lng], Math.max(map.getZoom(), 1));

@@ -280,3 +280,11 @@ mark {
   background-color: rgba(168, 85, 247, 0.3);
   color: #c4b5fd;
 }
+
+/* Minutes in the search (search-system.js): a heading, sessions with a snippet, "all matches" */
+.dropdown-heading { padding: 8px 10px 4px; font-size: 12px; font-weight: 700; color: var(--text-muted); border-top: 1px solid var(--dropdown-border); }
+.session-result .dropdown-text { padding-left: 4px; }
+.session-hits { font-size: 11px; font-weight: 600; color: var(--text-muted); }
+.session-all { justify-content: center; font-size: 13px; font-weight: 600; color: #6d28d9; cursor: pointer; }
+[data-theme="dark"] .session-all { color: #b49cff; }
+.term-result .character-placeholder { font-size: 18px; }

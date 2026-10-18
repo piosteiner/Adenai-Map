@@ -2,7 +2,7 @@
 //
 //   const live = AdenaiLive.connect({ url, token, onStatus, onMessage });   // token: the map's protocol token; the CMS
 //                                                                          // uses its login. onMessage: session news
-//                                                                          // ({ t: 'session' | 'draft' | 'gone' })
+//                                                                          // ({ t: 'session' | 'draft' | 'gone' | 'pending' })
 //   const room = live.join(sessionId, { name, color });           // { doc, text, fields, awareness, undoManager, ready, leave }
 //
 // One WebSocket for all rooms. Local changes go out as they happen; while offline they stay in the Yjs document and are
@@ -42,7 +42,7 @@ export function connect({ url, token = null, onStatus = () => {}, onMessage = ()
                 return;
             }
             if (m.t === 'error' && m.error === 'locked') { closedByUs = true; setStatus('locked'); return; }
-            if (m.t === 'session' || m.t === 'draft' || m.t === 'gone') onMessage(m);
+            if (m.t === 'session' || m.t === 'draft' || m.t === 'gone' || m.t === 'pending') onMessage(m);
             const room = rooms.get(m.id);
             if (!room) return;
             if (m.t === 'sync') room.onSync(m);

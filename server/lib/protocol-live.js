@@ -189,6 +189,8 @@ store.events.on('changed', (session, { published = false } = {}) => {
     if (entry && !entry.gone && !published) applySession(entry, store.working(session), 'server');
     everyone({ t: 'session', session: store.strip(session) });
 });
+// proposed entries (lib/pending-store.js): every device gets the new list
+require('./pending-store').events.on('changed', (entries) => everyone({ t: 'pending', entries }));
 store.events.on('draft', (session) => everyone({ t: 'draft', id: session.id, published: session.published !== false, draft: draftInfo(session) }));
 store.events.on('deleted', async (id) => {
     const entry = docs.get(id);

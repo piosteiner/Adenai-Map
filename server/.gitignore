@@ -133,6 +133,7 @@ data/journeys.json
 data/protocols*.json
 data/protocol-settings.json
 data/protocol-live/
+data/pending-entries*.json
 
 # Generated client files (written by journey/dynamics routes)
 client-sync/*

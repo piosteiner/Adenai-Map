@@ -196,3 +196,34 @@
 [data-theme="dark"] .pp-actions button.pp-publish { color: #1b1915; }
 /* the draft marker in light mode: darker amber for enough contrast on sepia */
 :root:not([data-theme="dark"]) .pp-draft, :root:not([data-theme="dark"]) .pp-item-draft, :root:not([data-theme="dark"]) .pp-warn { color: #8a5a10; }
+
+/* Proposals (components/glossary.js): links to them dashed amber, the note, the dialog to create one */
+.rich-text .wiki-link.wiki-pending { color: #8a5a10; text-decoration: underline dashed rgba(138, 90, 16, 0.6); text-underline-offset: 3px; }
+[data-theme="dark"] .rich-text .wiki-link.wiki-pending { color: #f0c066; text-decoration-color: rgba(240, 192, 102, 0.6); }
+.gl-pending .pp-item-title { color: #8a5a10; }
+[data-theme="dark"] .gl-pending .pp-item-title { color: #f0c066; }
+.gl-pending-note { margin: 0 0 12px; padding: 8px 10px; border-radius: 6px; background: rgba(245, 193, 61, 0.16); border: 1px solid rgba(196, 140, 0, 0.35); font-size: 13px; }
+.gl-create {
+  --input-bg: #fffdf8; --text-primary: #2b241b; --text-secondary: #6f6352; --border-color: #d9ccb2; --accent-primary: #6d28d9;
+  --focus-border: #6d28d9; --focus-ring: rgba(109, 40, 217, 0.22); --card-bg: #fffdf8; --bg-secondary: #f1e8d6; --tab-hover-bg: rgba(109, 40, 217, 0.1);
+  width: min(460px, calc(100vw - 32px)); padding: 18px 20px; border: 0; border-radius: 10px; background: #fbf7ee; color: #2b241b;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45); font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; z-index: 3000;
+}
+[data-theme="dark"] .gl-create {
+  --input-bg: #1f1c18; --text-primary: #f1e9da; --text-secondary: #b6a98f; --border-color: #3d362c; --accent-primary: #b49cff;
+  --focus-border: #b49cff; --card-bg: #24201b; --bg-secondary: #2a251f; --tab-hover-bg: rgba(180, 156, 255, 0.14);
+  background: #1b1915; color: #f1e9da;
+}
+.gl-create::backdrop { background: rgba(0, 0, 0, 0.45); }
+.gl-create h3 { margin: 0 0 12px; }
+.gl-create label, .gl-edit label { display: grid; gap: 4px; margin-bottom: 10px; font-weight: 600; font-size: 13px; }
+.gl-create input:not([type=radio]), .gl-create textarea, .gl-edit textarea { padding: 6px 8px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--input-bg); color: inherit; font: inherit; font-weight: 400; }
+.gl-create fieldset, .gl-edit fieldset { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0 0 10px; padding: 6px 10px 8px; border: 1px solid var(--border-color); border-radius: 6px; }
+.gl-create legend, .gl-edit legend { font-size: 13px; font-weight: 600; padding: 0 4px; }
+.gl-create label.gl-kind, .gl-edit label.gl-kind { display: flex; align-items: center; gap: 6px; margin: 0; font-weight: 400; font-size: 14px; }
+.gl-create-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; }
+.gl-create .pp-done, .gl-edit .pp-done { color: #fff; }
+[data-theme="dark"] .gl-create .pp-done, [data-theme="dark"] .gl-edit .pp-done { color: #1b1915; }
+.gl-create .pp-later, .gl-edit .pp-later { min-height: 30px; padding: 0 12px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--input-bg); color: inherit; font: inherit; cursor: pointer; }
+.gl-create .pp-error { color: #b3261e; margin: 0; }
+[data-theme="dark"] .gl-create .pp-error { color: #ff8a80; }
