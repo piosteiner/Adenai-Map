@@ -75,7 +75,16 @@ export function charactersView(app) {
         const description = markdown(d.description, { placeholder: 'Beschreibung… [[ verlinkt Charaktere und Orte', rows: 5 });
         const notes = markdown(d.notes, { placeholder: 'Notizen…', rows: 3 });
         description.readOnly = notes.readOnly = ro;
-        const gallery = createGallery({ urls: imagesOf(d), editable, onChange: () => track.check() });
+        // the cover, large beside the form (as big as the map below it) — follows the gallery: a new cover, a removed one
+        const portrait = h('div.side-block.portrait');
+        const drawPortrait = (urls) => {
+            const url = urls[0];
+            portrait.replaceChildren(url
+                ? h('a.portrait-link', { href: url, target: '_blank', rel: 'noopener', title: 'Open the image' }, h('img', { src: url, alt: d.name ? `Portrait of ${d.name}` : '' }))
+                : h('div.portrait-empty', {}, h('span', { text: '👤' }), h('span.muted', { text: editable ? 'No image yet — add one under Images.' : 'No image yet.' })));
+        };
+        drawPortrait(imagesOf(d));
+        const gallery = createGallery({ urls: imagesOf(d), editable, onChange: (list) => { drawPortrait(list); track.check(); } });
 
         const read = () => ({
             name: name.value.trim(), title: title.value.trim(), placeOfOrigin: origin.value, status: status.value,
@@ -150,6 +159,7 @@ export function charactersView(app) {
             h('div.detail-cols', {},
                 h('div.detail-main', {}, form, c ? movementsSection(c, editable) : h('p.muted.pad', { text: 'Movements can be added once the character is saved.' })),
                 h('aside.detail-side', {},
+                    portrait,
                     h('div.side-block', {}, h('h3', { text: c?.computedCurrentLocation ? `Now: ${c.computedCurrentLocation}` : 'On the map' }), map.el),
                     c ? h('div.side-block', {}, h('h3', { text: `Mentioned in (${refs.length})` }),
                         refs.length ? h('p.side-row', {}, refs.map(refChip)) : h('p.muted', { text: 'No text links here yet.' })) : null,
