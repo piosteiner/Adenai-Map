@@ -61,6 +61,23 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_78d281e18c",
+      "name": "Ewige Donnerklüfte",
+      "aliases": [
+        "Ewigen Donnerklüfte",
+        "Ewigen Donnerklüften",
+        "Donnergebirge"
+      ],
+      "category": "Ort",
+      "description": "Das zentrale Bergmassiv des Kontinents bei [[Glesburg]], entstanden aus dem Kampf gegen den Drachen [[Fulgur]]; darüber wütet ein ewiger Sturm. Aykan soll nahe dem Numa-Gipfel gewesen sein.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:23.723Z",
+      "updatedAt": "2026-10-18T04:41:23.723Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_2a66dedf92",
       "name": "Familie Kleulenberg",
       "aliases": [
@@ -385,5 +402,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:22.564Z"
+  "lastUpdated": "2026-10-18T04:41:23.723Z"
 }
