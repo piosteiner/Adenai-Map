@@ -2331,16 +2331,16 @@
         261
       ],
       "description": "",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/80ds24j2lc5g-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/80ds24j2lc5g-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2026-10-17T19:44:00.084Z",
-      "updatedAt": "2026-10-17T19:44:00.084Z",
       "currentLocation": {
         "location": "Olecea",
         "date": "5663-06-03",
@@ -2350,8 +2350,10 @@
           916,
           261
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2026-10-17T19:44:00.084Z",
+      "updatedAt": "2026-10-18T15:58:51.391Z"
     },
     {
       "id": "lambert",
@@ -3952,5 +3954,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T06:59:39.562Z"
+  "lastUpdated": "2026-10-18T15:58:51.391Z"
 }
