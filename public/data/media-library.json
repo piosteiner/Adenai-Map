@@ -3677,7 +3677,7 @@
     "general-qdivh5igoinj": {
       "id": "general-qdivh5igoinj",
       "category": "general",
-      "title": "testbild",
+      "title": "Testbild Claude",
       "caption": "",
       "credits": "Test – Claude",
       "tags": [],
@@ -3715,8 +3715,9 @@
         }
       },
       "fileSize": 2476,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-18T06:24:37.069Z"
     }
   },
-  "lastUpdated": "2026-10-18T06:24:35.459Z"
+  "lastUpdated": "2026-10-18T06:24:37.069Z"
 }
