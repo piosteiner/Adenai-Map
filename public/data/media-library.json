@@ -18843,7 +18843,7 @@
     },
     "general-1dmfw0nyx0tf": {
       "id": "general-1dmfw0nyx0tf",
-      "category": "general",
+      "category": "characters",
       "title": "Serinessa a new born",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/807199933261514290/",
@@ -18882,8 +18882,9 @@
         }
       },
       "fileSize": 261797,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-18T17:45:45.455Z"
     }
   },
-  "lastUpdated": "2026-10-18T17:45:40.195Z"
+  "lastUpdated": "2026-10-18T17:45:45.455Z"
 }
