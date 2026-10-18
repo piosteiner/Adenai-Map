@@ -399,6 +399,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_9ab9c6f396",
+      "name": "Wrag-Mûl",
+      "aliases": [],
+      "category": "Ort",
+      "description": "Eine Zwergenstadt, deren Zwerge gegen den Drachen [[Fulgur]] kämpften. Ein dort stammender Golem wurde von [[Naos]] und [[Aykan]] versehentlich erweckt.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:25.914Z",
+      "updatedAt": "2026-10-18T04:41:25.914Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_c23925c785",
       "name": "Чёрная Кошка",
       "aliases": [
@@ -415,5 +428,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:24.969Z"
+  "lastUpdated": "2026-10-18T04:41:25.914Z"
 }
