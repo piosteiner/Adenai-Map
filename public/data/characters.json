@@ -2525,7 +2525,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:16:20.860Z",
       "updatedAt": "2026-10-18T04:16:20.860Z"
+    },
+    {
+      "id": "luna",
+      "name": "Luna",
+      "title": "Fee",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Eine Fee. Kam in [[Silbergrat]] von Moonhaven in die Material Plane und trat in der 3. Sitzung spontan den [[VsuzH]] bei.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "VsuzH",
+      "relationship": "party",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:16:22.856Z",
+      "updatedAt": "2026-10-18T04:16:22.856Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:16:20.860Z"
+  "lastUpdated": "2026-10-18T04:16:22.856Z"
 }
