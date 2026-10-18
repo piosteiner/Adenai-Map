@@ -261,6 +261,22 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_0dbf6fbcfb",
+      "name": "Mortimer-Archipel",
+      "aliases": [
+        "Mortimerarchipel",
+        "Azur-Inseln"
+      ],
+      "category": "Ort",
+      "description": "Inselgruppe, früher «Azur-Inseln», benannt nach dem Kreuzzug von [[Mortimer Peccatum]]. Ziel der [[VsuzH]] ab Sitzung 72.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:26.924Z",
+      "updatedAt": "2026-10-18T04:41:26.924Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_389ac0d3b0",
       "name": "Mpako",
       "aliases": [
@@ -428,5 +444,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:25.914Z"
+  "lastUpdated": "2026-10-18T04:41:26.924Z"
 }
