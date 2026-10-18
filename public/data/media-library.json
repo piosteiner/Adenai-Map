@@ -7557,7 +7557,50 @@
       "fileSize": 2713729,
       "mimeType": "image/png",
       "lastModified": "2026-10-18T13:31:19.552Z"
+    },
+    "characters-tl2ag8p6nh9h": {
+      "id": "characters-tl2ag8p6nh9h",
+      "category": "characters",
+      "title": "letizia griswold",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/670825307042544524/",
+      "tags": [],
+      "uploadDate": "2026-10-18T13:31:54.672Z",
+      "sizes": {
+        "thumb": {
+          "filename": "tl2ag8p6nh9h-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/tl2ag8p6nh9h-thumb.webp",
+          "width": 125,
+          "height": 150
+        },
+        "small": {
+          "filename": "tl2ag8p6nh9h-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/tl2ag8p6nh9h-small.webp",
+          "width": 249,
+          "height": 300
+        },
+        "medium": {
+          "filename": "tl2ag8p6nh9h-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/tl2ag8p6nh9h-medium.webp",
+          "width": 498,
+          "height": 600
+        },
+        "large": {
+          "filename": "tl2ag8p6nh9h-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/tl2ag8p6nh9h-large.webp",
+          "width": 996,
+          "height": 1200
+        },
+        "original": {
+          "filename": "tl2ag8p6nh9h-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/tl2ag8p6nh9h-large.webp",
+          "width": 996,
+          "height": 1200
+        }
+      },
+      "fileSize": 126118,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T13:31:19.552Z"
+  "lastUpdated": "2026-10-18T13:31:54.674Z"
 }
