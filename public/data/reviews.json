@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "d9e1e67ad3f04b5db54c50f7ae0905060e32b8b9",
+      "action": "update",
+      "type": "character",
+      "itemName": "Francis",
+      "user": "gm",
+      "timestamp": "2026-10-18T19:55:02.808Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T19:55:02.808Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: francis (by gm) - updated image"
+    },
+    {
       "commitSha": "3ac56798fa997b1d220297afed647721aae76b1a",
       "action": "update",
       "type": "character",
@@ -2381,5 +2394,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T19:55:00.006Z"
+  "lastUpdated": "2026-10-18T19:55:02.808Z"
 }
