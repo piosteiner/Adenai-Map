@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "3e5311363c7f6ee9ee35f08d447b71ab089c225b",
+      "action": "update",
+      "type": "character",
+      "itemName": "Vanisha",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:24:26.528Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:24:26.528Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vanischa (by gm) - updated name"
+    },
+    {
       "commitSha": "aacaade2e8b39a4398fd5b3fafdec4ec7a638f96",
       "action": "update",
       "type": "character",
@@ -1809,5 +1822,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:23:20.250Z"
+  "lastUpdated": "2026-10-18T16:24:26.528Z"
 }
