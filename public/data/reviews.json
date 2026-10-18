@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "7ad5a141d724800d50fdff196d2faf419105c130",
+      "action": "create",
+      "type": "character",
+      "itemName": "Nele",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:42:53.529Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:42:53.529Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Nele (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "28159be26a398c71e8eab0b974c5fa714353f876",
       "action": "create",
       "type": "character",
@@ -1133,5 +1146,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:51.779Z"
+  "lastUpdated": "2026-10-18T04:42:53.529Z"
 }
