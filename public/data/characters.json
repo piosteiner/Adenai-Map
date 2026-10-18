@@ -4100,7 +4100,7 @@
       "title": "",
       "placeOfOrigin": "",
       "coordinates": null,
-      "description": "In einer Theatergruppe in [[Wesdalen]] mit [[Greda]] und [[Sylph]].",
+      "description": "In einer Theatergruppe namens [[Die Tanzenden Couatl]] in [[Wesdalen]] mit [[Greda]] und [[Sylph]].",
       "images": [
         "https://adenai-admin.piogino.ch/media/68r5ycf7hj0u-small.webp"
       ],
@@ -4111,9 +4111,10 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T17:25:11.344Z",
-      "updatedAt": "2026-10-18T17:25:11.344Z"
+      "updatedAt": "2026-10-18T17:29:35.717Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:29:21.492Z"
+  "lastUpdated": "2026-10-18T17:29:35.717Z"
 }
