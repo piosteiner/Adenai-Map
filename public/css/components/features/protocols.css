@@ -190,3 +190,9 @@
 .pp-find-count { font-size: 12px; color: var(--text-secondary); white-space: nowrap; }
 .pp-find-count[hidden] { display: none; }
 @media (prefers-reduced-motion: reduce) { .pp-hl-flash { animation: none; } }
+
+/* "Speichern" is the primary action — its own colours win over the action row's plain buttons */
+.pp-actions button.pp-publish { background: var(--accent-primary); border-color: var(--accent-primary); color: #fff; font-weight: 600; }
+[data-theme="dark"] .pp-actions button.pp-publish { color: #1b1915; }
+/* the draft marker in light mode: darker amber for enough contrast on sepia */
+:root:not([data-theme="dark"]) .pp-draft, :root:not([data-theme="dark"]) .pp-item-draft, :root:not([data-theme="dark"]) .pp-warn { color: #8a5a10; }
