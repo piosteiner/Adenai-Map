@@ -3281,7 +3281,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:29.678Z",
       "updatedAt": "2026-10-18T04:42:29.678Z"
+    },
+    {
+      "id": "rocky",
+      "name": "Rocky",
+      "title": "Kobold, Spruchrollen-Hersteller",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Ein Kobold, den der [[Sternenzirkel]] in [[Valaris]] einsperrte und Spruchrollen herstellen liess. [[Luna]] teleportierte ihn gegen einen Stapel Spruchrollen aus seinem Gefängnis.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:32.109Z",
+      "updatedAt": "2026-10-18T04:42:32.109Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:29.678Z"
+  "lastUpdated": "2026-10-18T04:42:32.109Z"
 }
