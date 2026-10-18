@@ -7301,7 +7301,7 @@
     "characters-3utz83r8ijsh": {
       "id": "characters-3utz83r8ijsh",
       "category": "characters",
-      "title": "3516e9c0333655bebb5ac35abd1724fe",
+      "title": "Lambert",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/6896205674464909/",
       "tags": [],
@@ -7339,7 +7339,8 @@
         }
       },
       "fileSize": 67639,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-18T16:30:45.594Z"
     },
     "characters-hau76163yydj": {
       "id": "characters-hau76163yydj",
@@ -18403,5 +18404,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-18T16:28:21.540Z"
+  "lastUpdated": "2026-10-18T16:30:45.594Z"
 }
