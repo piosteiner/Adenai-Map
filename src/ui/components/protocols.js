@@ -58,7 +58,8 @@ class MapProtocols {
     }
 
     async load() {
-        const [s, sg] = await Promise.all([this.api(''), this.api('/suggestions').catch(() => ({}))]);
+        const [s, sg, ln] = await Promise.all([this.api(''), this.api('/suggestions').catch(() => ({})), this.api('/links').catch(() => ({}))]);
+        this.links = ln.links || []; // shown above the minutes (set in the CMS → Protocols), e.g. the attendance sheet
         this.sessions = s.sessions || [];
         this.sort();
         this.suggestions = { players: sg.players || [], places: sg.places || [] };
@@ -379,6 +380,8 @@ class MapProtocols {
         this.view = this.el('article', 'pp-view pp-scroll');
         this.body.replaceChildren(this.listEl, this.view);
         this.sections.clear();
+        const top = this.linksBar('pp-links-top');
+        if (top) this.view.append(top);
         if (!this.sessions.length) this.view.append(this.el('p', 'pp-note pp-empty', 'Noch keine Protokolle. Mit „＋ Neu“ das erste schreiben.'));
         // the table of contents follows the scrolling
         this.observer?.disconnect();
@@ -459,9 +462,25 @@ class MapProtocols {
         return box;
     }
 
+    // the links from the CMS (e.g. the attendance sheet) as a bar: above the text, and pinned at the top of the list
+    linksBar(cls) {
+        if (!this.links?.length) return null;
+        const bar = this.el('nav', `pp-links ${cls}`);
+        bar.setAttribute('aria-label', 'Links zu den Protokollen');
+        for (const l of this.links) {
+            const a = this.el('a', 'pp-link', `${l.label} ↗`);
+            a.href = l.url;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            bar.append(a);
+        }
+        return bar;
+    }
+
     drawList() {
         if (!this.listEl) return;
-        this.listEl.replaceChildren(...this.sessions.map((raw) => {
+        const pinned = this.linksBar('pp-links-pinned');
+        this.listEl.replaceChildren(...(pinned ? [pinned] : []), ...this.sessions.map((raw) => {
             const s = this.shown(raw);
             const b = this.el('button', 'pp-item');
             b.type = 'button';
@@ -486,7 +505,8 @@ class MapProtocols {
         if (item) {
             // only the list scrolls (scrollIntoView would also shift the panel and the page)
             const l = this.listEl;
-            if (item.offsetTop < l.scrollTop) l.scrollTop = item.offsetTop - 4;
+            const pinned = l.querySelector('.pp-links-pinned')?.offsetHeight || 0; // the sticky links bar covers the top
+            if (item.offsetTop - pinned < l.scrollTop) l.scrollTop = item.offsetTop - pinned - 4;
             else if (item.offsetTop + item.offsetHeight > l.scrollTop + l.clientHeight) l.scrollTop = item.offsetTop + item.offsetHeight - l.clientHeight + 4;
         }
         const s = this.sessions.find((x) => x.id === id);

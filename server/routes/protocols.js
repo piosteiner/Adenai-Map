@@ -15,6 +15,7 @@
 // Editing itself is live (lib/protocol-live.js) and goes into the session's draft.
 //   GET/PUT /api/protocols/settings/password                               CMS login only
 //   GET  /api/protocols/export      all private data as one JSON file      CMS login only
+//   GET  /api/protocols/links       links shown above the minutes          CMS login or token; PUT: CMS login only
 //
 // Tokens: "<expiry>.<passwordVersion>.<hmac>", signed with SESSION_SECRET. Setting a new password bumps the version,
 // which ends every token handed out before.
@@ -71,12 +72,32 @@ router.put('/settings/password', requireAuth, async (req, res) => {
     if (password.length < 6) return res.status(400).json({ success: false, error: 'At least 6 characters' });
     const s = await store.settings();
     await store.saveSettings({
+        ...s, // keeps the other settings (links)
         passwordHash: await bcrypt.hash(password, 12),
         passwordVersion: (s.passwordVersion || 0) + 1,
         updatedAt: new Date().toISOString(),
         updatedBy: cmsUser(req),
     });
     res.json({ success: true, message: 'Password set — devices unlocked with the old one must enter the new one' });
+});
+
+// ---------- links shown above the minutes (e.g. the attendance sheet) ----------
+// Kept with the settings on this server, not in the map's public code: only unlocked devices get them.
+
+const cleanLinks = (list) => (Array.isArray(list) ? list : [])
+    .map((l) => ({ label: String(l?.label || '').trim().slice(0, 80), url: String(l?.url || '').trim() }))
+    .filter((l) => l.label && /^https?:\/\/[^\s]+$/i.test(l.url))
+    .slice(0, 10);
+
+router.get('/links', requireAccess, async (req, res) => {
+    res.json({ success: true, links: (await store.settings()).links || [] });
+});
+
+router.put('/links', requireAuth, async (req, res) => {
+    const s = await store.settings();
+    const links = cleanLinks(req.body?.links);
+    await store.saveSettings({ ...s, links });
+    res.json({ success: true, links });
 });
 
 // ---------- sessions ----------

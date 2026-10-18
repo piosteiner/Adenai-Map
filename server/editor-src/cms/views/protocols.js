@@ -109,12 +109,12 @@ export function protocolsView(app) {
         if (key === 'new') return createSession();
         const session = key ? sessions.find((s) => s.id === key) : null;
         list.update(sessions, session?.id || null);
-        if (key && !session) { detail.replaceChildren(h('div.placeholder', {}, h('p', { text: 'No such session.' })), passwordBlock()); return; }
+        if (key && !session) { detail.replaceChildren(h('div.placeholder', {}, h('p', { text: 'No such session.' })), linksAboveBlock(), passwordBlock()); return; }
         if (!key) {
             const drafts = sessions.filter((s) => s.draft || s.published === false).length;
             detail.replaceChildren(h('div.detail-cols', {},
                 h('div.placeholder.pad', {}, h('p', { text: sessions.length ? `${sessions.length} sessions${drafts ? `, ${drafts} with unpublished changes` : ''}. Pick one on the left, or press ＋ New.` : 'No minutes yet. Press ＋ New — or let the players write them on the map.' })),
-                h('aside.detail-side', {}, passwordBlock())));
+                h('aside.detail-side', {}, linksAboveBlock(), passwordBlock())));
             return;
         }
         render(session);
@@ -300,7 +300,7 @@ export function protocolsView(app) {
                 h('aside.detail-side', {},
                     links,
                     h('div.side-block.meta', {}, h('p.muted', { text: `Created ${formatDate(s.createdAt)} by ${s.createdBy} (${s.createdVia})${s.published !== false ? ` · published ${formatDate(s.updatedAt)} by ${s.updatedBy} (${s.updatedVia}) · ${s.versions} earlier version${s.versions === 1 ? '' : 's'} kept` : ''}` })),
-                    passwordBlock())));
+                    linksAboveBlock(), passwordBlock())));
         requestAnimationFrame(() => window.AdenaiEditor?.enhance(content, room));
         Object.assign(current, { drawState, publish });
         drawChips();
@@ -323,6 +323,35 @@ export function protocolsView(app) {
     function linksBlock(text) {
         const names = [...new Set([...String(text || '').matchAll(/\[\[([^\[\]|\n]+?)(?:\|[^\[\]\n]+?)?\]\]/g)].map((m) => m[1].trim()))];
         return h('div.side-block', {}, h('h3', { text: `Links (${names.length})` }), names.length ? h('p.side-row', {}, names.map(chip)) : h('p.muted', { text: 'No [[links]] yet.' }));
+    }
+
+    // Links shown above the minutes on the map (e.g. the attendance sheet) — on the server, so only unlocked devices see them
+    function linksAboveBlock() {
+        const box = h('div.side-block', {}, h('h3', { text: 'Links above the minutes' }), h('p.muted', { text: 'Loading…' }));
+        api('/api/protocols/links').then(({ links }) => {
+            const rows = h('div.links-edit');
+            const row = (l = { label: '', url: '' }) => {
+                const label = h('input', { type: 'text', value: l.label, placeholder: 'Label, e.g. 📊 Anwesenheit' });
+                const url = h('input', { type: 'url', value: l.url, placeholder: 'https://…' });
+                const del = h('button.icon', { type: 'button', title: 'Remove', on: { click: () => r.remove() } }, '×');
+                const r = h('div.link-row', {}, label, url, del);
+                r.read = () => ({ label: label.value.trim(), url: url.value.trim() });
+                return r;
+            };
+            (links.length ? links : [undefined]).forEach((l) => rows.append(row(l)));
+            const save = h('button.btn.small.primary', { type: 'button' }, 'Save');
+            save.addEventListener('click', async () => {
+                try {
+                    const r = await api('/api/protocols/links', { method: 'PUT', body: { links: [...rows.children].map((x) => x.read()).filter((x) => x.label || x.url) } });
+                    toast(`Saved ${r.links.length} link${r.links.length === 1 ? '' : 's'} — players see them after reloading the map`);
+                    box.replaceWith(linksAboveBlock());
+                } catch (err) { toast(err.message, 'bad'); }
+            });
+            box.replaceChildren(h('h3', { text: 'Links above the minutes' }),
+                h('p.muted', { text: 'Shown at the top of the minutes on the map, to unlocked devices only.' }),
+                rows, h('div.pair', {}, h('button.btn.small', { type: 'button', on: { click: () => rows.append(row()) } }, '＋ Link'), save));
+        }).catch((err) => box.replaceChildren(h('h3', { text: 'Links above the minutes' }), h('p.error', { text: err.message })));
+        return box;
     }
 
     // The password the map asks for before showing the minutes

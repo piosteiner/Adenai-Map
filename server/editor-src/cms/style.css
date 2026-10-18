@@ -310,3 +310,7 @@ a.stat:hover { border-color: var(--accent); text-decoration: none; }
 /* search (list.js): matches marked, and where a hidden match is */
 .row mark { background: var(--accent-2); color: inherit; border-radius: 2px; padding: 0 1px; }
 .row-why { display: block; font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* links above the minutes (views/protocols.js) */
+.links-edit { display: grid; gap: 6px; margin-bottom: 6px; }
+.link-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto; gap: 4px; }

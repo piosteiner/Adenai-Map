@@ -255,3 +255,10 @@
 .pp-lockform.shake { animation: pp-shake 0.35s ease-in-out; }
 @keyframes pp-shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
 @media (prefers-reduced-motion: reduce) { .pp-lockform.shake { animation: none; } }
+
+/* Links above the minutes (CMS → Protocols), e.g. the attendance sheet */
+.pp-links { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); }
+.pp-link { display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border: 1px solid var(--border-color); border-radius: 16px; background: var(--bg-secondary); color: var(--accent-primary); font-size: 13px; font-weight: 600; text-decoration: none; }
+.pp-link:hover { border-color: var(--accent-primary); }
+.pp-links-pinned { position: sticky; top: -6px; z-index: 1; margin: -6px -6px 6px; padding: 8px 6px; background: var(--card-bg, #fbf7ee); }
+.pp-links-pinned .pp-link { flex: 1 1 auto; justify-content: center; }
