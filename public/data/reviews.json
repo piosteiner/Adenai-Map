@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "72b05ec913a07dedb9433d68df62cd6a2804c28d",
+      "action": "update",
+      "type": "character",
+      "itemName": "Colette Pinet",
+      "user": "gm",
+      "timestamp": "2026-10-18T17:02:08.767Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T17:02:08.767Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: colette_pinet (by gm) - Updated character details"
+    },
+    {
       "commitSha": "d53778e44dc6521d0766fadc85feea1254e28fbf",
       "action": "update",
       "type": "character",
@@ -2030,5 +2043,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T17:01:50.073Z"
+  "lastUpdated": "2026-10-18T17:02:08.767Z"
 }
