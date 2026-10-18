@@ -4201,13 +4201,14 @@
       "image": "https://adenai-admin.piogino.ch/media/waffrms957wp-small.webp",
       "status": "alive",
       "faction": "",
-      "relationship": "neutral",
+      "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T19:28:02.754Z",
-      "updatedAt": "2026-10-18T19:28:02.754Z"
+      "updatedAt": "2026-10-18T19:28:41.704Z"
     }
   ],
-  "lastUpdated": "2026-10-18T19:28:26.254Z"
+  "lastUpdated": "2026-10-18T19:28:41.704Z"
 }
