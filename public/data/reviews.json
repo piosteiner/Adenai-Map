@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "dc10635f7d99c836d0237d0dcce5bccfe2e04a18",
+      "action": "create",
+      "type": "character",
+      "itemName": "Maey",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:42:47.558Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:42:47.558Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Maey (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "eb7fa4bd67f2291ce7f2547a847705d8065dbf8b",
       "action": "create",
       "type": "character",
@@ -1094,5 +1107,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:45.546Z"
+  "lastUpdated": "2026-10-18T04:42:47.558Z"
 }
