@@ -389,6 +389,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_0e3ff785a3",
+      "name": "Testbestätigt fxyx",
+      "aliases": [],
+      "category": "",
+      "description": "Ein Testwesen, siehe [ Ergänzt.[Naos]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T05:48:57.047Z",
+      "updatedAt": "2026-10-18T05:48:57.047Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_2e332a0c89",
       "name": "Thieves' Cant",
       "aliases": [],
@@ -457,5 +470,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T05:02:11.722Z"
+  "lastUpdated": "2026-10-18T05:48:57.047Z"
 }
