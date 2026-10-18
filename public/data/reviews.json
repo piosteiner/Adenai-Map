@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "28159be26a398c71e8eab0b974c5fa714353f876",
+      "action": "create",
+      "type": "character",
+      "itemName": "Jaćek Wandermann",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:42:51.778Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:42:51.778Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Jaćek Wandermann (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "3464963f121dfa3626404422e328a6a1287e89a9",
       "action": "create",
       "type": "character",
@@ -1120,5 +1133,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:49.847Z"
+  "lastUpdated": "2026-10-18T04:42:51.779Z"
 }
