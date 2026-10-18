@@ -356,6 +356,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_8bd4159583",
+      "name": "Tua Danar",
+      "aliases": [],
+      "category": "Ort",
+      "description": "Eine Insel, die Adenai mit arkaner Magie eroberte – [[Remus|Lord Remus]] stammt von dort und will ihre Unabhängigkeit erhalten. Rena und [[Wesdalen]] führen Krieg gegen Tua Danar.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:22.564Z",
+      "updatedAt": "2026-10-18T04:41:22.564Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_c23925c785",
       "name": "Чёрная Кошка",
       "aliases": [
@@ -372,5 +385,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:21.650Z"
+  "lastUpdated": "2026-10-18T04:41:22.564Z"
 }
