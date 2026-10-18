@@ -48,6 +48,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_005469b087",
+      "name": "Mondstein",
+      "aliases": [],
+      "category": "Gegenstand",
+      "description": "Mondstein hält das [[Feywild]] durch Manaabsorption stabil; er darf nicht mit [[Sonnenstein]] in Kontakt kommen. Der grosse Mondstein von [[Moonhaven]] verschwand zur gleichen Zeit wie [[Aykan]]; die Königsfamilie hat die Pflicht, die Reserven zu bewahren. Ein Griswold-Schiff mit Mondstein sank bei der [[Glasinsel]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:05.962Z",
+      "updatedAt": "2026-10-18T04:41:05.962Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_ac90c790b0",
       "name": "Projekt Wolkenbruch",
       "aliases": [],
@@ -122,5 +135,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:05.197Z"
+  "lastUpdated": "2026-10-18T04:41:05.962Z"
 }
