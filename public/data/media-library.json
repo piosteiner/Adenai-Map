@@ -7516,7 +7516,7 @@
     },
     "general-7sfut8aqsl62": {
       "id": "general-7sfut8aqsl62",
-      "category": "general",
+      "category": "characters",
       "title": "dravak svaja",
       "caption": "",
       "credits": "AI modified with GPT-5",
@@ -7555,8 +7555,9 @@
         }
       },
       "fileSize": 2713729,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-18T13:31:19.552Z"
     }
   },
-  "lastUpdated": "2026-10-18T13:31:11.790Z"
+  "lastUpdated": "2026-10-18T13:31:19.552Z"
 }
