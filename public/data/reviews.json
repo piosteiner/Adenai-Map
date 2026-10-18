@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "744827f47c90f33b67ed55d240f4709fdeb45877",
+      "action": "update",
+      "type": "character",
+      "itemName": "Piper Schlopp",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:01:51.933Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:01:51.933Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: piper (by gm) - updated name, updated title, added image - links updated in 1 character(s)"
+    },
+    {
       "commitSha": "064ccaef7fd2f70c0fb3323a9d46b03471108435",
       "action": "update",
       "type": "character",
@@ -1627,5 +1640,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:01:26.520Z"
+  "lastUpdated": "2026-10-18T16:01:51.933Z"
 }
