@@ -2543,7 +2543,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:16:22.856Z",
       "updatedAt": "2026-10-18T04:16:22.856Z"
+    },
+    {
+      "id": "niall",
+      "name": "Niall",
+      "title": "Menschlicher Warlock, Ex-Soldat",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Menschlicher Warlock, rationaler Ex-Soldat. Von der ersten Sitzung in [[Silbergrat]] bis Sitzung 25 bei den [[VsuzH]].",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "VsuzH",
+      "relationship": "party",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:16:24.785Z",
+      "updatedAt": "2026-10-18T04:16:24.785Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:16:22.856Z"
+  "lastUpdated": "2026-10-18T04:16:24.785Z"
 }
