@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6d9c43b2617b1f363f39a4f6f0e51d7e7409fb65",
+      "action": "create",
+      "type": "character",
+      "itemName": "She-Ra",
+      "user": "gm",
+      "timestamp": "2026-10-18T17:39:47.502Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T17:39:47.502Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: She-Ra (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "9531e8bf89df1d3cce47371cc384b49e5653bf6d",
       "action": "update",
       "type": "character",
@@ -2264,5 +2277,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T17:34:18.195Z"
+  "lastUpdated": "2026-10-18T17:39:47.502Z"
 }
