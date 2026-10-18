@@ -2579,7 +2579,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:16:26.940Z",
       "updatedAt": "2026-10-18T04:16:26.941Z"
+    },
+    {
+      "id": "alice",
+      "name": "Alice",
+      "title": "Eladrin-Sorceress",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Eine Eladrin-Sorceress, der die [[VsuzH]] in der 9. Sitzung begegneten. Sie sieht für alle anders aus. Bis Sitzung 19 im Protokoll als entschuldigt geführt.",
+      "images": [],
+      "image": "",
+      "status": "unknown",
+      "faction": "VsuzH",
+      "relationship": "party",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:41:28.994Z",
+      "updatedAt": "2026-10-18T04:41:28.994Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:16:26.941Z"
+  "lastUpdated": "2026-10-18T04:41:28.994Z"
 }
