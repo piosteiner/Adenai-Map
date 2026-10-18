@@ -15689,7 +15689,50 @@
       },
       "fileSize": 93119,
       "mimeType": "image/jpeg"
+    },
+    "characters-bni390laliks": {
+      "id": "characters-bni390laliks",
+      "category": "characters",
+      "title": "3d9f81cd689f156e130e06c21a4a09f9",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/595249275796394640/",
+      "tags": [],
+      "uploadDate": "2026-10-18T14:29:00.303Z",
+      "sizes": {
+        "thumb": {
+          "filename": "bni390laliks-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/bni390laliks-thumb.webp",
+          "width": 92,
+          "height": 150
+        },
+        "small": {
+          "filename": "bni390laliks-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/bni390laliks-small.webp",
+          "width": 183,
+          "height": 300
+        },
+        "medium": {
+          "filename": "bni390laliks-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/bni390laliks-medium.webp",
+          "width": 366,
+          "height": 600
+        },
+        "large": {
+          "filename": "bni390laliks-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/bni390laliks-large.webp",
+          "width": 732,
+          "height": 1200
+        },
+        "original": {
+          "filename": "bni390laliks-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/bni390laliks-original.webp",
+          "width": 736,
+          "height": 1207
+        }
+      },
+      "fileSize": 115230,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T14:28:44.215Z"
+  "lastUpdated": "2026-10-18T14:29:00.306Z"
 }
