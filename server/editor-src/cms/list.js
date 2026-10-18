@@ -1,9 +1,12 @@
 // The list column of a split view: search, filters, rows with the cover image, ↑/↓ to move, "/" to search.
-import { h, fold } from './dom';
+import { h } from './dom';
 import { thumbOf } from './store';
 
 // config: { noun, newLabel, keyOf, thumbOf, initialOf (text when there is no image), titleOf, subtitleOf, badgesOf, textOf, filters: [{ id, label, options() → [{value,label}], test(item, value) }],
+//           searchDoc(item) → { name, aliases, fields: [{ label, text, weight }] } (optional; else title, subtitle, text),
 //           onSelect(key), onNew() }
+// The search is the site's one search (src/utils/search.js): best matches first — the exact name, then names starting
+// with it, then names containing it, then other fields —, matches marked, and a line saying where a hidden match is.
 export function createList(config) {
     const state = { items: [], selected: null, query: '', filters: {} };
     const search = h('input.search', { type: 'search', placeholder: `Search ${config.noun}…  ( / )`, 'aria-label': `Search ${config.noun}` });
@@ -27,15 +30,23 @@ export function createList(config) {
         }
     }
 
+    const docOf = (item) => config.searchDoc?.(item) || {
+        name: config.titleOf(item),
+        fields: [{ label: '', text: config.subtitleOf(item), weight: 2 }, { label: '', text: config.textOf(item), weight: 1 }],
+    };
+    const why = new Map(); // item → { label, text } of the last search
+
     function visible() {
-        const q = fold(state.query);
-        return state.items.filter((item) =>
-            (!q || fold(config.textOf(item)).includes(q))
-            && selects.every(({ f }) => !state.filters[f.id] || f.test(item, state.filters[f.id])));
+        const filtered = state.items.filter((item) => selects.every(({ f }) => !state.filters[f.id] || f.test(item, state.filters[f.id])));
+        why.clear();
+        if (!state.query.trim()) return filtered;
+        return window.AdenaiSearch.rank(filtered, state.query, docOf).map((r) => { if (r.why) why.set(r.item, r.why); return r.item; });
     }
 
     function render() {
         const list = visible();
+        const S = window.AdenaiSearch;
+        const q = state.query.trim();
         count.textContent = list.length === state.items.length ? `${list.length}` : `${list.length} / ${state.items.length}`;
         rows.replaceChildren(...list.map((item) => {
             const key = config.keyOf(item);
@@ -43,7 +54,11 @@ export function createList(config) {
             const title = config.titleOf(item);
             return h('div.row', { role: 'option', dataset: { key }, 'aria-selected': String(key === state.selected), on: { click: () => config.onSelect(key) } },
                 cover ? h('img.thumb', { src: thumbOf(cover), alt: '', loading: 'lazy' }) : h('span.thumb.empty', { text: config.initialOf ? config.initialOf(item) : (title || '?').slice(0, 1) }),
-                h('span.row-text', {}, h('span.row-title', { text: title }), h('span.row-sub', { text: config.subtitleOf(item) })),
+                h('span.row-text', {},
+                    q ? h('span.row-title', { html: S.highlight(title, q) }) : h('span.row-title', { text: title }),
+                    q ? h('span.row-sub', { html: S.highlight(config.subtitleOf(item), q) }) : h('span.row-sub', { text: config.subtitleOf(item) }),
+                    q && why.get(item) && !S.matches(`${title} ${config.subtitleOf(item)}`, q)
+                        ? h('span.row-why', { html: `${why.get(item).label ? `${S.highlight(why.get(item).label, '')}: ` : ''}${S.highlight(why.get(item).text, q)}` }) : null),
                 h('span.row-badges', {}, config.badgesOf(item)));
         }));
         if (!list.length) rows.append(h('p.empty-note', { text: state.items.length ? 'Nothing matches.' : `No ${config.noun} yet.` }));

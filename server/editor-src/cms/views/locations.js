@@ -22,6 +22,9 @@ export function locationsView(app) {
             f.properties.visited ? h('span.pill.ok', { title: 'Visited by the party' }, '✓') : null,
             imagesOf(f.properties).length > 1 ? h('span.pill', { title: 'Images' }, `🖼 ${imagesOf(f.properties).length}`) : null,
         ],
+        searchDoc: (f) => ({ name: f.properties.name, fields: [
+            { label: 'Type', text: labelOf('locationTypes', f.properties.type), weight: 2 }, { label: 'Region', text: labelOf('locationRegions', f.properties.region), weight: 2 },
+            { label: 'Description', text: f.properties.description, weight: 1 }] }),
         textOf: (f) => [f.properties.name, f.properties.type, labelOf('locationTypes', f.properties.type), f.properties.region, labelOf('locationRegions', f.properties.region), f.properties.description].join(' '),
         filters: [
             { id: 'type', label: 'All types', options: () => options('locationTypes'), test: (f, v) => f.properties.type === v },

@@ -78,15 +78,10 @@ class SearchSystem {
         }
 
         const extra = (window.mapGlossary?.allTerms?.() || window.mapGlossary?.terms || []).map((t) => ({ name: t.name, desc: t.description || '', type: 'term', term: t }));
-        const results = [...this.searchIndex, ...extra]
-            .map(item => ({
-                ...item,
-                relevanceScore: this.calculateRelevanceScore(item, queryLower),
-                matchedFields: this.getMatchedFields(item, queryLower)
-            }))
-            .filter(item => item.relevanceScore > 0)
-            .sort((a, b) => this.sortSearchResults(a, b, queryLower));
-
+        // the site's one search (src/utils/search.js): exact name first, then names starting with the query, then words
+        // of names, then other fields; typos only when nothing matches as typed
+        const results = window.AdenaiSearch.rank([...this.searchIndex, ...extra], query, (item) => this.searchDoc(item))
+            .map((r) => ({ ...r.item, relevanceScore: r.score, why: r.why, fuzzy: !!r.fuzzy }));
         const sessions = this.searchMinutes(query);
         if (results.length > 0 || sessions.length) {
             this.renderSearchResults(results.slice(0, 15)); // Limit to top 15 results
@@ -96,6 +91,34 @@ class SearchSystem {
             this.showNoResults();
             this.dropdown.style.display = 'block';
         }
+    }
+
+    // what is searched in an entry, and how much each field counts
+    searchDoc(item) {
+        if (item.type === 'character') {
+            const c = item.character || {};
+            return { name: c.name || item.name, fields: [
+                { label: 'Titel', text: c.title, weight: 3 }, { label: 'Fraktion', text: c.faction, weight: 2 },
+                { label: 'Ort', text: [c.location, c.currentLocation?.location, c.placeOfOrigin].filter(Boolean).join(' '), weight: 2 },
+                { label: 'Beschreibung', text: c.description, weight: 1 }, { label: 'Notizen', text: c.notes, weight: 1 }] };
+        }
+        if (item.type === 'term') {
+            const t = item.term;
+            return { name: t.name, aliases: t.aliases || [], fields: [{ label: 'Kategorie', text: t.category || t.kindLabel, weight: 2 }, { label: 'Beschreibung', text: t.description, weight: 1 }] };
+        }
+        const p = item.feature?.properties || {};
+        return { name: item.name, fields: [
+            { label: 'Typ', text: window.AdenaiConfig?.getLocationTypeLabel?.(p.type) || p.type, weight: 2 },
+            { label: 'Region', text: window.AdenaiConfig?.getLocationRegionLabel?.(p.region) || p.region, weight: 2 },
+            { label: 'Beschreibung', text: String(item.desc || '').replace(/<[^>]+>/g, ''), weight: 1 }] };
+    }
+
+    // "Gefunden in Beschreibung: …Text…" under a result when the match is in a field it doesn't show
+    whyLine(result, query) {
+        if (!result.why) return '';
+        const label = result.fuzzy ? 'Ähnlicher Name' : result.why.label;
+        const text = result.fuzzy ? '' : result.why.text;
+        return `<div class="result-why">${RichText.escape(label)}${text ? `: ${window.AdenaiSearch.highlight(text, query)}` : ''}</div>`;
     }
 
     sortSearchResults(a, b, query) {
@@ -218,6 +241,11 @@ class SearchSystem {
         results.forEach((result, index) => {
             const item = document.createElement("div");
             item.innerHTML = this.renderSearchResult(result);
+            // where the match is, when the result doesn't show it
+            const shown = item.textContent;
+            if (result.why && (result.fuzzy || !window.AdenaiSearch.matches(shown, this.searchInput.value))) {
+                item.querySelector('.dropdown-text')?.insertAdjacentHTML('beforeend', this.whyLine(result, this.searchInput.value));
+            }
             
             item.addEventListener("click", () => {
                 this.selectSearchResult(result);
@@ -282,9 +310,9 @@ class SearchSystem {
             <div class="dropdown-item term-result" data-relevance="${result.relevanceScore}">
                 <div class="result-avatar"><div class="character-placeholder">📖</div></div>
                 <div class="dropdown-text">
-                    <div class="result-header"><strong>${this.highlightText(RichText.escape(t.name), query)}</strong></div>
+                    <div class="result-header"><strong>${this.highlightText(t.name, query)}</strong></div>
                     <div class="character-title">${RichText.escape(kind)}</div>
-                    ${desc ? `<div class="character-preview">${this.highlightText(RichText.escape(desc.substring(0, 120)), query)}${desc.length > 120 ? '...' : ''}</div>` : ''}
+                    ${desc ? `<div class="character-preview">${this.highlightText(desc.substring(0, 120), query)}${desc.length > 120 ? '...' : ''}</div>` : ''}
                 </div>
             </div>
         `;
@@ -324,7 +352,7 @@ class SearchSystem {
                     <div class="character-meta">
                         📍 ${highlightedLocation}
                     </div>
-                    ${char.description ? `<div class="character-preview">${this.highlightText(char.description.substring(0, 120), query)}${char.description.length > 120 ? '...' : ''}</div>` : ''}
+                    ${char.description ? `<div class="character-preview">${this.highlightText(window.AdenaiSearch.plain(char.description).substring(0, 120), query)}${char.description.length > 120 ? '…' : ''}</div>` : ''}
                 </div>
             </div>
         `;
@@ -333,7 +361,7 @@ class SearchSystem {
     renderLocationResult(result, query) {
         const filename = window.mapCore.sanitizeFilename(result.name);
         const highlightedName = this.highlightText(result.name, query);
-        const highlightedDesc = this.highlightText(result.desc.replace(/(<([^>]+)>)/gi, '').substring(0, 120), query);
+        const highlightedDesc = this.highlightText(window.AdenaiSearch.plain(result.desc.replace(/(<([^>]+)>)/gi, '')).substring(0, 120), query);
         
         return `
             <div class="dropdown-item location-result" data-relevance="${result.relevanceScore}">
@@ -351,11 +379,10 @@ class SearchSystem {
         `;
     }
 
+    // text without its [[link]] and **markup** syntax, escaped, with the query's words marked (accents don't matter)
     highlightText(text, query) {
-        if (!text || !query || query.length < 2) return text;
-        
-        const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-        return text.replace(regex, '<mark>$1</mark>');
+        if (!text) return '';
+        return window.AdenaiSearch.highlight(window.AdenaiSearch.plain(text), query || '');
     }
 
     createMatchBadges(matchedFields) {

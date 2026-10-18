@@ -39,6 +39,9 @@ export function protocolsView(app) {
                 : s.draft ? h('span.pill.warn', { title: `Unpublished changes${s.draft.updatedBy ? ` by ${s.draft.updatedBy}` : ''}` }, 'draft') : null,
             s.updatedVia === 'map' ? h('span.pill', { title: 'Last published on the map' }, 'map') : null,
         ],
+        searchDoc: (raw) => { const s = shown(raw); return { name: `${s.number ?? ''} ${s.title || ''}`.trim(), fields: [
+            { label: 'Players', text: (s.players || []).join(', '), weight: 2 }, { label: 'Places', text: (s.places || []).join(', '), weight: 2 },
+            { label: 'Date', text: formatDate(s.date), weight: 1.5 }, { label: 'Minutes', text: s.content, weight: 1 }] }; },
         textOf: (raw) => { const s = shown(raw); return [s.number, s.title, (s.players || []).join(' '), (s.places || []).join(' '), s.date, s.content].join(' '); },
         filters: [
             { id: 'player', label: 'All players', options: () => suggestions.players.map((p) => ({ value: p, label: p })), test: (s, v) => (shown(s).players || []).includes(v) },

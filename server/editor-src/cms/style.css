@@ -306,3 +306,7 @@ a.stat:hover { border-color: var(--accent); text-decoration: none; }
   .media-split { grid-template-columns: 1fr; }
   .media-detail:empty { display: none; }
 }
+
+/* search (list.js): matches marked, and where a hidden match is */
+.row mark { background: var(--accent-2); color: inherit; border-radius: 2px; padding: 0 1px; }
+.row-why { display: block; font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

@@ -190,13 +190,14 @@ class MapGlossary {
     }
 
     drawList() {
-        const q = this.fold(this.search.value);
+        const q = this.search.value.trim();
         const cat = this.category.value;
-        const fits = (t) => (!q || this.fold([t.name, ...(t.aliases || []), t.category, t.kindLabel, t.description].join(' ')).includes(q));
-        const list = [
-            ...this.pending.filter((p) => (!cat || cat === '__pending') && fits(p)),
-            ...this.terms.filter((t) => (!cat || t.category === cat) && fits(t)),
+        let list = [
+            ...this.pending.filter((p) => !cat || cat === '__pending'),
+            ...this.terms.filter((t) => !cat || t.category === cat),
         ];
+        // the site's one search: best matches first, accents and typos forgiven
+        if (q) list = window.AdenaiSearch.rank(list, q, (t) => ({ name: t.name, aliases: t.aliases || [], fields: [{ label: 'Kategorie', text: t.category || t.kindLabel, weight: 2 }, { label: '', text: t.description, weight: 1 }] })).map((r) => r.item);
         this.list.replaceChildren(...list.map((t) => {
             const b = this.el('button', `pp-item gl-item${this.current?.id === t.id ? ' active' : ''}${t.pending ? ' gl-pending' : ''}`);
             b.type = 'button';

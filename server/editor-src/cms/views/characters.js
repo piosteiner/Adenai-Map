@@ -28,6 +28,11 @@ export function charactersView(app) {
             h(`span.rel.rel-${c.relationship || 'unknown'}`, { title: labelOf('characterRelationships', c.relationship) }),
             h('span.pill', { title: labelOf('characterStatus', c.status) }, STATUS_ICON[c.status] || '·'),
         ],
+        searchDoc: (c) => ({ name: c.name, fields: [
+            { label: 'Title', text: c.title, weight: 3 }, { label: 'Faction', text: c.faction, weight: 2 },
+            { label: 'Location', text: [c.computedCurrentLocation, c.placeOfOrigin].filter(Boolean).join(' · '), weight: 2 },
+            { label: 'Relationship', text: labelOf('characterRelationships', c.relationship), weight: 1.5 }, { label: 'Status', text: labelOf('characterStatus', c.status), weight: 1.5 },
+            { label: 'Description', text: c.description, weight: 1 }, { label: 'Notes', text: c.notes, weight: 1 }] }),
         textOf: (c) => [c.name, c.title, c.faction, c.placeOfOrigin, c.computedCurrentLocation, labelOf('characterRelationships', c.relationship), labelOf('characterStatus', c.status), c.description, c.notes].join(' '),
         filters: [
             { id: 'rel', label: 'All relationships', options: () => options('characterRelationships'), test: (c, v) => c.relationship === v },

@@ -1,6 +1,6 @@
 // Images of a location or character: a gallery field (first = cover; reorder, remove, add), the picker dialog
 // (multi-select from the media library, upload right there) and a hover preview for every small image.
-import { h, toast, fold } from './dom';
+import { h, toast } from './dom';
 import { store, reload, mediumOf } from './store';
 import { api } from './api';
 
@@ -64,12 +64,13 @@ export function pickImages({ already = [] } = {}) {
         });
 
         function render() {
-            const q = fold(search.value);
-            const items = Object.values(store.media)
+            const q = search.value.trim();
+            let items = Object.values(store.media)
                 .filter((m) => urlOf(m))
                 .filter((m) => !category.value || m.category === category.value)
-                .filter((m) => !q || fold([m.title, m.caption, m.credits, m.category, ...(m.tags || [])].join(' ')).includes(q))
                 .sort((a, b) => String(b.uploadDate || '').localeCompare(String(a.uploadDate || '')));
+            // the site's one search: best matches first, typos forgiven
+            if (q) items = window.AdenaiSearch.rank(items, q, (m) => ({ name: m.title || m.id, aliases: m.tags || [], fields: [{ label: 'Caption', text: m.caption, weight: 2 }, { label: 'Credits', text: m.credits, weight: 1 }, { label: 'Category', text: m.category, weight: 1 }] })).map((r) => r.item);
             grid.replaceChildren(...items.map((m) => {
                 const url = urlOf(m);
                 const there = inGallery.has(url);

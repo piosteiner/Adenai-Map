@@ -2,7 +2,7 @@
 // with search and category; dropping files anywhere on the grid (or "Upload") uploads them with a progress bar; the
 // selected image shows its sizes and where it is used, and its title, caption, credits, category and tags can be
 // edited. Deleting asks first — and says if characters, locations or glossary terms still show the image.
-import { h, toast, confirmDialog, formatDate, fold } from '../dom';
+import { h, toast, confirmDialog, formatDate } from '../dom';
 import { store, reload, canEdit } from '../store';
 import { api } from '../api';
 
@@ -74,10 +74,16 @@ export function mediaView(app) {
         startUpload([...e.dataTransfer.files].filter((f) => f.type.startsWith('image/')));
     });
 
-    const items = () => Object.values(store.media || {})
-        .filter((m) => !category || m.category === category)
-        .filter((m) => !query || fold([m.title, m.caption, m.credits, m.category, ...(m.tags || []), m.id].join(' ')).includes(fold(query)))
-        .sort((a, b) => String(b.uploadDate || '').localeCompare(String(a.uploadDate || '')));
+    const items = () => {
+        const all = Object.values(store.media || {})
+            .filter((m) => !category || m.category === category)
+            .sort((a, b) => String(b.uploadDate || '').localeCompare(String(a.uploadDate || '')));
+        if (!query.trim()) return all;
+        return window.AdenaiSearch.rank(all, query, (m) => ({ name: m.title || m.id, aliases: m.tags || [], fields: [
+            { label: 'Caption', text: m.caption, weight: 2 }, { label: 'Credits', text: m.credits, weight: 1 }, { label: 'Category', text: m.category, weight: 1 }, { label: 'Id', text: m.id, weight: 1 },
+            // where it is used: "Petrel" finds his portrait
+            { label: 'Used by', text: usageOf(m).map((u) => u.name).join(', '), weight: 2 }] })).map((r) => r.item);
+    };
 
     function draw() {
         const list = items();

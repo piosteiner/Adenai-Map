@@ -20,6 +20,7 @@ export function glossaryView(app) {
         titleOf: (t) => t.name,
         subtitleOf: (t) => [t.category, (t.aliases || []).length ? `auch: ${t.aliases.join(', ')}` : ''].filter(Boolean).join(' · '),
         badgesOf: () => [],
+        searchDoc: (t) => ({ name: t.name, aliases: t.aliases || [], fields: [{ label: 'Category', text: t.category, weight: 2 }, { label: 'Description', text: t.description, weight: 1 }] }),
         textOf: (t) => [t.name, ...(t.aliases || []), t.category, t.description].join(' '),
         filters: [{ id: 'cat', label: 'All categories', options: () => categories().map((c) => ({ value: c, label: c })), test: (t, v) => t.category === v }],
         onSelect: (key) => app.go(`glossary/${encodeURIComponent(key)}`),

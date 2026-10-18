@@ -388,10 +388,14 @@ class CharacterPanel {
         const searchInput = document.getElementById('character-search');
         if (!searchInput) return;
         
-        const query = searchInput.value.toLowerCase().trim();
-        const filteredCharacters = query === '' 
+        const query = searchInput.value.trim();
+        // the site's one search (src/utils/search.js): best matches first, accents and typos forgiven
+        const filteredCharacters = query === ''
             ? this.characters
-            : this.characters.filter(character => this.matchesSearchQuery(character, query));
+            : window.AdenaiSearch.rank(this.characters, query, (c) => ({ name: c.name, fields: [
+                { label: 'Titel', text: c.title, weight: 3 }, { label: 'Fraktion', text: c.faction, weight: 2 },
+                { label: 'Ort', text: [c.location, c.currentLocation?.location, c.placeOfOrigin].filter(Boolean).join(' '), weight: 2 },
+                { label: 'Beschreibung', text: c.description, weight: 1 }, { label: 'Notizen', text: c.notes, weight: 1 }] })).map((r) => r.item);
         
         this.populateCharacterGrid(filteredCharacters);
     }
@@ -580,8 +584,8 @@ class CharacterPanel {
         this.grid.innerHTML = `
             <div class="empty-state">
                 <div class="empty-icon">👥</div>
-                <h3>No Characters Found</h3>
-                <p>No characters match your search or none have been added yet.</p>
+                <h3>Keine Charaktere gefunden</h3>
+                <p>Nichts passt zur Suche.</p>
             </div>
         `;
     }

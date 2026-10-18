@@ -48,15 +48,19 @@ async function linkCompletions(context) {
     const m = context.matchBefore(/\[\[[^\[\]|\n]*$/);
     if (!m) return null;
     const q = fold(m.text.slice(2));
-    const ranked = entries()
-        .map((e) => {
-            const n = fold(e.alias || e.name);
-            const score = !q ? 3 : n.startsWith(q) ? 0 : n.split(/[\s\-']+/).some((w) => w.startsWith(q)) ? 1 : n.includes(q) ? 2 : -1;
-            return { e, score };
-        })
-        .filter((x) => x.score >= 0)
-        .sort((a, b) => a.score - b.score || (a.e.alias || a.e.name).localeCompare(b.e.alias || b.e.name, 'de'))
-        .slice(0, 30);
+    const all = entries();
+    // the site's one search (src/utils/search.js): exact, then starts with, then a word starts with … — and typos
+    // ("[[glesbrug" → Glesburg) when nothing matches as typed. Without it (it is loaded by the pages): the simple ranking.
+    const S = window.AdenaiSearch;
+    const ranked = !q
+        ? all.slice().sort((a, b) => (a.alias || a.name).localeCompare(b.alias || b.name, 'de')).slice(0, 30).map((e) => ({ e }))
+        : S
+            ? S.rank(all, m.text.slice(2), (e) => ({ name: e.alias || e.name, fields: [{ label: '', text: e.detail, weight: 0.5 }] }), { limit: 30 }).map((r) => ({ e: r.item }))
+            : all.map((e) => {
+                const n = fold(e.alias || e.name);
+                const score = n.startsWith(q) ? 0 : n.split(/[\s\-']+/).some((w) => w.startsWith(q)) ? 1 : n.includes(q) ? 2 : -1;
+                return { e, score };
+            }).filter((x) => x.score >= 0).sort((a, b) => a.score - b.score || (a.e.alias || a.e.name).localeCompare(b.e.alias || b.e.name, 'de')).slice(0, 30);
     const after = context.state.sliceDoc(context.pos, context.pos + 2); // "]]" already typed after the cursor?
     const options = ranked.map(({ e }) => ({ label: e.alias || e.name, detail: e.detail, type: 'text', apply: e.alias ? `[[${e.name}|${e.alias}]]` : `[[${e.name}]]` }));
     // a name nothing has yet: offer to create an entry (only where the page provides window.AdenaiEditor.onCreateEntry —
