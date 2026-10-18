@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "f801dc83b69342ac31eac353013a78551c453c54",
+      "action": "update",
+      "type": "character",
+      "itemName": "Aykan",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:25:56.616Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:25:56.616Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: aykan (by gm) - added image"
+    },
+    {
       "commitSha": "8c5c85901b63e3603a2cb6846851c51452736ba1",
       "action": "update",
       "type": "character",
@@ -1835,5 +1848,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:25:04.024Z"
+  "lastUpdated": "2026-10-18T16:25:56.616Z"
 }
