@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "f652591f0bd1623a1377645e072e8a6987b9c154",
+      "action": "update",
+      "type": "character",
+      "itemName": "Emi Brach",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:45:53.715Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:45:53.715Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: emi_brach (by gm) - changed relationship to suspicious"
+    },
+    {
       "commitSha": "3d7520532ee2afc178c1d011a6a01375c806b9db",
       "action": "update",
       "type": "character",
@@ -1926,5 +1939,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:45:47.582Z"
+  "lastUpdated": "2026-10-18T16:45:53.715Z"
 }
