@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "2e02c3c8ffb7ead493f5ae0339d855e0a0830b04",
+      "action": "update",
+      "type": "character",
+      "itemName": "Sir Adrien",
+      "user": "gm",
+      "timestamp": "2026-10-18T15:59:22.181Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T15:59:22.181Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: sir_adrien (by gm) - added image"
+    },
+    {
       "commitSha": "06ece1ed0dfebe58a28e4e606f7e7949d78decfa",
       "action": "update",
       "type": "character",
@@ -1588,5 +1601,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T15:59:11.864Z"
+  "lastUpdated": "2026-10-18T15:59:22.181Z"
 }
