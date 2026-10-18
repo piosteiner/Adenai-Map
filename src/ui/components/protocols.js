@@ -17,6 +17,9 @@ class MapProtocols {
         this.LIVE = 'wss://adenai-admin.piogino.ch/api/protocols/live';
         this.KEY = 'adenai-protocol-token';
         this.NAME_KEY = 'adenai-protocol-name';
+        // where this device stopped reading ({ id, offset }), and which version of each session it has seen ({ id: updatedAt })
+        this.READ_KEY = 'adenai-protocol-reading';
+        this.SEEN_KEY = 'adenai-protocol-seen';
         this.sessions = [];
         this.suggestions = { players: [], places: [] };
         this.rooms = new Map(); // session id → live room, while editing
@@ -26,6 +29,79 @@ class MapProtocols {
         this.build();
         // an unlocked device knows the minutes from the start, for "Erwähnt in" in the popups
         if (this.unlocked) this.load().then(() => window.WikiLinks?.refreshBacklinks?.()).catch(() => {});
+    }
+
+    // ---------- reading: where this device stopped, what it has seen ----------
+
+    stored(key, fallback) { try { return JSON.parse(localStorage.getItem(key) || 'null') ?? fallback; } catch { return fallback; } }
+    store(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* private mode */ } }
+    // where el starts within the scrolling text column
+    topIn(el) { return el.getBoundingClientRect().top - this.view.getBoundingClientRect().top + this.view.scrollTop; }
+
+    // the session in view and how far into it, a moment after the scrolling stops
+    rememberPosition() {
+        clearTimeout(this.readTimer);
+        this.readTimer = setTimeout(() => {
+            const sec = this.activeId && this.sections.get(this.activeId);
+            if (!sec || !this.view || this.view.scrollTop < 4) return;
+            const offset = this.view.scrollTop - this.topIn(sec.el);
+            this.store(this.READ_KEY, { id: this.activeId, offset: Math.max(0, Math.round(offset)), at: Date.now() });
+        }, 400);
+    }
+
+    // back where this device stopped reading: true when there was such a place
+    resume() {
+        const r = this.stored(this.READ_KEY, null);
+        const sec = r && this.sections.get(r.id);
+        if (!sec || sec.el.hidden) return false;
+        const latest = this.sessions.filter((x) => x.published !== false).at(-1);
+        const view = this.view;
+        view.scrollTo({ top: Math.max(0, this.topIn(sec.el) + (r.offset || 0)), behavior: 'instant' });
+        this.setActive(r.id);
+        const s = this.sessions.find((x) => x.id === r.id);
+        if (latest && latest.id !== r.id) {
+            // floating over the text (a sticky holder of no height): showing or hiding it moves nothing
+            const holder = this.el('div', 'pp-resume-holder');
+            const note = this.el('div', 'pp-resume');
+            holder.append(note);
+            note.append(this.el('span', '', `📖 Weitergelesen bei Sitzung ${this.shown(s).number ?? ''}`));
+            const go = this.el('button', 'pp-resume-latest', `Zur neusten (Sitzung ${this.shown(latest).number ?? ''}) →`);
+            go.type = 'button';
+            go.addEventListener('click', () => { holder.remove(); this.scrollTo(latest.id); });
+            const x = this.el('button', 'pp-resume-close', '×');
+            x.type = 'button';
+            x.title = 'Schliessen';
+            x.addEventListener('click', () => holder.remove());
+            note.append(go, x);
+            this.view.prepend(holder);
+            setTimeout(() => holder.remove(), 15000);
+        }
+        return true;
+    }
+
+    // "neu" / "geändert": a session this device has not seen in this version. The first visit sees everything as known.
+    seenState(raw) {
+        const seen = this.seen ??= this.stored(this.SEEN_KEY, null);
+        if (!seen) return '';
+        const at = raw.updatedAt || raw.createdAt || '';
+        if (!(raw.id in seen)) return 'neu';
+        return at && at > seen[raw.id] ? 'geändert' : '';
+    }
+    markSeen(id) {
+        const raw = this.sessions.find((x) => x.id === id);
+        if (!raw) return;
+        this.seen ??= this.stored(this.SEEN_KEY, null) || {};
+        const at = raw.updatedAt || raw.createdAt || '';
+        if (this.seen[id] === at) return;
+        this.seen[id] = at;
+        this.store(this.SEEN_KEY, this.seen);
+        this.listEl?.querySelector(`.pp-item[data-id="${CSS.escape(id)}"] .pp-fresh`)?.remove();
+    }
+    // the first visit: everything there is now counts as seen
+    initSeen() {
+        if (this.stored(this.SEEN_KEY, null)) return;
+        this.seen = Object.fromEntries(this.sessions.map((x) => [x.id, x.updatedAt || x.createdAt || '']));
+        this.store(this.SEEN_KEY, this.seen);
     }
 
     // ---------- token, name & API ----------
@@ -173,8 +249,10 @@ class MapProtocols {
         try {
             await Promise.all([this.load(), this.loadEditor()]);
             this.startLive();
+            this.initSeen();
             this.showMain();
-            this.scrollTo(sessionId || this.sessions.filter((s) => s.published !== false).at(-1)?.id || this.sessions.at(-1)?.id, false, highlight);
+            // a session asked for (a link, a mention): there; else where this device stopped reading; else the newest
+            if (sessionId || !this.resume()) this.scrollTo(sessionId || this.sessions.filter((s) => s.published !== false).at(-1)?.id || this.sessions.at(-1)?.id, false, highlight);
         } catch (err) {
             if (err.message !== 'locked') this.body.replaceChildren(this.el('p', 'pp-error', `Protokolle nicht verfügbar: ${err.message}`));
         }
@@ -265,7 +343,7 @@ class MapProtocols {
         window.adminGlossary ||= { getTerms: () => window.mapGlossary?.allTerms?.() || window.mapGlossary?.terms || [] };
         this.editorLoading ||= new Promise((resolve, reject) => {
             const sc = document.createElement('script');
-            sc.src = 'src/vendor/md-editor.js?v=7';
+            sc.src = 'src/vendor/md-editor.js?v=8';
             sc.onload = () => {
                 // "[[Name" for something without an entry: players propose one (components/glossary.js)
                 window.AdenaiEditor.onCreateEntry = (typed) => window.mapGlossary?.createEntry(typed);
@@ -391,6 +469,7 @@ class MapProtocols {
         }, { root: this.view, rootMargin: '0px 0px -70% 0px' });
         for (const s of this.sessions) this.addSection(s);
         this.drawList();
+        this.view.addEventListener('scroll', () => this.rememberPosition(), { passive: true });
     }
 
     addSection(s) {
@@ -490,6 +569,8 @@ class MapProtocols {
                 b.classList.add('has-draft');
                 title.prepend(Object.assign(this.el('span', 'pp-item-draft', '● '), { title: raw.published === false ? 'Entwurf – noch nicht gespeichert' : 'Ungespeicherte Änderungen' }));
             }
+            const fresh = raw.published !== false ? this.seenState(raw) : '';
+            if (fresh) title.append(' ', Object.assign(this.el('span', 'pp-fresh', fresh), { title: fresh === 'neu' ? 'Neu seit dem letzten Lesen' : 'Seit dem letzten Lesen geändert' }));
             b.append(this.el('strong', '', `${s.number ?? '?'}`), title, this.el('span', 'pp-item-meta', this.date(s.date)));
             b.addEventListener('click', () => { this.panel.classList.remove('toc-open'); this.scrollTo(s.id); });
             return b;
@@ -500,6 +581,8 @@ class MapProtocols {
 
     setActive(id) {
         this.activeId = id;
+        clearTimeout(this.seenTimer);
+        this.seenTimer = setTimeout(() => { if (this.activeId === id) this.markSeen(id); }, 1500); // read a moment: seen
         this.listEl?.querySelectorAll('.pp-item').forEach((b) => b.classList.toggle('active', b.dataset.id === id));
         const item = this.listEl?.querySelector('.pp-item.active');
         if (item) {

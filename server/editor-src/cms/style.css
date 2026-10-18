@@ -345,3 +345,22 @@ a.stat:hover { border-color: var(--accent); text-decoration: none; }
 .search-picker-menu .sp-none { color: var(--muted); cursor: default; font-size: 12px; }
 .search-picker-hint { position: absolute; left: 0; top: calc(100% + 3px); z-index: 31; font-size: 11.5px; color: var(--bad); background: var(--panel); padding: 3px 6px; border-radius: 4px; border: 1px solid var(--line-2); }
 .search-picker-hint[hidden] { display: none; }
+/* light Markdown, the rest (rich-text.js): as on the map */
+.rich-text h5 { font-size: 0.95em; margin: 0.8em 0 0.3em; } .rich-text h6 { font-size: 0.88em; margin: 0.7em 0 0.25em; text-transform: uppercase; letter-spacing: 0.03em; opacity: 0.85; }
+.rich-text ol { padding-left: 1.6em; margin: 0 0 0.5em; } .rich-text li > ul, .rich-text li > ol { margin: 0.15em 0 0.2em; }
+.rich-text .task { display: inline-flex; gap: 0.35em; align-items: baseline; } .rich-text li:has(> .task) { list-style: none; margin-left: -1.1em; }
+.rich-text .task input { margin: 0; accent-color: var(--accent); } .rich-text .task.done > span { text-decoration: line-through; opacity: 0.65; }
+.rich-text mark { background: rgba(250, 204, 21, 0.32); color: inherit; padding: 0 0.15em; border-radius: 3px; }
+.rich-text .spoiler { background: currentColor; border-radius: 3px; padding: 0 0.2em; cursor: pointer; } .rich-text .spoiler:focus { background: rgba(127, 127, 127, 0.18); outline: none; }
+.rich-text hr { border: 0; border-top: 1px solid var(--line-2); margin: 1em 0; }
+.rich-text .callout { --c: 139, 92, 246; margin: 0.6em 0 0.8em; padding: 0.55em 0.8em; border-left: 4px solid rgb(var(--c)); border-radius: 6px; background: rgba(var(--c), 0.13); }
+.rich-text .callout-title { font-weight: 700; margin-bottom: 0.15em; } .rich-text .callout-body > :last-child { margin-bottom: 0; }
+.rich-text .callout-quote { --c: 148, 163, 184; } .rich-text .callout-quote .callout-body { font-style: italic; } .rich-text .callout-loot { --c: 234, 179, 8; }
+.rich-text .callout-info { --c: 59, 130, 246; } .rich-text .callout-warning { --c: 239, 68, 68; } .rich-text .callout-note { --c: 34, 197, 94; } .rich-text .callout-secret { --c: 100, 116, 139; }
+.rich-text .table-wrap { overflow-x: auto; margin: 0 0 0.6em; } .rich-text table { border-collapse: collapse; font-size: 0.95em; }
+.rich-text th, .rich-text td { border: 1px solid var(--line-2); padding: 0.25em 0.6em; text-align: left; vertical-align: top; } .rich-text th { background: var(--panel-2); }
+/* the editor's "▣ Box ▾" menu (md-editor.js) */
+.md-boxmenu { position: relative; display: inline-flex; }
+.md-boxlist { position: absolute; top: calc(100% + 3px); left: 0; z-index: 40; display: grid; min-width: 9.5rem; padding: 3px; background: var(--panel); border: 1px solid var(--line-2); border-radius: 6px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35); }
+.md-boxlist[hidden] { display: none; }
+.md-boxlist .md-tool { text-align: left; }

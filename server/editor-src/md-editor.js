@@ -110,6 +110,16 @@ const underlines = ViewPlugin.fromClass(class {
     update(u) { this.decorations = underlineDeco.updateDeco(u, this.decorations); }
 }, { decorations: (v) => v.decorations });
 
+// ==markiert== and ||Spoiler|| look like that while typing (the markers stay, dimmed by nothing: they are plain text)
+const markDeco = new MatchDecorator({ regexp: /==(?=\S)[^=\n]*?\S==/g, decoration: () => Decoration.mark({ class: 'cm-mark' }) });
+const spoilerDeco = new MatchDecorator({ regexp: /\|\|(?=\S)[^|\n]*?\S\|\|/g, decoration: () => Decoration.mark({ class: 'cm-spoiler' }) });
+const calloutDeco = new MatchDecorator({ regexp: /^>\s?\[![a-zA-ZäöüÄÖÜ]+\].*$/gm, decoration: () => Decoration.mark({ class: 'cm-callout' }) });
+const decorated = (deco) => ViewPlugin.fromClass(class {
+    constructor(view) { this.decorations = deco.createDeco(view); }
+    update(u) { this.decorations = deco.updateDeco(u, this.decorations); }
+}, { decorations: (v) => v.decorations });
+const marks = [decorated(markDeco), decorated(spoilerDeco), decorated(calloutDeco)];
+
 const wikiLinks = ViewPlugin.fromClass(class {
     constructor(view) { this.decorations = wikiDeco.createDeco(view); }
     update(u) { this.decorations = wikiDeco.updateDeco(u, this.decorations); }
@@ -200,6 +210,9 @@ const theme = EditorView.theme({
     '&.cm-focused .cm-selectionBackground, .cm-selectionBackground': { background: 'var(--focus-ring)' },
     '.cm-wikilink': { color: 'var(--accent-primary)', fontWeight: '600' },
     '.cm-underline': { textDecoration: 'underline' },
+    '.cm-mark': { background: 'rgba(250, 204, 21, 0.35)', borderRadius: '2px' },
+    '.cm-spoiler': { background: 'rgba(127, 127, 127, 0.28)', borderRadius: '2px', textDecoration: 'underline dotted' },
+    '.cm-callout': { fontWeight: '700', color: 'var(--accent-primary)' },
     '.cm-search-match': { background: 'rgba(255, 196, 0, .32)', borderRadius: '2px' },
     '.cm-search-current': { background: 'rgba(255, 166, 0, .75)', boxShadow: '0 0 0 1px rgba(255, 166, 0, .9)' },
     // other people's cursors in live mode (y-codemirror.next)
@@ -309,6 +322,60 @@ function linePrefix(view, prefix) {
     return true;
 }
 
+// "1. " … before the selected lines (again: removed)
+function numberLines(view) {
+    const { state } = view;
+    const lines = [];
+    for (const r of state.selection.ranges) for (let pos = r.from; pos <= r.to;) { const l = state.doc.lineAt(pos); if (!lines.some((x) => x.from === l.from)) lines.push(l); pos = l.to + 1; }
+    const NUM = /^(\s*)\d{1,3}[.)]\s+/;
+    const allHave = lines.every((l) => NUM.test(l.text));
+    view.dispatch({
+        changes: lines.map((l, i) => {
+            const m = NUM.exec(l.text);
+            return allHave ? { from: l.from + m[1].length, to: l.from + m[0].length } : { from: l.from, insert: `${i + 1}. ` };
+        }),
+        userEvent: 'input',
+    });
+    view.focus();
+    return true;
+}
+
+// the heading of the line: none → # → ## → ### → none
+function cycleHeading(view) {
+    const line = view.state.doc.lineAt(view.state.selection.main.head);
+    const m = /^(#{1,6})\s+/.exec(line.text);
+    const next = !m ? '# ' : m[1].length < 3 ? `${m[1]}# ` : '';
+    view.dispatch({ changes: { from: line.from, to: line.from + (m ? m[0].length : 0), insert: next }, userEvent: 'input' });
+    view.focus();
+    return true;
+}
+
+// a block on lines of its own after the cursor's line (a divider, a table): blank lines around it
+function insertBlock(view, text, cursorAt = null) {
+    const line = view.state.doc.lineAt(view.state.selection.main.head);
+    const before = line.text.trim() ? '\n\n' : '';
+    const insert = `${before}${text}\n`;
+    const from = line.text.trim() ? line.to : line.from;
+    view.dispatch({ changes: { from, insert }, selection: { anchor: from + before.length + (cursorAt ?? text.length) }, userEvent: 'input' });
+    view.focus();
+    return true;
+}
+
+// a box (as in Obsidian): the selected lines go into it, else an empty one is started
+const BOXES = [['quote', '💬 Zitat'], ['loot', '💰 Beute'], ['quest', '📜 Auftrag'], ['info', 'ℹ️ Info'], ['warning', '⚠️ Achtung'], ['note', '📝 Notiz'], ['secret', '🤫 Geheim']];
+function insertBox(view, type) {
+    const { state } = view;
+    const sel = state.selection.main;
+    if (!sel.empty) {
+        const a = state.doc.lineAt(sel.from); const b = state.doc.lineAt(sel.to);
+        const body = state.sliceDoc(a.from, b.to).split('\n').map((l) => `> ${l}`).join('\n');
+        view.dispatch({ changes: { from: a.from, to: b.to, insert: `> [!${type}]\n${body}` }, userEvent: 'input' });
+        view.focus();
+        return true;
+    }
+    return insertBlock(view, `> [!${type}] \n> `, `> [!${type}] `.length);
+}
+
 const shortcuts = [
     { key: 'Mod-b', run: (v) => wrap(v, '**') },
     { key: 'Mod-i', run: (v) => wrap(v, '*') },
@@ -316,6 +383,7 @@ const shortcuts = [
     // browser's page source.
     { key: 'Mod-u', run: (v) => wrap(v, '++'), preventDefault: true },
     { key: 'Mod-k', run: webLink },
+    { key: 'Mod-Shift-h', run: (v) => wrap(v, '=='), preventDefault: true },
 ];
 
 function button(label, title, onClick) {
@@ -369,6 +437,7 @@ function enhance(textarea, collab = null) {
                 bracketOverSelection,
                 wikiLinks,
                 underlines,
+                marks,
                 searchField,
                 theme,
                 placeholder(textarea.placeholder || ''),
@@ -420,6 +489,16 @@ function enhance(textarea, collab = null) {
         previewButton.textContent = 'Edit';
     };
     const previewButton = button('Preview', 'So sieht es auf der Karte aus', togglePreview);
+    // ▣ Box ▾: a small menu of the box types
+    const boxMenu = document.createElement('span');
+    boxMenu.className = 'md-boxmenu';
+    const boxList = document.createElement('span');
+    boxList.className = 'md-boxlist';
+    boxList.hidden = true;
+    BOXES.forEach(([type, label]) => boxList.append(button(label, `Box „${label.slice(2).trim()}“ — > [!${type}]`, () => { boxList.hidden = true; insertBox(view, type); })));
+    const boxButton = button('▣ Box ▾', 'Box: Zitat, Beute, Auftrag, Info, Achtung, Notiz, Geheim', () => { boxList.hidden = !boxList.hidden; });
+    boxMenu.append(boxButton, boxList);
+    document.addEventListener('mousedown', (e) => { if (!boxMenu.contains(e.target)) boxList.hidden = true; });
 
     toolbar.append(
         button('B', 'Fett (Ctrl/⌘+B)', () => wrap(view, '**')),
@@ -427,9 +506,16 @@ function enhance(textarea, collab = null) {
         button('U', 'Unterstrichen (Ctrl/⌘+U)', () => wrap(view, '++')),
         button('[[ ]]', 'Link zu einem Eintrag — oder [[ tippen, oder ein Wort markieren und [ tippen', () => wikiLink(view)),
         button('Web', 'Weblink (Ctrl/⌘+K)', () => webLink(view)),
-        button('H', 'Überschrift', () => linePrefix(view, '## ')),
+        button('H', 'Überschrift — nochmals: kleiner (#, ##, ###)', () => cycleHeading(view)),
         button('• Liste', 'Aufzählung', () => linePrefix(view, '- ')),
+        button('1.', 'Nummerierte Liste', () => numberLines(view)),
+        button('☐', 'Offener Punkt (- [ ]) — [x] = erledigt', () => linePrefix(view, '- [ ] ')),
+        button('▍', 'Markieren (Ctrl/⌘+Shift+H)', () => wrap(view, '==')),
+        button('◼', 'Spoiler — erst beim Anklicken sichtbar', () => wrap(view, '||')),
         button('❝', 'Zitat', () => linePrefix(view, '> ')),
+        boxMenu,
+        button('⊞', 'Tabelle', () => insertBlock(view, '| Spalte | Spalte |\n|---|---|\n|  |  |', 2)),
+        button('—', 'Trennlinie', () => insertBlock(view, '---')),
         Object.assign(document.createElement('span'), { className: 'md-spacer' }),
         previewButton,
     );

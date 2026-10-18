@@ -540,3 +540,54 @@
 .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--popup-bg); color: var(--text-color); }
 .leaflet-bar a, .leaflet-bar a:hover { background-color: var(--popup-bg); color: var(--text-color); border-bottom-color: var(--dropdown-border); }
 .leaflet-container a.leaflet-popup-close-button { color: var(--text-muted); }
+
+/* ---- light Markdown, the rest (src/utils/rich-text.js): sub-headings, numbered lists, tasks, highlights, spoilers,
+   dividers, boxes, tables ---- */
+.rich-text h5 { font-size: 0.95em; margin: 0.8em 0 0.3em; }
+.rich-text h6 { font-size: 0.88em; margin: 0.7em 0 0.25em; text-transform: uppercase; letter-spacing: 0.03em; opacity: 0.85; }
+.rich-text ol { padding-left: 1.6em; margin: 0 0 0.5em; }
+.rich-text li > ul, .rich-text li > ol { margin: 0.15em 0 0.2em; }
+.rich-text .task { display: inline-flex; gap: 0.35em; align-items: baseline; }
+.rich-text li:has(> .task) { list-style: none; margin-left: -1.1em; }
+.rich-text .task input { margin: 0; transform: translateY(1px); accent-color: #6d28d9; }
+.rich-text .task.done > span { text-decoration: line-through; opacity: 0.65; }
+.rich-text mark { background: rgba(250, 204, 21, 0.45); color: inherit; padding: 0 0.15em; border-radius: 3px; }
+[data-theme="dark"] .rich-text mark { background: rgba(250, 204, 21, 0.3); }
+.rich-text .spoiler { background: currentColor; color: inherit; border-radius: 3px; padding: 0 0.2em; cursor: pointer; transition: background 0.15s; }
+.rich-text .spoiler:focus { background: rgba(127, 127, 127, 0.18); outline: none; }
+.rich-text .spoiler:not(:focus) * { visibility: hidden; }
+.rich-text hr { border: 0; border-top: 1px solid rgba(127, 127, 127, 0.35); margin: 1em 0; }
+.rich-text .callout { --c: 109, 40, 217; margin: 0.6em 0 0.8em; padding: 0.55em 0.8em; border-left: 4px solid rgb(var(--c)); border-radius: 6px; background: rgba(var(--c), 0.08); }
+.rich-text .callout-title { font-weight: 700; margin-bottom: 0.15em; }
+.rich-text .callout-body > :last-child { margin-bottom: 0; }
+.rich-text .callout-quote { --c: 100, 116, 139; }
+.rich-text .callout-quote .callout-body { font-style: italic; }
+.rich-text .callout-loot { --c: 202, 138, 4; }
+.rich-text .callout-quest { --c: 109, 40, 217; }
+.rich-text .callout-info { --c: 37, 99, 235; }
+.rich-text .callout-warning { --c: 220, 38, 38; }
+.rich-text .callout-note { --c: 22, 163, 74; }
+.rich-text .callout-secret { --c: 71, 85, 105; }
+[data-theme="dark"] .rich-text .callout { background: rgba(var(--c), 0.16); }
+.rich-text .table-wrap { overflow-x: auto; margin: 0 0 0.6em; }
+.rich-text table { border-collapse: collapse; font-size: 0.95em; }
+.rich-text th, .rich-text td { border: 1px solid rgba(127, 127, 127, 0.3); padding: 0.25em 0.6em; text-align: left; vertical-align: top; }
+.rich-text th { background: rgba(127, 127, 127, 0.1); }
+
+/* a card for a [[link]] under the pointer (src/ui/components/link-cards.js): above popups and the image preview */
+.link-card { position: fixed; z-index: 10020; display: flex; gap: 10px; width: max-content; max-width: min(340px, calc(100vw - 16px)); padding: 10px 12px;
+  border-radius: 10px; background: #fbf7ee; color: #2a2522; border: 1px solid rgba(0, 0, 0, 0.12); box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  font: 13px/1.4 system-ui, -apple-system, 'Segoe UI', sans-serif; pointer-events: none; opacity: 0; transform: translateY(3px); transition: opacity 0.12s, transform 0.12s; }
+.link-card.visible { opacity: 1; transform: none; }
+.link-card[hidden] { display: none; }
+.link-card-img { flex: none; width: 72px; height: 72px; border-radius: 8px; object-fit: cover; object-position: center top; background: rgba(0, 0, 0, 0.06); }
+.link-card-body { min-width: 0; max-width: 240px; }
+.link-card-title { font-weight: 700; font-size: 14.5px; }
+.link-card-sub { font-style: italic; opacity: 0.8; }
+.link-card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.link-card-tags span { padding: 0 6px; border-radius: 999px; background: rgba(109, 40, 217, 0.1); font-size: 11.5px; }
+.link-card-line { margin-top: 4px; font-size: 12px; }
+.link-card-text { margin-top: 5px; font-size: 12.5px; opacity: 0.9; }
+.link-card-hint { margin-top: 5px; font-size: 11px; opacity: 0.55; }
+[data-theme="dark"] .link-card { background: #2b2d33; color: #e8e6e3; border-color: rgba(255, 255, 255, 0.12); }
+[data-theme="dark"] .link-card-tags span { background: rgba(167, 139, 250, 0.18); }

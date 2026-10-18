@@ -277,8 +277,8 @@ class MemoryUtils {
         });
         this.observers.clear();
         
-        // Clear weak references
-        this.weakRefs.clear();
+        // Clear weak references (a WeakMap has no clear(): a new one — this threw, so the rest never ran)
+        this.weakRefs = new WeakMap();
         
         // Force GC
         this.forceGC();
