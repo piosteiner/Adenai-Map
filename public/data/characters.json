@@ -3528,8 +3528,8 @@
       "updatedAt": "2026-10-18T16:09:07.605Z"
     },
     {
-      "id": "vanischa",
-      "name": "Vanischa",
+      "id": "vanisha",
+      "name": "Vanisha",
       "title": "Tua Danarer Widerstandskämpferin",
       "placeOfOrigin": "",
       "coordinates": null,
@@ -3542,8 +3542,9 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:42:53.541Z",
-      "updatedAt": "2026-10-18T04:42:53.541Z"
+      "updatedAt": "2026-10-18T16:24:25.267Z"
     },
     {
       "id": "sorsley",
@@ -4007,5 +4008,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:23:19.216Z"
+  "lastUpdated": "2026-10-18T16:24:25.267Z"
 }
