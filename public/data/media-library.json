@@ -18710,7 +18710,50 @@
       },
       "fileSize": 222068,
       "mimeType": "image/webp"
+    },
+    "characters-2ezeuruva8t0": {
+      "id": "characters-2ezeuruva8t0",
+      "category": "characters",
+      "title": "She-Ra",
+      "caption": "",
+      "credits": "unknown",
+      "tags": [],
+      "uploadDate": "2026-10-18T17:38:52.382Z",
+      "sizes": {
+        "thumb": {
+          "filename": "2ezeuruva8t0-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/2ezeuruva8t0-thumb.webp",
+          "width": 149,
+          "height": 150
+        },
+        "small": {
+          "filename": "2ezeuruva8t0-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/2ezeuruva8t0-small.webp",
+          "width": 298,
+          "height": 300
+        },
+        "medium": {
+          "filename": "2ezeuruva8t0-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/2ezeuruva8t0-medium.webp",
+          "width": 597,
+          "height": 600
+        },
+        "large": {
+          "filename": "2ezeuruva8t0-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/2ezeuruva8t0-large.webp",
+          "width": 776,
+          "height": 780
+        },
+        "original": {
+          "filename": "2ezeuruva8t0-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/2ezeuruva8t0-large.webp",
+          "width": 776,
+          "height": 780
+        }
+      },
+      "fileSize": 110086,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T17:24:18.730Z"
+  "lastUpdated": "2026-10-18T17:38:52.389Z"
 }
