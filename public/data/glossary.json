@@ -61,6 +61,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_a5d4bb80bd",
+      "name": "Erinea",
+      "aliases": [],
+      "category": "Ort",
+      "description": "Die zu Staub zerstörte Aboleth-Stadt, auf deren Ruinen [[Epiphea]] gebaut ist; von etwa sieben Drachen zerbombt. [[Kadmis]] hat dort ein Labor.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:24.969Z",
+      "updatedAt": "2026-10-18T04:41:24.969Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_78d281e18c",
       "name": "Ewige Donnerklüfte",
       "aliases": [
@@ -402,5 +415,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:23.723Z"
+  "lastUpdated": "2026-10-18T04:41:24.969Z"
 }
