@@ -2597,7 +2597,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:41:28.994Z",
       "updatedAt": "2026-10-18T04:41:28.994Z"
+    },
+    {
+      "id": "francis",
+      "name": "Francis",
+      "title": "Abus Vertrauter",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "[[Abu]]s Vertrauter, der in vielen Gestalten auftritt – etwa als Ratte – und für die [[VsuzH]] auskundschaftet, ablenkt und klaut (z. B. sechs [[Glüebli]] in [[Toftgard]]). Francis II. starb in Sitzung 7, ein Vertrauter bleibt aber nie lange weg.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "VsuzH",
+      "relationship": "party",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:41:29.986Z",
+      "updatedAt": "2026-10-18T04:41:29.986Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:28.994Z"
+  "lastUpdated": "2026-10-18T04:41:29.986Z"
 }
