@@ -325,3 +325,8 @@ a.stat:hover { border-color: var(--accent); text-decoration: none; }
 .portrait-link img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 .portrait-empty { aspect-ratio: 4 / 5; display: grid; place-content: center; justify-items: center; gap: 6px; font-size: 48px; text-align: center; }
 .portrait-empty .muted { font-size: 12px; max-width: 18ch; }
+/* the autosave state in an entry's header (form.js autosaver) */
+.save-state.autosave { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.save-state.autosave.busy { color: var(--text); }
+.save-state.autosave.ok { color: var(--ok, #3fb950); }
+.save-state.autosave.bad { color: var(--bad, #f85149); cursor: pointer; white-space: normal; max-width: 34ch; text-align: right; }

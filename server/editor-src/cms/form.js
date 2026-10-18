@@ -39,6 +39,63 @@ export function tracker(read, onDirty) {
     return {
         check,
         isDirty: () => dirty,
-        reset() { base = JSON.stringify(read()); dirty = false; onDirty(false); },
+        // saved: the values that were saved (typing during the save stays unsaved); default: what the form holds now
+        reset(saved = read()) { base = JSON.stringify(saved); dirty = false; onDirty(false); check(); },
+    };
+}
+
+// Saves a form by itself — characters, locations, media: a field once it is left or a choice made (the form's
+// change event), a long text after a pause in typing; changes close together go into one save, so one entry in the
+// history. persist(values) saves the values read() gave and throws to report a failure. state: an element that says
+// "Saving…", "✓ Saved 16:42" or "⚠ Not saved: … — retry" (a click retries).
+//   form events: autosave.attach(form) · other changes (the gallery, a map click): autosave.changed()
+//   before leaving: await autosave.flush() → true when nothing is left unsaved
+export function autosaver({ read, track, persist, state, fieldDelay = 1500, typingDelay = 3000 }) {
+    let timer = null;
+    let running = null;
+    const show = (text, kind = '') => { state.textContent = text; state.className = `save-state autosave${kind ? ` ${kind}` : ''}`; };
+    const time = () => new Date().toLocaleTimeString('de-CH', { hour: '2-digit', minute: '2-digit' });
+    state.addEventListener('click', () => { if (state.classList.contains('bad')) flush(); });
+    state.title = 'Changes are saved by themselves';
+
+    function schedule(ms) {
+        track.check();
+        clearTimeout(timer);
+        if (!track.isDirty()) return;
+        show('● unsaved…');
+        timer = setTimeout(flush, ms);
+    }
+    async function flush() {
+        clearTimeout(timer);
+        timer = null;
+        while (running) await running;            // one save at a time; then the newest values
+        track.check();
+        if (!track.isDirty()) return true;
+        const values = read();
+        let ok = false;
+        running = (async () => {
+            show('Saving…', 'busy');
+            try {
+                await persist(values);
+                track.reset(values);
+                ok = true;
+                show(`✓ Saved ${time()}`, 'ok');
+            } catch (err) {
+                show(`⚠ Not saved: ${err.message} — click to retry`, 'bad');
+            }
+        })();
+        await running;
+        running = null;
+        if (ok && track.isDirty()) schedule(fieldDelay); // typed while it was saving
+        return ok && !track.isDirty();
+    }
+    return {
+        attach(form) {
+            form.addEventListener('change', () => schedule(fieldDelay));
+            form.addEventListener('input', (e) => (e.target.tagName === 'TEXTAREA' ? schedule(typingDelay) : track.check()));
+        },
+        changed: (ms = fieldDelay) => schedule(ms),
+        flush,
+        pending: () => !!timer || !!running,
     };
 }

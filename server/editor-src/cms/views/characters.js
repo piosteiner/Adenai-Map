@@ -6,7 +6,7 @@ import { store, reload, canEdit, options, labelOf, imagesOf, characterById, char
 import { createList } from '../list';
 import { createGallery } from '../gallery';
 import { createMiniMap } from '../minimap';
-import { field, input, select, markdown, tracker } from '../form';
+import { field, input, select, markdown, tracker, autosaver } from '../form';
 
 // In-game calendar: the campaign starts on 3 June 5663. Date pickers open in 5663 (min), never at today's real date.
 export const CAMPAIGN_START = '5663-06-03';
@@ -84,7 +84,7 @@ export function charactersView(app) {
                 : h('div.portrait-empty', {}, h('span', { text: '👤' }), h('span.muted', { text: editable ? 'No image yet — add one under Images.' : 'No image yet.' })));
         };
         drawPortrait(imagesOf(d));
-        const gallery = createGallery({ urls: imagesOf(d), editable, onChange: (list) => { drawPortrait(list); track.check(); } });
+        const gallery = createGallery({ urls: imagesOf(d), editable, onChange: (list) => { drawPortrait(list); if (auto) auto.changed(); else track.check(); } });
 
         const read = () => ({
             name: name.value.trim(), title: title.value.trim(), placeOfOrigin: origin.value, status: status.value,
@@ -92,10 +92,48 @@ export function charactersView(app) {
             description: description.value, notes: notes.value, images: gallery.get(),
         });
         const state = h('span.save-state');
-        const saveBtn = h('button.btn.primary', { type: 'button', disabled: true, title: 'Save (Ctrl+S)', on: { click: () => save() } }, 'Save');
-        const track = tracker(read, (dirty) => { saveBtn.disabled = !dirty; state.textContent = dirty ? '● unsaved changes' : ''; });
+        // a new character is created on purpose (Create); an existing one saves itself (autosaver, form.js)
+        const saveBtn = h('button.btn.primary', { type: 'button', disabled: true, title: 'Create (Ctrl+S)', on: { click: () => save() } }, 'Create');
+        const track = tracker(read, (dirty) => { saveBtn.disabled = !dirty; if (!auto) state.textContent = dirty ? '● unsaved changes' : ''; });
+        let auto = null;
+        const headTitle = h('h2', { text: d.name || 'New character' });
+        const headSub = h('span.muted');
+        const drawHead = (v) => {
+            headTitle.textContent = v.name || 'New character';
+            headSub.replaceChildren(...(c ? [h(`span.rel.rel-${v.relationship}`), ` ${labelOf('characterRelationships', v.relationship)} · ${labelOf('characterStatus', v.status)}${v.title ? ` · ${v.title}` : ''}`] : ['not saved yet']));
+        };
+        drawHead(d);
+
+        // an existing character: saved as it is edited (a renamed one moves to its new address: links follow)
+        async function persist(v) {
+            if (!v.name) throw new Error('a character needs a name');
+            const clash = characterByName(v.name);
+            if (clash && clash.id !== c.id) throw new Error(`there is already a character “${clash.name}”`);
+            const res = await api(`/api/characters/${encodeURIComponent(c.id)}`, { method: 'PUT', body: { ...v, image: v.images[0] || '' } });
+            const n = res.linksUpdated || {};
+            await reload('characters', ...(n.locations ? ['locations'] : []));
+            if (n.locations || n.characters) toast(`“${v.name}”: links updated in ${(n.locations || 0) + (n.characters || 0)} entries`);
+            if (res.linksWarning) toast(res.linksWarning, 'warn', 8000);
+            const id = res.character?.id || c.id;
+            if (id !== c.id) { track.reset(v); app.go(`characters/${encodeURIComponent(id)}`, { force: true }); return; }
+            drawHead(v);
+            list.update(sorted(), c.id);
+        }
+        if (c && editable) {
+            auto = autosaver({ read, track, persist, state });
+            // a new name renames: with links to it, asked first (they all follow the new name)
+            name.addEventListener('change', async (e) => {
+                const v = name.value.trim();
+                const linked = backlinks(d.name).length;
+                if (!v || v === d.name || !linked) return;
+                e.stopImmediatePropagation();
+                if (await confirmDialog(`Rename “${d.name}” to “${v}”? The links in ${linked} entr${linked === 1 ? 'y' : 'ies'} follow the new name.`, { ok: 'Rename' })) auto.changed(0);
+                else { name.value = d.name; track.check(); }
+            });
+        }
 
         async function save() {
+            if (auto) return auto.flush(); // an existing character: save now what is waiting (Ctrl+S, Enter)
             const v = read();
             if (!v.name) return toast('A character needs a name', 'warn');
             const clash = characterByName(v.name);
@@ -151,11 +189,10 @@ export function charactersView(app) {
         detail.replaceChildren(
             h('header.detail-head', {},
                 cover ? h('div.detail-cover', {}, h('img', { src: cover, alt: '' })) : h('div.detail-cover.empty', { text: '👤' }),
-                h('div.detail-title', {}, h('h2', { text: d.name || 'New character' }),
-                    h('span.muted', {}, c ? [h(`span.rel.rel-${d.relationship}`), ` ${labelOf('characterRelationships', d.relationship)} · ${labelOf('characterStatus', d.status)}${d.title ? ` · ${d.title}` : ''}`] : 'not saved yet')),
+                h('div.detail-title', {}, headTitle, headSub),
                 h('span.spacer'), state,
                 editable && c ? h('button.btn.ghost.danger', { type: 'button', on: { click: remove } }, 'Delete') : null,
-                editable ? saveBtn : h('span.muted', { text: 'Log in to edit' })),
+                editable ? (c ? null : saveBtn) : h('span.muted', { text: 'Log in to edit' })),
             h('div.detail-cols', {},
                 h('div.detail-main', {}, form, c ? movementsSection(c, editable) : h('p.muted.pad', { text: 'Movements can be added once the character is saved.' })),
                 h('aside.detail-side', {},
@@ -165,7 +202,8 @@ export function charactersView(app) {
                         refs.length ? h('p.side-row', {}, refs.map(refChip)) : h('p.muted', { text: 'No text links here yet.' })) : null,
                     c ? h('div.side-block.meta', {}, h('p.muted', { text: `ID ${c.id} · created ${formatDate(c.createdAt)} · updated ${formatDate(c.updatedAt)}` })) : null)));
 
-        current = { key: c?.id || 'new', track, save, map };
+        if (auto) auto.attach(form);
+        current = { key: c?.id || 'new', track, save, map, flush: () => (auto ? auto.flush() : Promise.resolve(!track.isDirty())) };
         if (!c) name.focus();
     }
 
@@ -307,6 +345,8 @@ export function charactersView(app) {
         focusSearch: () => list.focusSearch(),
         isDirty: () => !!current?.track.isDirty(),
         save: () => current?.save(),
+        // before leaving: save what is waiting (true: nothing left unsaved)
+        flush: () => current?.flush() ?? Promise.resolve(true),
         refresh(key) { if (!current?.track.isDirty()) open(key); else list.update(sorted(), key); },
     };
 }

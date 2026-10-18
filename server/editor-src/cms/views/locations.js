@@ -6,7 +6,7 @@ import { store, reload, canEdit, options, labelOf, imagesOf, locationByName, cha
 import { createList } from '../list';
 import { createGallery } from '../gallery';
 import { createMiniMap } from '../minimap';
-import { field, input, select, checkbox, markdown, tracker } from '../form';
+import { field, input, select, checkbox, markdown, tracker, autosaver } from '../form';
 
 export function locationsView(app) {
     let current = null; // { key, track, save, map }
@@ -73,11 +73,11 @@ export function locationsView(app) {
         visited.box.disabled = ro;
         const description = markdown(p.description, { placeholder: 'Description… [[ links to characters and places', rows: 6 });
         description.readOnly = ro;
-        const gallery = createGallery({ urls: imagesOf(p), editable, onChange: () => track.check() });
+        const gallery = createGallery({ urls: imagesOf(p), editable, onChange: () => (auto ? auto.changed() : track.check()) });
         const map = createMiniMap({
             point: Number.isFinite(+x0) && x0 !== '' ? [x0, y0] : null,
             editable,
-            onPick: ([px, py]) => { x.value = px; y.value = py; track.check(); },
+            onPick: ([px, py]) => { x.value = px; y.value = py; if (auto) auto.changed(); else track.check(); },
         });
         [x, y].forEach((i) => i.addEventListener('change', () => map.setPoint([x.value, y.value])));
 
@@ -86,14 +86,54 @@ export function locationsView(app) {
             description: description.value, images: gallery.get(), x: x.value, y: y.value,
         });
         const status = h('span.save-state');
-        const saveBtn = h('button.btn.primary', { type: 'button', disabled: true, title: 'Save (Ctrl+S)', on: { click: () => save() } }, 'Save');
+        // a new location is created on purpose (Create); an existing one saves itself (autosaver, form.js)
+        const saveBtn = h('button.btn.primary', { type: 'button', disabled: true, title: 'Create (Ctrl+S)', on: { click: () => save() } }, 'Create');
         const track = tracker(read, (dirty) => {
             saveBtn.disabled = !dirty;
-            status.textContent = dirty ? '● unsaved changes' : '';
+            if (!auto) status.textContent = dirty ? '● unsaved changes' : '';
         });
+        let auto = null;
+        const headTitle = h('h2', { text: p.name || 'New location' });
+        const headSub = h('span.muted', { text: feature ? [labelOf('locationTypes', p.type), labelOf('locationRegions', p.region)].filter(Boolean).join(' · ') : 'not saved yet' });
+
+        // an existing location: saved as it is edited (the name is its address: a renamed one moves, references follow)
+        async function persist(v) {
+            if (!v.name) throw new Error('a location needs a name');
+            if (!Number.isFinite(parseInt(v.x, 10)) || !Number.isFinite(parseInt(v.y, 10))) throw new Error('set the position: click the map or enter X and Y');
+            const clash = locationByName(v.name);
+            if (clash && clash !== feature) throw new Error(`there is already a location “${clash.properties.name}”`);
+            const before = feature.properties.name;
+            const body = {
+                type: 'Feature',
+                properties: { ...(feature.properties || {}), name: v.name, type: v.type, region: v.region, visited: v.visited, description: v.description, images: v.images, image: v.images[0] || '' },
+                geometry: { type: 'Point', coordinates: [parseInt(v.x, 10), parseInt(v.y, 10)] },
+            };
+            const res = await api(`/api/locations/${encodeURIComponent(before)}`, { method: 'PUT', body });
+            const n = res.linksUpdated || {};
+            await reload('locations', ...(n.characters ? ['characters'] : []));
+            if (n.locations || n.characters) toast(`“${v.name}”: references updated in ${(n.locations || 0) + (n.characters || 0)} entries`);
+            if (res.linksWarning) toast(res.linksWarning, 'warn', 8000);
+            if (v.name !== before) { track.reset(v); app.go(`locations/${encodeURIComponent(v.name)}`, { force: true }); return; }
+            feature = locationByName(v.name) || feature;   // the reloaded entry: the next save builds on it
+            headTitle.textContent = v.name;
+            headSub.textContent = [labelOf('locationTypes', v.type), labelOf('locationRegions', v.region)].filter(Boolean).join(' · ');
+            list.update(sorted(), v.name);
+        }
+        if (feature && editable) {
+            auto = autosaver({ read, track, persist, state: status });
+            name.addEventListener('change', async (e) => {
+                const v = name.value.trim();
+                const linked = backlinks(p.name).length;
+                if (!v || v === p.name || !linked) return;
+                e.stopImmediatePropagation();
+                if (await confirmDialog(`Rename “${p.name}” to “${v}”? The references in ${linked} entr${linked === 1 ? 'y' : 'ies'} follow the new name.`, { ok: 'Rename' })) auto.changed(0);
+                else { name.value = p.name; track.check(); }
+            });
+        }
         const form = h('form.detail-body', { on: { input: () => track.check(), change: () => track.check(), submit: (e) => { e.preventDefault(); save(); } } });
 
         async function save() {
+            if (auto) return auto.flush(); // an existing location: save now what is waiting (Ctrl+S, Enter)
             const v = read();
             if (!v.name) return toast('A location needs a name', 'warn');
             if (!Number.isFinite(parseInt(v.x, 10)) || !Number.isFinite(parseInt(v.y, 10))) return toast('Set the position: click the map or enter X and Y', 'warn');
@@ -154,12 +194,11 @@ export function locationsView(app) {
         detail.replaceChildren(
             h('header.detail-head', {},
                 cover ? h('div.detail-cover', {}, h('img', { src: cover, alt: '' })) : h('div.detail-cover.empty', { text: '📍' }),
-                h('div.detail-title', {}, h('h2', { text: p.name || 'New location' }),
-                    h('span.muted', { text: feature ? [labelOf('locationTypes', p.type), labelOf('locationRegions', p.region)].filter(Boolean).join(' · ') : 'not saved yet' })),
+                h('div.detail-title', {}, headTitle, headSub),
                 h('span.spacer'), status,
                 feature ? h('a.btn.ghost', { href: `https://adenai.piogino.ch/`, target: '_blank', rel: 'noopener', title: 'Open the public map' }, 'Map ↗') : null,
                 editable && feature ? h('button.btn.ghost.danger', { type: 'button', on: { click: remove } }, 'Delete') : null,
-                editable ? saveBtn : h('span.muted', { text: 'Log in to edit' })),
+                editable ? (feature ? null : saveBtn) : h('span.muted', { text: 'Log in to edit' })),
             h('div.detail-cols', {},
                 form,
                 h('aside.detail-side', {},
@@ -171,7 +210,8 @@ export function locationsView(app) {
                     feature ? h('div.side-block', {}, h('h3', { text: `Mentioned in (${refs.length})` }),
                         refs.length ? h('p.side-row', {}, refs.map(refChip)) : h('p.muted', { text: 'No text links here yet.' })) : null)));
 
-        current = { key: feature?.properties.name || 'new', track, save, map };
+        if (auto) auto.attach(form);
+        current = { key: feature?.properties.name || 'new', track, save, map, flush: () => (auto ? auto.flush() : Promise.resolve(!track.isDirty())) };
         if (!feature) name.focus();
     }
 
@@ -180,6 +220,8 @@ export function locationsView(app) {
         open,
         focusSearch: () => list.focusSearch(),
         isDirty: () => !!current?.track.isDirty(),
+        // before leaving: save what is waiting (true: nothing left unsaved)
+        flush: () => current?.flush() ?? Promise.resolve(true),
         save: () => current?.save(),
         refresh(key) { if (!current?.track.isDirty()) open(key); else list.update(sorted(), key); },
     };

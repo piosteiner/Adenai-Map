@@ -35,13 +35,22 @@ const AREAS = [
 ];
 const VIEWS = { overview: overviewView, locations: locationsView, characters: charactersView, glossary: glossaryView, protocols: protocolsView, proposals: proposalsView, media: mediaView, history: historyView };
 
+// Before leaving an entry: a view that saves by itself saves what is waiting (autosaver, form.js); true when nothing
+// is left unsaved — otherwise the guards below ask whether to discard (a save that failed, a new entry not created).
+async function settle() {
+    const v = app.currentView();
+    if (!v?.isDirty()) return true;
+    if (v.flush) { try { await v.flush(); } catch { /* reported in the view */ } }
+    return !v.isDirty();
+}
+
 const app = {
     area: null,
     views: {},
     // go('characters/mae'); a view with unsaved changes asks first (force: after its own save)
     async go(path, { force = false } = {}) {
         const target = `#/${path}`;
-        if (!force && location.hash !== target && app.currentView()?.isDirty()) {
+        if (!force && location.hash !== target && !(await settle())) {
             const { confirmDialog } = await import('./dom');
             if (!(await confirmDialog('Discard the unsaved changes?', { ok: 'Discard', danger: true }))) return;
         }
@@ -124,7 +133,7 @@ function loginDialog() {
 }
 
 async function logout() {
-    if (app.currentView()?.isDirty() && !(await (await import('./dom')).confirmDialog('Log out and discard the unsaved changes?', { ok: 'Log out', danger: true }))) return;
+    if (!(await settle()) && !(await (await import('./dom')).confirmDialog('Log out and discard the unsaved changes?', { ok: 'Log out', danger: true }))) return;
     await api('/api/logout', { method: 'POST' }).catch(() => {});
     await reload('auth'); if (store.auth.authenticated) await loadPending(); else store.pending = [];
     route(true);
@@ -153,7 +162,7 @@ async function route(force = false) {
 // Back/forward or a typed address: guard unsaved changes, then follow
 window.addEventListener('hashchange', async () => {
     if (skipGuard) { skipGuard = false; return route(); }
-    if (app.currentView()?.isDirty()) {
+    if (!(await settle())) {
         const { confirmDialog } = await import('./dom');
         if (!(await confirmDialog('Discard the unsaved changes?', { ok: 'Discard', danger: true }))) {
             skipGuard = true;
@@ -163,7 +172,13 @@ window.addEventListener('hashchange', async () => {
     }
     route();
 });
-window.addEventListener('beforeunload', (e) => { if (app.currentView()?.isDirty()) { e.preventDefault(); e.returnValue = ''; } });
+// closing the tab with a change waiting: its save is started, and the browser asks (it may not finish otherwise)
+window.addEventListener('beforeunload', (e) => {
+    if (!app.currentView()?.isDirty()) return;
+    app.currentView().flush?.();
+    e.preventDefault();
+    e.returnValue = '';
+});
 
 document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); app.currentView()?.save(); return; }

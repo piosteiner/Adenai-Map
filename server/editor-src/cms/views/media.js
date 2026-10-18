@@ -3,6 +3,7 @@
 // selected image shows its sizes and where it is used, and its title, caption, credits, category and tags can be
 // edited. Deleting asks first — and says if characters, locations or glossary terms still show the image.
 import { h, toast, confirmDialog, formatDate } from '../dom';
+import { tracker, autosaver } from '../form';
 import { store, reload, canEdit } from '../store';
 import { api } from '../api';
 
@@ -50,6 +51,7 @@ function upload(files, fields, onProgress) {
 
 export function mediaView(app) {
     let selected = null;
+    let current = null; // the open image: { track, save, flush }
     let query = '';
     let category = '';
     const search = h('input.search', { type: 'search', placeholder: 'Search title, caption, credits, tags…  ( / )', 'aria-label': 'Search media', on: { input: (e) => { query = e.target.value; draw(); } } });
@@ -151,15 +153,27 @@ export function mediaView(app) {
                 h('button.icon', { type: 'button', title: 'Copy the address', on: { click: () => navigator.clipboard?.writeText(z.url).then(() => toast('Address copied')) } }, '⧉'));
         });
 
-        async function save() {
-            if (!credits.value.trim()) return toast('Credits are required', 'warn');
-            try {
-                await api(`/api/media/${encodeURIComponent(m.id)}`, { method: 'PUT', body: { title: title.value.trim(), caption: caption.value.trim(), credits: credits.value.trim(), category: cat.value, tags: tags.value.split(',').map((t) => t.trim()).filter(Boolean) } });
-                await reload('media');
-                toast('Saved');
-                app.go(`media/${encodeURIComponent(m.id)}`, { force: true });
-            } catch (err) { toast(`Not saved: ${err.message}`, 'bad', 7000); }
+        // saved as it is edited (autosaver, form.js): a field once it is left, the caption after a pause in typing
+        const read = () => ({ title: title.value.trim(), caption: caption.value.trim(), credits: credits.value.trim(), category: cat.value, tags: tags.value.split(',').map((t) => t.trim()).filter(Boolean) });
+        const state = h('span.save-state');
+        const headTitle = h('h2', { text: m.title || m.id });
+        const track = tracker(read, () => {});
+        async function persist(v) {
+            if (!v.credits) throw new Error('credits are required');
+            await api(`/api/media/${encodeURIComponent(m.id)}`, { method: 'PUT', body: v });
+            await reload('media');
+            headTitle.textContent = v.title || m.id;
+            draw();
         }
+        const auto = ro ? null : autosaver({ read, track, persist, state });
+        const save = () => auto?.flush();
+        const form = h('form.detail-body', { on: { submit: (e) => { e.preventDefault(); save(); } } },
+            h('label.field', {}, h('span.field-label', { text: 'Title' }), title),
+            h('label.field', {}, h('span.field-label', { text: 'Caption' }), caption),
+            h('label.field', {}, h('span.field-label', { text: 'Credits *' }), credits),
+            h('div.grid', {}, h('label.field', {}, h('span.field-label', { text: 'Category' }), cat), h('label.field', {}, h('span.field-label', { text: 'Tags' }), tags)));
+        auto?.attach(form);
+        current = { track, save, flush: () => (auto ? auto.flush() : Promise.resolve(true)) };
         async function remove() {
             const warn = used.length ? ` It is still shown by ${used.map((u) => u.name).join(', ')} — they would show a broken image.` : '';
             if (!(await confirmDialog(`Delete “${m.title || m.id}” and its files?${warn}`, { ok: 'Delete', danger: true }))) return;
@@ -173,24 +187,20 @@ export function mediaView(app) {
 
         detail.replaceChildren(
             h('header.detail-head', {},
-                h('div.detail-title', {}, h('h2', { text: m.title || m.id }), h('span.muted', { text: `${m.category || ''} · uploaded ${formatDate(m.uploadDate)}${m.fileSize ? ` · ${Math.round(m.fileSize / 1024)} KB original` : ''}` })),
-                h('span.spacer'),
-                ro ? null : h('button.btn.ghost.danger', { type: 'button', on: { click: remove } }, 'Delete'),
-                ro ? null : h('button.btn.primary', { type: 'button', on: { click: save } }, 'Save')),
+                h('div.detail-title', {}, headTitle, h('span.muted', { text: `${m.category || ''} · uploaded ${formatDate(m.uploadDate)}${m.fileSize ? ` · ${Math.round(m.fileSize / 1024)} KB original` : ''}` })),
+                h('span.spacer'), state,
+                ro ? null : h('button.btn.ghost.danger', { type: 'button', on: { click: remove } }, 'Delete')),
             h('div.media-detail-body', {},
                 h('a.media-preview', { href: urlOf(m, 'large'), target: '_blank', rel: 'noopener', title: 'Open the large version' }, h('img', { src: urlOf(m, 'medium'), alt: m.title || '' })),
                 h('div.media-sizes', {}, sizes),
-                h('form.detail-body', { on: { submit: (e) => { e.preventDefault(); save(); } } },
-                    h('label.field', {}, h('span.field-label', { text: 'Title' }), title),
-                    h('label.field', {}, h('span.field-label', { text: 'Caption' }), caption),
-                    h('label.field', {}, h('span.field-label', { text: 'Credits *' }), credits),
-                    h('div.grid', {}, h('label.field', {}, h('span.field-label', { text: 'Category' }), cat), h('label.field', {}, h('span.field-label', { text: 'Tags' }), tags))),
+                form,
                 h('div.side-block', {}, h('h3', { text: `Used by (${used.length})` }),
                     used.length ? h('p.side-row', {}, used.map((u) => h('a.chip', { href: u.href }, `${{ character: '👤', location: '📍', term: '📖' }[u.kind]} ${u.name}`))) : h('p.muted', { text: 'Not used by any character, location or glossary term.' }))));
     }
 
     function open(key) {
         selected = key || null;
+        current = null;
         draw();
         const m = key ? store.media?.[key] : null;
         if (m) {
@@ -201,5 +211,12 @@ export function mediaView(app) {
         }
     }
 
-    return { el, open, focusSearch: () => search.focus(), isDirty: () => false, save: () => {}, async reloadAll() { await reload('media'); } };
+    return {
+        el, open, focusSearch: () => search.focus(),
+        isDirty: () => !!current?.track.isDirty(),
+        save: () => current?.save(),
+        // before leaving: save what is waiting (true: nothing left unsaved)
+        flush: () => current?.flush() ?? Promise.resolve(true),
+        async reloadAll() { await reload('media'); },
+    };
 }
