@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "230792c62407bb1947be2dd2af23ba9a2ea64bad",
+      "action": "create",
+      "type": "character",
+      "itemName": "Mowgli",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:43:08.021Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:43:08.021Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Mowgli (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "59d1e2317f1bbaac9bc2627841cdc865d94e540a",
       "action": "create",
       "type": "character",
@@ -1224,5 +1237,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:06.056Z"
+  "lastUpdated": "2026-10-18T04:43:08.021Z"
 }
