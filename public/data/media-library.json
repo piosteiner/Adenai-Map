@@ -18186,7 +18186,50 @@
       },
       "fileSize": 308731,
       "mimeType": "image/png"
+    },
+    "characters-z53397vho9ss": {
+      "id": "characters-z53397vho9ss",
+      "category": "characters",
+      "title": "Lord-Ramvir-Beridze",
+      "caption": "",
+      "credits": "https://in.pinterest.com/pin/633529872610391005/",
+      "tags": [],
+      "uploadDate": "2026-10-18T16:19:21.514Z",
+      "sizes": {
+        "thumb": {
+          "filename": "z53397vho9ss-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z53397vho9ss-thumb.webp",
+          "width": 124,
+          "height": 150
+        },
+        "small": {
+          "filename": "z53397vho9ss-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z53397vho9ss-small.webp",
+          "width": 246,
+          "height": 300
+        },
+        "medium": {
+          "filename": "z53397vho9ss-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z53397vho9ss-medium.webp",
+          "width": 492,
+          "height": 600
+        },
+        "large": {
+          "filename": "z53397vho9ss-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z53397vho9ss-large.webp",
+          "width": 984,
+          "height": 1200
+        },
+        "original": {
+          "filename": "z53397vho9ss-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z53397vho9ss-original.webp",
+          "width": 1200,
+          "height": 1463
+        }
+      },
+      "fileSize": 214634,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T16:16:47.414Z"
+  "lastUpdated": "2026-10-18T16:19:21.521Z"
 }
