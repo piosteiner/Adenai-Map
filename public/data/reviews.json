@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "4a205302051711824dfbcef34ee3c418a777eb09",
+      "action": "update",
+      "type": "character",
+      "itemName": "Nuri",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:06:35.085Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:06:35.085Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: nuri (by gm) - added image"
+    },
+    {
       "commitSha": "e62eee1b195a7211f2a22f38d9bd2d51f2f0d070",
       "action": "update",
       "type": "character",
@@ -1666,5 +1679,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:05:14.403Z"
+  "lastUpdated": "2026-10-18T16:06:35.085Z"
 }
