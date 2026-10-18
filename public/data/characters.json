@@ -3027,7 +3027,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:08.054Z",
       "updatedAt": "2026-10-18T04:42:08.054Z"
+    },
+    {
+      "id": "eldra",
+      "name": "Eldra",
+      "title": "Luft-Genasi, Gründerin von Atlantis",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Gründete mit [[Gal]] 700 Jahre vor dem Fall von Atlantis die Stadt in den Wolken. Die beiden versiegelten Sonne und Mond mit einem Kern aus [[Sonnenstein|Sonnen-]] und [[Mondstein]] und opferten dafür ihr Leben.",
+      "images": [],
+      "image": "",
+      "status": "dead",
+      "faction": "DeWitts",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:10.245Z",
+      "updatedAt": "2026-10-18T04:42:10.245Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:08.054Z"
+  "lastUpdated": "2026-10-18T04:42:10.245Z"
 }
