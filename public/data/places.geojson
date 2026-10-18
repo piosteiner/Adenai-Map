@@ -29,7 +29,7 @@
         "image": "",
         "region": "rena_region",
         "type": "city",
-        "visited": false,
+        "visited": true,
         "images": []
       },
       "geometry": {
