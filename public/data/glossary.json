@@ -190,6 +190,21 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_fa442a3edd",
+      "name": "Moonhaven",
+      "aliases": [
+        "Haven"
+      ],
+      "category": "Ort",
+      "description": "[[Luna]]s Heimat im [[Feywild]], regiert von ihrer Familie; ihr Bruder [[Aykan]] ist Kronprinz. Hütet die [[Mondstein]]-Reserven und schottete sich ab, als das Interesse an den Steinen zu gross wurde.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:20.743Z",
+      "updatedAt": "2026-10-18T04:41:20.743Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_27598377f7",
       "name": "Moradin",
       "aliases": [],
@@ -344,5 +359,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:19.892Z"
+  "lastUpdated": "2026-10-18T04:41:20.743Z"
 }
