@@ -2777,7 +2777,39 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:41:47.889Z",
       "updatedAt": "2026-10-18T04:41:47.889Z"
+    },
+    {
+      "id": "fitcher",
+      "name": "Fitcher",
+      "title": "Magier",
+      "placeOfOrigin": "Fitchers Turm",
+      "coordinates": [
+        1344,
+        1128
+      ],
+      "description": "Ein legendärer Magier, der exotische Tiere einfängt und in seinem Turm im [[Toftgarder Forst]] hält. Die [[VsuzH]] fanden ihn in Sitzung 9 verletzt (und assen seine Gerstensuppe). Seither ein Verbündeter: Er schenkte [[Ally]] [[Blechdose]], weiss viel über Mondsteindrachen und [[Epiphea]] und teleportierte die Gruppe mitsamt seinem Turm nach [[Glesburg]].",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "ally",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:41:50.095Z",
+      "updatedAt": "2026-10-18T04:41:50.095Z",
+      "currentLocation": {
+        "location": "Fitchers Turm",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          1344,
+          1128
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:47.889Z"
+  "lastUpdated": "2026-10-18T04:41:50.095Z"
 }
