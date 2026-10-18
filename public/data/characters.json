@@ -4072,7 +4072,27 @@
       "currentLocation": null,
       "createdAt": "2026-10-18T17:00:53.428Z",
       "updatedAt": "2026-10-18T17:01:48.879Z"
+    },
+    {
+      "id": "sylph",
+      "name": "Sylph",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Mit [[Greda]] in einer Theatergruppe in [[Wesdalen]].",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/6r8m9at8gobd-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/6r8m9at8gobd-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T17:21:35.492Z",
+      "updatedAt": "2026-10-18T17:21:35.492Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:06:42.374Z"
+  "lastUpdated": "2026-10-18T17:21:35.492Z"
 }
