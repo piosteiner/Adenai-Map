@@ -3299,7 +3299,39 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:32.109Z",
       "updatedAt": "2026-10-18T04:42:32.109Z"
+    },
+    {
+      "id": "angela",
+      "name": "Angela",
+      "title": "Tiefling, Teufelsrechtsberaterin",
+      "placeOfOrigin": "Valaris",
+      "coordinates": [
+        1700,
+        1008
+      ],
+      "description": "Auch Angie. Berät die [[VsuzH]] in [[Valaris]] in Teufelsrecht, etwa zu [[Tasbor]]s Vertrag mit [[Rhodesia]], und gab ihnen ein Buch über Bindungsrituale.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:35.197Z",
+      "updatedAt": "2026-10-18T04:42:35.197Z",
+      "currentLocation": {
+        "location": "Valaris",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          1700,
+          1008
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:32.109Z"
+  "lastUpdated": "2026-10-18T04:42:35.197Z"
 }
