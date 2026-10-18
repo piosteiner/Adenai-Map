@@ -2561,7 +2561,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:16:24.785Z",
       "updatedAt": "2026-10-18T04:16:24.785Z"
+    },
+    {
+      "id": "poison",
+      "name": "Poison",
+      "title": "Poison Ivy · Dragonborn-Druidin",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Poison Ivy, Dragonborn-Druidin, eher verschwiegen. Von der ersten Sitzung in [[Silbergrat]] bis Sitzung 25 bei den [[VsuzH]].",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "VsuzH",
+      "relationship": "party",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:16:26.940Z",
+      "updatedAt": "2026-10-18T04:16:26.941Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:16:24.785Z"
+  "lastUpdated": "2026-10-18T04:16:26.941Z"
 }
