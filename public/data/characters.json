@@ -3814,16 +3814,16 @@
         769
       ],
       "description": "Führt einen Antiquitätenladen in [[Wesdalen]] mit Relikten aus [[Mortimer Peccatum|Mortimers]] Missionszug – manches überbepreist. Erhält Briefe in [[Thieves' Cant]] mit Zahlungsaufforderungen über 50'000 Gold.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/kpl60pwq45ld-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/kpl60pwq45ld-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "suspicious",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2026-10-18T04:43:14.018Z",
-      "updatedAt": "2026-10-18T04:43:14.018Z",
       "currentLocation": {
         "location": "Wesdalen",
         "date": "5663-06-03",
@@ -3833,8 +3833,10 @@
           790,
           769
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2026-10-18T04:43:14.018Z",
+      "updatedAt": "2026-10-18T17:06:31.327Z"
     },
     {
       "id": "mortimer_peccatum",
@@ -4070,5 +4072,5 @@
       "updatedAt": "2026-10-18T17:01:48.879Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:04:09.409Z"
+  "lastUpdated": "2026-10-18T17:06:31.327Z"
 }
