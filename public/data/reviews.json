@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "50a0873a2f332d8105b68734fd9953f68265a8a5",
+      "action": "create",
+      "type": "character",
+      "itemName": "Slay",
+      "user": "gm",
+      "timestamp": "2026-10-18T19:28:04.158Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T19:28:04.158Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Slay (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "a8c5672f54d320ee5273ed772856232bcb8cb670",
       "action": "create",
       "type": "character",
@@ -2329,5 +2342,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T19:23:20.997Z"
+  "lastUpdated": "2026-10-18T19:28:04.158Z"
 }
