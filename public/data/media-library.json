@@ -18491,7 +18491,50 @@
       "fileSize": 45088,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-18T16:51:38.728Z"
+    },
+    "creatures-77mv6clryyy3": {
+      "id": "creatures-77mv6clryyy3",
+      "category": "creatures",
+      "title": "francis",
+      "caption": "",
+      "credits": "https://se.pinterest.com/pin/675117800364212364/",
+      "tags": [],
+      "uploadDate": "2026-10-18T16:53:07.233Z",
+      "sizes": {
+        "thumb": {
+          "filename": "77mv6clryyy3-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/77mv6clryyy3-thumb.webp",
+          "width": 150,
+          "height": 138
+        },
+        "small": {
+          "filename": "77mv6clryyy3-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/77mv6clryyy3-small.webp",
+          "width": 300,
+          "height": 276
+        },
+        "medium": {
+          "filename": "77mv6clryyy3-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/77mv6clryyy3-medium.webp",
+          "width": 500,
+          "height": 460
+        },
+        "large": {
+          "filename": "77mv6clryyy3-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/77mv6clryyy3-large.webp",
+          "width": 500,
+          "height": 460
+        },
+        "original": {
+          "filename": "77mv6clryyy3-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/77mv6clryyy3-large.webp",
+          "width": 500,
+          "height": 460
+        }
+      },
+      "fileSize": 33587,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T16:51:38.728Z"
+  "lastUpdated": "2026-10-18T16:53:07.241Z"
 }
