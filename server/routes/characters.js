@@ -542,12 +542,10 @@ router.put('/:id', requireAuth, async (req, res) => {
 
     let linksWarning = null;
     if (renamed) {
-      try {
-        linksUpdated.locations = await linkRename.renameInRepoFile(octokit, REPO_OWNER, REPO_NAME, 'location', oldCharacter.name, updatedCharacter.name, user);
-      } catch (err) {
-        console.error('Updating links in locations failed:', err.message);
-        linksWarning = `Saved, but links in location texts still use the old name: ${err.message}`;
-      }
+      // the links (and for a location: the characters' location fields) in every other data file and in the minutes
+      const r = await linkRename.renameElsewhere(octokit, REPO_OWNER, REPO_NAME, 'character', oldCharacter.name, updatedCharacter.name, user);
+      Object.assign(linksUpdated, r.counts);
+      if (r.warnings.length) linksWarning = `Saved, but some links still use the old name — ${r.warnings.join('; ')}`;
     }
     
     res.json({ 

@@ -4,41 +4,27 @@
 //   POST /api/protocols/unlock      { password } → { token, expiresAt }   (map; wrong passwords are rate-limited)
 //   GET  /api/protocols             list (newest first)                    CMS login or "Authorization: Bearer <token>"
 //   GET  /api/protocols/players     names used so far (suggestions)        same
+//   GET  /api/protocols/suggestions { players, places } used so far        same
 //   GET  /api/protocols/:id         one session                            same
-//   POST /api/protocols             create                                 same
-//   PUT  /api/protocols/:id         update                                 same
+//   POST /api/protocols             new session, unpublished (a draft)     same — from the map only one at a time:
+//                                   409 with the open one instead
+//   POST /api/protocols/:id/publish the draft becomes the published version
+//   DELETE /api/protocols/:id/draft throw the draft away (a never-published session goes with it)
+//   PUT  /api/protocols/:id         publish values directly (form, import)  same
 //   DELETE /api/protocols/:id       delete (kept in protocols-deleted.json) CMS login only
+// Editing itself is live (lib/protocol-live.js) and goes into the session's draft.
 //   GET/PUT /api/protocols/settings/password                               CMS login only
 //
 // Tokens: "<expiry>.<passwordVersion>.<hmac>", signed with SESSION_SECRET. Setting a new password bumps the version,
 // which ends every token handed out before.
 const express = require('express');
-const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const store = require('../lib/protocol-store');
+const protocolLive = require('../lib/protocol-live');
 const { requireAuth } = require('../middleware/auth');
 
 const router = express.Router();
-const TOKEN_DAYS = 30;
-const SECRET = `${process.env.SESSION_SECRET || ''}:protocols`;
-
-const sign = (payload) => crypto.createHmac('sha256', SECRET).update(payload).digest('base64url');
-
-function makeToken(passwordVersion) {
-    const exp = Date.now() + TOKEN_DAYS * 86400000;
-    const payload = `${exp}.${passwordVersion}`;
-    return { token: `${payload}.${sign(payload)}`, expiresAt: new Date(exp).toISOString() };
-}
-
-async function tokenValid(header) {
-    const m = /^Bearer\s+(\d+)\.(\d+)\.([\w-]+)$/.exec(header || '');
-    if (!m) return false;
-    const [, exp, version, mac] = m;
-    const expected = sign(`${exp}.${version}`);
-    if (mac.length !== expected.length || !crypto.timingSafeEqual(Buffer.from(mac), Buffer.from(expected))) return false;
-    if (Number(exp) < Date.now()) return false;
-    return Number(version) === (await store.settings()).passwordVersion;
-}
+const { makeToken, tokenValid } = require('../lib/protocol-auth');
 
 const cmsUser = (req) => (req.session?.authenticated ? (req.session.displayName || req.session.username || 'CMS') : null);
 
@@ -102,16 +88,31 @@ router.get('/players', requireAccess, async (req, res) => {
     res.json({ success: true, players: await store.players() });
 });
 
+router.get('/suggestions', requireAccess, async (req, res) => {
+    res.json({ success: true, ...(await store.suggestions()) });
+});
+
 router.get('/:id', requireAccess, async (req, res) => {
     const session = await store.get(req.params.id, { history: req.protocolVia === 'cms' && req.query.history === '1' });
     if (!session) return res.status(404).json({ success: false, error: 'Session not found' });
     res.json({ success: true, session });
 });
 
-const reply = (res, r) => (r.error ? res.status(r.status).json({ success: false, error: r.error, errors: r.errors }) : res.status(r.status).json({ success: true, session: r.session }));
+const reply = (res, r) => (r.error ? res.status(r.status).json({ success: false, error: r.error, errors: r.errors, session: r.session }) : res.status(r.status).json({ success: true, session: r.session, deleted: r.deleted }));
+const by = (req) => String(req.body?.by || '').trim().slice(0, 40) || req.protocolBy; // the map sends the device's name
 
 router.post('/', requireAccess, async (req, res) => {
-    reply(res, await store.save(req.body || {}, { by: req.protocolBy, via: req.protocolVia }));
+    reply(res, await store.create(req.body || {}, { by: by(req), via: req.protocolVia }));
+});
+
+router.post('/:id/publish', requireAccess, async (req, res) => {
+    await protocolLive.flush(req.params.id);
+    reply(res, await store.publish(req.params.id, { by: by(req), via: req.protocolVia }));
+});
+
+router.delete('/:id/draft', requireAccess, async (req, res) => {
+    await protocolLive.flush(req.params.id);
+    reply(res, await store.discardDraft(req.params.id));
 });
 
 router.put('/:id', requireAccess, async (req, res) => {

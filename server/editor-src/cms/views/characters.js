@@ -121,7 +121,7 @@ export function charactersView(app) {
         const path = c ? movementPath(c) : [];
         const map = createMiniMap({ point: path.length === 1 ? path[0] : (path.length ? null : originPoint(d)), path });
         const refs = c ? backlinks(d.name) : [];
-        const refChip = (r) => h('a.chip', { href: r.kind === 'character' ? `#/characters/${encodeURIComponent(r.id)}` : `#/locations/${encodeURIComponent(r.name)}` }, r.kind === 'character' ? '👤 ' : '📍 ', r.name);
+        const refChip = (r) => h('a.chip', { href: r.kind === 'character' ? `#/characters/${encodeURIComponent(r.id)}` : r.kind === 'term' ? `#/glossary/${encodeURIComponent(r.id)}` : `#/locations/${encodeURIComponent(r.name)}` }, { character: '👤 ', term: '📖 ', location: '📍 ' }[r.kind], r.name);
         const cover = imagesOf(d)[0];
 
         const form = h('form.detail-body', { on: { input: () => track.check(), change: () => track.check(), submit: (e) => { e.preventDefault(); save(); } } },

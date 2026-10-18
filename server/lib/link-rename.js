@@ -46,29 +46,67 @@ function renameInCharacters(data, oldName, newName, { locationRefs = false } = {
     return changed;
 }
 
+function renameInTerms(data, oldName, newName) {
+    let changed = 0;
+    for (const t of data.terms || []) {
+        const after = renameInText(t.description, oldName, newName);
+        if (after !== t.description) { t.description = after; changed++; }
+    }
+    return changed;
+}
+
 const FILES = {
-    location: { path: 'public/data/places.geojson', rename: renameInLocations },
-    // called from a location rename: links and the location fields of characters
-    character: { path: 'public/data/characters.json', rename: (data, o, n) => renameInCharacters(data, o, n, { locationRefs: true }) },
+    location: { path: 'public/data/places.geojson', rename: renameInLocations, label: 'location' },
+    character: { path: 'public/data/characters.json', rename: renameInCharacters, label: 'character' },
+    term: { path: 'public/data/glossary.json', rename: renameInTerms, label: 'glossary term' },
 };
 
-// Rewrites the links in the *other* data file (the one the route doesn't save itself) as its own commit.
-// which: 'location' (places.geojson) or 'character' (characters.json). Returns the number of entries changed.
-async function renameInRepoFile(octokit, owner, repo, which, oldName, newName, user) {
-    const { path, rename } = FILES[which];
-    const { data: file } = await octokit.rest.repos.getContent({ owner, repo, path, ref: 'main' });
+// Rewrites the links in one of the data files as its own commit. Returns the number of entries changed.
+// locationRefs: a location was renamed — characters also name it in their origin, current location and movements.
+async function renameInRepoFile(octokit, owner, repo, which, oldName, newName, user, { locationRefs = false } = {}) {
+    const { path, rename, label } = FILES[which];
+    let file;
+    try {
+        ({ data: file } = await octokit.rest.repos.getContent({ owner, repo, path, ref: 'main' }));
+    } catch (err) {
+        if (err.status === 404) return 0; // e.g. no glossary yet
+        throw err;
+    }
     const content = JSON.parse(Buffer.from(file.content, 'base64').toString());
-    const changed = rename(content, oldName, newName);
+    const changed = rename(content, oldName, newName, { locationRefs });
     if (!changed) return 0;
-    if (which === 'character') content.lastUpdated = new Date().toISOString();
+    content.lastUpdated = new Date().toISOString();
     await octokit.rest.repos.createOrUpdateFileContents({
         owner, repo, path, sha: file.sha,
-        message: which === 'location'
-            ? `Update links: [[${oldName}]] → [[${newName}]] in ${changed} location${changed === 1 ? '' : 's'} (by ${user})`
-            : `Rename location in characters: ${oldName} → ${newName} (links, origin, current location, movements) in ${changed} character${changed === 1 ? '' : 's'} (by ${user})`,
+        message: locationRefs
+            ? `Rename location in characters: ${oldName} → ${newName} (links, origin, current location, movements) in ${changed} character${changed === 1 ? '' : 's'} (by ${user})`
+            : `Update links: [[${oldName}]] → [[${newName}]] in ${changed} ${label}${changed === 1 ? '' : 's'} (by ${user})`,
         content: Buffer.from(JSON.stringify(content, null, 2)).toString('base64'),
     });
     return changed;
 }
 
-module.exports = { renameInText, renameInLocations, renameInCharacters, renameInRepoFile };
+// After a route has saved its own file (with the links in it already renamed): the links in every other data file
+// and in the session minutes. kind: what was renamed — 'location', 'character' or 'term'.
+// → { counts: { locations, characters, terms, protocols }, warnings: [] } (a failure in one place doesn't stop the rest)
+async function renameElsewhere(octokit, owner, repo, kind, oldName, newName, user) {
+    const counts = {};
+    const warnings = [];
+    for (const which of Object.keys(FILES)) {
+        if (which === kind) continue;
+        const key = { location: 'locations', character: 'characters', term: 'terms' }[which];
+        try {
+            counts[key] = await renameInRepoFile(octokit, owner, repo, which, oldName, newName, user, { locationRefs: kind === 'location' && which === 'character' });
+        } catch (err) {
+            warnings.push(`${FILES[which].label}s: ${err.message}`);
+        }
+    }
+    try {
+        counts.protocols = await require('./protocol-store').renameLinks(oldName, newName, user);
+    } catch (err) {
+        warnings.push(`session minutes: ${err.message}`);
+    }
+    return { counts, warnings };
+}
+
+module.exports = { renameInText, renameInLocations, renameInCharacters, renameInTerms, renameInRepoFile, renameElsewhere };

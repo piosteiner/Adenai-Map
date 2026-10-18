@@ -11,17 +11,20 @@ import { installHoverPreview } from './gallery';
 import { locationsView } from './views/locations';
 import { charactersView } from './views/characters';
 import { protocolsView } from './views/protocols';
+import { glossaryView } from './views/glossary';
 
 // md-editor.js finds link targets through the classic CMS's modules: give it the same interface
 window.adminCharacters = { getCharacters: () => store.characters };
 window.adminLocations = { getLocations: () => store.locations };
+window.adminGlossary = { getTerms: () => store.terms };
 
 const AREAS = [
     { id: 'locations', label: 'Locations', icon: '📍', count: () => store.locations.length },
     { id: 'characters', label: 'Characters', icon: '👤', count: () => store.characters.length },
+    { id: 'glossary', label: 'Glossary', icon: '📖', count: () => store.terms.length },
     { id: 'protocols', label: 'Protocols', icon: '📜', count: () => '' },
 ];
-const VIEWS = { locations: locationsView, characters: charactersView, protocols: protocolsView };
+const VIEWS = { locations: locationsView, characters: charactersView, glossary: glossaryView, protocols: protocolsView };
 const CLASSIC = [
     { label: 'Media', href: '/#media' },
     { label: 'Changelog', href: '/#changelog' },

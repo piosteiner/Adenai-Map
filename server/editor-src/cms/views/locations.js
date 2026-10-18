@@ -135,7 +135,7 @@ export function locationsView(app) {
         const here = feature ? charactersAt(p.name) : { origin: [], current: [] };
         const refs = feature ? backlinks(p.name) : [];
         const chip = (c) => h('a.chip', { href: `#/characters/${encodeURIComponent(c.id)}` }, c.name);
-        const refChip = (r) => h('a.chip', { href: r.kind === 'character' ? `#/characters/${encodeURIComponent(r.id)}` : `#/locations/${encodeURIComponent(r.name)}` }, r.kind === 'character' ? '👤 ' : '📍 ', r.name);
+        const refChip = (r) => h('a.chip', { href: r.kind === 'character' ? `#/characters/${encodeURIComponent(r.id)}` : r.kind === 'term' ? `#/glossary/${encodeURIComponent(r.id)}` : `#/locations/${encodeURIComponent(r.name)}` }, { character: '👤 ', term: '📖 ', location: '📍 ' }[r.kind], r.name);
         const cover = imagesOf(p)[0];
 
         form.append(

@@ -13,6 +13,9 @@
             .map((l) => l.feature?.properties?.name || l.name)
             .find((n) => fold(n) === key);
         if (location) return { kind: 'location', name: location };
+        // glossary terms, by name or alias (components/glossary.js)
+        const term = window.mapGlossary?.find(name);
+        if (term) return { kind: 'term', name: term.name };
         return null;
     }
 
@@ -57,12 +60,15 @@
         }
         pinSource(link);
         if (hit.kind === 'character') window.characterSystem.focusCharacter(hit.name);
+        else if (hit.kind === 'term') window.mapGlossary.open(hit.name);
         else window.locationSystem.focusLocation(hit.name);
     });
 
     // ---------- backlinks: "Erwähnt in …" ----------
     // Every location description and character description/notes that links to name (not counting the entry itself).
     function backlinks(name) {
+        // a term is also linked by its aliases
+        const keys = new Set([name, ...(window.mapGlossary?.find(name)?.aliases || [])].map(fold));
         const key = fold(name);
         const sources = [
             ...(window.characterSystem?.getCharacters?.() || []).map((c) => ({ kind: 'character', name: c.name, texts: [c.description, c.notes] })),
@@ -71,8 +77,9 @@
                 return { kind: 'location', name: p.name, texts: [p.description] };
             }),
         ];
+        sources.push(...(window.mapGlossary?.terms || []).map((t) => ({ kind: 'term', name: t.name, texts: [t.description] })));
         return sources
-            .filter((s) => s.name && fold(s.name) !== key && s.texts.some((t) => RichText.links(t).some((n) => fold(n) === key)))
+            .filter((s) => s.name && fold(s.name) !== key && s.texts.some((t) => RichText.links(t).some((n) => keys.has(fold(n)))))
             .sort((a, b) => a.name.localeCompare(b.name, 'de'));
     }
 
@@ -85,7 +92,9 @@
         slot.dataset.filled = '1';
         const hits = backlinks(slot.dataset.backlinksFor);
         // session minutes that mention it — only on a device unlocked for the protocols (components/protocols.js)
-        const sessions = window.mapProtocols?.mentions(slot.dataset.backlinksFor) || [];
+        const term = window.mapGlossary?.find(slot.dataset.backlinksFor);
+        const names = [slot.dataset.backlinksFor, ...(term?.aliases || [])];
+        const sessions = [...new Map(names.flatMap((n) => window.mapProtocols?.mentions(n) || []).map((x) => [x.id, x])).values()];
         if (!hits.length && !sessions.length) return;
         const links = [
             ...hits.map((h) => `<a href="#" class="wiki-link wiki-${h.kind}" data-kind="${h.kind}" data-name="${RichText.escape(h.name)}">${RichText.escape(h.name)}</a>`),

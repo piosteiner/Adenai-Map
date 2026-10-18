@@ -205,7 +205,7 @@ class ImagePopupManager {
             // Check if it's a character image in a popup
             if (img.tagName === 'IMG' && 
                 (img.closest('.character-popup') || 
-                 img.closest('.leaflet-popup-content') ||
+                 img.closest('.leaflet-popup-content') || img.closest('.glossary-panel .gl-images') ||
                  img.classList.contains('character-popup-avatar'))) {
                 
                 e.preventDefault();

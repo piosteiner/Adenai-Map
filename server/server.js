@@ -19,6 +19,7 @@ const journeyRoutes = require('./routes/journey');
 const dynamicsRoutes = require('./routes/dynamics');
 const configRoutes = require('./routes/config');
 const protocolRoutes = require('./routes/protocols');
+const glossaryRoutes = require('./routes/glossary');
 
 // Import middleware
 const { requireAuth, authenticateJourneyAPI, authenticateDynamicsAPI } = require('./middleware/auth');
@@ -47,7 +48,7 @@ const REPO_NAME = process.env.GITHUB_REPO;
 
 // Data files are answered from memory and written through to GitHub (lib/github-cache.js): the CMS no longer waits
 // 0.2–0.6 s for GitHub on every read.
-github.cache.warm(REPO_OWNER, REPO_NAME, ['public/data/places.geojson', 'public/data/characters.json', 'public/data/media-library.json', 'public/data/reviews.json']);
+github.cache.warm(REPO_OWNER, REPO_NAME, ['public/data/places.geojson', 'public/data/characters.json', 'public/data/media-library.json', 'public/data/reviews.json', 'public/data/glossary.json']);
 
 console.log(`Setting up admin for: ${REPO_OWNER}/${REPO_NAME}`);
 
@@ -64,7 +65,7 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // Session management - sessions are persisted to disk so they survive server restarts
-app.use(session({
+const sessionMiddleware = session({
   store: new FileStore({
     path: path.join(__dirname, 'sessions'),
     ttl: 24 * 60 * 60, // 24 hours, in seconds
@@ -80,7 +81,8 @@ app.use(session({
     sameSite: 'lax',
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
-}));
+});
+app.use(sessionMiddleware);
 
 app.use(express.static('admin-interface'));
 app.use('/uploads', express.static('uploads'));
@@ -119,6 +121,7 @@ app.use('/api/journey', authenticateJourneyAPI, journeyRoutes);
 app.use('/api/dynamics', authenticateDynamicsAPI, dynamicsRoutes);
 app.use('/api/config', configRoutes);
 app.use('/api/protocols', protocolRoutes); // session minutes, behind the protocol password
+app.use('/api/glossary', glossaryRoutes); // terms that are neither characters nor locations
 
 // Activity routes (uncomment when you have the activity routes file)
 // app.use('/api/activity', requireAuth, activityRoutes);
@@ -158,7 +161,7 @@ app.get('/health', (req, res) => {
 });
 
 // Start server
-app.listen(PORT, '0.0.0.0', () => {
+const httpServer = app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Adenai Admin Server running on port ${PORT}`);
   console.log(`📁 Repository: ${REPO_OWNER}/${REPO_NAME}`);
   console.log(`🌐 Access admin at: http://your-vps-ip:${PORT}`);
@@ -172,3 +175,13 @@ process.on('SIGTERM', () => {
   console.log('🛑 Received SIGTERM, shutting down gracefully');
   process.exit(0);
 });
+
+// Writing the session minutes together: WebSocket at /api/protocols/live (lib/protocol-live.js)
+const protocolLive = require('./lib/protocol-live');
+protocolLive.attach(httpServer, sessionMiddleware);
+// pm2 restarts with SIGINT: write the open live documents first
+for (const sig of ['SIGINT', 'SIGTERM']) {
+  process.once(sig, async () => {
+    try { await protocolLive.flushAll(); } finally { process.exit(0); }
+  });
+}

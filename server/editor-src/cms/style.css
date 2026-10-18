@@ -119,6 +119,8 @@ input[readonly], select:disabled { background: var(--panel-2); color: var(--mute
 .row-badges { display: flex; gap: 4px; align-items: center; }
 .pill { font-size: 11px; padding: 0 5px; border-radius: 8px; background: var(--panel-2); border: 1px solid var(--line); color: var(--muted); }
 .pill.ok { color: var(--ok); }
+.pill.warn { color: var(--warn); border-color: currentColor; }
+.save-state:not(.warn) { color: var(--ok); }
 .empty-note { padding: 16px; color: var(--muted); }
 
 .rel { display: inline-block; width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(0, 0, 0, 0.25); vertical-align: middle; }

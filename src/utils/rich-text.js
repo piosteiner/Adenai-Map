@@ -19,10 +19,12 @@
     let defaultResolver = () => null;
 
     // Links first, as placeholders (so **[[Mae]]** works), then escaping and emphasis, then the links back in.
+    // A backslash keeps the next character literal, as in Markdown: Arbeiter\*innen, 1\. Sitzung, \[[kein Link]].
     function inline(text, resolve) {
         const parts = [];
         const hold = (html) => `\u0000${parts.push(html) - 1}\u0000`;
         let s = String(text)
+            .replace(/\\([\\`*_{}\[\]()#+\-.!>~|&])/g, (_, c) => hold(escape(c)))
             .replace(WIKI, (_, target, label) => {
                 const name = target.trim();
                 const shown = escape((label || target).trim());
@@ -45,9 +47,9 @@
         let kind = null; // the open block: 'p', 'ul' or 'quote'
         let lines = [];
         const flush = () => {
-            const html = lines.map((l) => inline(l, resolve));
+            const html = lines.map((l) => inline(typeof l === 'string' ? l : l.text, resolve));
             if (kind === 'p') out.push(`<p>${html.join('<br>')}</p>`);
-            if (kind === 'ul') out.push(`<ul>${html.map((h) => `<li>${h}</li>`).join('')}</ul>`);
+            if (kind === 'ul') out.push(nestedList(lines.map((l, i) => ({ level: l.level, html: html[i] }))));
             if (kind === 'quote') out.push(`<blockquote>${html.join('<br>')}</blockquote>`);
             kind = null;
             lines = [];
@@ -58,12 +60,26 @@
             let m;
             if (!line.trim()) flush();
             else if ((m = /^#{1,6}\s+(.*)$/.exec(line))) { flush(); out.push(`<h4>${inline(m[1], resolve)}</h4>`); }
-            else if ((m = /^\s*[-*]\s+(.*)$/.exec(line))) add('ul', m[1]);
+            else if ((m = /^(\s*)[-*+]\s+(.*)$/.exec(line))) add('ul', { level: Math.floor(m[1].replace(/\t/g, '  ').length / 2), text: m[2] });
             else if ((m = /^>\s?(.*)$/.exec(line))) add('quote', m[1]);
             else add('p', line);
         }
         flush();
         return out.join('');
+    }
+
+    // List items with indentation levels (2 spaces per level) → nested <ul>; a level can only go one deeper at a time
+    function nestedList(items) {
+        let html = '';
+        let depth = -1;
+        for (const it of items) {
+            const level = Math.min(it.level, depth + 1);
+            if (level > depth) html += '<ul><li>'.repeat(level - depth).replace(/<li>$/, '') + '<li>';
+            else html += '</li>'.concat('</ul></li>'.repeat(depth - level)) + '<li>';
+            html += it.html;
+            depth = level;
+        }
+        return html + '</li>' + '</ul></li>'.repeat(depth) + '</ul>';
     }
 
     // Names of all links in a text, e.g. to find what links where.

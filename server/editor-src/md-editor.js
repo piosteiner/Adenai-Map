@@ -15,6 +15,8 @@ import { syntaxHighlighting, HighlightStyle, LanguageSupport } from '@codemirror
 import { markdownLanguage } from '@codemirror/lang-markdown';
 import { tags as t } from '@lezer/highlight';
 import { autocompletion, startCompletion } from '@codemirror/autocomplete';
+import { yCollab, yUndoManagerKeymap } from 'y-codemirror.next';
+import * as AdenaiLive from './live-client';
 
 // ---------- what [[links]] can point to: the admin's loaded characters and locations ----------
 
@@ -27,12 +29,17 @@ function entries() {
     const locs = (window.adminLocations?.getLocations?.() || []).map((l) => ({
         kind: 'location', name: l.properties?.name, detail: ['Ort', l.properties?.region].filter(Boolean).join(' · '),
     }));
-    return [...chars, ...locs].filter((e) => e.name);
+    // glossary terms, and each alias as its own suggestion that links to the term: [[Term|alias]]
+    const terms = (window.adminGlossary?.getTerms?.() || []).flatMap((t) => [
+        { kind: 'term', name: t.name, detail: ['Glossar', t.category].filter(Boolean).join(' · ') },
+        ...(t.aliases || []).map((a) => ({ kind: 'term', name: t.name, alias: a, detail: `→ ${t.name}` })),
+    ]);
+    return [...chars, ...locs, ...terms].filter((e) => e.name);
 }
 
 export function resolve(name) {
     const key = fold(name);
-    const hit = entries().find((e) => fold(e.name) === key);
+    const hit = entries().find((e) => fold(e.alias || e.name) === key);
     return hit ? { kind: hit.kind, name: hit.name } : null;
 }
 
@@ -42,19 +49,19 @@ async function linkCompletions(context) {
     const q = fold(m.text.slice(2));
     const ranked = entries()
         .map((e) => {
-            const n = fold(e.name);
+            const n = fold(e.alias || e.name);
             const score = !q ? 3 : n.startsWith(q) ? 0 : n.split(/[\s\-']+/).some((w) => w.startsWith(q)) ? 1 : n.includes(q) ? 2 : -1;
             return { e, score };
         })
         .filter((x) => x.score >= 0)
-        .sort((a, b) => a.score - b.score || a.e.name.localeCompare(b.e.name, 'de'))
+        .sort((a, b) => a.score - b.score || (a.e.alias || a.e.name).localeCompare(b.e.alias || b.e.name, 'de'))
         .slice(0, 30);
     const after = context.state.sliceDoc(context.pos, context.pos + 2); // "]]" already typed after the cursor?
     return {
         from: m.from,
         to: after === ']]' ? context.pos + 2 : context.pos,
         filter: false, // ranked above; the typed "[[ako" wouldn't match "Akónetchie" by CodeMirror's own filter
-        options: ranked.map(({ e }) => ({ label: e.name, detail: e.detail, type: 'text', apply: `[[${e.name}]]` })),
+        options: ranked.map(({ e }) => ({ label: e.alias || e.name, detail: e.detail, type: 'text', apply: e.alias ? `[[${e.name}|${e.alias}]]` : `[[${e.name}]]` })),
     };
 }
 
@@ -100,6 +107,8 @@ const theme = EditorView.theme({
     '&.cm-focused .cm-selectionBackground, .cm-selectionBackground': { background: 'var(--focus-ring)' },
     '.cm-wikilink': { color: 'var(--accent-primary)', fontWeight: '600' },
     '.cm-underline': { textDecoration: 'underline' },
+    // other people's cursors in live mode (y-codemirror.next)
+    '.cm-ySelectionInfo': { fontFamily: 'system-ui, sans-serif', fontSize: '11px', padding: '1px 4px', borderRadius: '3px', opacity: '1', top: '-1.25em' },
     '.cm-wikilink-missing': { color: 'var(--toast-error)', textDecoration: 'underline dotted' },
     '.cm-tooltip': { background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--border-color)', borderRadius: '6px' },
     '.cm-tooltip.cm-tooltip-autocomplete > ul': { fontFamily: 'inherit', maxHeight: '16em' },
@@ -198,7 +207,9 @@ function button(label, title, onClick) {
 const nativeValue = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value');
 const views = new WeakMap(); // textarea → its EditorView
 
-function enhance(textarea) {
+// collab: { text: Y.Text, awareness, undoManager } (live-client.js room) — the editor then edits the shared text:
+// other people's cursors and selections show with their names, and undo only undoes one's own typing.
+function enhance(textarea, collab = null) {
     if (textarea.dataset.mdReady) return;
     textarea.dataset.mdReady = '1';
 
@@ -216,11 +227,11 @@ function enhance(textarea) {
     const view = new EditorView({
         parent: editorBox,
         state: EditorState.create({
-            doc: nativeValue.get.call(textarea),
+            doc: collab ? collab.text.toString() : nativeValue.get.call(textarea),
             extensions: [
-                history(),
+                collab ? yCollab(collab.text, collab.awareness, { undoManager: collab.undoManager }) : history(),
                 drawSelection(),
-                keymap.of([...shortcuts, ...defaultKeymap, ...historyKeymap]),
+                keymap.of([...shortcuts, ...defaultKeymap, ...(collab ? yUndoManagerKeymap : historyKeymap)]),
                 new LanguageSupport(markdownLanguage),
                 syntaxHighlighting(liveStyle),
                 EditorView.lineWrapping,
@@ -305,6 +316,7 @@ window.renderRichText = (text) => (window.RichText ? window.RichText.render(text
 // [[links]] there point nowhere in the admin: no jump to the top of the page
 document.addEventListener('click', (e) => { if (e.target.closest?.('a.wiki-link')) e.preventDefault(); });
 
+window.AdenaiLive = AdenaiLive;
 window.AdenaiEditor = { enhance, enhanceAll, resolve, viewOf: (textarea) => views.get(textarea) };
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => enhanceAll());
 else enhanceAll();

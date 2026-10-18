@@ -2,7 +2,7 @@
 import { h, fold } from './dom';
 import { thumbOf } from './store';
 
-// config: { noun, newLabel, keyOf, thumbOf, titleOf, subtitleOf, badgesOf, textOf, filters: [{ id, label, options() → [{value,label}], test(item, value) }],
+// config: { noun, newLabel, keyOf, thumbOf, initialOf (text when there is no image), titleOf, subtitleOf, badgesOf, textOf, filters: [{ id, label, options() → [{value,label}], test(item, value) }],
 //           onSelect(key), onNew() }
 export function createList(config) {
     const state = { items: [], selected: null, query: '', filters: {} };
@@ -42,7 +42,7 @@ export function createList(config) {
             const cover = config.thumbOf(item);
             const title = config.titleOf(item);
             return h('div.row', { role: 'option', dataset: { key }, 'aria-selected': String(key === state.selected), on: { click: () => config.onSelect(key) } },
-                cover ? h('img.thumb', { src: thumbOf(cover), alt: '', loading: 'lazy' }) : h('span.thumb.empty', { text: (title || '?').slice(0, 1) }),
+                cover ? h('img.thumb', { src: thumbOf(cover), alt: '', loading: 'lazy' }) : h('span.thumb.empty', { text: config.initialOf ? config.initialOf(item) : (title || '?').slice(0, 1) }),
                 h('span.row-text', {}, h('span.row-title', { text: title }), h('span.row-sub', { text: config.subtitleOf(item) })),
                 h('span.row-badges', {}, config.badgesOf(item)));
         }));

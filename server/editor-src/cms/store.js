@@ -8,6 +8,7 @@ export const store = {
     config: { locationTypes: {}, locationRegions: {}, characterStatus: {}, characterRelationships: {}, movementTypes: {} },
     locations: [],   // GeoJSON features
     characters: [],
+    terms: [],       // glossary
     media: {},       // id → media entry
     loaded: false,
 };
@@ -17,13 +18,15 @@ export const onChange = (fn) => { listeners.add(fn); return () => listeners.dele
 const emit = (what) => listeners.forEach((fn) => fn(what));
 
 export async function loadAll() {
-    const [auth, config, locations, characters, media] = await Promise.all([
+    const [auth, config, locations, characters, media, glossary] = await Promise.all([
         api('/api/auth-status'),
         api('/api/config'),
         api('/api/locations'),
         api('/api/characters'),
         api('/api/media?page=1&limit=10000'),
+        api('/api/glossary'),
     ]);
+    store.terms = glossary.terms || [];
     store.auth = auth;
     store.config = config.config || store.config;
     store.locations = locations.features || [];
@@ -37,6 +40,7 @@ export async function reload(...what) {
     await Promise.all(what.map(async (w) => {
         if (w === 'locations') store.locations = (await api('/api/locations')).features || [];
         if (w === 'characters') store.characters = (await api('/api/characters')).characters || [];
+        if (w === 'terms') store.terms = (await api('/api/glossary')).terms || [];
         if (w === 'media') store.media = (await api('/api/media?page=1&limit=10000')).media || {};
         if (w === 'auth') store.auth = await api('/api/auth-status');
     }));
@@ -50,6 +54,9 @@ export const canEdit = () => !!store.auth.authenticated;
 export const locationByName = (name) => store.locations.find((f) => fold(f.properties?.name) === fold(name));
 export const characterById = (id) => store.characters.find((c) => c.id === id);
 export const characterByName = (name) => store.characters.find((c) => fold(c.name) === fold(name));
+export const termById = (id) => store.terms.find((t) => t.id === id);
+// by name or alias
+export const termByName = (name) => store.terms.find((t) => [t.name, ...(t.aliases || [])].some((n) => fold(n) === fold(name)));
 
 // Config values come as { key: { value, label } }
 export const options = (section) => Object.values(store.config[section] || {});
@@ -75,6 +82,9 @@ export function backlinks(name) {
     for (const f of store.locations) {
         const p = f.properties || {};
         if (fold(p.name) !== key && linksIn(p.description).includes(key)) out.push({ kind: 'location', name: p.name });
+    }
+    for (const t of store.terms) {
+        if (fold(t.name) !== key && linksIn(t.description).includes(key)) out.push({ kind: 'term', name: t.name, id: t.id });
     }
     return out.sort((a, b) => a.name.localeCompare(b.name, 'de'));
 }
