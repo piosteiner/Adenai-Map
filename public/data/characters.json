@@ -3534,8 +3534,10 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Schiffbrüchige, die die [[VsuzH]] bei der [[Delfinklippe]] retteten – Teil einer Widerstandsbewegung aus [[Tua Danar]] gegen die wesdalische Expansion. Hat keinen Puls, lebt aber offenbar fröhlich weiter. Die Gruppe barg ihren Verlobungsarmreif.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/xdcmpf9tbu7f-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/xdcmpf9tbu7f-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "neutral",
@@ -3544,7 +3546,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2026-10-18T04:42:53.541Z",
-      "updatedAt": "2026-10-18T16:24:25.267Z"
+      "updatedAt": "2026-10-18T16:25:02.824Z"
     },
     {
       "id": "sorsley",
@@ -4008,5 +4010,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:24:25.267Z"
+  "lastUpdated": "2026-10-18T16:25:02.824Z"
 }
