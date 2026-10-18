@@ -168,7 +168,7 @@
       "name": "Glasinsel",
       "aliases": [],
       "category": "Ort",
-      "description": "Eine Insel, um die sich Wetteranomalien häufen. Dort sank laut [[Nele]] ein Griswold-Schiff mit einem [[Mondstein]].",
+      "description": "Eine Insel, um die sich Wetteranomalien häufen. Dort sank laut [[Nele Wandermann]] ein Griswold-Schiff mit einem [[Mondstein]].",
       "images": [],
       "image": "",
       "createdAt": "2026-10-18T04:41:28.022Z",
@@ -457,5 +457,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T05:49:09.399Z"
+  "lastUpdated": "2026-10-18T16:09:08.717Z"
 }
