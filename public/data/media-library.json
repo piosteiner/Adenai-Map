@@ -17882,7 +17882,50 @@
       },
       "fileSize": 128272,
       "mimeType": "image/jpeg"
+    },
+    "characters-d2z0j59vyqcu": {
+      "id": "characters-d2z0j59vyqcu",
+      "category": "characters",
+      "title": "rhodesia",
+      "caption": "",
+      "credits": "\"Book of Many Things\" Wizards of the Coast",
+      "tags": [],
+      "uploadDate": "2026-10-18T16:00:38.353Z",
+      "sizes": {
+        "thumb": {
+          "filename": "d2z0j59vyqcu-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/d2z0j59vyqcu-thumb.webp",
+          "width": 125,
+          "height": 150
+        },
+        "small": {
+          "filename": "d2z0j59vyqcu-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/d2z0j59vyqcu-small.webp",
+          "width": 249,
+          "height": 300
+        },
+        "medium": {
+          "filename": "d2z0j59vyqcu-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/d2z0j59vyqcu-medium.webp",
+          "width": 499,
+          "height": 600
+        },
+        "large": {
+          "filename": "d2z0j59vyqcu-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/d2z0j59vyqcu-large.webp",
+          "width": 831,
+          "height": 1000
+        },
+        "original": {
+          "filename": "d2z0j59vyqcu-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/d2z0j59vyqcu-large.webp",
+          "width": 831,
+          "height": 1000
+        }
+      },
+      "fileSize": 483136,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-18T14:40:42.659Z"
+  "lastUpdated": "2026-10-18T16:00:38.362Z"
 }
