@@ -2615,7 +2615,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:41:29.986Z",
       "updatedAt": "2026-10-18T04:41:29.986Z"
+    },
+    {
+      "id": "g_nther_meier",
+      "name": "Günther Meier",
+      "title": "Allys unsichtbarer Diener",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Ein unsichtbarer «sexy Butler», den [[Ally]] in der 9. Sitzung beschwor. Kundschaftet aus, bedient das Dachgeschütz und sägt Schiffswracks auf.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "VsuzH",
+      "relationship": "party",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:41:31.940Z",
+      "updatedAt": "2026-10-18T04:41:31.940Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:29.986Z"
+  "lastUpdated": "2026-10-18T04:41:31.940Z"
 }
