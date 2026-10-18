@@ -16807,7 +16807,50 @@
       },
       "fileSize": 91478,
       "mimeType": "image/jpeg"
+    },
+    "characters-hftduney901c": {
+      "id": "characters-hftduney901c",
+      "category": "characters",
+      "title": "e764dd86af8e46e3692b700343db6136",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/842876886513661982/",
+      "tags": [],
+      "uploadDate": "2026-10-18T14:34:55.230Z",
+      "sizes": {
+        "thumb": {
+          "filename": "hftduney901c-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hftduney901c-thumb.webp",
+          "width": 150,
+          "height": 140
+        },
+        "small": {
+          "filename": "hftduney901c-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hftduney901c-small.webp",
+          "width": 300,
+          "height": 280
+        },
+        "medium": {
+          "filename": "hftduney901c-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hftduney901c-medium.webp",
+          "width": 600,
+          "height": 560
+        },
+        "large": {
+          "filename": "hftduney901c-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hftduney901c-large.webp",
+          "width": 1000,
+          "height": 933
+        },
+        "original": {
+          "filename": "hftduney901c-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hftduney901c-large.webp",
+          "width": 1000,
+          "height": 933
+        }
+      },
+      "fileSize": 69422,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T14:34:40.344Z"
+  "lastUpdated": "2026-10-18T14:34:55.235Z"
 }
