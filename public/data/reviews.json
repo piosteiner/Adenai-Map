@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "eb7fa4bd67f2291ce7f2547a847705d8065dbf8b",
+      "action": "create",
+      "type": "character",
+      "itemName": "Sven",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:42:45.546Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:42:45.546Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Sven (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "ed24ae54900af7828c350a1b5e6daff2a96d0a9c",
       "action": "create",
       "type": "character",
@@ -1081,5 +1094,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:43.692Z"
+  "lastUpdated": "2026-10-18T04:42:45.546Z"
 }
