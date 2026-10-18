@@ -3449,7 +3449,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:45.558Z",
       "updatedAt": "2026-10-18T04:42:45.558Z"
+    },
+    {
+      "id": "nussbert",
+      "name": "Nussbert",
+      "title": "Eichhörnchen",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Ein kettenrauchendes, neurotisches Eichhörnchen im [[Mpako]] bei [[Akónetchie]]. Freute sich unverhohlen über den Tod seines unheimlichen Mitbewohners «Stinkepopel».",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:47.571Z",
+      "updatedAt": "2026-10-18T04:42:47.571Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:45.558Z"
+  "lastUpdated": "2026-10-18T04:42:47.571Z"
 }
