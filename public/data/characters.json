@@ -2422,16 +2422,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/hoqtymz82glu-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/hoqtymz82glu-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "ally",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-17T19:46:17.674Z",
-      "updatedAt": "2026-10-17T19:46:17.674Z"
+      "updatedAt": "2026-10-18T17:04:09.409Z"
     },
     {
       "id": "ramza",
@@ -4067,5 +4070,5 @@
       "updatedAt": "2026-10-18T17:01:48.879Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:02:10.347Z"
+  "lastUpdated": "2026-10-18T17:04:09.409Z"
 }
