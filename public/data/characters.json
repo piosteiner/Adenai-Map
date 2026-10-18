@@ -2178,18 +2178,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/blsimdbgw1d9-small.webp"
+      ],
       "image": "https://adenai-admin.piogino.ch/media/blsimdbgw1d9-small.webp",
       "status": "alive",
       "faction": "",
-      "relationship": "ally",
+      "relationship": "suspicious",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-01-17T15:12:07.988Z",
-      "updatedAt": "2026-10-18T16:36:05.000Z",
-      "images": [
-        "https://adenai-admin.piogino.ch/media/blsimdbgw1d9-small.webp"
-      ]
+      "updatedAt": "2026-10-18T16:45:52.614Z"
     },
     {
       "id": "lulloq_doro",
@@ -4026,5 +4027,5 @@
       "updatedAt": "2026-10-18T16:44:08.887Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:45:46.387Z"
+  "lastUpdated": "2026-10-18T16:45:52.614Z"
 }
