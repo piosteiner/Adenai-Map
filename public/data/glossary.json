@@ -48,6 +48,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_ac90c790b0",
+      "name": "Projekt Wolkenbruch",
+      "aliases": [],
+      "category": "Ereignis",
+      "description": "Das Projekt der [[DeWitts]] vor rund 6000 Jahren, in dem ein geraubter Zwillingsstein verbaut wurde und das ihre Zivilisation auslöschte – nur Sonne und Mond blieben übrig.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:05.197Z",
+      "updatedAt": "2026-10-18T04:41:05.197Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_5b94014772",
       "name": "Sandschreiter",
       "aliases": [
@@ -109,5 +122,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:04.421Z"
+  "lastUpdated": "2026-10-18T04:41:05.197Z"
 }
