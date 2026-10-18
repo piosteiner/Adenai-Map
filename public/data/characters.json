@@ -2380,16 +2380,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Aus Elissastadt",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/ive3af4xb6xa-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/ive3af4xb6xa-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-17T19:45:01.093Z",
-      "updatedAt": "2026-10-17T19:45:01.093Z"
+      "updatedAt": "2026-10-18T15:59:10.494Z"
     },
     {
       "id": "lulloq_doro",
@@ -3954,5 +3957,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T15:58:51.391Z"
+  "lastUpdated": "2026-10-18T15:59:10.494Z"
 }
