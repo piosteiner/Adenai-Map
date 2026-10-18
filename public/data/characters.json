@@ -3503,7 +3503,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:51.792Z",
       "updatedAt": "2026-10-18T04:42:51.792Z"
+    },
+    {
+      "id": "vanischa",
+      "name": "Vanischa",
+      "title": "Tua Danarer Widerstandskämpferin",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Schiffbrüchige, die die [[VsuzH]] bei der [[Delfinklippe]] retteten – Teil einer Widerstandsbewegung aus [[Tua Danar]] gegen die wesdalische Expansion. Hat keinen Puls, lebt aber offenbar fröhlich weiter. Die Gruppe barg ihren Verlobungsarmreif.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:53.541Z",
+      "updatedAt": "2026-10-18T04:42:53.541Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:51.792Z"
+  "lastUpdated": "2026-10-18T04:42:53.541Z"
 }
