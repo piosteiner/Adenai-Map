@@ -3431,7 +3431,25 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "maey",
+      "name": "Maey",
+      "title": "Tochter von Königin Maeba II.",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Die Tochter von [[Königin Maeba II.]] Hält mit ihren Streitkräften in [[Akónetchie]] die Stellung und erklärte den [[VsuzH]] die Kampfstrategie. Wollte den befallenen [[Mpako]] lieber fällen als heilen.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:45.558Z",
+      "updatedAt": "2026-10-18T04:42:45.558Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:43.704Z"
+  "lastUpdated": "2026-10-18T04:42:45.558Z"
 }
