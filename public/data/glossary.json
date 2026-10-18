@@ -89,6 +89,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_72cb200c37",
+      "name": "Sonnenstein",
+      "aliases": [],
+      "category": "Gegenstand",
+      "description": "Das Gegenstück zum [[Mondstein]]: infundiert gewöhnlichen Boden mit Mana. Die Kugel der [[VsuzH]] wurde von [[Findel]] als Sonnenstein erkannt; mit einem weiteren («die Energie eines verlorenen Volks») öffnete [[Naos]] ein Portal.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:06.756Z",
+      "updatedAt": "2026-10-18T04:41:06.756Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_bc1b5746e6",
       "name": "Sternenzirkel",
       "aliases": [
@@ -135,5 +148,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:05.962Z"
+  "lastUpdated": "2026-10-18T04:41:06.756Z"
 }
