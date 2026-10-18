@@ -3839,22 +3839,25 @@
       "updatedAt": "2026-10-18T04:43:15.870Z"
     },
     {
-      "id": "bulan",
-      "name": "Bulan",
-      "title": "Erisa Bulan, Forschungsdirektorin",
+      "id": "erissa_bulan",
+      "name": "Erissa Bulan",
+      "title": "Forschungsdirektorin Griswold Standort Wesdalen",
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Direktorin in Griswolds Forschungsanlage. Vermutete [[Nele Wandermann]] hinter einem Einbruchsversuch und ist [[Taspipor]] gegenüber recht fürsorglich. Teil der Entourage von [[Letizia Griswold]].",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/ratq6cwo6cg8-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/ratq6cwo6cg8-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "suspicious",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:43:17.938Z",
-      "updatedAt": "2026-10-18T04:43:17.938Z"
+      "updatedAt": "2026-10-18T16:46:58.927Z"
     },
     {
       "id": "jak_gur",
@@ -3862,7 +3865,7 @@
       "title": "Dragonborn, Abteilungsleiter",
       "placeOfOrigin": "",
       "coordinates": null,
-      "description": "Arbeitet unter [[Bulan]] in Griswolds Anlage; meint, Eindringlinge in Level 3 liessen sich per Knopfdruck in Testsubjekte verwandeln. Wollte «Piper» zur Sicherheit abtasten.",
+      "description": "Arbeitet unter [[Erissa Bulan]] in Griswolds Anlage; meint, Eindringlinge in Level 3 liessen sich per Knopfdruck in Testsubjekte verwandeln. Wollte «Piper» zur Sicherheit abtasten.",
       "images": [
         "https://adenai-admin.piogino.ch/media/jezjxkc09ypb-small.webp"
       ],
@@ -4030,5 +4033,5 @@
       "updatedAt": "2026-10-18T16:44:08.887Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:46:08.345Z"
+  "lastUpdated": "2026-10-18T16:46:58.927Z"
 }
