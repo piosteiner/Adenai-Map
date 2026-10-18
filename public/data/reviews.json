@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "69586f3805210f0d6b998cc46389ab51cc0a079d",
+      "action": "create",
+      "type": "character",
+      "itemName": "Blechdose",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:41:35.721Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:41:35.721Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Blechdose (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "5b0b8a6700e8abfc4eba35ab64f3832f7ba6f9d9",
       "action": "create",
       "type": "character",
@@ -639,5 +652,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:33.766Z"
+  "lastUpdated": "2026-10-18T04:41:35.722Z"
 }
