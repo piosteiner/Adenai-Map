@@ -4040,7 +4040,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T16:44:08.887Z",
       "updatedAt": "2026-10-18T16:44:08.887Z"
+    },
+    {
+      "id": "partriato_serinessa",
+      "name": "Partriato Serinessa",
+      "title": "Hüter der Insel und Host",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T17:00:53.428Z",
+      "updatedAt": "2026-10-18T17:00:53.428Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:53:17.232Z"
+  "lastUpdated": "2026-10-18T17:00:53.428Z"
 }
