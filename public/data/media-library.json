@@ -4887,7 +4887,7 @@
     "characters-22szoql6f0rp": {
       "id": "characters-22szoql6f0rp",
       "category": "characters",
-      "title": "versper",
+      "title": "Versper Serenissa",
       "caption": "",
       "credits": "https://pin.it/7qdB8aCLN",
       "tags": [],
@@ -4925,7 +4925,8 @@
         }
       },
       "fileSize": 131417,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-18T16:33:53.380Z"
     },
     "characters-gorw9003jana": {
       "id": "characters-gorw9003jana",
@@ -18404,5 +18405,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-18T16:33:45.621Z"
+  "lastUpdated": "2026-10-18T16:33:53.380Z"
 }
