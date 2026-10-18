@@ -3009,7 +3009,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:06.360Z",
       "updatedAt": "2026-10-18T04:42:06.360Z"
+    },
+    {
+      "id": "findel",
+      "name": "Findel",
+      "title": "Lady Findel von Atlantis",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Aktivierte vor 5700 Jahren das Kriegsprotokoll von Atlantis. Erkannte die Kugel der [[VsuzH]] als [[Sonnenstein]] und bat um ihre Übergabe, um Atlantis wieder in den Himmel zu heben. Am [[Projekt Wolkenbruch]] beteiligt.",
+      "images": [],
+      "image": "",
+      "status": "unknown",
+      "faction": "DeWitts",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:08.054Z",
+      "updatedAt": "2026-10-18T04:42:08.054Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:06.360Z"
+  "lastUpdated": "2026-10-18T04:42:08.054Z"
 }
