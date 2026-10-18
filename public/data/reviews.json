@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "dde14fd21f3afe5920d36d30400ffb2ba9fe8ba9",
+      "action": "create",
+      "type": "character",
+      "itemName": "Rocky",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:42:35.183Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:42:35.183Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Rocky (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "e70a63b5cbcb853cdad9af7003fd0f802579b147",
       "action": "create",
       "type": "character",
@@ -1016,5 +1029,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:32.092Z"
+  "lastUpdated": "2026-10-18T04:42:35.183Z"
 }
