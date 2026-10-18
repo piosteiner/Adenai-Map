@@ -1969,7 +1969,10 @@
         1869,
         556
       ],
-      "description": "Tochter von Königin Maeba II., Prinzessin von Basapo und Anführerin des Rückeroberungs Regiments in Ako.",
+      "description": "Tochter von Königin Maeba II., Prinzessin von Basapo und Anführerin des Rückeroberungs Regiments in Ako. Hielt mit ihren Streitkräften in [[Akónetchie]] die Stellung und erklärte den [[VsuzH]] die Kampfstrategie (Sitzungen 45 und 48).",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/mjf9mjovvqtl-small.webp"
+      ],
       "image": "https://adenai-admin.piogino.ch/media/mjf9mjovvqtl-small.webp",
       "status": "alive",
       "faction": "",
@@ -1989,7 +1992,7 @@
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2025-08-30T21:53:55.749Z",
-      "updatedAt": "2025-09-07T19:45:02.508Z"
+      "updatedAt": "2026-10-18T06:59:35.954Z"
     },
     {
       "id": "lady_rivea",
@@ -3967,5 +3970,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T05:24:49.052Z"
+  "lastUpdated": "2026-10-18T06:59:35.954Z"
 }
