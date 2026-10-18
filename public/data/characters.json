@@ -3663,16 +3663,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Schenkte [[Ally]] einen grossen Blumenstrauss aus ihrem Primelhaus. [[Abu]] besuchte die Blumenfelder ihrer Familie und nahm magische Blumen mit, darunter die mit den [[Glüebli]] verwandten Glüemli.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/zwss3jet3v1d-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/zwss3jet3v1d-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:43:04.010Z",
-      "updatedAt": "2026-10-18T04:43:04.010Z"
+      "updatedAt": "2026-10-18T16:11:29.325Z"
     },
     {
       "id": "mowgli",
@@ -3993,5 +3996,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:10:19.478Z"
+  "lastUpdated": "2026-10-18T16:11:29.325Z"
 }
