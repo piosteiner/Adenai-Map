@@ -3485,7 +3485,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:49.859Z",
       "updatedAt": "2026-10-18T04:42:49.859Z"
+    },
+    {
+      "id": "nele",
+      "name": "Nele",
+      "title": "Nele Wandermann",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Nachfahrin von [[Jaćek Wandermann]] und ehemalige Untermieterin von [[Tasbor]]. Macht in [[Wesdalen]] Probleme und wird von Griswolds Leuten gesucht; reiste als «Geist» blind auf dem Schiff der [[VsuzH]] mit. Weiss von einem Griswold-Schiff mit einem [[Mondstein]], das bei der [[Glasinsel]] unterging.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:51.792Z",
+      "updatedAt": "2026-10-18T04:42:51.792Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:49.859Z"
+  "lastUpdated": "2026-10-18T04:42:51.792Z"
 }
