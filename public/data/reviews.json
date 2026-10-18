@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "154f3c23102721457a550687e2b82b3916bfb27b",
+      "action": "update",
+      "type": "character",
+      "itemName": "Rhodesia",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:00:55.704Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:00:55.704Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: rhodesia (by gm) - added image"
+    },
+    {
       "commitSha": "2e02c3c8ffb7ead493f5ae0339d855e0a0830b04",
       "action": "update",
       "type": "character",
@@ -1601,5 +1614,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T15:59:22.181Z"
+  "lastUpdated": "2026-10-18T16:00:55.704Z"
 }
