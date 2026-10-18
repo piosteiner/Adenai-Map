@@ -2759,7 +2759,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:41:45.936Z",
       "updatedAt": "2026-10-18T04:41:45.936Z"
+    },
+    {
+      "id": "aykan",
+      "name": "Aykan",
+      "title": "Kronprinz von Moonhaven, Lunas Bruder",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "[[Luna]]s älterer Bruder und Thronfolger von [[Moonhaven]]. Verschwand zur gleichen Zeit wie der grosse [[Mondstein]] Moonhavens. Forscht mit [[Naos]] über das entfernte Zeitalter und wird von den [[Sandschreiter]]n verfolgt.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:41:47.889Z",
+      "updatedAt": "2026-10-18T04:41:47.889Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:45.936Z"
+  "lastUpdated": "2026-10-18T04:41:47.889Z"
 }
