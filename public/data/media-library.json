@@ -5873,7 +5873,50 @@
       },
       "fileSize": 113209,
       "mimeType": "image/jpeg"
+    },
+    "characters-ive3af4xb6xa": {
+      "id": "characters-ive3af4xb6xa",
+      "category": "characters",
+      "title": "Sophia",
+      "caption": "",
+      "credits": "https://pin.it/3MNnL38ed",
+      "tags": [],
+      "uploadDate": "2026-10-18T13:05:29.127Z",
+      "sizes": {
+        "thumb": {
+          "filename": "ive3af4xb6xa-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ive3af4xb6xa-thumb.webp",
+          "width": 89,
+          "height": 150
+        },
+        "small": {
+          "filename": "ive3af4xb6xa-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ive3af4xb6xa-small.webp",
+          "width": 179,
+          "height": 300
+        },
+        "medium": {
+          "filename": "ive3af4xb6xa-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ive3af4xb6xa-medium.webp",
+          "width": 357,
+          "height": 600
+        },
+        "large": {
+          "filename": "ive3af4xb6xa-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ive3af4xb6xa-large.webp",
+          "width": 715,
+          "height": 1200
+        },
+        "original": {
+          "filename": "ive3af4xb6xa-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ive3af4xb6xa-original.webp",
+          "width": 1079,
+          "height": 1811
+        }
+      },
+      "fileSize": 211254,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T13:04:03.293Z"
+  "lastUpdated": "2026-10-18T13:05:29.130Z"
 }
