@@ -74,6 +74,22 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_bab481167f",
+      "name": "Gelber Otter",
+      "aliases": [
+        "Gelben Otter",
+        "Gelben Otters"
+      ],
+      "category": "Gegenstand",
+      "description": "[[Shiho]]s kleines Schiff, beschlagnahmt in der Werft von [[Valaris]], bis die [[VsuzH]] es befreiten. Seine Schiffsseele heisst [[Otto]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:11.123Z",
+      "updatedAt": "2026-10-18T04:41:11.123Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_4a9b59bbfe",
       "name": "Graz'tchar",
       "aliases": [],
@@ -202,5 +218,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:10.251Z"
+  "lastUpdated": "2026-10-18T04:41:11.123Z"
 }
