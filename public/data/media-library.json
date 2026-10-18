@@ -6437,7 +6437,7 @@
     "characters-undoh3n482fz": {
       "id": "characters-undoh3n482fz",
       "category": "characters",
-      "title": "Vesper",
+      "title": "unnamed",
       "caption": "",
       "credits": "https://pin.it/1VknM18q3",
       "tags": [],
@@ -6475,7 +6475,8 @@
         }
       },
       "fileSize": 192471,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-18T16:50:28.714Z"
     },
     "characters-qaplc2obagsb": {
       "id": "characters-qaplc2obagsb",
@@ -18448,5 +18449,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T16:50:14.259Z"
+  "lastUpdated": "2026-10-18T16:50:28.714Z"
 }
