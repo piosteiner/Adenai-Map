@@ -18012,7 +18012,50 @@
       },
       "fileSize": 61822,
       "mimeType": "image/webp"
+    },
+    "general-hf5nqnpw64cq": {
+      "id": "general-hf5nqnpw64cq",
+      "category": "general",
+      "title": "nele wandermann",
+      "caption": "",
+      "credits": "https://cl.pinterest.com/pin/904168062713837452/",
+      "tags": [],
+      "uploadDate": "2026-10-18T16:08:30.099Z",
+      "sizes": {
+        "thumb": {
+          "filename": "hf5nqnpw64cq-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hf5nqnpw64cq-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "hf5nqnpw64cq-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hf5nqnpw64cq-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "hf5nqnpw64cq-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hf5nqnpw64cq-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "hf5nqnpw64cq-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hf5nqnpw64cq-large.webp",
+          "width": 1133,
+          "height": 1133
+        },
+        "original": {
+          "filename": "hf5nqnpw64cq-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hf5nqnpw64cq-large.webp",
+          "width": 1133,
+          "height": 1133
+        }
+      },
+      "fileSize": 72669,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T16:06:17.088Z"
+  "lastUpdated": "2026-10-18T16:08:30.106Z"
 }
