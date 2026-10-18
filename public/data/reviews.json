@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ed729e5b7170d669237ff52a76c9017d9ae927bf",
+      "action": "create",
+      "type": "character",
+      "itemName": "Sylph",
+      "user": "gm",
+      "timestamp": "2026-10-18T17:21:36.854Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T17:21:36.854Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Sylph (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "a2e2a8b5e99a4bd849d6ce4ec71aa8d131a21e94",
       "action": "update",
       "type": "character",
@@ -2095,5 +2108,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T17:06:43.575Z"
+  "lastUpdated": "2026-10-18T17:21:36.854Z"
 }
