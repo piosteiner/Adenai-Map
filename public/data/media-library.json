@@ -24234,7 +24234,52 @@
       "fileSize": 39254,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-18T18:22:45.961Z"
+    },
+    "characters-h4t61fej6cr2": {
+      "id": "characters-h4t61fej6cr2",
+      "category": "characters",
+      "title": "0d04cf2e404179469a63d604301b0a72",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/670825307039461891/",
+      "tags": [
+        "fairy"
+      ],
+      "uploadDate": "2026-10-18T18:22:58.333Z",
+      "sizes": {
+        "thumb": {
+          "filename": "h4t61fej6cr2-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/h4t61fej6cr2-thumb.webp",
+          "width": 106,
+          "height": 150
+        },
+        "small": {
+          "filename": "h4t61fej6cr2-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/h4t61fej6cr2-small.webp",
+          "width": 212,
+          "height": 300
+        },
+        "medium": {
+          "filename": "h4t61fej6cr2-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/h4t61fej6cr2-medium.webp",
+          "width": 424,
+          "height": 600
+        },
+        "large": {
+          "filename": "h4t61fej6cr2-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/h4t61fej6cr2-large.webp",
+          "width": 849,
+          "height": 1200
+        },
+        "original": {
+          "filename": "h4t61fej6cr2-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/h4t61fej6cr2-original.webp",
+          "width": 1200,
+          "height": 1697
+        }
+      },
+      "fileSize": 122050,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T18:22:45.961Z"
+  "lastUpdated": "2026-10-18T18:22:58.339Z"
 }
