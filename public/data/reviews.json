@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6d554bf0ceb22019ea464e34291e82c9530f8126",
+      "action": "update",
+      "type": "character",
+      "itemName": "Letizia Griswold",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:30:21.748Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:30:21.748Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: letizia_griswold (by gm) - added image"
+    },
+    {
       "commitSha": "8c570eb2114e10bffb9fdeaf5a2bebb37668cc8a",
       "action": "update",
       "type": "character",
@@ -1874,5 +1887,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:29:54.314Z"
+  "lastUpdated": "2026-10-18T16:30:21.748Z"
 }
