@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ed24ae54900af7828c350a1b5e6daff2a96d0a9c",
+      "action": "create",
+      "type": "character",
+      "itemName": "Azo",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:42:43.692Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:42:43.692Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Azo (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "612f5051426bd3297537401fbb6377f689e0eace",
       "action": "create",
       "type": "character",
@@ -1068,5 +1081,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:41.501Z"
+  "lastUpdated": "2026-10-18T04:42:43.692Z"
 }
