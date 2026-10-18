@@ -2599,16 +2599,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "[[Abu]]s Vertrauter, der in vielen Gestalten auftritt – etwa als Ratte – und für die [[VsuzH]] auskundschaftet, ablenkt und klaut (z. B. sechs [[Glüebli]] in [[Toftgard]]). Francis II. starb in Sitzung 7, ein Vertrauter bleibt aber nie lange weg.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/77mv6clryyy3-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/77mv6clryyy3-small.webp",
       "status": "alive",
       "faction": "VsuzH",
       "relationship": "party",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:41:29.986Z",
-      "updatedAt": "2026-10-18T04:41:29.986Z"
+      "updatedAt": "2026-10-18T16:53:17.232Z"
     },
     {
       "id": "g_nther_meier",
@@ -4039,5 +4042,5 @@
       "updatedAt": "2026-10-18T16:44:08.887Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:51:58.759Z"
+  "lastUpdated": "2026-10-18T16:53:17.232Z"
 }
