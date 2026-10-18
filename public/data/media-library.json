@@ -18358,7 +18358,50 @@
       },
       "fileSize": 136929,
       "mimeType": "image/jpeg"
+    },
+    "characters-t97dcte4iemb": {
+      "id": "characters-t97dcte4iemb",
+      "category": "characters",
+      "title": "Vanisha",
+      "caption": "",
+      "credits": "https://se.pinterest.com/pin/417708934208258725/",
+      "tags": [],
+      "uploadDate": "2026-10-18T16:24:46.381Z",
+      "sizes": {
+        "thumb": {
+          "filename": "t97dcte4iemb-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/t97dcte4iemb-thumb.webp",
+          "width": 99,
+          "height": 150
+        },
+        "small": {
+          "filename": "t97dcte4iemb-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/t97dcte4iemb-small.webp",
+          "width": 199,
+          "height": 300
+        },
+        "medium": {
+          "filename": "t97dcte4iemb-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/t97dcte4iemb-medium.webp",
+          "width": 398,
+          "height": 600
+        },
+        "large": {
+          "filename": "t97dcte4iemb-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/t97dcte4iemb-large.webp",
+          "width": 796,
+          "height": 1200
+        },
+        "original": {
+          "filename": "t97dcte4iemb-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/t97dcte4iemb-original.webp",
+          "width": 1101,
+          "height": 1659
+        }
+      },
+      "fileSize": 136929,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T16:22:52.435Z"
+  "lastUpdated": "2026-10-18T16:24:46.386Z"
 }
