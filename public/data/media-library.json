@@ -7209,7 +7209,50 @@
       },
       "fileSize": 122737,
       "mimeType": "image/jpeg"
+    },
+    "characters-35dz170t6air": {
+      "id": "characters-35dz170t6air",
+      "category": "characters",
+      "title": "b9462fd373052cadb15c672b7dd4056f",
+      "caption": "",
+      "credits": "https://pin.it/3p3bfFqfZ",
+      "tags": [],
+      "uploadDate": "2026-10-18T13:24:52.823Z",
+      "sizes": {
+        "thumb": {
+          "filename": "35dz170t6air-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/35dz170t6air-thumb.webp",
+          "width": 109,
+          "height": 150
+        },
+        "small": {
+          "filename": "35dz170t6air-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/35dz170t6air-small.webp",
+          "width": 219,
+          "height": 300
+        },
+        "medium": {
+          "filename": "35dz170t6air-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/35dz170t6air-medium.webp",
+          "width": 437,
+          "height": 600
+        },
+        "large": {
+          "filename": "35dz170t6air-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/35dz170t6air-large.webp",
+          "width": 746,
+          "height": 1024
+        },
+        "original": {
+          "filename": "35dz170t6air-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/35dz170t6air-large.webp",
+          "width": 746,
+          "height": 1024
+        }
+      },
+      "fileSize": 78835,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T13:24:14.687Z"
+  "lastUpdated": "2026-10-18T13:24:52.825Z"
 }
