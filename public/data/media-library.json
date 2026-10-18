@@ -18579,7 +18579,50 @@
       },
       "fileSize": 70945,
       "mimeType": "image/jpeg"
+    },
+    "characters-kpl60pwq45ld": {
+      "id": "characters-kpl60pwq45ld",
+      "category": "characters",
+      "title": "melchior von rÃ¼mpel",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/364721269840407661/",
+      "tags": [],
+      "uploadDate": "2026-10-18T17:05:56.799Z",
+      "sizes": {
+        "thumb": {
+          "filename": "kpl60pwq45ld-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/kpl60pwq45ld-thumb.webp",
+          "width": 97,
+          "height": 150
+        },
+        "small": {
+          "filename": "kpl60pwq45ld-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/kpl60pwq45ld-small.webp",
+          "width": 195,
+          "height": 300
+        },
+        "medium": {
+          "filename": "kpl60pwq45ld-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/kpl60pwq45ld-medium.webp",
+          "width": 390,
+          "height": 600
+        },
+        "large": {
+          "filename": "kpl60pwq45ld-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/kpl60pwq45ld-large.webp",
+          "width": 780,
+          "height": 1200
+        },
+        "original": {
+          "filename": "kpl60pwq45ld-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/kpl60pwq45ld-original.webp",
+          "width": 1200,
+          "height": 1847
+        }
+      },
+      "fileSize": 122304,
+      "mimeType": "image/webp"
     }
   },
-  "lastUpdated": "2026-10-18T17:05:04.010Z"
+  "lastUpdated": "2026-10-18T17:05:56.803Z"
 }
