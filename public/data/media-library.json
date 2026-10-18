@@ -8461,7 +8461,50 @@
       },
       "fileSize": 75256,
       "mimeType": "image/jpeg"
+    },
+    "general-bq40tvnh7tpa": {
+      "id": "general-bq40tvnh7tpa",
+      "category": "general",
+      "title": "cornelius",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/female-dnd-human-characters-art--98657048085361918/",
+      "tags": [],
+      "uploadDate": "2026-10-18T13:39:42.671Z",
+      "sizes": {
+        "thumb": {
+          "filename": "bq40tvnh7tpa-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/bq40tvnh7tpa-thumb.webp",
+          "width": 100,
+          "height": 150
+        },
+        "small": {
+          "filename": "bq40tvnh7tpa-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/bq40tvnh7tpa-small.webp",
+          "width": 200,
+          "height": 300
+        },
+        "medium": {
+          "filename": "bq40tvnh7tpa-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/bq40tvnh7tpa-medium.webp",
+          "width": 400,
+          "height": 600
+        },
+        "large": {
+          "filename": "bq40tvnh7tpa-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/bq40tvnh7tpa-large.webp",
+          "width": 800,
+          "height": 1200
+        },
+        "original": {
+          "filename": "bq40tvnh7tpa-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/bq40tvnh7tpa-original.webp",
+          "width": 1000,
+          "height": 1500
+        }
+      },
+      "fileSize": 105227,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T13:39:17.070Z"
+  "lastUpdated": "2026-10-18T13:39:42.673Z"
 }
