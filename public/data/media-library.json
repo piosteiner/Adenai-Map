@@ -18358,7 +18358,50 @@
       },
       "fileSize": 136929,
       "mimeType": "image/jpeg"
+    },
+    "characters-5urqweicz6pt": {
+      "id": "characters-5urqweicz6pt",
+      "category": "characters",
+      "title": "naida",
+      "caption": "",
+      "credits": "Mythic Odysseys of Theros, pg. 236 by Wizards of the Coast",
+      "tags": [],
+      "uploadDate": "2026-10-18T16:28:21.532Z",
+      "sizes": {
+        "thumb": {
+          "filename": "5urqweicz6pt-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5urqweicz6pt-thumb.webp",
+          "width": 73,
+          "height": 150
+        },
+        "small": {
+          "filename": "5urqweicz6pt-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5urqweicz6pt-small.webp",
+          "width": 147,
+          "height": 300
+        },
+        "medium": {
+          "filename": "5urqweicz6pt-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5urqweicz6pt-medium.webp",
+          "width": 293,
+          "height": 600
+        },
+        "large": {
+          "filename": "5urqweicz6pt-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5urqweicz6pt-large.webp",
+          "width": 489,
+          "height": 1000
+        },
+        "original": {
+          "filename": "5urqweicz6pt-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5urqweicz6pt-large.webp",
+          "width": 489,
+          "height": 1000
+        }
+      },
+      "fileSize": 293089,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-18T16:24:53.422Z"
+  "lastUpdated": "2026-10-18T16:28:21.540Z"
 }
