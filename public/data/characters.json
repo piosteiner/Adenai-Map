@@ -3703,7 +3703,39 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "lord_ramvir",
+      "name": "Lord Ramvir",
+      "title": "Lord Ramvir Beridze",
+      "placeOfOrigin": "Wesdalen",
+      "coordinates": [
+        790,
+        769
+      ],
+      "description": "She-Ras Ex-Boss in [[Wesdalen]]. Besorgte den [[VsuzH]] Theaterkarten und lud sie zum Apéro ein. Distanziert sich und Wesdalen stark vom [[Sternenzirkel]] – Wesdalen führt Krieg gegen [[Tua Danar]].",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:09.987Z",
+      "updatedAt": "2026-10-18T04:43:09.987Z",
+      "currentLocation": {
+        "location": "Wesdalen",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          790,
+          769
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:08.034Z"
+  "lastUpdated": "2026-10-18T04:43:09.987Z"
 }
