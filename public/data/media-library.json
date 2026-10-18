@@ -3672,7 +3672,50 @@
       },
       "fileSize": 58572,
       "mimeType": "image/webp"
+    },
+    "general-cyetqo5o7ufa": {
+      "id": "general-cyetqo5o7ufa",
+      "category": "general",
+      "title": "piper schlopp",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/670825307041361967/",
+      "tags": [],
+      "uploadDate": "2026-10-18T12:25:05.567Z",
+      "sizes": {
+        "thumb": {
+          "filename": "cyetqo5o7ufa-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/cyetqo5o7ufa-thumb.webp",
+          "width": 92,
+          "height": 150
+        },
+        "small": {
+          "filename": "cyetqo5o7ufa-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/cyetqo5o7ufa-small.webp",
+          "width": 184,
+          "height": 300
+        },
+        "medium": {
+          "filename": "cyetqo5o7ufa-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/cyetqo5o7ufa-medium.webp",
+          "width": 368,
+          "height": 600
+        },
+        "large": {
+          "filename": "cyetqo5o7ufa-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/cyetqo5o7ufa-large.webp",
+          "width": 735,
+          "height": 1200
+        },
+        "original": {
+          "filename": "cyetqo5o7ufa-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/cyetqo5o7ufa-original.webp",
+          "width": 736,
+          "height": 1201
+        }
+      },
+      "fileSize": 58600,
+      "mimeType": "image/webp"
     }
   },
-  "lastUpdated": "2026-10-18T12:24:43.311Z"
+  "lastUpdated": "2026-10-18T12:25:05.568Z"
 }
