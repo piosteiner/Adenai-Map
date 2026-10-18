@@ -1201,6 +1201,26 @@
           578
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Glesburg Umgebung",
+        "description": "Das Flusstal und die Wälder vor [[Glesburg]], wo die [[VsuzH]] im September 5663 auf [[Valentino]] trafen und gegen Standschreiter kämpften (Sitzungen 57–59).",
+        "contentUrl": null,
+        "type": "landmark",
+        "region": "eastern_adenai",
+        "visited": true,
+        "image": "",
+        "images": []
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1244,
+          629
+        ]
+      }
     }
   ]
 }
