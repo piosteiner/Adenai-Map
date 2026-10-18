@@ -3063,7 +3063,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:42:12.344Z",
       "updatedAt": "2026-10-18T04:42:12.344Z"
+    },
+    {
+      "id": "meteus_dewitt",
+      "name": "Meteus DeWitt",
+      "title": "Mitglied der DeWitts",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Am [[Projekt Wolkenbruch]] beteiligt. [[Ally]] tarnte sich in Atlantis als Meteus – die Kugel sprach sie daraufhin als Bruder an.",
+      "images": [],
+      "image": "",
+      "status": "dead",
+      "faction": "DeWitts",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:14.273Z",
+      "updatedAt": "2026-10-18T04:42:14.273Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:12.344Z"
+  "lastUpdated": "2026-10-18T04:42:14.273Z"
 }
