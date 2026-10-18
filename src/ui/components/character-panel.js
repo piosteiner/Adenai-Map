@@ -394,7 +394,7 @@ class CharacterPanel {
             ? this.characters
             : window.AdenaiSearch.rank(this.characters, query, (c) => ({ name: c.name, fields: [
                 { label: 'Titel', text: c.title, weight: 3 }, { label: 'Fraktion', text: c.faction, weight: 2 },
-                { label: 'Ort', text: [c.location, c.currentLocation?.location, c.placeOfOrigin].filter(Boolean).join(' '), weight: 2 },
+                { label: 'Ort', text: [...new Set([c.location, c.currentLocation?.location, c.placeOfOrigin].filter(Boolean))].join(' · '), weight: 2 },
                 { label: 'Beschreibung', text: c.description, weight: 1 }, { label: 'Notizen', text: c.notes, weight: 1 }] })).map((r) => r.item);
         
         this.populateCharacterGrid(filteredCharacters);

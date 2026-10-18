@@ -12,6 +12,9 @@
 .pp-toc, .gl-back, .character-panel-button { display: none; }
 .panel-anchored-popup .popup-title { display: none; } /* the header shows the name already */
 
+/* the search results lie over the panel buttons below the search (on every screen) */
+#search-container { z-index: 1002; }
+
 /* ---------- touch: finger-sized targets ---------- */
 @media (pointer: coarse) {
   .map-panel-button, .timeline-open { min-height: 40px; padding: 0 14px; }
