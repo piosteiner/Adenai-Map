@@ -45,7 +45,23 @@
       "updatedAt": "2026-10-18T04:40:58.916Z",
       "createdBy": "gm",
       "updatedBy": "gm"
+    },
+    {
+      "id": "term_c23925c785",
+      "name": "Чёрная Кошка",
+      "aliases": [
+        "Кошка",
+        "Schwarze Katze"
+      ],
+      "category": "Organisation",
+      "description": "Die Diebesgilde von [[Rena]]; ihr Zeichen ist eine schwarze Katze. Auch [[Zo'ob]] trat ihr bei, ist dort aber wegen seiner Gewalttätigkeit unbeliebt. Verständigt sich in [[Thieves' Cant]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:01.451Z",
+      "updatedAt": "2026-10-18T04:41:01.451Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:00.661Z"
+  "lastUpdated": "2026-10-18T04:41:01.451Z"
 }
