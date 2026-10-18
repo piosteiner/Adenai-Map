@@ -8506,7 +8506,50 @@
       "fileSize": 105227,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-18T13:39:46.785Z"
+    },
+    "characters-z009xi7zaoup": {
+      "id": "characters-z009xi7zaoup",
+      "category": "characters",
+      "title": "cornelius",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/670825307042566772/",
+      "tags": [],
+      "uploadDate": "2026-10-18T13:40:47.428Z",
+      "sizes": {
+        "thumb": {
+          "filename": "z009xi7zaoup-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z009xi7zaoup-thumb.webp",
+          "width": 138,
+          "height": 150
+        },
+        "small": {
+          "filename": "z009xi7zaoup-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z009xi7zaoup-small.webp",
+          "width": 276,
+          "height": 300
+        },
+        "medium": {
+          "filename": "z009xi7zaoup-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z009xi7zaoup-medium.webp",
+          "width": 552,
+          "height": 600
+        },
+        "large": {
+          "filename": "z009xi7zaoup-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z009xi7zaoup-large.webp",
+          "width": 1104,
+          "height": 1200
+        },
+        "original": {
+          "filename": "z009xi7zaoup-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z009xi7zaoup-original.webp",
+          "width": 1200,
+          "height": 1304
+        }
+      },
+      "fileSize": 218515,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T13:39:52.228Z"
+  "lastUpdated": "2026-10-18T13:40:47.431Z"
 }
