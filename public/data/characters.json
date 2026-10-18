@@ -2909,7 +2909,39 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:41:58.193Z",
       "updatedAt": "2026-10-18T04:41:58.193Z"
+    },
+    {
+      "id": "lerna",
+      "name": "Lerna",
+      "title": "Fuchsfrau, Chefin der Benthals",
+      "placeOfOrigin": "Valaris",
+      "coordinates": [
+        1700,
+        1008
+      ],
+      "description": "Führt die [[Benthals]] in der Unterstadt von [[Valaris]] und bat die [[VsuzH]] um Hilfe gegen groteske Kreaturen in der Kanalisation. Nach dem Sieg über [[Kunos]] vertritt sie die Unterstadt als Beraterin des Kardinals.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "Benthals",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:00.412Z",
+      "updatedAt": "2026-10-18T04:42:00.412Z",
+      "currentLocation": {
+        "location": "Valaris",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          1700,
+          1008
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:58.193Z"
+  "lastUpdated": "2026-10-18T04:42:00.412Z"
 }
