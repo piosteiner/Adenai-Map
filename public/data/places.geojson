@@ -1121,6 +1121,26 @@
           651
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zentralgebirge",
+        "description": "Das Gebirge, das die [[VsuzH]] in den Sitzungen 4 und 5 auf dem Weg von [[Silbergrat]] nach [[Toftgard]] durchquerten (Juni 5663). Die Lage ist aus ihrer Reiseroute geschätzt.",
+        "contentUrl": null,
+        "type": "mountain",
+        "region": "sun_peaks",
+        "visited": true,
+        "image": "",
+        "images": []
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1285,
+          1055
+        ]
+      }
     }
   ]
 }
