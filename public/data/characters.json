@@ -3911,7 +3911,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:43:28.316Z",
       "updatedAt": "2026-10-18T04:43:28.317Z"
+    },
+    {
+      "id": "asulana",
+      "name": "Asulana",
+      "title": "Geist der Moradin-Hohepriesterin",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Der Geist der Hohepriesterin von [[Moradin]] in der [[Ruine von Zurak'thar]]. Führte die [[VsuzH]] zur [[Kugel von Zurag Tar]]; die Gruppe entband sie und ihre Co-Priesterinnen Myraxis und Lyssaria von ihren Pflichten als Hüterinnen der Tempelanlage.",
+      "images": [],
+      "image": "",
+      "status": "undead",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:30.318Z",
+      "updatedAt": "2026-10-18T04:43:30.318Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:28.317Z"
+  "lastUpdated": "2026-10-18T04:43:30.318Z"
 }
