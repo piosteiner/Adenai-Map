@@ -18536,7 +18536,50 @@
       },
       "fileSize": 33587,
       "mimeType": "image/jpeg"
+    },
+    "characters-shn3vn2yhfw6": {
+      "id": "characters-shn3vn2yhfw6",
+      "category": "characters",
+      "title": "Greda",
+      "caption": "",
+      "credits": "https://es.pinterest.com/pin/849069336042891003/",
+      "tags": [],
+      "uploadDate": "2026-10-18T17:05:04.002Z",
+      "sizes": {
+        "thumb": {
+          "filename": "shn3vn2yhfw6-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/shn3vn2yhfw6-thumb.webp",
+          "width": 112,
+          "height": 150
+        },
+        "small": {
+          "filename": "shn3vn2yhfw6-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/shn3vn2yhfw6-small.webp",
+          "width": 224,
+          "height": 300
+        },
+        "medium": {
+          "filename": "shn3vn2yhfw6-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/shn3vn2yhfw6-medium.webp",
+          "width": 448,
+          "height": 600
+        },
+        "large": {
+          "filename": "shn3vn2yhfw6-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/shn3vn2yhfw6-large.webp",
+          "width": 736,
+          "height": 986
+        },
+        "original": {
+          "filename": "shn3vn2yhfw6-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/shn3vn2yhfw6-large.webp",
+          "width": 736,
+          "height": 986
+        }
+      },
+      "fileSize": 70945,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T17:01:28.478Z"
+  "lastUpdated": "2026-10-18T17:05:04.010Z"
 }
