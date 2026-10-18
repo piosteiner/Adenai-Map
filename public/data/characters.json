@@ -3117,7 +3117,7 @@
     {
       "id": "orren",
       "name": "Orren",
-      "title": "Orren Auron, Ex-Jäger",
+      "title": "Ex-Jäger, Schneckenrennen-Veranstalter",
       "placeOfOrigin": "Toftgard",
       "coordinates": [
         1392,
@@ -3132,8 +3132,6 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2026-10-18T04:42:18.505Z",
-      "updatedAt": "2026-10-18T04:42:18.505Z",
       "currentLocation": {
         "location": "Toftgard",
         "date": "5663-06-03",
@@ -3143,8 +3141,10 @@
           1392,
           1083
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2026-10-18T04:42:18.505Z",
+      "updatedAt": "2026-10-18T05:24:40.878Z"
     },
     {
       "id": "ellas",
@@ -3967,5 +3967,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T05:02:13.557Z"
+  "lastUpdated": "2026-10-18T05:24:40.878Z"
 }
