@@ -3653,7 +3653,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:43:04.010Z",
       "updatedAt": "2026-10-18T04:43:04.010Z"
+    },
+    {
+      "id": "mowgli",
+      "name": "Mowgli",
+      "title": "Leng, Ladenbesitzer",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Empfing [[Naos]] in seinem Laden und verlangt für einen Dienst noch eine Gegenleistung von ihm – weshalb die [[VsuzH]] Naos zurücklassen mussten.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:06.068Z",
+      "updatedAt": "2026-10-18T04:43:06.068Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:04.010Z"
+  "lastUpdated": "2026-10-18T04:43:06.068Z"
 }
