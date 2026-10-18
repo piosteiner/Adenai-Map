@@ -3675,7 +3675,7 @@
     },
     "general-cyetqo5o7ufa": {
       "id": "general-cyetqo5o7ufa",
-      "category": "general",
+      "category": "characters",
       "title": "piper schlopp",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/670825307041361967/",
@@ -3714,7 +3714,8 @@
         }
       },
       "fileSize": 58600,
-      "mimeType": "image/webp"
+      "mimeType": "image/webp",
+      "lastModified": "2026-10-18T12:28:04.259Z"
     },
     "general-gdjmeo73ul3b": {
       "id": "general-gdjmeo73ul3b",
@@ -3804,5 +3805,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T12:27:57.742Z"
+  "lastUpdated": "2026-10-18T12:28:04.259Z"
 }
