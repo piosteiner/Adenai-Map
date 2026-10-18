@@ -3875,7 +3875,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:43:24.392Z",
       "updatedAt": "2026-10-18T04:43:24.392Z"
+    },
+    {
+      "id": "sir_adrien",
+      "name": "Sir Adrien",
+      "title": "Fahnder",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Fahnder in [[Letizia Griswold]]s Entourage, der den verschwundenen [[Mondstein]] sucht. Die [[VsuzH]] wollen seinen Reiseplan abklappern, um ihm einen Schritt voraus zu sein.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "suspicious",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:26.231Z",
+      "updatedAt": "2026-10-18T04:43:26.231Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:24.392Z"
+  "lastUpdated": "2026-10-18T04:43:26.231Z"
 }
