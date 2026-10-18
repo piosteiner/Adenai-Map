@@ -1,4 +1,23 @@
 {
   "version": 1,
-  "terms": []
+  "terms": [
+    {
+      "id": "term_bc1b5746e6",
+      "name": "Sternenzirkel",
+      "aliases": [
+        "Zirkel des Sternenfalls",
+        "Sternfallzirkel",
+        "Sternzirkel"
+      ],
+      "category": "Organisation",
+      "description": "Ein Kult, der die klassisch-arkane Magie durch eine andere Magieform ablösen will, im Zusammenhang mit [[Remus|Lord Remus]] und [[Lady Rivea]]. In [[Valaris]] von [[Kunos]] geleitet. Ihm werden Gehirnwäsche politischer Führung, Raub historischer Artefakte und die systematische Tötung arkaner Magier:innen vorgeworfen; er sperrte [[Rocky]] ein und betreibt das «Projekt [[Kadmis]]». Bezieht seine Kraft womöglich von [[Tiamat]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:40:58.916Z",
+      "updatedAt": "2026-10-18T04:40:58.916Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    }
+  ],
+  "lastUpdated": "2026-10-18T04:40:58.916Z"
 }
