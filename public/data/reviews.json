@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "c83b5df5fe3bb630f4de3c43a778b03d86feb4fe",
+      "action": "update",
+      "type": "character",
+      "itemName": "Sylph",
+      "user": "gm",
+      "timestamp": "2026-10-18T17:21:41.378Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T17:21:41.378Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: sylph (by gm) - changed relationship to friendly"
+    },
+    {
       "commitSha": "ed729e5b7170d669237ff52a76c9017d9ae927bf",
       "action": "create",
       "type": "character",
@@ -2108,5 +2121,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T17:21:36.854Z"
+  "lastUpdated": "2026-10-18T17:21:41.379Z"
 }
