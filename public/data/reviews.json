@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "d53778e44dc6521d0766fadc85feea1254e28fbf",
+      "action": "update",
+      "type": "character",
+      "itemName": "Partriato Serinessa",
+      "user": "gm",
+      "timestamp": "2026-10-18T17:01:50.073Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T17:01:50.073Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: partriato_serinessa (by gm) - added image"
+    },
+    {
       "commitSha": "76e35012f4d96b7e126ae8006009717e13aa86e9",
       "action": "create",
       "type": "character",
@@ -2017,5 +2030,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T17:00:54.811Z"
+  "lastUpdated": "2026-10-18T17:01:50.073Z"
 }
