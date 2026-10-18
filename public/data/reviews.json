@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "233f406d0f41ede86f6b7c1af3d700f894397676",
+      "action": "create",
+      "type": "character",
+      "itemName": "Mortimer Peccatum",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:43:17.925Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:43:17.925Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Mortimer Peccatum (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "cf735a5acb758d79992b96fd8a8815bbd547c83d",
       "action": "create",
       "type": "character",
@@ -1289,5 +1302,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:15.857Z"
+  "lastUpdated": "2026-10-18T04:43:17.926Z"
 }
