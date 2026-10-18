@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "be0417fc5fcfdf7b476231f3b4ee6c62fcc4d70e",
+      "action": "create",
+      "type": "location",
+      "itemName": "Glesburg Umgebung",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:16:18.874Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:16:18.874Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create location: Glesburg Umgebung (by gm) - Initial location creation"
+    },
+    {
       "commitSha": "b0655752f44ee2b9876e82afd7e9566f49512738",
       "action": "create",
       "type": "location",
@@ -522,5 +535,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:16:16.923Z"
+  "lastUpdated": "2026-10-18T04:16:18.874Z"
 }
