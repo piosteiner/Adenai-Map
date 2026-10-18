@@ -3331,7 +3331,25 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "rhodesia",
+      "name": "Rhodesia",
+      "title": "Teufelin",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Die Teufelin, mit der [[Tasbor]] unwissentlich einen Vertrag einging (ausgelöst durch die Karte «die Flammen»). Tarnte sich als Meriel Muriel, um Sterbenden die Seele abzuluchsen, und tötete Tasbor in Sitzung 46 – [[Abu]] holte ihn mit einem [[Fulgurkäfer]] zurück.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "enemy",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:37.517Z",
+      "updatedAt": "2026-10-18T04:42:37.517Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:35.197Z"
+  "lastUpdated": "2026-10-18T04:42:37.517Z"
 }
