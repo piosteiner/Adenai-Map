@@ -2246,7 +2246,10 @@
         650,
         1000
       ],
-      "description": "",
+      "description": "Partner von [[Slay]]. Mitglied der [[Чёрная Кошка|Schwarze Katze]]",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/cgtv3j5du702-small.webp"
+      ],
       "image": "https://adenai-admin.piogino.ch/media/cgtv3j5du702-small.webp",
       "status": "alive",
       "faction": "Schwarze Katze",
@@ -2266,7 +2269,7 @@
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2026-01-18T21:28:23.624Z",
-      "updatedAt": "2026-01-19T11:44:24.294Z"
+      "updatedAt": "2026-10-18T19:28:26.254Z"
     },
     {
       "id": "ischri_dimiourgia",
@@ -4206,5 +4209,5 @@
       "updatedAt": "2026-10-18T19:28:02.754Z"
     }
   ],
-  "lastUpdated": "2026-10-18T19:28:02.754Z"
+  "lastUpdated": "2026-10-18T19:28:26.254Z"
 }
