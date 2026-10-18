@@ -6,7 +6,7 @@ import { store, reload, canEdit, options, labelOf, imagesOf, characterById, char
 import { createList } from '../list';
 import { createGallery } from '../gallery';
 import { createMiniMap } from '../minimap';
-import { field, input, select, markdown, tracker, autosaver } from '../form';
+import { field, input, select, markdown, tracker, autosaver, searchPicker } from '../form';
 
 // In-game calendar: the campaign starts on 3 June 5663. Date pickers open in 5663 (min), never at today's real date.
 export const CAMPAIGN_START = '5663-06-03';
@@ -66,7 +66,10 @@ export function charactersView(app) {
 
         const name = input(d.name, { required: true, readOnly: ro });
         const title = input(d.title, { readOnly: ro, placeholder: 'e.g. Prinzessin von Basapo' });
-        const origin = select(d.placeOfOrigin, locationOptions(), { disabled: ro, empty: '— unknown —' });
+        // the place of origin: typed and found (the site's search), chosen from the locations
+        const origin = searchPicker(d.placeOfOrigin, () => store.locations.map((f) => ({ name: f.properties.name,
+            detail: [labelOf('locationTypes', f.properties.type), labelOf('locationRegions', f.properties.region)].filter(Boolean).join(' · ') }))
+            .sort((a, b) => a.name.localeCompare(b.name, 'de')), { readOnly: ro, placeholder: 'Search a place…' });
         const status = select(d.status, options('characterStatus'), { disabled: ro, empty: null });
         const relationship = select(d.relationship, options('characterRelationships'), { disabled: ro, empty: null });
         const faction = input(d.faction, { readOnly: ro, list: 'faction-list' });
