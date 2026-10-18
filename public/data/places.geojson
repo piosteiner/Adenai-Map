@@ -1147,9 +1147,9 @@
       "type": "Feature",
       "properties": {
         "name": "Valanui",
-        "description": "Gegend am Adenui, wo die [[VsuzH]] auf der Flussreise von [[Toftgard]] nach [[Valaris]] im Juli 5663 Halt machten (Sitzung 26, nahe [[Goblin Loch]]). Die Lage ist aus ihrer Reiseroute geschätzt.",
+        "description": "Der Fluss, der von [[Toftgard]] nach [[Valaris]] fliesst. Die [[VsuzH]] fuhren ihn im Juli 5663 mit dem Boot hinunter und machten unterwegs Halt beim [[Goblin Loch]] und in der [[Zur Prallen Traube|Prallen Traube]] (Sitzung 26).",
         "contentUrl": null,
-        "type": "landmark",
+        "type": "lake",
         "region": "eastern_adenai",
         "visited": true,
         "image": "",
@@ -1158,8 +1158,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          1485,
-          1062
+          1500,
+          1064
         ]
       }
     },
