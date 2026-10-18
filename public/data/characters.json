@@ -2968,8 +2968,10 @@
         992
       ],
       "description": "Herrscher der tritonischen Unterwasserstadt [[Luvatu]]; residiert in einer korallenartigen Struktur. Bot den [[VsuzH]] Unterkunft in der Fröhlichen Auster und Geleit nach Atlantis. Massimo Ist ein [Marid](https://www.dndbeyond.com/monsters/17143-marid).",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/e7npfnzt1yza-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/e7npfnzt1yza-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "friendly",
@@ -2988,7 +2990,7 @@
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2026-10-18T04:42:02.623Z",
-      "updatedAt": "2026-10-18T16:16:22.437Z"
+      "updatedAt": "2026-10-18T16:17:00.797Z"
     },
     {
       "id": "vallis",
@@ -3997,5 +3999,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:16:22.437Z"
+  "lastUpdated": "2026-10-18T16:17:00.797Z"
 }
