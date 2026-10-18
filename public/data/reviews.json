@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "3f974ef855bd463ed4e1146bce4bd96228752b85",
+      "action": "update",
+      "type": "character",
+      "itemName": "Rizz",
+      "user": "gm",
+      "timestamp": "2026-10-18T19:28:27.488Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T19:28:27.488Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: rizz (by gm) - added description"
+    },
+    {
       "commitSha": "50a0873a2f332d8105b68734fd9953f68265a8a5",
       "action": "create",
       "type": "character",
@@ -2342,5 +2355,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T19:28:04.158Z"
+  "lastUpdated": "2026-10-18T19:28:27.488Z"
 }
