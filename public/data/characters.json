@@ -3113,7 +3113,39 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "orren",
+      "name": "Orren",
+      "title": "Orren Auron, Ex-Jäger",
+      "placeOfOrigin": "Toftgard",
+      "coordinates": [
+        1392,
+        1083
+      ],
+      "description": "Emeritierter Jäger und Veranstalter der Schneckenrennen in [[Toftgard]] (gegen [[Poison]] verlor er Geld). Wusste von einem faszinierenden Ei und wurde von den [[VsuzH]] angeheuert, um die Vorgänge im [[Toftgarder Forst]] zu ergründen.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:18.505Z",
+      "updatedAt": "2026-10-18T04:42:18.505Z",
+      "currentLocation": {
+        "location": "Toftgard",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          1392,
+          1083
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:16.419Z"
+  "lastUpdated": "2026-10-18T04:42:18.505Z"
 }
