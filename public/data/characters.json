@@ -3553,7 +3553,39 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "dacien",
+      "name": "Dacien",
+      "title": "Dacien Valerio",
+      "placeOfOrigin": "Rena",
+      "coordinates": [
+        650,
+        1000
+      ],
+      "description": "Opfer in einem Mordfall in [[Rena]], den die [[VsuzH]] untersuchten. Geschäftspartner von [[Sorsley]]; von [[Zo'ob]] getötet.",
+      "images": [],
+      "image": "",
+      "status": "dead",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:58.048Z",
+      "updatedAt": "2026-10-18T04:42:58.048Z",
+      "currentLocation": {
+        "location": "Rena",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          650,
+          1000
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:55.870Z"
+  "lastUpdated": "2026-10-18T04:42:58.048Z"
 }
