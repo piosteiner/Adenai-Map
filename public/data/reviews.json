@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "aacaade2e8b39a4398fd5b3fafdec4ec7a638f96",
+      "action": "update",
+      "type": "character",
+      "itemName": "Jak-gur",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:23:20.249Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:23:20.249Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: jakbur (by gm) - updated name, added image"
+    },
+    {
       "commitSha": "9cd0d3fbc4c55ff665a1498dd5b7deaa9b3121c9",
       "action": "update",
       "type": "character",
@@ -1796,5 +1809,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:20:16.295Z"
+  "lastUpdated": "2026-10-18T16:23:20.250Z"
 }
