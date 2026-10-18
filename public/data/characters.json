@@ -4086,13 +4086,14 @@
       "image": "https://adenai-admin.piogino.ch/media/6r8m9at8gobd-small.webp",
       "status": "alive",
       "faction": "",
-      "relationship": "neutral",
+      "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T17:21:35.492Z",
-      "updatedAt": "2026-10-18T17:21:35.492Z"
+      "updatedAt": "2026-10-18T17:21:40.239Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:21:35.492Z"
+  "lastUpdated": "2026-10-18T17:21:40.239Z"
 }
