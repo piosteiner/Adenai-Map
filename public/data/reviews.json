@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "9f6bb708bebc7cc417d23793fe3f17663829015c",
+      "action": "create",
+      "type": "character",
+      "itemName": "Chügeli",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:41:41.853Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:41:41.853Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Chügeli (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "a03dba899bc5c490a8614d3afd47d104b386807f",
       "action": "create",
       "type": "character",
@@ -678,5 +691,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:40.027Z"
+  "lastUpdated": "2026-10-18T04:41:41.853Z"
 }
