@@ -3857,7 +3857,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:43:22.109Z",
       "updatedAt": "2026-10-18T04:43:22.109Z"
+    },
+    {
+      "id": "taspipor",
+      "name": "Taspipor",
+      "title": "Tasbor als Piper Schlopp",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "[[Tasbor]] in der Tarnung als [[Piper]] Schlopp in Griswolds Anlage – mit einer Illusion, die man sehen, aber nicht ertasten kann.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "VsuzH",
+      "relationship": "party",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:24.392Z",
+      "updatedAt": "2026-10-18T04:43:24.392Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:22.109Z"
+  "lastUpdated": "2026-10-18T04:43:24.392Z"
 }
