@@ -4140,7 +4140,27 @@
       },
       "createdAt": "2026-10-18T17:25:11.344Z",
       "updatedAt": "2026-10-18T17:33:56.592Z"
+    },
+    {
+      "id": "she_ra",
+      "name": "She-Ra",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Alte Bekanntschaft von [[Abu]]. Hat die [[VsuzH]] eine Zeit vor und in [[Wesdalen]] begleitet.",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/2ezeuruva8t0-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/2ezeuruva8t0-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T17:39:46.215Z",
+      "updatedAt": "2026-10-18T17:39:46.215Z"
     }
   ],
-  "lastUpdated": "2026-10-18T17:34:17.097Z"
+  "lastUpdated": "2026-10-18T17:39:46.215Z"
 }
