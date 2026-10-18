@@ -25,7 +25,7 @@ class MapProtocols {
         this.live = null;
         this.build();
         // an unlocked device knows the minutes from the start, for "Erwähnt in" in the popups
-        if (this.unlocked) this.load().catch(() => {});
+        if (this.unlocked) this.load().then(() => window.WikiLinks?.refreshBacklinks?.()).catch(() => {});
     }
 
     // ---------- token, name & API ----------
@@ -106,7 +106,8 @@ class MapProtocols {
             <header class="pp-head">
                 <strong>📜 Protokolle</strong>
                 <span class="pp-status" hidden></span>
-                <input type="search" class="pp-search" placeholder="Suchen…" aria-label="Protokolle durchsuchen" hidden>
+                <input type="search" class="pp-search" placeholder="Suchen…" aria-label="Protokolle durchsuchen" title="Enter: nächster Treffer · Umschalt+Enter: vorheriger" hidden>
+                <span class="pp-find-count" hidden></span>
                 <button type="button" class="pp-name" title="Dein Name beim gemeinsamen Schreiben" hidden></button>
                 <button type="button" class="pp-new" hidden>＋ Neu</button>
                 <button type="button" class="pp-lock" title="Auf diesem Gerät sperren" hidden>🔒</button>
@@ -125,7 +126,13 @@ class MapProtocols {
         this.newBtn.addEventListener('click', () => this.newSession());
         this.panel.querySelector('.pp-lock').addEventListener('click', () => this.lockDevice());
         this.nameBtn.addEventListener('click', () => this.askName());
-        this.search.addEventListener('input', () => this.filter());
+        this.search.addEventListener('input', () => { this.filter(); clearTimeout(this.findTimer); this.findTimer = setTimeout(() => this.find(), 200); });
+        this.search.addEventListener('keydown', (e) => {
+            if (e.key !== 'Enter') return;
+            e.preventDefault();
+            this.find();
+            this.step(e.shiftKey ? -1 : 1);
+        });
         if (window.L) { L.DomEvent.disableClickPropagation(this.panel); L.DomEvent.disableScrollPropagation(this.panel); }
         // following a [[link]] on a narrow screen: fold the panel away to show the map
         this.panel.addEventListener('click', (e) => {
@@ -134,6 +141,7 @@ class MapProtocols {
     }
 
     toolbar(on) {
+        if (!on) this.panel.querySelector('.pp-find-count').hidden = true;
         ['.pp-search', '.pp-new', '.pp-lock', '.pp-name', '.pp-status'].forEach((s) => { this.panel.querySelector(s).hidden = !on; });
         this.drawName();
     }
@@ -149,18 +157,19 @@ class MapProtocols {
         if (s === 'locked') this.lockDevice('Bitte das Passwort erneut eingeben.');
     }
 
-    async open(sessionId = null) {
+    // highlight: a name (character, place, term) whose mentions in that session are marked ("Erwähnt in" in popups)
+    async open(sessionId = null, { highlight = null } = {}) {
         this.panel.hidden = false;
         this.panel.classList.remove('folded');
         this.button.classList.add('active');
         if (!this.unlocked) return this.showLock();
-        if (this.listEl && this.live) { if (sessionId) this.scrollTo(sessionId); return; }
+        if (this.listEl && this.live) { if (sessionId) this.scrollTo(sessionId, true, highlight); return; }
         this.body.replaceChildren(this.el('p', 'pp-note', 'Lädt…'));
         try {
             await Promise.all([this.load(), this.loadEditor()]);
             this.startLive();
             this.showMain();
-            this.scrollTo(sessionId || this.sessions.filter((s) => s.published !== false).at(-1)?.id || this.sessions.at(-1)?.id, false);
+            this.scrollTo(sessionId || this.sessions.filter((s) => s.published !== false).at(-1)?.id || this.sessions.at(-1)?.id, false, highlight);
         } catch (err) {
             if (err.message !== 'locked') this.body.replaceChildren(this.el('p', 'pp-error', `Protokolle nicht verfügbar: ${err.message}`));
         }
@@ -386,6 +395,7 @@ class MapProtocols {
         const text = this.el('div', 'pp-text rich-text');
         text.innerHTML = s.content ? RichText.render(s.content) : '<p class="pp-note">Noch kein Text.</p>';
         sec.el.replaceChildren(head, text);
+        if (this.findQuery) { this.findMarks = null; this.findQuery = null; clearTimeout(this.findTimer); this.findTimer = setTimeout(() => this.find(), 50); }
     }
 
     // names with an entry of the same name (a character, a location, a glossary term) link to it
@@ -431,11 +441,107 @@ class MapProtocols {
         this.listEl?.querySelector('.pp-item.active')?.scrollIntoView({ block: 'nearest' });
     }
 
-    scrollTo(id, smooth = true) {
+    scrollTo(id, smooth = true, highlight = null) {
         const sec = id && this.sections.get(id);
         if (!sec) return;
+        if (highlight) {
+            // a hidden session (search filter) would have nothing to show
+            if (sec.el.hidden) { this.search.value = ''; this.filter(); this.find(); }
+            const first = this.mark(sec.el, highlight);
+            if (first) {
+                first.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' });
+                this.setActive(id);
+                return;
+            }
+        }
         sec.el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
         this.setActive(id);
+    }
+
+    // ---------- highlighting ----------
+
+    // The ways a name appears in the minutes: the name, a glossary term's aliases, and the short form of a person's
+    // name ("Viktoria" for Viktoria Karthright, "Torrack" for König Torrack)
+    variants(name) {
+        const titles = new Set(['König', 'Königin', 'Prinz', 'Prinzessin', 'Lady', 'Lord', 'Sir', 'Graf', 'Gräfin', 'Kardinal']);
+        const out = new Set([name, ...(window.mapGlossary?.find(name)?.aliases || [])]);
+        const parts = name.split(/\s+/);
+        if (parts.length > 1 && window.WikiLinks?.find(name)?.kind === 'character') {
+            const short = titles.has(parts[0]) ? parts[1] : parts[0];
+            if (short && short.length >= 3) out.add(short);
+        }
+        return [...out].filter((v) => v.length >= 2).sort((a, b) => b.length - a.length);
+    }
+
+    // Marks the mentions of name in a session (links to it and the name in plain text); returns the first mark
+    mark(el, name) {
+        this.unmark('pp-hl');
+        const fold = (x) => String(x).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+        const variants = this.variants(name);
+        const keys = new Set(variants.map(fold));
+        el.querySelectorAll('a.wiki-link').forEach((a) => { if (keys.has(fold(a.dataset.name || '')) || keys.has(fold(a.textContent))) a.classList.add('pp-hl'); });
+        const re = new RegExp(`(?<![\\p{L}\\p{N}])(?:${variants.map(MapProtocols.loose).join('|')})(?![\\p{L}\\p{N}])`, 'giu');
+        this.wrap(el, re, 'pp-hl', (node) => !node.parentElement.closest('a.wiki-link'));
+        const first = el.querySelector('.pp-hl');
+        first?.classList.add('pp-hl-flash');
+        return first;
+    }
+
+    // wraps every match of re in the text nodes under el into <mark class=cls>
+    wrap(el, re, cls, accept = () => true) {
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+        const nodes = [];
+        for (let n; (n = walker.nextNode());) if (n.nodeValue.trim() && !n.parentElement.closest('mark, button, .pp-form') && accept(n)) nodes.push(n);
+        for (const node of nodes) {
+            const text = node.nodeValue;
+            re.lastIndex = 0;
+            if (!re.test(text)) continue;
+            re.lastIndex = 0;
+            const frag = document.createDocumentFragment();
+            let last = 0;
+            for (const m of text.matchAll(re)) {
+                if (!m[0]) continue;
+                frag.append(text.slice(last, m.index), Object.assign(document.createElement('mark'), { className: cls, textContent: m[0] }));
+                last = m.index + m[0].length;
+            }
+            frag.append(text.slice(last));
+            node.replaceWith(frag);
+        }
+    }
+
+    unmark(cls) {
+        this.view?.querySelectorAll(`mark.${cls}`).forEach((m) => m.replaceWith(m.textContent));
+        this.view?.querySelectorAll(`a.${cls}`).forEach((a) => a.classList.remove(cls, 'pp-hl-flash'));
+        this.view?.normalize();
+    }
+
+    // The search: matches in the shown sessions are marked; Enter / Shift+Enter go to the next / previous one
+    find() {
+        const q = this.search.value.trim();
+        if (q === this.findQuery && this.findMarks) return;
+        this.findQuery = q;
+        this.unmark('pp-find');
+        this.findMarks = [];
+        this.findIndex = -1;
+        const count = this.panel.querySelector('.pp-find-count');
+        if (q.length < 2 || !this.view) { count.hidden = true; return; }
+        const re = new RegExp(MapProtocols.loose(q), 'giu');
+        for (const sec of this.sections.values()) if (!sec.el.hidden && !sec.editing) this.wrap(sec.el, re, 'pp-find');
+        this.findMarks = [...this.view.querySelectorAll('mark.pp-find')];
+        count.hidden = false;
+        count.textContent = this.findMarks.length ? `${this.findMarks.length} Treffer` : 'keine Treffer';
+    }
+
+    step(dir) {
+        if (!this.findMarks?.length) return;
+        this.findMarks[this.findIndex]?.classList.remove('current');
+        this.findIndex = (this.findIndex + dir + this.findMarks.length) % this.findMarks.length;
+        const m = this.findMarks[this.findIndex];
+        m.classList.add('current');
+        m.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        this.panel.querySelector('.pp-find-count').textContent = `${this.findIndex + 1} / ${this.findMarks.length}`;
+        const id = m.closest('.pp-session')?.dataset.id;
+        if (id) this.setActive(id);
     }
 
     // the search narrows the table of contents and hides sessions that don't match
@@ -449,6 +555,16 @@ class MapProtocols {
             const sec = this.sections.get(s.id);
             if (sec && !sec.editing) sec.el.hidden = !hit;
         }
+    }
+
+    // A regex source matching text regardless of accents: "Akonetchie" finds "Akónetchie" and the other way round
+    static loose(text) {
+        const ACCENTS = { a: 'àáâãäå', c: 'ç', e: 'èéêë', i: 'ìíîï', n: 'ñ', o: 'òóôõöø', u: 'ùúûü', y: 'ýÿ' };
+        return [...String(text)].map((c) => {
+            const base = c.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            if (ACCENTS[base]) return `[${base}${ACCENTS[base]}]`;
+            return c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }).join('');
     }
 
     // "Nach [[Tangoa|der Stadt]]" → "Nach der Stadt" (titles in the list)

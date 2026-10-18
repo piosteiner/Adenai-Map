@@ -48,7 +48,7 @@
 
     document.addEventListener('click', (e) => {
         const session = e.target.closest && e.target.closest('a.protocol-link');
-        if (session) { e.preventDefault(); window.mapProtocols?.open(session.dataset.session); return; }
+        if (session) { e.preventDefault(); window.mapProtocols?.open(session.dataset.session, { highlight: session.dataset.name }); return; }
         const link = e.target.closest && e.target.closest('a.wiki-link');
         if (!link) return;
         e.preventDefault();
@@ -98,7 +98,7 @@
         if (!hits.length && !sessions.length) return;
         const links = [
             ...hits.map((h) => `<a href="#" class="wiki-link wiki-${h.kind}" data-kind="${h.kind}" data-name="${RichText.escape(h.name)}">${RichText.escape(h.name)}</a>`),
-            ...sessions.map((s) => `<a href="#" class="protocol-link" data-session="${RichText.escape(s.id)}" title="${RichText.escape(s.title || '')}">📜 Sitzung ${s.number}</a>`),
+            ...sessions.map((s) => `<a href="#" class="protocol-link" data-session="${RichText.escape(s.id)}" data-name="${RichText.escape(slot.dataset.backlinksFor)}" title="${RichText.escape(s.title || '')}">📜 Sitzung ${s.number}</a>`),
         ];
         slot.innerHTML = `🔗 <strong>Erwähnt in:</strong> ${links.join(', ')}`;
         slot.classList.add('rich-text');
@@ -110,5 +110,8 @@
         for (const r of records) for (const n of r.addedNodes) if (n.nodeType === 1) fillAll(n.matches?.('.backlinks') ? n.parentNode : n);
     }).observe(document.documentElement, { childList: true, subtree: true });
 
-    window.WikiLinks = { find, backlinks, backlinksSlot };
+    // after the minutes have loaded (components/protocols.js): fill the open popups' lists again, with the sessions
+    const refreshBacklinks = () => document.querySelectorAll('.backlinks[data-filled]').forEach(fill);
+
+    window.WikiLinks = { find, backlinks, backlinksSlot, refreshBacklinks };
 })();

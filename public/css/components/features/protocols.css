@@ -176,3 +176,17 @@
 /* Dark: the light purple buttons carry dark text; the date picker button follows the text colour */
 [data-theme="dark"] .pp-new, [data-theme="dark"] .pp-done, [data-theme="dark"] .pp-lockform button, [data-theme="dark"] .protocol-panel button.pp-publish { color: #1b1915; }
 .date-field-button { color: inherit; }
+
+/* Highlights: mentions of a name opened from "Erwähnt in" (pp-hl), search matches (pp-find, the current one stronger) */
+.pp-view mark { color: inherit; border-radius: 3px; padding: 0 1px; }
+.pp-view mark.pp-hl, .pp-view a.wiki-link.pp-hl { background: rgba(245, 193, 61, 0.5); box-shadow: 0 0 0 1px rgba(196, 140, 0, 0.55); border-radius: 3px; }
+.pp-view mark.pp-find { background: rgba(109, 40, 217, 0.18); }
+.pp-view mark.pp-find.current { background: rgba(245, 193, 61, 0.75); box-shadow: 0 0 0 2px rgba(196, 140, 0, 0.7); }
+[data-theme="dark"] .pp-view mark.pp-hl, [data-theme="dark"] .pp-view a.wiki-link.pp-hl { background: rgba(245, 193, 61, 0.32); box-shadow: 0 0 0 1px rgba(245, 193, 61, 0.55); }
+[data-theme="dark"] .pp-view mark.pp-find { background: rgba(180, 156, 255, 0.28); }
+[data-theme="dark"] .pp-view mark.pp-find.current { background: rgba(245, 193, 61, 0.45); }
+.pp-hl-flash { animation: pp-flash 1.6s ease-out 2; }
+@keyframes pp-flash { 0%, 100% { box-shadow: 0 0 0 1px rgba(196, 140, 0, 0.55); } 30% { box-shadow: 0 0 0 5px rgba(245, 193, 61, 0.65); } }
+.pp-find-count { font-size: 12px; color: var(--text-secondary); white-space: nowrap; }
+.pp-find-count[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { .pp-hl-flash { animation: none; } }
