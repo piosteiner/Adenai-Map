@@ -62,7 +62,14 @@ async function linkCompletions(context) {
                 return { e, score };
             }).filter((x) => x.score >= 0).sort((a, b) => a.score - b.score || (a.e.alias || a.e.name).localeCompare(b.e.alias || b.e.name, 'de')).slice(0, 30);
     const after = context.state.sliceDoc(context.pos, context.pos + 2); // "]]" already typed after the cursor?
-    const options = ranked.map(({ e }) => ({ label: e.alias || e.name, detail: e.detail, type: 'text', apply: e.alias ? `[[${e.name}|${e.alias}]]` : `[[${e.name}]]` }));
+    // from a selection (selectionLink): the text as written stays the link's text
+    const label = linkLabel && linkLabel.from === m.from && linkLabel.text === m.text.slice(2) ? linkLabel.text : null;
+    if (!label) linkLabel = null;
+    const target = (e) => {
+        const shown = label ?? e.alias;
+        return shown && shown !== e.name ? `[[${e.name}|${shown}]]` : `[[${e.name}]]`;
+    };
+    const options = ranked.map(({ e }) => ({ label: e.alias || e.name, detail: e.detail, type: 'text', apply: target(e) }));
     // a name nothing has yet: offer to create an entry (only where the page provides window.AdenaiEditor.onCreateEntry —
     // on the map: a proposal the DM confirms). The link goes in once it exists.
     const typed = m.text.slice(2).trim();
@@ -178,15 +185,47 @@ function webLink(view) {
     return true;
 }
 
-// "[[" at the cursor (around a selection: that text becomes the search) and the suggestions open.
+// "[[" at the cursor and the suggestions open — or, around a selection, the selection becomes a link (selectionLink).
 function wikiLink(view) {
-    const { from, to } = view.state.selection.main;
-    const text = view.state.sliceDoc(from, to);
-    view.dispatch({ changes: { from, to, insert: `[[${text}` }, selection: { anchor: from + 2 + text.length }, userEvent: 'input' });
+    if (selectionLink(view)) return true;
+    const { from } = view.state.selection.main;
+    view.dispatch({ changes: { from, to: from, insert: '[[' }, selection: { anchor: from + 2 }, userEvent: 'input' });
     view.focus();
     startCompletion(view);
     return true;
 }
+
+// A word written without a link is selected and "[" typed (or the [[ ]] button pressed): it becomes a link.
+//   the text is an entry's name or alias      → [[Name]] / [[Name|text as written]] — done
+//   otherwise                                 → [[text]] and the suggestions open, searched for the text; picking one
+//                                               keeps the text as written: "Aykans" → [[Aykan|Aykans]]
+// The selection's own spaces stay outside; nothing happens for a selection over several lines or with brackets.
+let linkLabel = null; // { from, text } while the suggestions for a selection are open
+function selectionLink(view) {
+    const sel = view.state.selection.main;
+    if (sel.empty) return false;
+    let { from, to } = sel;
+    const raw = view.state.sliceDoc(from, to);
+    if (/[\n\[\]|]/.test(raw)) return false;
+    from += raw.length - raw.trimStart().length;
+    to -= raw.length - raw.trimEnd().length;
+    const text = view.state.sliceDoc(from, to);
+    if (!text) return false;
+    const hit = entries().find((e) => fold(e.alias || e.name) === fold(text));
+    if (hit) {
+        const link = hit.name === text ? `[[${hit.name}]]` : `[[${hit.name}|${text}]]`;
+        view.dispatch({ changes: { from, to, insert: link }, selection: { anchor: from + link.length }, userEvent: 'input' });
+        view.focus();
+        return true;
+    }
+    view.dispatch({ changes: { from, to, insert: `[[${text}]]` }, selection: { anchor: from + 2 + text.length }, userEvent: 'input' });
+    linkLabel = { from, text };
+    view.focus();
+    startCompletion(view);
+    return true;
+}
+// "[" typed over a selection — whatever the keyboard (on Swiss/German layouts it is AltGr + ü / AltGr + 8)
+const bracketOverSelection = EditorView.inputHandler.of((view, from, to, text) => text === '[' && from !== to && selectionLink(view));
 
 // Toggle a prefix ("## ", "- ", "> ") on every line the selection touches.
 function linePrefix(view, prefix) {
@@ -263,6 +302,7 @@ function enhance(textarea, collab = null) {
                 syntaxHighlighting(liveStyle),
                 EditorView.lineWrapping,
                 autocompletion({ override: [linkCompletions], icons: false }),
+                bracketOverSelection,
                 wikiLinks,
                 underlines,
                 theme,
@@ -318,7 +358,7 @@ function enhance(textarea, collab = null) {
         button('B', 'Fett (Ctrl/⌘+B)', () => wrap(view, '**')),
         button('I', 'Kursiv (Ctrl/⌘+I)', () => wrap(view, '*')),
         button('U', 'Unterstrichen (Ctrl/⌘+U)', () => wrap(view, '++')),
-        button('[[ ]]', 'Link zu einem Charakter oder Ort — oder einfach [[ tippen', () => wikiLink(view)),
+        button('[[ ]]', 'Link zu einem Eintrag — oder [[ tippen, oder ein Wort markieren und [ tippen', () => wikiLink(view)),
         button('Web', 'Weblink (Ctrl/⌘+K)', () => webLink(view)),
         button('H', 'Überschrift', () => linePrefix(view, '## ')),
         button('• Liste', 'Aufzählung', () => linePrefix(view, '- ')),
