@@ -30,6 +30,24 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_2a66dedf92",
+      "name": "Familie Kleulenberg",
+      "aliases": [
+        "Kleulenberg",
+        "Kleunenberg",
+        "Kleulenbergs",
+        "Kleunenbergs"
+      ],
+      "category": "Familie",
+      "description": "«Hüter ausserordentlicher Magischer Schätze» in [[Rena]]. Ihr Keller war voller dämonischer Wesen; für den Dienst an der Familie gewährte [[König Torrack]] den [[VsuzH]] eine Audienz.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:04.421Z",
+      "updatedAt": "2026-10-18T04:41:04.421Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_5b94014772",
       "name": "Sandschreiter",
       "aliases": [
@@ -91,5 +109,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:03.421Z"
+  "lastUpdated": "2026-10-18T04:41:04.421Z"
 }
