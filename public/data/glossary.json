@@ -2,6 +2,19 @@
   "version": 1,
   "terms": [
     {
+      "id": "term_e576725672",
+      "name": "Benthals",
+      "aliases": [],
+      "category": "Organisation",
+      "description": "Eine Untergrundgruppierung in der Unterstadt von [[Valaris]], geführt von [[Lerna]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:00.661Z",
+      "updatedAt": "2026-10-18T04:41:00.661Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_5b94014772",
       "name": "Sandschreiter",
       "aliases": [
@@ -34,5 +47,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:40:59.798Z"
+  "lastUpdated": "2026-10-18T04:41:00.661Z"
 }
