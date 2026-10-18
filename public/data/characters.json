@@ -4003,7 +4003,27 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:43:34.390Z",
       "updatedAt": "2026-10-18T04:43:34.390Z"
+    },
+    {
+      "id": "versper_serinessa",
+      "name": "Versper Serinessa",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/22szoql6f0rp-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/22szoql6f0rp-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T16:44:08.887Z",
+      "updatedAt": "2026-10-18T16:44:08.887Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:36:05.000Z"
+  "lastUpdated": "2026-10-18T16:44:08.887Z"
 }
