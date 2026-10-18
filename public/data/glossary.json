@@ -276,6 +276,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_2e332a0c89",
+      "name": "Thieves' Cant",
+      "aliases": [],
+      "category": "Sprache",
+      "description": "Die Geheimsprache der Diebe, die [[Ally]] liest – etwa an den Wänden zur [[Чёрная Кошка]] oder in Briefen an [[Gilbert Rümpel]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:16.936Z",
+      "updatedAt": "2026-10-18T04:41:16.936Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_c23925c785",
       "name": "Чёрная Кошка",
       "aliases": [
@@ -292,5 +305,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:16.024Z"
+  "lastUpdated": "2026-10-18T04:41:16.937Z"
 }
