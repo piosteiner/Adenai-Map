@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "be30bd62ad8c82eda6d126e2290d8a1c9d77bb2d",
+      "action": "update",
+      "type": "character",
+      "itemName": "Orren",
+      "user": "gm",
+      "timestamp": "2026-10-18T05:24:41.946Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T05:24:41.946Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: orren (by gm) - updated title"
+    },
+    {
       "commitSha": "067dfbefecf97eed5dfcd0548673d96fc06c94ae",
       "action": "update",
       "type": "location",
@@ -1445,5 +1458,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T05:13:50.366Z"
+  "lastUpdated": "2026-10-18T05:24:41.946Z"
 }
