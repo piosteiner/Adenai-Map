@@ -3081,8 +3081,8 @@
       "updatedAt": "2026-10-18T04:42:12.344Z"
     },
     {
-      "id": "meteus_dewitt",
-      "name": "Meteus DeWitt",
+      "id": "meteios_dewitt",
+      "name": "Meteios DeWitt",
       "title": "Mitglied der DeWitts",
       "placeOfOrigin": "",
       "coordinates": null,
@@ -3095,8 +3095,9 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:42:14.273Z",
-      "updatedAt": "2026-10-18T04:42:14.273Z"
+      "updatedAt": "2026-10-18T16:12:41.153Z"
     },
     {
       "id": "goldira",
@@ -3996,5 +3997,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:11:29.325Z"
+  "lastUpdated": "2026-10-18T16:12:41.153Z"
 }
