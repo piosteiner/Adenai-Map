@@ -18143,7 +18143,50 @@
       "fileSize": 43752,
       "mimeType": "image/webp",
       "lastModified": "2026-10-18T16:11:16.522Z"
+    },
+    "characters-e7npfnzt1yza": {
+      "id": "characters-e7npfnzt1yza",
+      "category": "characters",
+      "title": "massimo the marid",
+      "caption": "",
+      "credits": "Players Handbook 2014 by Wizards of the Coast",
+      "tags": [],
+      "uploadDate": "2026-10-18T16:16:47.406Z",
+      "sizes": {
+        "thumb": {
+          "filename": "e7npfnzt1yza-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/e7npfnzt1yza-thumb.webp",
+          "width": 119,
+          "height": 150
+        },
+        "small": {
+          "filename": "e7npfnzt1yza-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/e7npfnzt1yza-small.webp",
+          "width": 237,
+          "height": 300
+        },
+        "medium": {
+          "filename": "e7npfnzt1yza-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/e7npfnzt1yza-medium.webp",
+          "width": 474,
+          "height": 600
+        },
+        "large": {
+          "filename": "e7npfnzt1yza-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/e7npfnzt1yza-large.webp",
+          "width": 790,
+          "height": 1000
+        },
+        "original": {
+          "filename": "e7npfnzt1yza-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/e7npfnzt1yza-large.webp",
+          "width": 790,
+          "height": 1000
+        }
+      },
+      "fileSize": 308731,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-18T16:11:16.522Z"
+  "lastUpdated": "2026-10-18T16:16:47.414Z"
 }
