@@ -6479,7 +6479,7 @@
     "characters-qaplc2obagsb": {
       "id": "characters-qaplc2obagsb",
       "category": "characters",
-      "title": "e608c688758097b16304312bc39e8ce5",
+      "title": "Ramza",
       "caption": "",
       "credits": "https://pin.it/69QfD8n7A",
       "tags": [],
@@ -6517,7 +6517,8 @@
         }
       },
       "fileSize": 129630,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-18T16:01:12.956Z"
     },
     "characters-hoqtymz82glu": {
       "id": "characters-hoqtymz82glu",
@@ -17927,5 +17928,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-18T16:00:38.362Z"
+  "lastUpdated": "2026-10-18T16:01:12.956Z"
 }
