@@ -199,32 +199,59 @@ class MapProtocols {
         this.toolbar(false);
         const form = this.el('form', 'pp-lockform');
         form.innerHTML = `
-            <p>Die Protokolle sind passwortgeschützt. Das Passwort bekommst du von der Spielleitung.</p>
-            <input type="password" autocomplete="current-password" placeholder="Passwort" required>
-            <button type="submit">Öffnen</button>
-            <p class="pp-error" hidden></p>
-            <p class="pp-note">Bleibt auf diesem Gerät 30 Tage entsperrt.</p>`;
+            <div class="pp-lock-icon" aria-hidden="true">🔒</div>
+            <h2>Sitzungsprotokolle</h2>
+            <p class="pp-lock-text">Die Protokolle sind passwortgeschützt. Das Passwort bekommst du von der Spielleitung.</p>
+            <label class="pp-pw">
+                <span class="pp-visually-hidden">Passwort</span>
+                <input type="password" name="password" autocomplete="current-password" placeholder="Passwort" required>
+                <button type="button" class="pp-pw-toggle" aria-label="Passwort zeigen" title="Passwort zeigen">👁</button>
+            </label>
+            <p class="pp-error" role="alert" hidden></p>
+            <button type="submit" class="pp-unlock">Öffnen</button>
+            <p class="pp-lock-note">Bleibt auf diesem Gerät 30 Tage entsperrt.</p>`;
+        const input = form.elements.password;
         const err = form.querySelector('.pp-error');
-        if (message) { err.textContent = message; err.hidden = false; }
+        const btn = form.querySelector('.pp-unlock');
+        const toggle = form.querySelector('.pp-pw-toggle');
+        const showError = (text) => {
+            err.textContent = text;
+            err.hidden = false;
+            form.classList.remove('shake');
+            void form.offsetWidth; // restart the animation
+            form.classList.add('shake');
+        };
+        if (message) showError(message);
+        toggle.addEventListener('click', () => {
+            const show = input.type === 'password';
+            input.type = show ? 'text' : 'password';
+            toggle.setAttribute('aria-label', show ? 'Passwort verbergen' : 'Passwort zeigen');
+            toggle.title = toggle.getAttribute('aria-label');
+            toggle.classList.toggle('on', show);
+            input.focus();
+        });
+        input.addEventListener('input', () => { err.hidden = true; });
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = form.querySelector('button');
             btn.disabled = true;
+            btn.textContent = 'Prüft…';
             try {
-                const res = await fetch(`${this.API}/unlock`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: form.querySelector('input').value }) });
+                const res = await fetch(`${this.API}/unlock`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: input.value }) });
                 const data = await res.json().catch(() => ({}));
                 if (!res.ok) throw new Error(data.error || `Fehler ${res.status}`);
                 this.token = { token: data.token, expiresAt: data.expiresAt };
                 window.mapGlossary?.loadPending();
                 this.open();
             } catch (e2) {
-                err.textContent = e2.message === 'Wrong password' ? 'Falsches Passwort.' : e2.message;
-                err.hidden = false;
+                showError(e2.message === 'Wrong password' ? 'Falsches Passwort.' : e2.message.startsWith('Too many') ? 'Zu viele Versuche – bitte in ein paar Minuten nochmals.' : e2.message);
+                input.select();
                 btn.disabled = false;
+                btn.textContent = 'Öffnen';
             }
         });
+        this.body.classList.add('pp-locked');
         this.body.replaceChildren(form);
-        form.querySelector('input').focus();
+        input.focus();
     }
 
     // ---------- live ----------
@@ -347,6 +374,7 @@ class MapProtocols {
 
     showMain() {
         this.toolbar(true);
+        this.body.classList.remove('pp-locked');
         this.listEl = this.el('nav', 'pp-list');
         this.view = this.el('article', 'pp-view pp-scroll');
         this.body.replaceChildren(this.listEl, this.view);

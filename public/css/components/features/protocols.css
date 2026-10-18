@@ -227,3 +227,31 @@
 .gl-create .pp-later, .gl-edit .pp-later { min-height: 30px; padding: 0 12px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--input-bg); color: inherit; font: inherit; cursor: pointer; }
 .gl-create .pp-error { color: #b3261e; margin: 0; }
 [data-theme="dark"] .gl-create .pp-error { color: #ff8a80; }
+
+/* The lock screen (components/protocols.js showLock): a compact card in the middle of the panel */
+.pp-body.pp-locked { display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; overflow-y: auto; padding: 24px 16px; }
+.pp-locked .pp-lockform {
+  width: min(360px, 100%); margin: 0; padding: 28px 26px 22px; display: grid; gap: 12px; align-content: start; text-align: center;
+  border: 1px solid var(--border-color); border-radius: 14px; background: var(--card-bg); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+}
+.pp-lock-icon { justify-self: center; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; font-size: 26px; background: var(--bg-secondary); }
+.pp-lockform h2 { margin: 0; font-size: 19px; }
+.pp-lock-text { margin: 0 0 4px; color: var(--text-secondary); font-size: 14px; line-height: 1.5; }
+.pp-lock-note { margin: 2px 0 0; color: var(--text-secondary); font-size: 12px; }
+.pp-pw { position: relative; display: block; }
+.pp-locked .pp-pw input { width: 100%; box-sizing: border-box; min-height: 44px; padding: 8px 46px 8px 12px; font-size: 16px; text-align: left; border-radius: 8px; }
+.pp-locked .pp-pw input:focus { outline: none; border-color: var(--focus-border); box-shadow: 0 0 0 3px var(--focus-ring); }
+.pp-locked .pp-pw-toggle {
+  position: absolute; top: 50%; right: 6px; transform: translateY(-50%); width: 34px; height: 34px; min-height: 0; padding: 0;
+  border: 0; border-radius: 6px; background: transparent; color: var(--text-secondary); font-size: 17px; cursor: pointer; opacity: 0.7;
+}
+.pp-locked .pp-pw-toggle:hover, .pp-locked .pp-pw-toggle.on { opacity: 1; background: var(--tab-hover-bg); }
+.pp-locked .pp-unlock { min-height: 44px; border: 0; border-radius: 8px; background: var(--accent-primary); color: #fff; font: inherit; font-weight: 600; font-size: 15px; cursor: pointer; }
+[data-theme="dark"] .pp-locked .pp-unlock { color: #1b1915; }
+.pp-locked .pp-unlock:disabled { opacity: 0.65; cursor: wait; }
+.pp-locked .pp-error { margin: -4px 0 0; font-size: 13px; color: #b3261e; }
+[data-theme="dark"] .pp-locked .pp-error { color: #ff8a80; }
+.pp-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.pp-lockform.shake { animation: pp-shake 0.35s ease-in-out; }
+@keyframes pp-shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+@media (prefers-reduced-motion: reduce) { .pp-lockform.shake { animation: none; } }
