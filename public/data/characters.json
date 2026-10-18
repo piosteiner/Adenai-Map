@@ -4164,7 +4164,27 @@
       "currentLocation": null,
       "createdAt": "2026-10-18T17:39:46.215Z",
       "updatedAt": "2026-10-18T17:39:53.966Z"
+    },
+    {
+      "id": "lord_braun",
+      "name": "Lord Braun",
+      "title": "Garant geheimer Gelüste",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/9luh5hjxqu4x-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/9luh5hjxqu4x-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T19:23:19.622Z",
+      "updatedAt": "2026-10-18T19:23:19.622Z"
     }
   ],
-  "lastUpdated": "2026-10-18T18:25:02.015Z"
+  "lastUpdated": "2026-10-18T19:23:19.622Z"
 }
