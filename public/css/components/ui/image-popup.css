@@ -381,3 +381,57 @@
     color: #fff;
     font-size: 13px;
 }
+
+/* ---- A frame of one size for every image (overrides the positions above) --------------------------------------
+   Top bar (counter, ×) · the image centred in a fixed area, never cropped · the information below it, never over
+   it. Every image, whatever its size, gets the same frame: the arrows stay in the same place while paging. */
+.image-popup-content {
+    --bar: 48px;                         /* the counter and the close button */
+    --stage: min(62vh, 640px);           /* the image's area */
+    --info: 9.5rem;                      /* the information below; longer text scrolls inside */
+    width: min(92vw, 900px);
+    max-width: none;
+    max-height: none;
+    display: grid;
+    grid-template-rows: var(--bar) var(--stage) var(--info);
+    row-gap: 10px;
+    align-items: stretch;
+}
+.image-popup-content::before {           /* the image area, faintly shown: the frame stays visible around small images */
+    content: '';
+    grid-row: 2;
+    grid-column: 1;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+}
+.image-popup-image {
+    grid-row: 2;
+    grid-column: 1;
+    justify-self: center;
+    align-self: center;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: var(--stage);
+}
+.image-popup-counter { top: 12px; left: 0; }
+.image-popup-close { top: 2px; right: 0; }
+.image-popup-nav { top: calc(var(--bar) + 10px + var(--stage) / 2 - 22px); }
+.image-popup-prev { left: 10px; }
+.image-popup-next { right: 10px; }
+.image-popup-info {
+    position: static;
+    grid-row: 3;
+    min-width: 0;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+@media (max-width: 768px) {
+    .image-popup-content { --bar: 44px; --stage: min(52vh, 520px); --info: 10.5rem; width: 95vw; }
+    .image-popup-close { top: 4px; }
+    .image-popup-info { bottom: auto; }
+}
+@media (max-width: 480px) {
+    .image-popup-content { --stage: 46vh; --info: 11.5rem; }
+    .image-popup-info { bottom: auto; }
+}
