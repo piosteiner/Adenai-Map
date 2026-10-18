@@ -3449,8 +3449,11 @@
       "id": "nussbert",
       "name": "Nussbert",
       "title": "Eichhörnchen",
-      "placeOfOrigin": "",
-      "coordinates": null,
+      "placeOfOrigin": "Akónetchie",
+      "coordinates": [
+        1869,
+        556
+      ],
       "description": "Ein kettenrauchendes, neurotisches Eichhörnchen im [[Mpako]] bei [[Akónetchie]]. Freute sich unverhohlen über den Tod seines unheimlichen Mitbewohners «Stinkepopel».",
       "images": [
         "https://adenai-admin.piogino.ch/media/755sjo3nr59u-small.webp"
@@ -3462,9 +3465,19 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "currentLocation": null,
+      "currentLocation": {
+        "location": "Akónetchie",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          1869,
+          556
+        ],
+        "notes": "Location set based on place of origin"
+      },
       "createdAt": "2026-10-18T04:42:47.571Z",
-      "updatedAt": "2026-10-18T16:05:06.133Z"
+      "updatedAt": "2026-10-18T16:05:13.246Z"
     },
     {
       "id": "ja_ek_wandermann",
@@ -3971,5 +3984,5 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     }
   ],
-  "lastUpdated": "2026-10-18T16:05:06.133Z"
+  "lastUpdated": "2026-10-18T16:05:13.246Z"
 }
