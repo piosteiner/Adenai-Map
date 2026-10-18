@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "bc1d790431f2a5f64a0cdb2557eca38c36c1acb2",
+      "action": "create",
+      "type": "character",
+      "itemName": "Eldra",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:42:12.330Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:42:12.330Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Eldra (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "7d9e1aafdba1d5f9c6c627ffe4ed0c2262e01dbc",
       "action": "create",
       "type": "character",
@@ -873,5 +886,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:10.233Z"
+  "lastUpdated": "2026-10-18T04:42:12.330Z"
 }
