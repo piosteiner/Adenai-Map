@@ -2941,7 +2941,39 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "massimo",
+      "name": "Massimo",
+      "title": "Meerkönig von Luvatu, Triton",
+      "placeOfOrigin": "Luvatu",
+      "coordinates": [
+        2126,
+        992
+      ],
+      "description": "Herrscher der tritonischen Unterwasserstadt [[Luvatu]]; residiert in einer korallenartigen Struktur. Bot den [[VsuzH]] Unterkunft in der Fröhlichen Auster und Geleit nach Atlantis.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:42:02.623Z",
+      "updatedAt": "2026-10-18T04:42:02.623Z",
+      "currentLocation": {
+        "location": "Luvatu",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          2126,
+          992
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:00.412Z"
+  "lastUpdated": "2026-10-18T04:42:02.623Z"
 }
