@@ -62,6 +62,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_aa49f93b24",
+      "name": "Sturmreiter",
+      "aliases": [],
+      "category": "Organisation",
+      "description": "Ein Team, gegen das die [[VsuzH]] in der Arena von [[Toftgard]] antraten (nachdem sie es abgefüllt hatten). Reiste später mit [[Vazeer]] nach [[Tangoa]] und half [[Basapo]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-18T04:41:03.421Z",
+      "updatedAt": "2026-10-18T04:41:03.421Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_c23925c785",
       "name": "Чёрная Кошка",
       "aliases": [
@@ -78,5 +91,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:02.463Z"
+  "lastUpdated": "2026-10-18T04:41:03.421Z"
 }
