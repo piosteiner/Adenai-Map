@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "3464963f121dfa3626404422e328a6a1287e89a9",
+      "action": "create",
+      "type": "character",
+      "itemName": "Nussbert",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:42:49.847Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:42:49.847Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Nussbert (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "dc10635f7d99c836d0237d0dcce5bccfe2e04a18",
       "action": "create",
       "type": "character",
@@ -1107,5 +1120,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:47.558Z"
+  "lastUpdated": "2026-10-18T04:42:49.847Z"
 }
