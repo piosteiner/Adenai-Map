@@ -162,7 +162,7 @@ class ImageHoverPreview {
         style.textContent = `
             .subtle-image-popup {
                 position: fixed;
-                z-index: 9999;
+                z-index: 10010; /* above the character / location popups (10001, 10002 on phones), below the image viewer */
                 pointer-events: none;
                 opacity: 0;
                 transform: scale(0.8);
