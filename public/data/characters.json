@@ -2669,7 +2669,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:41:35.735Z",
       "updatedAt": "2026-10-18T04:41:35.735Z"
+    },
+    {
+      "id": "roger",
+      "name": "Roger",
+      "title": "Esel",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Ein Esel, der die [[VsuzH]] seit der 4. Sitzung auf dem Weg von [[Silbergrat]] nach [[Toftgard]] begleitet. Gehört zu den Begleitern, «die wir alle immer dabei haben».",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "VsuzH",
+      "relationship": "party",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:41:37.931Z",
+      "updatedAt": "2026-10-18T04:41:37.931Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:41:35.735Z"
+  "lastUpdated": "2026-10-18T04:41:37.931Z"
 }
