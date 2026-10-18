@@ -9,7 +9,7 @@
 //
 // [[links]] as in Obsidian: typing "[[" and a few letters lists matching characters and locations; picking one writes
 // [[Name]]. The map renders them with src/utils/rich-text.js (copied to js/core/rich-text.js by the build).
-import { EditorState, EditorSelection } from '@codemirror/state';
+import { EditorState, EditorSelection, StateField, StateEffect } from '@codemirror/state';
 import { EditorView, keymap, placeholder, drawSelection, Decoration, ViewPlugin, MatchDecorator } from '@codemirror/view';
 import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
 import { syntaxHighlighting, HighlightStyle, LanguageSupport } from '@codemirror/language';
@@ -115,6 +115,65 @@ const wikiLinks = ViewPlugin.fromClass(class {
     update(u) { this.decorations = wikiDeco.updateDeco(u, this.decorations); }
 }, { decorations: (v) => v.decorations });
 
+// ---------- a search shown in the text (the CMS list's search: every match marked, ▲▼ moves between them) ----------
+// Spelling doesn't matter, as in the search itself (src/utils/search.js): "meteios" marks "Meteios", "akonetchie"
+// marks "Akónetchie". The marks follow the text while one types.
+
+const setSearch = StateEffect.define(); // { query, current }
+const searchMark = Decoration.mark({ class: 'cm-search-match' });
+const currentMark = Decoration.mark({ class: 'cm-search-match cm-search-current' });
+
+// [from, to) of every occurrence of the query's words, in the document's own positions
+function matchRanges(text, query) {
+    const S = window.AdenaiSearch;
+    const words = S ? S.words(query) : String(query || '').toLowerCase().split(/\s+/).filter(Boolean);
+    if (!words.length || !text) return [];
+    const fold = S ? S.fold : (x) => x.toLowerCase();
+    let folded = '';
+    const origin = []; // folded index → document index
+    for (let i = 0; i < text.length;) {
+        const ch = String.fromCodePoint(text.codePointAt(i));
+        const f = fold(ch);
+        for (let k = 0; k < f.length; k++) origin.push(i);
+        folded += f;
+        i += ch.length;
+    }
+    origin.push(text.length);
+    const out = [];
+    for (const w of words) {
+        for (let at = folded.indexOf(w); at >= 0; at = folded.indexOf(w, at + w.length)) {
+            const from = origin[at];
+            const last = origin[at + w.length - 1];
+            out.push([from, last + String.fromCodePoint(text.codePointAt(last)).length]);
+        }
+    }
+    out.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+    return out.filter((r, i) => !i || r[0] >= out[i - 1][1]); // overlapping words: the first
+}
+
+const searchField = StateField.define({
+    create: () => ({ query: '', ranges: [], current: -1, deco: Decoration.none }),
+    update(value, tr) {
+        let { query, current } = value;
+        let changed = tr.docChanged;
+        for (const e of tr.effects) if (e.is(setSearch)) { query = e.value.query; current = e.value.current ?? 0; changed = true; }
+        if (!changed) return value;
+        const ranges = query ? matchRanges(tr.state.doc.toString(), query) : [];
+        if (current >= ranges.length) current = ranges.length - 1;
+        const deco = ranges.length ? Decoration.set(ranges.map(([a, b], i) => (i === current ? currentMark : searchMark).range(a, b))) : Decoration.none;
+        return { query, ranges, current, deco };
+    },
+    provide: (f) => EditorView.decorations.from(f, (v) => v.deco),
+});
+
+// Marks `query` in the editor and scrolls to its first match (or to match `current`); '' clears.
+function showSearch(view, query, current = 0) {
+    view.dispatch({ effects: setSearch.of({ query: String(query || '').trim(), current }) });
+    const { ranges, current: i } = view.state.field(searchField);
+    if (ranges[i]) view.dispatch({ effects: EditorView.scrollIntoView(ranges[i][0], { y: 'center' }) });
+    return ranges.length;
+}
+
 // ---------- look ----------
 
 // Colours from the admin's CSS variables, so its light/dark theme just works.
@@ -141,6 +200,8 @@ const theme = EditorView.theme({
     '&.cm-focused .cm-selectionBackground, .cm-selectionBackground': { background: 'var(--focus-ring)' },
     '.cm-wikilink': { color: 'var(--accent-primary)', fontWeight: '600' },
     '.cm-underline': { textDecoration: 'underline' },
+    '.cm-search-match': { background: 'rgba(255, 196, 0, .32)', borderRadius: '2px' },
+    '.cm-search-current': { background: 'rgba(255, 166, 0, .75)', boxShadow: '0 0 0 1px rgba(255, 166, 0, .9)' },
     // other people's cursors in live mode (y-codemirror.next)
     '.cm-ySelectionInfo': { fontFamily: 'system-ui, sans-serif', fontSize: '11px', padding: '1px 4px', borderRadius: '3px', opacity: '1', top: '-1.25em' },
     '.cm-wikilink-missing': { color: 'var(--toast-error)', textDecoration: 'underline dotted' },
@@ -272,6 +333,8 @@ function button(label, title, onClick) {
 
 const nativeValue = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value');
 const views = new WeakMap(); // textarea → its EditorView
+const searchUi = new WeakMap(); // EditorView → redraws its "2 / 5 ▲▼"
+const pendingSearch = new WeakMap(); // textarea → a search asked for before its editor existed
 
 // collab: { text: Y.Text, awareness, undoManager } (live-client.js room) — the editor then edits the shared text:
 // other people's cursors and selections show with their names, and undo only undoes one's own typing.
@@ -290,6 +353,7 @@ function enhance(textarea, collab = null) {
     wrapper.append(toolbar, editorBox, preview);
 
     let syncing = false;
+    let redrawFound = () => {}; // the toolbar's "2 / 5" (set below, once the toolbar exists)
     const view = new EditorView({
         parent: editorBox,
         state: EditorState.create({
@@ -305,10 +369,12 @@ function enhance(textarea, collab = null) {
                 bracketOverSelection,
                 wikiLinks,
                 underlines,
+                searchField,
                 theme,
                 placeholder(textarea.placeholder || ''),
                 EditorView.contentAttributes.of({ 'aria-label': textarea.getAttribute('aria-label') || textarea.name || 'Text', spellcheck: 'true', lang: 'de' }),
                 EditorView.updateListener.of((u) => {
+                    if (u.docChanged && u.state.field(searchField).query) redrawFound(); // typing can add or remove matches
                     if (!u.docChanged || syncing) return;
                     nativeValue.set.call(textarea, u.state.doc.toString());
                     textarea.dispatchEvent(new Event('input', { bubbles: true }));
@@ -318,6 +384,7 @@ function enhance(textarea, collab = null) {
     });
 
     views.set(textarea, view);
+    if (pendingSearch.has(textarea)) setTimeout(() => highlight(textarea, pendingSearch.get(textarea)), 0);
 
     // Text set from outside (the admin filling the form) goes into the editor.
     const show = (text) => {
@@ -366,12 +433,44 @@ function enhance(textarea, collab = null) {
         Object.assign(document.createElement('span'), { className: 'md-spacer' }),
         previewButton,
     );
+    // the list's search, found in this text: "2 / 5" ▲ ▼ (shown only while there is a search)
+    const found = Object.assign(document.createElement('span'), { className: 'md-found', hidden: true });
+    const step = (d) => {
+        const { query, ranges, current } = view.state.field(searchField);
+        if (ranges.length) showSearch(view, query, (current + d + ranges.length) % ranges.length);
+        drawFound();
+    };
+    const prev = button('▲', 'Vorheriger Treffer', () => step(-1));
+    const next = button('▼', 'Nächster Treffer', () => step(1));
+    const count = Object.assign(document.createElement('span'), { className: 'md-found-count' });
+    found.append(count, prev, next);
+    const drawFound = () => {
+        const { query, ranges, current } = view.state.field(searchField);
+        found.hidden = !query;
+        count.textContent = ranges.length ? `„${query}“ ${current + 1} / ${ranges.length}` : `„${query}“ nicht im Text`;
+        prev.disabled = next.disabled = ranges.length < 2;
+    };
+    redrawFound = drawFound;
+    toolbar.insertBefore(found, previewButton);
+    searchUi.set(view, drawFound);
+
     toolbar.children[0].style.fontWeight = '700';
     toolbar.children[1].style.fontStyle = 'italic';
     toolbar.children[2].style.textDecoration = 'underline';
 
     textarea.hidden = true;
     textarea.after(wrapper);
+}
+
+// The search of the CMS list shown in an editor: highlight(textarea, 'meteios') → the number of matches ('' clears).
+// Works before the editor exists too (it is created a frame later): applied once it does.
+function highlight(textarea, query) {
+    const view = views.get(textarea);
+    if (!view) { pendingSearch.set(textarea, query); return 0; }
+    pendingSearch.delete(textarea);
+    const n = showSearch(view, query);
+    searchUi.get(view)?.();
+    return n;
 }
 
 function enhanceAll(root = document) {
@@ -384,6 +483,6 @@ window.renderRichText = (text) => (window.RichText ? window.RichText.render(text
 document.addEventListener('click', (e) => { if (e.target.closest?.('a.wiki-link')) e.preventDefault(); });
 
 window.AdenaiLive = AdenaiLive;
-window.AdenaiEditor = { ...(window.AdenaiEditor || {}), enhance, enhanceAll, resolve, viewOf: (textarea) => views.get(textarea) };
+window.AdenaiEditor = { ...(window.AdenaiEditor || {}), enhance, enhanceAll, resolve, highlight, viewOf: (textarea) => views.get(textarea) };
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => enhanceAll());
 else enhanceAll();

@@ -4,7 +4,7 @@ import { thumbOf } from './store';
 
 // config: { noun, newLabel, keyOf, thumbOf, initialOf (text when there is no image), titleOf, subtitleOf, badgesOf, textOf, filters: [{ id, label, options() → [{value,label}], test(item, value) }],
 //           searchDoc(item) → { name, aliases, fields: [{ label, text, weight }] } (optional; else title, subtitle, text),
-//           onSelect(key), onNew() }
+//           onSelect(key), onNew(), onQuery(query) — the search typed (e.g. to mark it in the open entry's text) }
 // The search is the site's one search (src/utils/search.js): best matches first — the exact name, then names starting
 // with it, then names containing it, then other fields —, matches marked, and a line saying where a hidden match is.
 export function createList(config) {
@@ -68,7 +68,7 @@ export function createList(config) {
         rows.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: 'nearest' });
     }
 
-    search.addEventListener('input', () => { state.query = search.value; render(); });
+    search.addEventListener('input', () => { state.query = search.value; render(); config.onQuery?.(state.query); });
     rows.addEventListener('keydown', (e) => {
         if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
         e.preventDefault();
@@ -81,6 +81,7 @@ export function createList(config) {
     return {
         el,
         focusSearch() { search.focus(); search.select(); },
+        query: () => state.query,
         update(items, selected) {
             state.items = items;
             state.selected = selected;

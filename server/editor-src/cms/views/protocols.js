@@ -22,13 +22,15 @@ const shown = (s) => (s.published === false ? { ...s, ...(s.draft?.values || { n
 export function protocolsView(app) {
     let sessions = [];
     let suggestions = { players: [], places: [] };
-    let current = null; // { id, room, drawState, publish }
+    let current = null; // { id, room, drawState, publish, content (the minutes textarea) }
     let loaded = false;
     let live = null;
     const detail = h('section.detail');
     const list = createList({
         noun: 'sessions',
         newLabel: 'New session',
+        // the search marked in the open session's minutes too (md-editor.js highlight)
+        onQuery: (q) => { if (current?.content) window.AdenaiEditor?.highlight(current.content, q); },
         keyOf: (s) => s.id,
         thumbOf: () => null,
         initialOf: (s) => String(shown(s).number ?? '?'),
@@ -302,7 +304,8 @@ export function protocolsView(app) {
                     h('div.side-block.meta', {}, h('p.muted', { text: `Created ${formatDate(s.createdAt)} by ${s.createdBy} (${s.createdVia})${s.published !== false ? ` · published ${formatDate(s.updatedAt)} by ${s.updatedBy} (${s.updatedVia}) · ${s.versions} earlier version${s.versions === 1 ? '' : 's'} kept` : ''}` })),
                     linksAboveBlock(), passwordBlock())));
         requestAnimationFrame(() => window.AdenaiEditor?.enhance(content, room));
-        Object.assign(current, { drawState, publish });
+        window.AdenaiEditor?.highlight(content, list.query());   // applied once the editor exists
+        Object.assign(current, { drawState, publish, content });
         drawChips();
         drawState();
         drawPeople();
