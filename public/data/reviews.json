@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "03526b321bf28d33e3bf17a7c54c85021d0bc584",
+      "action": "update",
+      "type": "character",
+      "itemName": "Nani",
+      "user": "gm",
+      "timestamp": "2026-10-18T16:11:30.704Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T16:11:30.704Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: nani (by gm) - added image"
+    },
+    {
       "commitSha": "0dedfc1527a72bc6a95fa5b8e5158e3e6999e42b",
       "action": "update",
       "type": "character",
@@ -1705,5 +1718,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T16:10:20.677Z"
+  "lastUpdated": "2026-10-18T16:11:30.704Z"
 }
