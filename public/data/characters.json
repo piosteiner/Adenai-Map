@@ -3735,7 +3735,25 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "kristina",
+      "name": "Kristina",
+      "title": "Angestellte von Lord Ramvir",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Brachte den [[VsuzH]] die Theaterkarten von [[Lord Ramvir]]. Begegnete ihnen später in Griswolds Anlage wieder.",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:11.819Z",
+      "updatedAt": "2026-10-18T04:43:11.819Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:09.987Z"
+  "lastUpdated": "2026-10-18T04:43:11.819Z"
 }
