@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "612f5051426bd3297537401fbb6377f689e0eace",
+      "action": "create",
+      "type": "character",
+      "itemName": "Figmar",
+      "user": "gm",
+      "timestamp": "2026-10-18T04:42:41.501Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-18T04:42:41.501Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Figmar (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "46c7887668c09b0fcb6a43094c3205b48e55f860",
       "action": "create",
       "type": "character",
@@ -1055,5 +1068,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-18T04:42:39.421Z"
+  "lastUpdated": "2026-10-18T04:42:41.501Z"
 }
