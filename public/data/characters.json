@@ -3803,7 +3803,25 @@
       "movementHistory": [],
       "createdAt": "2026-10-18T04:43:15.870Z",
       "updatedAt": "2026-10-18T04:43:15.870Z"
+    },
+    {
+      "id": "bulan",
+      "name": "Bulan",
+      "title": "Erisa Bulan, Forschungsdirektorin",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Direktorin in Griswolds Forschungsanlage. Vermutete [[Nele]] hinter einem Einbruchsversuch und ist [[Taspipor]] gegenüber recht fürsorglich. Teil der Entourage von [[Letizia Griswold]].",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "suspicious",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-18T04:43:17.938Z",
+      "updatedAt": "2026-10-18T04:43:17.938Z"
     }
   ],
-  "lastUpdated": "2026-10-18T04:43:15.870Z"
+  "lastUpdated": "2026-10-18T04:43:17.938Z"
 }
