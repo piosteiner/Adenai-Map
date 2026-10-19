@@ -4219,8 +4219,7 @@
       "coordinates": null,
       "description": "",
       "images": [
-        "https://adenai-admin.piogino.ch/media/sb87jd8m6h0a-small.webp",
-        "https://adenai-admin.piogino.ch/media/wgp38knfr60d-small.webp"
+        "https://adenai-admin.piogino.ch/media/sb87jd8m6h0a-small.webp"
       ],
       "image": "https://adenai-admin.piogino.ch/media/sb87jd8m6h0a-small.webp",
       "status": "alive",
@@ -4231,8 +4230,8 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2026-10-19T11:23:26.886Z",
-      "updatedAt": "2026-10-19T11:32:56.561Z"
+      "updatedAt": "2026-10-19T11:33:22.265Z"
     }
   ],
-  "lastUpdated": "2026-10-19T11:32:56.561Z"
+  "lastUpdated": "2026-10-19T11:33:22.265Z"
 }
