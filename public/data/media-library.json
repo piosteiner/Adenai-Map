@@ -29215,7 +29215,50 @@
       },
       "fileSize": 75573,
       "mimeType": "image/jpeg"
+    },
+    "characters-wgp38knfr60d": {
+      "id": "characters-wgp38knfr60d",
+      "category": "characters",
+      "title": "anselm halloran",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/670825307042544090/",
+      "tags": [],
+      "uploadDate": "2026-10-19T11:32:34.702Z",
+      "sizes": {
+        "thumb": {
+          "filename": "wgp38knfr60d-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/wgp38knfr60d-thumb.webp",
+          "width": 110,
+          "height": 150
+        },
+        "small": {
+          "filename": "wgp38knfr60d-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/wgp38knfr60d-small.webp",
+          "width": 220,
+          "height": 300
+        },
+        "medium": {
+          "filename": "wgp38knfr60d-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/wgp38knfr60d-medium.webp",
+          "width": 440,
+          "height": 600
+        },
+        "large": {
+          "filename": "wgp38knfr60d-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/wgp38knfr60d-large.webp",
+          "width": 735,
+          "height": 1002
+        },
+        "original": {
+          "filename": "wgp38knfr60d-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/wgp38knfr60d-large.webp",
+          "width": 735,
+          "height": 1002
+        }
+      },
+      "fileSize": 92214,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-18T18:51:50.415Z"
+  "lastUpdated": "2026-10-19T11:32:34.755Z"
 }
