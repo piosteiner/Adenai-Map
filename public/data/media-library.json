@@ -29387,7 +29387,50 @@
       },
       "fileSize": 44311,
       "mimeType": "image/jpeg"
+    },
+    "characters-luqipufregli": {
+      "id": "characters-luqipufregli",
+      "category": "characters",
+      "title": "27faa015d64ac305b3ce4c8eed7b55a1",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/373306256609005279/",
+      "tags": [],
+      "uploadDate": "2026-10-19T20:40:23.854Z",
+      "sizes": {
+        "thumb": {
+          "filename": "luqipufregli-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/luqipufregli-thumb.webp",
+          "width": 144,
+          "height": 150
+        },
+        "small": {
+          "filename": "luqipufregli-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/luqipufregli-small.webp",
+          "width": 287,
+          "height": 300
+        },
+        "medium": {
+          "filename": "luqipufregli-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/luqipufregli-medium.webp",
+          "width": 574,
+          "height": 600
+        },
+        "large": {
+          "filename": "luqipufregli-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/luqipufregli-large.webp",
+          "width": 983,
+          "height": 1027
+        },
+        "original": {
+          "filename": "luqipufregli-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/luqipufregli-large.webp",
+          "width": 983,
+          "height": 1027
+        }
+      },
+      "fileSize": 96476,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-19T20:40:10.832Z"
+  "lastUpdated": "2026-10-19T20:40:23.864Z"
 }
