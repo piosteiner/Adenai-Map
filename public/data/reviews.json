@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6620e251ae3ff1764ee25f9fb28866bbb757c4ea",
+      "action": "update",
+      "type": "character",
+      "itemName": "Anselm Halloran",
+      "user": "gm",
+      "timestamp": "2026-10-19T11:33:23.564Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-19T11:33:23.564Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: anselm_halloran (by gm) - Updated character details"
+    },
+    {
       "commitSha": "783c0a7e86b9fcc1974d2e242f014b4c8941628e",
       "action": "update",
       "type": "character",
@@ -2433,5 +2446,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-19T11:32:57.818Z"
+  "lastUpdated": "2026-10-19T11:33:23.564Z"
 }
