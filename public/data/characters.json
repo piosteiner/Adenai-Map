@@ -4218,17 +4218,20 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/sb87jd8m6h0a-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/sb87jd8m6h0a-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-19T11:23:26.886Z",
-      "updatedAt": "2026-10-19T11:23:26.886Z"
+      "updatedAt": "2026-10-19T11:23:48.177Z"
     }
   ],
-  "lastUpdated": "2026-10-19T11:23:26.886Z"
+  "lastUpdated": "2026-10-19T11:23:48.177Z"
 }
