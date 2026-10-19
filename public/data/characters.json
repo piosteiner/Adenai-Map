@@ -4210,7 +4210,25 @@
       "currentLocation": null,
       "createdAt": "2026-10-18T19:28:02.754Z",
       "updatedAt": "2026-10-18T19:28:41.704Z"
+    },
+    {
+      "id": "anselm_halloran",
+      "name": "Anselm Halloran",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-19T11:23:26.886Z",
+      "updatedAt": "2026-10-19T11:23:26.886Z"
     }
   ],
-  "lastUpdated": "2026-10-18T19:55:01.575Z"
+  "lastUpdated": "2026-10-19T11:23:26.886Z"
 }
