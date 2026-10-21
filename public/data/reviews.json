@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "b52062df724dbe20988099d56488c65d41bf0509",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2026-10-21T19:17:05.900Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-21T19:17:05.900Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Fitchers Turm bei Glesburg entry (5663-09-10)"
+    },
+    {
       "commitSha": "6620e251ae3ff1764ee25f9fb28866bbb757c4ea",
       "action": "update",
       "type": "character",
@@ -2446,5 +2459,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-19T11:33:23.564Z"
+  "lastUpdated": "2026-10-21T19:17:05.901Z"
 }
