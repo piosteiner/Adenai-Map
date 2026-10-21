@@ -909,10 +909,10 @@
             648
           ],
           "notes": "",
-          "type": "stay",
+          "type": "teleport",
           "isCustomLocation": false,
           "createdAt": "2026-10-10T19:39:43.040Z",
-          "updatedAt": "2026-10-10T19:50:39.084Z"
+          "updatedAt": "2026-10-21T19:17:27.542Z"
         },
         {
           "id": "movement_1791661275729",
@@ -1035,7 +1035,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-10-21T19:17:18.049Z",
+      "updatedAt": "2026-10-21T19:17:27.542Z",
       "currentLocation": {
         "date": "5663-09-28",
         "dateStart": "5663-09-28",
@@ -4233,5 +4233,5 @@
       "updatedAt": "2026-10-19T11:33:22.265Z"
     }
   ],
-  "lastUpdated": "2026-10-21T19:17:18.049Z"
+  "lastUpdated": "2026-10-21T19:17:27.542Z"
 }
