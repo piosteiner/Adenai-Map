@@ -268,7 +268,7 @@ export function charactersView(app) {
             const rows = moves.map((m, i) => (m.id === editingId ? editRow(m) : h('tr', editingId === null ? dragProps(i) : {},
                 h('td.num', { title: editable ? 'Drag to reorder' : null }, editable && editingId === null ? h('span.grip', { text: '⋮⋮' }) : null, i + 1),
                 h('td.nowrap', { text: [m.dateStart || m.date, m.dateEnd].filter(Boolean).join(' – ') }),
-                h('td', {}, m.isCustomLocation || !m.location ? h('span.muted', { text: `(${(m.coordinates || []).join(', ')})` }) : h('a', { href: `#/locations/${encodeURIComponent(m.location)}` }, m.location)),
+                h('td', {}, m.isCustomLocation || !m.location ? [m.location || '', ' ', h('span.muted', { text: `(${(m.coordinates || []).join(', ')})` })] : h('a', { href: `#/locations/${encodeURIComponent(m.location)}` }, m.location)),
                 h('td', { text: labelOf('movementTypes', m.type) }),
                 h('td.notes', { text: m.notes || '' }),
                 h('td.actions', {}, editable ? [
@@ -288,21 +288,24 @@ export function charactersView(app) {
             const start = input(m?.dateStart || m?.date || last?.dateEnd || last?.dateStart || last?.date || CAMPAIGN_START, { type: 'date', required: true, min: CAMPAIGN_MIN });
             const end = input(m?.dateEnd || '', { type: 'date', min: start.value || CAMPAIGN_MIN, title: 'Optional: until when' });
             start.addEventListener('change', () => { end.min = start.value || CAMPAIGN_MIN; });
+            // A known location, or with X / Y a custom position, then the field is its name
             const custom = !!(m?.isCustomLocation);
-            const where = input(custom ? '' : (m?.location || ''), { list: 'location-list', placeholder: 'Location' });
+            const where = input(m?.location || '', { list: 'location-list', placeholder: 'Location, or a name for X / Y' });
             const cx = input(custom ? m.coordinates?.[0] : '', { type: 'number', placeholder: 'X' });
             const cy = input(custom ? m.coordinates?.[1] : '', { type: 'number', placeholder: 'Y' });
+            where.addEventListener('change', () => { if (locationByName(where.value)) cx.value = cy.value = ''; });
             const datalist = h('datalist#location-list', {}, locationOptions().map((o) => h('option', { value: o.value })));
             const type = select(m?.type || 'travel', options('movementTypes'), { empty: null });
             const notes = input(m?.notes || '', { placeholder: 'Notes' });
             const ok = h('button.btn.primary.small', { type: 'button' }, m ? 'Save' : 'Add');
             ok.addEventListener('click', async () => {
-                const useCustom = !where.value.trim() && cx.value !== '' && cy.value !== '';
+                const useCustom = cx.value !== '' && cy.value !== '';
                 if (!start.value) return toast('A movement needs a start date', 'warn');
-                if (!useCustom && !locationByName(where.value)) return toast('Pick a known location — or leave it empty and enter X / Y', 'warn');
+                if (useCustom && !where.value.trim()) return toast('A custom position needs a name', 'warn');
+                if (!useCustom && !locationByName(where.value)) return toast('Pick a known location — or enter X / Y for a custom position', 'warn');
                 const body = {
                     dateStart: start.value, dateEnd: end.value || null, type: type.value, notes: notes.value.trim(),
-                    ...(useCustom ? { isCustomLocation: true, location: null, coordinates: [Number(cx.value), Number(cy.value)] }
+                    ...(useCustom ? { isCustomLocation: true, location: where.value.trim(), coordinates: [Number(cx.value), Number(cy.value)] }
                         : { isCustomLocation: false, location: locationByName(where.value).properties.name }),
                 };
                 ok.disabled = true;

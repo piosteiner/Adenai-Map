@@ -274,3 +274,29 @@
 .pp-resume-latest { border: 1px solid var(--border-color); background: transparent; color: var(--accent-primary); border-radius: 6px; padding: 2px 8px; font: inherit; cursor: pointer; }
 .pp-resume-close { margin-left: auto; border: 0; background: transparent; color: var(--text-secondary); font-size: 16px; cursor: pointer; }
 .pp-fresh { display: inline-block; padding: 0 6px; border-radius: 999px; background: var(--accent-primary); color: #fff; font-size: 10.5px; font-weight: 700; vertical-align: 1px; text-transform: uppercase; letter-spacing: 0.03em; }
+
+/* Protokoll-Stats: a layer over the panel */
+.pp-links-pinned { flex-direction: column; }
+.pp-links button.pp-link { font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+.pp-stats-layer { position: absolute; inset: 0; z-index: 5; display: grid; place-items: start center; padding: 16px; overflow-y: auto; background: rgba(0, 0, 0, 0.35); }
+.pp-stats { width: min(720px, 100%); padding: 16px 18px 20px; border-radius: 10px; background: var(--card-bg); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35); }
+.pp-stats-head { display: flex; align-items: center; gap: 8px; }
+.pp-stats-head h2 { margin: 0; margin-right: auto; font-size: 20px; }
+.pp-stats-close { min-height: 30px; padding: 0 10px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--card-bg); color: inherit; font-size: 16px; cursor: pointer; }
+.pp-stats h3 { margin: 18px 0 8px; font-size: 15px; }
+.pp-stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin-top: 8px; }
+.pp-stat { display: grid; gap: 2px; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); }
+.pp-stat strong { font-size: 20px; color: var(--accent-primary); font-variant-numeric: tabular-nums; }
+.pp-stat span { font-size: 13px; font-weight: 600; }
+.pp-stat small { font-size: 12px; color: var(--text-secondary); }
+.pp-stat-facts { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; margin: 16px 0 0; }
+.pp-stat-facts dt { font-weight: 600; }
+.pp-stat-facts dd { margin: 0; overflow-wrap: anywhere; }
+.pp-stat-ranks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0 20px; }
+.pp-stat-rank ol { margin: 0; padding-left: 22px; }
+.pp-stat-rank li { display: flex; gap: 8px; justify-content: space-between; padding: 1px 0; }
+.pp-stat-n { color: var(--text-secondary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pp-stat-bars { display: flex; align-items: flex-end; gap: 2px; height: 120px; padding: 4px; border-bottom: 1px solid var(--border-color); }
+.pp-stat-bar { flex: 1 1 0; min-width: 2px; border-radius: 2px 2px 0 0; background: var(--accent-primary); opacity: 0.75; }
+.pp-stat-bar:hover { opacity: 1; }
+@media (max-width: 600px) { .pp-stat-facts { grid-template-columns: 1fr; } .pp-stat-facts dd { margin-bottom: 6px; } }

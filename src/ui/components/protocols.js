@@ -541,19 +541,165 @@ class MapProtocols {
         return box;
     }
 
-    // the links from the CMS (e.g. the attendance sheet) as a bar: above the text, and pinned at the top of the list
+    // the links from the CMS (e.g. the attendance sheet) and the stats as a bar: above the text, and pinned at the top of the list
     linksBar(cls) {
-        if (!this.links?.length) return null;
         const bar = this.el('nav', `pp-links ${cls}`);
         bar.setAttribute('aria-label', 'Links zu den Protokollen');
-        for (const l of this.links) {
+        for (const l of this.links || []) {
             const a = this.el('a', 'pp-link', `${l.label} ↗`);
             a.href = l.url;
             a.target = '_blank';
             a.rel = 'noopener';
             bar.append(a);
         }
+        const stats = this.el('button', 'pp-link', '📈 Protokoll-Stats');
+        stats.type = 'button';
+        stats.addEventListener('click', () => this.showStats());
+        bar.append(stats);
         return bar;
+    }
+
+    // ---------- stats over all published minutes ----------
+
+    // the text of a session as read (no Markdown, no link brackets), one line per block
+    static readText(content) {
+        const box = document.createElement('div');
+        box.innerHTML = RichText.render(content || '');
+        box.querySelectorAll('p, li, h1, h2, h3, h4, h5, h6, blockquote, div, tr, br').forEach((e) => e.append('\n'));
+        return box.textContent.split('\n').map((l) => l.trim()).filter(Boolean);
+    }
+
+    // words too common to be anyone's favourite
+    static COMMON = new Set(('traktandum mitteilungen werden wieder wurden worden würden hatten haben können konnte konnten wollen wollte '
+        + 'wollten sollen sollte müssen musste möchte dieser dieses diesen diesem welche welcher welches nachdem zurück dabei damit '
+        + 'darauf daraus deshalb jedoch allerdings nämlich zusammen unsere unserer unseren andere anderen anderer einige einigen '
+        + 'keinen keiner später sodass sondern zwischen während obwohl bereits nochmal').split(' '));
+
+    stats() {
+        const sessions = this.sessions.filter((s) => s.published !== false);
+        const count = (map, key) => map.set(key, (map.get(key) || 0) + 1);
+        const top = (map, n = 5) => [...map].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'de')).slice(0, n);
+        const links = new Map(), players = new Map(), places = new Map(), words = new Map();
+        let chars = 0, charsNoSpace = 0, gold = 0, levelUps = 0, agenda = 0, questions = 0, longest = '';
+        const per = sessions.map((s) => {
+            const lines = MapProtocols.readText(s.content);
+            const text = lines.join(' ');
+            const w = text.split(/\s+/).filter(Boolean);
+            chars += lines.reduce((n, l) => n + [...l].length, 0);
+            charsNoSpace += [...text.replace(/\s+/g, '')].length;
+            for (const n of RichText.links(s.content || '')) count(links, n);
+            (s.players || []).forEach((p) => count(players, p));
+            (s.places || []).forEach((p) => count(places, p));
+            for (const word of text.match(/[\p{L}][\p{L}-]*/gu) || []) {
+                if ([...word].length > [...longest].length) longest = word;
+                if ([...word].length >= 6 && !MapProtocols.COMMON.has(word.toLowerCase())) count(words, word);
+            }
+            for (const m of text.matchAll(/(\d[\d'’]*)\s*(?:Gold|GM)\b/g)) gold += Number(m[1].replace(/['’]/g, ''));
+            levelUps += (s.content.match(/LEVEL UP/gi) || []).length;
+            agenda += (s.content.match(/^#\s/gm) || []).length;
+            questions += (text.match(/\?/g) || []).length;
+            return { s, words: w.length };
+        });
+        const total = per.reduce((n, p) => n + p.words, 0);
+        const byLength = [...per].sort((a, b) => b.words - a.words);
+        const days = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5) + 1;
+        const dated = (key) => sessions.map((s) => s[key]).filter((d) => /^\d{4,5}-\d{2}-\d{2}$/.test(d || '')).sort();
+        const ingame = [...dated('ingameStart'), ...dated('ingameEnd')].sort();
+        const real = dated('date');
+        return {
+            sessions: sessions.length, words: total, chars, charsNoSpace, gold, levelUps, agenda, questions, longest, per,
+            longestSession: byLength[0], shortestSession: byLength.at(-1),
+            ingame: ingame.length ? { from: ingame[0], to: ingame.at(-1), days: days(ingame[0], ingame.at(-1)) } : null,
+            real: real.length ? { from: real[0], to: real.at(-1), days: days(real[0], real.at(-1)) } : null,
+            links: top(links), players: top(players, 8), places: top(places), topWords: top(words),
+        };
+    }
+
+    showStats() {
+        this.panel.querySelector('.pp-stats-layer')?.remove();
+        const st = this.stats();
+        const num = (n) => Number(n).toLocaleString('de-CH');
+        const layer = this.el('div', 'pp-stats-layer');
+        const box = this.el('section', 'pp-stats');
+        box.setAttribute('role', 'dialog');
+        box.setAttribute('aria-label', 'Protokoll-Stats');
+        const close = () => { layer.remove(); document.removeEventListener('keydown', onKey, true); };
+        const onKey = (e) => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); close(); } };
+        document.addEventListener('keydown', onKey, true);
+        layer.addEventListener('mousedown', (e) => { if (e.target === layer) close(); });
+        const x = this.el('button', 'pp-stats-close', '✕');
+        x.type = 'button';
+        x.title = 'Schliessen';
+        x.addEventListener('click', close);
+        const head = this.el('header', 'pp-stats-head');
+        head.append(this.el('h2', '', '📈 Protokoll-Stats'), x);
+        box.append(head, this.el('p', 'pp-note', `Über alle ${st.sessions} gespeicherten Protokolle.`));
+
+        const tile = (value, label, sub) => {
+            const t = this.el('div', 'pp-stat');
+            t.append(this.el('strong', '', value), this.el('span', '', label));
+            if (sub) t.append(this.el('small', '', sub));
+            return t;
+        };
+        const label = (p) => `Sitzung ${p.s.number ?? '?'}${p.s.title ? ` · ${MapProtocols.plain(p.s.title)}` : ''}`;
+        const tiles = this.el('div', 'pp-stat-grid');
+        tiles.append(
+            tile(num(st.chars), 'Zeichen mit Leerzeichen'),
+            tile(num(st.charsNoSpace), 'Zeichen ohne Leerzeichen'),
+            tile(num(st.words), 'Wörter', `Ø ${num(Math.round(st.words / (st.sessions || 1)))} pro Sitzung`),
+            tile(`${num(Math.round(st.words / 230))} min`, 'Lesezeit für alles', 'bei 230 Wörtern pro Minute'),
+            tile(num(st.agenda), 'Traktanden'),
+            tile(num(st.levelUps), 'Level-ups'),
+            tile(num(st.questions), 'Fragezeichen', 'offene Fragen gibt es immer'),
+            tile(num(st.gold), 'Gold erwähnt', 'alle Beträge mit «Gold» zusammengezählt'),
+        );
+        if (st.ingame) tiles.append(tile(`${num(st.ingame.days)} Tage`, 'Ingame erlebt', `${this.date(st.ingame.from)} – ${this.date(st.ingame.to)}`));
+        if (st.real) tiles.append(tile(`${num(st.real.days)} Tage`, 'Im echten Leben gespielt', `${this.date(st.real.from)} – ${this.date(st.real.to)}`));
+        box.append(tiles);
+
+        const facts = this.el('dl', 'pp-stat-facts');
+        const fact = (k, v) => facts.append(this.el('dt', '', k), this.el('dd', '', v));
+        if (st.longestSession) fact('📜 Längstes Protokoll', `${label(st.longestSession)} (${num(st.longestSession.words)} Wörter)`);
+        if (st.shortestSession) fact('🩳 Kürzestes Protokoll', `${label(st.shortestSession)} (${num(st.shortestSession.words)} Wörter)`);
+        if (st.longest) fact('🐍 Längstes Wort', `${st.longest} (${[...st.longest].length} Buchstaben)`);
+        box.append(facts);
+
+        const ranking = (title, rows, unit) => {
+            if (!rows.length) return;
+            const sec = this.el('div', 'pp-stat-rank');
+            sec.append(this.el('h3', '', title));
+            const ol = this.el('ol');
+            for (const [name, n] of rows) {
+                const li = this.el('li');
+                li.append(this.el('span', '', name), this.el('span', 'pp-stat-n', `${num(n)} ${unit}`));
+                ol.append(li);
+            }
+            sec.append(ol);
+            ranks.append(sec);
+        };
+        const ranks = this.el('div', 'pp-stat-ranks');
+        ranking('🎲 Am häufigsten dabei', st.players, '×');
+        ranking('🔗 Am häufigsten verlinkt', st.links, '×');
+        ranking('📍 Meistbesuchte Orte', st.places, '×');
+        ranking('💬 Lieblingswörter (ab 6 Buchstaben)', st.topWords, '×');
+        box.append(ranks);
+
+        // words per session as bars, in session order
+        const max = Math.max(1, ...st.per.map((p) => p.words));
+        const chart = this.el('div', 'pp-stat-bars');
+        chart.setAttribute('role', 'img');
+        chart.setAttribute('aria-label', 'Wörter pro Sitzung');
+        for (const p of st.per) {
+            const bar = this.el('span', 'pp-stat-bar');
+            bar.style.height = `${Math.max(2, (p.words / max) * 100)}%`;
+            bar.title = `${label(p)}: ${num(p.words)} Wörter`;
+            chart.append(bar);
+        }
+        box.append(this.el('h3', '', '📊 Wörter pro Sitzung'), chart);
+
+        layer.append(box);
+        this.panel.append(layer);
+        x.focus();
     }
 
     drawList() {

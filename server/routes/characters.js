@@ -988,7 +988,7 @@ router.put('/:id/movements/:movementId', requireAuth, async (req, res) => {
       coordinates: coordinates,
       notes: req.body.notes || '',
       type: req.body.type || character.movementHistory[movementIndex].type,
-      isCustomLocation: req.body.isCustomLocation || character.movementHistory[movementIndex].isCustomLocation,
+      isCustomLocation: req.body.isCustomLocation ?? character.movementHistory[movementIndex].isCustomLocation,
       updatedAt: new Date().toISOString()
     };
     
