@@ -824,10 +824,10 @@
             594
           ],
           "notes": "Die Gruppe teleportierte sich mit Lia, Fitcher und seinem Turm in die Nähe von Glesburg.",
-          "type": "travel",
+          "type": "teleport",
           "isCustomLocation": true,
           "createdAt": "2025-09-22T12:44:40.545Z",
-          "updatedAt": "2026-10-10T19:50:39.084Z"
+          "updatedAt": "2026-10-21T19:17:04.069Z"
         },
         {
           "id": "movement_1758545154944",
@@ -1035,7 +1035,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-10-18T05:24:49.052Z",
+      "updatedAt": "2026-10-21T19:17:04.069Z",
       "currentLocation": {
         "date": "5663-09-28",
         "dateStart": "5663-09-28",
@@ -4233,5 +4233,5 @@
       "updatedAt": "2026-10-19T11:33:22.265Z"
     }
   ],
-  "lastUpdated": "2026-10-19T11:33:22.265Z"
+  "lastUpdated": "2026-10-21T19:17:04.069Z"
 }
