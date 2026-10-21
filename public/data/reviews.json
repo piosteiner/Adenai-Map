@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "64cc33276834cea6e4bc43246c6a13157403fbc3",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2026-10-21T19:17:36.978Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-21T19:17:36.978Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character movement: VsuzH (by gm) - Modified Gleissende Zitadelle entry (5663-09-16 to 5663-09-16)"
+    },
+    {
       "commitSha": "753cc71fd4d94305bb85c178137cb7616677478e",
       "action": "update",
       "type": "character",
@@ -2485,5 +2498,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-21T19:17:28.870Z"
+  "lastUpdated": "2026-10-21T19:17:36.978Z"
 }
