@@ -926,10 +926,10 @@
             -108
           ],
           "notes": "",
-          "type": "mission",
+          "type": "teleport",
           "isCustomLocation": false,
           "createdAt": "2026-10-10T19:41:15.729Z",
-          "updatedAt": "2026-10-10T19:50:39.084Z"
+          "updatedAt": "2026-10-21T19:17:35.815Z"
         },
         {
           "id": "movement_1791661299407",
@@ -1035,7 +1035,7 @@
         }
       ],
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-10-21T19:17:27.542Z",
+      "updatedAt": "2026-10-21T19:17:35.815Z",
       "currentLocation": {
         "date": "5663-09-28",
         "dateStart": "5663-09-28",
@@ -4233,5 +4233,5 @@
       "updatedAt": "2026-10-19T11:33:22.265Z"
     }
   ],
-  "lastUpdated": "2026-10-21T19:17:27.542Z"
+  "lastUpdated": "2026-10-21T19:17:35.815Z"
 }
