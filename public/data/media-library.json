@@ -29998,7 +29998,50 @@
       },
       "fileSize": 92419,
       "mimeType": "image/jpeg"
+    },
+    "locations-urynzo3lwfui": {
+      "id": "locations-urynzo3lwfui",
+      "category": "locations",
+      "title": "serinessa ballroom",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/670825307042533592/",
+      "tags": [],
+      "uploadDate": "2026-10-22T18:48:17.999Z",
+      "sizes": {
+        "thumb": {
+          "filename": "urynzo3lwfui-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/urynzo3lwfui-thumb.webp",
+          "width": 150,
+          "height": 58
+        },
+        "small": {
+          "filename": "urynzo3lwfui-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/urynzo3lwfui-small.webp",
+          "width": 300,
+          "height": 116
+        },
+        "medium": {
+          "filename": "urynzo3lwfui-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/urynzo3lwfui-medium.webp",
+          "width": 600,
+          "height": 232
+        },
+        "large": {
+          "filename": "urynzo3lwfui-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/urynzo3lwfui-large.webp",
+          "width": 1100,
+          "height": 425
+        },
+        "original": {
+          "filename": "urynzo3lwfui-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/urynzo3lwfui-large.webp",
+          "width": 1100,
+          "height": 425
+        }
+      },
+      "fileSize": 91044,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-22T16:55:18.036Z"
+  "lastUpdated": "2026-10-22T18:48:18.010Z"
 }
