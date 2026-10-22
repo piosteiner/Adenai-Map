@@ -26288,7 +26288,10 @@
       "title": "0bbeac05583bba87470e03a1f6a9ea54",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/251357222945641955/",
-      "tags": [],
+      "tags": [
+        "Dragonborn",
+        "bard"
+      ],
       "uploadDate": "2026-10-18T18:35:43.695Z",
       "sizes": {
         "thumb": {
@@ -26323,7 +26326,8 @@
         }
       },
       "fileSize": 161154,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-22T19:43:16.400Z"
     },
     "characters-tdv50n1q2ayb": {
       "id": "characters-tdv50n1q2ayb",
@@ -30540,5 +30544,5 @@
       "lastModified": "2026-10-22T19:08:39.201Z"
     }
   },
-  "lastUpdated": "2026-10-22T19:43:03.096Z"
+  "lastUpdated": "2026-10-22T19:43:16.400Z"
 }
