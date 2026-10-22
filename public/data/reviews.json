@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "f1fcc2cf717080b822793ac911b31dd1dbaa2c06",
+      "action": "update",
+      "type": "location",
+      "itemName": "Alter Stützpunkt zwischen Glesburg und Osdalen",
+      "user": "gm",
+      "timestamp": "2026-10-22T16:57:39.062Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-22T16:57:39.062Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Alter Stützpunkt zwischen Glesburg und Osdalen (by gm) - updated description"
+    },
+    {
       "commitSha": "292c3a5d09c4b1b0c5571f92c77b707560a6d2d7",
       "action": "update",
       "type": "location",
@@ -2537,5 +2550,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-22T16:57:33.411Z"
+  "lastUpdated": "2026-10-22T16:57:39.063Z"
 }
