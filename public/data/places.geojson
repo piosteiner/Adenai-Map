@@ -261,12 +261,15 @@
       "type": "Feature",
       "properties": {
         "name": "Akónetchie",
-        "description": "Auch nur 'Ako' genannt. Alte heilige Städte im Dschungel von Upeto. Hier befindet sich der M'pako, die Sonnenwurzel. Wie in [[Basapo]] wird hier primär Talona als Göttin verehrt. Ein Zugang zum Underdark befindet sich hier.",
+        "description": "Auch nur 'Ako' genannt. Alte heilige Städte im Dschungel von Upeto. Hier befindet sich der M'pako, die Sonnenwurzel. Wie in [[Basapo]] wird hier primär Talona als Göttin verehrt. Ein Zugang zum Underdark befindet sich hier. :3 asdf",
         "contentUrl": null,
         "image": "https://adenai-admin.piogino.ch/media/yo2c0exwe5z6-small.webp",
         "region": "upeto",
         "type": "town",
-        "visited": true
+        "visited": true,
+        "images": [
+          "https://adenai-admin.piogino.ch/media/yo2c0exwe5z6-small.webp"
+        ]
       },
       "geometry": {
         "type": "Point",
