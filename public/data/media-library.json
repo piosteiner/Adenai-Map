@@ -30002,7 +30002,7 @@
     "locations-urynzo3lwfui": {
       "id": "locations-urynzo3lwfui",
       "category": "locations",
-      "title": "serinessa ballroom",
+      "title": "Serinessa Ballroom",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/670825307042533592/",
       "tags": [],
@@ -30040,7 +30040,8 @@
         }
       },
       "fileSize": 91044,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-22T19:09:39.128Z"
     },
     "locations-hko0a8tcnq8x": {
       "id": "locations-hko0a8tcnq8x",
@@ -30263,5 +30264,5 @@
       "lastModified": "2026-10-22T19:08:39.201Z"
     }
   },
-  "lastUpdated": "2026-10-22T19:09:28.302Z"
+  "lastUpdated": "2026-10-22T19:09:39.128Z"
 }
