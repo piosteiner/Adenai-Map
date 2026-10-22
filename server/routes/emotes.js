@@ -2,7 +2,8 @@
 // Stored in the public repo as public/data/emotes.json (the map reads it from there), written through the shared,
 // cached GitHub client (lib/github.js).
 //   { version, sources: [ { type: 'user', name, setId, setName, count } | { type: 'set', setId, setName, count } | { type: 'global', … } ],
-//     custom: [ { name, url } ], emotes: { name: { url, w, h, animated, from } }, lastUpdated }
+//     custom: [ { name, url } ], emotes: { name: { url, w, h, animated, from, original? } }, lastUpdated }
+// (original: the 7TV name, when it had a colon — ":3" is written :3:)
 // Sources are 7TV emote sets: a 7TV (or Twitch, Kick, Discord) user name follows the user's active set, a set id or
 // link that set. They are fetched again on every save, so "Save" also refreshes. Custom emotes (images from the media
 // library) win over 7TV ones of the same name; among the sources the first wins.
@@ -93,11 +94,15 @@ async function fetchSource(src) {
     out.setId = data.id;
     out.setName = data.name;
     const emotes = {};
-    for (const e of data.emotes || []) {
-        if (!validName(e.name)) continue;
+    // a name with a colon (":3", "D:") goes without it (:3:, :D:), unless an emote has that name already
+    const all = data.emotes || [];
+    const named = all.filter((e) => validName(e.name)).map((e) => [e.name, e]);
+    const colons = all.filter((e) => !validName(e.name)).map((e) => [e.name.replace(/:/g, '').trim(), e, e.name]).filter(([n]) => validName(n));
+    for (const [name, e, original] of [...named, ...colons]) {
+        if (emotes[name]) continue;
         const files = e.data?.host?.files || [];
         const small = files.find((f) => f.name === '1x.webp') || files[0] || {};
-        emotes[e.name] = { url: `https://cdn.7tv.app/emote/${e.id}/2x.webp`, w: small.width || 28, h: small.height || 28, animated: !!e.data?.animated, from: labelOf(out) };
+        emotes[name] = { url: `https://cdn.7tv.app/emote/${e.id}/2x.webp`, w: small.width || 28, h: small.height || 28, animated: !!e.data?.animated, from: labelOf(out), ...(original ? { original } : {}) };
     }
     out.count = Object.keys(emotes).length;
     return { source: out, emotes };

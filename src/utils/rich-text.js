@@ -31,12 +31,13 @@
     let emotes = {};          // name → { url, w, h }
     let emotesLower = new Map(); // lower-case name → name, for :catjam: when only catJAM exists
 
-    // ":name:" → the emote's image; the closing colon is only taken by an emote, so "a:b:catJAM:" still finds catJAM
+    // ":name:" → the emote's image; the closing colon is only taken by an emote, so ":nix::catJAM:" still finds catJAM.
+    // Not right after a letter or digit: "2:3:1" stays text even with an emote "3" (7TV's ":3", written :3:)
     function emote(name) {
         const key = emotes[name] ? name : emotesLower.get(name.toLowerCase());
         const e = key && emotes[key];
         if (!e) return null;
-        return `<img class="emote" src="${escape(e.url)}" alt=":${escape(key)}:" title="${escape(key)}" loading="lazy" decoding="async" style="height:1.75em;width:auto;vertical-align:middle;margin:-0.3em 0">`;
+        return `<img class="emote" src="${escape(e.url)}" alt=":${escape(key)}:" title="${escape(e.original || key)}" loading="lazy" decoding="async" style="height:1.75em;width:auto;vertical-align:middle;margin:-0.3em 0">`;
     }
 
     // Links first, as placeholders (so **[[Mae]]** works), then escaping and emphasis, then the links back in.
@@ -54,7 +55,7 @@
                 return hold(`<a href="#" class="wiki-link wiki-${hit.kind}" data-kind="${hit.kind}" data-name="${escape(hit.name)}">${shown}</a>`);
             })
             .replace(MDLINK, (_, label, url) => hold(`<a href="${escape(url)}" target="_blank" rel="noopener">${escape(label)}</a>`))
-            .replace(/:([^\s:\u0000]{1,64})(?=:)/g, (m, name) => { const img = emote(name); return img ? `${hold(img)}\u0002` : m; })
+            .replace(/(?<![\p{L}\p{N}]):([^\s:\u0000]{1,64})(?=:)/gu, (m, name) => { const img = emote(name); return img ? `${hold(img)}\u0002` : m; })
             .replace(/\u0002:/g, '');
         s = escape(s)
             .replace(/\*\*(?=\S)([^*]*?\S)\*\*/g, '<strong>$1</strong>')

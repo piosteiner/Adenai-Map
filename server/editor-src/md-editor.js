@@ -128,7 +128,7 @@ function emoteCompletions(context) {
         from: m.from,
         to: closing ? context.pos + 1 : context.pos,
         filter: false,
-        options: scored.map(({ e }) => ({ label: `:${e.name}:`, detail: e.from === 'custom' ? 'eigenes' : e.from, type: 'text', emote: e })),
+        options: scored.map(({ e }) => ({ label: `:${e.name}:`, detail: [e.original ? `7TV: ${e.original}` : '', e.from === 'custom' ? 'eigenes' : e.from].filter(Boolean).join(' · '), type: 'text', emote: e })),
     };
 }
 
@@ -162,7 +162,7 @@ class EmoteWidget extends WidgetType {
 
 // :name: of a known emote: the code dimmed, its image right after it (what is saved stays visible, as with **)
 const emoteDeco = new MatchDecorator({
-    regexp: /(?<![\\])(:([^\s:]{1,64}):)/g,
+    regexp: /(?<![\\\p{L}\p{N}])(:([^\s:]{1,64}):)/gu,
     decorate(add, from, to, m) {
         const e = emoteOf(m[2]);
         if (!e) return;

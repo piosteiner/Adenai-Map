@@ -345,7 +345,7 @@ class MapProtocols {
         window.adminGlossary ||= { getTerms: () => window.mapGlossary?.allTerms?.() || window.mapGlossary?.terms || [] };
         this.editorLoading ||= new Promise((resolve, reject) => {
             const sc = document.createElement('script');
-            sc.src = 'src/vendor/md-editor.js?v=9';
+            sc.src = 'src/vendor/md-editor.js?v=10';
             sc.onload = () => {
                 // "[[Name" for something without an entry: players propose one (components/glossary.js)
                 window.AdenaiEditor.onCreateEntry = (typed) => window.mapGlossary?.createEntry(typed);
