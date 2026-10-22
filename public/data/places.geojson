@@ -1100,7 +1100,8 @@
         "image": "",
         "region": "western_adenai",
         "type": "island",
-        "visited": false
+        "visited": true,
+        "images": []
       },
       "geometry": {
         "type": "Point",
