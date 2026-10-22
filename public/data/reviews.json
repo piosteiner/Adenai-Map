@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "161c0f235a8062e958558f15c291c76e406d34bc",
+      "action": "update",
+      "type": "location",
+      "itemName": "Serenissa",
+      "user": "gm",
+      "timestamp": "2026-10-22T18:54:06.475Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-22T18:54:06.475Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Serenissa (by gm) - Updated location details"
+    },
+    {
       "commitSha": "a96a2b998e72f97c1b804cc5ce830cf1c8e44860",
       "action": "update",
       "type": "location",
@@ -2680,5 +2693,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-22T18:54:02.649Z"
+  "lastUpdated": "2026-10-22T18:54:06.475Z"
 }
