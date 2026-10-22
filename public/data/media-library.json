@@ -30131,7 +30131,7 @@
     "locations-tzt0yqpqftcg": {
       "id": "locations-tzt0yqpqftcg",
       "category": "locations",
-      "title": "serinessa upper city",
+      "title": "Serinessa Upper City",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/670825307042533497/",
       "tags": [],
@@ -30169,7 +30169,8 @@
         }
       },
       "fileSize": 105209,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-22T19:09:01.413Z"
     },
     "locations-ke2jlsbm97st": {
       "id": "locations-ke2jlsbm97st",
@@ -30260,5 +30261,5 @@
       "lastModified": "2026-10-22T19:08:39.201Z"
     }
   },
-  "lastUpdated": "2026-10-22T19:08:48.799Z"
+  "lastUpdated": "2026-10-22T19:09:01.413Z"
 }
