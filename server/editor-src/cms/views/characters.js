@@ -272,13 +272,16 @@ export function charactersView(app) {
                 h('td', { text: labelOf('movementTypes', m.type) }),
                 h('td.notes', { text: m.notes || '' }),
                 h('td.actions', {}, editable ? [
+                    // touch screens can't drag rows: up / down instead
+                    editingId === null ? h('button.icon.touch-only', { type: 'button', title: 'Up', disabled: i === 0, on: { click: () => reorder(i, i - 1) } }, '↑') : null,
+                    editingId === null ? h('button.icon.touch-only', { type: 'button', title: 'Down', disabled: i === moves.length - 1, on: { click: () => reorder(i, i + 1) } }, '↓') : null,
                     h('button.icon', { type: 'button', title: 'Edit', on: { click: () => draw(m.id) } }, '✎'),
                     h('button.icon.danger', { type: 'button', title: 'Delete', on: { click: () => removeMove(m) } }, '✕')] : null))));
             if (editingId === 'new') rows.push(editRow(null));
             box.replaceChildren(
                 h('div.section-head', {}, h('h3', { text: `Movements (${moves.length})` }), h('span.spacer'),
                     editable && editingId === null ? h('button.btn.small', { type: 'button', on: { click: () => draw('new') } }, '＋ Movement') : null),
-                moves.length || editingId ? h('table.table', {}, h('thead', {}, h('tr', {}, ['#', 'When', 'Where', 'Type', 'Notes', ''].map((t) => h('th', { text: t })))), h('tbody', {}, rows))
+                moves.length || editingId ? h('div.table-scroll', {}, h('table.table', {}, h('thead', {}, h('tr', {}, ['#', 'When', 'Where', 'Type', 'Notes', ''].map((t) => h('th', { text: t })))), h('tbody', {}, rows)))
                     : h('p.muted', { text: 'No movements yet: the character stays at the place of origin.' }));
         }
 

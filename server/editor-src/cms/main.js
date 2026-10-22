@@ -76,6 +76,7 @@ let skipGuard = false;
 const tabs = h('nav.tabs', { 'aria-label': 'Areas' });
 const userBox = h('div.user');
 const main = h('main.main');
+const paneBack = h('a.pane-back');
 document.body.append(
     h('header.topbar', {},
         h('a.brand', { href: '#/overview' }, h('span.brand-mark', { text: '◆' }), 'Adenai', h('span.muted', { text: ' CMS' })),
@@ -89,6 +90,9 @@ document.body.append(
 function drawTabs() {
     tabs.replaceChildren(...AREAS.map((a) => h('a.tab', { href: `#/${a.id}`, 'aria-current': a.id === app.area ? 'page' : null },
         `${a.icon} ${a.label}`, store.loaded && a.count() !== '' ? h('span.tab-count', { text: a.count() }) : null)));
+    // on a narrow screen the tabs scroll sideways: keep the current one in view
+    const current = tabs.querySelector('[aria-current="page"]');
+    if (current && tabs.scrollWidth > tabs.clientWidth) tabs.scrollLeft = current.offsetLeft - (tabs.clientWidth - current.offsetWidth) / 2;
 }
 
 function drawUser() {
@@ -161,8 +165,12 @@ async function route(force = false) {
     if (area !== app.area) {
         app.area = area;
         app.views[area] ||= VIEWS[area](app);
-        main.replaceChildren(app.views[area].el);
+        main.replaceChildren(paneBack, app.views[area].el);
     }
+    // on phones a list area shows the list or the open entry, not both (style.css): which one, and the way back
+    main.dataset.pane = key ? 'detail' : 'list';
+    paneBack.href = `#/${area}`;
+    paneBack.textContent = `← ${AREAS.find((a) => a.id === area).label}`;
     drawTabs();
     drawUser();
     document.title = `${key && key !== 'new' ? `${key} · ` : ''}${AREAS.find((a) => a.id === area).label} · Adenai CMS`;

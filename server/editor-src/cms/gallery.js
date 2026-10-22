@@ -145,6 +145,8 @@ function uploadForm(onUploaded) {
 
 // Any image with data-preview, or a list thumbnail, shows its 600 px version beside it while hovered.
 export function installHoverPreview() {
+    // touch screens: a tap is no hover, and the preview would stay over the page
+    if (window.matchMedia?.('(hover: none)').matches) return;
     const box = h('div.hover-preview', { hidden: true }, h('img', { alt: '' }));
     document.body.append(box);
     const big = box.firstChild;
