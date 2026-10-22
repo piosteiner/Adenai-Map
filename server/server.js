@@ -48,7 +48,7 @@ const REPO_NAME = process.env.GITHUB_REPO;
 
 // Data files are answered from memory and written through to GitHub (lib/github-cache.js): the CMS no longer waits
 // 0.2–0.6 s for GitHub on every read.
-github.cache.warm(REPO_OWNER, REPO_NAME, ['public/data/places.geojson', 'public/data/characters.json', 'public/data/media-library.json', 'public/data/reviews.json', 'public/data/glossary.json']);
+github.cache.warm(REPO_OWNER, REPO_NAME, ['public/data/places.geojson', 'public/data/characters.json', 'public/data/media-library.json', 'public/data/reviews.json', 'public/data/glossary.json', 'public/data/emotes.json']);
 
 console.log(`Setting up admin for: ${REPO_OWNER}/${REPO_NAME}`);
 
@@ -124,6 +124,7 @@ app.use('/api/dynamics', authenticateDynamicsAPI, dynamicsRoutes);
 app.use('/api/config', configRoutes);
 app.use('/api/protocols', protocolRoutes); // session minutes, behind the protocol password
 app.use('/api/glossary', glossaryRoutes); // terms that are neither characters nor locations
+app.use('/api/emotes', require('./routes/emotes')); // :name: images (7TV sets and our own)
 app.use('/api/pending', require('./routes/pending')); // entries proposed by the players, confirmed in the CMS
 
 // Activity routes (uncomment when you have the activity routes file)

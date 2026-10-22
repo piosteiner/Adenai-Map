@@ -364,3 +364,20 @@ a.stat:hover { border-color: var(--accent); text-decoration: none; }
 .md-boxlist { position: absolute; top: calc(100% + 3px); left: 0; z-index: 40; display: grid; min-width: 9.5rem; padding: 3px; background: var(--panel); border: 1px solid var(--line-2); border-radius: 6px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35); }
 .md-boxlist[hidden] { display: none; }
 .md-boxlist .md-tool { text-align: left; }
+
+/* ---------- Emotes (views/emotes.js) ---------- */
+.emote-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.emote-head h2 { margin: 0; }
+.emote-list { display: grid; gap: 6px; margin: 8px 0; }
+.emote-source { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+.emote-source input { width: 180px; }
+.emote-source .error { color: var(--bad); font-size: 12.5px; }
+.emote-img { height: 32px; width: 40px; object-fit: contain; }
+.emote-add { display: flex; gap: 8px; flex-wrap: wrap; }
+.emote-add input { flex: 1 1 260px; }
+.emotes input[type="search"] { width: 100%; box-sizing: border-box; margin-bottom: 10px; }
+.emote-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 6px; }
+.emote-tile { display: grid; justify-items: center; gap: 4px; padding: 8px 4px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); cursor: pointer; }
+.emote-tile:hover { border-color: var(--accent); }
+.emote-tile img { height: 32px; max-width: 80px; object-fit: contain; }
+.emote-tile span { font-size: 11.5px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

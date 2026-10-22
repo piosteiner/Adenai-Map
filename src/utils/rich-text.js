@@ -3,6 +3,7 @@
 //   [[Mae]]                 link to a character or location by name (case does not matter)
 //   [[Tangoa|die Stadt]]    same, with its own link text
 //   **fett**  *kursiv*  ++unterstrichen++  ~~durchgestrichen~~  ==markiert==  ||Spoiler||  [Text](https://…)
+//   :catJAM:                an emote (RichText.setEmotes; 7TV and our own, set in the CMS) — an unknown name stays text
 //   At the start of a line: "# " heading ("## ", "### " smaller), "- " list, "1. " numbered list (2 spaces deeper =
 //   nested), "- [ ] " / "- [x] " open / done item, "> " quote, "---" divider, "| a | b |" table (a "|---|" line
 //   under the first row makes it the header). Blank line = new paragraph.
@@ -27,14 +28,24 @@
     const ALIASES = { zitat: 'quote', beute: 'loot', auftrag: 'quest', hinweis: 'info', tip: 'info', achtung: 'warning', danger: 'warning', notiz: 'note', geheim: 'secret', spoiler: 'secret' };
 
     let defaultResolver = () => null;
+    let emotes = {};          // name → { url, w, h }
+    let emotesLower = new Map(); // lower-case name → name, for :catjam: when only catJAM exists
+
+    // ":name:" → the emote's image; the closing colon is only taken by an emote, so "a:b:catJAM:" still finds catJAM
+    function emote(name) {
+        const key = emotes[name] ? name : emotesLower.get(name.toLowerCase());
+        const e = key && emotes[key];
+        if (!e) return null;
+        return `<img class="emote" src="${escape(e.url)}" alt=":${escape(key)}:" title="${escape(key)}" loading="lazy" decoding="async" style="height:1.75em;width:auto;vertical-align:middle;margin:-0.3em 0">`;
+    }
 
     // Links first, as placeholders (so **[[Mae]]** works), then escaping and emphasis, then the links back in.
-    // A backslash keeps the next character literal, as in Markdown: Arbeiter\*innen, 1\. Sitzung, \[[kein Link]].
+    // A backslash keeps the next character literal, as in Markdown: Arbeiter\*innen, 1\. Sitzung, \[[kein Link]], \:kein Emote:.
     function inline(text, resolve) {
         const parts = [];
         const hold = (html) => `\u0000${parts.push(html) - 1}\u0000`;
         let s = String(text)
-            .replace(/\\([\\`*_{}\[\]()#+\-.!>~|&=])/g, (_, c) => hold(escape(c)))
+            .replace(/\\([\\`*_{}\[\]()#+\-.!>~|&=:])/g, (_, c) => hold(escape(c)))
             .replace(WIKI, (_, target, label) => {
                 const name = target.trim();
                 const shown = escape((label || target).trim());
@@ -42,7 +53,9 @@
                 if (!hit) return hold(`<span class="wiki-link missing" title="Nicht gefunden: ${escape(name)}">${shown}</span>`);
                 return hold(`<a href="#" class="wiki-link wiki-${hit.kind}" data-kind="${hit.kind}" data-name="${escape(hit.name)}">${shown}</a>`);
             })
-            .replace(MDLINK, (_, label, url) => hold(`<a href="${escape(url)}" target="_blank" rel="noopener">${escape(label)}</a>`));
+            .replace(MDLINK, (_, label, url) => hold(`<a href="${escape(url)}" target="_blank" rel="noopener">${escape(label)}</a>`))
+            .replace(/:([^\s:\u0000]{1,64})(?=:)/g, (m, name) => { const img = emote(name); return img ? `${hold(img)}\u0002` : m; })
+            .replace(/\u0002:/g, '');
         s = escape(s)
             .replace(/\*\*(?=\S)([^*]*?\S)\*\*/g, '<strong>$1</strong>')
             .replace(/(^|[^*])\*(?=\S)([^*]*?\S)\*(?!\*)/g, '$1<em>$2</em>')
@@ -150,7 +163,13 @@
         return [...String(text || '').matchAll(WIKI)].map((m) => m[1].trim());
     }
 
-    const RichText = { render, links, escape, setResolver(fn) { defaultResolver = fn || (() => null); } };
+    function setEmotes(map) {
+        emotes = map || {};
+        emotesLower = new Map();
+        for (const name of Object.keys(emotes)) if (!emotesLower.has(name.toLowerCase())) emotesLower.set(name.toLowerCase(), name);
+    }
+
+    const RichText = { render, links, escape, setResolver(fn) { defaultResolver = fn || (() => null); }, setEmotes };
     if (typeof module !== 'undefined' && module.exports) module.exports = RichText;
     root.RichText = RichText;
 })(typeof window !== 'undefined' ? window : globalThis);

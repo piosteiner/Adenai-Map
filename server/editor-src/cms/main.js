@@ -17,11 +17,21 @@ import { proposalsView, loadPending } from './views/proposals';
 import { mediaView } from './views/media';
 import { historyView } from './views/history';
 import { overviewView } from './views/overview';
+import { emotesView } from './views/emotes';
 
 // md-editor.js finds link targets through the classic CMS's modules: give it the same interface
 window.adminCharacters = { getCharacters: () => store.characters };
 window.adminLocations = { getLocations: () => store.locations };
 window.adminGlossary = { getTerms: () => store.terms };
+// the editor's ":" suggestions (md-editor.js); RichText gets them in store.js
+window.AdenaiEmotes = {
+    list: () => Object.entries(store.emotes.emotes || {}).map(([name, e]) => ({ name, ...e })),
+    get: (name) => {
+        const all = store.emotes.emotes || {};
+        const key = all[name] ? name : Object.keys(all).find((n) => n.toLowerCase() === String(name).toLowerCase());
+        return key ? { name: key, ...all[key] } : null;
+    },
+};
 
 const AREAS = [
     { id: 'overview', label: 'Overview', icon: '◆', count: () => '' },
@@ -31,9 +41,10 @@ const AREAS = [
     { id: 'protocols', label: 'Protocols', icon: '📜', count: () => '' },
     { id: 'proposals', label: 'Proposals', icon: '⏳', count: () => (store.pending?.length ? store.pending.length : '') },
     { id: 'media', label: 'Media', icon: '🖼', count: () => Object.keys(store.media || {}).length },
+    { id: 'emotes', label: 'Emotes', icon: '☺', count: () => Object.keys(store.emotes?.emotes || {}).length },
     { id: 'history', label: 'History', icon: '🕘', count: () => '' },
 ];
-const VIEWS = { overview: overviewView, locations: locationsView, characters: charactersView, glossary: glossaryView, protocols: protocolsView, proposals: proposalsView, media: mediaView, history: historyView };
+const VIEWS = { overview: overviewView, locations: locationsView, characters: charactersView, glossary: glossaryView, protocols: protocolsView, proposals: proposalsView, media: mediaView, emotes: emotesView, history: historyView };
 
 // Before leaving an entry: a view that saves by itself saves what is waiting (autosaver, form.js); true when nothing
 // is left unsaved — otherwise the guards below ask whether to discard (a save that failed, a new entry not created).

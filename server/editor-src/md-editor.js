@@ -9,8 +9,11 @@
 //
 // [[links]] as in Obsidian: typing "[[" and a few letters lists matching characters and locations; picking one writes
 // [[Name]]. The map renders them with src/utils/rich-text.js (copied to js/core/rich-text.js by the build).
+//
+// Emotes as in a Twitch chat: ":" and a letter or two lists the emotes (window.AdenaiEmotes: the map's
+// src/utils/emotes.js, the CMS's store); picking one writes :name:, which shows the emote's image next to it.
 import { EditorState, EditorSelection, StateField, StateEffect } from '@codemirror/state';
-import { EditorView, keymap, placeholder, drawSelection, Decoration, ViewPlugin, MatchDecorator } from '@codemirror/view';
+import { EditorView, keymap, placeholder, drawSelection, Decoration, ViewPlugin, MatchDecorator, WidgetType } from '@codemirror/view';
 import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
 import { syntaxHighlighting, HighlightStyle, LanguageSupport } from '@codemirror/language';
 import { markdownLanguage } from '@codemirror/lang-markdown';
@@ -99,6 +102,86 @@ async function linkCompletions(context) {
     };
 }
 
+// ---------- emotes ----------
+
+const emoteList = () => window.AdenaiEmotes?.list?.() || [];
+const emoteOf = (name) => window.AdenaiEmotes?.get?.(name) || null;
+
+// ":ca" → catJAM, peepoCat …: starting with what was typed first, then containing it; shorter names first.
+// After a letter or digit a colon is no emote ("10:30", "Notiz:"); a bare ":" only from the toolbar button.
+function emoteCompletions(context) {
+    const m = context.matchBefore(/:[^\s:]*$/);
+    if (!m || (m.text.length < 2 && !context.explicit)) return null;
+    if (/[\p{L}\p{N}]/u.test(context.state.sliceDoc(m.from - 1, m.from))) return null;
+    const q = m.text.slice(1).toLowerCase();
+    const all = emoteList();
+    if (!all.length) return null;
+    const scored = all.map((e) => {
+        const n = e.name.toLowerCase();
+        return { e, score: !q ? 1 : n.startsWith(q) ? 0 : n.includes(q) ? 1 : -1 };
+    }).filter((x) => x.score >= 0)
+        .sort((a, b) => a.score - b.score || a.e.name.length - b.e.name.length || a.e.name.localeCompare(b.e.name))
+        .slice(0, 40);
+    if (!scored.length) return null;
+    const closing = context.state.sliceDoc(context.pos, context.pos + 1) === ':';
+    return {
+        from: m.from,
+        to: closing ? context.pos + 1 : context.pos,
+        filter: false,
+        options: scored.map(({ e }) => ({ label: `:${e.name}:`, detail: e.from === 'custom' ? 'eigenes' : e.from, type: 'text', emote: e })),
+    };
+}
+
+// the image in the suggestion list, before the name
+const emoteOption = {
+    position: 20,
+    render(completion) {
+        if (!completion.emote) return null;
+        const img = document.createElement('img');
+        img.className = 'cm-emote-option';
+        img.src = completion.emote.url;
+        img.alt = '';
+        img.loading = 'lazy';
+        return img;
+    },
+};
+
+class EmoteWidget extends WidgetType {
+    constructor(e) { super(); this.url = e.url; this.name = e.name; }
+    eq(other) { return other.url === this.url; }
+    toDOM() {
+        const img = document.createElement('img');
+        img.className = 'cm-emote';
+        img.src = this.url;
+        img.alt = '';
+        img.title = this.name;
+        return img;
+    }
+    ignoreEvent() { return false; }
+}
+
+// :name: of a known emote: the code dimmed, its image right after it (what is saved stays visible, as with **)
+const emoteDeco = new MatchDecorator({
+    regexp: /(?<![\\])(:([^\s:]{1,64}):)/g,
+    decorate(add, from, to, m) {
+        const e = emoteOf(m[2]);
+        if (!e) return;
+        add(from, to, Decoration.mark({ class: 'cm-emote-code' }));
+        add(to, to, Decoration.widget({ widget: new EmoteWidget({ ...e, name: m[2] }), side: 1 }));
+    },
+});
+
+// ":" at the cursor and the list of emotes opens (the toolbar's ☺)
+function emotePicker(view) {
+    const { from, to } = view.state.selection.main;
+    const before = view.state.sliceDoc(from - 1, from);
+    const insert = before && !/\s/.test(before) ? ' :' : ':';
+    view.dispatch({ changes: { from, to, insert }, selection: { anchor: from + insert.length }, userEvent: 'input' });
+    view.focus();
+    startCompletion(view);
+    return true;
+}
+
 // [[links]] coloured in the editor; a name that matches nothing (yet) is marked
 const wikiDeco = new MatchDecorator({
     regexp: /\[\[([^\[\]|\n]+?)(?:\|[^\[\]\n]+?)?\]\]/g,
@@ -118,7 +201,7 @@ const decorated = (deco) => ViewPlugin.fromClass(class {
     constructor(view) { this.decorations = deco.createDeco(view); }
     update(u) { this.decorations = deco.updateDeco(u, this.decorations); }
 }, { decorations: (v) => v.decorations });
-const marks = [decorated(markDeco), decorated(spoilerDeco), decorated(calloutDeco)];
+const marks = [decorated(markDeco), decorated(spoilerDeco), decorated(calloutDeco), decorated(emoteDeco)];
 
 const wikiLinks = ViewPlugin.fromClass(class {
     constructor(view) { this.decorations = wikiDeco.createDeco(view); }
@@ -213,6 +296,9 @@ const theme = EditorView.theme({
     '.cm-mark': { background: 'rgba(250, 204, 21, 0.35)', borderRadius: '2px' },
     '.cm-spoiler': { background: 'rgba(127, 127, 127, 0.28)', borderRadius: '2px', textDecoration: 'underline dotted' },
     '.cm-callout': { fontWeight: '700', color: 'var(--accent-primary)' },
+    '.cm-emote-code': { color: 'var(--text-secondary)', fontSize: '.85em' },
+    '.cm-emote': { height: '1.6em', width: 'auto', verticalAlign: 'middle', margin: '-.3em 0 -.3em .15em' },
+    '.cm-emote-option': { height: '1.6em', width: '2.2em', objectFit: 'contain', verticalAlign: 'middle', marginRight: '.5rem' },
     '.cm-search-match': { background: 'rgba(255, 196, 0, .32)', borderRadius: '2px' },
     '.cm-search-current': { background: 'rgba(255, 166, 0, .75)', boxShadow: '0 0 0 1px rgba(255, 166, 0, .9)' },
     // other people's cursors in live mode (y-codemirror.next)
@@ -433,7 +519,7 @@ function enhance(textarea, collab = null) {
                 new LanguageSupport(markdownLanguage),
                 syntaxHighlighting(liveStyle),
                 EditorView.lineWrapping,
-                autocompletion({ override: [linkCompletions], icons: false }),
+                autocompletion({ override: [linkCompletions, emoteCompletions], icons: false, addToOptions: [emoteOption] }),
                 bracketOverSelection,
                 wikiLinks,
                 underlines,
@@ -506,6 +592,7 @@ function enhance(textarea, collab = null) {
         button('U', 'Unterstrichen (Ctrl/⌘+U)', () => wrap(view, '++')),
         button('[[ ]]', 'Link zu einem Eintrag — oder [[ tippen, oder ein Wort markieren und [ tippen', () => wikiLink(view)),
         button('Web', 'Weblink (Ctrl/⌘+K)', () => webLink(view)),
+        button('☺', 'Emote — oder : und ein paar Buchstaben tippen', () => emotePicker(view)),
         button('H', 'Überschrift — nochmals: kleiner (#, ##, ###)', () => cycleHeading(view)),
         button('• Liste', 'Aufzählung', () => linePrefix(view, '- ')),
         button('1.', 'Nummerierte Liste', () => numberLines(view)),

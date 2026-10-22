@@ -10,6 +10,7 @@ export const store = {
     characters: [],
     terms: [],       // glossary
     media: {},       // id → media entry
+    emotes: { sources: [], custom: [], emotes: {} }, // public/data/emotes.json
     loaded: false,
 };
 
@@ -18,15 +19,17 @@ export const onChange = (fn) => { listeners.add(fn); return () => listeners.dele
 const emit = (what) => listeners.forEach((fn) => fn(what));
 
 export async function loadAll() {
-    const [auth, config, locations, characters, media, glossary] = await Promise.all([
+    const [auth, config, locations, characters, media, glossary, emotes] = await Promise.all([
         api('/api/auth-status'),
         api('/api/config'),
         api('/api/locations'),
         api('/api/characters'),
         api('/api/media?page=1&limit=10000'),
         api('/api/glossary'),
+        api('/api/emotes').catch(() => null), // no emotes is no reason not to start
     ]);
     store.terms = glossary.terms || [];
+    setEmotes(emotes);
     store.auth = auth;
     store.config = config.config || store.config;
     store.locations = locations.features || [];
@@ -43,11 +46,17 @@ export async function reload(...what) {
         if (w === 'terms') store.terms = (await api('/api/glossary')).terms || [];
         if (w === 'media') store.media = (await api('/api/media?page=1&limit=10000')).media || {};
         if (w === 'auth') store.auth = await api('/api/auth-status');
+        if (w === 'emotes') setEmotes(await api('/api/emotes'));
     }));
     emit(what.join(','));
 }
 
 export const canEdit = () => !!store.auth.authenticated;
+
+function setEmotes(data) {
+    store.emotes = { sources: data?.sources || [], custom: data?.custom || [], emotes: data?.emotes || {}, lastUpdated: data?.lastUpdated };
+    window.RichText?.setEmotes(store.emotes.emotes);
+}
 
 // ---------- lookups ----------
 

@@ -27,6 +27,8 @@ class MapProtocols {
         this.editorLoading = null;
         this.live = null;
         this.build();
+        // emotes that arrive after the texts were drawn
+        document.addEventListener('emotesReady', () => this.redrawAll());
         // an unlocked device knows the minutes from the start, for "Erwähnt in" in the popups
         if (this.unlocked) this.load().then(() => window.WikiLinks?.refreshBacklinks?.()).catch(() => {});
     }
@@ -343,7 +345,7 @@ class MapProtocols {
         window.adminGlossary ||= { getTerms: () => window.mapGlossary?.allTerms?.() || window.mapGlossary?.terms || [] };
         this.editorLoading ||= new Promise((resolve, reject) => {
             const sc = document.createElement('script');
-            sc.src = 'src/vendor/md-editor.js?v=8';
+            sc.src = 'src/vendor/md-editor.js?v=9';
             sc.onload = () => {
                 // "[[Name" for something without an entry: players propose one (components/glossary.js)
                 window.AdenaiEditor.onCreateEntry = (typed) => window.mapGlossary?.createEntry(typed);
