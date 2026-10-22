@@ -82,8 +82,8 @@ async function parseSource(input) {
     return { type: 'user', name: s.replace(/^@/, '').replace(/^https?:\/\/(www\.)?twitch\.tv\//i, '').replace(/\/.*$/, '') };
 }
 
-// what an emote's "from" says: the user, "7TV global", or the set's name
-const labelOf = (src) => (src.type === 'user' ? src.name : src.type === 'global' ? '7TV global' : src.setName);
+// what an emote's "from" says: the user, "global", or the set's name
+const labelOf = (src) => (src.type === 'user' ? src.name : src.type === 'global' ? 'global' : src.setName);
 
 // a source → { source (with set name and count), emotes }; a user's set is looked up again (it may have changed)
 async function fetchSource(src) {

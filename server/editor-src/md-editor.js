@@ -128,7 +128,7 @@ function emoteCompletions(context) {
         from: m.from,
         to: closing ? context.pos + 1 : context.pos,
         filter: false,
-        options: scored.map(({ e }) => ({ label: `:${e.name}:`, detail: [e.original ? `7TV: ${e.original}` : '', e.from === 'custom' ? 'eigenes' : e.from].filter(Boolean).join(' · '), type: 'text', emote: e })),
+        options: scored.map(({ e }) => ({ label: `:${e.name}:`, detail: [e.original, e.from === 'custom' ? 'eigenes' : e.from].filter(Boolean).join(' · '), type: 'text', emote: e })),
     };
 }
 
