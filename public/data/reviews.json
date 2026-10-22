@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "f1c82094287c563a510df51006c9223445b2f8d4",
+      "action": "update",
+      "type": "location",
+      "itemName": "Akónetchie",
+      "user": "gm",
+      "timestamp": "2026-10-22T18:22:16.766Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-22T18:22:16.766Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Akónetchie (by gm) - updated description"
+    },
+    {
       "commitSha": "8d47f9fcba11a0edced45b9b0c2e3cd47806e755",
       "action": "update",
       "type": "location",
@@ -2628,5 +2641,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-22T18:22:11.897Z"
+  "lastUpdated": "2026-10-22T18:22:16.766Z"
 }
