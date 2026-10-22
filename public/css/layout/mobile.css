@@ -95,9 +95,10 @@
   .panel-close-mobile { display: none; }
   .character-panel.mobile-open .panel-close-mobile { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; background: transparent; color: inherit; font-size: 26px; cursor: pointer; }
 
-  /* popups never wider than the screen */
+  /* popups never wider than the screen. Leaflet's own width stays (only capped): width: auto shrank the popup to its
+     longest word, since the popup pane it sits in has no width */
   .leaflet-popup-content-wrapper { max-width: calc(100vw - 24px); }
-  .leaflet-popup-content { max-width: calc(100vw - 56px); width: auto !important; max-height: calc(100dvh - 240px); overflow-y: auto; }
+  .leaflet-popup-content { max-width: calc(100vw - 56px); max-height: calc(100dvh - 240px); overflow-y: auto; }
   .panel-anchored-popup {
     left: 10px !important; right: 10px !important; top: 60px !important; width: auto !important; max-width: none !important; transform: none !important;
     max-height: calc(100dvh - 80px); overflow: auto;
