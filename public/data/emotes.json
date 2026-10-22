@@ -1546,7 +1546,7 @@
       "animated": true,
       "from": "piogino"
     },
-    "watchtime": {
+    "vanish": {
       "url": "https://cdn.7tv.app/emote/01GNFQ2AGG00073646VYTGE0M7/2x.webp",
       "w": 59,
       "h": 32,
@@ -1742,7 +1742,7 @@
       "animated": true,
       "from": "piogino"
     },
-    "modCheck": {
+    "Check": {
       "url": "https://cdn.7tv.app/emote/01F6FTE8B80008E39HFFQJ7MWS/2x.webp",
       "w": 32,
       "h": 32,
@@ -2242,5 +2242,5 @@
       "original": ":d"
     }
   },
-  "lastUpdated": "2026-10-22T18:19:36.731Z"
+  "lastUpdated": "2026-10-22T18:39:52.009Z"
 }
