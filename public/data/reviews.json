@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "1fd852bb5daca99dce7ffcb7bd80ae0a1f8da3ac",
+      "action": "update",
+      "type": "character",
+      "itemName": "Chovy",
+      "user": "gm",
+      "timestamp": "2026-10-22T16:56:11.901Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-22T16:56:11.901Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: chovy (by gm) - added image"
+    },
+    {
       "commitSha": "62ddab1a9937003a616143fb07bce8729f3dc675",
       "action": "update",
       "type": "character",
@@ -2511,5 +2524,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-21T19:17:43.428Z"
+  "lastUpdated": "2026-10-22T16:56:11.901Z"
 }
