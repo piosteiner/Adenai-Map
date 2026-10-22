@@ -30084,7 +30084,50 @@
       },
       "fileSize": 209471,
       "mimeType": "image/jpeg"
+    },
+    "locations-1jmkov8hdz6j": {
+      "id": "locations-1jmkov8hdz6j",
+      "category": "locations",
+      "title": "serinessa room view",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/670825307042533502/",
+      "tags": [],
+      "uploadDate": "2026-10-22T18:50:53.233Z",
+      "sizes": {
+        "thumb": {
+          "filename": "1jmkov8hdz6j-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1jmkov8hdz6j-thumb.webp",
+          "width": 116,
+          "height": 150
+        },
+        "small": {
+          "filename": "1jmkov8hdz6j-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1jmkov8hdz6j-small.webp",
+          "width": 234,
+          "height": 300
+        },
+        "medium": {
+          "filename": "1jmkov8hdz6j-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1jmkov8hdz6j-medium.webp",
+          "width": 467,
+          "height": 600
+        },
+        "large": {
+          "filename": "1jmkov8hdz6j-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1jmkov8hdz6j-large.webp",
+          "width": 623,
+          "height": 800
+        },
+        "original": {
+          "filename": "1jmkov8hdz6j-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1jmkov8hdz6j-large.webp",
+          "width": 623,
+          "height": 800
+        }
+      },
+      "fileSize": 119672,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-22T18:49:21.704Z"
+  "lastUpdated": "2026-10-22T18:50:53.242Z"
 }
