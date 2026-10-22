@@ -30213,7 +30213,50 @@
       },
       "fileSize": 72982,
       "mimeType": "image/jpeg"
+    },
+    "locations-nxxqb1ql4ja1": {
+      "id": "locations-nxxqb1ql4ja1",
+      "category": "locations",
+      "title": "serinessa lower city",
+      "caption": "",
+      "credits": "https://ar.pinterest.com/pin/627759635589861159/",
+      "tags": [],
+      "uploadDate": "2026-10-22T18:53:23.724Z",
+      "sizes": {
+        "thumb": {
+          "filename": "nxxqb1ql4ja1-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nxxqb1ql4ja1-thumb.webp",
+          "width": 96,
+          "height": 150
+        },
+        "small": {
+          "filename": "nxxqb1ql4ja1-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nxxqb1ql4ja1-small.webp",
+          "width": 192,
+          "height": 300
+        },
+        "medium": {
+          "filename": "nxxqb1ql4ja1-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nxxqb1ql4ja1-medium.webp",
+          "width": 384,
+          "height": 600
+        },
+        "large": {
+          "filename": "nxxqb1ql4ja1-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nxxqb1ql4ja1-large.webp",
+          "width": 448,
+          "height": 700
+        },
+        "original": {
+          "filename": "nxxqb1ql4ja1-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nxxqb1ql4ja1-large.webp",
+          "width": 448,
+          "height": 700
+        }
+      },
+      "fileSize": 70498,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-22T18:51:37.379Z"
+  "lastUpdated": "2026-10-22T18:53:23.735Z"
 }
