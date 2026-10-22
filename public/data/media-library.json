@@ -30127,7 +30127,50 @@
       },
       "fileSize": 119672,
       "mimeType": "image/jpeg"
+    },
+    "locations-tzt0yqpqftcg": {
+      "id": "locations-tzt0yqpqftcg",
+      "category": "locations",
+      "title": "serinessa upper city",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/670825307042533497/",
+      "tags": [],
+      "uploadDate": "2026-10-22T18:51:27.872Z",
+      "sizes": {
+        "thumb": {
+          "filename": "tzt0yqpqftcg-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/tzt0yqpqftcg-thumb.webp",
+          "width": 96,
+          "height": 150
+        },
+        "small": {
+          "filename": "tzt0yqpqftcg-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/tzt0yqpqftcg-small.webp",
+          "width": 192,
+          "height": 300
+        },
+        "medium": {
+          "filename": "tzt0yqpqftcg-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/tzt0yqpqftcg-medium.webp",
+          "width": 383,
+          "height": 600
+        },
+        "large": {
+          "filename": "tzt0yqpqftcg-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/tzt0yqpqftcg-large.webp",
+          "width": 456,
+          "height": 714
+        },
+        "original": {
+          "filename": "tzt0yqpqftcg-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/tzt0yqpqftcg-large.webp",
+          "width": 456,
+          "height": 714
+        }
+      },
+      "fileSize": 105209,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-22T18:50:53.242Z"
+  "lastUpdated": "2026-10-22T18:51:27.879Z"
 }
