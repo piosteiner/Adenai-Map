@@ -30041,7 +30041,50 @@
       },
       "fileSize": 91044,
       "mimeType": "image/jpeg"
+    },
+    "locations-hko0a8tcnq8x": {
+      "id": "locations-hko0a8tcnq8x",
+      "category": "locations",
+      "title": "serinessa innenhof",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/932737772846131979/",
+      "tags": [],
+      "uploadDate": "2026-10-22T18:49:21.693Z",
+      "sizes": {
+        "thumb": {
+          "filename": "hko0a8tcnq8x-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hko0a8tcnq8x-thumb.webp",
+          "width": 150,
+          "height": 84
+        },
+        "small": {
+          "filename": "hko0a8tcnq8x-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hko0a8tcnq8x-small.webp",
+          "width": 300,
+          "height": 169
+        },
+        "medium": {
+          "filename": "hko0a8tcnq8x-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hko0a8tcnq8x-medium.webp",
+          "width": 600,
+          "height": 338
+        },
+        "large": {
+          "filename": "hko0a8tcnq8x-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hko0a8tcnq8x-large.webp",
+          "width": 1200,
+          "height": 675
+        },
+        "original": {
+          "filename": "hko0a8tcnq8x-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hko0a8tcnq8x-large.webp",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "fileSize": 209471,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-22T18:48:18.010Z"
+  "lastUpdated": "2026-10-22T18:49:21.704Z"
 }
