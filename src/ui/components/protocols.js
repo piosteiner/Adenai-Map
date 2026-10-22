@@ -575,29 +575,34 @@ class MapProtocols {
         + 'darauf daraus deshalb jedoch allerdings nämlich zusammen unsere unserer unseren andere anderen anderer einige einigen '
         + 'keinen keiner später sodass sondern zwischen während obwohl bereits nochmal').split(' '));
 
+    // the player characters: they are in every session, so they would top the links and the favourite words
+    static PLAYERS = new Set(['abu', 'ally', 'niall', 'poison', 'luna', 'tasbor']);
+
+    static isPlayer(name) {
+        const n = name.toLowerCase();
+        return MapProtocols.PLAYERS.has(n) || MapProtocols.PLAYERS.has(n.replace(/s$/, ''));
+    }
+
     stats() {
         const sessions = this.sessions.filter((s) => s.published !== false);
         const count = (map, key) => map.set(key, (map.get(key) || 0) + 1);
         const top = (map, n = 5) => [...map].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'de')).slice(0, n);
-        const links = new Map(), players = new Map(), places = new Map(), words = new Map();
-        let chars = 0, charsNoSpace = 0, gold = 0, levelUps = 0, agenda = 0, questions = 0, longest = '';
+        const links = new Map(), places = new Map(), words = new Map(), long = new Map();
+        let chars = 0, charsNoSpace = 0, gold = 0, agenda = 0;
         const per = sessions.map((s) => {
             const lines = MapProtocols.readText(s.content);
             const text = lines.join(' ');
             const w = text.split(/\s+/).filter(Boolean);
             chars += lines.reduce((n, l) => n + [...l].length, 0);
             charsNoSpace += [...text.replace(/\s+/g, '')].length;
-            for (const n of RichText.links(s.content || '')) count(links, n);
-            (s.players || []).forEach((p) => count(players, p));
+            for (const n of RichText.links(s.content || '')) if (!MapProtocols.isPlayer(n)) count(links, n);
             (s.places || []).forEach((p) => count(places, p));
             for (const word of text.match(/[\p{L}][\p{L}-]*/gu) || []) {
-                if ([...word].length > [...longest].length) longest = word;
-                if ([...word].length >= 6 && !MapProtocols.COMMON.has(word.toLowerCase())) count(words, word);
+                if (!long.has(word.toLowerCase())) long.set(word.toLowerCase(), word);
+                if ([...word].length >= 6 && !MapProtocols.COMMON.has(word.toLowerCase()) && !MapProtocols.isPlayer(word)) count(words, word);
             }
             for (const m of text.matchAll(/(\d[\d'’]*)\s*(?:Gold|GM)\b/g)) gold += Number(m[1].replace(/['’]/g, ''));
-            levelUps += (s.content.match(/LEVEL UP/gi) || []).length;
             agenda += (s.content.match(/^#\s/gm) || []).length;
-            questions += (text.match(/\?/g) || []).length;
             return { s, words: w.length };
         });
         const total = per.reduce((n, p) => n + p.words, 0);
@@ -606,12 +611,13 @@ class MapProtocols {
         const dated = (key) => sessions.map((s) => s[key]).filter((d) => /^\d{4,5}-\d{2}-\d{2}$/.test(d || '')).sort();
         const ingame = [...dated('ingameStart'), ...dated('ingameEnd')].sort();
         const real = dated('date');
+        const longest = [...long.values()].map((w) => [w, [...w].length]).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'de')).slice(0, 10);
         return {
-            sessions: sessions.length, words: total, chars, charsNoSpace, gold, levelUps, agenda, questions, longest, per,
+            sessions: sessions.length, words: total, chars, charsNoSpace, gold, agenda, longest, per,
             longestSession: byLength[0], shortestSession: byLength.at(-1),
             ingame: ingame.length ? { from: ingame[0], to: ingame.at(-1), days: days(ingame[0], ingame.at(-1)) } : null,
             real: real.length ? { from: real[0], to: real.at(-1), days: days(real[0], real.at(-1)) } : null,
-            links: top(links), players: top(players, 8), places: top(places), topWords: top(words),
+            links: top(links), places: top(places), topWords: top(words),
         };
     }
 
@@ -619,6 +625,12 @@ class MapProtocols {
         this.panel.querySelector('.pp-stats-layer')?.remove();
         const st = this.stats();
         const num = (n) => Number(n).toLocaleString('de-CH');
+        // 400 → 1 Jahr 35 Tage (a year counted as 365 days)
+        const span = (d) => {
+            const y = Math.floor(d / 365), r = d % 365;
+            if (d <= 365) return `${num(d)} Tage`;
+            return `${num(y)} ${y === 1 ? 'Jahr' : 'Jahre'}${r ? ` ${num(r)} ${r === 1 ? 'Tag' : 'Tage'}` : ''}`;
+        };
         const layer = this.el('div', 'pp-stats-layer');
         const box = this.el('section', 'pp-stats');
         box.setAttribute('role', 'dialog');
@@ -649,19 +661,16 @@ class MapProtocols {
             tile(num(st.words), 'Wörter', `Ø ${num(Math.round(st.words / (st.sessions || 1)))} pro Sitzung`),
             tile(`${num(Math.round(st.words / 230))} min`, 'Lesezeit für alles', 'bei 230 Wörtern pro Minute'),
             tile(num(st.agenda), 'Traktanden'),
-            tile(num(st.levelUps), 'Level-ups'),
-            tile(num(st.questions), 'Fragezeichen', 'offene Fragen gibt es immer'),
             tile(num(st.gold), 'Gold erwähnt', 'alle Beträge mit «Gold» zusammengezählt'),
         );
-        if (st.ingame) tiles.append(tile(`${num(st.ingame.days)} Tage`, 'Ingame erlebt', `${this.date(st.ingame.from)} – ${this.date(st.ingame.to)}`));
-        if (st.real) tiles.append(tile(`${num(st.real.days)} Tage`, 'Im echten Leben gespielt', `${this.date(st.real.from)} – ${this.date(st.real.to)}`));
+        if (st.ingame) tiles.append(tile(span(st.ingame.days), 'Ingame erlebt', `${this.date(st.ingame.from)} – ${this.date(st.ingame.to)}`));
+        if (st.real) tiles.append(tile(span(st.real.days), 'Im echten Leben gespielt', `${this.date(st.real.from)} – ${this.date(st.real.to)}`));
         box.append(tiles);
 
         const facts = this.el('dl', 'pp-stat-facts');
         const fact = (k, v) => facts.append(this.el('dt', '', k), this.el('dd', '', v));
         if (st.longestSession) fact('📜 Längstes Protokoll', `${label(st.longestSession)} (${num(st.longestSession.words)} Wörter)`);
         if (st.shortestSession) fact('🩳 Kürzestes Protokoll', `${label(st.shortestSession)} (${num(st.shortestSession.words)} Wörter)`);
-        if (st.longest) fact('🐍 Längstes Wort', `${st.longest} (${[...st.longest].length} Buchstaben)`);
         box.append(facts);
 
         const ranking = (title, rows, unit) => {
@@ -678,10 +687,10 @@ class MapProtocols {
             ranks.append(sec);
         };
         const ranks = this.el('div', 'pp-stat-ranks');
-        ranking('🎲 Am häufigsten dabei', st.players, '×');
         ranking('🔗 Am häufigsten verlinkt', st.links, '×');
         ranking('📍 Meistbesuchte Orte', st.places, '×');
         ranking('💬 Lieblingswörter (ab 6 Buchstaben)', st.topWords, '×');
+        ranking('🐍 Die längsten Wörter', st.longest, 'Buchstaben');
         box.append(ranks);
 
         // words per session as bars, in session order
