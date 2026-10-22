@@ -37,7 +37,7 @@
         const key = emotes[name] ? name : emotesLower.get(name.toLowerCase());
         const e = key && emotes[key];
         if (!e) return null;
-        return `<img class="emote" src="${escape(e.url)}" alt=":${escape(key)}:" title="${escape(e.original || key)}" loading="lazy" decoding="async" style="height:1.75em;width:auto;vertical-align:middle;margin:-0.3em 0">`;
+        return `<img class="emote" src="${escape(e.url)}" alt=":${escape(key)}:" title="${escape(e.original || key)}" loading="lazy" decoding="async" draggable="false" style="height:1.75em;width:auto;vertical-align:middle;margin:-0.3em 0;cursor:default">`;
     }
 
     // Links first, as placeholders (so **[[Mae]]** works), then escaping and emphasis, then the links back in.

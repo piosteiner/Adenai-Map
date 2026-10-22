@@ -313,6 +313,8 @@ class ImageHoverPreview {
         
         // Skip if already has preview disabled
         if (element.hasAttribute('data-no-hover-preview')) return false;
+        // emotes have their own, smaller preview (src/utils/emotes.js)
+        if (element.classList.contains('emote')) return false;
         
         // Skip very small images (likely icons)
         if (element.offsetWidth < 32 || element.offsetHeight < 32) return false;

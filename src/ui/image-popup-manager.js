@@ -203,7 +203,8 @@ class ImagePopupManager {
             const img = e.target;
             
             // Check if it's a character image in a popup
-            if (img.tagName === 'IMG' && 
+            // emotes (:name:) are part of the text: no viewer
+            if (img.tagName === 'IMG' && !img.classList.contains('emote') &&
                 (img.closest('.character-popup') || 
                  img.closest('.leaflet-popup-content') || img.closest('.glossary-panel .gl-images') ||
                  img.classList.contains('character-popup-avatar'))) {
