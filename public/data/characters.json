@@ -2299,16 +2299,16 @@
         452
       ],
       "description": "",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/hau76163yydj-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/hau76163yydj-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2026-10-17T19:42:22.578Z",
-      "updatedAt": "2026-10-17T19:42:22.578Z",
       "currentLocation": {
         "location": "Tangoa",
         "date": "5663-06-03",
@@ -2318,8 +2318,10 @@
           1618,
           452
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2026-10-17T19:42:22.578Z",
+      "updatedAt": "2026-10-22T16:56:09.451Z"
     },
     {
       "id": "nuri",
@@ -4233,5 +4235,5 @@
       "updatedAt": "2026-10-19T11:33:22.265Z"
     }
   ],
-  "lastUpdated": "2026-10-21T19:17:41.983Z"
+  "lastUpdated": "2026-10-22T16:56:09.452Z"
 }
