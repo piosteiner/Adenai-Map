@@ -30088,7 +30088,7 @@
     "locations-1jmkov8hdz6j": {
       "id": "locations-1jmkov8hdz6j",
       "category": "locations",
-      "title": "serinessa room view",
+      "title": "Serinessa Room View",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/670825307042533502/",
       "tags": [],
@@ -30126,7 +30126,8 @@
         }
       },
       "fileSize": 119672,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-22T19:09:14.091Z"
     },
     "locations-tzt0yqpqftcg": {
       "id": "locations-tzt0yqpqftcg",
@@ -30261,5 +30262,5 @@
       "lastModified": "2026-10-22T19:08:39.201Z"
     }
   },
-  "lastUpdated": "2026-10-22T19:09:01.413Z"
+  "lastUpdated": "2026-10-22T19:09:14.091Z"
 }
