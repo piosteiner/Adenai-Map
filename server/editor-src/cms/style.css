@@ -196,7 +196,7 @@ input[readonly], select:disabled { background: var(--panel-2); color: var(--mute
 .hover-preview[hidden] { display: none; }
 
 /* mini map */
-.minimap { height: 230px; border-radius: 6px; overflow: hidden; background: #a9c3cf; }
+.minimap { height: 230px; border-radius: 6px; overflow: hidden; background: #a9c3cf; isolation: isolate; } /* Leaflet's panes (z-index 400+) stay inside: dialogs go over the map */
 .minimap-pin { background: var(--gold); border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.45); }
 
 /* movements */
