@@ -84,7 +84,7 @@ export function emotesView() {
                 title: `:${n}: — ${e.from === 'custom' ? 'own' : e.from} · click to copy`,
                 on: { click: () => navigator.clipboard?.writeText(`:${n}:`).then(() => toast(`:${n}: copied`), () => {}) },
             }, h('img', { src: e.url, alt: '', loading: 'lazy' }), h('span', { text: n }))),
-            shown.length > 400 ? h('p.muted', { text: `… and ${shown.length - 400} more — search to narrow down` }) : null);
+            ...(shown.length > 400 ? [h('p.muted', { text: `… and ${shown.length - 400} more — search to narrow down` })] : []));
         };
         drawGrid();
 
