@@ -673,9 +673,9 @@ class MapProtocols {
         if (st.shortestSession) fact('🩳 Kürzestes Protokoll', `${label(st.shortestSession)} (${num(st.shortestSession.words)} Wörter)`);
         box.append(facts);
 
-        const ranking = (title, rows, unit) => {
+        const ranking = (title, rows, unit, into = ranks, cls = '') => {
             if (!rows.length) return;
-            const sec = this.el('div', 'pp-stat-rank');
+            const sec = this.el('div', `pp-stat-rank ${cls}`);
             sec.append(this.el('h3', '', title));
             const ol = this.el('ol');
             for (const [name, n] of rows) {
@@ -684,13 +684,14 @@ class MapProtocols {
                 ol.append(li);
             }
             sec.append(ol);
-            ranks.append(sec);
+            into.append(sec);
         };
         const ranks = this.el('div', 'pp-stat-ranks');
+        // the whole width of the popup; a soft hyphen between letters so a word wrapped over lines gets a «-»
+        ranking('🐍 Die längsten Wörter', st.longest.map(([w, n]) => [[...w].join('\u00AD'), n]), 'Buchstaben', box, 'pp-stat-long');
         ranking('🔗 Am häufigsten verlinkt', st.links, '×');
         ranking('📍 Meistbesuchte Orte', st.places, '×');
         ranking('💬 Lieblingswörter (ab 6 Buchstaben)', st.topWords, '×');
-        ranking('🐍 Die längsten Wörter', st.longest, 'Buchstaben');
         box.append(ranks);
 
         // words per session as bars, in session order
