@@ -219,14 +219,14 @@ class MovementSystem {
         return group;
     }
 
-    // a and b as [lat, lng]: a quadratic curve bulging sideways by a quarter of the distance
+    // a and b as [lat, lng]: a gentle quadratic curve (its apex 5% of the distance to the side)
     teleportArc(a, b, style) {
         const mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
         const dLat = b[0] - a[0];
         const dLng = b[1] - a[1];
-        const ctrl = [mid[0] + dLng * 0.25, mid[1] - dLat * 0.25];
+        const ctrl = [mid[0] + dLng * 0.1, mid[1] - dLat * 0.1];
         const apex = [0.25 * a[0] + 0.5 * ctrl[0] + 0.25 * b[0], 0.25 * a[1] + 0.5 * ctrl[1] + 0.25 * b[1]];
-        const arc = L.curve(['M', a, 'Q', ctrl, b], { ...style, dashArray: '1, 10', lineCap: 'round', weight: (style.weight || 4) + 1 });
+        const arc = L.curve(['M', a, 'Q', ctrl, b], { ...style, dashArray: '1, 30', lineCap: 'round', weight: (style.weight || 4) + 1 });
         arc.bindTooltip('✨ Teleport', { sticky: true });
         const spark = L.marker(apex, { icon: L.divIcon({ className: 'teleport-spark', html: '✨', iconSize: [20, 20], iconAnchor: [10, 10] }), interactive: false, keyboard: false });
         return L.featureGroup([arc, spark]);

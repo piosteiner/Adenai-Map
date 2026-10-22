@@ -598,7 +598,7 @@ class MapProtocols {
             for (const n of RichText.links(s.content || '')) if (!MapProtocols.isPlayer(n)) count(links, n);
             (s.places || []).forEach((p) => count(places, p));
             for (const word of text.match(/[\p{L}][\p{L}-]*/gu) || []) {
-                if (!long.has(word.toLowerCase())) long.set(word.toLowerCase(), word);
+                if (!long.has(word.toLowerCase())) long.set(word.toLowerCase(), { word, n: [...word].length, s });
                 if ([...word].length >= 6 && !MapProtocols.COMMON.has(word.toLowerCase()) && !MapProtocols.isPlayer(word)) count(words, word);
             }
             for (const m of text.matchAll(/(\d[\d'’]*)\s*(?:Gold|GM)\b/g)) gold += Number(m[1].replace(/['’]/g, ''));
@@ -611,7 +611,12 @@ class MapProtocols {
         const dated = (key) => sessions.map((s) => s[key]).filter((d) => /^\d{4,5}-\d{2}-\d{2}$/.test(d || '')).sort();
         const ingame = [...dated('ingameStart'), ...dated('ingameEnd')].sort();
         const real = dated('date');
-        const longest = [...long.values()].map((w) => [w, [...w].length]).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'de')).slice(0, 10);
+        // longest first, where each was first used; the list stops before the first length shared by more than 5 words (but has at least 10)
+        const longest = [...long.values()].sort((a, b) => b.n - a.n || a.word.localeCompare(b.word, 'de'));
+        const lengths = new Map();
+        longest.forEach((w) => count(lengths, w.n));
+        const cut = longest.findIndex((w) => lengths.get(w.n) > 5);
+        longest.splice(Math.max(10, cut < 0 ? longest.length : cut));
         return {
             sessions: sessions.length, words: total, chars, charsNoSpace, gold, agenda, longest, per,
             longestSession: byLength[0], shortestSession: byLength.at(-1),
@@ -673,9 +678,36 @@ class MapProtocols {
         if (st.shortestSession) fact('🩳 Kürzestes Protokoll', `${label(st.shortestSession)} (${num(st.shortestSession.words)} Wörter)`);
         box.append(facts);
 
-        const ranking = (title, rows, unit, into = ranks, cls = '') => {
+        // the longest words over the whole width, 10 more at a time; a click goes to the word in its session.
+        // A soft hyphen between letters, so a word wrapped over lines gets a «-»
+        if (st.longest.length) {
+            const sec = this.el('div', 'pp-stat-rank pp-stat-long');
+            const ol = this.el('ol');
+            const more = this.el('button', 'pp-stat-more');
+            more.type = 'button';
+            const add = () => {
+                for (const w of st.longest.slice(ol.children.length, ol.children.length + 10)) {
+                    const li = this.el('li');
+                    const go = this.el('button', 'pp-stat-word', [...w.word].join('\u00AD'));
+                    go.type = 'button';
+                    go.title = `In Sitzung ${w.s.number ?? '?'} zeigen`;
+                    go.addEventListener('click', () => { close(); this.scrollTo(w.s.id, true, w.word); });
+                    li.append(go, this.el('span', 'pp-stat-n', `${num(w.n)} Buchstaben`));
+                    ol.append(li);
+                }
+                const left = st.longest.length - ol.children.length;
+                more.hidden = left <= 0;
+                more.textContent = `${Math.min(10, left)} weitere anzeigen`;
+            };
+            more.addEventListener('click', add);
+            add();
+            sec.append(this.el('h3', '', '🐍 Die längsten Wörter'), ol, more);
+            box.append(sec);
+        }
+
+        const ranking = (title, rows, unit) => {
             if (!rows.length) return;
-            const sec = this.el('div', `pp-stat-rank ${cls}`);
+            const sec = this.el('div', 'pp-stat-rank');
             sec.append(this.el('h3', '', title));
             const ol = this.el('ol');
             for (const [name, n] of rows) {
@@ -684,11 +716,9 @@ class MapProtocols {
                 ol.append(li);
             }
             sec.append(ol);
-            into.append(sec);
+            ranks.append(sec);
         };
         const ranks = this.el('div', 'pp-stat-ranks');
-        // the whole width of the popup; a soft hyphen between letters so a word wrapped over lines gets a «-»
-        ranking('🐍 Die längsten Wörter', st.longest.map(([w, n]) => [[...w].join('\u00AD'), n]), 'Buchstaben', box, 'pp-stat-long');
         ranking('🔗 Am häufigsten verlinkt', st.links, '×');
         ranking('📍 Meistbesuchte Orte', st.places, '×');
         ranking('💬 Lieblingswörter (ab 6 Buchstaben)', st.topWords, '×');
