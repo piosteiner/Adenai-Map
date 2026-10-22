@@ -30174,7 +30174,7 @@
     "locations-ke2jlsbm97st": {
       "id": "locations-ke2jlsbm97st",
       "category": "locations",
-      "title": "serinessa garden",
+      "title": "Serinessa Garden",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/517280707211936643/",
       "tags": [],
@@ -30212,7 +30212,8 @@
         }
       },
       "fileSize": 72982,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-22T19:08:48.799Z"
     },
     "locations-nxxqb1ql4ja1": {
       "id": "locations-nxxqb1ql4ja1",
@@ -30259,5 +30260,5 @@
       "lastModified": "2026-10-22T19:08:39.201Z"
     }
   },
-  "lastUpdated": "2026-10-22T19:08:39.201Z"
+  "lastUpdated": "2026-10-22T19:08:48.799Z"
 }
