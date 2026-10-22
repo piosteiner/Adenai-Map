@@ -30170,7 +30170,50 @@
       },
       "fileSize": 105209,
       "mimeType": "image/jpeg"
+    },
+    "locations-ke2jlsbm97st": {
+      "id": "locations-ke2jlsbm97st",
+      "category": "locations",
+      "title": "serinessa garden",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/517280707211936643/",
+      "tags": [],
+      "uploadDate": "2026-10-22T18:51:37.371Z",
+      "sizes": {
+        "thumb": {
+          "filename": "ke2jlsbm97st-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ke2jlsbm97st-thumb.webp",
+          "width": 121,
+          "height": 150
+        },
+        "small": {
+          "filename": "ke2jlsbm97st-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ke2jlsbm97st-small.webp",
+          "width": 242,
+          "height": 300
+        },
+        "medium": {
+          "filename": "ke2jlsbm97st-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ke2jlsbm97st-medium.webp",
+          "width": 483,
+          "height": 600
+        },
+        "large": {
+          "filename": "ke2jlsbm97st-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ke2jlsbm97st-large.webp",
+          "width": 489,
+          "height": 607
+        },
+        "original": {
+          "filename": "ke2jlsbm97st-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ke2jlsbm97st-large.webp",
+          "width": 489,
+          "height": 607
+        }
+      },
+      "fileSize": 72982,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-22T18:51:27.879Z"
+  "lastUpdated": "2026-10-22T18:51:37.379Z"
 }
