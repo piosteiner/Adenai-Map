@@ -23113,7 +23113,10 @@
       "title": "7fd427fecb248169172fd489eb14daf4",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/670825307037925510/",
-      "tags": [],
+      "tags": [
+        "halfling",
+        "female"
+      ],
       "uploadDate": "2026-10-18T18:15:44.548Z",
       "sizes": {
         "thumb": {
@@ -23148,7 +23151,8 @@
         }
       },
       "fileSize": 303626,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-23T11:07:36.485Z"
     },
     "characters-amzm2v7mv0hm": {
       "id": "characters-amzm2v7mv0hm",
@@ -30774,5 +30778,5 @@
       "lastModified": "2026-10-22T19:08:39.201Z"
     }
   },
-  "lastUpdated": "2026-10-23T11:07:23.506Z"
+  "lastUpdated": "2026-10-23T11:07:36.485Z"
 }
