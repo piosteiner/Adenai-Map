@@ -23459,7 +23459,11 @@
       "title": "afd8173caf056cd1556571e5858cfd19",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/188236459412732089/",
-      "tags": [],
+      "tags": [
+        "halfling",
+        "child",
+        "male"
+      ],
       "uploadDate": "2026-10-18T18:17:54.034Z",
       "sizes": {
         "thumb": {
@@ -23494,7 +23498,8 @@
         }
       },
       "fileSize": 139430,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-23T11:06:17.879Z"
     },
     "characters-w3r7gdyzm98d": {
       "id": "characters-w3r7gdyzm98d",
@@ -30741,5 +30746,5 @@
       "lastModified": "2026-10-22T19:08:39.201Z"
     }
   },
-  "lastUpdated": "2026-10-23T11:06:06.215Z"
+  "lastUpdated": "2026-10-23T11:06:17.879Z"
 }
