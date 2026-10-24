@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "57286899e93c0234d4b4d17bd2ad71529558813f",
+      "action": "update",
+      "type": "character",
+      "itemName": "Blechdose",
+      "user": "gm",
+      "timestamp": "2026-10-24T20:11:21.039Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T20:11:21.039Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: blechdose (by gm) - added image"
+    },
+    {
       "commitSha": "030d78ae47c5e3a7c0fb1c28a66c184cfb536d42",
       "action": "update",
       "type": "character",
@@ -3070,5 +3083,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T20:10:13.157Z"
+  "lastUpdated": "2026-10-24T20:11:21.039Z"
 }
