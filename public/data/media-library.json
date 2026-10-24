@@ -31237,49 +31237,6 @@
       "fileSize": 1688364,
       "mimeType": "image/png"
     },
-    "characters-499hz46ieg64": {
-      "id": "characters-499hz46ieg64",
-      "category": "characters",
-      "title": "Abu",
-      "caption": "",
-      "credits": "AI generated",
-      "tags": [],
-      "uploadDate": "2026-10-24T18:19:31.391Z",
-      "sizes": {
-        "thumb": {
-          "filename": "499hz46ieg64-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/499hz46ieg64-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "499hz46ieg64-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/499hz46ieg64-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "499hz46ieg64-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/499hz46ieg64-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "499hz46ieg64-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/499hz46ieg64-large.webp",
-          "width": 1200,
-          "height": 1200
-        },
-        "original": {
-          "filename": "499hz46ieg64-original.webp",
-          "url": "https://adenai-admin.piogino.ch/media/499hz46ieg64-original.webp",
-          "width": 1668,
-          "height": 1668
-        }
-      },
-      "fileSize": 1017492,
-      "mimeType": "image/jpeg"
-    },
     "characters-jzyqdmmvitsh": {
       "id": "characters-jzyqdmmvitsh",
       "category": "characters",
@@ -31465,5 +31422,5 @@
       "lastModified": "2026-10-24T18:20:37.452Z"
     }
   },
-  "lastUpdated": "2026-10-24T18:20:54.794Z"
+  "lastUpdated": "2026-10-24T18:21:02.567Z"
 }
