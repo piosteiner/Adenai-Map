@@ -4008,16 +4008,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Ein blauer Drache, gegen den sich die Zwerge von [[Wrag-Mûl]] mit dem Sturmgiganten Kataida verbündeten. Aus dem Kampf entstanden die [[Ewige Donnerklüfte|Ewigen Donnerklüfte]] und ein ewiger Sturm. Nach ihm sind die [[Fulgurkäfer]] benannt.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/l33j6a91fuds-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/l33j6a91fuds-small.webp",
       "status": "dead",
       "faction": "",
       "relationship": "enemy",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:43:28.316Z",
-      "updatedAt": "2026-10-18T04:43:28.317Z"
+      "updatedAt": "2026-10-24T19:57:55.038Z"
     },
     {
       "id": "asulana",
@@ -4327,5 +4330,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T19:54:57.731Z"
+  "lastUpdated": "2026-10-24T19:57:55.039Z"
 }
