@@ -4374,16 +4374,16 @@
         1203
       ],
       "description": "",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/t812xbmq2ca7-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/t812xbmq2ca7-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "neutral",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2026-10-24T21:18:41.404Z",
-      "updatedAt": "2026-10-24T21:18:41.404Z",
       "currentLocation": {
         "location": "Estu Vin",
         "date": "5663-06-03",
@@ -4393,9 +4393,11 @@
           1846,
           1203
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2026-10-24T21:18:41.404Z",
+      "updatedAt": "2026-10-24T21:18:51.473Z"
     }
   ],
-  "lastUpdated": "2026-10-24T21:18:41.404Z"
+  "lastUpdated": "2026-10-24T21:18:51.474Z"
 }
