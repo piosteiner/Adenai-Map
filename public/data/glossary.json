@@ -252,13 +252,17 @@
     {
       "id": "term_be45afdbb6",
       "name": "Krabbelkönig",
-      "aliases": [],
+      "aliases": [
+        "Torog"
+      ],
       "category": "Wesen",
       "description": "Ein Monster in den Tiefen der Erde, gegen das [[Moradin]] mit [[Rikka Brenner]]s Speer kämpfte.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/7cpbiai8qvx1-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/7cpbiai8qvx1-small.webp",
       "createdAt": "2026-10-18T04:41:19.892Z",
-      "updatedAt": "2026-10-18T04:41:19.892Z",
+      "updatedAt": "2026-10-24T20:23:05.289Z",
       "createdBy": "gm",
       "updatedBy": "gm"
     },
@@ -506,5 +510,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-24T19:45:45.844Z"
+  "lastUpdated": "2026-10-24T20:23:05.289Z"
 }
