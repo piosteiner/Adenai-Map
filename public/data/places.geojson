@@ -172,10 +172,13 @@
         "name": "Atlantis (versunken)",
         "description": "Atlantis versunken im Mirog Graben - auch bekannt als das Unterwasser Paradies.",
         "contentUrl": null,
-        "image": "",
+        "image": "https://adenai-admin.piogino.ch/media/p758ykxn48qq-small.webp",
         "region": "east_sea",
         "type": "ruin",
-        "visited": true
+        "visited": true,
+        "images": [
+          "https://adenai-admin.piogino.ch/media/p758ykxn48qq-small.webp"
+        ]
       },
       "geometry": {
         "type": "Point",
