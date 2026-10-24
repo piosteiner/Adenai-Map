@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "8688beffcddf67f4e51723a466bd831598356ddd",
+      "action": "update",
+      "type": "character",
+      "itemName": "Prinz Torren",
+      "user": "gm",
+      "timestamp": "2026-10-24T20:24:07.281Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T20:24:07.281Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: prinz_torren (by gm) - changed relationship to friendly"
+    },
+    {
       "commitSha": "12e73b5b480d15d1d387fc2efecfbcb1d74db18c",
       "action": "update",
       "type": "character",
@@ -3135,5 +3148,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T20:24:02.251Z"
+  "lastUpdated": "2026-10-24T20:24:07.281Z"
 }
