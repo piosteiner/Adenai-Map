@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "5efd83ebd4e4944f0f470f0237a00e6d31330a74",
+      "action": "update",
+      "type": "character",
+      "itemName": "Abu",
+      "user": "gm",
+      "timestamp": "2026-10-24T18:22:11.164Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T18:22:11.164Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: abu (by gm) - added image"
+    },
+    {
       "commitSha": "e9255b887a2c5250e3f781ef6922b160cbd94a53",
       "action": "update",
       "type": "location",
@@ -2758,5 +2771,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T18:08:07.038Z"
+  "lastUpdated": "2026-10-24T18:22:11.164Z"
 }
