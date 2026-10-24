@@ -31295,7 +31295,7 @@
     "characters-1zz963zmzkm7": {
       "id": "characters-1zz963zmzkm7",
       "category": "characters",
-      "title": "rocky",
+      "title": "Kobold Inventor",
       "caption": "",
       "credits": "Tome of Beast 1",
       "tags": [],
@@ -31333,8 +31333,9 @@
         }
       },
       "fileSize": 446319,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-24T18:25:03.056Z"
     }
   },
-  "lastUpdated": "2026-10-24T18:24:52.960Z"
+  "lastUpdated": "2026-10-24T18:25:03.056Z"
 }
