@@ -77,13 +77,13 @@
       "name": "Die Vier Kristallherzen",
       "aliases": [],
       "category": "",
-      "description": "",
+      "description": "Eine Gruppe von Abenteurern bestehend aus [[Migo]], [[Yafira]], [[Shadi]] und [[Hrogar]]. Die [[VsuzH]] haben in der Arena von [[Toftgard]] gegen sie gekämpft.",
       "images": [
         "https://adenai-admin.piogino.ch/media/l0e09ron6cra-small.webp"
       ],
       "image": "https://adenai-admin.piogino.ch/media/l0e09ron6cra-small.webp",
       "createdAt": "2026-10-24T19:43:12.579Z",
-      "updatedAt": "2026-10-24T19:43:12.579Z",
+      "updatedAt": "2026-10-24T19:45:45.844Z",
       "createdBy": "gm",
       "updatedBy": "gm"
     },
@@ -506,5 +506,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-24T19:43:12.579Z"
+  "lastUpdated": "2026-10-24T19:45:45.844Z"
 }
