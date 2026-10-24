@@ -4270,7 +4270,27 @@
       "currentLocation": null,
       "createdAt": "2026-10-24T19:43:34.587Z",
       "updatedAt": "2026-10-24T19:44:08.023Z"
+    },
+    {
+      "id": "yafira",
+      "name": "Yafira",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Teil der [[Die Vier Kristallherzen]].",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/hqjii211om7h-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/hqjii211om7h-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-24T19:44:24.891Z",
+      "updatedAt": "2026-10-24T19:44:24.891Z"
     }
   ],
-  "lastUpdated": "2026-10-24T19:44:08.023Z"
+  "lastUpdated": "2026-10-24T19:44:24.891Z"
 }
