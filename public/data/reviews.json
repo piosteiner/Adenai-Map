@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "946f410b2039c1f4305b4af601348a838d536801",
+      "action": "update",
+      "type": "character",
+      "itemName": "Migo",
+      "user": "gm",
+      "timestamp": "2026-10-24T19:42:46.139Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T19:42:46.140Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: migo (by gm) - updated description"
+    },
+    {
       "commitSha": "96d25a395392962790c6e3e9afe625378765c67b",
       "action": "update",
       "type": "character",
@@ -2836,5 +2849,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T19:42:34.027Z"
+  "lastUpdated": "2026-10-24T19:42:46.140Z"
 }
