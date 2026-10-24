@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "f8a005305a65dcebcf0098b1678fbaa15a7a1652",
+      "action": "create",
+      "type": "character",
+      "itemName": "Shadi",
+      "user": "gm",
+      "timestamp": "2026-10-24T19:43:35.591Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T19:43:35.591Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Shadi (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "946f410b2039c1f4305b4af601348a838d536801",
       "action": "update",
       "type": "character",
@@ -2849,5 +2862,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T19:42:46.140Z"
+  "lastUpdated": "2026-10-24T19:43:35.591Z"
 }
