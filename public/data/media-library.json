@@ -31922,7 +31922,52 @@
       },
       "fileSize": 68439,
       "mimeType": "image/jpeg"
+    },
+    "characters-9tyx6d0onpf5": {
+      "id": "characters-9tyx6d0onpf5",
+      "category": "characters",
+      "title": "97627de07c929b4c6f1f48d8e11b3c0a",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/752171575291710596/",
+      "tags": [
+        "dragonborn"
+      ],
+      "uploadDate": "2026-10-24T18:33:51.269Z",
+      "sizes": {
+        "thumb": {
+          "filename": "9tyx6d0onpf5-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9tyx6d0onpf5-thumb.webp",
+          "width": 116,
+          "height": 150
+        },
+        "small": {
+          "filename": "9tyx6d0onpf5-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9tyx6d0onpf5-small.webp",
+          "width": 232,
+          "height": 300
+        },
+        "medium": {
+          "filename": "9tyx6d0onpf5-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9tyx6d0onpf5-medium.webp",
+          "width": 464,
+          "height": 600
+        },
+        "large": {
+          "filename": "9tyx6d0onpf5-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9tyx6d0onpf5-large.webp",
+          "width": 600,
+          "height": 776
+        },
+        "original": {
+          "filename": "9tyx6d0onpf5-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9tyx6d0onpf5-large.webp",
+          "width": 600,
+          "height": 776
+        }
+      },
+      "fileSize": 67949,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T18:33:20.834Z"
+  "lastUpdated": "2026-10-24T18:33:51.278Z"
 }
