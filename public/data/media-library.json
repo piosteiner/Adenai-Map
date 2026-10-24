@@ -30842,7 +30842,50 @@
       },
       "fileSize": 401834,
       "mimeType": "image/png"
+    },
+    "general-51zzg0l6ixw2": {
+      "id": "general-51zzg0l6ixw2",
+      "category": "general",
+      "title": "Gelber Otter",
+      "caption": "",
+      "credits": "myself",
+      "tags": [],
+      "uploadDate": "2026-10-24T18:05:07.665Z",
+      "sizes": {
+        "thumb": {
+          "filename": "51zzg0l6ixw2-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/51zzg0l6ixw2-thumb.webp",
+          "width": 150,
+          "height": 117
+        },
+        "small": {
+          "filename": "51zzg0l6ixw2-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/51zzg0l6ixw2-small.webp",
+          "width": 300,
+          "height": 234
+        },
+        "medium": {
+          "filename": "51zzg0l6ixw2-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/51zzg0l6ixw2-medium.webp",
+          "width": 600,
+          "height": 469
+        },
+        "large": {
+          "filename": "51zzg0l6ixw2-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/51zzg0l6ixw2-large.webp",
+          "width": 676,
+          "height": 528
+        },
+        "original": {
+          "filename": "51zzg0l6ixw2-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/51zzg0l6ixw2-large.webp",
+          "width": 676,
+          "height": 528
+        }
+      },
+      "fileSize": 173747,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-24T18:05:02.762Z"
+  "lastUpdated": "2026-10-24T18:05:07.672Z"
 }
