@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "08e1caff99fd0d8f20483e818107b78ce47c8cac",
+      "action": "update",
+      "type": "character",
+      "itemName": "Ruben Karthright",
+      "user": "gm",
+      "timestamp": "2026-10-24T19:54:58.987Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T19:54:58.987Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: ruben_karthright (by gm) - changed relationship to friendly"
+    },
+    {
       "commitSha": "a43bb616a15cb2823ab35b6c399d282642fda057",
       "action": "update",
       "type": "character",
@@ -3005,5 +3018,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T19:54:30.081Z"
+  "lastUpdated": "2026-10-24T19:54:58.988Z"
 }
