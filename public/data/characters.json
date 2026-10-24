@@ -1745,13 +1745,13 @@
       "image": "https://adenai-admin.piogino.ch/media/i2wgrvgm96vy-small.webp",
       "status": "alive",
       "faction": "",
-      "relationship": "unknown",
+      "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:43:21.763Z",
-      "updatedAt": "2026-10-24T19:54:09.763Z"
+      "updatedAt": "2026-10-24T19:54:57.731Z"
     },
     {
       "id": "sorin_karthright",
@@ -4327,5 +4327,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T19:54:28.290Z"
+  "lastUpdated": "2026-10-24T19:54:57.731Z"
 }
