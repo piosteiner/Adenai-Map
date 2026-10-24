@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "12e73b5b480d15d1d387fc2efecfbcb1d74db18c",
+      "action": "update",
+      "type": "character",
+      "itemName": "Prinz Torren",
+      "user": "gm",
+      "timestamp": "2026-10-24T20:24:02.250Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T20:24:02.251Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: prinz_torren (by gm) - added place of origin"
+    },
+    {
       "commitSha": "4f30b8ae0412a36db117c5b43cc727e1f8024bfc",
       "action": "update",
       "type": "character",
@@ -3122,5 +3135,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T20:20:30.273Z"
+  "lastUpdated": "2026-10-24T20:24:02.251Z"
 }
