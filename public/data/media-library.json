@@ -33585,7 +33585,7 @@
     "characters-nnn3xknmh5ng": {
       "id": "characters-nnn3xknmh5ng",
       "category": "characters",
-      "title": "Weary Wizard with Ancient Grimoire",
+      "title": "Fitcher",
       "caption": "",
       "credits": "AI generated GPT",
       "tags": [],
@@ -33623,8 +33623,9 @@
         }
       },
       "fileSize": 1970691,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-24T20:06:39.018Z"
     }
   },
-  "lastUpdated": "2026-10-24T20:06:29.915Z"
+  "lastUpdated": "2026-10-24T20:06:39.018Z"
 }
