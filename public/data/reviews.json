@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "631b6290a3c157b7e405659fed2a895483b96108",
+      "action": "update",
+      "type": "character",
+      "itemName": "She-Ra",
+      "user": "gm",
+      "timestamp": "2026-10-24T21:02:30.053Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T21:02:30.053Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: she_ra (by gm) - changed relationship to party"
+    },
+    {
       "commitSha": "2e524221dd6d5aa73bba2586978ab37d9e03b4d7",
       "action": "update",
       "type": "character",
@@ -3200,5 +3213,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T21:02:17.951Z"
+  "lastUpdated": "2026-10-24T21:02:30.054Z"
 }
