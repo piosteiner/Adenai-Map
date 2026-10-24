@@ -1113,10 +1113,13 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/0kxwjpujrynw-small.webp"
+      ],
       "image": "https://adenai-admin.piogino.ch/media/0kxwjpujrynw-small.webp",
       "status": "alive",
       "faction": "Regierung von Rena",
-      "relationship": "unknown",
+      "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [
@@ -1149,7 +1152,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:21:10.180Z",
-      "updatedAt": "2025-09-07T19:29:22.243Z"
+      "updatedAt": "2026-10-24T20:24:11.117Z"
     },
     {
       "id": "ceres_golwit",
@@ -4353,5 +4356,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T20:24:06.103Z"
+  "lastUpdated": "2026-10-24T20:24:11.117Z"
 }
