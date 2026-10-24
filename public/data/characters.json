@@ -3308,16 +3308,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Top-ausgebildeter Einzelgänger im Team, gegen das die [[VsuzH]] in der Arena von [[Toftgard]] antraten. Interessiert sich sehr für [[Abu]] und brachte ihr Gift of Gab bei.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/nply3qhlq6qk-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/nply3qhlq6qk-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:42:28.054Z",
-      "updatedAt": "2026-10-18T04:42:28.054Z"
+      "updatedAt": "2026-10-24T19:42:32.945Z"
     },
     {
       "id": "kauris",
@@ -4248,5 +4251,5 @@
       "updatedAt": "2026-10-19T11:33:22.265Z"
     }
   ],
-  "lastUpdated": "2026-10-24T18:22:41.609Z"
+  "lastUpdated": "2026-10-24T19:42:32.945Z"
 }
