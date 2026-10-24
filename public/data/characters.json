@@ -2716,16 +2716,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "[[Tasbor]]s Salamander, seit der 8. Sitzung bei den [[VsuzH]]. Leckt gerne an [[Blechdose]].",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/043zrka858ih-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/043zrka858ih-small.webp",
       "status": "alive",
       "faction": "VsuzH",
       "relationship": "party",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:41:35.735Z",
-      "updatedAt": "2026-10-18T04:41:35.735Z"
+      "updatedAt": "2026-10-24T21:04:43.639Z"
     },
     {
       "id": "roger",
@@ -4362,5 +4365,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T21:02:28.841Z"
+  "lastUpdated": "2026-10-24T21:04:43.639Z"
 }
