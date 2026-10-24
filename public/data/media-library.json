@@ -33100,7 +33100,7 @@
     },
     "characters-n5v05no3iv5n": {
       "id": "characters-n5v05no3iv5n",
-      "category": "characters",
+      "category": "locations",
       "title": "Fitcher's Tower",
       "caption": "",
       "credits": "AI generated",
@@ -33139,7 +33139,8 @@
         }
       },
       "fileSize": 1312226,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-24T19:53:33.391Z"
     },
     "characters-6jtvj13jlm42": {
       "id": "characters-6jtvj13jlm42",
@@ -33315,5 +33316,5 @@
       "lastModified": "2026-10-24T19:53:28.028Z"
     }
   },
-  "lastUpdated": "2026-10-24T19:53:28.028Z"
+  "lastUpdated": "2026-10-24T19:53:33.391Z"
 }
