@@ -31408,7 +31408,50 @@
       },
       "fileSize": 1688364,
       "mimeType": "image/png"
+    },
+    "characters-j7fnoh4fgy89": {
+      "id": "characters-j7fnoh4fgy89",
+      "category": "characters",
+      "title": "Abu",
+      "caption": "",
+      "credits": "AI generated",
+      "tags": [],
+      "uploadDate": "2026-10-24T18:20:18.422Z",
+      "sizes": {
+        "thumb": {
+          "filename": "j7fnoh4fgy89-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j7fnoh4fgy89-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "j7fnoh4fgy89-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j7fnoh4fgy89-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "j7fnoh4fgy89-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j7fnoh4fgy89-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "j7fnoh4fgy89-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j7fnoh4fgy89-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "j7fnoh4fgy89-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/j7fnoh4fgy89-original.webp",
+          "width": 1668,
+          "height": 1668
+        }
+      },
+      "fileSize": 1017492,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T18:20:00.578Z"
+  "lastUpdated": "2026-10-24T18:20:18.429Z"
 }
