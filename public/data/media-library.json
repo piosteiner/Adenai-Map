@@ -35208,7 +35208,50 @@
       },
       "fileSize": 52265,
       "mimeType": "image/jpeg"
+    },
+    "characters-8uu88nklvqcg": {
+      "id": "characters-8uu88nklvqcg",
+      "category": "characters",
+      "title": "alice",
+      "caption": "",
+      "credits": "AI generated",
+      "tags": [],
+      "uploadDate": "2026-10-24T21:02:05.644Z",
+      "sizes": {
+        "thumb": {
+          "filename": "8uu88nklvqcg-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/8uu88nklvqcg-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "8uu88nklvqcg-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/8uu88nklvqcg-small.webp",
+          "width": 300,
+          "height": 299
+        },
+        "medium": {
+          "filename": "8uu88nklvqcg-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/8uu88nklvqcg-medium.webp",
+          "width": 557,
+          "height": 556
+        },
+        "large": {
+          "filename": "8uu88nklvqcg-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/8uu88nklvqcg-large.webp",
+          "width": 557,
+          "height": 556
+        },
+        "original": {
+          "filename": "8uu88nklvqcg-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/8uu88nklvqcg-large.webp",
+          "width": 557,
+          "height": 556
+        }
+      },
+      "fileSize": 512184,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-24T21:00:56.976Z"
+  "lastUpdated": "2026-10-24T21:02:05.659Z"
 }
