@@ -2,6 +2,21 @@
   "version": 1,
   "terms": [
     {
+      "id": "term_5baffac2f3",
+      "name": "Abu's Hand",
+      "aliases": [],
+      "category": "VsuzH",
+      "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/hsi393jv2njo-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/hsi393jv2njo-small.webp",
+      "createdAt": "2026-10-24T18:09:36.874Z",
+      "updatedAt": "2026-10-24T18:09:36.874Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_e576725672",
       "name": "Benthals",
       "aliases": [],
@@ -472,5 +487,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-24T18:08:27.623Z"
+  "lastUpdated": "2026-10-24T18:09:36.874Z"
 }
