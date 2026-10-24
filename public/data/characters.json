@@ -1779,9 +1779,15 @@
       "id": "prinz_torren",
       "name": "Prinz Torren",
       "title": "",
-      "placeOfOrigin": "",
-      "coordinates": null,
+      "placeOfOrigin": "Rena",
+      "coordinates": [
+        650,
+        1000
+      ],
       "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/a2eua15nmpn4-small.webp"
+      ],
       "image": "https://adenai-admin.piogino.ch/media/a2eua15nmpn4-small.webp",
       "status": "alive",
       "faction": "",
@@ -1818,7 +1824,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-29T20:44:34.697Z",
-      "updatedAt": "2025-09-07T19:46:07.607Z"
+      "updatedAt": "2026-10-24T20:24:01.070Z"
     },
     {
       "id": "vivi_wulbren",
@@ -4347,5 +4353,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T20:20:28.936Z"
+  "lastUpdated": "2026-10-24T20:24:01.070Z"
 }
