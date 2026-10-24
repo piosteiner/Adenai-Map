@@ -103,7 +103,13 @@
         "name": "Fitchers Turm",
         "description": "Standort des Turms von Fitcher, als die VsuzH ihn besuchten.",
         "contentUrl": null,
-        "visited": true
+        "visited": true,
+        "type": "",
+        "region": "",
+        "images": [
+          "https://adenai-admin.piogino.ch/media/n5v05no3iv5n-small.webp"
+        ],
+        "image": "https://adenai-admin.piogino.ch/media/n5v05no3iv5n-small.webp"
       },
       "geometry": {
         "type": "Point",
