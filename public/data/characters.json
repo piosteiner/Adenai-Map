@@ -1757,6 +1757,10 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/n18hyg8qnnul-small.webp",
+        "https://adenai-admin.piogino.ch/media/t0azef8q1278-small.webp"
+      ],
       "image": "https://adenai-admin.piogino.ch/media/n18hyg8qnnul-small.webp",
       "status": "alive",
       "faction": "",
@@ -1766,7 +1770,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:43:56.783Z",
-      "updatedAt": "2025-09-07T21:46:28.203Z"
+      "updatedAt": "2026-10-24T19:54:17.970Z"
     },
     {
       "id": "prinz_torren",
@@ -4320,5 +4324,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T19:54:09.763Z"
+  "lastUpdated": "2026-10-24T19:54:17.970Z"
 }
