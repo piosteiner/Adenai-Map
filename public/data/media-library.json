@@ -35080,7 +35080,7 @@
     "creatures-2a7qind102ua": {
       "id": "creatures-2a7qind102ua",
       "category": "creatures",
-      "title": "IMG_0271",
+      "title": "Fulgur Käfer",
       "caption": "",
       "credits": "Fulgur Käfer",
       "tags": [],
@@ -35118,7 +35118,8 @@
         }
       },
       "fileSize": 66775,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-24T20:56:13.162Z"
     },
     "general-pk9xhbmgk91d": {
       "id": "general-pk9xhbmgk91d",
@@ -35164,5 +35165,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T20:56:05.782Z"
+  "lastUpdated": "2026-10-24T20:56:13.162Z"
 }
