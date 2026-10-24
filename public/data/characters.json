@@ -1381,10 +1381,10 @@
       "coordinates": null,
       "description": "",
       "images": [
-        "https://adenai-admin.piogino.ch/media/7r8s2u5d5rio-small.webp",
-        "https://adenai-admin.piogino.ch/media/wrztc7xj57ca-small.webp"
+        "https://adenai-admin.piogino.ch/media/wrztc7xj57ca-small.webp",
+        "https://adenai-admin.piogino.ch/media/7r8s2u5d5rio-small.webp"
       ],
-      "image": "https://adenai-admin.piogino.ch/media/7r8s2u5d5rio-small.webp",
+      "image": "https://adenai-admin.piogino.ch/media/wrztc7xj57ca-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "friendly",
@@ -1393,7 +1393,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:33:49.688Z",
-      "updatedAt": "2026-10-24T19:53:55.976Z"
+      "updatedAt": "2026-10-24T19:54:01.456Z"
     },
     {
       "id": "graf_honza",
@@ -4316,5 +4316,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T19:53:55.976Z"
+  "lastUpdated": "2026-10-24T19:54:01.456Z"
 }
