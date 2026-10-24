@@ -4397,7 +4397,27 @@
       },
       "createdAt": "2026-10-24T21:18:41.404Z",
       "updatedAt": "2026-10-24T21:18:51.473Z"
+    },
+    {
+      "id": "barnabaix",
+      "name": "Barnabaix",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/hhin92fw6eni-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/hhin92fw6eni-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-24T21:27:35.436Z",
+      "updatedAt": "2026-10-24T21:27:35.436Z"
     }
   ],
-  "lastUpdated": "2026-10-24T21:18:51.474Z"
+  "lastUpdated": "2026-10-24T21:27:35.436Z"
 }
