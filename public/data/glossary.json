@@ -200,11 +200,12 @@
       "category": "Gegenstand",
       "description": "[[Shiho]]s kleines Schiff, beschlagnahmt in der Werft von [[Valaris]], bis die [[VsuzH]] es befreiten. Seine Schiffsseele heisst [[Otto]].",
       "images": [
-        "https://adenai-admin.piogino.ch/media/51zzg0l6ixw2-small.webp"
+        "https://adenai-admin.piogino.ch/media/51zzg0l6ixw2-small.webp",
+        "https://adenai-admin.piogino.ch/media/osftq8lkouvw-small.webp"
       ],
       "image": "https://adenai-admin.piogino.ch/media/51zzg0l6ixw2-small.webp",
       "createdAt": "2026-10-18T04:41:11.123Z",
-      "updatedAt": "2026-10-24T18:08:27.622Z",
+      "updatedAt": "2026-10-24T20:56:41.698Z",
       "createdBy": "gm",
       "updatedBy": "gm"
     },
@@ -510,5 +511,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-24T20:23:21.330Z"
+  "lastUpdated": "2026-10-24T20:56:41.698Z"
 }
