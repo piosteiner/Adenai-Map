@@ -477,7 +477,11 @@
         "contentUrl": null,
         "region": "eastern_adenai",
         "type": "landmark",
-        "visited": true
+        "visited": true,
+        "images": [
+          "https://adenai-admin.piogino.ch/media/ntgcgzaej11b-small.webp"
+        ],
+        "image": "https://adenai-admin.piogino.ch/media/ntgcgzaej11b-small.webp"
       },
       "geometry": {
         "type": "Point",
