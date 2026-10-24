@@ -31279,7 +31279,50 @@
       },
       "fileSize": 1017492,
       "mimeType": "image/jpeg"
+    },
+    "characters-jzyqdmmvitsh": {
+      "id": "characters-jzyqdmmvitsh",
+      "category": "characters",
+      "title": "Luna",
+      "caption": "",
+      "credits": "AI generated",
+      "tags": [],
+      "uploadDate": "2026-10-24T18:19:47.368Z",
+      "sizes": {
+        "thumb": {
+          "filename": "jzyqdmmvitsh-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jzyqdmmvitsh-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "jzyqdmmvitsh-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jzyqdmmvitsh-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "jzyqdmmvitsh-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jzyqdmmvitsh-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "jzyqdmmvitsh-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jzyqdmmvitsh-large.webp",
+          "width": 1000,
+          "height": 1000
+        },
+        "original": {
+          "filename": "jzyqdmmvitsh-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/jzyqdmmvitsh-large.webp",
+          "width": 1000,
+          "height": 1000
+        }
+      },
+      "fileSize": 1264710,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-24T18:19:31.406Z"
+  "lastUpdated": "2026-10-24T18:19:49.232Z"
 }
