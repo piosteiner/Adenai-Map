@@ -4061,16 +4061,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Gründete die unterirdische Stadt Zurag Tar (heute [[Ruine von Zurak'thar]]), schmiedete [[Moradin]] einen Speer für seinen Kampf gegen den [[Krabbelkönig]] und schuf die [[Kugel von Zurak'thar]].",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/pb85iintcskp-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/pb85iintcskp-small.webp",
       "status": "dead",
       "faction": "",
       "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:43:32.406Z",
-      "updatedAt": "2026-10-18T04:43:32.406Z"
+      "updatedAt": "2026-10-24T20:20:28.936Z"
     },
     {
       "id": "timmibald_grassel",
@@ -4344,5 +4347,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T20:16:16.564Z"
+  "lastUpdated": "2026-10-24T20:20:28.936Z"
 }
