@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "47760921357407b303b290020730f5d9d34935c0",
+      "action": "update",
+      "type": "character",
+      "itemName": "Fulgur",
+      "user": "gm",
+      "timestamp": "2026-10-24T19:57:56.383Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T19:57:56.383Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: fulgur (by gm) - added image"
+    },
+    {
       "commitSha": "08e1caff99fd0d8f20483e818107b78ce47c8cac",
       "action": "update",
       "type": "character",
@@ -3018,5 +3031,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T19:54:58.988Z"
+  "lastUpdated": "2026-10-24T19:57:56.385Z"
 }
