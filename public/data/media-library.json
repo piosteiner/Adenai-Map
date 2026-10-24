@@ -33634,7 +33634,8 @@
       "credits": "Fizban's Treasury of Dragons",
       "tags": [
         "dragon",
-        "moon stone"
+        "moon stone",
+        "gem"
       ],
       "uploadDate": "2026-10-24T20:09:54.623Z",
       "sizes": {
@@ -33670,8 +33671,9 @@
         }
       },
       "fileSize": 327435,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-24T20:10:01.896Z"
     }
   },
-  "lastUpdated": "2026-10-24T20:09:54.635Z"
+  "lastUpdated": "2026-10-24T20:10:01.896Z"
 }
