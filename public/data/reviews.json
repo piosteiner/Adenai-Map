@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "49a9e1b3bc06c23b9b84fa1c40b7a565d81cea4f",
+      "action": "update",
+      "type": "character",
+      "itemName": "Eilana",
+      "user": "gm",
+      "timestamp": "2026-10-24T20:12:41.362Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T20:12:41.362Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: eilana (by gm) - added image"
+    },
+    {
       "commitSha": "57286899e93c0234d4b4d17bd2ad71529558813f",
       "action": "update",
       "type": "character",
@@ -3083,5 +3096,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T20:11:21.039Z"
+  "lastUpdated": "2026-10-24T20:12:41.362Z"
 }
