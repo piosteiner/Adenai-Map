@@ -2758,16 +2758,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Das Mondsteindrachenbaby der [[VsuzH]]. Mondsteindrachen können laut [[Fitcher]] zwischen den Ebenen wechseln; einst dienten sie der Königsfamilie von Atlantis als Reittiere. Fitcher schenkte eine Schleife, die Sonnhild als [[Duodrohne]] tarnt. Siehe auch [[Mondstein]].",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/stqm4n8iaktt-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/stqm4n8iaktt-small.webp",
       "status": "alive",
       "faction": "VsuzH",
       "relationship": "party",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:41:41.864Z",
-      "updatedAt": "2026-10-18T04:41:41.864Z"
+      "updatedAt": "2026-10-24T20:10:11.599Z"
     },
     {
       "id": "otto",
@@ -4333,5 +4336,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T20:06:52.378Z"
+  "lastUpdated": "2026-10-24T20:10:11.599Z"
 }
