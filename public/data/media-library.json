@@ -35165,7 +35165,50 @@
       "fileSize": 142899,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-24T20:57:45.312Z"
+    },
+    "characters-orrae32mz009": {
+      "id": "characters-orrae32mz009",
+      "category": "characters",
+      "title": "placeholder character",
+      "caption": "",
+      "credits": "https://de.pinterest.com/pin/630011435366442224/",
+      "tags": [],
+      "uploadDate": "2026-10-24T21:00:56.964Z",
+      "sizes": {
+        "thumb": {
+          "filename": "orrae32mz009-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/orrae32mz009-thumb.webp",
+          "width": 114,
+          "height": 150
+        },
+        "small": {
+          "filename": "orrae32mz009-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/orrae32mz009-small.webp",
+          "width": 227,
+          "height": 300
+        },
+        "medium": {
+          "filename": "orrae32mz009-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/orrae32mz009-medium.webp",
+          "width": 454,
+          "height": 600
+        },
+        "large": {
+          "filename": "orrae32mz009-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/orrae32mz009-large.webp",
+          "width": 676,
+          "height": 893
+        },
+        "original": {
+          "filename": "orrae32mz009-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/orrae32mz009-large.webp",
+          "width": 676,
+          "height": 893
+        }
+      },
+      "fileSize": 52265,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T20:57:45.312Z"
+  "lastUpdated": "2026-10-24T21:00:56.976Z"
 }
