@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "32219807266cd5002cbc6737574238356397b15a",
+      "action": "update",
+      "type": "character",
+      "itemName": "Luna",
+      "user": "gm",
+      "timestamp": "2026-10-24T18:22:42.853Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T18:22:42.853Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: luna (by gm) - added image"
+    },
+    {
       "commitSha": "133e7ea01ff673d38c7b18970f4c61cfd9f42f9a",
       "action": "update",
       "type": "character",
@@ -2797,5 +2810,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T18:22:36.664Z"
+  "lastUpdated": "2026-10-24T18:22:42.853Z"
 }
