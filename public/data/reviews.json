@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "7ba986d07f291353f93ea7b65198c261e1830cef",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lulloq Doro",
+      "user": "gm",
+      "timestamp": "2026-10-24T20:24:36.986Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T20:24:36.986Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: lulloq_doro (by gm) - added faction"
+    },
+    {
       "commitSha": "94d71539502096c9f38b14c66b2b181888afcbbe",
       "action": "update",
       "type": "character",
@@ -3161,5 +3174,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T20:24:12.285Z"
+  "lastUpdated": "2026-10-24T20:24:36.986Z"
 }
