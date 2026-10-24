@@ -31335,7 +31335,52 @@
       "fileSize": 446319,
       "mimeType": "image/png",
       "lastModified": "2026-10-24T18:25:03.056Z"
+    },
+    "characters-abgb95vczyz6": {
+      "id": "characters-abgb95vczyz6",
+      "category": "characters",
+      "title": "kobold sorcerer",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/569142471685941203/",
+      "tags": [
+        "kobold"
+      ],
+      "uploadDate": "2026-10-24T18:26:56.657Z",
+      "sizes": {
+        "thumb": {
+          "filename": "abgb95vczyz6-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/abgb95vczyz6-thumb.webp",
+          "width": 106,
+          "height": 150
+        },
+        "small": {
+          "filename": "abgb95vczyz6-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/abgb95vczyz6-small.webp",
+          "width": 211,
+          "height": 300
+        },
+        "medium": {
+          "filename": "abgb95vczyz6-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/abgb95vczyz6-medium.webp",
+          "width": 423,
+          "height": 600
+        },
+        "large": {
+          "filename": "abgb95vczyz6-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/abgb95vczyz6-large.webp",
+          "width": 736,
+          "height": 1044
+        },
+        "original": {
+          "filename": "abgb95vczyz6-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/abgb95vczyz6-large.webp",
+          "width": 736,
+          "height": 1044
+        }
+      },
+      "fileSize": 93659,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T18:25:03.056Z"
+  "lastUpdated": "2026-10-24T18:26:56.668Z"
 }
