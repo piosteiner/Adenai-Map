@@ -33400,7 +33400,50 @@
       },
       "fileSize": 120671,
       "mimeType": "image/jpeg"
+    },
+    "creatures-l33j6a91fuds": {
+      "id": "creatures-l33j6a91fuds",
+      "category": "creatures",
+      "title": "e73d7bfc65afad9e7beffcc094d1b6ae",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/853502566905600741/",
+      "tags": [],
+      "uploadDate": "2026-10-24T19:57:19.328Z",
+      "sizes": {
+        "thumb": {
+          "filename": "l33j6a91fuds-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/l33j6a91fuds-thumb.webp",
+          "width": 123,
+          "height": 150
+        },
+        "small": {
+          "filename": "l33j6a91fuds-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/l33j6a91fuds-small.webp",
+          "width": 246,
+          "height": 300
+        },
+        "medium": {
+          "filename": "l33j6a91fuds-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/l33j6a91fuds-medium.webp",
+          "width": 492,
+          "height": 600
+        },
+        "large": {
+          "filename": "l33j6a91fuds-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/l33j6a91fuds-large.webp",
+          "width": 677,
+          "height": 826
+        },
+        "original": {
+          "filename": "l33j6a91fuds-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/l33j6a91fuds-large.webp",
+          "width": 677,
+          "height": 826
+        }
+      },
+      "fileSize": 56136,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T19:56:12.054Z"
+  "lastUpdated": "2026-10-24T19:57:19.339Z"
 }
