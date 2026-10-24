@@ -2630,16 +2630,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Eine Eladrin-Sorceress, der die [[VsuzH]] in der 9. Sitzung begegneten. Sie sieht für alle anders aus. Bis Sitzung 19 im Protokoll als entschuldigt geführt.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/8uu88nklvqcg-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/8uu88nklvqcg-small.webp",
       "status": "unknown",
       "faction": "VsuzH",
       "relationship": "party",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:41:28.994Z",
-      "updatedAt": "2026-10-18T04:41:28.994Z"
+      "updatedAt": "2026-10-24T21:02:16.698Z"
     },
     {
       "id": "francis",
@@ -4359,5 +4362,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T20:57:34.917Z"
+  "lastUpdated": "2026-10-24T21:02:16.698Z"
 }
