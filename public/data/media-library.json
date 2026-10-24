@@ -34083,7 +34083,50 @@
       "fileSize": 55178,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-24T20:20:06.194Z"
+    },
+    "creatures-7cpbiai8qvx1": {
+      "id": "creatures-7cpbiai8qvx1",
+      "category": "creatures",
+      "title": "Torog_-_LoVM",
+      "caption": "",
+      "credits": "https://criticalrole.miraheze.org/wiki/Torog",
+      "tags": [],
+      "uploadDate": "2026-10-24T20:21:51.115Z",
+      "sizes": {
+        "thumb": {
+          "filename": "7cpbiai8qvx1-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7cpbiai8qvx1-thumb.webp",
+          "width": 114,
+          "height": 150
+        },
+        "small": {
+          "filename": "7cpbiai8qvx1-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7cpbiai8qvx1-small.webp",
+          "width": 228,
+          "height": 300
+        },
+        "medium": {
+          "filename": "7cpbiai8qvx1-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7cpbiai8qvx1-medium.webp",
+          "width": 290,
+          "height": 382
+        },
+        "large": {
+          "filename": "7cpbiai8qvx1-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7cpbiai8qvx1-large.webp",
+          "width": 290,
+          "height": 382
+        },
+        "original": {
+          "filename": "7cpbiai8qvx1-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/7cpbiai8qvx1-large.webp",
+          "width": 290,
+          "height": 382
+        }
+      },
+      "fileSize": 99956,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-24T20:20:13.968Z"
+  "lastUpdated": "2026-10-24T20:21:51.127Z"
 }
