@@ -33625,7 +33625,53 @@
       "fileSize": 1970691,
       "mimeType": "image/png",
       "lastModified": "2026-10-24T20:06:39.018Z"
+    },
+    "creatures-stqm4n8iaktt": {
+      "id": "creatures-stqm4n8iaktt",
+      "category": "creatures",
+      "title": "moon stone dragon",
+      "caption": "",
+      "credits": "Fizban's Treasury of Dragons",
+      "tags": [
+        "dragon",
+        "moon stone"
+      ],
+      "uploadDate": "2026-10-24T20:09:54.623Z",
+      "sizes": {
+        "thumb": {
+          "filename": "stqm4n8iaktt-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/stqm4n8iaktt-thumb.webp",
+          "width": 150,
+          "height": 141
+        },
+        "small": {
+          "filename": "stqm4n8iaktt-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/stqm4n8iaktt-small.webp",
+          "width": 300,
+          "height": 282
+        },
+        "medium": {
+          "filename": "stqm4n8iaktt-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/stqm4n8iaktt-medium.webp",
+          "width": 600,
+          "height": 565
+        },
+        "large": {
+          "filename": "stqm4n8iaktt-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/stqm4n8iaktt-large.webp",
+          "width": 1000,
+          "height": 941
+        },
+        "original": {
+          "filename": "stqm4n8iaktt-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/stqm4n8iaktt-large.webp",
+          "width": 1000,
+          "height": 941
+        }
+      },
+      "fileSize": 327435,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T20:06:39.018Z"
+  "lastUpdated": "2026-10-24T20:09:54.635Z"
 }
