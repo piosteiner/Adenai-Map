@@ -1735,6 +1735,10 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/i2wgrvgm96vy-small.webp",
+        "https://adenai-admin.piogino.ch/media/zy9v4azk0qay-small.webp"
+      ],
       "image": "https://adenai-admin.piogino.ch/media/i2wgrvgm96vy-small.webp",
       "status": "alive",
       "faction": "",
@@ -1744,7 +1748,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:43:21.763Z",
-      "updatedAt": "2025-09-07T19:46:31.446Z"
+      "updatedAt": "2026-10-24T19:54:09.763Z"
     },
     {
       "id": "sorin_karthright",
@@ -4316,5 +4320,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T19:54:01.456Z"
+  "lastUpdated": "2026-10-24T19:54:09.763Z"
 }
