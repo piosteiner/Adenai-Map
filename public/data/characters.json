@@ -4290,7 +4290,27 @@
       "movementHistory": [],
       "createdAt": "2026-10-24T19:44:24.891Z",
       "updatedAt": "2026-10-24T19:44:24.891Z"
+    },
+    {
+      "id": "hrogar",
+      "name": "Hrogar",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "Teil der [[Die Vier Kristallherzen]].",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/pnltjvsdkk9x-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/pnltjvsdkk9x-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-24T19:44:39.399Z",
+      "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T19:44:24.891Z"
+  "lastUpdated": "2026-10-24T19:44:39.399Z"
 }
