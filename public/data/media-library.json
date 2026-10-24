@@ -33448,7 +33448,54 @@
       "fileSize": 56136,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-24T19:57:40.123Z"
+    },
+    "creatures-11e3xxjktdy8": {
+      "id": "creatures-11e3xxjktdy8",
+      "category": "creatures",
+      "title": "651c1eb12d15739755b888a36a154c7f",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/3518505955413185/",
+      "tags": [
+        "blue",
+        "dragon",
+        "chromatic"
+      ],
+      "uploadDate": "2026-10-24T19:59:58.895Z",
+      "sizes": {
+        "thumb": {
+          "filename": "11e3xxjktdy8-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/11e3xxjktdy8-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "11e3xxjktdy8-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/11e3xxjktdy8-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "11e3xxjktdy8-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/11e3xxjktdy8-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "11e3xxjktdy8-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/11e3xxjktdy8-large.webp",
+          "width": 1024,
+          "height": 1024
+        },
+        "original": {
+          "filename": "11e3xxjktdy8-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/11e3xxjktdy8-large.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "fileSize": 194701,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T19:57:40.123Z"
+  "lastUpdated": "2026-10-24T19:59:58.907Z"
 }
