@@ -2980,16 +2980,16 @@
         1008
       ],
       "description": "Führt die [[Benthals]] in der Unterstadt von [[Valaris]] und bat die [[VsuzH]] um Hilfe gegen groteske Kreaturen in der Kanalisation. Nach dem Sieg über [[Kunos]] vertritt sie die Unterstadt als Beraterin des Kardinals.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/mswzr1fdgs1o-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/mswzr1fdgs1o-small.webp",
       "status": "alive",
       "faction": "Benthals",
       "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2026-10-18T04:42:00.412Z",
-      "updatedAt": "2026-10-18T04:42:00.412Z",
       "currentLocation": {
         "location": "Valaris",
         "date": "5663-06-03",
@@ -2999,8 +2999,10 @@
           1700,
           1008
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2026-10-18T04:42:00.412Z",
+      "updatedAt": "2026-10-24T20:16:16.564Z"
     },
     {
       "id": "massimo",
@@ -4342,5 +4344,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T20:12:40.002Z"
+  "lastUpdated": "2026-10-24T20:16:16.564Z"
 }
