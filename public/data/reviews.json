@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "33b37abed64cde65f4910fa7f5efd94604316243",
+      "action": "update",
+      "type": "character",
+      "itemName": "Al-Ajrafa",
+      "user": "gm",
+      "timestamp": "2026-10-24T21:18:52.571Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T21:18:52.571Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: al_ajrafa (by gm) - added image"
+    },
+    {
       "commitSha": "8d5911a6c32875dc1d85f048cc90c430bca91317",
       "action": "create",
       "type": "character",
@@ -3239,5 +3252,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T21:18:42.682Z"
+  "lastUpdated": "2026-10-24T21:18:52.571Z"
 }
