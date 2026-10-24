@@ -2549,16 +2549,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Eine Fee. Kam in [[Silbergrat]] von Moonhaven in die Material Plane und trat in der 3. Sitzung spontan den [[VsuzH]] bei.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/jzyqdmmvitsh-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/jzyqdmmvitsh-small.webp",
       "status": "alive",
       "faction": "VsuzH",
       "relationship": "party",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:16:22.856Z",
-      "updatedAt": "2026-10-18T04:16:22.856Z"
+      "updatedAt": "2026-10-24T18:22:41.609Z"
     },
     {
       "id": "niall",
@@ -4245,5 +4248,5 @@
       "updatedAt": "2026-10-19T11:33:22.265Z"
     }
   ],
-  "lastUpdated": "2026-10-24T18:22:35.441Z"
+  "lastUpdated": "2026-10-24T18:22:41.609Z"
 }
