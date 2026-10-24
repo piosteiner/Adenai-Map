@@ -31194,49 +31194,6 @@
       "fileSize": 321863,
       "mimeType": "image/png"
     },
-    "characters-z3sy8m4ud8h8": {
-      "id": "characters-z3sy8m4ud8h8",
-      "category": "characters",
-      "title": "Tasbor",
-      "caption": "",
-      "credits": "AI generated",
-      "tags": [],
-      "uploadDate": "2026-10-24T18:19:30.762Z",
-      "sizes": {
-        "thumb": {
-          "filename": "z3sy8m4ud8h8-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/z3sy8m4ud8h8-thumb.webp",
-          "width": 150,
-          "height": 150
-        },
-        "small": {
-          "filename": "z3sy8m4ud8h8-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/z3sy8m4ud8h8-small.webp",
-          "width": 300,
-          "height": 300
-        },
-        "medium": {
-          "filename": "z3sy8m4ud8h8-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/z3sy8m4ud8h8-medium.webp",
-          "width": 600,
-          "height": 600
-        },
-        "large": {
-          "filename": "z3sy8m4ud8h8-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/z3sy8m4ud8h8-large.webp",
-          "width": 1024,
-          "height": 1024
-        },
-        "original": {
-          "filename": "z3sy8m4ud8h8-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/z3sy8m4ud8h8-large.webp",
-          "width": 1024,
-          "height": 1024
-        }
-      },
-      "fileSize": 1688364,
-      "mimeType": "image/png"
-    },
     "characters-jzyqdmmvitsh": {
       "id": "characters-jzyqdmmvitsh",
       "category": "characters",
@@ -31422,5 +31379,5 @@
       "lastModified": "2026-10-24T18:20:37.452Z"
     }
   },
-  "lastUpdated": "2026-10-24T18:21:02.567Z"
+  "lastUpdated": "2026-10-24T18:21:05.044Z"
 }
