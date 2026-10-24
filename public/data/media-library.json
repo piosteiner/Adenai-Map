@@ -33581,7 +33581,50 @@
       },
       "fileSize": 181800,
       "mimeType": "image/jpeg"
+    },
+    "characters-nnn3xknmh5ng": {
+      "id": "characters-nnn3xknmh5ng",
+      "category": "characters",
+      "title": "Weary Wizard with Ancient Grimoire",
+      "caption": "",
+      "credits": "AI generated GPT",
+      "tags": [],
+      "uploadDate": "2026-10-24T20:06:29.903Z",
+      "sizes": {
+        "thumb": {
+          "filename": "nnn3xknmh5ng-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nnn3xknmh5ng-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "nnn3xknmh5ng-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nnn3xknmh5ng-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "nnn3xknmh5ng-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nnn3xknmh5ng-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "nnn3xknmh5ng-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nnn3xknmh5ng-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "nnn3xknmh5ng-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nnn3xknmh5ng-original.webp",
+          "width": 1254,
+          "height": 1254
+        }
+      },
+      "fileSize": 1970691,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-24T20:02:38.601Z"
+  "lastUpdated": "2026-10-24T20:06:29.915Z"
 }
