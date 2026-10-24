@@ -35037,7 +35037,7 @@
     "general-osftq8lkouvw": {
       "id": "general-osftq8lkouvw",
       "category": "general",
-      "title": "IMG_0773",
+      "title": "Gelber Otter, fliegend",
       "caption": "",
       "credits": "myself",
       "tags": [],
@@ -35075,7 +35075,8 @@
         }
       },
       "fileSize": 856214,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-24T20:56:22.710Z"
     },
     "creatures-2a7qind102ua": {
       "id": "creatures-2a7qind102ua",
@@ -35165,5 +35166,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T20:56:13.162Z"
+  "lastUpdated": "2026-10-24T20:56:22.710Z"
 }
