@@ -191,10 +191,13 @@
         "name": "Atlantis (aufgestiegen)",
         "description": "Standort von Atlantis, nachdem es von den VsuzH wieder in den Himmel gehoben wurde.",
         "contentUrl": null,
-        "image": "",
+        "image": "https://adenai-admin.piogino.ch/media/1c7ewf7omv29-small.webp",
         "region": "heaven",
         "type": "ruin",
-        "visited": true
+        "visited": true,
+        "images": [
+          "https://adenai-admin.piogino.ch/media/1c7ewf7omv29-small.webp"
+        ]
       },
       "geometry": {
         "type": "Point",
