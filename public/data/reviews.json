@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "94d71539502096c9f38b14c66b2b181888afcbbe",
+      "action": "update",
+      "type": "character",
+      "itemName": "König Torrack",
+      "user": "gm",
+      "timestamp": "2026-10-24T20:24:12.285Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T20:24:12.285Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: k_nig_torrack (by gm) - changed relationship to friendly"
+    },
+    {
       "commitSha": "8688beffcddf67f4e51723a466bd831598356ddd",
       "action": "update",
       "type": "character",
@@ -3148,5 +3161,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T20:24:07.281Z"
+  "lastUpdated": "2026-10-24T20:24:12.285Z"
 }
