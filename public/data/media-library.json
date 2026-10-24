@@ -30972,7 +30972,50 @@
       "fileSize": 201474,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-24T18:05:51.583Z"
+    },
+    "locations-p758ykxn48qq": {
+      "id": "locations-p758ykxn48qq",
+      "category": "locations",
+      "title": "Atlantis versunken",
+      "caption": "",
+      "credits": "myself",
+      "tags": [],
+      "uploadDate": "2026-10-24T18:07:35.115Z",
+      "sizes": {
+        "thumb": {
+          "filename": "p758ykxn48qq-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/p758ykxn48qq-thumb.webp",
+          "width": 146,
+          "height": 150
+        },
+        "small": {
+          "filename": "p758ykxn48qq-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/p758ykxn48qq-small.webp",
+          "width": 292,
+          "height": 300
+        },
+        "medium": {
+          "filename": "p758ykxn48qq-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/p758ykxn48qq-medium.webp",
+          "width": 584,
+          "height": 600
+        },
+        "large": {
+          "filename": "p758ykxn48qq-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/p758ykxn48qq-large.webp",
+          "width": 786,
+          "height": 808
+        },
+        "original": {
+          "filename": "p758ykxn48qq-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/p758ykxn48qq-large.webp",
+          "width": 786,
+          "height": 808
+        }
+      },
+      "fileSize": 360913,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-24T18:05:51.583Z"
+  "lastUpdated": "2026-10-24T18:07:35.125Z"
 }
