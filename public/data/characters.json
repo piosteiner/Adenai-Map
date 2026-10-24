@@ -2503,16 +2503,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Abu Sasin, Harengon-Wizard. Detektivin, besonnen; führt mit [[Tasbor]] die Detektei TAbu. Seit der ersten Sitzung in [[Silbergrat]] Teil der [[VsuzH]].",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/j7fnoh4fgy89-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/j7fnoh4fgy89-small.webp",
       "status": "alive",
       "faction": "VsuzH",
       "relationship": "party",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:16:18.892Z",
-      "updatedAt": "2026-10-18T04:16:18.892Z"
+      "updatedAt": "2026-10-24T18:22:10.038Z"
     },
     {
       "id": "ally",
@@ -4235,5 +4238,5 @@
       "updatedAt": "2026-10-19T11:33:22.265Z"
     }
   ],
-  "lastUpdated": "2026-10-22T16:56:09.452Z"
+  "lastUpdated": "2026-10-24T18:22:10.041Z"
 }
