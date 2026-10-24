@@ -33677,7 +33677,7 @@
     "creatures-mmirt95gt8t9": {
       "id": "creatures-mmirt95gt8t9",
       "category": "creatures",
-      "title": "638741964423251585",
+      "title": "Duodrone",
       "caption": "",
       "credits": "Monster Manual 2024",
       "tags": [
@@ -33717,8 +33717,9 @@
         }
       },
       "fileSize": 306252,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-24T20:11:28.724Z"
     }
   },
-  "lastUpdated": "2026-10-24T20:11:11.889Z"
+  "lastUpdated": "2026-10-24T20:11:28.724Z"
 }
