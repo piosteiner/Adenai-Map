@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "8f49ee6a906cfa1e64a549544e2a751107064fe8",
+      "action": "create",
+      "type": "character",
+      "itemName": "Hrogar",
+      "user": "gm",
+      "timestamp": "2026-10-24T19:44:40.782Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T19:44:40.782Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Hrogar (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "6cea328158e533aa4f9b53348d5694a4f16b583e",
       "action": "create",
       "type": "character",
@@ -2914,5 +2927,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T19:44:26.023Z"
+  "lastUpdated": "2026-10-24T19:44:40.782Z"
 }
