@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "3ad3b1957de2e9f2635da621f52d4f20b843318c",
+      "action": "update",
+      "type": "character",
+      "itemName": "Fitcher",
+      "user": "gm",
+      "timestamp": "2026-10-24T20:06:53.645Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T20:06:53.645Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: fitcher (by gm) - updated image"
+    },
+    {
       "commitSha": "8f7a3d168bca69cb01472344027bf254319bead7",
       "action": "update",
       "type": "character",
@@ -3044,5 +3057,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T19:58:19.798Z"
+  "lastUpdated": "2026-10-24T20:06:53.645Z"
 }
