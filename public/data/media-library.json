@@ -32522,7 +32522,52 @@
       },
       "fileSize": 65459,
       "mimeType": "image/jpeg"
+    },
+    "characters-x7mkqjt8wy4z": {
+      "id": "characters-x7mkqjt8wy4z",
+      "category": "characters",
+      "title": "18ed607b9b66cf2aaaae56c77c61679d",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/1048564725782621292/",
+      "tags": [
+        "tabaxi"
+      ],
+      "uploadDate": "2026-10-24T18:54:15.963Z",
+      "sizes": {
+        "thumb": {
+          "filename": "x7mkqjt8wy4z-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/x7mkqjt8wy4z-thumb.webp",
+          "width": 120,
+          "height": 150
+        },
+        "small": {
+          "filename": "x7mkqjt8wy4z-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/x7mkqjt8wy4z-small.webp",
+          "width": 240,
+          "height": 300
+        },
+        "medium": {
+          "filename": "x7mkqjt8wy4z-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/x7mkqjt8wy4z-medium.webp",
+          "width": 480,
+          "height": 600
+        },
+        "large": {
+          "filename": "x7mkqjt8wy4z-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/x7mkqjt8wy4z-large.webp",
+          "width": 960,
+          "height": 1200
+        },
+        "original": {
+          "filename": "x7mkqjt8wy4z-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/x7mkqjt8wy4z-original.webp",
+          "width": 1200,
+          "height": 1500
+        }
+      },
+      "fileSize": 163899,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T18:53:46.285Z"
+  "lastUpdated": "2026-10-24T18:54:15.972Z"
 }
