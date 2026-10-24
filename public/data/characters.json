@@ -2239,14 +2239,14 @@
       ],
       "image": "https://adenai-admin.piogino.ch/media/monvonnobeq9-small.webp",
       "status": "alive",
-      "faction": "",
+      "faction": "Yosefka Akademie",
       "relationship": "suspicious",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2026-01-17T15:12:30.476Z",
-      "updatedAt": "2026-10-18T16:45:46.387Z"
+      "updatedAt": "2026-10-24T20:24:35.790Z"
     },
     {
       "id": "zo_ob",
@@ -4356,5 +4356,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T20:24:11.117Z"
+  "lastUpdated": "2026-10-24T20:24:35.790Z"
 }
