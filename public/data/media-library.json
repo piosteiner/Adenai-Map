@@ -32567,7 +32567,53 @@
       },
       "fileSize": 163899,
       "mimeType": "image/jpeg"
+    },
+    "characters-uzqdw2ar794c": {
+      "id": "characters-uzqdw2ar794c",
+      "category": "characters",
+      "title": "6919a4f97404da5d584c48ba0dff58a4",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/858639485230203642/",
+      "tags": [
+        "harengon",
+        "child"
+      ],
+      "uploadDate": "2026-10-24T18:56:10.240Z",
+      "sizes": {
+        "thumb": {
+          "filename": "uzqdw2ar794c-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/uzqdw2ar794c-thumb.webp",
+          "width": 104,
+          "height": 150
+        },
+        "small": {
+          "filename": "uzqdw2ar794c-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/uzqdw2ar794c-small.webp",
+          "width": 207,
+          "height": 300
+        },
+        "medium": {
+          "filename": "uzqdw2ar794c-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/uzqdw2ar794c-medium.webp",
+          "width": 414,
+          "height": 600
+        },
+        "large": {
+          "filename": "uzqdw2ar794c-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/uzqdw2ar794c-large.webp",
+          "width": 736,
+          "height": 1067
+        },
+        "original": {
+          "filename": "uzqdw2ar794c-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/uzqdw2ar794c-large.webp",
+          "width": 736,
+          "height": 1067
+        }
+      },
+      "fileSize": 65805,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T18:54:15.972Z"
+  "lastUpdated": "2026-10-24T18:56:10.252Z"
 }
