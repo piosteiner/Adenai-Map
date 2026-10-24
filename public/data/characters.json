@@ -4457,7 +4457,27 @@
       "movementHistory": [],
       "createdAt": "2026-10-24T21:28:18.011Z",
       "updatedAt": "2026-10-24T21:28:18.011Z"
+    },
+    {
+      "id": "marsala",
+      "name": "Marsala",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/zskx9zsrar47-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/zskx9zsrar47-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-24T21:31:44.475Z",
+      "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-24T21:28:18.011Z"
+  "lastUpdated": "2026-10-24T21:31:44.475Z"
 }
