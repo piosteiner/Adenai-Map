@@ -33673,7 +33673,52 @@
       "fileSize": 327435,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-24T20:10:01.896Z"
+    },
+    "creatures-mmirt95gt8t9": {
+      "id": "creatures-mmirt95gt8t9",
+      "category": "creatures",
+      "title": "638741964423251585",
+      "caption": "",
+      "credits": "Monster Manual 2024",
+      "tags": [
+        "modron"
+      ],
+      "uploadDate": "2026-10-24T20:11:11.876Z",
+      "sizes": {
+        "thumb": {
+          "filename": "mmirt95gt8t9-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/mmirt95gt8t9-thumb.webp",
+          "width": 120,
+          "height": 150
+        },
+        "small": {
+          "filename": "mmirt95gt8t9-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/mmirt95gt8t9-small.webp",
+          "width": 240,
+          "height": 300
+        },
+        "medium": {
+          "filename": "mmirt95gt8t9-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/mmirt95gt8t9-medium.webp",
+          "width": 480,
+          "height": 600
+        },
+        "large": {
+          "filename": "mmirt95gt8t9-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/mmirt95gt8t9-large.webp",
+          "width": 800,
+          "height": 1000
+        },
+        "original": {
+          "filename": "mmirt95gt8t9-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/mmirt95gt8t9-large.webp",
+          "width": 800,
+          "height": 1000
+        }
+      },
+      "fileSize": 306252,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T20:10:01.896Z"
+  "lastUpdated": "2026-10-24T20:11:11.889Z"
 }
