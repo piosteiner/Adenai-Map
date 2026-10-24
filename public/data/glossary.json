@@ -296,10 +296,12 @@
       "aliases": [],
       "category": "Gottheit",
       "description": "Gott der Zwerge. [[Rikka Brenner]] schmiedete ihm einen Speer gegen den [[Krabbelkönig]]; in der [[Ruine von Zurak'thar]] steht sein Tempel.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/3s28tm6deavh-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/3s28tm6deavh-small.webp",
       "createdAt": "2026-10-18T04:41:19.011Z",
-      "updatedAt": "2026-10-18T04:41:19.011Z",
+      "updatedAt": "2026-10-24T18:12:35.357Z",
       "createdBy": "gm",
       "updatedBy": "gm"
     },
@@ -487,5 +489,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-24T18:09:36.874Z"
+  "lastUpdated": "2026-10-24T18:12:35.357Z"
 }
