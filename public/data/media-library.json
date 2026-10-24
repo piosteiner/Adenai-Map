@@ -5754,7 +5754,7 @@
     "characters-hhin92fw6eni": {
       "id": "characters-hhin92fw6eni",
       "category": "characters",
-      "title": "63b677833c922cdf10b69063c901216e",
+      "title": "Barnabaix",
       "caption": "",
       "credits": "https://pin.it/7BhqCQEHQ",
       "tags": [],
@@ -5792,7 +5792,8 @@
         }
       },
       "fileSize": 80719,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-24T21:27:12.619Z"
     },
     "characters-0a1y6ik0i19u": {
       "id": "characters-0a1y6ik0i19u",
@@ -35300,5 +35301,5 @@
       "lastModified": "2026-10-24T21:04:33.749Z"
     }
   },
-  "lastUpdated": "2026-10-24T21:25:20.767Z"
+  "lastUpdated": "2026-10-24T21:27:12.619Z"
 }
