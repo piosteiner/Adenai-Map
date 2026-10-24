@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "2e524221dd6d5aa73bba2586978ab37d9e03b4d7",
+      "action": "update",
+      "type": "character",
+      "itemName": "Alice",
+      "user": "gm",
+      "timestamp": "2026-10-24T21:02:17.950Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T21:02:17.950Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: alice (by gm) - added image"
+    },
+    {
       "commitSha": "5d8c570b138b1024b3e6b0a1f54a1d0ec18a977b",
       "action": "update",
       "type": "character",
@@ -3187,5 +3200,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T20:57:36.085Z"
+  "lastUpdated": "2026-10-24T21:02:17.951Z"
 }
