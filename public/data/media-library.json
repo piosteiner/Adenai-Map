@@ -31107,7 +31107,179 @@
       },
       "fileSize": 443914,
       "mimeType": "image/jpeg"
+    },
+    "characters-74ngbz9gvnxr": {
+      "id": "characters-74ngbz9gvnxr",
+      "category": "characters",
+      "title": "Luna",
+      "caption": "",
+      "credits": "AI generated",
+      "tags": [],
+      "uploadDate": "2026-10-24T18:19:30.364Z",
+      "sizes": {
+        "thumb": {
+          "filename": "74ngbz9gvnxr-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/74ngbz9gvnxr-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "74ngbz9gvnxr-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/74ngbz9gvnxr-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "74ngbz9gvnxr-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/74ngbz9gvnxr-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "74ngbz9gvnxr-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/74ngbz9gvnxr-large.webp",
+          "width": 1000,
+          "height": 1000
+        },
+        "original": {
+          "filename": "74ngbz9gvnxr-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/74ngbz9gvnxr-large.webp",
+          "width": 1000,
+          "height": 1000
+        }
+      },
+      "fileSize": 1264710,
+      "mimeType": "image/png"
+    },
+    "characters-pygcsvg7vwnb": {
+      "id": "characters-pygcsvg7vwnb",
+      "category": "characters",
+      "title": "Ally",
+      "caption": "",
+      "credits": "AI generated",
+      "tags": [],
+      "uploadDate": "2026-10-24T18:19:30.461Z",
+      "sizes": {
+        "thumb": {
+          "filename": "pygcsvg7vwnb-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/pygcsvg7vwnb-thumb.webp",
+          "width": 147,
+          "height": 150
+        },
+        "small": {
+          "filename": "pygcsvg7vwnb-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/pygcsvg7vwnb-small.webp",
+          "width": 294,
+          "height": 300
+        },
+        "medium": {
+          "filename": "pygcsvg7vwnb-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/pygcsvg7vwnb-medium.webp",
+          "width": 405,
+          "height": 413
+        },
+        "large": {
+          "filename": "pygcsvg7vwnb-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/pygcsvg7vwnb-large.webp",
+          "width": 405,
+          "height": 413
+        },
+        "original": {
+          "filename": "pygcsvg7vwnb-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/pygcsvg7vwnb-large.webp",
+          "width": 405,
+          "height": 413
+        }
+      },
+      "fileSize": 321863,
+      "mimeType": "image/png"
+    },
+    "characters-z3sy8m4ud8h8": {
+      "id": "characters-z3sy8m4ud8h8",
+      "category": "characters",
+      "title": "Tasbor",
+      "caption": "",
+      "credits": "AI generated",
+      "tags": [],
+      "uploadDate": "2026-10-24T18:19:30.762Z",
+      "sizes": {
+        "thumb": {
+          "filename": "z3sy8m4ud8h8-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z3sy8m4ud8h8-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "z3sy8m4ud8h8-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z3sy8m4ud8h8-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "z3sy8m4ud8h8-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z3sy8m4ud8h8-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "z3sy8m4ud8h8-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z3sy8m4ud8h8-large.webp",
+          "width": 1024,
+          "height": 1024
+        },
+        "original": {
+          "filename": "z3sy8m4ud8h8-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/z3sy8m4ud8h8-large.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "fileSize": 1688364,
+      "mimeType": "image/png"
+    },
+    "characters-499hz46ieg64": {
+      "id": "characters-499hz46ieg64",
+      "category": "characters",
+      "title": "Abu",
+      "caption": "",
+      "credits": "AI generated",
+      "tags": [],
+      "uploadDate": "2026-10-24T18:19:31.391Z",
+      "sizes": {
+        "thumb": {
+          "filename": "499hz46ieg64-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/499hz46ieg64-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "499hz46ieg64-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/499hz46ieg64-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "499hz46ieg64-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/499hz46ieg64-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "499hz46ieg64-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/499hz46ieg64-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "499hz46ieg64-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/499hz46ieg64-original.webp",
+          "width": 1668,
+          "height": 1668
+        }
+      },
+      "fileSize": 1017492,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T18:12:57.601Z"
+  "lastUpdated": "2026-10-24T18:19:31.406Z"
 }
