@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "9b6f8eea68dd6841d2d118578c9247a2f82fa549",
+      "action": "update",
+      "type": "character",
+      "itemName": "Eytan Karthright",
+      "user": "gm",
+      "timestamp": "2026-10-24T19:53:57.098Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T19:53:57.098Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: eytan_karthright (by gm) - Updated character details"
+    },
+    {
       "commitSha": "5514cf31aad373293053360e29a6029e237c7840",
       "action": "update",
       "type": "location",
@@ -2940,5 +2953,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T19:53:45.774Z"
+  "lastUpdated": "2026-10-24T19:53:57.098Z"
 }
