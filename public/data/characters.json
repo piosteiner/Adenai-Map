@@ -2683,16 +2683,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Eine [[Duodrohne]], die [[Ally]] bei [[Fitcher]] mitgenommen und Blechdose getauft hat. [[Simon-Alexander]] versucht ständig, sie abzulecken.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/mmirt95gt8t9-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/mmirt95gt8t9-small.webp",
       "status": "alive",
       "faction": "VsuzH",
       "relationship": "party",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:41:33.782Z",
-      "updatedAt": "2026-10-18T04:41:33.782Z"
+      "updatedAt": "2026-10-24T20:11:19.716Z"
     },
     {
       "id": "simon_alexander",
@@ -4336,5 +4339,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T20:10:11.599Z"
+  "lastUpdated": "2026-10-24T20:11:19.716Z"
 }
