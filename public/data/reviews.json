@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "133e7ea01ff673d38c7b18970f4c61cfd9f42f9a",
+      "action": "update",
+      "type": "character",
+      "itemName": "Ally",
+      "user": "gm",
+      "timestamp": "2026-10-24T18:22:36.664Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T18:22:36.664Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: ally (by gm) - added image"
+    },
+    {
       "commitSha": "78f2cedbf20408c394b96bae93fe1176e3c0408f",
       "action": "update",
       "type": "character",
@@ -2784,5 +2797,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T18:22:17.146Z"
+  "lastUpdated": "2026-10-24T18:22:36.664Z"
 }
