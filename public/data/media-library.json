@@ -34087,7 +34087,7 @@
     "creatures-7cpbiai8qvx1": {
       "id": "creatures-7cpbiai8qvx1",
       "category": "creatures",
-      "title": "Torog_-_LoVM",
+      "title": "Torog",
       "caption": "",
       "credits": "https://criticalrole.miraheze.org/wiki/Torog",
       "tags": [],
@@ -34125,8 +34125,9 @@
         }
       },
       "fileSize": 99956,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-24T20:21:58.451Z"
     }
   },
-  "lastUpdated": "2026-10-24T20:21:51.127Z"
+  "lastUpdated": "2026-10-24T20:21:58.451Z"
 }
