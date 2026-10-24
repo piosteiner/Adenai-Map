@@ -1317,7 +1317,10 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/6rk3m2ielsmr-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/6rk3m2ielsmr-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "friendly",
@@ -1326,7 +1329,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-08-29T20:31:54.501Z",
-      "updatedAt": "2025-09-07T19:26:51.770Z"
+      "updatedAt": "2026-10-24T19:54:28.290Z"
     },
     {
       "id": "eriosa_s_ssblatt",
@@ -4324,5 +4327,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T19:54:17.970Z"
+  "lastUpdated": "2026-10-24T19:54:28.290Z"
 }
