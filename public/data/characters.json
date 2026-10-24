@@ -4417,7 +4417,27 @@
       "movementHistory": [],
       "createdAt": "2026-10-24T21:27:35.436Z",
       "updatedAt": "2026-10-24T21:27:35.436Z"
+    },
+    {
+      "id": "riel",
+      "name": "Riel",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/03ucqhu2n5ot-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/03ucqhu2n5ot-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-24T21:27:56.022Z",
+      "updatedAt": "2026-10-24T21:27:56.022Z"
     }
   ],
-  "lastUpdated": "2026-10-24T21:27:35.436Z"
+  "lastUpdated": "2026-10-24T21:27:56.022Z"
 }
