@@ -33723,7 +33723,7 @@
     "characters-mswzr1fdgs1o": {
       "id": "characters-mswzr1fdgs1o",
       "category": "characters",
-      "title": "519ae32d83f2fe283c914f9c6d26bdcc",
+      "title": "Lerna",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/501095896040158314/",
       "tags": [],
@@ -33761,7 +33761,8 @@
         }
       },
       "fileSize": 117285,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-24T20:15:38.710Z"
     },
     "characters-vwx1tmxax6ya": {
       "id": "characters-vwx1tmxax6ya",
@@ -33850,5 +33851,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T20:15:29.661Z"
+  "lastUpdated": "2026-10-24T20:15:38.710Z"
 }
