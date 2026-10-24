@@ -73,6 +73,21 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_e69ee85f89",
+      "name": "Die Vier Kristallherzen",
+      "aliases": [],
+      "category": "",
+      "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/l0e09ron6cra-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/l0e09ron6cra-small.webp",
+      "createdAt": "2026-10-24T19:43:12.579Z",
+      "updatedAt": "2026-10-24T19:43:12.579Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_2dbbddd938",
       "name": "Duodrohne",
       "aliases": [
@@ -491,5 +506,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-24T18:14:05.968Z"
+  "lastUpdated": "2026-10-24T19:43:12.579Z"
 }
