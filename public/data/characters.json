@@ -4256,7 +4256,7 @@
       "title": "",
       "placeOfOrigin": "",
       "coordinates": null,
-      "description": "",
+      "description": "Teil der [[Die Vier Kristallherzen]].",
       "images": [
         "https://adenai-admin.piogino.ch/media/rmf5gnk160ie-small.webp"
       ],
@@ -4267,9 +4267,10 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-24T19:43:34.587Z",
-      "updatedAt": "2026-10-24T19:43:34.587Z"
+      "updatedAt": "2026-10-24T19:44:08.023Z"
     }
   ],
-  "lastUpdated": "2026-10-24T19:43:59.212Z"
+  "lastUpdated": "2026-10-24T19:44:08.023Z"
 }
