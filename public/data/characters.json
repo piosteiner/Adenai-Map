@@ -4363,7 +4363,39 @@
       "movementHistory": [],
       "createdAt": "2026-10-24T19:44:39.399Z",
       "updatedAt": "2026-10-24T19:44:39.399Z"
+    },
+    {
+      "id": "al_ajrafa",
+      "name": "Al-Ajrafa",
+      "title": "",
+      "placeOfOrigin": "Estu Vin",
+      "coordinates": [
+        1846,
+        1203
+      ],
+      "description": "",
+      "images": [],
+      "image": "",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-24T21:18:41.404Z",
+      "updatedAt": "2026-10-24T21:18:41.404Z",
+      "currentLocation": {
+        "location": "Estu Vin",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          1846,
+          1203
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-24T21:04:43.639Z"
+  "lastUpdated": "2026-10-24T21:18:41.404Z"
 }
