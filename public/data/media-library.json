@@ -32656,7 +32656,54 @@
       },
       "fileSize": 160323,
       "mimeType": "image/jpeg"
+    },
+    "characters-ew6sklhyixaz": {
+      "id": "characters-ew6sklhyixaz",
+      "category": "characters",
+      "title": "311aa09650ef584cd63e205c5c94de74",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/310607705564378006/",
+      "tags": [
+        "harengon",
+        "female",
+        "youth"
+      ],
+      "uploadDate": "2026-10-24T18:57:47.364Z",
+      "sizes": {
+        "thumb": {
+          "filename": "ew6sklhyixaz-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ew6sklhyixaz-thumb.webp",
+          "width": 105,
+          "height": 150
+        },
+        "small": {
+          "filename": "ew6sklhyixaz-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ew6sklhyixaz-small.webp",
+          "width": 209,
+          "height": 300
+        },
+        "medium": {
+          "filename": "ew6sklhyixaz-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ew6sklhyixaz-medium.webp",
+          "width": 418,
+          "height": 600
+        },
+        "large": {
+          "filename": "ew6sklhyixaz-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ew6sklhyixaz-large.webp",
+          "width": 837,
+          "height": 1200
+        },
+        "original": {
+          "filename": "ew6sklhyixaz-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ew6sklhyixaz-original.webp",
+          "width": 1162,
+          "height": 1666
+        }
+      },
+      "fileSize": 149459,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T18:56:43.875Z"
+  "lastUpdated": "2026-10-24T18:57:47.375Z"
 }
