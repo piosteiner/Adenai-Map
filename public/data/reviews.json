@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "5d8c570b138b1024b3e6b0a1f54a1d0ec18a977b",
+      "action": "update",
+      "type": "character",
+      "itemName": "Kauris",
+      "user": "gm",
+      "timestamp": "2026-10-24T20:57:36.085Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T20:57:36.085Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: kauris (by gm) - added image"
+    },
+    {
       "commitSha": "7ba986d07f291353f93ea7b65198c261e1830cef",
       "action": "update",
       "type": "character",
@@ -3174,5 +3187,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T20:24:36.986Z"
+  "lastUpdated": "2026-10-24T20:57:36.085Z"
 }
