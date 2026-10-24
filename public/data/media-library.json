@@ -32148,7 +32148,52 @@
       },
       "fileSize": 33473,
       "mimeType": "image/jpeg"
+    },
+    "characters-9g66vsfprh7y": {
+      "id": "characters-9g66vsfprh7y",
+      "category": "characters",
+      "title": "eeffdecb84850a700b680baddf1ff9db",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/831195675014529228/",
+      "tags": [
+        "kobold"
+      ],
+      "uploadDate": "2026-10-24T18:36:10.760Z",
+      "sizes": {
+        "thumb": {
+          "filename": "9g66vsfprh7y-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9g66vsfprh7y-thumb.webp",
+          "width": 89,
+          "height": 150
+        },
+        "small": {
+          "filename": "9g66vsfprh7y-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9g66vsfprh7y-small.webp",
+          "width": 179,
+          "height": 300
+        },
+        "medium": {
+          "filename": "9g66vsfprh7y-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9g66vsfprh7y-medium.webp",
+          "width": 357,
+          "height": 600
+        },
+        "large": {
+          "filename": "9g66vsfprh7y-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9g66vsfprh7y-large.webp",
+          "width": 715,
+          "height": 1200
+        },
+        "original": {
+          "filename": "9g66vsfprh7y-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9g66vsfprh7y-original.webp",
+          "width": 736,
+          "height": 1236
+        }
+      },
+      "fileSize": 73219,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T18:35:54.435Z"
+  "lastUpdated": "2026-10-24T18:36:10.769Z"
 }
