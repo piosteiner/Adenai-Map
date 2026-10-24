@@ -4230,13 +4230,13 @@
       "image": "https://adenai-admin.piogino.ch/media/2ezeuruva8t0-small.webp",
       "status": "alive",
       "faction": "",
-      "relationship": "ally",
+      "relationship": "party",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2026-10-18T17:39:46.215Z",
-      "updatedAt": "2026-10-18T17:39:53.966Z"
+      "updatedAt": "2026-10-24T21:02:28.841Z"
     },
     {
       "id": "lord_braun",
@@ -4362,5 +4362,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T21:02:16.698Z"
+  "lastUpdated": "2026-10-24T21:02:28.841Z"
 }
