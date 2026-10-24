@@ -1087,11 +1087,13 @@
         "name": "Gleissende Zitadelle",
         "description": "Radiant Citadel",
         "contentUrl": null,
-        "image": "",
+        "image": "https://adenai-admin.piogino.ch/media/hic3u8km9zpv-small.webp",
         "region": "unknown",
         "type": "city",
         "visited": true,
-        "images": []
+        "images": [
+          "https://adenai-admin.piogino.ch/media/hic3u8km9zpv-small.webp"
+        ]
       },
       "geometry": {
         "type": "Point",
