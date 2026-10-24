@@ -30885,7 +30885,50 @@
       },
       "fileSize": 173747,
       "mimeType": "image/png"
+    },
+    "locations-ntgcgzaej11b": {
+      "id": "locations-ntgcgzaej11b",
+      "category": "locations",
+      "title": "Goblin Loch",
+      "caption": "",
+      "credits": "myself",
+      "tags": [],
+      "uploadDate": "2026-10-24T18:05:17.502Z",
+      "sizes": {
+        "thumb": {
+          "filename": "ntgcgzaej11b-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ntgcgzaej11b-thumb.webp",
+          "width": 150,
+          "height": 120
+        },
+        "small": {
+          "filename": "ntgcgzaej11b-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ntgcgzaej11b-small.webp",
+          "width": 300,
+          "height": 240
+        },
+        "medium": {
+          "filename": "ntgcgzaej11b-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ntgcgzaej11b-medium.webp",
+          "width": 600,
+          "height": 479
+        },
+        "large": {
+          "filename": "ntgcgzaej11b-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ntgcgzaej11b-large.webp",
+          "width": 888,
+          "height": 709
+        },
+        "original": {
+          "filename": "ntgcgzaej11b-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ntgcgzaej11b-large.webp",
+          "width": 888,
+          "height": 709
+        }
+      },
+      "fileSize": 442602,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-24T18:05:07.672Z"
+  "lastUpdated": "2026-10-24T18:05:17.511Z"
 }
