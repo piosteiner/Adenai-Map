@@ -4249,7 +4249,27 @@
       "currentLocation": null,
       "createdAt": "2026-10-19T11:23:26.886Z",
       "updatedAt": "2026-10-19T11:33:22.265Z"
+    },
+    {
+      "id": "shadi",
+      "name": "Shadi",
+      "title": "",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/rmf5gnk160ie-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/rmf5gnk160ie-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "friendly",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-24T19:43:34.587Z",
+      "updatedAt": "2026-10-24T19:43:34.587Z"
     }
   ],
-  "lastUpdated": "2026-10-24T19:42:45.038Z"
+  "lastUpdated": "2026-10-24T19:43:34.587Z"
 }
