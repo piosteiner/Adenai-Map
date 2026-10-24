@@ -183,10 +183,12 @@
       "aliases": [],
       "category": "Gegenstand",
       "description": "Ein Käfer, der mit einem Elektroschock Tote ins Leben zurückholt und dabei verschwindet. So retteten [[Abu]] [[Tasbor]] und [[Luna]] [[Naos]]. Benannt nach dem Drachen [[Fulgur]].",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/2a7qind102ua-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/2a7qind102ua-small.webp",
       "createdAt": "2026-10-18T04:41:09.383Z",
-      "updatedAt": "2026-10-18T04:41:09.383Z",
+      "updatedAt": "2026-10-24T20:56:56.297Z",
       "createdBy": "gm",
       "updatedBy": "gm"
     },
@@ -511,5 +513,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-24T20:56:41.698Z"
+  "lastUpdated": "2026-10-24T20:56:56.297Z"
 }
