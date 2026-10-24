@@ -31298,7 +31298,9 @@
       "title": "Kobold Inventor",
       "caption": "",
       "credits": "Tome of Beast 1",
-      "tags": [],
+      "tags": [
+        "kobold"
+      ],
       "uploadDate": "2026-10-24T18:24:52.946Z",
       "sizes": {
         "thumb": {
@@ -31334,7 +31336,7 @@
       },
       "fileSize": 446319,
       "mimeType": "image/png",
-      "lastModified": "2026-10-24T18:25:03.056Z"
+      "lastModified": "2026-10-24T18:27:04.284Z"
     },
     "characters-abgb95vczyz6": {
       "id": "characters-abgb95vczyz6",
@@ -31382,5 +31384,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T18:26:56.668Z"
+  "lastUpdated": "2026-10-24T18:27:04.284Z"
 }
