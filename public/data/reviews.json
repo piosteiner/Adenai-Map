@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "37737d9808f8e1af2a677934ed36554be4c358fe",
+      "action": "create",
+      "type": "character",
+      "itemName": "Marsala",
+      "user": "gm",
+      "timestamp": "2026-10-24T21:31:45.725Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T21:31:45.725Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Marsala (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "dd0673b26b6ae3798ed3f8dcbf7d1c76ce3d5f5b",
       "action": "create",
       "type": "character",
@@ -3291,5 +3304,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T21:28:19.071Z"
+  "lastUpdated": "2026-10-24T21:31:45.725Z"
 }
