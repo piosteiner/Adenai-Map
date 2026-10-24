@@ -32204,7 +32204,52 @@
       },
       "fileSize": 73219,
       "mimeType": "image/jpeg"
+    },
+    "general-a1atdh5gfm4e": {
+      "id": "general-a1atdh5gfm4e",
+      "category": "general",
+      "title": "7db382316a3eafdf8b558ae2166cc5e6",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/383157880818780823/",
+      "tags": [
+        "goblin"
+      ],
+      "uploadDate": "2026-10-24T18:44:56.768Z",
+      "sizes": {
+        "thumb": {
+          "filename": "a1atdh5gfm4e-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/a1atdh5gfm4e-thumb.webp",
+          "width": 112,
+          "height": 150
+        },
+        "small": {
+          "filename": "a1atdh5gfm4e-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/a1atdh5gfm4e-small.webp",
+          "width": 225,
+          "height": 300
+        },
+        "medium": {
+          "filename": "a1atdh5gfm4e-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/a1atdh5gfm4e-medium.webp",
+          "width": 452,
+          "height": 600
+        },
+        "large": {
+          "filename": "a1atdh5gfm4e-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/a1atdh5gfm4e-large.webp",
+          "width": 903,
+          "height": 1200
+        },
+        "original": {
+          "filename": "a1atdh5gfm4e-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/a1atdh5gfm4e-original.webp",
+          "width": 1199,
+          "height": 1593
+        }
+      },
+      "fileSize": 162942,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T18:38:53.260Z"
+  "lastUpdated": "2026-10-24T18:44:56.780Z"
 }
