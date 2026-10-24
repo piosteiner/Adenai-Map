@@ -31061,7 +31061,53 @@
       },
       "fileSize": 38992,
       "mimeType": "image/webp"
+    },
+    "general-csmrue00sulh": {
+      "id": "general-csmrue00sulh",
+      "category": "general",
+      "title": "tiamat",
+      "caption": "",
+      "credits": "Fizban's Treasury of Dragons, Wizards of the Coast",
+      "tags": [
+        "dragon",
+        "god"
+      ],
+      "uploadDate": "2026-10-24T18:12:57.587Z",
+      "sizes": {
+        "thumb": {
+          "filename": "csmrue00sulh-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/csmrue00sulh-thumb.webp",
+          "width": 150,
+          "height": 119
+        },
+        "small": {
+          "filename": "csmrue00sulh-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/csmrue00sulh-small.webp",
+          "width": 300,
+          "height": 239
+        },
+        "medium": {
+          "filename": "csmrue00sulh-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/csmrue00sulh-medium.webp",
+          "width": 600,
+          "height": 479
+        },
+        "large": {
+          "filename": "csmrue00sulh-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/csmrue00sulh-large.webp",
+          "width": 1000,
+          "height": 799
+        },
+        "original": {
+          "filename": "csmrue00sulh-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/csmrue00sulh-large.webp",
+          "width": 1000,
+          "height": 799
+        }
+      },
+      "fileSize": 443914,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T18:11:04.907Z"
+  "lastUpdated": "2026-10-24T18:12:57.601Z"
 }
