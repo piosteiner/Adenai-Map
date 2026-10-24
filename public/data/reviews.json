@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "78f2cedbf20408c394b96bae93fe1176e3c0408f",
+      "action": "update",
+      "type": "character",
+      "itemName": "Tasbor",
+      "user": "gm",
+      "timestamp": "2026-10-24T18:22:17.146Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T18:22:17.146Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: tasbor (by gm) - updated place of origin, added image"
+    },
+    {
       "commitSha": "5efd83ebd4e4944f0f470f0237a00e6d31330a74",
       "action": "update",
       "type": "character",
@@ -2771,5 +2784,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T18:22:11.164Z"
+  "lastUpdated": "2026-10-24T18:22:17.146Z"
 }
