@@ -31365,7 +31365,50 @@
       },
       "fileSize": 321863,
       "mimeType": "image/png"
+    },
+    "characters-qt06uv0thnvd": {
+      "id": "characters-qt06uv0thnvd",
+      "category": "characters",
+      "title": "Tasbor",
+      "caption": "",
+      "credits": "AI generated",
+      "tags": [],
+      "uploadDate": "2026-10-24T18:20:00.568Z",
+      "sizes": {
+        "thumb": {
+          "filename": "qt06uv0thnvd-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qt06uv0thnvd-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "qt06uv0thnvd-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qt06uv0thnvd-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "qt06uv0thnvd-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qt06uv0thnvd-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "qt06uv0thnvd-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qt06uv0thnvd-large.webp",
+          "width": 1024,
+          "height": 1024
+        },
+        "original": {
+          "filename": "qt06uv0thnvd-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/qt06uv0thnvd-large.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "fileSize": 1688364,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-24T18:19:53.020Z"
+  "lastUpdated": "2026-10-24T18:20:00.578Z"
 }
