@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "030d78ae47c5e3a7c0fb1c28a66c184cfb536d42",
+      "action": "update",
+      "type": "character",
+      "itemName": "Sonnhild",
+      "user": "gm",
+      "timestamp": "2026-10-24T20:10:13.157Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T20:10:13.157Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: sonnhild (by gm) - added image"
+    },
+    {
       "commitSha": "3ad3b1957de2e9f2635da621f52d4f20b843318c",
       "action": "update",
       "type": "character",
@@ -3057,5 +3070,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T20:06:53.645Z"
+  "lastUpdated": "2026-10-24T20:10:13.157Z"
 }
