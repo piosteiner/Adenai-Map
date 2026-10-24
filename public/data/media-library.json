@@ -32748,7 +32748,50 @@
       },
       "fileSize": 95505,
       "mimeType": "image/jpeg"
+    },
+    "characters-nply3qhlq6qk": {
+      "id": "characters-nply3qhlq6qk",
+      "category": "characters",
+      "title": "IMG_0079",
+      "caption": "",
+      "credits": "Wizards of the Coast",
+      "tags": [],
+      "uploadDate": "2026-10-24T19:40:24.052Z",
+      "sizes": {
+        "thumb": {
+          "filename": "nply3qhlq6qk-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nply3qhlq6qk-thumb.webp",
+          "width": 95,
+          "height": 150
+        },
+        "small": {
+          "filename": "nply3qhlq6qk-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nply3qhlq6qk-small.webp",
+          "width": 189,
+          "height": 300
+        },
+        "medium": {
+          "filename": "nply3qhlq6qk-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nply3qhlq6qk-medium.webp",
+          "width": 379,
+          "height": 600
+        },
+        "large": {
+          "filename": "nply3qhlq6qk-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nply3qhlq6qk-large.webp",
+          "width": 631,
+          "height": 1000
+        },
+        "original": {
+          "filename": "nply3qhlq6qk-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/nply3qhlq6qk-large.webp",
+          "width": 631,
+          "height": 1000
+        }
+      },
+      "fileSize": 1038252,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-24T19:05:28.687Z"
+  "lastUpdated": "2026-10-24T19:40:24.063Z"
 }
