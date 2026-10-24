@@ -439,10 +439,12 @@
       "aliases": [],
       "category": "Gottheit",
       "description": "Die erste der chromatischen Drachen, in die Hölle verbannt. [[Lady Rivea]] scheint sie wiederbeleben zu wollen; eine Vielhändige rüstet ihre Armee.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/csmrue00sulh-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/csmrue00sulh-small.webp",
       "createdAt": "2026-10-18T04:41:17.908Z",
-      "updatedAt": "2026-10-18T04:41:17.908Z",
+      "updatedAt": "2026-10-24T18:14:05.968Z",
       "createdBy": "gm",
       "updatedBy": "gm"
     },
@@ -489,5 +491,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-24T18:12:35.357Z"
+  "lastUpdated": "2026-10-24T18:14:05.968Z"
 }
