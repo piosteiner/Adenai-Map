@@ -31151,49 +31151,6 @@
       "fileSize": 1264710,
       "mimeType": "image/png"
     },
-    "characters-pygcsvg7vwnb": {
-      "id": "characters-pygcsvg7vwnb",
-      "category": "characters",
-      "title": "Ally",
-      "caption": "",
-      "credits": "AI generated",
-      "tags": [],
-      "uploadDate": "2026-10-24T18:19:30.461Z",
-      "sizes": {
-        "thumb": {
-          "filename": "pygcsvg7vwnb-thumb.webp",
-          "url": "https://adenai-admin.piogino.ch/media/pygcsvg7vwnb-thumb.webp",
-          "width": 147,
-          "height": 150
-        },
-        "small": {
-          "filename": "pygcsvg7vwnb-small.webp",
-          "url": "https://adenai-admin.piogino.ch/media/pygcsvg7vwnb-small.webp",
-          "width": 294,
-          "height": 300
-        },
-        "medium": {
-          "filename": "pygcsvg7vwnb-medium.webp",
-          "url": "https://adenai-admin.piogino.ch/media/pygcsvg7vwnb-medium.webp",
-          "width": 405,
-          "height": 413
-        },
-        "large": {
-          "filename": "pygcsvg7vwnb-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/pygcsvg7vwnb-large.webp",
-          "width": 405,
-          "height": 413
-        },
-        "original": {
-          "filename": "pygcsvg7vwnb-large.webp",
-          "url": "https://adenai-admin.piogino.ch/media/pygcsvg7vwnb-large.webp",
-          "width": 405,
-          "height": 413
-        }
-      },
-      "fileSize": 321863,
-      "mimeType": "image/png"
-    },
     "characters-jzyqdmmvitsh": {
       "id": "characters-jzyqdmmvitsh",
       "category": "characters",
@@ -31379,5 +31336,5 @@
       "lastModified": "2026-10-24T18:20:37.452Z"
     }
   },
-  "lastUpdated": "2026-10-24T18:21:05.044Z"
+  "lastUpdated": "2026-10-24T18:21:07.217Z"
 }
