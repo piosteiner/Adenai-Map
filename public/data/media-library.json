@@ -31322,7 +31322,50 @@
       },
       "fileSize": 1264710,
       "mimeType": "image/png"
+    },
+    "characters-rcl3qdh1mm67": {
+      "id": "characters-rcl3qdh1mm67",
+      "category": "characters",
+      "title": "Ally",
+      "caption": "",
+      "credits": "AI generated",
+      "tags": [],
+      "uploadDate": "2026-10-24T18:19:53.013Z",
+      "sizes": {
+        "thumb": {
+          "filename": "rcl3qdh1mm67-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/rcl3qdh1mm67-thumb.webp",
+          "width": 147,
+          "height": 150
+        },
+        "small": {
+          "filename": "rcl3qdh1mm67-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/rcl3qdh1mm67-small.webp",
+          "width": 294,
+          "height": 300
+        },
+        "medium": {
+          "filename": "rcl3qdh1mm67-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/rcl3qdh1mm67-medium.webp",
+          "width": 405,
+          "height": 413
+        },
+        "large": {
+          "filename": "rcl3qdh1mm67-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/rcl3qdh1mm67-large.webp",
+          "width": 405,
+          "height": 413
+        },
+        "original": {
+          "filename": "rcl3qdh1mm67-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/rcl3qdh1mm67-large.webp",
+          "width": 405,
+          "height": 413
+        }
+      },
+      "fileSize": 321863,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-24T18:19:49.232Z"
+  "lastUpdated": "2026-10-24T18:19:53.020Z"
 }
