@@ -32796,7 +32796,7 @@
     "characters-hqjii211om7h": {
       "id": "characters-hqjii211om7h",
       "category": "characters",
-      "title": "IMG_0078",
+      "title": "Yafira",
       "caption": "",
       "credits": "Wizards of the Coast",
       "tags": [],
@@ -32834,7 +32834,8 @@
         }
       },
       "fileSize": 321090,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-24T19:41:06.869Z"
     },
     "characters-pnltjvsdkk9x": {
       "id": "characters-pnltjvsdkk9x",
@@ -32881,5 +32882,5 @@
       "lastModified": "2026-10-24T19:40:58.083Z"
     }
   },
-  "lastUpdated": "2026-10-24T19:40:58.083Z"
+  "lastUpdated": "2026-10-24T19:41:06.869Z"
 }
