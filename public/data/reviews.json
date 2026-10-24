@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "bf447916d891a67c017d5af9a0b48976657b2deb",
+      "action": "update",
+      "type": "character",
+      "itemName": "Shadi",
+      "user": "gm",
+      "timestamp": "2026-10-24T19:44:09.502Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T19:44:09.502Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: shadi (by gm) - added description"
+    },
+    {
       "commitSha": "90e5366f033cf80248aa4bac0a07f2bc563e482d",
       "action": "update",
       "type": "character",
@@ -2888,5 +2901,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T19:44:00.411Z"
+  "lastUpdated": "2026-10-24T19:44:09.502Z"
 }
