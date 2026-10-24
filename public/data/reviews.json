@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "cdbb65a703e66549f1cbcb23b42adbfce56ea404",
+      "action": "update",
+      "type": "character",
+      "itemName": "Simon-Alexander",
+      "user": "gm",
+      "timestamp": "2026-10-24T21:04:44.802Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T21:04:44.802Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: simon_alexander (by gm) - added image"
+    },
+    {
       "commitSha": "631b6290a3c157b7e405659fed2a895483b96108",
       "action": "update",
       "type": "character",
@@ -3213,5 +3226,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T21:02:30.054Z"
+  "lastUpdated": "2026-10-24T21:04:44.802Z"
 }
