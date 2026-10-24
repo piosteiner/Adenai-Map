@@ -31937,7 +31937,8 @@
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/752171575291710596/",
       "tags": [
-        "dragonborn"
+        "dragonborn",
+        "elder"
       ],
       "uploadDate": "2026-10-24T18:33:51.269Z",
       "sizes": {
@@ -31973,7 +31974,8 @@
         }
       },
       "fileSize": 67949,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-24T18:38:37.897Z"
     },
     "characters-p672kxjuwg3t": {
       "id": "characters-p672kxjuwg3t",
@@ -32202,5 +32204,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T18:38:24.890Z"
+  "lastUpdated": "2026-10-24T18:38:37.897Z"
 }
