@@ -255,14 +255,14 @@
       "aliases": [
         "Torog"
       ],
-      "category": "Wesen",
+      "category": "Gottheit",
       "description": "Ein Monster in den Tiefen der Erde, gegen das [[Moradin]] mit [[Rikka Brenner]]s Speer kämpfte.",
       "images": [
         "https://adenai-admin.piogino.ch/media/7cpbiai8qvx1-small.webp"
       ],
       "image": "https://adenai-admin.piogino.ch/media/7cpbiai8qvx1-small.webp",
       "createdAt": "2026-10-18T04:41:19.892Z",
-      "updatedAt": "2026-10-24T20:23:05.289Z",
+      "updatedAt": "2026-10-24T20:23:21.330Z",
       "createdBy": "gm",
       "updatedBy": "gm"
     },
@@ -510,5 +510,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-24T20:23:05.289Z"
+  "lastUpdated": "2026-10-24T20:23:21.330Z"
 }
