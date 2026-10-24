@@ -31291,7 +31291,50 @@
       "fileSize": 1017492,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-24T18:20:37.452Z"
+    },
+    "characters-1zz963zmzkm7": {
+      "id": "characters-1zz963zmzkm7",
+      "category": "characters",
+      "title": "rocky",
+      "caption": "",
+      "credits": "Tome of Beast 1",
+      "tags": [],
+      "uploadDate": "2026-10-24T18:24:52.946Z",
+      "sizes": {
+        "thumb": {
+          "filename": "1zz963zmzkm7-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1zz963zmzkm7-thumb.webp",
+          "width": 101,
+          "height": 150
+        },
+        "small": {
+          "filename": "1zz963zmzkm7-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1zz963zmzkm7-small.webp",
+          "width": 202,
+          "height": 300
+        },
+        "medium": {
+          "filename": "1zz963zmzkm7-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1zz963zmzkm7-medium.webp",
+          "width": 403,
+          "height": 600
+        },
+        "large": {
+          "filename": "1zz963zmzkm7-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1zz963zmzkm7-large.webp",
+          "width": 672,
+          "height": 1000
+        },
+        "original": {
+          "filename": "1zz963zmzkm7-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1zz963zmzkm7-large.webp",
+          "width": 672,
+          "height": 1000
+        }
+      },
+      "fileSize": 446319,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-24T18:21:11.429Z"
+  "lastUpdated": "2026-10-24T18:24:52.960Z"
 }
