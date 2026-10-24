@@ -2528,16 +2528,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Air-Genasi-Rogue, sehr still und mysteriös. Seit der ersten Sitzung in [[Silbergrat]] Teil der [[VsuzH]].",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/rcl3qdh1mm67-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/rcl3qdh1mm67-small.webp",
       "status": "alive",
       "faction": "VsuzH",
       "relationship": "party",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:16:20.860Z",
-      "updatedAt": "2026-10-18T04:16:20.860Z"
+      "updatedAt": "2026-10-24T18:22:35.441Z"
     },
     {
       "id": "luna",
@@ -4242,5 +4245,5 @@
       "updatedAt": "2026-10-19T11:33:22.265Z"
     }
   ],
-  "lastUpdated": "2026-10-24T18:22:15.974Z"
+  "lastUpdated": "2026-10-24T18:22:35.441Z"
 }
