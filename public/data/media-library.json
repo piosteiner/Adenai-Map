@@ -32292,7 +32292,52 @@
       },
       "fileSize": 260559,
       "mimeType": "image/jpeg"
+    },
+    "characters-osthl6z82jlv": {
+      "id": "characters-osthl6z82jlv",
+      "category": "characters",
+      "title": "a7042f0ae6127939ac2fcac5d32af302",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/495607134012546425/",
+      "tags": [
+        "orc"
+      ],
+      "uploadDate": "2026-10-24T18:50:11.543Z",
+      "sizes": {
+        "thumb": {
+          "filename": "osthl6z82jlv-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/osthl6z82jlv-thumb.webp",
+          "width": 97,
+          "height": 150
+        },
+        "small": {
+          "filename": "osthl6z82jlv-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/osthl6z82jlv-small.webp",
+          "width": 193,
+          "height": 300
+        },
+        "medium": {
+          "filename": "osthl6z82jlv-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/osthl6z82jlv-medium.webp",
+          "width": 387,
+          "height": 600
+        },
+        "large": {
+          "filename": "osthl6z82jlv-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/osthl6z82jlv-large.webp",
+          "width": 581,
+          "height": 900
+        },
+        "original": {
+          "filename": "osthl6z82jlv-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/osthl6z82jlv-large.webp",
+          "width": 581,
+          "height": 900
+        }
+      },
+      "fileSize": 38421,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-24T18:49:06.720Z"
+  "lastUpdated": "2026-10-24T18:50:11.558Z"
 }
