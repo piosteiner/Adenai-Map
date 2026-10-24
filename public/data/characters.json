@@ -2840,9 +2840,10 @@
       ],
       "description": "Ein legendärer Magier, der exotische Tiere einfängt und in seinem Turm im [[Toftgarder Forst]] hält. Die [[VsuzH]] fanden ihn in Sitzung 9 verletzt (und assen seine Gerstensuppe). Seither ein Verbündeter: Er schenkte [[Ally]] [[Blechdose]], weiss viel über Mondsteindrachen und [[Epiphea]] und teleportierte die Gruppe mitsamt seinem Turm nach [[Glesburg]].",
       "images": [
+        "https://adenai-admin.piogino.ch/media/nnn3xknmh5ng-small.webp",
         "https://adenai-admin.piogino.ch/media/6jtvj13jlm42-small.webp"
       ],
-      "image": "https://adenai-admin.piogino.ch/media/6jtvj13jlm42-small.webp",
+      "image": "https://adenai-admin.piogino.ch/media/nnn3xknmh5ng-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "ally",
@@ -2861,7 +2862,7 @@
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2026-10-18T04:41:50.095Z",
-      "updatedAt": "2026-10-24T19:58:18.595Z"
+      "updatedAt": "2026-10-24T20:06:52.378Z"
     },
     {
       "id": "kunos",
@@ -4332,5 +4333,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T19:58:18.595Z"
+  "lastUpdated": "2026-10-24T20:06:52.378Z"
 }
