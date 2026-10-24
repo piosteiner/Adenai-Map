@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "50a2968dac0329b2fe0101654093fc89a8abbc21",
+      "action": "create",
+      "type": "character",
+      "itemName": "Riel",
+      "user": "gm",
+      "timestamp": "2026-10-24T21:27:57.230Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T21:27:57.230Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Riel (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "ed9372d3a049b866cf6b276bc5d179d8c10c2640",
       "action": "create",
       "type": "character",
@@ -3265,5 +3278,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T21:27:36.724Z"
+  "lastUpdated": "2026-10-24T21:27:57.230Z"
 }
