@@ -31015,7 +31015,53 @@
       },
       "fileSize": 360913,
       "mimeType": "image/png"
+    },
+    "general-3s28tm6deavh": {
+      "id": "general-3s28tm6deavh",
+      "category": "general",
+      "title": "moradin",
+      "caption": "",
+      "credits": "https://forgotten-realms.fandom.com/de/wiki/Moradin",
+      "tags": [
+        "dwarf",
+        "god"
+      ],
+      "uploadDate": "2026-10-24T18:11:04.893Z",
+      "sizes": {
+        "thumb": {
+          "filename": "3s28tm6deavh-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/3s28tm6deavh-thumb.webp",
+          "width": 125,
+          "height": 150
+        },
+        "small": {
+          "filename": "3s28tm6deavh-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/3s28tm6deavh-small.webp",
+          "width": 250,
+          "height": 300
+        },
+        "medium": {
+          "filename": "3s28tm6deavh-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/3s28tm6deavh-medium.webp",
+          "width": 400,
+          "height": 480
+        },
+        "large": {
+          "filename": "3s28tm6deavh-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/3s28tm6deavh-large.webp",
+          "width": 400,
+          "height": 480
+        },
+        "original": {
+          "filename": "3s28tm6deavh-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/3s28tm6deavh-large.webp",
+          "width": 400,
+          "height": 480
+        }
+      },
+      "fileSize": 38992,
+      "mimeType": "image/webp"
     }
   },
-  "lastUpdated": "2026-10-24T18:07:35.125Z"
+  "lastUpdated": "2026-10-24T18:11:04.907Z"
 }
