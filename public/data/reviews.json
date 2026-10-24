@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ed9372d3a049b866cf6b276bc5d179d8c10c2640",
+      "action": "create",
+      "type": "character",
+      "itemName": "Barnabaix",
+      "user": "gm",
+      "timestamp": "2026-10-24T21:27:36.724Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-24T21:27:36.724Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create character: Barnabaix (by gm) - Initial character creation"
+    },
+    {
       "commitSha": "33b37abed64cde65f4910fa7f5efd94604316243",
       "action": "update",
       "type": "character",
@@ -3252,5 +3265,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-24T21:18:52.571Z"
+  "lastUpdated": "2026-10-24T21:27:36.724Z"
 }
