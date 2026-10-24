@@ -3367,16 +3367,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Ein Firbolg, der eines Tages an der Tür der Detektei in [[Valaris]] stand. Half den [[VsuzH]] in der Kanalisation mit Geruchszaubern und Gesprächen mit den Kreaturen dort.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/pk9xhbmgk91d-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/pk9xhbmgk91d-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:42:29.678Z",
-      "updatedAt": "2026-10-18T04:42:29.678Z"
+      "updatedAt": "2026-10-24T20:57:34.916Z"
     },
     {
       "id": "rocky",
@@ -4356,5 +4359,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T20:24:35.790Z"
+  "lastUpdated": "2026-10-24T20:57:34.917Z"
 }
