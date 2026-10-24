@@ -3314,16 +3314,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Dunkelhäutige Halbelfe im Gefolge von [[Viktoria Karthright]]. Ihre Vergangenheit: Diebesleben, ein Diebstahlversuch an der jungen Viktoria, Training mit [[Lia Karthright|Lia]] und Morde.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/6rk3m2ielsmr-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/6rk3m2ielsmr-small.webp",
       "status": "alive",
       "faction": "Familie Karthright",
       "relationship": "suspicious",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:42:25.703Z",
-      "updatedAt": "2026-10-18T04:42:25.703Z"
+      "updatedAt": "2026-10-24T20:12:40.002Z"
     },
     {
       "id": "migo",
@@ -4339,5 +4342,5 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     }
   ],
-  "lastUpdated": "2026-10-24T20:11:19.716Z"
+  "lastUpdated": "2026-10-24T20:12:40.002Z"
 }
