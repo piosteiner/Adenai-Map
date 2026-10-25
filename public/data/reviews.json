@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "a4ff98c5c5343a79d33c08ca608e4dd41d956ae8",
+      "action": "update",
+      "type": "location",
+      "itemName": "Donnermund",
+      "user": "gm",
+      "timestamp": "2026-10-25T11:28:04.180Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T11:28:04.180Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Donnermund (by gm) - updated description"
+    },
+    {
       "commitSha": "243cde854edeec6b8ddd4bab1cb790f327b90b02",
       "action": "update",
       "type": "location",
@@ -3863,5 +3876,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T11:27:29.377Z"
+  "lastUpdated": "2026-10-25T11:28:04.180Z"
 }
