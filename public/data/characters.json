@@ -4483,8 +4483,8 @@
       "updatedAt": "2026-10-24T21:28:18.011Z"
     },
     {
-      "id": "marsala",
-      "name": "Marsala",
+      "id": "niousha",
+      "name": "Niousha",
       "title": "",
       "placeOfOrigin": "",
       "coordinates": null,
@@ -4499,9 +4499,10 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-24T21:31:44.475Z",
-      "updatedAt": "2026-10-24T21:31:44.475Z"
+      "updatedAt": "2026-10-25T11:45:12.068Z"
     }
   ],
-  "lastUpdated": "2026-10-25T11:04:23.905Z"
+  "lastUpdated": "2026-10-25T11:45:12.068Z"
 }
