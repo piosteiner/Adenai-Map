@@ -35133,7 +35133,9 @@
       "title": "Kauris",
       "caption": "",
       "credits": "myself",
-      "tags": [],
+      "tags": [
+        "firbolg"
+      ],
       "uploadDate": "2026-10-24T20:56:05.772Z",
       "sizes": {
         "thumb": {
@@ -35169,7 +35171,7 @@
       },
       "fileSize": 142899,
       "mimeType": "image/jpeg",
-      "lastModified": "2026-10-24T20:57:45.312Z"
+      "lastModified": "2026-10-25T08:32:59.774Z"
     },
     "characters-orrae32mz009": {
       "id": "characters-orrae32mz009",
@@ -36639,5 +36641,5 @@
       "lastModified": "2026-10-25T08:30:55.734Z"
     }
   },
-  "lastUpdated": "2026-10-25T08:32:50.776Z"
+  "lastUpdated": "2026-10-25T08:32:59.774Z"
 }
