@@ -38440,7 +38440,7 @@
       "category": "creatures",
       "title": "flying horror",
       "caption": "",
-      "credits": "a",
+      "credits": "Guildmasters’ Guide to Ravnica, pg. 203",
       "tags": [],
       "uploadDate": "2026-10-25T15:04:55.239Z",
       "sizes": {
@@ -38476,7 +38476,8 @@
         }
       },
       "fileSize": 409863,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-25T15:05:58.922Z"
     },
     "creatures-i4j05kpdyrlj": {
       "id": "creatures-i4j05kpdyrlj",
@@ -38522,5 +38523,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T15:05:46.329Z"
+  "lastUpdated": "2026-10-25T15:05:58.922Z"
 }
