@@ -63,12 +63,13 @@
       "type": "Feature",
       "properties": {
         "name": "Wesdalen",
-        "description": "Details zu diesem Ort sind noch zu entdecken.",
+        "description": "Wesdalen ist neben ",
         "contentUrl": null,
         "image": "",
         "region": "rena_region",
         "type": "city",
-        "visited": false
+        "visited": false,
+        "images": []
       },
       "geometry": {
         "type": "Point",
