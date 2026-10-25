@@ -4466,8 +4466,11 @@
       "id": "pirouz",
       "name": "Pirouz",
       "title": "",
-      "placeOfOrigin": "",
-      "coordinates": null,
+      "placeOfOrigin": "Tangoa",
+      "coordinates": [
+        1618,
+        452
+      ],
       "description": "",
       "images": [
         "https://adenai-admin.piogino.ch/media/mb31cp9a4b75-small.webp"
@@ -4479,9 +4482,19 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "currentLocation": null,
+      "currentLocation": {
+        "location": "Tangoa",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          1618,
+          452
+        ],
+        "notes": "Location set based on place of origin"
+      },
       "createdAt": "2026-10-24T21:28:18.011Z",
-      "updatedAt": "2026-10-25T11:53:10.418Z"
+      "updatedAt": "2026-10-25T11:53:30.522Z"
     },
     {
       "id": "niousha",
@@ -4518,5 +4531,5 @@
       "updatedAt": "2026-10-25T11:45:20.779Z"
     }
   ],
-  "lastUpdated": "2026-10-25T11:53:10.418Z"
+  "lastUpdated": "2026-10-25T11:53:30.522Z"
 }
