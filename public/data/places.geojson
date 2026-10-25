@@ -452,12 +452,13 @@
       "type": "Feature",
       "properties": {
         "name": "Barbenfall",
-        "description": "Sitz des Clubs der Armen",
+        "description": "Sitz des Clubs der Armen. Wird geführt von [[Eriosa Süssblatt]].",
         "contentUrl": null,
         "image": "",
         "region": "",
         "type": "town",
-        "visited": false
+        "visited": false,
+        "images": []
       },
       "geometry": {
         "type": "Point",
