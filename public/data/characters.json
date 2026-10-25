@@ -3736,7 +3736,7 @@
       "image": "",
       "status": "alive",
       "faction": "Regierung von Rena",
-      "relationship": "neutral",
+      "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
@@ -3752,7 +3752,7 @@
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2026-10-18T04:42:59.982Z",
-      "updatedAt": "2026-10-25T08:06:06.795Z"
+      "updatedAt": "2026-10-25T08:06:51.786Z"
     },
     {
       "id": "waldomar",
@@ -4500,5 +4500,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T08:06:06.795Z"
+  "lastUpdated": "2026-10-25T08:06:51.786Z"
 }
