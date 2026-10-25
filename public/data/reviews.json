@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "d42cb733147f033964a2b5cf44f46dcee071f267",
+      "action": "update",
+      "type": "character",
+      "itemName": "Pirouz",
+      "user": "gm",
+      "timestamp": "2026-10-25T11:53:31.741Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T11:53:31.741Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: pirouz (by gm) - added place of origin"
+    },
+    {
       "commitSha": "f0178e6b7e2cb38ce5e50a5871a81070f4dff404",
       "action": "update",
       "type": "character",
@@ -4162,5 +4175,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T11:53:11.842Z"
+  "lastUpdated": "2026-10-25T11:53:31.741Z"
 }
