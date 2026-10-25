@@ -2945,16 +2945,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "[[Minfilia]]s Tochter. Forschte mit [[Aykan]] und [[Naos]] und reiste mit ihrem Schiff, dem [[Gelber Otter|Gelben Otter]], um ihre Erkenntnisse zu verbreiten, bis sie – wohl von den [[Sandschreiter]]n – ermordet wurde. Ihr Tagebuch ist [[Das blaue Juwel des Nachthimmels]].",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/orrae32mz009-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/orrae32mz009-small.webp",
       "status": "dead",
       "faction": "",
       "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:41:53.974Z",
-      "updatedAt": "2026-10-18T04:41:53.974Z"
+      "updatedAt": "2026-10-25T08:13:23.874Z"
     },
     {
       "id": "minfilia",
@@ -4513,5 +4516,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T08:13:16.798Z"
+  "lastUpdated": "2026-10-25T08:13:23.874Z"
 }
