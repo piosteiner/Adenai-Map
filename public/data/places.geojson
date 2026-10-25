@@ -228,10 +228,13 @@
       "type": "Feature",
       "properties": {
         "name": "Toftgard",
-        "description": "Stadt der Familie Karthright.",
+        "description": "Stadt der Familie Karthright.\n[[Viktoria Karthright]], [[Eytan Karthright]], [[Ruben Karthright]]",
         "contentUrl": null,
         "region": "eastern_adenai",
-        "visited": true
+        "visited": true,
+        "type": "",
+        "images": [],
+        "image": ""
       },
       "geometry": {
         "type": "Point",
