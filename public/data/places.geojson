@@ -324,12 +324,13 @@
       "type": "Feature",
       "properties": {
         "name": "Glesburg",
-        "description": "Die grösste noch aktive von Zwergen geschaffene Stadt auf Adenai.",
+        "description": "Die grösste noch aktive von Zwergen geschaffene Stadt auf Adenai.\n\nWird von [[Vivi Wulbren]] regiert. Ihr Bruder [[Valentino]] der Hübsche ",
         "contentUrl": null,
         "image": "",
         "region": "eastern_adenai",
         "type": "city",
-        "visited": false
+        "visited": false,
+        "images": []
       },
       "geometry": {
         "type": "Point",
