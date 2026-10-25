@@ -37077,7 +37077,52 @@
       "fileSize": 240262,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-25T11:57:03.996Z"
+    },
+    "characters-lh5ykohfuuda": {
+      "id": "characters-lh5ykohfuuda",
+      "category": "characters",
+      "title": "e50172477b62e4fd8cbd89b4ad0bdeee",
+      "caption": "",
+      "credits": "https://de.pinterest.com/pin/503699539582145228/",
+      "tags": [
+        "lizardfolk"
+      ],
+      "uploadDate": "2026-10-25T11:57:31.908Z",
+      "sizes": {
+        "thumb": {
+          "filename": "lh5ykohfuuda-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/lh5ykohfuuda-thumb.webp",
+          "width": 102,
+          "height": 150
+        },
+        "small": {
+          "filename": "lh5ykohfuuda-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/lh5ykohfuuda-small.webp",
+          "width": 204,
+          "height": 300
+        },
+        "medium": {
+          "filename": "lh5ykohfuuda-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/lh5ykohfuuda-medium.webp",
+          "width": 409,
+          "height": 600
+        },
+        "large": {
+          "filename": "lh5ykohfuuda-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/lh5ykohfuuda-large.webp",
+          "width": 817,
+          "height": 1200
+        },
+        "original": {
+          "filename": "lh5ykohfuuda-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/lh5ykohfuuda-original.webp",
+          "width": 1000,
+          "height": 1468
+        }
+      },
+      "fileSize": 111202,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T11:57:03.996Z"
+  "lastUpdated": "2026-10-25T11:57:31.919Z"
 }
