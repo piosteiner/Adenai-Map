@@ -38130,7 +38130,50 @@
       },
       "fileSize": 66791,
       "mimeType": "image/jpeg"
+    },
+    "locations-f4ynbzqoirbs": {
+      "id": "locations-f4ynbzqoirbs",
+      "category": "locations",
+      "title": "mirog 1",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/448178600423296551/",
+      "tags": [],
+      "uploadDate": "2026-10-25T14:33:05.155Z",
+      "sizes": {
+        "thumb": {
+          "filename": "f4ynbzqoirbs-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/f4ynbzqoirbs-thumb.webp",
+          "width": 84,
+          "height": 150
+        },
+        "small": {
+          "filename": "f4ynbzqoirbs-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/f4ynbzqoirbs-small.webp",
+          "width": 169,
+          "height": 300
+        },
+        "medium": {
+          "filename": "f4ynbzqoirbs-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/f4ynbzqoirbs-medium.webp",
+          "width": 338,
+          "height": 600
+        },
+        "large": {
+          "filename": "f4ynbzqoirbs-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/f4ynbzqoirbs-large.webp",
+          "width": 670,
+          "height": 1191
+        },
+        "original": {
+          "filename": "f4ynbzqoirbs-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/f4ynbzqoirbs-large.webp",
+          "width": 670,
+          "height": 1191
+        }
+      },
+      "fileSize": 19315,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T14:12:59.734Z"
+  "lastUpdated": "2026-10-25T14:33:05.169Z"
 }
