@@ -38396,7 +38396,7 @@
       "category": "creatures",
       "title": "skittering horror",
       "caption": "",
-      "credits": "a",
+      "credits": "Guildmasters’ Guide to Ravnica, pg. 205",
       "tags": [],
       "uploadDate": "2026-10-25T15:04:54.487Z",
       "sizes": {
@@ -38432,7 +38432,8 @@
         }
       },
       "fileSize": 533039,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-25T15:05:46.329Z"
     },
     "creatures-80e0g77i35h1": {
       "id": "creatures-80e0g77i35h1",
@@ -38521,5 +38522,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T15:05:24.381Z"
+  "lastUpdated": "2026-10-25T15:05:46.329Z"
 }
