@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "4e0a0b8817df80a71d201bf43c67845b77abd4ed",
+      "action": "update",
+      "type": "character",
+      "itemName": "Mowgli Leng",
+      "user": "gm",
+      "timestamp": "2026-10-25T08:14:07.349Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T08:14:07.349Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: mowgli_leng (by gm) - updated title"
+    },
+    {
       "commitSha": "a22f46aab26e7ff3a7b76d7d9b28ba5a346a6964",
       "action": "update",
       "type": "character",
@@ -3473,5 +3486,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T08:13:46.288Z"
+  "lastUpdated": "2026-10-25T08:14:07.349Z"
 }
