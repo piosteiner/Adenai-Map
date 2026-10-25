@@ -4531,7 +4531,41 @@
       },
       "createdAt": "2026-10-24T21:31:44.475Z",
       "updatedAt": "2026-10-25T11:45:20.779Z"
+    },
+    {
+      "id": "fina_serinessa_und_fino",
+      "name": "Fina Serinessa und Fino",
+      "title": "",
+      "placeOfOrigin": "Serenissa",
+      "coordinates": [
+        741,
+        769
+      ],
+      "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/gorw9003jana-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/gorw9003jana-small.webp",
+      "status": "alive",
+      "faction": "",
+      "relationship": "neutral",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-25T12:24:12.372Z",
+      "updatedAt": "2026-10-25T12:24:12.372Z",
+      "currentLocation": {
+        "location": "Serenissa",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          741,
+          769
+        ],
+        "notes": "Initial location based on place of origin"
+      }
     }
   ],
-  "lastUpdated": "2026-10-25T11:56:14.173Z"
+  "lastUpdated": "2026-10-25T12:24:12.372Z"
 }
