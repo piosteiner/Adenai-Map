@@ -4463,8 +4463,8 @@
       "updatedAt": "2026-10-24T21:27:56.022Z"
     },
     {
-      "id": "damian",
-      "name": "Damian",
+      "id": "pirouz",
+      "name": "Pirouz",
       "title": "",
       "placeOfOrigin": "",
       "coordinates": null,
@@ -4479,8 +4479,9 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-24T21:28:18.011Z",
-      "updatedAt": "2026-10-24T21:28:18.011Z"
+      "updatedAt": "2026-10-25T11:53:10.418Z"
     },
     {
       "id": "niousha",
@@ -4517,5 +4518,5 @@
       "updatedAt": "2026-10-25T11:45:20.779Z"
     }
   ],
-  "lastUpdated": "2026-10-25T11:49:06.441Z"
+  "lastUpdated": "2026-10-25T11:53:10.418Z"
 }
