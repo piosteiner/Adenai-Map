@@ -36937,7 +36937,50 @@
       "fileSize": 5456360,
       "mimeType": "image/png",
       "lastModified": "2026-10-25T11:23:10.819Z"
+    },
+    "locations-uvlssv90j5ke": {
+      "id": "locations-uvlssv90j5ke",
+      "category": "locations",
+      "title": "IMG_1066",
+      "caption": "",
+      "credits": "myself",
+      "tags": [],
+      "uploadDate": "2026-10-25T11:23:21.115Z",
+      "sizes": {
+        "thumb": {
+          "filename": "uvlssv90j5ke-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/uvlssv90j5ke-thumb.webp",
+          "width": 150,
+          "height": 106
+        },
+        "small": {
+          "filename": "uvlssv90j5ke-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/uvlssv90j5ke-small.webp",
+          "width": 300,
+          "height": 212
+        },
+        "medium": {
+          "filename": "uvlssv90j5ke-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/uvlssv90j5ke-medium.webp",
+          "width": 600,
+          "height": 424
+        },
+        "large": {
+          "filename": "uvlssv90j5ke-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/uvlssv90j5ke-large.webp",
+          "width": 1200,
+          "height": 848
+        },
+        "original": {
+          "filename": "uvlssv90j5ke-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/uvlssv90j5ke-original.webp",
+          "width": 2048,
+          "height": 1448
+        }
+      },
+      "fileSize": 12254295,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-25T11:23:10.819Z"
+  "lastUpdated": "2026-10-25T11:23:21.128Z"
 }
