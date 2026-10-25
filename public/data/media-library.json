@@ -38266,7 +38266,7 @@
       "category": "creatures",
       "title": "Star Warden",
       "caption": "",
-      "credits": "a",
+      "credits": "Monsters of Drakkenheim, pg. 321",
       "tags": [],
       "uploadDate": "2026-10-25T15:04:53.299Z",
       "sizes": {
@@ -38302,7 +38302,8 @@
         }
       },
       "fileSize": 368439,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-25T15:07:04.133Z"
     },
     "creatures-1vqsyaofkwmx": {
       "id": "creatures-1vqsyaofkwmx",
@@ -38525,5 +38526,5 @@
       "lastModified": "2026-10-25T15:06:44.950Z"
     }
   },
-  "lastUpdated": "2026-10-25T15:06:44.950Z"
+  "lastUpdated": "2026-10-25T15:07:04.133Z"
 }
