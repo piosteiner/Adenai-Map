@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "08fae5ca043f27004f335f20a7158ac33ba80dcc",
+      "action": "update",
+      "type": "location",
+      "itemName": "Byrgenwerft",
+      "user": "gm",
+      "timestamp": "2026-10-25T11:16:19.470Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T11:16:19.470Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Byrgenwerft (by gm) - updated description"
+    },
+    {
       "commitSha": "c5843a9e5973d11fbd8fa4933582c1c97440edb0",
       "action": "update",
       "type": "location",
@@ -3759,5 +3772,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T11:16:05.962Z"
+  "lastUpdated": "2026-10-25T11:16:19.470Z"
 }
