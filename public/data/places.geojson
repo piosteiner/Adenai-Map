@@ -1149,12 +1149,13 @@
       "type": "Feature",
       "properties": {
         "name": "Cucurbita",
-        "description": "",
+        "description": "Ländliche Stadt unter dem Berg vor Donnermund. Jeden Herbst findet hier das Kürbisfest statt.",
         "contentUrl": null,
         "image": "",
         "region": "ewige_donnerkluefte",
         "type": "town",
-        "visited": true
+        "visited": true,
+        "images": []
       },
       "geometry": {
         "type": "Point",
