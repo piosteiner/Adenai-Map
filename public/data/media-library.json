@@ -36944,7 +36944,10 @@
       "title": "IMG_1066",
       "caption": "",
       "credits": "myself",
-      "tags": [],
+      "tags": [
+        "wesdalen",
+        "map"
+      ],
       "uploadDate": "2026-10-25T11:23:21.115Z",
       "sizes": {
         "thumb": {
@@ -36979,8 +36982,9 @@
         }
       },
       "fileSize": 12254295,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-25T11:23:33.135Z"
     }
   },
-  "lastUpdated": "2026-10-25T11:23:21.128Z"
+  "lastUpdated": "2026-10-25T11:23:33.135Z"
 }
