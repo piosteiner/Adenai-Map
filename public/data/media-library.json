@@ -36987,12 +36987,13 @@
     },
     "general-xv9mt6ygz3ou": {
       "id": "general-xv9mt6ygz3ou",
-      "category": "locations",
+      "category": "characters",
       "title": "Vazeer",
       "caption": "",
       "credits": "https://de.pinterest.com/pin/324822191888489649/",
       "tags": [
-        "Tangoa"
+        "Tangoa",
+        "lo"
       ],
       "uploadDate": "2026-10-25T11:55:52.005Z",
       "sizes": {
@@ -37029,7 +37030,7 @@
       },
       "fileSize": 53081,
       "mimeType": "image/jpeg",
-      "lastModified": "2026-10-25T11:56:50.362Z"
+      "lastModified": "2026-10-25T11:56:52.755Z"
     },
     "characters-znhn9j8srwyz": {
       "id": "characters-znhn9j8srwyz",
@@ -37075,5 +37076,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T11:56:50.362Z"
+  "lastUpdated": "2026-10-25T11:56:52.755Z"
 }
