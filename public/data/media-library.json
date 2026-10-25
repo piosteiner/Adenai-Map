@@ -36984,7 +36984,50 @@
       "fileSize": 12254295,
       "mimeType": "image/png",
       "lastModified": "2026-10-25T11:23:41.358Z"
+    },
+    "general-xv9mt6ygz3ou": {
+      "id": "general-xv9mt6ygz3ou",
+      "category": "general",
+      "title": "Vazeer",
+      "caption": "",
+      "credits": "https://de.pinterest.com/pin/324822191888489649/",
+      "tags": [],
+      "uploadDate": "2026-10-25T11:55:52.005Z",
+      "sizes": {
+        "thumb": {
+          "filename": "xv9mt6ygz3ou-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/xv9mt6ygz3ou-thumb.webp",
+          "width": 150,
+          "height": 119
+        },
+        "small": {
+          "filename": "xv9mt6ygz3ou-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/xv9mt6ygz3ou-small.webp",
+          "width": 300,
+          "height": 239
+        },
+        "medium": {
+          "filename": "xv9mt6ygz3ou-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/xv9mt6ygz3ou-medium.webp",
+          "width": 600,
+          "height": 479
+        },
+        "large": {
+          "filename": "xv9mt6ygz3ou-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/xv9mt6ygz3ou-large.webp",
+          "width": 1000,
+          "height": 798
+        },
+        "original": {
+          "filename": "xv9mt6ygz3ou-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/xv9mt6ygz3ou-large.webp",
+          "width": 1000,
+          "height": 798
+        }
+      },
+      "fileSize": 53081,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T11:23:41.358Z"
+  "lastUpdated": "2026-10-25T11:55:52.017Z"
 }
