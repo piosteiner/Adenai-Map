@@ -176,11 +176,8 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "placeOfOrigin": "Serenissa",
-      "coordinates": [
-        741,
-        769
-      ],
+      "placeOfOrigin": "",
+      "coordinates": null,
       "description": "",
       "images": [],
       "image": "",
@@ -1051,7 +1048,7 @@
         "notes": ""
       },
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-10-25T07:50:29.315Z"
+      "updatedAt": "2026-10-25T07:50:53.707Z"
     },
     {
       "id": "viktoria_karthright",
@@ -4480,5 +4477,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T07:50:29.315Z"
+  "lastUpdated": "2026-10-25T07:50:53.707Z"
 }
