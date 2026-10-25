@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "edaa2f54b8ccf0d647db6f83bde29fef8ff3f1ef",
+      "action": "update",
+      "type": "location",
+      "itemName": "Toftgard",
+      "user": "gm",
+      "timestamp": "2026-10-25T12:28:32.096Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T12:28:32.096Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Toftgard (by gm) - updated description, updated type"
+    },
+    {
       "commitSha": "83a47b0c10ea00e4e344618c1bf419a38bcd49ba",
       "action": "update",
       "type": "location",
@@ -4344,5 +4357,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T12:26:56.148Z"
+  "lastUpdated": "2026-10-25T12:28:32.096Z"
 }
