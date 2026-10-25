@@ -35481,7 +35481,50 @@
       "fileSize": 470242,
       "mimeType": "image/png",
       "lastModified": "2026-10-25T08:15:49.027Z"
+    },
+    "characters-1jzl888738f7": {
+      "id": "characters-1jzl888738f7",
+      "category": "characters",
+      "title": "Vulture Aarakokra",
+      "caption": "",
+      "credits": "https://de.pinterest.com/pin/819584832237746716/",
+      "tags": [],
+      "uploadDate": "2026-10-25T08:19:52.668Z",
+      "sizes": {
+        "thumb": {
+          "filename": "1jzl888738f7-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1jzl888738f7-thumb.webp",
+          "width": 106,
+          "height": 150
+        },
+        "small": {
+          "filename": "1jzl888738f7-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1jzl888738f7-small.webp",
+          "width": 212,
+          "height": 300
+        },
+        "medium": {
+          "filename": "1jzl888738f7-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1jzl888738f7-medium.webp",
+          "width": 424,
+          "height": 600
+        },
+        "large": {
+          "filename": "1jzl888738f7-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1jzl888738f7-large.webp",
+          "width": 848,
+          "height": 1200
+        },
+        "original": {
+          "filename": "1jzl888738f7-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/1jzl888738f7-original.webp",
+          "width": 1448,
+          "height": 2048
+        }
+      },
+      "fileSize": 458982,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T08:15:49.027Z"
+  "lastUpdated": "2026-10-25T08:19:52.681Z"
 }
