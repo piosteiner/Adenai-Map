@@ -1297,6 +1297,26 @@
           563
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mirog",
+        "description": "Mirog ist der Name, welchen die Bewonher:innen von [[Luvatu - Triton City]] dem Tiefseegraben gegeben haben. Aus den Tiefen des Mirog tauchen regelmässig Kreaturen der Elemental Plane des Wassers auf.\n\nAuffallend ist, dass aus diesem Schlund nicht nur Kreaturen der Elemental Plane of Water kommen, sondern auch welche aus dem Frostfell, also der Ebene, welche zwischen Wasser und Luft liegt. Zu den Kreaturen zählen beispielsweise [Frost Salamander](https://www.dndbeyond.com/monsters/2560818-frost-salamander) und [Rime Hulks](https://www.dndbeyond.com/monsters/3731039-rime-hulk). Auch [Olhydra](https://www.dndbeyond.com/monsters/17463-olhydra) soll bereits einen direkten Angriff aus dieser Spalte gemacht haben.",
+        "contentUrl": null,
+        "type": "",
+        "region": "",
+        "visited": false,
+        "images": [],
+        "image": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2383,
+          1077
+        ]
+      }
     }
   ],
   "lastUpdated": "2026-10-25T11:45:13.345Z"
