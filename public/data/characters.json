@@ -3723,8 +3723,8 @@
       }
     },
     {
-      "id": "larial",
-      "name": "Larial",
+      "id": "lareal",
+      "name": "Lareal",
       "title": "Elfe im Heimatschutzministerium",
       "placeOfOrigin": "Rena",
       "coordinates": [
@@ -3740,8 +3740,6 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2026-10-18T04:42:59.982Z",
-      "updatedAt": "2026-10-18T04:42:59.982Z",
       "currentLocation": {
         "location": "Rena",
         "date": "5663-06-03",
@@ -3751,8 +3749,10 @@
           650,
           1000
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2026-10-18T04:42:59.982Z",
+      "updatedAt": "2026-10-25T08:06:06.795Z"
     },
     {
       "id": "waldomar",
@@ -4500,5 +4500,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T08:00:19.369Z"
+  "lastUpdated": "2026-10-25T08:06:06.795Z"
 }
