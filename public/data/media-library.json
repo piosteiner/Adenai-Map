@@ -36893,7 +36893,7 @@
     },
     "general-njpuqlh4ut3e": {
       "id": "general-njpuqlh4ut3e",
-      "category": "general",
+      "category": "locations",
       "title": "Wesdalen Querschnitt",
       "caption": "",
       "credits": "myself",
@@ -36936,7 +36936,7 @@
       },
       "fileSize": 5456360,
       "mimeType": "image/png",
-      "lastModified": "2026-10-25T11:23:10.819Z"
+      "lastModified": "2026-10-25T11:56:43.311Z"
     },
     "locations-uvlssv90j5ke": {
       "id": "locations-uvlssv90j5ke",
@@ -37075,5 +37075,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T11:56:35.839Z"
+  "lastUpdated": "2026-10-25T11:56:43.311Z"
 }
