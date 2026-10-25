@@ -3708,16 +3708,16 @@
         1000
       ],
       "description": "Opfer in einem Mordfall in [[Rena]], den die [[VsuzH]] untersuchten. Geschäftspartner von [[Sorsley]]; von [[Zo'ob]] getötet.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/orrae32mz009-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/orrae32mz009-small.webp",
       "status": "dead",
       "faction": "",
       "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2026-10-18T04:42:58.048Z",
-      "updatedAt": "2026-10-18T04:42:58.048Z",
       "currentLocation": {
         "location": "Rena",
         "date": "5663-06-03",
@@ -3727,8 +3727,10 @@
           650,
           1000
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2026-10-18T04:42:58.048Z",
+      "updatedAt": "2026-10-25T08:16:13.583Z"
     },
     {
       "id": "lareal",
@@ -4519,5 +4521,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T08:16:01.398Z"
+  "lastUpdated": "2026-10-25T08:16:13.584Z"
 }
