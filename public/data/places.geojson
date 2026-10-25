@@ -47,12 +47,13 @@
       "type": "Feature",
       "properties": {
         "name": "Olecea",
-        "description": "Zentrale Stadt auf Harak - Sitz der Grossen Bibliothek.",
+        "description": "Zentrale Stadt auf Harak - Sitz der Grossen Bibliothek.\n\n## Regierung\nTeil der Regierung sind [[Zala]]",
         "contentUrl": null,
         "image": "",
         "region": "harak",
         "type": "city",
-        "visited": false
+        "visited": false,
+        "images": []
       },
       "geometry": {
         "type": "Point",
