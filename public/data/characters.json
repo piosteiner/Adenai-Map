@@ -2755,16 +2755,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Ein Esel, der die [[VsuzH]] seit der 4. Sitzung auf dem Weg von [[Silbergrat]] nach [[Toftgard]] begleitet. Gehört zu den Begleitern, «die wir alle immer dabei haben».",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/kszozlpjmwfc-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/kszozlpjmwfc-small.webp",
       "status": "alive",
       "faction": "VsuzH",
       "relationship": "party",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:41:37.931Z",
-      "updatedAt": "2026-10-18T04:41:37.931Z"
+      "updatedAt": "2026-10-25T08:00:19.369Z"
     },
     {
       "id": "ch_geli",
@@ -4497,5 +4500,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T07:51:53.022Z"
+  "lastUpdated": "2026-10-25T08:00:19.369Z"
 }
