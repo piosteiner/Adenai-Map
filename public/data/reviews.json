@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "7a46c42f737d306ca47917f773ee4c7224dac8a3",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2026-10-25T07:51:54.424Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T07:51:54.424Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Add movement to character: VsuzH (by gm) - Serenissa (5663-09-30 to 5663-09-30)"
+    },
+    {
       "commitSha": "bc695ad54149188549e4d4ab4fdb7e937c6e767c",
       "action": "update",
       "type": "character",
@@ -3330,5 +3343,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T07:50:54.848Z"
+  "lastUpdated": "2026-10-25T07:51:54.425Z"
 }
