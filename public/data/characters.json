@@ -3732,8 +3732,10 @@
         1000
       ],
       "description": "Empfing die [[VsuzH]] im Ministerium für Heimatschutz in [[Rena]] und prüfte [[Abu]]. Arbeitet mit [[Dina Eisfeld]] zusammen und schickte die Gruppe zu den Teufeln im Anwesen der [[Familie Kleulenberg]].",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/kdws2zj3l37s-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/kdws2zj3l37s-small.webp",
       "status": "alive",
       "faction": "Regierung von Rena",
       "relationship": "friendly",
@@ -3752,7 +3754,7 @@
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2026-10-18T04:42:59.982Z",
-      "updatedAt": "2026-10-25T08:06:51.786Z"
+      "updatedAt": "2026-10-25T08:09:04.534Z"
     },
     {
       "id": "waldomar",
@@ -4500,5 +4502,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T08:06:51.786Z"
+  "lastUpdated": "2026-10-25T08:09:04.534Z"
 }
