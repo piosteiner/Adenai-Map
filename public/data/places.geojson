@@ -1307,8 +1307,11 @@
         "type": "",
         "region": "",
         "visited": false,
-        "images": [],
-        "image": ""
+        "images": [
+          "https://adenai-admin.piogino.ch/media/v11maqr95agq-small.webp",
+          "https://adenai-admin.piogino.ch/media/f4ynbzqoirbs-small.webp"
+        ],
+        "image": "https://adenai-admin.piogino.ch/media/v11maqr95agq-small.webp"
       },
       "geometry": {
         "type": "Point",
