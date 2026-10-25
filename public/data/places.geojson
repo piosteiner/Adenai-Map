@@ -414,12 +414,13 @@
       "type": "Feature",
       "properties": {
         "name": "Donnermund",
-        "description": "Details zu diesem Ort sind noch zu entdecken.",
+        "description": "Stadt, die sich zu teilen innerhalb und zu teilen ausserhalb des Berges befindet.",
         "contentUrl": null,
         "image": "",
         "region": "western_adenai",
         "type": "town",
-        "visited": false
+        "visited": false,
+        "images": []
       },
       "geometry": {
         "type": "Point",
