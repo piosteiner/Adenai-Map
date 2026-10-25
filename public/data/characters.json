@@ -177,7 +177,10 @@
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
       "placeOfOrigin": "",
-      "coordinates": null,
+      "coordinates": [
+        741,
+        769
+      ],
       "description": "",
       "images": [],
       "image": "",
@@ -1034,21 +1037,38 @@
           "isCustomLocation": false,
           "createdAt": "2026-10-10T19:46:20.891Z",
           "updatedAt": "2026-10-10T19:50:39.084Z"
+        },
+        {
+          "id": "movement_1792914713022",
+          "movement_nr": 50,
+          "date": "5663-09-30",
+          "dateStart": "5663-09-30",
+          "dateEnd": "5663-09-30",
+          "location": "Serenissa",
+          "coordinates": [
+            741,
+            769
+          ],
+          "notes": "Mit dem gelben Otter nach Serinessa",
+          "type": "travel",
+          "isCustomLocation": false,
+          "createdAt": "2026-10-25T07:51:53.022Z"
         }
       ],
       "currentLocation": {
-        "date": "5663-09-28",
-        "dateStart": "5663-09-28",
+        "date": "5663-09-30",
+        "dateStart": "5663-09-30",
         "dateEnd": "5663-09-30",
-        "location": "Wesdalen",
+        "location": "Serenissa",
         "coordinates": [
-          790,
+          741,
           769
         ],
-        "notes": ""
+        "notes": "Mit dem gelben Otter nach Serinessa"
       },
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-10-25T07:50:53.707Z"
+      "updatedAt": "2026-10-25T07:51:53.022Z",
+      "location": "Serenissa"
     },
     {
       "id": "viktoria_karthright",
@@ -4477,5 +4497,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T07:50:53.707Z"
+  "lastUpdated": "2026-10-25T07:51:53.022Z"
 }
