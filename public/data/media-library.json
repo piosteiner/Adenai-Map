@@ -35154,7 +35154,9 @@
       "title": "Fulgurkäfer",
       "caption": "",
       "credits": "Fulgur Käfer",
-      "tags": [],
+      "tags": [
+        "beast"
+      ],
       "uploadDate": "2026-10-24T20:55:56.589Z",
       "sizes": {
         "thumb": {
@@ -35190,7 +35192,7 @@
       },
       "fileSize": 66775,
       "mimeType": "image/png",
-      "lastModified": "2026-10-24T20:57:04.040Z"
+      "lastModified": "2026-10-25T08:35:50.879Z"
     },
     "general-pk9xhbmgk91d": {
       "id": "general-pk9xhbmgk91d",
@@ -36706,5 +36708,5 @@
       "lastModified": "2026-10-25T08:30:55.734Z"
     }
   },
-  "lastUpdated": "2026-10-25T08:35:43.554Z"
+  "lastUpdated": "2026-10-25T08:35:50.879Z"
 }
