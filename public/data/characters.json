@@ -176,12 +176,13 @@
       "id": "vsuzh",
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
-      "location": "Wesdalen",
+      "placeOfOrigin": "Serenissa",
       "coordinates": [
-        790,
+        741,
         769
       ],
       "description": "",
+      "images": [],
       "image": "",
       "status": "alive",
       "faction": "Selbständige Abenteurer",
@@ -1038,8 +1039,6 @@
           "updatedAt": "2026-10-10T19:50:39.084Z"
         }
       ],
-      "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-10-21T19:17:41.983Z",
       "currentLocation": {
         "date": "5663-09-28",
         "dateStart": "5663-09-28",
@@ -1050,7 +1049,9 @@
           769
         ],
         "notes": ""
-      }
+      },
+      "createdAt": "2025-08-24T23:05:39.208Z",
+      "updatedAt": "2026-10-25T07:50:29.315Z"
     },
     {
       "id": "viktoria_karthright",
@@ -4479,5 +4480,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-24T21:31:44.475Z"
+  "lastUpdated": "2026-10-25T07:50:29.315Z"
 }
