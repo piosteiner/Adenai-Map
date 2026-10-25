@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "c8f4d71c9f85280f6433bca9bc32d3ab99cd1360",
+      "action": "update",
+      "type": "character",
+      "itemName": "Sorsley",
+      "user": "gm",
+      "timestamp": "2026-10-25T08:13:18.120Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T08:13:18.120Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: sorsley (by gm) - added image"
+    },
+    {
       "commitSha": "243b39acb2168e16b243eff24fb225a110949eb8",
       "action": "update",
       "type": "character",
@@ -3434,5 +3447,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T08:12:56.863Z"
+  "lastUpdated": "2026-10-25T08:13:18.120Z"
 }
