@@ -7573,7 +7573,7 @@
     "characters-tl2ag8p6nh9h": {
       "id": "characters-tl2ag8p6nh9h",
       "category": "characters",
-      "title": "letizia griswold",
+      "title": "Letizia Griswold",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/670825307042544524/",
       "tags": [],
@@ -7611,7 +7611,8 @@
         }
       },
       "fileSize": 126118,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-25T11:02:06.892Z"
     },
     "characters-p5etxhuhvy0i": {
       "id": "characters-p5etxhuhvy0i",
@@ -36753,5 +36754,5 @@
       "lastModified": "2026-10-25T10:09:40.749Z"
     }
   },
-  "lastUpdated": "2026-10-25T11:01:58.461Z"
+  "lastUpdated": "2026-10-25T11:02:06.892Z"
 }
