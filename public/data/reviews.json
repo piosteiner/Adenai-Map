@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "4516606963d5c83a2e9b84977a59b2a339fea493",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lareal",
+      "user": "gm",
+      "timestamp": "2026-10-25T08:06:53.032Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T08:06:53.032Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: lareal (by gm) - changed relationship to friendly"
+    },
+    {
       "commitSha": "dfe1efb5553a792656ffd0b9737318f9de628b6e",
       "action": "update",
       "type": "character",
@@ -3369,5 +3382,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T08:06:07.807Z"
+  "lastUpdated": "2026-10-25T08:06:53.033Z"
 }
