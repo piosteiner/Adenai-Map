@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "bc695ad54149188549e4d4ab4fdb7e937c6e767c",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2026-10-25T07:50:54.848Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T07:50:54.848Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vsuzh (by gm) - removed place of origin"
+    },
+    {
       "commitSha": "18e3791db22411d3efc61ea953a2cd8cfcac6e6c",
       "action": "update",
       "type": "character",
@@ -3317,5 +3330,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T07:50:30.509Z"
+  "lastUpdated": "2026-10-25T07:50:54.848Z"
 }
