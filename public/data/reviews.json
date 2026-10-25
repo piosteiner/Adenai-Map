@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ab1523b7d19422ca1ebbbffaa10279dbec15818c",
+      "action": "update",
+      "type": "location",
+      "itemName": "Glesburg",
+      "user": "gm",
+      "timestamp": "2026-10-25T11:33:25.545Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T11:33:25.545Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Glesburg (by gm) - updated description"
+    },
+    {
       "commitSha": "682a63e620abc0be81c85e6c107cb00421f046f6",
       "action": "update",
       "type": "location",
@@ -4006,5 +4019,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T11:33:14.775Z"
+  "lastUpdated": "2026-10-25T11:33:25.545Z"
 }
