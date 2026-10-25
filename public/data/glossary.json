@@ -253,6 +253,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_f6ce1764b2",
+      "name": "Griswold Werkstätte",
+      "aliases": [],
+      "category": "",
+      "description": "Die Werkstätte und Labore, die unter [[Letizia Griswold]] in Adenai aufgebaut oder geführt werden.",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-25T11:06:22.628Z",
+      "updatedAt": "2026-10-25T11:06:22.628Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_be45afdbb6",
       "name": "Krabbelkönig",
       "aliases": [
@@ -513,5 +526,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-24T20:56:56.297Z"
+  "lastUpdated": "2026-10-25T11:06:22.630Z"
 }
