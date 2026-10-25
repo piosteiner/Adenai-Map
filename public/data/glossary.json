@@ -456,6 +456,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_3e2480274c",
+      "name": "TAbu",
+      "aliases": [],
+      "category": "",
+      "description": "Detektei von [[Tasbor]] und [[Abu]].",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-25T11:31:35.167Z",
+      "updatedAt": "2026-10-25T11:31:35.167Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_2e332a0c89",
       "name": "Thieves' Cant",
       "aliases": [],
@@ -526,5 +539,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-25T11:06:22.630Z"
+  "lastUpdated": "2026-10-25T11:31:35.168Z"
 }
