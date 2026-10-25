@@ -35398,7 +35398,9 @@
       "title": "Kadmis",
       "caption": "",
       "credits": "Critical Role: Call of the Netherdeep",
-      "tags": [],
+      "tags": [
+        "Aboleth"
+      ],
       "uploadDate": "2026-10-25T08:11:35.908Z",
       "sizes": {
         "thumb": {
@@ -35433,8 +35435,9 @@
         }
       },
       "fileSize": 305320,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-25T08:11:45.741Z"
     }
   },
-  "lastUpdated": "2026-10-25T08:11:35.920Z"
+  "lastUpdated": "2026-10-25T08:11:45.741Z"
 }
