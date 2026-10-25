@@ -37122,7 +37122,52 @@
       },
       "fileSize": 111202,
       "mimeType": "image/jpeg"
+    },
+    "characters-wva4602cusae": {
+      "id": "characters-wva4602cusae",
+      "category": "characters",
+      "title": "b84280db225accde7443d55d41743def",
+      "caption": "",
+      "credits": "https://de.pinterest.com/pin/931541504206453634/",
+      "tags": [
+        "lizardfolk"
+      ],
+      "uploadDate": "2026-10-25T11:58:21.037Z",
+      "sizes": {
+        "thumb": {
+          "filename": "wva4602cusae-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/wva4602cusae-thumb.webp",
+          "width": 94,
+          "height": 150
+        },
+        "small": {
+          "filename": "wva4602cusae-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/wva4602cusae-small.webp",
+          "width": 188,
+          "height": 300
+        },
+        "medium": {
+          "filename": "wva4602cusae-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/wva4602cusae-medium.webp",
+          "width": 375,
+          "height": 600
+        },
+        "large": {
+          "filename": "wva4602cusae-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/wva4602cusae-large.webp",
+          "width": 750,
+          "height": 1200
+        },
+        "original": {
+          "filename": "wva4602cusae-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/wva4602cusae-original.webp",
+          "width": 1200,
+          "height": 1920
+        }
+      },
+      "fileSize": 94647,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T11:57:31.919Z"
+  "lastUpdated": "2026-10-25T11:58:21.047Z"
 }
