@@ -37307,7 +37307,52 @@
       "fileSize": 57954,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-25T12:33:27.719Z"
+    },
+    "characters-aua2v74yjpo3": {
+      "id": "characters-aua2v74yjpo3",
+      "category": "characters",
+      "title": "767091e349305f244480498c74b32136",
+      "caption": "",
+      "credits": "https://de.pinterest.com/pin/751327150361885771/",
+      "tags": [
+        "grung"
+      ],
+      "uploadDate": "2026-10-25T14:00:24.916Z",
+      "sizes": {
+        "thumb": {
+          "filename": "aua2v74yjpo3-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/aua2v74yjpo3-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "aua2v74yjpo3-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/aua2v74yjpo3-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "aua2v74yjpo3-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/aua2v74yjpo3-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "aua2v74yjpo3-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/aua2v74yjpo3-large.webp",
+          "width": 1024,
+          "height": 1024
+        },
+        "original": {
+          "filename": "aua2v74yjpo3-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/aua2v74yjpo3-large.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "fileSize": 109177,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T12:33:27.719Z"
+  "lastUpdated": "2026-10-25T14:00:24.926Z"
 }
