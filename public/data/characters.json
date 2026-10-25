@@ -4486,8 +4486,11 @@
       "id": "niousha",
       "name": "Niousha",
       "title": "",
-      "placeOfOrigin": "",
-      "coordinates": null,
+      "placeOfOrigin": "Olecea",
+      "coordinates": [
+        916,
+        261
+      ],
       "description": "",
       "images": [
         "https://adenai-admin.piogino.ch/media/zskx9zsrar47-small.webp"
@@ -4499,10 +4502,20 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "currentLocation": null,
+      "currentLocation": {
+        "location": "Olecea",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          916,
+          261
+        ],
+        "notes": "Location set based on place of origin"
+      },
       "createdAt": "2026-10-24T21:31:44.475Z",
-      "updatedAt": "2026-10-25T11:45:12.068Z"
+      "updatedAt": "2026-10-25T11:45:20.779Z"
     }
   ],
-  "lastUpdated": "2026-10-25T11:45:12.068Z"
+  "lastUpdated": "2026-10-25T11:45:20.779Z"
 }
