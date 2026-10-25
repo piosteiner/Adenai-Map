@@ -37946,7 +37946,53 @@
       },
       "fileSize": 29273,
       "mimeType": "image/jpeg"
+    },
+    "general-548hkttrsean": {
+      "id": "general-548hkttrsean",
+      "category": "general",
+      "title": "66efb4e0fa6d5991eb1582229485637b",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/598697344212930933/",
+      "tags": [
+        "gate. portal",
+        "door"
+      ],
+      "uploadDate": "2026-10-25T14:12:25.837Z",
+      "sizes": {
+        "thumb": {
+          "filename": "548hkttrsean-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/548hkttrsean-thumb.webp",
+          "width": 149,
+          "height": 150
+        },
+        "small": {
+          "filename": "548hkttrsean-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/548hkttrsean-small.webp",
+          "width": 298,
+          "height": 300
+        },
+        "medium": {
+          "filename": "548hkttrsean-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/548hkttrsean-medium.webp",
+          "width": 596,
+          "height": 600
+        },
+        "large": {
+          "filename": "548hkttrsean-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/548hkttrsean-large.webp",
+          "width": 1005,
+          "height": 1012
+        },
+        "original": {
+          "filename": "548hkttrsean-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/548hkttrsean-large.webp",
+          "width": 1005,
+          "height": 1012
+        }
+      },
+      "fileSize": 92936,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T14:12:10.383Z"
+  "lastUpdated": "2026-10-25T14:12:25.850Z"
 }
