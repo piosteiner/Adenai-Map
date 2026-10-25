@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "74f6b2bb00cad58f808633669b98c68329c04738",
+      "action": "update",
+      "type": "character",
+      "itemName": "Roger",
+      "user": "gm",
+      "timestamp": "2026-10-25T08:00:20.684Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T08:00:20.684Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: roger (by gm) - added image"
+    },
+    {
       "commitSha": "7a46c42f737d306ca47917f773ee4c7224dac8a3",
       "action": "update",
       "type": "character",
@@ -3343,5 +3356,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T07:51:54.425Z"
+  "lastUpdated": "2026-10-25T08:00:20.684Z"
 }
