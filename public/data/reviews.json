@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "b395fe5fab3cd72a208240787fcf5b3fb49f7e3f",
+      "action": "update",
+      "type": "character",
+      "itemName": "Dacien",
+      "user": "gm",
+      "timestamp": "2026-10-25T08:16:14.522Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T08:16:14.522Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: dacien (by gm) - added image"
+    },
+    {
       "commitSha": "32abd62d19b541829986d71cddcae3005a4515a3",
       "action": "update",
       "type": "character",
@@ -3499,5 +3512,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T08:16:02.607Z"
+  "lastUpdated": "2026-10-25T08:16:14.523Z"
 }
