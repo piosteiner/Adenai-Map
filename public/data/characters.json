@@ -4389,8 +4389,8 @@
       "updatedAt": "2026-10-24T19:44:39.399Z"
     },
     {
-      "id": "al_ajrafa",
-      "name": "Al-Ajrafa",
+      "id": "kuura",
+      "name": "Kuura",
       "title": "",
       "placeOfOrigin": "Estu Vin",
       "coordinates": [
@@ -4420,7 +4420,7 @@
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2026-10-24T21:18:41.404Z",
-      "updatedAt": "2026-10-24T21:18:51.473Z"
+      "updatedAt": "2026-10-25T11:49:06.441Z"
     },
     {
       "id": "barnabaix",
@@ -4517,5 +4517,5 @@
       "updatedAt": "2026-10-25T11:45:20.779Z"
     }
   ],
-  "lastUpdated": "2026-10-25T11:45:20.779Z"
+  "lastUpdated": "2026-10-25T11:49:06.441Z"
 }
