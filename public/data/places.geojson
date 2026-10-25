@@ -261,12 +261,15 @@
       "type": "Feature",
       "properties": {
         "name": "Basapo",
-        "description": "Ein grosser Handelsposten im Süden von Valaris.",
+        "description": "Ein grosser Handelsposten im Süden von Valaris.\n\nWird von [[Königin Maeba II.]] regiert.",
         "contentUrl": null,
         "image": "https://adenai-admin.piogino.ch/media/01ln4jgoxpje-small.webp",
         "region": "upeto",
         "type": "city",
-        "visited": true
+        "visited": true,
+        "images": [
+          "https://adenai-admin.piogino.ch/media/01ln4jgoxpje-small.webp"
+        ]
       },
       "geometry": {
         "type": "Point",
