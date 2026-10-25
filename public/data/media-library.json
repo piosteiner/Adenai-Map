@@ -35391,7 +35391,50 @@
       "fileSize": 52264,
       "mimeType": "image/webp",
       "lastModified": "2026-10-25T08:08:49.253Z"
+    },
+    "characters-79tjmmo9itja": {
+      "id": "characters-79tjmmo9itja",
+      "category": "characters",
+      "title": "Kadmis",
+      "caption": "",
+      "credits": "Critical Role: Call of the Netherdeep",
+      "tags": [],
+      "uploadDate": "2026-10-25T08:11:35.908Z",
+      "sizes": {
+        "thumb": {
+          "filename": "79tjmmo9itja-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/79tjmmo9itja-thumb.webp",
+          "width": 150,
+          "height": 135
+        },
+        "small": {
+          "filename": "79tjmmo9itja-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/79tjmmo9itja-small.webp",
+          "width": 300,
+          "height": 270
+        },
+        "medium": {
+          "filename": "79tjmmo9itja-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/79tjmmo9itja-medium.webp",
+          "width": 600,
+          "height": 540
+        },
+        "large": {
+          "filename": "79tjmmo9itja-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/79tjmmo9itja-large.webp",
+          "width": 1000,
+          "height": 900
+        },
+        "original": {
+          "filename": "79tjmmo9itja-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/79tjmmo9itja-large.webp",
+          "width": 1000,
+          "height": 900
+        }
+      },
+      "fileSize": 305320,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T08:08:49.253Z"
+  "lastUpdated": "2026-10-25T08:11:35.920Z"
 }
