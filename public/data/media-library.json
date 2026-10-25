@@ -6403,7 +6403,11 @@
       "title": "Anselm Halloran",
       "caption": "",
       "credits": "https://pin.it/1o6ejpQKt",
-      "tags": [],
+      "tags": [
+        "mage",
+        "yosefka",
+        "serinessa"
+      ],
       "uploadDate": "2026-10-18T13:10:03.505Z",
       "sizes": {
         "thumb": {
@@ -6438,7 +6442,8 @@
         }
       },
       "fileSize": 92214,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-25T12:25:20.321Z"
     },
     "characters-undoh3n482fz": {
       "id": "characters-undoh3n482fz",
@@ -37260,5 +37265,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T11:58:55.767Z"
+  "lastUpdated": "2026-10-25T12:25:20.321Z"
 }
