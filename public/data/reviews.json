@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "243b39acb2168e16b243eff24fb225a110949eb8",
+      "action": "update",
+      "type": "character",
+      "itemName": "Taspipor",
+      "user": "gm",
+      "timestamp": "2026-10-25T08:12:56.863Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T08:12:56.863Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: taspipor (by gm) - added image"
+    },
+    {
       "commitSha": "ce2e036f810a91d00e2f6d3b19db0cd82478669b",
       "action": "update",
       "type": "character",
@@ -3421,5 +3434,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T08:12:39.378Z"
+  "lastUpdated": "2026-10-25T08:12:56.863Z"
 }
