@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "0d28d1a97a8bd41d6612de66ef80ef4150c21062",
+      "action": "update",
+      "type": "character",
+      "itemName": "Vazeer",
+      "user": "gm",
+      "timestamp": "2026-10-25T11:56:15.576Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T11:56:15.576Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vazeer (by gm) - added image"
+    },
+    {
       "commitSha": "d42cb733147f033964a2b5cf44f46dcee071f267",
       "action": "update",
       "type": "character",
@@ -4175,5 +4188,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T11:53:31.741Z"
+  "lastUpdated": "2026-10-25T11:56:15.576Z"
 }
