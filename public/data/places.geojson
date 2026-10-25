@@ -414,7 +414,7 @@
       "type": "Feature",
       "properties": {
         "name": "Donnermund",
-        "description": "## Beschreibung\nStadt, die sich zu teilen innerhalb und zu teilen ausserhalb des Berges befindet.\n\n",
+        "description": "## Beschreibung\nStadt, die sich zu teilen innerhalb und zu teilen ausserhalb des Berges befindet.\n\n## Regierung\nWird vom Stadthalter [[Dravak Svya]] regiert. Seine rechte Hand ist [[Ramza]].",
         "contentUrl": null,
         "image": "",
         "region": "western_adenai",
