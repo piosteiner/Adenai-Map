@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ed62abf7a7e115d93439bc35887da0f46f42f934",
+      "action": "delete",
+      "type": "character",
+      "itemName": "Krista",
+      "user": "gm",
+      "timestamp": "2026-10-25T11:04:25.187Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T11:04:25.187Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Delete character: Krista (by gm) - Removed from campaign"
+    },
+    {
       "commitSha": "f64cd5ecbf913332f45aa02194ba16a1d2372c67",
       "action": "update",
       "type": "location",
@@ -3668,5 +3681,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T11:03:30.599Z"
+  "lastUpdated": "2026-10-25T11:04:25.187Z"
 }
