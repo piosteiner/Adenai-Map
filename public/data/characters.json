@@ -177,13 +177,12 @@
       "name": "VsuzH",
       "title": "Vollkommen seriöse und zivilisierte Held:innen",
       "placeOfOrigin": "",
-      "coordinates": [
-        741,
-        769
-      ],
+      "coordinates": null,
       "description": "",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/hoxg4mv9w55r-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/hoxg4mv9w55r-small.webp",
       "status": "alive",
       "faction": "Selbständige Abenteurer",
       "relationship": "party",
@@ -1067,8 +1066,7 @@
         "notes": "Mit dem gelben Otter nach Serinessa"
       },
       "createdAt": "2025-08-24T23:05:39.208Z",
-      "updatedAt": "2026-10-25T07:51:53.022Z",
-      "location": "Serenissa"
+      "updatedAt": "2026-10-25T10:09:52.779Z"
     },
     {
       "id": "viktoria_karthright",
@@ -4523,5 +4521,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T08:20:11.095Z"
+  "lastUpdated": "2026-10-25T10:09:52.779Z"
 }
