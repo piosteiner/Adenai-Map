@@ -36752,7 +36752,136 @@
       "fileSize": 334087,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-25T10:09:40.749Z"
+    },
+    "general-o9qw12ejcntt": {
+      "id": "general-o9qw12ejcntt",
+      "category": "general",
+      "title": "dungeon generic 2",
+      "caption": "",
+      "credits": "efs",
+      "tags": [],
+      "uploadDate": "2026-10-25T11:19:07.113Z",
+      "sizes": {
+        "thumb": {
+          "filename": "o9qw12ejcntt-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/o9qw12ejcntt-thumb.webp",
+          "width": 102,
+          "height": 150
+        },
+        "small": {
+          "filename": "o9qw12ejcntt-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/o9qw12ejcntt-small.webp",
+          "width": 204,
+          "height": 300
+        },
+        "medium": {
+          "filename": "o9qw12ejcntt-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/o9qw12ejcntt-medium.webp",
+          "width": 409,
+          "height": 600
+        },
+        "large": {
+          "filename": "o9qw12ejcntt-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/o9qw12ejcntt-large.webp",
+          "width": 698,
+          "height": 1024
+        },
+        "original": {
+          "filename": "o9qw12ejcntt-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/o9qw12ejcntt-large.webp",
+          "width": 698,
+          "height": 1024
+        }
+      },
+      "fileSize": 170963,
+      "mimeType": "image/jpeg"
+    },
+    "general-hqoywirn25hg": {
+      "id": "general-hqoywirn25hg",
+      "category": "general",
+      "title": "dungeon generic",
+      "caption": "",
+      "credits": "efs",
+      "tags": [],
+      "uploadDate": "2026-10-25T11:19:07.230Z",
+      "sizes": {
+        "thumb": {
+          "filename": "hqoywirn25hg-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hqoywirn25hg-thumb.webp",
+          "width": 150,
+          "height": 100
+        },
+        "small": {
+          "filename": "hqoywirn25hg-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hqoywirn25hg-small.webp",
+          "width": 300,
+          "height": 200
+        },
+        "medium": {
+          "filename": "hqoywirn25hg-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hqoywirn25hg-medium.webp",
+          "width": 600,
+          "height": 400
+        },
+        "large": {
+          "filename": "hqoywirn25hg-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hqoywirn25hg-large.webp",
+          "width": 735,
+          "height": 490
+        },
+        "original": {
+          "filename": "hqoywirn25hg-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/hqoywirn25hg-large.webp",
+          "width": 735,
+          "height": 490
+        }
+      },
+      "fileSize": 37070,
+      "mimeType": "image/jpeg"
+    },
+    "general-sthd2crzcmgk": {
+      "id": "general-sthd2crzcmgk",
+      "category": "general",
+      "title": "dungeon with crystal lights",
+      "caption": "",
+      "credits": "efs",
+      "tags": [],
+      "uploadDate": "2026-10-25T11:19:07.385Z",
+      "sizes": {
+        "thumb": {
+          "filename": "sthd2crzcmgk-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/sthd2crzcmgk-thumb.webp",
+          "width": 150,
+          "height": 85
+        },
+        "small": {
+          "filename": "sthd2crzcmgk-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/sthd2crzcmgk-small.webp",
+          "width": 300,
+          "height": 170
+        },
+        "medium": {
+          "filename": "sthd2crzcmgk-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/sthd2crzcmgk-medium.webp",
+          "width": 600,
+          "height": 340
+        },
+        "large": {
+          "filename": "sthd2crzcmgk-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/sthd2crzcmgk-large.webp",
+          "width": 1000,
+          "height": 567
+        },
+        "original": {
+          "filename": "sthd2crzcmgk-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/sthd2crzcmgk-large.webp",
+          "width": 1000,
+          "height": 567
+        }
+      },
+      "fileSize": 74563,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T11:02:06.892Z"
+  "lastUpdated": "2026-10-25T11:19:07.398Z"
 }
