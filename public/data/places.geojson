@@ -334,12 +334,13 @@
       "type": "Feature",
       "properties": {
         "name": "Byrgenwerft",
-        "description": "Grösste Stadt in der Nähe der Yosefka Akademie.",
+        "description": "Grösste Stadt in der Nähe der Yosefka Akademie.\n\n",
         "contentUrl": null,
         "image": "",
         "region": "arcane_heights",
         "type": "city",
-        "visited": false
+        "visited": false,
+        "images": []
       },
       "geometry": {
         "type": "Point",
