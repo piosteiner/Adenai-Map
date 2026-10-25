@@ -38309,7 +38309,7 @@
       "category": "creatures",
       "title": "Star-Spawn of Cthulhu",
       "caption": "",
-      "credits": "a",
+      "credits": "Tome of Beasts 1, pg. 348",
       "tags": [],
       "uploadDate": "2026-10-25T15:04:53.710Z",
       "sizes": {
@@ -38345,7 +38345,8 @@
         }
       },
       "fileSize": 500001,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-25T15:06:14.636Z"
     },
     "creatures-u31n3uyya6jm": {
       "id": "creatures-u31n3uyya6jm",
@@ -38523,5 +38524,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T15:05:58.922Z"
+  "lastUpdated": "2026-10-25T15:06:14.636Z"
 }
