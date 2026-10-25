@@ -2995,16 +2995,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Ein Aboleth – für die Leute ein mythisches Tentakelmonster –, um das sich das «Projekt Kadmis» des [[Sternenzirkel]]s auf Upeto dreht. Hat ein Labor in den Ruinen von [[Erinea]] unter [[Epiphea]] und weiss von einem Artefakt der [[DeWitts]], das die Welt vor Zugriffen von aussen schützt.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/79tjmmo9itja-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/79tjmmo9itja-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "suspicious",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:41:58.193Z",
-      "updatedAt": "2026-10-18T04:41:58.193Z"
+      "updatedAt": "2026-10-25T08:12:21.766Z"
     },
     {
       "id": "lerna",
@@ -4502,5 +4505,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T08:09:04.534Z"
+  "lastUpdated": "2026-10-25T08:12:21.766Z"
 }
