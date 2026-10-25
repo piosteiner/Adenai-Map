@@ -3311,16 +3311,16 @@
         452
       ],
       "description": "Lizardfolk aus [[Tangoa]], Gast beim Empfang der Karthrights in [[Toftgard]]. Liess einen Zettel fallen, der riet, vor einem Beitritt zu [[Viktoria Karthright|Viktoria]] eine Zweitmeinung einzuholen. Schickte später die [[Sturmreiter]] als Hilfe nach [[Basapo]].",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/xv9mt6ygz3ou-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/xv9mt6ygz3ou-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2026-10-18T04:42:23.736Z",
-      "updatedAt": "2026-10-18T04:42:23.737Z",
       "currentLocation": {
         "location": "Tangoa",
         "date": "5663-06-03",
@@ -3330,8 +3330,10 @@
           1618,
           452
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2026-10-18T04:42:23.736Z",
+      "updatedAt": "2026-10-25T11:56:14.173Z"
     },
     {
       "id": "eilana",
@@ -4531,5 +4533,5 @@
       "updatedAt": "2026-10-25T11:45:20.779Z"
     }
   ],
-  "lastUpdated": "2026-10-25T11:53:30.522Z"
+  "lastUpdated": "2026-10-25T11:56:14.173Z"
 }
