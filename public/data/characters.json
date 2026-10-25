@@ -2916,16 +2916,16 @@
         1008
       ],
       "description": "Ein kränklicher Aarakocra, Leiter des [[Sternenzirkel]]s in [[Valaris]] und Berater von Kardinal [[Petrel Kormorant]]. Ging einen Pakt mit einem Energietentakelwesen ein, orchestrierte einen Gefängnisausbruch und erkundete via [[Luvatu]] einen Unterwassertempel. Die [[VsuzH]] töteten ihn in Sitzung 34; sein schimmernder Arm wurde gestohlen.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/1jzl888738f7-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/1jzl888738f7-small.webp",
       "status": "dead",
       "faction": "Sternenzirkel",
       "relationship": "enemy",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2026-10-18T04:41:51.910Z",
-      "updatedAt": "2026-10-18T04:41:51.910Z",
       "currentLocation": {
         "location": "Valaris",
         "date": "5663-06-03",
@@ -2935,8 +2935,10 @@
           1700,
           1008
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2026-10-18T04:41:51.910Z",
+      "updatedAt": "2026-10-25T08:20:11.095Z"
     },
     {
       "id": "shiho",
@@ -4521,5 +4523,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T08:16:13.584Z"
+  "lastUpdated": "2026-10-25T08:20:11.095Z"
 }
