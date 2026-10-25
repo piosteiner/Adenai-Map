@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ec8dec0b3dc6d837c1123eb4c91ed533d0391239",
+      "action": "create",
+      "type": "location",
+      "itemName": "Tua Danar",
+      "user": "gm",
+      "timestamp": "2026-10-25T12:17:29.204Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T12:17:29.204Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Create location: Tua Danar (by gm) - Initial location creation"
+    },
+    {
       "commitSha": "0d28d1a97a8bd41d6612de66ef80ef4150c21062",
       "action": "update",
       "type": "character",
@@ -4188,5 +4201,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T11:56:15.576Z"
+  "lastUpdated": "2026-10-25T12:17:29.204Z"
 }
