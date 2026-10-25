@@ -38350,9 +38350,9 @@
     "creatures-u31n3uyya6jm": {
       "id": "creatures-u31n3uyya6jm",
       "category": "creatures",
-      "title": "Star Spawn Larva Mage ",
+      "title": "Star Spawn Larva Mage",
       "caption": "",
-      "credits": "a",
+      "credits": "Mordenkainen Presents: Monsters of the Multiverse, pg. 228",
       "tags": [],
       "uploadDate": "2026-10-25T15:04:53.874Z",
       "sizes": {
@@ -38388,7 +38388,8 @@
         }
       },
       "fileSize": 305648,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-25T15:05:24.381Z"
     },
     "creatures-6balkxexxlqj": {
       "id": "creatures-6balkxexxlqj",
@@ -38520,5 +38521,5 @@
       "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T15:04:55.418Z"
+  "lastUpdated": "2026-10-25T15:05:24.381Z"
 }
