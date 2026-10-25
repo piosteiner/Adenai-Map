@@ -4030,16 +4030,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "[[Tasbor]] in der Tarnung als [[Piper Schlopp]] Schlopp in Griswolds Anlage – mit einer Illusion, die man sehen, aber nicht ertasten kann.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/cyetqo5o7ufa-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/cyetqo5o7ufa-small.webp",
       "status": "alive",
       "faction": "VsuzH",
       "relationship": "party",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:43:24.392Z",
-      "updatedAt": "2026-10-18T04:43:24.392Z"
+      "updatedAt": "2026-10-25T08:12:55.647Z"
     },
     {
       "id": "sir_adrien",
@@ -4508,5 +4511,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T08:12:38.058Z"
+  "lastUpdated": "2026-10-25T08:12:55.647Z"
 }
