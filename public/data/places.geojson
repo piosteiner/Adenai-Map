@@ -1272,6 +1272,26 @@
           629
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tua Danar",
+        "description": "Eine Insel, die Adenai mit arkaner Magie eroberte – [[Remus|Lord Remus]] stammt von dort und will ihre Unabhängigkeit erhalten. Rena und [[Wesdalen]] führen Krieg gegen Tua Danar.",
+        "contentUrl": null,
+        "type": "",
+        "region": "tua_danar",
+        "visited": false,
+        "images": [],
+        "image": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          357,
+          563
+        ]
+      }
     }
   ],
   "lastUpdated": "2026-10-25T11:45:13.345Z"
