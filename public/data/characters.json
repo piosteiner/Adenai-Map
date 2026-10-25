@@ -3766,16 +3766,19 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Ein Magier, der während eines Aufenthalts in [[Rena]] an der Zinnoberseuche starb, nachdem er im Oxalis-Kloster vergeblich Hilfe gesucht hatte. Die [[VsuzH]] besuchten seine Beisetzung.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/orrae32mz009-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/orrae32mz009-small.webp",
       "status": "dead",
       "faction": "",
       "relationship": "unknown",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T04:43:01.821Z",
-      "updatedAt": "2026-10-18T04:43:01.821Z"
+      "updatedAt": "2026-10-25T08:12:38.058Z"
     },
     {
       "id": "nani",
@@ -4505,5 +4508,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T08:12:21.766Z"
+  "lastUpdated": "2026-10-25T08:12:38.058Z"
 }
