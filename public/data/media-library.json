@@ -35437,7 +35437,50 @@
       "fileSize": 305320,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-25T08:11:45.741Z"
+    },
+    "characters-5wsc0m10amcr": {
+      "id": "characters-5wsc0m10amcr",
+      "category": "characters",
+      "title": "638465563627228993",
+      "caption": "",
+      "credits": "Tome of Beasts 1",
+      "tags": [],
+      "uploadDate": "2026-10-25T08:15:22.075Z",
+      "sizes": {
+        "thumb": {
+          "filename": "5wsc0m10amcr-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5wsc0m10amcr-thumb.webp",
+          "width": 128,
+          "height": 150
+        },
+        "small": {
+          "filename": "5wsc0m10amcr-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5wsc0m10amcr-small.webp",
+          "width": 256,
+          "height": 300
+        },
+        "medium": {
+          "filename": "5wsc0m10amcr-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5wsc0m10amcr-medium.webp",
+          "width": 511,
+          "height": 600
+        },
+        "large": {
+          "filename": "5wsc0m10amcr-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5wsc0m10amcr-large.webp",
+          "width": 852,
+          "height": 1000
+        },
+        "original": {
+          "filename": "5wsc0m10amcr-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/5wsc0m10amcr-large.webp",
+          "width": 852,
+          "height": 1000
+        }
+      },
+      "fileSize": 470242,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-25T08:11:45.741Z"
+  "lastUpdated": "2026-10-25T08:15:22.084Z"
 }
