@@ -3813,8 +3813,10 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "Empfing [[Naos]] in seinem Laden und verlangt für einen Dienst noch eine Gegenleistung von ihm – weshalb die [[VsuzH]] Naos zurücklassen mussten.",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/5wsc0m10amcr-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/5wsc0m10amcr-small.webp",
       "status": "alive",
       "faction": "",
       "relationship": "neutral",
@@ -3823,7 +3825,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2026-10-18T04:43:06.068Z",
-      "updatedAt": "2026-10-25T08:14:06.154Z"
+      "updatedAt": "2026-10-25T08:16:01.398Z"
     },
     {
       "id": "greda",
@@ -4517,5 +4519,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T08:14:06.154Z"
+  "lastUpdated": "2026-10-25T08:16:01.398Z"
 }
