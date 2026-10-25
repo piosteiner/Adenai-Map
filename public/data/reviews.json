@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "e087590f3dbba77c5b843dfc0192e42560a531a7",
+      "action": "update",
+      "type": "character",
+      "itemName": "Shiho",
+      "user": "gm",
+      "timestamp": "2026-10-25T08:13:25.064Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T08:13:25.064Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: shiho (by gm) - added image"
+    },
+    {
       "commitSha": "c8f4d71c9f85280f6433bca9bc32d3ab99cd1360",
       "action": "update",
       "type": "character",
@@ -3447,5 +3460,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T08:13:18.120Z"
+  "lastUpdated": "2026-10-25T08:13:25.064Z"
 }
