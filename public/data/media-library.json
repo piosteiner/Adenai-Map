@@ -36890,7 +36890,53 @@
       "fileSize": 74563,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-25T11:19:37.736Z"
+    },
+    "general-njpuqlh4ut3e": {
+      "id": "general-njpuqlh4ut3e",
+      "category": "general",
+      "title": "IMG_1073",
+      "caption": "",
+      "credits": "myself",
+      "tags": [
+        "wesdalen",
+        "map"
+      ],
+      "uploadDate": "2026-10-25T11:23:04.206Z",
+      "sizes": {
+        "thumb": {
+          "filename": "njpuqlh4ut3e-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/njpuqlh4ut3e-thumb.webp",
+          "width": 150,
+          "height": 106
+        },
+        "small": {
+          "filename": "njpuqlh4ut3e-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/njpuqlh4ut3e-small.webp",
+          "width": 300,
+          "height": 212
+        },
+        "medium": {
+          "filename": "njpuqlh4ut3e-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/njpuqlh4ut3e-medium.webp",
+          "width": 600,
+          "height": 424
+        },
+        "large": {
+          "filename": "njpuqlh4ut3e-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/njpuqlh4ut3e-large.webp",
+          "width": 1200,
+          "height": 848
+        },
+        "original": {
+          "filename": "njpuqlh4ut3e-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/njpuqlh4ut3e-original.webp",
+          "width": 2048,
+          "height": 1448
+        }
+      },
+      "fileSize": 5456360,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-25T11:21:29.182Z"
+  "lastUpdated": "2026-10-25T11:23:04.219Z"
 }
