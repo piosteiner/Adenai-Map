@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "e01abcff12e45334011fdeb5aec7593ecf79ba47",
+      "action": "update",
+      "type": "character",
+      "itemName": "VsuzH",
+      "user": "gm",
+      "timestamp": "2026-10-25T10:09:53.824Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T10:09:53.824Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vsuzh (by gm) - added image"
+    },
+    {
       "commitSha": "9f971f68452eba3f2ce1fd63dda995079e2da6f1",
       "action": "update",
       "type": "character",
@@ -3525,5 +3538,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T08:20:12.156Z"
+  "lastUpdated": "2026-10-25T10:09:53.824Z"
 }
