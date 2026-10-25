@@ -35108,7 +35108,9 @@
       "title": "Gelber Otter, fliegend",
       "caption": "",
       "credits": "myself",
-      "tags": [],
+      "tags": [
+        "construct"
+      ],
       "uploadDate": "2026-10-24T20:55:42.055Z",
       "sizes": {
         "thumb": {
@@ -35144,7 +35146,7 @@
       },
       "fileSize": 856214,
       "mimeType": "image/png",
-      "lastModified": "2026-10-24T20:56:22.710Z"
+      "lastModified": "2026-10-25T08:35:43.554Z"
     },
     "creatures-2a7qind102ua": {
       "id": "creatures-2a7qind102ua",
@@ -36704,5 +36706,5 @@
       "lastModified": "2026-10-25T08:30:55.734Z"
     }
   },
-  "lastUpdated": "2026-10-25T08:35:32.797Z"
+  "lastUpdated": "2026-10-25T08:35:43.554Z"
 }
