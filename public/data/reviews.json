@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "9f971f68452eba3f2ce1fd63dda995079e2da6f1",
+      "action": "update",
+      "type": "character",
+      "itemName": "Kunos",
+      "user": "gm",
+      "timestamp": "2026-10-25T08:20:12.156Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T08:20:12.156Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: kunos (by gm) - added image"
+    },
+    {
       "commitSha": "b395fe5fab3cd72a208240787fcf5b3fb49f7e3f",
       "action": "update",
       "type": "character",
@@ -3512,5 +3525,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T08:16:14.523Z"
+  "lastUpdated": "2026-10-25T08:20:12.156Z"
 }
