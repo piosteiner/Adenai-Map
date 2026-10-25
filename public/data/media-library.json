@@ -37671,7 +37671,52 @@
       },
       "fileSize": 171182,
       "mimeType": "image/jpeg"
+    },
+    "characters-ppb75m7yg8z5": {
+      "id": "characters-ppb75m7yg8z5",
+      "category": "characters",
+      "title": "29c3bf3a86d69230ef4f02d8c7939cdf",
+      "caption": "",
+      "credits": "https://ch.pinterest.com/pin/649996158755788888/",
+      "tags": [
+        "evil"
+      ],
+      "uploadDate": "2026-10-25T14:07:52.686Z",
+      "sizes": {
+        "thumb": {
+          "filename": "ppb75m7yg8z5-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ppb75m7yg8z5-thumb.webp",
+          "width": 120,
+          "height": 150
+        },
+        "small": {
+          "filename": "ppb75m7yg8z5-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ppb75m7yg8z5-small.webp",
+          "width": 240,
+          "height": 300
+        },
+        "medium": {
+          "filename": "ppb75m7yg8z5-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ppb75m7yg8z5-medium.webp",
+          "width": 480,
+          "height": 600
+        },
+        "large": {
+          "filename": "ppb75m7yg8z5-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ppb75m7yg8z5-large.webp",
+          "width": 736,
+          "height": 920
+        },
+        "original": {
+          "filename": "ppb75m7yg8z5-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/ppb75m7yg8z5-large.webp",
+          "width": 736,
+          "height": 920
+        }
+      },
+      "fileSize": 157150,
+      "mimeType": "image/jpeg"
     }
   },
-  "lastUpdated": "2026-10-25T14:07:33.627Z"
+  "lastUpdated": "2026-10-25T14:07:52.696Z"
 }
