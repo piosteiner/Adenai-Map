@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "35b98eb1c5e2fddaa3ef3c698486b1458401f035",
+      "action": "update",
+      "type": "character",
+      "itemName": "Niousha",
+      "user": "gm",
+      "timestamp": "2026-10-25T11:45:21.827Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T11:45:21.827Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: niousha (by gm) - added place of origin"
+    },
+    {
       "commitSha": "6ee233a47bd773e41be7a382dc8eeb9f1efb29ab",
       "action": "update",
       "type": "character",
@@ -4123,5 +4136,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T11:45:13.343Z"
+  "lastUpdated": "2026-10-25T11:45:21.827Z"
 }
