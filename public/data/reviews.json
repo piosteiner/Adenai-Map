@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "f0178e6b7e2cb38ce5e50a5871a81070f4dff404",
+      "action": "update",
+      "type": "character",
+      "itemName": "Pirouz",
+      "user": "gm",
+      "timestamp": "2026-10-25T11:53:11.841Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T11:53:11.841Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: damian (by gm) - updated name"
+    },
+    {
       "commitSha": "f3decc994b79ef22b5f89fe1982741764e59258e",
       "action": "update",
       "type": "character",
@@ -4149,5 +4162,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T11:49:07.736Z"
+  "lastUpdated": "2026-10-25T11:53:11.842Z"
 }
