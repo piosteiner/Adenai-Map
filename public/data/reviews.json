@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ce2e036f810a91d00e2f6d3b19db0cd82478669b",
+      "action": "update",
+      "type": "character",
+      "itemName": "Waldomar",
+      "user": "gm",
+      "timestamp": "2026-10-25T08:12:39.378Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T08:12:39.378Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: waldomar (by gm) - added image"
+    },
+    {
       "commitSha": "d707cf9f9d09fa70d334022fc81366bebbb3d56d",
       "action": "update",
       "type": "character",
@@ -3408,5 +3421,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T08:12:23.046Z"
+  "lastUpdated": "2026-10-25T08:12:39.378Z"
 }
