@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "8cad4e58816ca796f5ca93794b56ee1d0566534c",
+      "action": "update",
+      "type": "location",
+      "itemName": "Theos Hof",
+      "user": "gm",
+      "timestamp": "2026-10-25T11:15:32.327Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T11:15:32.327Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Theos Hof (by gm) - updated description"
+    },
+    {
       "commitSha": "2b82baf8ed79ede0745de059187bfa464a8e57dc",
       "action": "update",
       "type": "location",
@@ -3720,5 +3733,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T11:07:54.887Z"
+  "lastUpdated": "2026-10-25T11:15:32.327Z"
 }
