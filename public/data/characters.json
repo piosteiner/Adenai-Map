@@ -1508,24 +1508,6 @@
       "updatedAt": "2025-09-07T19:29:07.486Z"
     },
     {
-      "id": "krista",
-      "name": "Krista",
-      "title": "",
-      "placeOfOrigin": "",
-      "coordinates": null,
-      "description": "",
-      "image": "https://adenai-admin.piogino.ch/media/dlymg4j3u4gk-small.webp",
-      "status": "alive",
-      "faction": "",
-      "relationship": "unknown",
-      "firstMet": "",
-      "notes": "",
-      "movementHistory": [],
-      "currentLocation": null,
-      "createdAt": "2025-08-29T20:39:29.421Z",
-      "updatedAt": "2025-09-07T19:44:10.842Z"
-    },
-    {
       "id": "krull_sturmbann",
       "name": "Krull Sturmbann",
       "title": "",
@@ -4521,5 +4503,5 @@
       "updatedAt": "2026-10-24T21:31:44.475Z"
     }
   ],
-  "lastUpdated": "2026-10-25T10:09:52.779Z"
+  "lastUpdated": "2026-10-25T11:04:23.905Z"
 }
