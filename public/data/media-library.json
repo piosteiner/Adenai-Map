@@ -38485,7 +38485,7 @@
       "category": "creatures",
       "title": "Elder Thing",
       "caption": "",
-      "credits": "a",
+      "credits": "Ravenloft: The Horrors Within, pg. 245",
       "tags": [],
       "uploadDate": "2026-10-25T15:04:55.403Z",
       "sizes": {
@@ -38521,8 +38521,9 @@
         }
       },
       "fileSize": 443364,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-25T15:06:44.950Z"
     }
   },
-  "lastUpdated": "2026-10-25T15:06:14.636Z"
+  "lastUpdated": "2026-10-25T15:06:44.950Z"
 }
