@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "dfe1efb5553a792656ffd0b9737318f9de628b6e",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lareal",
+      "user": "gm",
+      "timestamp": "2026-10-25T08:06:07.807Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T08:06:07.807Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: larial (by gm) - updated name"
+    },
+    {
       "commitSha": "74f6b2bb00cad58f808633669b98c68329c04738",
       "action": "update",
       "type": "character",
@@ -3356,5 +3369,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T08:00:20.684Z"
+  "lastUpdated": "2026-10-25T08:06:07.807Z"
 }
