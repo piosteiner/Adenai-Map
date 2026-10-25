@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6ee233a47bd773e41be7a382dc8eeb9f1efb29ab",
+      "action": "update",
+      "type": "character",
+      "itemName": "Niousha",
+      "user": "gm",
+      "timestamp": "2026-10-25T11:45:13.343Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T11:45:13.343Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: marsala (by gm) - updated name"
+    },
+    {
       "commitSha": "2e72e02803fb808289c1282f2e2e9211232b27cb",
       "action": "update",
       "type": "location",
@@ -4110,5 +4123,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T11:35:49.499Z"
+  "lastUpdated": "2026-10-25T11:45:13.343Z"
 }
