@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6420d09511f06fb38da03e059a0ff0d0eb371f4f",
+      "action": "update",
+      "type": "location",
+      "itemName": "Wesdalen",
+      "user": "gm",
+      "timestamp": "2026-10-25T11:05:06.810Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T11:05:06.810Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Wesdalen (by gm) - updated description"
+    },
+    {
       "commitSha": "ed62abf7a7e115d93439bc35887da0f46f42f934",
       "action": "delete",
       "type": "character",
@@ -3681,5 +3694,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T11:04:25.187Z"
+  "lastUpdated": "2026-10-25T11:05:06.810Z"
 }
