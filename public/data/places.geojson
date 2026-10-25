@@ -65,11 +65,14 @@
         "name": "Wesdalen",
         "description": "## Beschreibung\nWesdalen ist neben [[Rena]] die grösste Stadt in West-Adenai. Das Zentrum der Stadt ist um einen alten, schwebenden, umgenutzten Magierturm gebaut. Auf einem Küstenarm liegt in einem riesigen Ring die Stadt unterhalb der alten schwebenden Insel.\nDie Theatergruppe [[Die Tanzenden Couatl]] stammen aus dieser Stadt.\n[[She-Ra]] hat Beziehungen zu dieser Stadt.\n\n## Regierung\nRegiert wird die Stadt von [[Lord Ramvir Beridze]]. Seine rechte Hand ist [[Kristina]].\n\n## [[Griswold Werkstätte]]\n[[Erissa Bulan]] führt das Labor von Griswold hier unter der Stadt. [[Piper Schlopp]] ist eine von ihren Schülerinnen, die viel Potenzial zu haben scheint. [[Jak-gur]] ist für ein Teil der Sicherheit der Einrichtung verantwortlich.",
         "contentUrl": null,
-        "image": "",
+        "image": "https://adenai-admin.piogino.ch/media/njpuqlh4ut3e-small.webp",
         "region": "rena_region",
         "type": "city",
         "visited": false,
-        "images": []
+        "images": [
+          "https://adenai-admin.piogino.ch/media/njpuqlh4ut3e-small.webp",
+          "https://adenai-admin.piogino.ch/media/uvlssv90j5ke-small.webp"
+        ]
       },
       "geometry": {
         "type": "Point",
