@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "2ddd90cc837e7ffab21b868581f3d4b4798a40df",
+      "action": "update",
+      "type": "location",
+      "itemName": "Valanui",
+      "user": "gm",
+      "timestamp": "2026-10-25T12:30:17.918Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-25T12:30:17.918Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update location: Valanui (by gm) - updated coordinates"
+    },
+    {
       "commitSha": "320b6546361d2df2fd57301886c89395be7a1ee7",
       "action": "update",
       "type": "location",
@@ -4500,5 +4513,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-25T12:30:10.594Z"
+  "lastUpdated": "2026-10-25T12:30:17.918Z"
 }
