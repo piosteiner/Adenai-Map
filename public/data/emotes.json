@@ -6,7 +6,7 @@
       "name": "piogino",
       "setId": "01K1BPC2WFZB8QA3T04MPBTSS9",
       "setName": "set1",
-      "count": 318
+      "count": 364
     }
   ],
   "custom": [],
@@ -2162,7 +2162,7 @@
       "animated": true,
       "from": "piogino"
     },
-    "ORLY": {
+    "OWL": {
       "url": "https://cdn.7tv.app/emote/01G4ZXH2T8000CRWJ70G8FT03B/2x.webp",
       "w": 32,
       "h": 32,
@@ -2225,6 +2225,314 @@
       "animated": true,
       "from": "piogino"
     },
+    "catHYPERS": {
+      "url": "https://cdn.7tv.app/emote/01HMWZCDZG000AD7FMTBJ80MZS/2x.webp",
+      "w": 41,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "moreHalloween": {
+      "url": "https://cdn.7tv.app/emote/01J9504CMR0001V26HAKQBF34M/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "nanaSPOOKED": {
+      "url": "https://cdn.7tv.app/emote/01H1JF0Y0800063NETC9FXGTK5/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "catBOO": {
+      "url": "https://cdn.7tv.app/emote/01JXQS2SWG4TH0A1V4VZM836GY/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "DogeTea": {
+      "url": "https://cdn.7tv.app/emote/01FMFP0YB0000B3TR3VAP7VFQE/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "dogKEK": {
+      "url": "https://cdn.7tv.app/emote/01FJH1GZWR0005ZW4QCZF2KHZ0/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "SoSmiley": {
+      "url": "https://cdn.7tv.app/emote/01GKZZR00000093RS6925561D0/2x.webp",
+      "w": 38,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "dogeFlirt": {
+      "url": "https://cdn.7tv.app/emote/01GC1CS7Q0000F5ND0VWBT98PB/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "thatDog": {
+      "url": "https://cdn.7tv.app/emote/01FN5FKBQ8000EXJQ7MWJVS1PQ/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "shiba": {
+      "url": "https://cdn.7tv.app/emote/01JR5DDFHZMQVSZFG2942R8GJH/2x.webp",
+      "w": 38,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "Dicege": {
+      "url": "https://cdn.7tv.app/emote/01GK002VFG0000EPP0TR4PY2Y1/2x.webp",
+      "w": 64,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "GUH": {
+      "url": "https://cdn.7tv.app/emote/01HZXR7ZXR0005W8H9YKVEQWV0/2x.webp",
+      "w": 42,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "Detective": {
+      "url": "https://cdn.7tv.app/emote/01GG0EJ7300002Y4Z4CY7NHRXW/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "DetectivNotes": {
+      "url": "https://cdn.7tv.app/emote/01FG7JMM9000047CPSV86K42EJ/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "BurnEvidence": {
+      "url": "https://cdn.7tv.app/emote/01G36QGDD8000BZSKRTC3NH4TE/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "detectiveCat": {
+      "url": "https://cdn.7tv.app/emote/01HAQQBJMR000BY5AAK49PM716/2x.webp",
+      "w": 27,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "peepoDetective2": {
+      "url": "https://cdn.7tv.app/emote/01FRG9TPAG0007ABTNBF6YJVFD/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "madMage": {
+      "url": "https://cdn.7tv.app/emote/01KQK9EHPSR15BVRHVGD0Y011T/2x.webp",
+      "w": 30,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "PeepoMage": {
+      "url": "https://cdn.7tv.app/emote/01G0SGGENR000B07GP10RGN79Y/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "bardd": {
+      "url": "https://cdn.7tv.app/emote/01JPPEK960WQTDVX0DR81T1DJ6/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "smollbard": {
+      "url": "https://cdn.7tv.app/emote/01HK48W88R00055RWFJ3SK9G76/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "princess": {
+      "url": "https://cdn.7tv.app/emote/01H5MYCK800007SK9E6EYS5WJN/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "fairy": {
+      "url": "https://cdn.7tv.app/emote/01JDSNVN65K37W0QD8HTHCV4V4/2x.webp",
+      "w": 46,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "ghibliYippee": {
+      "url": "https://cdn.7tv.app/emote/01GSDQ41R8000DX72RFK5PFK55/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "cantcarry": {
+      "url": "https://cdn.7tv.app/emote/01HBSKBW18000EBT75K3M5XTAQ/2x.webp",
+      "w": 35,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "totoroRun": {
+      "url": "https://cdn.7tv.app/emote/01KEH3GRQDWKX7Q9CY1HJT6ZKW/2x.webp",
+      "w": 24,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "HeadEmpty": {
+      "url": "https://cdn.7tv.app/emote/01JSCCA2HJB6TDS0QN320P40D7/2x.webp",
+      "w": 39,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "AkaneDance": {
+      "url": "https://cdn.7tv.app/emote/01GAVVSH8G0009FFQSDJAM8SNQ/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "seal": {
+      "url": "https://cdn.7tv.app/emote/01GQXW9Q88000AH5YBCSXQWMQE/2x.webp",
+      "w": 35,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "WatSeal": {
+      "url": "https://cdn.7tv.app/emote/01GBB135G80000X4MX5ZF49Z66/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "OtterHypers": {
+      "url": "https://cdn.7tv.app/emote/01G60PGRTR0008JMMMWZ5BDC2V/2x.webp",
+      "w": 38,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "PetTheOtter": {
+      "url": "https://cdn.7tv.app/emote/01GH6FYGN00006V5R1ARWVJ8N5/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "Scratch": {
+      "url": "https://cdn.7tv.app/emote/01G615TBTG00020B4JB4BJGSHS/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "Kirby": {
+      "url": "https://cdn.7tv.app/emote/01G53HE76G0003SYTMXJ2SQMYY/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "kirbyEat": {
+      "url": "https://cdn.7tv.app/emote/01GXEG0KPG0000G2M7H5BG8CD3/2x.webp",
+      "w": 47,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "owlActually": {
+      "url": "https://cdn.7tv.app/emote/01HJRS6Z0G000EEKXQ7RB11M42/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "KEKOWL": {
+      "url": "https://cdn.7tv.app/emote/01HTDWGB7R000B1F9GAE4NZ77N/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "0-0'": {
+      "url": "https://cdn.7tv.app/emote/01HAVK6J2G000CK4GBCA21E861/2x.webp",
+      "w": 49,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "owlGlasses": {
+      "url": "https://cdn.7tv.app/emote/01JVY9MT5J7PM19E5GDW9PS6DQ/2x.webp",
+      "w": 36,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "frierenMimic": {
+      "url": "https://cdn.7tv.app/emote/01J0WMA55R0008JR3QQMJSJQ97/2x.webp",
+      "w": 46,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "Fight": {
+      "url": "https://cdn.7tv.app/emote/01J14WJMK800068734GKCYE5VD/2x.webp",
+      "w": 27,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "peepoStabby2": {
+      "url": "https://cdn.7tv.app/emote/01HEJQEV08000D9HKF0SAN2AB2/2x.webp",
+      "w": 96,
+      "h": 24,
+      "animated": true,
+      "from": "piogino"
+    },
+    "Angy": {
+      "url": "https://cdn.7tv.app/emote/01G2QV2Q3G0006W03Y0X6BGJZF/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
+    "hide": {
+      "url": "https://cdn.7tv.app/emote/01GXVMSXB80007G1AQRF64DZ1N/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
     "D": {
       "url": "https://cdn.7tv.app/emote/01GM78BAGR0001WBT5AMQY9YG3/2x.webp",
       "w": 32,
@@ -2240,7 +2548,23 @@
       "animated": true,
       "from": "piogino",
       "original": ":d"
+    },
+    "p": {
+      "url": "https://cdn.7tv.app/emote/01K41FQ0G13GXX11470XX6N4YK/2x.webp",
+      "w": 37,
+      "h": 32,
+      "animated": false,
+      "from": "piogino",
+      "original": ":p"
+    },
+    "O": {
+      "url": "https://cdn.7tv.app/emote/01GCW8EAQG000D8RDSXFWM2F0P/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino",
+      "original": ":O"
     }
   },
-  "lastUpdated": "2026-10-22T18:40:05.097Z"
+  "lastUpdated": "2026-10-27T20:43:54.992Z"
 }
