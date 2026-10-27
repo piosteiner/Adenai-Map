@@ -24,11 +24,18 @@ function withFileCache(octokit, log = console) {
     const onMain = (p) => !p.ref || p.ref === 'main';
     const copy = (entry) => ({ status: 200, data: { ...entry.data }, headers: {} });
 
+    // Files over 1 MB come without content (encoding "none", e.g. media-library.json): the content from the blob API
+    // instead (up to 100 MB), so the routes get them as a small file
+    async function withContent(params, res) {
+        if (res.data?.type !== 'file' || res.data.content || !res.data.sha) return res;
+        const blob = await octokit.rest.git.getBlob({ owner: params.owner, repo: params.repo, file_sha: res.data.sha });
+        return { ...res, data: { ...res.data, encoding: 'base64', content: blob.data.content } };
+    }
+
     async function fetchInto(params, entry) {
         const headers = entry?.etag ? { ...(params.headers || {}), 'if-none-match': entry.etag } : params.headers;
         try {
-            const res = await get({ ...params, headers });
-            // files over 1 MB come without content (encoding "none"): not cached
+            const res = await withContent(params, await get({ ...params, headers }));
             if (res.data && res.data.type === 'file' && res.data.encoding === 'base64' && res.data.content) {
                 files.set(keyOf(params), { data: res.data, etag: res.headers?.etag || null, at: Date.now() });
             }
@@ -40,7 +47,7 @@ function withFileCache(octokit, log = console) {
     }
 
     repos.getContent = async (params) => {
-        if (!onMain(params)) return get(params);
+        if (!onMain(params)) return withContent(params, await get(params));
         const entry = files.get(keyOf(params));
         if (!entry) return fetchInto(params);
         if (Date.now() - entry.at > FRESH_MS && !entry.refreshing) {
