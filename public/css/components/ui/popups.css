@@ -603,3 +603,23 @@
 .emote-suggest li { display: flex; align-items: center; gap: 8px; padding: 4px 8px; border-radius: 5px; font-size: 13px; cursor: pointer; }
 .emote-suggest li[aria-selected="true"] { background: var(--accent-primary, #6366f1); color: #fff; }
 .emote-suggest img { width: 32px; height: 28px; object-fit: contain; }
+
+/* the entry of a link clicked in the minutes, at the link (link-cards.js): the whole description, its links followed
+   in place (← zurück), and the way to the map or the glossary */
+.link-card-pinned { z-index: 10050; display: grid; gap: 8px; width: min(380px, calc(100vw - 16px)); max-width: none; max-height: min(70vh, 560px); overflow-y: auto; box-sizing: border-box; pointer-events: auto; font-size: 14px; }
+.link-card-bar { display: flex; justify-content: space-between; margin: -2px -4px -4px; }
+.link-card-bar button { min-height: 30px; padding: 0 8px; border: 0; border-radius: 6px; background: none; color: inherit; font: inherit; font-size: 13px; cursor: pointer; opacity: 0.75; }
+.link-card-bar button:hover { opacity: 1; background: rgba(127, 127, 127, 0.15); }
+.link-card-close { margin-left: auto; }
+.link-card-headrow { display: flex; gap: 12px; }
+.link-card-pinned .link-card-img { width: 88px; height: 88px; }
+.link-card-pinned .link-card-title { font-size: 16px; }
+.link-card-desc { font-size: 13.5px; line-height: 1.5; }
+.link-card-desc p, .link-card-desc ul, .link-card-desc ol { margin: 0 0 0.5em; }
+.link-card-desc > :last-child { margin-bottom: 0; }
+.link-card-desc .wiki-link { color: #6d28d9; font-weight: 600; }
+.link-card-actions { display: flex; }
+.link-card-go { min-height: 34px; padding: 0 12px; border: 1px solid rgba(109, 40, 217, 0.35); border-radius: 6px; background: rgba(109, 40, 217, 0.08); color: inherit; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+.link-card-go:hover { background: rgba(109, 40, 217, 0.16); }
+[data-theme="dark"] .link-card-desc .wiki-link { color: #b49cff; }
+[data-theme="dark"] .link-card-go { border-color: rgba(180, 156, 255, 0.4); background: rgba(180, 156, 255, 0.12); }

@@ -52,6 +52,8 @@
         const link = e.target.closest && e.target.closest('a.wiki-link');
         if (!link) return;
         e.preventDefault();
+        // in the minutes: the entry in a card at the link (link-cards.js) — the minutes stay open, the map where it is
+        if (window.LinkCards?.inMinutes(link) && window.LinkCards.open(link)) return;
         const hit = find(link.dataset.name);
         if (!hit) {
             link.classList.add('missing');
@@ -59,10 +61,17 @@
             return;
         }
         pinSource(link);
+        go(hit.name);
+    });
+
+    // the entry itself: a character's popup, a place on the map, a term in the glossary
+    function go(name) {
+        const hit = find(name);
+        if (!hit) return;
         if (hit.kind === 'character') window.characterSystem.focusCharacter(hit.name);
         else if (hit.kind === 'term' || hit.kind === 'pending') window.mapGlossary.open(hit.name);
         else window.locationSystem.focusLocation(hit.name);
-    });
+    }
 
     // ---------- backlinks: "Erwähnt in …" ----------
     // Every location description and character description/notes that links to name (not counting the entry itself).
@@ -113,5 +122,5 @@
     // after the minutes have loaded (components/protocols.js): fill the open popups' lists again, with the sessions
     const refreshBacklinks = () => document.querySelectorAll('.backlinks[data-filled]').forEach(fill);
 
-    window.WikiLinks = { find, backlinks, backlinksSlot, refreshBacklinks };
+    window.WikiLinks = { find, go, backlinks, backlinksSlot, refreshBacklinks };
 })();
