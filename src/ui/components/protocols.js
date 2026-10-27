@@ -518,8 +518,14 @@ class MapProtocols {
         const edit = this.el('button', 'pp-edit', raw.draft || raw.published === false ? '✎ Weiterschreiben' : '✎ Bearbeiten');
         edit.type = 'button';
         edit.addEventListener('click', () => this.edit(id));
+        const exp = this.el('button', 'pp-edit', '⬇ Exportieren');
+        exp.type = 'button';
+        exp.title = 'Diese Sitzung als Text herunterladen oder kopieren';
+        exp.addEventListener('click', () => this.showExport(id));
+        const actions = this.el('div', 'pp-read-actions');
+        actions.append(edit, exp);
         const badge = this.draftBadge(raw);
-        head.append(h2, meta, this.chips(s.players || [], 'pp-players', '👥'), this.chips(s.places || [], 'pp-places', '📍'), ...(badge ? [badge] : []), edit);
+        head.append(h2, meta, this.chips(s.players || [], 'pp-players', '👥'), this.chips(s.places || [], 'pp-places', '📍'), ...(badge ? [badge] : []), actions);
         const text = this.el('div', 'pp-text rich-text');
         text.innerHTML = s.content ? RichText.render(s.content) : '<p class="pp-note">Noch kein Text.</p>';
         sec.el.replaceChildren(head, text);
@@ -559,6 +565,127 @@ class MapProtocols {
         stats.addEventListener('click', () => this.showStats());
         bar.append(stats);
         return bar;
+    }
+
+    // ---------- export of one session ----------
+
+    // A session as text: { markup } keeps the Markdown (**fett**, # Überschrift, > [!loot] …) — else plain text;
+    // { links } keeps [[Name]] and [Text](https://…) — else only the text that is shown
+    exportText(s, { markup = true, links = false } = {}) {
+        const BOXES = { quote: 'Zitat', loot: 'Beute', quest: 'Auftrag', info: 'Info', warning: 'Achtung', note: 'Notiz', secret: 'Geheim' };
+        const inline = (t) => {
+            let x = String(t || '');
+            if (!links) {
+                x = x.replace(/\[\[([^\[\]|\n]+?)(?:\|([^\[\]\n]+?))?\]\]/g, (_, target, label) => (label || target).trim())
+                    .replace(/\[([^\[\]\n]+)\]\((https?:\/\/[^\s)]+)\)/g, '$1');
+            }
+            if (markup) return x;
+            if (links) x = x.replace(/\[([^\[\]\n]+)\]\((https?:\/\/[^\s)]+)\)/g, '$1 ($2)');
+            return x
+                .replace(/\*\*(?=\S)([^*]*?\S)\*\*/g, '$1')
+                .replace(/(^|[^*])\*(?=\S)([^*]*?\S)\*(?!\*)/g, '$1$2')
+                .replace(/~~(?=\S)([^~]*?\S)~~/g, '$1')
+                .replace(/\+\+(?=\S)([^+]*?\S)\+\+/g, '$1')
+                .replace(/==(?=\S)([^=]*?\S)==/g, '$1')
+                .replace(/\|\|(?=\S)([^|]*?\S)\|\|/g, '$1')
+                .replace(/\\([\\`*_{}\[\]()#+\-.!>~|&=:])/g, '$1');
+        };
+        // plain text: no "#", ">", boxes as their title with a colon, tables without their |---| line
+        const plainLine = (line) => {
+            let m;
+            if ((m = /^#{1,6}\s+(.*)$/.exec(line))) return inline(m[1]);
+            if ((m = /^>\s?\[!([a-zA-ZäöüÄÖÜ]+)\][+-]?\s*(.*)$/.exec(line))) return `${inline(m[2]) || BOXES[m[1].toLowerCase()] || m[1]}:`;
+            if ((m = /^>\s?(.*)$/.exec(line))) return `  ${inline(m[1])}`;
+            if ((m = /^(\s*)[-*+]\s+\[([ xX])\]\s+(.*)$/.exec(line))) return `${m[1]}${m[2] === ' ' ? '☐' : '☑'} ${inline(m[3])}`;
+            if (/^\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?$/.test(line.trim())) return null;
+            if (/^\s*\|.*\|\s*$/.test(line)) {
+                // cells split at "|" — not at the one inside [[Name|text]] or a ||spoiler|| (as rich-text.js)
+                const kept = [];
+                const safe = line.trim().replace(/\[\[[^\]\n]*\]\]|\|\|[^|\n]*\|\|/g, (k) => `\u0001${kept.push(k) - 1}\u0001`);
+                return safe.replace(/^\|/, '').replace(/\|$/, '').split(/(?<!\\)\|/)
+                    .map((c) => inline(c.trim().replace(/\u0001(\d+)\u0001/g, (_, i) => kept[Number(i)]))).join('  |  ');
+            }
+            return inline(line);
+        };
+        const body = String(s.content || '').replace(/\r\n?/g, '\n').split('\n')
+            .map((l) => (markup ? inline(l) : plainLine(l))).filter((l) => l !== null).join('\n').trim();
+        const title = `Sitzung ${s.number ?? '?'}${s.title ? ` · ${inline(s.title)}` : ''}`;
+        const meta = [
+            s.date ? `📅 ${this.date(s.date)}` : '',
+            s.ingameStart ? `🗓️ ${this.date(s.ingameStart)}${s.ingameEnd && s.ingameEnd !== s.ingameStart ? ` – ${this.date(s.ingameEnd)}` : ''}` : '',
+            s.level ? `⭐ Stufe ${s.level}` : '',
+        ].filter(Boolean).join(' · ');
+        const list = (names) => names.map((n) => (links ? `[[${n}]]` : n)).join(', ');
+        const head = [
+            markup ? `# ${title}` : title,
+            meta,
+            s.players?.length ? `👥 ${list(s.players)}` : '',
+            s.places?.length ? `📍 ${list(s.places)}` : '',
+        ].filter(Boolean);
+        return `${head.join(markup ? '  \n' : '\n')}\n\n${markup ? '---\n\n' : ''}${body}\n`;
+    }
+
+    showExport(id) {
+        const raw = this.sessions.find((x) => x.id === id);
+        if (!raw) return;
+        const s = this.shown(raw);
+        this.panel.querySelector('.pp-stats-layer')?.remove();
+        const layer = this.el('div', 'pp-stats-layer');
+        const box = this.el('section', 'pp-stats pp-export');
+        box.setAttribute('role', 'dialog');
+        box.setAttribute('aria-label', `Sitzung ${s.number ?? ''} exportieren`);
+        const close = () => { layer.remove(); document.removeEventListener('keydown', onKey, true); };
+        const onKey = (e) => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); close(); } };
+        document.addEventListener('keydown', onKey, true);
+        layer.addEventListener('mousedown', (e) => { if (e.target === layer) close(); });
+        const x = this.el('button', 'pp-stats-close', '✕');
+        x.type = 'button';
+        x.title = 'Schliessen';
+        x.addEventListener('click', close);
+        const head = this.el('header', 'pp-stats-head');
+        head.append(this.el('h2', '', `⬇ Sitzung ${s.number ?? '?'} exportieren`), x);
+
+        const option = (label, hint, checked) => {
+            const l = this.el('label', 'pp-export-option');
+            const c = Object.assign(document.createElement('input'), { type: 'checkbox', checked });
+            l.append(c, this.el('span', '', label), this.el('small', '', hint));
+            return [l, c];
+        };
+        const [markupLabel, markup] = option('Formatierung', 'Fett, Überschriften, Listen, Boxen … als Markdown', true);
+        const [linksLabel, links] = option('Links', '[[Mae]] statt nur «Mae», Weblinks mit Adresse', false);
+        const preview = Object.assign(document.createElement('textarea'), { className: 'pp-export-preview', readOnly: true, spellcheck: false });
+        preview.setAttribute('aria-label', 'Vorschau');
+        const name = () => `Sitzung ${s.number ?? ''}${s.title ? ` ${MapProtocols.plain(s.title)}` : ''}`.trim().replace(/[\\/:*?"<>|]+/g, '').replace(/\s+/g, '-') + (markup.checked ? '.md' : '.txt');
+        const text = () => this.exportText(s, { markup: markup.checked, links: links.checked });
+        const update = () => { preview.value = text(); };
+        [markup, links].forEach((c) => c.addEventListener('change', update));
+
+        const download = this.el('button', 'pp-export-go', '⬇ Herunterladen');
+        download.type = 'button';
+        download.addEventListener('click', () => {
+            const url = URL.createObjectURL(new Blob([text()], { type: markup.checked ? 'text/markdown;charset=utf-8' : 'text/plain;charset=utf-8' }));
+            const a = Object.assign(document.createElement('a'), { href: url, download: name() });
+            document.body.append(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 5000);
+        });
+        const copy = this.el('button', 'pp-export-go', '📋 Kopieren');
+        copy.type = 'button';
+        copy.addEventListener('click', async () => {
+            try { await navigator.clipboard.writeText(text()); } catch { preview.select(); document.execCommand('copy'); }
+            copy.textContent = '✓ Kopiert';
+            setTimeout(() => { copy.textContent = '📋 Kopieren'; }, 1500);
+        });
+        const buttons = this.el('div', 'pp-export-actions');
+        buttons.append(download, copy);
+
+        box.append(head, this.el('div', 'pp-export-options'), preview, buttons);
+        box.querySelector('.pp-export-options').append(markupLabel, linksLabel);
+        update();
+        layer.append(box);
+        this.panel.append(layer);
+        download.focus();
     }
 
     // ---------- stats over all published minutes ----------

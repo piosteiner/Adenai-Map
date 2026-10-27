@@ -304,3 +304,17 @@
 .pp-stat-bar { flex: 1 1 0; min-width: 2px; border-radius: 2px 2px 0 0; background: var(--accent-primary); opacity: 0.75; }
 .pp-stat-bar:hover { opacity: 1; }
 @media (max-width: 600px) { .pp-stat-facts { grid-template-columns: 1fr; } .pp-stat-facts dd { margin-bottom: 6px; } }
+
+/* export of a session (⬇ Exportieren): options, preview, download / copy */
+.pp-read-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.pp-read-actions .pp-edit { justify-self: auto; }
+.pp-export { display: grid; gap: 12px; }
+.pp-export-options { display: grid; gap: 8px; }
+.pp-export-option { display: grid; grid-template-columns: auto 1fr; gap: 0 8px; align-items: center; cursor: pointer; }
+.pp-export-option input { width: 18px; height: 18px; margin: 0; }
+.pp-export-option span { font-weight: 600; }
+.pp-export-option small { grid-column: 2; font-size: 12px; color: var(--text-secondary); }
+.pp-export-preview { width: 100%; min-height: 260px; max-height: 50vh; box-sizing: border-box; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); color: inherit; font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; resize: vertical; }
+.pp-export-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.pp-export-go { min-height: 36px; padding: 0 14px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--card-bg); color: inherit; font: inherit; font-weight: 600; cursor: pointer; }
+.pp-export-go:first-child { background: var(--accent-primary); border-color: var(--accent-primary); color: #fff; }
