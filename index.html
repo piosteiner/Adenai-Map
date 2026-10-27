@@ -131,6 +131,8 @@
   
   <!-- STEP 0: External Dependencies (CMS API) -->
   <script src="src/core/config.js?t=v1.2"></script>
+  <!-- the data files from the CMS server first (GitHub Pages as fallback), and live changes: before anything loads data -->
+  <script src="src/utils/live-data.js?t=v1.0"></script>
   
   <!-- STEP 1: External Dependencies (Core Libraries) -->
   <script src="src/vendor/leaflet/leaflet.js"></script>
@@ -147,7 +149,7 @@
   <!-- STEP 4: Utility Libraries (before other systems) -->
   <script src="src/utils/logger.js?t=v1.1"></script>
   <script src="src/utils/rich-text.js?t=v1.5"></script>
-  <script src="src/utils/emotes.js?t=v1.2"></script>
+  <script src="src/utils/emotes.js?t=v1.3"></script>
   <script src="src/utils/date-field.js?t=v1.0"></script>
   <script src="src/utils/panel-resize.js?t=v1.0"></script>
   <script src="src/utils/wiki-links.js?t=v1.8"></script>
@@ -178,8 +180,8 @@
   <script src="src/ui/components/movement-markers.js?t=v1.2"></script>
   <script src="src/ui/components/timeline.js?t=v1.1"></script>
   <script src="src/ui/components/protocols.js?t=v1.29"></script>
-  <script src="src/ui/components/glossary.js?t=v1.5"></script>
-  <script src="src/systems/movement-system.js?t=v1.5"></script>
+  <script src="src/ui/components/glossary.js?t=v1.6"></script>
+  <script src="src/systems/movement-system.js?t=v1.6"></script>
   <script src="src/systems/location-system.js?t=v1.3"></script>
   <script src="src/utils/search.js?t=v1.0"></script>
   <script src="src/systems/search-system.js?t=v1.8"></script>

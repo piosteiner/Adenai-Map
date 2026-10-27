@@ -11,21 +11,25 @@
         return key ? { name: key, ...emotes[key] } : null;
     };
 
+    // (again after a change in the CMS: src/utils/live-data.js)
+    const load = () => fetch('public/data/emotes.json', { cache: 'no-cache' })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => {
+            if (!data?.emotes) return;
+            emotes = data.emotes;
+            lower = new Map();
+            for (const name of Object.keys(emotes)) if (!lower.has(name.toLowerCase())) lower.set(name.toLowerCase(), name);
+            window.RichText?.setEmotes(emotes);
+            document.dispatchEvent(new CustomEvent('emotesReady'));
+        })
+        .catch(() => { /* no emotes: :name: stays text */ });
+
     window.AdenaiEmotes = {
         list: () => Object.entries(emotes).map(([name, e]) => ({ name, ...e })),
         get,
         suggest: (field) => suggest(field),
-        ready: fetch('public/data/emotes.json', { cache: 'no-cache' })
-            .then((r) => (r.ok ? r.json() : null))
-            .then((data) => {
-                if (!data?.emotes) return;
-                emotes = data.emotes;
-                lower = new Map();
-                for (const name of Object.keys(emotes)) if (!lower.has(name.toLowerCase())) lower.set(name.toLowerCase(), name);
-                window.RichText?.setEmotes(emotes);
-                document.dispatchEvent(new CustomEvent('emotesReady'));
-            })
-            .catch(() => { /* no emotes: :name: stays text */ }),
+        reload: load,
+        ready: load(),
     };
 
     // ---------- ":" suggestions in a plain text field (the map's comments; the editors have their own) ----------

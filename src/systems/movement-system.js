@@ -36,9 +36,25 @@ class MovementSystem {
         });
     }
 
-    // API-only path loading and display
+    // The paths again, from the current data (characters or places changed: src/utils/live-data.js)
+    reloadPaths() {
+        return this.loadAndDisplayPaths();
+    }
+
+    // API-only path loading and display. Run again (new data), it starts over — the old paths and movement markers go,
+    // the computed paths are not taken from the cache — and the paths that were shown are shown again.
     async loadAndDisplayPaths() {
         try {
+            const again = this.characterPaths.length > 0;
+            const shown = new Set(this.characterPaths.filter((p) => p.isVisible).map((p) => p.character.id));
+            if (again) {
+                this.hideAllPaths();
+                this.movementMarkers.forEach((m) => MapUtils.removeFromMap(m.marker));
+                this.characterPaths = [];
+                this.movementLayers = [];
+                this.movementMarkers = [];
+                this.pathManager.cache?.clear?.();
+            }
             Logger.movement('Starting path loading process...');
             const apiData = await this.pathManager.loadCharacterPaths();
             Logger.movement('API data received, processing paths...');
@@ -50,6 +66,17 @@ class MovementSystem {
             Logger.movement('Loading character movement markers...');
             await this.loadCharacterMovementMarkers();
             Logger.movement('Movement markers loaded successfully');
+
+            // the same paths shown as before (displayPaths and the markers show VsuzH's by default, a moment later)
+            if (again) {
+                setTimeout(() => {
+                    for (const p of this.characterPaths) {
+                        if (shown.has(p.character.id) && !p.isVisible) this.showCharacterPath(p.character.id);
+                        else if (!shown.has(p.character.id) && p.isVisible) this.hideCharacterPath?.(p.character.id);
+                    }
+                    window.characterPanel?.refreshPanel?.();
+                }, 200);
+            }
             
         } catch (error) {
             Logger.error('Error in loadAndDisplayPaths:', error);

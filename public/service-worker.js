@@ -325,6 +325,9 @@ self.addEventListener('fetch', event => {
     
     // Skip chrome-extension and other non-http requests
     if (!event.request.url.startsWith('http')) return;
+
+    // Live streams (the map's data changes, src/utils/live-data.js) never end: straight to the network, never cached
+    if ((event.request.headers.get('accept') || '').includes('text/event-stream')) return;
     
     event.respondWith(ServiceWorkerManager.handleFetch(event));
 });

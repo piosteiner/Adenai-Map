@@ -16,11 +16,24 @@ class MapGlossary {
         this.current = null;
         this.fold = (s) => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
         this.build();
-        this.ready = fetch('public/data/glossary.json', { cache: 'no-cache' })
-            .then((r) => (r.ok ? r.json() : { terms: [] }))
-            .then((g) => { this.terms = (g.terms || []).sort((a, b) => a.name.localeCompare(b.name, 'de')); this.drawButton(); })
-            .catch(() => { this.terms = []; });
+        this.ready = this.reload();
         setTimeout(() => this.loadPending(), 0); // after components/protocols.js knows whether this device is unlocked
+    }
+
+    // the terms (again, after a change in the CMS: src/utils/live-data.js): an open glossary and the links follow
+    async reload() {
+        try {
+            const r = await fetch('public/data/glossary.json', { cache: 'no-cache' });
+            const g = r.ok ? await r.json() : { terms: [] };
+            this.terms = (g.terms || []).sort((a, b) => a.name.localeCompare(b.name, 'de'));
+        } catch { this.terms ||= []; }
+        this.drawButton();
+        if (this.panel && !this.panel.hidden && !this.editing) {
+            this.drawList();
+            const now = this.current && this.find(this.current.name);
+            if (now) this.show(now);
+        }
+        window.mapProtocols?.redrawAll?.(); // links to a new or renamed term
     }
 
     // ---------- proposals ----------

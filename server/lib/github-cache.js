@@ -8,10 +8,16 @@
 //     the next read is current at once — GitHub's own API can lag behind a commit for some seconds;
 //   - writes stay safe: GitHub only accepts a write with the file's current sha, so a change made outside the CMS
 //     makes the write fail (409) instead of being overwritten; the entry is then dropped and fetched anew.
+//   - "changed" (path, sha) on .events whenever a file's content changes: a write, or a refresh that found a newer
+//     version (an outside commit) — routes/data.js tells the open maps.
+const { EventEmitter } = require('events');
+
 const FRESH_MS = 60 * 1000;
 const COMMITS_MS = 30 * 1000;
 
 function withFileCache(octokit, log = console) {
+    const events = new EventEmitter();
+    events.setMaxListeners(0);
     const repos = octokit.rest.repos;
     const get = repos.getContent.bind(repos);
     const put = repos.createOrUpdateFileContents.bind(repos);
@@ -37,7 +43,9 @@ function withFileCache(octokit, log = console) {
         try {
             const res = await withContent(params, await get({ ...params, headers }));
             if (res.data && res.data.type === 'file' && res.data.encoding === 'base64' && res.data.content) {
+                const before = files.get(keyOf(params))?.data.sha;
                 files.set(keyOf(params), { data: res.data, etag: res.headers?.etag || null, at: Date.now() });
+                if (before && before !== res.data.sha) events.emit('changed', params.path, res.data.sha);
             }
             return res;
         } catch (err) {
@@ -81,6 +89,7 @@ function withFileCache(octokit, log = console) {
                 at: Date.now(),
             });
             commitCache = new Map();
+            events.emit('changed', params.path, res.data.content.sha);
             return res;
         } catch (err) {
             files.delete(keyOf(params)); // e.g. 409: changed outside the CMS — read it fresh next time
@@ -108,7 +117,7 @@ function withFileCache(octokit, log = console) {
         await Promise.all(paths.map((path) => repos.getContent({ owner, repo, path }).catch((err) => log.warn?.(`github-cache: warm-up of ${path} failed: ${err.message}`))));
     }
 
-    return { warm, stats: () => ({ files: [...files.keys()].map((k) => k.split('/').slice(2).join('/')) }) };
+    return { warm, events, stats: () => ({ files: [...files.keys()].map((k) => k.split('/').slice(2).join('/')) }) };
 }
 
 module.exports = { withFileCache };
