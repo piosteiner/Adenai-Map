@@ -4565,7 +4565,28 @@
         ],
         "notes": "Initial location based on place of origin"
       }
+    },
+    {
+      "id": "flechtenmann",
+      "name": "Flechtenmann",
+      "title": "Der Gärtner",
+      "placeOfOrigin": "",
+      "coordinates": null,
+      "description": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/84wmkab8c8r7-small.webp",
+        "https://adenai-admin.piogino.ch/media/bw40pkobzn4a-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/84wmkab8c8r7-small.webp",
+      "status": "missing",
+      "faction": "",
+      "relationship": "unknown",
+      "firstMet": "",
+      "notes": "",
+      "movementHistory": [],
+      "createdAt": "2026-10-27T20:31:36.242Z",
+      "updatedAt": "2026-10-27T20:31:36.242Z"
     }
   ],
-  "lastUpdated": "2026-10-25T12:24:12.372Z"
+  "lastUpdated": "2026-10-27T20:31:36.242Z"
 }
