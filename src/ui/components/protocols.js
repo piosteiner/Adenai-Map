@@ -625,6 +625,7 @@ class MapProtocols {
             if (pos + len > start) parts.push([n, Math.max(0, start - pos), Math.min(len, end - pos)]);
             pos += len;
         }
+        let last = null;
         for (const [node, a, b] of parts) {
             if (!node.nodeValue.slice(a, b).trim()) continue; // only the space between two blocks
             let piece = node;
@@ -636,7 +637,10 @@ class MapProtocols {
             span.title = 'Kommentar anzeigen';
             piece.replaceWith(span);
             span.append(piece);
+            last = span;
         }
+        // the passage's end gets the 💬 (drawn by CSS: no text in the minutes, their copy or search)
+        last?.classList.add('pp-cmark-end');
     }
 
     // highlights the session's commented passages in its text column; returns the comments whose passage is gone

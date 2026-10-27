@@ -327,9 +327,13 @@
 }
 [data-theme="dark"] .pp-ccard, [data-theme="dark"] .pp-cbutton { --text-primary: #f1e9da; --text-secondary: #b6a98f; --border-color: #3d362c; --accent-primary: #b49cff; --card-bg: #24201b; --bg-secondary: #2a251f; }
 [data-theme="dark"] .pp-cgo:not(.pp-cgo-quiet) { color: #1b1915; }
-.pp-cmark { background: rgba(59, 130, 246, 0.14); border-bottom: 2px solid rgba(59, 130, 246, 0.55); border-radius: 2px; cursor: pointer; }
-.pp-cmark .pp-cmark { background: rgba(59, 130, 246, 0.26); }
-.pp-cmark:hover { background: rgba(59, 130, 246, 0.28); }
+.pp-cmark { background: rgba(59, 130, 246, 0.2); border-bottom: 2px solid rgba(59, 130, 246, 0.7); border-radius: 2px; cursor: pointer; }
+.pp-cmark .pp-cmark { background: rgba(59, 130, 246, 0.32); }
+.pp-cmark:hover { background: rgba(59, 130, 246, 0.34); }
+/* a small 💬 after the passage, slowly fading in and out (70% → 0 → 70%) */
+.pp-cmark-end::after { content: "💬"; display: inline-block; margin-left: 2px; font-size: 0.85em; line-height: 1; vertical-align: 0.4em; animation: pp-cbubble 2.8s ease-in-out infinite; pointer-events: auto; }
+@keyframes pp-cbubble { 0%, 100% { opacity: 0.7; } 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .pp-cmark-end::after { animation: none; opacity: 0.7; } }
 .pp-cbutton { position: fixed; z-index: 10040; min-height: 34px; padding: 0 12px; border: 1px solid var(--border-color); border-radius: 999px; background: var(--card-bg); color: var(--text-primary); font: inherit; font-size: 13px; font-weight: 600; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); cursor: pointer; }
 .pp-ccard { position: fixed; z-index: 10040; display: grid; gap: 8px; width: min(360px, calc(100vw - 16px)); max-height: min(60vh, 520px); overflow-y: auto; box-sizing: border-box; padding: 12px; border: 1px solid var(--border-color); border-radius: 10px; background: var(--card-bg); color: var(--text-primary); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); font-size: 14px; }
 .pp-ccard-sheet { left: 8px !important; right: 8px; bottom: 8px; top: auto !important; width: auto; }
