@@ -30,6 +30,19 @@
       "updatedBy": "gm"
     },
     {
+      "id": "term_c6afdd37ed",
+      "name": "Big fight",
+      "aliases": [],
+      "category": "",
+      "description": "afsd",
+      "images": [],
+      "image": "",
+      "createdAt": "2026-10-27T20:47:24.773Z",
+      "updatedAt": "2026-10-27T20:47:24.773Z",
+      "createdBy": "gm",
+      "updatedBy": "gm"
+    },
+    {
       "id": "term_608549e16e",
       "name": "Das blaue Juwel des Nachthimmels",
       "aliases": [
@@ -526,5 +539,5 @@
       "updatedBy": "gm"
     }
   ],
-  "lastUpdated": "2026-10-25T12:17:57.095Z"
+  "lastUpdated": "2026-10-27T20:47:24.773Z"
 }
