@@ -241,6 +241,9 @@ class MapProtocols {
         this.statusEl.textContent = text;
         this.statusEl.className = `pp-status pp-status-${s}`;
         if (s === 'locked') this.lockDevice('Bitte das Passwort erneut eingeben.');
+        // back after a dropped connection (a phone asleep, the network gone): what was said meanwhile
+        if (s === 'live' && this.wasLive) this.refreshComments();
+        if (s === 'live') this.wasLive = true;
     }
 
     // highlight: a name (character, place, term) whose mentions in that session are marked ("Erwähnt in" in popups)
@@ -267,6 +270,7 @@ class MapProtocols {
         this.panel.hidden = true;
         this.button.classList.remove('active');
         this.stopLive();
+        this.wasLive = false;
         this.listEl = null;
     }
 
@@ -348,7 +352,7 @@ class MapProtocols {
         window.adminGlossary ||= { getTerms: () => window.mapGlossary?.allTerms?.() || window.mapGlossary?.terms || [] };
         this.editorLoading ||= new Promise((resolve, reject) => {
             const sc = document.createElement('script');
-            sc.src = 'src/vendor/md-editor.js?v=11';
+            sc.src = 'src/vendor/md-editor.js?v=12';
             sc.onload = () => {
                 // "[[Name" for something without an entry: players propose one (components/glossary.js)
                 window.AdenaiEditor.onCreateEntry = (typed) => window.mapGlossary?.createEntry(typed);
@@ -382,16 +386,7 @@ class MapProtocols {
     onNews(m) {
         if (m.t === 'pending') return window.mapGlossary?.setPending(m.entries);
         if (m.t === 'gone') return this.removeSession(m.id);
-        if (m.t === 'comments') {
-            this.comments[m.id] = m.comments;
-            if (this.sections.get(m.id) && !this.sections.get(m.id).editing) this.drawSection(m.id);
-            // an open card of that session shows the new state — unless someone is typing in it
-            if (this.card?.dataset.session === m.id && !this.card.querySelector('textarea')) {
-                if (this.card.classList.contains('pp-cview')) this.fillComments(this.card, m.id, this.cardIds);
-                else this.closeCard();
-            }
-            return;
-        }
+        if (m.t === 'comments') return this.setComments(m.id, m.comments);
         const i = this.sessions.findIndex((x) => x.id === (m.session?.id || m.id));
         if (m.t === 'session') {
             if (i >= 0) this.sessions[i] = m.session;
@@ -586,6 +581,66 @@ class MapProtocols {
     // export. Marking text in a session shows "💬 Kommentieren"; commented passages are highlighted, a click shows their
     // comments. A comment is its writer's name and the text (with emotes) — nothing else.
 
+    // a session's comments as they are now (live news, or fetched again): drawn, an open card brought up to date,
+    // and others' new comments announced
+    setComments(id, list) {
+        const before = new Set((this.comments[id] || []).map((c) => c.id));
+        this.comments[id] = list;
+        const fresh = list.filter((c) => !before.has(c.id) && c.by !== this.name);
+        if (this.sections.get(id) && !this.sections.get(id).editing) this.drawSection(id);
+        // an open card of that session shows the new state — unless someone is typing in it
+        if (this.card?.dataset.session === id && !this.card.querySelector('textarea')) {
+            if (this.card.classList.contains('pp-cview')) this.fillComments(this.card, id);
+            else this.closeCard();
+        }
+        for (const c of fresh) {
+            this.flashComment(id, c.id);
+            if (!this.card?.querySelector(`[data-comment="${CSS.escape(c.id)}"]`)) this.announceComment(id, c);
+        }
+    }
+
+    async refreshComments() {
+        try {
+            const { comments = {} } = await this.api('/comments');
+            for (const id of new Set([...Object.keys(this.comments), ...Object.keys(comments)])) {
+                if (JSON.stringify(this.comments[id] || []) !== JSON.stringify(comments[id] || [])) this.setComments(id, comments[id] || []);
+            }
+        } catch { /* next time */ }
+    }
+
+    // the passage of a new comment glows for a moment
+    flashComment(id, commentId) {
+        this.sections.get(id)?.el.querySelectorAll('.pp-cmark').forEach((m) => {
+            if (!m.dataset.comments.split(' ').includes(commentId)) return;
+            m.classList.remove('pp-cmark-new');
+            void m.offsetWidth; // restart the animation
+            m.classList.add('pp-cmark-new');
+        });
+    }
+
+    // "💬 Anna: …" in a corner for a few seconds; a click opens the conversation
+    announceComment(id, c) {
+        this.toasts ||= document.body.appendChild(this.el('div', 'pp-ctoasts'));
+        const t = this.el('button', 'pp-ctoast');
+        t.type = 'button';
+        const s = this.sessions.find((x) => x.id === id);
+        const text = this.el('span', 'pp-ctoast-text rich-text');
+        text.innerHTML = RichText.render(c.text.length > 140 ? `${c.text.slice(0, 140)}…` : c.text).replace(/<\/?p>/g, ' ');
+        t.append(this.el('strong', '', `💬 ${c.by}`), this.el('small', '', ` · Sitzung ${this.shown(s || {}).number ?? '?'}`), text);
+        const gone = () => { t.classList.add('pp-ctoast-out'); setTimeout(() => t.remove(), 300); };
+        t.addEventListener('click', () => {
+            gone();
+            const mark = [...(this.sections.get(id)?.el.querySelectorAll('.pp-cmark') || [])].find((m) => m.dataset.comments.split(' ').includes(c.id));
+            if (!mark) return this.scrollTo(id);
+            this.scrollWithin(mark, { block: 'center' });
+            this.setActive(id);
+            setTimeout(() => this.showComments(id, new Set([c.id]), mark), 250);
+        });
+        this.toasts.append(t);
+        while (this.toasts.children.length > 3) this.toasts.firstChild.remove();
+        setTimeout(gone, 8000);
+    }
+
     listenForComments() {
         document.addEventListener('selectionchange', () => { clearTimeout(this.selTimer); this.selTimer = setTimeout(() => this.onSelection(), 200); });
         document.addEventListener('click', (e) => {
@@ -675,6 +730,7 @@ class MapProtocols {
 
     commentEl(id, c, { quote = false } = {}) {
         const el = this.el('div', 'pp-comment');
+        el.dataset.comment = c.id;
         if (quote) el.append(this.el('p', 'pp-cquote', `«${c.quote.length > 120 ? `${c.quote.slice(0, 120)}…` : c.quote}»`));
         const head = this.el('p', 'pp-comment-by');
         head.append(this.el('strong', '', c.by));
@@ -819,23 +875,37 @@ class MapProtocols {
 
     // the comments on a highlighted passage, and "Antworten" (another comment on the same passage)
     showComments(id, ids, mark) {
-        if (!(this.comments[id] || []).some((c) => ids.has(c.id))) return;
+        const first = (this.comments[id] || []).find((c) => ids.has(c.id));
+        if (!first) return;
         const card = this.openCard('pp-cview', mark, id);
-        this.cardIds = ids;
-        this.fillComments(card, id, ids);
+        // the card is a conversation about its passage: replies (the same quote and surroundings) join it live
+        this.cardIds = new Set(ids);
+        this.cardPassage = MapProtocols.passageKey(first);
+        this.fillComments(card, id);
     }
 
-    // the card's comments as they are now (also after a change on another device); none left: the card goes
-    fillComments(card, id, ids) {
-        const list = (this.comments[id] || []).filter((c) => ids.has(c.id));
+    static passageKey(c) { return [c.quote, c.prefix, c.suffix].join('\u0000'); }
+
+    // the card's comments as they are now (also after a change on another device), the newest in view; none left:
+    // the card goes
+    fillComments(card, id) {
+        const list = (this.comments[id] || []).filter((c) => this.cardIds.has(c.id) || MapProtocols.passageKey(c) === this.cardPassage);
         if (!list.length) return this.closeCard();
+        const shown = new Set([...card.querySelectorAll('[data-comment]')].map((e) => e.dataset.comment));
+        list.forEach((c) => this.cardIds.add(c.id));
         const reply = this.el('button', 'pp-cgo', '💬 Antworten');
         reply.type = 'button';
         const { quote, prefix, suffix } = list[0];
         reply.addEventListener('click', () => this.showCommentForm({ id, quote, prefix, suffix, rect: card.getBoundingClientRect() }));
         const actions = this.el('div', 'pp-cactions');
         actions.append(reply);
-        card.replaceChildren(...list.map((c) => this.commentEl(id, c)), actions);
+        const els = list.map((c) => {
+            const el = this.commentEl(id, c);
+            if (shown.size && !shown.has(c.id)) el.classList.add('pp-comment-new');
+            return el;
+        });
+        card.replaceChildren(...els, actions);
+        if (shown.size && els.some((e) => e.classList.contains('pp-comment-new'))) card.scrollTop = card.scrollHeight;
     }
 
     showCommentForm(p) {
@@ -860,7 +930,11 @@ class MapProtocols {
                 this.comments[p.id] = r.comments;
                 this.closeCard();
                 document.getSelection()?.removeAllRanges();
-                if (!this.sections.get(p.id)?.editing) this.drawSection(p.id);
+                if (this.sections.get(p.id)?.editing) return;
+                this.drawSection(p.id);
+                // then the conversation about that passage, as in a chat
+                const mark = [...this.sections.get(p.id).el.querySelectorAll('.pp-cmark')].find((m) => m.dataset.comments.split(' ').includes(r.comment.id));
+                if (mark) this.showComments(p.id, new Set([r.comment.id]), mark);
             } catch (err) {
                 save.disabled = false;
                 if (err.message !== 'locked') window.alert(`Nicht gespeichert: ${err.message}`);

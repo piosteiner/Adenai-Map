@@ -355,3 +355,18 @@
 .pp-comment-text p { margin: 0 0 0.3em; } .pp-comment-text > :last-child { margin-bottom: 0; }
 .pp-comments-lost { display: grid; gap: 8px; margin-top: 14px; padding: 10px 12px; border: 1px dashed var(--border-color); border-radius: 8px; font-size: 14px; }
 .pp-comments-lost .pp-note { margin: 0; }
+
+/* live comments: a new one's passage glows, a new one in an open card flashes, "💬 Anna: …" in a corner */
+.pp-cmark-new { animation: pp-cmark-new 2.4s ease-out 2; }
+@keyframes pp-cmark-new { 0% { background: rgba(59, 130, 246, 0.6); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.35); } 100% { background: rgba(59, 130, 246, 0.2); box-shadow: none; } }
+.pp-comment-new { animation: pp-comment-new 2s ease-out; border-radius: 6px; }
+@keyframes pp-comment-new { from { background: rgba(59, 130, 246, 0.22); } to { background: transparent; } }
+.pp-ctoasts { position: fixed; right: 14px; bottom: 14px; z-index: 10045; display: grid; gap: 8px; width: min(320px, calc(100vw - 28px)); pointer-events: none;
+  --text-primary: #2b241b; --text-secondary: #6f6352; --border-color: #d9ccb2; --card-bg: #fffdf8; }
+[data-theme="dark"] .pp-ctoasts { --text-primary: #f1e9da; --text-secondary: #b6a98f; --border-color: #3d362c; --card-bg: #24201b; }
+.pp-ctoast { display: block; padding: 10px 12px; border: 1px solid var(--border-color); border-left: 4px solid rgba(59, 130, 246, 0.8); border-radius: 8px; background: var(--card-bg); color: var(--text-primary); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; text-align: left; cursor: pointer; pointer-events: auto; animation: pp-ctoast-in 0.25s ease-out; transition: opacity 0.3s, transform 0.3s; }
+.pp-ctoast small { color: var(--text-secondary); }
+.pp-ctoast-text { display: block; margin-top: 2px; overflow-wrap: anywhere; }
+.pp-ctoast-out { opacity: 0; transform: translateY(8px); }
+@keyframes pp-ctoast-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .pp-cmark-new, .pp-comment-new, .pp-ctoast { animation: none; } }

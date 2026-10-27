@@ -42,7 +42,8 @@ export function connect({ url, token = null, onStatus = () => {}, onMessage = ()
                 return;
             }
             if (m.t === 'error' && m.error === 'locked') { closedByUs = true; setStatus('locked'); return; }
-            if (m.t === 'session' || m.t === 'draft' || m.t === 'gone' || m.t === 'pending') onMessage(m);
+            // news for the page: sessions, drafts, proposals, comments (everything but a room's own sync traffic)
+            if (m.t === 'session' || m.t === 'draft' || m.t === 'gone' || m.t === 'pending' || m.t === 'comments') onMessage(m);
             const room = rooms.get(m.id);
             if (!room) return;
             if (m.t === 'sync') room.onSync(m);
