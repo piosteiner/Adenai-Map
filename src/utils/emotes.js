@@ -14,6 +14,7 @@
     window.AdenaiEmotes = {
         list: () => Object.entries(emotes).map(([name, e]) => ({ name, ...e })),
         get,
+        suggest: (field) => suggest(field),
         ready: fetch('public/data/emotes.json', { cache: 'no-cache' })
             .then((r) => (r.ok ? r.json() : null))
             .then((data) => {
@@ -26,6 +27,70 @@
             })
             .catch(() => { /* no emotes: :name: stays text */ }),
     };
+
+    // ---------- ":" suggestions in a plain text field (the map's comments; the editors have their own) ----------
+    // ":ca" lists catJAM, peepoCat …; ↑ ↓ choose, Enter / Tab or a click writes :name:, Esc closes.
+    // As in the editor: not after a letter or digit ("10:30"), starting with what was typed first, shorter names first.
+    function suggest(field) {
+        const box = Object.assign(document.createElement('ul'), { className: 'emote-suggest', role: 'listbox', hidden: true });
+        document.body.append(box);
+        let items = [];
+        let index = 0;
+        let match = null;
+        const close = () => { box.hidden = true; items = []; match = null; };
+        const pick = (e) => {
+            const v = field.value;
+            const end = field.selectionStart;
+            const after = v.slice(end).startsWith(':') ? end + 1 : end;
+            const insert = `:${e.name}: `;
+            field.value = v.slice(0, match.from) + insert + v.slice(after).replace(/^ /, '');
+            field.selectionStart = field.selectionEnd = match.from + insert.length;
+            field.dispatchEvent(new Event('input', { bubbles: true }));
+            close();
+            field.focus();
+        };
+        const draw = () => {
+            box.replaceChildren(...items.map((e, i) => {
+                const li = Object.assign(document.createElement('li'), { role: 'option' });
+                li.setAttribute('aria-selected', String(i === index));
+                const img = Object.assign(document.createElement('img'), { src: e.url, alt: '', loading: 'lazy' });
+                li.append(img, `:${e.name}:`);
+                li.addEventListener('mousedown', (ev) => { ev.preventDefault(); pick(e); });
+                return li;
+            }));
+            const r = field.getBoundingClientRect();
+            const below = window.innerHeight - r.bottom > 220;
+            Object.assign(box.style, { left: `${Math.max(8, r.left)}px`, width: `${Math.min(300, r.width)}px`, top: below ? `${r.bottom + 4}px` : '', bottom: below ? '' : `${window.innerHeight - r.top + 4}px` });
+            box.hidden = false;
+            box.children[index]?.scrollIntoView({ block: 'nearest' });
+        };
+        const update = () => {
+            const before = field.value.slice(0, field.selectionStart);
+            const m = /(^|[^\p{L}\p{N}\\]):([^\s:]{1,40})$/u.exec(before);
+            if (!m) return close();
+            const q = m[2].toLowerCase();
+            items = Object.keys(emotes)
+                .map((name) => ({ name, n: name.toLowerCase() }))
+                .filter((x) => x.n.includes(q))
+                .sort((a, b) => (b.n.startsWith(q) - a.n.startsWith(q)) || a.name.length - b.name.length || a.name.localeCompare(b.name))
+                .slice(0, 8)
+                .map((x) => ({ name: x.name, ...emotes[x.name] }));
+            if (!items.length) return close();
+            match = { from: m.index + m[1].length };
+            index = 0;
+            draw();
+        };
+        field.addEventListener('input', update);
+        field.addEventListener('click', update);
+        field.addEventListener('blur', () => setTimeout(close, 150));
+        field.addEventListener('keydown', (e) => {
+            if (box.hidden) return;
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); index = (index + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length; draw(); }
+            else if (e.key === 'Enter' || e.key === 'Tab') { e.preventDefault(); e.stopPropagation(); pick(items[index]); }
+            else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); close(); }
+        });
+        return { close, destroy: () => box.remove() };
+    }
 
     // ---------- hover: the emote bigger ----------
 

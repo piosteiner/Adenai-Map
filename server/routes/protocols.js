@@ -16,12 +16,16 @@
 //   GET/PUT /api/protocols/settings/password                               CMS login only
 //   GET  /api/protocols/export      all private data as one JSON file      CMS login only
 //   GET  /api/protocols/links       links shown above the minutes          CMS login or token; PUT: CMS login only
+//   GET  /api/protocols/comments    comments on marked passages, by session   CMS login or token (lib/protocol-comments.js)
+//   POST /api/protocols/:id/comments          { by, text, quote, prefix, suffix }   same
+//   DELETE /api/protocols/:id/comments/:cid   { by } — its writer, or the CMS      same
 //
 // Tokens: "<expiry>.<passwordVersion>.<hmac>", signed with SESSION_SECRET. Setting a new password bumps the version,
 // which ends every token handed out before.
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const store = require('../lib/protocol-store');
+const comments = require('../lib/protocol-comments');
 const protocolLive = require('../lib/protocol-live');
 const { requireAuth } = require('../middleware/auth');
 
@@ -128,6 +132,25 @@ router.get('/export', requireAuth, async (req, res) => {
         proposals: await read('pending-entries.json', { entries: [] }),
         password: { set: !!settings.passwordHash, updatedAt: settings.updatedAt || null },
     });
+});
+
+// ---------- comments on marked passages (not part of the minutes) ----------
+
+router.get('/comments', requireAccess, async (req, res) => {
+    res.json({ success: true, comments: await comments.all() });
+});
+
+router.post('/:id/comments', requireAccess, async (req, res) => {
+    if (!(await store.get(req.params.id))) return res.status(404).json({ success: false, error: 'Session not found' });
+    const r = await comments.add(req.params.id, { ...req.body, by: req.protocolVia === 'cms' && !req.body?.by ? req.protocolBy : req.body?.by });
+    if (r.error) return res.status(400).json({ success: false, error: r.error });
+    res.status(201).json({ success: true, ...r });
+});
+
+router.delete('/:id/comments/:cid', requireAccess, async (req, res) => {
+    const r = await comments.remove(req.params.id, req.params.cid, { by: req.body?.by, admin: req.protocolVia === 'cms' });
+    if (r.error) return res.status(r.status).json({ success: false, error: r.error });
+    res.json({ success: true, ...r });
 });
 
 router.get('/:id', requireAccess, async (req, res) => {

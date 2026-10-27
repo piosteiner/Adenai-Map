@@ -26,7 +26,9 @@ class MapProtocols {
         this.sections = new Map(); // session id → { el, editing }
         this.editorLoading = null;
         this.live = null;
+        this.comments = {}; // session id → [ { id, by, text, quote, prefix, suffix } ] (lib/protocol-comments.js)
         this.build();
+        this.listenForComments();
         // emotes that arrive after the texts were drawn
         document.addEventListener('emotesReady', () => this.redrawAll());
         // an unlocked device knows the minutes from the start, for "Erwähnt in" in the popups
@@ -136,7 +138,8 @@ class MapProtocols {
     }
 
     async load() {
-        const [s, sg, ln] = await Promise.all([this.api(''), this.api('/suggestions').catch(() => ({})), this.api('/links').catch(() => ({}))]);
+        const [s, sg, ln, cm] = await Promise.all([this.api(''), this.api('/suggestions').catch(() => ({})), this.api('/links').catch(() => ({})), this.api('/comments').catch(() => ({}))]);
+        this.comments = cm.comments || {};
         this.links = ln.links || []; // shown above the minutes (set in the CMS → Protocols), e.g. the attendance sheet
         this.sessions = s.sessions || [];
         this.sort();
@@ -379,6 +382,12 @@ class MapProtocols {
     onNews(m) {
         if (m.t === 'pending') return window.mapGlossary?.setPending(m.entries);
         if (m.t === 'gone') return this.removeSession(m.id);
+        if (m.t === 'comments') {
+            this.comments[m.id] = m.comments;
+            if (this.card?.dataset.session === m.id) this.closeCard();
+            if (this.sections.get(m.id) && !this.sections.get(m.id).editing) this.drawSection(m.id);
+            return;
+        }
         const i = this.sessions.findIndex((x) => x.id === (m.session?.id || m.id));
         if (m.t === 'session') {
             if (i >= 0) this.sessions[i] = m.session;
@@ -528,7 +537,8 @@ class MapProtocols {
         head.append(h2, meta, this.chips(s.players || [], 'pp-players', '👥'), this.chips(s.places || [], 'pp-places', '📍'), ...(badge ? [badge] : []), actions);
         const text = this.el('div', 'pp-text rich-text');
         text.innerHTML = s.content ? RichText.render(s.content) : '<p class="pp-note">Noch kein Text.</p>';
-        sec.el.replaceChildren(head, text);
+        const lost = this.drawComments(id, text);
+        sec.el.replaceChildren(head, text, ...(lost.length ? [this.lostComments(id, lost)] : []));
         if (this.findQuery) { this.findMarks = null; this.findQuery = null; clearTimeout(this.findTimer); this.findTimer = setTimeout(() => this.find(), 50); }
     }
 
@@ -565,6 +575,244 @@ class MapProtocols {
         stats.addEventListener('click', () => this.showStats());
         bar.append(stats);
         return bar;
+    }
+
+    // ---------- comments on marked passages ----------
+    // Not part of the minutes: kept apart on the server (lib/protocol-comments.js), never in the text, its history or an
+    // export. Marking text in a session shows "💬 Kommentieren"; commented passages are highlighted, a click shows their
+    // comments. A comment is its writer's name and the text (with emotes) — nothing else.
+
+    listenForComments() {
+        document.addEventListener('selectionchange', () => { clearTimeout(this.selTimer); this.selTimer = setTimeout(() => this.onSelection(), 200); });
+        document.addEventListener('click', (e) => {
+            const mark = e.target.closest?.('.pp-cmark');
+            if (!mark || !this.panel?.contains(mark) || e.target.closest('a') || !document.getSelection().isCollapsed) return;
+            const ids = new Set([...this.ancestorsOf(mark, '.pp-cmark')].flatMap((m) => m.dataset.comments.split(' ')));
+            this.showComments(mark.closest('.pp-session').dataset.id, ids, mark);
+        });
+        document.addEventListener('mousedown', (e) => {
+            if (this.card && !this.card.contains(e.target) && !e.target.closest?.('.pp-cmark, .pp-cbutton, .emote-suggest')) this.closeCard();
+        });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && this.card) { e.stopPropagation(); this.closeCard(); } }, true);
+    }
+
+    * ancestorsOf(el, selector) {
+        for (let m = el; m; m = m.parentElement?.closest(selector)) yield m;
+    }
+
+    // Where a comment's passage is in a text column: { start, end } in its characters — the occurrence of the quote
+    // whose surroundings fit its prefix and suffix best — or null when the text no longer has it
+    static locate(text, c) {
+        let best = null;
+        for (let i = text.indexOf(c.quote); i >= 0 && c.quote; i = text.indexOf(c.quote, i + 1)) {
+            const before = text.slice(Math.max(0, i - (c.prefix || '').length), i);
+            const after = text.slice(i + c.quote.length, i + c.quote.length + (c.suffix || '').length);
+            let score = 0;
+            for (let k = 1; k <= before.length && before[before.length - k] === c.prefix[c.prefix.length - k]; k++) score++;
+            for (let k = 0; k < after.length && after[k] === c.suffix[k]; k++) score++;
+            if (!best || score > best.score) best = { start: i, end: i + c.quote.length, score };
+        }
+        return best;
+    }
+
+    // Wraps the characters [start, end) of root's text in <span class="pp-cmark"> — one per text node it touches
+    static wrapRange(root, start, end, ids) {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+        const parts = [];
+        let pos = 0;
+        for (let n; (n = walker.nextNode()) && pos < end;) {
+            const len = n.nodeValue.length;
+            if (pos + len > start) parts.push([n, Math.max(0, start - pos), Math.min(len, end - pos)]);
+            pos += len;
+        }
+        for (const [node, a, b] of parts) {
+            if (!node.nodeValue.slice(a, b).trim()) continue; // only the space between two blocks
+            let piece = node;
+            if (a > 0) piece = piece.splitText(a);
+            if (b - a < piece.nodeValue.length) piece.splitText(b - a);
+            const span = document.createElement('span');
+            span.className = 'pp-cmark';
+            span.dataset.comments = ids.join(' ');
+            span.title = 'Kommentar anzeigen';
+            piece.replaceWith(span);
+            span.append(piece);
+        }
+    }
+
+    // highlights the session's commented passages in its text column; returns the comments whose passage is gone
+    drawComments(id, textEl) {
+        const text = textEl.textContent;
+        const groups = new Map(); // the same passage → one highlight for all its comments
+        const lost = [];
+        for (const c of this.comments[id] || []) {
+            const at = MapProtocols.locate(text, c);
+            if (!at) { lost.push(c); continue; }
+            const key = `${at.start}-${at.end}`;
+            if (!groups.has(key)) groups.set(key, { ...at, ids: [] });
+            groups.get(key).ids.push(c.id);
+        }
+        for (const g of groups.values()) MapProtocols.wrapRange(textEl, g.start, g.end, g.ids);
+        return lost;
+    }
+
+    // comments on text that was changed since: below the session, with what they were about
+    lostComments(id, lost) {
+        const box = this.el('div', 'pp-comments-lost');
+        box.append(this.el('p', 'pp-note', '💬 Kommentare zu Text, der inzwischen geändert wurde:'));
+        lost.forEach((c) => box.append(this.commentEl(id, c, { quote: true })));
+        return box;
+    }
+
+    commentEl(id, c, { quote = false } = {}) {
+        const el = this.el('div', 'pp-comment');
+        if (quote) el.append(this.el('p', 'pp-cquote', `«${c.quote.length > 120 ? `${c.quote.slice(0, 120)}…` : c.quote}»`));
+        const head = this.el('p', 'pp-comment-by');
+        head.append(this.el('strong', '', c.by));
+        if (c.by === this.name) {
+            const del = this.el('button', 'pp-comment-del', '🗑');
+            del.type = 'button';
+            del.title = 'Kommentar löschen';
+            del.addEventListener('click', async () => {
+                if (!window.confirm('Diesen Kommentar löschen?')) return;
+                try {
+                    const r = await this.api(`/${encodeURIComponent(id)}/comments/${encodeURIComponent(c.id)}`, { method: 'DELETE', body: { by: this.name } });
+                    this.comments[id] = r.comments;
+                    this.closeCard();
+                    if (!this.sections.get(id)?.editing) this.drawSection(id);
+                } catch (err) { if (err.message !== 'locked') window.alert(`Nicht gelöscht: ${err.message}`); }
+            });
+            head.append(del);
+        }
+        const body = this.el('div', 'pp-comment-text rich-text');
+        body.innerHTML = RichText.render(c.text);
+        el.append(head, body);
+        return el;
+    }
+
+    // The marked text, as a passage to comment on: { id, quote, prefix, suffix, rect } — or null (nothing marked in a
+    // session's text, or the session is being edited)
+    selectedPassage() {
+        const sel = document.getSelection();
+        if (!sel?.rangeCount || sel.isCollapsed) return null;
+        const range = sel.getRangeAt(0);
+        const textOf = (n) => (n.nodeType === 1 ? n : n.parentElement)?.closest('.pp-text');
+        const textEl = textOf(range.startContainer);
+        if (!textEl || textEl !== textOf(range.endContainer) || !this.view?.contains(textEl)) return null;
+        const id = textEl.closest('.pp-session')?.dataset.id;
+        if (!id || this.sections.get(id)?.editing) return null;
+        const pre = document.createRange();
+        pre.selectNodeContents(textEl);
+        pre.setEnd(range.startContainer, range.startOffset);
+        const raw = range.toString();
+        const quote = raw.trim();
+        if (!quote) return null;
+        const start = pre.toString().length + (raw.length - raw.trimStart().length);
+        const full = textEl.textContent;
+        return { id, quote: quote.slice(0, 1000), prefix: full.slice(Math.max(0, start - 32), start), suffix: full.slice(start + quote.length, start + quote.length + 32), rect: range.getBoundingClientRect() };
+    }
+
+    // "💬 Kommentieren" under the marked text
+    onSelection() {
+        if (this.card?.classList.contains('pp-cform')) return; // writing one: keep it
+        const p = this.selectedPassage();
+        if (!p) { this.commentButton?.remove(); return; }
+        if (!this.commentButton) {
+            this.commentButton = this.el('button', 'pp-cbutton', '💬 Kommentieren');
+            this.commentButton.type = 'button';
+            this.commentButton.addEventListener('mousedown', (e) => e.preventDefault()); // keeps the marked text
+            this.commentButton.addEventListener('click', () => {
+                const passage = this.passage;
+                this.commentButton.remove();
+                if (passage) this.showCommentForm(passage);
+            });
+        }
+        this.passage = p;
+        const below = p.rect.bottom + 50 < window.innerHeight;
+        Object.assign(this.commentButton.style, {
+            left: `${Math.min(Math.max(8, p.rect.left + p.rect.width / 2 - 60), window.innerWidth - 140)}px`,
+            top: `${below ? p.rect.bottom + 8 : Math.max(8, p.rect.top - 44)}px`,
+        });
+        document.body.append(this.commentButton);
+    }
+
+    // a card by the passage (on phones at the bottom)
+    openCard(cls, near, sessionId) {
+        this.closeCard();
+        const card = this.el('div', `pp-ccard ${cls}`);
+        card.dataset.session = sessionId;
+        card.setAttribute('role', 'dialog');
+        document.body.append(card);
+        this.card = card;
+        requestAnimationFrame(() => {
+            if (this.card !== card) return;
+            if (window.innerWidth < 600) { card.classList.add('pp-ccard-sheet'); return; }
+            const r = near.getBoundingClientRect ? near.getBoundingClientRect() : near;
+            const w = card.offsetWidth;
+            const h = card.offsetHeight;
+            const below = r.bottom + 8 + h < window.innerHeight;
+            card.style.left = `${Math.min(Math.max(8, r.left), window.innerWidth - w - 8)}px`;
+            card.style.top = `${below ? r.bottom + 8 : Math.max(8, r.top - h - 8)}px`;
+        });
+        return card;
+    }
+
+    closeCard() {
+        this.cardSuggest?.destroy();
+        this.cardSuggest = null;
+        this.card?.remove();
+        this.card = null;
+    }
+
+    // the comments on a highlighted passage, and "Antworten" (another comment on the same passage)
+    showComments(id, ids, mark) {
+        const list = (this.comments[id] || []).filter((c) => ids.has(c.id));
+        if (!list.length) return;
+        const card = this.openCard('pp-cview', mark, id);
+        list.forEach((c) => card.append(this.commentEl(id, c)));
+        const reply = this.el('button', 'pp-cgo', '💬 Antworten');
+        reply.type = 'button';
+        const { quote, prefix, suffix } = list[0];
+        reply.addEventListener('click', () => this.showCommentForm({ id, quote, prefix, suffix, rect: mark.getBoundingClientRect() }));
+        const actions = this.el('div', 'pp-cactions');
+        actions.append(reply);
+        card.append(actions);
+    }
+
+    showCommentForm(p) {
+        if (!this.name && !this.askName()) return;
+        const card = this.openCard('pp-cform', p.rect, p.id);
+        const field = Object.assign(document.createElement('textarea'), { rows: 3, maxLength: 2000, placeholder: 'Kommentar … (: und ein paar Buchstaben für Emotes)' });
+        field.setAttribute('aria-label', 'Kommentar');
+        const who = this.el('p', 'pp-cwho');
+        const drawWho = () => { who.replaceChildren(`als ${this.name} · `, Object.assign(this.el('button', 'pp-clink', 'Name ändern'), { type: 'button', onclick: () => { this.askName(); drawWho(); } })); };
+        drawWho();
+        const save = this.el('button', 'pp-cgo', 'Kommentieren');
+        save.type = 'button';
+        const cancel = this.el('button', 'pp-cgo pp-cgo-quiet', 'Abbrechen');
+        cancel.type = 'button';
+        cancel.addEventListener('click', () => this.closeCard());
+        const send = async () => {
+            const text = field.value.trim();
+            if (!text) return field.focus();
+            save.disabled = true;
+            try {
+                const r = await this.api(`/${encodeURIComponent(p.id)}/comments`, { method: 'POST', body: { by: this.name, text, quote: p.quote, prefix: p.prefix, suffix: p.suffix } });
+                this.comments[p.id] = r.comments;
+                this.closeCard();
+                document.getSelection()?.removeAllRanges();
+                if (!this.sections.get(p.id)?.editing) this.drawSection(p.id);
+            } catch (err) {
+                save.disabled = false;
+                if (err.message !== 'locked') window.alert(`Nicht gespeichert: ${err.message}`);
+            }
+        };
+        save.addEventListener('click', send);
+        field.addEventListener('keydown', (e) => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); send(); } });
+        const actions = this.el('div', 'pp-cactions');
+        actions.append(save, cancel);
+        card.append(this.el('p', 'pp-cquote', `«${p.quote.length > 160 ? `${p.quote.slice(0, 160)}…` : p.quote}»`), field, who, actions);
+        this.cardSuggest = window.AdenaiEmotes?.suggest?.(field);
+        field.focus();
     }
 
     // ---------- export of one session ----------

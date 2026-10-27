@@ -318,3 +318,34 @@
 .pp-export-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .pp-export-go { min-height: 36px; padding: 0 14px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--card-bg); color: inherit; font: inherit; font-weight: 600; cursor: pointer; }
 .pp-export-go:first-child { background: var(--accent-primary); border-color: var(--accent-primary); color: #fff; }
+
+/* comments on marked passages (not part of the minutes): highlight, "💬 Kommentieren", the cards */
+/* the cards and the button sit outside the panel (on <body>): the panel's colours */
+.pp-ccard, .pp-cbutton {
+  --text-primary: #2b241b; --text-secondary: #6f6352; --border-color: #d9ccb2; --accent-primary: #6d28d9; --card-bg: #fffdf8; --bg-secondary: #f1e8d6;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.5;
+}
+[data-theme="dark"] .pp-ccard, [data-theme="dark"] .pp-cbutton { --text-primary: #f1e9da; --text-secondary: #b6a98f; --border-color: #3d362c; --accent-primary: #b49cff; --card-bg: #24201b; --bg-secondary: #2a251f; }
+[data-theme="dark"] .pp-cgo:not(.pp-cgo-quiet) { color: #1b1915; }
+.pp-cmark { background: rgba(59, 130, 246, 0.14); border-bottom: 2px solid rgba(59, 130, 246, 0.55); border-radius: 2px; cursor: pointer; }
+.pp-cmark .pp-cmark { background: rgba(59, 130, 246, 0.26); }
+.pp-cmark:hover { background: rgba(59, 130, 246, 0.28); }
+.pp-cbutton { position: fixed; z-index: 10040; min-height: 34px; padding: 0 12px; border: 1px solid var(--border-color); border-radius: 999px; background: var(--card-bg); color: var(--text-primary); font: inherit; font-size: 13px; font-weight: 600; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); cursor: pointer; }
+.pp-ccard { position: fixed; z-index: 10040; display: grid; gap: 8px; width: min(360px, calc(100vw - 16px)); max-height: min(60vh, 520px); overflow-y: auto; box-sizing: border-box; padding: 12px; border: 1px solid var(--border-color); border-radius: 10px; background: var(--card-bg); color: var(--text-primary); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); font-size: 14px; }
+.pp-ccard-sheet { left: 8px !important; right: 8px; bottom: 8px; top: auto !important; width: auto; }
+.pp-ccard textarea { width: 100%; box-sizing: border-box; min-height: 76px; padding: 8px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-secondary, transparent); color: inherit; font: inherit; font-size: 16px; resize: vertical; }
+.pp-cquote { margin: 0; padding-left: 8px; border-left: 3px solid rgba(59, 130, 246, 0.55); color: var(--text-secondary); font-size: 13px; font-style: italic; overflow-wrap: anywhere; }
+.pp-cwho { margin: 0; font-size: 12px; color: var(--text-secondary); }
+.pp-clink { padding: 0; border: 0; background: none; color: var(--accent-primary); font: inherit; text-decoration: underline; cursor: pointer; }
+.pp-cactions { display: flex; flex-wrap: wrap; gap: 6px; }
+.pp-cgo { min-height: 34px; padding: 0 12px; border: 1px solid var(--accent-primary); border-radius: 6px; background: var(--accent-primary); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+.pp-cgo:disabled { opacity: 0.5; cursor: default; }
+.pp-cgo-quiet { border-color: var(--border-color); background: transparent; color: inherit; font-weight: 400; }
+.pp-comment { display: grid; gap: 2px; padding-bottom: 8px; border-bottom: 1px solid var(--border-color); }
+.pp-cview .pp-comment:last-of-type { border-bottom: 0; padding-bottom: 0; }
+.pp-comment-by { display: flex; align-items: center; gap: 6px; margin: 0; }
+.pp-comment-del { margin-left: auto; min-width: 30px; min-height: 28px; border: 0; border-radius: 4px; background: none; cursor: pointer; opacity: 0.6; }
+.pp-comment-del:hover { opacity: 1; background: var(--bg-secondary); }
+.pp-comment-text p { margin: 0 0 0.3em; } .pp-comment-text > :last-child { margin-bottom: 0; }
+.pp-comments-lost { display: grid; gap: 8px; margin-top: 14px; padding: 10px 12px; border: 1px dashed var(--border-color); border-radius: 8px; font-size: 14px; }
+.pp-comments-lost .pp-note { margin: 0; }
