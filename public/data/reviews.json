@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "0f94c8ec2b7404b2eb562a5d98403832a1d04c5b",
+      "action": "update",
+      "type": "character",
+      "itemName": "\"Flechten-Ding\"",
+      "user": "gm",
+      "timestamp": "2026-10-27T20:32:40.139Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-27T20:32:40.139Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: flechtenmann (by gm) - updated name"
+    },
+    {
       "commitSha": "102e87df4a2c71de96cc9d8f0d59847935125096",
       "action": "create",
       "type": "character",
@@ -4552,5 +4565,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-27T20:31:37.575Z"
+  "lastUpdated": "2026-10-27T20:32:40.139Z"
 }
