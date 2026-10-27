@@ -18,6 +18,7 @@
 //   GET  /api/protocols/links       links shown above the minutes          CMS login or token; PUT: CMS login only
 //   GET  /api/protocols/comments    comments on marked passages, by session   CMS login or token (lib/protocol-comments.js)
 //   POST /api/protocols/:id/comments          { by, text, quote, prefix, suffix }   same
+//   PUT  /api/protocols/:id/comments/:cid     { by, text } — its writer, or the CMS  same
 //   DELETE /api/protocols/:id/comments/:cid   { by } — its writer, or the CMS      same
 //
 // Tokens: "<expiry>.<passwordVersion>.<hmac>", signed with SESSION_SECRET. Setting a new password bumps the version,
@@ -145,6 +146,12 @@ router.post('/:id/comments', requireAccess, async (req, res) => {
     const r = await comments.add(req.params.id, { ...req.body, by: req.protocolVia === 'cms' && !req.body?.by ? req.protocolBy : req.body?.by });
     if (r.error) return res.status(400).json({ success: false, error: r.error });
     res.status(201).json({ success: true, ...r });
+});
+
+router.put('/:id/comments/:cid', requireAccess, async (req, res) => {
+    const r = await comments.update(req.params.id, req.params.cid, { by: req.body?.by, text: req.body?.text, admin: req.protocolVia === 'cms' });
+    if (r.error) return res.status(r.status).json({ success: false, error: r.error });
+    res.json({ success: true, ...r });
 });
 
 router.delete('/:id/comments/:cid', requireAccess, async (req, res) => {

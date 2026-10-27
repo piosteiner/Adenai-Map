@@ -51,6 +51,23 @@ function add(sessionId, input) {
     });
 }
 
+// Only its writer (the same name) or the CMS may change a comment's text → { comment, comments } or { error, status }
+function update(sessionId, commentId, { by = '', text = '', admin = false } = {}) {
+    return serial(async () => {
+        const value = str(text, 2000).trim();
+        if (!value) return { error: 'Der Kommentar ist leer', status: 400 };
+        const data = await load();
+        const list = data.sessions[sessionId] || [];
+        const comment = list.find((c) => c.id === commentId);
+        if (!comment) return { error: 'Kommentar nicht gefunden', status: 404 };
+        if (!admin && comment.by !== String(by).trim()) return { error: 'Nur wer ihn geschrieben hat, kann ihn ändern', status: 403 };
+        comment.text = value;
+        await write(data);
+        events.emit('changed', sessionId, list);
+        return { comment, comments: list };
+    });
+}
+
 // Only its writer (the same name) or the CMS may delete a comment → { comments } or { error, status }
 function remove(sessionId, commentId, { by = '', admin = false } = {}) {
     return serial(async () => {
@@ -67,4 +84,4 @@ function remove(sessionId, commentId, { by = '', admin = false } = {}) {
     });
 }
 
-module.exports = { all, add, remove, events };
+module.exports = { all, add, update, remove, events };

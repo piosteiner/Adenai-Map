@@ -349,6 +349,8 @@
 .pp-cview .pp-comment:last-of-type { border-bottom: 0; padding-bottom: 0; }
 .pp-comment-by { display: flex; align-items: center; gap: 6px; margin: 0; }
 .pp-comment-del { margin-left: auto; min-width: 30px; min-height: 28px; border: 0; border-radius: 4px; background: none; cursor: pointer; opacity: 0.6; }
+.pp-comment-del + .pp-comment-del { margin-left: 0; }
+.pp-comment textarea { width: 100%; box-sizing: border-box; min-height: 70px; padding: 8px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-secondary, transparent); color: inherit; font: inherit; font-size: 16px; resize: vertical; }
 .pp-comment-del:hover { opacity: 1; background: var(--bg-secondary); }
 .pp-comment-text p { margin: 0 0 0.3em; } .pp-comment-text > :last-child { margin-bottom: 0; }
 .pp-comments-lost { display: grid; gap: 8px; margin-top: 14px; padding: 10px 12px; border: 1px dashed var(--border-color); border-radius: 8px; font-size: 14px; }

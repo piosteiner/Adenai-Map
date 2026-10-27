@@ -384,8 +384,12 @@ class MapProtocols {
         if (m.t === 'gone') return this.removeSession(m.id);
         if (m.t === 'comments') {
             this.comments[m.id] = m.comments;
-            if (this.card?.dataset.session === m.id) this.closeCard();
             if (this.sections.get(m.id) && !this.sections.get(m.id).editing) this.drawSection(m.id);
+            // an open card of that session shows the new state — unless someone is typing in it
+            if (this.card?.dataset.session === m.id && !this.card.querySelector('textarea')) {
+                if (this.card.classList.contains('pp-cview')) this.fillComments(this.card, m.id, this.cardIds);
+                else this.closeCard();
+            }
             return;
         }
         const i = this.sessions.findIndex((x) => x.id === (m.session?.id || m.id));
@@ -674,7 +678,53 @@ class MapProtocols {
         if (quote) el.append(this.el('p', 'pp-cquote', `«${c.quote.length > 120 ? `${c.quote.slice(0, 120)}…` : c.quote}»`));
         const head = this.el('p', 'pp-comment-by');
         head.append(this.el('strong', '', c.by));
+        const body = this.el('div', 'pp-comment-text rich-text');
+        body.innerHTML = RichText.render(c.text);
         if (c.by === this.name) {
+            // ✎: the text becomes a field in place (with the ":" emote list); saving updates every device
+            const change = this.el('button', 'pp-comment-del', '✎');
+            change.type = 'button';
+            change.title = 'Kommentar bearbeiten';
+            change.addEventListener('click', () => {
+                if (el.querySelector('textarea')) return;
+                const field = Object.assign(document.createElement('textarea'), { rows: 3, maxLength: 2000, value: c.text });
+                field.setAttribute('aria-label', 'Kommentar bearbeiten');
+                const save = this.el('button', 'pp-cgo', 'Speichern');
+                save.type = 'button';
+                const cancel = this.el('button', 'pp-cgo pp-cgo-quiet', 'Abbrechen');
+                cancel.type = 'button';
+                const actions = this.el('div', 'pp-cactions');
+                actions.append(save, cancel);
+                const suggest = window.AdenaiEmotes?.suggest?.(field);
+                const done = () => { suggest?.destroy(); field.remove(); actions.remove(); body.hidden = false; };
+                cancel.addEventListener('click', done);
+                const send = async () => {
+                    const text = field.value.trim();
+                    if (!text) return field.focus();
+                    if (text === c.text) return done();
+                    save.disabled = true;
+                    try {
+                        const r = await this.api(`/${encodeURIComponent(id)}/comments/${encodeURIComponent(c.id)}`, { method: 'PUT', body: { by: this.name, text } });
+                        this.comments[id] = r.comments;
+                        Object.assign(c, r.comment);
+                        body.innerHTML = RichText.render(c.text);
+                        done();
+                    } catch (err) {
+                        save.disabled = false;
+                        if (err.message !== 'locked') window.alert(`Nicht gespeichert: ${err.message}`);
+                    }
+                };
+                save.addEventListener('click', send);
+                field.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); send(); }
+                    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); done(); }
+                });
+                body.hidden = true;
+                el.append(field, actions);
+                field.focus();
+                field.setSelectionRange(field.value.length, field.value.length);
+            });
+            head.append(change);
             const del = this.el('button', 'pp-comment-del', '🗑');
             del.type = 'button';
             del.title = 'Kommentar löschen';
@@ -689,8 +739,6 @@ class MapProtocols {
             });
             head.append(del);
         }
-        const body = this.el('div', 'pp-comment-text rich-text');
-        body.innerHTML = RichText.render(c.text);
         el.append(head, body);
         return el;
     }
@@ -771,17 +819,23 @@ class MapProtocols {
 
     // the comments on a highlighted passage, and "Antworten" (another comment on the same passage)
     showComments(id, ids, mark) {
-        const list = (this.comments[id] || []).filter((c) => ids.has(c.id));
-        if (!list.length) return;
+        if (!(this.comments[id] || []).some((c) => ids.has(c.id))) return;
         const card = this.openCard('pp-cview', mark, id);
-        list.forEach((c) => card.append(this.commentEl(id, c)));
+        this.cardIds = ids;
+        this.fillComments(card, id, ids);
+    }
+
+    // the card's comments as they are now (also after a change on another device); none left: the card goes
+    fillComments(card, id, ids) {
+        const list = (this.comments[id] || []).filter((c) => ids.has(c.id));
+        if (!list.length) return this.closeCard();
         const reply = this.el('button', 'pp-cgo', '💬 Antworten');
         reply.type = 'button';
         const { quote, prefix, suffix } = list[0];
-        reply.addEventListener('click', () => this.showCommentForm({ id, quote, prefix, suffix, rect: mark.getBoundingClientRect() }));
+        reply.addEventListener('click', () => this.showCommentForm({ id, quote, prefix, suffix, rect: card.getBoundingClientRect() }));
         const actions = this.el('div', 'pp-cactions');
         actions.append(reply);
-        card.append(actions);
+        card.replaceChildren(...list.map((c) => this.commentEl(id, c)), actions);
     }
 
     showCommentForm(p) {
