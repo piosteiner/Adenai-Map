@@ -590,9 +590,11 @@ class MapProtocols {
             const ids = new Set([...this.ancestorsOf(mark, '.pp-cmark')].flatMap((m) => m.dataset.comments.split(' ')));
             this.showComments(mark.closest('.pp-session').dataset.id, ids, mark);
         });
-        document.addEventListener('mousedown', (e) => {
+        // a click or tap anywhere else closes the card — caught on the way down (capture): the panel stops clicks from
+        // reaching the map (L.DomEvent.disableClickPropagation), so they would never bubble up to here
+        document.addEventListener('pointerdown', (e) => {
             if (this.card && !this.card.contains(e.target) && !e.target.closest?.('.pp-cmark, .pp-cbutton, .emote-suggest')) this.closeCard();
-        });
+        }, true);
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && this.card) { e.stopPropagation(); this.closeCard(); } }, true);
     }
 
