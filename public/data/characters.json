@@ -4567,8 +4567,8 @@
       }
     },
     {
-      "id": "flechtenmann",
-      "name": "Flechtenmann",
+      "id": "_flechten_ding_",
+      "name": "\"Flechten-Ding\"",
       "title": "Der Gärtner",
       "placeOfOrigin": "",
       "coordinates": null,
@@ -4584,9 +4584,10 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-27T20:31:36.242Z",
-      "updatedAt": "2026-10-27T20:31:36.242Z"
+      "updatedAt": "2026-10-27T20:32:38.929Z"
     }
   ],
-  "lastUpdated": "2026-10-27T20:31:36.242Z"
+  "lastUpdated": "2026-10-27T20:32:38.929Z"
 }
