@@ -570,11 +570,23 @@ class MapProtocols {
     // ---------- export of one session ----------
 
     // A session as text: { markup } keeps the Markdown (**fett**, # Überschrift, > [!loot] …) — else plain text;
-    // { links } keeps [[Name]] and [Text](https://…) — else only the text that is shown
+    // { links } keeps [[Name]] and [Text](https://…) — else only the text that is shown. Emotes (:catJAM:) are left out
+    // always: they only exist on this site.
     exportText(s, { markup = true, links = false } = {}) {
         const BOXES = { quote: 'Zitat', loot: 'Beute', quest: 'Auftrag', info: 'Info', warning: 'Achtung', note: 'Notiz', secret: 'Geheim' };
+        // the emotes rich-text.js would show (not after a letter, digit or backslash), and the spaces they leave
+        // — "Mae :catJAM:." → "Mae.", "**fett :D:**" → "**fett**", "a :3: b" → "a b"
+        const noEmotes = (t) => t
+            .replace(/(?<![\p{L}\p{N}\\]):([^\s:]{1,64}):/gu, (m, name) => (window.AdenaiEmotes?.get(name) ? '\u0002' : m))
+            .replace(/( *)(?:\u0002 *)+/g, (m, lead, at, all) => {
+                const before = all[at - 1];
+                const after = all[at + m.length];
+                if (after === undefined || /[.,;:!?)\]*_~=|+]/.test(after) || before === '(' || before === undefined) return '';
+                return lead || / $/.test(m) ? ' ' : '';
+            })
+            .replace(/[ \t]+$/, '');
         const inline = (t) => {
-            let x = String(t || '');
+            let x = noEmotes(String(t || ''));
             if (!links) {
                 x = x.replace(/\[\[([^\[\]|\n]+?)(?:\|([^\[\]\n]+?))?\]\]/g, (_, target, label) => (label || target).trim())
                     .replace(/\[([^\[\]\n]+)\]\((https?:\/\/[^\s)]+)\)/g, '$1');
