@@ -28,7 +28,7 @@
         const img = window.EntityImages?.imagesOf(c)[0];
         const where = window.characterSystem.getCurrentLocation?.(c);
         return {
-            img, title: c.name, sub: c.title,
+            img, images: window.EntityImages?.imagesOf(c), title: c.name, sub: c.title,
             tags: [label('getCharacterStatusLabel', c.status), label('getCharacterRelationshipLabel', c.relationship), c.faction ? `🛡️ ${c.faction}` : ''],
             line: where && !/unbekannt|unknown/i.test(where) ? `📍 ${where}` : '',
             text: plain(c.description),
@@ -40,7 +40,7 @@
         const p = l?.feature?.properties || l;
         if (!p) return null;
         return {
-            img: window.EntityImages?.imagesOf(p)[0], title: p.name,
+            img: window.EntityImages?.imagesOf(p)[0], images: window.EntityImages?.imagesOf(p), title: p.name,
             tags: [label('getLocationTypeLabel', p.type), label('getLocationRegionLabel', p.region), p.visited ? '✓ besucht' : ''],
             text: plain(p.description),
             desc: p.description,
@@ -50,7 +50,7 @@
         const t = window.mapGlossary?.find?.(name);
         if (!t) return null;
         return {
-            img: window.EntityImages?.imagesOf(t)[0], title: t.name, sub: t.pending ? '⏳ Vorschlag, noch nicht bestätigt' : '',
+            img: window.EntityImages?.imagesOf(t)[0], images: window.EntityImages?.imagesOf(t), title: t.name, sub: t.pending ? '⏳ Vorschlag, noch nicht bestätigt' : '',
             tags: [t.category ? `📖 ${t.category}` : '📖 Glossar'],
             text: plain(t.definition || t.description),
             desc: t.description || t.definition,
@@ -89,6 +89,8 @@
     function drawPinned(d) {
         const img = d.img ? window.EntityImages.thumbOf(d.img) : '';
         const tags = d.tags.filter(Boolean);
+        // a click on the picture: the image viewer with all of the entry's pictures (image-popup-manager.js)
+        const zoom = d.img ? ` title="Bild vergrössern" data-src="${esc(d.img)}"${window.EntityImages.galleryAttrs(d.images || [d.img], d.img)}` : '';
         const go = d.kind === 'term' ? '📖 Im Glossar öffnen' : '🗺️ Auf der Karte zeigen';
         pinned.innerHTML = `
             <div class="link-card-bar">
@@ -96,7 +98,7 @@
               <button type="button" class="link-card-close" title="Schliessen" aria-label="Schliessen">✕</button>
             </div>
             <div class="link-card-headrow">
-              ${img ? `<img class="link-card-img" src="${esc(img)}" alt="">` : ''}
+              ${img ? `<img class="link-card-img link-card-zoom" src="${esc(img)}" alt=""${zoom}>` : ''}
               <div class="link-card-body">
                 <div class="link-card-title">${esc(d.title)}</div>
                 ${d.sub ? `<div class="link-card-sub">${esc(d.sub)}</div>` : ''}
@@ -107,6 +109,12 @@
             ${d.desc ? `<div class="link-card-desc rich-text">${RichText.render(d.desc)}</div>` : '<p class="link-card-hint">Noch keine Beschreibung.</p>'}
             <div class="link-card-actions"><button type="button" class="link-card-go">${go}</button></div>`;
         pinned.querySelector('.link-card-close').addEventListener('click', close);
+        pinned.querySelector('.link-card-zoom')?.addEventListener('click', (e) => {
+            const v = window.imagePopupManager;
+            if (!v) return;
+            v.setGallery(e.currentTarget, { title: d.title });
+            v.showImagePopup(d.img, { title: d.title });
+        });
         pinned.querySelector('.link-card-back')?.addEventListener('click', () => { const prev = trail.pop(); drawPinned(prev); });
         pinned.querySelector('.link-card-go').addEventListener('click', () => {
             close();
@@ -151,8 +159,10 @@
 
     // anywhere else (caught on the way down: the minutes panel stops clicks from reaching the map), Esc, or the text
     // scrolling away under it
-    document.addEventListener('pointerdown', (e) => { if (pinned && !pinned.contains(e.target) && !e.target.closest?.('a.wiki-link')) close(); }, true);
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pinned) { e.stopPropagation(); close(); } }, true);
+    // (the image viewer opened from the card is not "elsewhere": the card is still there once it closes)
+    const viewerOpen = () => !!document.querySelector('.image-popup-overlay.active');
+    document.addEventListener('pointerdown', (e) => { if (pinned && !pinned.contains(e.target) && !e.target.closest?.('a.wiki-link, .image-popup-overlay')) close(); }, true);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pinned && !viewerOpen()) { e.stopPropagation(); close(); } }, true);
     document.addEventListener('scroll', (e) => { if (pinned && !pinned.contains(e.target)) close(); }, true);
 
     window.LinkCards = { open, close, inMinutes: minutes };

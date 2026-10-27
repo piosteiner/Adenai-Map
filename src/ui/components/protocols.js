@@ -654,9 +654,12 @@ class MapProtocols {
         // a click or tap anywhere else closes the card — caught on the way down (capture): the panel stops clicks from
         // reaching the map (L.DomEvent.disableClickPropagation), so they would never bubble up to here
         document.addEventListener('pointerdown', (e) => {
-            if (this.card && !this.card.contains(e.target) && !e.target.closest?.('.pp-cmark, .pp-cbutton, .emote-suggest, .link-card-pinned')) this.closeCard();
+            if (this.card && !this.card.contains(e.target) && !e.target.closest?.('.pp-cmark, .pp-cbutton, .emote-suggest, .link-card-pinned, .image-popup-overlay')) this.closeCard();
         }, true);
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && this.card) { e.stopPropagation(); this.closeCard(); } }, true);
+        // Esc: the card — but an image viewer or a link card in front of it first
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.card && !document.querySelector('.image-popup-overlay.active, .link-card-pinned')) { e.stopPropagation(); this.closeCard(); }
+        }, true);
     }
 
     * ancestorsOf(el, selector) {
