@@ -4572,7 +4572,7 @@
       "title": "Der Gärtner",
       "placeOfOrigin": "",
       "coordinates": null,
-      "description": "Eine Kreatur, welche es geschafft hatte sich unter die Gäste auf [[Serenissa]] zu schleichen. ",
+      "description": "Eine Kreatur, welche es geschafft hatte sich unter die Gäste auf [[Serenissa]] zu schleichen. Kann mehrere Mage Hands gleichzeitig beschwören. Wurde von Abu über die Brüstung der ",
       "images": [
         "https://adenai-admin.piogino.ch/media/84wmkab8c8r7-small.webp",
         "https://adenai-admin.piogino.ch/media/bw40pkobzn4a-small.webp"
@@ -4586,8 +4586,8 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2026-10-27T20:31:36.242Z",
-      "updatedAt": "2026-10-28T07:44:29.084Z"
+      "updatedAt": "2026-10-28T07:44:56.377Z"
     }
   ],
-  "lastUpdated": "2026-10-28T07:44:29.084Z"
+  "lastUpdated": "2026-10-28T07:44:56.377Z"
 }
