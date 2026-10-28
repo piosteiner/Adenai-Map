@@ -60,8 +60,10 @@ async function updateMediaLibrary(mutate, message, retries = 3) {
 
 // Tags are lower case, trimmed, each once ("Human, human " → ["human"]): written so by every route here, and the
 // library's older tags brought in line once at start (normalizeLibraryTags)
+// Settled spellings (2026-10-28): a tag written the other way becomes this one — the library's and whatever is typed
+const TAG_RENAMES = { firbold: ['firbolg'], 'gate. portal': ['gate', 'portal'], beastfolk: ['beastkin'], chlid: ['child'] };
 const normalizeTags = (list) => [...new Set((Array.isArray(list) ? list : String(list || '').split(','))
-  .map((t) => String(t).trim().toLowerCase()).filter(Boolean))];
+  .map((t) => String(t).trim().toLowerCase()).filter(Boolean).flatMap((t) => TAG_RENAMES[t] || [t]))];
 
 async function normalizeLibraryTags() {
   const changed = await updateMediaLibrary((library) => {
@@ -72,8 +74,8 @@ async function normalizeLibraryTags() {
       if (JSON.stringify(tags) !== JSON.stringify(m.tags)) { m.tags = tags; n += 1; }
     }
     return n || null; // nothing to change: no write
-  }, (n) => `Tags in lower case (${n} images)`);
-  if (changed) console.log(`media: tags of ${changed} images in lower case`);
+  }, (n) => `Tags in lower case, settled spellings (${n} images)`);
+  if (changed) console.log(`media: tags of ${changed} images normalised`);
 }
 
 // Helper function to generate short unique IDs

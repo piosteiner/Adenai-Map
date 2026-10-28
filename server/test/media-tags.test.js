@@ -8,3 +8,7 @@ test('tags: lower case, trimmed, each once, from a list or a comma-separated tex
     assert.deepEqual(normalizeTags('Elf, Child ,elf,,'), ['elf', 'child']);
     assert.deepEqual(normalizeTags(undefined), []);
 });
+
+test('tags: settled spellings — a typo, two tags written as one, the name chosen of two', () => {
+    assert.deepEqual(normalizeTags(['Firbold', 'gate. portal', 'Beastfolk', 'beastkin', 'chlid']), ['firbolg', 'gate', 'portal', 'beastkin', 'child']);
+});
