@@ -9,6 +9,54 @@ import { api } from '../api';
 
 const CATEGORIES = ['characters', 'locations', 'items', 'creatures', 'maps', 'sessions', 'general'];
 const SIZE_ORDER = ['thumbnail', 'small', 'medium', 'large', 'original'];
+const OFTEN = 16; // "Often used": at most this many
+
+// Tags to click beside the tags field: the groups of the category (server config mediaTagGroups: gender, age, ancestry)
+// and the tags used most often on images of that category. A click sets or removes the tag in the field (whatever its
+// case: "Human" counts as "human") and fires "change", so the autosaver saves it as if typed. Follows the field and
+// the category as they change.
+function tagPicks(input, categoryOf) {
+    const el = h('div.tag-picks');
+    const fold = (t) => t.trim().toLowerCase();
+    const current = () => input.value.split(',').map((t) => t.trim()).filter(Boolean);
+    function toggle(tag) {
+        const list = current();
+        const has = list.some((t) => fold(t) === fold(tag));
+        input.value = (has ? list.filter((t) => fold(t) !== fold(tag)) : [...list, tag]).join(', ');
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+        draw();
+    }
+    // the tags of this category's images, most used first, in their most used spelling
+    function often(category, skip) {
+        const counts = new Map();
+        for (const m of Object.values(store.media || {})) {
+            if ((m.category || 'general') !== category) continue;
+            for (const t of m.tags || []) {
+                const k = fold(t);
+                if (!k || skip.has(k)) continue;
+                const c = counts.get(k) || { n: 0, forms: new Map() };
+                c.n += 1;
+                c.forms.set(t.trim(), (c.forms.get(t.trim()) || 0) + 1);
+                counts.set(k, c);
+            }
+        }
+        return [...counts.values()].filter((c) => c.n >= 2).sort((a, b) => b.n - a.n).slice(0, OFTEN)
+            .map((c) => [...c.forms].sort((a, b) => b[1] - a[1])[0][0]);
+    }
+    function draw() {
+        const category = categoryOf();
+        const set = new Set(current().map(fold));
+        const groups = (store.config.mediaTagGroups || []).filter((g) => (g.categories || []).includes(category));
+        const inGroups = new Set(groups.flatMap((g) => g.tags.map(fold)));
+        const row = (label, tags) => h('div.tag-pick-row', {}, h('span.tag-pick-label', { text: label }),
+            tags.map((t) => h(`button.tag-pick${set.has(fold(t)) ? '.on' : ''}`, { type: 'button', 'aria-pressed': String(set.has(fold(t))), on: { click: () => toggle(t) } }, t)));
+        const more = often(category, inGroups);
+        el.replaceChildren(...groups.map((g) => row(g.label, g.tags)), more.length ? row('Often used', more) : '');
+    }
+    input.addEventListener('input', draw);
+    draw();
+    return { el, draw };
+}
 
 const baseOf = (m) => {
     const f = Object.values(m.sizes || {})[0]?.filename || '';
@@ -105,6 +153,8 @@ export function mediaView(app) {
         const cat = h('select', {}, ...CATEGORIES.map((c) => h('option', { value: c }, c)));
         cat.value = category || 'general';
         const tags = h('input', { type: 'text', placeholder: 'comma separated (optional)' });
+        const picks = tagPicks(tags, () => cat.value);
+        cat.addEventListener('change', picks.draw);
         const ok = await new Promise((resolve) => {
             const close = (v) => { overlay.remove(); resolve(v); };
             const go = h('button.btn.primary', { type: 'button', on: { click: () => { if (!credits.value.trim()) { credits.focus(); return toast('Credits are required', 'warn'); } close(true); } } }, `Upload ${files.length} image${files.length === 1 ? '' : 's'}`);
@@ -113,6 +163,7 @@ export function mediaView(app) {
                 h('p.muted', { text: [...files].map((f) => f.name).join(', ') }),
                 h('label.field', {}, h('span.field-label', { text: 'Credits *' }), credits),
                 h('div.grid', {}, h('label.field', {}, h('span.field-label', { text: 'Category' }), cat), h('label.field', {}, h('span.field-label', { text: 'Tags' }), tags)),
+                picks.el,
                 h('div.dialog-actions', {}, h('button.btn', { type: 'button', on: { click: () => close(false) } }, 'Cancel'), go)));
             document.body.append(overlay);
             credits.focus();
@@ -146,6 +197,8 @@ export function mediaView(app) {
         const cat = h('select', { disabled: ro }, ...CATEGORIES.map((c) => h('option', { value: c }, c)));
         cat.value = m.category || 'general';
         const tags = h('input', { type: 'text', value: (m.tags || []).join(', '), readOnly: ro, placeholder: 'comma separated' });
+        const picks = tagPicks(tags, () => cat.value);
+        cat.addEventListener('change', picks.draw);
         const used = usageOf(m);
         const sizes = SIZE_ORDER.filter((s) => m.sizes?.[s]).map((s) => {
             const z = m.sizes[s];
@@ -171,7 +224,8 @@ export function mediaView(app) {
             h('label.field', {}, h('span.field-label', { text: 'Title' }), title),
             h('label.field', {}, h('span.field-label', { text: 'Caption' }), caption),
             h('label.field', {}, h('span.field-label', { text: 'Credits *' }), credits),
-            h('div.grid', {}, h('label.field', {}, h('span.field-label', { text: 'Category' }), cat), h('label.field', {}, h('span.field-label', { text: 'Tags' }), tags)));
+            h('div.grid', {}, h('label.field', {}, h('span.field-label', { text: 'Category' }), cat), h('label.field', {}, h('span.field-label', { text: 'Tags' }), tags)),
+            ro ? null : picks.el);
         auto?.attach(form);
         current = { track, save, flush: () => (auto ? auto.flush() : Promise.resolve(true)) };
         async function remove() {

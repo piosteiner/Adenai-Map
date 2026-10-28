@@ -132,3 +132,16 @@ test('combined messages', () => {
     assert.equal(combinedMessage(['Delete media x']), 'Delete media x');
     assert.equal(combinedMessage(['a', 'b', 'a']), '3 changes from the CMS\n\n- a (×2)\n- b');
 });
+
+test('content already on GitHub (committed just before a stop that left the journal) is not committed again', async () => {
+    const dir = tmpDir();
+    const first = setup({ [LIB]: b64({ images: {} }) }, dir);
+    await edit(first.repos, LIB, (d) => { d.images.f = {}; }, 'Update metadata for media f');
+    const files = { ...first.state.files, [LIB]: b64({ images: { f: {} } }) }; // the commit went through
+    const gh = fakeGitHub(files);
+    const cache = withFileCache(gh.octokit, quiet, { deferred: [LIB, REVIEWS], journalDir: dir, quietMs: 60000, maxWaitMs: 60000 });
+    await cache.flush();
+    assert.equal(gh.state.commits.length, 0);
+    assert.deepEqual(cache.pending(), []);
+    assert.deepEqual(fs.readdirSync(dir), []);
+});

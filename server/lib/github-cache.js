@@ -160,6 +160,19 @@ function withFileCache(octokit, log = console, options = {}) {
         return { status: 200, data: { content: { path: params.path, sha }, commit: { sha: null, message: 'waiting to be committed' } } };
     }
 
+    // f is on GitHub: no longer waiting — unless it changed meanwhile, then the rest waits, based on what is there
+    function done(f) {
+        const d = dirty.get(f.key);
+        if (files.get(f.key).data.sha === f.sha) {
+            dirty.delete(f.key);
+            fs.rmSync(journalOf(f.key), { force: true });
+        } else {
+            d.base = f.sha;
+            d.messages = d.messages.slice(f.count);
+            writeJournal(f.key);
+        }
+    }
+
     // Everything waiting, as one commit per repository (on the write queue: never beside another commit)
     async function flushNow() {
         const byRepo = new Map();
@@ -177,7 +190,8 @@ function withFileCache(octokit, log = console, options = {}) {
                 for (const f of list) {
                     let remote = null;
                     try { remote = (await get({ owner, repo, path: f.d.path, ref: head })).data.sha; } catch (err) { if (err.status !== 404) throw err; }
-                    if (remote === f.d.base || remote === f.sha) ok.push(f);
+                    if (remote === f.sha) done(f); // already there (committed just before a stop that left the journal)
+                    else if (remote === f.d.base) ok.push(f);
                     else log.error?.(`github-cache: ${f.d.path} changed on GitHub outside the CMS (${remote}, the CMS began from ${f.d.base}) — not committed; its changes wait in ${journalOf(f.key)}`);
                 }
                 if (!ok.length) return;
@@ -196,17 +210,7 @@ function withFileCache(octokit, log = console, options = {}) {
                     if (err.status === 422 && attempt < 2) continue; // another commit came first: build on it
                     throw err;
                 }
-                for (const f of ok) {
-                    const d = dirty.get(f.key);
-                    if (files.get(f.key).data.sha === f.sha) { // nothing new meanwhile: done
-                        dirty.delete(f.key);
-                        fs.rmSync(journalOf(f.key), { force: true });
-                    } else { // changed during the commit: the rest waits, now based on what was committed
-                        d.base = f.sha;
-                        d.messages = d.messages.slice(f.count);
-                        writeJournal(f.key);
-                    }
-                }
+                for (const f of ok) done(f);
                 commitCache = new Map();
                 log.log?.(`github-cache: committed ${ok.map((f) => `${f.d.path} (${f.count})`).join(', ')} as ${commit.slice(0, 7)}`);
                 break;

@@ -70,7 +70,18 @@ const AdenaiConfig = {
         escape: { value: 'escape', label: '🏃 Flucht' },
         teleport: { value: 'teleport', label: '✨ Teleport' }, // drawn as a dotted arc, an instant jump on the timeline
         other: { value: 'other', label: '❓ Andere' }
-    }
+    },
+    // Tags to click on an image of these categories (CMS → Media, beside "Tags"); the tags as they are written in the
+    // library — a group's tag counts as set whatever its case ("Human" = "human"). Other tags used twice or more show
+    // under "Often used" by themselves.
+    mediaTagGroups: [
+        { label: 'Gender', categories: ['characters'], tags: ['male', 'female', 'nonbinary'] },
+        { label: 'Age', categories: ['characters'], tags: ['child', 'youth', 'elder'] },
+        { label: 'Ancestry', categories: ['characters', 'creatures'], tags: [
+            'human', 'elf', 'half-elf', 'drow', 'dwarf', 'halfling', 'gnome', 'orc', 'goblin', 'kobold', 'tiefling',
+            'dragonborn', 'harengon', 'tabaxi', 'kenku', 'aarakocra', 'firbolg', 'lizardfolk', 'grung', 'centaur',
+            'faun', 'fairy', 'triton', 'yuan-ti', 'goliath', 'genasi'] }
+    ]
 };
 
 // Get all configuration
