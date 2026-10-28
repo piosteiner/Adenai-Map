@@ -91,3 +91,14 @@ test('"Tag lists…": a list added in the dialog is saved and offered beside the
     await expect(page.locator('.tag-pick-label', { hasText: 'Constructs' })).toBeVisible();
     await expect(page.locator('.tag-picks button.tag-pick', { hasText: /^warforged$/ })).toBeVisible();
 });
+
+test('in the grid, an image without tags has a dot in its corner, a tagged one none', async ({ page }) => {
+    const lib = await (await page.request.get(`${CMS}/api/data/media-library.json`)).json();
+    const entries = Object.entries(lib.images);
+    const untagged = entries.filter(([, m]) => !(m.tags || []).length).length;
+    await page.goto(`${CMS}/v2/#/media`);
+    await expect(page.locator('.media-card').first()).toBeVisible();
+    await expect(page.locator('.media-card .media-card-untagged')).toHaveCount(untagged);
+    const [taggedId] = entries.find(([, m]) => (m.tags || []).length);
+    await expect(page.locator(`.media-card[data-id="${taggedId}"] .media-card-untagged`)).toHaveCount(0);
+});
