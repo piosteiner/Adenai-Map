@@ -106,8 +106,8 @@ function initializeMapOverlays() {
         //Gleissende Zitadelle — on another plane, below the map: its picture where its dot is, the edges fading into
         //the dark (the picture is a square painting, not a cut-out like Atlantis; map-core.css .overlay-plane)
         const gleissendeZitadelle = [
-          [-108 - 55, 1402 - 55],  // Southwest corner
-          [-108 + 55, 1402 + 55]   // Northeast corner
+          [-108 - 69, 1402 - 69],  // Southwest corner
+          [-108 + 69, 1402 + 69]   // Northeast corner
         ];
 
         //Gleissende Zitadelle
