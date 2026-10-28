@@ -41,6 +41,11 @@ test('clicking tags sets and removes them in the field, saved like typing', asyn
     await expect(pick('human')).toHaveClass(/\bon\b/);
     await pick('human').click();
     await expect(tags).toHaveValue('');
+    // leaving the field: lower case, each once — and saved so
+    await tags.fill('Elf, ELF, Child');
+    await tags.blur();
+    await expect(tags).toHaveValue('elf, child');
+    await expect.poll(() => JSON.stringify(saved.at(-1).tags), { timeout: 10000 }).toBe('["elf","child"]');
 });
 
 test('a location image offers only its often used tags, no character groups', async ({ page }) => {

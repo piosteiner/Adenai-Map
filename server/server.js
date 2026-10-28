@@ -57,6 +57,8 @@ initLocationsGitHub(octokit, REPO_OWNER, REPO_NAME);
 initCharactersGitHub(octokit, REPO_OWNER, REPO_NAME);
 initCharacterPathsGitHub(octokit, REPO_OWNER, REPO_NAME);
 initMediaGitHub(octokit, REPO_OWNER, REPO_NAME);
+// older tags in lower case, once (nothing is written when they are already)
+require('./routes/media').normalizeLibraryTags().catch((err) => console.error('media: tags not normalised:', err.message));
 
 // Middleware
 app.use(compression()); // gzip: the admin's scripts and the JSON lists are a third of the size on the wire

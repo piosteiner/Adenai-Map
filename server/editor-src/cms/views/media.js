@@ -54,6 +54,13 @@ function tagPicks(input, categoryOf) {
         el.replaceChildren(...groups.map((g) => row(g.label, g.tags)), more.length ? row('Often used', more) : '');
     }
     input.addEventListener('input', draw);
+    // tags are lower case, each once (as the server writes them): the field shows it once it is left — before the
+    // autosaver reads it (the form's "change" comes after the field's own). No redraw: which tags are on doesn't
+    // change, and a click on a tag (which is what left the field) needs its button to stay.
+    input.addEventListener('change', () => {
+        const tidy = [...new Set(current().map(fold))].join(', ');
+        if (tidy !== input.value) input.value = tidy;
+    });
     draw();
     return { el, draw };
 }

@@ -58,6 +58,24 @@ async function updateMediaLibrary(mutate, message, retries = 3) {
   }
 }
 
+// Tags are lower case, trimmed, each once ("Human, human " → ["human"]): written so by every route here, and the
+// library's older tags brought in line once at start (normalizeLibraryTags)
+const normalizeTags = (list) => [...new Set((Array.isArray(list) ? list : String(list || '').split(','))
+  .map((t) => String(t).trim().toLowerCase()).filter(Boolean))];
+
+async function normalizeLibraryTags() {
+  const changed = await updateMediaLibrary((library) => {
+    let n = 0;
+    for (const m of Object.values(library.images)) {
+      if (!Array.isArray(m.tags)) continue;
+      const tags = normalizeTags(m.tags);
+      if (JSON.stringify(tags) !== JSON.stringify(m.tags)) { m.tags = tags; n += 1; }
+    }
+    return n || null; // nothing to change: no write
+  }, (n) => `Tags in lower case (${n} images)`);
+  if (changed) console.log(`media: tags of ${changed} images in lower case`);
+}
+
 // Helper function to generate short unique IDs
 function generateShortId() {
   return Math.random().toString(36).substr(2, 8) + Math.random().toString(36).substr(2, 4);
@@ -246,7 +264,7 @@ router.post('/upload', requireAuth, upload.array('images', 10), async (req, res)
           title: title || path.parse(file.originalname).name,
           caption: caption,
           credits: credits.trim(),
-          tags: tags.split(',').map(tag => tag.trim()).filter(Boolean),
+          tags: normalizeTags(tags),
           uploadDate: new Date().toISOString(),
           sizes: {},
           fileSize: file.size,
@@ -407,7 +425,7 @@ router.put('/:id', requireAuth, async (req, res) => {
         caption: caption || '',
         credits: credits.trim(),
         category: category || 'general',
-        tags: Array.isArray(tags) ? tags : [],
+        tags: normalizeTags(tags),
         lastModified: new Date().toISOString()
       };
       return media[id];
@@ -475,4 +493,4 @@ router.delete('/:id', requireAuth, async (req, res) => {
   }
 });
 
-module.exports = { router, initGitHub, optimizeImage };
+module.exports = { router, initGitHub, optimizeImage, normalizeTags, normalizeLibraryTags };
