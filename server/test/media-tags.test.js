@@ -16,3 +16,8 @@ test('tags: settled spellings — a typo, two tags written as one, the name chos
 test('tags: wizard (and the typo wizardd) is mage', () => {
     assert.deepEqual(normalizeTags(['Wizard', 'mage', 'wizardd']), ['mage']);
 });
+
+test('tags: a full stop separates tags as a comma does', () => {
+    assert.deepEqual(normalizeTags(['male. half-orc', 'vsuzh. familiar', 'gate. portal']), ['male', 'half-orc', 'vsuzh', 'familiar', 'gate', 'portal']);
+    assert.deepEqual(normalizeTags('elf. child, youth.'), ['elf', 'child', 'youth']);
+});
