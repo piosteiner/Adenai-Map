@@ -4161,10 +4161,10 @@
       "id": "partriato_serinessa",
       "name": "Partriato Serinessa",
       "title": "Hüter der Insel und Host",
-      "placeOfOrigin": "Serenissa",
+      "placeOfOrigin": "Olecea",
       "coordinates": [
-        741,
-        769
+        916,
+        261
       ],
       "description": "",
       "images": [
@@ -4178,18 +4178,18 @@
       "notes": "",
       "movementHistory": [],
       "currentLocation": {
-        "location": "Serenissa",
+        "location": "Olecea",
         "date": "5663-06-03",
         "dateStart": "5663-06-03",
         "dateEnd": null,
         "coordinates": [
-          741,
-          769
+          916,
+          261
         ],
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2026-10-18T17:00:53.428Z",
-      "updatedAt": "2026-10-28T07:45:19.093Z"
+      "updatedAt": "2026-10-28T07:45:33.726Z"
     },
     {
       "id": "sylph",
@@ -4602,5 +4602,5 @@
       "updatedAt": "2026-10-28T07:45:04.454Z"
     }
   ],
-  "lastUpdated": "2026-10-28T07:45:19.093Z"
+  "lastUpdated": "2026-10-28T07:45:33.726Z"
 }
