@@ -2802,7 +2802,9 @@
       "title": "Wanted Poster - Abu",
       "caption": "",
       "credits": "drawn by Pio Gino Steiner",
-      "tags": [],
+      "tags": [
+        "vsuzh"
+      ],
       "uploadDate": "2025-09-07T19:04:05.493Z",
       "sizes": {
         "thumb": {
@@ -2838,7 +2840,7 @@
       },
       "fileSize": 812527,
       "mimeType": "image/png",
-      "lastModified": "2025-09-07T19:14:36.527Z"
+      "lastModified": "2026-10-28T19:20:54.363Z"
     },
     "characters-0fphq5qtggmc": {
       "id": "characters-0fphq5qtggmc",
@@ -2846,7 +2848,9 @@
       "title": "Wanted Poster Tasbor",
       "caption": "",
       "credits": "drawn by Pio Gino Steiner",
-      "tags": [],
+      "tags": [
+        "vsuzh"
+      ],
       "uploadDate": "2025-09-07T19:04:20.230Z",
       "sizes": {
         "thumb": {
@@ -2882,7 +2886,7 @@
       },
       "fileSize": 1284645,
       "mimeType": "image/png",
-      "lastModified": "2025-09-07T19:15:23.584Z"
+      "lastModified": "2026-10-28T19:20:56.342Z"
     },
     "characters-8qp40gi1xwvn": {
       "id": "characters-8qp40gi1xwvn",
@@ -39387,5 +39391,5 @@
       "lastModified": "2026-10-25T15:06:44.950Z"
     }
   },
-  "lastUpdated": "2026-10-28T19:20:47.727Z"
+  "lastUpdated": "2026-10-28T19:20:56.342Z"
 }
