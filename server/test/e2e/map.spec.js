@@ -86,3 +86,15 @@ test('a journey point beside a location dot shows its number (not "1x"), and onl
         expect(result.many.fans.filter((f) => f === 'movement')).toHaveLength(result.many.count);
     }
 });
+
+test('the pictures on the map (Atlantis, ships, the Gleissende Zitadelle …) are each there once', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' });
+    await expect(page.locator('img.leaflet-image-layer[src*="gleissende_zitadelle"]')).toHaveCount(1);
+    await page.waitForTimeout(2500); // the later attempts to add them
+    const counts = await page.evaluate(() => {
+        const c = {};
+        document.querySelectorAll('img.leaflet-image-layer').forEach((i) => { const k = i.src.split('/').pop(); c[k] = (c[k] || 0) + 1; });
+        return c;
+    });
+    expect(Object.values(counts).every((n) => n === 1), JSON.stringify(counts)).toBe(true);
+});

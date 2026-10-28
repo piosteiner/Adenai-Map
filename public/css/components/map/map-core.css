@@ -38,3 +38,10 @@
   min-width: 250px;
   max-width: 400px;
 }
+
+/* A picture on the map that stands for a place on another plane (src/utils/icons.js, Gleissende Zitadelle): a
+   square painting, its edges fading out */
+.leaflet-image-layer.overlay-plane {
+    -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent 100%);
+    mask-image: radial-gradient(closest-side, #000 62%, transparent 100%);
+}

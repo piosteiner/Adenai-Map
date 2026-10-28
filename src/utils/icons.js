@@ -4,8 +4,12 @@
 // Map Image Overlays - Initialized after map is ready
 // Waits for map initialization before adding overlays
 
+let overlaysAdded = false; // several ways below lead here (event, DOM ready, retries): the overlays only once
+
 function initializeMapOverlays() {
+    if (overlaysAdded) return true;
     return MapUtils.withMap((map) => {
+        overlaysAdded = true;
         Logger.info('Initializing map image overlays...');
 
         //Map Expansion
@@ -95,6 +99,21 @@ function initializeMapOverlays() {
         //Atlantis Flying
         L.imageOverlay('public/images/atlantis_clouds.png', atlantisClouds, {
           interactive: false
+        }).addTo(map);
+
+        ///---------------------
+
+        //Gleissende Zitadelle — on another plane, below the map: its picture where its dot is, the edges fading into
+        //the dark (the picture is a square painting, not a cut-out like Atlantis; map-core.css .overlay-plane)
+        const gleissendeZitadelle = [
+          [-108 - 55, 1402 - 55],  // Southwest corner
+          [-108 + 55, 1402 + 55]   // Northeast corner
+        ];
+
+        //Gleissende Zitadelle
+        L.imageOverlay('public/images/gleissende_zitadelle.webp', gleissendeZitadelle, {
+          interactive: false,
+          className: 'overlay-plane'
         }).addTo(map);
 
         ///---------------------
