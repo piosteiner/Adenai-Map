@@ -22740,7 +22740,10 @@
       "title": "c964a3e08431d671e83850cbc85b3d13",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/670825307037925374/",
-      "tags": [],
+      "tags": [
+        "dwarf",
+        "male"
+      ],
       "uploadDate": "2026-10-18T18:12:55.430Z",
       "sizes": {
         "thumb": {
@@ -22775,7 +22778,8 @@
         }
       },
       "fileSize": 80126,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-28T07:46:23.790Z"
     },
     "characters-pug6ii7wdeec": {
       "id": "characters-pug6ii7wdeec",
@@ -38526,5 +38530,5 @@
       "lastModified": "2026-10-25T15:06:44.950Z"
     }
   },
-  "lastUpdated": "2026-10-27T20:33:12.897Z"
+  "lastUpdated": "2026-10-28T07:46:23.790Z"
 }
