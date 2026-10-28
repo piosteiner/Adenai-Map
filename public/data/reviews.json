@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "6abd839cd312a6800b989e8f92bc45e40387bba0",
+      "action": "update",
+      "type": "character",
+      "itemName": "\"Flechtenmann\"",
+      "user": "gm",
+      "timestamp": "2026-10-28T07:44:30.577Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-28T07:44:30.577Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: _flechtenmann_ (by gm) - updated description"
+    },
+    {
       "commitSha": "42fe353e42fc1c7c52400ee98b67471624e8bd48",
       "action": "update",
       "type": "character",
@@ -4591,5 +4604,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-28T07:44:04.721Z"
+  "lastUpdated": "2026-10-28T07:44:30.577Z"
 }
