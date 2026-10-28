@@ -12,3 +12,7 @@ test('tags: lower case, trimmed, each once, from a list or a comma-separated tex
 test('tags: settled spellings — a typo, two tags written as one, the name chosen of two', () => {
     assert.deepEqual(normalizeTags(['Firbold', 'gate. portal', 'Beastfolk', 'beastkin', 'chlid']), ['firbolg', 'gate', 'portal', 'beastkin', 'child']);
 });
+
+test('tags: wizard (and the typo wizardd) is mage', () => {
+    assert.deepEqual(normalizeTags(['Wizard', 'mage', 'wizardd']), ['mage']);
+});
