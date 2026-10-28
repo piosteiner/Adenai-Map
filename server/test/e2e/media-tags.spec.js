@@ -58,3 +58,36 @@ test('a location image offers only its often used tags, no character groups', as
     await expect(page.getByLabel('Tags')).toBeVisible();
     await expect(page.locator('.tag-pick-label', { hasText: 'Gender' })).toHaveCount(0);
 });
+
+test('"Tag lists…": a list added in the dialog is saved and offered beside the tags at once', async ({ page }) => {
+    await page.route('**/api/auth-status', (route) => route.fulfill({ json: { authenticated: true, username: 'test', role: 'gm' } }));
+    await page.route(/\/api\/(protocols|pending|quality)/, (route) => route.fulfill({ json: { success: true, sessions: [], entries: [], ok: {} } }));
+    await page.route('**/api/media/*', (route) => (route.request().method() === 'PUT' ? route.fulfill({ json: { success: true } }) : route.continue()));
+    let sent = null;
+    await page.route('**/api/media-tag-groups', (route) => {
+        if (route.request().method() !== 'PUT') return route.continue();
+        sent = route.request().postDataJSON();
+        // as the server cleans them: tags lower case, trimmed, empty ones dropped
+        const groups = sent.groups.map((g) => ({ ...g, label: g.label.trim(), tags: [...new Set(g.tags.map((t) => t.trim().toLowerCase()).filter(Boolean))] }));
+        return route.fulfill({ json: { success: true, groups } });
+    });
+    const lib = await (await page.request.get(`${CMS}/api/data/media-library.json`)).json();
+    const [id] = Object.entries(lib.images).find(([, m]) => m.category === 'characters');
+    await page.goto(`${CMS}/v2/#/media/${encodeURIComponent(id)}`);
+    await expect(page.locator('.tag-pick-label', { hasText: 'Ancestry' })).toBeVisible();
+
+    await page.getByRole('button', { name: 'Tag lists…' }).click();
+    const dialog = page.getByRole('dialog', { name: 'Tag lists' });
+    await expect(dialog.locator('.tag-list')).toHaveCount(3);
+    await dialog.getByRole('button', { name: '＋ Add list' }).click();
+    const last = dialog.locator('.tag-list').last();
+    await last.getByLabel('Name of the list').fill('Constructs');
+    await last.locator('textarea').fill('Warforged, Golem');
+    await dialog.getByRole('button', { name: 'Save' }).click();
+    await expect(dialog).toHaveCount(0);
+
+    expect(sent.groups.map((g) => g.label)).toEqual(['Gender', 'Age', 'Ancestry', 'Constructs']);
+    expect(sent.groups[3].categories).toEqual(['characters']);
+    await expect(page.locator('.tag-pick-label', { hasText: 'Constructs' })).toBeVisible();
+    await expect(page.locator('.tag-picks button.tag-pick', { hasText: /^warforged$/ })).toBeVisible();
+});

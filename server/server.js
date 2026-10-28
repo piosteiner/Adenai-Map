@@ -1,4 +1,5 @@
 require('dotenv').config();
+process.env.ADENAI_CMS_SERVER = '1'; // this process keeps the data files' waiting changes (lib/github.js)
 const express = require('express');
 const compression = require('compression');
 const github = require('./lib/github');
@@ -48,7 +49,7 @@ const REPO_NAME = process.env.GITHUB_REPO;
 
 // Data files are answered from memory and written through to GitHub (lib/github-cache.js): the CMS no longer waits
 // 0.2–0.6 s for GitHub on every read.
-github.cache.warm(REPO_OWNER, REPO_NAME, ['public/data/places.geojson', 'public/data/characters.json', 'public/data/media-library.json', 'public/data/reviews.json', 'public/data/glossary.json', 'public/data/emotes.json']);
+github.cache.warm(REPO_OWNER, REPO_NAME, ['public/data/places.geojson', 'public/data/characters.json', 'public/data/media-library.json', 'public/data/reviews.json', 'public/data/glossary.json', 'public/data/emotes.json', 'public/data/media-tag-groups.json']);
 
 console.log(`Setting up admin for: ${REPO_OWNER}/${REPO_NAME}`);
 
@@ -130,6 +131,7 @@ app.use('/api/emotes', require('./routes/emotes')); // :name: images (7TV sets a
 app.use('/api/data', require('./routes/data')); // the map's data files from the cache, and a live channel for changes
 app.use('/api/pending', require('./routes/pending')); // entries proposed by the players, confirmed in the CMS
 app.use('/api/quality', require('./routes/quality')); // the Quality page's "OK" marks
+app.use('/api/media-tag-groups', require('./routes/tag-groups').router); // the tags to click beside an image's tags
 
 // Activity routes (uncomment when you have the activity routes file)
 // app.use('/api/activity', requireAuth, activityRoutes);

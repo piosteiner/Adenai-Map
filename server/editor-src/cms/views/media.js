@@ -11,6 +11,49 @@ const CATEGORIES = ['characters', 'locations', 'items', 'creatures', 'maps', 'se
 const SIZE_ORDER = ['thumbnail', 'small', 'medium', 'large', 'original'];
 const OFTEN = 16; // "Often used": at most this many
 
+// "Tag lists…": the groups of tags to click (server: routes/tag-groups.js, public/data/media-tag-groups.json) — a name,
+// the image categories it is offered for, its tags (comma separated); reordered with ↑ ↓. Saved as a whole.
+async function editTagLists() {
+    const lists = (store.config.mediaTagGroups || []).map((g) => ({ ...g }));
+    const body = h('div.tag-lists');
+    const row = (g, i) => {
+        const name = h('input', { type: 'text', value: g.label, placeholder: 'Name, e.g. Ancestry', 'aria-label': 'Name of the list', on: { input: (e) => { g.label = e.target.value; } } });
+        const cats = CATEGORIES.map((c) => h('label.tag-list-cat', {}, h('input', { type: 'checkbox', checked: g.categories.includes(c), on: { change: (e) => { g.categories = e.target.checked ? [...g.categories, c] : g.categories.filter((x) => x !== c); } } }), c));
+        const tags = h('textarea', { rows: 2, placeholder: 'tags, comma separated', 'aria-label': `Tags of ${g.label || 'the list'}`, on: { input: (e) => { g.tags = e.target.value.split(','); } } }, g.tags.join(', '));
+        const move = (d) => { const j = i + d; if (j < 0 || j >= lists.length) return; [lists[i], lists[j]] = [lists[j], lists[i]]; draw(); };
+        return h('div.tag-list', {},
+            h('div.tag-list-head', {}, name,
+                h('button.icon', { type: 'button', title: 'Up', disabled: i === 0, on: { click: () => move(-1) } }, '↑'),
+                h('button.icon', { type: 'button', title: 'Down', disabled: i === lists.length - 1, on: { click: () => move(1) } }, '↓'),
+                h('button.icon', { type: 'button', title: 'Remove the list', on: { click: () => { lists.splice(i, 1); draw(); } } }, '✕')),
+            h('div.tag-list-cats', {}, h('span.muted', { text: 'for ' }), cats),
+            tags);
+    };
+    const draw = () => body.replaceChildren(...lists.map(row), lists.length ? '' : h('p.muted', { text: 'No lists — add one.' }));
+    draw();
+    return new Promise((resolve) => {
+        const close = (v) => { overlay.remove(); resolve(v); };
+        async function save() {
+            try {
+                const res = await api('/api/media-tag-groups', { method: 'PUT', body: { groups: lists.map((g) => ({ ...g, tags: g.tags })) } });
+                store.config.mediaTagGroups = res.groups;
+                toast('Tag lists saved');
+                close(true);
+            } catch (err) { toast(err.message, 'warn', 6000); }
+        }
+        const overlay = h('div.overlay', {}, h('div.dialog', { role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Tag lists' },
+            h('h3', { text: 'Tag lists' }),
+            h('p.muted', { text: 'The tags to click beside an image’s tags, for the categories ticked. Tags are saved in lower case. Tags used twice or more show under “Often used” anyway.' }),
+            h('div.tag-lists-scroll', {}, body),
+            h('div.dialog-actions', {},
+                h('button.btn', { type: 'button', on: { click: () => { lists.push({ label: '', categories: ['characters'], tags: [] }); draw(); body.lastElementChild?.querySelector('input')?.focus(); } } }, '＋ Add list'),
+                h('span', { style: { flex: '1' } }),
+                h('button.btn', { type: 'button', on: { click: () => close(false) } }, 'Cancel'),
+                h('button.btn.primary', { type: 'button', on: { click: save } }, 'Save'))));
+        document.body.append(overlay);
+    });
+}
+
 // Tags to click beside the tags field: the groups of the category (server config mediaTagGroups: gender, age, ancestry)
 // and the tags used most often on images of that category. A click sets or removes the tag in the field (whatever its
 // case: "Human" counts as "human") and fires "change", so the autosaver saves it as if typed. Follows the field and
@@ -115,10 +158,12 @@ export function mediaView(app) {
     const count = h('span.count');
     const fileInput = h('input', { type: 'file', accept: 'image/*', multiple: true, hidden: true, on: { change: () => { const files = [...fileInput.files]; fileInput.value = ''; if (files.length) startUpload(files); } } });
     const uploadBtn = h('button.btn.primary.small', { type: 'button', on: { click: () => fileInput.click() } }, '＋ Upload');
+    const listsBtn = h('button.btn.small', { type: 'button', title: 'The tags to click beside an image’s tags',
+        on: { click: async () => { if (!canEdit()) return toast('Log in to change the tag lists', 'warn'); if (await editTagLists()) current?.redrawPicks?.(); } } }, 'Tag lists…');
     const progress = h('div.media-progress', { hidden: true }, h('div.media-progress-bar'), h('span.media-progress-text'));
     const grid = h('div.media-grid', { role: 'listbox', 'aria-label': 'Images' });
     const detail = h('section.detail.media-detail');
-    const listCol = h('div.media-col', {}, h('div.media-toolbar', {}, search, catSelect, uploadBtn, fileInput), progress, h('div.media-sub', {}, count, h('span.muted', { text: ' · drop image files here to upload' })), grid);
+    const listCol = h('div.media-col', {}, h('div.media-toolbar', {}, search, catSelect, uploadBtn, listsBtn, fileInput), progress, h('div.media-sub', {}, count, h('span.muted', { text: ' · drop image files here to upload' })), grid);
     const el = h('div.split.media-split', {}, listCol, detail);
 
     // dropping files on the library uploads them
@@ -234,7 +279,7 @@ export function mediaView(app) {
             h('div.grid', {}, h('label.field', {}, h('span.field-label', { text: 'Category' }), cat), h('label.field', {}, h('span.field-label', { text: 'Tags' }), tags)),
             ro ? null : picks.el);
         auto?.attach(form);
-        current = { track, save, flush: () => (auto ? auto.flush() : Promise.resolve(true)) };
+        current = { track, save, flush: () => (auto ? auto.flush() : Promise.resolve(true)), redrawPicks: picks.draw };
         async function remove() {
             const warn = used.length ? ` It is still shown by ${used.map((u) => u.name).join(', ')} — they would show a broken image.` : '';
             if (!(await confirmDialog(`Delete “${m.title || m.id}” and its files?${warn}`, { ok: 'Delete', danger: true }))) return;

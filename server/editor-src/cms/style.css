@@ -465,3 +465,12 @@ a.stat:hover { border-color: var(--accent); text-decoration: none; }
 .tag-pick:hover { border-color: var(--accent); }
 .tag-pick.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 @media (pointer: coarse) { .tag-pick { padding: 4px 11px; } }
+
+/* Media: "Tag lists…" (views/media.js editTagLists) */
+.tag-lists-scroll { overflow-y: auto; max-height: 60vh; }
+.tag-lists { display: grid; gap: 12px; }
+.tag-list { display: grid; gap: 6px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel-2); }
+.tag-list-head { display: flex; gap: 6px; align-items: center; }
+.tag-list-head input { flex: 1; font-weight: 600; }
+.tag-list-cats { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12.5px; align-items: center; }
+.tag-list-cat { display: inline-flex; gap: 4px; align-items: center; }

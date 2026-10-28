@@ -1,7 +1,7 @@
-// routes/media.js normalizeTags: how every tag is written
+// lib/tags.js normalizeTags: how every tag is written
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { normalizeTags } = require('../routes/media');
+const { normalizeTags } = require('../lib/tags');
 
 test('tags: lower case, trimmed, each once, from a list or a comma-separated text', () => {
     assert.deepEqual(normalizeTags(['Human', ' human ', 'Tabaxi', '', 'NPC']), ['human', 'tabaxi', 'npc']);
