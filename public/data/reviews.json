@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "b844e209a13c2f3ca67e180480c5a5d1ad348bb7",
+      "action": "update",
+      "type": "character",
+      "itemName": "Partriato Serinessa",
+      "user": "gm",
+      "timestamp": "2026-10-28T07:46:02.033Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-28T07:46:02.033Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: partriato_serinessa (by gm) - removed place of origin"
+    },
+    {
       "commitSha": "2c751c64aeeda61212de04276130928368285cec",
       "action": "update",
       "type": "character",
@@ -4656,5 +4669,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-28T07:45:35.148Z"
+  "lastUpdated": "2026-10-28T07:46:02.033Z"
 }
