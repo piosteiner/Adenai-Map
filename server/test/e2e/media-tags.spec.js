@@ -102,3 +102,21 @@ test('in the grid, an image without tags has a dot in its corner, a tagged one n
     const [taggedId] = entries.find(([, m]) => (m.tags || []).length);
     await expect(page.locator(`.media-card[data-id="${taggedId}"] .media-card-untagged`)).toHaveCount(0);
 });
+
+test('"No tags yet" shows only the images still to tag, also within a category, with their number', async ({ page }) => {
+    const lib = await (await page.request.get(`${CMS}/api/data/media-library.json`)).json();
+    const images = Object.values(lib.images);
+    const untagged = images.filter((m) => !(m.tags || []).length);
+    const chars = untagged.filter((m) => m.category === 'characters');
+    await page.goto(`${CMS}/v2/#/media`);
+    const tagsFilter = page.getByRole('combobox', { name: 'Tag filter' });
+    await expect(tagsFilter.locator('option[value="untagged"]')).toHaveText(`No tags yet (${untagged.length})`);
+    await tagsFilter.selectOption('untagged');
+    await expect(page.locator('.media-card')).toHaveCount(untagged.length);
+    await expect(page.locator('.media-card .media-card-untagged')).toHaveCount(untagged.length);
+    await page.getByRole('combobox', { name: 'Category' }).selectOption('characters');
+    await expect(page.locator('.media-card')).toHaveCount(chars.length);
+    await expect(tagsFilter.locator('option[value="untagged"]')).toHaveText(`No tags yet (${chars.length})`);
+    await tagsFilter.selectOption('');
+    await expect(page.locator('.media-card')).toHaveCount(images.filter((m) => m.category === 'characters').length);
+});

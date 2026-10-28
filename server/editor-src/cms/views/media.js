@@ -155,6 +155,12 @@ export function mediaView(app) {
     const search = h('input.search', { type: 'search', placeholder: 'Search title, caption, credits, tags…  ( / )', 'aria-label': 'Search media', on: { input: (e) => { query = e.target.value; draw(); } } });
     const catSelect = h('select', { 'aria-label': 'Category', on: { change: (e) => { category = e.target.value; draw(); } } },
         h('option', { value: '' }, 'All categories'), ...CATEGORIES.map((c) => h('option', { value: c }, c)));
+    // "No tags yet": the images still to tag, with the category above; the open one stays in the grid while it gets
+    // its tags, so the grid doesn't jump under the hand (it goes when another is opened)
+    let untaggedOnly = false;
+    const untaggedOpt = h('option', { value: 'untagged' }, 'No tags yet');
+    const tagSelect = h('select', { 'aria-label': 'Tag filter', on: { change: (e) => { untaggedOnly = e.target.value === 'untagged'; draw(); } } },
+        h('option', { value: '' }, 'Any tags'), untaggedOpt);
     const count = h('span.count');
     const fileInput = h('input', { type: 'file', accept: 'image/*', multiple: true, hidden: true, on: { change: () => { const files = [...fileInput.files]; fileInput.value = ''; if (files.length) startUpload(files); } } });
     const uploadBtn = h('button.btn.primary.small', { type: 'button', on: { click: () => fileInput.click() } }, '＋ Upload');
@@ -163,7 +169,7 @@ export function mediaView(app) {
     const progress = h('div.media-progress', { hidden: true }, h('div.media-progress-bar'), h('span.media-progress-text'));
     const grid = h('div.media-grid', { role: 'listbox', 'aria-label': 'Images' });
     const detail = h('section.detail.media-detail');
-    const listCol = h('div.media-col', {}, h('div.media-toolbar', {}, search, catSelect, uploadBtn, listsBtn, fileInput), progress, h('div.media-sub', {}, count, h('span.muted', { text: ' · drop image files here to upload' })), grid);
+    const listCol = h('div.media-col', {}, h('div.media-toolbar', {}, search, catSelect, tagSelect, uploadBtn, listsBtn, fileInput), progress, h('div.media-sub', {}, count, h('span.muted', { text: ' · drop image files here to upload' })), grid);
     const el = h('div.split.media-split', {}, listCol, detail);
 
     // dropping files on the library uploads them
@@ -179,6 +185,7 @@ export function mediaView(app) {
     const items = () => {
         const all = Object.values(store.media || {})
             .filter((m) => !category || m.category === category)
+            .filter((m) => !untaggedOnly || !(m.tags || []).length || m.id === selected)
             .sort((a, b) => String(b.uploadDate || '').localeCompare(String(a.uploadDate || '')));
         if (!query.trim()) return all;
         return window.AdenaiSearch.rank(all, query, (m) => ({ name: m.title || m.id, aliases: m.tags || [], fields: [
@@ -189,6 +196,8 @@ export function mediaView(app) {
 
     function draw() {
         const list = items();
+        // how many are still to tag, in the category chosen
+        untaggedOpt.textContent = `No tags yet (${Object.values(store.media || {}).filter((m) => (!category || m.category === category) && !(m.tags || []).length).length})`;
         count.textContent = `${list.length} image${list.length === 1 ? '' : 's'}`;
         grid.replaceChildren(...list.map((m) => h('button.media-card', {
             type: 'button', role: 'option', 'aria-selected': String(m.id === selected), title: m.title || m.caption || m.id,
