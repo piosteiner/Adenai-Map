@@ -4,6 +4,7 @@ module.exports = {
   apps: [{
     name: 'adenai-cms',
     script: 'server.js',
-    cwd: __dirname
+    cwd: __dirname,
+    kill_timeout: 8000 // time to commit the files waiting for GitHub (server.js, lib/github-cache.js)
   }]
 };

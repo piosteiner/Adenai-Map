@@ -135,6 +135,8 @@ data/protocol-comments.json
 data/protocol-settings.json
 data/protocol-live/
 data/pending-entries*.json
+# Data-file changes waiting to be committed to GitHub (lib/github-cache.js)
+data/github-pending/
 
 # Generated client files (written by journey/dynamics routes)
 client-sync/*

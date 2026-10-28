@@ -1,10 +1,16 @@
 // github.js - The one GitHub client of the CMS, with the data-file cache (github-cache.js).
 // Every route must use this instance: a second client would write files behind the cache's back.
+const path = require('path');
 const { Octokit } = require('@octokit/rest');
 const { withFileCache } = require('./github-cache');
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
-const cache = withFileCache(octokit);
+// The media library (1.3 MB, written on every tag or caption) and the review log: committed together, a few times an
+// hour, instead of once per change; waiting in data/github-pending meanwhile (lib/github-cache.js)
+const cache = withFileCache(octokit, console, {
+    deferred: ['public/data/media-library.json', 'public/data/reviews.json'],
+    journalDir: path.join(__dirname, '..', 'data', 'github-pending'),
+});
 
 module.exports = { octokit, cache };
 

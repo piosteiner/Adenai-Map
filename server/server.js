@@ -175,18 +175,14 @@ const httpServer = app.listen(PORT, '0.0.0.0', () => {
   console.log(`🧪 Script testing: Both workflows operational`);
 });
 
-// Graceful shutdown
-process.on('SIGTERM', () => {
-  console.log('🛑 Received SIGTERM, shutting down gracefully');
-  process.exit(0);
-});
-
 // Writing the session minutes together: WebSocket at /api/protocols/live (lib/protocol-live.js)
 const protocolLive = require('./lib/protocol-live');
 protocolLive.attach(httpServer, sessionMiddleware);
-// pm2 restarts with SIGINT: write the open live documents first
+// pm2 restarts with SIGINT: write the open live documents first, and commit the files waiting for GitHub (what doesn't
+// make it in time stays in data/github-pending and is committed after the start)
 for (const sig of ['SIGINT', 'SIGTERM']) {
   process.once(sig, async () => {
-    try { await protocolLive.flushAll(); } finally { process.exit(0); }
+    const giveUp = new Promise((r) => setTimeout(r, 6000));
+    try { await Promise.race([Promise.all([protocolLive.flushAll(), github.cache.flush().catch(() => {})]), giveUp]); } finally { process.exit(0); }
   });
 }

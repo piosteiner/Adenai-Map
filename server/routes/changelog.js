@@ -450,8 +450,20 @@ const KINDS = [
   [/^(location in characters|locations?)\b/i, 'location'], [/^(characters?|character movement|movements? for character|movement to character)\b/i, 'character'],
   [/^glossary term\b/i, 'term'], [/^media\b|new media files/i, 'media'], [/^links?\b/i, 'links'],
 ];
+// A commit of several changes (lib/github-cache.js: the media library and the review log are committed together):
+// "3 changes from the CMS" and a list "- <message> (×n)"
+const listedChanges = (message) => String(message).split('\n').filter((l) => l.startsWith('- ')).map((l) => l.slice(2).replace(/ \(×\d+\)$/, ''));
+const onlyReviews = (message) => /^Update review status/.test(message)
+  || (/^\d+ changes from the CMS/.test(message) && listedChanges(message).every((l) => /^Update review status/.test(l)));
+
 function describeCommit(message, author) {
   const first = String(message).split('\n')[0];
+  if (/^\d+ changes from the CMS/.test(first)) {
+    const lines = listedChanges(message).filter((l) => !/^Update review status/.test(l));
+    const media = lines.length && lines.every((l) => /media/i.test(l));
+    return { action: 'update', kind: media ? 'media' : 'other', item: `${lines.length} changes`, user: author,
+      detail: lines.map((l) => l.replace(/^Update metadata for media /, 'metadata ')).join(' · ') };
+  }
   const m = /^(Create|Add|Update|Delete|Reorder|Rename|Remove)\s+(.*?)(?::\s+(.*))?$/.exec(first);
   const out = { action: 'change', kind: 'other', item: '', user: author, detail: first };
   if (!m) return out;
@@ -479,7 +491,7 @@ router.get('/history', requireAuth, async (req, res) => {
     const { data: commits } = await octokit.rest.repos.listCommits({ owner: GITHUB_OWNER, repo: GITHUB_REPO, path: 'public/data', per_page: 100, page });
     const reviews = Object.fromEntries((await loadReviews()).reviews.map((r) => [r.commitSha, r]));
     const entries = commits
-      .filter((c) => !/^Update review status/.test(c.commit.message))
+      .filter((c) => !onlyReviews(c.commit.message))
       .map((c) => {
         const d = describeCommit(c.commit.message, c.commit.author.name);
         const r = reviews[c.sha];
