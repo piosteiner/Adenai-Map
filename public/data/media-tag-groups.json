@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "groups": [
+    {
+      "label": "Gender",
+      "categories": [
+        "characters"
+      ],
+      "tags": [
+        "male",
+        "female",
+        "nonbinary"
+      ]
+    },
+    {
+      "label": "Age",
+      "categories": [
+        "characters"
+      ],
+      "tags": [
+        "child",
+        "youth",
+        "elder"
+      ]
+    },
+    {
+      "label": "Ancestry",
+      "categories": [
+        "characters",
+        "creatures"
+      ],
+      "tags": [
+        "human",
+        "elf",
+        "half-elf",
+        "drow",
+        "dwarf",
+        "halfling",
+        "gnome",
+        "orc",
+        "goblin",
+        "kobold",
+        "tiefling",
+        "dragonborn",
+        "harengon",
+        "tabaxi",
+        "kenku",
+        "aarakocra",
+        "firbolg",
+        "lizardfolk",
+        "grung",
+        "centaur",
+        "faun",
+        "fairy",
+        "triton",
+        "yuan-ti",
+        "goliath",
+        "beastkin",
+        "half-orc",
+        "changeling",
+        "air-genasi",
+        "water-genasi",
+        "earth-genasi",
+        "fire-genasi"
+      ]
+    }
+  ],
+  "lastUpdated": "2026-10-28T19:54:06.166Z",
+  "updatedBy": "claude (for pio)"
+}
