@@ -195,7 +195,7 @@ export function mediaView(app) {
             dataset: { id: m.id }, on: { click: () => app.go(`media/${encodeURIComponent(m.id)}`) },
         }, h('img', { src: urlOf(m, 'thumbnail'), alt: '', loading: 'lazy' }),
             // no tags yet: a dot in the corner, so they can be found without opening each (gone once it has one)
-            (m.tags || []).length ? null : h('span.media-card-untagged', { title: 'No tags yet', 'aria-label': 'No tags yet' }),
+            (m.tags || []).length ? null : h('span.media-card-untagged', { role: 'img', title: 'No tags yet', 'aria-label': 'No tags yet' }),
             h('span.media-card-title', { text: m.title || m.caption || m.id }), h('span.media-card-cat', { text: m.category || '' }))));
         if (!list.length) grid.append(h('p.empty-note', { text: Object.keys(store.media || {}).length ? 'Nothing matches.' : 'No images yet.' }));
     }

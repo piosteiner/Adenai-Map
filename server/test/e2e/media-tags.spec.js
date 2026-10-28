@@ -19,7 +19,7 @@ test('clicking tags sets and removes them in the field, saved like typing', asyn
     const [id, image] = Object.entries(lib.images).find(([, m]) => m.category === 'characters');
     await page.goto(`${CMS}/v2/#/media/${encodeURIComponent(id)}`);
 
-    const tags = page.getByLabel('Tags');
+    const tags = page.getByLabel('Tags', { exact: true });
     await expect(tags).toBeVisible();
     for (const group of ['Gender', 'Age', 'Ancestry', 'Often used']) await expect(page.locator('.tag-pick-label', { hasText: group })).toBeVisible();
 
@@ -55,7 +55,7 @@ test('a location image offers only its often used tags, no character groups', as
     const lib = await (await page.request.get(`${CMS}/api/data/media-library.json`)).json();
     const [id] = Object.entries(lib.images).find(([, m]) => m.category === 'locations');
     await page.goto(`${CMS}/v2/#/media/${encodeURIComponent(id)}`);
-    await expect(page.getByLabel('Tags')).toBeVisible();
+    await expect(page.getByLabel('Tags', { exact: true })).toBeVisible();
     await expect(page.locator('.tag-pick-label', { hasText: 'Gender' })).toHaveCount(0);
 });
 
