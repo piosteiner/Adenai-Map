@@ -2894,7 +2894,9 @@
       "title": "Wanted Poster Luna",
       "caption": "",
       "credits": "drawn by Pio Gino Steiner",
-      "tags": [],
+      "tags": [
+        "vsuzh"
+      ],
       "uploadDate": "2025-09-07T19:04:40.125Z",
       "sizes": {
         "thumb": {
@@ -2930,7 +2932,7 @@
       },
       "fileSize": 1086663,
       "mimeType": "image/png",
-      "lastModified": "2025-09-07T19:15:06.003Z"
+      "lastModified": "2026-10-28T19:20:57.739Z"
     },
     "characters-gqm9fidr1pi9": {
       "id": "characters-gqm9fidr1pi9",
@@ -2938,7 +2940,9 @@
       "title": "Wanted Poster Ally",
       "caption": "",
       "credits": "drawn by Pio Gino Steiner",
-      "tags": [],
+      "tags": [
+        "vsuzh"
+      ],
       "uploadDate": "2025-09-07T19:04:55.439Z",
       "sizes": {
         "thumb": {
@@ -2974,7 +2978,7 @@
       },
       "fileSize": 885470,
       "mimeType": "image/png",
-      "lastModified": "2025-09-07T19:14:48.809Z"
+      "lastModified": "2026-10-28T19:20:59.201Z"
     },
     "characters-ejhjt2k1p4bj": {
       "id": "characters-ejhjt2k1p4bj",
@@ -39391,5 +39395,5 @@
       "lastModified": "2026-10-25T15:06:44.950Z"
     }
   },
-  "lastUpdated": "2026-10-28T19:20:56.342Z"
+  "lastUpdated": "2026-10-28T19:20:59.201Z"
 }
