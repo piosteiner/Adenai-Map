@@ -31149,7 +31149,7 @@
     "general-csmrue00sulh": {
       "id": "general-csmrue00sulh",
       "category": "general",
-      "title": "tiamat",
+      "title": "Tiamat",
       "caption": "",
       "credits": "Fizban's Treasury of Dragons, Wizards of the Coast",
       "tags": [
@@ -31190,7 +31190,8 @@
         }
       },
       "fileSize": 443914,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-28T18:50:47.298Z"
     },
     "characters-jzyqdmmvitsh": {
       "id": "characters-jzyqdmmvitsh",
@@ -38637,5 +38638,5 @@
       "lastModified": "2026-10-25T15:06:44.950Z"
     }
   },
-  "lastUpdated": "2026-10-28T18:47:06.004Z"
+  "lastUpdated": "2026-10-28T18:50:47.298Z"
 }
