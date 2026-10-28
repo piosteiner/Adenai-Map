@@ -109,7 +109,7 @@
         big.alt = '';
         big.src = bigUrl(img.src);
         big.onerror = () => { big.onerror = null; big.src = img.src; };
-        tip.replaceChildren(big, Object.assign(document.createElement('span'), { textContent: img.title }));
+        tip.replaceChildren(big); // the emote only, without its name
         const r = img.getBoundingClientRect();
         const above = r.top > 150; // else below the emote
         Object.assign(tip.style, {

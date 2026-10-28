@@ -40,3 +40,22 @@ test('a [[link]] in a place opens the linked character, the place stays open', a
     await expect(placePopup).toBeVisible(); // pinned: links can be followed in a chain
     expect(errors).toEqual([]);
 });
+
+test('an emote shows no name on hover: no title, the bigger image only', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' });
+    const name = await page.waitForFunction(() => window.AdenaiEmotes?.list?.()[0]?.name).then((h) => h.jsonValue());
+    // an emote in a text, as every text of the map renders it
+    await page.evaluate((n) => {
+        const box = Object.assign(document.createElement('div'), { id: 'emote-test', innerHTML: RichText.render(`hi :${n}:`) });
+        Object.assign(box.style, { position: 'fixed', top: '300px', left: '300px', zIndex: 99999, background: '#fff', padding: '10px' });
+        document.body.append(box);
+    }, name);
+    const emote = page.locator('#emote-test img.emote');
+    await expect(emote).toHaveCount(1);
+    await expect(emote).not.toHaveAttribute('title', /.*/);
+    await emote.hover();
+    const tip = page.locator('.emote-tip');
+    await expect(tip).toBeVisible();
+    await expect(tip.locator('img')).toHaveCount(1);
+    await expect(tip).toHaveText('');
+});

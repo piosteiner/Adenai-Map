@@ -593,9 +593,8 @@
 [data-theme="dark"] .link-card-tags span { background: rgba(167, 139, 250, 0.18); }
 
 /* an emote hovered (src/utils/emotes.js): bigger, with its name; over popups and panels */
-.emote-tip { position: fixed; z-index: 10050; display: grid; justify-items: center; gap: 4px; padding: 8px 10px 6px; border-radius: 8px; background: var(--card-bg, #fff); color: var(--text-primary, #222); border: 1px solid var(--border-color, rgba(127, 127, 127, 0.35)); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); pointer-events: none; }
+.emote-tip { position: fixed; z-index: 10050; display: grid; justify-items: center; padding: 8px; border-radius: 8px; background: var(--card-bg, #fff); color: var(--text-primary, #222); border: 1px solid var(--border-color, rgba(127, 127, 127, 0.35)); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); pointer-events: none; }
 .emote-tip img { display: block; height: 96px; max-width: 112px; object-fit: contain; }
-.emote-tip span { font-size: 12px; font-weight: 600; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* ":" emote suggestions in a plain text field (src/utils/emotes.js: AdenaiEmotes.suggest) */
 .emote-suggest { position: fixed; z-index: 10060; max-height: 260px; overflow-y: auto; margin: 0; padding: 4px; list-style: none; box-sizing: border-box; border: 1px solid var(--border-color, rgba(127, 127, 127, 0.35)); border-radius: 8px; background: var(--card-bg, #fff); color: var(--text-primary, #222); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); }
