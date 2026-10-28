@@ -4161,11 +4161,8 @@
       "id": "partriato_serinessa",
       "name": "Partriato Serinessa",
       "title": "Hüter der Insel und Host",
-      "placeOfOrigin": "Olecea",
-      "coordinates": [
-        916,
-        261
-      ],
+      "placeOfOrigin": "",
+      "coordinates": null,
       "description": "",
       "images": [
         "https://adenai-admin.piogino.ch/media/cd4vqdovgfaq-small.webp"
@@ -4189,7 +4186,7 @@
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2026-10-18T17:00:53.428Z",
-      "updatedAt": "2026-10-28T07:45:33.726Z"
+      "updatedAt": "2026-10-28T07:46:00.443Z"
     },
     {
       "id": "sylph",
@@ -4602,5 +4599,5 @@
       "updatedAt": "2026-10-28T07:45:04.454Z"
     }
   ],
-  "lastUpdated": "2026-10-28T07:45:33.726Z"
+  "lastUpdated": "2026-10-28T07:46:00.443Z"
 }
