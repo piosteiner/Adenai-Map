@@ -163,13 +163,17 @@ class MovementMarkers {
             const movementCount = movements.length;
             const pathColor = this.getCharacterPathColor(characterId);
             const hasNearbyLocations = nearbyLocations.length > 0;
+            // one journey point (here only because of a location dot): its number, not "1x" — and it is the marker
+            // itself, so only the location dots fan out
+            const single = movementCount === 1;
+            const label = single ? (movements[0].movement_nr || 0) + 1 : `${movementCount}x`;
 
             let markerHtml;
             if (hasNearbyLocations) {
                 // Show mixed content indicator
                 markerHtml = `
                     <div class="movement-marker cluster-marker mixed-cluster" style="${this.getMarkerStyles(pathColor)}">
-                        ${movementCount}x
+                        ${label}
                         <div class="location-indicator" style="
                             position: absolute;
                             bottom: -2px;
@@ -193,7 +197,7 @@ class MovementMarkers {
                 // Standard cluster marker
                 markerHtml = `
                     <div class="movement-marker cluster-marker" style="${this.getMarkerStyles(pathColor)}">
-                        ${movementCount}x
+                        ${label}
                     </div>
                 `;
             }
@@ -231,8 +235,10 @@ class MovementMarkers {
                 }, 500);
             });
             
-            // Add click event to bounce fanned markers as visual cue
+            // Add click event to bounce fanned markers as visual cue — a single journey point opens its popup, as
+            // its own marker does
             marker.on('click', () => {
+                if (single) { this.showMovementPopup(movements[0], characterName, label); return; }
                 if (marker._isFannedOut && marker._fanMarkers.length > 0) {
                     this.bounceAllFanMarkers(marker);
                 }
@@ -269,9 +275,10 @@ class MovementMarkers {
             const pathColor = this.getCharacterPathColor(characterId);
             
             // Combine movements and locations for spiral arrangement
+            // one journey point is the marker itself: only the location dots fan out
             const allItems = [
-                ...movements.map(m => ({ type: 'movement', data: m })),
-            ...nearbyLocations.map(l => ({ type: 'location', data: l }))
+                ...(movements.length > 1 ? movements.map(m => ({ type: 'movement', data: m })) : []),
+                ...nearbyLocations.map(l => ({ type: 'location', data: l }))
             ];
             
             // Track fan positions for popup placement

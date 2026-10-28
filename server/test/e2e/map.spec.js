@@ -59,3 +59,30 @@ test('an emote shows no name on hover: no title, the bigger image only', async (
     await expect(tip.locator('img')).toHaveCount(1);
     await expect(tip).toHaveText('');
 });
+
+test('a journey point beside a location dot shows its number (not "1x"), and only the location dot fans out', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' });
+    await page.waitForFunction(() => window.movementSystem?.movementMarkers?.some((m) => m.type === 'cluster' && m.movements.length === 1));
+    const result = await page.evaluate(async () => {
+        const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+        const all = window.movementSystem.movementMarkers.filter((m) => m.type === 'cluster');
+        const one = all.find((m) => m.movements.length === 1 && m.marker._nearbyLocations.length);
+        const many = all.find((m) => m.movements.length > 1);
+        const look = async (m) => {
+            MapUtils.addToMap(m.marker);
+            const text = m.marker.getElement().querySelector('.cluster-marker').firstChild.textContent.trim();
+            m.marker.fire('mouseover');
+            await wait(600);
+            const fans = m.marker._fanMarkers.map((f) => (f.getElement().querySelector('.fan-location-marker') ? 'location' : 'movement'));
+            m.marker.fire('mouseout');
+            return { text, fans, number: m.movements.length === 1 ? String((m.movements[0].movement_nr || 0) + 1) : null, count: m.movements.length, locations: m.marker._nearbyLocations.length };
+        };
+        return { one: await look(one), many: many ? await look(many) : null };
+    });
+    expect(result.one.text).toBe(result.one.number);
+    expect(result.one.fans).toEqual(Array(result.one.locations).fill('location'));
+    if (result.many) {
+        expect(result.many.text).toBe(`${result.many.count}x`);
+        expect(result.many.fans.filter((f) => f === 'movement')).toHaveLength(result.many.count);
+    }
+});
