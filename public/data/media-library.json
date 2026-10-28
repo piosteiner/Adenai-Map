@@ -33275,7 +33275,11 @@
       "title": "Eytan Karthright",
       "caption": "",
       "credits": "AI generated",
-      "tags": [],
+      "tags": [
+        "male",
+        "elder",
+        "orc"
+      ],
       "uploadDate": "2026-10-24T19:52:53.777Z",
       "sizes": {
         "thumb": {
@@ -33310,7 +33314,8 @@
         }
       },
       "fileSize": 932386,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-28T18:39:12.898Z"
     },
     "characters-6rk3m2ielsmr": {
       "id": "characters-6rk3m2ielsmr",
@@ -33318,7 +33323,10 @@
       "title": "Eliana Karthright",
       "caption": "",
       "credits": "AI generated",
-      "tags": [],
+      "tags": [
+        "elf",
+        "female"
+      ],
       "uploadDate": "2026-10-24T19:52:53.997Z",
       "sizes": {
         "thumb": {
@@ -33353,7 +33361,8 @@
         }
       },
       "fileSize": 934156,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-28T18:39:23.719Z"
     },
     "characters-m7adl2kvw3hf": {
       "id": "characters-m7adl2kvw3hf",
@@ -33361,7 +33370,9 @@
       "title": "Warforged",
       "caption": "",
       "credits": "Wizards of the Coast",
-      "tags": [],
+      "tags": [
+        "warforged"
+      ],
       "uploadDate": "2026-10-24T19:52:54.326Z",
       "sizes": {
         "thumb": {
@@ -33397,7 +33408,7 @@
       },
       "fileSize": 326119,
       "mimeType": "image/png",
-      "lastModified": "2026-10-24T19:53:28.028Z"
+      "lastModified": "2026-10-28T18:39:33.237Z"
     },
     "characters-sr50hmc3l519": {
       "id": "characters-sr50hmc3l519",
@@ -38598,5 +38609,5 @@
       "lastModified": "2026-10-25T15:06:44.950Z"
     }
   },
-  "lastUpdated": "2026-10-28T18:38:06.108Z"
+  "lastUpdated": "2026-10-28T18:39:33.237Z"
 }
