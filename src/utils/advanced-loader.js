@@ -31,7 +31,7 @@ class AdvancedLoader {
         // Progressive loading priorities
         priorities: {
             critical: ['locations', 'characters'],
-            important: ['journeys'],
+            important: [], // journeys: retired 2026-10-17 (character paths are computed in the browser) — loading them failed
             optional: ['reviews', 'media-library']
         },
         
@@ -68,7 +68,7 @@ class AdvancedLoader {
             }
             
             // Phase 2: Important data (background)
-            Logger.loading('⚡ Loading important data (journeys)...');
+            Logger.loading('⚡ Loading important data...');
             this.loadInBackground(this.config.priorities.important, results.important);
             
             // Phase 3: Optional data (lazy)

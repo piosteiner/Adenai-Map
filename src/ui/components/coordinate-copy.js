@@ -11,10 +11,8 @@ class CoordinateCopySystem {
     }
 
     init() {
-        // Wait for map to be ready
-        MapUtils.withMap(() => {
-            this.setupMapListeners();
-        });
+        // The map may not exist yet (this file loads before it): then the event below (quietly, not as an error)
+        if (MapUtils.isMapAvailable()) this.setupMapListeners();
         
         // Also listen for the map ready event as backup
         document.addEventListener('adenaiMapReady', () => {

@@ -447,3 +447,12 @@ a.stat:hover { border-color: var(--accent); text-decoration: none; }
     .grip { display: none; }
     .icon:disabled { opacity: .3; cursor: default; }
 }
+
+/* Quality (views/quality.js) */
+.quality h3 { font-size: 13px; margin: 12px 0 6px; font-weight: 600; }
+.quality-list { list-style: none; margin: 0 0 6px; padding: 0; }
+.quality-row { display: flex; align-items: center; gap: 8px; padding: 4px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.quality-text { flex: 1 1 260px; min-width: 0; font-size: 13px; }
+.quality-error h2 { color: var(--bad); }
+.quality-warning h2 { color: var(--warn); }
+.quality details summary { cursor: pointer; font-weight: 600; font-size: 14px; }

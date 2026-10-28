@@ -127,6 +127,7 @@ app.use('/api/glossary', glossaryRoutes); // terms that are neither characters n
 app.use('/api/emotes', require('./routes/emotes')); // :name: images (7TV sets and our own)
 app.use('/api/data', require('./routes/data')); // the map's data files from the cache, and a live channel for changes
 app.use('/api/pending', require('./routes/pending')); // entries proposed by the players, confirmed in the CMS
+app.use('/api/quality', require('./routes/quality')); // the Quality page's "OK" marks
 
 // Activity routes (uncomment when you have the activity routes file)
 // app.use('/api/activity', requireAuth, activityRoutes);

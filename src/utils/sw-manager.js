@@ -27,7 +27,15 @@ class SWManager {
     }
     
     // Register service worker
+    // Not registered (2026-10-28): the script lies under /public/, and a service worker may only control the folder it
+    // lies in unless the server sends "Service-Worker-Allowed", which GitHub Pages can't — so the registration for "/"
+    // always failed and the worker never ran. To use it, move it to the site root (and check what it caches: the
+    // map's ?v= busting assumes the browser's own cache).
     async register() {
+        return null;
+    }
+
+    async registerWorker() {
         if (!SWManager.isSupported) {
             Logger.warning('Service Worker not supported in this browser');
             return null;

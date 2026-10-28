@@ -18,6 +18,7 @@ import { mediaView } from './views/media';
 import { historyView } from './views/history';
 import { overviewView } from './views/overview';
 import { emotesView } from './views/emotes';
+import { qualityView } from './views/quality';
 
 // md-editor.js finds link targets through the classic CMS's modules: give it the same interface
 window.adminCharacters = { getCharacters: () => store.characters };
@@ -43,8 +44,9 @@ const AREAS = [
     { id: 'media', label: 'Media', icon: '🖼', count: () => Object.keys(store.media || {}).length },
     { id: 'emotes', label: 'Emotes', icon: '☺', count: () => Object.keys(store.emotes?.emotes || {}).length },
     { id: 'history', label: 'History', icon: '🕘', count: () => '' },
+    { id: 'quality', label: 'Quality', icon: '✓', count: () => '' },
 ];
-const VIEWS = { overview: overviewView, locations: locationsView, characters: charactersView, glossary: glossaryView, protocols: protocolsView, proposals: proposalsView, media: mediaView, emotes: emotesView, history: historyView };
+const VIEWS = { overview: overviewView, locations: locationsView, characters: charactersView, glossary: glossaryView, protocols: protocolsView, proposals: proposalsView, media: mediaView, emotes: emotesView, history: historyView, quality: qualityView };
 
 // Before leaving an entry: a view that saves by itself saves what is waiting (autosaver, form.js); true when nothing
 // is left unsaved — otherwise the guards below ask whether to discard (a save that failed, a new entry not created).

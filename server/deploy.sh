@@ -11,6 +11,7 @@ if [ "$(sha1sum package-lock.json)" != "$lock_before" ]; then
 fi
 
 node --check server.js
+npm test --silent >/dev/null 2>&1 || { echo "❌ Unit tests failed (npm test) — not restarted"; exit 1; }
 pm2 restart adenai-cms
 sleep 2
 curl -sf http://localhost:3001/health > /dev/null && echo "✅ Deployed and healthy" || { echo "❌ Health check failed: pm2 logs adenai-cms"; exit 1; }

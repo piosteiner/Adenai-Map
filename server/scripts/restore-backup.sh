@@ -22,7 +22,7 @@ done
 [ -f "$OFFSITE/server/config_users.js.gpg" ] && decrypt "$OFFSITE/server/config_users.js.gpg" "$TARGET/config/users.js"
 [ -f "$OFFSITE/server/.env.gpg" ] && decrypt "$OFFSITE/server/.env.gpg" "$TARGET/.env"
 install -d "$TARGET/data"
-for f in protocols.json protocol-settings.json protocols-deleted.json; do
+for f in protocols.json protocol-settings.json protocols-deleted.json pending-entries.json protocol-comments.json quality-ok.json; do
   if [ -f "$OFFSITE/server/data_$f.gpg" ]; then decrypt "$OFFSITE/server/data_$f.gpg" "$TARGET/data/$f"; fi
 done
 echo "restored $n media files and the server files into $TARGET"

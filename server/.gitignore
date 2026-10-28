@@ -137,6 +137,11 @@ data/protocol-live/
 data/pending-entries*.json
 # Data-file changes waiting to be committed to GitHub (lib/github-cache.js)
 data/github-pending/
+# The Quality page's "OK" marks (routes/quality.js)
+data/quality-ok.json
+
+# Browser test output (npx playwright test)
+test/e2e/.results/
 
 # Generated client files (written by journey/dynamics routes)
 client-sync/*
