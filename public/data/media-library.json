@@ -2986,7 +2986,10 @@
       "title": "Lord Remus",
       "caption": "",
       "credits": "AI Generated - GPT5",
-      "tags": [],
+      "tags": [
+        "male",
+        "human"
+      ],
       "uploadDate": "2025-09-07T19:05:25.177Z",
       "sizes": {
         "thumb": {
@@ -3021,7 +3024,8 @@
         }
       },
       "fileSize": 2790611,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-28T19:21:01.673Z"
     },
     "characters-njof8v5mhxne": {
       "id": "characters-njof8v5mhxne",
@@ -39395,5 +39399,5 @@
       "lastModified": "2026-10-25T15:06:44.950Z"
     }
   },
-  "lastUpdated": "2026-10-28T19:20:59.201Z"
+  "lastUpdated": "2026-10-28T19:21:01.673Z"
 }
