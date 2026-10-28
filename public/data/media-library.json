@@ -33232,7 +33232,11 @@
       "title": "Fitcher",
       "caption": "",
       "credits": "AI generated",
-      "tags": [],
+      "tags": [
+        "male",
+        "elder",
+        "human"
+      ],
       "uploadDate": "2026-10-24T19:52:53.549Z",
       "sizes": {
         "thumb": {
@@ -33267,7 +33271,8 @@
         }
       },
       "fileSize": 1391366,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-10-28T18:45:45.391Z"
     },
     "characters-wrztc7xj57ca": {
       "id": "characters-wrztc7xj57ca",
@@ -33459,7 +33464,11 @@
       "title": "f54ee4932f81b430d84aa96b2345668c",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/618541330118487975/",
-      "tags": [],
+      "tags": [
+        "male",
+        "elder",
+        "tiefling"
+      ],
       "uploadDate": "2026-10-24T19:56:12.044Z",
       "sizes": {
         "thumb": {
@@ -33494,7 +33503,8 @@
         }
       },
       "fileSize": 120671,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-28T18:46:01.435Z"
     },
     "creatures-l33j6a91fuds": {
       "id": "creatures-l33j6a91fuds",
@@ -33640,7 +33650,12 @@
       "title": "722a3fc4611e32b4977548b4781bd8c3",
       "caption": "",
       "credits": "https://ch.pinterest.com/pin/1025765252648244875/",
-      "tags": [],
+      "tags": [
+        "male",
+        "elder",
+        "human",
+        "wizard"
+      ],
       "uploadDate": "2026-10-24T20:02:38.590Z",
       "sizes": {
         "thumb": {
@@ -33675,7 +33690,8 @@
         }
       },
       "fileSize": 181800,
-      "mimeType": "image/jpeg"
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-10-28T18:47:06.004Z"
     },
     "characters-nnn3xknmh5ng": {
       "id": "characters-nnn3xknmh5ng",
@@ -38621,5 +38637,5 @@
       "lastModified": "2026-10-25T15:06:44.950Z"
     }
   },
-  "lastUpdated": "2026-10-28T18:42:47.801Z"
+  "lastUpdated": "2026-10-28T18:47:06.004Z"
 }
