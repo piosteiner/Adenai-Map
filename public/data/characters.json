@@ -4161,8 +4161,11 @@
       "id": "partriato_serinessa",
       "name": "Partriato Serinessa",
       "title": "Hüter der Insel und Host",
-      "placeOfOrigin": "",
-      "coordinates": null,
+      "placeOfOrigin": "Serenissa",
+      "coordinates": [
+        741,
+        769
+      ],
       "description": "",
       "images": [
         "https://adenai-admin.piogino.ch/media/cd4vqdovgfaq-small.webp"
@@ -4174,9 +4177,19 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "currentLocation": null,
+      "currentLocation": {
+        "location": "Serenissa",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          741,
+          769
+        ],
+        "notes": "Location set based on place of origin"
+      },
       "createdAt": "2026-10-18T17:00:53.428Z",
-      "updatedAt": "2026-10-18T17:01:48.879Z"
+      "updatedAt": "2026-10-28T07:45:19.093Z"
     },
     {
       "id": "sylph",
@@ -4589,5 +4602,5 @@
       "updatedAt": "2026-10-28T07:45:04.454Z"
     }
   ],
-  "lastUpdated": "2026-10-28T07:45:04.454Z"
+  "lastUpdated": "2026-10-28T07:45:19.093Z"
 }
