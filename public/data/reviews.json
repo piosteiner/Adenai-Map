@@ -2,6 +2,123 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "9901b48d14416ac155e310d62dd9bd3a2cbc88b9",
+      "action": "update",
+      "type": "character",
+      "itemName": "Vesper Serinessa",
+      "user": "gm",
+      "timestamp": "2026-10-29T08:32:04.773Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-29T08:32:04.773Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vesper_serinessa (by gm) - updated description"
+    },
+    {
+      "commitSha": "011125f4f972133f230f27f5915726568d0b748e",
+      "action": "update",
+      "type": "character",
+      "itemName": "Vesper Serinessa",
+      "user": "gm",
+      "timestamp": "2026-10-29T08:31:16.579Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-29T08:31:16.579Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vesper_serinessa (by gm) - updated description"
+    },
+    {
+      "commitSha": "9af8e9e5da8d7138edbce0ccfb6f5a1ef7b469b4",
+      "action": "update",
+      "type": "character",
+      "itemName": "Vesper Serinessa",
+      "user": "gm",
+      "timestamp": "2026-10-29T08:31:01.075Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-29T08:31:01.075Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vesper_serinessa (by gm) - updated description"
+    },
+    {
+      "commitSha": "d3411e5d4fddc0cea23a777001f60a7a7fd6aec6",
+      "action": "update",
+      "type": "character",
+      "itemName": "Vesper Serinessa",
+      "user": "gm",
+      "timestamp": "2026-10-29T08:30:13.556Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-29T08:30:13.556Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vesper_serinessa (by gm) - updated description"
+    },
+    {
+      "commitSha": "87fd9014c59520f985aa6d164eff8c8dbc4b3a6a",
+      "action": "update",
+      "type": "character",
+      "itemName": "Vesper Serinessa",
+      "user": "gm",
+      "timestamp": "2026-10-29T08:29:58.385Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-29T08:29:58.385Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vesper_serinessa (by gm) - updated description"
+    },
+    {
+      "commitSha": "76e1ed69d072fffb2c2dfe5b1fbc257fc0ff6e03",
+      "action": "update",
+      "type": "character",
+      "itemName": "Vesper Serinessa",
+      "user": "gm",
+      "timestamp": "2026-10-29T08:29:36.666Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-29T08:29:36.666Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vesper_serinessa (by gm) - updated description"
+    },
+    {
+      "commitSha": "229d5c05d9d8acb3c77e1cad96ce810d51ddc835",
+      "action": "update",
+      "type": "character",
+      "itemName": "Vesper Serinessa",
+      "user": "gm",
+      "timestamp": "2026-10-29T08:29:28.774Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-29T08:29:28.774Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vesper_serinessa (by gm) - added description"
+    },
+    {
+      "commitSha": "326c0374b7011bfe949732cbd435da3cc0a3f725",
+      "action": "update",
+      "type": "character",
+      "itemName": "Vesper Serinessa",
+      "user": "gm",
+      "timestamp": "2026-10-29T08:28:48.990Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-29T08:28:48.990Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vesper_serinessa (by gm) - added place of origin"
+    },
+    {
+      "commitSha": "1b78534be622dc69e9d9851eb00bb1933e0bbbee",
+      "action": "update",
+      "type": "character",
+      "itemName": "Vesper Serinessa",
+      "user": "gm",
+      "timestamp": "2026-10-29T08:28:39.733Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-29T08:28:39.733Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: vesper_serinessa (by gm) - changed relationship to friendly"
+    },
+    {
       "commitSha": "ba2065c63ee2d945754beee3ce3c0c0f0d8d0196",
       "action": "update",
       "type": "character",
@@ -4695,5 +4812,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-29T08:27:24.138Z"
+  "lastUpdated": "2026-10-29T08:32:04.773Z"
 }
