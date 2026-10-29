@@ -2,6 +2,19 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "ba2065c63ee2d945754beee3ce3c0c0f0d8d0196",
+      "action": "update",
+      "type": "character",
+      "itemName": "Fina Serinessa und Fino",
+      "user": "gm",
+      "timestamp": "2026-10-29T08:27:24.138Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-10-29T08:27:24.138Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: fina_serinessa_und_fino (by gm) - added description"
+    },
+    {
       "commitSha": "8bd67dd91ae414c3ad98d12defdca5ad1c7c6aaa",
       "action": "update",
       "type": "location",
@@ -4682,5 +4695,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-28T18:31:43.202Z"
+  "lastUpdated": "2026-10-29T08:27:24.138Z"
 }
