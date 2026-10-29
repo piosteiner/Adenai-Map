@@ -4141,8 +4141,11 @@
       "id": "vesper_serinessa",
       "name": "Vesper Serinessa",
       "title": "",
-      "placeOfOrigin": "",
-      "coordinates": null,
+      "placeOfOrigin": "Serenissa",
+      "coordinates": [
+        741,
+        769
+      ],
       "description": "",
       "images": [
         "https://adenai-admin.piogino.ch/media/22szoql6f0rp-small.webp"
@@ -4154,9 +4157,19 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "currentLocation": null,
+      "currentLocation": {
+        "location": "Serenissa",
+        "date": "5663-06-03",
+        "dateStart": "5663-06-03",
+        "dateEnd": null,
+        "coordinates": [
+          741,
+          769
+        ],
+        "notes": "Location set based on place of origin"
+      },
       "createdAt": "2026-10-18T16:44:08.887Z",
-      "updatedAt": "2026-10-29T08:28:38.363Z"
+      "updatedAt": "2026-10-29T08:28:47.419Z"
     },
     {
       "id": "partriato_serinessa",
@@ -4600,5 +4613,5 @@
       "updatedAt": "2026-10-28T07:45:04.454Z"
     }
   ],
-  "lastUpdated": "2026-10-29T08:28:38.363Z"
+  "lastUpdated": "2026-10-29T08:28:47.420Z"
 }
