@@ -4150,13 +4150,13 @@
       "image": "https://adenai-admin.piogino.ch/media/22szoql6f0rp-small.webp",
       "status": "alive",
       "faction": "",
-      "relationship": "neutral",
+      "relationship": "friendly",
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2026-10-18T16:44:08.887Z",
-      "updatedAt": "2026-10-29T08:28:26.341Z"
+      "updatedAt": "2026-10-29T08:28:38.363Z"
     },
     {
       "id": "partriato_serinessa",
@@ -4600,5 +4600,5 @@
       "updatedAt": "2026-10-28T07:45:04.454Z"
     }
   ],
-  "lastUpdated": "2026-10-29T08:28:26.341Z"
+  "lastUpdated": "2026-10-29T08:28:38.363Z"
 }
