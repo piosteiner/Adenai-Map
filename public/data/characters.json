@@ -4146,7 +4146,7 @@
         741,
         769
       ],
-      "description": "Schüler vom alten Meister [[Anselm Halloran]] und möglicherweise sein Sohn?\n[[Fina Serinessa und Fino]]",
+      "description": "Schüler vom alten Meister [[Anselm Halloran]] und möglicherweise sein Sohn?\n[[Fina Serinessa und Fino|Fina]] ist seine beste Freundin und emotionale Stütze auf der Insel, dafür hat er ihr versprochen sie ",
       "images": [
         "https://adenai-admin.piogino.ch/media/22szoql6f0rp-small.webp"
       ],
@@ -4169,7 +4169,7 @@
         "notes": "Location set based on place of origin"
       },
       "createdAt": "2026-10-18T16:44:08.887Z",
-      "updatedAt": "2026-10-29T08:30:12.030Z"
+      "updatedAt": "2026-10-29T08:30:59.514Z"
     },
     {
       "id": "partriato_serinessa",
@@ -4613,5 +4613,5 @@
       "updatedAt": "2026-10-28T07:45:04.454Z"
     }
   ],
-  "lastUpdated": "2026-10-29T08:30:12.030Z"
+  "lastUpdated": "2026-10-29T08:30:59.514Z"
 }
