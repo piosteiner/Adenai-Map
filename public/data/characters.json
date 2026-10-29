@@ -4551,7 +4551,7 @@
         741,
         769
       ],
-      "description": "",
+      "description": "Fina hat eine enge Freundschaft mit [[Versper Serinessa]] und ermutigt ihn immer wieder. dafür ist Fino immer für sie da, wenn Fina mal Aufmunterung braucht.",
       "images": [
         "https://adenai-admin.piogino.ch/media/gorw9003jana-small.webp"
       ],
@@ -4562,8 +4562,6 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
-      "createdAt": "2026-10-25T12:24:12.372Z",
-      "updatedAt": "2026-10-25T12:24:12.372Z",
       "currentLocation": {
         "location": "Serenissa",
         "date": "5663-06-03",
@@ -4573,8 +4571,10 @@
           741,
           769
         ],
-        "notes": "Initial location based on place of origin"
-      }
+        "notes": "Location set based on place of origin"
+      },
+      "createdAt": "2026-10-25T12:24:12.372Z",
+      "updatedAt": "2026-10-29T08:27:22.604Z"
     },
     {
       "id": "_flechtenmann_",
@@ -4599,5 +4599,5 @@
       "updatedAt": "2026-10-28T07:45:04.454Z"
     }
   ],
-  "lastUpdated": "2026-10-28T07:46:00.443Z"
+  "lastUpdated": "2026-10-29T08:27:22.619Z"
 }
