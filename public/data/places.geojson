@@ -1135,7 +1135,7 @@
       "type": "Feature",
       "properties": {
         "name": "Serenissa",
-        "description": "Serinessa ist in obere und untere Stadt unterteilt. In der unteren Stadt leben die ständigen Bediensteten und die Serinessa Kinder. Die obere Stadt ist rein den geladenen Gästen vorbehalten.\nHier lebt seit vielen Jahren der alte Magier [[Anselm Halloran]], er scheint die Insel nie zu verlassen. Zu seinen Schüler:innen gehört [[Versper Serinessa]]. Seine Freundin ist [[Fina Serinessa und Fino]].\n[[Partriato Serinessa]] leitet die Insel.",
+        "description": "Serinessa ist in obere und untere Stadt unterteilt. In der unteren Stadt leben die ständigen Bediensteten und die Serinessa Kinder. Die obere Stadt ist rein den geladenen Gästen vorbehalten.\nHier lebt seit vielen Jahren der alte Magier [[Anselm Halloran]], er scheint die Insel nie zu verlassen. Zu seinen Schüler:innen gehört [[Vesper Serinessa]]. Seine Freundin ist [[Fina Serinessa und Fino]].\n[[Partriato Serinessa]] leitet die Insel.",
         "contentUrl": null,
         "image": "https://adenai-admin.piogino.ch/media/tzt0yqpqftcg-small.webp",
         "region": "western_adenai",
@@ -1322,5 +1322,5 @@
       }
     }
   ],
-  "lastUpdated": "2026-10-25T11:45:13.345Z"
+  "lastUpdated": "2026-10-29T08:28:29.133Z"
 }
