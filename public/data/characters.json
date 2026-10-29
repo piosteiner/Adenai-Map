@@ -4138,8 +4138,8 @@
       "updatedAt": "2026-10-18T04:43:34.390Z"
     },
     {
-      "id": "versper_serinessa",
-      "name": "Versper Serinessa",
+      "id": "vesper_serinessa",
+      "name": "Vesper Serinessa",
       "title": "",
       "placeOfOrigin": "",
       "coordinates": null,
@@ -4154,8 +4154,9 @@
       "firstMet": "",
       "notes": "",
       "movementHistory": [],
+      "currentLocation": null,
       "createdAt": "2026-10-18T16:44:08.887Z",
-      "updatedAt": "2026-10-18T16:44:08.887Z"
+      "updatedAt": "2026-10-29T08:28:26.341Z"
     },
     {
       "id": "partriato_serinessa",
@@ -4551,7 +4552,7 @@
         741,
         769
       ],
-      "description": "Fina hat eine enge Freundschaft mit [[Versper Serinessa]] und ermutigt ihn immer wieder. dafür ist Fino immer für sie da, wenn Fina mal Aufmunterung braucht.",
+      "description": "Fina hat eine enge Freundschaft mit [[Vesper Serinessa]] und ermutigt ihn immer wieder. dafür ist Fino immer für sie da, wenn Fina mal Aufmunterung braucht.",
       "images": [
         "https://adenai-admin.piogino.ch/media/gorw9003jana-small.webp"
       ],
@@ -4599,5 +4600,5 @@
       "updatedAt": "2026-10-28T07:45:04.454Z"
     }
   ],
-  "lastUpdated": "2026-10-29T08:27:22.619Z"
+  "lastUpdated": "2026-10-29T08:28:26.341Z"
 }
