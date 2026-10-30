@@ -40526,7 +40526,53 @@
       "fileSize": 443364,
       "mimeType": "image/jpeg",
       "lastModified": "2026-10-25T15:06:44.950Z"
+    },
+    "characters-phodrh68yzu8": {
+      "id": "characters-phodrh68yzu8",
+      "category": "characters",
+      "title": "sbcd_06d_HlbnNF",
+      "caption": "",
+      "credits": "https://na.finalfantasyxiv.com/lodestone/topics/detail/96e9dee060ada88b8105b07b99ee455445be2cad",
+      "tags": [
+        "female",
+        "dragonborn"
+      ],
+      "uploadDate": "2026-10-30T21:11:20.188Z",
+      "sizes": {
+        "thumb": {
+          "filename": "phodrh68yzu8-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/phodrh68yzu8-thumb.webp",
+          "width": 150,
+          "height": 150
+        },
+        "small": {
+          "filename": "phodrh68yzu8-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/phodrh68yzu8-small.webp",
+          "width": 300,
+          "height": 300
+        },
+        "medium": {
+          "filename": "phodrh68yzu8-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/phodrh68yzu8-medium.webp",
+          "width": 600,
+          "height": 600
+        },
+        "large": {
+          "filename": "phodrh68yzu8-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/phodrh68yzu8-large.webp",
+          "width": 1200,
+          "height": 1200
+        },
+        "original": {
+          "filename": "phodrh68yzu8-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/phodrh68yzu8-original.webp",
+          "width": 1300,
+          "height": 1300
+        }
+      },
+      "fileSize": 2091502,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-10-28T20:09:38.773Z"
+  "lastUpdated": "2026-10-30T21:11:20.198Z"
 }
