@@ -40630,7 +40630,100 @@
       "fileSize": 360657,
       "mimeType": "image/jpeg",
       "lastModified": "2026-11-08T00:36:13.850Z"
+    },
+    "creatures-9w21oxehzjy4": {
+      "id": "creatures-9w21oxehzjy4",
+      "category": "creatures",
+      "title": "Ithuârath",
+      "caption": "",
+      "credits": "Flee, Mortals!, pg. 202",
+      "tags": [
+        "god",
+        "void"
+      ],
+      "uploadDate": "2026-11-08T00:49:06.448Z",
+      "sizes": {
+        "thumb": {
+          "filename": "9w21oxehzjy4-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9w21oxehzjy4-thumb.webp",
+          "width": 121,
+          "height": 150
+        },
+        "small": {
+          "filename": "9w21oxehzjy4-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9w21oxehzjy4-small.webp",
+          "width": 241,
+          "height": 300
+        },
+        "medium": {
+          "filename": "9w21oxehzjy4-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9w21oxehzjy4-medium.webp",
+          "width": 482,
+          "height": 600
+        },
+        "large": {
+          "filename": "9w21oxehzjy4-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9w21oxehzjy4-large.webp",
+          "width": 804,
+          "height": 1000
+        },
+        "original": {
+          "filename": "9w21oxehzjy4-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/9w21oxehzjy4-large.webp",
+          "width": 804,
+          "height": 1000
+        }
+      },
+      "fileSize": 483898,
+      "mimeType": "image/jpeg",
+      "lastModified": "2026-11-08T00:49:12.778Z"
+    },
+    "creatures-auj56gq9k2r6": {
+      "id": "creatures-auj56gq9k2r6",
+      "category": "creatures",
+      "title": "unspeakable horror",
+      "caption": "",
+      "credits": "Ravenloft: The Horrors Within",
+      "tags": [
+        "void"
+      ],
+      "uploadDate": "2026-11-08T00:49:37.293Z",
+      "sizes": {
+        "thumb": {
+          "filename": "auj56gq9k2r6-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/auj56gq9k2r6-thumb.webp",
+          "width": 150,
+          "height": 101
+        },
+        "small": {
+          "filename": "auj56gq9k2r6-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/auj56gq9k2r6-small.webp",
+          "width": 300,
+          "height": 202
+        },
+        "medium": {
+          "filename": "auj56gq9k2r6-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/auj56gq9k2r6-medium.webp",
+          "width": 600,
+          "height": 404
+        },
+        "large": {
+          "filename": "auj56gq9k2r6-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/auj56gq9k2r6-large.webp",
+          "width": 1000,
+          "height": 674
+        },
+        "original": {
+          "filename": "auj56gq9k2r6-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/auj56gq9k2r6-large.webp",
+          "width": 1000,
+          "height": 674
+        }
+      },
+      "fileSize": 654439,
+      "mimeType": "image/png",
+      "lastModified": "2026-11-08T00:49:57.280Z"
     }
   },
-  "lastUpdated": "2026-11-08T00:43:30.660Z"
+  "lastUpdated": "2026-11-08T00:49:57.280Z"
 }
