@@ -39,7 +39,9 @@ function combinedMessage(messages) {
 }
 
 function withFileCache(octokit, log = console, options = {}) {
-    const { deferred = [], journalDir = null, quietMs = QUIET_MS, maxWaitMs = MAX_WAIT_MS } = options;
+    const { deferred = [], journalDir = null, quietMs = QUIET_MS, maxWaitMs = MAX_WAIT_MS, readOnly = false } = options;
+    // readOnly (a test instance): every write refused, nothing committed
+    const refuse = (p) => { throw Object.assign(new Error(`read-only: ${p.path || 'GitHub'} is not written`), { status: 503 }); };
     const events = new EventEmitter();
     events.setMaxListeners(0);
     const repos = octokit.rest.repos;
@@ -219,13 +221,14 @@ function withFileCache(octokit, log = console, options = {}) {
     }
     function flush() {
         clearTimeout(timer);
-        if (!dirty.size) return Promise.resolve();
+        if (!dirty.size || readOnly) return Promise.resolve();
         const job = writes.then(flushNow);
         writes = job.catch((err) => log.error?.(`github-cache: commit of the waiting files failed: ${err.message}`));
         return job.finally(schedule);
     }
 
     repos.createOrUpdateFileContents = async (params) => {
+        if (readOnly) refuse(params);
         if (isDeferred(params) && params.sha) return deferWrite(params);
         try {
             const res = await serialPut(params);
@@ -244,6 +247,7 @@ function withFileCache(octokit, log = console, options = {}) {
     };
 
     repos.deleteFile = async (params) => {
+        if (readOnly) refuse(params);
         files.delete(keyOf(params));
         commitCache = new Map();
         return del(params);

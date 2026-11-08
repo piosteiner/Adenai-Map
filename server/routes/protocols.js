@@ -28,12 +28,12 @@ const bcrypt = require('bcryptjs');
 const store = require('../lib/protocol-store');
 const comments = require('../lib/protocol-comments');
 const protocolLive = require('../lib/protocol-live');
-const { requireAuth } = require('../middleware/auth');
+const { requireAuth, isGm } = require('../middleware/auth');
 
 const router = express.Router();
 const { makeToken, tokenValid } = require('../lib/protocol-auth');
 
-const cmsUser = (req) => (req.session?.authenticated ? (req.session.displayName || req.session.username || 'CMS') : null);
+const cmsUser = (req) => (isGm(req) ? (req.session.displayName || req.session.username || 'CMS') : null);
 
 // CMS login, or a valid protocol token from the map
 async function requireAccess(req, res, next) {

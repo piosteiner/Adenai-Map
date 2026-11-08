@@ -1,5 +1,6 @@
 const express = require('express');
 const { validateUser, getUserInfo } = require('../config/users');
+const { GM_ROLES, isGm } = require('../middleware/auth');
 const router = express.Router();
 
 // Login route
@@ -12,6 +13,12 @@ router.post('/login', (req, res) => {
   
   console.log('🔍 Validation result:', user);
   
+  // the CMS is the GM's: another account is refused (its password may be right)
+  if (user && !GM_ROLES.includes(user.role)) {
+    console.log('⛔ Login refused (not the GM):', user.displayName);
+    return res.status(403).json({ success: false, message: 'The CMS is for the GM only.' });
+  }
+
   if (user) {
     req.session.authenticated = true;
     req.session.username = user.username;
@@ -47,11 +54,13 @@ router.post('/logout', (req, res) => {
 });
 
 // Auth status check
+// Auth status check — logged in means: as the GM (a player's session from before counts as none)
 router.get('/auth-status', (req, res) => {
+  const gm = isGm(req);
   res.json({
-    authenticated: !!(req.session && req.session.authenticated),
-    username: req.session?.displayName || req.session?.username || null,
-    role: req.session?.role || null
+    authenticated: gm,
+    username: gm ? (req.session.displayName || req.session.username) : null,
+    role: gm ? req.session.role : null
   });
 });
 

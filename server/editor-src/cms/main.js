@@ -152,8 +152,7 @@ function loginDialog() {
 async function logout() {
     if (!(await settle()) && !(await (await import('./dom')).confirmDialog('Log out and discard the unsaved changes?', { ok: 'Log out', danger: true }))) return;
     await api('/api/logout', { method: 'POST' }).catch(() => {});
-    await reload('auth'); if (store.auth.authenticated) await loadPending(); else store.pending = [];
-    route(true);
+    location.reload(); // back to the login form, nothing of the data left on the page
 }
 
 // ---------- routing ----------
@@ -215,7 +214,38 @@ installHoverPreview();
 window.DateField.observe(document.body);
 main.append(h('div.placeholder', {}, h('p', { text: 'Loading…' })));
 app.drawTabs = () => drawTabs();
-loadAll()
-    .then(() => (store.auth.authenticated ? loadPending() : null))
-    .then(() => route(true))
+// The CMS is the GM's (server: middleware/auth.js): without the GM's login nothing is loaded — no data, no
+// images — only this form; logged in, the page starts afresh
+function showGate() {
+    document.body.classList.add('locked');
+    const user = h('input', { autocomplete: 'username', required: true, 'aria-label': 'User' });
+    const pass = h('input', { type: 'password', autocomplete: 'current-password', required: true, 'aria-label': 'Password' });
+    const err = h('p.error', { hidden: true, role: 'alert' });
+    const form = h('form.gate-form', { on: { submit: async (e) => {
+        e.preventDefault();
+        err.hidden = true;
+        try {
+            await api('/api/login', { method: 'POST', body: { username: user.value, password: pass.value } });
+            location.reload();
+        } catch (e2) {
+            err.textContent = e2.status === 401 ? 'Wrong user name or password' : e2.message;
+            err.hidden = false;
+        }
+    } } },
+    h('h2', { text: 'Adenai CMS' }),
+    h('p.muted', { text: 'For the GM only. Log in to continue.' }),
+    h('label.field', {}, h('span.field-label', { text: 'User' }), user),
+    h('label.field', {}, h('span.field-label', { text: 'Password' }), pass), err,
+    h('button.btn.primary', { type: 'submit' }, 'Log in'));
+    main.replaceChildren(h('div.gate', {}, form));
+    user.focus();
+}
+
+api('/api/auth-status')
+    .then((auth) => {
+        if (!auth.authenticated) return showGate();
+        return loadAll()
+            .then(() => loadPending())
+            .then(() => route(true));
+    })
     .catch((err) => main.replaceChildren(h('div.placeholder', {}, h('p.error', { text: `Could not load the data: ${err.message}` }))));

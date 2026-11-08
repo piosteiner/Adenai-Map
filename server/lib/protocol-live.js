@@ -15,6 +15,7 @@
 // Access: a CMS login (session cookie, checked on upgrade) or the protocol token, sent as the first message
 // { t: 'auth', token } — browsers can't set headers on WebSockets, and a token in the URL would end up in logs.
 // Only pages of the CMS and the map may connect (Origin check against cross-site WebSocket hijacking).
+const { isGm } = require('../middleware/auth');
 const { WebSocketServer } = require('ws');
 const Y = require('yjs');
 const awarenessProtocol = require('y-protocols/awareness');
@@ -216,7 +217,7 @@ function attach(server, sessionMiddleware) {
             sessionMiddleware(req, {}, () => {
                 wss.handleUpgrade(req, socket, head, (ws) => {
                     const s = req.session;
-                    const conn = { ws, alive: true, clients: new Map(), user: s?.authenticated ? { name: s.displayName || s.username, via: 'cms' } : null };
+                    const conn = { ws, alive: true, clients: new Map(), user: isGm(req) ? { name: s.displayName || s.username, via: 'cms' } : null }; // the GM's login only
                     if (conn.user) send(conn, { t: 'ready' });
                     // a map client has 5 s to authenticate with its token
                     const authTimer = setTimeout(() => { if (!conn.user) ws.close(4401, 'locked'); }, 5000);

@@ -9,10 +9,15 @@ const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 // hour, instead of once per change; waiting in data/github-pending meanwhile (lib/github-cache.js). Only in the CMS
 // server itself (server.js sets ADENAI_CMS_SERVER): a test or a script that loads this client must not take over the
 // server's waiting changes — there, writes go to GitHub at once.
-const cache = withFileCache(octokit, console, process.env.ADENAI_CMS_SERVER ? {
-    deferred: ['public/data/media-library.json', 'public/data/reviews.json'],
-    journalDir: path.join(__dirname, '..', 'data', 'github-pending'),
-} : {});
+// A test instance (server/test/e2e/cms-test-server.cjs): ADENAI_JOURNAL_DIR, a journal of its own;
+// ADENAI_READ_ONLY, nothing is written to GitHub at all.
+const cache = withFileCache(octokit, console, {
+    ...(process.env.ADENAI_CMS_SERVER ? {
+        deferred: ['public/data/media-library.json', 'public/data/reviews.json'],
+        journalDir: process.env.ADENAI_JOURNAL_DIR || path.join(__dirname, '..', 'data', 'github-pending'),
+    } : {}),
+    readOnly: !!process.env.ADENAI_READ_ONLY,
+});
 
 module.exports = { octokit, cache };
 

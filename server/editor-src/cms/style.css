@@ -475,3 +475,10 @@ a.stat:hover { border-color: var(--accent); text-decoration: none; }
 .tag-list-head input { flex: 1; font-weight: 600; }
 .tag-list-cats { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12.5px; align-items: center; }
 .tag-list-cat { display: inline-flex; gap: 4px; align-items: center; }
+
+/* Locked: without the GM's login only the login form (main.js showGate) */
+body.locked .tabs, body.locked .user, body.locked .topbar .btn { display: none; }
+.gate { display: flex; align-items: center; justify-content: center; min-height: 70vh; padding: 20px; }
+.gate-form { display: grid; gap: 12px; width: min(340px, 100%); padding: 22px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+.gate-form h2 { margin: 0; font-size: 18px; }
+.gate-form p { margin: 0; }

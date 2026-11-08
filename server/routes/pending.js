@@ -8,7 +8,7 @@
 // The protocol token is the one the map gets for the protocol password (lib/protocol-auth.js).
 const express = require('express');
 const store = require('../lib/pending-store');
-const { requireAuth } = require('../middleware/auth');
+const { requireAuth, isGm } = require('../middleware/auth');
 const { tokenValid } = require('../lib/protocol-auth');
 const { octokit } = require('../lib/github');
 
@@ -16,7 +16,7 @@ const router = express.Router();
 const OWNER = process.env.GITHUB_USERNAME;
 const REPO = process.env.GITHUB_REPO;
 
-const cmsUser = (req) => (req.session?.authenticated ? (req.session.displayName || req.session.username || 'CMS') : null);
+const cmsUser = (req) => (isGm(req) ? (req.session.displayName || req.session.username || 'CMS') : null);
 async function requireAccess(req, res, next) {
     try {
         if (cmsUser(req)) { req.via = 'cms'; req.by = cmsUser(req); return next(); }

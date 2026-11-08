@@ -1,11 +1,11 @@
-// CMS → Media: the tags to click. The live CMS, as if logged in (the login check answered by the test) — the save is
-// caught by the test too, so nothing is written.
+// CMS → Media: the tags to click. The CMS test instance (test/e2e/cms-test-server.cjs), logged in as its GM; saves
+// are caught by the test (the instance would refuse them anyway: it writes nothing).
 const { test, expect } = require('@playwright/test');
 
-const CMS = 'https://adenai-admin.piogino.ch';
+const { CMS, loginGm } = require('./cms-helpers');
 
 test('clicking tags sets and removes them in the field, saved like typing', async ({ page }) => {
-    await page.route('**/api/auth-status', (route) => route.fulfill({ json: { authenticated: true, username: 'test', role: 'gm' } }));
+    await loginGm(page);
     const saved = [];
     await page.route('**/api/media/*', (route) => {
         if (route.request().method() !== 'PUT') return route.continue();
@@ -49,7 +49,7 @@ test('clicking tags sets and removes them in the field, saved like typing', asyn
 });
 
 test('a location image offers only its often used tags, no character groups', async ({ page }) => {
-    await page.route('**/api/auth-status', (route) => route.fulfill({ json: { authenticated: true, username: 'test', role: 'gm' } }));
+    await loginGm(page);
     await page.route(/\/api\/(protocols|pending|quality)/, (route) => route.fulfill({ json: { success: true, sessions: [], entries: [], ok: {} } }));
     await page.route('**/api/media/*', (route) => (route.request().method() === 'PUT' ? route.fulfill({ json: { success: true } }) : route.continue()));
     const lib = await (await page.request.get(`${CMS}/api/data/media-library.json`)).json();
@@ -60,7 +60,7 @@ test('a location image offers only its often used tags, no character groups', as
 });
 
 test('"Tag lists…": a list added in the dialog is saved and offered beside the tags at once', async ({ page }) => {
-    await page.route('**/api/auth-status', (route) => route.fulfill({ json: { authenticated: true, username: 'test', role: 'gm' } }));
+    await loginGm(page);
     await page.route(/\/api\/(protocols|pending|quality)/, (route) => route.fulfill({ json: { success: true, sessions: [], entries: [], ok: {} } }));
     await page.route('**/api/media/*', (route) => (route.request().method() === 'PUT' ? route.fulfill({ json: { success: true } }) : route.continue()));
     let sent = null;
@@ -96,6 +96,7 @@ test('in the grid, an image without tags has a dot in its corner, a tagged one n
     const lib = await (await page.request.get(`${CMS}/api/data/media-library.json`)).json();
     const entries = Object.entries(lib.images);
     const untagged = entries.filter(([, m]) => !(m.tags || []).length).length;
+    await loginGm(page);
     await page.goto(`${CMS}/v2/#/media`);
     await expect(page.locator('.media-card').first()).toBeVisible();
     await expect(page.locator('.media-card .media-card-untagged')).toHaveCount(untagged);
@@ -108,6 +109,7 @@ test('"No tags yet" shows only the images still to tag, also within a category, 
     const images = Object.values(lib.images);
     const untagged = images.filter((m) => !(m.tags || []).length);
     const chars = untagged.filter((m) => m.category === 'characters');
+    await loginGm(page);
     await page.goto(`${CMS}/v2/#/media`);
     const tagsFilter = page.getByRole('combobox', { name: 'Tag filter' });
     await expect(tagsFilter.locator('option[value="untagged"]')).toHaveText(`No tags yet (${untagged.length})`);

@@ -23,7 +23,7 @@ const protocolRoutes = require('./routes/protocols');
 const glossaryRoutes = require('./routes/glossary');
 
 // Import middleware
-const { requireAuth, authenticateJourneyAPI, authenticateDynamicsAPI } = require('./middleware/auth');
+const { requireAuth, gmOnlyApi, authenticateJourneyAPI, authenticateDynamicsAPI } = require('./middleware/auth');
 
 // Import activity routes (optional - only if you have the activity routes file)
 // const activityRoutes = require('./routes/activity');
@@ -70,7 +70,7 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 // Session management - sessions are persisted to disk so they survive server restarts
 const sessionMiddleware = session({
   store: new FileStore({
-    path: path.join(__dirname, 'sessions'),
+    path: process.env.ADENAI_SESSIONS_DIR || path.join(__dirname, 'sessions'), // a test instance: its own
     ttl: 24 * 60 * 60, // 24 hours, in seconds
     retries: 0,
     logFn: () => {} // silence session-file-store's noisy default logging
@@ -89,8 +89,8 @@ app.use(sessionMiddleware);
 
 // The CMS is the one at /v2/ (server/editor-src/cms); the classic one is retired — its address leads there
 app.get(['/', '/index.html'], (req, res) => res.redirect(302, '/v2/'));
-app.use(express.static('admin-interface'));
-app.use('/uploads', express.static('uploads'));
+app.use(express.static('admin-interface')); // the CMS's code — its data comes only with the GM login (below)
+app.use('/uploads', requireAuth, express.static('uploads')); // originals and leftovers: the GM's; the map uses /media
 app.use('/media', express.static('uploads/optimized')); // Serve optimized media files
 
 // File upload configuration
@@ -115,7 +115,8 @@ const upload = multer({
   }
 });
 
-// API Routes
+// API Routes — all the GM's except what the public map needs (middleware/auth.js gmOnlyApi)
+app.use('/api', gmOnlyApi);
 app.use('/api', authRoutes);
 app.use('/api/locations', locationsRouter);
 app.use('/api/characters', charactersRouter);
