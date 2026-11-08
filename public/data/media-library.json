@@ -40313,7 +40313,9 @@
       "title": "Star-Spawn of Cthulhu",
       "caption": "",
       "credits": "Tome of Beasts 1, pg. 348",
-      "tags": [],
+      "tags": [
+        "void"
+      ],
       "uploadDate": "2026-10-25T15:04:53.710Z",
       "sizes": {
         "thumb": {
@@ -40349,7 +40351,7 @@
       },
       "fileSize": 500001,
       "mimeType": "image/png",
-      "lastModified": "2026-10-25T15:06:14.636Z"
+      "lastModified": "2026-11-08T00:43:30.660Z"
     },
     "creatures-u31n3uyya6jm": {
       "id": "creatures-u31n3uyya6jm",
@@ -40357,7 +40359,9 @@
       "title": "Star Spawn Larva Mage",
       "caption": "",
       "credits": "Mordenkainen Presents: Monsters of the Multiverse, pg. 228",
-      "tags": [],
+      "tags": [
+        "void"
+      ],
       "uploadDate": "2026-10-25T15:04:53.874Z",
       "sizes": {
         "thumb": {
@@ -40393,7 +40397,7 @@
       },
       "fileSize": 305648,
       "mimeType": "image/jpeg",
-      "lastModified": "2026-10-25T15:05:24.381Z"
+      "lastModified": "2026-11-08T00:43:26.059Z"
     },
     "creatures-6balkxexxlqj": {
       "id": "creatures-6balkxexxlqj",
@@ -40401,7 +40405,9 @@
       "title": "skittering horror",
       "caption": "",
       "credits": "Guildmasters’ Guide to Ravnica, pg. 205",
-      "tags": [],
+      "tags": [
+        "void"
+      ],
       "uploadDate": "2026-10-25T15:04:54.487Z",
       "sizes": {
         "thumb": {
@@ -40437,7 +40443,7 @@
       },
       "fileSize": 533039,
       "mimeType": "image/png",
-      "lastModified": "2026-10-25T15:05:46.329Z"
+      "lastModified": "2026-11-08T00:43:22.956Z"
     },
     "creatures-80e0g77i35h1": {
       "id": "creatures-80e0g77i35h1",
@@ -40445,7 +40451,9 @@
       "title": "flying horror",
       "caption": "",
       "credits": "Guildmasters’ Guide to Ravnica, pg. 203",
-      "tags": [],
+      "tags": [
+        "void"
+      ],
       "uploadDate": "2026-10-25T15:04:55.239Z",
       "sizes": {
         "thumb": {
@@ -40481,7 +40489,7 @@
       },
       "fileSize": 409863,
       "mimeType": "image/png",
-      "lastModified": "2026-10-25T15:05:58.922Z"
+      "lastModified": "2026-11-08T00:43:20.344Z"
     },
     "creatures-i4j05kpdyrlj": {
       "id": "creatures-i4j05kpdyrlj",
@@ -40489,7 +40497,9 @@
       "title": "Elder Thing",
       "caption": "",
       "credits": "Ravenloft: The Horrors Within, pg. 245",
-      "tags": [],
+      "tags": [
+        "void"
+      ],
       "uploadDate": "2026-10-25T15:04:55.403Z",
       "sizes": {
         "thumb": {
@@ -40525,7 +40535,7 @@
       },
       "fileSize": 443364,
       "mimeType": "image/jpeg",
-      "lastModified": "2026-10-25T15:06:44.950Z"
+      "lastModified": "2026-11-08T00:43:15.296Z"
     },
     "characters-phodrh68yzu8": {
       "id": "characters-phodrh68yzu8",
@@ -40622,5 +40632,5 @@
       "lastModified": "2026-11-08T00:36:13.850Z"
     }
   },
-  "lastUpdated": "2026-11-08T00:36:13.850Z"
+  "lastUpdated": "2026-11-08T00:43:30.660Z"
 }
