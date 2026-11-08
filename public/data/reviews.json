@@ -2,6 +2,32 @@
   "version": "1.0",
   "reviews": [
     {
+      "commitSha": "7f364c7d47dcd1a24c85d3f5f49c3e924d019a9d",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lady Rivea",
+      "user": "gm",
+      "timestamp": "2026-11-08T14:21:10.366Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-11-08T14:21:10.366Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: lady_rivea (by gm) - added image"
+    },
+    {
+      "commitSha": "1af085363fc7483c6871aa6e0c4995b5b7d1da03",
+      "action": "update",
+      "type": "character",
+      "itemName": "Lady Rivea",
+      "user": "gm",
+      "timestamp": "2026-11-08T14:21:05.587Z",
+      "status": "approved",
+      "reviewedBy": "gm",
+      "reviewedAt": "2026-11-08T14:21:05.587Z",
+      "reviewNotes": "Auto-approved (GM/Admin)",
+      "commitMessage": "Update character: lady_rivea (by gm) - removed image"
+    },
+    {
       "commitSha": "9901b48d14416ac155e310d62dd9bd3a2cbc88b9",
       "action": "update",
       "type": "character",
@@ -4812,5 +4838,5 @@
       "commitMessage": "Create location: test (by Nici) - Initial location creation"
     }
   ],
-  "lastUpdated": "2026-10-29T08:32:04.773Z"
+  "lastUpdated": "2026-11-08T14:21:10.366Z"
 }
