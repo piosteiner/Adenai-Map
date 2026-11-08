@@ -2034,8 +2034,10 @@
       "placeOfOrigin": "",
       "coordinates": null,
       "description": "",
-      "images": [],
-      "image": "",
+      "images": [
+        "https://adenai-admin.piogino.ch/media/dp1sow1g2hsp-small.webp"
+      ],
+      "image": "https://adenai-admin.piogino.ch/media/dp1sow1g2hsp-small.webp",
       "status": "dead",
       "faction": "Sternenzirkel",
       "relationship": "enemy",
@@ -2044,7 +2046,7 @@
       "movementHistory": [],
       "currentLocation": null,
       "createdAt": "2025-09-07T12:41:46.791Z",
-      "updatedAt": "2026-11-08T14:21:04.339Z"
+      "updatedAt": "2026-11-08T14:21:09.196Z"
     },
     {
       "id": "puglia",
@@ -4614,5 +4616,5 @@
       "updatedAt": "2026-10-28T07:45:04.454Z"
     }
   ],
-  "lastUpdated": "2026-11-08T14:21:04.341Z"
+  "lastUpdated": "2026-11-08T14:21:09.196Z"
 }
