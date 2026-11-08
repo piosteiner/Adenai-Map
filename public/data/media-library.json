@@ -40723,7 +40723,148 @@
       "fileSize": 654439,
       "mimeType": "image/png",
       "lastModified": "2026-11-08T00:49:57.280Z"
+    },
+    "characters-mdv7w5cwtr4d": {
+      "id": "characters-mdv7w5cwtr4d",
+      "category": "characters",
+      "title": "Lady Rivea 1",
+      "caption": "",
+      "credits": "Ravenloft: The Horrors Within",
+      "tags": [
+        "elf",
+        "female",
+        "evil"
+      ],
+      "uploadDate": "2026-11-08T14:00:02.131Z",
+      "sizes": {
+        "thumb": {
+          "filename": "mdv7w5cwtr4d-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/mdv7w5cwtr4d-thumb.webp",
+          "width": 112,
+          "height": 150
+        },
+        "small": {
+          "filename": "mdv7w5cwtr4d-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/mdv7w5cwtr4d-small.webp",
+          "width": 225,
+          "height": 300
+        },
+        "medium": {
+          "filename": "mdv7w5cwtr4d-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/mdv7w5cwtr4d-medium.webp",
+          "width": 450,
+          "height": 600
+        },
+        "large": {
+          "filename": "mdv7w5cwtr4d-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/mdv7w5cwtr4d-large.webp",
+          "width": 900,
+          "height": 1200
+        },
+        "original": {
+          "filename": "mdv7w5cwtr4d-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/mdv7w5cwtr4d-original.webp",
+          "width": 1086,
+          "height": 1448
+        }
+      },
+      "fileSize": 2514472,
+      "mimeType": "image/png"
+    },
+    "characters-dp1sow1g2hsp": {
+      "id": "characters-dp1sow1g2hsp",
+      "category": "characters",
+      "title": "Lady Rivea 3",
+      "caption": "",
+      "credits": "Ravenloft: The Horrors Within",
+      "tags": [
+        "elf",
+        "female",
+        "evil"
+      ],
+      "uploadDate": "2026-11-08T14:00:03.937Z",
+      "sizes": {
+        "thumb": {
+          "filename": "dp1sow1g2hsp-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/dp1sow1g2hsp-thumb.webp",
+          "width": 112,
+          "height": 150
+        },
+        "small": {
+          "filename": "dp1sow1g2hsp-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/dp1sow1g2hsp-small.webp",
+          "width": 225,
+          "height": 300
+        },
+        "medium": {
+          "filename": "dp1sow1g2hsp-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/dp1sow1g2hsp-medium.webp",
+          "width": 450,
+          "height": 600
+        },
+        "large": {
+          "filename": "dp1sow1g2hsp-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/dp1sow1g2hsp-large.webp",
+          "width": 900,
+          "height": 1200
+        },
+        "original": {
+          "filename": "dp1sow1g2hsp-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/dp1sow1g2hsp-original.webp",
+          "width": 1086,
+          "height": 1448
+        }
+      },
+      "fileSize": 2204227,
+      "mimeType": "image/png"
+    },
+    "characters-iu4xt4d57ibu": {
+      "id": "characters-iu4xt4d57ibu",
+      "category": "characters",
+      "title": "Lady Rivea 2",
+      "caption": "",
+      "credits": "Ravenloft: The Horrors Within",
+      "tags": [
+        "elf",
+        "female",
+        "evil"
+      ],
+      "uploadDate": "2026-11-08T14:00:05.344Z",
+      "sizes": {
+        "thumb": {
+          "filename": "iu4xt4d57ibu-thumb.webp",
+          "url": "https://adenai-admin.piogino.ch/media/iu4xt4d57ibu-thumb.webp",
+          "width": 112,
+          "height": 150
+        },
+        "small": {
+          "filename": "iu4xt4d57ibu-small.webp",
+          "url": "https://adenai-admin.piogino.ch/media/iu4xt4d57ibu-small.webp",
+          "width": 225,
+          "height": 300
+        },
+        "medium": {
+          "filename": "iu4xt4d57ibu-medium.webp",
+          "url": "https://adenai-admin.piogino.ch/media/iu4xt4d57ibu-medium.webp",
+          "width": 450,
+          "height": 600
+        },
+        "large": {
+          "filename": "iu4xt4d57ibu-large.webp",
+          "url": "https://adenai-admin.piogino.ch/media/iu4xt4d57ibu-large.webp",
+          "width": 900,
+          "height": 1200
+        },
+        "original": {
+          "filename": "iu4xt4d57ibu-original.webp",
+          "url": "https://adenai-admin.piogino.ch/media/iu4xt4d57ibu-original.webp",
+          "width": 1086,
+          "height": 1448
+        }
+      },
+      "fileSize": 2208745,
+      "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-11-08T00:49:57.280Z"
+  "lastUpdated": "2026-11-08T14:00:05.356Z"
 }
