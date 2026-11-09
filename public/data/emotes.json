@@ -6,7 +6,7 @@
       "name": "piogino",
       "setId": "01K1BPC2WFZB8QA3T04MPBTSS9",
       "setName": "set1",
-      "count": 364
+      "count": 368
     }
   ],
   "custom": [],
@@ -2533,6 +2533,34 @@
       "animated": true,
       "from": "piogino"
     },
+    "Yoink": {
+      "url": "https://cdn.7tv.app/emote/01F6J1FX60000FY32H4AKVS6HM/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "yoink": {
+      "url": "https://cdn.7tv.app/emote/01FQ9F3DK00006VXQQR6SJGVCX/2x.webp",
+      "w": 29,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "yeet": {
+      "url": "https://cdn.7tv.app/emote/01HRCTDQFG0002JMMTD1P14SMQ/2x.webp",
+      "w": 47,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
+    "billyReady": {
+      "url": "https://cdn.7tv.app/emote/01FQSNKTM00001563XCKBAX1KF/2x.webp",
+      "w": 32,
+      "h": 32,
+      "animated": true,
+      "from": "piogino"
+    },
     "D": {
       "url": "https://cdn.7tv.app/emote/01GM78BAGR0001WBT5AMQY9YG3/2x.webp",
       "w": 32,
@@ -2566,5 +2594,5 @@
       "original": ":O"
     }
   },
-  "lastUpdated": "2026-10-27T20:43:54.992Z"
+  "lastUpdated": "2026-11-09T23:41:02.844Z"
 }
