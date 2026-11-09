@@ -2,7 +2,7 @@
 // emote set ("dispatch" with type emote_set.update). A few seconds after one, routes/emotes.js refreshFrom7tv() fetches
 // the sources again and saves emotes.json if the emotes changed — open maps reload it (routes/data.js "changed").
 // One connection per set; reopened when it drops or heartbeats stop. Every 30 minutes a refresh anyway, which also
-// catches a channel switching to another set. Off with EMOTES_LIVE=off (tests).
+// catches a channel switching to another set; one at start for what changed meanwhile. Off with EMOTES_LIVE=off (tests).
 const EVENTS = process.env.SEVENTV_EVENTS || 'https://events.7tv.io/v3';
 const CHECK_EVERY = 30 * 60_000;
 const SETTLE_MS = 5000; // several changes in a row: one refresh
@@ -87,6 +87,7 @@ function start(emotesRoute, { logger = console } = {}) {
     api = emotesRoute;
     log = logger;
     sync();
+    refreshSoon(); // what changed while the server was down
     setInterval(refreshSoon, CHECK_EVERY).unref();
 }
 
