@@ -181,6 +181,9 @@ const httpServer = app.listen(PORT, '0.0.0.0', () => {
   console.log(`🧪 Script testing: Both workflows operational`);
 });
 
+// Emotes follow the 7TV sets live (lib/emotes-live.js); not in the browser tests, which can't write
+if (process.env.NODE_ENV !== 'test' && !process.env.ADENAI_READ_ONLY) require('./lib/emotes-live').start(require('./routes/emotes'));
+
 // Writing the session minutes together: WebSocket at /api/protocols/live (lib/protocol-live.js)
 const protocolLive = require('./lib/protocol-live');
 protocolLive.attach(httpServer, sessionMiddleware);

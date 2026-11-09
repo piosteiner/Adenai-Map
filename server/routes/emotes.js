@@ -159,7 +159,34 @@ router.put('/', requireAuth, async (req, res) => {
         const next = { version: 1, sources: built.sources, custom, emotes: built.emotes };
         await save(next, sha, `Update emotes: ${Object.keys(next.emotes).length} (by ${userOf(req)})`);
         res.json({ success: true, ...next });
+        require('../lib/emotes-live').sync(); // the sources may have changed: follow their sets
     } catch (err) { fail(res, 'save the emotes')(err); }
 });
 
+// Live (lib/emotes-live.js): the saved sources fetched again from 7TV — after 7TV reported a change to one of the
+// sets, and every 30 minutes. Saved (one commit, maps reload it) only when the emotes really changed.
+async function refreshFrom7tv() {
+    const { file, sha } = await load();
+    if (!file.sources?.length) return null;
+    const built = await build(file.sources, file.custom || [], file.emotes || {});
+    const before = Object.keys(file.emotes || {});
+    const after = Object.keys(built.emotes);
+    const same = JSON.stringify(file.emotes || {}) === JSON.stringify(built.emotes)
+        && JSON.stringify((file.sources || []).map((s) => [s.setId, s.count])) === JSON.stringify(built.sources.map((s) => [s.setId, s.count]));
+    if (same) return { changed: false, count: after.length };
+    const added = after.filter((n) => !file.emotes?.[n]).length;
+    const removed = before.filter((n) => !built.emotes[n]).length;
+    await save({ version: 1, sources: built.sources, custom: file.custom || [], emotes: built.emotes }, sha,
+        `Update emotes from 7TV: ${after.length} (+${added} −${removed}, live)`);
+    return { changed: true, count: after.length, added, removed };
+}
+
+// the 7TV sets the emotes come from (to follow them live)
+async function setIds() {
+    const { file } = await load();
+    return [...new Set((file.sources || []).map((s) => s.setId).filter(Boolean))];
+}
+
 module.exports = router;
+module.exports.refreshFrom7tv = refreshFrom7tv;
+module.exports.setIds = setIds;
