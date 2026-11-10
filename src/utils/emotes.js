@@ -100,8 +100,10 @@
 
     let tip = null;
     let over = null;
-    // 7TV has the emote in 4× as well: sharp at the bigger size
-    const bigUrl = (url) => url.replace(/(\/\/cdn\.7tv\.app\/emote\/[^/]+\/)2x\.webp$/, '$14x.webp');
+    // 7TV has the emote in 4× as well: sharp at the bigger size (served by our server; older lists point at 7TV)
+    const bigUrl = (url) => url
+        .replace(/(\/api\/emotes\/img\/[0-9A-Za-z]+)\.webp$/, '$1-4x.webp')
+        .replace(/(\/\/cdn\.7tv\.app\/emote\/[^/]+\/)2x\.webp$/, '$14x.webp');
 
     function show(img) {
         tip ||= Object.assign(document.createElement('div'), { className: 'emote-tip', role: 'tooltip' });

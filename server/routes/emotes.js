@@ -17,6 +17,17 @@ const REPO = process.env.GITHUB_REPO;
 const PATH = 'public/data/emotes.json';
 const API = 'https://7tv.io/v3';
 
+// Emote pictures are served by this server (GET /api/emotes/img/<id>.webp, <id>-4x.webp for the bigger hover view):
+// fetched from 7TV the first time and kept in data/emote-cache/, so visitors' browsers never contact 7TV.
+// Only ids of the current emotes are served. The emote list (emotes.json) points here.
+const fs = require('fs/promises');
+const path = require('path');
+const PUBLIC_URL = (process.env.PUBLIC_URL || 'https://adenai-admin.piogino.ch').replace(/\/$/, '');
+const CACHE = path.join(__dirname, '..', 'data', 'emote-cache');
+const imgUrl = (id) => `${PUBLIC_URL}/api/emotes/img/${id}.webp`;
+// an emote's 7TV id, from either kind of address (7TV's own, or ours)
+const idOf = (url) => (/\/\/cdn\.7tv\.app\/emote\/([0-9A-Za-z]+)\//.exec(url) || /\/api\/emotes\/img\/([0-9A-Za-z]+)\.webp$/.exec(url) || [])[1] || null;
+
 const userOf = (req) => req.session?.displayName || req.session?.username || 'Unknown';
 // names that work between colons: no spaces, no colons
 const validName = (n) => /^[^\s:]{1,64}$/.test(n);
@@ -102,7 +113,7 @@ async function fetchSource(src) {
         if (emotes[name]) continue;
         const files = e.data?.host?.files || [];
         const small = files.find((f) => f.name === '1x.webp') || files[0] || {};
-        emotes[name] = { url: `https://cdn.7tv.app/emote/${e.id}/2x.webp`, w: small.width || 28, h: small.height || 28, animated: !!e.data?.animated, from: labelOf(out), ...(original ? { original } : {}) };
+        emotes[name] = { url: imgUrl(e.id), w: small.width || 28, h: small.height || 28, animated: !!e.data?.animated, from: labelOf(out), ...(original ? { original } : {}) };
     }
     out.count = Object.keys(emotes).length;
     return { source: out, emotes };
@@ -124,6 +135,41 @@ const fail = (res, what) => (err) => {
     console.error(`Emotes: ${what} failed:`, err.message);
     res.status(err.status === 409 ? 409 : 500).json({ success: false, error: err.status === 409 ? 'The emotes were changed meanwhile — reload and try again' : `Could not ${what}: ${err.message}` });
 };
+
+const pending = new Map();
+router.get('/img/:file', async (req, res) => {
+    const m = /^([0-9A-Za-z]{1,40})(-4x)?\.webp$/.exec(req.params.file);
+    if (!m) return res.status(404).end();
+    const [, id, big] = m;
+    try {
+        // only emotes that are in the list now
+        const { file } = await load();
+        if (!Object.values(file.emotes || {}).some((e) => idOf(e.url) === id)) return res.status(404).end();
+        const size = big ? '4x' : '2x';
+        const target = path.join(CACHE, `${id}-${size}.webp`);
+        try { await fs.access(target); } catch {
+            const key = `${id}-${size}`;
+            if (!pending.has(key)) {
+                pending.set(key, (async () => {
+                    const r = await fetch(`https://cdn.7tv.app/emote/${id}/${size}.webp`, { signal: AbortSignal.timeout(15000) });
+                    if (!r.ok) throw new Error(`7TV image answered ${r.status}`);
+                    const buf = Buffer.from(await r.arrayBuffer());
+                    if (buf.subarray(0, 4).toString('latin1') !== 'RIFF' || buf.subarray(8, 12).toString('latin1') !== 'WEBP') throw new Error('7TV sent no WebP');
+                    await fs.mkdir(CACHE, { recursive: true });
+                    const tmp = `${target}.${process.pid}.tmp`;
+                    await fs.writeFile(tmp, buf);
+                    await fs.rename(tmp, target);
+                })().finally(() => pending.delete(key)));
+            }
+            await pending.get(key);
+        }
+        res.set({ 'Cache-Control': 'public, max-age=31536000, immutable', 'Cross-Origin-Resource-Policy': 'cross-origin' });
+        res.type('image/webp').sendFile(target);
+    } catch (err) {
+        console.error('Emote image:', err.message);
+        res.status(502).end();
+    }
+});
 
 router.get('/', async (req, res) => {
     try { res.json({ success: true, ...(await load()).file }); } catch (err) { fail(res, 'load the emotes')(err); }

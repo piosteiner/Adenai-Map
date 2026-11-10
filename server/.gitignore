@@ -134,6 +134,7 @@ data/protocols*.json
 data/protocol-comments.json
 data/protocol-settings.json
 data/protocol-live/
+data/emote-cache/
 data/pending-entries*.json
 # Data-file changes waiting to be committed to GitHub (lib/github-cache.js)
 data/github-pending/
