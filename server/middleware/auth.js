@@ -19,7 +19,8 @@ const requireAuth = (req, res, next) => {
 // Everything under /api is the GM's, except what the public map uses (server.js mounts this before the routes):
 // the data files (/api/data), the players' proposals (/api/pending) and the minutes (/api/protocols, their own
 // password), and logging in. A route added later is closed unless it is listed here.
-const PUBLIC_API = ['/data', '/pending', '/protocols', '/login', '/logout', '/auth-status', '/test'];
+// /emotes/img: the emote pictures (routes/emotes.js), which the map shows to everyone
+const PUBLIC_API = ['/data', '/pending', '/protocols', '/login', '/logout', '/auth-status', '/test', '/emotes/img'];
 const gmOnlyApi = (req, res, next) => {
   if (req.method === 'OPTIONS') return next();
   if (PUBLIC_API.some((p) => req.path === p || req.path.startsWith(`${p}/`))) return next();
