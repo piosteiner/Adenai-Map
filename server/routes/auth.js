@@ -3,15 +3,25 @@ const { validateUser, getUserInfo } = require('../config/users');
 const { GM_ROLES, isGm } = require('../middleware/auth');
 const router = express.Router();
 
+// Wrong passwords per address: 8, then a 15-minute pause (as the protocol unlock; 2026-11-10). Checked before
+// bcrypt, so a flood of guesses costs the server nothing; expired entries are swept so the map stays small.
+const failures = new Map();
+const blocked = (ip) => { const f = failures.get(ip); return !!f && f.count >= 8 && Date.now() < f.until; };
+function failed(ip) {
+  const now = Date.now();
+  const f = failures.get(ip);
+  failures.set(ip, { count: (f && now < f.until ? f.count : 0) + 1, until: now + 15 * 60000 });
+  if (failures.size > 10000) for (const [k, v] of failures) if (v.until < now) failures.delete(k);
+}
+
 // Login route
-router.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  
-  console.log('🔍 Login attempt:', { username, password: '***' });
-  
-  const user = validateUser(username, password);
-  
-  console.log('🔍 Validation result:', user);
+router.post('/login', async (req, res) => {
+  const { username, password } = req.body || {};
+  if (blocked(req.ip)) {
+    return res.status(429).json({ success: false, message: 'Too many wrong passwords — try again in 15 minutes.' });
+  }
+
+  const user = await validateUser(username, password);
   
   // the CMS is the GM's: another account is refused (its password may be right)
   if (user && !GM_ROLES.includes(user.role)) {
@@ -25,6 +35,7 @@ router.post('/login', (req, res) => {
     req.session.displayName = user.displayName;
     req.session.role = user.role;
     
+    failures.delete(req.ip);
     console.log('✅ Login successful for:', user.displayName);
     
     res.json({ 
@@ -34,7 +45,8 @@ router.post('/login', (req, res) => {
       role: user.role
     });
   } else {
-    console.log('❌ Login failed for:', username);
+    failed(req.ip);
+    console.log('❌ Login failed for:', String(username || '').slice(0, 40));
     res.status(401).json({ 
       success: false, 
       message: 'Invalid credentials' 

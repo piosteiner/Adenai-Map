@@ -62,6 +62,19 @@ initMediaGitHub(octokit, REPO_OWNER, REPO_NAME);
 require('./routes/media').normalizeLibraryTags().catch((err) => console.error('media: tags not normalised:', err.message));
 
 // Middleware
+// Security headers (2026-11-10): the CMS runs no inline scripts (theme.js is a file); its editor adds <style> tags,
+// the live collaboration speaks WebSocket to this host; images may come from elsewhere (pasted addresses).
+app.disable('x-powered-by');
+app.use((req, res, next) => {
+  res.set({
+    'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' wss://adenai-admin.piogino.ch; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'X-Frame-Options': 'DENY',
+    'Strict-Transport-Security': 'max-age=31536000',
+  });
+  next();
+});
 app.use(compression()); // gzip: the admin's scripts and the JSON lists are a third of the size on the wire
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
