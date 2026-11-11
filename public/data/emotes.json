@@ -6,7 +6,7 @@
       "name": "piogino",
       "setId": "01K1BPC2WFZB8QA3T04MPBTSS9",
       "setName": "set1",
-      "count": 400
+      "count": 401
     }
   ],
   "custom": [],
@@ -2778,6 +2778,13 @@
       "animated": true,
       "from": "piogino"
     },
+    "Kalm": {
+      "url": "https://adenai-admin.piogino.ch/api/emotes/img/01GSM7P4280001G7T9NFZMVHP8.webp",
+      "w": 32,
+      "h": 32,
+      "animated": false,
+      "from": "piogino"
+    },
     "D": {
       "url": "https://adenai-admin.piogino.ch/api/emotes/img/01GM78BAGR0001WBT5AMQY9YG3.webp",
       "w": 32,
@@ -2819,5 +2826,5 @@
       "original": ":P"
     }
   },
-  "lastUpdated": "2026-11-11T13:30:41.537Z"
+  "lastUpdated": "2026-11-11T13:31:06.144Z"
 }
