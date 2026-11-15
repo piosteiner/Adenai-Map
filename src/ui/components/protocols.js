@@ -264,7 +264,7 @@ class MapProtocols {
             // a session asked for (a link, a mention): there; else where this device stopped reading; else the newest
             if (sessionId || !this.resume()) this.scrollTo(sessionId || this.sessions.filter((s) => s.published !== false).at(-1)?.id || this.sessions.at(-1)?.id, false, highlight);
         } catch (err) {
-            if (err.message !== 'locked') this.body.replaceChildren(this.el('p', 'pp-error', `Protokolle nicht verfügbar: ${err.message}`));
+            if (err.message !== 'locked') this.body.replaceChildren(this.el('p', 'pp-error', `Protokolle nicht verfügbar: ${err.message || err.name || err}`));
         }
     }
 
@@ -372,8 +372,15 @@ class MapProtocols {
 
     startLive() {
         if (this.live) return;
-        this.live = window.AdenaiLive.connect({ url: this.LIVE, token: this.token, onStatus: (s) => this.setStatus(s), onMessage: (m) => this.onNews(m) });
-        this.setStatus(this.live.status());
+        // a browser that refuses the connection (Firefox throws a SecurityError on a CSP block) must not stop the reading
+        try {
+            this.live = window.AdenaiLive.connect({ url: this.LIVE, token: this.token, onStatus: (s) => this.setStatus(s), onMessage: (m) => this.onNews(m) });
+            this.setStatus(this.live.status());
+        } catch (err) {
+            console.warn('Protokolle: live connection refused', err);
+            this.live = null;
+            this.setStatus('offline');
+        }
     }
 
     stopLive() {
