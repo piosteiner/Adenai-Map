@@ -449,6 +449,47 @@ router.post('/', requireAuth, async (req, res) => {
   }
 });
 
+// Several new characters in one commit (routes/minutes-characters.js: the people the minutes name): the same entry as
+// the create route above makes, one GitHub write for all; a name whose id exists already is skipped.
+// items: [{ name, title, description, status, relationship, placeOfOrigin, firstMet }] → { created: [...], skipped: [...] }
+async function createCharacters(items, user = 'Unknown', userRole = 'user') {
+  const { data: currentFile } = await octokit.rest.repos.getContent({ owner: REPO_OWNER, repo: REPO_NAME, path: 'public/data/characters.json' });
+  const currentContent = JSON.parse(Buffer.from(currentFile.content, 'base64').toString());
+  const { data: placesFile } = await octokit.rest.repos.getContent({ owner: REPO_OWNER, repo: REPO_NAME, path: 'public/data/places.geojson' });
+  const places = JSON.parse(Buffer.from(placesFile.content, 'base64').toString()).features || [];
+  const coordsOf = (name) => places.find((f) => f.properties.name === name)?.geometry?.coordinates || null;
+  const ids = new Set(currentContent.characters.map((c) => c.id));
+  const created = []; const skipped = [];
+  const now = new Date().toISOString();
+  for (const b of items) {
+    const name = String(b.name || '').trim();
+    const id = name.toLowerCase().replace(/[^a-z0-9]/g, '_');
+    if (!name || ids.has(id)) { skipped.push(name); continue; }
+    const coordinates = coordsOf(b.placeOfOrigin);
+    const c = {
+      id, name, title: b.title || '', placeOfOrigin: b.placeOfOrigin || '', coordinates, description: b.description || '',
+      ...normalizeImages(undefined, undefined),
+      status: b.status || 'alive', faction: '', relationship: b.relationship || 'neutral', firstMet: b.firstMet || '', notes: '',
+      movementHistory: [], createdAt: now, updatedAt: now,
+    };
+    if (b.placeOfOrigin && coordinates) {
+      c.currentLocation = { location: b.placeOfOrigin, date: CAMPAIGN_START, dateStart: CAMPAIGN_START, dateEnd: null, coordinates, notes: 'Initial location based on place of origin' };
+    }
+    currentContent.characters.push(c);
+    ids.add(id);
+    created.push(c);
+  }
+  if (!created.length) return { created, skipped };
+  currentContent.lastUpdated = now;
+  const commitMessage = `Create ${created.length} characters from the minutes (by ${user}): ${created.map((c) => c.name).join(', ')}`.slice(0, 1000);
+  const commitResponse = await octokit.rest.repos.createOrUpdateFileContents({
+    owner: REPO_OWNER, repo: REPO_NAME, path: 'public/data/characters.json', message: commitMessage,
+    content: Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64'), sha: currentFile.sha,
+  });
+  await submitChangeForReview(commitResponse.data.commit.sha, 'create', 'character', `${created.length} characters from the minutes`, commitMessage, user, userRole);
+  return { created, skipped };
+}
+
 // Update character (protected)
 router.put('/:id', requireAuth, async (req, res) => {
   try {
@@ -1658,4 +1699,4 @@ router.post('/migrate-movement-numbers', requireAuth, async (req, res) => {
   }
 });
 
-module.exports = { router, initGitHub };
+module.exports = { router, initGitHub, createCharacters };

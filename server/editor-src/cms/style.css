@@ -513,3 +513,15 @@ body.locked .tabs, body.locked .user, body.locked .topbar .btn { display: none; 
 .name-use { display: inline-flex; align-items: center; gap: 2px; }
 .name-link { font-size: 13px; padding: 0 2px; }
 .name-dialog select { width: 100%; }
+/* ---- characters from the minutes (views/minutes-characters.js) ---- */
+.mc-row { display: flex; gap: 10px; padding: 10px 4px; border-top: 1px solid var(--line); }
+.mc-row.unsure { opacity: 0.75; }
+.mc-row.on { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.mc-pick { padding-top: 6px; }
+.mc-pick input { width: auto; }
+.mc-main { flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.mc-line { display: flex; flex-wrap: wrap; gap: 6px; }
+.mc-line input, .mc-line select { width: auto; flex: 1 1 8rem; }
+.mc-line .mc-name { flex: 1 1 12rem; font-weight: 600; }
+.mc-main textarea { width: 100%; box-sizing: border-box; }
+.mc-unsure { color: var(--gold, #b8901a); font-weight: 600; }
