@@ -482,3 +482,31 @@ body.locked .tabs, body.locked .user, body.locked .topbar .btn { display: none; 
 .gate-form { display: grid; gap: 12px; width: min(340px, 100%); padding: 22px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
 .gate-form h2 { margin: 0; font-size: 18px; }
 .gate-form p { margin: 0; }
+
+/* ---- names (views/names.js): the Grimoire's list with Adenai's record ---- */
+.names .chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 9px; border: 1px solid var(--line-2); border-radius: 999px; background: var(--panel); color: var(--text); font: inherit; font-size: 12px; cursor: pointer; }
+.names .chip:hover:not(:disabled) { border-color: var(--accent); }
+.names .chip:disabled { cursor: default; }
+.names .chip.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.names .chip.major { border-color: var(--gold, #b8901a); background: color-mix(in srgb, var(--gold, #b8901a) 14%, var(--panel)); }
+.name-filters { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 10px; }
+.name-filters select, .name-filters input[type="search"] { width: auto; min-width: 9rem; }
+.name-filters input[type="search"] { flex: 1 1 12rem; }
+.name-table { display: flex; flex-direction: column; }
+.name-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 6px 4px; border-top: 1px solid var(--line); }
+.name-row.major .name-name::after { content: ' ★'; color: var(--gold, #b8901a); }
+.name-name { min-width: 9rem; }
+.name-uses { display: flex; flex-wrap: wrap; gap: 4px; }
+.name-row .spacer { flex: 1; }
+.name-row .btn.on { border-color: var(--accent); color: var(--accent); }
+.name-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 8px; }
+.name-picked { display: inline-block; margin-right: 8px; padding: 2px 10px; border-radius: 6px; background: var(--accent-2); font-size: 15px; font-weight: 600; }
+.name-dialog { display: flex; flex-direction: column; gap: 10px; min-width: min(26rem, 90vw); }
+.name-dialog h3 { margin: 0; }
+.name-field { display: flex; flex-direction: column; gap: 4px; }
+.name-field span { font-size: 12px; color: var(--muted); }
+.name-check { display: flex; align-items: center; gap: 6px; }
+.name-check input { width: auto; }
+.name-dialog .dialog-actions { display: flex; gap: 8px; align-items: center; }
+.name-dialog .dialog-actions .spacer { flex: 1; }
+.small { font-size: 12px; }

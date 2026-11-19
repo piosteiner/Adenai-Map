@@ -21,6 +21,7 @@ const dynamicsRoutes = require('./routes/dynamics');
 const configRoutes = require('./routes/config');
 const protocolRoutes = require('./routes/protocols');
 const glossaryRoutes = require('./routes/glossary');
+const namesRoutes = require('./routes/names'); // the name list in the Grimoire, with Adenai's record
 
 // Import middleware
 const { requireAuth, gmOnlyApi, authenticateJourneyAPI, authenticateDynamicsAPI } = require('./middleware/auth');
@@ -141,6 +142,7 @@ app.use('/api/dynamics', authenticateDynamicsAPI, dynamicsRoutes);
 app.use('/api/config', configRoutes);
 app.use('/api/protocols', protocolRoutes); // session minutes, behind the protocol password
 app.use('/api/glossary', glossaryRoutes); // terms that are neither characters nor locations
+app.use('/api/names', namesRoutes);
 app.use('/api/emotes', require('./routes/emotes')); // :name: images (7TV sets and our own)
 app.use('/api/data', require('./routes/data')); // the map's data files from the cache, and a live channel for changes
 app.use('/api/pending', require('./routes/pending')); // entries proposed by the players, confirmed in the CMS

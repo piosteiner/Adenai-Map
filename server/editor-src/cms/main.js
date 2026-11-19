@@ -19,6 +19,7 @@ import { historyView } from './views/history';
 import { overviewView } from './views/overview';
 import { emotesView } from './views/emotes';
 import { qualityView } from './views/quality';
+import { namesView } from './views/names';
 
 // md-editor.js finds link targets through the classic CMS's modules: give it the same interface
 window.adminCharacters = { getCharacters: () => store.characters };
@@ -39,6 +40,7 @@ const AREAS = [
     { id: 'locations', label: 'Locations', icon: '📍', count: () => store.locations.length },
     { id: 'characters', label: 'Characters', icon: '👤', count: () => store.characters.length },
     { id: 'glossary', label: 'Glossary', icon: '📖', count: () => store.terms.length },
+    { id: 'names', label: 'Names', icon: '🏷', count: () => '' },
     { id: 'protocols', label: 'Protocols', icon: '📜', count: () => '' },
     { id: 'proposals', label: 'Proposals', icon: '⏳', count: () => (store.pending?.length ? store.pending.length : '') },
     { id: 'media', label: 'Media', icon: '🖼', count: () => Object.keys(store.media || {}).length },
@@ -46,7 +48,7 @@ const AREAS = [
     { id: 'history', label: 'History', icon: '🕘', count: () => '' },
     { id: 'quality', label: 'Quality', icon: '✓', count: () => '' },
 ];
-const VIEWS = { overview: overviewView, locations: locationsView, characters: charactersView, glossary: glossaryView, protocols: protocolsView, proposals: proposalsView, media: mediaView, emotes: emotesView, history: historyView, quality: qualityView };
+const VIEWS = { overview: overviewView, locations: locationsView, characters: charactersView, glossary: glossaryView, names: namesView, protocols: protocolsView, proposals: proposalsView, media: mediaView, emotes: emotesView, history: historyView, quality: qualityView };
 
 // Before leaving an entry: a view that saves by itself saves what is waiting (autosaver, form.js); true when nothing
 // is left unsaved — otherwise the guards below ask whether to discard (a save that failed, a new entry not created).
