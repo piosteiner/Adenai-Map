@@ -310,6 +310,61 @@ function unlinkName(name, by = 'unlink') {
     });
 }
 
+// New entries (characters created from the minutes): in every session the first plain mention of each becomes a link,
+// [[Name]] or [[Name|the form written]], unless the session links it already. Mentions inside [[…]] are left alone.
+// entries: [{ name, forms: ['Meriel Muriel', 'Meriel'] }] (the longest form that fits wins). Published texts only
+// when no draft is open (a draft is someone writing right now); the previous text goes into the history.
+// Returns { sessions, links }.
+function linkMentions(entries, by = 'link') {
+    const esc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const fold = (x) => String(x).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+    const L = '[\\p{L}\\p{N}]';
+    const linkIn = (text, e) => {
+        const has = new RegExp(`\\[\\[\\s*${esc(e.name)}\\s*(\\|[^\\]]*)?\\]\\]`, 'iu');
+        if (has.test(text)) return null;
+        // the plain stretches between links
+        const parts = String(text).split(/(\[\[[^\[\]\n]*\]\])/);
+        const forms = [...new Set([e.name, ...(e.forms || [])])].filter(Boolean).sort((a, b) => b.length - a.length);
+        for (let i = 0; i < parts.length; i += 2) {
+            let best = null;
+            for (const f of forms) {
+                const m = new RegExp(`(?<!${L})${esc(f)}(?!${L})`, 'u').exec(parts[i]);
+                if (m && (!best || m.index < best.index || (m.index === best.index && f.length > best.f.length))) best = { index: m.index, f };
+            }
+            if (best) {
+                const link = fold(best.f) === fold(e.name) ? `[[${e.name}]]` : `[[${e.name}|${best.f}]]`;
+                parts[i] = parts[i].slice(0, best.index) + link + parts[i].slice(best.index + best.f.length);
+                return parts.join('');
+            }
+        }
+        return null;
+    };
+    return serial(async () => {
+        const data = await load();
+        const now = new Date().toISOString();
+        const changed = [];
+        let links = 0;
+        for (const s of data.sessions) {
+            if (s.draft) continue;
+            let content = s.content || '';
+            let n = 0;
+            for (const e of entries) { const next = linkIn(content, e); if (next !== null) { content = next; n++; } }
+            if (n) {
+                const { history = [], ...previous } = s;
+                if (s.published !== false) s.history = [previous, ...history].slice(0, HISTORY_MAX);
+                Object.assign(s, { content, updatedAt: now, updatedBy: by, updatedVia: 'link' });
+                changed.push(s);
+                links += n;
+            }
+        }
+        if (changed.length) {
+            await writeJson(FILE, data);
+            changed.forEach((s) => events.emit('changed', s));
+        }
+        return { sessions: changed.length, links };
+    });
+}
+
 // Names used in sessions so far, most frequent first (suggestions for the players and places fields)
 async function suggestions() {
     const count = { players: new Map(), places: new Map() };
@@ -327,6 +382,6 @@ const settings = () => readJson(SETTINGS, { passwordHash: null, passwordVersion:
 const saveSettings = (s) => serial(() => writeJson(SETTINGS, s));
 
 module.exports = {
-    list, get, create, save, saveDraft, publish, discardDraft, remove, renameLinks, unlinkName, players, suggestions, settings, saveSettings,
+    list, get, create, save, saveDraft, publish, discardDraft, remove, renameLinks, unlinkName, linkMentions, players, suggestions, settings, saveSettings,
     working, pick, strip, FIELDS, events, DIR,
 };

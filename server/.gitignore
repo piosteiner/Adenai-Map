@@ -140,6 +140,8 @@ data/pending-entries*.json
 data/github-pending/
 # The Quality page's "OK" marks (routes/quality.js)
 data/quality-ok.json
+# candidate lists read from the minutes (they quote them)
+data/minutes-characters/
 
 # Browser test output (npx playwright test)
 test/e2e/.results/
