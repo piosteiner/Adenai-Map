@@ -19,11 +19,13 @@ function formDialog(title, fields, { ok = 'Save', extra } = {}) {
         const rows = fields.map((f) => {
             const input = f.type === 'checkbox'
                 ? h('input', { type: 'checkbox', checked: !!f.value })
-                : h('input', { type: 'text', value: f.value || '', placeholder: f.placeholder || '', list: f.list || null, autocomplete: 'off' });
+                : f.type === 'select'
+                    ? h('select', {}, ...f.options.map(([v, label]) => h('option', { value: v, text: label, selected: v === (f.value || '') })))
+                    : h('input', { type: 'text', value: f.value || '', placeholder: f.placeholder || '', list: f.list || null, autocomplete: 'off' });
             inputs[f.key] = input;
             return f.type === 'checkbox'
                 ? h('label.name-check', {}, input, ' ', f.label, f.help ? h('span.muted', { text: ` — ${f.help}` }) : null)
-                : h('label.name-field', {}, h('span', { text: f.label }), input);
+                : h('label.name-field', {}, h('span', { text: f.label }), input, f.help ? h('span.muted.small', { text: f.help }) : null);
         });
         const overlay = h('div.overlay', { on: { mousedown: (e) => { if (e.target === overlay) close(null); } } },
             h('form.dialog.small.name-dialog', { role: 'dialog', 'aria-modal': 'true', on: { submit } },
@@ -62,25 +64,38 @@ export function namesView() {
     // ---- changes, each answered with the name's new state ----
     const replace = (n, patch) => { Object.assign(n, patch); draw(); };
     const charNames = () => [...new Set((store.characters || []).map((c) => c.name).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+    const charById = (id) => (store.characters || []).find((c) => c.id === id);
+    // the characters to link a use to: those whose name holds this name first, then the rest
+    const charOptions = (n) => {
+        const all = [...(store.characters || [])].filter((c) => c.id && c.name).sort((a, b) => a.name.localeCompare(b.name));
+        const has = (c) => fold(c.name).split(/[^a-z0-9äöüß'-]+/).includes(fold(n.name));
+        return [['', '— no character (a place, a ship, someone without an entry) —'], ...all.filter(has).map((c) => [c.id, `${c.name} ✓`]), ...all.filter((c) => !has(c)).map((c) => [c.id, c.name])];
+    };
+    // the form's answer → the use: a chosen character gives its name when "for whom" is left empty
+    const withChar = (v) => { const c = charById(v.ref); return { ...v, ref: v.ref || null, usedFor: v.usedFor || c?.name || '' }; };
 
     async function addUse(n) {
-        const v = await formDialog(`Use “${n.name}”`, [
-            { key: 'usedFor', label: 'For whom or what', placeholder: 'a character, a place, a ship …', list: 'name-characters' },
+        const v0 = await formDialog(`Use “${n.name}”`, [
+            { key: 'ref', type: 'select', label: 'Character', options: charOptions(n), help: '✓ their name has this one' },
+            { key: 'usedFor', label: 'For whom or what', placeholder: 'empty: the character\'s name', list: 'name-characters' },
             { key: 'major', type: 'checkbox', label: '★ A major character', help: 'the name stays theirs: using it again asks first' },
             { key: 'note', label: 'Note', placeholder: 'optional' },
         ], { ok: 'Use' });
-        if (!v) return;
+        if (!v0) return;
+        const v = withChar(v0);
         await send(n, () => api(`/api/names/${n.id}/uses`, { method: 'POST', body: v }), (body) => api(`/api/names/${n.id}/uses`, { method: 'POST', body: { ...v, ...body } }),
             (r) => replace(n, { uses: [...n.uses, r.use], wanted: null }));
     }
 
     async function editUse(n, u) {
-        const v = await formDialog(`“${n.name}” — ${u.usedFor || 'used'}`, [
+        const v0 = await formDialog(`“${n.name}” — ${u.usedFor || 'used'}`, [
+            { key: 'ref', type: 'select', label: 'Character', value: u.ref, options: charOptions(n), help: '✓ their name has this one' },
             { key: 'usedFor', label: 'For whom or what', value: u.usedFor, list: 'name-characters' },
             { key: 'major', type: 'checkbox', label: '★ A major character', value: u.major },
             { key: 'note', label: 'Note', value: u.note },
         ], { extra: { action: 'remove', label: 'Release the name' } });
-        if (!v) return;
+        if (!v0) return;
+        const v = v0.action ? v0 : withChar(v0);
         if (v.action === 'remove') {
             if (!(await confirmDialog(`Release “${n.name}” from ${u.usedFor || 'this use'}?`, { ok: 'Release', danger: true }))) return;
             try { await api(`/api/names/uses/${u.id}`, { method: 'DELETE' }); replace(n, { uses: n.uses.filter((x) => x.id !== u.id) }); toast(`${n.name}: released`); } catch (err) { toast(err.message, 'bad', 6000); }
@@ -133,10 +148,12 @@ export function namesView() {
                 ...list.slice(0, shown).map((n) => h(`div.name-row${isMajor(n) ? '.major' : ''}`, {},
                     h('strong.name-name', { text: n.name }),
                     h('span.muted.small', { text: [n.type, n.gender].filter(Boolean).join(' · ') }),
-                    h('span.name-uses', {}, ...n.uses.map((u) => h(`button.chip${u.major ? '.major' : ''}`, {
-                        type: 'button', disabled: !editable, title: [u.major ? 'A major character' : 'Used', u.note, u.at && `since ${formatDate(u.at)}`].filter(Boolean).join(' · '),
-                        on: { click: () => editUse(n, u) },
-                    }, `${u.major ? '★ ' : ''}${u.usedFor || 'used'}`))),
+                    h('span.name-uses', {}, ...n.uses.map((u) => h('span.name-use', {},
+                        h(`button.chip${u.major ? '.major' : ''}`, {
+                            type: 'button', disabled: !editable, title: [u.major ? 'A major character' : 'Used', u.ref && !charById(u.ref) ? `linked to ${u.ref}, no longer a character` : null, u.note, u.at && `since ${formatDate(u.at)}`].filter(Boolean).join(' · '),
+                            on: { click: () => editUse(n, u) },
+                        }, `${u.major ? '★ ' : ''}${u.usedFor || 'used'}`),
+                        u.ref && charById(u.ref) ? h('a.name-link', { href: `#/characters/${encodeURIComponent(u.ref)}`, title: `Open ${charById(u.ref).name}` }, '👤') : null))),
                     h('span.spacer'),
                     editable ? h(`button.btn.ghost.small${n.wanted ? '.on' : ''}`, { type: 'button', title: n.wanted ? `Wanted${n.wanted.note ? `: ${n.wanted.note}` : ''} — click to drop the wish` : 'Mark as wanted: you want this name for a character still to come', on: { click: () => toggleWanted(n) } }, n.wanted ? '🔖 Wanted' : '🔖') : null,
                     editable ? h('button.btn.small', { type: 'button', on: { click: () => addUse(n) } }, n.uses.length ? '+ Use again' : '+ Use') : null)),

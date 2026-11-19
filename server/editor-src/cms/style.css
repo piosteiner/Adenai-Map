@@ -510,3 +510,6 @@ body.locked .tabs, body.locked .user, body.locked .topbar .btn { display: none; 
 .name-dialog .dialog-actions { display: flex; gap: 8px; align-items: center; }
 .name-dialog .dialog-actions .spacer { flex: 1; }
 .small { font-size: 12px; }
+.name-use { display: inline-flex; align-items: center; gap: 2px; }
+.name-link { font-size: 13px; padding: 0 2px; }
+.name-dialog select { width: 100%; }
