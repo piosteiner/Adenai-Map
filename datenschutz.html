@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://adenai-admin.piogino.ch wss://adenai-admin.piogino.ch https://api.github.com; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Datenschutz · Adenai Map</title>
-  <meta name="description" content="Datenschutzerklärung der Adenai Map: keine Cookies, kein Tracking.">
+  <meta name="description" content="Datenschutzerklärung der Adenai Map: kein Tracking, ein Cookie nur mit dem Protokoll-Passwort.">
   <link rel="icon" type="image/png" href="public/icons/uwu_1.png">
   <style>
     :root {
@@ -38,10 +38,11 @@
   <main>
     <a class="back" href="./">← Zur Karte</a>
     <h1>Datenschutz</h1>
-    <p class="updated">Stand: 10. November 2026 (Emotes: Bilder von unserem eigenen Server)</p>
+    <p class="updated">Stand: 20. November 2026 (Bilder nur mit dem Protokoll-Passwort: ein Cookie dafür)</p>
 
     <h2>Kurz gesagt</h2>
-    <p>Keine Cookies, keine Analyse, keine Werbung, kein Tracking. Um dir die Karte zu zeigen, verbindet sich dein Browser
+    <p>Keine Analyse, keine Werbung, kein Tracking. Ein einziges Cookie gibt es, und nur wenn du die Protokolle mit
+      dem Passwort öffnest: Es macht die Bilder der Karte sichtbar. Um dir die Karte zu zeigen, verbindet sich dein Browser
       mit den unten genannten Diensten, die dadurch deine IP-Adresse sehen. Nichts davon wird genutzt, um dich zu
       erkennen oder ein Profil zu erstellen.</p>
 
@@ -67,16 +68,22 @@
     </table></div>
 
     <h2>In deinem Browser gespeichert</h2>
-    <p>Die Karte setzt <strong>keine Cookies</strong>. Sie speichert einige Dinge auf deinem Gerät, damit sie schneller lädt
-      und deine Einstellung beim nächsten Besuch noch da ist:</p>
+    <p>Die Karte speichert einige Dinge auf deinem Gerät, damit sie schneller lädt und deine Einstellung beim nächsten
+      Besuch noch da ist:</p>
     <ul>
       <li><code>theme</code> im lokalen Speicher: helles oder dunkles Design, falls du es geändert hast</li>
       <li><code>http_cache_…</code> im lokalen Speicher: Kopien der Kartendaten (Orte, Charaktere, Reisen)</li>
       <li><code>adenai-protocol-token</code> im lokalen Speicher, nur wenn du die Protokolle mit dem Passwort öffnest: ein
         Schlüssel, der dieses Gerät 30 Tage für die Protokolle freischaltet (🔒 im Protokoll sperrt es wieder)</li>
+      <li>das Cookie <code>adenai_media</code>, nur wenn du die Protokolle mit dem Passwort öffnest: derselbe Schlüssel
+        für die Bilder der Karte (Charaktere, Orte, Galerien). Die Bilder sind nur für die Spielgruppe sichtbar, weil sie
+        meist von Künstler:innen stammen, die sie nicht für eine öffentliche Website freigegeben haben. Das Cookie gilt
+        nur für die Bilder auf adenai-admin.piogino.ch, ist 30 Tage gültig und verschwindet mit 🔒 im Protokoll; es
+        enthält nichts über dich. Ohne es zeigt die Karte an Stelle der Bilder ein Schloss.</li>
       <li>eine Kopie der Seiten, Skripte und Daten der Karte, damit sie auch offline funktioniert</li>
     </ul>
-    <p>Nichts davon wird an uns gesendet, ausser dem Protokoll-Schlüssel bei jedem Abruf der Protokolle. Du kannst alles jederzeit löschen, indem du die Website-Daten in den
+    <p>Nichts davon wird an uns gesendet, ausser dem Protokoll-Schlüssel bei jedem Abruf der Protokolle und dem Cookie
+      bei jedem Bild. Du kannst alles jederzeit löschen, indem du die Website-Daten in den
       Browser-Einstellungen entfernst, oder ein privates Fenster nutzen; die Karte funktioniert auch ohne.</p>
 
     <h2>Sitzungsprotokolle</h2>
