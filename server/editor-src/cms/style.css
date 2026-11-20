@@ -525,3 +525,15 @@ body.locked .tabs, body.locked .user, body.locked .topbar .btn { display: none; 
 .mc-line .mc-name { flex: 1 1 12rem; font-weight: 600; }
 .mc-main textarea { width: 100%; box-sizing: border-box; }
 .mc-unsure { color: var(--gold, #b8901a); font-weight: 600; }
+/* the name picker (views/names.js) */
+.name-picker { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; padding: 12px; border: 1px solid var(--line-2); border-radius: 8px; background: var(--panel); }
+.name-picker .name-filters { margin-bottom: 0; }
+.name-seg { display: inline-flex; flex-wrap: wrap; gap: 4px; align-items: center; margin-right: 8px; }
+.name-count { width: 3.5rem !important; min-width: 0 !important; text-align: center; padding: 2px 4px; }
+.name-results { display: flex; flex-wrap: wrap; gap: 8px; }
+.name-results.with-meaning { flex-direction: column; }
+.name-result { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+.name-results.with-meaning .name-result { padding: 6px 0; border-top: 1px solid var(--line); }
+.name-result-part { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.name-results.with-meaning .name-result-part { display: flex; width: 100%; }
+.name-meaning { color: var(--muted); flex-basis: 100%; }

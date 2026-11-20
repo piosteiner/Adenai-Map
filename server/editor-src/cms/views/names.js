@@ -8,6 +8,11 @@ import { store, canEdit } from '../store';
 
 const FILTERS = [['all', 'All'], ['free', 'Free'], ['used', 'Used'], ['major', '★ Major character'], ['wanted', '🔖 Wanted']];
 const PAGE = 300;
+// the picker's settings, remembered in this browser
+const PICK_KEY = 'adenai-name-picker';
+const PICK_DEFAULT = { gender: '', kind: 'first', count: 5, meaning: false, redraw: 'none' };
+const loadPick = () => { try { return { ...PICK_DEFAULT, ...JSON.parse(localStorage.getItem(PICK_KEY) || '{}') }; } catch { return { ...PICK_DEFAULT }; } };
+const REDRAW = [['none', 'Free names only'], ['minor', 'Also names of minor characters'], ['all', 'All names']];
 
 // a small form in a dialog: Promise of the values, or null when cancelled
 function formDialog(title, fields, { ok = 'Save', extra } = {}) {
@@ -50,7 +55,9 @@ export function namesView() {
     let gender = '';
     let q = '';
     let shown = PAGE;
-    let picked = [];
+    let picked = [];      // [{ parts: [name, family?] }]
+    let pk = loadPick();
+    const setPk = (patch) => { pk = { ...pk, ...patch }; try { localStorage.setItem(PICK_KEY, JSON.stringify(pk)); } catch { /* private window */ } draw(); };
 
     async function load() {
         try { names = (await api('/api/names')).names; error = ''; } catch (err) { error = err.message; names = names || []; }
@@ -121,11 +128,51 @@ export function namesView() {
         } catch (err) { toast(err.message, 'bad', 6000); }
     }
 
+    // which names the picker may draw: free ones (never used, not wanted), also those of minor characters (used,
+    // but never for a ★ major one; still not wanted), or all of them
+    const drawable = (n) => (pk.redraw === 'all' ? true : pk.redraw === 'minor' ? !isMajor(n) && !n.wanted : !n.uses.length && !n.wanted);
+    const pickPools = () => {
+        const firsts = names.filter((n) => n.type === 'First name' && (!pk.gender || n.gender === pk.gender) && drawable(n));
+        const families = names.filter((n) => n.type === 'Family name' && drawable(n));
+        return { firsts, families, pool: pk.kind === 'family' ? families : firsts };
+    };
+    const takeRandom = (list, k) => { const left = [...list]; const out = []; while (out.length < k && left.length) out.push(left.splice(Math.floor(Math.random() * left.length), 1)[0]); return out; };
     function pick() {
-        const pool = names.filter((n) => !n.uses.length && !n.wanted && (!kind || n.type === kind) && (!gender || n.gender === gender));
-        picked = [];
-        while (picked.length < 5 && pool.length) picked.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
+        const { firsts, families, pool } = pickPools();
+        const k = Math.max(1, Math.min(30, Number(pk.count) || 5));
+        if (pk.kind === 'full') {
+            const lasts = takeRandom(families, k);
+            picked = takeRandom(firsts, k).map((f, i) => ({ parts: [f, lasts.length ? lasts[i % lasts.length] : null].filter(Boolean) }));
+        } else picked = takeRandom(pool, k).map((n) => ({ parts: [n] }));
         draw();
+    }
+
+    function picker(editable) {
+        const { firsts, families, pool } = pickPools();
+        const seg = (opts, value, key) => h('span.name-seg', {}, ...opts.map(([v, label]) => h(`button.chip${value === v ? '.active' : ''}`, { type: 'button', 'aria-pressed': String(value === v), on: { click: () => setPk({ [key]: v }) } }, label)));
+        const k = Math.max(1, Math.min(30, Number(pk.count) || 5));
+        const countInput = h('input.name-count', { type: 'number', min: 1, max: 30, value: k, 'aria-label': 'Number of names', on: { change: (e) => setPk({ count: e.target.value }) } });
+        const usedNote = (n) => (n.uses.length ? `${isMajor(n) ? '★ ' : ''}used for ${n.uses.map((u) => u.usedFor || 'someone').join(', ')}` : n.wanted ? 'wanted' : '');
+        return h('div.name-picker', {},
+            h('div.name-filters', {},
+                seg([['', 'Any'], ['Female', 'Female'], ['Male', 'Male'], ['Neutral', 'Neutral']], pk.gender, 'gender'),
+                seg([['first', 'First names'], ['full', 'Full names'], ['family', 'Family names']], pk.kind, 'kind'),
+                h('span.name-seg', {}, h('button.btn.ghost.small', { type: 'button', 'aria-label': 'One fewer', on: { click: () => setPk({ count: Math.max(1, k - 1) }) } }, '−'), countInput,
+                    h('button.btn.ghost.small', { type: 'button', 'aria-label': 'One more', on: { click: () => setPk({ count: Math.min(30, k + 1) }) } }, '+')),
+                h('label.name-check', {}, h('input', { type: 'checkbox', checked: pk.meaning, on: { change: (e) => setPk({ meaning: e.target.checked }) } }), ' Show the meaning')),
+            h('div.name-filters', {},
+                h('span.muted.small', { text: 'Draw from:' }), seg(REDRAW, pk.redraw, 'redraw'),
+                h('span.spacer'),
+                h('button.btn.primary', { type: 'button', disabled: !pool.length, on: { click: pick } }, `🎲 Pick ${k}`)),
+            h('p.muted.small', { text: `From ${pool.length} ${pk.kind === 'family' ? 'family names' : `${pk.gender ? `${pk.gender.toLowerCase()} ` : ''}first names`}${pk.kind === 'full' ? ` and ${families.length} family names` : ''}${pk.gender && pk.kind !== 'family' ? ' (names without a gender only under Any)' : ''}.` }),
+            picked.length ? h(`div.name-results${pk.meaning ? '.with-meaning' : ''}`, {}, ...picked.map((p) => h('div.name-result', {},
+                h('span.name-picked', { text: p.parts.map((n) => n.name).join(' ') }),
+                ...p.parts.map((n) => h('span.name-result-part', {},
+                    p.parts.length > 1 ? h('strong.small', { text: `${n.name}: ` }) : null,
+                    usedNote(n) ? h('span.muted.small', { text: `${usedNote(n)} ` }) : null,
+                    editable ? h('button.btn.ghost.small', { type: 'button', title: `Use “${n.name}”`, on: { click: () => addUse(n) } }, '+ Use') : null,
+                    editable ? h(`button.btn.ghost.small${n.wanted ? '.on' : ''}`, { type: 'button', title: n.wanted ? 'Wanted — click to drop the wish' : 'Mark as wanted', on: { click: () => toggleWanted(n) } }, '🔖') : null,
+                    pk.meaning ? h('span.name-meaning.small', {}, n.meaning || 'no meaning known', ' ', n.meaningSource ? h('a', { href: n.meaningSource, target: '_blank', rel: 'noopener' }, /wiktionary\.org/.test(n.meaningSource) ? 'Wiktionary ↗' : 'source ↗') : null) : null))))) : null);
     }
 
     // ---- the page ----
@@ -169,8 +216,7 @@ export function namesView() {
                     h('span.spacer'), h('a.btn.ghost.small', { href: 'https://grimoire.piogino.ch/names', target: '_blank', rel: 'noopener' }, 'The list in the Grimoire ↗')),
                 h('p.muted', { text: 'The list itself lives in the Grimoire and stays clean there; what Adenai did with each name is kept here. ★ A major character: the name stays theirs — using it again asks first. 🔖 Wanted: kept for a character still to come. Click a use to change it or release the name.' }),
                 error ? h('p.error', { text: `⚠ ${error}` }) : null,
-                h('div.name-pick', {}, h('button.btn.primary', { type: 'button', on: { click: pick } }, '🎲 Five free names'),
-                    picked.length ? h('span', {}, ...picked.map((n) => h('span.name-picked', { text: n.name }))) : h('span.muted', { text: 'Unused and not wanted, of the kind and gender chosen below.' }))),
+                picker(editable)),
             h('section.overview-block', {},
                 h('div.name-filters', {},
                     ...FILTERS.map(([k, label]) => h(`button.chip${filter === k ? '.active' : ''}`, { type: 'button', on: { click: () => { filter = k; shown = PAGE; draw(); } } }, `${label} ${count(k)}`)),
