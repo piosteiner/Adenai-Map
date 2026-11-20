@@ -7,12 +7,12 @@
         "name": "Valaris",
         "description": "Die grösste Stadt im Osten von Adenai. Regiert von [[Petrel Kormorant]].\n\nHier hatte [[Kunos]] von dem [[Sternenzirkel]] die Stadtregierung mit magischen Wasserspielen unter eine Bann gesetzt.\n\n[[Lerna]] führt in der Unterstadt die [[Benthals]] an. Eine Gruppierung die zwischen strukturierter Kriminalität und Nachbarschaftsschutz schwankt.\n\n[[Tasbor]] und [[Abu]] haben hier ihre Detektei [[TAbu]].\nIhre Nachbarin ist [[Angela]].",
         "contentUrl": null,
-        "image": "https://adenai-admin.piogino.ch/media/gxvgaxrnc2ez-small.webp",
+        "image": "https://grimoire.piogino.ch/api/media/files/gxvgaxrnc2ez-small.webp",
         "region": "valaris_region",
         "type": "city",
         "visited": true,
         "images": [
-          "https://adenai-admin.piogino.ch/media/gxvgaxrnc2ez-small.webp"
+          "https://grimoire.piogino.ch/api/media/files/gxvgaxrnc2ez-small.webp"
         ]
       },
       "geometry": {
@@ -69,13 +69,13 @@
         "name": "Wesdalen",
         "description": "## Beschreibung\nWesdalen ist neben [[Rena]] die grösste Stadt in West-Adenai. Das Zentrum der Stadt ist um einen alten, schwebenden, umgenutzten Magierturm gebaut. Auf einem Küstenarm liegt in einem riesigen Ring die Stadt unterhalb der alten schwebenden Insel.\nDie Theatergruppe [[Die Tanzenden Couatl]] stammen aus dieser Stadt.\n[[She-Ra]] hat Beziehungen zu dieser Stadt.\n\n## Regierung\nRegiert wird die Stadt von [[Lord Ramvir Beridze]]. Seine rechte Hand ist [[Kristina]].\n\n## [[Griswold Werkstätte]]\n[[Erissa Bulan]] führt das Labor von Griswold hier unter der Stadt. [[Piper Schlopp]] ist eine von ihren Schülerinnen, die viel Potenzial zu haben scheint. [[Jak-gur]] ist für ein Teil der Sicherheit der Einrichtung verantwortlich.",
         "contentUrl": null,
-        "image": "https://adenai-admin.piogino.ch/media/njpuqlh4ut3e-small.webp",
+        "image": "https://grimoire.piogino.ch/api/media/files/njpuqlh4ut3e-small.webp",
         "region": "rena_region",
         "type": "city",
         "visited": false,
         "images": [
-          "https://adenai-admin.piogino.ch/media/njpuqlh4ut3e-small.webp",
-          "https://adenai-admin.piogino.ch/media/uvlssv90j5ke-small.webp"
+          "https://grimoire.piogino.ch/api/media/files/njpuqlh4ut3e-small.webp",
+          "https://grimoire.piogino.ch/api/media/files/uvlssv90j5ke-small.webp"
         ]
       },
       "geometry": {
@@ -115,9 +115,9 @@
         "type": "",
         "region": "",
         "images": [
-          "https://adenai-admin.piogino.ch/media/n5v05no3iv5n-small.webp"
+          "https://grimoire.piogino.ch/api/media/files/n5v05no3iv5n-small.webp"
         ],
-        "image": "https://adenai-admin.piogino.ch/media/n5v05no3iv5n-small.webp"
+        "image": "https://grimoire.piogino.ch/api/media/files/n5v05no3iv5n-small.webp"
       },
       "geometry": {
         "type": "Point",
@@ -186,12 +186,12 @@
         "name": "Atlantis (versunken)",
         "description": "Atlantis versunken im Mirog Graben - auch bekannt als das Unterwasser Paradies.",
         "contentUrl": null,
-        "image": "https://adenai-admin.piogino.ch/media/p758ykxn48qq-small.webp",
+        "image": "https://grimoire.piogino.ch/api/media/files/p758ykxn48qq-small.webp",
         "region": "east_sea",
         "type": "ruin",
         "visited": true,
         "images": [
-          "https://adenai-admin.piogino.ch/media/p758ykxn48qq-small.webp"
+          "https://grimoire.piogino.ch/api/media/files/p758ykxn48qq-small.webp"
         ]
       },
       "geometry": {
@@ -208,12 +208,12 @@
         "name": "Atlantis (aufgestiegen)",
         "description": "Standort von Atlantis, nachdem es von den VsuzH wieder in den Himmel gehoben wurde.",
         "contentUrl": null,
-        "image": "https://adenai-admin.piogino.ch/media/1c7ewf7omv29-small.webp",
+        "image": "https://grimoire.piogino.ch/api/media/files/1c7ewf7omv29-small.webp",
         "region": "heaven",
         "type": "ruin",
         "visited": true,
         "images": [
-          "https://adenai-admin.piogino.ch/media/1c7ewf7omv29-small.webp"
+          "https://grimoire.piogino.ch/api/media/files/1c7ewf7omv29-small.webp"
         ]
       },
       "geometry": {
@@ -267,12 +267,12 @@
         "name": "Basapo",
         "description": "Ein grosser Handelsposten im Süden von Valaris.\n\nWird von [[Königin Maeba II.]] regiert.",
         "contentUrl": null,
-        "image": "https://adenai-admin.piogino.ch/media/01ln4jgoxpje-small.webp",
+        "image": "https://grimoire.piogino.ch/api/media/files/01ln4jgoxpje-small.webp",
         "region": "upeto",
         "type": "city",
         "visited": true,
         "images": [
-          "https://adenai-admin.piogino.ch/media/01ln4jgoxpje-small.webp"
+          "https://grimoire.piogino.ch/api/media/files/01ln4jgoxpje-small.webp"
         ]
       },
       "geometry": {
@@ -289,12 +289,12 @@
         "name": "Akónetchie",
         "description": "Auch nur 'Ako' genannt. Alte heilige Städte im Dschungel von Upeto. Hier befindet sich der M'pako, die Sonnenwurzel. Wie in [[Basapo]] wird hier primär Talona als Göttin verehrt. Ein Zugang zum Underdark befindet sich hier.",
         "contentUrl": null,
-        "image": "https://adenai-admin.piogino.ch/media/yo2c0exwe5z6-small.webp",
+        "image": "https://grimoire.piogino.ch/api/media/files/yo2c0exwe5z6-small.webp",
         "region": "upeto",
         "type": "town",
         "visited": true,
         "images": [
-          "https://adenai-admin.piogino.ch/media/yo2c0exwe5z6-small.webp"
+          "https://grimoire.piogino.ch/api/media/files/yo2c0exwe5z6-small.webp"
         ]
       },
       "geometry": {
@@ -311,7 +311,7 @@
         "name": "Silbergrat",
         "description": "Der Start der Reise der VsuzH. An diesem Ort kam Luna von Moonhaven in die Material Plane.",
         "contentUrl": null,
-        "image": "https://adenai-admin.piogino.ch/media/hsxm3mxbyg8r-small.webp",
+        "image": "https://grimoire.piogino.ch/api/media/files/hsxm3mxbyg8r-small.webp",
         "region": "sun_peaks",
         "type": "town",
         "visited": true
@@ -447,7 +447,7 @@
         "name": "Kalthar",
         "description": "Details zu diesem Ort sind noch zu entdecken.",
         "contentUrl": null,
-        "image": "https://adenai-admin.piogino.ch/media/fgvdrnuyt9xe-small.webp",
+        "image": "https://grimoire.piogino.ch/api/media/files/fgvdrnuyt9xe-small.webp",
         "region": "western_adenai",
         "type": "town",
         "visited": false
@@ -509,9 +509,9 @@
         "type": "landmark",
         "visited": true,
         "images": [
-          "https://adenai-admin.piogino.ch/media/ntgcgzaej11b-small.webp"
+          "https://grimoire.piogino.ch/api/media/files/ntgcgzaej11b-small.webp"
         ],
-        "image": "https://adenai-admin.piogino.ch/media/ntgcgzaej11b-small.webp"
+        "image": "https://grimoire.piogino.ch/api/media/files/ntgcgzaej11b-small.webp"
       },
       "geometry": {
         "type": "Point",
@@ -527,7 +527,7 @@
         "name": "Zur Prallen Traube",
         "description": "Die VsuzH haben einen Überfall auf das Gasthaus und das umliegende Dorf gerächt.",
         "contentUrl": null,
-        "image": "https://adenai-admin.piogino.ch/media/njof8v5mhxne-small.webp",
+        "image": "https://grimoire.piogino.ch/api/media/files/njof8v5mhxne-small.webp",
         "region": "eastern_adenai",
         "type": "village",
         "visited": true
@@ -767,7 +767,7 @@
         "name": "Siedlung an der nördlichen Grenze zur Harak Wüste",
         "description": "Details sind noch zu entdecken.",
         "contentUrl": null,
-        "image": "https://adenai-admin.piogino.ch/media/sfp29t68v924-small.webp",
+        "image": "https://grimoire.piogino.ch/api/media/files/sfp29t68v924-small.webp",
         "region": "harak",
         "type": "town",
         "visited": false
@@ -1039,7 +1039,7 @@
         "name": "Erhabene See",
         "description": "Eine Hochebene mit riesigen Sand Dünen aus dem zerribenen Gestein des süd-östlichen Ausläufers des Sonnenspitzen Gebirges.",
         "contentUrl": null,
-        "image": "https://adenai-admin.piogino.ch/media/xwrsm4c088bp-small.webp",
+        "image": "https://grimoire.piogino.ch/api/media/files/xwrsm4c088bp-small.webp",
         "region": "tua_danar",
         "type": "environment",
         "visited": false
@@ -1058,7 +1058,7 @@
         "name": "Underdark bei Ako",
         "description": "Zugang zum Underdark bei Ako. Die Sonnenwurzel Mpako liegt über dem Zugang.",
         "contentUrl": null,
-        "image": "https://adenai-admin.piogino.ch/media/qt1ttvmhk66g-small.webp",
+        "image": "https://grimoire.piogino.ch/api/media/files/qt1ttvmhk66g-small.webp",
         "region": "north_adenai",
         "type": "landmark",
         "visited": true
@@ -1115,12 +1115,12 @@
         "name": "Gleissende Zitadelle",
         "description": "Radiant Citadel",
         "contentUrl": null,
-        "image": "https://adenai-admin.piogino.ch/media/hic3u8km9zpv-small.webp",
+        "image": "https://grimoire.piogino.ch/api/media/files/hic3u8km9zpv-small.webp",
         "region": "unknown",
         "type": "city",
         "visited": true,
         "images": [
-          "https://adenai-admin.piogino.ch/media/hic3u8km9zpv-small.webp"
+          "https://grimoire.piogino.ch/api/media/files/hic3u8km9zpv-small.webp"
         ]
       },
       "geometry": {
@@ -1137,17 +1137,17 @@
         "name": "Serenissa",
         "description": "Serinessa ist in obere und untere Stadt unterteilt. In der unteren Stadt leben die ständigen Bediensteten und die Serinessa Kinder. Die obere Stadt ist rein den geladenen Gästen vorbehalten.\nHier lebt seit vielen Jahren der alte Magier [[Anselm Halloran]], er scheint die Insel nie zu verlassen. Zu seinen Schüler:innen gehört [[Vesper Serinessa]]. Seine Freundin ist [[Fina Serinessa und Fino]].\n[[Partriato Serinessa]] leitet die Insel.",
         "contentUrl": null,
-        "image": "https://adenai-admin.piogino.ch/media/tzt0yqpqftcg-small.webp",
+        "image": "https://grimoire.piogino.ch/api/media/files/tzt0yqpqftcg-small.webp",
         "region": "western_adenai",
         "type": "island",
         "visited": true,
         "images": [
-          "https://adenai-admin.piogino.ch/media/tzt0yqpqftcg-small.webp",
-          "https://adenai-admin.piogino.ch/media/nxxqb1ql4ja1-small.webp",
-          "https://adenai-admin.piogino.ch/media/ke2jlsbm97st-small.webp",
-          "https://adenai-admin.piogino.ch/media/1jmkov8hdz6j-small.webp",
-          "https://adenai-admin.piogino.ch/media/hko0a8tcnq8x-small.webp",
-          "https://adenai-admin.piogino.ch/media/urynzo3lwfui-small.webp"
+          "https://grimoire.piogino.ch/api/media/files/tzt0yqpqftcg-small.webp",
+          "https://grimoire.piogino.ch/api/media/files/nxxqb1ql4ja1-small.webp",
+          "https://grimoire.piogino.ch/api/media/files/ke2jlsbm97st-small.webp",
+          "https://grimoire.piogino.ch/api/media/files/1jmkov8hdz6j-small.webp",
+          "https://grimoire.piogino.ch/api/media/files/hko0a8tcnq8x-small.webp",
+          "https://grimoire.piogino.ch/api/media/files/urynzo3lwfui-small.webp"
         ]
       },
       "geometry": {
@@ -1308,10 +1308,10 @@
         "region": "",
         "visited": false,
         "images": [
-          "https://adenai-admin.piogino.ch/media/v11maqr95agq-small.webp",
-          "https://adenai-admin.piogino.ch/media/f4ynbzqoirbs-small.webp"
+          "https://grimoire.piogino.ch/api/media/files/v11maqr95agq-small.webp",
+          "https://grimoire.piogino.ch/api/media/files/f4ynbzqoirbs-small.webp"
         ],
-        "image": "https://adenai-admin.piogino.ch/media/v11maqr95agq-small.webp"
+        "image": "https://grimoire.piogino.ch/api/media/files/v11maqr95agq-small.webp"
       },
       "geometry": {
         "type": "Point",
