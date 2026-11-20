@@ -34,6 +34,16 @@ const plainCors = cors();
 const credentialCors = cors({ origin: MAP_ORIGINS, credentials: true });
 const corsFor = (req, res, next) => (CREDENTIAL_PATHS.includes(req.path) ? credentialCors : plainCors)(req, res, next);
 
+// other servers of the owner that show the pictures (the OBS controller): a key of their own in X-Media-Key; stored
+// here only as its SHA-256, MEDIA_KEYS="obs:<sha256 hex>,…"
+const crypto = require('crypto');
+const MEDIA_KEYS = (process.env.MEDIA_KEYS || '').split(',').map((s) => s.trim().split(':')[1]).filter(Boolean);
+function keyValid(key) {
+    if (!key || !MEDIA_KEYS.length) return false;
+    const h = crypto.createHash('sha256').update(String(key)).digest('hex');
+    return MEDIA_KEYS.some((k) => k.length === h.length && crypto.timingSafeEqual(Buffer.from(k), Buffer.from(h)));
+}
+
 // in front of /media: open pictures for everyone, else the GM, or a valid token in the cookie; otherwise 401 (no body: the map shows its placeholder)
 async function gate(req, res, next) {
     try {
@@ -43,7 +53,7 @@ async function gate(req, res, next) {
             res.set('Cache-Control', 'public, max-age=86400');
             return next();
         }
-        if (isGm(req) || await tokenValid(cookieOf(req))) {
+        if (isGm(req) || keyValid(req.get('x-media-key')) || await tokenValid(cookieOf(req))) {
             res.set('Cache-Control', 'private, max-age=86400'); // the browser may keep it, no shared cache
             return next();
         }
@@ -57,4 +67,4 @@ function setCookie(res, token, expiresAt) {
 }
 const clearCookie = (res) => res.clearCookie(COOKIE, { path: '/media', httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax' });
 
-module.exports = { gate, setCookie, clearCookie, corsFor, cookieOf, COOKIE, MAP_ORIGINS };
+module.exports = { keyValid, gate, setCookie, clearCookie, corsFor, cookieOf, COOKIE, MAP_ORIGINS };
