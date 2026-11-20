@@ -5,6 +5,7 @@ const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs').promises;
 const { requireAuth } = require('../middleware/auth');
+const { ownWork } = require('../lib/media-open');
 
 // Initialize GitHub API (passed from main server)
 let octokit, REPO_OWNER, REPO_NAME;
@@ -73,6 +74,20 @@ async function normalizeLibraryTags() {
     return n || null; // nothing to change: no write
   }, (n) => `Tags in lower case, settled spellings (${n} images)`);
   if (changed) console.log(`media: tags of ${changed} images normalised`);
+}
+
+// Pictures from before the `open` mark (2026-11-20) get it once, from their credits (lib/media-open.js); a mark the
+// owner has set is never touched again
+async function markOpenPictures() {
+  const result = await updateMediaLibrary((library) => {
+    let n = 0, open = 0;
+    for (const m of Object.values(library.images)) {
+      if (typeof m.open === 'boolean') continue;
+      m.open = ownWork(m.credits); n += 1; if (m.open) open += 1;
+    }
+    return n ? { n, open } : null;
+  }, (r) => `Pictures: own work and AI visible to everyone (${r.open} of ${r.n})`);
+  if (result) console.log(`media: ${result.open} of ${result.n} pictures marked visible to everyone`);
 }
 
 // Helper function to generate short unique IDs
@@ -264,6 +279,7 @@ router.post('/upload', requireAuth, upload.array('images', 10), async (req, res)
           caption: caption,
           credits: credits.trim(),
           tags: normalizeTags(tags),
+          open: req.body.open === undefined || req.body.open === '' ? ownWork(credits) : req.body.open === 'true', // own work and AI: for everyone (lib/media-open.js)
           uploadDate: new Date().toISOString(),
           sizes: {},
           fileSize: file.size,
@@ -402,7 +418,7 @@ router.get('/:id', requireAuth, async (req, res) => {
 router.put('/:id', requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, caption, credits, category, tags } = req.body;
+    const { title, caption, credits, category, tags, open } = req.body;
     
     // Validate required fields
     if (!credits || credits.trim() === '') {
@@ -425,6 +441,8 @@ router.put('/:id', requireAuth, async (req, res) => {
         credits: credits.trim(),
         category: category || 'general',
         tags: normalizeTags(tags),
+        // visible to everyone (lib/media-open.js): as ticked; an older client that sends no tick keeps the picture's
+        open: typeof open === 'boolean' ? open : !!media[id].open,
         lastModified: new Date().toISOString()
       };
       return media[id];
@@ -492,4 +510,5 @@ router.delete('/:id', requireAuth, async (req, res) => {
   }
 });
 
-module.exports = { router, initGitHub, optimizeImage, normalizeTags, normalizeLibraryTags };
+module.exports = {
+  router, initGitHub, optimizeImage, normalizeTags, normalizeLibraryTags, markOpenPictures };

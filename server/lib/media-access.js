@@ -1,4 +1,4 @@
-// The pictures of the media library (/media, uploads/optimized) are not public (2026-11-20): most come from artists
+// The pictures of the media library (/media, uploads/optimized) are not public (2026-11-20) — except those marked open, the owner's own and AI ones (lib/media-open.js): most come from artists
 // who never allowed showing them on an open website. They are for the group: the GM (CMS login) and everyone who
 // has the minutes password. Unlocking the minutes (routes/protocols.js) also sets a cookie for /media holding the same
 // signed token (lib/protocol-auth.js, 30 days, ended by a new password); a device unlocked before swaps its stored
@@ -8,6 +8,16 @@
 const cors = require('cors');
 const { tokenValid } = require('./protocol-auth');
 const { isGm } = require('../middleware/auth');
+const { openFiles } = require('./media-open');
+const github = require('./github');
+
+// the pictures everyone may see (lib/media-open.js), from the library in the CMS's memory (lib/github-cache.js)
+async function isOpen(file) {
+    try {
+        const { data } = await github.octokit.rest.repos.getContent({ owner: process.env.GITHUB_USERNAME, repo: process.env.GITHUB_REPO, path: 'public/data/media-library.json' });
+        return openFiles(JSON.parse(Buffer.from(data.content, 'base64').toString()), data.sha).has(file);
+    } catch { return false; } // the library unreadable: closed, as before
+}
 
 const COOKIE = 'adenai_media';
 // the map's addresses: they may send the password and receive the cookie (credentials need a named origin)
@@ -24,10 +34,15 @@ const plainCors = cors();
 const credentialCors = cors({ origin: MAP_ORIGINS, credentials: true });
 const corsFor = (req, res, next) => (CREDENTIAL_PATHS.includes(req.path) ? credentialCors : plainCors)(req, res, next);
 
-// in front of /media: the GM, or a valid token in the cookie; otherwise 401 (no body: the map shows its placeholder)
+// in front of /media: open pictures for everyone, else the GM, or a valid token in the cookie; otherwise 401 (no body: the map shows its placeholder)
 async function gate(req, res, next) {
     try {
         res.set('Vary', 'Cookie');
+        // the owner's own pictures and AI pictures: for everyone
+        if (await isOpen(decodeURIComponent(req.path.replace(/^\//, '')))) {
+            res.set('Cache-Control', 'public, max-age=86400');
+            return next();
+        }
         if (isGm(req) || await tokenValid(cookieOf(req))) {
             res.set('Cache-Control', 'private, max-age=86400'); // the browser may keep it, no shared cache
             return next();

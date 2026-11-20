@@ -23,12 +23,16 @@ test("without the GM's login the CMS's data is closed; the map's addresses stay 
     expect((await (await request.get(`${CMS}/api/pending`)).json()).error).toBe('Protocol password required');
     // a picture of the media library: closed to the public (2026-11-20 — for the group only, see the next test)
     expect((await request.get(await aPicture(request))).status()).toBe(401);
+    // … but the owner's own pictures and AI pictures are for everyone (lib/media-open.js)
+    expect((await request.get(await aPicture(request, true))).status()).toBe(200);
 });
 
-// the address of a picture the map shows, on the test instance
-const aPicture = async (request) => {
+// the address of a picture the map shows, on the test instance: one with someone else's art in it (locked), or with
+// own: one marked visible to everyone (open, the owner's own or AI)
+const aPicture = async (request, own = false) => {
     const lib = await (await request.get(`${CMS}/api/data/media-library.json`)).json();
-    return Object.values(lib.images)[0].sizes.small.url.replace('https://adenai-admin.piogino.ch', CMS);
+    const m = Object.values(lib.images).find((x) => !!x.open === own);
+    return m.sizes.small.url.replace('https://adenai-admin.piogino.ch', CMS);
 };
 
 test('the pictures are for the group: the GM sees them, and whoever has the minutes password', async ({ page, browser, request }) => {

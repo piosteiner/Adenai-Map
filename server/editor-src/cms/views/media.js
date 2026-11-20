@@ -261,6 +261,8 @@ export function mediaView(app) {
         const cat = h('select', { disabled: ro }, ...CATEGORIES.map((c) => h('option', { value: c }, c)));
         cat.value = m.category || 'general';
         const tags = h('input', { type: 'text', value: (m.tags || []).join(', '), readOnly: ro, placeholder: 'comma separated' });
+        // own work and AI pictures are for everyone; the rest only with the minutes password (server/lib/media-open.js)
+        const open = h('input', { type: 'checkbox', checked: !!m.open, disabled: ro });
         const picks = tagPicks(tags, () => cat.value);
         cat.addEventListener('change', picks.draw);
         const used = usageOf(m);
@@ -271,7 +273,7 @@ export function mediaView(app) {
         });
 
         // saved as it is edited (autosaver, form.js): a field once it is left, the caption after a pause in typing
-        const read = () => ({ title: title.value.trim(), caption: caption.value.trim(), credits: credits.value.trim(), category: cat.value, tags: tags.value.split(',').map((t) => t.trim()).filter(Boolean) });
+        const read = () => ({ title: title.value.trim(), caption: caption.value.trim(), credits: credits.value.trim(), category: cat.value, tags: tags.value.split(',').map((t) => t.trim()).filter(Boolean), open: open.checked });
         const state = h('span.save-state');
         const headTitle = h('h2', { text: m.title || m.id });
         const track = tracker(read, () => {});
@@ -288,6 +290,7 @@ export function mediaView(app) {
             h('label.field', {}, h('span.field-label', { text: 'Title' }), title),
             h('label.field', {}, h('span.field-label', { text: 'Caption' }), caption),
             h('label.field', {}, h('span.field-label', { text: 'Credits *' }), credits),
+            h('label.check', { title: 'Your own drawings and pictures made purely with AI. Everything else only with the minutes password.' }, open, ' Visible to everyone — my own work or AI, no one else’s art in it'),
             h('div.grid', {}, h('label.field', {}, h('span.field-label', { text: 'Category' }), cat), h('label.field', {}, h('span.field-label', { text: 'Tags' }), tags)),
             ro ? null : picks.el);
         auto?.attach(form);

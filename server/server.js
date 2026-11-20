@@ -61,7 +61,8 @@ initCharactersGitHub(octokit, REPO_OWNER, REPO_NAME);
 initCharacterPathsGitHub(octokit, REPO_OWNER, REPO_NAME);
 initMediaGitHub(octokit, REPO_OWNER, REPO_NAME);
 // older tags in lower case, once (nothing is written when they are already)
-require('./routes/media').normalizeLibraryTags().catch((err) => console.error('media: tags not normalised:', err.message));
+require('./routes/media').normalizeLibraryTags().catch((err) => console.error('media: tags not normalised:', err.message))
+    .then(() => require('./routes/media').markOpenPictures()).catch((err) => console.error('media: open pictures not marked:', err.message)); // own work and AI for everyone (lib/media-open.js)
 
 // Middleware
 // Security headers (2026-11-10): the CMS runs no inline scripts (theme.js is a file); its editor adds <style> tags,
