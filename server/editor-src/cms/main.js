@@ -156,6 +156,7 @@ function loginDialog() {
 async function logout() {
     if (!(await settle()) && !(await (await import('./dom')).confirmDialog('Log out and discard the unsaved changes?', { ok: 'Log out', danger: true }))) return;
     await api('/api/logout', { method: 'POST' }).catch(() => {});
+    await fetch(GRIMOIRE_ACCESS, { method: 'DELETE', credentials: 'include' }).catch(() => {}); // the pictures closed again
     location.reload(); // back to the login form, nothing of the data left on the page
 }
 
@@ -245,9 +246,20 @@ function showGate() {
     user.focus();
 }
 
+// The pictures are in the Grimoire's library (server/lib/media-access.js), behind its gate: the GM's session gets a
+// minutes token here and hands it to the Grimoire, which keeps it as its cookie for Adenai's pictures (30 days)
+const GRIMOIRE_ACCESS = 'https://grimoire.piogino.ch/api/projects/adenai/media-access';
+async function pictureAccess() {
+    try {
+        const { token } = await api('/api/protocols/media-token');
+        await fetch(GRIMOIRE_ACCESS, { method: 'POST', credentials: 'include', headers: { Authorization: `Bearer ${token}` } });
+    } catch (e) { console.warn('The pictures could not be opened at the Grimoire:', e.message); }
+}
+
 api('/api/auth-status')
-    .then((auth) => {
+    .then(async (auth) => {
         if (!auth.authenticated) return showGate();
+        await pictureAccess();
         return loadAll()
             .then(() => loadPending())
             .then(() => route(true));

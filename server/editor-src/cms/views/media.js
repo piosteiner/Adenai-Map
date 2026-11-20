@@ -1,4 +1,4 @@
-// Media: the image library (public/data/media-library.json, files in server/uploads/optimized). A grid of all images
+// Media: the image library — Adenai's set in the Grimoire's library (server/lib/grimoire-images.js), copied to public/data/media-library.json. A grid of all images
 // with search and category; dropping files anywhere on the grid (or "Upload") uploads them with a progress bar; the
 // selected image shows its sizes and where it is used, and its title, caption, credits, category and tags can be
 // edited. Deleting asks first — and says if characters, locations or glossary terms still show the image.
@@ -118,7 +118,7 @@ const urlOf = (m, size = 'small') => m.sizes?.[size]?.url || m.sizes?.medium?.ur
 function usageOf(m) {
     const base = baseOf(m);
     if (!base) return [];
-    const uses = (entity, texts = []) => [...(entity.images || []), entity.image, ...texts].some((x) => typeof x === 'string' && x.includes(`/media/${base}-`));
+    const uses = (entity, texts = []) => [...(entity.images || []), entity.image, ...texts].some((x) => typeof x === 'string' && (x.includes(`/media/${base}-`) || x.includes(`/files/${base}-`)));
     return [
         ...store.characters.filter((c) => uses(c, [c.description, c.notes])).map((c) => ({ kind: 'character', name: c.name, href: `#/characters/${encodeURIComponent(c.id)}` })),
         ...store.locations.filter((f) => uses(f.properties || {}, [f.properties?.description])).map((f) => ({ kind: 'location', name: f.properties.name, href: `#/locations/${encodeURIComponent(f.properties.name)}` })),

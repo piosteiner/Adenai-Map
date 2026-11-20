@@ -14,8 +14,8 @@ const fold = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toL
 const LINK = /(?<!\\)\[\[([^\]\n|]+)(?:\|[^\]\n]*)?\]\]/g;
 const dayOf = (x) => x?.dateStart || x?.date || '';
 
-// the media id of an image address: ".../media/g7b7j6jhzs5f-small.webp" → "g7b7j6jhzs5f"
-const mediaIdOf = (url) => (/\/media\/([a-z0-9]+)-(?:thumb|small|medium|large|original)\.webp$/i.exec(String(url || '')) || [])[1] || null;
+// the media id of an image address: ".../media/g7b7j6jhzs5f-small.webp" (the Grimoire's ".../media/files/…") → "g7b7j6jhzs5f"
+const mediaIdOf = (url) => (/\/(?:media|files)\/([a-z0-9]+)-(?:thumb|small|medium|large|original)\.webp$/i.exec(String(url || '')) || [])[1] || null;
 
 // names that differ by one letter ("Toftgard" / "Torftgard"): Levenshtein distance ≤ 1
 function oneEditApart(a, b) {

@@ -60,9 +60,11 @@ initLocationsGitHub(octokit, REPO_OWNER, REPO_NAME);
 initCharactersGitHub(octokit, REPO_OWNER, REPO_NAME);
 initCharacterPathsGitHub(octokit, REPO_OWNER, REPO_NAME);
 initMediaGitHub(octokit, REPO_OWNER, REPO_NAME);
-// older tags in lower case, once (nothing is written when they are already)
-require('./routes/media').normalizeLibraryTags().catch((err) => console.error('media: tags not normalised:', err.message))
-    .then(() => require('./routes/media').markOpenPictures()).catch((err) => console.error('media: open pictures not marked:', err.message)); // own work and AI for everyone (lib/media-open.js)
+// the pictures live in the Grimoire (lib/grimoire-images.js): the copy here in step with it, at start and every 10 minutes
+const syncMedia = () => require('./routes/media').syncFromGrimoire().catch((err) => console.error('media: not in step with the Grimoire:', err.message));
+syncMedia();
+require('./lib/move-media-addresses').moveMediaAddresses(REPO_OWNER, REPO_NAME).catch((err) => console.error('media: addresses not moved:', err.message));
+setInterval(syncMedia, 10 * 60 * 1000).unref();
 
 // Middleware
 // Security headers (2026-11-10): the CMS runs no inline scripts (theme.js is a file); its editor adds <style> tags,
@@ -70,7 +72,7 @@ require('./routes/media').normalizeLibraryTags().catch((err) => console.error('m
 app.disable('x-powered-by');
 app.use((req, res, next) => {
   res.set({
-    'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' wss://adenai-admin.piogino.ch; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+    'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' wss://adenai-admin.piogino.ch https://grimoire.piogino.ch; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
     'X-Content-Type-Options': 'nosniff',
     'Referrer-Policy': 'strict-origin-when-cross-origin',
     'X-Frame-Options': 'DENY',
@@ -107,7 +109,7 @@ app.use(sessionMiddleware);
 app.get(['/', '/index.html'], (req, res) => res.redirect(302, '/v2/'));
 app.use(express.static('admin-interface')); // the CMS's code — its data comes only with the GM login (below)
 app.use('/uploads', requireAuth, express.static('uploads')); // originals and leftovers: the GM's; the map uses /media
-app.use('/media', mediaAccess.gate, express.static('uploads/optimized')); // the pictures: for the GM and whoever has the minutes password (lib/media-access.js)
+app.use('/media', mediaAccess.toGrimoire); // the pictures moved to the Grimoire's library (2026-11-20): old addresses lead there (lib/media-access.js)
 
 // File upload configuration
 const storage = multer.diskStorage({

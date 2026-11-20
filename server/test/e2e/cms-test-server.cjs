@@ -18,6 +18,8 @@ Object.assign(process.env, {
     ADENAI_SESSIONS_DIR: path.join(dir, 'sessions'),
     // the minutes in a copy (2026-11-20): a test may set the minutes password, never on the real ones
     PROTOCOL_DATA_DIR: path.join(dir, 'protocols'),
+    // the pictures and names are the Grimoire's (lib/grimoire-images.js): a test instance never writes there
+    GRIMOIRE_KEY: '',
 });
 fs.mkdirSync(process.env.PROTOCOL_DATA_DIR, { recursive: true });
 for (const f of ['protocols.json', 'protocol-settings.json', 'protocol-comments.json', 'protocols-deleted.json']) {

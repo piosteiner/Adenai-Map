@@ -21,52 +21,41 @@ test("without the GM's login the CMS's data is closed; the map's addresses stay 
     expect((await request.get(`${CMS}/api/auth-status`)).status()).toBe(200);
     // the proposals: past the GM's lock, to their own (the minutes' password)
     expect((await (await request.get(`${CMS}/api/pending`)).json()).error).toBe('Protocol password required');
-    // a picture of the media library: closed to the public (2026-11-20 — for the group only, see the next test)
-    expect((await request.get(await aPicture(request))).status()).toBe(401);
-    // … but the owner's own pictures and AI pictures are for everyone (lib/media-open.js)
-    expect((await request.get(await aPicture(request, true))).status()).toBe(200);
+    // the pictures are in the Grimoire's library (2026-11-20): an old address here leads there
+    const old = await request.get(`${CMS}/media/g7b7j6jhzs5f-small.webp`, { maxRedirects: 0 });
+    expect(old.status()).toBe(301);
+    expect(old.headers().location).toBe('https://grimoire.piogino.ch/api/media/files/g7b7j6jhzs5f-small.webp');
+    expect((await request.get(`${CMS}/media/..%2Fserver.js`, { maxRedirects: 0 })).status()).toBe(404);
 });
 
-// the address of a picture the map shows, on the test instance: one with someone else's art in it (locked), or with
-// own: one marked visible to everyone (open, the owner's own or AI)
-const aPicture = async (request, own = false) => {
-    const lib = await (await request.get(`${CMS}/api/data/media-library.json`)).json();
-    const m = Object.values(lib.images).find((x) => !!x.open === own);
-    return m.sizes.small.url.replace('https://adenai-admin.piogino.ch', CMS);
-};
-
-test('the pictures are for the group: the GM sees them, and whoever has the minutes password', async ({ page, browser, request }) => {
-    const url = await aPicture(request);
-    expect((await request.get(url)).status()).toBe(401);
-    // the GM (CMS login) sees them, and sets a minutes password (on the test instance's copy of the minutes)
+// The Grimoire keeps the pictures behind its gate (its own tests); it asks here whether a players' minutes token is
+// valid, and the CMS gets a token for the GM's session to hand over
+test('the pictures: the Grimoire may check a minutes token here; the GM\'s session gets one', async ({ page, browser, request }) => {
+    expect((await request.get(`${CMS}/api/protocols/media-token`)).status()).toBe(401);
+    expect((await request.get(`${CMS}/api/protocols/media-access/check`, { headers: { Authorization: 'Bearer 1.1.forged' } })).status()).toBe(401);
+    expect((await request.get(`${CMS}/api/protocols/media-access/check`)).status()).toBe(401);
+    await page.route('https://grimoire.piogino.ch/**', (route) => route.fulfill({ json: { ok: true } })); // the real Grimoire stays out of it
     await page.goto(`${CMS}/v2/`);
     await page.getByLabel('User').fill(GM.username);
     await page.getByLabel('Password').fill(GM.password);
+    const handed = page.waitForRequest((r) => r.url() === 'https://grimoire.piogino.ch/api/projects/adenai/media-access' && r.method() === 'POST');
     await page.getByRole('button', { name: 'Log in' }).click();
     await expect(page.getByRole('navigation', { name: 'Areas' })).toBeVisible();
-    expect((await page.request.get(url)).status()).toBe(200);
+    const gmToken = (await handed).headers().authorization.replace('Bearer ', '');
+    expect((await request.get(`${CMS}/api/protocols/media-access/check`, { headers: { Authorization: `Bearer ${gmToken}` } })).status()).toBe(200);
+    // a player's token: valid until a new password ends it
     expect((await page.request.put(`${CMS}/api/protocols/settings/password`, { data: { password: 'e2e-minutes' } })).status()).toBe(200);
-    // a player's device: the minutes password opens the pictures too
+    expect((await request.get(`${CMS}/api/protocols/media-access/check`, { headers: { Authorization: `Bearer ${gmToken}` } })).status()).toBe(401);
     const player = await browser.newContext();
     expect((await player.request.post(`${CMS}/api/protocols/unlock`, { data: { password: 'nope-nope' } })).status()).toBe(401);
-    expect((await player.request.get(url)).status()).toBe(401);
-    const unlocked = await player.request.post(`${CMS}/api/protocols/unlock`, { data: { password: 'e2e-minutes' } });
-    const { token } = await unlocked.json();
-    expect((await player.request.get(url)).status()).toBe(200);
-    // a device unlocked before: its stored token becomes the picture cookie; locking takes it away
-    const earlier = await browser.newContext();
-    expect((await earlier.request.post(`${CMS}/api/protocols/media-access`, { headers: { Authorization: 'Bearer 1.1.forged' } })).status()).toBe(401);
-    expect((await earlier.request.post(`${CMS}/api/protocols/media-access`, { headers: { Authorization: `Bearer ${token}` } })).status()).toBe(200);
-    expect((await earlier.request.get(url)).status()).toBe(200);
-    expect((await earlier.request.delete(`${CMS}/api/protocols/media-access`)).status()).toBe(200);
-    expect((await earlier.request.get(url)).status()).toBe(401);
+    const { token } = await (await player.request.post(`${CMS}/api/protocols/unlock`, { data: { password: 'e2e-minutes' } })).json();
+    expect((await request.get(`${CMS}/api/protocols/media-access/check`, { headers: { Authorization: `Bearer ${token}` } })).status()).toBe(200);
     // only the map's address may send the password with credentials
-    const pre = await request.fetch(`${CMS}/api/protocols/media-access`, { method: 'OPTIONS', headers: { Origin: 'https://adenai.piogino.ch', 'Access-Control-Request-Method': 'POST', 'Access-Control-Request-Headers': 'authorization' } });
+    const pre = await request.fetch(`${CMS}/api/protocols/unlock`, { method: 'OPTIONS', headers: { Origin: 'https://adenai.piogino.ch', 'Access-Control-Request-Method': 'POST', 'Access-Control-Request-Headers': 'content-type' } });
     expect(pre.headers()['access-control-allow-origin']).toBe('https://adenai.piogino.ch');
-    expect(pre.headers()['access-control-allow-credentials']).toBe('true');
-    const evil = await request.fetch(`${CMS}/api/protocols/media-access`, { method: 'OPTIONS', headers: { Origin: 'https://evil.example', 'Access-Control-Request-Method': 'POST' } });
+    const evil = await request.fetch(`${CMS}/api/protocols/unlock`, { method: 'OPTIONS', headers: { Origin: 'https://evil.example', 'Access-Control-Request-Method': 'POST' } });
     expect(evil.headers()['access-control-allow-origin']).toBeUndefined();
-    await player.close(); await earlier.close();
+    await player.close();
 });
 
 test('the CMS shows only a login form and loads nothing of the data', async ({ page }) => {

@@ -32,7 +32,6 @@ const { requireAuth, isGm } = require('../middleware/auth');
 
 const router = express.Router();
 const { makeToken, tokenValid } = require('../lib/protocol-auth');
-const mediaAccess = require('../lib/media-access');
 
 const cmsUser = (req) => (isGm(req) ? (req.session.displayName || req.session.username || 'CMS') : null);
 
@@ -64,21 +63,24 @@ router.post('/unlock', async (req, res) => {
     }
     failures.delete(ip);
     const t = makeToken(s.passwordVersion);
-    mediaAccess.setCookie(res, t.token, t.expiresAt); // the pictures open with the minutes (lib/media-access.js)
     res.json({ success: true, ...t });
 });
 
-// a device unlocked before the pictures were closed: its token (Authorization) becomes the picture cookie; DELETE
-// takes the cookie away again (the device was locked)
-router.post('/media-access', async (req, res, next) => {
-    try {
-        if (!(await tokenValid(req.get('authorization')))) return res.status(401).json({ success: false, error: 'Protocol password required', locked: true });
-        const token = String(req.get('authorization')).replace(/^Bearer\s+/, '');
-        mediaAccess.setCookie(res, token, new Date(Number(token.split('.')[0])).toISOString());
-        res.json({ success: true });
-    } catch (err) { next(err); }
+// The pictures (in the Grimoire's library, lib/media-access.js): the Grimoire asks whether a minutes token is valid —
+// a player's, handed over by the map; 200 or 401
+router.get('/media-access/check', async (req, res, next) => {
+    try { return (await tokenValid(req.get('authorization'))) ? res.json({ success: true }) : res.status(401).json({ success: false }); } catch (err) { return next(err); }
 });
-router.delete('/media-access', (req, res) => { mediaAccess.clearCookie(res); res.json({ success: true }); });
+// the GM in the CMS: a minutes token for the session, which the CMS hands to the Grimoire to see Adenai's pictures
+router.get('/media-token', async (req, res, next) => {
+    try {
+        if (!isGm(req)) return res.status(401).json({ success: false, error: 'GM login required' });
+        return res.json({ success: true, ...makeToken((await store.settings()).passwordVersion) });
+    } catch (err) { return next(err); }
+});
+// older copies of the map: they asked here for a picture cookie, which is the Grimoire's now
+router.post('/media-access', (req, res) => res.json({ success: true }));
+router.delete('/media-access', (req, res) => res.json({ success: true }));
 
 // ---------- password (CMS) ----------
 

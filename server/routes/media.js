@@ -6,6 +6,7 @@ const path = require('path');
 const fs = require('fs').promises;
 const { requireAuth } = require('../middleware/auth');
 const { ownWork } = require('../lib/media-open');
+const grimoire = require('../lib/grimoire-images');
 
 // Initialize GitHub API (passed from main server)
 let octokit, REPO_OWNER, REPO_NAME;
@@ -74,20 +75,6 @@ async function normalizeLibraryTags() {
     return n || null; // nothing to change: no write
   }, (n) => `Tags in lower case, settled spellings (${n} images)`);
   if (changed) console.log(`media: tags of ${changed} images normalised`);
-}
-
-// Pictures from before the `open` mark (2026-11-20) get it once, from their credits (lib/media-open.js); a mark the
-// owner has set is never touched again
-async function markOpenPictures() {
-  const result = await updateMediaLibrary((library) => {
-    let n = 0, open = 0;
-    for (const m of Object.values(library.images)) {
-      if (typeof m.open === 'boolean') continue;
-      m.open = ownWork(m.credits); n += 1; if (m.open) open += 1;
-    }
-    return n ? { n, open } : null;
-  }, (r) => `Pictures: own work and AI visible to everyone (${r.open} of ${r.n})`);
-  if (result) console.log(`media: ${result.open} of ${result.n} pictures marked visible to everyone`);
 }
 
 // Helper function to generate short unique IDs
@@ -235,120 +222,41 @@ router.get('/', async (req, res) => {
   }
 });
 
-// POST /api/media/upload - Upload and process new media
+// POST /api/media/upload - new pictures: into the Grimoire's library (lib/grimoire-images.js), in Adenai's set, and
+// into the copy here. Visible to everyone when the credits say own work or AI (lib/media-open.js), unless the upload
+// says otherwise (open=true|false).
 router.post('/upload', requireAuth, upload.array('images', 10), async (req, res) => {
+  const files = req.files || [];
   try {
     const { category = 'general', tags = '', caption = '', title = '', credits = '' } = req.body;
-    const uploadedFiles = req.files;
-    
-    // Validate required credits field
     if (!credits || credits.trim() === '') {
-      return res.status(400).json({
-        success: false,
-        error: 'Credits/Attribution is required for all image uploads'
-      });
+      return res.status(400).json({ success: false, error: 'Credits/Attribution is required for all image uploads' });
     }
-    
-    if (!uploadedFiles || uploadedFiles.length === 0) {
-      return res.status(400).json({
-        success: false,
-        error: 'No files uploaded'
-      });
-    }
-    
+    if (!files.length) return res.status(400).json({ success: false, error: 'No files uploaded' });
+    const open = req.body.open === undefined || req.body.open === '' ? ownWork(credits) : req.body.open === 'true';
     const processedMedia = [];
-    const optimizedDir = 'uploads/optimized';
-    await fs.mkdir(optimizedDir, { recursive: true });
-    
-    for (const file of uploadedFiles) {
+    for (const file of files) {
       try {
-        // Generate clean base ID for this upload
-        const baseId = generateShortId();
-        
-        // Optimize images
-        const optimized = await optimizeImage(file.path, optimizedDir, baseId);
-        
-        // Generate media ID
-        const mediaId = `${category}-${baseId}`;
-        
-        // Prepare media entry
-        const mediaEntry = {
-          id: mediaId,
-          category,
-          title: title || path.parse(file.originalname).name,
-          caption: caption,
-          credits: credits.trim(),
-          tags: normalizeTags(tags),
-          open: req.body.open === undefined || req.body.open === '' ? ownWork(credits) : req.body.open === 'true', // own work and AI: for everyone (lib/media-open.js)
-          uploadDate: new Date().toISOString(),
-          sizes: {},
-          fileSize: file.size,
-          mimeType: file.mimetype
-        };
-        
-        // Add size information
-        for (const [sizeName, sizeInfo] of Object.entries(optimized)) {
-          const mediaBaseUrl = process.env.MEDIA_BASE_URL || '';
-          mediaEntry.sizes[sizeName] = {
-            filename: sizeInfo.filename,
-            url: `${mediaBaseUrl}/media/${sizeInfo.filename}`, // Full URL for cross-domain access
-            width: sizeInfo.width || sizeInfo.size?.width,
-            height: sizeInfo.height || sizeInfo.size?.height
-          };
-        }
-        
-        processedMedia.push(mediaEntry);
-        
-        // Clean up original upload
-        await fs.unlink(file.path);
-        
+        const g = await grimoire.upload(await fs.readFile(file.path), {
+          filename: file.originalname, mimetype: file.mimetype, credits: credits.trim(), open,
+          title: title || path.parse(file.originalname).name, caption, category, tags: normalizeTags(tags),
+        });
+        processedMedia.push(grimoire.mirrorEntry(await grimoire.update(g.id, { ref: `${category}-${g.id}` })));
       } catch (fileError) {
-        console.error(`Error processing file ${file.originalname}:`, fileError);
-        await fs.unlink(file.path).catch(() => {}); // no leftover in temp_media_upload
-        // Continue with other files
+        console.error(`Error processing file ${file.originalname}:`, fileError.message);
       }
     }
-    
-    if (processedMedia.length === 0) {
-      return res.status(500).json({
-        success: false,
-        error: 'Failed to process any uploaded files'
-      });
-    }
-    
-    // Update media library in GitHub
-    try {
-      await updateMediaLibrary(mediaLibrary => {
-        processedMedia.forEach(media => {
-          mediaLibrary.images[media.id] = media;
-        });
-        return processedMedia;
-      }, `Add ${processedMedia.length} new media files via CMS`);
-      
-      res.json({
-        success: true,
-        message: `Successfully uploaded and processed ${processedMedia.length} files`,
-        media: processedMedia,
-        totalProcessed: processedMedia.length,
-        category
-      });
-      
-    } catch (githubError) {
-      console.error('GitHub update error:', githubError);
-      res.status(500).json({
-        success: false,
-        error: 'Files processed but failed to update GitHub',
-        details: githubError.message
-      });
-    }
-    
+    if (!processedMedia.length) return res.status(500).json({ success: false, error: 'Failed to process any uploaded files' });
+    await updateMediaLibrary((library) => {
+      for (const m of processedMedia) library.images[m.id] = m;
+      return processedMedia;
+    }, `Add ${processedMedia.length} new media files via CMS`);
+    res.json({ success: true, message: `Successfully uploaded and processed ${processedMedia.length} files`, media: processedMedia, totalProcessed: processedMedia.length, category });
   } catch (error) {
     console.error('Media upload error:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Upload failed',
-      details: error.message
-    });
+    res.status(error.status === 503 ? 503 : 500).json({ success: false, error: 'Upload failed', details: error.message });
+  } finally {
+    for (const f of files) await fs.unlink(f.path).catch(() => {}); // no leftover in temp_media_upload
   }
 });
 
@@ -414,101 +322,69 @@ router.get('/:id', requireAuth, async (req, res) => {
   }
 });
 
-// Update media metadata
+// Update media metadata: in the Grimoire (title, caption, category, tags: Adenai's own; credits and the mark: the
+// picture's, for every campaign), then the copy here
 router.put('/:id', requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
     const { title, caption, credits, category, tags, open } = req.body;
-    
-    // Validate required fields
-    if (!credits || credits.trim() === '') {
-      return res.status(400).json({
-        success: false,
-        error: 'Credits field is required'
-      });
-    }
-    
-    const updated = await updateMediaLibrary(mediaLibrary => {
-      const media = mediaLibrary.images;
-      if (!media[id]) {
-        return null;
-      }
-
-      media[id] = {
-        ...media[id],
-        title: title || '',
-        caption: caption || '',
-        credits: credits.trim(),
-        category: category || 'general',
-        tags: normalizeTags(tags),
-        // visible to everyone (lib/media-open.js): as ticked; an older client that sends no tick keeps the picture's
-        open: typeof open === 'boolean' ? open : !!media[id].open,
-        lastModified: new Date().toISOString()
-      };
-      return media[id];
-    }, `Update metadata for media ${id}`);
-
-    if (!updated) {
-      return res.status(404).json({
-        success: false,
-        error: 'Media item not found'
-      });
-    }
-
-    res.json({
-      success: true,
-      message: 'Media metadata updated successfully',
-      media: updated
+    if (!credits || credits.trim() === '') return res.status(400).json({ success: false, error: 'Credits field is required' });
+    const gid = await grimoireIdOf(id);
+    if (!gid) return res.status(404).json({ success: false, error: 'Media item not found' });
+    const g = await grimoire.update(gid, {
+      title: title || '', caption: caption || '', credits: credits.trim(), category: category || 'general', tags: normalizeTags(tags),
+      ...(typeof open === 'boolean' ? { open } : {}),
     });
+    const updated = grimoire.mirrorEntry(g);
+    await updateMediaLibrary((library) => { library.images[id] = updated; return updated; }, `Update metadata for media ${id}`);
+    res.json({ success: true, message: 'Media metadata updated successfully', media: updated });
   } catch (error) {
     console.error('Error updating media metadata:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to update media metadata'
-    });
+    res.status(error.status === 404 ? 404 : 500).json({ success: false, error: error.status === 404 ? 'Media item not found' : 'Failed to update media metadata' });
   }
 });
 
-// DELETE /api/media/:id - Delete media
+// DELETE /api/media/:id - out of Adenai's set; the picture and its files go too unless another campaign has it
 router.delete('/:id', requireAuth, async (req, res) => {
   try {
     const mediaId = req.params.id;
-    
-    const mediaToDelete = await updateMediaLibrary(mediaLibrary => {
-      const media = mediaLibrary.images[mediaId];
-      if (!media) {
-        return null;
-      }
-      delete mediaLibrary.images[mediaId];
+    const gid = await grimoireIdOf(mediaId);
+    if (!gid) return res.status(404).json({ success: false, error: 'Media not found' });
+    await grimoire.remove(gid).catch((e) => { if (e.status !== 404) throw e; });
+    await updateMediaLibrary((library) => {
+      const media = library.images[mediaId];
+      if (!media) return null;
+      delete library.images[mediaId];
       return media;
-    }, media => `Delete media: ${media.title || media.caption || media.originalName || mediaId}`);
-
-    if (!mediaToDelete) {
-      return res.status(404).json({
-        success: false,
-        error: 'Media not found'
-      });
-    }
-
-    // Delete physical files only once the library no longer references them
-    for (const sizeInfo of Object.values(mediaToDelete.sizes || {})) {
-      const filePath = path.join('uploads/optimized', sizeInfo.filename);
-      await fs.unlink(filePath).catch(() => {}); // Ignore if file doesn't exist
-    }
-
-    res.json({
-      success: true,
-      message: 'Media deleted successfully'
-    });
-    
+    }, (media) => `Delete media: ${media.title || media.caption || mediaId}`);
+    res.json({ success: true, message: 'Media deleted successfully' });
   } catch (error) {
     console.error('Media deletion error:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to delete media'
-    });
+    res.status(500).json({ success: false, error: 'Failed to delete media' });
   }
 });
 
+// the Grimoire's id of a media id here
+async function grimoireIdOf(id) {
+  const { data } = await octokit.rest.repos.getContent({ owner: REPO_OWNER, repo: REPO_NAME, path: MEDIA_LIBRARY_PATH });
+  const m = JSON.parse(Buffer.from(data.content, 'base64').toString()).images?.[id];
+  return m ? (m.grimoireId || id.replace(/^[a-z]+-/, '')) : null;
+}
+
+// The copy here brought in line with Adenai's set in the Grimoire (at start and every 10 minutes): what the owner
+// changed there — credits, the mark, a picture taken out — shows here too. Written only when something differs.
+async function syncFromGrimoire() {
+  const set = await grimoire.list();
+  const want = Object.fromEntries(set.filter((g) => g.use?.ref).map((g) => [g.use.ref, grimoire.mirrorEntry(g)]));
+  const result = await updateMediaLibrary((library) => {
+    let n = 0;
+    for (const [id, m] of Object.entries(want)) if (JSON.stringify(library.images[id]) !== JSON.stringify(m)) { library.images[id] = m; n += 1; }
+    for (const id of Object.keys(library.images)) if (!want[id]) { delete library.images[id]; n += 1; }
+    return n || null;
+  }, (n) => `Media library: in step with the Grimoire (${n} pictures)`);
+  if (result) console.log(`media: ${result} pictures brought in step with the Grimoire`);
+  return result || 0;
+}
+
 module.exports = {
-  router, initGitHub, optimizeImage, normalizeTags, normalizeLibraryTags, markOpenPictures };
+  router, initGitHub, optimizeImage, normalizeTags, normalizeLibraryTags, syncFromGrimoire };

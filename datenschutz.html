@@ -38,7 +38,7 @@
   <main>
     <a class="back" href="./">← Zur Karte</a>
     <h1>Datenschutz</h1>
-    <p class="updated">Stand: 20. November 2026 (Bilder nur mit dem Protokoll-Passwort: ein Cookie dafür)</p>
+    <p class="updated">Stand: 20. November 2026 (Bilder aus der Bildersammlung auf grimoire.piogino.ch, mit dem Protokoll-Passwort: ein Cookie dafür)</p>
 
     <h2>Kurz gesagt</h2>
     <p>Keine Analyse, keine Werbung, kein Tracking. Ein einziges Cookie gibt es, und nur wenn du die Protokolle mit
@@ -61,7 +61,8 @@
           <td>GitHub-API: GitHub, Inc., USA</td>
           <td>Deine IP-Adresse und die Abfrage des letzten Updates der Karte. Ohne Cookies.</td></tr>
         <tr><td>Reisen, Pfade der Charaktere, Bilder und Emotes</td>
-          <td>Unser eigener Server <code>adenai-admin.piogino.ch</code> bei Infomaniak, Schweiz</td>
+          <td>Unser eigener Server <code>adenai-admin.piogino.ch</code> und für die Bilder <code>grimoire.piogino.ch</code>
+            (dieselbe Maschine) bei Infomaniak, Schweiz</td>
           <td>Deine IP-Adresse, Zeitpunkt, die abgefragten Daten, Angaben zum Browser. Diese landen im Server-Log für
             Betrieb und Sicherheit und werden nach 14 Tagen gelöscht; sie werden nicht ausgewertet oder weitergegeben.</td></tr>
       </tbody>
@@ -75,11 +76,12 @@
       <li><code>http_cache_…</code> im lokalen Speicher: Kopien der Kartendaten (Orte, Charaktere, Reisen)</li>
       <li><code>adenai-protocol-token</code> im lokalen Speicher, nur wenn du die Protokolle mit dem Passwort öffnest: ein
         Schlüssel, der dieses Gerät 30 Tage für die Protokolle freischaltet (🔒 im Protokoll sperrt es wieder)</li>
-      <li>das Cookie <code>adenai_media</code>, nur wenn du die Protokolle mit dem Passwort öffnest: derselbe Schlüssel
-        für die Bilder der Karte (Charaktere, Orte, Galerien). Die Bilder sind nur für die Spielgruppe sichtbar, weil sie
-        meist von Künstler:innen stammen, die sie nicht für eine öffentliche Website freigegeben haben. Das Cookie gilt
-        nur für die Bilder auf adenai-admin.piogino.ch, ist 30 Tage gültig und verschwindet mit 🔒 im Protokoll; es
-        enthält nichts über dich. Ohne es zeigt die Karte an Stelle der Bilder ein Schloss.</li>
+      <li>das Cookie <code>grimoire_media_adenai</code>, nur wenn du die Protokolle mit dem Passwort öffnest: derselbe
+        Schlüssel für die Bilder der Karte (Charaktere, Orte, Galerien). Die Bilder liegen in unserer Bildersammlung auf
+        grimoire.piogino.ch; die meisten sind nur für die Spielgruppe sichtbar, weil sie von Künstler:innen stammen, die
+        sie nicht für eine öffentliche Website freigegeben haben (eigene und KI-Bilder sind für alle sichtbar). Das Cookie
+        gilt nur für die Bilder dort, ist 30 Tage gültig und verschwindet mit 🔒 im Protokoll; es enthält nichts über
+        dich. Ohne es zeigt die Karte an Stelle der Bilder ein Schloss.</li>
       <li>eine Kopie der Seiten, Skripte und Daten der Karte, damit sie auch offline funktioniert</li>
     </ul>
     <p>Nichts davon wird an uns gesendet, ausser dem Protokoll-Schlüssel bei jedem Abruf der Protokolle und dem Cookie
