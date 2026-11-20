@@ -5,7 +5,8 @@ const { test, expect } = require('@playwright/test');
 function watchErrors(page) {
     const errors = [];
     page.on('pageerror', (e) => errors.push(`pageerror: ${e.message}`));
-    page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text().split('\n')[0]); });
+    // a closed picture (401: the pictures are for the group, src/utils/media-lock.js) is no error of the map
+    page.on('console', (m) => { if (m.type() === 'error' && !(m.text().includes('status of 401') && /adenai-admin\.piogino\.ch\/media\//.test(m.location()?.url || ''))) errors.push(m.text().split('\n')[0]); });
     return errors;
 }
 
