@@ -1,7 +1,8 @@
 // protocols.js - The campaign's session minutes on the map, behind the protocol password, written together live.
 //
 // The minutes are not in the public data files: they live on the CMS server (server/lib/protocol-store.js). Entering
-// the password (set in the CMS → Protocols) unlocks this device for 30 days (token in localStorage); a new password in
+// the password (set in the CMS → Protocols) unlocks this device for 30 days (token in localStorage) — and with it the
+// pictures of the media library (src/utils/media-lock.js); a new password in
 // the CMS ends that. The panel shows all sessions as one long scroll (the side bar is the table of contents, it follows
 // the scrolling); "✎ Bearbeiten" turns a session into an editor in place. The panel's width can be dragged.
 //
@@ -33,6 +34,8 @@ class MapProtocols {
         document.addEventListener('emotesReady', () => this.redrawAll());
         // an unlocked device knows the minutes from the start, for "Erwähnt in" in the popups
         if (this.unlocked) this.load().then(() => window.WikiLinks?.refreshBacklinks?.()).catch(() => {});
+        // the same password opens the pictures (src/utils/media-lock.js): the stored token becomes their cookie
+        if (this.unlocked) window.AdenaiMedia?.requestAccess(this.token);
     }
 
     // ---------- reading: where this device stopped, what it has seen ----------
@@ -278,6 +281,7 @@ class MapProtocols {
 
     lockDevice(message = '') {
         this.token = null;
+        window.AdenaiMedia?.lock();
         window.mapGlossary?.setPending([]);
         this.stopLive();
         this.sessions = [];
@@ -330,6 +334,7 @@ class MapProtocols {
                 const data = await res.json().catch(() => ({}));
                 if (!res.ok) throw new Error(data.error || `Fehler ${res.status}`);
                 this.token = { token: data.token, expiresAt: data.expiresAt };
+                window.AdenaiMedia?.requestAccess(data.token); // and the pictures
                 window.mapGlossary?.loadPending();
                 this.open();
             } catch (e2) {

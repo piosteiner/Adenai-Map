@@ -21,7 +21,8 @@ const dynamicsRoutes = require('./routes/dynamics');
 const configRoutes = require('./routes/config');
 const protocolRoutes = require('./routes/protocols');
 const glossaryRoutes = require('./routes/glossary');
-const namesRoutes = require('./routes/names'); // the name list in the Grimoire, with Adenai's record
+const namesRoutes = require('./routes/names');
+const mediaAccess = require('./lib/media-access'); // the pictures only for the group // the name list in the Grimoire, with Adenai's record
 
 // Import middleware
 const { requireAuth, gmOnlyApi, authenticateJourneyAPI, authenticateDynamicsAPI } = require('./middleware/auth');
@@ -77,7 +78,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(compression()); // gzip: the admin's scripts and the JSON lists are a third of the size on the wire
-app.use(cors());
+app.use(mediaAccess.corsFor); // open as before; the password and picture-cookie routes only for the map (lib/media-access.js)
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
@@ -105,7 +106,7 @@ app.use(sessionMiddleware);
 app.get(['/', '/index.html'], (req, res) => res.redirect(302, '/v2/'));
 app.use(express.static('admin-interface')); // the CMS's code — its data comes only with the GM login (below)
 app.use('/uploads', requireAuth, express.static('uploads')); // originals and leftovers: the GM's; the map uses /media
-app.use('/media', express.static('uploads/optimized')); // Serve optimized media files
+app.use('/media', mediaAccess.gate, express.static('uploads/optimized')); // the pictures: for the GM and whoever has the minutes password (lib/media-access.js)
 
 // File upload configuration
 const storage = multer.diskStorage({

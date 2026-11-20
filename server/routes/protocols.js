@@ -32,6 +32,7 @@ const { requireAuth, isGm } = require('../middleware/auth');
 
 const router = express.Router();
 const { makeToken, tokenValid } = require('../lib/protocol-auth');
+const mediaAccess = require('../lib/media-access');
 
 const cmsUser = (req) => (isGm(req) ? (req.session.displayName || req.session.username || 'CMS') : null);
 
@@ -62,8 +63,22 @@ router.post('/unlock', async (req, res) => {
         return res.status(401).json({ success: false, error: 'Wrong password' });
     }
     failures.delete(ip);
-    res.json({ success: true, ...makeToken(s.passwordVersion) });
+    const t = makeToken(s.passwordVersion);
+    mediaAccess.setCookie(res, t.token, t.expiresAt); // the pictures open with the minutes (lib/media-access.js)
+    res.json({ success: true, ...t });
 });
+
+// a device unlocked before the pictures were closed: its token (Authorization) becomes the picture cookie; DELETE
+// takes the cookie away again (the device was locked)
+router.post('/media-access', async (req, res, next) => {
+    try {
+        if (!(await tokenValid(req.get('authorization')))) return res.status(401).json({ success: false, error: 'Protocol password required', locked: true });
+        const token = String(req.get('authorization')).replace(/^Bearer\s+/, '');
+        mediaAccess.setCookie(res, token, new Date(Number(token.split('.')[0])).toISOString());
+        res.json({ success: true });
+    } catch (err) { next(err); }
+});
+router.delete('/media-access', (req, res) => { mediaAccess.clearCookie(res); res.json({ success: true }); });
 
 // ---------- password (CMS) ----------
 
