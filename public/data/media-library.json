@@ -40729,7 +40729,7 @@
       "category": "characters",
       "title": "Lady Rivea 1",
       "caption": "",
-      "credits": "Ravenloft: The Horrors Within",
+      "credits": "ai generated based on an own sketch",
       "tags": [
         "elf",
         "female",
@@ -40769,14 +40769,15 @@
         }
       },
       "fileSize": 2514472,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-11-20T15:27:42.820Z"
     },
     "characters-dp1sow1g2hsp": {
       "id": "characters-dp1sow1g2hsp",
       "category": "characters",
       "title": "Lady Rivea 3",
       "caption": "",
-      "credits": "Ravenloft: The Horrors Within",
+      "credits": "ai generated based on an own sketch",
       "tags": [
         "elf",
         "female",
@@ -40816,14 +40817,15 @@
         }
       },
       "fileSize": 2204227,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-11-20T15:27:46.801Z"
     },
     "characters-iu4xt4d57ibu": {
       "id": "characters-iu4xt4d57ibu",
       "category": "characters",
       "title": "Lady Rivea 2",
       "caption": "",
-      "credits": "Ravenloft: The Horrors Within",
+      "credits": "ai generated based on an own sketch",
       "tags": [
         "elf",
         "female",
@@ -40863,8 +40865,9 @@
         }
       },
       "fileSize": 2208745,
-      "mimeType": "image/png"
+      "mimeType": "image/png",
+      "lastModified": "2026-11-20T15:27:49.057Z"
     }
   },
-  "lastUpdated": "2026-11-08T14:00:05.356Z"
+  "lastUpdated": "2026-11-20T15:27:49.057Z"
 }
