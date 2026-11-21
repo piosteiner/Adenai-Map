@@ -7,12 +7,12 @@
       "title": "Lady Rivea",
       "caption": "Portrait of Lady Rivea",
       "credits": "AI Generated - GPT5: based on own drawing",
-      "open": true,
+      "open": false,
       "tags": [
         "npc"
       ],
       "uploadDate": "2025-09-07T12:40:06.900Z",
-      "lastModified": "2026-11-20T15:53:45.493Z",
+      "lastModified": "2026-11-21T03:32:30.209Z",
       "sizes": {
         "thumbnail": {
           "filename": "tryy7cw94miy-thumb.webp",
@@ -403,13 +403,13 @@
       "title": "Eytan Karthright",
       "caption": "",
       "credits": "AI Generated - Midjourney & GPT5",
-      "open": true,
+      "open": false,
       "tags": [
         "male",
         "half-orc"
       ],
       "uploadDate": "2025-09-07T17:06:35.014Z",
-      "lastModified": "2026-11-20T15:53:45.627Z",
+      "lastModified": "2026-11-21T03:32:40.811Z",
       "sizes": {
         "small": {
           "filename": "7r8s2u5d5rio-small.webp",
@@ -489,13 +489,13 @@
       "title": "Old White Male",
       "caption": "",
       "credits": "AI Generated - GPT5",
-      "open": true,
+      "open": false,
       "tags": [
         "male",
         "human"
       ],
       "uploadDate": "2025-09-07T17:08:01.630Z",
-      "lastModified": "2026-11-20T15:53:45.652Z",
+      "lastModified": "2026-11-21T03:32:36.170Z",
       "sizes": {
         "small": {
           "filename": "b7dmj2g33fgi-small.webp",
@@ -878,13 +878,13 @@
       "title": "Ruben Karthright",
       "caption": "",
       "credits": "AI Generated - Midjourney & GPT5",
-      "open": true,
+      "open": false,
       "tags": [
         "male",
         "human"
       ],
       "uploadDate": "2025-09-07T17:13:10.731Z",
-      "lastModified": "2026-11-20T15:53:45.751Z",
+      "lastModified": "2026-11-21T03:32:45.651Z",
       "sizes": {
         "small": {
           "filename": "i2wgrvgm96vy-small.webp",
@@ -921,13 +921,13 @@
       "title": "Sorin Karthright",
       "caption": "",
       "credits": "AI Generated - Midjourney & GPT5",
-      "open": true,
+      "open": false,
       "tags": [
         "female",
         "elf"
       ],
       "uploadDate": "2025-09-07T17:13:27.440Z",
-      "lastModified": "2026-11-20T15:53:45.762Z",
+      "lastModified": "2026-11-21T03:32:43.290Z",
       "sizes": {
         "small": {
           "filename": "n18hyg8qnnul-small.webp",
@@ -1137,13 +1137,13 @@
       "title": "Mae",
       "caption": "",
       "credits": "AI Generated - GPT5",
-      "open": true,
+      "open": false,
       "tags": [
         "grung",
         "female"
       ],
       "uploadDate": "2025-09-07T17:15:49.643Z",
-      "lastModified": "2026-11-20T15:53:45.830Z",
+      "lastModified": "2026-11-21T03:32:53.686Z",
       "sizes": {
         "small": {
           "filename": "mjf9mjovvqtl-small.webp",
@@ -2174,13 +2174,13 @@
       "title": "Guard Chief",
       "caption": "",
       "credits": "AI Generated - GPT5",
-      "open": true,
+      "open": false,
       "tags": [
         "male",
         "human"
       ],
       "uploadDate": "2025-09-07T18:10:04.307Z",
-      "lastModified": "2026-11-20T15:53:46.090Z",
+      "lastModified": "2026-11-21T03:32:49.788Z",
       "sizes": {
         "small": {
           "filename": "0md8qrop8n7z-small.webp",
@@ -2752,13 +2752,13 @@
       "title": "Lord Remus",
       "caption": "",
       "credits": "AI Generated - GPT5",
-      "open": true,
+      "open": false,
       "tags": [
         "male",
         "human"
       ],
       "uploadDate": "2025-09-07T19:05:25.177Z",
-      "lastModified": "2026-11-20T15:53:46.244Z",
+      "lastModified": "2026-11-21T03:33:08.487Z",
       "sizes": {
         "small": {
           "filename": "ejhjt2k1p4bj-small.webp",
@@ -31991,13 +31991,13 @@
       "title": "Sorin Karthright",
       "caption": "",
       "credits": "AI generated",
-      "open": true,
+      "open": false,
       "tags": [
         "female",
         "elf"
       ],
       "uploadDate": "2026-10-24T19:52:52.447Z",
-      "lastModified": "2026-11-20T15:53:54.075Z",
+      "lastModified": "2026-11-21T03:33:21.979Z",
       "sizes": {
         "small": {
           "filename": "t0azef8q1278-small.webp",
@@ -32034,13 +32034,13 @@
       "title": "Ruben Karthright",
       "caption": "",
       "credits": "AI generated",
-      "open": true,
+      "open": false,
       "tags": [
         "male",
         "human"
       ],
       "uploadDate": "2026-10-24T19:52:52.736Z",
-      "lastModified": "2026-11-20T15:53:54.086Z",
+      "lastModified": "2026-11-21T03:33:19.585Z",
       "sizes": {
         "small": {
           "filename": "zy9v4azk0qay-small.webp",
@@ -32077,13 +32077,13 @@
       "title": "Frederik Quelber",
       "caption": "",
       "credits": "AI generated",
-      "open": true,
+      "open": false,
       "tags": [
         "human",
         "male"
       ],
       "uploadDate": "2026-10-24T19:52:53.012Z",
-      "lastModified": "2026-11-20T15:53:54.098Z",
+      "lastModified": "2026-11-21T03:33:33.992Z",
       "sizes": {
         "small": {
           "filename": "sigib7061etf-small.webp",
@@ -32120,10 +32120,10 @@
       "title": "Fitcher's Tower",
       "caption": "",
       "credits": "AI generated",
-      "open": true,
+      "open": false,
       "tags": [],
       "uploadDate": "2026-10-24T19:52:53.291Z",
-      "lastModified": "2026-11-20T15:53:54.109Z",
+      "lastModified": "2026-11-21T03:34:01.324Z",
       "sizes": {
         "small": {
           "filename": "n5v05no3iv5n-small.webp",
@@ -32160,14 +32160,14 @@
       "title": "Fitcher",
       "caption": "",
       "credits": "AI generated",
-      "open": true,
+      "open": false,
       "tags": [
         "male",
         "elder",
         "human"
       ],
       "uploadDate": "2026-10-24T19:52:53.549Z",
-      "lastModified": "2026-11-20T15:53:54.119Z",
+      "lastModified": "2026-11-21T03:33:26.305Z",
       "sizes": {
         "small": {
           "filename": "6jtvj13jlm42-small.webp",
@@ -32204,14 +32204,14 @@
       "title": "Eytan Karthright",
       "caption": "",
       "credits": "AI generated",
-      "open": true,
+      "open": false,
       "tags": [
         "male",
         "elder",
         "orc"
       ],
       "uploadDate": "2026-10-24T19:52:53.777Z",
-      "lastModified": "2026-11-20T15:53:54.130Z",
+      "lastModified": "2026-11-21T03:33:56.175Z",
       "sizes": {
         "small": {
           "filename": "wrztc7xj57ca-small.webp",
@@ -32248,13 +32248,13 @@
       "title": "Eliana Karthright",
       "caption": "",
       "credits": "AI generated",
-      "open": true,
+      "open": false,
       "tags": [
         "elf",
         "female"
       ],
       "uploadDate": "2026-10-24T19:52:53.997Z",
-      "lastModified": "2026-11-20T15:53:54.141Z",
+      "lastModified": "2026-11-21T03:33:49.469Z",
       "sizes": {
         "small": {
           "filename": "6rk3m2ielsmr-small.webp",
@@ -32590,10 +32590,10 @@
       "title": "Fitcher",
       "caption": "",
       "credits": "AI generated GPT",
-      "open": true,
+      "open": false,
       "tags": [],
       "uploadDate": "2026-10-24T20:06:29.903Z",
-      "lastModified": "2026-11-20T15:53:54.231Z",
+      "lastModified": "2026-11-21T03:33:31.102Z",
       "sizes": {
         "small": {
           "filename": "nnn3xknmh5ng-small.webp",
@@ -36949,12 +36949,12 @@
       "title": "Star-Spawn of Cthulhu",
       "caption": "",
       "credits": "Tome of Beasts 1, pg. 348",
-      "open": true,
+      "open": false,
       "tags": [
         "void"
       ],
       "uploadDate": "2026-10-25T15:04:53.710Z",
-      "lastModified": "2026-11-20T15:53:55.394Z",
+      "lastModified": "2026-11-21T03:32:12.562Z",
       "sizes": {
         "small": {
           "filename": "1vqsyaofkwmx-small.webp",
@@ -37331,14 +37331,14 @@
       "title": "Lady Rivea 1",
       "caption": "",
       "credits": "ai generated based on an own sketch",
-      "open": true,
+      "open": false,
       "tags": [
         "elf",
         "female",
         "evil"
       ],
       "uploadDate": "2026-11-08T14:00:02.131Z",
-      "lastModified": "2026-11-20T15:53:55.497Z",
+      "lastModified": "2026-11-21T03:33:45.492Z",
       "sizes": {
         "small": {
           "filename": "mdv7w5cwtr4d-small.webp",
@@ -37457,5 +37457,5 @@
       "mimeType": "image/png"
     }
   },
-  "lastUpdated": "2026-11-20T15:53:59.926Z"
+  "lastUpdated": "2026-11-21T03:34:30.281Z"
 }
